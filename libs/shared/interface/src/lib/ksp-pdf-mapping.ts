@@ -4,43 +4,16 @@ const defaultSize = 13;
 export const kspPdfMapping: IKspPdfMapping[] = [
   {
     pdfType: 99,
-    pdfSubType: 1,
-    pdfSrc: 'assets/pdf/school-approve-license.pdf',
+    pdfSubType: 3,
+    pdfSrc: 'assets/pdf/school-temp-approve-license.pdf',
     input: [
       {
         text: [
           {
             key: 'requestno',
             options: {
-              x: 130,
-              y: 688,
-              size: defaultSize,
-              color: black,
-            },
-          },
-          {
-            key: 'careertype',
-            options: {
-              x: 200,
-              y: 557,
-              size: defaultSize,
-              color: black,
-            },
-          },
-          {
-            key: 'startth',
-            options: {
-              x: 200,
-              y: 538,
-              size: defaultSize,
-              color: black,
-            },
-          },
-          {
-            key: 'endth',
-            options: {
-              x: 400,
-              y: 538,
+              x: 100,
+              y: 750,
               size: defaultSize,
               color: black,
             },
@@ -48,26 +21,53 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'name',
             options: {
-              x: 330,
-              y: 575,
+              x: 320,
+              y: 643,
               size: defaultSize,
               color: black,
             },
           },
           {
-            key: 'schoolname',
+            key: 'nameen',
             options: {
-              x: 200,
-              y: 519,
+              x: 320,
+              y: 623,
               size: defaultSize,
               color: black,
             },
           },
           {
-            key: 'schoolapprovename',
+            key: 'careertype',
             options: {
-              x: 170,
-              y: 500,
+              x: 120,
+              y: 604,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'careertypeen',
+            options: {
+              x: 120,
+              y: 585,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'careertype',
+            options: {
+              x: 205,
+              y: 456,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'careertypeen',
+            options: {
+              x: 425,
+              y: 420,
               size: defaultSize,
               color: black,
             },
@@ -75,8 +75,71 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'startth',
             options: {
-              x: 380,
-              y: 287,
+              x: 120,
+              y: 570,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'endth',
+            options: {
+              x: 270,
+              y: 570,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'starten',
+            options: {
+              x: 120,
+              y: 550,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'enden',
+            options: {
+              x: 270,
+              y: 550,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'schoolapprovename',
+            options: {
+              x: 75,
+              y: 493,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'schoolapprovenameen',
+            options: {
+              x: 105,
+              y: 475,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'fulldateth',
+            options: {
+              x: 290,
+              y: 175,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'fulldateen',
+            options: {
+              x: 290,
+              y: 155,
               size: defaultSize,
               color: black,
             },
@@ -884,6 +947,90 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             options: {
               x: 280,
               y: 450,
+              size: defaultSize,
+              color: black,
+            },
+          },
+        ],
+        svg: [],
+      },
+    ],
+  },
+  {
+    pdfType: 99,
+    pdfSubType: 6,
+    pdfSrc: 'assets/pdf/school-qualification-approve-temp-license.pdf',
+    input: [
+      {
+        text: [
+          {
+            key: 'requestno',
+            options: {
+              x: 130,
+              y: 721,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'month',
+            options: {
+              x: 380,
+              y: 650,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'year',
+            options: {
+              x: 420,
+              y: 650,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'careertype',
+            options: {
+              x: 340,
+              y: 510,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'name',
+            options: {
+              x: 120,
+              y: 493,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'position',
+            options: {
+              x: 350,
+              y: 493,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'schoolname',
+            options: {
+              x: 105,
+              y: 475,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'bureauname',
+            options: {
+              x: 300,
+              y: 475,
               size: defaultSize,
               color: black,
             },

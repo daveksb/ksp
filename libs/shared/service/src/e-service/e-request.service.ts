@@ -128,4 +128,10 @@ export class ERequestService {
       tokenkey: getCookie('userToken'),
     });
   }
+  kspRequestProcessSelectByRequestId(requestid: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/ksprequestprocessselectbyrequestid`,
+      { requestid, tokenkey: getCookie('userToken') }
+    );
+    }
 }

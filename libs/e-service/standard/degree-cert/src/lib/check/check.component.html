@@ -5,8 +5,7 @@
     <div class="box-header">รายละเอียดใบคำขอรับรองปริญญาและประกาศนียบัตร</div>
     <div class="bg-white p-3">
       <ksp-request-header-info
-        [requestDate]="'10 ตุลาคม 2565'"
-        [requestNumber]="'112234467876543'"
+        [requestNumber]="requestNumber"
       ></ksp-request-header-info>
 
       <hr />
@@ -22,11 +21,15 @@
           <ksp-degree-cert-step-one
             mode="view"
             (degreeType)="degreeType = $event"
+            formControlName="step1"
           >
           </ksp-degree-cert-step-one>
           <hr />
           <div class="bg-light p-3">
-            <e-service-license-check></e-service-license-check>
+            <e-service-license-check
+              formControlName="verifyStep1"
+              [choices]="choices"
+            ></e-service-license-check>
           </div>
         </mat-step>
 
@@ -36,48 +39,64 @@
             (tabIndexChanged)="({})"
             [mode]="'view'"
             [formType]="degreeType"
+            formControlName="step2"
           >
           </ksp-degree-cert-step-two>
           <br />
           <div class="bg-light p-3">
-            <e-service-license-check></e-service-license-check>
+            <e-service-license-check
+              formControlName="verifyStep2"
+              [choices]="choices"
+            ></e-service-license-check>
           </div>
         </mat-step>
 
         <mat-step [completed]="false">
           <ng-template matStepLabel>ด้านกระบวนการผลิต</ng-template>
-          <ksp-degree-cert-step-3 [mode]="'view'"></ksp-degree-cert-step-3>
+          <ksp-degree-cert-step-3
+            [mode]="'view'"
+            formControlName="step3"
+          ></ksp-degree-cert-step-3>
           <br />
           <hr />
           <br />
           <div class="bg-light p-3">
-            <e-service-license-check></e-service-license-check>
+            <e-service-license-check
+              formControlName="verifyStep3"
+              [choices]="choices"
+            ></e-service-license-check>
           </div>
         </mat-step>
 
         <mat-step [completed]="false">
           <ng-template matStepLabel>เอกสารแนบ</ng-template>
-          <ksp-degree-cert-step-four mode="view"></ksp-degree-cert-step-four>
+          <ksp-degree-cert-step-four
+            mode="view"
+            formControlName="step4"
+          ></ksp-degree-cert-step-four>
+          <br />
           <hr />
           <div class="bg-light p-3">
-            <e-service-license-check></e-service-license-check>
+            <e-service-license-check
+              formControlName="verifyStep4"
+              [choices]="choices"
+            ></e-service-license-check>
           </div>
         </mat-step>
 
         <mat-step [completed]="false">
           <ng-template matStepLabel>ตรวจสอบและยื่นคำขอ</ng-template>
           <div class="d-flex">
-            <e-service-verify-result
-              [isBasicValid]="true"
-            ></e-service-verify-result>
-            <e-service-verify-result
-              [number]="2"
-              [isBasicValid]="true"
-              [isCourseValid]="true"
-              [isProcessValid]="true"
-            ></e-service-verify-result>
+            <ng-container *ngFor="let item of verifyResult; let index = index">
+              <e-service-verify-result
+                [number]="index+1"
+                [isBasicValid]="item.isBasicValid"
+                [isCourseValid]="item.isCourseValid"
+                [isAttachmentValid]="item.isAttachmentValid"
+                [isProcessValid]="item.isProcessValid"
+              ></e-service-verify-result>
+            </ng-container>
           </div>
-
           <ksp-degree-cert-step-five
             formControlName="step5"
           ></ksp-degree-cert-step-five>

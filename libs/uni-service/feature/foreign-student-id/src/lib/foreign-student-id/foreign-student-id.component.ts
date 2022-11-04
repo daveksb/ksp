@@ -14,7 +14,8 @@ import {
   UniInfoService,
   UniRequestService,
 } from '@ksp/shared/service';
-import { getCookie } from '@ksp/shared/utility';
+import { formatDate, getCookie } from '@ksp/shared/utility';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   templateUrl: './foreign-student-id.component.html',
@@ -22,13 +23,12 @@ import { getCookie } from '@ksp/shared/utility';
 })
 export class ForeignStudentIdComponent {
   @Input() mode: FormMode = 'edit';
-  foreignInfo = [{ name: '1.สำเนาหนังสือเดินทาง' }];
-
+  foreignInfo = [{ name: '1.สำเนาหนังสือเดินทาง',filename: ""  }];
   form = this.fb.group({
     foreignStudent: [],
     visainfo: [],
   });
-
+  uniqueTimestamp: any;
   prefixList$!: Observable<any>;
   countries$!: Observable<any>;
   visaTypeList$!: Observable<any>;
@@ -47,6 +47,8 @@ export class ForeignStudentIdComponent {
     private generalInfoService: GeneralInfoService,
     private uniInfoService: UniInfoService
   ) {
+    this.uniqueTimestamp = uuidv4();
+
     this.getAll();
   }
   get formValid() {
@@ -70,7 +72,14 @@ export class ForeignStudentIdComponent {
   cancel() {
     this.router.navigate(['/', 'home']);
   }
-
+  getDefaultReq(value:any):any{
+    const payload = {...value};
+    payload.birthdate = value?.birthdate ? formatDate(new Date(value?.birthdate).toISOString()) : null
+    payload.passportenddate = value?.passportenddate ? formatDate(new Date(value?.passportenddate).toISOString()) : null
+    payload.passportstartdate = value?.passportstartdate ? formatDate(new Date(value?.passportstartdate).toISOString()) : null
+    payload.careertype = "5"
+    return payload;
+  }
   save() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
@@ -88,7 +97,7 @@ export class ForeignStudentIdComponent {
       .pipe(
         switchMap((res) => {
           if (res) {
-            const studentInfo = this.form.value.foreignStudent as any;
+            const studentInfo = this.getDefaultReq(this.form.value.foreignStudent)
             studentInfo.ref1 = '3';
             studentInfo.ref2 = '04';
             studentInfo.ref3 = '5';

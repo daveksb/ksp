@@ -5,8 +5,7 @@
     <div class="fs-4">รายละเอียดใบคำขอ</div>
     <div class="bg-white py-3 px-3 default-width">
       <ksp-request-header-info
-        [requestDate]="'10 ตุลาคม 2565'"
-        [requestNumber]="'112234467876543'"
+        [requestNumber]="requestNumber"
       ></ksp-request-header-info>
 
       <hr />
@@ -14,7 +13,11 @@
       <div class="fs-4 ms-2">
         ข้อมูลขอรับรองปริญญา และประกาศนียบัตรทางการศึกษา
       </div>
-      <ksp-degree-cert-step-one [mode]="'view'" [showCoordinatorForm]="false">
+      <ksp-degree-cert-step-one
+        formControlName="step1"
+        [mode]="'view'"
+        [showCoordinatorForm]="false"
+      >
       </ksp-degree-cert-step-one>
 
       <div class="px-3">
@@ -25,21 +28,15 @@
         </div>
 
         <div class="d-flex my-3">
-          <e-service-consider-result
-            [isBasicValid]="true"
-            name="ครบถ้วนถูกต้อง"
-          ></e-service-consider-result>
-
-          <e-service-consider-result
-            [number]="2"
-            name="ขอแก้ไข / เพิ่มเติม"
-          ></e-service-consider-result>
-
-          <e-service-consider-result
-            [number]="3"
-            [isBasicValid]="true"
-            name="ครบถ้วนถูกต้อง"
-          ></e-service-consider-result>
+          <ng-container *ngFor="let item of this.verifyResult; let index = index">
+            <e-service-consider-result
+              [number]="index+1"
+              [isBasicValid]="item.isBasicValid"
+              [name]="
+                item.isBasicValid ? 'ครบถ้วนถูกต้อง' : 'ขอแก้ไข / เพิ่มเติม'
+              "
+            ></e-service-consider-result>
+          </ng-container>
         </div>
       </div>
       <hr />
@@ -55,7 +52,7 @@
           </div>
 
           <div>
-            <button class="btn btn-primary w-auto">
+            <button class="btn btn-primary w-auto" (click)="toVerifyPage(3)">
               + มติและรายงานการประชุม
             </button>
           </div>
@@ -65,7 +62,6 @@
           <table class="table">
             <thead>
               <tr>
-                <th></th>
                 <th scope="col">มติครั้งที่</th>
                 <th scope="col">วันที่ส่งคำขอ</th>
                 <th scope="col">ประธาน</th>
@@ -75,14 +71,26 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">ดูเอกสาร</td>
+              <tr></tr>
+              <tr *ngFor="let item of considerCert; let i = index">
+                <td class="detail__table">
+                  {{ item?.verifyForm?.reasonTimes || '' }}
+                </td>
+                <td class="detail__table">
+                  {{ toDate(item?.verifyForm?.date) || '' }}
+                </td>
+                <td class="detail__table">
+                  {{ item?.verifyForm?.chairmanName || '' }}
+                </td>
+                <td class="detail__table">
+                  {{ item?.verifyForm?.boardName || '' }}
+                </td>
+                <td class="detail__table">
+                  {{ result[item?.considerationResult?.result || ''] }}
+                </td>
+                <td class="detail__table">
+                  <label class="view__label">ดูเอกสารแนบ</label>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -93,7 +101,7 @@
           <div class="text-primary fs-5">
             การประเมิณสภาพจริง เพื่อพิจารณาประเมินหลักสูตร
           </div>
-          <button class="btn btn-primary w-auto">
+          <button class="btn btn-primary w-auto" (click)="toVerifyPage(4)">
             + เพิ่มการประเมิณสภาพจริง
           </button>
         </div>
@@ -102,7 +110,6 @@
           <table class="table">
             <thead>
               <tr>
-                <th></th>
                 <th scope="col">วันที่ประเมิน</th>
                 <th scope="col">ชื่อคณะกรรมการ</th>
                 <th scope="col">รายละเอียด</th>
@@ -110,12 +117,19 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">xxx</td>
-                <td class="detail__table">ดูเอกสาร</td>
+              <tr *ngFor="let item of considerCourses; let i = index">
+                <td class="detail__table">
+                  {{ toDate(item?.verifyForm?.date) || '' }}
+                </td>
+                <td class="detail__table">
+                  {{ item?.verifyForm?.boardName || '' }}
+                </td>
+                <td class="detail__table">
+                  {{ item?.considerationResult?.detail || '' }}
+                </td>
+                <td class="detail__table">
+                  <label class="view__label">ดูเอกสารแนบ</label>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -125,10 +139,14 @@
     <br />
 
     <div class="bg-white p-3 default-width">
-      <e-service-license-check [choices]="choices"> </e-service-license-check>
-      <div>ถ้าเลือก "รับรอง" ด้านบนจะขึ้นกล่องข้างล่าง</div>
+      <e-service-license-check formControlName="verify" [choices]="choices">
+      </e-service-license-check>
       <!-- <ksp-form-meeting-record></ksp-form-meeting-record> -->
-      <e-service-form-meeting-record></e-service-form-meeting-record>
+      <ng-container *ngIf="isApprove">
+        <e-service-form-approve-meeting-record
+          formControlName="approveData"
+        ></e-service-form-approve-meeting-record>
+      </ng-container>
     </div>
   </div>
 </form>
