@@ -14,6 +14,7 @@ import {
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { TopNavComponent, BottomNavComponent } from '@ksp/shared/menu';
 import {
+  EServiceLicenseGroupSearchComponent,
   EServiceLicenseSearchComponent,
   EServiceRequestSearchComponent,
   RequestSearchComponent,
@@ -28,6 +29,8 @@ import {
   ConsiderKspRequestComponent,
   ValidateKspRequestComponent,
 } from '@ksp/e-service/e-license/approve-ksp-request';
+import { RequestLicenseApproveCreateGroupComponent } from './request-license-approve-create-group/request-license-approve-create-group.component';
+import { RequestLicenseApproveSearchListComponent } from './request-license-approve-search-list/request-license-approve-search-list.component';
 
 export const routes: Route[] = [
   {
@@ -55,6 +58,14 @@ export const routes: Route[] = [
         path: 'approve-confirm/:id',
         component: RequestLicenseApproveConfirmComponent,
       },
+      {
+        path: 'create-group',
+        component: RequestLicenseApproveCreateGroupComponent,
+      },
+      {
+        path: 'search-list',
+        component: RequestLicenseApproveSearchListComponent,
+      },
     ],
   },
 ];
@@ -81,11 +92,14 @@ export const routes: Route[] = [
     EServiceLicenseSearchComponent,
     ValidateKspRequestComponent,
     ConsiderKspRequestComponent,
+    EServiceLicenseGroupSearchComponent,
   ],
   declarations: [
     RequestLicenseApproveListComponent,
     RequestLicenseApproveDetailComponent,
     RequestLicenseApproveConfirmComponent,
+    RequestLicenseApproveCreateGroupComponent,
+    RequestLicenseApproveSearchListComponent,
   ],
 })
 export class EServiceELicenseRequestLicenseModule {}

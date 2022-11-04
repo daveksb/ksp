@@ -106,6 +106,10 @@ export class RequestLicenseApproveListComponent implements AfterViewInit {
   clear() {
     this.dataSource.data = [];
   }
+
+  createGroup() {
+    this.router.navigate(['/request-license', 'create-group']);
+  }
 }
 
 export const column = [

@@ -12,3 +12,4 @@ export * from './e-service-license-search/e-service-license-search.component';
 export * from './e-service-reward-search/e-service-reward-search.component';
 export * from './foreign-id-search/foreign-id-search.component';
 export * from './degree-cert-approved-search/degree-cert-approved-search.component';
+export * from './e-service-license-group-search/e-service-license-group-search.component';
