@@ -88,7 +88,7 @@ export class UniRequestService {
   }
 
   getAdmissionCount(form: any): Observable<any> {
-    return this.http.post(`${environment.shortApiUrl}/unidegreeadmissionsearchcount.php`, {
+    return this.http.post(`${environment.shortApiUrl}/unirequestadmissioncount.php`, {
       ...form,
       tokenkey: getCookie('userToken'),
     });

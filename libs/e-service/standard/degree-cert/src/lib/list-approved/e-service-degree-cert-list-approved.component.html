@@ -5,12 +5,15 @@
 <div class="bg-secondary bg-opacity-10 py-2 px-4 full-height full-width-2">
   <div class="fs-5">รายการใบรับรองปริญญาและประกาศนียบัตรทางการศึกษา</div>
   <div class="bg-white p-3">
-    <ksp-degree-cert-approved-search
-      (cleared)="onClear()"
-      (searched)="onSearch()"
-      [uniUniversityOption]="uniUniversityOption"
-      [degreeLevelOption]="degreeLevelOptions"
-    ></ksp-degree-cert-approved-search>
+    <form [formGroup]="form">
+      <ksp-degree-cert-approved-search
+        formControlName="search"
+        (cleared)="onClear()"
+        (searched)="search()"
+        [uniUniversityOption]="uniUniversityOption"
+        [degreeLevelOption]="degreeLevelOptions"
+      ></ksp-degree-cert-approved-search>
+    </form>
 
     <br />
 
@@ -62,14 +65,32 @@
         <ng-container matColumnDef="admissionstatus">
           <th mat-header-cell *matHeaderCellDef style="min-width: 120px;">สถานะรายชื่อผู้เข้า</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.admissionstatus }}
+            <span
+              class="rounded-pill d-flex justify-content-center"
+              [ngClass]="{
+                edit__status:
+                  element.studentStatus === 'สร้าง' || 'ยื่นเรียบร้อย',
+                verify__status: element.studentStatus === 'รับข้อมูล'
+              }"
+            >
+              {{ element.admissionstatus || '-' }}</span
+            >
           </td>
         </ng-container>
 
         <ng-container matColumnDef="graduatestatus">
           <th mat-header-cell *matHeaderCellDef style="min-width: 120px;">สถานะรายชื่อผู้สำเร็จ</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.graduatestatus }}
+            <span
+              class="rounded-pill d-flex justify-content-center"
+              [ngClass]="{
+                edit__status:
+                  element.graduateStatus === 'สร้าง' || 'ยื่นเรียบร้อย',
+                verify__status: element.graduateStatus === 'รับข้อมูล'
+              }"
+            >
+              {{ element.graduatestatus || '-' }}</span
+            >
           </td>
         </ng-container>
 

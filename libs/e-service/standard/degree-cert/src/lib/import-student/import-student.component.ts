@@ -200,58 +200,8 @@ export class ImportStudentComponent implements OnInit {
     return this.formStudent.get('user') as FormArray;
   }
 
-  addUsers(index: number) {
-    return this.fb.group({
-      checked: [false],
-      index: [index],
-      no: [index + 1],
-      admissiondate: [moment().format('YYYY-MM-DD'), Validators.required],
-      idcardno: ['', [Validators.required, Validators.pattern(idCardPattern)]],
-      passportno: ['', Validators.required],
-      nationality: [null, Validators.required],
-      prefixth: [null, Validators.required],
-      firstnameth: [
-        '',
-        [Validators.required, Validators.pattern(nameThPattern)],
-      ],
-      lastnameth: [
-        '',
-        [Validators.required, Validators.pattern(nameThPattern)],
-      ],
-      prefixen: [null, Validators.required],
-      firstnameen: [
-        '',
-        [Validators.required, Validators.pattern(nameEnPattern)],
-      ],
-      middlenameen: [
-        '',
-        [Validators.required, Validators.pattern(nameEnPattern)],
-      ],
-      lastnameen: [
-        '',
-        [Validators.required, Validators.pattern(nameEnPattern)],
-      ],
-      phone: ['', [Validators.required, Validators.pattern(phonePattern)]],
-      birthdate: ['', Validators.required],
-      address: this.fb.group({ addressInfo: [] }),
-      approveno: [
-        '',
-        this.pageType == 'graduateList' ? Validators.required : undefined,
-      ],
-      graduationdate: [
-        '',
-        this.pageType == 'graduateList' ? Validators.required : undefined,
-      ],
-      approvedate: [
-        '',
-        this.pageType == 'graduateList' ? Validators.required : undefined,
-      ],
-      subjects: [{ subject1: '', subject2: '' }, Validators.required],
-      teachingpracticeschool: [],
-    });
-  }
-
   edituser(data: any) {
+    console.log(data)
     let userAddress: any;
     if (this.pageType == 'admissionList') {
       userAddress = JSON.parse(data.address);
@@ -260,6 +210,7 @@ export class ImportStudentComponent implements OnInit {
     }
     console.log(userAddress)
     return this.fb.group({
+      id: [data.id],
       checked: [false],
       index: [data.index],
       no: [data.index + 1],
@@ -366,96 +317,6 @@ export class ImportStudentComponent implements OnInit {
           ],
       teachingpracticeschool: [data.teachingpracticeschool],
     });
-  }
-
-  addDatafromFile(data: any) {
-    return this.fb.group({
-      checked: [false],
-      index: [this.user.value.length],
-      no: [this.user.value.length + 1],
-      admissiondate: [moment(data.admissiondate).format('YYYY-MM-DD')],
-      idcardno: [
-        data.idcardno,
-        [Validators.required, Validators.pattern(idCardPattern)],
-      ],
-      passportno: [data.passportno, Validators.required],
-      nationality: [data.nationality, Validators.required],
-      prefixth: [data.prefixth, Validators.required],
-      firstnameth: [
-        data.firstnameth,
-        [Validators.required, Validators.pattern(nameThPattern)],
-      ],
-      lastnameth: [
-        data.lastnameth,
-        [Validators.required, Validators.pattern(nameThPattern)],
-      ],
-      prefixen: [data.prefixen, Validators.required],
-      firstnameen: [
-        data.firstnameen,
-        [Validators.required, Validators.pattern(nameEnPattern)],
-      ],
-      middlenameen: [
-        data.middlenameen,
-        [Validators.required, Validators.pattern(nameEnPattern)],
-      ],
-      lastnameen: [
-        data.lastnameen,
-        [Validators.required, Validators.pattern(nameEnPattern)],
-      ],
-      phone: [
-        data.phone,
-        [Validators.required, Validators.pattern(phonePattern)],
-      ],
-      birthdate: [data.birthdate, Validators.required],
-      address: this.fb.group({
-        addressInfo: [
-          {
-            location: [data?.location || null],
-            housenumber: [data?.housenumber || null],
-            villagenumber: [data?.villagenumber || null],
-            lane: [data?.lane || null],
-            road: [data?.road || null],
-            zipcode: [data?.zipcode || null],
-            provinceid: [data?.provinceid || null],
-            districtid: [data?.districtid || null],
-            subdistrictid: [data?.subdistrictid || null],
-            remark: [data?.remark || null],
-          },
-        ],
-      }),
-      approveno: [
-        data.approveno,
-        this.pageType == 'graduateList' ? Validators.required : undefined,
-      ],
-      graduationdate: [
-        data.graduationdate,
-        this.pageType == 'graduateList' ? Validators.required : undefined,
-      ],
-      approvedate: [
-        data.approvedate,
-        this.pageType == 'graduateList' ? Validators.required : undefined,
-      ],
-      subjects: data.subjects
-        ? [
-            { subject1: data.subject1, subject2: data.subject2 },
-            Validators.required,
-          ]
-        : [
-            { subject1: '', subject2: '' },
-            this.pageType == 'admissionList' ? Validators.required : undefined,
-          ],
-      teachingpracticeschool: [data.teachingpracticeschool],
-    });
-  }
-
-  addStudent() {
-    if (
-      this.formStudent.controls.user.value.length <
-      this.courseData.courseSelected.student
-    ) {
-      this.formStudent.markAllAsTouched();
-      this.user.push(this.addUsers(this.user.length));
-    }
   }
 
   insertSubject(subjectInfo: any, index: any) {
@@ -569,5 +430,9 @@ export class ImportStudentComponent implements OnInit {
       });
       return invalidform || empytychecked;
     }
+  }
+
+  prev() {
+    this.router.navigate(['/degree-cert', 'course-detail', this.payload.unidegreecertid]);
   }
 }
