@@ -62,13 +62,13 @@
           formControlName="visainfo"
         ></ksp-form-visa-info>
       </ksp-form-foreign-id>
-
       <div class="form__upload mt-3">
         <ksp-form-attachment
           [title]="'กรุณาแนบหลักฐานประกอบการปฏิบัติงาน '"
           [groups]="foreignInfo"
           [mode]="mode"
           [requestType]="1"
+          [uniqueTimestamp]="uniqueTimestamp"
         ></ksp-form-attachment>
       </div>
     </div>

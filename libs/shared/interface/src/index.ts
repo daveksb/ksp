@@ -36,4 +36,6 @@ export * from './lib/ksp-kuruspa';
 
 export * from './lib/uni-service-import-type';
 export * from './lib/university-select';
+
+export * from './lib/e-uni-approve';
 export * from './lib/uni-user';

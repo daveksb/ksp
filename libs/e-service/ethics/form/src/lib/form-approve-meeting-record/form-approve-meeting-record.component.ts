@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 
 @Component({
-  selector: 'e-service-form-meeting-record',
+  selector: 'e-service-form-approve-meeting-record',
   standalone: true,
   imports: [
     CommonModule,
@@ -19,24 +19,22 @@ import { SharedFormOthersModule } from '@ksp/shared/form/others';
     SharedFormOthersModule
   ],
   template: ` <p>form-meeting-record works!</p> `,
-  templateUrl: './form-meeting-record.component.html',
-  styleUrls: ['./form-meeting-record.component.scss'],
-  providers: providerFactory(FormMeetingRecordComponent),
+  templateUrl: './form-approve-meeting-record.component.html',
+  styleUrls: ['./form-approve-meeting-record.component.scss'],
+  providers: providerFactory(FormApproveMeetingRecordComponent),
 
 })
-export class FormMeetingRecordComponent extends KspFormBaseComponent {
+export class FormApproveMeetingRecordComponent extends KspFormBaseComponent {
   override form = this.fb.group({
     reasonTimes: [],
     date: [],
     boardType: [],
     boardName: [],
     chairmanName: [],
-    file:[]
+    file:[],
+    year:[]
   });
   uniqueNo = '';
-
-  @Input() showBoxHeader = 'บันทึกมติที่ประชุมคณะอนุกรรมการ';
-
   constructor(private fb: FormBuilder) {
     super();
     this.uniqueNo = uuidv4();

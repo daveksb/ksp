@@ -19,7 +19,7 @@ export class UniRequestService {
   }
 
   saveRequestInsert(form: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/kspuni/requestinsert`, {
+    return this.http.post(`${environment.apiUrl}/kspuni/ksprequestinsert`, {
       ...form,
       tokenkey: getCookie('userToken'),
     });

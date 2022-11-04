@@ -27,7 +27,7 @@ import {
 import { ReactiveFormsModule } from '@angular/forms';
 import { DegreeCertApprovedSearchComponent, DegreeCertSearchComponent } from '@ksp/shared/search';
 import { RouterModule } from '@angular/router';
-import { FormMeetingRecordComponent } from '@ksp/e-service/ethics/form';
+import { FormApproveMeetingRecordComponent, FormMeetingRecordComponent } from '@ksp/e-service/ethics/form';
 import { EServiceDegreeCertApprovedListComponent } from './list-approved/e-service-degree-cert-list-approved.component';
 import { ImportStudentComponent } from './import-student/import-student.component';
 import { CourseDetailComponent } from './course-detail/course-detail.component';
@@ -65,7 +65,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     DegreeCertApprovedSearchComponent,
     MatDatepickerModule,
     FormAddressTableComponent,
-    MatPaginatorModule
+    MatPaginatorModule,
+    FormApproveMeetingRecordComponent
   ],
   declarations: [
     EServiceDegreeCertListComponent,

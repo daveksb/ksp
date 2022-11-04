@@ -1,7 +1,16 @@
-<div class="box-header text-primary">{{ showBoxHeader }}</div>
-
 <form [formGroup]="form">
   <div class="bg-light p-3">
+    <div class="row mb-2">
+      <div class="col-2">
+        <label class="form-label">ปีการศึกษาที่รับรอง (พ.ศ.)</label>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="กรุณากรอก"
+          formControlName="year"
+        />
+      </div>
+    </div>
     <div class="row mb-2">
       <div class="col-2">
         <label class="form-label">มติครั้งที่</label>
@@ -30,6 +39,8 @@
           <mat-datepicker #picker></mat-datepicker>
         </div>
       </div>
+    </div>
+    <div class="row mb-2">
       <div class="col-6">
         <label class="form-label">ประเภทกรรมการ</label>
         <select class="search__content form-select" formControlName="boardType">
@@ -40,7 +51,6 @@
         </select>
       </div>
     </div>
-
     <div class="row mb-2">
       <div class="col">
         <label class="form-label">ชื่อกรรมการ</label>
@@ -75,6 +85,5 @@
       [showDeleteFile]="true"
       (uploadComplete)="onUploadComplete($event)"
     ></ksp-file-upload>
-    <!-- <ksp-file-upload></ksp-file-upload> -->
   </div>
 </form>

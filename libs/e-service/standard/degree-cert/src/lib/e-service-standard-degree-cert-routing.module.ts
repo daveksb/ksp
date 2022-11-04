@@ -31,11 +31,15 @@ export const routes: Routes = [
         component: EServiceDegreeCertListComponent,
       },
       {
+        path: 'list/:type/:processId',
+        component: EServiceDegreeCertListComponent,
+      },
+      {
         path: 'list-approved',
         component: EServiceDegreeCertApprovedListComponent
       },
       {
-        path: 'check', //ตรวจสอบ
+        path: 'check/:key', //ตรวจสอบ
         component: CheckComponent,
       },
       {
@@ -43,15 +47,19 @@ export const routes: Routes = [
         component: VerifyComponent,
       },
       {
-        path: 'consider', //พิจารณา
+        path: 'verify/:type/:process/:requestId',
+        component: VerifyComponent,
+      },
+      {
+        path: 'consider/:key', //พิจารณา
         component: ConsiderComponent,
       },
       {
-        path: 'approve', //ยืนยัน
+        path: 'approve/:key', //ยืนยัน
         component: ApproveComponent,
       },
       {
-        path: 'final-result', //ขั้นตอนสุดท้าย
+        path: 'final-result/:key', //ขั้นตอนสุดท้าย
         component: FinalResultComponent,
       },
       {

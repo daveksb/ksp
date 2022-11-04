@@ -1,0 +1,8 @@
+.table > :not(caption) > * > * {
+  padding: 12px;
+}
+
+.table .detail-table {
+  padding: 0 !important;
+}
+  
