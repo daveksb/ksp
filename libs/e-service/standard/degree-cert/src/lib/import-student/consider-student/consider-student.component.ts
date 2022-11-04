@@ -57,6 +57,45 @@ export class ConsiderStudentComponent implements OnInit {
         };
         this.requestdate = res.requestdate;
         this.requestno = res.requestno;
+        this.payload.studentlist.forEach((student:any) => {
+          student.addressinfo = JSON.stringify(student.address);
+          student.subjects = JSON.stringify(student.subjects);
+          student.unidegreecertid = this.payload.payloaddetail.unidegreecertid;
+          student.unirequestadmissionid = this.payload.payloaddetail.id;
+          student.planyear = this.payload.payloaddetail.planyear.toString();
+          student.plancalendaryear = this.payload.payloaddetail.plancalendaryear;
+          student.planname = this.payload.payloaddetail.planname;
+          if (student.admissiondate) {
+            const convertdate = new Date(student.admissiondate).toISOString();
+            student.admissiondate = convertdate.split('.')[0];
+          } else {
+            student.admissiondate = null;
+          }
+          if (student.graduationdate) {
+            const convertdate = new Date(student.graduationdate).toISOString();
+            student.graduationdate = convertdate.split('.')[0];
+          } else {
+            student.graduationdate = null;
+          }
+          if (student.approvedate) {
+            const convertdate = new Date(student.approvedate).toISOString();
+            student.approvedate = convertdate.split('.')[0];
+          } else {
+            student.approvedate = null;
+          }
+          if (student.birthdate) {
+            const convertdate = new Date(student.birthdate).toISOString();
+            student.birthdate = convertdate.split('.')[0];
+          } else {
+            student.birthdate = null;
+          }
+          if (!student.approveno) student.approveno = null;
+          delete student.middlenameen;
+          delete student.address;
+          delete student.checked;
+          delete student.index;
+          delete student.no;
+        });
         if (this.payload.total > this.payload.studentlist.length) {
           this.form.patchValue({
             result: '2'
@@ -131,6 +170,10 @@ export class ConsiderStudentComponent implements OnInit {
           process = '3';
           status = '2';
         }
+        if (this.payload.total > this.payload.studentlist.length) {
+          process = '3';
+          status = '2';
+        }
 
         this.payload.detail = JSON.stringify({ returndate: this.form.value.returndate || null });
         const realpayload = {
@@ -147,30 +190,18 @@ export class ConsiderStudentComponent implements OnInit {
                 && this.payload.pagetype == 'admissionList'
                 && this.payload.studentlist.length) {
                   this.payload.studentlist.forEach((student:any) => {
-                    student.addressinfo = JSON.stringify(student.address);
-                    student.subjects = JSON.stringify(student.subjects);
-                    student.unidegreecertid = this.payload.payloaddetail.unidegreecertid;
-                    student.unirequestadmissionid = this.payload.payloaddetail.id;
-                    student.planyear = this.payload.payloaddetail.planyear.toString();
-                    student.plancalendaryear = this.payload.payloaddetail.plancalendaryear;
-                    student.planname = this.payload.payloaddetail.planname;
-                    const date1 = new Date().toISOString();
-                    const date2 = new Date(student.birthdate).toISOString();
-                    const date3 = new Date(student.admissiondate).toISOString();
-                    student.approvedate = date1.split('.')[0];
-                    student.birthdate = date2.split('.')[0];
-                    student.admissiondate = date3.split('.')[0];
-                    if (!student.approveno) student.approveno = null;
-                    if (!student.graduationdate) student.graduationdate = null;
-                    delete student.middlenameen;
-                    delete student.address;
-                    delete student.checked;
-                    delete student.index;
-                    delete student.no;
                     this.requestService.insertStudent(student).subscribe((res: any) => {
                       console.log('done')
                     });
                   });
+            } else if (this.form.value.result == '1' 
+                && this.payload.pagetype == 'graduateList'
+                && this.payload.studentlist.length) {
+              this.payload.studentlist.forEach((student:any) => {
+                this.requestService.updateStudent(student).subscribe((res: any) => {
+                  console.log('done')
+                });
+              });
             }
           }
         })

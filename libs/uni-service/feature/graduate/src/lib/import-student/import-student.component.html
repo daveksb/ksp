@@ -663,6 +663,7 @@
                 <form [formGroup]="control.controls.address">
                   <ksp-form-address-table
                     formControlName="addressInfo"
+                    [disabledAll]="false"
                   ></ksp-form-address-table>
                 </form>
               </td>
@@ -697,6 +698,7 @@
     (cancelClicked)="cancel()"
     (tempSaveClicked)="save('temp')"
     [disableSaveButton]="checkdisableSave()"
+    (prevClicked)="prev()"
     [saveButtonLabel]="'บันทึกและยื่นใบคำขอ'"
   ></ksp-bottom-nav>
 </div>

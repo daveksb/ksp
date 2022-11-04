@@ -8,6 +8,7 @@ import { getCookie, stringToThaiDate, thaiDate } from '@ksp/shared/utility';
 import { UniserviceImportType, KspPaginationComponent, ListData } from '@ksp/shared/interface';
 
 import {
+  HistoryRequestAdmissionDialogComponent,
   HistoryRequestDialogComponent,
   PrintRequestDialogComponent,
 } from '@ksp/uni-service/dialog';
@@ -100,8 +101,16 @@ export class DegreeListComponent extends KspPaginationComponent implements OnIni
         return;
       };
       this.pageEvent.length = res.countnumunidegree;
-      res.datareturnadmission = res.datareturnadmission.sort((data1:any,data2:any) => data1.unirequestadmissionid - data2.unirequestadmissionid);
-      res.datareturngraduation = res.datareturngraduation.sort((data1:any,data2:any) => data1.unirequestadmissionid - data2.unirequestadmissionid);
+      if (res.datareturnadmission) {
+        res.datareturnadmission = res.datareturnadmission.sort((data1:any,data2:any) => data1.unirequestadmissionid - data2.unirequestadmissionid);
+      } else {
+        res.datareturnadmission = [];
+      }
+      if (res.datareturngraduation) {
+        res.datareturngraduation = res.datareturngraduation.sort((data1:any,data2:any) => data1.unirequestadmissionid - data2.unirequestadmissionid);
+      } else {
+        res.datareturngraduation = [];
+      }
       this.dataSource.data = res?.datareturn.map(
         (item: any, index: number) => {
           const admissionstatus = res.datareturnadmission.filter((data: any) => {
@@ -122,16 +131,28 @@ export class DegreeListComponent extends KspPaginationComponent implements OnIni
               editDate: item?.updatedate ? thaiDate(new Date(item?.updatedate)) : '',
               verify: 'แก้ไข',
               consider: 'แก้ไข',
-              admissionstatus: admissionstatus.status == '1' ? 'สร้าง' :
-                               admissionstatus.status == '2' ? 'ยื่นเรียบร้อย' :
-                               admissionstatus.status == '3' ? 'รับข้อมูล' : '',
-              graduatestatus: graduatestatus.status == '1' ? 'สร้าง' :
-                              graduatestatus.status == '2' ? 'ยื่นเรียบร้อย' :
-                              graduatestatus.status == '3' ? 'รับข้อมูล' : '',
+              admissionstatus: this.mapStatusProcess(admissionstatus.status, admissionstatus.process),
+              graduatestatus: this.mapStatusProcess(graduatestatus.status, graduatestatus.process),
           };
         }
       );
     });
+  }
+
+  mapStatusProcess(status: string, process: string) {
+    if (status == '1' && process == '1') {
+      return 'สร้าง';
+    } else if (process == '2' && status == '1') {
+      return 'ยื่นเรียบร้อย';
+    } else if (process == '3' && status == '0') {
+      return 'ส่งคืนและยกเลิก';
+    } else if (process == '3' && status == '2') {
+      return 'แก้ไข';
+    } else if (process == '3' && status == '3') {
+      return 'รับข้อมูล';
+    } else {
+      return '';
+    }
   }
 
   nextPage(id: number) {
@@ -153,9 +174,12 @@ export class DegreeListComponent extends KspPaginationComponent implements OnIni
   }
 
   opendialogHistory(data: any) {
-    this.dialog.open(HistoryRequestDialogComponent, {
+    this.dialog.open(HistoryRequestAdmissionDialogComponent, {
       width: '600px',
-      data: data
+      data: {
+        data: data,
+        system: 'uniservice'
+      }
     });
   }
 
