@@ -131,6 +131,8 @@
   <ksp-bottom-nav
     [showCenterButtons]=" true"
     [showSaveButton]="true"
-    [isFirstPage]="false">
+    [isFirstPage]="false"
+    (nextClicked)="next()"
+    (prevClicked)="prev()">
   </ksp-bottom-nav>
 </div>

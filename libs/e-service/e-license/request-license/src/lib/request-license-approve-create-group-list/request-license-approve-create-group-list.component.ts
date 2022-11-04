@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ksp-request-license-approve-create-group-list',
@@ -29,7 +30,7 @@ export class RequestLicenseApproveCreateGroupListComponent implements OnInit {
   ];
   dataSource = new MatTableDataSource<any>();
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.dataSource.data = [
@@ -74,5 +75,13 @@ export class RequestLicenseApproveCreateGroupListComponent implements OnInit {
         license: true,
       },
     ];
+  }
+
+  next() {
+    this.router.navigate(['/request-license', 'create-group']);
+  }
+
+  prev() {
+    this.router.navigate(['/request-license', 'search-list']);
   }
 }
