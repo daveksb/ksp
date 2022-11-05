@@ -128,10 +128,18 @@ export class ERequestService {
       tokenkey: getCookie('userToken'),
     });
   }
+
   kspRequestProcessSelectByRequestId(requestid: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/e-service/ksprequestprocessselectbyrequestid`,
       { requestid, tokenkey: getCookie('userToken') }
     );
-    }
+  }
+
+  retiredUniUser(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/uniuseractiveupdate`,
+      payload
+    );
+  }
 }
