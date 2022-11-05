@@ -130,7 +130,7 @@ export class ERequestService {
   }
   kspRequestProcessSelectByRequestId(requestid: any): Observable<any> {
     return this.http.post(
-      `${environment.apiUrl}/e-service/ksprequestprocessselectbyrequestid_requestdegree`,
+      `${environment.apiUrl}/e-service/ksprequestprocessselectbyrequestid`,
       { requestid, tokenkey: getCookie('userToken') }
     );
     }
