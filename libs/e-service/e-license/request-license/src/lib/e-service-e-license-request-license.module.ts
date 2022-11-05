@@ -35,6 +35,7 @@ import { RequestLicenseApproveSearchListComponent } from './request-license-appr
 import { RequestLicenseApproveCreateGroupListComponent } from './request-license-approve-create-group-list/request-license-approve-create-group-list.component';
 import { RequestLicenseApproveGuarunteeComponent } from './request-license-approve-guaruntee/request-license-approve-guaruntee.component';
 import { RequestLicenseApproveLicenseTableComponent } from './request-license-approve-license-table/request-license-approve-license-table.component';
+import { RequestLicenseApprovePrintComponent } from './request-license-approve-print/request-license-approve-print.component';
 
 export const routes: Route[] = [
   {
@@ -82,6 +83,10 @@ export const routes: Route[] = [
         path: 'guarantee-confirm',
         component: RequestLicenseApproveGuarunteeComponent,
       },
+      {
+        path: 'print',
+        component: RequestLicenseApprovePrintComponent,
+      },
     ],
   },
 ];
@@ -120,6 +125,7 @@ export const routes: Route[] = [
     RequestLicenseApproveCreateGroupListComponent,
     RequestLicenseApproveGuarunteeComponent,
     RequestLicenseApproveLicenseTableComponent,
+    RequestLicenseApprovePrintComponent,
   ],
 })
 export class EServiceELicenseRequestLicenseModule {}

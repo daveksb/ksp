@@ -76,4 +76,8 @@ export class RequestLicenseApproveSearchListComponent implements OnInit {
   guarantee() {
     this.router.navigate(['/request-license', 'guarantee-confirm']);
   }
+
+  print() {
+    this.router.navigate(['/request-license', 'print']);
+  }
 }
