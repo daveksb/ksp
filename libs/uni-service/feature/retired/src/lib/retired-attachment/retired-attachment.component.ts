@@ -107,10 +107,12 @@ export class RetiredAttachmentComponent implements OnInit {
               unicode: this.userInfo.unicode,
               uniname: this.userInfo.name,
               unitypename: this.userInfo.unitypename,
-              permission: this.userInfo.permissionright
+              permission: this.userInfo.permissionright,
+              userid: this.userInfo.id
             }
             const payload = {
               ...this.userInfo,
+              contactphone: this.userInfo.phone,
               educationoccupy: JSON.stringify(educationoccupy),
               coordinatorinfo: JSON.stringify(this.form.value.coordinator),
               fileinfo: JSON.stringify({ fileUpload }),
