@@ -16,6 +16,7 @@ import { TopNavComponent, BottomNavComponent } from '@ksp/shared/menu';
 import {
   EServiceLicenseCreateGroupSearchComponent,
   EServiceLicenseGroupSearchComponent,
+  EServiceLicenseSaveResultComponent,
   EServiceLicenseSearchComponent,
   EServiceRequestSearchComponent,
   RequestSearchComponent,
@@ -36,6 +37,7 @@ import { RequestLicenseApproveCreateGroupListComponent } from './request-license
 import { RequestLicenseApproveGuarunteeComponent } from './request-license-approve-guaruntee/request-license-approve-guaruntee.component';
 import { RequestLicenseApproveLicenseTableComponent } from './request-license-approve-license-table/request-license-approve-license-table.component';
 import { RequestLicenseApprovePrintComponent } from './request-license-approve-print/request-license-approve-print.component';
+import { RequestLicenseApproveSaveResultComponent } from './request-license-approve-save-result/request-license-approve-save-result.component';
 
 export const routes: Route[] = [
   {
@@ -87,6 +89,10 @@ export const routes: Route[] = [
         path: 'print',
         component: RequestLicenseApprovePrintComponent,
       },
+      {
+        path: 'save-result',
+        component: RequestLicenseApproveSaveResultComponent,
+      },
     ],
   },
 ];
@@ -115,6 +121,7 @@ export const routes: Route[] = [
     ConsiderKspRequestComponent,
     EServiceLicenseGroupSearchComponent,
     EServiceLicenseCreateGroupSearchComponent,
+    EServiceLicenseSaveResultComponent,
   ],
   declarations: [
     RequestLicenseApproveListComponent,
@@ -126,6 +133,7 @@ export const routes: Route[] = [
     RequestLicenseApproveGuarunteeComponent,
     RequestLicenseApproveLicenseTableComponent,
     RequestLicenseApprovePrintComponent,
+    RequestLicenseApproveSaveResultComponent,
   ],
 })
 export class EServiceELicenseRequestLicenseModule {}

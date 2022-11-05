@@ -80,4 +80,8 @@ export class RequestLicenseApproveSearchListComponent implements OnInit {
   print() {
     this.router.navigate(['/request-license', 'print']);
   }
+
+  saveResult() {
+    this.router.navigate(['/request-license', 'save-result']);
+  }
 }

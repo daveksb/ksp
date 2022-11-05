@@ -13,7 +13,10 @@
 
     <div class="d-flex justify-content-end mb-3 mt-4">
       <ng-container *ngIf="mode === 'create'">
-        <button type="button" class="btn btn-success ms-2 create-group-btn">
+        <button
+          type="button"
+          class="btn btn-success ms-2 create-group-btn"
+          (click)="saveResult()">
           บันทึกผลการนำเสนอกลั่นกรอง
         </button>
 
