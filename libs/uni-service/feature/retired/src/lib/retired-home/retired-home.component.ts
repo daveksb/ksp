@@ -60,7 +60,7 @@ export class RetiredHomeComponent implements OnInit {
         this.data = res.datareturn.map((data: any) => {
           data.permissionname = data.permissionright == '1' 
           ? 'เจ้าหน้าที่ประสานงาน (รับรองปริญญาและประกาศนียบัตรทางการศึกษา)' :
-          data.permissionright == '1' ? 'เจ้าหน้าที่ประสานงาน (นำส่งรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา​)' : '';
+          data.permissionright == '2' ? 'เจ้าหน้าที่ประสานงาน (นำส่งรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา​)' : '';
           return data;
         });
       } else {
