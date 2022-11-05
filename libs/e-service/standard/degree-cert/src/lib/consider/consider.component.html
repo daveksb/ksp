@@ -21,21 +21,15 @@
         </button>
 
         <div class="d-flex my-3">
-          <e-service-consider-result
-            [isBasicValid]="true"
-            name="ครบถ้วนถูกต้อง"
-          ></e-service-consider-result>
-
-          <e-service-consider-result
-            [number]="2"
-            name="ขอแก้ไข / เพิ่มเติม"
-          ></e-service-consider-result>
-
-          <e-service-consider-result
-            [number]="3"
-            [isBasicValid]="true"
-            name="ครบถ้วนถูกต้อง"
-          ></e-service-consider-result>
+          <ng-container *ngFor="let item of this.verifyResult; let index = index">
+            <e-service-consider-result
+              [number]="index+1"
+              [isBasicValid]="item.isBasicValid"
+              [name]="
+                item.isBasicValid ? 'ครบถ้วนถูกต้อง' : 'ขอแก้ไข / เพิ่มเติม'
+              "
+            ></e-service-consider-result>
+          </ng-container>
         </div>
 
         <hr />
@@ -68,14 +62,14 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of considerCourses; let i = index">
+              <tr *ngFor="let item of considerCert; let i = index">
                 <td>{{ i + 1 }}</td>
-                <td class="detail__table">{{ item?.reasonTimes || '' }}</td>
-                <td class="detail__table">{{ item?.date || '' }}</td>
-                <td class="detail__table">{{ item?.chairmanName || '' }}</td>
-                <td class="detail__table">{{ item?.boardName || '' }}</td>
-                <td class="detail__table">{{ mappingStatus[0][item?.status].name || '' }}</td>
-                <td class="detail__table"><label class="view__label" (click)="view()">ดูเอกสารแนบ</label></td>
+                <td class="detail__table">{{ item?.verifyForm?.reasonTimes || '' }}</td>
+                <td class="detail__table">{{ toDate(item?.verifyForm?.date) || '' }}</td>
+                <td class="detail__table">{{ item?.verifyForm?.chairmanName || '' }}</td>
+                <td class="detail__table">{{ item?.verifyForm?.boardName || '' }}</td>
+                <td class="detail__table">{{ result[item?.considerationResult?.result || ''] }}</td>
+                <td class="detail__table"><label class="view__label">ดูเอกสารแนบ</label></td>
               </tr>
             </tbody>
           </table>
@@ -104,10 +98,10 @@
             <tbody>
               <tr *ngFor="let item of considerCourses; let i = index">
                 <td>{{ i + 1 }}</td>
-                <td class="detail__table">{{ item?.date || '' }}</td>
-                <td class="detail__table">{{ item?.boardName || '' }}</td>
-                <td class="detail__table">{{ mappingStatus[1][item?.status].name || '' }}</td>
-                <td class="detail__table"><label class="view__label" (click)="view()">ดูเอกสารแนบ</label></td>
+                <td class="detail__table">{{ toDate(item?.verifyForm?.date) || '' }}</td>
+                <td class="detail__table">{{ item?.verifyForm?.boardName || '' }}</td>
+                <td class="detail__table">{{ result[item?.considerationResult?.result || ''] }}</td>
+                <td class="detail__table"><label class="view__label">ดูเอกสารแนบ</label></td>
               </tr>
             </tbody>
           </table>

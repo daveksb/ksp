@@ -99,13 +99,20 @@ export class VerifyComponent implements OnInit {
       state.considerCert = [...state.considerCert, this.form.value];
     if (this.processType === 4)
       state.considerCourses = [...state.considerCourses, this.form.value];
-    this.router.navigate(['./degree-cert', 'approve', this.requestId], {
-      state,
-    });
+
+    if (this.process === '5') {
+      this.router.navigate(['./degree-cert', 'consider', this.requestId], {
+        state,
+      });
+    } else if (this.process === '6') {
+      this.router.navigate(['./degree-cert', 'approve', this.requestId], {
+        state,
+      });
+    }
+    
   }
   save() {
-    console.log(this.process);
-    if (this.process === '6') return this.saveState();
+    if (this.process === '6' || this.process === '5') return this.saveState();
     const detail: any = {};
     let process = '';
     if (this.processType === 1 || this.processType === 3) {
