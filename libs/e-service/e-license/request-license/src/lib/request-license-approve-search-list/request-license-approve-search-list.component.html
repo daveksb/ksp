@@ -10,11 +10,41 @@
     </div>
 
     <div class="d-flex justify-content-end mb-3 mt-4">
-      <button
-        type="button"
-        class="btn btn-primary ms-2 create-group-btn">
-        + สร้างกลุ่มบัญชีรายชื่อ
-      </button>
+      <ng-container *ngIf="mode === 'create'">
+        <button
+          type="button"
+          class="btn btn-success ms-2 create-group-btn">
+          บันทึกผลการนำเสนอกลั่นกรอง
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-success ms-2 create-group-btn">
+          พิมพ์รายงานนำเสนอกลั่นกรอง
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-primary ms-2 create-group-btn"
+          (click)="createGroup()">
+          + สร้างกลุ่มบัญชีรายชื่อ
+        </button>
+      </ng-container>
+
+      <ng-container *ngIf="mode === 'guarantee'">
+        <button
+          type="button"
+          class="btn btn-success ms-2 create-group-btn"
+          (click)="guarantee()">
+          บันทึกผลการนำเสนอ กมว.
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-success ms-2 create-group-btn">
+          พิมพ์รายงานนำเสนอ กมว.
+        </button>
+      </ng-container>
     </div>
 
     <hr />

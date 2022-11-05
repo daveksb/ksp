@@ -1,0 +1,101 @@
+<ksp-top-nav><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span>
+  <span subHeader>รับรองใบอนุญาตประกอบวิชาชีพ </span>
+</ksp-top-nav>
+
+<div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
+  <div class="box-header">บันทึกผลพิจารณารับรองการออกใบอนุญาตประกอบวิชาชีพทางการศึกษา </div>
+  <div class="bg-white px-3 py-3">
+    <div>บัญชีรายชื่อผู้ขอขึ้นทะเบียนรับใบอนุญาตประกอบวิชาชีพครู</div>
+    <hr />
+
+    <button
+      type="button"
+      class="btn btn-primary ms-2 approve-btn mb-3">
+      อนุมัติออกใบอนุญาต
+    </button>
+
+    <div class="table__scroll">
+
+      <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef><input type="checkbox" class="me-2" checked /></th>
+          <td mat-cell *matCellDef="let element; let i = index">
+            <input type="checkbox" class="me-2" [checked]="element.select" />
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="order">
+          <th mat-header-cell *matHeaderCellDef>ลำดับ </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.order }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="idCardNo">
+          <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.idCardNo }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="educationLevel">
+          <th mat-header-cell *matHeaderCellDef>คุณวุฒิทางการศึกษา</th>
+          <td mat-cell *matCellDef="let element">{{ element.educationLevel }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="experience">
+          <th mat-header-cell *matHeaderCellDef>ประสบการณ์วิชาชีพ</th>
+          <td mat-cell *matCellDef="let element"><input type="checkbox" class="me-2" [checked]="element.experience" />
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="prohibitType">
+          <th mat-header-cell *matHeaderCellDef>ไม่มีลักษณะต้องห้าม</th>
+          <td mat-cell *matCellDef="let element">{{ element.prohibitType }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="urgent">
+          <th mat-header-cell *matHeaderCellDef>เร่งด่วน</th>
+          <td mat-cell *matCellDef="let element">
+            <input type="checkbox" class="me-2" [checked]="element.urgent" />
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="payDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่ชำระเงิน</th>
+          <td mat-cell *matCellDef="let element">{{ element.payDate }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="requestDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่ยื่นคำขอ</th>
+          <td mat-cell *matCellDef="let element">{{ element.requestDate }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="licenseNo">
+          <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
+          <td mat-cell *matCellDef="let element">{{ element.licenseNo }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+
+
+    </div>
+  </div>
+</div>
+
+<div class="sticky-bottom border px-2 bottom-nav">
+  <ksp-bottom-nav
+    [showCenterButtons]=" true"
+    [showSaveButton]="true"
+    [isFirstPage]="true"
+    [isLastPage]="true"
+    (saveClicked)="confirmDialog()">
+  </ksp-bottom-nav>
+</div>

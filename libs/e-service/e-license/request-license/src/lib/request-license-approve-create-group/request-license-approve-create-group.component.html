@@ -1,23 +1,21 @@
-<ksp-top-nav><span header>ยื่นใบคำขอ</span>
-  <span subHeader>ขอใบอนุญาตประกอบวิชาชีพ </span>
+<ksp-top-nav><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span>
+  <span subHeader>ผลการนำเสนอใบอนุญาตประกอบวิชาชีพ </span>
 </ksp-top-nav>
 
 <div class="bg-secondary bg-opacity-10 px-3 py-4 full-height">
-  <div class="bg-white px-4 py-2">
-    <span class="title">สร้างกลุ่มบัญชีรายชื่อผู้ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพทางการศึกษา</span>
-    <hr />
-    <div class="d-flex align-items-center">
-      <span class="fs-6 label">บัญชีที่ / List No.</span>
-      <div class="mx-3" style="width: 130px">
-        <input
-          class="form-control"
-          type="text" />
-      </div>
-      <span class="text-danger">Running No. (+1)</span>
+  <div class="title mb-3">สร้างกลุ่มบัญชีรายชื่อผู้ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพทางการศึกษา</div>
+  <div class=" d-flex align-items-center">
+    <span class="title">บัญชีที่ / List No.</span>
+    <div class="mx-3" style="width: 130px">
+      <input
+        class="form-control"
+        type="text" />
     </div>
+    <!-- <span class="text-danger">Running No. (+1)</span> -->
   </div>
 
-  <div class="title mx-4 my-3">สรุปจำนวนผู้ยื่นขอขึ้นทะเบียน</div>
+
+  <div class="title my-4">สรุปจำนวนผู้ยื่นขอขึ้นทะเบียน</div>
   <div class="table__scroll summary-table">
     <table mat-table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="order">
@@ -47,7 +45,10 @@
     </table>
   </div>
 
-  <div class="title mx-4 my-3">รายชื่อผู้ยื่นขอขึ้นทะเบียน</div>
+  <div class="title my-3 d-flex justify-content-between">
+    ผลการค้นหา 345 รายการ
+
+  </div>
   <div class="table__scroll">
     <table mat-table [dataSource]="dataSource2" matSort>
       <ng-container matColumnDef="check">
@@ -127,22 +128,29 @@
   </div>
 
   <div class="urgent-case">
-    <div class="mb-3 urgent-title">กรณีเร่งด่วน กรุณาเลือกส่งสร้างเลขที่ใบอนุญาต</div>
-    <div class="mb-2">
-      <input type="checkbox" class="me-2" />
-      <label class="fs-5">ส่งสร้างเลขที่ใบอนุญาต</label>
-    </div>
-    <div class="mb-2">
-      <input type="checkbox" class="me-2" />
-      <label class="fs-5">ไม่ส่งสร้างเลขที่ใบอนุญาต</label>
+    <div class="bg-white px-3 py-4">
+      <div class=" d-flex">
+        <div class="urgent-title">กรณีเร่งด่วน กรุณาเลือกส่งสร้างเลขที่ใบอนุญาต : </div>
+        <div class="mx-3">
+          <input type="checkbox" class="me-2" />
+          <label class="fs-5">ส่งสร้างเลขที่ใบอนุญาต</label>
+        </div>
+        <div class="mx-3">
+          <input type="checkbox" class="me-2" />
+          <label class="fs-5">ไม่ส่งสร้างเลขที่ใบอนุญาต</label>
+        </div>
+      </div>
     </div>
   </div>
+
 </div>
 
 <div class="sticky-bottom border px-2">
   <ksp-bottom-nav
     [showCenterButtons]="true"
     [showSaveButton]="true"
-    [isFirstPage]="true"
-    [isLastPage]="true"></ksp-bottom-nav>
+    [isFirstPage]="false"
+    [isLastPage]="true"
+    (prevClicked)="prev()"
+    (saveClicked)="confirmDialog()"></ksp-bottom-nav>
 </div>

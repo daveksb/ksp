@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
+import {
+  CompleteDialogComponent,
+  ConfirmDialogComponent,
+} from '@ksp/shared/dialog';
 
 @Component({
   selector: 'ksp-request-license-approve-create-group',
@@ -22,7 +28,7 @@ export class RequestLicenseApproveCreateGroupComponent implements OnInit {
   ];
   dataSource = new MatTableDataSource<any>();
   dataSource2 = new MatTableDataSource<any>();
-  constructor() {}
+  constructor(private router: Router, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.dataSource.data = [
@@ -79,5 +85,38 @@ export class RequestLicenseApproveCreateGroupComponent implements OnInit {
         requestDate: '01/01/2564',
       },
     ];
+  }
+
+  prev() {
+    this.router.navigate(['/request-license', 'create-group-list']);
+  }
+
+  confirmDialog() {
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: `คุณต้องการยืนยันข้อมูล
+        ใช่หรือไม่? `,
+      },
+    });
+
+    dialog.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.completeDialog();
+      }
+    });
+  }
+
+  completeDialog() {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header: `บันทึกข้อมูลสำเร็จ`,
+      },
+    });
+
+    dialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/request-license', 'search-list']);
+      }
+    });
   }
 }
