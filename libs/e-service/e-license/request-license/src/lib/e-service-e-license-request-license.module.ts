@@ -14,6 +14,7 @@ import {
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { TopNavComponent, BottomNavComponent } from '@ksp/shared/menu';
 import {
+  EServiceLicenseCreateGroupSearchComponent,
   EServiceLicenseGroupSearchComponent,
   EServiceLicenseSearchComponent,
   EServiceRequestSearchComponent,
@@ -31,6 +32,8 @@ import {
 } from '@ksp/e-service/e-license/approve-ksp-request';
 import { RequestLicenseApproveCreateGroupComponent } from './request-license-approve-create-group/request-license-approve-create-group.component';
 import { RequestLicenseApproveSearchListComponent } from './request-license-approve-search-list/request-license-approve-search-list.component';
+import { RequestLicenseApproveCreateGroupListComponent } from './request-license-approve-create-group-list/request-license-approve-create-group-list.component';
+import { RequestLicenseApproveGuarunteeComponent } from './request-license-approve-guaruntee/request-license-approve-guaruntee.component';
 
 export const routes: Route[] = [
   {
@@ -66,6 +69,18 @@ export const routes: Route[] = [
         path: 'search-list',
         component: RequestLicenseApproveSearchListComponent,
       },
+      {
+        path: 'create-group-list',
+        component: RequestLicenseApproveCreateGroupListComponent,
+      },
+      {
+        path: 'guarantee',
+        component: RequestLicenseApproveSearchListComponent,
+      },
+      {
+        path: 'guarantee-confirm',
+        component: RequestLicenseApproveGuarunteeComponent,
+      },
     ],
   },
 ];
@@ -93,6 +108,7 @@ export const routes: Route[] = [
     ValidateKspRequestComponent,
     ConsiderKspRequestComponent,
     EServiceLicenseGroupSearchComponent,
+    EServiceLicenseCreateGroupSearchComponent,
   ],
   declarations: [
     RequestLicenseApproveListComponent,
@@ -100,6 +116,8 @@ export const routes: Route[] = [
     RequestLicenseApproveConfirmComponent,
     RequestLicenseApproveCreateGroupComponent,
     RequestLicenseApproveSearchListComponent,
+    RequestLicenseApproveCreateGroupListComponent,
+    RequestLicenseApproveGuarunteeComponent,
   ],
 })
 export class EServiceELicenseRequestLicenseModule {}
