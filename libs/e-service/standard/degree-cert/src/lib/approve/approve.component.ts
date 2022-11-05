@@ -19,15 +19,19 @@ import _ from 'lodash';
 import { map } from 'rxjs';
 import moment from 'moment';
 const detailToState = (res: any) => {
-  let newRes = _.filter(res?.datareturn, { process: '6' }).map((data: any) => {
+  const newRes = _.filter(res?.datareturn, { process: '6' }).map((data: any) => {
     return parseJson(data?.detail);
   });
-  newRes = newRes?.map((data: any) => {
+ const verify = newRes?.map((data: any) => {
     const verifyObject: any = {};
     verifyObject.isBasicValid = _.get(data, 'verify.result') === '1';
     return verifyObject;
   });
-  return newRes || [];
+  return {
+    verify,
+    considerCert:_.get(_.last(newRes),"considerCert",[]),
+    considerCourses:_.get(_.last(newRes),"considerCourses",[])
+  }
 };
 @Component({
   selector: 'e-service-approve',
@@ -105,8 +109,9 @@ export class ApproveComponent implements OnInit {
       .kspRequestProcessSelectByRequestId(this.route.snapshot.params['key'])
       .pipe(map(detailToState))
       .subscribe((res) => {
-        this.verifyResult = res;
-        console.log(this.verifyResult);
+        this.verifyResult = res?.verify;
+        this.considerCert = [...this.considerCert,...res?.considerCert || []];
+        this.considerCourses = [...this.considerCourses,...res?.considerCourses || []];
       });
   }
 

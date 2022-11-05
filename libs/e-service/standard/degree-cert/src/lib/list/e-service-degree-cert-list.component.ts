@@ -8,7 +8,8 @@ import { UniInfoService } from '@ksp/shared/service';
 import { map } from 'rxjs';
 import { FormBuilder } from '@angular/forms';
 import { thaiDate } from '@ksp/shared/utility';
-
+import { EUniApproveProcess } from '@ksp/shared/constant';
+import _ from 'lodash';
 @Component({
   selector: 'e-service-degree-cert-list',
   templateUrl: './e-service-degree-cert-list.component.html',
@@ -24,7 +25,7 @@ export class EServiceDegreeCertListComponent
   selection = new SelectionModel<DegreeCertInfo>(true, []);
   displayedColumns: string[] = displayedColumns;
   pageType = 0;
-  showColumnSelect =false
+  showColumnSelect = false;
   uniUniversityOption: ListData[] = [];
   degreeLevelOption: ListData[] = [];
   form = this.fb.group({
@@ -75,8 +76,9 @@ export class EServiceDegreeCertListComponent
         /**
          * show action buttons if process = consider || approve
          */
-        this.showActionButtons = [3,4,5].includes(Number(res.get('type')));
-        this.showColumnSelect = Number(res.get('type')) == 1 ||  !res.get('type');
+        this.showActionButtons = [3, 4, 5].includes(Number(res.get('type')));
+        this.showColumnSelect =
+          Number(res.get('type')) == 1 || !res.get('type');
       }
       this.pageType = Number(res.get('processId'));
 
@@ -151,6 +153,9 @@ export class EServiceDegreeCertListComponent
                 : '',
               verify: 'แก้ไข',
               consider: 'แก้ไข',
+              process: item?.process,
+              requestType: item?.requesttype,
+              status: item?.status,
             };
           }
         );
@@ -162,39 +167,63 @@ export class EServiceDegreeCertListComponent
   }
 
   consider() {
-    this.router.navigate(['/degree-cert', 'verify', 1],{
-      state:{
-        dataSource:this.selection.selected
-      }
+    this.router.navigate(['/degree-cert', 'verify', 1], {
+      state: {
+        dataSource: this.selection.selected,
+      },
     });
   }
 
   approve() {
-    this.router.navigate(['/degree-cert', 'verify', 2],{
-      state:{
-        dataSource:this.selection.selected
-      }
+    this.router.navigate(['/degree-cert', 'verify', 2], {
+      state: {
+        dataSource: this.selection.selected,
+      },
     });
   }
-  isSelectConsider(){
-    return this.selection.selected.length > 0
+  isSelectConsider() {
+    return this.selection.selected.length > 0;
   }
 
-  isSelectApprove(){
-    return this.selection.selected.length > 0
+  isSelectApprove() {
+    return this.selection.selected.length > 0;
   }
-  goToDetailPage(row:any) {
+  goToDetailPage(row: any) {
     if (this.pageType === 0) {
-      this.router.navigate(['/degree-cert', 'check',row?.key]);
+      this.router.navigate(['/degree-cert', 'check', row?.key]);
     } else if (this.pageType === 1) {
       this.router.navigate(['/degree-cert', 'consider', row?.key]);
     } else if (this.pageType === 2) {
-      this.router.navigate(['/degree-cert', 'approve',row?.key]);
+      this.router.navigate(['/degree-cert', 'approve', row?.key]);
     }
   }
 
-  lastStep(row:any) {
-    this.router.navigate(['/degree-cert', 'final-result',row?.key]);
+  lastStep(row: any) {
+    this.router.navigate(['/degree-cert', 'final-result', row?.key]);
+  }
+  getVerify(e: any) {
+    let classStatus = 'verify__status';
+    let status:any = _.find(EUniApproveProcess, {
+      requestType: _.toNumber(e?.requestType),
+      processId: _.toNumber(e?.process),
+    });
+    status = _.find(status?.status,{id:_.toNumber(e?.status)})
+    if(!status) {
+      classStatus = 'edit__status';
+    }
+    return `<span class="rounded-pill d-flex justify-content-center ${classStatus}">${status?.sname || "แก้ไข"}</span>`;
+  }
+  getConsider(e: any) {
+    let classStatus = 'verify__status';
+    let status:any = _.find(EUniApproveProcess, {
+      requestType: _.toNumber(e?.requestType),
+      processId: _.toNumber(e?.process),
+    });
+    status = _.find(status?.status,{id:_.toNumber(e?.status)})
+    if(!status) {
+      classStatus = 'edit__status';
+    }
+    return `<span class="rounded-pill d-flex justify-content-center ${classStatus}">${status?.sname || "แก้ไข"}</span>`;
   }
 }
 
@@ -215,8 +244,8 @@ const displayedColumns: string[] = [
 ];
 export interface DegreeCertInfo {
   // degreeId: string;
-  key?:any;
-  requestno?:any;
+  key?: any;
+  requestno?: any;
   date: string;
   uni: string;
   major: string;
