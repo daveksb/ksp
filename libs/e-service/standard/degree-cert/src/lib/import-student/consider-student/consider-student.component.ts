@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { ConfirmDialogComponent } from '@ksp/shared/dialog';
+import { CompleteDialogComponent, ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { EUniService } from '@ksp/shared/service';
 import { formatDate, getCookie, parseJson, thaiDate } from '@ksp/shared/utility';
 import localForage from 'localforage';
@@ -194,6 +194,7 @@ export class ConsiderStudentComponent implements OnInit {
                       console.log('done')
                     });
                   });
+              this.onConfirmed();
             } else if (this.form.value.result == '1' 
                 && this.payload.pagetype == 'graduateList'
                 && this.payload.studentlist.length) {
@@ -202,9 +203,24 @@ export class ConsiderStudentComponent implements OnInit {
                   console.log('done')
                 });
               });
+              this.onConfirmed();
             }
           }
         })
+      }
+    });
+  }
+  onConfirmed() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      width: '350px',
+      data: {
+        header: 'บันทึกข้อมูลสำเร็จ',
+        buttonLabel: 'กลับสู่หน้าหลัก',
+      },
+    });
+
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
         this.router.navigate(['/', 'degree-cert', 'list-approved']);
       }
     });
