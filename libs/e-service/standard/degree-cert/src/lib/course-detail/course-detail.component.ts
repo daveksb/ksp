@@ -121,7 +121,7 @@ export class CourseDetailComponent implements OnInit {
         this.courseData.coursestructure.map((course: any, index: any)=>{
           course.indexyear = index+1;
           const findDataAdmission = response.datareturnadmission ? response.datareturnadmission.find((data: any) => {
-            return data.plancalendaryear == course.year;
+            return data.plancalendaryear == course.year && data.planyear == course.indexyear.toString();
           }) : {};
           course.admissioncount = findDataAdmission ? (findDataAdmission.countadmission || 0) : 0;
         })
@@ -129,7 +129,7 @@ export class CourseDetailComponent implements OnInit {
       if (response.datareturngraduate) {
         this.courseData.coursestructure.map((course: any, index: any)=>{
           const findDataGraduate = response.datareturngraduate ? response.datareturngraduate.find((data: any) => {
-            return data.plancalendaryear == course.year;
+            return data.plancalendaryear == course.year && data.planyear == course.indexyear.toString();
           }) : {};
           course.graduatecount = findDataGraduate ? (findDataGraduate.countgraduate || 0) : 0;
         })
