@@ -46,6 +46,22 @@
     </table>
 
     <div [formGroup]="form">
+      <ng-container
+        *ngIf="
+          saveData.requestData.process === '2' ||
+          saveData.requestData.process === '3' ||
+          saveData.requestData.process === '4'
+        "
+      >
+        <ksp-validate-ksp-request
+          [requestType]="saveData.requestData.requesttype"
+          [process]="saveData.requestData.process"
+          formControlName="approvement"
+        ></ksp-validate-ksp-request>
+      </ng-container>
+    </div>
+
+    <!-- <div [formGroup]="form">
       <ng-container *ngIf="saveData.requestData.process === '6'; else validate">
         <ng-container *ngIf="saveData.requestData.status === '1'">
           <ksp-consider-ksp-request
@@ -60,7 +76,7 @@
           formControlName="approvement"
         ></ksp-validate-ksp-request>
       </ng-template>
-    </div>
+    </div> -->
   </div>
 </div>
 
@@ -69,7 +85,12 @@
     (cancelClicked)="navigateBack()"
     (prevClicked)="prevPage()"
     (saveClicked)="confirmDialog()"
-    [disableSaveButton]="form.invalid"
+    [disableSaveButton]="
+      form.invalid ||
+      saveData.requestData.process === '5' ||
+      saveData.requestData.process === '6' ||
+      saveData.requestData.process === '7'
+    "
     [showCenterButtons]="true"
     [isLastPage]="true"
     [showSaveButton]="true"

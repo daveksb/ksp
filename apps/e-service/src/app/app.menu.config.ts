@@ -13,15 +13,6 @@ export const eLicenseMenu: MenuConfig[] = [
         path: '/request-license/approve-list',
         label: 'รายการใบคำขอรับใบอนุญาตประกอบวิชาชีพ',
       },
-      /* {
-        path: '/xxx',
-        label: 'บัญชีรายชื่อและผลการนำเสนอขอใบอนุญาตประกอบวิชาชีพ',
-      }, */
-      {
-        path: '/xxx',
-        label: 'พิจารณารับรองใบอนุญาตประกอบวิชาชีพ',
-      },
-
       {
         path: '/request-license/search-list',
         label: 'จัดทำบัญชีรายชื่อและนำเสนอขอใบอนุญาตประกอบวิชาชีพ',
@@ -43,10 +34,6 @@ export const eLicenseMenu: MenuConfig[] = [
         path: '/request-license/approve-list',
         label: 'รายการใบคำขอรับใบอนุญาตประกอบวิชาชีพ',
       },
-      /* {
-        path: '/xxx',
-        label: 'บัญชีรายชื่อและผลการนำเสนอขอใบอนุญาตประกอบวิชาชีพ',
-      }, */
       {
         path: '/xxx',
         label: 'พิจารณารับรองใบอนุญาตประกอบวิชาชีพ',
@@ -69,10 +56,6 @@ export const eLicenseMenu: MenuConfig[] = [
         path: '/renew-license/approve-list',
         label: 'รายการใบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
       },
-      /* {
-        path: '/xxx',
-        label: 'บัญชีรายชื่อและผลการนำเสนอขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
-      }, */
       {
         path: '/xxx',
         label: 'พิจารณารับรองใบอนุญาตประกอบวิชาชีพ',
