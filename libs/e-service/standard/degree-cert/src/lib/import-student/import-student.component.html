@@ -322,6 +322,7 @@
                   pInputText
                   type="text"
                   formControlName="approveno"
+                  readonly
                 />
               </td>
               <td class="p-2 text-nowrap" *ngIf="pageType === 'graduateList'">
@@ -332,11 +333,13 @@
                     autocomplete="off"
                     class="form-control form-date"
                     formControlName="approvedate"
+                    readonly
                   />
                   <mat-datepicker-toggle
                     class="button-date"
                     matSuffix
                     [for]="pickerapprovedate"
+                    disabled
                   ></mat-datepicker-toggle>
                   <mat-datepicker #pickerapprovedate></mat-datepicker>
                 </div>
@@ -356,11 +359,13 @@
                     autocomplete="off"
                     class="form-control form-date"
                     formControlName="graduationdate"
+                    readonly
                   />
                   <mat-datepicker-toggle
                     class="button-date"
                     matSuffix
                     [for]="pickergraduatedate"
+                    disabled
                   ></mat-datepicker-toggle>
                   <mat-datepicker #pickergraduatedate></mat-datepicker>
                 </div>

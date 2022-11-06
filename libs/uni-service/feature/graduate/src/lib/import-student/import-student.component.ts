@@ -214,11 +214,10 @@ export class ImportStudentComponent implements OnInit {
                   );
                   convertGraduateList.map((data: any) => {
                     const findindex = this.user.value.findIndex((user: any) => {
-                      return data.idcardno == user.idcardno;
+                      return data.idcardno == user.idcardno && data.id == user.id;
                     });
                     if (findindex != -1) {
                       const userAddress = JSON.parse(data.address);
-                      console.log(data)
                       this.user.at(findindex).patchValue({
                         approveno: data.approveno,
                         approvedate: moment(data.approvedate).format(
@@ -295,7 +294,7 @@ export class ImportStudentComponent implements OnInit {
       no: [index + 1],
       admissiondate: [moment().format('YYYY-MM-DD'), Validators.required],
       idcardno: ['', [Validators.required, Validators.pattern(idCardPattern)]],
-      passportno: ['', Validators.required],
+      passportno: [''],
       nationality: [null, Validators.required],
       prefixth: [null, Validators.required],
       firstnameth: [
@@ -344,7 +343,8 @@ export class ImportStudentComponent implements OnInit {
     if (this.pageType == 'admissionList') {
       userAddress = JSON.parse(data.address);
     } else {
-      userAddress = JSON.parse(data.addressinfo);
+      const parsedata = JSON.parse(data.addressinfo)
+      userAddress = parsedata?.addressInfo;
     }
     return this.fb.group({
       id: [data.id],
@@ -359,8 +359,7 @@ export class ImportStudentComponent implements OnInit {
           : undefined,
       ],
       passportno: [
-        data.passportno,
-        this.pageType == 'admissionList' ? Validators.required : undefined,
+        data.passportno
       ],
       nationality: [
         data.nationality,
@@ -428,7 +427,7 @@ export class ImportStudentComponent implements OnInit {
             subdistrictid: [userAddress?.subdistrictid || null],
             remark: [userAddress?.remark || null],
           },
-        ],
+        ]
       }),
       approveno: [
         data.approveno,
@@ -469,7 +468,7 @@ export class ImportStudentComponent implements OnInit {
         data.idcardno,
         [Validators.required, Validators.pattern(idCardPattern)],
       ],
-      passportno: [data.passportno, Validators.required],
+      passportno: [data.passportno],
       nationality: [data.nationality, Validators.required],
       prefixth: [data.prefixth, Validators.required],
       firstnameth: [
@@ -576,6 +575,7 @@ export class ImportStudentComponent implements OnInit {
       data: {
         teachingpracticeschool:
           this.user.at(index).value.teachingpracticeschool,
+        disableAll: false
       },
     });
     dialogRef.afterClosed().subscribe((response: any) => {
@@ -644,7 +644,7 @@ export class ImportStudentComponent implements OnInit {
               });
               this.payload.graduatelist = JSON.stringify(graduatelist);
               this.payload.admissionlist = null;
-              this.payload.currentgraduateno = this.user.value.length;
+              this.payload.currentgraduateno = this.getCheckedValue().length;
             }
             return this.requestService.createRequestAdmission(this.payload);
           }

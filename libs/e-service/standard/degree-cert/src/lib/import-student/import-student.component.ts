@@ -324,7 +324,7 @@ export class ImportStudentComponent implements OnInit {
       width: '600px',
       data: {
         ...subjectInfo,
-        disabledAll: true
+        disableAll: true
       },
     });
     dialogRef.afterClosed().subscribe((res) => {
@@ -346,7 +346,8 @@ export class ImportStudentComponent implements OnInit {
       },
       data: {
         teachingpracticeschool:
-        JSON.parse(this.user.at(index).value.teachingpracticeschool)
+        JSON.parse(this.user.at(index).value.teachingpracticeschool),
+        disableAll: true
       },
     });
     dialogRef.afterClosed().subscribe((response: any) => {

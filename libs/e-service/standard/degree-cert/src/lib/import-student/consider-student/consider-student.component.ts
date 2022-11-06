@@ -204,6 +204,8 @@ export class ConsiderStudentComponent implements OnInit {
                 });
               });
               this.onConfirmed();
+            } else {
+              this.onConfirmed();
             }
           }
         })
