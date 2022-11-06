@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConfirmDialogComponent } from '@ksp/shared/dialog';
+import {
+  ConfirmDialogComponent,
+  FilesPreviewComponent,
+} from '@ksp/shared/dialog';
 import { Location } from '@angular/common';
 import {
   ERequestService,
@@ -19,19 +22,21 @@ import _ from 'lodash';
 import { map } from 'rxjs';
 import moment from 'moment';
 const detailToState = (res: any) => {
-  const newRes = _.filter(res?.datareturn, { process: '6' }).map((data: any) => {
+  const dataReturn = _.filter(res?.datareturn, ({ process }: any) =>
+    ['3', '4', '5', '6'].includes(process)
+  ).map((data: any) => {
     return parseJson(data?.detail);
   });
- const verify = newRes?.map((data: any) => {
+  const verify = dataReturn?.map((data: any) => {
     const verifyObject: any = {};
     verifyObject.isBasicValid = _.get(data, 'verify.result') === '1';
     return verifyObject;
   });
   return {
     verify,
-    considerCert:_.get(_.last(newRes),"considerCert",[]),
-    considerCourses:_.get(_.last(newRes),"considerCourses",[])
-  }
+    considerCert: _.get(_.last(dataReturn), 'considerCert', []),
+    considerCourses: _.get(_.last(dataReturn), 'considerCourses', []),
+  };
 };
 @Component({
   selector: 'e-service-approve',
@@ -110,8 +115,14 @@ export class ApproveComponent implements OnInit {
       .pipe(map(detailToState))
       .subscribe((res) => {
         this.verifyResult = res?.verify;
-        this.considerCert = [...this.considerCert,...res?.considerCert || []];
-        this.considerCourses = [...this.considerCourses,...res?.considerCourses || []];
+        this.considerCert = [
+          ...this.considerCert,
+          ...(res?.considerCert || []),
+        ];
+        this.considerCourses = [
+          ...this.considerCourses,
+          ...(res?.considerCourses || []),
+        ];
       });
   }
 
@@ -174,5 +185,17 @@ export class ApproveComponent implements OnInit {
   }
   get isApprove() {
     return _.get(this.form.controls.verify.value, 'result') == 1;
+  }
+
+  view(rowData: any) {
+    const dialogRef = this.dialog.open(FilesPreviewComponent, {
+      width: '800px',
+    });
+
+    dialogRef.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.dialog.closeAll();
+      }
+    });
   }
 }

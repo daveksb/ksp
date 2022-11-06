@@ -89,7 +89,7 @@
                   {{ result[item?.considerationResult?.result || ''] }}
                 </td>
                 <td class="detail__table">
-                  <label class="view__label">ดูเอกสารแนบ</label>
+                  <label class="view__label" (click)="view(item)">ดูเอกสารแนบ</label>
                 </td>
               </tr>
             </tbody>
@@ -128,7 +128,7 @@
                   {{ item?.considerationResult?.detail || '' }}
                 </td>
                 <td class="detail__table">
-                  <label class="view__label">ดูเอกสารแนบ</label>
+                  <label class="view__label" (click)="view(item)">ดูเอกสารแนบ</label>
                 </td>
               </tr>
             </tbody>
