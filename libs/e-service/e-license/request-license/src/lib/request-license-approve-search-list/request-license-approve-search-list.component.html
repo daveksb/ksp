@@ -1,5 +1,4 @@
-<ksp-top-nav
-  ><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span>
+<ksp-top-nav><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span>
   <span subHeader>ผลการนำเสนอใบอนุญาตประกอบวิชาชีพ </span>
 </ksp-top-nav>
 
@@ -14,19 +13,24 @@
 
     <div class="d-flex justify-content-end mb-3 mt-4">
       <ng-container *ngIf="mode === 'create'">
-        <button type="button" class="btn btn-success ms-2 create-group-btn">
+        <button
+          type="button"
+          class="btn btn-success ms-2 create-group-btn"
+          (click)="saveResult()">
           บันทึกผลการนำเสนอกลั่นกรอง
         </button>
 
-        <button type="button" class="btn btn-success ms-2 create-group-btn">
+        <button
+          type="button"
+          class="btn btn-success ms-2 create-group-btn"
+          (click)="print()">
           พิมพ์รายงานนำเสนอกลั่นกรอง
         </button>
 
         <button
           type="button"
           class="btn btn-primary ms-2 create-group-btn"
-          (click)="createGroup()"
-        >
+          (click)="createGroup()">
           + สร้างกลุ่มบัญชีรายชื่อ
         </button>
       </ng-container>
@@ -35,8 +39,7 @@
         <button
           type="button"
           class="btn btn-success ms-2 create-group-btn"
-          (click)="guarantee()"
-        >
+          (click)="guarantee()">
           บันทึกผลการนำเสนอ กมว.
         </button>
 

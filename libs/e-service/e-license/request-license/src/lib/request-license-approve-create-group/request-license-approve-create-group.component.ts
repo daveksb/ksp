@@ -13,7 +13,6 @@ import {
   styleUrls: ['./request-license-approve-create-group.component.scss'],
 })
 export class RequestLicenseApproveCreateGroupComponent implements OnInit {
-  displayedColumns = ['order', 'licenseType', 'count'];
   displayedColumns2 = [
     'check',
     'order',
@@ -26,12 +25,13 @@ export class RequestLicenseApproveCreateGroupComponent implements OnInit {
     'approveDate',
     'requestDate',
   ];
-  dataSource = new MatTableDataSource<any>();
   dataSource2 = new MatTableDataSource<any>();
+  licenseData: any;
+
   constructor(private router: Router, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.dataSource.data = [
+    this.licenseData = [
       {
         order: 1,
         licenseType: 'ครู',
