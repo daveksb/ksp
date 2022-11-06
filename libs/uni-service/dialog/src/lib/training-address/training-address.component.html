@@ -17,12 +17,13 @@
               <input
                 class="form-control"
                 type="text"
-                formControlName="universitycode"
+                formControlName="schoolid"
               />
               <i
                 role="button"
                 (click)="searchAddress(i)"
                 class="bi bi-search text-primary fs-5 ms-1"
+                *ngIf="!data.disableAll"
               ></i>
             </div>
           </div>
@@ -32,11 +33,11 @@
               <input
                 class="form-control"
                 type="text"
-                formControlName="uniname"
+                formControlName="schoolname"
               />
               <i
                 role="button"
-                *ngIf="i > 0"
+                *ngIf="i > 0 && !data.disableAll"
                 (click)="deleteAddress(i)"
                 class="bi bi-trash text-danger fs-5 ms-1"
               ></i>
@@ -47,7 +48,9 @@
     </ng-container>
   </ng-container>
 
-  <div class="d-flex justify-content-end">
+  <div 
+    class="d-flex justify-content-end"
+    *ngIf="!data.disableAll">
     <ksp-add-row-button
       class="blue"
       (addRowClick)="addAddress()"
@@ -61,11 +64,24 @@
       matDialogClose
       type="button"
       class="btn border-primary text-primary"
+      *ngIf="!data.disableAll"
     >
       ยกเลิก
     </button>
-    <button (click)="save()" type="button" class="btn btn-primary ms-2">
+    <button 
+      (click)="save()" 
+      type="button" 
+      class="btn btn-primary ms-2"
+      *ngIf="!data.disableAll">
       บันทึก
+    </button>
+    <button
+      matDialogClose
+      type="button"
+      class="btn border-primary text-primary"
+      *ngIf="data.disableAll"
+    >
+      ปิด
     </button>
   </div>
 </form>

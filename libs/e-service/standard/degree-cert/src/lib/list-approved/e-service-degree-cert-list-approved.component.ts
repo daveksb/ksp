@@ -4,12 +4,14 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { EUniService, UniInfoService } from '@ksp/shared/service';
 import { KspPaginationComponent, ListData } from '@ksp/shared/interface';
-import { getCookie, thaiDate } from '@ksp/shared/utility';
 import { map } from 'rxjs';
 import _ from 'lodash';
-import { HistoryRequestAdmissionDialogComponent, HistoryRequestDialogComponent } from '@ksp/uni-service/dialog';
+import { HistoryRequestAdmissionDialogComponent } from '@ksp/uni-service/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder } from '@angular/forms';
+import { UniAdmissionStatus } from '@ksp/shared/constant';
+import { thaiDate } from '@ksp/shared/utility';
+
 const mapOption = () =>
   map((data: any) => {
     return (
@@ -33,6 +35,7 @@ export class EServiceDegreeCertApprovedListComponent extends KspPaginationCompon
   pageType = 0;
   uniUniversityOption: ListData[] = [];
   degreeLevelOptions: ListData[] = [];
+  statusList = UniAdmissionStatus;
   form = this.fb.group({
     search: [{}],
   });

@@ -29,13 +29,13 @@ export class StudentListSubjectComponent {
   ) {
     if (this.data) {
       this.subjectData = this.data;
-      if (this.data.disabledAll) {
+      if (this.data.disableAll) {
         this.disabledField = true;
       }
     }
-    console.log(this.subjectData);
-    this.dialogRef.backdropClick().subscribe(() => {
-      dialogRef.close(this.subjectData);
-    });
+  }
+
+  save() {
+    this.dialogRef.close(this.subjectData);
   }
 }

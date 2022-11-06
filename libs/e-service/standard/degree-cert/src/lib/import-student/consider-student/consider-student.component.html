@@ -35,7 +35,9 @@
                 <td class="detail__table">{{ history.createdate }}</td>
                 <td class="detail__table">{{ history.updatedate }}</td>
                 <td class="detail__table">{{ history.createby }}</td>
-                <td class="detail__table">{{ history.status === '2' ? 'ขอแก้ไข/เพิ่มเติม' 
+                <td class="detail__table">{{ 
+                  history.status === '1' ? 'รอตรวจสอบ'
+                  : history.status === '2' ? 'ขอแก้ไข/เพิ่มเติม' 
                   : history.status === '3' ? 'ครบถ้วนและถูกต้อง' : '' }}</td>
               </tr>
             </tbody>
