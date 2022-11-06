@@ -65,11 +65,23 @@ export class RequestLicenseApproveSearchListComponent implements OnInit {
     });
   }
 
-  createGroup() {
+  editGroup() {
     this.router.navigate(['/request-license', 'create-group-list']);
+  }
+
+  createGroup() {
+    this.router.navigate(['/request-license', 'create-group']);
   }
 
   guarantee() {
     this.router.navigate(['/request-license', 'guarantee-confirm']);
+  }
+
+  print() {
+    this.router.navigate(['/request-license', 'print']);
+  }
+
+  saveResult() {
+    this.router.navigate(['/request-license', 'save-result']);
   }
 }

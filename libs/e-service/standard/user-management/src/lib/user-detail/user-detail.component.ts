@@ -101,6 +101,7 @@ export class UserDetailComponent implements OnInit {
         );
       }
       const education = parseJson(res.educationoccupy);
+      this.requestData.userid = education?.userid || null;
       this.requestData.uniid = education?.uniid || null;
       this.requestData.bureauname = education?.affiliation || '';
       this.requestData.schoolname = education?.uniname || '';
@@ -117,6 +118,32 @@ export class UserDetailComponent implements OnInit {
       const coordinator = parseJson(res.coordinatorinfo);
       this.setPassword = coordinator.password;
       this.form.controls.coordinatorInfo.patchValue(coordinator);
+    });
+  }
+
+  retireUser() {
+    const payload: KspApprovePayload = {
+      requestid: `${this.requestId}`,
+      process: '1',
+      status: '2',
+      detail: null,
+      systemtype: '3', // school
+      userid: null,
+      paymentstatus: null,
+    };
+
+    this.eRequestService.KspUpdateRequestProcess(payload).subscribe((res) => {
+      console.log('update result = ', res);
+      this.completeDialog();
+    });
+
+    const retirePayload = {
+      id: this.requestData.userid,
+      isuseractive: '0',
+    };
+
+    this.eRequestService.retiredUniUser(retirePayload).subscribe((res) => {
+      console.log('retired result = ', res);
     });
   }
 
@@ -204,7 +231,11 @@ export class UserDetailComponent implements OnInit {
       const form: any = this.verifyForm.controls.result.value;
       const result = +form.result;
       if (result) {
-        this.approveUser();
+        if (this.requestData.requesttype === '1') {
+          this.approveUser();
+        } else if (this.requestData.requesttype === '2') {
+          this.retireUser();
+        }
       } else {
         this.unApproveUser();
       }

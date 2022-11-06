@@ -3,7 +3,9 @@
 </ksp-top-nav>
 
 <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
-  <div class="box-header">ค้นหากลุ่มบัญชีรายชื่อผู้ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพทางการศึกษา </div>
+  <div class="box-header">
+    ค้นหากลุ่มบัญชีรายชื่อผู้ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพทางการศึกษา
+  </div>
   <div class="bg-white px-3 py-3">
     <div class="mb-3">
       <ksp-e-service-license-group-search></ksp-e-service-license-group-search>
@@ -13,13 +15,15 @@
       <ng-container *ngIf="mode === 'create'">
         <button
           type="button"
-          class="btn btn-success ms-2 create-group-btn">
+          class="btn btn-success ms-2 create-group-btn"
+          (click)="saveResult()">
           บันทึกผลการนำเสนอกลั่นกรอง
         </button>
 
         <button
           type="button"
-          class="btn btn-success ms-2 create-group-btn">
+          class="btn btn-success ms-2 create-group-btn"
+          (click)="print()">
           พิมพ์รายงานนำเสนอกลั่นกรอง
         </button>
 
@@ -39,9 +43,7 @@
           บันทึกผลการนำเสนอ กมว.
         </button>
 
-        <button
-          type="button"
-          class="btn btn-success ms-2 create-group-btn">
+        <button type="button" class="btn btn-success ms-2 create-group-btn">
           พิมพ์รายงานนำเสนอ กมว.
         </button>
       </ng-container>
@@ -62,8 +64,10 @@
         </ng-container>
 
         <ng-container matColumnDef="resolution">
-          <th mat-header-cell *matHeaderCellDef>มติที่ประชุม (คณะอนุกรรมการ)</th>
-          <td mat-cell *matCellDef="let element">
+          <th mat-header-cell *matHeaderCellDef>
+            มติที่ประชุม (คณะอนุกรรมการ)
+          </th>
+          <td (click)="editGroup()" mat-cell *matCellDef="let element">
             {{ element.resolution }}
           </td>
         </ng-container>
@@ -112,14 +116,14 @@
 
         <ng-container matColumnDef="guaranteeDate">
           <th mat-header-cell *matHeaderCellDef>วันที่รับรอง</th>
-          <td mat-cell *matCellDef="let element">{{ element.guaranteeDate }}</td>
+          <td mat-cell *matCellDef="let element">
+            {{ element.guaranteeDate }}
+          </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
-
-
     </div>
   </div>
 </div>
