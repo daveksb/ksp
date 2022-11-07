@@ -17,12 +17,14 @@ import {
   EUniService,
   UniInfoService,
 } from '@ksp/shared/service';
-import { map, switchMap, lastValueFrom } from 'rxjs';
+import { map} from 'rxjs';
 import _ from 'lodash';
+import { Location } from '@angular/common';
+
 import { ApproveStepStatusOption } from '@ksp/shared/constant';
 const detailToState = (res: any) => {
-  let newRes = _.filter(res?.datareturn, ({ process }) =>
-    ['1', '2'].includes(process)
+  let newRes = _.filter(res?.datareturn, ({ process,detail }) =>
+    ['1', '2'].includes(process) && detail
   ).map((data: any) => {
     return parseJson(data?.detail);
   });
@@ -75,7 +77,8 @@ export class CheckComponent implements OnInit, AfterContentChecked {
     private uniInfoService: UniInfoService,
     private eUniService: EUniService,
     private eRequestService: ERequestService,
-    private cdref: ChangeDetectorRef
+    private cdref: ChangeDetectorRef,
+    private location:Location
   ) {}
   ngAfterContentChecked(): void {
     this.cdref.detectChanges();
@@ -218,8 +221,8 @@ export class CheckComponent implements OnInit, AfterContentChecked {
       userid: getCookie('userId'),
     };
     detail.returnDate = _.get(this.form, 'value.step5.returnDate', '');
-    payload.status = _.get(this.form, 'value.step5.verify.result', '');
-    payload.process = _.size(this.verifyResult) + 1;
+    payload.status = _.get(this.form, 'value.step5.verify', '');
+    payload.process = (_.size(this.verifyResult) + 1) +""
     payload.detail = jsonStringify(detail);
     this.eRequestService.kspUpdateRequestUniRequestDegree(payload).subscribe(() => {
       this.onConfirmed();
@@ -256,7 +259,7 @@ export class CheckComponent implements OnInit, AfterContentChecked {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'degree-cert', 'list', 0]);
+        this.location.back();
       }
     });
   }

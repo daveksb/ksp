@@ -81,6 +81,9 @@ export class UniInfoService {
       formData.step4 = {
         files: parseJson(res?.attachfiles),
       };
+    if (res?.degreeapprovecode) {
+      formData.degreeApproveCode = res?.degreeapprovecode;
+    }
     return formData;
   }
   univerSitySelectById(id: any): Observable<any> {
