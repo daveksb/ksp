@@ -10,20 +10,26 @@ import {
 } from '@ksp/shared/service';
 import { map } from 'rxjs';
 import { Location } from '@angular/common';
-import { jsonStringify, parseJson } from '@ksp/shared/utility';
+import { formatDate, jsonStringify, parseJson } from '@ksp/shared/utility';
 import _ from 'lodash';
-
 @Component({
   templateUrl: './final-result.component.html',
   styleUrls: ['./final-result.component.scss'],
 })
 export class FinalResultComponent implements OnInit {
   form = this.fb.group({
-    finalResult: [],
+    finalResult: [
+      {
+        reasonTimes: '',
+        date: '',
+        approvedegreeCode: Math.floor(Math.random() * 1000000000000),
+      },
+    ],
     step1: [],
   });
   daftRequest: any;
   requestNumber = '';
+  step1Data: any;
   constructor(
     public dialog: MatDialog,
     private router: Router,
@@ -50,6 +56,7 @@ export class FinalResultComponent implements OnInit {
         .subscribe((res) => {
           if (res?.returncode !== 98) {
             this.requestNumber = res?.requestNo;
+            this.step1Data = res.step1;
             this.form.patchValue({
               step1: res.step1,
             });
@@ -61,89 +68,59 @@ export class FinalResultComponent implements OnInit {
     this.router.navigate(['/', 'degree-cert', 'list', '0']);
   }
   private _getRequest(): any {
-    const payload: any = _.pick(this.daftRequest, [
-      'requestid',
-      'requestno',
-      'degreeapprovecode',
-      'uniid',
-      'unitype',
-      'uniname',
-      'unicode',
-      'uniprovince',
-      'degreelevel',
-      'courseacademicyear',
-      'coursename',
-      'coursetype',
-      'coursestatus',
-      'coursemajor',
-      'coursefieldofstudy',
-      'coursesubjects',
-      'fulldegreenameth',
-      'fulldegreenameen',
-      'shortdegreenameth',
-      'shortdegreenameen',
-      'courseapprovetime',
-      'courseapprovedate',
-      'courseacceptdate',
-      'coursedetailtype',
-      'coursedetailinfo',
-      'teachinglocation',
-      'responsibleunit',
-      'evaluatelocation',
-      'coordinatorinfo',
-      'coursestructure',
-      'courseplan',
-      'courseteacher',
-      'courseinstructor',
-      'courseadvisor',
-      'processtrainning',
-      'processteaching',
-      'attachfiles',
-      'requestdate',
-      'tokenkey',
-    ]);
-    if (payload?.coursedetailinfo)
-      payload.coursedetailinfo = jsonStringify(
-        parseJson(payload.coursedetailinfo)
-      );
-    if (payload?.teachinglocation)
-      payload.teachinglocation = jsonStringify(
-        parseJson(payload.teachinglocation)
-      );
-    if (payload?.responsibleunit)
-      payload.responsibleunit = jsonStringify(
-        parseJson(payload.responsibleunit)
-      );
-    if (payload?.evaluatelocation)
-      payload.evaluatelocation = jsonStringify(
-        parseJson(payload.evaluatelocation)
-      );
-    if (payload?.coordinatorinfo)
-      payload.coordinatorinfo = jsonStringify(
-        parseJson(payload.coordinatorinfo)
-      );
-    if (payload?.courseteacher)
-      payload.courseteacher = jsonStringify(parseJson(payload.courseteacher));
-    if (payload?.courseinstructor)
-      payload.courseinstructor = jsonStringify(
-        parseJson(payload.courseinstructor)
-      );
-    if (payload?.courseadvisor)
-      payload.courseadvisor = jsonStringify(parseJson(payload.courseadvisor));
-    if (payload?.processtrainning)
-      payload.processtrainning = jsonStringify(
-        parseJson(payload.processtrainning)
-      );
-    if (payload?.processteaching)
-      payload.processteaching = jsonStringify(
-        parseJson(payload.processteaching)
-      );
-    if (payload?.coursestructure)
-      payload.coursestructure = jsonStringify(
-        parseJson(payload.coursestructure)
-      );
-    if (payload?.courseplan)
-      payload.courseplan = jsonStringify(parseJson(payload.courseplan));
+    const payload: any = {
+      uniname: this.step1Data?.institutionsName || null,
+      unitype: this.step1Data?.institutionsGroup || null,
+      uniprovince: this.step1Data?.provience || null,
+      unicode: this.step1Data?.institutionsCode || null,
+      degreelevel: this.step1Data?.degreeTypeForm?.degreeType || null,
+      courseacademicyear: this.step1Data?.degreeTypeForm?.courseYear || null,
+      coursename: this.step1Data?.degreeTypeForm?.courseName || null,
+      coursetype: this.step1Data?.degreeTypeForm?.courseType || null,
+      coursestatus: this.step1Data?.degreeTypeForm?.courseStatus || null,
+      fulldegreenameth:
+        this.step1Data?.degreeTypeForm?.degreeNameThFull || null,
+      shortdegreenameth:
+        this.step1Data?.degreeTypeForm?.degreeNameThShort || null,
+      fulldegreenameen:
+        this.step1Data?.degreeTypeForm?.degreeNameEnFull || null,
+      shortdegreenameen:
+        this.step1Data?.degreeTypeForm?.degreeNameEnShort || null,
+      courseapprovetime:
+        this.step1Data?.degreeTypeForm?.courseApproveTime || null,
+      courseapprovedate: this.step1Data?.degreeTypeForm?.courseApproveDate
+        ? formatDate(
+            new Date(
+              this.step1Data?.degreeTypeForm?.courseApproveDate
+            ).toISOString()
+          )
+        : null,
+      courseacceptdate: this.step1Data?.degreeTypeForm?.courseAcceptDate
+        ? formatDate(
+            new Date(
+              this.step1Data?.degreeTypeForm?.courseAcceptDate
+            ).toISOString()
+          )
+        : null,
+      coursedetailtype: this.step1Data?.courseDetailType || null,
+      coursedetailinfo: this.step1Data?.courseDetail
+        ? JSON.stringify(this.step1Data?.courseDetail)
+        : null,
+      teachinglocation: this.step1Data?.locations
+        ? JSON.stringify(this.step1Data?.locations)
+        : null,
+      responsibleunit: this.step1Data?.institutions
+        ? JSON.stringify(this.step1Data?.institutions)
+        : null,
+      evaluatelocation: this.step1Data?.locations2
+        ? JSON.stringify(this.step1Data?.locations2)
+        : null,
+      coordinatorinfo: this.step1Data?.coordinator
+        ? JSON.stringify(this.step1Data?.coordinator)
+        : null,
+    };
+    payload.degreeapprovecode =
+      this.form.value.finalResult?.approvedegreeCode?.toString() || '';
     return payload;
   }
   onSubmitDeGreeCert() {

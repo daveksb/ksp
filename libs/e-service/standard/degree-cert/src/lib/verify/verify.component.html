@@ -1,3 +1,4 @@
+<!-- eslint-disable @angular-eslint/template/eqeqeq -->
 <ksp-top-nav>
   <span header> {{ titles[processType] }} </span>
 </ksp-top-nav>
@@ -35,6 +36,7 @@
       </div>
       <!-- <ksp-form-meeting-record></ksp-form-meeting-record> -->
       <e-service-form-meeting-record
+        [displayHeader]="processType != 3"
         formControlName="verifyForm"
       ></e-service-form-meeting-record>
     </div>

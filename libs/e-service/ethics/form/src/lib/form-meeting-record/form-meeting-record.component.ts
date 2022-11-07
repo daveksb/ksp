@@ -7,6 +7,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { providerFactory } from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
+import { UniInfoService } from '@ksp/shared/service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'e-service-form-meeting-record',
@@ -16,13 +18,12 @@ import { SharedFormOthersModule } from '@ksp/shared/form/others';
     FileUploadComponent,
     ReactiveFormsModule,
     MatDatepickerModule,
-    SharedFormOthersModule
+    SharedFormOthersModule,
   ],
   template: ` <p>form-meeting-record works!</p> `,
   templateUrl: './form-meeting-record.component.html',
   styleUrls: ['./form-meeting-record.component.scss'],
   providers: providerFactory(FormMeetingRecordComponent),
-
 })
 export class FormMeetingRecordComponent extends KspFormBaseComponent {
   override form = this.fb.group({
@@ -31,13 +32,14 @@ export class FormMeetingRecordComponent extends KspFormBaseComponent {
     boardType: [],
     boardName: [],
     chairmanName: [],
-    file:[]
+    file: [],
   });
   uniqueNo = '';
-
+  boardOption: any = [];
   @Input() showBoxHeader = 'บันทึกมติที่ประชุมคณะอนุกรรมการ';
+  @Input() displayHeader =  true;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private uniInfo: UniInfoService) {
     super();
     this.uniqueNo = uuidv4();
     this.subscriptions.push(
@@ -46,8 +48,21 @@ export class FormMeetingRecordComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+    this.uniInfo
+      .getBoard()
+      .pipe(
+        map((res) =>
+          res?.datareturn?.map((d: any) => ({
+            value: d?.boardname,
+            label: d?.boardname,
+          }))
+        )
+      )
+      .subscribe((res) => {
+        this.boardOption = res;
+      });
   }
   onUploadComplete(evt: any) {
-    this.form.controls.file.setValue(evt)
+    this.form.controls.file.setValue(evt);
   }
 }

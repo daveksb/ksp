@@ -312,4 +312,8 @@ export class UniInfoService {
   getUniDegreelevel(): Observable<any> {
     return this.http.get(`${environment.apiUrl}/kspmasterdata/unidegreelevel`);
   }
+
+  getBoard(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/kspmasterdata/board`);
+  }
 }

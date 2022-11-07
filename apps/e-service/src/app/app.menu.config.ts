@@ -43,7 +43,7 @@ export const eLicenseMenu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'สร้างเลขใบอนุญาตประกอบวิชาชีพ',
-    path: '/xxx',
+    path: '/create-license-id/list',
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',

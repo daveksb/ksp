@@ -378,6 +378,32 @@
       },
       "tags": []
     },
+    "e-service-e-license-create-license-id": {
+      "projectType": "library",
+      "root": "libs/e-service/e-license/create-license-id",
+      "sourceRoot": "libs/e-service/e-license/create-license-id/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/e-service/e-license/create-license-id"],
+          "options": {
+            "jestConfig": "libs/e-service/e-license/create-license-id/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/e-license/create-license-id/**/*.ts",
+              "libs/e-service/e-license/create-license-id/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "e-service-e-license-document-delivery": {
       "projectType": "library",
       "root": "libs/e-service/e-license/document-delivery",

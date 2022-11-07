@@ -134,12 +134,25 @@ export class ERequestService {
       `${environment.apiUrl}/e-service/ksprequestprocessselectbyrequestid`,
       { requestid, tokenkey: getCookie('userToken') }
     );
-  }
+    }
 
-  retiredUniUser(payload: any): Observable<any> {
-    return this.http.post(
-      `${environment.apiUrl}/e-service/uniuseractiveupdate`,
-      payload
-    );
-  }
+    kspUpdateRequestUniRequestDegree(payload: KspApprovePayload): Observable<any> {
+      return this.http.post(
+        `${environment.apiUrl}/e-service/ksprequestprocessinsert_unirequestdegree`,
+        payload
+      );
+    }
+
+    kspUniRequestProcessSelectByRequestId(requestid: any): Observable<any> {
+      return this.http.post(
+        `${environment.apiUrl}/e-service/ksprequestprocessselectbyrequestid_requestdegree`,
+        { requestid, tokenkey: getCookie('userToken') }
+      );
+      }
+      retiredUniUser(payload: any): Observable<any> {
+        return this.http.post(
+          `${environment.apiUrl}/e-service/uniuseractiveupdate`,
+          payload
+        );
+      }
 }

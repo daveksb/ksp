@@ -73,7 +73,7 @@ export class RequestLicenseApproveGuarunteeComponent implements OnInit {
 
     dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/request-license', 'guarantee']);
+        this.router.navigate(['/request-license', 'kmv']);
       }
     });
   }
