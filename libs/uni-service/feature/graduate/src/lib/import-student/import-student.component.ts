@@ -116,8 +116,8 @@ export class ImportStudentComponent implements OnInit {
           plancalendaryear: this.courseData.courseSelected.calendaryear,
           planname: this.courseData.courseSelected.label,
           plantotalno: this.courseData.courseSelected.student,
-          currentadmissionno: this.courseData.courseSelected.currentadmissionno,
-          currentgraduateno: this.courseData.courseSelected.currentgraduateno,
+          currentadmissionno: 0,
+          currentgraduateno: 0,
           ref1: '3',
           ref2: this.pageType == 'admissionList' ? '05' : '06',
           ref3: '5',
@@ -151,10 +151,10 @@ export class ImportStudentComponent implements OnInit {
               data.unidegreecertid == this.courseData?.courseDetail.id &&
               data.planyear == this.payload.planyear &&
               data.plancalendaryear == this.payload.plancalendaryear &&
-              data.admissionlist && data.process == '1'
+              data.admissionlist && (data.process == '1' || (data.process == '3' && data.status == '2'))
             );
           });
-          if (findResponse && findResponse.process == '1') {
+          if (findResponse) {
             const parseuser = JSON.parse(findResponse.admissionlist);
             parseuser.forEach((user: any, index: any) => {
               user.index = index;
@@ -199,10 +199,10 @@ export class ImportStudentComponent implements OnInit {
               row: 999,
             })
             .subscribe((res: any) => {
-              if (res.datareturn.length) {
+              if (res.datareturn && res.datareturn.length) {
                 const findRequestGraduate = res.datareturn.find((data: any) => {
                   return (
-                    data.graduatelist != null && data.process == '1'
+                    data.graduatelist != null && (data.process == '1' || (data.process == '3' && data.status == '2'))
                   );
                 });
                 if (findRequestGraduate) {
@@ -214,11 +214,10 @@ export class ImportStudentComponent implements OnInit {
                   );
                   convertGraduateList.map((data: any) => {
                     const findindex = this.user.value.findIndex((user: any) => {
-                      return data.idcardno == user.idcardno;
+                      return data.idcardno == user.idcardno && data.id == user.id;
                     });
                     if (findindex != -1) {
                       const userAddress = JSON.parse(data.address);
-                      console.log(data)
                       this.user.at(findindex).patchValue({
                         approveno: data.approveno,
                         approvedate: moment(data.approvedate).format(
@@ -289,12 +288,13 @@ export class ImportStudentComponent implements OnInit {
 
   addUsers(index: number) {
     return this.fb.group({
+      id: [null],
       checked: [false],
       index: [index],
       no: [index + 1],
       admissiondate: [moment().format('YYYY-MM-DD'), Validators.required],
       idcardno: ['', [Validators.required, Validators.pattern(idCardPattern)]],
-      passportno: ['', Validators.required],
+      passportno: [''],
       nationality: [null, Validators.required],
       prefixth: [null, Validators.required],
       firstnameth: [
@@ -343,9 +343,11 @@ export class ImportStudentComponent implements OnInit {
     if (this.pageType == 'admissionList') {
       userAddress = JSON.parse(data.address);
     } else {
-      userAddress = JSON.parse(data.addressinfo);
+      const parsedata = JSON.parse(data.addressinfo)
+      userAddress = parsedata?.addressInfo;
     }
     return this.fb.group({
+      id: [data.id],
       checked: [false],
       index: [data.index],
       no: [data.index + 1],
@@ -357,8 +359,7 @@ export class ImportStudentComponent implements OnInit {
           : undefined,
       ],
       passportno: [
-        data.passportno,
-        this.pageType == 'admissionList' ? Validators.required : undefined,
+        data.passportno
       ],
       nationality: [
         data.nationality,
@@ -426,7 +427,7 @@ export class ImportStudentComponent implements OnInit {
             subdistrictid: [userAddress?.subdistrictid || null],
             remark: [userAddress?.remark || null],
           },
-        ],
+        ]
       }),
       approveno: [
         data.approveno,
@@ -458,6 +459,7 @@ export class ImportStudentComponent implements OnInit {
 
   addDatafromFile(data: any) {
     return this.fb.group({
+      id: [null],
       checked: [false],
       index: [this.user.value.length],
       no: [this.user.value.length + 1],
@@ -466,7 +468,7 @@ export class ImportStudentComponent implements OnInit {
         data.idcardno,
         [Validators.required, Validators.pattern(idCardPattern)],
       ],
-      passportno: [data.passportno, Validators.required],
+      passportno: [data.passportno],
       nationality: [data.nationality, Validators.required],
       prefixth: [data.prefixth, Validators.required],
       firstnameth: [
@@ -573,6 +575,7 @@ export class ImportStudentComponent implements OnInit {
       data: {
         teachingpracticeschool:
           this.user.at(index).value.teachingpracticeschool,
+        disableAll: false
       },
     });
     dialogRef.afterClosed().subscribe((response: any) => {
@@ -629,6 +632,7 @@ export class ImportStudentComponent implements OnInit {
               });
               this.payload.admissionlist = JSON.stringify(datasave);
               this.payload.graduatelist = null;
+              this.payload.currentadmissionno = this.user.value.length;
             } else {
               const graduatelist = this.getCheckedValue();
               graduatelist.map((data: any) => {
@@ -640,6 +644,7 @@ export class ImportStudentComponent implements OnInit {
               });
               this.payload.graduatelist = JSON.stringify(graduatelist);
               this.payload.admissionlist = null;
+              this.payload.currentgraduateno = this.getCheckedValue().length;
             }
             return this.requestService.createRequestAdmission(this.payload);
           }
@@ -745,6 +750,15 @@ export class ImportStudentComponent implements OnInit {
         }
       });
     }
+  }
+
+  prev() {
+    this.router.navigate([
+      '/',
+      'student-list',
+      'course-detail',
+      this.payload.unidegreecertid
+    ]);
   }
 
   checkdisableSave() {

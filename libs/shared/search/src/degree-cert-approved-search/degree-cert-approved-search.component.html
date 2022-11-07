@@ -81,19 +81,21 @@
     <div class="row mb-3">
       <div class="col">
         <label class="form-label">สถานะรายชื่อผู้เข้าศึกษา </label>
-        <input
-          class="form-control"
-          type="text"
-          formControlName="admissionstatus"
-        />
+        <select class="form-select" formControlName="admissionstatus">
+          <option value="null" disabled selected hidden>กรุณาเลือก</option>
+          <option *ngFor="let item of statusOption" [value]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
       </div>
       <div class="col">
         <label class="form-label">สถานะรายชื่อผู้สำเร็จการศึกษา </label>
-        <input
-          class="form-control"
-          type="text"
-          formControlName="graduatestatus"
-        />
+        <select class="form-select" formControlName="graduatestatus">
+          <option value="null" disabled selected hidden>กรุณาเลือก</option>
+          <option *ngFor="let item of statusOption" [value]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
       </div>
     </div>
 

@@ -1,4 +1,4 @@
-import { ApproveUniOption, UniApproveProcess } from '@ksp/shared/interface';
+import { ApproveUniOption, ListData, UniApproveProcess } from '@ksp/shared/interface';
 
 export const ApproveStepStatusOption: ApproveUniOption[] = [
   {
@@ -95,4 +95,26 @@ export const EUniApproveProcess: UniApproveProcess[] = [
     processName: 'สร้างใบคำขอ',
     status: [{ id: 1, sname: 'ครบถ้วนถูกต้อง', ename: 'ครบถ้วนถูกต้อง' }],
   },
+];
+export const UniAdmissionStatus: ListData[] = [
+  {
+    name: 'ส่งคืนและยกเลิก',
+    label: 'ส่งคืนและยกเลิก',
+    value: '0'
+  },
+  {
+    name: 'รอตรวจสอบ',
+    label: 'รอตรวจสอบ',
+    value: '1'
+  },
+  {
+    name: 'แก้ไข',
+    label: 'แก้ไข',
+    value: '2'
+  },
+  {
+    name: 'ตรวจสอบเรียบร้อย',
+    label: 'ตรวจสอบเรียบร้อย',
+    value: '3'
+  }
 ];

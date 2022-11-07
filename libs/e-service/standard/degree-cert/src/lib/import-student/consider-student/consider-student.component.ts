@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { ConfirmDialogComponent } from '@ksp/shared/dialog';
+import { CompleteDialogComponent, ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { EUniService } from '@ksp/shared/service';
 import { formatDate, getCookie, parseJson, thaiDate } from '@ksp/shared/utility';
 import localForage from 'localforage';
@@ -57,6 +57,45 @@ export class ConsiderStudentComponent implements OnInit {
         };
         this.requestdate = res.requestdate;
         this.requestno = res.requestno;
+        this.payload.studentlist.forEach((student:any) => {
+          student.addressinfo = JSON.stringify(student.address);
+          student.subjects = JSON.stringify(student.subjects);
+          student.unidegreecertid = this.payload.payloaddetail.unidegreecertid;
+          student.unirequestadmissionid = this.payload.payloaddetail.id;
+          student.planyear = this.payload.payloaddetail.planyear.toString();
+          student.plancalendaryear = this.payload.payloaddetail.plancalendaryear;
+          student.planname = this.payload.payloaddetail.planname;
+          if (student.admissiondate) {
+            const convertdate = new Date(student.admissiondate).toISOString();
+            student.admissiondate = convertdate.split('.')[0];
+          } else {
+            student.admissiondate = null;
+          }
+          if (student.graduationdate) {
+            const convertdate = new Date(student.graduationdate).toISOString();
+            student.graduationdate = convertdate.split('.')[0];
+          } else {
+            student.graduationdate = null;
+          }
+          if (student.approvedate) {
+            const convertdate = new Date(student.approvedate).toISOString();
+            student.approvedate = convertdate.split('.')[0];
+          } else {
+            student.approvedate = null;
+          }
+          if (student.birthdate) {
+            const convertdate = new Date(student.birthdate).toISOString();
+            student.birthdate = convertdate.split('.')[0];
+          } else {
+            student.birthdate = null;
+          }
+          if (!student.approveno) student.approveno = null;
+          delete student.middlenameen;
+          delete student.address;
+          delete student.checked;
+          delete student.index;
+          delete student.no;
+        });
         if (this.payload.total > this.payload.studentlist.length) {
           this.form.patchValue({
             result: '2'
@@ -131,6 +170,10 @@ export class ConsiderStudentComponent implements OnInit {
           process = '3';
           status = '2';
         }
+        if (this.payload.total > this.payload.studentlist.length) {
+          process = '3';
+          status = '2';
+        }
 
         this.payload.detail = JSON.stringify({ returndate: this.form.value.returndate || null });
         const realpayload = {
@@ -147,33 +190,39 @@ export class ConsiderStudentComponent implements OnInit {
                 && this.payload.pagetype == 'admissionList'
                 && this.payload.studentlist.length) {
                   this.payload.studentlist.forEach((student:any) => {
-                    student.addressinfo = JSON.stringify(student.address);
-                    student.subjects = JSON.stringify(student.subjects);
-                    student.unidegreecertid = this.payload.payloaddetail.unidegreecertid;
-                    student.unirequestadmissionid = this.payload.payloaddetail.id;
-                    student.planyear = this.payload.payloaddetail.planyear.toString();
-                    student.plancalendaryear = this.payload.payloaddetail.plancalendaryear;
-                    student.planname = this.payload.payloaddetail.planname;
-                    const date1 = new Date().toISOString();
-                    const date2 = new Date(student.birthdate).toISOString();
-                    const date3 = new Date(student.admissiondate).toISOString();
-                    student.approvedate = date1.split('.')[0];
-                    student.birthdate = date2.split('.')[0];
-                    student.admissiondate = date3.split('.')[0];
-                    if (!student.approveno) student.approveno = null;
-                    if (!student.graduationdate) student.graduationdate = null;
-                    delete student.middlenameen;
-                    delete student.address;
-                    delete student.checked;
-                    delete student.index;
-                    delete student.no;
                     this.requestService.insertStudent(student).subscribe((res: any) => {
                       console.log('done')
                     });
                   });
+              this.onConfirmed();
+            } else if (this.form.value.result == '1' 
+                && this.payload.pagetype == 'graduateList'
+                && this.payload.studentlist.length) {
+              this.payload.studentlist.forEach((student:any) => {
+                this.requestService.updateStudent(student).subscribe((res: any) => {
+                  console.log('done')
+                });
+              });
+              this.onConfirmed();
+            } else {
+              this.onConfirmed();
             }
           }
         })
+      }
+    });
+  }
+  onConfirmed() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      width: '350px',
+      data: {
+        header: 'บันทึกข้อมูลสำเร็จ',
+        buttonLabel: 'กลับสู่หน้าหลัก',
+      },
+    });
+
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
         this.router.navigate(['/', 'degree-cert', 'list-approved']);
       }
     });

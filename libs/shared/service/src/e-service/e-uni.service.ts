@@ -21,7 +21,7 @@ export class EUniService {
   }  
 
   getAdmissionCount(form: any): Observable<any> {
-    return this.http.post(`${environment.shortApiUrl}/unidegreeadmissionsearchcount_es.php`, {
+    return this.http.post(`${environment.shortApiUrl}/unirequestadmissioncount_es.php`, {
       ...form,
       tokenkey: getCookie('userToken'),
     });
@@ -50,6 +50,13 @@ export class EUniService {
 
   insertStudent(form: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/e-service/unidegreeadmissioninsert`, {
+      ...form,
+      tokenkey: getCookie('userToken'),
+    });
+  }
+
+  updateStudent(form: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/e-service/unidegreeadmissionupdate`, {
       ...form,
       tokenkey: getCookie('userToken'),
     });
@@ -87,6 +94,16 @@ export class EUniService {
     return this.http.post(
       `${environment.apiUrl}/e-service/unidegreecertinsert`,
       { ...payload, tokenkey: getCookie('userToken') }
+    );
+  }
+
+  uniDegreeGraduateHistory(params: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/unirequestadmissionselectbyunidegreecertid`,
+      {
+        ...params,
+        tokenkey: getCookie('userToken'),
+      }
     );
   }
 }

@@ -38,6 +38,7 @@ export class DegreeCertApprovedSearchComponent extends KspFormBaseComponent {
   @Output() cleared = new EventEmitter<boolean>();
   @Input() uniUniversityOption: ListData[] = [];
   @Input() degreeLevelOption: ListData[] = [];
+  @Input() statusOption: ListData[] = [];
 
   constructor(
     private fb: FormBuilder,

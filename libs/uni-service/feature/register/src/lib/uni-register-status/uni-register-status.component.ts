@@ -65,9 +65,9 @@ export class UniRegisterStatusComponent implements OnInit {
         this.data = res.datareturn.map((data: any) => {
           if (data.educationoccupy) {
             data.educationoccupy = JSON.parse(data.educationoccupy);
-            data.educationoccupy.permissionname = data.educationoccupy.permission == '1' 
+            data.permissionname = data.permissionright == '1' 
               ? 'เจ้าหน้าที่ประสานงาน (รับรองปริญญาและประกาศนียบัตรทางการศึกษา)' :
-              data.educationoccupy.permission == '1' ? 'เจ้าหน้าที่ประสานงาน (นำส่งรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา​)' : '';
+              data.permissionright == '2' ? 'เจ้าหน้าที่ประสานงาน (นำส่งรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา​)' : '';
             data.requeststatusname = data.status == '1' ? 'กำลังดำเนินการ' :
               data.status == '2' ? 'อนุมัติเข้าใช้งาน' : 
               data.status == '3' ? 'ไม่อนุมัติเข้าใช้งาน' : '-';

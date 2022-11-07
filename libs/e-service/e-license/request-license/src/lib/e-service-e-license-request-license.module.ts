@@ -6,7 +6,10 @@ import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
-import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
+import {
+  LicenseCheckComponent,
+  RequestLicenseApproveSummaryTableComponent,
+} from '@ksp/e-service/ui/license-check';
 import {
   FormUploadImageComponent,
   SelfServiceFormModule,
@@ -14,6 +17,9 @@ import {
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { TopNavComponent, BottomNavComponent } from '@ksp/shared/menu';
 import {
+  EServiceLicenseCreateGroupSearchComponent,
+  EServiceLicenseGroupSearchComponent,
+  EServiceLicenseSaveResultComponent,
   EServiceLicenseSearchComponent,
   EServiceRequestSearchComponent,
   RequestSearchComponent,
@@ -28,6 +34,14 @@ import {
   ConsiderKspRequestComponent,
   ValidateKspRequestComponent,
 } from '@ksp/e-service/e-license/approve-ksp-request';
+import { RequestLicenseApproveCreateGroupComponent } from './request-license-approve-create-group/request-license-approve-create-group.component';
+import { RequestLicenseApproveSearchListComponent } from './request-license-approve-search-list/request-license-approve-search-list.component';
+import { RequestLicenseApproveCreateGroupListComponent } from './request-license-approve-create-group-list/request-license-approve-create-group-list.component';
+import { RequestLicenseApproveGuarunteeComponent } from './request-license-approve-guaruntee/request-license-approve-guaruntee.component';
+import { RequestLicenseApproveLicenseTableComponent } from './request-license-approve-license-table/request-license-approve-license-table.component';
+import { RequestLicenseApprovePrintComponent } from './request-license-approve-print/request-license-approve-print.component';
+import { RequestLicenseApproveSaveResultComponent } from './request-license-approve-save-result/request-license-approve-save-result.component';
+import { RequestLicenseApproveKmvComponent } from './request-license-approve-kmv/request-license-approve-kmv.component';
 
 export const routes: Route[] = [
   {
@@ -55,6 +69,38 @@ export const routes: Route[] = [
         path: 'approve-confirm/:id',
         component: RequestLicenseApproveConfirmComponent,
       },
+      {
+        path: 'create-group',
+        component: RequestLicenseApproveCreateGroupComponent,
+      },
+      {
+        path: 'search-list',
+        component: RequestLicenseApproveSearchListComponent,
+      },
+      {
+        path: 'create-group-list',
+        component: RequestLicenseApproveCreateGroupListComponent,
+      },
+      {
+        path: 'guarantee',
+        component: RequestLicenseApproveSearchListComponent,
+      },
+      {
+        path: 'guarantee-confirm',
+        component: RequestLicenseApproveGuarunteeComponent,
+      },
+      {
+        path: 'print',
+        component: RequestLicenseApprovePrintComponent,
+      },
+      {
+        path: 'save-result',
+        component: RequestLicenseApproveSaveResultComponent,
+      },
+      {
+        path: 'kmv',
+        component: RequestLicenseApproveKmvComponent,
+      },
     ],
   },
 ];
@@ -81,11 +127,23 @@ export const routes: Route[] = [
     EServiceLicenseSearchComponent,
     ValidateKspRequestComponent,
     ConsiderKspRequestComponent,
+    EServiceLicenseGroupSearchComponent,
+    EServiceLicenseCreateGroupSearchComponent,
+    EServiceLicenseSaveResultComponent,
+    RequestLicenseApproveSummaryTableComponent,
   ],
   declarations: [
     RequestLicenseApproveListComponent,
     RequestLicenseApproveDetailComponent,
     RequestLicenseApproveConfirmComponent,
+    RequestLicenseApproveCreateGroupComponent,
+    RequestLicenseApproveSearchListComponent,
+    RequestLicenseApproveCreateGroupListComponent,
+    RequestLicenseApproveGuarunteeComponent,
+    RequestLicenseApproveLicenseTableComponent,
+    RequestLicenseApprovePrintComponent,
+    RequestLicenseApproveSaveResultComponent,
+    RequestLicenseApproveKmvComponent,
   ],
 })
 export class EServiceELicenseRequestLicenseModule {}

@@ -117,17 +117,21 @@ export class CourseDetailComponent implements OnInit {
       offset: 0
     }
     this.uniRequestService.getAdmissionCount(payload).subscribe((response: any) => {
-      if (response.datareturn) {
+      if (response.datareturnadmission) {
         this.courseData.coursestructure.map((course: any, index: any)=>{
-          course.indexyear = index;
-          const findDataAdmission = response.datareturn.find((data: any) => {
-            return data.plancalendaryear == course.year;
-          });
-          course.admissioncount = findDataAdmission ? (findDataAdmission.unidegreecertidcount || 0) : 0;
-          const findDataGraduate = response.datareturngraduation.find((data: any) => {
-            return data.plancalendaryear == course.year;
-          });
-          course.graduatecount = findDataGraduate ? (findDataGraduate.unidegreecertidcount || 0) : 0;
+          course.indexyear = index+1;
+          const findDataAdmission = response.datareturnadmission ? response.datareturnadmission.find((data: any) => {
+            return data.plancalendaryear == course.year && data.planyear == course.indexyear.toString();
+          }) : {};
+          course.admissioncount = findDataAdmission ? (findDataAdmission.countadmission || 0) : 0;
+        })
+      }
+      if (response.datareturngraduate) {
+        this.courseData.coursestructure.map((course: any, index: any)=>{
+          const findDataGraduate = response.datareturngraduate ? response.datareturngraduate.find((data: any) => {
+            return data.plancalendaryear == course.year && data.planyear == course.indexyear.toString();
+          }) : {};
+          course.graduatecount = findDataGraduate ? (findDataGraduate.countgraduate || 0) : 0;
         })
       }
     })

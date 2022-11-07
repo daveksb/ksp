@@ -94,8 +94,6 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
         this.targetStatus = 5;
       }
     }
-    console.log('check xx process = ', this.targetProcess);
-    console.log('check xx status = ', this.targetStatus);
   }
 
   checkRequest() {
@@ -111,9 +109,7 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
       userid: this.userId,
       paymentstatus: null,
     };
-
     //console.log('payload = ', payload);
-
     this.eRequestService.KspUpdateRequestProcess(payload).subscribe((res) => {
       //console.log('result = ', res.app);
       this.navigateBack();

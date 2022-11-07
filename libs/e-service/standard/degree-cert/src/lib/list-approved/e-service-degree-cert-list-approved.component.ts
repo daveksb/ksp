@@ -4,9 +4,14 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { EUniService, UniInfoService } from '@ksp/shared/service';
 import { KspPaginationComponent, ListData } from '@ksp/shared/interface';
-import { getCookie, thaiDate } from '@ksp/shared/utility';
 import { map } from 'rxjs';
 import _ from 'lodash';
+import { HistoryRequestAdmissionDialogComponent } from '@ksp/uni-service/dialog';
+import { MatDialog } from '@angular/material/dialog';
+import { FormBuilder } from '@angular/forms';
+import { UniAdmissionStatus } from '@ksp/shared/constant';
+import { thaiDate } from '@ksp/shared/utility';
+
 const mapOption = () =>
   map((data: any) => {
     return (
@@ -30,12 +35,18 @@ export class EServiceDegreeCertApprovedListComponent extends KspPaginationCompon
   pageType = 0;
   uniUniversityOption: ListData[] = [];
   degreeLevelOptions: ListData[] = [];
+  statusList = UniAdmissionStatus;
+  form = this.fb.group({
+    search: [{}],
+  });
 
   constructor(
+    private fb: FormBuilder,
     private router: Router, 
     private route: ActivatedRoute,
     private requestService: EUniService,
-    private uniInfoService: UniInfoService
+    private uniInfoService: UniInfoService,
+    public dialog: MatDialog,
     ) {
       super();
     }
@@ -61,10 +72,17 @@ export class EServiceDegreeCertApprovedListComponent extends KspPaginationCompon
 
   getall() {
     this.uniInfoService
-    .getUniversity('7')
-    .pipe(mapOption())
-    .subscribe((res) => {
-      this.uniUniversityOption = res;
+    .getUniuniversity()
+    .pipe(
+      map((res) => {
+        return res?.datareturn?.map(({ id, name }: any) => ({
+          value: id,
+          label: name,
+        }));
+      })
+    )
+    .subscribe((data) => {
+      this.uniUniversityOption = data;
     });
     this.uniInfoService
     .uniDegreeLevel()
@@ -90,29 +108,56 @@ export class EServiceDegreeCertApprovedListComponent extends KspPaginationCompon
     this.selection.select(...this.dataSource.data);
   }
 
-  onSearch() {
+  getRequest() {
+    const {
+      requestno,
+      requestdate,
+      fulldegreename,
+      unicode,
+      uniid,
+      degreeapprovecode,
+      degreelevel,
+      admissionstatus,
+      graduatestatus
+    } = this.form.controls.search.value as any;
+    return {
+      requestno: requestno || '',
+      requestdate: requestdate || '',
+      fulldegreename: fulldegreename || '',
+      unicode: unicode || '',
+      uniid: uniid || '',
+      degredegreeapprovecodeelevel: degreeapprovecode || '',
+      degreelevel: degreelevel || '',
+      admissionstatus: admissionstatus || '',
+      graduatestatus: graduatestatus || '',
+      ...this.tableRecord,
+    };
+  }
+
+  override search() {
     for (let index = 0; index < 10; index++) {
       this.data = [...this.data, data];
     }
-    this.requestService.getDegreeCertList({
-      uniid: '',
-      unitype: '',
-      degreeapprovecode: '',
-      fulldegreenameth: '',
-      degreelevel: '',
-      courseacademicyear: '',
-      requestno: '',
-      requestdate: '',
-      uniprovince: '',
-      coursemajor: '',
-      coursefieldofstudy: '',
-      coursesubjects: '',
-      offset: '0',
-      row: '10'
-    }).subscribe((response: any) => {
-      this.pageEvent.length = response.countrow;
-      this.dataSource.data = response.datareturn.map((item: any, index: any) => {
+    this.requestService.getDegreeCertList(this.getRequest()).subscribe((res: any) => {
+      this.pageEvent.length = res.countnumunidegree;
+      if (res.datareturnadmission) {
+        res.datareturnadmission = res.datareturnadmission.sort((data1:any,data2:any) => data1.unirequestadmissionid - data2.unirequestadmissionid);
+      } else {
+        res.datareturnadmission = [];
+      }
+      if (res.datareturngraduation) {
+        res.datareturngraduation = res.datareturngraduation.sort((data1:any,data2:any) => data1.unirequestadmissionid - data2.unirequestadmissionid);
+      } else {
+        res.datareturngraduation = [];
+      }
+      this.dataSource.data = res.datareturn.map((item: any, index: any) => {
         item.order = index+1;
+        const admission = res.datareturnadmission.filter((data: any) => {
+          return data.unidegreecertid == item.id}).slice(-1).pop() || {};
+        const graduate = res.datareturngraduation.filter((data: any) => {
+          return data.unidegreecertid == item.id}).slice(-1).pop() || {};
+        item.admissionstatus = this.mapStatusProcess(admission.status, admission.process),
+        item.graduatestatus = this.mapStatusProcess(graduate.status, graduate.process),
         item.requestdate = thaiDate(new Date(item?.requestdate));
         item.updatedate = item?.updatedate ? thaiDate(new Date(item?.updatedate)) : '';
         const degreeLevel = this._findOptions(
@@ -126,12 +171,45 @@ export class EServiceDegreeCertApprovedListComponent extends KspPaginationCompon
     });
   }
 
+  mapStatusProcess(status: string, process: string) {
+    if (process == '2' && status == '1') {
+      return 'รอตรวจสอบ';
+    } else if (process == '3' && status == '0') {
+      return 'ส่งคืนและยกเลิก';
+    } else if (process == '3' && status == '2') {
+      return 'แก้ไข';
+    } else if (process == '3' && status == '3') {
+      return 'ตรวจสอบเรียบร้อย';
+    } else {
+      return '';
+    }
+  }
+
   onClear() {
+    this.form.reset();
     this.dataSource.data = [];
   }
 
   viewhistory(item: any){
+    const payload = {
+      unidegreecertid: item.id
+    };
+    this.requestService.uniDegreeGraduateHistory(payload).subscribe((response => {
+      if (response.datareturn) {
+        response.datareturn = response.datareturn.sort((data1:any,data2:any) => data1.id - data2.id);
+      }
+      this.opendialogHistory(response.datareturn);
+    }));
+  }
 
+  opendialogHistory(data: any) {
+    this.dialog.open(HistoryRequestAdmissionDialogComponent, {
+      width: '600px',
+      data: {
+        data: data,
+        system: 'eservice'
+      }
+    });
   }
 
   consider() {

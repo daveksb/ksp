@@ -6,6 +6,7 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { UniversitySearchComponent } from '@ksp/shared/search';
+import { GeneralInfoService } from '@ksp/shared/service';
 
 @Component({
   selector: 'uni-service-training-address',
@@ -14,9 +15,10 @@ import { UniversitySearchComponent } from '@ksp/shared/search';
 })
 export class TrainingAddressComponent {
   teachingAddressForm = this.fb.group({
-    uniid: [],
-    universitycode: [],
-    uniname: [],
+    schoolid: [],
+    schoolname: [],
+    bureauid: [],
+    bureauname: []
   });
 
   form = this.fb.group({
@@ -27,24 +29,31 @@ export class TrainingAddressComponent {
     public dialog: MatDialog,
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<TrainingAddressComponent>,
+    private generalInfoService: GeneralInfoService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     console.log(this.data);
     if (this.data.teachingpracticeschool.length) {
-      console.log('here1');
       this.setData(this.data.teachingpracticeschool);
     } else {
-      console.log('here');
       this.addresses.push(this.teachingAddressForm);
+    }
+    if (this.data.disableAll) {
+      console.log('true')
+      this.addresses.controls
+      .forEach(control => {
+        control.disable();
+      })
     }
   }
 
   setData(data: any) {
     data.forEach((address: any) => {
       const teachingAddressForm = this.fb.group({
-        universitycode: address.universitycode,
-        uniname: address.uniname,
-        uniid: address.uniid,
+        schoolid: address.schoolid,
+        schoolname: address.schoolname,
+        bureauid: address.bureauid,
+        bureauname: address.bureauname
       });
       this.addresses.push(teachingAddressForm);
     });
@@ -60,15 +69,16 @@ export class TrainingAddressComponent {
       },
       data: {
         subHeader: 'กรุณาเลือกหน่วยงาน / สถานศึกษา',
-        searchType: 'uni',
+        searchType: 'school'
       },
     });
     dialogRef.afterClosed().subscribe((response: any) => {
       if (response) {
         this.form.controls.addresses.at(index).patchValue({
-          universitycode: response.universitycode,
-          uniname: response.name,
-          uniid: response.id,
+          schoolid: response.schoolid,
+          schoolname: response.schoolname,
+          bureauid: response.bureauid,
+          bureauname: response.bureauname
         });
       }
     });
@@ -76,9 +86,10 @@ export class TrainingAddressComponent {
 
   addAddress() {
     const teachingAddressForm = this.fb.group({
-      universitycode: [],
-      uniname: [],
-      uniid: [],
+      schoolid: [],
+      schoolname: [],
+      bureauid: [],
+      bureauname: []
     });
     this.addresses.push(teachingAddressForm);
   }

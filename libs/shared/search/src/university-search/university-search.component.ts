@@ -9,6 +9,7 @@ import {
 import { Amphur, Province, SchInfo } from '@ksp/shared/interface';
 import {
   AddressService,
+  GeneralInfoService,
   SchoolInfoService,
   UniInfoService,
 } from '@ksp/shared/service';
@@ -58,7 +59,8 @@ export class UniversitySearchComponent implements OnInit {
     private addressService: AddressService,
     private schoolInfoService: SchoolInfoService,
     private uniinfoService: UniInfoService,
-    public dialogRef: MatDialogRef<UniversitySearchComponent>
+    public dialogRef: MatDialogRef<UniversitySearchComponent>,
+    private generalInfoService: GeneralInfoService
   ) {}
 
   ngOnInit(): void {
@@ -67,7 +69,17 @@ export class UniversitySearchComponent implements OnInit {
 
   getList() {
     this.provinces$ = this.addressService.getProvinces();
-    this.universityType$ = this.uniinfoService.getUniversityType();
+    if (this.data.searchType == 'uni') {
+      this.universityType$ = this.uniinfoService.getUniversityType();
+    } else {
+      if (!this.data.bureauList) {
+        this.generalInfoService.getBureau().subscribe((response: any) => {
+          if (response) {
+            this.data.bureauList = response;
+          }
+        });
+      }
+    }
   }
 
   onItemChange(university: any) {

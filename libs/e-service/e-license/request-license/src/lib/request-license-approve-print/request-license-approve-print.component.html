@@ -1,0 +1,105 @@
+<ksp-top-nav
+  ><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span>
+  <span subHeader>ผลการนำเสนอใบอนุญาตประกอบวิชาชีพ </span>
+</ksp-top-nav>
+
+<div class="bg-secondary bg-opacity-10 px-3 py-4 full-height">
+  <div class="bg-white px-3 py-3">
+    <div class="fs-5">รายงานนำเสนอคณะะอนุกรรมการกลั่นกรอง</div>
+    <hr />
+    <div class="px-4">
+      <div class="content mb-2">
+        บัญชีรายชื่อที่เลือกสำหรับพิมพ์รายงานนำเสนอคณะอนุกรรมการกลั่นกรอง
+      </div>
+      <div class="d-flex align-items-center mt-2 mb-3">
+        <div class="content">บัญชีที่ / List No.</div>
+        <div class="content-sub" style="margin-left: 37px">
+          7004 | 7005 | 7006 | 7007
+        </div>
+      </div>
+      <div class="d-flex align-items-center mt-2 mb-3">
+        <div class="content">กลุ่มที่ / Group No.</div>
+        <div style="margin-left: 26px; width: 107px">
+          <input class="form-control" type="text" disabled />
+        </div>
+      </div>
+      <div
+        class="d-flex align-items-center mt-2 mb-3"
+        style="margin-left: 178px"
+      >
+        <button
+          type="button"
+          (click)="cancel()"
+          class="btn border-success text-success"
+        >
+          ยกเลิก
+        </button>
+        <button
+          type="button"
+          (click)="cancel()"
+          class="btn btn-primary px-0 ms-2"
+        >
+          บันทึก
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white px-4 py-3 mt-3">
+    <div class="fs-5">สรุปจำนวนผู้ยื่นขอขึ้นทะเบียน</div>
+    <ksp-request-license-approve-license-table
+      class="summary-table"
+    ></ksp-request-license-approve-license-table>
+
+    <div class="fs-5">จัดเตรียมรายงานสำหรับนำเสนอคณะอนุกรรมการกลั่นกรอง</div>
+    <hr style="width: 382px" />
+    <div style="margin-left: 30px; width: 547px">
+      <div
+        class="d-flex justify-content-between align-items-center"
+        style="margin-bottom: 12px"
+      >
+        1. สรุปจำนวนผู้ยื่นขอขึ้นทะเบียนรับใบอนุญาต
+        <button type=" button" class="btn btn-success px-0 ms-2">
+          พิมพ์รายงาน
+        </button>
+      </div>
+      <div
+        class="d-flex justify-content-between align-items-center"
+        style="margin-bottom: 12px"
+      >
+        2. บัญชีรายชื่อผู้ขอขึ้นทะเบียนรับใบอนุญาตประกอบวิชาชีพครู
+        <button type=" button" class="btn btn-success px-0 ms-2">
+          พิมพ์รายงาน
+        </button>
+      </div>
+      <div
+        class="d-flex justify-content-between align-items-center"
+        style="margin-bottom: 12px"
+      >
+        3.
+        บัญชีรายชื่อผู้ขอขึ้นทะเบียนรับใบอนุญาตประกอบวิชาชีพผู้บริหารสถานศึกษา
+        <button type=" button" class="btn btn-success px-0 ms-2">
+          พิมพ์รายงาน
+        </button>
+      </div>
+      <div
+        class="d-flex justify-content-between align-items-center"
+        style="margin-bottom: 12px"
+      >
+        4. บัญชีรายชื่อผู้ขอขึ้นทะเบียนรับใบอนุญาตประกอบวิชาชีพผู้บริหารการศึกษา
+        <button type=" button" class="btn btn-success px-0 ms-2">
+          พิมพ์รายงาน
+        </button>
+      </div>
+      <div
+        class="d-flex justify-content-between align-items-center"
+        style="margin-bottom: 12px"
+      >
+        5. บัญชีรายชื่อผู้ขอขึ้นทะเบียนรับใบอนุญาตประกอบวิชาชีพศึกษานิเทศก์
+        <button type=" button" class="btn btn-success px-0 ms-2">
+          พิมพ์รายงาน
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

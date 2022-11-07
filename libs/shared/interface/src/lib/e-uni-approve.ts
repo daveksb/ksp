@@ -18,3 +18,7 @@ export interface UniApproveStatus {
   ename: string;
 }
 
+export interface UniAdmissionStatusOption {
+  value: string;
+  name: string;
+}

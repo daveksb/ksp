@@ -1,0 +1,90 @@
+<form [formGroup]="form">
+  <div class="bg-light px-4 py-2 default-width">
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">มติครั้งที่</label>
+        <input class="form-control" type="text" formControlName="requestno" />
+      </div>
+
+      <div class="col">
+        <label class="form-label">วันเดือนปีที่ลงมติ</label>
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker"
+            autocomplete="off"
+            class="form-control form-date"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">ชื่อคณะกรรมการ</label>
+        <select class="form-select" formControlName="subtype">
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        </select>
+      </div>
+
+      <div class="col-6">
+        <label class="form-label">ชื่อประธาน</label>
+        <select class="form-select" formControlName="currentprocess">
+          <option value="null" disabled hidden>กรุณาเลือก</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-6">
+        <label class="form-label">มติที่ประชุม</label>
+        <div class="d-flex form-control flex-row me-4">
+          <div class="d-flex align-items-center me-5">
+            <input type="radio" value="1" />
+            <label class="form-label ms-2">ผ่านการพิจารณา</label>
+          </div>
+          <div class="d-flex align-items-center">
+            <input type="radio" value="2" />
+            <label class="form-label ms-2">ไม่ผ่านการพิจารณา</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <label class="form-label">แนบเอกสาร</label>
+        <div role="button" class="text-primary">+ อัพโหลดเอกสาร</div>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col mb-3">
+        <label class="form-label">รายละเอียด </label>
+        <textarea class="form-control" type="text" rows="3"> </textarea>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center mb-2 mt-4">
+      <button
+        (click)="cancel.emit(true)"
+        type="button"
+        class="btn border-primary text-primary bg-white"
+      >
+        ยกเลิก
+      </button>
+
+      <button
+        (click)="save.emit(form.value)"
+        type="button"
+        class="btn btn-primary ms-2"
+      >
+        บันทึก
+      </button>
+    </div>
+  </div>
+</form>
