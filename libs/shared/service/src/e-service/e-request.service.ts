@@ -169,13 +169,22 @@ export class ERequestService {
 
   getLastApproveGroup(): Observable<GetLastApproveGroup> {
     return this.http.get<GetLastApproveGroup>(
-      `${environment.apiUrl}/e-service/selfapprovegroupselectlast`
+      `${environment.apiUrl}/e-service/selfapprovegroupselectlast`,
+      { headers: { 'Cache-Control': 'no-store' } }
     );
   }
 
   createAprroveList(payload: any): Observable<any> {
-    return this.http
-      .post(`${environment.apiUrl}/e-service/selfapprovelistinsert`, payload)
-      .pipe(map((data: any) => data.datareturn));
+    return this.http.post(
+      `${environment.apiUrl}/e-service/selfapprovelistinsert`,
+      payload
+    );
+  }
+
+  createAprroveGroup(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/selfapprovegroupinsert`,
+      payload
+    );
   }
 }

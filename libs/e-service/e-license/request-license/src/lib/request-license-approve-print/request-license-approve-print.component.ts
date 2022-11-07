@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ERequestService } from '@ksp/shared/service';
+import { getCookie } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-request-license-approve-print',
@@ -23,5 +24,18 @@ export class RequestLicenseApprovePrintComponent implements OnInit {
 
   cancel() {
     this.router.navigate(['/request-license', 'search-list']);
+  }
+
+  save() {
+    const payload = {
+      userid: `${getCookie('userId')}`,
+      groupno: this.groupNo.toString(),
+      grouplist: "{'field1':'data1','field2':'data2','field3':'data3'}",
+    };
+    this.requestService.createAprroveGroup(payload).subscribe((res) => {
+      if (res?.returnmessage === 'success') {
+        this.router.navigate(['/request-license', 'search-list']);
+      }
+    });
   }
 }
