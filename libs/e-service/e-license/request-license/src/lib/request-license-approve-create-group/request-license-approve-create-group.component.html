@@ -103,21 +103,23 @@
     </table>
   </div>
 
-  <div class="urgent-case">
-    <div class="bg-white px-3 py-4">
-      <div class=" d-flex">
-        <div class="urgent-title">กรณีเร่งด่วน กรุณาเลือกส่งสร้างเลขที่ใบอนุญาต : </div>
-        <div class="mx-3">
-          <input type="checkbox" class="me-2" />
-          <label class="fs-5">ส่งสร้างเลขที่ใบอนุญาต</label>
-        </div>
-        <div class="mx-3">
-          <input type="checkbox" class="me-2" />
-          <label class="fs-5">ไม่ส่งสร้างเลขที่ใบอนุญาต</label>
+  <form [formGroup]="form">
+    <div class="urgent-case">
+      <div class="bg-white px-3 py-4">
+        <div class=" d-flex">
+          <div class="urgent-title">กรณีเร่งด่วน กรุณาเลือกส่งสร้างเลขที่ใบอนุญาต : </div>
+          <div class="mx-3">
+            <input type="checkbox" class="me-2" formControlName="createNumber" />
+            <label class="fs-5">ส่งสร้างเลขที่ใบอนุญาต</label>
+          </div>
+          <div class="mx-3">
+            <input type="checkbox" class="me-2" [checked]="!form.controls.createNumber.value" />
+            <label class="fs-5">ไม่ส่งสร้างเลขที่ใบอนุญาต</label>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </form>
 
 </div>
 
