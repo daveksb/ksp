@@ -85,7 +85,7 @@
     </div>
   </div>
 
-  <div class="d-flex justify-content-end my-3">
+  <div class="d-flex justify-content-end mt-3 mb-2">
     <button class="btn btn-primary w-auto" type="button" (click)="save()">
       บันทึกผลการประเมิน
     </button>
@@ -98,11 +98,14 @@
     </button>
   </div>
 
-  <div class="fs-6 text-danger d-flex justify-content-end">
-    กรุณาเลือกหลักสูตร หรือรายชื่อที่ต้องการบันทึกผลการประเมิน
-  </div>
   <div class="bg-white p-3">
-    <div class="box-header">หลักสูตร</div>
+    <div class="box-header">
+      หลักสูตร
+      <span class="fs-6 text-danger">
+        *กรุณาเลือกหลักสูตร หรือรายชื่อที่ต้องการบันทึกผลการประเมิน
+      </span>
+    </div>
+
     <div class="table-reponsive bg-white">
       <table mat-table [dataSource]="dataSource1">
         <ng-container matColumnDef="university">

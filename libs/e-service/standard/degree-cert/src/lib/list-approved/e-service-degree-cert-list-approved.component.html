@@ -3,7 +3,7 @@
 </ksp-top-nav>
 
 <div class="bg-secondary bg-opacity-10 py-2 px-4 full-height full-width-2">
-  <div class="fs-5">รายการใบรับรองปริญญาและประกาศนียบัตรทางการศึกษา</div>
+  <div class="box-header">รายการใบรับรองปริญญาและประกาศนียบัตรทางการศึกษา</div>
   <div class="bg-white p-3">
     <form [formGroup]="form">
       <ksp-degree-cert-approved-search
@@ -18,14 +18,14 @@
 
     <br />
 
-    <div class="table-responsive">
+    <div class="table__scroll">
       <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="order">
           <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
           <td mat-cell *matCellDef="let element">{{ element.order }}</td>
         </ng-container>
         <ng-container matColumnDef="requestno">
-          <th mat-header-cell *matHeaderCellDef style="min-width: 200px;">เลขที่ใบคำขอ</th>
+          <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
           <td
             (click)="goToDetailPage(element.id)"
             class="text-primary link"
@@ -37,34 +37,40 @@
         </ng-container>
 
         <ng-container matColumnDef="unicode">
-          <th mat-header-cell *matHeaderCellDef style="min-width: 100px;">รหัสสถาบัน</th>
+          <th mat-header-cell *matHeaderCellDef>รหัสสถาบัน</th>
           <td mat-cell *matCellDef="let element">{{ element.unicode }}</td>
         </ng-container>
 
         <ng-container matColumnDef="degreeapprovecode">
-          <th mat-header-cell *matHeaderCellDef style="min-width: 100px;">รหัสปริญญา</th>
-          <td mat-cell *matCellDef="let element">{{ element.degreeapprovecode }}</td>
+          <th mat-header-cell *matHeaderCellDef>รหัสปริญญา</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.degreeapprovecode }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="uniname">
-          <th mat-header-cell *matHeaderCellDef style="min-width: 300px;">สถาบัน / มหาวิทยาลัย</th>
+          <th mat-header-cell *matHeaderCellDef>สถาบัน / มหาวิทยาลัย</th>
           <td mat-cell *matCellDef="let element">{{ element.uniname }}</td>
         </ng-container>
 
         <ng-container matColumnDef="degreelevel">
-          <th mat-header-cell *matHeaderCellDef style="min-width: 250px;">ระดับปริญญา</th>
-          <td mat-cell *matCellDef="let element">{{ element.degreelevelname }}</td>
+          <th mat-header-cell *matHeaderCellDef>ระดับปริญญา</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.degreelevelname }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="degreename">
-          <th mat-header-cell *matHeaderCellDef style="min-width: 250px;">ชื่อปริญญาและประกาศนียบัตรทางการศึกษา</th>
+          <th mat-header-cell *matHeaderCellDef>
+            ชื่อปริญญาและประกาศนียบัตรทางการศึกษา
+          </th>
           <td mat-cell *matCellDef="let element">
             {{ element.fulldegreenameth }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="admissionstatus">
-          <th mat-header-cell *matHeaderCellDef style="min-width: 120px;">สถานะรายชื่อผู้เข้า</th>
+          <th mat-header-cell *matHeaderCellDef>สถานะรายชื่อผู้เข้า</th>
           <td mat-cell *matCellDef="let element">
             <span
               class="rounded-pill d-flex justify-content-center"
@@ -80,7 +86,7 @@
         </ng-container>
 
         <ng-container matColumnDef="graduatestatus">
-          <th mat-header-cell *matHeaderCellDef style="min-width: 120px;">สถานะรายชื่อผู้สำเร็จ</th>
+          <th mat-header-cell *matHeaderCellDef>สถานะรายชื่อผู้สำเร็จ</th>
           <td mat-cell *matCellDef="let element">
             <span
               class="rounded-pill d-flex justify-content-center"
@@ -96,21 +102,21 @@
         </ng-container>
 
         <ng-container matColumnDef="updatedate">
-          <th mat-header-cell *matHeaderCellDef style="min-width: 120px;">วันที่แก้ไขล่าสุด</th>
+          <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
           <td mat-cell *matCellDef="let element">
             {{ element.updatedate }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="requestdate">
-          <th mat-header-cell *matHeaderCellDef style="min-width: 120px;">วันที่ยื่นคำขอ</th>
+          <th mat-header-cell *matHeaderCellDef>วันที่ยื่นคำขอ</th>
           <td mat-cell *matCellDef="let element">
             {{ element.requestdate }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="history">
-          <th mat-header-cell *matHeaderCellDef style="min-width: 100px;">ประวัติคำขอ</th>
+          <th mat-header-cell *matHeaderCellDef>ประวัติคำขอ</th>
           <td mat-cell *matCellDef="let element">
             <i
               role="button"
@@ -121,7 +127,7 @@
         </ng-container>
 
         <ng-container matColumnDef="print">
-          <th mat-header-cell *matHeaderCellDef style="min-width: 120px;"></th>
+          <th mat-header-cell *matHeaderCellDef></th>
           <td class="text-end" mat-cell *matCellDef="let element">
             <button class="btn btn-sm btn-primary" (click)="lastStep()">
               <div class="d-flex justify-content-center">

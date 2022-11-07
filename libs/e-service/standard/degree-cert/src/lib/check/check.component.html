@@ -7,9 +7,7 @@
       <ksp-request-header-info
         [requestNumber]="requestNumber"
       ></ksp-request-header-info>
-
       <hr />
-
       <mat-stepper
         [selectedIndex]="0"
         labelPosition="bottom"
@@ -24,8 +22,8 @@
             formControlName="step1"
           >
           </ksp-degree-cert-step-one>
-          <hr />
-          <div class="bg-light p-3">
+
+          <div class="bg-light px-3 py-2 mt-3 border">
             <e-service-license-check
               formControlName="verifyStep1"
               [choices]="choices"
@@ -42,8 +40,8 @@
             formControlName="step2"
           >
           </ksp-degree-cert-step-two>
-          <br />
-          <div class="bg-light p-3">
+
+          <div class="bg-light px-3 py-2 mt-3 border">
             <e-service-license-check
               formControlName="verifyStep2"
               [choices]="choices"
@@ -57,10 +55,8 @@
             [mode]="'view'"
             formControlName="step3"
           ></ksp-degree-cert-step-3>
-          <br />
-          <hr />
-          <br />
-          <div class="bg-light p-3">
+
+          <div class="bg-light px-3 py-2 mt-3 border">
             <e-service-license-check
               formControlName="verifyStep3"
               [choices]="choices"
@@ -74,9 +70,8 @@
             mode="view"
             formControlName="step4"
           ></ksp-degree-cert-step-four>
-          <br />
-          <hr />
-          <div class="bg-light p-3">
+
+          <div class="bg-light px-3 py-2 mt-3 border">
             <e-service-license-check
               formControlName="verifyStep4"
               [choices]="choices"
@@ -89,7 +84,7 @@
           <div class="d-flex">
             <ng-container *ngFor="let item of verifyResult; let index = index">
               <e-service-verify-result
-                [number]="index+1"
+                [number]="index + 1"
                 [isBasicValid]="item.isBasicValid"
                 [isCourseValid]="item.isCourseValid"
                 [isAttachmentValid]="item.isAttachmentValid"

@@ -4,7 +4,7 @@
       การปฏิบัติการสอนในสถานศึกษาในสาขาวิชาเฉพาะ วิชาชีพครู /
       การบริหารการศึกษาสำหรับทุกหลักสูตร
     </div>
-    <div class="bg-light p-3 my-4">
+    <div class="bg-light p-3 my-3">
       <div class="table-responsive">
         <table class="table">
           <thead>
@@ -79,13 +79,11 @@
               </ng-container>
             </ng-container>
 
-            <tr>
+            <tr *ngIf="mode === 'edit'">
               <th scope="row"></th>
               <td></td>
               <td>
-                <ksp-add-row-button
-                  (addRowClick)="addRow()"
-                  *ngIf="mode === 'edit'"
+                <ksp-add-row-button (addRowClick)="addRow()"
                   >เพิ่ม</ksp-add-row-button
                 >
               </td>

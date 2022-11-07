@@ -29,8 +29,8 @@ export class FormCoordinatorInfoComponent
   implements OnInit
 {
   @Input() positionLabel = 'ตำแหน่ง';
-  @Input() hideyyy = false;
-  @Input() hidexxx = false;
+  @Input() hideForm1 = false;
+  @Input() hideForm2 = false;
   @Input() isSchoolService = true;
   @Input() displayMode!: number[];
 
@@ -78,7 +78,7 @@ export class FormCoordinatorInfoComponent
       this.form.controls.kuruspano.clearValidators();
     }
   }
-  
+
   prefixChanged(evt: any) {
     const prefix = evt.target?.value;
 
