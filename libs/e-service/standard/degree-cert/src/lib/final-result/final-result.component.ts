@@ -10,8 +10,23 @@ import {
 } from '@ksp/shared/service';
 import { map } from 'rxjs';
 import { Location } from '@angular/common';
-import { formatDate, jsonStringify, parseJson } from '@ksp/shared/utility';
+import {
+  formatDate,
+  getCookie,
+  jsonStringify,
+  parseJson,
+} from '@ksp/shared/utility';
 import _ from 'lodash';
+
+const detailToState = (res: any) => {
+  const dataReturn = _.filter(
+    res?.datareturn,
+    ({ process }: any) => process === '4'
+  ).map((data: any) => {
+    return parseJson(data?.detail);
+  });
+  return _.first(dataReturn);
+};
 @Component({
   templateUrl: './final-result.component.html',
   styleUrls: ['./final-result.component.scss'],
@@ -22,14 +37,14 @@ export class FinalResultComponent implements OnInit {
       {
         reasonTimes: '',
         date: '',
-        approvedegreeCode: Math.floor(Math.random() * 1000000000000),
+        approvedegreeCode: '',
       },
     ],
     step1: [],
   });
   daftRequest: any;
   requestNumber = '';
-  step1Data: any;
+  step1Data: any = {};
   constructor(
     public dialog: MatDialog,
     private router: Router,
@@ -41,12 +56,22 @@ export class FinalResultComponent implements OnInit {
     private location: Location
   ) {}
   ngOnInit(): void {
-    this.getDegreeCert();
+    this.getHistory();
   }
-  getDegreeCert() {
-    if (this.route.snapshot.params['key']) {
+  getHistory() {
+    this.eRequestService
+      .kspUniRequestProcessSelectByRequestId(this.route.snapshot.params['key'])
+      .pipe(map(detailToState))
+      .subscribe((res) => {
+        this.getDegreeCert(res?.uniDegreeCertId);
+        // this.verifyResult = res?.verify;
+      });
+  }
+
+  getDegreeCert(id: any) {
+    if (id) {
       this.eUniService
-        .uniRequestDegreeCertSelectById(this.route.snapshot.params['key'])
+        .getUniDegreeCertById(id)
         .pipe(
           map((res) => {
             this.daftRequest = res;
@@ -56,9 +81,14 @@ export class FinalResultComponent implements OnInit {
         .subscribe((res) => {
           if (res?.returncode !== 98) {
             this.requestNumber = res?.requestNo;
-            this.step1Data = res.step1;
+            this.step1Data = res?.step1;
             this.form.patchValue({
               step1: res.step1,
+              finalResult: {
+                reasonTimes: '',
+                date: '',
+                approvedegreeCode: res?.degreeApproveCode || '',
+              },
             });
           }
         });
@@ -66,6 +96,42 @@ export class FinalResultComponent implements OnInit {
   }
   cancel() {
     this.router.navigate(['/', 'degree-cert', 'list', '0']);
+  }
+
+  save() {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
+        subTitle: `คุณยืนยันรหัสรับรองปริญญา
+        และประกาศนียบัตรทางการศึกษา ใช่หรือไม่`,
+      },
+    });
+
+    dialogRef.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.onSubmitKSP()
+      }
+    });
+  }
+
+  onConfirmed() {
+    const completeDialog = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: 'ระบบสร้างรหัส',
+        subTitle: `รับรองปริญญา และประกาศนียบัตร
+        ทางการศึกษาเรียบร้อย ตรวจสอบข้อมูลได้ที่`,
+        schoolCode: `"ทะเบียนปริญญา
+        และประกาศนียบัตรทางการศึกษา"`,
+      },
+    });
+
+    completeDialog.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/', 'degree-cert', 'list', '0']);
+      }
+    });
   }
   private _getRequest(): any {
     const payload: any = {
@@ -119,48 +185,27 @@ export class FinalResultComponent implements OnInit {
         ? JSON.stringify(this.step1Data?.coordinator)
         : null,
     };
-    payload.degreeapprovecode =
-      this.form.value.finalResult?.approvedegreeCode?.toString() || '';
     return payload;
   }
-  onSubmitDeGreeCert() {
-    this.eUniService.uniDegreeCertInsert(this._getRequest()).subscribe(() => {
-      this.onConfirmed();
-    });
-  }
-  save() {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
-      data: {
-        title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
-        subTitle: `คุณยืนยันรหัสรับรองปริญญา
-        และประกาศนียบัตรทางการศึกษา ใช่หรือไม่`,
-      },
-    });
 
-    dialogRef.componentInstance.confirmed.subscribe((res) => {
-      if (res) {
-        this.onSubmitDeGreeCert();
-      }
+  onSubmitKSP() {
+    const detail: any = _.pick(this.form.value, ['verify', 'approveData']);
+    const payload: any = {
+      systemtype: '3',
+      requestid: this.daftRequest?.requestid,
+      userid: getCookie('userId'),
+      process: '5',
+    };
+    payload.status = "1"
+    payload.detail = jsonStringify({
+      ...detail,
+      formData: this._getRequest(),
+      finalResult:this.form.value.finalResult
     });
-  }
-
-  onConfirmed() {
-    const completeDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
-      data: {
-        title: 'ระบบสร้างรหัส',
-        subTitle: `รับรองปริญญา และประกาศนียบัตร
-        ทางการศึกษาเรียบร้อย ตรวจสอบข้อมูลได้ที่`,
-        schoolCode: `"ทะเบียนปริญญา
-        และประกาศนียบัตรทางการศึกษา"`,
-      },
-    });
-
-    completeDialog.componentInstance.confirmed.subscribe((res) => {
-      if (res) {
-        this.router.navigate(['/', 'degree-cert', 'list', '0']);
-      }
-    });
+    this.eRequestService
+      .kspUpdateRequestUniRequestDegree(payload)
+      .subscribe(() => {
+        this.onConfirmed();
+      });
   }
 }

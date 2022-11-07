@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
+  CompleteDialogComponent,
   ConfirmDialogComponent,
   FilesPreviewComponent,
 } from '@ksp/shared/dialog';
@@ -13,6 +14,7 @@ import {
   UniInfoService,
 } from '@ksp/shared/service';
 import {
+  formatDate,
   getCookie,
   jsonStringify,
   parseJson,
@@ -72,6 +74,7 @@ export class ApproveComponent implements OnInit {
     verify: [],
     approveData: [],
   });
+  step1Data: any;
   daftRequest: any;
   verifyResult: any;
   requestNumber = '';
@@ -120,6 +123,7 @@ export class ApproveComponent implements OnInit {
         .subscribe((res) => {
           if (res?.returncode !== 98) {
             this.requestNumber = res?.requestNo;
+            this.step1Data = res.step1;
             this.form.patchValue({
               step1: res.step1,
             });
@@ -134,14 +138,14 @@ export class ApproveComponent implements OnInit {
       .pipe(map(detailToState))
       .subscribe((res) => {
         this.verifyResult = res?.verify;
-          this.considerCert = [
-            ...this.newConsiderCert,
-            ...(res?.considerCert || []),
-          ];
-          this.considerCourses = [
-            ...this.newConsiderCourses,
-            ...(res?.considerCourses || []),
-          ];
+        this.considerCert = [
+          ...this.newConsiderCert,
+          ...(res?.considerCert || []),
+        ];
+        this.considerCourses = [
+          ...this.newConsiderCourses,
+          ...(res?.considerCourses || []),
+        ];
       });
   }
 
@@ -165,12 +169,13 @@ export class ApproveComponent implements OnInit {
 
     dialogRef.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.onSubmitKSP();
+        this.onSubmitDeGreeCert();
       }
     });
   }
 
-  onSubmitKSP() {
+  onSubmitKSP(degreeApproveCode: any,uniDegreeCertId: any) {
+    if(!degreeApproveCode  || !uniDegreeCertId) return  this.onConfirmed("บันทึกข้อมูลไม่สำเร็จ");
     const detail: any = _.pick(this.form.value, ['verify', 'approveData']);
     const payload: any = {
       systemtype: '3',
@@ -183,11 +188,13 @@ export class ApproveComponent implements OnInit {
       ...detail,
       considerCourses: this.newConsiderCourses,
       considerCert: this.newConsiderCert,
+      degreeApproveCode: degreeApproveCode,
+      uniDegreeCertId:uniDegreeCertId,
     });
     this.eRequestService
       .kspUpdateRequestUniRequestDegree(payload)
       .subscribe(() => {
-        this.router.navigate(['/degree-cert', 'list', 1, 2]);
+        this.onConfirmed();
       });
   }
   toVerifyPage(type: number) {
@@ -225,5 +232,82 @@ export class ApproveComponent implements OnInit {
       'check',
       this.route.snapshot.params['key'],
     ]);
+  }
+  private _getRequest(): any {
+    const payload: any = {
+      uniname: this.step1Data?.institutionsName || null,
+      unitype: this.step1Data?.institutionsGroup || null,
+      uniprovince: this.step1Data?.provience || null,
+      unicode: this.step1Data?.institutionsCode || null,
+      degreelevel: this.step1Data?.degreeTypeForm?.degreeType || null,
+      courseacademicyear: this.step1Data?.degreeTypeForm?.courseYear || null,
+      coursename: this.step1Data?.degreeTypeForm?.courseName || null,
+      coursetype: this.step1Data?.degreeTypeForm?.courseType || null,
+      coursestatus: this.step1Data?.degreeTypeForm?.courseStatus || null,
+      fulldegreenameth:
+        this.step1Data?.degreeTypeForm?.degreeNameThFull || null,
+      shortdegreenameth:
+        this.step1Data?.degreeTypeForm?.degreeNameThShort || null,
+      fulldegreenameen:
+        this.step1Data?.degreeTypeForm?.degreeNameEnFull || null,
+      shortdegreenameen:
+        this.step1Data?.degreeTypeForm?.degreeNameEnShort || null,
+      courseapprovetime:
+        this.step1Data?.degreeTypeForm?.courseApproveTime || null,
+      courseapprovedate: this.step1Data?.degreeTypeForm?.courseApproveDate
+        ? formatDate(
+            new Date(
+              this.step1Data?.degreeTypeForm?.courseApproveDate
+            ).toISOString()
+          )
+        : null,
+      courseacceptdate: this.step1Data?.degreeTypeForm?.courseAcceptDate
+        ? formatDate(
+            new Date(
+              this.step1Data?.degreeTypeForm?.courseAcceptDate
+            ).toISOString()
+          )
+        : null,
+      coursedetailtype: this.step1Data?.courseDetailType || null,
+      coursedetailinfo: this.step1Data?.courseDetail
+        ? JSON.stringify(this.step1Data?.courseDetail)
+        : null,
+      teachinglocation: this.step1Data?.locations
+        ? JSON.stringify(this.step1Data?.locations)
+        : null,
+      responsibleunit: this.step1Data?.institutions
+        ? JSON.stringify(this.step1Data?.institutions)
+        : null,
+      evaluatelocation: this.step1Data?.locations2
+        ? JSON.stringify(this.step1Data?.locations2)
+        : null,
+      coordinatorinfo: this.step1Data?.coordinator
+        ? JSON.stringify(this.step1Data?.coordinator)
+        : null,
+    };
+    return payload;
+  }
+
+  onSubmitDeGreeCert() {
+    this.eUniService
+      .uniDegreeCertInsert(this._getRequest())
+      .subscribe((res) => {
+        this.onSubmitKSP(res?.degreeapprovecode,res?.id);
+      });
+  }
+
+  onConfirmed(header = "บันทึกข้อมูลสำเร็จ") {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header,
+        buttonLabel: 'กลับสู่หน้าหลัก',
+      },
+    });
+
+    dialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/degree-cert', 'list', 1, 2]);
+      }
+    });
   }
 }
