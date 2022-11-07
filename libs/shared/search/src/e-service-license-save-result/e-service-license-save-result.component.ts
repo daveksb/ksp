@@ -19,8 +19,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
   providers: providerFactory(EServiceLicenseSaveResultComponent),
 })
 export class EServiceLicenseSaveResultComponent extends KspFormBaseComponent {
-  @Output() clear = new EventEmitter<boolean>(false);
-  @Output() search = new EventEmitter<any>();
+  @Output() cancel = new EventEmitter<boolean>(false);
+  @Output() save = new EventEmitter<any>();
 
   eduOccupyList = selfOccupyList;
   processList: SchRequestProcess[] = [];
