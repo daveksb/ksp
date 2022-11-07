@@ -46,7 +46,7 @@ export class EServiceLicenseSearchComponent extends KspFormBaseComponent {
     );
 
     this.processList = SelfRequestProcess.filter((i) => {
-      return `${i.requestType}` === '1';
+      return `${i.requestType}` === '1' && i.processId > 1;
     });
 
     this.form.controls.currentprocess.valueChanges.subscribe(
