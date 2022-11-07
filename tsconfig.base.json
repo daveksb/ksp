@@ -28,6 +28,9 @@
       "@ksp/e-service/e-license/certificate-knowledge": [
         "libs/e-service/e-license/certificate-knowledge/src/index.ts"
       ],
+      "@ksp/e-service/e-license/create-license-id": [
+        "libs/e-service/e-license/create-license-id/src/index.ts"
+      ],
       "@ksp/e-service/e-license/document-delivery": [
         "libs/e-service/e-license/document-delivery/src/index.ts"
       ],

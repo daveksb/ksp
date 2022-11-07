@@ -1,0 +1,212 @@
+<ksp-top-nav
+  ><span header> หน้าแรก </span
+  ><span subHeader>ระบบงานทะเบียนและใบอนุญาต</span></ksp-top-nav
+>
+
+<div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
+  <div class="box-header">
+    ค้นหากลุ่มบัญชีรายชื่อผู้ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพทางการศึกษา
+  </div>
+  <div class="bg-white p-3">
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">กลุ่มที่ / Group No.</label>
+        <input type="text" class="form-control" />
+      </div>
+      <div class="col">
+        <label class="form-label">วันเดือนปีที่ทำรายการ</label>
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker1"
+            autocomplete="off"
+            class="form-control form-date"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker1"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">ประเภทใบอนุญาตประกอบวิชาชีพ</label>
+        <select class="form-select">
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+      <div class="col">
+        <label class="form-label">กลุ่มผู้ขอใบอนุญาตประกอบวิชาชีพ</label>
+        <select class="form-select">
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-3">
+        <label class="form-label"
+          >วันเดือนปีที่ผ่านการตรวจสอบอนุมัติ : จาก</label
+        >
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker2"
+            autocomplete="off"
+            class="form-control form-date"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker2"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </div>
+      </div>
+      <div class="col-3">
+        <label class="form-label"
+          >วันเดือนปีที่ผ่านการตรวจสอบอนุมัติ : ถึง</label
+        >
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker3"
+            autocomplete="off"
+            class="form-control form-date"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker3"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker3></mat-datepicker>
+        </div>
+      </div>
+      <div class="col-3">
+        <br />
+        <div class="d-flex align-items-center">
+          <input type="checkbox" class="me-2" />
+          <label class="form-label">เร่งด่วน</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end mt-4">
+      <button
+        type="button"
+        (click)="clear()"
+        class="btn border-primary text-primary me-2"
+      >
+        ล้างข้อมูล
+      </button>
+      <button type="button" (click)="search()" class="btn btn-primary">
+        ค้นหา
+      </button>
+    </div>
+  </div>
+  <br />
+
+  <div class="bg-white p-3">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="box-header">รายชื่อผู้ที่จะต้องออกใบอนุญาต</div>
+      <div class="d-flex">
+        <button
+          type="button"
+          (click)="create()"
+          class="btn text-primary bg-primary bg-opacity-10 w-auto"
+        >
+          + สร้างเลขที่ใบอนุญาต
+        </button>
+      </div>
+    </div>
+    <div class="d-flex align-items-center mb-2">
+      <input type="checkbox" class="me-2" />
+      <div class="form-label">เลือกทั้งหมด</div>
+    </div>
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>เลือก</th>
+        <td mat-cell *matCellDef="let element">
+          <input type="checkbox" />
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="group">
+        <th mat-header-cell *matHeaderCellDef>กลุ่มที่</th>
+        <td mat-cell *matCellDef="let element">{{ element.group }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="list">
+        <th mat-header-cell *matHeaderCellDef>บัญชีรายชื่อ</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.firstnameth }} {{ element.list }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="rush">
+        <th mat-header-cell *matHeaderCellDef>เร่งด่วน</th>
+        <td mat-cell *matCellDef="let element">
+          <i class="bi bi-exclamation-triangle-fill text-danger"></i>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="number">
+        <th mat-header-cell *matHeaderCellDef>จำนวน</th>
+        <td mat-cell *matCellDef="let element">{{ element.number }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="licenseType">
+        <th mat-header-cell *matHeaderCellDef>ประเภทใบอนุญาต</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.licenseType }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="groupType">
+        <th mat-header-cell *matHeaderCellDef>กลุ่มผู้ขอใบอนุญาต</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.groupType }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>สถานะ</th>
+        <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="considerDate">
+        <th mat-header-cell *matHeaderCellDef>วันที่กลั่นกรอง</th>
+        <td mat-cell *matCellDef="let element">{{ element.considerDate }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="verifyDate">
+        <th mat-header-cell *matHeaderCellDef>วันที่รับรอง</th>
+        <td mat-cell *matCellDef="let element">{{ element.verifyDate }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="approveDate">
+        <th mat-header-cell *matHeaderCellDef>วันที่ผ่านการตรวจสอบ</th>
+        <td mat-cell *matCellDef="let element">{{ element.approveDate }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[10]"
+      showFirstLastButtons
+      aria-label="Select page of periodic elements"
+    >
+    </mat-paginator>
+  </div>
+</div>
