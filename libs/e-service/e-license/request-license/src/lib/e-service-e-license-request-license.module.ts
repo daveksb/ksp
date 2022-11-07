@@ -38,6 +38,7 @@ import { RequestLicenseApproveGuarunteeComponent } from './request-license-appro
 import { RequestLicenseApproveLicenseTableComponent } from './request-license-approve-license-table/request-license-approve-license-table.component';
 import { RequestLicenseApprovePrintComponent } from './request-license-approve-print/request-license-approve-print.component';
 import { RequestLicenseApproveSaveResultComponent } from './request-license-approve-save-result/request-license-approve-save-result.component';
+import { RequestLicenseApproveKmvComponent } from './request-license-approve-kmv/request-license-approve-kmv.component';
 
 export const routes: Route[] = [
   {
@@ -93,6 +94,10 @@ export const routes: Route[] = [
         path: 'save-result',
         component: RequestLicenseApproveSaveResultComponent,
       },
+      {
+        path: 'kmv',
+        component: RequestLicenseApproveKmvComponent,
+      },
     ],
   },
 ];
@@ -134,6 +139,7 @@ export const routes: Route[] = [
     RequestLicenseApproveLicenseTableComponent,
     RequestLicenseApprovePrintComponent,
     RequestLicenseApproveSaveResultComponent,
+    RequestLicenseApproveKmvComponent,
   ],
 })
 export class EServiceELicenseRequestLicenseModule {}

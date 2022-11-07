@@ -73,6 +73,10 @@ export class RequestLicenseApproveSearchListComponent implements OnInit {
     this.router.navigate(['/request-license', 'create-group']);
   }
 
+  kmv() {
+    this.router.navigate(['/request-license', 'kmv']);
+  }
+
   guarantee() {
     this.router.navigate(['/request-license', 'guarantee-confirm']);
   }
