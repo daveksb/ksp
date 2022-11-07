@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ksp-request-license-approve-license-table',
@@ -61,7 +62,7 @@ export class RequestLicenseApproveLicenseTableComponent implements OnInit {
   displayedColumns: string[] = [];
   dataSource = new MatTableDataSource<any>();
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.dataSource.data = this.data;
@@ -76,5 +77,9 @@ export class RequestLicenseApproveLicenseTableComponent implements OnInit {
           'urgent',
         ])
       : (this.displayedColumns = ['order', 'licenseType', 'count']);
+  }
+
+  viewDetail(input: string) {
+    this.router.navigate(['/request-license', 'guarantee-confirm']);
   }
 }
