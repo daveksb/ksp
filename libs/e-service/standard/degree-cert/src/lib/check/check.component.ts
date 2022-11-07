@@ -1,5 +1,10 @@
 import { jsonStringify, parseJson, getCookie } from '@ksp/shared/utility';
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterContentChecked,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+} from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,15 +21,17 @@ import { map, switchMap, lastValueFrom } from 'rxjs';
 import _ from 'lodash';
 import { ApproveStepStatusOption } from '@ksp/shared/constant';
 const detailToState = (res: any) => {
-  let newRes = res?.datareturn.map((data: any) => {
+  let newRes = _.filter(res?.datareturn, ({ process }) =>
+    ['1', '2'].includes(process)
+  ).map((data: any) => {
     return parseJson(data?.detail);
   });
   newRes = newRes?.map((data: any) => {
     const verifyObject: any = {};
-    verifyObject.isBasicValid = _.get(data, 'verifyStep1.result') ==="1"
-    verifyObject.isCourseValid =  _.get(data, 'verifyStep2.result')==="1"
-    verifyObject.isAttachmentValid = _.get(data, 'verifyStep3.result')==="1"
-    verifyObject.isProcessValid =  _.get(data, 'verifyStep4.result')==="1"
+    verifyObject.isBasicValid = _.get(data, 'verifyStep1.result') === '1';
+    verifyObject.isCourseValid = _.get(data, 'verifyStep2.result') === '1';
+    verifyObject.isAttachmentValid = _.get(data, 'verifyStep3.result') === '1';
+    verifyObject.isProcessValid = _.get(data, 'verifyStep4.result') === '1';
     return verifyObject;
   });
   return newRes || [];
@@ -34,7 +41,7 @@ const detailToState = (res: any) => {
   templateUrl: './check.component.html',
   styleUrls: ['./check.component.scss'],
 })
-export class CheckComponent implements OnInit {
+export class CheckComponent implements OnInit, AfterContentChecked {
   form = this.fb.group<any>({
     step1: [],
     step2: [
@@ -67,11 +74,15 @@ export class CheckComponent implements OnInit {
     private fb: FormBuilder,
     private uniInfoService: UniInfoService,
     private eUniService: EUniService,
-    private eRequestService: ERequestService
+    private eRequestService: ERequestService,
+    private cdref: ChangeDetectorRef
   ) {}
+  ngAfterContentChecked(): void {
+    this.cdref.detectChanges();
+  }
   getHistory() {
     this.eRequestService
-      .kspRequestProcessSelectByRequestId(this.route.snapshot.params['key'])
+      .kspUniRequestProcessSelectByRequestId(this.route.snapshot.params['key'])
       .pipe(map(detailToState))
       .subscribe((res) => {
         this.verifyResult = res;
@@ -207,15 +218,10 @@ export class CheckComponent implements OnInit {
       userid: getCookie('userId'),
     };
     detail.returnDate = _.get(this.form, 'value.step5.returnDate', '');
-    payload.status = _.get(this.form, 'value.step5.verify', '');
-    payload.process = _.get(this.form, 'value.step5.forward', '');
+    payload.status = _.get(this.form, 'value.step5.verify.result', '');
+    payload.process = _.size(this.verifyResult) + 1;
     payload.detail = jsonStringify(detail);
-    this.eRequestService.KspUpdateRequestProcess(payload).subscribe(() => {
-      // this.onSubmitDeGreeCert();
-    });
-  }
-  onSubmitDeGreeCert() {
-    this.eUniService.uniDegreeCertInsert(this._getRequest()).subscribe(() => {
+    this.eRequestService.kspUpdateRequestUniRequestDegree(payload).subscribe(() => {
       this.onConfirmed();
     });
   }

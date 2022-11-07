@@ -1,3 +1,4 @@
+import { map } from 'rxjs';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -7,6 +8,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { providerFactory } from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
+import { UniInfoService } from '@ksp/shared/service';
 
 @Component({
   selector: 'e-service-form-approve-meeting-record',
@@ -16,13 +18,12 @@ import { SharedFormOthersModule } from '@ksp/shared/form/others';
     FileUploadComponent,
     ReactiveFormsModule,
     MatDatepickerModule,
-    SharedFormOthersModule
+    SharedFormOthersModule,
   ],
   template: ` <p>form-meeting-record works!</p> `,
   templateUrl: './form-approve-meeting-record.component.html',
   styleUrls: ['./form-approve-meeting-record.component.scss'],
   providers: providerFactory(FormApproveMeetingRecordComponent),
-
 })
 export class FormApproveMeetingRecordComponent extends KspFormBaseComponent {
   override form = this.fb.group({
@@ -31,11 +32,12 @@ export class FormApproveMeetingRecordComponent extends KspFormBaseComponent {
     boardType: [],
     boardName: [],
     chairmanName: [],
-    file:[],
-    year:[]
+    file: [],
+    year: [],
   });
   uniqueNo = '';
-  constructor(private fb: FormBuilder) {
+  boardOption: any = [];
+  constructor(private fb: FormBuilder, private uniInfo: UniInfoService) {
     super();
     this.uniqueNo = uuidv4();
     this.subscriptions.push(
@@ -44,8 +46,21 @@ export class FormApproveMeetingRecordComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+    this.uniInfo
+      .getBoard()
+      .pipe(
+        map((res) =>
+          res?.datareturn?.map((d: any) => ({
+            value: d?.boardname,
+            label: d?.boardname,
+          }))
+        )
+      )
+      .subscribe((res) => {
+        this.boardOption = res;
+      });
   }
   onUploadComplete(evt: any) {
-    this.form.controls.file.setValue(evt)
+    this.form.controls.file.setValue(evt);
   }
 }

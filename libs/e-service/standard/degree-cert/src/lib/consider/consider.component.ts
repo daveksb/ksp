@@ -1,71 +1,55 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CompleteDialogComponent, ConfirmDialogComponent, FilesPreviewComponent } from '@ksp/shared/dialog';
-import { ERequestService, EUniService, UniInfoService } from '@ksp/shared/service';
-import { jsonStringify, parseJson, thaiDate } from '@ksp/shared/utility';
+import { ConfirmDialogComponent } from '@ksp/shared/dialog';
+import {
+  ERequestService,
+  EUniService,
+  UniInfoService,
+} from '@ksp/shared/service';
+import {
+  getCookie,
+  jsonStringify,
+  parseJson,
+  thaiDate,
+} from '@ksp/shared/utility';
 import _ from 'lodash';
 import { map } from 'rxjs';
-import { DegreeCertInfo } from '../list/e-service-degree-cert-list.component';
+import { Location } from '@angular/common';
+import moment from 'moment';
 
 const detailToState = (res: any) => {
-  let newRes = res?.datareturn.map((data: any) => {
-    return parseJson(data?.detail);
-  });
-  let considerCourses: any = [], considerCert: any = [];
-  let plan: any = {}, considerationResult: any = {};
-  newRes = newRes?.map((data: any) => {
-    const mappingData: any = {};
-    mappingData.isBasicValid = _.get(data, 'verifyStep1.result') ==="1"
-    mappingData.isCourseValid =  _.get(data, 'verifyStep2.result')==="1"
-    mappingData.isAttachmentValid = _.get(data, 'verifyStep3.result')==="1"
-    mappingData.isProcessValid =  _.get(data, 'verifyStep4.result')==="1"
-    if (data) {
-      if ('plan' in data) {
-        plan =  _.get(data, 'plan')
+  const newRes = res?.datareturn
+    .filter(({ process }: any) => process == 3)
+    .map((data: any) => {
+      return parseJson(data?.detail);
+    });
+  const verifyItems = _.filter(newRes, ({ verify }) => verify);
+  const verifyResult = verifyItems.map((data) => ({
+    isBasicValid: _.get(data, 'verify.result') === '1',
+  }));
+  const considerCourses = _.reduce(
+    newRes,
+    (prev: any, curr) => {
+      if (curr?.considerCourses) {
+        prev.considerCourses = _.concat(
+          prev.considerCourses,
+          curr?.considerCourses
+        );
       }
-      if ('considerationResult' in data) {
-        considerationResult =  _.get(data, 'considerationResult')
-      }
-      if ('considerCourses' in data) {
-        considerCourses.push({ 
-          ..._.get(data, 'considerCourses.verifyForm'),
-          ...{
-            status: _.get(data, 'considerCourses.considerationResult.result'), 
-            date: _.get(data, 'considerCourses.verifyForm.date')
-                  ? thaiDate(new Date(_.get(data, 'considerCourses.verifyForm.date')))
-                  : '',
-          }
-        });
-      }
-      if ('considerCert' in data) {
-        considerCert.push({ 
-          ..._.get(data, 'considerCert.verifyForm'),
-          ...{
-            status: _.get(data, 'considerCert.considerationResult.result'),
-            date: _.get(data, 'considerCert.verifyForm.date')
-                  ? thaiDate(new Date(_.get(data, 'considerCert.verifyForm.date')))
-                  : '',
-          }
-        });
-      }
-    }
 
-    return mappingData;
-  });
-  newRes[newRes.length - 1] = { 
-    ...newRes[newRes.length - 1],  
-    ...{ 
-      considerCourses: considerCourses, 
-      considerCert: considerCert,
-      plan: plan,
-      considerationResult: considerationResult
-    }
-  }
-  
-  return newRes || [];
+      if (curr?.considerCert) {
+        prev.considerCert = _.concat(prev.considerCert, curr?.considerCert);
+      }
+      return prev;
+    },
+    { considerCourses: [], considerCert: [] }
+  );
+  return {
+    ...considerCourses,
+    verifyResult: verifyResult,
+  };
 };
 @Component({
   selector: 'e-service-consider',
@@ -73,7 +57,6 @@ const detailToState = (res: any) => {
   styleUrls: ['./consider.component.scss'],
 })
 export class ConsiderComponent implements OnInit {
-  dataSource = new MatTableDataSource<DegreeCertInfo>();
   form = this.fb.group({
     step1: [],
     step2: [
@@ -84,16 +67,20 @@ export class ConsiderComponent implements OnInit {
     step3: [],
     step4: [],
     step5: [],
-    plan: [{
-      plans: [],
-      plansResult: [],
-      subjects: []
-    }],
-    considerationResult:[{
-      detail: null,
-      reason: null,
-      result: null
-    }],
+    plan: [
+      {
+        plans: [],
+        plansResult: [],
+        subjects: [],
+      },
+    ],
+    verify: [
+      {
+        detail: null,
+        reason: null,
+        result: null,
+      },
+    ],
   });
   verifyResult: {
     isBasicValid: boolean;
@@ -101,57 +88,57 @@ export class ConsiderComponent implements OnInit {
     isAttachmentValid: boolean;
     isProcessValid: boolean;
   }[] = [];
+  daftRequest: any;
   requestNumber = '';
   requestdate = '';
   considerCourses: any = [];
   considerCert: any = [];
-
+  newConsiderCourses: any = [];
+  newConsiderCert: any = [];
   choices = [
     { name: 'เห็นควรพิจารณาให้การรับรอง', value: 1 },
     { name: 'เห็นควรพิจารณาไม่ให้การรับรอง', value: 2 },
     { name: 'ให้สถาบันแก้ไข / เพิ่มเติม', value: 3 },
     { name: 'ส่งคืนหลักสูตร', value: 4 },
   ];
-
-  mappingStatus = [
-    [
-      { name: '', value: 0 },
-      { name: 'ผ่านการพิจารณา', value: 1 },
-      { name: 'ไม่ผ่านการพิจารณา', value: 2 },
-    ],
-    [
-      { name: '', value: 0 },
-      { name: "รับรอง", value: 1 },
-      { name: "ไม่รับรอง", value: 2 },
-      { name: "ให้สถาบันแก้ไข / เพิ่มเติม", value: 3 },
-      { name: "ส่งคืน", value: 4 },
-      { name: "ยกเลิกการรับรอง", value: 5 },
-    ]
-  ];
+  result: any = { '1': 'ผ่านการพิจารณา', '2': 'ไม่ผ่านการพิจารณา' };
 
   constructor(
-    public dialog: MatDialog, 
+    public dialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute,
     private eUniService: EUniService,
     private uniInfoService: UniInfoService,
     private fb: FormBuilder,
-    private eRequestService: ERequestService
+    private eRequestService: ERequestService,
+    private location: Location
   ) {}
 
   getHistory() {
+    this.newConsiderCert = _.get(this.location.getState(), 'considerCert', []);
+    this.newConsiderCourses = _.get(
+      this.location.getState(),
+      'considerCourses',
+      []
+    );
     this.eRequestService
-      .kspRequestProcessSelectByRequestId(this.route.snapshot.params['key'])
+      .kspUniRequestProcessSelectByRequestId(this.route.snapshot.params['key'])
       .pipe(map(detailToState))
-      .subscribe((res) => {
-        const lastData = res[res.length - 1];
-        this.verifyResult = res;
-        this.considerCourses = lastData?.considerCourses || [];
-        this.considerCert = lastData?.considerCert || [];
-        this.form.patchValue({
-          plan: lastData?.plan || {},
-          considerationResult: lastData?.considerationResult || {},
-        });
+      .subscribe((res: any) => {
+        this.verifyResult = res?.verifyResult;
+          this.considerCourses = [
+            ...(res?.considerCourses || []),
+            ...this.newConsiderCourses,
+
+          ];
+          this.considerCert = [
+            ...(res?.considerCert || []),
+            ...this.newConsiderCert,
+          ];
+        // this.form.patchValue({
+        //   plan: lastData?.plan || {},
+        //   considerationResult: lastData?.considerationResult || {},
+        // });
       });
   }
 
@@ -161,72 +148,55 @@ export class ConsiderComponent implements OnInit {
         .uniRequestDegreeCertSelectById(this.route.snapshot.params['key'])
         .pipe(
           map((res) => {
-            this.dataSource.data = [{
-              key: res?.id,
-              requestno: res?.requestno,
-              date: res?.requestdate
-                ? thaiDate(new Date(res?.requestdate))
-                : '',
-              uni: res?.uniname,
-              major: res?.fulldegreenameth,
-              verifyStatus: 'รับข้อมูล',
-              considerStatus: 'พิจารณา',
-              approveStatus: 'พิจารณา',
-              approveDate: '',
-              editDate: res?.updatedate
-                ? thaiDate(new Date(res?.requestdate))
-                : '',
-              verify: 'แก้ไข',
-              consider: 'แก้ไข',
-            }];
-            this.requestNumber = res?.requestno;
-            this.requestdate = res?.requestdate
+            this.daftRequest = res;
             return this.uniInfoService.mappingUniverSitySelectByIdWithForm(res);
           })
         )
         .subscribe((res) => {
           if (res?.returncode !== 98) {
-            let plan: any[] = [];
+            const plan: any[] = [];
             if (res.step2.plan1.plans && res.step2.plan1.plans.length > 0) {
               res.step2.plan1.plans.map((data: any) => {
-                plan.push({...data, ...{consider: false}})
+                plan.push({ ...data, ...{ consider: false } });
               });
             }
-            const plans = {...res.step2.plan1, ...{ plansResult: plan }};
+            const plans = { ...res.step2.plan1, ...{ plansResult: plan } };
+            this.requestNumber = res?.requestNo;
             this.form.patchValue({
               step1: res.step1,
-              step2: res.step2,
-              step3: res.step3,
-              step4: res.step4,
               plan: plans,
             });
           }
-          this.getHistory();
-        })
+        });
     }
   }
 
   ngOnInit(): void {
     this.getDegreeCert();
-    // this.getHistory();
+    this.getHistory();
   }
 
   cancel() {
-    this.router.navigate(['./', 'degree-cert', 'list', '1']);
+    this.router.navigate(['/degree-cert', 'list', 3, 1]);
   }
 
   prevPage() {
-    this.router.navigate(['./', 'degree-cert', 'verify', '1']);
+    this.router.navigate(['/degree-cert', 'list', 3, 1]);
   }
 
   save() {
+    const detail = jsonStringify({
+      ...this.form.value,
+      considerCourses: this.newConsiderCourses,
+      considerCert: this.newConsiderCert,
+    });
     const payload: any = {
       systemtype: '3',
-      process: '5',
-      requestid: this.route.snapshot.params['key'],
-      status: this.form.value.considerationResult?.result,
-      detail: jsonStringify(this.form.value),
-      userid: null // getCookie('userId'),
+      process: '3',
+      requestid: this.daftRequest?.requestid,
+      status: _.get(this.form, 'value.verify.result', ''),
+      detail,
+      userid: getCookie('userId'),
     };
 
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
@@ -237,33 +207,37 @@ export class ConsiderComponent implements OnInit {
         ใช่หรือไม่`,
       },
     });
-
     dialogRef.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.eRequestService.KspUpdateRequestProcess(payload).subscribe(() => {
-          this.router.navigate(['/', 'degree-cert', 'list', '1']);
-        });
+        this.eRequestService
+          .kspUpdateRequestUniRequestDegree(payload)
+          .subscribe(() => {
+            this.router.navigate(['/', 'degree-cert', 'list', 3, 1]);
+          });
       }
     });
   }
 
   toVerifyPage(type: number) {
-    this.router.navigate(['./', 'degree-cert', 'verify', type], {
-      state:{
-        dataSource: this.dataSource.data
+    const state: any = {};
+    state['considerCourses'] = this.newConsiderCourses;
+    state['considerCert'] = this.newConsiderCert;
+    this.router.navigate(
+      ['/degree-cert', 'verify', type, 3, this.route.snapshot.params['key']],
+      {
+        state,
       }
-    });
+    );
   }
 
-  view() {
-    const dialogRef = this.dialog.open(FilesPreviewComponent, {
-      width: '800px',
-    });
-
-    dialogRef.componentInstance.confirmed.subscribe((res) => {
-      if (res) {
-        this.dialog.closeAll();
-      }
-    });
+  toDate(date: any) {
+    return thaiDate(moment(date).toDate());
+  }
+  toDetail() {
+    this.router.navigate([
+      '/degree-cert',
+      'check',
+      this.route.snapshot.params['key'],
+    ]);
   }
 }

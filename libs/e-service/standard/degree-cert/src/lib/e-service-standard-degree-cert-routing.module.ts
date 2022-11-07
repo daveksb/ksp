@@ -43,7 +43,7 @@ export const routes: Routes = [
         component: CheckComponent,
       },
       {
-        path: 'verify/:type',
+        path: 'verify/:type/:process',
         component: VerifyComponent,
       },
       {
