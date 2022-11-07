@@ -100,37 +100,32 @@ export class VerifyComponent implements OnInit {
     if (this.processType === 4)
       state.considerCourses = [...state.considerCourses, this.form.value];
 
-    if (this.process === '5') {
+    if (this.process === '3') {
       this.router.navigate(['./degree-cert', 'consider', this.requestId], {
         state,
       });
-    } else if (this.process === '6') {
+    } else if (this.process === '4') {
       this.router.navigate(['./degree-cert', 'approve', this.requestId], {
         state,
       });
     }
-    
   }
   save() {
-    if (this.process === '6' || this.process === '5') return this.saveState();
+    if (this.requestId) return this.saveState();
     const detail: any = {};
-    let process = '';
-    if (this.processType === 1 || this.processType === 3) {
-      process = '4';
+    if (this.processType === 2) {
       detail['considerCourses'] = this.form.value;
-    } else {
-      process = '3';
+    }
+    if (this.processType === 1) {
       detail['considerCert'] = this.form.value;
     }
-
     const payload: any = {
       systemtype: '3',
-      process: process,
+      process: this.process,
       status: this.form.value.considerationResult?.result,
       detail: jsonStringify(detail),
       userid: null, // getCookie('userId'),
     };
-
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -145,17 +140,11 @@ export class VerifyComponent implements OnInit {
         this.dataSource.map((data: any) => {
           payload.requestid = data?.key;
           this.eRequestService
-            .KspUpdateRequestProcess(payload)
+            .kspUpdateRequestUniRequestDegree(payload)
             .subscribe(() => {
-              // this.onSubmitDeGreeCert();
+              this.location.back();
             });
         });
-
-        if (this.processType != 1 && this.processType != 2) {
-          this.location.back();
-        } else {
-          this.router.navigate(['/degree-cert', 'list', this.processType]);
-        }
       }
     });
   }

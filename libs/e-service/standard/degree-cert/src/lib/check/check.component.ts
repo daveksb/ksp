@@ -82,7 +82,7 @@ export class CheckComponent implements OnInit, AfterContentChecked {
   }
   getHistory() {
     this.eRequestService
-      .kspRequestProcessSelectByRequestId(this.route.snapshot.params['key'])
+      .kspUniRequestProcessSelectByRequestId(this.route.snapshot.params['key'])
       .pipe(map(detailToState))
       .subscribe((res) => {
         this.verifyResult = res;
@@ -218,10 +218,10 @@ export class CheckComponent implements OnInit, AfterContentChecked {
       userid: getCookie('userId'),
     };
     detail.returnDate = _.get(this.form, 'value.step5.returnDate', '');
-    payload.status = _.get(this.form, 'value.step5.verify', '');
+    payload.status = _.get(this.form, 'value.step5.verify.result', '');
     payload.process = _.size(this.verifyResult) + 1;
     payload.detail = jsonStringify(detail);
-    this.eRequestService.KspUpdateRequestProcess(payload).subscribe(() => {
+    this.eRequestService.kspUpdateRequestUniRequestDegree(payload).subscribe(() => {
       this.onConfirmed();
     });
   }

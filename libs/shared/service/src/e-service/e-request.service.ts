@@ -134,4 +134,18 @@ export class ERequestService {
       { requestid, tokenkey: getCookie('userToken') }
     );
     }
+
+    kspUpdateRequestUniRequestDegree(payload: KspApprovePayload): Observable<any> {
+      return this.http.post(
+        `${environment.apiUrl}/e-service/ksprequestprocessinsert_unirequestdegree`,
+        payload
+      );
+    }
+
+    kspUniRequestProcessSelectByRequestId(requestid: any): Observable<any> {
+      return this.http.post(
+        `${environment.apiUrl}/e-service/ksprequestprocessselectbyrequestid_requestdegree`,
+        { requestid, tokenkey: getCookie('userToken') }
+      );
+      }
 }

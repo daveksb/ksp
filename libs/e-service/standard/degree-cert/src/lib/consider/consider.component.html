@@ -16,7 +16,7 @@
         <ksp-degree-cert-step-one [mode]="'view'" [showCoordinatorForm]="false" formControlName="step1">
         </ksp-degree-cert-step-one>
 
-        <button class="btn btn-primary w-auto">
+        <button class="btn btn-primary w-auto" (click)="toDetail()">
           กดเพื่อดูใบคำขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา
         </button>
 
@@ -111,7 +111,7 @@
     </div>
     <br />
     <div class="bg-white p-4">
-      <e-service-license-check [choices]="choices" formControlName="considerationResult"></e-service-license-check>
+      <e-service-license-check [choices]="choices" formControlName="verify"></e-service-license-check>
     </div>
   </div>
 </form>

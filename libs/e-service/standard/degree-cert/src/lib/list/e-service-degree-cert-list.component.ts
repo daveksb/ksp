@@ -167,7 +167,7 @@ export class EServiceDegreeCertListComponent
   }
 
   consider() {
-    this.router.navigate(['/degree-cert', 'verify', 1], {
+    this.router.navigate(['/degree-cert', 'verify', 1, 3], {
       state: {
         dataSource: this.selection.selected,
       },
@@ -175,7 +175,7 @@ export class EServiceDegreeCertListComponent
   }
 
   approve() {
-    this.router.navigate(['/degree-cert', 'verify', 2], {
+    this.router.navigate(['/degree-cert', 'verify', 2, 3], {
       state: {
         dataSource: this.selection.selected,
       },
@@ -203,27 +203,31 @@ export class EServiceDegreeCertListComponent
   }
   getVerify(e: any) {
     let classStatus = 'verify__status';
-    let status:any = _.find(EUniApproveProcess, {
+    let status: any = _.find(EUniApproveProcess, {
       requestType: _.toNumber(e?.requestType),
       processId: _.toNumber(e?.process),
     });
-    status = _.find(status?.status,{id:_.toNumber(e?.status)})
-    if(!status) {
+    status = _.find(status?.status, { id: _.toNumber(e?.status) });
+    if (!status) {
       classStatus = 'edit__status';
     }
-    return `<span class="rounded-pill d-flex justify-content-center ${classStatus}">${status?.sname || "แก้ไข"}</span>`;
+    return `<span class="rounded-pill d-flex justify-content-center ${classStatus}">${
+      status?.sname || 'แก้ไข'
+    }</span>`;
   }
   getConsider(e: any) {
     let classStatus = 'verify__status';
-    let status:any = _.find(EUniApproveProcess, {
+    let status: any = _.find(EUniApproveProcess, {
       requestType: _.toNumber(e?.requestType),
       processId: _.toNumber(e?.process),
     });
-    status = _.find(status?.status,{id:_.toNumber(e?.status)})
-    if(!status) {
+    status = _.find(status?.status, { id: _.toNumber(e?.status) });
+    if (!status) {
       classStatus = 'edit__status';
     }
-    return `<span class="rounded-pill d-flex justify-content-center ${classStatus}">${status?.sname || "แก้ไข"}</span>`;
+    return `<span class="rounded-pill d-flex justify-content-center ${classStatus}">${
+      status?.sname || 'แก้ไข'
+    }</span>`;
   }
 }
 
