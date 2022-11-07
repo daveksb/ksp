@@ -6,7 +6,10 @@ import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
-import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
+import {
+  LicenseCheckComponent,
+  RequestLicenseApproveSummaryTableComponent,
+} from '@ksp/e-service/ui/license-check';
 import {
   FormUploadImageComponent,
   SelfServiceFormModule,
@@ -127,6 +130,7 @@ export const routes: Route[] = [
     EServiceLicenseGroupSearchComponent,
     EServiceLicenseCreateGroupSearchComponent,
     EServiceLicenseSaveResultComponent,
+    RequestLicenseApproveSummaryTableComponent,
   ],
   declarations: [
     RequestLicenseApproveListComponent,
