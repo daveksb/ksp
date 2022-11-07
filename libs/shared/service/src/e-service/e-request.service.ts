@@ -11,6 +11,8 @@ import {
   SchUser,
   SelfRequest,
   UniUser,
+  GetLastApproveList,
+  GetLastApproveGroup,
 } from '@ksp/shared/interface';
 import { getCookie } from '@ksp/shared/utility';
 import { map, Observable, shareReplay } from 'rxjs';
@@ -134,25 +136,39 @@ export class ERequestService {
       `${environment.apiUrl}/e-service/ksprequestprocessselectbyrequestid`,
       { requestid, tokenkey: getCookie('userToken') }
     );
-    }
+  }
 
-    kspUpdateRequestUniRequestDegree(payload: KspApprovePayload): Observable<any> {
-      return this.http.post(
-        `${environment.apiUrl}/e-service/ksprequestprocessinsert_unirequestdegree`,
-        payload
-      );
-    }
+  kspUpdateRequestUniRequestDegree(
+    payload: KspApprovePayload
+  ): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/ksprequestprocessinsert_unirequestdegree`,
+      payload
+    );
+  }
 
-    kspUniRequestProcessSelectByRequestId(requestid: any): Observable<any> {
-      return this.http.post(
-        `${environment.apiUrl}/e-service/ksprequestprocessselectbyrequestid_requestdegree`,
-        { requestid, tokenkey: getCookie('userToken') }
-      );
-      }
-      retiredUniUser(payload: any): Observable<any> {
-        return this.http.post(
-          `${environment.apiUrl}/e-service/uniuseractiveupdate`,
-          payload
-        );
-      }
+  kspUniRequestProcessSelectByRequestId(requestid: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/ksprequestprocessselectbyrequestid_requestdegree`,
+      { requestid, tokenkey: getCookie('userToken') }
+    );
+  }
+  retiredUniUser(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/uniuseractiveupdate`,
+      payload
+    );
+  }
+
+  getLastApproveList(): Observable<GetLastApproveList> {
+    return this.http.get<GetLastApproveList>(
+      `${environment.apiUrl}/e-service/selfapprovelistselectlast`
+    );
+  }
+
+  getLastApproveGroup(): Observable<GetLastApproveGroup> {
+    return this.http.get<GetLastApproveGroup>(
+      `${environment.apiUrl}/e-service/selfapprovegroupselectlast`
+    );
+  }
 }

@@ -6,6 +6,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
+import { ERequestService } from '@ksp/shared/service';
 
 @Component({
   selector: 'ksp-request-license-approve-create-group',
@@ -27,10 +28,19 @@ export class RequestLicenseApproveCreateGroupComponent implements OnInit {
   ];
   dataSource2 = new MatTableDataSource<any>();
   licenseData: any;
+  listNo!: number;
 
-  constructor(private router: Router, public dialog: MatDialog) {}
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private requestService: ERequestService
+  ) {}
 
   ngOnInit(): void {
+    this.requestService.getLastApproveList().subscribe((res) => {
+      this.listNo = +res.listno + 1;
+    });
+
     this.licenseData = [
       {
         order: 1,
