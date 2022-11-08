@@ -1,4 +1,5 @@
 <ksp-top-nav><span header>ยื่นใบคำขอ</span></ksp-top-nav>
+<fieldset [disabled]="!allowEdit">
 
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 px-4 py-2">
@@ -23,7 +24,7 @@
     </div>
   </div>
 </form>
-
+</fieldset>
 <div class="sticky-bottom border">
   <ksp-bottom-nav
     [isFirstPage]="true"
@@ -32,6 +33,7 @@
     [showCenterButtons]="true"
     (saveClicked)="save()"
     (cancelClicked)="cancel()"
+    [disableSaveButton]="!allowEdit"
   >
   </ksp-bottom-nav>
 </div>

@@ -21,7 +21,7 @@ import moment from 'moment';
 
 const detailToState = (res: any) => {
   const newRes = res?.datareturn
-    .filter(({ process }: any) => process == 3)
+    .filter(({ process }: any) =>  ["3","4"].includes(process))
     .map((data: any) => {
       return parseJson(data?.detail);
     });
@@ -57,6 +57,7 @@ const detailToState = (res: any) => {
   styleUrls: ['./consider.component.scss'],
 })
 export class ConsiderComponent implements OnInit {
+  allowEdit= false;
   form = this.fb.group({
     step1: [],
     step2: [
@@ -149,6 +150,7 @@ export class ConsiderComponent implements OnInit {
         .pipe(
           map((res) => {
             this.daftRequest = res;
+            this.allowEdit =  ["2","3","4"].includes(res?.requestprocess)
             return this.uniInfoService.mappingUniverSitySelectByIdWithForm(res);
           })
         )
@@ -192,7 +194,7 @@ export class ConsiderComponent implements OnInit {
     });
     const payload: any = {
       systemtype: '3',
-      process: '3',
+      process: '4',
       requestid: this.daftRequest?.requestid,
       status: _.get(this.form, 'value.verify.result', ''),
       detail,

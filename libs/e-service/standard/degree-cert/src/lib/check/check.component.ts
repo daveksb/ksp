@@ -69,6 +69,7 @@ export class CheckComponent implements OnInit, AfterContentChecked {
   degreeType = '';
   choices = ApproveStepStatusOption;
   daftRequest: any;
+  allowEdit = false;
   constructor(
     public dialog: MatDialog,
     private router: Router,
@@ -98,6 +99,7 @@ export class CheckComponent implements OnInit, AfterContentChecked {
         .pipe(
           map((res) => {
             this.daftRequest = res;
+            this.allowEdit =  res?.requestprocess === "1"
             return this.uniInfoService.mappingUniverSitySelectByIdWithForm(res);
           })
         )

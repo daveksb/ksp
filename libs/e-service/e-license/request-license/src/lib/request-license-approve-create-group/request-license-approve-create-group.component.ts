@@ -108,7 +108,6 @@ export class RequestLicenseApproveCreateGroupComponent implements OnInit {
 
   prev() {
     this.router.navigate(['/request-license', 'search-list']);
-    //this.router.navigate(['/request-license', 'create-group-list']);
   }
 
   confirmDialog() {
