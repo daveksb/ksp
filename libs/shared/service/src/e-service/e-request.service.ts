@@ -13,6 +13,7 @@ import {
   UniUser,
   GetLastApproveList,
   GetLastApproveGroup,
+  KspListResponse,
 } from '@ksp/shared/interface';
 import { getCookie } from '@ksp/shared/utility';
 import { map, Observable, shareReplay } from 'rxjs';
@@ -191,6 +192,15 @@ export class ERequestService {
     return this.http.post(
       `${environment.apiUrl}/e-service/selfapprovegroupinsert`,
       payload
+    );
+  }
+
+  getLevel2LicenseList(): Observable<KspListResponse<KspRequest>> {
+    return this.http.get<KspListResponse<KspRequest>>(
+      `${environment.shortApiUrl}/ksprequestsearch_e-self.php`,
+      {
+        headers: { 'Cache-Control': 'no-store' },
+      }
     );
   }
 }
