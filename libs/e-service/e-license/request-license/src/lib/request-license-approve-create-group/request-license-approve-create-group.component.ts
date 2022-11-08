@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -6,7 +7,11 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
+import { ERequestService } from '@ksp/shared/service';
+import { getCookie } from '@ksp/shared/utility';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'ksp-request-license-approve-create-group',
   templateUrl: './request-license-approve-create-group.component.html',
@@ -27,10 +32,24 @@ export class RequestLicenseApproveCreateGroupComponent implements OnInit {
   ];
   dataSource2 = new MatTableDataSource<any>();
   licenseData: any;
+  listNo!: number;
 
-  constructor(private router: Router, public dialog: MatDialog) {}
+  form = this.fb.group({
+    createNumber: [false],
+  });
+
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private requestService: ERequestService,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
+    this.requestService.getLastApproveList().subscribe((res) => {
+      this.listNo = +res.listno + 1;
+    });
+
     this.licenseData = [
       {
         order: 1,
@@ -102,7 +121,17 @@ export class RequestLicenseApproveCreateGroupComponent implements OnInit {
 
     dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.completeDialog();
+        const payload = {
+          listno: this.listNo.toString(),
+          isurgent: this.form.controls.createNumber.value ? '1' : '2',
+          requestlist: "{'field1':'data1','field2':'data2','field3':'data3'}",
+          userid: `${getCookie('userId')}`,
+        };
+        this.requestService.createAprroveList(payload).subscribe((res) => {
+          if (res?.status === 'success') {
+            this.completeDialog();
+          }
+        });
       }
     });
   }
