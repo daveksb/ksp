@@ -84,6 +84,11 @@
           </td>
         </ng-container>
 
+        <ng-container matColumnDef="group">
+          <th mat-header-cell *matHeaderCellDef>กลุ่มที่</th>
+          <td mat-cell *matCellDef="let element">{{ element.group }}</td>
+        </ng-container>
+
         <ng-container matColumnDef="account">
           <th mat-header-cell *matHeaderCellDef>บัญชีที่</th>
           <td mat-cell *matCellDef="let element">{{ element.account }}</td>

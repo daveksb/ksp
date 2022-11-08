@@ -12,6 +12,7 @@ export class RequestLicenseApproveSearchListComponent implements OnInit {
     'select',
     'resolution',
     'resolution2',
+    'group',
     'account',
     'count',
     'licenseType',
@@ -33,6 +34,7 @@ export class RequestLicenseApproveSearchListComponent implements OnInit {
         resolution: '01/2564',
         resolution2: '01/2564',
 
+        group: '1',
         account: '7020',
         count: 100,
         licenseType: 'ครู',
@@ -47,6 +49,7 @@ export class RequestLicenseApproveSearchListComponent implements OnInit {
         resolution: '01/2564',
         resolution2: '01/2564',
 
+        group: '2',
         account: '7020',
         count: 100,
         licenseType: 'ผู้บริหารสถานศึกษา',
