@@ -33,8 +33,11 @@ export class TokenHandleInterceptor implements HttpInterceptor {
     }
 
     if (request.method === 'GET') {
+      const tokenkey = request.url.includes('?')
+        ? `&tokenkey=${token}`
+        : `?tokenkey=${token}`;
       const newRequest = request.clone({
-        url: request.url + `&tokenkey=${token}`,
+        url: request.url + tokenkey,
       });
 
       return next.handle(newRequest);

@@ -39,3 +39,6 @@ export * from './lib/university-select';
 
 export * from './lib/e-uni-approve';
 export * from './lib/uni-user';
+
+export * from './lib/e-self-approve-list';
+export * from './lib/e-self-approve-group';
