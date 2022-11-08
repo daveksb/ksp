@@ -1,5 +1,4 @@
-<ksp-top-nav
-  ><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span>
+<ksp-top-nav><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span>
   <span subHeader>ผลการนำเสนอใบอนุญาตประกอบวิชาชีพ </span>
 </ksp-top-nav>
 
@@ -10,8 +9,7 @@
   <div class="bg-white px-3 py-3">
     <div class="mb-3">
       <ksp-e-service-license-group-search
-        (search)="searchData()"
-      ></ksp-e-service-license-group-search>
+        (search)="searchData($event)"></ksp-e-service-license-group-search>
     </div>
 
     <div class="d-flex justify-content-end mb-3 mt-4">
@@ -19,24 +17,21 @@
         <button
           type="button"
           class="btn btn-success ms-2 create-group-btn"
-          (click)="saveResult()"
-        >
+          (click)="saveResult()">
           บันทึกผลการนำเสนอกลั่นกรอง
         </button>
 
         <button
           type="button"
           class="btn btn-success ms-2 create-group-btn"
-          (click)="print()"
-        >
+          (click)="print()">
           พิมพ์รายงานนำเสนอกลั่นกรอง
         </button>
 
         <button
           type="button"
           class="btn btn-primary ms-2 create-group-btn"
-          (click)="createGroup()"
-        >
+          (click)="createGroup()">
           + สร้างกลุ่มบัญชีรายชื่อ
         </button>
       </ng-container>
@@ -45,8 +40,7 @@
         <button
           type="button"
           class="btn btn-success ms-2 create-group-btn"
-          (click)="kmv()"
-        >
+          (click)="kmv()">
           บันทึกผลการนำเสนอ กมว.
         </button>
 

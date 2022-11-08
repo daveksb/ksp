@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ERequestService } from '@ksp/shared/service';
@@ -8,7 +9,9 @@ import { ERequestService } from '@ksp/shared/service';
   templateUrl: './request-license-approve-search-list.component.html',
   styleUrls: ['./request-license-approve-search-list.component.scss'],
 })
-export class RequestLicenseApproveSearchListComponent implements OnInit {
+export class RequestLicenseApproveSearchListComponent
+  implements OnInit, AfterViewInit
+{
   displayedColumns = [
     'select',
     'resolution',
@@ -26,6 +29,8 @@ export class RequestLicenseApproveSearchListComponent implements OnInit {
   dataSource = new MatTableDataSource<any>();
   mode: 'create' | 'guarantee' = 'create';
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -40,10 +45,16 @@ export class RequestLicenseApproveSearchListComponent implements OnInit {
     });
   }
 
-  searchData() {
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
+  searchData(params: any) {
     const payload = {
-      listno: '1',
-      createdate: null,
+      groupno: params.groupno,
+      process: params.process,
+      status: params.status,
+      createdate: params.createdate,
       offset: '0',
       row: '100',
     };
