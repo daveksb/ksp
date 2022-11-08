@@ -74,6 +74,7 @@ export class ApproveComponent implements OnInit {
     verify: [],
     approveData: [],
   });
+  allowEdit = false;
   step1Data: any;
   daftRequest: any;
   verifyResult: any;
@@ -117,6 +118,7 @@ export class ApproveComponent implements OnInit {
         .pipe(
           map((res) => {
             this.daftRequest = res;
+            this.allowEdit = res?.requestprocess === '4';
             return this.uniInfoService.mappingUniverSitySelectByIdWithForm(res);
           })
         )
@@ -181,7 +183,7 @@ export class ApproveComponent implements OnInit {
       systemtype: '3',
       requestid: this.daftRequest?.requestid,
       userid: getCookie('userId'),
-      process: '4',
+      process: '5',
     };
     payload.status = _.get(this.form, 'value.verify.result', '');
     payload.detail = jsonStringify({
