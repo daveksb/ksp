@@ -346,7 +346,7 @@ export const standardMenu: MenuConfig[] = [
     subMenuName: 'degree-cert',
     subMenu: [
       {
-        path: `/degree-cert/list/1`,
+        path: `/degree-cert/list/1/0`,
         label: 'รายการใบคำขอรับรองปริญญาและประกาศนียบัตร',
       },
       {

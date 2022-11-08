@@ -38,6 +38,7 @@
               (click)="$event.stopPropagation()"
               (change)="$event ? selection.toggle(row) : null"
               [checked]="selection.isSelected(row)"
+              [disabled]="!isSelect(row)"
             >
             </mat-checkbox>
           </td>

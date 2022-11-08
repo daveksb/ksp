@@ -21,7 +21,7 @@ import _ from 'lodash';
 const detailToState = (res: any) => {
   const dataReturn = _.filter(
     res?.datareturn,
-    ({ process }: any) => process === '4'
+    ({ process }: any) => process === '5'
   ).map((data: any) => {
     return parseJson(data?.detail);
   });
@@ -42,6 +42,7 @@ export class FinalResultComponent implements OnInit {
     ],
     step1: [],
   });
+  allowEdit = false;
   daftRequest: any;
   requestNumber = '';
   step1Data: any = {};
@@ -75,6 +76,7 @@ export class FinalResultComponent implements OnInit {
         .pipe(
           map((res) => {
             this.daftRequest = res;
+            this.allowEdit = res?.requestprocess === '5';
             return this.uniInfoService.mappingUniverSitySelectByIdWithForm(res);
           })
         )
@@ -92,10 +94,12 @@ export class FinalResultComponent implements OnInit {
             });
           }
         });
+    } else {
+      this.allowEdit = false;
     }
   }
   cancel() {
-    this.router.navigate(['/', 'degree-cert', 'list', '0']);
+    this.location.back();
   }
 
   save() {
@@ -110,7 +114,7 @@ export class FinalResultComponent implements OnInit {
 
     dialogRef.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.onSubmitKSP()
+        this.onSubmitKSP();
       }
     });
   }
@@ -194,13 +198,13 @@ export class FinalResultComponent implements OnInit {
       systemtype: '3',
       requestid: this.daftRequest?.requestid,
       userid: getCookie('userId'),
-      process: '5',
+      process: '6',
     };
-    payload.status = "1"
+    payload.status = '1';
     payload.detail = jsonStringify({
       ...detail,
       formData: this._getRequest(),
-      finalResult:this.form.value.finalResult
+      finalResult: this.form.value.finalResult,
     });
     this.eRequestService
       .kspUpdateRequestUniRequestDegree(payload)

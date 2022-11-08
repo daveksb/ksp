@@ -9,7 +9,7 @@ import { map } from 'rxjs';
 import { FormBuilder } from '@angular/forms';
 import { thaiDate } from '@ksp/shared/utility';
 import { EUniApproveProcess } from '@ksp/shared/constant';
-import _ from 'lodash';
+import _, { includes } from 'lodash';
 @Component({
   selector: 'e-service-degree-cert-list',
   templateUrl: './e-service-degree-cert-list.component.html',
@@ -228,6 +228,12 @@ export class EServiceDegreeCertListComponent
     return `<span class="rounded-pill d-flex justify-content-center ${classStatus}">${
       status?.sname || 'แก้ไข'
     }</span>`;
+  }
+  isSelect(row: any) {
+    if (this.pageType === 1) {
+      return ['3', '2'].includes(row?.process);
+    }
+    return true;
   }
 }
 
