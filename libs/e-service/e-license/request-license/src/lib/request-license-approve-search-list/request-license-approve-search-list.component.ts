@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ERequestService } from '@ksp/shared/service';
 
 @Component({
   selector: 'ksp-request-license-approve-search-list',
@@ -12,6 +13,7 @@ export class RequestLicenseApproveSearchListComponent implements OnInit {
     'select',
     'resolution',
     'resolution2',
+    'group',
     'account',
     'count',
     'licenseType',
@@ -24,44 +26,60 @@ export class RequestLicenseApproveSearchListComponent implements OnInit {
   dataSource = new MatTableDataSource<any>();
   mode: 'create' | 'guarantee' = 'create';
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private requestService: ERequestService
+  ) {}
 
   ngOnInit(): void {
-    this.dataSource.data = [
-      {
-        select: true,
-        resolution: '01/2564',
-        resolution2: '01/2564',
-
-        account: '7020',
-        count: 100,
-        licenseType: 'ครู',
-        licenseGroup: 'ชาวไทย',
-        process: 'จัดทำกลุ่มบัญชีรายชื่อ',
-        status: 'ระหว่างดำเนินการ',
-        screenDate: '01 มิ.ย. 2564',
-        guaranteeDate: '01 มิ.ย. 2564',
-      },
-      {
-        select: true,
-        resolution: '01/2564',
-        resolution2: '01/2564',
-
-        account: '7020',
-        count: 100,
-        licenseType: 'ผู้บริหารสถานศึกษา',
-        licenseGroup: 'ชาวไทย',
-        process: 'จัดทำกลุ่มบัญชีรายชื่อ',
-        status: 'เรียบร้อยแล้ว',
-        screenDate: '01 มิ.ย. 2564',
-        guaranteeDate: '01 มิ.ย. 2564',
-      },
-    ];
-
     this.route.url.subscribe((url) => {
       if (url[0].path === 'guarantee') {
         this.mode = 'guarantee';
       }
+    });
+  }
+
+  searchData() {
+    const payload = {
+      listno: '1',
+      createdate: null,
+      offset: '0',
+      row: '100',
+    };
+    this.requestService.searchRequestList(payload).subscribe((res) => {
+      this.dataSource.data = res; /* [
+        {
+          select: true,
+          resolution: '01/2564',
+          resolution2: '01/2564',
+
+          group: '1',
+          account: '7020',
+          count: 100,
+          licenseType: 'ครู',
+          licenseGroup: 'ชาวไทย',
+          process: 'จัดทำกลุ่มบัญชีรายชื่อ',
+          status: 'ระหว่างดำเนินการ',
+          screenDate: '01 มิ.ย. 2564',
+          guaranteeDate: '01 มิ.ย. 2564',
+        },
+        {
+          select: true,
+          resolution: '01/2564',
+          resolution2: '01/2564',
+
+          group: '2',
+          account: '7020',
+          count: 100,
+          licenseType: 'ผู้บริหารสถานศึกษา',
+          licenseGroup: 'ชาวไทย',
+          process: 'จัดทำกลุ่มบัญชีรายชื่อ',
+          status: 'เรียบร้อยแล้ว',
+          screenDate: '01 มิ.ย. 2564',
+          guaranteeDate: '01 มิ.ย. 2564',
+        },
+      ]; */
     });
   }
 
