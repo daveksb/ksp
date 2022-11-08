@@ -8,7 +8,6 @@ import { LicenseSearchComponent } from './license-search/license-search.componen
 import { AddStaffComponent } from './add-staff/add-staff.component';
 import { AddStaffTeachingInfoComponent } from './add-staff-teaching-info/add-staff-teaching-info.component';
 import { MatTabsModule } from '@angular/material/tabs';
-import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { BottomNavComponent } from '@ksp/shared/menu';
 import { SchoolServiceUiStaffSearchModule } from '@ksp/school-service/ui/staff-search';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -27,6 +26,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { SharedFormOthersModule } from '@ksp/shared/form/others';
 
 export const routes: Routes = [
   {

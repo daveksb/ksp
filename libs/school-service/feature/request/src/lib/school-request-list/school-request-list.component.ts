@@ -209,6 +209,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
         });
       });
   }
+
   clear() {
     this.form.reset();
     this.searchNotFound = false;

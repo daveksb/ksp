@@ -63,7 +63,8 @@
       </div>
       <hr />
 
-      <div class="box-header text-primary mb-1">ผลการค้นหา</div>
+      <div class="box-header text-primary">ผลการค้นหา</div>
+      <div *ngIf="searchNotFound" class="fs-5 text-center">ไม่พบข้อมูล</div>
       <div class="table-responsive" *ngIf="schoolInfos && schoolInfos.length">
         <table class="table">
           <thead class="header__table">

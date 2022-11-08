@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
   MatDialogModule,
   MatDialogRef,
@@ -34,11 +34,12 @@ export class UniversitySearchComponent implements OnInit {
   amphurs$!: Observable<Amphur[]>;
   universityType$!: Observable<any>;
   selectedUniversity = '';
+  searchNotFound = false;
 
   form = this.fb.group({
     institution: null,
-    provinceid: null,
-    amphurid: null,
+    provinceid: [null, Validators.required],
+    amphurid: [null, Validators.required],
     offset: '0',
     row: '25',
   });
@@ -108,10 +109,12 @@ export class UniversitySearchComponent implements OnInit {
 
       this.schoolInfoService.searchSchool(payload).subscribe((res) => {
         if (res && res.length) {
+          this.searchNotFound = false;
           this.schoolInfos = this.generateAddressShow(res);
           this.payload = payload;
         } else {
           this.schoolInfos = [];
+          this.searchNotFound = true;
         }
       });
     } else {
@@ -137,13 +140,14 @@ export class UniversitySearchComponent implements OnInit {
       const street = this.haveValue(item.street) ? 'ซอย ' + item.street : '';
       const road = this.haveValue(item.road) ? 'ถนน ' + item.road : '';
       const tumbon = this.haveValue(item.tumbon) ? 'ตำบล ' + item.tumbon : '';
-      const amphur = this.haveValue(item.amphurName)
-        ? 'อำเภอ ' + item.amphurName
+      const amphur = this.haveValue(item.amphurname)
+        ? 'อำเภอ ' + item.amphurname
         : '';
-      const province = this.haveValue(item.provinceName)
-        ? 'จังหวัด ' + item.provinceName
+      const province = this.haveValue(item.provincename)
+        ? 'จังหวัด ' + item.provincename
         : '';
-      item.addressShow = `${address} ${moo} ${street} ${road} ${tumbon} ${amphur}  ${province}`;
+      const zipcode = this.haveValue(item.zipcode) ? item.zipcode : '';
+      item.addressShow = `${address} ${moo} ${street} ${road} ${tumbon} ${amphur} ${province} ${zipcode}`;
     });
     return schoolInfos;
   }
@@ -153,6 +157,7 @@ export class UniversitySearchComponent implements OnInit {
   }
 
   clear() {
+    this.searchNotFound = false;
     this.schoolInfos = [];
     this.form.reset();
     this.form.patchValue({
