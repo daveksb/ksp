@@ -48,6 +48,12 @@ export class ERequestService {
     );
   }
 
+  searchRequestList(payload: any): Observable<any> {
+    return this.http
+      .post(`${environment.shortApiUrl}/selfapprovelistsearch.php`, payload)
+      .pipe(map((data: any) => data.datareturn));
+  }
+
   // new API
   getApproveHistory(requestid: string): Observable<SelfRequest[]> {
     return this.http

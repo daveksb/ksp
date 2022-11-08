@@ -9,7 +9,9 @@
   </div>
   <div class="bg-white px-3 py-3">
     <div class="mb-3">
-      <ksp-e-service-license-group-search></ksp-e-service-license-group-search>
+      <ksp-e-service-license-group-search
+        (search)="searchData()"
+      ></ksp-e-service-license-group-search>
     </div>
 
     <div class="d-flex justify-content-end mb-3 mt-4">
@@ -86,12 +88,12 @@
 
         <ng-container matColumnDef="group">
           <th mat-header-cell *matHeaderCellDef>กลุ่มที่</th>
-          <td mat-cell *matCellDef="let element">{{ element.group }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.groupno }}</td>
         </ng-container>
 
         <ng-container matColumnDef="account">
           <th mat-header-cell *matHeaderCellDef>บัญชีที่</th>
-          <td mat-cell *matCellDef="let element">{{ element.account }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.listno }}</td>
         </ng-container>
 
         <ng-container matColumnDef="count">
@@ -101,17 +103,19 @@
 
         <ng-container matColumnDef="licenseType">
           <th mat-header-cell *matHeaderCellDef>ประเภทใบอนุญาต</th>
-          <td mat-cell *matCellDef="let element">{{ element.licenseType }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.careertype }}</td>
         </ng-container>
 
         <ng-container matColumnDef="licenseGroup">
           <th mat-header-cell *matHeaderCellDef>กลุ่มผู้ขอใบอนุญาต</th>
-          <td mat-cell *matCellDef="let element">{{ element.licenseGroup }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.isforeign }}</td>
         </ng-container>
 
         <ng-container matColumnDef="process">
           <th mat-header-cell *matHeaderCellDef>ขั้นตอนการดำเนินการ</th>
-          <td mat-cell *matCellDef="let element">{{ element.process }}</td>
+          <td mat-cell *matCellDef="let element">
+            {{ 'จัดทำกลุ่มบัญชีรายชื่อ' }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="status">
@@ -121,13 +125,15 @@
 
         <ng-container matColumnDef="screenDate">
           <th mat-header-cell *matHeaderCellDef>วันที่กลั่นกรอง</th>
-          <td mat-cell *matCellDef="let element">{{ element.screenDate }}</td>
+          <td mat-cell *matCellDef="let element">
+            {{ element.considerdate | thaiDate }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="guaranteeDate">
           <th mat-header-cell *matHeaderCellDef>วันที่รับรอง</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.guaranteeDate }}
+            {{ element.approvedate | thaiDate }}
           </td>
         </ng-container>
 
