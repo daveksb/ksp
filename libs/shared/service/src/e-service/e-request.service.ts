@@ -203,4 +203,25 @@ export class ERequestService {
       }
     );
   }
+
+  getGroupByAccount(account: string): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/selfapprovegroupsearchgroup`,
+      { grouplist: account }
+    );
+  }
+
+  updateApproveGroup(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/selfapprovegroupupdate`,
+      payload
+    );
+  }
+
+  updateApproveGroup2(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/selfapprovegroupupdate_2`,
+      payload
+    );
+  }
 }
