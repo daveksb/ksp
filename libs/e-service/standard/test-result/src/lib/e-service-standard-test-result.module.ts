@@ -8,6 +8,7 @@ import { BottomNavComponent, TopNavComponent } from '@ksp/shared/menu';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 const routes: Routes = [
   {
@@ -39,6 +40,7 @@ const routes: Routes = [
     MatCheckboxModule,
     BottomNavComponent,
     MatDialogModule,
+    MatPaginatorModule,
     RouterModule.forChild(routes),
   ],
   declarations: [TestDataListComponent, TestDataDetailComponent],
