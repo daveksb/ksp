@@ -84,7 +84,7 @@
                     : 'ชื่อโรงเรียน/สถานศึกษา'
                 }}
               </th>
-              <th scope="col">ที่อยู่</th>
+              <th scope="col" *ngIf="data.searchType !== 'uni'">ที่อยู่</th>
               <th scope="col">สังกัด</th>
             </tr>
           </thead>
@@ -120,7 +120,7 @@
               </th>
               <td>{{ item.universitycode }}</td>
               <td>{{ item.name }}</td>
-              <td>{{ item.addressShow }}</td>
+              <!-- <td>{{ item.addressShow }}</td> -->
               <td>{{ item.nametype }}</td>
             </tr>
           </tbody>
