@@ -4,7 +4,7 @@
     <div class="row mb-2">
       <div class="col">
         <label class="form-label">กลุ่มที่ / Group No. </label>
-        <input class="form-control" type="text" formControlName="requestno" />
+        <input class="form-control" type="text" formControlName="groupno" />
       </div>
 
       <div class="col">
@@ -14,6 +14,7 @@
             matInput
             [matDatepicker]="picker"
             autocomplete="off"
+            formControlName="createdate"
             class="form-control form-date" />
           <mat-datepicker-toggle
             class="button-date"
@@ -27,7 +28,7 @@
     <div class="row mb-2">
       <div class="col">
         <label class="form-label">วันเดือนปีที่ทำรายการ</label>
-        <select class="form-select" formControlName="subtype">
+        <select class="form-select">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
 
         </select>
@@ -35,7 +36,7 @@
 
       <div class="col-6">
         <label class="form-label">กลุ่มผู้ขอใบอนุญาตประกอบวิชาชีพ</label>
-        <select class="form-select" formControlName="currentprocess">
+        <select class="form-select">
           <option value="null" disabled hidden>กรุณาเลือก</option>
 
         </select>
@@ -45,7 +46,7 @@
     <div class="row mb-2">
       <div class="col-6">
         <label class="form-label">ขั้นตอนการดำเนินการ</label>
-        <select class="form-select" formControlName="currentprocess">
+        <select class="form-select">
           <option value="null" disabled hidden>กรุณาเลือก</option>
           <option *ngFor="let p of processList" [value]="p?.processId">
             {{ p.processName }}
@@ -55,7 +56,7 @@
 
       <div class="col-6">
         <label class="form-label">สถานะการดำเนินการ</label>
-        <select class="form-select" formControlName="requeststatus">
+        <select class="form-select">
           <option value="null" disabled hidden>กรุณาเลือก</option>
           <option *ngFor="let s of statusList" [value]="s.id">
             {{ s.sname }}

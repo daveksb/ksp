@@ -57,7 +57,7 @@ export class RegisterRequesterComponent implements OnInit {
         res?.street ?? '-'
       } หมู่ ${res?.moo ?? '-'} ถนน ${res?.road ?? '-'} ตำบล ${
         res.tumbon
-      } อำเภอ ${res.amphurname} จังหวัด ${res.provincename}`;
+      } อำเภอ ${res.amphurname} จังหวัด ${res.provincename} รหัสไปรษณีย์ ${res.zipcode}`;
     });
 
     localForage.getItem('registerUserInfo').then((res: any) => {

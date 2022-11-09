@@ -1,4 +1,4 @@
-<div [formGroup]="form" class="bg-light px-4 py-2 default-width">
+<div [formGroup]="form" class="bg-light p-3 default-width">
   <div class="text-primary box-header">ค้นหารายการ</div>
 
   <div class="row mb-2">
@@ -81,7 +81,7 @@
           matInput
           [matDatepicker]="picker1"
           autocomplete="off"
-          class="form-control form-date"
+          class="form-date form-control"
           formControlName="requestdatefrom"
         />
         <mat-datepicker-toggle
@@ -92,11 +92,6 @@
         <mat-datepicker #picker1></mat-datepicker>
       </div>
     </div>
-
-    <!-- <div class="col-auto px-0">
-      <br />
-      <span class="fs-6">-</span>
-    </div> -->
 
     <div class="col">
       <label class="form-label">วันเดือนปีที่ยื่นใบคำขอ : ถึง</label>

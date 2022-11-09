@@ -5,7 +5,7 @@
     </div>
 
     <div class="row" *ngIf="showSelectDegree">
-      <div class="col-6 mb-3">
+      <div class="col-6 mb-2">
         <label class="form-label required">ระดับวุฒิทางการศึกษา</label>
         <select class="form-select" formControlName="degreeLevel">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
@@ -28,22 +28,22 @@
     </div>
 
     <div class="row">
-      <div class="col mb-3">
+      <div class="col mb-2">
         <label class="form-label required">ชื่อปริญญา/หลักสูตร</label>
         <input class="form-control" type="text" formControlName="degreeName" />
       </div>
-      <div class="col mb-3">
+      <div class="col mb-2">
         <label class="form-label required">สาขา/วิชาเอก</label>
         <input class="form-control" type="text" formControlName="major" />
       </div>
     </div>
 
     <div class="row">
-      <div class="col mb-3">
+      <div class="col mb-2">
         <label class="form-label required">สถาบันการศึกษา</label>
         <input class="form-control" type="text" formControlName="institution" />
       </div>
-      <div class="col mb-3">
+      <div class="col mb-2">
         <label class="form-label">ประเทศ</label>
         <select class="form-select" formControlName="country">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
@@ -55,7 +55,7 @@
     </div>
 
     <div class="row">
-      <div class="col mb-3">
+      <div class="col mb-2">
         <label class="form-label">วันเดือนปี เข้าศึกษา</label>
         <div class="d-flex align-items-center">
           <input
@@ -73,7 +73,7 @@
           <mat-datepicker #picker1></mat-datepicker>
         </div>
       </div>
-      <div class="col mb-3">
+      <div class="col mb-2">
         <label class="form-label">วันเดือนปี สำเร็จการศึกษา</label>
         <div class="d-flex align-items-center">
           <input
@@ -94,11 +94,11 @@
     </div>
 
     <div class="row">
-      <div class="col-6 mb-3" *ngIf="showGradeInput">
+      <div class="col-6 mb-2" *ngIf="showGradeInput">
         <label class="form-label">เกรดเฉลี่ย</label>
         <input class="form-control" type="text" formControlName="grade" />
       </div>
-      <div class="col-6 mb-3" *ngIf="showGraduateYearInput">
+      <div class="col-6 mb-2" *ngIf="showGraduateYearInput">
         <label class="form-label">ปีการศึกษาที่เข้าศึกษา</label>
         <input
           class="form-control"
@@ -109,11 +109,11 @@
     </div>
 
     <div class="row" *ngIf="userEducationType === FormTypeEnum.foreign">
-      <div class="col-6 mb-3">
+      <div class="col-6 mb-2">
         <label class="form-label">หน่วยงานที่รับรองวิทยฐานะมหาวิทยาลัย</label>
         <input class="form-control" type="text" />
       </div>
-      <div class="col-6 mb-3">
+      <div class="col-6 mb-2">
         <label class="form-label">เว็บไซต์ของหน่วยงาน</label>
         <input class="form-control" type="text" />
       </div>

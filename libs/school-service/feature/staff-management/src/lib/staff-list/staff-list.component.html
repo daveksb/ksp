@@ -4,7 +4,7 @@
 
 <div
   [formGroup]="form"
-  class="bg-secondary bg-opacity-10 px-4 py-2 full-height"
+  class="bg-secondary bg-opacity-10 px-4 py-2 full-height full-width-2"
 >
   <div class="box-header">ทะเบียนบุคลากรภายในหน่วยงาน</div>
 
@@ -142,14 +142,13 @@
           </td>
         </tr>
       </table>
-
-      <mat-paginator
-        [hidden]="!dataSource.data.length"
-        [length]="dataSource.data.length"
-        [pageSize]="25"
-        [showFirstLastButtons]="true"
-      >
-      </mat-paginator>
     </div>
+    <mat-paginator
+      [hidden]="!dataSource.data.length"
+      [length]="dataSource.data.length"
+      [pageSize]="25"
+      [showFirstLastButtons]="true"
+    >
+    </mat-paginator>
   </div>
 </div>

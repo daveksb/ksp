@@ -23,7 +23,7 @@
   </div>
 
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 mb-2">
       <label class="form-label required">สถานศึกษาที่ปฏิบัติการสอน</label>
       <input
         class="form-control"
@@ -31,7 +31,7 @@
         formControlName="teachingAddress" />
     </div>
 
-    <div class="col-md-6 mb-3">
+    <div class="col-md-6 mb-2">
       <br />
       <td class="d-flex justify-content-center justify-content-md-start">
         <button type="button" class="btn btn-primary w-auto" *ngIf="mode !== 'view'">
@@ -51,7 +51,7 @@
   </div>
 
   <ng-template [ngIf]="hasForeignLicense">
-    <div class="mt-3">
+    <div class="mt-2">
       <ksp-experience-form
         [mode]="mode"
         [countries]="countries"

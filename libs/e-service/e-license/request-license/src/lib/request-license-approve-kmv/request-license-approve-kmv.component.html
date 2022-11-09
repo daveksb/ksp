@@ -1,5 +1,4 @@
-<ksp-top-nav
-  ><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span>
+<ksp-top-nav><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span>
   <span subHeader>รับรองใบอนุญาตประกอบวิชาชีพ </span>
 </ksp-top-nav>
 
@@ -27,8 +26,7 @@
       <div class="content fs-4 mb-2">สรุปจำนวนผู้ยื่นขอขึ้นทะเบียน</div>
       <ksp-request-license-approve-license-table
         [isKmv]="true"
-        class="summary-table"
-      ></ksp-request-license-approve-license-table>
+        class="summary-table"></ksp-request-license-approve-license-table>
     </div>
   </div>
 
@@ -42,8 +40,7 @@
     <div class="mb-3">
       <ksp-e-service-license-save-result
         (cancel)="cancel()"
-        (save)="confirmDialog()"
-      ></ksp-e-service-license-save-result>
+        (save)="save($event)"></ksp-e-service-license-save-result>
     </div>
   </div>
 </div>

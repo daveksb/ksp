@@ -1,5 +1,5 @@
 <form [formGroup]="form">
-  <div class="row mb-2" *ngIf="hidexxx === false && !hideIdcard">
+  <div class="row mb-2" *ngIf="hideForm2 === false">
     <div class="col-4">
       <label class="form-label" [ngClass]="{ required: mode === 'edit' }"
         >หมายเลขบัตรประชาชน</label
@@ -80,7 +80,7 @@
     </div>
   </div>
 
-  <div class="row mb-2" *ngIf="hidexxx === false && hideyyy === false">
+  <div class="row mb-2" *ngIf="hideForm2 === false && hideForm1 === false">
     <div class="col-2">
       <label class="form-label">คำนำหน้าชื่ออังกฤษ</label>
       <select
@@ -180,7 +180,7 @@
   </div>
 
   <div class="row mb-2">
-    <div class="col-6" *ngIf="hidexxx === false && hideyyy === false">
+    <div class="col-6" *ngIf="hideForm2 === false && hideForm1 === false">
       <label
         class="form-label required"
         [ngClass]="{ required: mode === 'edit' }"
@@ -200,7 +200,7 @@
         </span>
       </ng-container>
     </div>
-    <div class="col-6" *ngIf="hidexxx === false">
+    <div class="col-6" *ngIf="hideForm2 === false">
       <label
         class="form-label required"
         [ngClass]="{ required: mode === 'edit' }"

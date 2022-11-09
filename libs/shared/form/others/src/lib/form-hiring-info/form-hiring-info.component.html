@@ -1,5 +1,5 @@
 <form [formGroup]="form">
-  <div class="bg-light px-3 py-3">
+  <div class="bg-light px-3 py-3 mb-3">
     <div class="box-header">ข้อมูลการจ้าง</div>
 
     <div class="row mb-3" *ngIf="displayMode === 'staff'">
@@ -104,7 +104,7 @@
     </div>
 
     <div *ngIf="displayMode === 'staff'">
-      <div class="form-label text-secondary">สถานะบุคลากร</div>
+      <div class="form-label">สถานะบุคลากร</div>
 
       <ng-container *ngFor="let item of status">
         <div class="row row-cols-3 my-2 align-items-center">
@@ -112,11 +112,12 @@
             <input
               formControlName="hiringStatus"
               type="radio"
+              class="form-check-input radio my-0"
               value="{{ item.value }}"
             />
           </div>
           <div class="col-2">
-            <label class="form-label text-secondary">{{ item.label }}</label>
+            <label class="form-label">{{ item.label }}</label>
           </div>
           <div class="col-3">
             <div class="d-flex align-items-center">
@@ -138,13 +139,15 @@
         </div>
       </ng-container>
 
-      <div class="mb-2">
-        <div class="form-label text-secondary">ระบุสาเหตุ</div>
-        <textarea
-          class="form-control"
-          rows="3"
-          formControlName="hiringStatusReason"
-        ></textarea>
+      <div class="row mb-2 justify-content-center">
+        <div class="col-10">
+          <div class="form-label">ระบุสาเหตุ</div>
+          <textarea
+            class="form-control"
+            rows="3"
+            formControlName="hiringStatusReason"
+          ></textarea>
+        </div>
       </div>
     </div>
   </div>

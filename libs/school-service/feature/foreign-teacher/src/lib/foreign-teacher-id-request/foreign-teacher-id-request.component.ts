@@ -256,7 +256,9 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
           res?.street ?? ''
         } หมู่ ${res?.moo ?? ''} ถนน ${res?.road ?? ''} ตำบล ${
           res.tumbon
-        } อำเภอ ${res.amphurName} จังหวัด ${res.provinceName}`;
+        } อำเภอ ${res.amphurName} จังหวัด ${res.provinceName} รหัสไปรษณีย์ ${
+          res.zipCode
+        }`;
       });
     this.countries$ = this.addressService.getCountry();
     this.prefixList$ = this.generalInfoService.getPrefix();

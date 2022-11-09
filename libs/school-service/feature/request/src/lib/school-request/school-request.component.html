@@ -57,25 +57,26 @@
             (amphurChanged)="amphurChanged(1, $event)"
             formControlName="addr1"
             >ที่อยู่ทะเบียนบ้าน</ksp-form-address
-          ><br />
-          <ksp-form-address
-            [provinces]="provinces$ | async"
-            [amphurs]="amphurs2$ | async"
-            [tumbols]="tumbols2$ | async"
-            (provinceChanged)="provinceChanged(2, $event)"
-            (amphurChanged)="amphurChanged(2, $event)"
-            formControlName="addr2"
-            >ที่อยู่ที่ติดต่อได้สะดวก
-            <div class="d-flex align-items-center">
-              <input
-                (change)="useSameAddress($event)"
-                type="checkbox"
-                class="me-2"
-              />
-              <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
-            </div>
-          </ksp-form-address>
-
+          >
+          <div class="mt-3">
+            <ksp-form-address
+              [provinces]="provinces$ | async"
+              [amphurs]="amphurs2$ | async"
+              [tumbols]="tumbols2$ | async"
+              (provinceChanged)="provinceChanged(2, $event)"
+              (amphurChanged)="amphurChanged(2, $event)"
+              formControlName="addr2"
+              >ที่อยู่ที่ติดต่อได้สะดวก
+              <div class="d-flex align-items-center">
+                <input
+                  (change)="useSameAddress($event)"
+                  type="checkbox"
+                  class="me-2"
+                />
+                <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
+              </div>
+            </ksp-form-address>
+          </div>
           <div class="text-danger">
             *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
             โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
@@ -103,21 +104,20 @@
             >
               <div class="box-header">วุฒิการศึกษาปริญญาตรี</div>
             </ksp-form-education-info>
-
-            <ksp-form-education-info
-              [showCheckbox]="false"
-              [showSelectDegree]="false"
-              formControlName="edu2"
-              [showGradeInput]="false"
-              [showPropertyInput]="true"
-              [countries]="countries$ | async"
-              [option]="true"
-            >
-              <div class="box-header">
-                วุฒิการศึกษาปริญญาโท
-              </div> </ksp-form-education-info
-            ><br
-          /></ng-container>
+            <div class="mt-3">
+              <ksp-form-education-info
+                [showCheckbox]="false"
+                [showSelectDegree]="false"
+                formControlName="edu2"
+                [showGradeInput]="false"
+                [showPropertyInput]="true"
+                [countries]="countries$ | async"
+                [option]="true"
+              >
+                <div class="box-header">วุฒิการศึกษาปริญญาโท</div>
+              </ksp-form-education-info>
+            </div></ng-container
+          >
 
           <ng-container *ngIf="careerType === 2 || careerType === 5">
             <div class="d-flex align-items-center">
@@ -232,9 +232,8 @@
               </ksp-form-education-info> </ng-container
           ></ng-container>
 
-          <br />
           <ng-container *ngIf="careerType === 5">
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center mt-3">
               <input
                 (change)="eduSelect(6, $event)"
                 type="checkbox"
@@ -284,12 +283,13 @@
               <ksp-form-education-info-manager></ksp-form-education-info-manager></ng-container
             ><br
           /></ng-container> -->
-          <br />
-          <ksp-form-multi-attachment
-            [pageType]="pageType.educationTab"
-            [uniqueTimestamp]="uniqueNo"
-            [groups]="eduFiles"
-          ></ksp-form-multi-attachment>
+          <div class="mt-3">
+            <ksp-form-multi-attachment
+              [pageType]="pageType.educationTab"
+              [uniqueTimestamp]="uniqueNo"
+              [groups]="eduFiles"
+            ></ksp-form-multi-attachment>
+          </div>
         </mat-tab>
 
         <mat-tab label="ข้อมูลการสอนและการจ้าง">
@@ -303,13 +303,15 @@
             <ksp-form-teaching-info-manager></ksp-form-teaching-info-manager
           ></ng-container>
 
-          <ksp-form-hiring-info
-            [displayMode]="'request'"
-            formControlName="hiringinfo"
-            [staffTypes]="staffTypes$ | async"
-            [positionTypes]="positionTypes$ | async"
-            [academicStandingList]="academicTypes$ | async"
-          ></ksp-form-hiring-info>
+          <div class="mt-3">
+            <ksp-form-hiring-info
+              [displayMode]="'request'"
+              formControlName="hiringinfo"
+              [staffTypes]="staffTypes$ | async"
+              [positionTypes]="positionTypes$ | async"
+              [academicStandingList]="academicTypes$ | async"
+            ></ksp-form-hiring-info>
+          </div>
 
           <ksp-form-temp-license-number></ksp-form-temp-license-number>
 
@@ -325,12 +327,13 @@
             [careerType]="careerType"
             formControlName="reasoninfo"
           ></ksp-form-reason-info>
-          <br />
-          <ksp-form-multi-attachment
-            [uniqueTimestamp]="uniqueNo"
-            [pageType]="pageType.reasonTab"
-            [groups]="reasonFiles"
-          ></ksp-form-multi-attachment>
+          <div class="mt-3">
+            <ksp-form-multi-attachment
+              [uniqueTimestamp]="uniqueNo"
+              [pageType]="pageType.reasonTab"
+              [groups]="reasonFiles"
+            ></ksp-form-multi-attachment>
+          </div>
         </mat-tab>
 
         <mat-tab label="เอกสารหลักฐานประกอบ">

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { UserInfoFormType } from '@ksp/shared/constant';
 import { Prefix } from '@ksp/shared/interface';
-import { SchoolInfoService } from '@ksp/shared/service';
+import { GeneralInfoService, SchoolInfoService } from '@ksp/shared/service';
 import { getCookie } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
@@ -27,10 +27,12 @@ export class SchoolInfoDetailComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private schoolInfoService: SchoolInfoService
+    private schoolInfoService: SchoolInfoService,
+    private generalInfoService: GeneralInfoService,
   ) {}
 
   ngOnInit(): void {
+    this.prefixList$ = this.generalInfoService.getPrefix();
     this.getSchoolAddress();
   }
 

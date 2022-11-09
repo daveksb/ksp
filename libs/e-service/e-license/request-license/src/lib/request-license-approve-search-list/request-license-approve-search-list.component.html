@@ -1,5 +1,4 @@
-<ksp-top-nav
-  ><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span>
+<ksp-top-nav><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span>
   <span subHeader>ผลการนำเสนอใบอนุญาตประกอบวิชาชีพ </span>
 </ksp-top-nav>
 
@@ -9,7 +8,8 @@
   </div>
   <div class="bg-white px-3 py-3">
     <div class="mb-3">
-      <ksp-e-service-license-group-search></ksp-e-service-license-group-search>
+      <ksp-e-service-license-group-search
+        (search)="searchData($event)"></ksp-e-service-license-group-search>
     </div>
 
     <div class="d-flex justify-content-end mb-3 mt-4">
@@ -17,24 +17,23 @@
         <button
           type="button"
           class="btn btn-success ms-2 create-group-btn"
-          (click)="saveResult()"
-        >
+          [disabled]="!canSave"
+          (click)="saveResult()">
           บันทึกผลการนำเสนอกลั่นกรอง
         </button>
 
         <button
           type="button"
           class="btn btn-success ms-2 create-group-btn"
-          (click)="print()"
-        >
+          [disabled]="!canPrint"
+          (click)="print()">
           พิมพ์รายงานนำเสนอกลั่นกรอง
         </button>
 
         <button
           type="button"
           class="btn btn-primary ms-2 create-group-btn"
-          (click)="createGroup()"
-        >
+          (click)="createGroup()">
           + สร้างกลุ่มบัญชีรายชื่อ
         </button>
       </ng-container>
@@ -43,12 +42,11 @@
         <button
           type="button"
           class="btn btn-success ms-2 create-group-btn"
-          (click)="kmv()"
-        >
+          (click)="kmv()">
           บันทึกผลการนำเสนอ กมว.
         </button>
 
-        <button type="button" class="btn btn-success ms-2 create-group-btn">
+        <button type="button" class="btn btn-success ms-2 create-group-btn" [disabled]="!canPrint">
           พิมพ์รายงานนำเสนอ กมว.
         </button>
       </ng-container>
@@ -64,7 +62,7 @@
         <ng-container matColumnDef="select">
           <th mat-header-cell *matHeaderCellDef>เลือก</th>
           <td mat-cell *matCellDef="let element; let i = index">
-            <input type="checkbox" class="me-2" [checked]="element.select" />
+            <input type="checkbox" class="me-2" [checked]="element.select" (click)="onSelect(element)" />
           </td>
         </ng-container>
 
@@ -84,9 +82,14 @@
           </td>
         </ng-container>
 
+        <ng-container matColumnDef="group">
+          <th mat-header-cell *matHeaderCellDef>กลุ่มที่</th>
+          <td mat-cell *matCellDef="let element">{{ element.groupno }}</td>
+        </ng-container>
+
         <ng-container matColumnDef="account">
           <th mat-header-cell *matHeaderCellDef>บัญชีที่</th>
-          <td mat-cell *matCellDef="let element">{{ element.account }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.listno }}</td>
         </ng-container>
 
         <ng-container matColumnDef="count">
@@ -96,17 +99,19 @@
 
         <ng-container matColumnDef="licenseType">
           <th mat-header-cell *matHeaderCellDef>ประเภทใบอนุญาต</th>
-          <td mat-cell *matCellDef="let element">{{ element.licenseType }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.careertype }}</td>
         </ng-container>
 
         <ng-container matColumnDef="licenseGroup">
           <th mat-header-cell *matHeaderCellDef>กลุ่มผู้ขอใบอนุญาต</th>
-          <td mat-cell *matCellDef="let element">{{ element.licenseGroup }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.isforeign }}</td>
         </ng-container>
 
         <ng-container matColumnDef="process">
           <th mat-header-cell *matHeaderCellDef>ขั้นตอนการดำเนินการ</th>
-          <td mat-cell *matCellDef="let element">{{ element.process }}</td>
+          <td mat-cell *matCellDef="let element">
+            {{ 'จัดทำกลุ่มบัญชีรายชื่อ' }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="status">
@@ -116,13 +121,15 @@
 
         <ng-container matColumnDef="screenDate">
           <th mat-header-cell *matHeaderCellDef>วันที่กลั่นกรอง</th>
-          <td mat-cell *matCellDef="let element">{{ element.screenDate }}</td>
+          <td mat-cell *matCellDef="let element">
+            {{ element.considerdate | thaiDate }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="guaranteeDate">
           <th mat-header-cell *matHeaderCellDef>วันที่รับรอง</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.guaranteeDate }}
+            {{ element.approvedate | thaiDate }}
           </td>
         </ng-container>
 

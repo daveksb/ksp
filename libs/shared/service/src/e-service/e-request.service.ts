@@ -13,6 +13,7 @@ import {
   UniUser,
   GetLastApproveList,
   GetLastApproveGroup,
+  KspListResponse,
 } from '@ksp/shared/interface';
 import { getCookie } from '@ksp/shared/utility';
 import { map, Observable, shareReplay } from 'rxjs';
@@ -46,6 +47,12 @@ export class ERequestService {
         id,
       }
     );
+  }
+
+  searchRequestList(payload: any): Observable<any> {
+    return this.http
+      .post(`${environment.shortApiUrl}/selfapprovelistsearch.php`, payload)
+      .pipe(map((data: any) => data.datareturn));
   }
 
   // new API
@@ -184,6 +191,36 @@ export class ERequestService {
   createAprroveGroup(payload: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/e-service/selfapprovegroupinsert`,
+      payload
+    );
+  }
+
+  getLevel2LicenseList(): Observable<KspListResponse<KspRequest>> {
+    return this.http.get<KspListResponse<KspRequest>>(
+      `${environment.shortApiUrl}/ksprequestsearch_e-self.php`,
+      {
+        headers: { 'Cache-Control': 'no-store' },
+      }
+    );
+  }
+
+  getGroupByAccount(account: string): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/selfapprovegroupsearchgroup`,
+      { grouplist: account }
+    );
+  }
+
+  updateApproveGroup(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/selfapprovegroupupdate`,
+      payload
+    );
+  }
+
+  updateApproveGroup2(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/selfapprovegroupupdate_2`,
       payload
     );
   }
