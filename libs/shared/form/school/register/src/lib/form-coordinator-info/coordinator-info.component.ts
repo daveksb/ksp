@@ -40,7 +40,7 @@ export class FormCoordinatorInfoComponent
   @Input() visaClassList: VisaClass[] | null = [];
   @Input() visaTypeList: VisaType[] | null = [];
   @Input() occupyList: Array<any> | null = [];
-
+  @Input() hideIdcard = false;
   RequestTypeEnum = SchoolRequestType;
   validatorMessages = validatorMessages;
   FormTypeEnum = UserInfoFormType;

@@ -1,5 +1,5 @@
 <form [formGroup]="form">
-  <div class="row mb-2" *ngIf="hideForm2 === false">
+  <div class="row mb-2" *ngIf="hideForm2 === false && !hideIdcard">
     <div class="col-4">
       <label class="form-label" [ngClass]="{ required: mode === 'edit' }"
         >หมายเลขบัตรประชาชน</label
