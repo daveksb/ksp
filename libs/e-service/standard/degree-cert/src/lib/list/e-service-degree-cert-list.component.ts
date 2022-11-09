@@ -28,6 +28,10 @@ export class EServiceDegreeCertListComponent
   showColumnSelect = false;
   uniUniversityOption: ListData[] = [];
   degreeLevelOption: ListData[] = [];
+  verifyStatusOption: ListData[] = EUniApproveProcess.map(
+    ({ processId, processName }) => ({ value: processId, label: processName })
+  );
+  approveStatusOption: ListData[] = [];
   form = this.fb.group({
     search: [{}],
   });
@@ -71,6 +75,19 @@ export class EServiceDegreeCertListComponent
       });
   }
   ngOnInit() {
+    this.form.controls.search.valueChanges.subscribe((data: any) => {
+      if (data?.verifyStatus) {
+        const options = _.find(EUniApproveProcess, {
+          processId: _.toNumber(data?.verifyStatus),
+        });
+        this.approveStatusOption = (options?.status || []).map(
+          ({ id, sname }) => ({
+            value: id,
+            label: sname,
+          })
+        );
+      }
+    });
     this.route.paramMap.subscribe((res) => {
       if (res) {
         /**

@@ -7,10 +7,11 @@ import { SchoolRequestProcess } from '@ksp/shared/constant';
 import {
   EsSearchPayload,
   KspRequest,
+  ListData,
   RequestSearchFilter,
   SchoolUserPageType,
 } from '@ksp/shared/interface';
-import { ERequestService } from '@ksp/shared/service';
+import { ERequestService, UniInfoService } from '@ksp/shared/service';
 import {
   checkStatus,
   replaceEmptyWithNull,
@@ -33,14 +34,26 @@ export class ApproveNewUserListComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   selectedUniversity = '';
+  uniUniversityTypeOption: ListData[] = [];
 
   constructor(
     private router: Router,
-    private eRequestService: ERequestService
-  ) {}
+    private eRequestService: ERequestService,
+    private uniInfoService: UniInfoService
+  ) {
+    this.getOptions();
+  }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+  }
+
+  getOptions() {
+    this.uniInfoService.getUniversityType().subscribe(response=>{
+      if (response) {
+        this.uniUniversityTypeOption = response;
+      }
+    })
   }
 
   search(params: RequestSearchFilter) {
@@ -69,7 +82,13 @@ export class ApproveNewUserListComponent implements AfterViewInit {
     this.eRequestService.KspSearchRequest(payload).subscribe((res) => {
       //console.log('res = ', res);
       if (res) {
-        this.dataSource.data = res;
+        this.dataSource.data = res.map((data: any) => {
+          data.educationoccupy = JSON.parse(data.educationoccupy);
+          data.coordinatorinfo = JSON.parse(data.coordinatorinfo);
+          data.coordinatorname = data.coordinatorinfo?.firstnameth.concat(" ", data.coordinatorinfo?.lastnameth);
+          data.requesttype = parseInt(data.requesttype);
+          return data;
+        });
         this.dataSource.sort = this.sort;
 
         const sortState: Sort = { active: 'id', direction: 'desc' };

@@ -33,13 +33,14 @@ export class FormCoordinatorInfoComponent
   @Input() hideForm2 = false;
   @Input() isSchoolService = true;
   @Input() displayMode!: number[];
-
+  @Input() systemform = 'default';
   @Input() prefixList: Prefix[] | null = [];
   @Input() countryList: Country[] | null = [];
   @Input() nationList: Nationality[] | null = [];
   @Input() visaClassList: VisaClass[] | null = [];
   @Input() visaTypeList: VisaType[] | null = [];
-
+  @Input() occupyList: Array<any> | null = [];
+  @Input() hideIdcard = false;
   RequestTypeEnum = SchoolRequestType;
   validatorMessages = validatorMessages;
   FormTypeEnum = UserInfoFormType;

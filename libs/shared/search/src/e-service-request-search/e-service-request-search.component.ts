@@ -24,7 +24,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 export class EServiceRequestSearchComponent extends KspFormBaseComponent {
   override form = this.fb.group({
     schoolinfo: [null],
-    requesttype: [''],
+    requesttype: [null],
     requestno: [''],
     name: [''],
     requestdatefrom: [''],
@@ -33,6 +33,7 @@ export class EServiceRequestSearchComponent extends KspFormBaseComponent {
 
   @Input() searchType = '';
   @Input() statusList: any[] | undefined = [];
+  @Input() universityType: any;
   @Output() search = new EventEmitter<any>();
   @Output() clear = new EventEmitter<boolean>();
 

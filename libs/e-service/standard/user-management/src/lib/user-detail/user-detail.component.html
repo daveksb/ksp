@@ -104,7 +104,10 @@
         [mode]="'view'"
         [displayMode]="[0]"
         [prefixList]="prefixList$ | async"
+        [occupyList]="occupyList$ | async"
         formControlName="coordinatorInfo"
+        [hideIdcard]="true"
+        [systemform]="'uni'"
       ></ksp-form-coordinator-info>
     </div>
     <br />

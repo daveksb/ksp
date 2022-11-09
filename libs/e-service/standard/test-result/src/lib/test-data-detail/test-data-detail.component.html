@@ -49,7 +49,14 @@
           class="me-1"
         />ดาวน์โหลดแบบตารางนำเข้า
       </button>
-      <button class="btn btn-primary w-auto ms-2" (click)="search()">
+      <input
+        type="file"
+        class="file-input"
+        hidden
+        (change)="onFileSelected($event)"
+        #fileUpload
+      />
+      <button class="btn btn-primary w-auto ms-2" (click)="fileUpload.click()">
         นำเข้าตารางผลการทดสอบ
       </button>
     </div>
@@ -64,56 +71,69 @@
     <div class="bg-light px-3 py-2">
       <div class="d-flex justify-content-between w-75 mb-2">
         <label class="form-label text-black"
-          >รายการนำเข้า (ทั้งหมด): 4 รายการ</label
+          >รายการนำเข้า (ทั้งหมด): {{ exportDataSize }} รายการ</label
         >
         <label class="form-label text-success"
-          >รายการนำเข้า (สำเร็จ): 3 รายการ</label
+          >รายการนำเข้า (สำเร็จ): {{ isValidSize }} รายการ</label
         >
         <label class="form-label text-danger"
-          >รายการนำเข้า (ผิดพลาด): 1 รายการ</label
+          >รายการนำเข้า (ผิดพลาด): {{ inValidSize }} รายการ</label
         >
       </div>
       <div class="table-responsive">
         <table mat-table [dataSource]="dataSource">
           <ng-container matColumnDef="select">
             <th mat-header-cell *matHeaderCellDef>เลือก</th>
-            <td mat-cell *matCellDef="let row">
-              <input type="checkbox" />
+            <td mat-cell *matCellDef="let element">
+              <input
+                class="selected-row-import"
+                type="checkbox"
+                (click)="$event.preventDefault()"
+                [checked]="element.isValid !== false"
+                [disabled]="element.isValid === false"
+              />
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="year">
+          <ng-container matColumnDef="calendaryear">
             <th mat-header-cell *matHeaderCellDef>ปีการศึกษา</th>
-            <td mat-cell *matCellDef="let element">{{ element.year }}</td>
+            <td mat-cell *matCellDef="let element">
+              {{ element.calendaryear }}
+            </td>
           </ng-container>
 
-          <ng-container matColumnDef="subjectCode">
+          <ng-container matColumnDef="subjectid">
             <th mat-header-cell *matHeaderCellDef>รหัสวิชา</th>
             <td mat-cell *matCellDef="let element">
-              {{ element.subjectCode }}
+              {{ element.subjectid }}
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="subjectName">
+          <ng-container matColumnDef="subjectname">
             <th mat-header-cell *matHeaderCellDef>ชื่อวิชา</th>
             <td mat-cell *matCellDef="let element">
               {{ element.subjectName }}
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="personId">
+          <ng-container matColumnDef="idcardno">
             <th mat-header-cell *matHeaderCellDef>
               หมายเลขบัตรประชาชน/เลขประจำตัวคุรุสภา
             </th>
             <td mat-cell *matCellDef="let element">
-              {{ element.personId }}
+              {{ element.idcardno }}
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="name">
+          <ng-container matColumnDef="fullname">
             <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
             <td mat-cell *matCellDef="let element">
-              {{ element.name }}
+              {{
+                element?.subjectcode +
+                  ' ' +
+                  element?.firstname +
+                  element?.lastname
+              }}
             </td>
           </ng-container>
 
@@ -124,44 +144,51 @@
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="score">
+          <ng-container matColumnDef="userscore">
             <th mat-header-cell *matHeaderCellDef>คะแนน</th>
             <td mat-cell *matCellDef="let element">
-              {{ element.score }}
+              {{ element.userscore }}
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="testResult">
+          <ng-container matColumnDef="examresult">
             <th mat-header-cell *matHeaderCellDef>ผลการทดสอบ</th>
             <td mat-cell *matCellDef="let element">
-              {{ element.testResult }}
+              {{ element.examresult }}
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="testStatus">
+          <ng-container matColumnDef="result">
             <th mat-header-cell *matHeaderCellDef>สถานะการทดสอบ</th>
             <td mat-cell *matCellDef="let element">
-              {{ element.testStatus }}
+              {{ element.result }}
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="annouceDate">
+          <ng-container matColumnDef="annoucedate">
             <th mat-header-cell *matHeaderCellDef>วันที่ประกาศ</th>
             <td mat-cell *matCellDef="let element">
-              {{ element.annouceDate }}
+              {{ element.annoucedate }}
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="validDate">
+          <ng-container matColumnDef="expiredate">
             <th mat-header-cell *matHeaderCellDef>ใช้ผลได้ถึงวันที่</th>
             <td mat-cell *matCellDef="let element">
-              {{ element.validDate }}
+              {{ element.expiredate }}
             </td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
+        <mat-paginator
+          [pageSizeOptions]="[25]"
+          [length]="exportDataSize"
+          showFirstLastButtons
+          (page)="onPaginatorEvent($event)"
+        >
+        </mat-paginator>
       </div>
     </div>
   </div>
@@ -174,6 +201,7 @@
     [isFirstPage]="true"
     [showCenterButtons]="true"
     [showSaveButton]="true"
+    [disableSaveButton]="disableSaveButton"
     (saveClicked)="save()"
   ></ksp-bottom-nav>
 </div>
