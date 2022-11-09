@@ -28,11 +28,12 @@
           maxlength="13"
           placeholder="หมายเลขบัตรประชาชนจำนวน 13 หลัก"
           formControlName="idcardno"
+          (input)="checkID($event)"
         />
         <ng-container
-          *ngIf="idCardNo.invalid && (idCardNo.dirty || idCardNo.touched)"
+          *ngIf="(idCardNo.invalid && (idCardNo.dirty || idCardNo.touched) || !validIdcard)"
         >
-          <span class="text-danger" *ngIf="idCardNo.errors?.['pattern']">
+          <span class="text-danger" *ngIf="idCardNo.errors?.['pattern'] || !validIdcard">
             {{ validatorMessages.idCardNo }}
           </span>
         </ng-container>

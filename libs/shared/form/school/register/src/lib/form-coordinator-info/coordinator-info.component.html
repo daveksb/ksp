@@ -1,5 +1,5 @@
 <form [formGroup]="form">
-  <div class="row mb-2" *ngIf="hidexxx === false">
+  <div class="row mb-2" *ngIf="hidexxx === false && !hideIdcard">
     <div class="col-4">
       <label class="form-label" [ngClass]="{ required: mode === 'edit' }"
         >หมายเลขบัตรประชาชน</label
@@ -131,13 +131,29 @@
   </div>
 
   <div class="row mb-2">
-    <div class="col-6">
+    <div class="col-6" *ngIf="systemform === 'default'">
       <label
         class="form-label required"
         [ngClass]="{ required: mode === 'edit' }"
         >{{ positionLabel }}</label
       >
       <input class="form-control" type="text" formControlName="position" />
+    </div>
+    <div class="col-6" *ngIf="systemform !== 'default'">
+      <label
+        class="form-label required"
+        [ngClass]="{ required: mode === 'edit' }"
+        >{{ positionLabel }}</label
+      >
+      <select
+        class="form-select"
+        formControlName="position"
+      >
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        <option *ngFor="let position of occupyList" [value]="position.eduoccupytype">
+          {{ position?.eduoccupyname }}
+        </option>
+      </select>
     </div>
     <div class="col-6">
       <label

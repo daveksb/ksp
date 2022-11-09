@@ -31,14 +31,16 @@ export class FormCoordinatorInfoComponent
   @Input() positionLabel = 'ตำแหน่ง';
   @Input() hideyyy = false;
   @Input() hidexxx = false;
+  @Input() hideIdcard = false;
   @Input() isSchoolService = true;
   @Input() displayMode!: number[];
-
+  @Input() systemform = 'default';
   @Input() prefixList: Prefix[] | null = [];
   @Input() countryList: Country[] | null = [];
   @Input() nationList: Nationality[] | null = [];
   @Input() visaClassList: VisaClass[] | null = [];
   @Input() visaTypeList: VisaType[] | null = [];
+  @Input() occupyList: Array<any> | null = [];
 
   RequestTypeEnum = SchoolRequestType;
   validatorMessages = validatorMessages;

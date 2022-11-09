@@ -29,6 +29,7 @@ export class FormRegisterRequesterInfoComponent
     affiliation: '',
   };
   permissionList: Array<any> = uniPermissionList;
+  validIdcard = false;
 
   override form = createUniUserInfoForm(this.fb);
 
@@ -56,6 +57,25 @@ export class FormRegisterRequesterInfoComponent
       this.form.controls.contactphone.clearValidators();
       this.form.controls.position.clearValidators();
       this.form.controls.email.clearValidators();
+    }
+  }
+
+  checkID(event: any) {
+    const id = event?.target.value;
+    if (id.length != 13) {
+      this.validIdcard = false;
+      return;
+    }
+    let sum = 0;
+    for (let i = 0; i < 12; i++) {
+      sum += parseInt(id.charAt(i)) * (13 - i);
+    }
+    const mod = sum % 11;
+    const check = (11 - mod) % 10;
+    if (check == parseInt(id.charAt(12))) {
+      this.validIdcard = true;
+    } else {
+      this.validIdcard = false;
     }
   }
 

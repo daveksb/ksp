@@ -64,7 +64,7 @@
       <hr />
 
       <div class="box-header text-primary mb-1">ผลการค้นหา</div>
-      <div class="table-responsive" *ngIf="schoolInfos && schoolInfos.length">
+      <div class="table-responsive">
         <table class="table">
           <thead class="header__table">
             <tr>
@@ -83,7 +83,7 @@
                     : 'ชื่อโรงเรียน/สถานศึกษา'
                 }}
               </th>
-              <th scope="col">ที่อยู่</th>
+              <th scope="col" *ngIf="data.searchType !== 'uni'">ที่อยู่</th>
               <th scope="col">สังกัด</th>
             </tr>
           </thead>
@@ -104,6 +104,9 @@
               <td>{{ item.addressShow }}</td>
               <td>{{ item.bureauname }}</td>
             </tr>
+            <tr *ngIf="!schoolInfos || !schoolInfos.length">
+              <td class="text-center">ไม่พบข้อมูล</td>
+            </tr>
           </tbody>
           <tbody *ngIf="data.searchType === 'uni'">
             <tr *ngFor="let item of schoolInfos">
@@ -119,8 +122,11 @@
               </th>
               <td>{{ item.universitycode }}</td>
               <td>{{ item.name }}</td>
-              <td>{{ item.addressShow }}</td>
+              <!-- <td>{{ item.addressShow }}</td> -->
               <td>{{ item.nametype }}</td>
+            </tr>
+            <tr *ngIf="!schoolInfos || !schoolInfos.length">
+              <td class="text-center">ไม่พบข้อมูล</td>
             </tr>
           </tbody>
         </table>

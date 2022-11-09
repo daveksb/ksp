@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
   MatDialogModule,
   MatDialogRef,
@@ -65,6 +65,11 @@ export class UniversitySearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.getList();
+    if (this.data.searchType == 'uni') {
+      this.form.controls.provinceid.setValidators([Validators.required]);
+      this.form.controls.amphurid.setValidators([Validators.required]);
+      this.form.updateValueAndValidity();
+    }
   }
 
   getList() {
@@ -115,19 +120,21 @@ export class UniversitySearchComponent implements OnInit {
         }
       });
     } else {
-      payload = {
-        typeid: data?.institution?.organization,
-        unicode: data?.institution?.instituteId,
-        uniname: data?.institution?.instituteName,
-        provinceid: provinceid,
-        amphur_id: amphurid,
-        offset,
-        row,
-      };
-      this.uniinfoService.searchUniversity(payload).subscribe((res: any) => {
-        this.schoolInfos = this.generateAddressShow(res);
-        this.payload = payload;
-      });
+      if (this.form.valid) {
+        payload = {
+          typeid: data?.institution?.bureauid,
+          unicode: data?.institution?.schoolid,
+          uniname: data?.institution?.schoolname,
+          provinceid: provinceid,
+          amphur_id: amphurid,
+          offset,
+          row,
+        };
+        this.uniinfoService.searchUniversity(payload).subscribe((res: any) => {
+          this.schoolInfos = this.generateAddressShow(res);
+          this.payload = payload;
+        });
+      }
     }
   }
   generateAddressShow(schoolInfos: SchInfo[]) {
