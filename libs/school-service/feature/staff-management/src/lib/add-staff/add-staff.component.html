@@ -74,26 +74,28 @@
             >
               ที่อยู่ทะเบียนบ้าน
             </ksp-form-address>
-            <br />
-            <ksp-form-address
-              [mode]="mode"
-              [provinces]="provinces$ | async"
-              [amphurs]="amphurs2$ | async"
-              [tumbols]="tumbols2$ | async"
-              (provinceChanged)="provinceChanged(2, $event)"
-              (amphurChanged)="amphurChanged(2, $event)"
-              formControlName="addr2"
-            >
-              <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
-              <div class="d-flex align-items-center">
-                <input
-                  (change)="useSameAddress($event)"
-                  type="checkbox"
-                  class="address__checkbox"
-                />
-                <label class="form-label ms-1">ที่อยู่ตามทะเบียนบ้าน</label>
-              </div>
-            </ksp-form-address>
+            <div class="mt-3">
+              <ksp-form-address
+                [mode]="mode"
+                [provinces]="provinces$ | async"
+                [amphurs]="amphurs2$ | async"
+                [tumbols]="tumbols2$ | async"
+                (provinceChanged)="provinceChanged(2, $event)"
+                (amphurChanged)="amphurChanged(2, $event)"
+                formControlName="addr2"
+              >
+                <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
+                <div class="d-flex align-items-center">
+                  <input
+                    (change)="useSameAddress($event)"
+                    type="checkbox"
+                    class="address__checkbox"
+                    [disabled]="mode === 'view'"
+                  />
+                  <label class="form-label ms-1">ที่อยู่ตามทะเบียนบ้าน</label>
+                </div>
+              </ksp-form-address>
+            </div>
           </mat-tab>
 
           <mat-tab label="วุฒิทางการศึกษา">
@@ -113,7 +115,7 @@
                 [countries]="countries$ | async"
               ></ksp-form-education-info>
 
-              <div *ngIf="!i" class="d-flex align-items-center mt-1">
+              <div *ngIf="!i" class="d-flex align-items-center mt-3">
                 <input
                   (change)="eduSelect(1, $event)"
                   [checked]="edu.length === 2"

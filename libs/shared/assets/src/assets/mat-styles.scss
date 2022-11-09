@@ -158,14 +158,12 @@ button.mat-menu-item {
   color: #0056ff;
 }
 
-:host ::ng-deep .mat-input-element {
-  font-family: 'ksp regular' !important;
-  font-size: 18px !important;
+.mat-input-element {
   border: 1px solid #ced4da;
   background-color: #fff;
 }
 
-:host ::ng-deep .mat-input-element:disabled {
+.mat-input-element:disabled {
   background-color: #e9ecef;
 }
 

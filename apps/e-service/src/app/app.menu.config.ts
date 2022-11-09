@@ -482,15 +482,16 @@ export const standardMenu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
+    label: 'ใบคำขอรหัสเข้าใช้งานระบบบริการสถาบันผลิตครู (Uni Service)',
+    path: '/uni/new-user',
+  },
+  {
+    icon: 'assets/images/icon-sidenav/card.svg',
     label: 'ระบบบริหารจัดการผู้ใช้งาน',
     path: '',
     isExpanded: false,
     subMenuName: 'user-management',
     subMenu: [
-      {
-        path: '/uni/new-user',
-        label: 'ใบคำขอรหัสเข้าใช้งานระบบบริการสถาบันผลิตครู (Uni Service)',
-      },
       {
         path: '/bb',
         label: 'ผู้ใช้งานระบบบริการสถาบันผลิตครู (Uni Service)',
