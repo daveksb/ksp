@@ -1,5 +1,4 @@
-<ksp-top-nav
-  ><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span>
+<ksp-top-nav><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span>
   <span subHeader>ผลการนำเสนอใบอนุญาตประกอบวิชาชีพ </span>
 </ksp-top-nav>
 
@@ -10,8 +9,7 @@
   <div class="bg-white px-3 py-3">
     <div class="mb-3">
       <ksp-e-service-license-group-search
-        (search)="searchData()"
-      ></ksp-e-service-license-group-search>
+        (search)="searchData($event)"></ksp-e-service-license-group-search>
     </div>
 
     <div class="d-flex justify-content-end mb-3 mt-4">
@@ -19,24 +17,23 @@
         <button
           type="button"
           class="btn btn-success ms-2 create-group-btn"
-          (click)="saveResult()"
-        >
+          [disabled]="!canSave"
+          (click)="saveResult()">
           บันทึกผลการนำเสนอกลั่นกรอง
         </button>
 
         <button
           type="button"
           class="btn btn-success ms-2 create-group-btn"
-          (click)="print()"
-        >
+          [disabled]="!canPrint"
+          (click)="print()">
           พิมพ์รายงานนำเสนอกลั่นกรอง
         </button>
 
         <button
           type="button"
           class="btn btn-primary ms-2 create-group-btn"
-          (click)="createGroup()"
-        >
+          (click)="createGroup()">
           + สร้างกลุ่มบัญชีรายชื่อ
         </button>
       </ng-container>
@@ -45,12 +42,11 @@
         <button
           type="button"
           class="btn btn-success ms-2 create-group-btn"
-          (click)="kmv()"
-        >
+          (click)="kmv()">
           บันทึกผลการนำเสนอ กมว.
         </button>
 
-        <button type="button" class="btn btn-success ms-2 create-group-btn">
+        <button type="button" class="btn btn-success ms-2 create-group-btn" [disabled]="!canPrint">
           พิมพ์รายงานนำเสนอ กมว.
         </button>
       </ng-container>
@@ -66,7 +62,7 @@
         <ng-container matColumnDef="select">
           <th mat-header-cell *matHeaderCellDef>เลือก</th>
           <td mat-cell *matCellDef="let element; let i = index">
-            <input type="checkbox" class="me-2" [checked]="element.select" />
+            <input type="checkbox" class="me-2" [checked]="element.select" (click)="onSelect(element)" />
           </td>
         </ng-container>
 

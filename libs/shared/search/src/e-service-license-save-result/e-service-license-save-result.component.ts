@@ -27,13 +27,12 @@ export class EServiceLicenseSaveResultComponent extends KspFormBaseComponent {
   statusList?: SchRequestStatus[] = [];
 
   override form = this.fb.group({
-    requestno: [null],
-    subtype: [null],
-    idcardno: [''],
-    currentprocess: [null],
-    requeststatus: [null],
-    requestdatefrom: [null],
-    requestdateto: [null],
+    no: [null],
+    date: [null],
+    boardname: [null],
+    presidentname: [null],
+    result: [null],
+    detail: [null],
   });
 
   constructor(private fb: FormBuilder) {
@@ -43,19 +42,6 @@ export class EServiceLicenseSaveResultComponent extends KspFormBaseComponent {
         this.onChange(value);
         this.onTouched();
       })
-    );
-
-    this.processList = SelfRequestProcess.filter((i) => {
-      return `${i.requestType}` === '1';
-    });
-
-    this.form.controls.currentprocess.valueChanges.subscribe(
-      (currentProcess) => {
-        this.statusList = this.processList.find(
-          (p) => `${p.processId}` === currentProcess
-        )?.status;
-        //console.log('status list = ', this.statusList);
-      }
     );
   }
 }

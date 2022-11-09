@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { ConfirmDialogComponent } from '@ksp/shared/dialog';
+import {
+  CompleteDialogComponent,
+  ConfirmDialogComponent,
+} from '@ksp/shared/dialog';
+import { ERequestService } from '@ksp/shared/service';
 
 @Component({
   selector: 'ksp-request-license-approve-kmv',
@@ -9,7 +13,11 @@ import { ConfirmDialogComponent } from '@ksp/shared/dialog';
   styleUrls: ['./request-license-approve-kmv.component.scss'],
 })
 export class RequestLicenseApproveKmvComponent {
-  constructor(private dialog: MatDialog, private router: Router) {}
+  constructor(
+    private dialog: MatDialog,
+    private router: Router,
+    private requestService: ERequestService
+  ) {}
 
   //ngOnInit(): void {}
 
@@ -28,6 +36,49 @@ export class RequestLicenseApproveKmvComponent {
     dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         this.router.navigate(['/request-license', 'guarantee']);
+      }
+    });
+  }
+
+  save(value: any) {
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: `คุณต้องการยืนยันข้อมูล
+        ใช่หรือไม่? `,
+      },
+    });
+
+    dialog.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        const payload = {
+          id: '44',
+          matilevel2no: value.no,
+          matilevel2date: value.date,
+          matilevel2boardname: value.boardname,
+          matilevel2presidentname: value.presidentname,
+          matilevel2result: value.result,
+          matilevel2fileinfo: null,
+          matilevel2detail: value.detail,
+        };
+        this.requestService.updateApproveGroup2(payload).subscribe((res) => {
+          if (res?.returnmessage === 'success') {
+            this.completeDialog();
+          }
+        });
+      }
+    });
+  }
+
+  completeDialog() {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header: `บันทึกข้อมูลสำเร็จ`,
+      },
+    });
+
+    dialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.cancel();
       }
     });
   }
