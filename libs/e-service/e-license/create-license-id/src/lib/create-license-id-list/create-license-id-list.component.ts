@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { SelectionModel } from '@angular/cdk/collections';
+import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ERequestService } from '@ksp/shared/service';
+import localForage from 'localforage';
 
 @Component({
   selector: 'ksp-create-license-id-list',
@@ -11,6 +13,7 @@ import { ERequestService } from '@ksp/shared/service';
 export class CreateLicenseIdListComponent {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<info>();
+  selection = new SelectionModel<any>(true, []);
 
   constructor(
     private router: Router,
@@ -46,6 +49,8 @@ export class CreateLicenseIdListComponent {
   }
 
   create() {
+    console.log('this.selection.selected = ', this.selection.selected);
+    localForage.setItem('selected-for-create-license', this.selection.selected);
     this.router.navigate(['/create-license-id', 'detail']);
   }
 }

@@ -3,6 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Prefix } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
+import localForage from 'localforage';
 
 @Component({
   selector: 'ksp-create-license-id-detail',
@@ -24,28 +25,18 @@ export class CreateLicenseIdDetailComponent implements OnInit {
   @Input() prefixList: Prefix[] | null = [];
 
   ngOnInit(): void {
-    const payload = {
-      groupno: null, //params.groupno,
-      process: null, //params.process,
-      status: null, //params.status,
-      createdate: null, //params.createdate,
-      offset: '0',
-      row: '100',
-    };
-    this.requestService.searchRequestList(payload).subscribe((res: any[]) => {
-      res = res.map((i) => {
-        return {
-          ...i,
-          ...{
-            listcount: i.requestlist ? JSON.parse(i.requestlist).length : 0,
-          },
-        };
-      });
-      this.dataSource1.data = res;
-      console.log('search res = ', res);
+    localForage.getItem('selected-for-create-license').then((res: any) => {
+      //console.log('store data = ', res);
+      if (res) {
+        this.dataSource1.data = res;
+      }
     });
 
     this.dataSource2.data = data2;
+  }
+
+  back() {
+    this.router.navigate(['/create-license-id', 'list']);
   }
 }
 
