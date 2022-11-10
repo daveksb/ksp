@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import {
+  CompleteDialogComponent,
+  ConfirmDialogComponent,
+} from '@ksp/shared/dialog';
 import { ERequestService } from '@ksp/shared/service';
 import { getCookie, parseJson } from '@ksp/shared/utility';
 
@@ -15,7 +20,8 @@ export class RequestLicenseApprovePrintComponent implements OnInit {
   constructor(
     private router: Router,
     private requestService: ERequestService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -38,14 +44,47 @@ export class RequestLicenseApprovePrintComponent implements OnInit {
   }
 
   save() {
-    const payload = {
-      userid: `${getCookie('userId')}`,
-      groupno: this.groupNo.toString(),
-      grouplist: JSON.stringify(this.accounts.split(' | ')),
-    };
-    this.requestService.createAprroveGroup(payload).subscribe((res) => {
-      if (res?.returnmessage === 'success') {
-        this.router.navigate(['/request-license', 'search-list']);
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: `คุณต้องการยืนยันข้อมูล
+        ใช่หรือไม่? `,
+      },
+    });
+
+    dialog.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        const payload = {
+          userid: `${getCookie('userId')}`,
+          groupno: this.groupNo.toString(),
+          grouplist: JSON.stringify(this.accounts.split(' | ')),
+        };
+        this.requestService.createAprroveGroup(payload).subscribe((res) => {
+          if (res?.returnmessage === 'success') {
+            const payload2 = {
+              groupno: this.groupNo.toString(),
+              listno: this.accounts.split(' | ').join(','),
+            };
+            this.requestService.updateMultiList(payload2).subscribe((res) => {
+              if (res?.returnmessage === 'success') {
+                this.router.navigate(['/request-license', 'search-list']);
+              }
+            });
+          }
+        });
+      }
+    });
+  }
+
+  completeDialog() {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header: `บันทึกข้อมูลสำเร็จ`,
+      },
+    });
+
+    dialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.cancel();
       }
     });
   }
