@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ERequestService } from '@ksp/shared/service';
-import { getCookie } from '@ksp/shared/utility';
+import { getCookie, parseJson } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-request-license-approve-print',
@@ -19,6 +19,7 @@ export class RequestLicenseApprovePrintComponent implements OnInit {
   ngOnInit(): void {
     this.requestService.getLastApproveGroup().subscribe((res) => {
       this.groupNo = +res.groupno + 1;
+      console.log('group = ', parseJson(res.grouplist));
     });
   }
 

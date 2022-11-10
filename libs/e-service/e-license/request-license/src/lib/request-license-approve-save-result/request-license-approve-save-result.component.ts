@@ -27,8 +27,8 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
       const account = params.get('account') || '';
 
       if (account) {
-        this.requestService.getGroupByAccount(account).subscribe((res) => {
-          console.log(res);
+        this.requestService.getGroupByAccount('7005').subscribe((res) => {
+          console.log('group = ', res);
         });
       }
     });
