@@ -1,6 +1,6 @@
 <form [formGroup]="form">
   <div class="row mb-2">
-    <div class="col-8">
+    <div class="col-md-8">
       <label class="form-label">
         {{ searchType === 'uni' ? 'กลุ่มสถาบัน' : 'สังกัด' }}</label
       >
@@ -29,7 +29,7 @@
   </div>
 
   <div class="row mb-2">
-    <div class="col-4">
+    <div class="col-md-4">
       <label class="form-label">
         {{
           searchType === 'uni' ? 'รหัสมหาวิทยาลัย' : 'รหัสโรงเรียน/สถานศึกษา'
@@ -37,7 +37,7 @@
       </label>
       <input class="form-control" type="text" formControlName="schoolid" />
     </div>
-    <div class="col-8">
+    <div class="col-md-8">
       <label class="form-label">
         {{
           searchType === 'uni' ? 'ชื่อมหาวิทยาลัย' : 'ชื่อโรงเรียน/สถานศึกษา'

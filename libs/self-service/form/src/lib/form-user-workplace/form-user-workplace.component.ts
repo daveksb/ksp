@@ -5,6 +5,7 @@ import {
   Amphur,
   KspFormBaseComponent,
   Province,
+  SchInfo,
   Tambol,
 } from '@ksp/shared/interface';
 import { UniversitySearchComponent } from '@ksp/shared/search';
@@ -50,6 +51,21 @@ export class FormUserWorkplaceComponent
   @Input() showNotRequire = false;
   @Output() provinceChanged = new EventEmitter<any>();
   @Output() amphurChanged = new EventEmitter<any>();
+
+  schoolInfo = new SchInfo();
+  school: any;
+
+  schoolName: any;
+  moo: any;
+  road: any;
+  zipcode: any;
+  houseNo: any;
+  alley: any;
+
+  bureauid: any;
+  province: any;
+  amphur: any;
+  tumbon: any;
 
   override form = this.fb.group({
     bureauid: [null, Validators.required],
@@ -105,20 +121,58 @@ export class FormUserWorkplaceComponent
     }
   }
 
+  selectedUniversity(school: SchInfo) {
+    this.schoolInfo = school;
+    console.log('activeUsers = ', school);
+
+    this.bureauid = school.bureauid;
+    this.schoolName = school.schoolname;
+    this.zipcode = school.zipcode;
+    this.moo = school.moo;
+    this.houseNo = school.address;
+    this.alley = school.street;
+    this.road = school.road;
+    this.province = school.provinceid;
+    this.tumbon = school.tumbonid;
+    this.amphur = school.amphurid;
+
+    this.form.controls.bureauid.patchValue(this.bureauid);
+    this.form.controls.schoolname.patchValue(this.schoolName);
+    this.form.controls.houseno.patchValue(this.houseNo);
+    this.form.controls.moo.patchValue(this.moo);
+    this.form.controls.postcode.patchValue(this.zipcode);
+    this.form.controls.road.patchValue(this.road);
+    this.form.controls.alley.patchValue(this.alley);
+    this.form.controls.province.patchValue(this.province);
+    if (this.province !== null) {
+      this.form.controls.amphur.patchValue(this.amphur);
+      console.log('am = ', this.amphur);
+    }
+    if (this.amphur !== null) {
+      this.form.controls.tumbol.patchValue(this.tumbon);
+      console.log('tum = ', this.tumbon);
+    }
+  }
+
   openSearchDialog() {
-    this.dialog.open(UniversitySearchComponent, {
+    const dialog = this.dialog.open(UniversitySearchComponent, {
       height: '100vh',
       width: '75vw',
       position: {
         top: '0px',
         right: '0px',
       },
-
       data: {
-        searchType: '',
+        searchType: 'school',
         subHeader: 'กรุณาเลือกหน่วยงาน/สถานศึกษาที่ท่านสังกัด',
         bureauList: this.bureaus,
       },
+    });
+
+    dialog.afterClosed().subscribe((res: SchInfo) => {
+      if (res) {
+        this.selectedUniversity(res);
+      }
     });
   }
 
