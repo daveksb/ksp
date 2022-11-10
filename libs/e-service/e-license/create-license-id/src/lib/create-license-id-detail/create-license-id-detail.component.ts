@@ -1,8 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Prefix } from '@ksp/shared/interface';
+import {
+  EsSearchPayload,
+  Prefix,
+  SchRequestSearchFilter,
+} from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
+import { replaceEmptyWithNull } from '@ksp/shared/utility';
 import localForage from 'localforage';
 
 @Component({
@@ -15,7 +20,7 @@ export class CreateLicenseIdDetailComponent implements OnInit {
   dataSource1 = new MatTableDataSource<info1>();
 
   displayedColumns2: string[] = column2;
-  dataSource2 = new MatTableDataSource<info2>();
+  dataSource2 = new MatTableDataSource<any>();
 
   constructor(
     private router: Router,
@@ -26,13 +31,40 @@ export class CreateLicenseIdDetailComponent implements OnInit {
 
   ngOnInit(): void {
     localForage.getItem('selected-for-create-license').then((res: any) => {
-      //console.log('store data = ', res);
       if (res) {
         this.dataSource1.data = res;
       }
     });
 
-    this.dataSource2.data = data2;
+    this.search({});
+  }
+
+  search(params: Partial<SchRequestSearchFilter>) {
+    let payload: EsSearchPayload = {
+      systemtype: '1',
+      requesttype: '1',
+      requestno: params.requestno,
+      careertype: null,
+      name: params.name,
+      idcardno: params.idcardno,
+      passportno: null,
+      process: '4',
+      status: '3',
+      schoolid: null,
+      schoolname: null,
+      bureauid: null,
+      requestdatefrom: null,
+      requestdateto: null,
+      offset: '0',
+      row: '10',
+    };
+
+    payload = replaceEmptyWithNull(payload);
+
+    this.requestService.KspSearchRequest(payload).subscribe((res) => {
+      console.log('ds2 = ', res);
+      this.dataSource2.data = res;
+    });
   }
 
   back() {

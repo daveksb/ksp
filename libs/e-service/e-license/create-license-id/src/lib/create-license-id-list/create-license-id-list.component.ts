@@ -40,7 +40,7 @@ export class CreateLicenseIdListComponent {
         };
       });
       this.dataSource.data = res;
-      console.log('search res = ', res);
+      //console.log('search res = ', res);
     });
   }
 
@@ -49,7 +49,7 @@ export class CreateLicenseIdListComponent {
   }
 
   create() {
-    console.log('this.selection.selected = ', this.selection.selected);
+    //console.log('this.selection.selected = ', this.selection.selected);
     localForage.setItem('selected-for-create-license', this.selection.selected);
     this.router.navigate(['/create-license-id', 'detail']);
   }
