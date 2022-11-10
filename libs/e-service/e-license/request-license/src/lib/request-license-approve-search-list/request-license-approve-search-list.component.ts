@@ -119,7 +119,13 @@ export class RequestLicenseApproveSearchListComponent
   }
 
   print() {
-    this.router.navigate(['/request-license', 'print']);
+    const selectedAccount = this.dataSource.data
+      .filter((item) => item.select)
+      .map((item) => item.listno)
+      .join(',');
+    this.router.navigate(['/request-license', 'print'], {
+      queryParams: { accounts: selectedAccount },
+    });
   }
 
   saveResult() {

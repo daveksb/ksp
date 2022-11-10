@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ERequestService } from '@ksp/shared/service';
 import { getCookie, parseJson } from '@ksp/shared/utility';
 
@@ -10,16 +10,26 @@ import { getCookie, parseJson } from '@ksp/shared/utility';
 })
 export class RequestLicenseApprovePrintComponent implements OnInit {
   groupNo!: number;
+  accounts!: string;
 
   constructor(
     private router: Router,
-    private requestService: ERequestService
+    private requestService: ERequestService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.requestService.getLastApproveGroup().subscribe((res) => {
       this.groupNo = +res.groupno + 1;
       console.log('group = ', parseJson(res.grouplist));
+    });
+
+    this.route.queryParamMap.subscribe((params) => {
+      const accounts = params.get('accounts') || '';
+
+      if (accounts) {
+        this.accounts = accounts.split(',').join(' | ');
+      }
     });
   }
 
@@ -31,7 +41,7 @@ export class RequestLicenseApprovePrintComponent implements OnInit {
     const payload = {
       userid: `${getCookie('userId')}`,
       groupno: this.groupNo.toString(),
-      grouplist: "{'field1':'data1','field2':'data2','field3':'data3'}",
+      grouplist: JSON.stringify(this.accounts.split(' | ')),
     };
     this.requestService.createAprroveGroup(payload).subscribe((res) => {
       if (res?.returnmessage === 'success') {
