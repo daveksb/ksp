@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { ERequestService } from '@ksp/shared/service';
 
 @Component({
   selector: 'ksp-create-license-id-list',
@@ -11,10 +12,33 @@ export class CreateLicenseIdListComponent {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<info>();
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private requestService: ERequestService
+  ) {}
 
   search() {
-    this.dataSource.data = data;
+    //this.dataSource.data = data;
+    const payload = {
+      groupno: null, //params.groupno,
+      process: null, //params.process,
+      status: null, //params.status,
+      createdate: null, //params.createdate,
+      offset: '0',
+      row: '100',
+    };
+    this.requestService.searchRequestList(payload).subscribe((res: any[]) => {
+      res = res.map((i) => {
+        return {
+          ...i,
+          ...{
+            listcount: i.requestlist ? JSON.parse(i.requestlist).length : 0,
+          },
+        };
+      });
+      this.dataSource.data = res;
+      console.log('search res = ', res);
+    });
   }
 
   clear() {
@@ -31,7 +55,7 @@ const column = [
   'group',
   'list',
   'rush',
-  'number',
+  'listcount',
   'licenseType',
   'groupType',
   'status',

@@ -10,6 +10,7 @@ import { BottomNavComponent, TopNavComponent } from '@ksp/shared/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { FormUploadImageComponent } from '@ksp/self-service/form';
+import { ThaiDatePipe } from '@ksp/shared/pipe';
 
 export const routes: Routes = [
   {
@@ -44,6 +45,7 @@ export const routes: Routes = [
     SharedFormOthersModule,
     FormUploadImageComponent,
     BottomNavComponent,
+    ThaiDatePipe,
   ],
   declarations: [CreateLicenseIdDetailComponent, CreateLicenseIdListComponent],
   exports: [CreateLicenseIdDetailComponent, CreateLicenseIdListComponent],
