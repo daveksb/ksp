@@ -111,7 +111,11 @@ export class RequestLicenseApproveSearchListComponent
   }
 
   kmv() {
-    this.router.navigate(['/request-license', 'kmv']);
+    const selectedData = this.dataSource.data.filter((item) => item.select);
+    const group = selectedData[0].groupno;
+    this.router.navigate(['/request-license', 'kmv'], {
+      queryParams: { group },
+    });
   }
 
   guarantee() {
