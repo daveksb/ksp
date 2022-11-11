@@ -240,4 +240,11 @@ export class ERequestService {
       payload
     );
   }
+
+  getRequestListByGroupNo(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/ksprequestsearcharray_e-self_groupno.php`,
+      payload
+    );
+  }
 }
