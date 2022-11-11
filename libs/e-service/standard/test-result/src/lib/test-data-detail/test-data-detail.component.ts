@@ -1,3 +1,4 @@
+import { EUniService } from '@ksp/shared/service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
@@ -9,6 +10,9 @@ import {
 } from '@ksp/shared/dialog';
 import _ from 'lodash';
 import { PageEvent } from '@angular/material/paginator';
+import { ListData } from '@ksp/shared/interface';
+import moment from 'moment';
+import { thaiDate } from '@ksp/shared/utility';
 @Component({
   selector: 'ksp-test-data-detail',
   templateUrl: './test-data-detail.component.html',
@@ -17,13 +21,28 @@ import { PageEvent } from '@angular/material/paginator';
 export class TestDataDetailComponent implements OnInit {
   dataSource = new MatTableDataSource<ImportTest>();
   displayedColumns: string[] = displayedColumns;
-
-  constructor(private router: Router, public dialog: MatDialog) {}
-
-  ngOnInit(): void {}
+  yearOption: ListData[] = [];
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private eUniService: EUniService
+  ) {}
+  getYear() {
+    const year = new Date().getFullYear() + 543;
+    this.yearOption = new Array(11).fill(null).map((data, i) => {
+      const value = year - i + '';
+      return {
+        label: value,
+        value: value,
+      };
+    });
+  }
+  ngOnInit(): void {
+    this.getYear();
+  }
 
   search() {
-    console.log("search")
+    console.log('search');
   }
 
   cancel() {
@@ -40,7 +59,15 @@ export class TestDataDetailComponent implements OnInit {
 
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.onCompleted();
+        this.eUniService
+          .insertUniExamResult(
+            _.filter(this.dataSource.data, ({ isValid }) =>
+              _.isUndefined(isValid)
+            )
+          )
+          .subscribe(() => {
+            this.onCompleted();
+          });
       }
     });
   }
@@ -65,28 +92,39 @@ export class TestDataDetailComponent implements OnInit {
     });
     return false;
   }
+  otDate(sDate: any) {
+    try {
+      return _.size(sDate) ? moment(sDate, 'DD MMM YY').format('YYYY-MM-DD') : '';
+    } catch (error) {
+      return "";
+    }
+  }
+  toThaiDate(sDate:any){
+    return thaiDate(moment(sDate,"YYYY-MM-DD").toDate());
+  }
   otObject(rowArr: any) {
     return _.map(rowArr, (row: any) => {
       const newOb: any = {
-        no: _.get(row, '0', '') + '',
+        examcount: _.get(row, '0', '') + '',
         calendaryear: _.get(row, '1', '') + '',
         subjectid: _.get(row, '2', '') + '',
         subjectname: _.get(row, '3', '') + '',
         idcardno: _.get(row, '4', '') + '',
         subjectcode: _.get(row, '5', '') + '',
-        userscore: _.get(row, '8', '') + '',
-        examresult: _.get(row, '9', '') + '',
-        result: _.get(row, '10', '') + '',
-        annoucedate: _.get(row, '11', '') + '',
-        expiredate: _.get(row, '12', '') + '',
         firstname: _.get(row, '6', ''),
         lastname: _.get(row, '7', ''),
+        userscore: _.get(row, '8', '') + '',
+        examscore: _.get(row, '9', '') + '',
+        examresult: _.get(row, '10', '') + '',
+        examstatus: _.get(row, '11', '') + '',
+        annoucedate: this.otDate(_.get(row, '12', '')),
+        expiredate: this.otDate(_.get(row, '13', '')),
       };
       if (
         _.some(_.keys(newOb), (key: any) => _.size(newOb[key]) === 0) ||
         _.isNaN(_.toNumber(newOb?.idcardno)) ||
         _.size(newOb?.idcardno) != 13 ||
-        _.isNaN(_.toNumber(newOb?.examresult)) ||
+        _.isNaN(_.toNumber(newOb?.examscore)) ||
         _.isNaN(_.toNumber(newOb?.userscore))
       ) {
         newOb.isValid = false;
@@ -94,17 +132,21 @@ export class TestDataDetailComponent implements OnInit {
       return newOb;
     });
   }
-  get exportDataSize(){
-   return _.size(this.dataSource?.data)
+  get exportDataSize() {
+    return _.size(this.dataSource?.data);
   }
   get isValidSize() {
-    return  _.size(this.dataSource?.data) - this.inValidSize;
+    return _.size(this.dataSource?.data) - this.inValidSize;
   }
   get inValidSize() {
-    return _.filter(this.dataSource?.data, ({ isValid }) => _.isUndefined(isValid)).length;
+    return _.filter(this.dataSource?.data, ({ isValid }) =>
+      _.isUndefined(isValid)
+    ).length;
   }
-  get disableSaveButton (){
-    return  this.exportDataSize === 0 || (this.inValidSize === this.exportDataSize)
+  get disableSaveButton() {
+    return (
+      this.exportDataSize === 0 || this.inValidSize === this.exportDataSize
+    );
   }
   async onFileSelected(event: any) {
     const target: DataTransfer = <DataTransfer>event.target;
@@ -119,35 +161,43 @@ export class TestDataDetailComponent implements OnInit {
             const wsname: string = wb.SheetNames[index];
             const ws: XLSX.WorkSheet = wb.Sheets[wsname];
             let data =
-              XLSX.utils.sheet_to_json(ws, { header: 1, blankrows: false }) ||
-              {};
+              XLSX.utils.sheet_to_json(ws, {
+                header: 1,
+                blankrows: false,
+                raw: false,
+              }) || {};
             data = _.slice(data, 1, _.size(data));
             return [...prev, ...this.otObject(data)];
           },
           []
-        ) as  ImportTest[]
+        ) as ImportTest[];
       } catch (error) {
         console.log('error', error);
       }
     };
   }
   onPaginatorEvent(e: PageEvent) {
-   console.log(e)
+    console.log(e);
+  }
+  getFullName(element: any) {
+    return [element?.subjectcode, element?.firstname, element?.lastname]
+      .filter((d: any) => d)
+      .join(' ');
   }
 }
 
 const displayedColumns: string[] = [
-  "select",
-  "calendaryear",
-  "subjectid",
-  "subjectname",
-  "idcardno",
-  "fullname",
-  "userscore",
-  "examresult",
-  "result",
-  "annoucedate",
-  "expiredate"
+  'select',
+  'calendaryear',
+  'subjectid',
+  'subjectname',
+  'idcardno',
+  'fullname',
+  'userscore',
+  'examresult',
+  'examscore',
+  'annoucedate',
+  'expiredate',
 ];
 export interface ImportTest {
   select: string;
@@ -159,10 +209,10 @@ export interface ImportTest {
   fullname: string;
   userscore: string;
   examresult: string;
-  result: string;
+  examscore: string;
   annoucedate: string;
   expiredate: string;
-  isValid?:boolean;
+  isValid?: boolean;
 }
 
 // export const data2: ImportTest = {

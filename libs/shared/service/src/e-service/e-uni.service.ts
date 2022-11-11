@@ -13,67 +13,92 @@ export class EUniService {
 
   getUniDegreeCertById(id: any): Observable<any> {
     return this.http.post(
-      `${environment.apiUrl}/e-service/unidegreecertselectbyid`, {
+      `${environment.apiUrl}/e-service/unidegreecertselectbyid`,
+      {
         id: id,
         tokenkey: getCookie('userToken'),
       }
     );
-  }  
+  }
 
   getAdmissionCount(form: any): Observable<any> {
-    return this.http.post(`${environment.shortApiUrl}/unirequestadmissioncount_es.php`, {
-      ...form,
-      tokenkey: getCookie('userToken'),
-    });
+    return this.http.post(
+      `${environment.shortApiUrl}/unirequestadmissioncount_es.php`,
+      {
+        ...form,
+        tokenkey: getCookie('userToken'),
+      }
+    );
   }
 
   getAdmissionListById(form: any): Observable<any> {
-    return this.http.post(`${environment.shortApiUrl}/unirequestadmissionsearch_es.php`, {
-      ...form,
-      tokenkey: getCookie('userToken'),
-    });
+    return this.http.post(
+      `${environment.shortApiUrl}/unirequestadmissionsearch_es.php`,
+      {
+        ...form,
+        tokenkey: getCookie('userToken'),
+      }
+    );
   }
 
   getGraduateListById(form: any): Observable<any> {
-    return this.http.post(`${environment.shortApiUrl}/unidegreeadmissionsearchall_es.php`, {
-      ...form,
-      tokenkey: getCookie('userToken'),
-    });
+    return this.http.post(
+      `${environment.shortApiUrl}/unidegreeadmissionsearchall_es.php`,
+      {
+        ...form,
+        tokenkey: getCookie('userToken'),
+      }
+    );
   }
 
   requestProcessInsert(form: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/e-service/ksprequestprocessinsert_unirequestadmission`, {
-      ...form,
-      tokenkey: getCookie('userToken'),
-    });
+    return this.http.post(
+      `${environment.apiUrl}/e-service/ksprequestprocessinsert_unirequestadmission`,
+      {
+        ...form,
+        tokenkey: getCookie('userToken'),
+      }
+    );
   }
 
   insertStudent(form: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/e-service/unidegreeadmissioninsert`, {
-      ...form,
-      tokenkey: getCookie('userToken'),
-    });
+    return this.http.post(
+      `${environment.apiUrl}/e-service/unidegreeadmissioninsert`,
+      {
+        ...form,
+        tokenkey: getCookie('userToken'),
+      }
+    );
   }
 
   updateStudent(form: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/e-service/unidegreeadmissionupdate`, {
-      ...form,
-      tokenkey: getCookie('userToken'),
-    });
+    return this.http.post(
+      `${environment.apiUrl}/e-service/unidegreeadmissionupdate`,
+      {
+        ...form,
+        tokenkey: getCookie('userToken'),
+      }
+    );
   }
 
   getProcessHistory(form: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/e-service/ksprequestprocessselectbyrequestid_requestadmission`, {
-      ...form,
-      tokenkey: getCookie('userToken'),
-    });
+    return this.http.post(
+      `${environment.apiUrl}/e-service/ksprequestprocessselectbyrequestid_requestadmission`,
+      {
+        ...form,
+        tokenkey: getCookie('userToken'),
+      }
+    );
   }
 
   getDegreeCertList(form: any): Observable<any> {
-    return this.http.post(`${environment.shortApiUrl}/unidegreecertsearch_es.php`, {
-      ...form,
-      tokenkey: getCookie('userToken'),
-    });
+    return this.http.post(
+      `${environment.shortApiUrl}/unidegreecertsearch_es.php`,
+      {
+        ...form,
+        tokenkey: getCookie('userToken'),
+      }
+    );
   }
   uniRequestDegreeCertSearchEsUni(params: any): Observable<any> {
     return this.http.post(
@@ -107,6 +132,15 @@ export class EUniService {
     );
   }
 
+  insertUniExamResult(data: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/insertuniexamresult.php`,
+      {
+        data,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
   getUserlistbyUniid(params: any): Observable<any> {
     return this.http.post(
       `${environment.shortApiUrl}/uniusersearch_uniid_es.php`,
@@ -117,6 +151,15 @@ export class EUniService {
     );
   }
 
+  uniExamResultSearchEs(search: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/uniexamresultsearch_es.php`,
+      {
+        ...search,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
   getUserById(params: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/e-service/uniuserselectbyid`,
