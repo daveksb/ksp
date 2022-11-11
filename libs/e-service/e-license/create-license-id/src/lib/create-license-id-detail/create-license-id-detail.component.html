@@ -1,0 +1,375 @@
+<ksp-top-nav
+  ><span header> หน้าแรก </span
+  ><span subHeader>ระบบงานทะเบียนและใบอนุญาต</span></ksp-top-nav
+>
+<div class="bg-secondary bg-opacity-10 px-3 py-2">
+  <div class="box-header">สร้างเลขที่ใบอนุญาตประกอบวิชาชีพทางการศึกษา</div>
+  <div class="bg-white px-3 py-2">
+    <div class="box-header">
+      ข้อมูลที่ต้องการสร้างเลขที่ใบอนุญาตประกอบวิชาชีพทางการศึกษา
+    </div>
+    <div class="table__scroll">
+      <table mat-table [dataSource]="dataSource1">
+        <ng-container matColumnDef="group">
+          <th mat-header-cell *matHeaderCellDef>กลุ่มที่</th>
+          <td mat-cell *matCellDef="let element">{{ element.groupno }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="list">
+          <th mat-header-cell *matHeaderCellDef>บัญชีรายชื่อ</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.firstnameth }} {{ element.listno }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="rush">
+          <th mat-header-cell *matHeaderCellDef>เร่งด่วน</th>
+          <td mat-cell *matCellDef="let element">
+            <i class="bi bi-exclamation-triangle-fill text-danger"></i>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="listcount">
+          <th mat-header-cell *matHeaderCellDef>จำนวน</th>
+          <td mat-cell *matCellDef="let element">{{ element.listcount }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="licenseType">
+          <th mat-header-cell *matHeaderCellDef>ประเภทใบอนุญาต</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.careertype }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="groupType">
+          <th mat-header-cell *matHeaderCellDef>กลุ่มผู้ขอใบอนุญาต</th>
+          <td mat-cell *matCellDef="let element">
+            <!-- {{ element.groupType }} -->
+            ชาวไทย
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>สถานะ</th>
+          <td mat-cell *matCellDef="let element">
+            ระหว่างดำเนินการ<!-- {{ element.status }} -->
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="considerDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่กลั่นกรอง</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.considerdate | thaiDate }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="verifyDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่รับรอง</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.approvedate | thaiDate }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="approveDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่ผ่านการตรวจสอบ</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.createdate | thaiDate }}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns1"></tr>
+      </table>
+    </div>
+    <mat-paginator
+      [pageSizeOptions]="[10]"
+      showFirstLastButtons
+      aria-label="Select page of periodic elements"
+    >
+    </mat-paginator>
+
+    <hr />
+
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <div class="box-header">
+        รายชื่อ - สร้างเลขที่ใบอนุญาตประกอบวิชาชีพทางการศึกษา
+      </div>
+      <div class="d-flex">
+        <button
+          type="button"
+          class="btn text-primary bg-primary bg-opacity-10 w-auto"
+        >
+          สร้างเลขที่ใบอนุญาต (ทั้งหมด)
+        </button>
+      </div>
+    </div>
+    <div class="table__scroll">
+      <table mat-table [dataSource]="dataSource2">
+        <ng-container matColumnDef="create">
+          <th mat-header-cell *matHeaderCellDef>สร้าง</th>
+          <td mat-cell *matCellDef="let element">
+            <i role="button" class="bi bi-pencil-square text-primary"></i>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="order">
+          <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+          <td mat-cell *matCellDef="let element; let i = index">
+            {{ i + 1 }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="rush">
+          <th mat-header-cell *matHeaderCellDef>เร่งด่วน</th>
+          <td mat-cell *matCellDef="let element">
+            <i class="bi bi-exclamation-triangle-fill text-danger"></i>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="number">
+          <th mat-header-cell *matHeaderCellDef>จำนวน</th>
+          <td mat-cell *matCellDef="let element">{{ element.number }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="personId">
+          <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
+          <td mat-cell *matCellDef="let element">{{ element.idcardno }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="licenseType">
+          <th mat-header-cell *matHeaderCellDef>ประเภทใบอนุญาต</th>
+          <td mat-cell *matCellDef="let element">ใบอนุญาตประกอบวิชาชีพครู</td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.firstnameth }} {{ element.lastnameth }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="licenseGroup">
+          <th mat-header-cell *matHeaderCellDef>กลุ่มผู้ขอใบอนุญาต</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.licenseGroup }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="approveDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่รับรอง</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.requestdate | thaiDate }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="verifyDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่ผ่านการตรวจสอบ</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.processupdatedate | thaiDate }}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns2"></tr>
+      </table>
+    </div>
+    <mat-paginator
+      [pageSizeOptions]="[10]"
+      showFirstLastButtons
+      aria-label="Select page of periodic elements"
+    >
+    </mat-paginator>
+  </div>
+  <div class="bg-white px-3 py-3 mt-3">
+    <div class="row">
+      <div class="col-lg-3 my-auto">
+        <self-service-form-upload-image></self-service-form-upload-image>
+      </div>
+      <div class="col-md mt-md-0 mt-2">
+        <div class="row">
+          <div class="col-md-3 mb-2">
+            <label class="form-label">เลขที่ใบอนุญาตประกอบวิชาชีพ</label>
+            <input
+              class="form-control"
+              type="text"
+              placeholder="กรุณากรอกนามสกุลภาษาไทย"
+              formControlName="licenseId"
+            />
+          </div>
+          <div class="col-md-3 mb-2">
+            <label class="form-label">เลขที่บัตรประชาชน</label>
+            <input
+              class="form-control"
+              type="text"
+              placeholder="กรุณากรอกชื่อภาษาไทย"
+              formControlName="personId"
+            />
+          </div>
+
+          <div class="col-md-6 mb-2">
+            <label class="form-label">ประเภทใบอนุญาตประกอบวิชาชีพ</label>
+            <select class="form-select" formControlName="licenseType">
+              <option disabled hidden selected value="null">กรุณาเลือก</option>
+              <option *ngFor="let prefix of prefixList" [value]="prefix.id">
+                {{ prefix?.name_th }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3 mb-2">
+            <label class="form-label">คำนำหน้าชื่อภาษาไทย</label>
+            <select class="form-select" formControlName="prefixth">
+              <option disabled hidden selected value="null">กรุณาเลือก</option>
+              <option *ngFor="let prefix of prefixList" [value]="prefix.id">
+                {{ prefix?.name_th }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md mb-2">
+            <label class="form-label">ชื่อภาษาไทย</label>
+            <input
+              class="form-control"
+              type="text"
+              placeholder="กรุณากรอกชื่อภาษาไทย"
+              formControlName="firstnameth"
+            />
+          </div>
+
+          <div class="col-md mb-2">
+            <label class="form-label">นามสกุลภาษาไทย</label>
+            <input
+              class="form-control"
+              type="text"
+              placeholder="กรุณากรอกนามสกุลภาษาไทย"
+              formControlName="lastnameth"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3 mb-2">
+            <label class="form-label required">คำนำหน้าชื่อภาษาอังกฤษ</label>
+            <select class="form-select" formControlName="prefixen">
+              <option value="null" selected hidden disabled>กรุณาเลือก</option>
+              <option *ngFor="let prefix of prefixList" [value]="prefix.id">
+                {{ prefix?.name_en }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md mb-2">
+            <label class="form-label required">ชื่อภาษาอังกฤษ</label>
+            <input
+              class="form-control"
+              type="text"
+              placeholder="กรุณากรอกชื่อภาษาอังกฤษ"
+              formControlName="firstnameen"
+            />
+          </div>
+
+          <div class="col-md mb-2">
+            <label class="form-label required">นามสกุลภาษาอังกฤษ</label>
+            <input
+              class="form-control"
+              type="text"
+              placeholder="กรุณากรอกนามสกุลภาษาอังกฤษ"
+              formControlName="lastnameen"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md mb-2">
+            <label class="form-label required">เพศ</label>
+            <select class="form-select" formControlName="sex">
+              <option value="null" selected hidden disabled>กรุณาเลือก</option>
+              <option value="1">ชาย</option>
+              <option value="2">หญิง</option>
+              <option value="3">อื่นๆ</option>
+            </select>
+          </div>
+          <div class="col-md mb-2">
+            <label class="form-label required">วันเดือนปีเกิด</label>
+            <div class="d-flex align-items-center">
+              <input
+                matInput
+                [matDatepicker]="picker1"
+                autocomplete="off"
+                class="form-control form-date"
+                formControlName="birthdate"
+              />
+              <mat-datepicker-toggle
+                class="button-date"
+                matSuffix
+                [for]="picker1"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md mb-2">
+            <label class="form-label required">วันเดือนปีที่ออก</label>
+            <div class="d-flex align-items-center">
+              <input
+                matInput
+                [matDatepicker]="picker2"
+                autocomplete="off"
+                class="form-control form-date"
+                formControlName="releasedDate"
+              />
+              <mat-datepicker-toggle
+                class="button-date"
+                matSuffix
+                [for]="picker2"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </div>
+          </div>
+          <div class="col-md mb-2">
+            <label class="form-label required">วันเดือนปีที่หมดอายุ</label>
+            <div class="d-flex align-items-center">
+              <input
+                matInput
+                [matDatepicker]="picker3"
+                autocomplete="off"
+                class="form-control form-date"
+                formControlName="expiredDate"
+              />
+              <mat-datepicker-toggle
+                class="button-date"
+                matSuffix
+                [for]="picker3"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker3></mat-datepicker>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="box-header">แบบร่าง ใบอนุญาตประกอบวิชาชีพ</div>
+    <div
+      class="bg-secondary bg-opacity-10 py-3 border d-flex justify-content-center"
+    >
+      <div
+        class="bg-white d-flex justify-content-center flex-column align-items-center"
+        style="height: 300px; width: 475px"
+      >
+        ใบอนุญาตประกอบวิชาชีพ
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sticky-bottom border">
+  <ksp-bottom-nav
+    [isLastPage]="true"
+    [isFirstPage]="true"
+    (cancelClicked)="back()"
+    [showCenterButtons]="true"
+    [showSaveButton]="true"
+  ></ksp-bottom-nav>
+</div>

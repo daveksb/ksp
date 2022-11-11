@@ -125,6 +125,18 @@ const routes: EthicsCustomRoute[] = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'create-license-id',
+    data: {
+      menuConfig: eLicenseMenu,
+      headerLabel: 'ระบบใบอนุญาตประกอบวิชาชีพทางการศึกษา',
+    },
+    loadChildren: () =>
+      import('@ksp/e-service/e-license/create-license-id').then(
+        (m) => m.EServiceELicenseCreateLicenseIdModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'import-test',
     data: { menuConfig: standardMenu, headerLabel: 'ระบบงานมาตรฐานวิชาชีพ' },
     loadChildren: () =>

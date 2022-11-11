@@ -159,9 +159,9 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'schoolname',
             options: {
-              x: 342,
-              y: 620,
-              size: defaultSize - 2,
+              x: 350,
+              y: 609,
+              size: defaultSize,
               color: black,
             },
           },
@@ -169,7 +169,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'day',
             options: {
               x: 345,
-              y: 595,
+              y: 584,
               size: defaultSize,
               color: black,
             },
@@ -178,7 +178,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'month',
             options: {
               x: 420,
-              y: 595,
+              y: 584,
               size: defaultSize,
               color: black,
             },
@@ -187,7 +187,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'year',
             options: {
               x: 515,
-              y: 595,
+              y: 584,
               size: defaultSize,
               color: black,
             },
@@ -196,17 +196,17 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'schoolname',
             options: {
               x: 176,
-              y: 535,
-              size: defaultSize - 2,
+              y: 537,
+              size: defaultSize,
               color: black,
             },
           },
           {
             key: 'bureauname',
             options: {
-              x: 415,
-              y: 535,
-              size: defaultSize - 2,
+              x: 100,
+              y: 517,
+              size: defaultSize,
               color: black,
             },
           },
@@ -214,7 +214,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'address',
             options: {
               x: 105,
-              y: 513,
+              y: 498,
               size: defaultSize,
               color: black,
             },
@@ -223,7 +223,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'moo',
             options: {
               x: 190,
-              y: 513,
+              y: 498,
               size: defaultSize,
               color: black,
             },
@@ -232,7 +232,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'street',
             options: {
               x: 300,
-              y: 513,
+              y: 498,
               size: defaultSize,
               color: black,
             },
@@ -241,7 +241,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'road',
             options: {
               x: 440,
-              y: 513,
+              y: 498,
               size: defaultSize,
               color: black,
             },
@@ -250,7 +250,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'tumbon',
             options: {
               x: 140,
-              y: 490,
+              y: 477,
               size: defaultSize,
               color: black,
             },
@@ -259,7 +259,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'amphurname',
             options: {
               x: 300,
-              y: 490,
+              y: 477,
               size: defaultSize,
               color: black,
             },
@@ -268,7 +268,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'provincename',
             options: {
               x: 440,
-              y: 490,
+              y: 477,
               size: defaultSize,
               color: black,
             },
@@ -277,7 +277,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'zipcode',
             options: {
               x: 120,
-              y: 467,
+              y: 458,
               size: defaultSize,
               color: black,
             },
@@ -286,7 +286,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'telphone',
             options: {
               x: 300,
-              y: 467,
+              y: 458,
               size: defaultSize,
               color: black,
             },
@@ -295,7 +295,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'fax',
             options: {
               x: 445,
-              y: 467,
+              y: 458,
               size: defaultSize,
               color: black,
             },
@@ -304,7 +304,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'phone',
             options: {
               x: 140,
-              y: 444,
+              y: 438,
               size: defaultSize,
               color: black,
             },
@@ -313,7 +313,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'name',
             options: {
               x: 250,
-              y: 422,
+              y: 410,
               size: defaultSize,
               color: black,
             },
@@ -322,7 +322,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'id1',
             options: {
               x: 190,
-              y: 390,
+              y: 377,
               size: defaultSize,
               color: black,
             },
@@ -331,7 +331,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'id2',
             options: {
               x: 218,
-              y: 390,
+              y: 377,
               size: defaultSize,
               color: black,
             },
@@ -340,7 +340,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'id3',
             options: {
               x: 233,
-              y: 390,
+              y: 377,
               size: defaultSize,
               color: black,
             },
@@ -349,7 +349,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'id4',
             options: {
               x: 248,
-              y: 390,
+              y: 377,
               size: defaultSize,
               color: black,
             },
@@ -358,7 +358,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'id5',
             options: {
               x: 263,
-              y: 390,
+              y: 377,
               size: defaultSize,
               color: black,
             },
@@ -367,7 +367,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'id6',
             options: {
               x: 292,
-              y: 390,
+              y: 377,
               size: defaultSize,
               color: black,
             },
@@ -376,7 +376,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'id7',
             options: {
               x: 307,
-              y: 390,
+              y: 377,
               size: defaultSize,
               color: black,
             },
@@ -385,7 +385,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'id8',
             options: {
               x: 322,
-              y: 390,
+              y: 377,
               size: defaultSize,
               color: black,
             },
@@ -394,7 +394,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'id9',
             options: {
               x: 337,
-              y: 390,
+              y: 377,
               size: defaultSize,
               color: black,
             },
@@ -403,7 +403,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'id10',
             options: {
               x: 352,
-              y: 390,
+              y: 377,
               size: defaultSize,
               color: black,
             },
@@ -412,7 +412,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'id11',
             options: {
               x: 380,
-              y: 390,
+              y: 377,
               size: defaultSize,
               color: black,
             },
@@ -421,7 +421,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'id12',
             options: {
               x: 395,
-              y: 390,
+              y: 377,
               size: defaultSize,
               color: black,
             },
@@ -429,8 +429,8 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'id13',
             options: {
-              x: 425,
-              y: 390,
+              x: 410,
+              y: 377,
               size: defaultSize,
               color: black,
             },
@@ -439,7 +439,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'degreename1',
             options: {
               x: 200,
-              y: 287,
+              y: 267,
               size: defaultSize,
               color: black,
             },
@@ -448,7 +448,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'major1',
             options: {
               x: 420,
-              y: 287,
+              y: 267,
               size: defaultSize,
               color: black,
             },
@@ -457,7 +457,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'institution1',
             options: {
               x: 200,
-              y: 265,
+              y: 245,
               size: defaultSize,
               color: black,
             },
@@ -466,7 +466,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
         svg: [
           {
             key: 'checkbox1',
-            options: { x: 45, y: 328 },
+            options: { x: 45, y: 308 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
         ],

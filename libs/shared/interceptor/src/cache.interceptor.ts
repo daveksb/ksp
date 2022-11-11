@@ -26,8 +26,14 @@ export class CacheInterceptor implements HttpInterceptor {
     //const url = request.url.replace('https://', '').replace(/[^0-9a-z]/g, '');
     const url = request.url.replace(environment.apiUrl, '');
 
-    if (request.method !== 'GET') {
-      return next.handle(request);
+    const cacheControl = request.headers.get('Cache-Control');
+
+    const newRequest = request.clone({
+      headers: request.headers.delete('Cache-Control'),
+    });
+
+    if (request.method !== 'GET' || cacheControl === 'no-store') {
+      return next.handle(newRequest);
     }
 
     return from(localForage.keys()).pipe(
@@ -36,7 +42,7 @@ export class CacheInterceptor implements HttpInterceptor {
         cache
           ? of(cache)
           : next
-              .handle(request)
+              .handle(newRequest)
               .pipe(switchMap((data) => this.addToCache(data, url)))
       )
     );

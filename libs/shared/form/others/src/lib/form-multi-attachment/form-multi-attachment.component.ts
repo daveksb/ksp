@@ -23,31 +23,16 @@ export class FormMultiAttachmentComponent {
 
   constructor(public dialog: MatDialog, private fileService: FileService) {}
 
-  view(group: FileGroup) {
+  view(group: FileGroup, index: number) {
     this.dialog.open(PdfViewerComponent, {
       width: '1200px',
       height: '100vh',
       data: {
         title: group.name,
-        file: group.files[0],
+        file: group.files[index],
       },
     });
   }
-
-  /*   view(title: string) {
-    const dialog = this.dialog.open(FilesPreviewComponent, {
-      width: '800px',
-      data: {
-        title,
-      },
-    });
-
-    dialog.componentInstance.confirmed.subscribe((res) => {
-      if (res) {
-        this.dialog.closeAll();
-      }
-    });
-  } */
 
   deleteFile(file: KspFile) {
     const payload = {

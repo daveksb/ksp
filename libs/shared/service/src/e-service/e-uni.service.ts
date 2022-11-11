@@ -141,12 +141,30 @@ export class EUniService {
       }
     );
   }
+  getUserlistbyUniid(params: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/uniusersearch_uniid_es.php`,
+      {
+        ...params,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
 
   uniExamResultSearchEs(search: any): Observable<any> {
     return this.http.post(
       `${environment.shortApiUrl}/uniexamresultsearch_es.php`,
       {
         ...search,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
+  getUserById(params: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/uniuserselectbyid`,
+      {
+        ...params,
         tokenkey: getCookie('userToken'),
       }
     );

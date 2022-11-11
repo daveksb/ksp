@@ -27,13 +27,10 @@ export class EServiceLicenseGroupSearchComponent extends KspFormBaseComponent {
   statusList?: SchRequestStatus[] = [];
 
   override form = this.fb.group({
-    requestno: [null],
-    subtype: [null],
-    idcardno: [''],
-    currentprocess: [null],
-    requeststatus: [null],
-    requestdatefrom: [null],
-    requestdateto: [null],
+    groupno: [null],
+    process: [null],
+    status: [null],
+    createdate: [null],
   });
 
   constructor(private fb: FormBuilder) {
@@ -49,13 +46,11 @@ export class EServiceLicenseGroupSearchComponent extends KspFormBaseComponent {
       return `${i.requestType}` === '1';
     });
 
-    this.form.controls.currentprocess.valueChanges.subscribe(
-      (currentProcess) => {
-        this.statusList = this.processList.find(
-          (p) => `${p.processId}` === currentProcess
-        )?.status;
-        //console.log('status list = ', this.statusList);
-      }
-    );
+    this.form.controls.process.valueChanges.subscribe((currentProcess) => {
+      this.statusList = this.processList.find(
+        (p) => `${p.processId}` === currentProcess
+      )?.status;
+      //console.log('status list = ', this.statusList);
+    });
   }
 }

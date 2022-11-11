@@ -62,7 +62,6 @@ export class RequestLicenseApproveListComponent implements AfterViewInit {
   }
 
   search(params: any) {
-    console.log(params);
     let payload: EsSearchPayload = {
       systemtype: '1',
       requesttype: SelfServiceRequestType.ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ,

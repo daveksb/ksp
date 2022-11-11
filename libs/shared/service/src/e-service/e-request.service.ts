@@ -11,6 +11,9 @@ import {
   SchUser,
   SelfRequest,
   UniUser,
+  GetLastApproveList,
+  GetLastApproveGroup,
+  KspListResponse,
 } from '@ksp/shared/interface';
 import { getCookie } from '@ksp/shared/utility';
 import { map, Observable, shareReplay } from 'rxjs';
@@ -44,6 +47,12 @@ export class ERequestService {
         id,
       }
     );
+  }
+
+  searchRequestList(payload: any): Observable<any> {
+    return this.http
+      .post(`${environment.shortApiUrl}/selfapprovelistsearch.php`, payload)
+      .pipe(map((data: any) => data.datareturn));
   }
 
   // new API
@@ -134,25 +143,92 @@ export class ERequestService {
       `${environment.apiUrl}/e-service/ksprequestprocessselectbyrequestid`,
       { requestid, tokenkey: getCookie('userToken') }
     );
-    }
+  }
 
-    kspUpdateRequestUniRequestDegree(payload: KspApprovePayload): Observable<any> {
-      return this.http.post(
-        `${environment.apiUrl}/e-service/ksprequestprocessinsert_unirequestdegree`,
-        payload
-      );
-    }
+  kspUpdateRequestUniRequestDegree(
+    payload: KspApprovePayload
+  ): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/ksprequestprocessinsert_unirequestdegree`,
+      payload
+    );
+  }
 
-    kspUniRequestProcessSelectByRequestId(requestid: any): Observable<any> {
-      return this.http.post(
-        `${environment.apiUrl}/e-service/ksprequestprocessselectbyrequestid_requestdegree`,
-        { requestid, tokenkey: getCookie('userToken') }
-      );
+  kspUniRequestProcessSelectByRequestId(requestid: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/ksprequestprocessselectbyrequestid_requestdegree`,
+      { requestid, tokenkey: getCookie('userToken') }
+    );
+  }
+  retiredUniUser(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/uniuseractiveupdate`,
+      payload
+    );
+  }
+
+  getLastApproveList(): Observable<GetLastApproveList> {
+    return this.http.get<GetLastApproveList>(
+      `${environment.apiUrl}/e-service/selfapprovelistselectlast`,
+      { headers: { 'Cache-Control': 'no-store' } }
+    );
+  }
+
+  getLastApproveGroup(): Observable<GetLastApproveGroup> {
+    return this.http.get<GetLastApproveGroup>(
+      `${environment.apiUrl}/e-service/selfapprovegroupselectlast`,
+      { headers: { 'Cache-Control': 'no-store' } }
+    );
+  }
+
+  createAprroveList(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/selfapprovelistinsert`,
+      payload
+    );
+  }
+
+  createAprroveGroup(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/selfapprovegroupinsert`,
+      payload
+    );
+  }
+
+  getLevel2LicenseList(): Observable<KspListResponse<KspRequest>> {
+    return this.http.get<KspListResponse<KspRequest>>(
+      `${environment.shortApiUrl}/ksprequestsearch_e-self.php`,
+      {
+        headers: { 'Cache-Control': 'no-store' },
       }
-      retiredUniUser(payload: any): Observable<any> {
-        return this.http.post(
-          `${environment.apiUrl}/e-service/uniuseractiveupdate`,
-          payload
-        );
-      }
+    );
+  }
+
+  getGroupByAccount(account: string): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/selfapprovegroupsearchgroup`,
+      { grouplist: account }
+    );
+  }
+
+  updateApproveGroup(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/selfapprovegroupupdate`,
+      payload
+    );
+  }
+
+  updateApproveGroup2(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/selfapprovegroupupdate_2`,
+      payload
+    );
+  }
+
+  updateMultiList(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/uniapprovelistupdate_es.php`,
+      payload
+    );
+  }
 }

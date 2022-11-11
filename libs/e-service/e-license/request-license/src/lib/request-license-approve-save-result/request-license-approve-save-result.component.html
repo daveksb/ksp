@@ -1,5 +1,4 @@
-<ksp-top-nav
-  ><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span>
+<ksp-top-nav><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span>
   <span subHeader>ผลการนำเสนอใบอนุญาตประกอบวิชาชีพ </span>
 </ksp-top-nav>
 
@@ -15,26 +14,24 @@
       <div class="d-flex align-items-center mt-2 mb-3">
         <div class="content">บัญชีที่ / List No.</div>
         <div class="content-sub" style="margin-left: 37px">
-          7004 | 7005 | 7006 | 7007
+          {{ listNo }}
         </div>
       </div>
       <div class="d-flex align-items-center mt-2 mb-3">
         <div class="content">กลุ่มที่ / Group No.</div>
-        <div class="content-sub" style="margin-left: 37px">110</div>
+        <div class="content-sub" style="margin-left: 37px">{{ groupNo }}</div>
       </div>
     </div>
 
     <ksp-request-license-approve-license-table
-      class="summary-table"
-    ></ksp-request-license-approve-license-table>
+      class="summary-table"></ksp-request-license-approve-license-table>
   </div>
 
   <div class="bg-white px-3 py-3">
     <div class="mb-3">
       <ksp-e-service-license-save-result
-        (save)="cancel()"
-        (cancel)="cancel()"
-      ></ksp-e-service-license-save-result>
+        (save)="save($event)"
+        (cancel)="cancel()"></ksp-e-service-license-save-result>
     </div>
   </div>
 </div>

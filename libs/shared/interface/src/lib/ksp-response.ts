@@ -4,9 +4,9 @@ export interface KspResponse {
   returnmessage: string;
 }
 
-export interface KspListResponse {
+export interface KspListResponse<T = any> {
   returncode: string;
   returnmessage: string;
   countrow: number;
-  datareturn: any[];
+  datareturn: T[];
 }

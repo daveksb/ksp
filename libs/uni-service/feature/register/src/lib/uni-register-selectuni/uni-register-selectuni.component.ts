@@ -39,7 +39,8 @@ export class UniRegisterSelectUniComponent {
       uniname: university.name,
       unitypename: university.nametype
     }
-    localForage.setItem('registerSelectedUniversity', formuni);
-    this.next();
+    localForage.setItem('registerSelectedUniversity', formuni).then(()=>{
+      this.next();
+    });
   }
 }

@@ -209,6 +209,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
         });
       });
   }
+
   clear() {
     this.form.reset();
     this.searchNotFound = false;
@@ -311,6 +312,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
         const provincename = res.provinceName;
         const zipcode = res.zipCode;
         const telphone = res.telphone;
+        console.log(id12);
         this.dialog.open(PdfRenderComponent, {
           width: '1200px',
           height: '100vh',

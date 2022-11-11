@@ -14,14 +14,19 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { UniInfoService, UniRequestService } from '@ksp/shared/service';
-import { getCookie, thaiDate, parseJson, formatDate } from '@ksp/shared/utility';
+import {
+  getCookie,
+  thaiDate,
+  parseJson,
+  formatDate,
+} from '@ksp/shared/utility';
 import moment from 'moment';
 import { lastValueFrom } from 'rxjs';
 @Component({
   templateUrl: './degree-cert-request.component.html',
   styleUrls: ['./degree-cert-request.component.scss'],
 })
-export class DegreeCertRequestComponent implements AfterContentChecked {
+export class DegreeCertRequestComponent {
   @ViewChild('stepper') private stepper?: MatStepper;
   id?: string;
   requestNo = '';
@@ -55,10 +60,6 @@ export class DegreeCertRequestComponent implements AfterContentChecked {
     private cdref: ChangeDetectorRef
   ) {
     this.initForm();
-  }
-
-  ngAfterContentChecked() {
-    this.cdref.detectChanges();
   }
 
   async initForm() {
@@ -165,10 +166,14 @@ export class DegreeCertRequestComponent implements AfterContentChecked {
       shortdegreenameen: step1?.degreeTypeForm?.degreeNameEnShort || null,
       courseapprovetime: step1?.degreeTypeForm?.courseApproveTime || null,
       courseapprovedate: step1?.degreeTypeForm?.courseApproveDate
-        ? formatDate(new Date(step1?.degreeTypeForm?.courseApproveDate).toISOString())
+        ? formatDate(
+            new Date(step1?.degreeTypeForm?.courseApproveDate).toISOString()
+          )
         : null,
       courseacceptdate: step1?.degreeTypeForm?.courseAcceptDate
-        ? formatDate(new Date(step1?.degreeTypeForm?.courseAcceptDate).toISOString())
+        ? formatDate(
+            new Date(step1?.degreeTypeForm?.courseAcceptDate).toISOString()
+          )
         : null,
       coursedetailtype: step1?.courseDetailType || null,
       coursedetailinfo: step1?.courseDetail

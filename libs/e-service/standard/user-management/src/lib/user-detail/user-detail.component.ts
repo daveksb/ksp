@@ -14,10 +14,11 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { ERequestService, GeneralInfoService } from '@ksp/shared/service';
+import { ERequestService, GeneralInfoService, UniInfoService } from '@ksp/shared/service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { parseJson } from '@ksp/shared/utility';
+import localForage from 'localforage';
 
 @Component({
   templateUrl: './user-detail.component.html',
@@ -30,6 +31,7 @@ export class UserDetailComponent implements OnInit {
   requestId!: number | null;
   requestData = new KspRequest();
   prefixList$!: Observable<Prefix[]>;
+  occupyList$!: Observable<Prefix[]>;
   pageType: SchoolUserPageType = SchoolUserPageType.CurrentUser;
   pageTypeEnum = SchoolUserPageType;
   setPassword = '';
@@ -69,7 +71,8 @@ export class UserDetailComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private eRequestService: ERequestService,
-    private generalInfoService: GeneralInfoService
+    private generalInfoService: GeneralInfoService,
+    private uniInfoService: UniInfoService
   ) {}
 
   ngOnInit(): void {
@@ -80,6 +83,7 @@ export class UserDetailComponent implements OnInit {
     });
 
     this.prefixList$ = this.generalInfoService.getPrefix();
+    this.occupyList$ = this.uniInfoService.getOccupy();
   }
 
   checkRequestId() {
@@ -208,7 +212,10 @@ export class UserDetailComponent implements OnInit {
   }
 
   viewUser() {
-    this.router.navigate(['uni', 'all-user']);
+    console.log(this.requestData)
+    localForage.setItem('uniseleced', this.requestData).then(()=>{
+      this.router.navigate(['uni', 'all-user']);
+    });
   }
 
   cancel() {

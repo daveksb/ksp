@@ -1,17 +1,93 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
+import {
+  CompleteDialogComponent,
+  ConfirmDialogComponent,
+} from '@ksp/shared/dialog';
+import { ERequestService } from '@ksp/shared/service';
+import { parseJson } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-request-license-approve-save-result',
   templateUrl: './request-license-approve-save-result.component.html',
   styleUrls: ['./request-license-approve-save-result.component.scss'],
 })
-export class RequestLicenseApproveSaveResultComponent {
-  constructor(private router: Router) {}
+export class RequestLicenseApproveSaveResultComponent implements OnInit {
+  groupNo!: string;
+  id!: string;
+  listNo = '';
 
-  //ngOnInit(): void {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private requestService: ERequestService,
+    public dialog: MatDialog
+  ) {}
+
+  ngOnInit(): void {
+    this.route.queryParamMap.subscribe((params) => {
+      const account = params.get('account') || '';
+
+      if (account) {
+        this.requestService.getGroupByAccount(account).subscribe((res) => {
+          console.log('group = ', res);
+          if (res) {
+            this.id = res.id;
+            this.groupNo = res.groupno;
+            const groupList = parseJson(res.grouplist);
+            this.listNo = groupList.join(' | ');
+          }
+        });
+      }
+    });
+  }
 
   cancel() {
     this.router.navigate(['/request-license', 'search-list']);
+  }
+
+  save(value: any) {
+    console.log(value);
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: `คุณต้องการยืนยันข้อมูล
+        ใช่หรือไม่? `,
+      },
+    });
+
+    dialog.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        const payload = {
+          id: this.id,
+          matilevel1no: value.no,
+          matilevel1date: value.date,
+          matilevel1boardname: value.boardname,
+          matilevel1presidentname: value.presidentname,
+          matilevel1result: value.result,
+          matilevel1fileinfo: null,
+          matilevel1detail: value.detail,
+        };
+        this.requestService.updateApproveGroup(payload).subscribe((res) => {
+          if (res?.returnmessage === 'success') {
+            this.completeDialog();
+          }
+        });
+      }
+    });
+  }
+
+  completeDialog() {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header: `บันทึกข้อมูลสำเร็จ`,
+      },
+    });
+
+    dialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.cancel();
+      }
+    });
   }
 }
