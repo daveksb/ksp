@@ -153,6 +153,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
     pdfType: 3,
     pdfSubType: 1,
     pdfSrc: 'assets/pdf/school-thai-temp-license.pdf',
+
     input: [
       {
         text: [
@@ -496,47 +497,144 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             options: { x: 215, y: 380 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
+        ],
+      },
+      {
+        text: [
+          {
+            key: 'schoolname',
+            options: {
+              x: 275,
+              y: 755,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'schoolname',
+            options: {
+              x: 50,
+              y: 545,
+              size: defaultSize,
+              color: black,
+            },
+          },
+        ],
+        svg: [
           //teaeching level
-          /* {
-            key: 'level1',
-            options: { x: 45, y: 328 },
+          {
+            key: 'lv1',
+            options: { x: 81, y: 696 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'level2',
-            options: { x: 45, y: 328 },
+            key: 'lv2',
+            options: { x: 82, y: 672 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'level3',
-            options: { x: 45, y: 328 },
+            key: 'lv3',
+            options: { x: 82, y: 649 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'level4',
-            options: { x: 45, y: 328 },
+            key: 'lv4',
+            options: { x: 82, y: 625 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'level5',
-            options: { x: 45, y: 328 },
+            key: 'lv5',
+            options: { x: 262, y: 696 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'level6',
-            options: { x: 45, y: 328 },
+            key: 'lv6',
+            options: { x: 262, y: 672 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'level7',
-            options: { x: 45, y: 328 },
+            key: 'lv7',
+            options: { x: 262, y: 649 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'level8',
-            options: { x: 45, y: 328 },
+            key: 'lv8',
+            options: { x: 262, y: 625 },
             svgPath: 'M18 7L9.42857 17L6 13',
-          }, */
+          },
+          //teaeching level
+          {
+            key: 'checkbox1',
+            options: { x: 85, y: 425 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'checkbox1',
+            options: { x: 85, y: 400 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'checkbox1',
+            options: { x: 84, y: 375 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'checkbox1',
+            options: { x: 84, y: 350 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'checkbox1',
+            options: { x: 84, y: 325 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'checkbox1',
+            options: { x: 84, y: 300 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'checkbox1',
+            options: { x: 81, y: 275 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+
+          {
+            key: 'checkbox1',
+            options: { x: 81, y: 225 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+
+          {
+            key: 'checkbox1',
+            options: { x: 81, y: 175 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'checkbox1',
+            options: { x: 81, y: 150 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'checkbox1',
+            options: { x: 81, y: 125 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'checkbox1',
+            options: { x: 81, y: 100 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'checkbox1',
+            options: { x: 81, y: 75 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'checkbox1',
+            options: { x: 81, y: 50 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
         ],
       },
     ],
@@ -856,7 +954,6 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           },
         ],
         svg: [
-
           {
             key: 'checkbox1',
             options: { x: 46, y: 313 },
