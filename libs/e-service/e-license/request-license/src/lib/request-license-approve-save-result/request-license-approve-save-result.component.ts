@@ -6,6 +6,7 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { ERequestService } from '@ksp/shared/service';
+import { parseJson } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-request-license-approve-save-result',
@@ -14,6 +15,8 @@ import { ERequestService } from '@ksp/shared/service';
 })
 export class RequestLicenseApproveSaveResultComponent implements OnInit {
   groupNo!: string;
+  id!: string;
+  listNo = '';
 
   constructor(
     private router: Router,
@@ -27,8 +30,14 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
       const account = params.get('account') || '';
 
       if (account) {
-        this.requestService.getGroupByAccount('7005').subscribe((res) => {
+        this.requestService.getGroupByAccount(account).subscribe((res) => {
           console.log('group = ', res);
+          if (res) {
+            this.id = res.id;
+            this.groupNo = res.groupno;
+            const groupList = parseJson(res.grouplist);
+            this.listNo = groupList.join(' | ');
+          }
         });
       }
     });
@@ -50,7 +59,7 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
     dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         const payload = {
-          id: '44',
+          id: this.id,
           matilevel1no: value.no,
           matilevel1date: value.date,
           matilevel1boardname: value.boardname,

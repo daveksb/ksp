@@ -224,4 +224,11 @@ export class ERequestService {
       payload
     );
   }
+
+  updateMultiList(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/uniapprovelistupdate_es.php`,
+      payload
+    );
+  }
 }

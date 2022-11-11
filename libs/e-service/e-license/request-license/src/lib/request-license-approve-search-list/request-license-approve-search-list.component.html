@@ -42,11 +42,12 @@
         <button
           type="button"
           class="btn btn-success ms-2 create-group-btn"
+          [disabled]="!canSave"
           (click)="kmv()">
           บันทึกผลการนำเสนอ กมว.
         </button>
 
-        <button type="button" class="btn btn-success ms-2 create-group-btn" [disabled]="!canPrint">
+        <button type="button" class="btn btn-success ms-2 create-group-btn" disabled>
           พิมพ์รายงานนำเสนอ กมว.
         </button>
       </ng-container>

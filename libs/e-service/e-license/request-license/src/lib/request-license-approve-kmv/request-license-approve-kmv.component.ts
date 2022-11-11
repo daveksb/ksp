@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -12,14 +12,24 @@ import { ERequestService } from '@ksp/shared/service';
   templateUrl: './request-license-approve-kmv.component.html',
   styleUrls: ['./request-license-approve-kmv.component.scss'],
 })
-export class RequestLicenseApproveKmvComponent {
+export class RequestLicenseApproveKmvComponent implements OnInit {
+  groupNo!: string;
   constructor(
     private dialog: MatDialog,
     private router: Router,
-    private requestService: ERequestService
+    private requestService: ERequestService,
+    private route: ActivatedRoute
   ) {}
 
-  //ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.queryParamMap.subscribe((params) => {
+      const group = params.get('group') || '';
+
+      if (group) {
+        this.groupNo = group;
+      }
+    });
+  }
 
   cancel() {
     this.router.navigate(['/request-license', 'guarantee']);
