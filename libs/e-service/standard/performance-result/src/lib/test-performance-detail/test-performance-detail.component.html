@@ -15,14 +15,14 @@
         <div class="col">
           <div class="row">
             <label class="fs-5 text-black col-4 text-end">มหาวิทยาลัย</label>
-            <label class="fs-5 text-secondary col">มหาวิทยาลัยภูเก็ต</label>
+            <label class="fs-5 text-secondary col">{{ degreecertData?.uniname }}</label>
           </div>
         </div>
 
         <div class="col">
           <div class="row">
             <label class="fs-5 text-black col-4 text-end">สังกัด/คณะ</label>
-            <label class="fs-5 text-secondary col">ครุศาสตร์</label>
+            <label class="fs-5 text-secondary col">{{ degreecertData?.unitypename }}</label>
           </div>
         </div>
       </div>
@@ -32,7 +32,7 @@
           <div class="row">
             <label class="fs-5 text-black col-4 text-end">ระดับปริญญา</label>
             <label class="fs-5 text-secondary col"
-              >ปริญญาตรีทางการศึกษา (หลักสูตร 5 ปี)</label
+              >{{ degreecertData?.degreelevelname }}</label
             >
           </div>
         </div>
@@ -42,7 +42,7 @@
             <label class="fs-5 text-black col-4 text-end"
               >ชื่อสาขาวิชาเอก</label
             >
-            <label class="fs-5 text-secondary col">เอกภาษาอังกฤษ</label>
+            <label class="fs-5 text-secondary col">{{ degreecertData?.coursemajor }}</label>
           </div>
         </div>
       </div>
@@ -51,9 +51,9 @@
         <div class="col">
           <div class="row">
             <label class="fs-5 text-black col-4 text-end">ชื่อปริญญา</label>
-            <label class="fs-5 text-secondary col"
-              >(2800) การศึกษาบัณฑิต (5 ปี) หลักสูตรปรับปรุง พ.ศ. 2564</label
-            >
+            <label class="fs-5 text-secondary col">
+              {{ degreecertData?.fulldegreenameth }}
+            </label>
           </div>
         </div>
 
@@ -62,7 +62,7 @@
             <label class="fs-5 text-black col-4 text-end"
               >วันที่รับรองปริญญา</label
             >
-            <label class="fs-5 text-secondary col">20 มีนาคม 2563</label>
+            <label class="fs-5 text-secondary col">{{ degreecertData?.courseapprovedate }}</label>
           </div>
         </div>
       </div>
@@ -71,16 +71,14 @@
         <div class="col-6">
           <div class="row">
             <label class="fs-5 text-black col-4 text-end"
-              >ปีการศึกษาที่เปิดสอน</label
+              >ปีการศึกษาที่สอบ</label
             >
-            <div class="col-3">
+            <div class="col-4">
               <select class="form-select">
                 <option value="null" selected disabled hidden>
                   กรุณาเลือก
                 </option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option *ngFor="let year of calendaryearList" [value]="year.value">{{ year.label }}</option>
               </select>
             </div>
           </div>
@@ -93,14 +91,9 @@
             <label class="fs-5 text-black text-end col-4"
               >จำนวนนักศึกษาที่เรียน</label
             >
-            <label class="fs-5 text-secondary col">150 คน</label>
+            <label class="fs-5 text-secondary col">{{ sumalladmission }}</label>
           </div>
         </div>
-      </div>
-
-      <div class="d-flex justify-content-center py-2">
-        <button class="btn border-primary text-primary">ยกเลิก</button>
-        <button class="btn btn-primary ms-2">ยืนยัน</button>
       </div>
     </div>
   </div>
@@ -111,9 +104,15 @@
       ตามมาตรฐานวิชาชีพครู
     </div>
     <div class="d-flex justify-content-end">
-      <button class="btn btn-primary w-auto me-2" (click)="search()">
+      <button class="btn btn-primary w-auto me-2" (click)="fileUpload.click()">
         นำเข้าตารางผลการทดสอบ
       </button>
+      <input
+          hidden="true"
+          type="file"
+          (change)="onFileSelected($event)"
+          #fileUpload
+        />
       <button class="btn border-success text-success w-auto bg-white">
         <img
           src="/assets/images/img-uni/microsoft excel.png"
@@ -139,7 +138,7 @@
           </th>
         </ng-container>
 
-        <ng-container matColumnDef="select">
+        <ng-container matColumnDef="checked">
           <th mat-header-cell *matHeaderCellDef [ngStyle]="{ display: 'none' }">
             เลือก
           </th>
@@ -159,8 +158,8 @@
           </th>
         </ng-container>
 
-        <ng-container matColumnDef="personId">
-          <th mat-header-cell *matHeaderCellDef [ngStyle]="{ display: 'none' }">
+        <ng-container matColumnDef="idcardno">
+          <th mat-header-cell *matHeaderCellDef>
             หมายเลขบัตรประชาชน
           </th>
           <td mat-cell *matCellDef="let element">{{ element.personId }}</td>
@@ -177,7 +176,7 @@
           </th>
         </ng-container>
 
-        <ng-container matColumnDef="name">
+        <ng-container matColumnDef="fullname">
           <th mat-header-cell *matHeaderCellDef [ngStyle]="{ display: 'none' }">
             ชื่อ-นามสกุล
           </th>

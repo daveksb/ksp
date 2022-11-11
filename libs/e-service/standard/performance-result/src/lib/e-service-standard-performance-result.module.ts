@@ -8,6 +8,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -24,7 +25,7 @@ const routes: Routes = [
         component: TestPerformanceListComponent,
       },
       {
-        path: 'detail',
+        path: 'detail/:id',
         component: TestPerformanceDetailComponent,
       },
     ],
@@ -39,6 +40,7 @@ const routes: Routes = [
     MatTableModule,
     BottomNavComponent,
     MatDialogModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
   ],
   declarations: [TestPerformanceListComponent, TestPerformanceDetailComponent],

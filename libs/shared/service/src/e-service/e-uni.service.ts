@@ -126,4 +126,14 @@ export class EUniService {
       }
     );
   }
+
+  getDegreeCertResultList(params: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/uniperformanceresult_unidegreecert.php`,
+      {
+        ...params,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
 }
