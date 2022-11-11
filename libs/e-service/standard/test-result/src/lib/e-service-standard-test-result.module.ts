@@ -9,6 +9,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ThaiDatePipe } from '@ksp/shared/pipe';
 
 const routes: Routes = [
   {
@@ -41,6 +43,9 @@ const routes: Routes = [
     BottomNavComponent,
     MatDialogModule,
     MatPaginatorModule,
+    ReactiveFormsModule,
+    FormsModule,
+    ThaiDatePipe,
     RouterModule.forChild(routes),
   ],
   declarations: [TestDataListComponent, TestDataDetailComponent],
