@@ -60,6 +60,15 @@ export class RegisterIdCardComponent {
     });
   }
 
+  /* nextPage() {
+    const data = {
+      ...this.form.value,
+      ...{ uniquetimestamp: this.uniqueNo },
+    };
+    localForage.setItem('th-register', data);
+    this.router.navigate(['/register', 'th-step-2']);
+  } */
+
   loginPage() {
     this.router.navigate(['/login']);
   }
