@@ -170,7 +170,6 @@ export class ETempLicenseListComponent implements AfterViewInit {
     const provincename = school.provinceName;
     const zipcode = school.zipCode;
     const telphone = school.telphone;
-
     this.dialog.open(PdfRenderComponent, {
       width: '1200px',
       height: '100vh',
