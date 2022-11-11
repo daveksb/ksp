@@ -1,19 +1,25 @@
 <form [formGroup]="form">
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label required">สถานศึกษาฝึกประสบการณ์วิชาชีพ ครั้งที่ 1</label>
+      <label class="form-label required"
+        >สถานศึกษาฝึกประสบการณ์วิชาชีพ ครั้งที่ 1</label
+      >
       <input
         class="form-control"
         type="text"
-        formControlName="TrainingAddressOne" />
+        formControlName="TrainingAddressOne"
+      />
     </div>
 
     <div class="col-md-6 mb-2">
-      <label class="form-label required">สถานศึกษาฝึกประสบการณ์วิชาชีพ ครั้งที่ 2</label>
+      <label class="form-label required"
+        >สถานศึกษาฝึกประสบการณ์วิชาชีพ ครั้งที่ 2</label
+      >
       <input
         class="form-control"
         type="text"
-        formControlName="TrainingAddressTwo" />
+        formControlName="TrainingAddressTwo"
+      />
     </div>
   </div>
 
@@ -22,32 +28,61 @@
     <span class="hr-text">หรือ</span>
   </div>
 
-  <div class="row">
-    <div class="col-md-6 mb-2">
-      <label class="form-label required">สถานศึกษาที่ปฏิบัติการสอน</label>
-      <input
-        class="form-control"
-        type="text"
-        formControlName="teachingAddress" />
-    </div>
+  <ng-container formArrayName="teachingAddressForm">
+    <ng-container *ngFor="let course of address.controls; let i = index">
+      <ng-container [formGroupName]="i">
+        <div class="row">
+          <div class="col-md-6 col mb-2">
+            <label class="form-label required"
+              >สถานศึกษาที่ปฏิบัติการสอน ครั้งที่ {{ i + 1 }}</label
+            >
+            <input
+              class="form-control"
+              type="text"
+              formControlName="teachingAddress"
+            />
+          </div>
 
-    <div class="col-md-6 mb-2">
-      <br />
-      <td class="d-flex justify-content-center justify-content-md-start">
-        <button type="button" class="btn btn-primary w-auto" *ngIf="mode !== 'view'">
-          + เพิ่มสถานศึกษาที่ปฏิบัติการสอน
-        </button>
-      </td>
-    </div>
-  </div>
+          <ng-container *ngIf="mode !== 'view'">
+            <div class="col-md-auto col-auto ps-0" *ngIf="i >= 1">
+              <br />
+              <i
+                class="bi bi-trash-fill text-danger"
+                (click)="deleteAddress(i)"
+                role="button"
+              ></i>
+            </div>
+
+            <div class="col-md-6 mb-2" *ngIf="i <= 0">
+              <label class="d-md-inline-block d-none"><br /></label>
+              <div
+                class="d-flex justify-content-center justify-content-md-start"
+              >
+                <button
+                  (click)="addAddress(i)"
+                  type="button"
+                  class="btn btn-primary w-auto"
+                  style="height: 36px"
+                >
+                  + เพิ่มสถานศึกษาที่ปฏิบัติการสอน
+                </button>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </ng-container>
+    </ng-container>
+  </ng-container>
 
   <div class="d-flex align-items-center">
     <input
       formControlName="hasForeignLicense"
       type="checkbox"
-      (change)="resetForeignLicenseForm($event)" />
+      (change)="resetForeignLicenseForm($event)"
+    />
     <label class="form-label ms-2">
-      ใบอนุญาตประกอบวิชาชีพครูจากต่างประเทศ</label>
+      ใบอนุญาตประกอบวิชาชีพครูจากต่างประเทศ</label
+    >
   </div>
 
   <ng-template [ngIf]="hasForeignLicense">
@@ -56,7 +91,8 @@
         [mode]="mode"
         [countries]="countries"
         [licenses]="licenses"
-        formControlName="foreignLicenseForm"></ksp-experience-form>
+        formControlName="foreignLicenseForm"
+      ></ksp-experience-form>
     </div>
   </ng-template>
 </form>

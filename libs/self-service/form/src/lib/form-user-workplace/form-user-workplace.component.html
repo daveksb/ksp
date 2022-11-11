@@ -1,13 +1,13 @@
 <form [formGroup]="form">
   <ng-container *ngIf="showNotRequire">
-    <div class="d-flex justify-content-between">
+    <div class="d-flex flex-md-row flex-column justify-content-between">
       <div class="d-flex align-items-center">
         <input type="checkbox" class="me-2" formControlName="notRequired" />
         <label class="form-label">เป็นผู้ประสงค์ประกอบวิชาชีพทางการศึกษา</label>
       </div>
 
       <div
-        class="d-flex align-items-center"
+        class="d-flex align-items-center justify-content-end"
         *ngIf="form.controls.notRequired.value !== true"
       >
         <label
