@@ -49,11 +49,11 @@ export class ERequestService {
     );
   }
 
-  getSelfApproveGroupById(id: number): Observable<KspRequest> {
+  getSelfApproveGroupById(groupno: string): Observable<any> {
     return this.http.post<KspRequest>(
       `${environment.apiUrl}/e-service/selfapprovegroupsearchgroupno`,
       {
-        id,
+        groupno,
       }
     );
   }
