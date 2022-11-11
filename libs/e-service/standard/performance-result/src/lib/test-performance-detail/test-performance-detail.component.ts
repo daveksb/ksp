@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,7 +9,9 @@ import {
 } from '@ksp/shared/dialog';
 import { ListData } from '@ksp/shared/interface';
 import { EUniService, UniInfoService } from '@ksp/shared/service';
-import { parseJson, stringToThaiDate } from '@ksp/shared/utility';
+import { getCookie, parseJson, stringToThaiDate } from '@ksp/shared/utility';
+import _ from 'lodash';
+import moment from 'moment';
 import { map } from 'rxjs';
 import * as XLSX from 'xlsx';
 
@@ -28,8 +31,12 @@ export class TestPerformanceDetailComponent implements OnInit {
   sumalladmission: any;
   calendaryearList: ListData[] = [];
   exceltoJson: any;
+  form = this.fb.group({
+    calendaryear: [null, Validators.required]
+  })
 
   constructor(
+    private fb: FormBuilder,
     private router: Router,
     public dialog: MatDialog,
     private route: ActivatedRoute,
@@ -70,7 +77,7 @@ export class TestPerformanceDetailComponent implements OnInit {
     const currYear = new Date().getFullYear();
     for (let index = 0; index < 10; index++) {
       this.calendaryearList.push({
-        value: currYear - index,
+        value: ((currYear - index) + 543).toString(),
         label: ((currYear - index) + 543).toString()
       })
     }
@@ -117,7 +124,21 @@ export class TestPerformanceDetailComponent implements OnInit {
 
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.onCompleted();
+        const getValiddata = _.filter(this.dataSource.data, ({ isValid }) =>
+        _.isUndefined(isValid)
+      )
+        const payload = {
+          userid: getCookie('userId'),
+          unidegreecertid: this.degreecertId,
+          importstatus: getValiddata.length == this.sumalladmission ? '1' : null,
+          calendaryear: this.form.value.calendaryear,
+          studentlist: JSON.stringify(getValiddata)
+        }
+        this.eUniService
+          .insertUniPerformanceResult(payload)
+          .subscribe(() => {
+            this.onCompleted();
+          });
       }
     });
   }
@@ -143,71 +164,104 @@ export class TestPerformanceDetailComponent implements OnInit {
     const reader: FileReader = new FileReader();
     reader.readAsBinaryString(target.files[0]);
     this.exceltoJson['filename'] = target.files[0].name;
-    const newdata = [];
     reader.onload = (e: any) => {
       const binarystr: string = e.target.result;
       const wb: XLSX.WorkBook = XLSX.read(binarystr, { type: 'binary' });
-      let newsarr: any[];
-      for (let i = 0; i < wb.SheetNames.length; ++i) {
-        const wsname: string = wb.SheetNames[i];
-        const ws: XLSX.WorkSheet = wb.Sheets[wsname];
-        const data = XLSX.utils.sheet_to_json(ws,
-          {
-            header: 1,
-            blankrows: false,
-            raw: false,
-          }) || {};
-        delete data[0];
-        delete data[1];
-        console.log(data)
-        data.forEach((newdata: any) => {
-          if (newdata && newdata.length) {
-            this.dataSource.data.push({
-              idcardno: newdata[1],
-              prefixth: newdata[2],
-              firstnameth: newdata[3],
-              lastnameth: newdata[4],
-              knowledgeavg: newdata[5],
-              knowledgeresult: newdata[6],
-              relationavg: newdata[7],
-              relationresult: newdata[8],
-              ethicavg: newdata[9],
-              ethicresult: newdata[10],
-              averageavg: newdata[11],
-              averageresult: newdata[12]
-            })
-          }
-        });
-        console.log(this.dataSource.data)
-      }
+      this.dataSource.data = wb.SheetNames?.reduce(
+        (prev: any, curr: any, index: number) => {
+          const wsname: string = wb.SheetNames[index];
+          const ws: XLSX.WorkSheet = wb.Sheets[wsname];
+          let data =
+            XLSX.utils.sheet_to_json(ws, {
+              header: 1,
+              blankrows: false,
+              raw: false,
+            }) || {};
+          data = _.slice(data, 2, _.size(data));
+          return [...prev, ...this.otObject(data)];
+        },
+        []
+      );
+      console.log(this.dataSource.data)
     };
   }
 
+  otObject(rowArr: any) {
+    return _.map(rowArr, (row: any) => {
+      const newOb: any = {
+        checked: true,
+        idcardno: _.get(row, '1', '') + '',
+        prefixth: _.get(row, '2', '') + '',
+        firstnameth: _.get(row, '3', '') + '',
+        lastnameth: _.get(row, '4', '') + '',
+        knowledgeavg: _.get(row, '5', '') + '',
+        knowledgeresult: _.get(row, '6', '') + '',
+        relationavg: _.get(row, '7', '') + '',
+        relationresult: _.get(row, '8', '') + '',
+        ethicavg: _.get(row, '9', '') + '',
+        ethicresult: _.get(row, '10', '') + '',
+        averageavg: _.get(row, '11', '') + '',
+        averageresult: _.get(row, '12', '') + '',
+        uniid: this.degreecertData.uniid,
+        unitype: this.degreecertData.unitype,
+        uniname: this.degreecertData.uniname,
+        unitypename: this.degreecertData.unitypename,
+        importdate: moment().format('DD/MM/YYYY'),
+        importstatus: '1',
+        coursemajor: this.degreecertData.coursemajor
+      };
+      console.log(newOb?.idcardno.length)
+      if (
+        _.isNaN(_.toNumber(newOb?.idcardno)) ||
+        _.size(newOb?.idcardno) != 13 ||
+        _.isEmpty(newOb?.firstnameth) ||
+        _.isEmpty(newOb?.lastnameth)
+      ) {
+        console.log('yep')
+        newOb.isValid = false;
+        newOb.importstatus = '2'
+      }
+      return newOb;
+    });
+  }
+
+  getFullName(element: any) {
+    return [element?.prefixth, element?.firstnameth, element?.lastnameth]
+      .filter((d: any) => d)
+      .join(' ');
+  }
+
+  downloadfile() {
+    window.open('/assets/file/Example_import_performance.xlsx', '_blank');
+  }
 }
 
 const displayedColumns: string[] = [
   'checked',
   'idcardno',
   'fullname',
-  'score1',
-  'evaluate1',
-  'score2',
-  'evaluate2',
-  'score3',
-  'evaluate3',
-  'score4',
-  'evaluate4',
+  'knowledgeavg',
+  'knowledgeresult',
+  'relationavg',
+  'relationresult',
+  'ethicavg',
+  'ethicresult',
+  'averageavg',
+  'averageresult',
 ];
 
 export const data2: any = {
-  personId: '3-1020-xXXXX-XX-1',
-  name: 'นางสาวกนกวรรณ คล้อยใจตาม',
-  score1: '5',
-  score2: '5',
-  score3: '5',
-  score4: '5',
-  evaluate1: 'ดีมาก',
-  evaluate2: 'ดีมาก',
-  evaluate3: 'ดีมาก',
-  evaluate4: 'ดีมาก',
+  checked: false,
+  idcardno: '3-1020-xXXXX-XX-1',
+  prefixth: 'นางสาว',
+  firstnameth: 'กนกวรรณ',
+  lastnameth: 'คล้อยใจตาม',
+  knowledgeavg: '5',
+  relationavg: '5',
+  ethicavg: '5',
+  averageavg: '5',
+  knowledgeresult: 'ดีมาก',
+  relationresult: 'ดีมาก',
+  ethicresult: 'ดีมาก',
+  averageresult: 'ดีมาก',
 };

@@ -179,4 +179,14 @@ export class EUniService {
       }
     );
   }
+
+  insertUniPerformanceResult(data: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/uniperformanceresultinsert`,
+      {
+        ...data,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
 }

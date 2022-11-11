@@ -86,7 +86,7 @@ export class TestPerformanceListComponent extends KspPaginationComponent impleme
         this.dataSource1.data = res.datareturn.map((data :any) => {
           const findType = this.universityTypeList.find(type => { return data.unitype == type.value });
           data.unitypename = findType ? findType.label : '';
-          data.createdate = stringToThaiDate(data.createdate);
+          data.createdate = data.createdate ? stringToThaiDate(data.createdate) : '';
           return data;
         });
       }
@@ -101,6 +101,13 @@ export class TestPerformanceListComponent extends KspPaginationComponent impleme
   selectRow(row: any) {
     this.rowSelected = row;
     this.dataSource2 = row.studentlist ? JSON.parse(row.studentlist) : [];
+    console.log(this.dataSource2)
+  }
+
+  getFullName(element: any) {
+    return [element?.prefixth, element?.firstnameth, element?.lastnameth]
+      .filter((d: any) => d)
+      .join(' ');
   }
 }
 
