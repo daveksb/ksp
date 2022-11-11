@@ -1,5 +1,4 @@
-<ksp-top-nav
-  ><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span>
+<ksp-top-nav><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span>
   <span subHeader>ผลการนำเสนอใบอนุญาตประกอบวิชาชีพ </span>
 </ksp-top-nav>
 
@@ -18,8 +17,7 @@
   <div class="title my-4">สรุปจำนวนผู้ยื่นขอขึ้นทะเบียน</div>
   <ksp-request-license-approve-license-table
     [data]="licenseData"
-    class="summary-table"
-  ></ksp-request-license-approve-license-table>
+    class="summary-table"></ksp-request-license-approve-license-table>
 
   <div class="title my-3 d-flex justify-content-between">
     ผลการค้นหา {{ countRow }} รายการ
@@ -38,8 +36,7 @@
             type="checkbox"
             class="me-2"
             [checked]="element.check"
-            (click)="onCheck(element)"
-          />
+            (click)="onCheck(element)" />
         </td>
       </ng-container>
 
@@ -47,9 +44,9 @@
         <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
         <td mat-cell *matCellDef="let element; let i = index">
           {{
-            paginator.pageIndex === 0
-              ? i + 1
-              : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+          paginator.pageIndex === 0
+          ? i + 1
+          : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
           }}
         </td>
       </ng-container>
@@ -57,7 +54,7 @@
       <ng-container matColumnDef="urgent">
         <th mat-header-cell *matHeaderCellDef>เร่งด่วน</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.urgent }}
+          <i class="bi bi-exclamation-triangle-fill text-danger"></i>
         </td>
       </ng-container>
 
@@ -126,16 +123,14 @@
             <input
               type="checkbox"
               class="me-2"
-              formControlName="createNumber"
-            />
+              formControlName="createNumber" />
             <label class="fs-5">ส่งสร้างเลขที่ใบอนุญาต</label>
           </div>
           <div class="mx-3">
             <input
               type="checkbox"
               class="me-2"
-              [checked]="!form.controls.createNumber.value"
-            />
+              [checked]="!form.controls.createNumber.value" />
             <label class="fs-5">ไม่ส่งสร้างเลขที่ใบอนุญาต</label>
           </div>
         </div>
@@ -152,6 +147,5 @@
     [isLastPage]="true"
     (prevClicked)="prev()"
     (cancelClicked)="prev()"
-    (saveClicked)="confirmDialog()"
-  ></ksp-bottom-nav>
+    (saveClicked)="confirmDialog()"></ksp-bottom-nav>
 </div>

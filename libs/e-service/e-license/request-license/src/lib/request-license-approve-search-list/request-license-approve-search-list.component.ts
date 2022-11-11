@@ -111,7 +111,11 @@ export class RequestLicenseApproveSearchListComponent
   }
 
   kmv() {
-    this.router.navigate(['/request-license', 'kmv']);
+    const selectedData = this.dataSource.data.filter((item) => item.select);
+    const group = selectedData[0].groupno;
+    this.router.navigate(['/request-license', 'kmv'], {
+      queryParams: { group },
+    });
   }
 
   guarantee() {
@@ -119,7 +123,13 @@ export class RequestLicenseApproveSearchListComponent
   }
 
   print() {
-    this.router.navigate(['/request-license', 'print']);
+    const selectedAccount = this.dataSource.data
+      .filter((item) => item.select)
+      .map((item) => item.listno)
+      .join(',');
+    this.router.navigate(['/request-license', 'print'], {
+      queryParams: { accounts: selectedAccount },
+    });
   }
 
   saveResult() {
