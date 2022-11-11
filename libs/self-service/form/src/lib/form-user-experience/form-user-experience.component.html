@@ -34,7 +34,7 @@
         <div class="row">
           <div class="col-md-6 col mb-2">
             <label class="form-label required"
-              >สถานศึกษาที่ปฏิบัติการสอน {{ i + 1 }}</label
+              >สถานศึกษาที่ปฏิบัติการสอน ครั้งที่ {{ i + 1 }}</label
             >
             <input
               class="form-control"
@@ -45,6 +45,7 @@
 
           <ng-container *ngIf="mode !== 'view'">
             <div class="col-md-auto col-auto ps-0" *ngIf="i >= 1">
+              <br />
               <i
                 class="bi bi-trash-fill text-danger"
                 (click)="deleteAddress(i)"

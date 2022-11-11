@@ -47,8 +47,9 @@
     <div class="menu__container">
       <mat-selection-list #subject [multiple]="false">
         <mat-list-option
-          *ngFor="let subject of typesOfSubject;let i = index"
-          [value]="i">
+          *ngFor="let subject of typesOfSubject; let i = index"
+          [value]="i"
+        >
           {{ subject }}
         </mat-list-option>
       </mat-selection-list>
@@ -60,10 +61,12 @@
       <div class="mb-3">
         <self-service-test-result-table></self-service-test-result-table>
       </div>
-      <ksp-form-attachment
+      <ksp-form-multi-attachment
+        [titleClass]="'pt-2'"
         title=""
         [groups]="performanceFiles[subject.selectedOptions.selected[0].value]"
-        [uniqueTimestamp]="uniqueTimestamp"></ksp-form-attachment>
+        [uniqueTimestamp]="uniqueTimestamp"
+      ></ksp-form-multi-attachment>
     </div>
   </ng-container>
 </div>
