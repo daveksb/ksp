@@ -171,7 +171,18 @@ export class RequestLicenseApproveKmvComponent implements OnInit {
         };
         this.requestService.updateApproveGroup2(payload).subscribe((res) => {
           if (res?.returnmessage === 'success') {
-            this.completeDialog();
+            const payload2 = {
+              approvedate: value.date,
+              matilevel2: this.id,
+              listno: this.listData.split(' | ').join(','),
+            };
+            this.requestService
+              .updateDateForMati2(payload2)
+              .subscribe((res) => {
+                if (res?.returnmessage === 'success') {
+                  this.completeDialog();
+                }
+              });
           }
         });
       }

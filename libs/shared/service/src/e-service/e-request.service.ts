@@ -227,6 +227,20 @@ export class ERequestService {
     );
   }
 
+  updateDateForMati1(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/uniapprovelistupdate_considerdate_es.php`,
+      payload
+    );
+  }
+
+  updateDateForMati2(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/uniapprovelistupdate_approvedate_es.php`,
+      payload
+    );
+  }
+
   updateApproveGroup2(payload: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/e-service/selfapprovegroupupdate_2`,
