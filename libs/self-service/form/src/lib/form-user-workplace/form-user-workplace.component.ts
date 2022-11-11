@@ -123,35 +123,29 @@ export class FormUserWorkplaceComponent
 
   selectedUniversity(school: SchInfo) {
     this.schoolInfo = school;
-    console.log('activeUsers = ', school);
+    //console.log('activeUsers = ', school);
 
-    this.bureauid = school.bureauid;
+    /* this.bureauid = school.bureauid; */
     this.schoolName = school.schoolname;
     this.zipcode = school.zipcode;
     this.moo = school.moo;
     this.houseNo = school.address;
     this.alley = school.street;
     this.road = school.road;
-    this.province = school.provinceid;
-    this.tumbon = school.tumbonid;
-    this.amphur = school.amphurid;
+    /* this.province = school.provinceid;
+    this.tumbon = school.tumbon;
+    this.amphur = school.amphurname; */
 
-    this.form.controls.bureauid.patchValue(this.bureauid);
+    /* this.form.controls.bureauid.patchValue(this.bureauid); */
     this.form.controls.schoolname.patchValue(this.schoolName);
     this.form.controls.houseno.patchValue(this.houseNo);
     this.form.controls.moo.patchValue(this.moo);
     this.form.controls.postcode.patchValue(this.zipcode);
     this.form.controls.road.patchValue(this.road);
     this.form.controls.alley.patchValue(this.alley);
-    this.form.controls.province.patchValue(this.province);
-    if (this.province !== null) {
-      this.form.controls.amphur.patchValue(this.amphur);
-      console.log('am = ', this.amphur);
-    }
-    if (this.amphur !== null) {
-      this.form.controls.tumbol.patchValue(this.tumbon);
-      console.log('tum = ', this.tumbon);
-    }
+    /* this.form.controls.province.patchValue(this.province);
+    this.form.controls.amphur.patchValue(this.amphur);
+    this.form.controls.tumbol.patchValue(this.tumbon); */
   }
 
   openSearchDialog() {

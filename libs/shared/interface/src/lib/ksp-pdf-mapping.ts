@@ -464,11 +464,79 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           },
         ],
         svg: [
+          //degree level
           {
             key: 'checkbox1',
+            options: { x: 46, y: 328 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'checkbox2',
+            options: { x: 46, y: 236 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'checkbox3',
+            options: { x: 46, y: 144 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          //approve times
+          {
+            key: 'checkbox4',
+            options: { x: 135, y: 380 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'checkbox5',
+            options: { x: 177, y: 380 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'checkbox6',
+            options: { x: 215, y: 380 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          //teaeching level
+          /* {
+            key: 'level1',
             options: { x: 45, y: 328 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
+          {
+            key: 'level2',
+            options: { x: 45, y: 328 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'level3',
+            options: { x: 45, y: 328 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'level4',
+            options: { x: 45, y: 328 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'level5',
+            options: { x: 45, y: 328 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'level6',
+            options: { x: 45, y: 328 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'level7',
+            options: { x: 45, y: 328 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'level8',
+            options: { x: 45, y: 328 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          }, */
         ],
       },
     ],
@@ -788,9 +856,31 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           },
         ],
         svg: [
+
           {
             key: 'checkbox1',
-            options: { x: 45, y: 313 },
+            options: { x: 46, y: 313 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'checkbox2',
+            options: { x: 46, y: 221 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'checkbox3',
+            options: { x: 46, y: 129 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+
+          {
+            key: 'checkbox4',
+            options: { x: 135, y: 365 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'checkbox5',
+            options: { x: 177, y: 365 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
         ],
