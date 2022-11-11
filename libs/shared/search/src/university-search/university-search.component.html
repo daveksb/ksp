@@ -23,7 +23,7 @@
       ></ksp-basic-institute-search>
 
       <div class="row mb-2">
-        <div class="col">
+        <div class="col-md">
           <label class="form-label required">จังหวัด </label>
           <select
             formControlName="provinceid"
@@ -39,7 +39,7 @@
             </option>
           </select>
         </div>
-        <div class="col">
+        <div class="col-md">
           <label class="form-label required">อำเภอ </label>
           <select formControlName="amphurid" class="form-select">
             <option value="null" selected hidden disabled>กรุณาเลือก</option>
@@ -167,7 +167,7 @@
         <button
           matDialogClose
           type="button"
-          class="btn btn-primary w-25"
+          class="btn btn-primary"
           (click)="confirm()"
           [disabled]="!selectedUniversity"
         >

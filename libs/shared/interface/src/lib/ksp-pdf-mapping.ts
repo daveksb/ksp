@@ -153,6 +153,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
     pdfType: 3,
     pdfSubType: 1,
     pdfSrc: 'assets/pdf/school-thai-temp-license.pdf',
+
     input: [
       {
         text: [
@@ -790,7 +791,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
         svg: [
           {
             key: 'checkbox1',
-            options: { x: 45, y: 313 },
+            options: { x: 46, y: 313 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
         ],
