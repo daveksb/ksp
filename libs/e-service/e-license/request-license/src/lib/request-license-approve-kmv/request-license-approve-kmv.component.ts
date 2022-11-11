@@ -6,6 +6,7 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { ERequestService } from '@ksp/shared/service';
+import { parseJson } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-request-license-approve-kmv',
@@ -14,6 +15,8 @@ import { ERequestService } from '@ksp/shared/service';
 })
 export class RequestLicenseApproveKmvComponent implements OnInit {
   groupNo!: string;
+  listData!: any;
+
   constructor(
     private dialog: MatDialog,
     private router: Router,
@@ -27,6 +30,11 @@ export class RequestLicenseApproveKmvComponent implements OnInit {
 
       if (group) {
         this.groupNo = group;
+        this.requestService.getSelfApproveGroupById(group).subscribe((res) => {
+          this.listData = parseJson(res.grouplist)
+            .toString()
+            .replaceAll(',', ' | ');
+        });
       }
     });
   }
