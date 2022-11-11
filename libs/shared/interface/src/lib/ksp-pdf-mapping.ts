@@ -465,7 +465,6 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           },
         ],
         svg: [
-          //degree level
           {
             key: 'checkbox1',
             options: { x: 45, y: 308 },
@@ -795,27 +794,6 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             options: { x: 46, y: 313 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
-          /* {
-            key: 'checkbox2',
-            options: { x: 46, y: 221 },
-            svgPath: 'M18 7L9.42857 17L6 13',
-          },
-          {
-            key: 'checkbox3',
-            options: { x: 46, y: 129 },
-            svgPath: 'M18 7L9.42857 17L6 13',
-          },
-
-          {
-            key: 'checkbox4',
-            options: { x: 135, y: 365 },
-            svgPath: 'M18 7L9.42857 17L6 13',
-          },
-          {
-            key: 'checkbox5',
-            options: { x: 177, y: 365 },
-            svgPath: 'M18 7L9.42857 17L6 13',
-          }, */
         ],
       },
     ],
