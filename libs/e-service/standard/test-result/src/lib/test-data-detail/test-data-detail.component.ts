@@ -21,6 +21,7 @@ import { thaiDate } from '@ksp/shared/utility';
 export class TestDataDetailComponent implements OnInit {
   dataSource = new MatTableDataSource<ImportTest>();
   displayedColumns: string[] = displayedColumns;
+  importData: any = [];
   yearOption: ListData[] = [];
   constructor(
     private router: Router,
@@ -59,15 +60,15 @@ export class TestDataDetailComponent implements OnInit {
 
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.eUniService
-          .insertUniExamResult(
-            _.filter(this.dataSource.data, ({ isValid }) =>
-              _.isUndefined(isValid)
-            )
-          )
-          .subscribe(() => {
-            this.onCompleted();
-          });
+        // this.eUniService
+        //   .insertUniExamResult(
+        //     _.filter(this.dataSource.data, ({ isValid }) =>
+        //       _.isUndefined(isValid)
+        //     )
+        //   )
+        //   .subscribe(() => {
+        //     this.onCompleted();
+        //   });
       }
     });
   }
@@ -94,13 +95,15 @@ export class TestDataDetailComponent implements OnInit {
   }
   otDate(sDate: any) {
     try {
-      return _.size(sDate) ? moment(sDate, 'DD MMM YY').format('YYYY-MM-DD') : '';
+      return _.size(sDate)
+        ? moment(sDate, 'DD MMM YY').format('YYYY-MM-DD')
+        : '';
     } catch (error) {
-      return "";
+      return '';
     }
   }
-  toThaiDate(sDate:any){
-    return thaiDate(moment(sDate,"YYYY-MM-DD").toDate());
+  toThaiDate(sDate: any) {
+    return thaiDate(moment(sDate, 'YYYY-MM-DD').toDate());
   }
   otObject(rowArr: any) {
     return _.map(rowArr, (row: any) => {
@@ -133,14 +136,15 @@ export class TestDataDetailComponent implements OnInit {
     });
   }
   get exportDataSize() {
-    return _.size(this.dataSource?.data);
+    return _.size(this.importData);
   }
   get isValidSize() {
-    return _.size(this.dataSource?.data) - this.inValidSize;
+    return _.size(this.importData) - this.inValidSize;
   }
   get inValidSize() {
-    return _.filter(this.dataSource?.data, ({ isValid }) =>
-      _.isUndefined(isValid)
+    return _.filter(
+      this.importData,
+      ({ isValid }) => isValid === false
     ).length;
   }
   get disableSaveButton() {
@@ -156,7 +160,7 @@ export class TestDataDetailComponent implements OnInit {
       try {
         const binarystr: string = e.target.result;
         const wb: XLSX.WorkBook = XLSX.read(binarystr, { type: 'binary' });
-        this.dataSource.data = wb.SheetNames?.reduce(
+        this.importData = wb.SheetNames?.reduce(
           (prev: any, curr: any, index: number) => {
             const wsname: string = wb.SheetNames[index];
             const ws: XLSX.WorkSheet = wb.Sheets[wsname];
@@ -171,13 +175,14 @@ export class TestDataDetailComponent implements OnInit {
           },
           []
         ) as ImportTest[];
+        this.dataSource.data = _.slice(this.importData, 0, 24);
       } catch (error) {
         console.log('error', error);
       }
     };
   }
   onPaginatorEvent(e: PageEvent) {
-    console.log(e);
+   this.dataSource.data = _.slice(this.importData, 24 * e.pageIndex , (24 * e.pageIndex)+ 24)
   }
   getFullName(element: any) {
     return [element?.subjectcode, element?.firstname, element?.lastname]
@@ -188,6 +193,7 @@ export class TestDataDetailComponent implements OnInit {
 
 const displayedColumns: string[] = [
   'select',
+  // 'examcount',
   'calendaryear',
   'subjectid',
   'subjectname',
@@ -201,6 +207,7 @@ const displayedColumns: string[] = [
 ];
 export interface ImportTest {
   select: string;
+  // examcount:string;
   calendaryear: string;
   subjectid: string;
   subjectname: string;

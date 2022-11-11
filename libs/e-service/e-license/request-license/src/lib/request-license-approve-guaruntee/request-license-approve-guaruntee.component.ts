@@ -1,3 +1,4 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
@@ -27,6 +28,7 @@ export class RequestLicenseApproveGuarunteeComponent implements OnInit {
     'licenseNo',
   ];
   dataSource = new MatTableDataSource<any>();
+  selection = new SelectionModel<any>(true, []);
 
   constructor(private dialog: MatDialog, private router: Router) {}
 
