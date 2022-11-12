@@ -269,4 +269,11 @@ export class ERequestService {
       payload
     );
   }
+
+  updateMultipleLicenseStatus(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/ksprequestprocessinsert.php`,
+      payload
+    );
+  }
 }

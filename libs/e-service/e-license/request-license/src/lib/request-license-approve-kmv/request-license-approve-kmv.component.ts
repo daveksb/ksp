@@ -167,8 +167,6 @@ export class RequestLicenseApproveKmvComponent implements OnInit {
 
                 return item;
               });
-
-              console.log(this.requestTypeList);
             }
           });
       }
