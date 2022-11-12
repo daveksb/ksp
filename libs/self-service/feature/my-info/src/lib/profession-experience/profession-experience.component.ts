@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
 import { FormMode, SelfMyInfo } from '@ksp/shared/interface';
 import {
@@ -17,6 +17,7 @@ import { replaceEmptyWithNull } from '@ksp/shared/utility';
 export class ProfessionExperienceComponent implements OnInit {
   label = 'แก้ไขข้อมูล';
   mode: FormMode = 'view';
+  @Input() showSeeButton = true;
 
   info = [
     { name: 'สำเนาใบรายงานผลการศึกษา (transcript)', fileid: '', filename: '' },
