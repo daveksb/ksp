@@ -6,7 +6,7 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { ERequestService } from '@ksp/shared/service';
-import { parseJson } from '@ksp/shared/utility';
+import { formatDate, formatDatePayload, parseJson } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-request-license-approve-save-result',
@@ -49,6 +49,7 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
 
   save(value: any) {
     console.log(value);
+
     const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการยืนยันข้อมูล
@@ -68,13 +69,14 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
           matilevel1fileinfo: null,
           matilevel1detail: value.detail,
         };
+
         this.requestService.updateApproveGroup(payload).subscribe((res) => {
           if (res?.returnmessage === 'success') {
-            const payload2 = {
+            const payload2 = formatDatePayload({
               considerdate: value.date,
               matilevel1: this.id,
               listno: this.listNo.split(' | ').join(','),
-            };
+            });
             this.requestService
               .updateDateForMati1(payload2)
               .subscribe((res) => {
