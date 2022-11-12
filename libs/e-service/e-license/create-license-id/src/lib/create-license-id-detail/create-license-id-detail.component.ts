@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import {
@@ -6,9 +7,8 @@ import {
   KspRequest,
   Prefix,
   SchRequestSearchFilter,
-  SelfLicense,
 } from '@ksp/shared/interface';
-import { ERequestService } from '@ksp/shared/service';
+import { ERequestService, GeneralInfoService } from '@ksp/shared/service';
 import { replaceEmptyWithNull } from '@ksp/shared/utility';
 import localForage from 'localforage';
 
@@ -20,16 +20,32 @@ import localForage from 'localforage';
 export class CreateLicenseIdDetailComponent implements OnInit {
   displayedColumns1: string[] = column1;
   dataSource1 = new MatTableDataSource<info1>();
-
   displayedColumns2: string[] = column2;
   dataSource2 = new MatTableDataSource<KspRequest>();
+  prefixList!: any;
+
+  form = this.fb.group({
+    licenseno: [],
+    idcardno: [],
+    licensetype: [],
+    prefixth: [],
+    firstnameth: [],
+    lastnameth: [],
+    prefixen: [],
+    firstnameen: [],
+    lastnameen: [],
+    sex: [],
+    birthdate: [],
+    licensestartdate: [],
+    licenseenddate: [],
+  });
 
   constructor(
     private router: Router,
-    private requestService: ERequestService
+    private requestService: ERequestService,
+    private fb: FormBuilder,
+    private generalInfoService: GeneralInfoService
   ) {}
-
-  @Input() prefixList: Prefix[] | null = [];
 
   ngOnInit(): void {
     localForage.getItem('selected-for-create-license').then((res: any) => {
@@ -39,45 +55,14 @@ export class CreateLicenseIdDetailComponent implements OnInit {
     });
 
     this.search({});
+    this.prefixList = this.generalInfoService.getPrefix();
+  }
+
+  rowSelect(data: any) {
+    this.form.patchValue(data);
   }
 
   createMultiLicense() {
-    /*
-      {
-      "careertype" : "1",
-      "renewtype" : "2",
-      "isforeign" : "3",
-      "licenseno" : "4",
-      "requestno" : "5",
-      "licensestartdate" : "2022-09-06T00:20:13",
-      "licenseenddate" : "2022-09-06T00:20:13",
-      "licensestatus" : "6",
-      "licensetype" : "7",
-      "teachercouncilidno" : "8",
-      "imageid" : "9",
-      "idcardno" : "10",
-      "prefixth" : "11",
-      "firstnameth" : "12",
-      "lastnameth" : "13",
-      "prefixen" : "14",
-      "firstnameen" : "15",
-      "lastnameen" : "16",
-      "passportno" : "17",
-      "addressinfo" : "{'field1':'data1','field2':'data2','field3':'data3'}",
-      "schooladdrinfo" : "{'field1':'data1','field2':'data2','field3':'data3'}",
-      "eduinfo" : "{'field1':'data1','field2':'data2','field3':'data3'}",
-      "experienceinfo" : "{'field1':'data1','field2':'data2','field3':'data3'}",
-      "competencyinfo" : "{'field1':'data1','field2':'data2','field3':'data3'}",
-      "selfdevelopmentinfo" : "{'field1':'data1','field2':'data2','field3':'data3'}",
-      "fileinfo" : "{'field1':'data1','field2':'data2','field3':'data3'}",
-      "schoolid" : "111",
-      "birthdate" : "2022-09-06T00:20:13",
-      "sex" : "222",
-      "contactphone" : "333",
-      "workphone" : "444",
-      "email" : "email555"
-     },
-    */
     console.log('ds = ', this.dataSource2.data);
 
     const payload: any = {
@@ -87,7 +72,7 @@ export class CreateLicenseIdDetailComponent implements OnInit {
           renewtype: '1',
           isforeign: ds.isforeign,
           licenseno: '2',
-          requestno: ds.requestno,
+          requestno: ds.id,
           licensestartdate: '2022-11-12',
           licenseenddate: '2027-11-12',
           licensestatus: '1',

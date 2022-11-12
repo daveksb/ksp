@@ -1,3 +1,4 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -44,6 +45,7 @@ export class RequestLicenseApproveCreateGroupComponent
   licenseData: any;
   listNo!: number;
   countRow = 0;
+  selection = new SelectionModel<any>(true, []);
 
   form = this.fb.group({
     createNumber: [false],
@@ -69,6 +71,7 @@ export class RequestLicenseApproveCreateGroupComponent
 
     this.requestService.getLevel2LicenseList().subscribe((res) => {
       this.countRow = res.countrow;
+      //console.log('res = ', res);
       this.dataSource.data = res.datareturn.map((item) => ({
         ...item,
         check: false,
@@ -103,6 +106,23 @@ export class RequestLicenseApproveCreateGroupComponent
         count: 0,
       },
     ];
+  }
+
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      return;
+    }
+
+    this.selection.select(...this.dataSource.data);
   }
 
   onCheck(element: CheckKSPRequest) {
