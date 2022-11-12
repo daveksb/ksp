@@ -181,7 +181,8 @@
     >
     </mat-paginator>
   </div>
-  <div class="bg-white px-3 py-3 mt-3">
+
+  <div [formGroup]="form" class="bg-white px-3 py-3 mt-3">
     <div class="row">
       <div class="col-lg-3 my-auto">
         <self-service-form-upload-image></self-service-form-upload-image>
@@ -194,7 +195,7 @@
               class="form-control"
               type="text"
               placeholder="กรุณากรอกนามสกุลภาษาไทย"
-              formControlName="licenseId"
+              formControlName="licenseno"
             />
           </div>
           <div class="col-md-3 mb-2">
@@ -203,13 +204,13 @@
               class="form-control"
               type="text"
               placeholder="กรุณากรอกชื่อภาษาไทย"
-              formControlName="personId"
+              formControlName="idcardno"
             />
           </div>
 
           <div class="col-md-6 mb-2">
             <label class="form-label">ประเภทใบอนุญาตประกอบวิชาชีพ</label>
-            <select class="form-select" formControlName="licenseType">
+            <select class="form-select" formControlName="licensetype">
               <option disabled hidden selected value="null">กรุณาเลือก</option>
               <option *ngFor="let prefix of prefixList" [value]="prefix.id">
                 {{ prefix?.name_th }}
@@ -319,7 +320,7 @@
                 [matDatepicker]="picker2"
                 autocomplete="off"
                 class="form-control form-date"
-                formControlName="releasedDate"
+                formControlName="licensestartdate"
               />
               <mat-datepicker-toggle
                 class="button-date"
@@ -337,7 +338,7 @@
                 [matDatepicker]="picker3"
                 autocomplete="off"
                 class="form-control form-date"
-                formControlName="expiredDate"
+                formControlName="licenseenddate"
               />
               <mat-datepicker-toggle
                 class="button-date"
