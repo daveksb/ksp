@@ -19,11 +19,7 @@ import {
   UniRequestService,
 } from '@ksp/shared/service';
 import localForage from 'localforage';
-import {
-  FormArray,
-  FormBuilder,
-  Validators,
-} from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { EMPTY, switchMap } from 'rxjs';
 import * as XLSX from 'xlsx';
 import {
@@ -32,7 +28,6 @@ import {
   nameEnPattern,
   nameThPattern,
   phonePattern,
-  thaiDate,
 } from '@ksp/shared/utility';
 import moment from 'moment';
 
@@ -65,7 +60,7 @@ export class ImportStudentComponent implements OnInit {
   };
   requestNo = '';
   userBackup: any;
-  requestDate:any = undefined;
+  requestDate: any = undefined;
   formStudent = this.fb.group({
     user: this.fb.array([]),
   });
@@ -143,24 +138,28 @@ export class ImportStudentComponent implements OnInit {
       })
       .subscribe((response: any) => {
         if (response.datareturn) {
-          response.datareturn = response.datareturn.sort((data1:any,data2:any) => data1.id - data2.id);
+          response.datareturn = response.datareturn.sort(
+            (data1: any, data2: any) => data1.id - data2.id
+          );
           const findResponse = response.datareturn.find((data: any) => {
             return (
               data.unidegreecertid == this.courseData?.courseDetail.id &&
               data.planyear == this.payload.planyear &&
               data.plancalendaryear == this.payload.plancalendaryear &&
-              (this.pageType == 'admissionList' ? data.requesttype == '05' : data.requesttype == '06')
+              (this.pageType == 'admissionList'
+                ? data.requesttype == '05'
+                : data.requesttype == '06')
             );
           });
-          console.log(findResponse)
+          console.log(findResponse);
           if (findResponse && findResponse.process == '2') {
-            let parseuser:any;
+            let parseuser: any;
             if (this.pageType == 'admissionList') {
               parseuser = JSON.parse(findResponse.admissionlist);
             } else {
               parseuser = JSON.parse(findResponse.graduatelist);
             }
-            console.log(parseuser)
+            console.log(parseuser);
             parseuser.forEach((user: any, index: any) => {
               user.index = index;
               user.subjects = JSON.parse(user.subjects);
@@ -201,14 +200,14 @@ export class ImportStudentComponent implements OnInit {
   }
 
   edituser(data: any) {
-    console.log(data)
+    console.log(data);
     let userAddress: any;
     if (this.pageType == 'admissionList') {
       userAddress = JSON.parse(data.address);
     } else {
       userAddress = JSON.parse(data.address);
     }
-    console.log(userAddress)
+    console.log(userAddress);
     return this.fb.group({
       id: [data.id],
       checked: [false],
@@ -324,7 +323,7 @@ export class ImportStudentComponent implements OnInit {
       width: '600px',
       data: {
         ...subjectInfo,
-        disableAll: true
+        disableAll: true,
       },
     });
     dialogRef.afterClosed().subscribe((res) => {
@@ -345,9 +344,10 @@ export class ImportStudentComponent implements OnInit {
         right: '0px',
       },
       data: {
-        teachingpracticeschool:
-        JSON.parse(this.user.at(index).value.teachingpracticeschool),
-        disableAll: true
+        teachingpracticeschool: JSON.parse(
+          this.user.at(index).value.teachingpracticeschool
+        ),
+        disableAll: true,
       },
     });
     dialogRef.afterClosed().subscribe((response: any) => {
@@ -360,7 +360,7 @@ export class ImportStudentComponent implements OnInit {
   }
 
   viewAdress(address: any) {
-    console.log(this.user.value)
+    console.log(this.user.value);
     this.dialog.open(FormAddressTableComponent, {
       width: '75vw',
       height: '100vw',
@@ -400,7 +400,7 @@ export class ImportStudentComponent implements OnInit {
 
   next() {
     const checkeddata = this.getCheckedValue();
-    console.log(checkeddata)
+    console.log(checkeddata);
     const datainfo = {
       studentlist: checkeddata,
       requestno: this.requestNo,
@@ -408,9 +408,9 @@ export class ImportStudentComponent implements OnInit {
       pagetype: this.pageType,
       total: this.user.value.length,
       requestdate: this.requestDate,
-      payload: {...this.payload}
+      payload: { ...this.payload },
     };
-    
+
     localForage.setItem('studentform', datainfo);
     this.router.navigate(['/degree-cert', 'consider-student']);
   }
@@ -434,6 +434,10 @@ export class ImportStudentComponent implements OnInit {
   }
 
   prev() {
-    this.router.navigate(['/degree-cert', 'course-detail', this.payload.unidegreecertid]);
+    this.router.navigate([
+      '/degree-cert',
+      'course-detail',
+      this.payload.unidegreecertid,
+    ]);
   }
 }
