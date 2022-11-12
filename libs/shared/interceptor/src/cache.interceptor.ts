@@ -6,7 +6,7 @@ import {
   HttpRequest,
   HttpHandler,
 } from '@angular/common/http';
-import { from, map, Observable, of, switchMap } from 'rxjs';
+import { from, map, Observable, of, switchMap, tap } from 'rxjs';
 import localForage from 'localforage';
 import * as moment from 'moment';
 import { environment } from '@ksp/shared/environment';
@@ -39,7 +39,7 @@ export class CacheInterceptor implements HttpInterceptor {
     return from(localForage.keys()).pipe(
       switchMap((keys) => this.getFromCache(keys, url)),
       switchMap((cache) =>
-        cache
+        cache?.body
           ? of(cache)
           : next
               .handle(newRequest)
