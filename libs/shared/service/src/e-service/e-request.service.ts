@@ -204,6 +204,7 @@ export class ERequestService {
     );
   }
 
+  // ค้นหาใบคำขอที่มี สถานะตรวจเอกสารลำดับที่ 2
   getLevel2LicenseList(): Observable<KspListResponse<KspRequest>> {
     return this.http.get<KspListResponse<KspRequest>>(
       `${environment.shortApiUrl}/ksprequestsearch_e-self.php`,

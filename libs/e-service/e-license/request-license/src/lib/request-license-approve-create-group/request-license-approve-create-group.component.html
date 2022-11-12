@@ -22,7 +22,7 @@
   ></ksp-request-license-approve-license-table>
 
   <div class="title my-3 d-flex justify-content-between">
-    ผลการค้นหา {{ countRow }} รายการ
+    ผลการค้นหา {{ dataSource.data.length }} รายการ
   </div>
   <div class="table__scroll">
     <mat-paginator [pageSizeOptions]="[25]" showFirstLastButtons>
@@ -84,10 +84,9 @@
       </ng-container>
 
       <ng-container matColumnDef="licenseGroup">
-        <th mat-header-cell *matHeaderCellDef>กลุ่มผู้ใบอนุญาต</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.licenseGroup }}
-        </td>
+        <th mat-header-cell *matHeaderCellDef>กลุ่มผู้ขอใบอนุญาต</th>
+        <td mat-cell *matCellDef="let element">ชาวไทย</td>
+        <!-- {{ element.isforeign }} -->
       </ng-container>
 
       <ng-container matColumnDef="idCardNo">
@@ -107,7 +106,7 @@
       <ng-container matColumnDef="approveDate">
         <th mat-header-cell *matHeaderCellDef>วันที่ผ่านการตรวจสอบ</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.approveDate }}
+          {{ element.approveDate | thaiDate }}
         </td>
       </ng-container>
 

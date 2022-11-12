@@ -11,6 +11,7 @@ import {
 import { ERequestService, GeneralInfoService } from '@ksp/shared/service';
 import { replaceEmptyWithNull } from '@ksp/shared/utility';
 import localForage from 'localforage';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ksp-create-license-id-detail',
@@ -22,12 +23,14 @@ export class CreateLicenseIdDetailComponent implements OnInit {
   dataSource1 = new MatTableDataSource<info1>();
   displayedColumns2: string[] = column2;
   dataSource2 = new MatTableDataSource<KspRequest>();
-  prefixList!: any;
+  prefixList!: Observable<Prefix[]>;
+  licenseTypes = [{ value: 1, name: 'ใบอนุญาตประกอบวิชาชีพครู' }];
+  myImage: any = null;
 
   form = this.fb.group({
     licenseno: [],
     idcardno: [],
-    licensetype: [],
+    careertype: [],
     prefixth: [],
     firstnameth: [],
     lastnameth: [],
@@ -59,6 +62,8 @@ export class CreateLicenseIdDetailComponent implements OnInit {
   }
 
   rowSelect(data: any) {
+    console.log('data = ', data);
+    //this.myImage = atob(data.imagefileid);
     this.form.patchValue(data);
   }
 
