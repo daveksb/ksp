@@ -57,14 +57,35 @@
         >
           ล้างข้อมูล
         </button>
-        <button (click)="search()" type="button" class="btn btn-primary ms-2">
-          ค้นหา
-        </button>
+        <span
+          [matTooltipDisabled]="!form.invalid"
+          matTooltip="กรุณาเลือกจังหวัดและอำเภอก่อน"
+        >
+          <button
+            (click)="search()"
+            type="button"
+            class="btn btn-primary ms-2"
+            [disabled]="form.invalid"
+          >
+            ค้นหา
+          </button></span
+        >
       </div>
       <hr />
+      <div class="d-flex flex-row align-items-center">
+        <div class="box-header text-primary me-2">ผลการค้นหา</div>
+        <ng-container *ngIf="searchStatus === 'searching'">
+          <div
+            class="spinner-border spinner-border-sm text-primary"
+            role="status"
+          >
+            <span class="sr-only"></span></div
+        ></ng-container>
+      </div>
 
-      <div class="box-header text-primary">ผลการค้นหา</div>
-      <div *ngIf="searchNotFound" class="fs-5 text-center">ไม่พบข้อมูล</div>
+      <div *ngIf="searchNotFound" class="fs-5 text-center text-danger">
+        ไม่พบข้อมูล
+      </div>
       <div class="table-responsive" *ngIf="schoolInfos && schoolInfos.length">
         <table class="table">
           <thead class="header__table">

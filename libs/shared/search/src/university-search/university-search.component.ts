@@ -6,6 +6,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Amphur, Province, SchInfo } from '@ksp/shared/interface';
 import {
   AddressService,
@@ -25,6 +26,7 @@ import { BasicInstituteSearchComponent } from '../basic-institute-search/basic-i
     MatDialogModule,
     BasicInstituteSearchComponent,
     ReactiveFormsModule,
+    MatTooltipModule,
   ],
 })
 export class UniversitySearchComponent implements OnInit {
@@ -35,6 +37,7 @@ export class UniversitySearchComponent implements OnInit {
   universityType$!: Observable<any>;
   selectedUniversity = '';
   searchNotFound = false;
+  searchStatus = '';
 
   form = this.fb.group({
     institution: null,
@@ -98,6 +101,8 @@ export class UniversitySearchComponent implements OnInit {
     const { provinceid, amphurid, offset, row } = data;
     let payload = {};
     this.currentPage = 1;
+    this.searchStatus = 'searching';
+
     if (this.data.searchType != 'uni') {
       payload = {
         bureauid: data?.institution?.bureauid,
@@ -117,9 +122,11 @@ export class UniversitySearchComponent implements OnInit {
           this.searchNotFound = false;
           this.schoolInfos = this.generateAddressShow(res);
           this.payload = payload;
+          this.searchStatus = 'success';
         } else {
-          this.schoolInfos = [];
           this.searchNotFound = true;
+          this.schoolInfos = [];
+          this.searchStatus = 'success';
         }
       });
     } else {
@@ -176,6 +183,7 @@ export class UniversitySearchComponent implements OnInit {
   provinceChange(evt: any) {
     const province = evt.target?.value;
     this.amphurs$ = this.addressService.getAmphurs(province);
+    this.form.controls.amphurid.reset();
   }
 
   goPrevious() {
