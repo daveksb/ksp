@@ -263,6 +263,13 @@ export class ERequestService {
     );
   }
 
+  getRequestListByListNo(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/ksprequestsearcharray_e-self.php`,
+      payload
+    );
+  }
+
   createMultipleLicense(payload: any): Observable<any> {
     return this.http.post(
       `${environment.shortApiUrl}/selflicenseinsertarray.php`,

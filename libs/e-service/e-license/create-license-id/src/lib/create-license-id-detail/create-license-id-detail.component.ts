@@ -54,6 +54,21 @@ export class CreateLicenseIdDetailComponent implements OnInit {
     localForage.getItem('selected-for-create-license').then((res: any) => {
       if (res) {
         this.dataSource1.data = res;
+        console.log(res);
+        const requestlist = res.map((r: any) => r.listno).join(',');
+        console.log(requestlist);
+        if (requestlist) {
+          const payload = {
+            requestlist,
+            offset: '0',
+            row: '10',
+          };
+          this.requestService
+            .getRequestListByListNo(payload)
+            .subscribe((res: any) => {
+              console.log(res);
+            });
+        }
       }
     });
 
