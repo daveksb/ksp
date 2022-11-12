@@ -1,5 +1,4 @@
-<ksp-top-nav
-  ><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span>
+<ksp-top-nav><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span>
   <span subHeader>รับรองใบอนุญาตประกอบวิชาชีพ </span>
 </ksp-top-nav>
 
@@ -23,8 +22,7 @@
             <mat-checkbox
               (click)="$event.stopPropagation()"
               (change)="$event ? selection.toggle(row) : null"
-              [checked]="selection.isSelected(row)"
-            >
+              [checked]="selection.isSelected(row)">
             </mat-checkbox>
           </td>
         </ng-container>
@@ -37,21 +35,25 @@
 
         <ng-container matColumnDef="order">
           <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
-          <td mat-cell *matCellDef="let element">
-            {{ element.order }}
+          <td mat-cell *matCellDef="let element; let i = index">
+            {{
+            paginator.pageIndex === 0
+            ? i + 1
+            : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+            }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="idCardNo">
           <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.idCardNo }}
+            {{ element.idcardno }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
-          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.firstnameth }} {{ element.lastnameth }}</td>
         </ng-container>
 
         <ng-container matColumnDef="educationLevel">
@@ -67,8 +69,7 @@
             <input
               type="checkbox"
               class="me-2"
-              [checked]="element.experience"
-            />
+              [checked]="element.experience" />
           </td>
         </ng-container>
 
@@ -91,17 +92,20 @@
 
         <ng-container matColumnDef="requestDate">
           <th mat-header-cell *matHeaderCellDef>วันที่ยื่นคำขอ</th>
-          <td mat-cell *matCellDef="let element">{{ element.requestDate }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.requestdate | thaiDate }}</td>
         </ng-container>
 
         <ng-container matColumnDef="licenseNo">
           <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
-          <td mat-cell *matCellDef="let element">{{ element.licenseNo }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.requestno }}</td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
+
+      <mat-paginator [pageSizeOptions]="[25]" showFirstLastButtons>
+      </mat-paginator>
     </div>
   </div>
 </div>
@@ -112,7 +116,6 @@
     [showSaveButton]="true"
     [isFirstPage]="true"
     [isLastPage]="true"
-    (saveClicked)="confirmDialog()"
-  >
+    (saveClicked)="confirmDialog()">
   </ksp-bottom-nav>
 </div>
