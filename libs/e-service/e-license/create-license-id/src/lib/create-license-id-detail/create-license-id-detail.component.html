@@ -187,7 +187,10 @@
   <div [formGroup]="form" class="bg-white px-3 py-3 mt-3">
     <div class="row">
       <div class="col-lg-3 my-auto">
-        <self-service-form-upload-image></self-service-form-upload-image>
+        <!-- [imgSrc]="myImage" -->
+        <self-service-form-upload-image
+          [isEditMode]="false"
+        ></self-service-form-upload-image>
       </div>
       <div class="col-md mt-md-0 mt-2">
         <div class="row">
@@ -196,7 +199,6 @@
             <input
               class="form-control"
               type="text"
-              placeholder="กรุณากรอกนามสกุลภาษาไทย"
               formControlName="licenseno"
             />
           </div>
@@ -205,17 +207,16 @@
             <input
               class="form-control"
               type="text"
-              placeholder="กรุณากรอกชื่อภาษาไทย"
               formControlName="idcardno"
             />
           </div>
 
           <div class="col-md-6 mb-2">
             <label class="form-label">ประเภทใบอนุญาตประกอบวิชาชีพ</label>
-            <select class="form-select" formControlName="licensetype">
+            <select class="form-select" formControlName="careertype">
               <option disabled hidden selected value="null">กรุณาเลือก</option>
-              <option *ngFor="let prefix of prefixList" [value]="prefix.id">
-                {{ prefix?.name_th }}
+              <option *ngFor="let l of licenseTypes" [value]="l.value">
+                {{ l.name }}
               </option>
             </select>
           </div>
