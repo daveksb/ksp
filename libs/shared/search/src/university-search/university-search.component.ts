@@ -41,8 +41,8 @@ export class UniversitySearchComponent implements OnInit {
 
   form = this.fb.group({
     institution: null,
-    provinceid: [null, Validators.required],
-    amphurid: [null, Validators.required],
+    provinceid: [null],
+    amphurid: [null],
     offset: '0',
     row: '25',
   });
@@ -69,11 +69,11 @@ export class UniversitySearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.getList();
-    if (this.data.searchType == 'uni') {
-      this.form.controls.provinceid.setValidators([Validators.required]);
-      this.form.controls.amphurid.setValidators([Validators.required]);
-      this.form.updateValueAndValidity();
-    }
+    // if (this.data.searchType == 'uni') {
+    //   this.form.controls.provinceid.setValidators([Validators.required]);
+    //   this.form.controls.amphurid.setValidators([Validators.required]);
+    //   this.form.updateValueAndValidity();
+    // }
   }
 
   getList() {
@@ -141,8 +141,16 @@ export class UniversitySearchComponent implements OnInit {
           row,
         };
         this.uniinfoService.searchUniversity(payload).subscribe((res: any) => {
-          this.schoolInfos = this.generateAddressShow(res);
-          this.payload = payload;
+          if (res && res.length) {
+            this.searchNotFound = false;
+            this.schoolInfos = this.generateAddressShow(res);
+            this.payload = payload;
+            this.searchStatus = 'success';
+          } else {
+            this.searchNotFound = true;
+            this.schoolInfos = [];
+            this.searchStatus = 'success';
+          }
         });
       }
     }
