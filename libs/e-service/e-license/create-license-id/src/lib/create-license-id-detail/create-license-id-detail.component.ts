@@ -55,11 +55,11 @@ export class CreateLicenseIdDetailComponent implements OnInit {
       if (res) {
         this.dataSource1.data = res;
         console.log(res);
-        const requestlist = res.map((r: any) => r.listno).join(',');
-        console.log(requestlist);
-        if (requestlist) {
+        const listno = res.map((r: any) => r.listno).join(',');
+        console.log(listno);
+        if (listno) {
           const payload = {
-            requestlist,
+            listno,
             offset: '0',
             row: '10',
           };
@@ -67,12 +67,15 @@ export class CreateLicenseIdDetailComponent implements OnInit {
             .getRequestListByListNo(payload)
             .subscribe((res: any) => {
               console.log(res);
+              if (res?.datareturn) {
+                this.dataSource2.data = res.datareturn;
+              }
             });
         }
       }
     });
 
-    this.search({});
+    // this.search({});
     this.prefixList = this.generalInfoService.getPrefix();
   }
 
