@@ -283,4 +283,11 @@ export class ERequestService {
       payload
     );
   }
+
+  updateRequestUrgent(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/ksprequestupdateisurgent`,
+      payload
+    );
+  }
 }
