@@ -261,4 +261,11 @@ export class ERequestService {
       payload
     );
   }
+
+  createMultipleLicense(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/selflicenseinsertarray.php`,
+      payload
+    );
+  }
 }

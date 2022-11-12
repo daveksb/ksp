@@ -7,8 +7,7 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { ERequestService } from '@ksp/shared/service';
-import { parseJson } from '@ksp/shared/utility';
-import { BehaviorSubject } from 'rxjs';
+import { formatDatePayload, parseJson } from '@ksp/shared/utility';
 
 const DEFAULT_REQUEST_TYPE_LIST = [
   {
@@ -171,11 +170,13 @@ export class RequestLicenseApproveKmvComponent implements OnInit {
         };
         this.requestService.updateApproveGroup2(payload).subscribe((res) => {
           if (res?.returnmessage === 'success') {
-            const payload2 = {
+            const payload2 = formatDatePayload({
               approvedate: value.date,
-              matilevel2: this.id,
-              listno: this.listData.split(' | ').join(','),
-            };
+              matilevel2: '', //this.id,
+              listno: this.listData
+                ? this.listData.split(' | ').join(',')
+                : null,
+            });
             this.requestService
               .updateDateForMati2(payload2)
               .subscribe((res) => {

@@ -5,11 +5,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SelfServiceRequestSubType } from '@ksp/shared/constant';
-import {
-  CompleteDialogComponent,
-  ConfirmDialogComponent,
-} from '@ksp/shared/dialog';
+import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { ERequestService } from '@ksp/shared/service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'ksp-request-license-approve-guaruntee',
@@ -43,7 +41,8 @@ export class RequestLicenseApproveGuarunteeComponent
     private dialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute,
-    private requestService: ERequestService
+    private requestService: ERequestService,
+    private location: Location
   ) {}
 
   ngAfterViewInit() {
@@ -99,36 +98,6 @@ export class RequestLicenseApproveGuarunteeComponent
           });
       }
     });
-
-    // this.dataSource.data = [
-    //   {
-    //     select: true,
-    //     order: 1,
-    //     idCardNo: '3-6406-00004-00-1',
-    //     name: 'นายสมชาย สมบัติ',
-    //     educationLevel: 'ศิลปศาสตร์บัณฑิต',
-    //     experience: true,
-    //     prohibitType: 'รับรอง',
-    //     urgent: true,
-    //     payDate: '01 มิ.ย. 2564',
-    //     requestDate: '01 มิ.ย. 2564',
-    //     licenseNo: 'SF_TR640600004',
-    //   },
-    //   {
-    //     select: true,
-    //     order: 2,
-    //     idCardNo: '3-6406-00004-00-1',
-    //     name: 'นางสาวพรทิพย์ นาคปรก',
-    //     educationLevel: 'วิทยาศาสตร์บัณฑิต',
-    //     experience: true,
-    //     prohibitType: 'รับรอง',
-    //     urgent: true,
-    //     payDate: '01 มิ.ย. 2564',
-
-    //     requestDate: '01 มิ.ย. 2564',
-    //     licenseNo: 'SF_TR640600004',
-    //   },
-    // ];
   }
 
   confirmDialog() {
@@ -145,5 +114,9 @@ export class RequestLicenseApproveGuarunteeComponent
         this.router.navigate(['/request-license', 'kmv']);
       }
     });
+  }
+
+  back() {
+    this.location.back();
   }
 }
