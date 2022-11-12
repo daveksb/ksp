@@ -74,7 +74,7 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
           if (res?.returnmessage === 'success') {
             const payload2 = formatDatePayload({
               considerdate: value.date,
-              matilevel1: this.id,
+              matilevel1: value.no,
               listno: this.listNo.split(' | ').join(','),
             });
             this.requestService
