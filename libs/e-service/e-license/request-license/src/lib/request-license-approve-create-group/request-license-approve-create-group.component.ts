@@ -1,3 +1,4 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -41,9 +42,35 @@ export class RequestLicenseApproveCreateGroupComponent
     'requestDate',
   ];
   dataSource = new MatTableDataSource<CheckKSPRequest>();
-  licenseData: any;
+  licenseData = [
+    {
+      order: 1,
+      licenseType: 'ครู',
+      count: 0,
+    },
+    {
+      order: 2,
+      licenseType: 'ครูชาวต่างชาติ',
+      count: 0,
+    },
+    {
+      order: 3,
+      licenseType: 'ผู้บริหารสถานศึกษา',
+      count: 0,
+    },
+    {
+      order: 4,
+      licenseType: 'ผู้บริหารการศึกษา',
+      count: 0,
+    },
+    {
+      order: 5,
+      licenseType: 'ศึกษานิเทศก์',
+      count: 0,
+    },
+  ];
   listNo!: number;
-  countRow = 0;
+  selection = new SelectionModel<any>(true, []);
 
   form = this.fb.group({
     createNumber: [false],
@@ -68,41 +95,12 @@ export class RequestLicenseApproveCreateGroupComponent
     });
 
     this.requestService.getLevel2LicenseList().subscribe((res) => {
-      this.countRow = res.countrow;
+      console.log('res level 2 = ', res);
       this.dataSource.data = res.datareturn.map((item) => ({
         ...item,
         check: false,
       }));
-      // console.log(res);
     });
-
-    this.licenseData = [
-      {
-        order: 1,
-        licenseType: 'ครู',
-        count: 0,
-      },
-      {
-        order: 2,
-        licenseType: 'ครูชาวต่างชาติ',
-        count: 0,
-      },
-      {
-        order: 3,
-        licenseType: 'ผู้บริหารสถานศึกษา',
-        count: 0,
-      },
-      {
-        order: 4,
-        licenseType: 'ผู้บริหารการศึกษา',
-        count: 0,
-      },
-      {
-        order: 5,
-        licenseType: 'ศึกษานิเทศก์',
-        count: 0,
-      },
-    ];
   }
 
   onCheck(element: CheckKSPRequest) {
@@ -203,5 +201,22 @@ export class RequestLicenseApproveCreateGroupComponent
         this.router.navigate(['/request-license', 'search-list']);
       }
     });
+  }
+
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      return;
+    }
+
+    this.selection.select(...this.dataSource.data);
   }
 }

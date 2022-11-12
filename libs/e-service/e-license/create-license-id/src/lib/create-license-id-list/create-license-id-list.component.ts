@@ -80,17 +80,3 @@ interface info {
   verifyDate: string;
   approveDate: string;
 }
-
-const data: info[] = [
-  {
-    group: 'string',
-    list: 'string',
-    number: 'string',
-    licenseType: 'string',
-    groupType: 'string',
-    status: 'string',
-    considerDate: 'string',
-    verifyDate: 'string',
-    approveDate: 'string',
-  },
-];

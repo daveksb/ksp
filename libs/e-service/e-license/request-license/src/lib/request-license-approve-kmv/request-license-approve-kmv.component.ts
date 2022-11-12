@@ -1,11 +1,64 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SelfServiceRequestSubType } from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { ERequestService } from '@ksp/shared/service';
+import { formatDatePayload, parseJson } from '@ksp/shared/utility';
+
+const DEFAULT_REQUEST_TYPE_LIST = [
+  {
+    order: 1,
+    licenseType: 'ครู',
+    count: 0,
+    approve: 0,
+    unApprove: 0,
+    urgent: 0,
+  },
+  {
+    order: 2,
+    licenseType: 'ครูชาวต่างชาติ',
+    count: 0,
+    approve: 0,
+    unApprove: 0,
+    urgent: 0,
+  },
+  {
+    order: 3,
+    licenseType: 'KSP Bundit',
+    count: 0,
+    approve: 0,
+    unApprove: 0,
+    urgent: 0,
+  },
+  {
+    order: 4,
+    licenseType: 'ผู้บริหารสถานศึกษา',
+    count: 0,
+    approve: 0,
+    unApprove: 0,
+    urgent: 0,
+  },
+  {
+    order: 5,
+    licenseType: 'ผู้บริหารการศึกษา',
+    count: 0,
+    approve: 0,
+    unApprove: 0,
+    urgent: 0,
+  },
+  {
+    order: 6,
+    licenseType: 'ศึกษานิเทศก์',
+    count: 0,
+    approve: 0,
+    unApprove: 0,
+    urgent: 0,
+  },
+];
 
 @Component({
   selector: 'ksp-request-license-approve-kmv',
@@ -14,6 +67,11 @@ import { ERequestService } from '@ksp/shared/service';
 })
 export class RequestLicenseApproveKmvComponent implements OnInit {
   groupNo!: string;
+  listData!: any;
+  id!: string;
+  requestList: any[] = [];
+  requestTypeList: any[] = [];
+
   constructor(
     private dialog: MatDialog,
     private router: Router,
@@ -22,11 +80,51 @@ export class RequestLicenseApproveKmvComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.requestTypeList = [...DEFAULT_REQUEST_TYPE_LIST];
     this.route.queryParamMap.subscribe((params) => {
       const group = params.get('group') || '';
 
       if (group) {
         this.groupNo = group;
+        this.requestService.getSelfApproveGroupById(group).subscribe((res) => {
+          this.id = res.id;
+          this.listData = parseJson(res.grouplist)
+            .toString()
+            .replaceAll(',', ' | ');
+        });
+
+        this.requestService
+          .getRequestListByGroupNo({
+            groupno: group,
+            offset: '0',
+            row: '100',
+          })
+          .subscribe((res) => {
+            if (res && res.datareturn.length > 0) {
+              this.requestList = res.datareturn;
+
+              this.requestList.forEach((item) => {
+                switch (+item.careertype) {
+                  case SelfServiceRequestSubType.ครู: {
+                    this.requestTypeList[0].count += 1;
+                    break;
+                  }
+                  case SelfServiceRequestSubType.ผู้บริหารสถานศึกษา: {
+                    this.requestTypeList[3].count += 1;
+                    break;
+                  }
+                  case SelfServiceRequestSubType.ผู้บริหารการศึกษา: {
+                    this.requestTypeList[4].count += 1;
+                    break;
+                  }
+                  case SelfServiceRequestSubType.ศึกษานิเทศก์: {
+                    this.requestTypeList[5].count += 1;
+                    break;
+                  }
+                }
+              });
+            }
+          });
       }
     });
   }
@@ -61,7 +159,7 @@ export class RequestLicenseApproveKmvComponent implements OnInit {
     dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         const payload = {
-          id: '44',
+          id: this.id,
           matilevel2no: value.no,
           matilevel2date: value.date,
           matilevel2boardname: value.boardname,
@@ -72,7 +170,20 @@ export class RequestLicenseApproveKmvComponent implements OnInit {
         };
         this.requestService.updateApproveGroup2(payload).subscribe((res) => {
           if (res?.returnmessage === 'success') {
-            this.completeDialog();
+            const payload2 = formatDatePayload({
+              approvedate: value.date,
+              matilevel2: value.no,
+              listno: this.listData
+                ? this.listData.split(' | ').join(',')
+                : null,
+            });
+            this.requestService
+              .updateDateForMati2(payload2)
+              .subscribe((res) => {
+                if (res?.returnmessage === 'success') {
+                  this.completeDialog();
+                }
+              });
           }
         });
       }
@@ -90,6 +201,12 @@ export class RequestLicenseApproveKmvComponent implements OnInit {
       if (res) {
         this.cancel();
       }
+    });
+  }
+
+  onListOpen(order: string) {
+    this.router.navigate(['/request-license', 'guarantee-confirm'], {
+      queryParams: { order: order, group: this.groupNo },
     });
   }
 }

@@ -49,6 +49,15 @@ export class ERequestService {
     );
   }
 
+  getSelfApproveGroupById(groupno: string): Observable<any> {
+    return this.http.post<KspRequest>(
+      `${environment.apiUrl}/e-service/selfapprovegroupsearchgroupno`,
+      {
+        groupno,
+      }
+    );
+  }
+
   searchRequestList(payload: any): Observable<any> {
     return this.http
       .post(`${environment.shortApiUrl}/selfapprovelistsearch.php`, payload)
@@ -195,6 +204,7 @@ export class ERequestService {
     );
   }
 
+  // ค้นหาใบคำขอที่มี สถานะตรวจเอกสารลำดับที่ 2
   getLevel2LicenseList(): Observable<KspListResponse<KspRequest>> {
     return this.http.get<KspListResponse<KspRequest>>(
       `${environment.shortApiUrl}/ksprequestsearch_e-self.php`,
@@ -218,6 +228,20 @@ export class ERequestService {
     );
   }
 
+  updateDateForMati1(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/uniapprovelistupdate_considerdate_es.php`,
+      payload
+    );
+  }
+
+  updateDateForMati2(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/uniapprovelistupdate_approvedate_es.php`,
+      payload
+    );
+  }
+
   updateApproveGroup2(payload: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/e-service/selfapprovegroupupdate_2`,
@@ -228,6 +252,20 @@ export class ERequestService {
   updateMultiList(payload: any): Observable<any> {
     return this.http.post(
       `${environment.shortApiUrl}/uniapprovelistupdate_es.php`,
+      payload
+    );
+  }
+
+  getRequestListByGroupNo(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/ksprequestsearcharray_e-self_groupno.php`,
+      payload
+    );
+  }
+
+  createMultipleLicense(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/selflicenseinsertarray.php`,
       payload
     );
   }

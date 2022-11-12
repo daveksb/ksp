@@ -3,7 +3,6 @@ import {
   idCardPattern,
   nameEnPattern,
   nameThPattern,
-  passportPattern,
   phonePattern,
 } from './form-validators';
 import { validateIdCard } from './function';

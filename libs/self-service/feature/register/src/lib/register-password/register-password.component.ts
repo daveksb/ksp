@@ -33,6 +33,8 @@ export class RegisterPasswordComponent implements OnInit {
   myInfo = new SelfMyInfo();
   passwordEqual = false;
   validatorMessages = validatorMessages;
+  eyeIconClicked1 = false;
+  eyeIconClicked2 = false;
 
   constructor(
     public dialog: MatDialog,

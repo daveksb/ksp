@@ -19,13 +19,15 @@
       <div class="d-flex align-items-center mt-2 mb-3">
         <div class="content">บัญชีที่ / List No.</div>
         <div class="content-sub" style="margin-left: 37px">
-          7004 | 7005 | 7006 | 7007
+          {{ listData }}
         </div>
       </div>
 
       <div class="content fs-4 mb-2">สรุปจำนวนผู้ยื่นขอขึ้นทะเบียน</div>
       <ksp-request-license-approve-license-table
         [isKmv]="true"
+        [data]="requestTypeList"
+        (listOpen)="onListOpen($event)"
         class="summary-table"></ksp-request-license-approve-license-table>
     </div>
   </div>

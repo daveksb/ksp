@@ -6,7 +6,7 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { ERequestService } from '@ksp/shared/service';
-import { parseJson } from '@ksp/shared/utility';
+import { formatDatePayload, parseJson } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-request-license-approve-save-result',
@@ -17,6 +17,33 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
   groupNo!: string;
   id!: string;
   listNo = '';
+  licenseData = [
+    {
+      order: 1,
+      licenseType: 'ครู',
+      count: 0,
+    },
+    {
+      order: 2,
+      licenseType: 'ครูชาวต่างชาติ',
+      count: 0,
+    },
+    {
+      order: 3,
+      licenseType: 'ผู้บริหารสถานศึกษา',
+      count: 0,
+    },
+    {
+      order: 4,
+      licenseType: 'ผู้บริหารการศึกษา',
+      count: 0,
+    },
+    {
+      order: 5,
+      licenseType: 'ศึกษานิเทศก์',
+      count: 0,
+    },
+  ];
 
   constructor(
     private router: Router,
@@ -49,6 +76,7 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
 
   save(value: any) {
     console.log(value);
+
     const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการยืนยันข้อมูล
@@ -68,9 +96,21 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
           matilevel1fileinfo: null,
           matilevel1detail: value.detail,
         };
+
         this.requestService.updateApproveGroup(payload).subscribe((res) => {
           if (res?.returnmessage === 'success') {
-            this.completeDialog();
+            const payload2 = formatDatePayload({
+              considerdate: value.date,
+              matilevel1: value.no,
+              listno: this.listNo.split(' | ').join(','),
+            });
+            this.requestService
+              .updateDateForMati1(payload2)
+              .subscribe((res) => {
+                if (res?.returnmessage === 'success') {
+                  this.completeDialog();
+                }
+              });
           }
         });
       }
