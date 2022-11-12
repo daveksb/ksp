@@ -8,7 +8,7 @@ import {
   Prefix,
   SchRequestSearchFilter,
 } from '@ksp/shared/interface';
-import { ERequestService } from '@ksp/shared/service';
+import { ERequestService, GeneralInfoService } from '@ksp/shared/service';
 import { replaceEmptyWithNull } from '@ksp/shared/utility';
 import localForage from 'localforage';
 
@@ -22,7 +22,7 @@ export class CreateLicenseIdDetailComponent implements OnInit {
   dataSource1 = new MatTableDataSource<info1>();
   displayedColumns2: string[] = column2;
   dataSource2 = new MatTableDataSource<KspRequest>();
-  prefixList: Prefix[] | null = [];
+  prefixList!: any;
 
   form = this.fb.group({
     licenseno: [],
@@ -43,7 +43,8 @@ export class CreateLicenseIdDetailComponent implements OnInit {
   constructor(
     private router: Router,
     private requestService: ERequestService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private generalInfoService: GeneralInfoService
   ) {}
 
   ngOnInit(): void {
@@ -54,6 +55,11 @@ export class CreateLicenseIdDetailComponent implements OnInit {
     });
 
     this.search({});
+    this.prefixList = this.generalInfoService.getPrefix();
+  }
+
+  rowSelect(data: any) {
+    this.form.patchValue(data);
   }
 
   createMultiLicense() {
