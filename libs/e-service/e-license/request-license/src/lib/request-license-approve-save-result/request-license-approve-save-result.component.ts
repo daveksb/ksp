@@ -70,7 +70,18 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
         };
         this.requestService.updateApproveGroup(payload).subscribe((res) => {
           if (res?.returnmessage === 'success') {
-            this.completeDialog();
+            const payload2 = {
+              considerdate: value.date,
+              matilevel1: this.id,
+              listno: this.listNo.split(' | ').join(','),
+            };
+            this.requestService
+              .updateDateForMati1(payload2)
+              .subscribe((res) => {
+                if (res?.returnmessage === 'success') {
+                  this.completeDialog();
+                }
+              });
           }
         });
       }

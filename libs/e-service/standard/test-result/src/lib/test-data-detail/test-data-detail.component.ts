@@ -13,6 +13,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { ListData } from '@ksp/shared/interface';
 import moment from 'moment';
 import { thaiDate } from '@ksp/shared/utility';
+const MAX_UPLOAD_DATA = 2000;
 @Component({
   selector: 'ksp-test-data-detail',
   templateUrl: './test-data-detail.component.html',
@@ -60,15 +61,22 @@ export class TestDataDetailComponent implements OnInit {
 
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        // this.eUniService
-        //   .insertUniExamResult(
-        //     _.filter(this.dataSource.data, ({ isValid }) =>
-        //       _.isUndefined(isValid)
-        //     )
-        //   )
-        //   .subscribe(() => {
-        //     this.onCompleted();
-        //   });
+        let uploadData = this.importData;
+        if (_.size(uploadData) > MAX_UPLOAD_DATA) {
+          this.importData = _.slice(uploadData, 2000);
+          uploadData = _.slice(uploadData, 0, 1999);
+          this.dataSource.data = _.slice(this.importData, 0, 24);
+        } else {
+          this.importData = [];
+          this.dataSource.data = [];
+        }
+        this.eUniService
+          .insertUniExamResult(
+            _.filter(uploadData, ({ isValid }) => _.isUndefined(isValid))
+          )
+          .subscribe(() => {
+            this.onCompleted();
+          });
       }
     });
   }
@@ -142,10 +150,7 @@ export class TestDataDetailComponent implements OnInit {
     return _.size(this.importData) - this.inValidSize;
   }
   get inValidSize() {
-    return _.filter(
-      this.importData,
-      ({ isValid }) => isValid === false
-    ).length;
+    return _.filter(this.importData, ({ isValid }) => isValid === false).length;
   }
   get disableSaveButton() {
     return (
@@ -182,7 +187,11 @@ export class TestDataDetailComponent implements OnInit {
     };
   }
   onPaginatorEvent(e: PageEvent) {
-   this.dataSource.data = _.slice(this.importData, 24 * e.pageIndex , (24 * e.pageIndex)+ 24)
+    this.dataSource.data = _.slice(
+      this.importData,
+      24 * e.pageIndex,
+      24 * e.pageIndex + 24
+    );
   }
   getFullName(element: any) {
     return [element?.subjectcode, element?.firstname, element?.lastname]
