@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
@@ -7,7 +15,9 @@ import { Router } from '@angular/router';
   templateUrl: './request-license-approve-license-table.component.html',
   styleUrls: ['./request-license-approve-license-table.component.scss'],
 })
-export class RequestLicenseApproveLicenseTableComponent implements OnInit {
+export class RequestLicenseApproveLicenseTableComponent
+  implements OnInit, OnChanges
+{
   @Input() isKmv = false;
   @Input() data: any[] = [];
   @Output() listOpen = new EventEmitter();
@@ -29,6 +39,12 @@ export class RequestLicenseApproveLicenseTableComponent implements OnInit {
           'urgent',
         ])
       : (this.displayedColumns = ['order', 'licenseType', 'count']);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['data']) {
+      this.dataSource.data = this.data;
+    }
   }
 
   viewDetail(item: any) {
