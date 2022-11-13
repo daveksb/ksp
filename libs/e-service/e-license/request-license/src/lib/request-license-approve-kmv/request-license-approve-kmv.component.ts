@@ -13,10 +13,10 @@ const DEFAULT_REQUEST_TYPE_LIST = [
   {
     order: 1,
     licenseType: 'ครู',
-    count: 0,
-    approve: 0,
-    unApprove: 0,
-    urgent: 0,
+    // count: 0,
+    // approve: 0,
+    // unApprove: 0,
+    // urgent: 0,
   },
   {
     order: 2,
@@ -37,26 +37,26 @@ const DEFAULT_REQUEST_TYPE_LIST = [
   {
     order: 4,
     licenseType: 'ผู้บริหารสถานศึกษา',
-    count: 0,
-    approve: 0,
-    unApprove: 0,
-    urgent: 0,
+    // count: 0,
+    // approve: 0,
+    // unApprove: 0,
+    // urgent: 0,
   },
   {
     order: 5,
     licenseType: 'ผู้บริหารการศึกษา',
-    count: 0,
-    approve: 0,
-    unApprove: 0,
-    urgent: 0,
+    // count: 0,
+    // approve: 0,
+    // unApprove: 0,
+    // urgent: 0,
   },
   {
     order: 6,
     licenseType: 'ศึกษานิเทศก์',
-    count: 0,
-    approve: 0,
-    unApprove: 0,
-    urgent: 0,
+    // count: 0,
+    // approve: 0,
+    // unApprove: 0,
+    // urgent: 0,
   },
 ];
 
@@ -80,7 +80,7 @@ export class RequestLicenseApproveKmvComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.requestTypeList = [...DEFAULT_REQUEST_TYPE_LIST];
+    // this.requestTypeList = [...DEFAULT_REQUEST_TYPE_LIST];
     this.route.queryParamMap.subscribe((params) => {
       const group = params.get('group') || '';
 
@@ -103,25 +103,69 @@ export class RequestLicenseApproveKmvComponent implements OnInit {
             if (res && res.datareturn.length > 0) {
               this.requestList = res.datareturn;
 
-              this.requestList.forEach((item) => {
-                switch (+item.careertype) {
-                  case SelfServiceRequestSubType.ครู: {
-                    this.requestTypeList[0].count += 1;
-                    break;
-                  }
-                  case SelfServiceRequestSubType.ผู้บริหารสถานศึกษา: {
-                    this.requestTypeList[3].count += 1;
-                    break;
-                  }
-                  case SelfServiceRequestSubType.ผู้บริหารการศึกษา: {
-                    this.requestTypeList[4].count += 1;
-                    break;
-                  }
-                  case SelfServiceRequestSubType.ศึกษานิเทศก์: {
-                    this.requestTypeList[5].count += 1;
-                    break;
-                  }
+              const teacherCount = this.requestList.filter(
+                (item) => +item.careertype === SelfServiceRequestSubType.ครู
+              ).length;
+
+              const schoolManagerCount = this.requestList.filter(
+                (item) =>
+                  +item.careertype ===
+                  SelfServiceRequestSubType.ผู้บริหารสถานศึกษา
+              ).length;
+
+              const educationManagerCount = this.requestList.filter(
+                (item) =>
+                  +item.careertype ===
+                  SelfServiceRequestSubType.ผู้บริหารการศึกษา
+              ).length;
+
+              const educationConsultantCount = this.requestList.filter(
+                (item) =>
+                  +item.careertype === SelfServiceRequestSubType.ศึกษานิเทศก์
+              ).length;
+
+              this.requestTypeList = DEFAULT_REQUEST_TYPE_LIST.map((item) => {
+                if (item.order === 1) {
+                  return {
+                    ...item,
+                    count: teacherCount,
+                    approve: 0,
+                    unApprove: 0,
+                    urgent: 0,
+                  };
                 }
+
+                if (item.licenseType === 'ผู้บริหารสถานศึกษา') {
+                  return {
+                    ...item,
+                    count: schoolManagerCount,
+                    approve: 0,
+                    unApprove: 0,
+                    urgent: 0,
+                  };
+                }
+
+                if (item.licenseType === 'ผู้บริหารการศึกษา') {
+                  return {
+                    ...item,
+                    count: educationManagerCount,
+                    approve: 0,
+                    unApprove: 0,
+                    urgent: 0,
+                  };
+                }
+
+                if (item.licenseType === 'ศึกษานิเทศก์') {
+                  return {
+                    ...item,
+                    count: educationConsultantCount,
+                    approve: 0,
+                    unApprove: 0,
+                    urgent: 0,
+                  };
+                }
+
+                return item;
               });
             }
           });

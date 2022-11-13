@@ -5,7 +5,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SelfServiceRequestSubType } from '@ksp/shared/constant';
-import { ConfirmDialogComponent } from '@ksp/shared/dialog';
+import {
+  CompleteDialogComponent,
+  ConfirmDialogComponent,
+} from '@ksp/shared/dialog';
 import { ERequestService } from '@ksp/shared/service';
 import { Location } from '@angular/common';
 
@@ -118,5 +121,53 @@ export class RequestLicenseApproveGuarunteeComponent
 
   back() {
     this.location.back();
+  }
+
+  approve() {
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: `คุณต้องการยืนยันข้อมูล
+        ใช่หรือไม่? `,
+      },
+    });
+
+    dialog.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        const data = this.selection.selected.map((item: any) => ({
+          requestid: item.id,
+          process: '5',
+          status: '3',
+          // detail: '',
+          // systemtype: '4',
+          // userid: '123',
+        }));
+        if (data.length > 0) {
+          const payload = {
+            data,
+          };
+          this.requestService
+            .updateMultipleLicenseStatus(payload)
+            .subscribe((res) => {
+              // if (res?.)
+              console.log(res);
+              this.completeDialog();
+            });
+        }
+      }
+    });
+  }
+
+  completeDialog() {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header: `บันทึกข้อมูลสำเร็จ`,
+      },
+    });
+
+    dialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.back();
+      }
+    });
   }
 }
