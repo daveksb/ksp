@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -33,6 +33,7 @@ export class EServiceLicenseSaveResultComponent extends KspFormBaseComponent {
     presidentname: [null],
     result: [null],
     detail: [null],
+    urgent: [false],
   });
 
   constructor(private fb: FormBuilder) {
