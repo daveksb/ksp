@@ -1,9 +1,9 @@
 <form [formGroup]="form">
-  <div class="box-header required">มาตราฐานความรู้ที่ต้องการรับรอง</div>
   <div
-    class="d-flex flex-column flex-md-row align-items-end align-items-md-center justify-content-end justify-content-md-between"
+    class="d-flex flex-column flex-md-row align-items-md-center justify-content-start justify-content-md-between"
   >
-    <select class="form-select" formControlName="standardInfo">
+    <div class="box-header required">มาตราฐานความรู้ที่ต้องการรับรอง</div>
+    <!-- <select class="form-select" formControlName="standardInfo">
       <option value="null" selected hidden disabled>กรุณาเลือก</option>
       <option value="1">ความเป็นครู</option>
       <option value="2">ปรัชญาการศึกษา</option>
@@ -16,12 +16,14 @@
       <option value="9">การวัดและการประเมินผลการเรียนรู้</option>
       <option value="10">การประกันคุณภาพการศึกษา</option>
       <option value="11">คุณธรรม จริยธรรม และจรรยาบรรณ</option>
-    </select>
-    <ksp-add-row-button
-      [classList]="'text-primary w-md-25 w-md-50 ms-md-3'"
-      (addRowClick)="addStandard()"
-      >เพิ่มมาตรฐานและหลักฐาน</ksp-add-row-button
-    >
+    </select> -->
+    <div class="d-flex justify-content-end">
+      <ksp-add-row-button
+        [classList]="'text-primary w-md-25 w-md-50 ms-md-3'"
+        (addRowClick)="addStandard()"
+        >เพิ่มมาตรฐานและหลักฐาน</ksp-add-row-button
+      >
+    </div>
   </div>
 
   <ng-container formArrayName="standards">
@@ -29,21 +31,45 @@
       *ngFor="let transferForm of standards.controls; let i = index"
     >
       <ng-container [formGroupName]="i">
-        <div class="bg-light py-2 px-3 mt-3">
+        <div class="bg-light py-2 px-3 mb-3">
           <div class="d-flex justify-content-between">
-            <div class="form-label pb-3">มาตรฐานความรู้ที่ {{ i + 1 }}</div>
+            <div class="form-label">มาตรฐานความรู้ที่ {{ i + 1 }}</div>
             <i
               class="bi bi-x-circle-fill text-danger"
               role="button"
               (click)="deleteStandard(i)"
             ></i>
           </div>
+          <div class="row">
+            <div class="col-md-6 mb-2">
+              <select class="form-select" formControlName="standardInfo">
+                <option value="null" selected hidden disabled>
+                  กรุณาเลือก
+                </option>
+                <option value="1">ความเป็นครู</option>
+                <option value="2">ปรัชญาการศึกษา</option>
+                <option value="3">ภาษาและวัฒนธรรม</option>
+                <option value="4">จิตวิทยาสำหรับครู</option>
+                <option value="5">หลักสูตร</option>
+                <option value="6">
+                  การจัดการเรียนรู้และการจัดการชั้นเรียน
+                </option>
+                <option value="7">การวิจัยเพื่อพัฒนาการเรียนรู้</option>
+                <option value="8">
+                  นวัตกรรมและเทคโนโลยีสารสนเทศทางการศึกษา
+                </option>
+                <option value="9">การวัดและการประเมินผลการเรียนรู้</option>
+                <option value="10">การประกันคุณภาพการศึกษา</option>
+                <option value="11">คุณธรรม จริยธรรม และจรรยาบรรณ</option>
+              </select>
+            </div>
+          </div>
           <ng-container formArrayName="subjects">
             <ng-container
               *ngFor="let subject of getSubjects(i).controls; let j = index"
             >
               <ng-container [formGroupName]="j">
-                <div class="py-2 px-3 border bg-white mb-3">
+                <div class="py-2 px-3 bg-white mb-2">
                   <div class="d-flex justify-content-end" *ngIf="j > 0">
                     <i
                       class="bi bi-x-circle-fill text-danger"
@@ -94,7 +120,7 @@
               </ng-container>
             </ng-container>
           </ng-container>
-          <div class="d-flex justify-content-end mt-3">
+          <div class="d-flex">
             <ksp-add-row-button
               [classList]="'text-primary'"
               (addRowClick)="addSubject(i)"

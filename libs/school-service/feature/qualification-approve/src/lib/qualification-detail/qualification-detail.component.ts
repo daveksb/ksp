@@ -255,7 +255,7 @@ export class QualificationDetailComponent implements OnInit {
       .subscribe((res: any) => {
         this.schoolName = res.schoolName;
         this.bureauName = res.bureauName;
-        this.address = `บ้านเลขที่ ${res.address} ซอย ${
+        this.address = `เลขที่ ${res.address} ซอย ${
           res?.street ?? ''
         } หมู่ ${res?.moo ?? ''} ถนน ${res?.road ?? ''} ตำบล ${
           res.tumbon

@@ -53,7 +53,7 @@ export class RegisterRequesterComponent implements OnInit {
     localForage.getItem('registerSelectedSchool').then((res: any) => {
       //console.log('school data = ', res);
       this.school = res;
-      this.address = `บ้านเลขที่ ${res.address} ซอย ${
+      this.address = `เลขที่ ${res.address} ซอย ${
         res?.street ?? '-'
       } หมู่ ${res?.moo ?? '-'} ถนน ${res?.road ?? '-'} ตำบล ${
         res.tumbon
