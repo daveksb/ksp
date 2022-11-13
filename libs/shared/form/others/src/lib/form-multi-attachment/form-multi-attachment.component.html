@@ -44,7 +44,7 @@
             <td *ngIf="mode === 'view'">
               <div class="mt-4">
                 <ng-container *ngFor="let file of group.files; index as i">
-                  <div class="d-flex align-items-center flex-row">
+                  <div class="d-flex flex-row justify-content-center">
                     <label class="view__label" (click)="view(group, i)"
                       >ดูเอกสารแนบ</label
                     >

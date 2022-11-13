@@ -37,6 +37,7 @@ export class TransferKnowledgeEducationComponent
   extends KspFormBaseComponent
   implements OnInit
 {
+  @Input() showSeeButton = false;
   @Input() countries: any[] = [];
   override form = this.fb.group({
     licenseInfo1: this.fb.array([]),

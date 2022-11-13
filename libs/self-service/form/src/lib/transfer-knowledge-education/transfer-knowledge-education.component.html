@@ -1,9 +1,8 @@
 <form [formGroup]="form">
   <div class="border rounded px-3 py-2 mb-3">
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between align-items-start">
       <div class="fs-5 text-dark">ปริญญาตรี</div>
-
-      <div class="text-primary fs-5" role="button">
+      <div class="d-flex align-items-center">
         <ksp-add-row-button
           [ngClass]="mode === 'view' ? 'text-secondary' : 'text-primary'"
           (addRowClick)="addFormArray(1)"
@@ -11,6 +10,19 @@
         >
           เพิ่ม
         </ksp-add-row-button>
+
+        <div *ngIf="showSeeButton">
+          <button
+            class="btn btn-link text-secondary w-auto p-0 ms-3"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseExample1"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+          >
+            ดูเพิ่มเติม <i class="bi bi-chevron-down"></i>
+          </button>
+        </div>
       </div>
     </div>
 
@@ -19,30 +31,31 @@
         *ngFor="let DegreeForm of licenseInfo1.controls; let i = index"
       >
         <ng-container [formGroupName]="i">
-          <hr />
-          <div class="d-flex justify-content-end" *ngIf="mode === 'edit'">
-            <i
-              class="bi bi-x-circle-fill text-danger"
-              role="button"
-              (click)="deleteFormArray(licenseInfo1, i)"
-            ></i>
+          <div class="collapse show" id="collapseExample1">
+            <hr />
+            <div class="d-flex justify-content-end" *ngIf="mode === 'edit'">
+              <i
+                class="bi bi-x-circle-fill text-danger"
+                role="button"
+                (click)="deleteFormArray(licenseInfo1, i)"
+              ></i>
+            </div>
+            <ksp-activity-add-degree
+              [mode]="mode"
+              formControlName="licenseForm"
+              [countries]="countries"
+            >
+            </ksp-activity-add-degree>
           </div>
-          <ksp-activity-add-degree
-            [mode]="mode"
-            formControlName="licenseForm"
-            [countries]="countries"
-          >
-          </ksp-activity-add-degree>
         </ng-container>
       </ng-container>
     </ng-container>
   </div>
 
   <div class="border rounded px-3 py-2 mb-3">
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between align-items-start">
       <div class="fs-5 text-dark">ปริญญาโท</div>
-
-      <div class="text-primary fs-5" role="button">
+      <div class="d-flex align-items-center">
         <ksp-add-row-button
           [ngClass]="mode === 'view' ? 'text-secondary' : 'text-primary'"
           (addRowClick)="addFormArray(2)"
@@ -50,6 +63,19 @@
         >
           เพิ่ม
         </ksp-add-row-button>
+
+        <div *ngIf="showSeeButton">
+          <button
+            class="btn btn-link text-secondary w-auto p-0 ms-3"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseExample2"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+          >
+            ดูเพิ่มเติม <i class="bi bi-chevron-down"></i>
+          </button>
+        </div>
       </div>
     </div>
 
@@ -58,30 +84,31 @@
         *ngFor="let DegreeForm of licenseInfo2.controls; let i = index"
       >
         <ng-container [formGroupName]="i">
-          <hr />
-          <div class="d-flex justify-content-end" *ngIf="mode === 'edit'">
-            <i
-              class="bi bi-x-circle-fill text-danger"
-              role="button"
-              (click)="deleteFormArray(licenseInfo2, i)"
-            ></i>
+          <div class="collapse show" id="collapseExample2">
+            <hr />
+            <div class="d-flex justify-content-end" *ngIf="mode === 'edit'">
+              <i
+                class="bi bi-x-circle-fill text-danger"
+                role="button"
+                (click)="deleteFormArray(licenseInfo2, i)"
+              ></i>
+            </div>
+            <ksp-activity-add-degree
+              [mode]="mode"
+              formControlName="licenseForm"
+              [countries]="countries"
+            >
+            </ksp-activity-add-degree>
           </div>
-          <ksp-activity-add-degree
-            [mode]="mode"
-            formControlName="licenseForm"
-            [countries]="countries"
-          >
-          </ksp-activity-add-degree>
         </ng-container>
       </ng-container>
     </ng-container>
   </div>
 
   <div class="border rounded px-3 py-2 mb-3">
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between align-items-start">
       <div class="fs-5 text-dark">ปริญญาเอก</div>
-
-      <div class="text-primary fs-5" role="button">
+      <div class="d-flex align-items-center">
         <ksp-add-row-button
           [ngClass]="mode === 'view' ? 'text-secondary' : 'text-primary'"
           (addRowClick)="addFormArray(3)"
@@ -89,6 +116,19 @@
         >
           เพิ่ม
         </ksp-add-row-button>
+
+        <div *ngIf="showSeeButton">
+          <button
+            class="btn btn-link text-secondary w-auto p-0 ms-3"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseExample3"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+          >
+            ดูเพิ่มเติม <i class="bi bi-chevron-down"></i>
+          </button>
+        </div>
       </div>
     </div>
 
@@ -97,30 +137,31 @@
         *ngFor="let DegreeForm of licenseInfo3.controls; let i = index"
       >
         <ng-container [formGroupName]="i">
-          <hr />
-          <div class="d-flex justify-content-end" *ngIf="mode === 'edit'">
-            <i
-              class="bi bi-x-circle-fill text-danger"
-              role="button"
-              (click)="deleteFormArray(licenseInfo3, i)"
-            ></i>
+          <div class="collapse show" id="collapseExample3">
+            <hr />
+            <div class="d-flex justify-content-end" *ngIf="mode === 'edit'">
+              <i
+                class="bi bi-x-circle-fill text-danger"
+                role="button"
+                (click)="deleteFormArray(licenseInfo3, i)"
+              ></i>
+            </div>
+            <ksp-activity-add-degree
+              [mode]="mode"
+              formControlName="licenseForm"
+              [countries]="countries"
+            >
+            </ksp-activity-add-degree>
           </div>
-          <ksp-activity-add-degree
-            [mode]="mode"
-            formControlName="licenseForm"
-            [countries]="countries"
-          >
-          </ksp-activity-add-degree>
         </ng-container>
       </ng-container>
     </ng-container>
   </div>
 
   <div class="border rounded px-3 py-2 mb-3">
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between align-items-start">
       <div class="fs-5 text-dark">ปริญญาอื่นๆ</div>
-
-      <div class="text-primary fs-5" role="button">
+      <div class="d-flex align-items-center">
         <ksp-add-row-button
           [ngClass]="mode === 'view' ? 'text-secondary' : 'text-primary'"
           (addRowClick)="addFormArray(4)"
@@ -128,6 +169,18 @@
         >
           เพิ่ม
         </ksp-add-row-button>
+        <div *ngIf="showSeeButton">
+          <button
+            class="btn btn-link text-secondary w-auto p-0 ms-3"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseExample4"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+          >
+            ดูเพิ่มเติม <i class="bi bi-chevron-down"></i>
+          </button>
+        </div>
       </div>
     </div>
 
@@ -136,29 +189,30 @@
         *ngFor="let DegreeForm of licenseInfo4.controls; let i = index"
       >
         <ng-container [formGroupName]="i">
-          <hr />
-          <div class="d-flex justify-content-end" *ngIf="mode === 'edit'">
-            <i
-              class="bi bi-x-circle-fill text-danger"
-              role="button"
-              (click)="deleteFormArray(licenseInfo4, i)"
-            ></i>
+          <div class="collapse show" id="collapseExample4">
+            <hr />
+            <div class="d-flex justify-content-end" *ngIf="mode === 'edit'">
+              <i
+                class="bi bi-x-circle-fill text-danger"
+                role="button"
+                (click)="deleteFormArray(licenseInfo4, i)"
+              ></i>
+            </div>
+            <ksp-activity-add-degree
+              [mode]="mode"
+              formControlName="licenseForm"
+              [countries]="countries"
+            >
+            </ksp-activity-add-degree>
           </div>
-          <ksp-activity-add-degree
-            [mode]="mode"
-            formControlName="licenseForm"
-            [countries]="countries"
-          >
-          </ksp-activity-add-degree>
         </ng-container>
       </ng-container>
     </ng-container>
   </div>
   <div class="border rounded px-3 py-2">
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between align-items-start">
       <div class="fs-5 text-dark">ใบรับรองฝึกอาชีพ</div>
-
-      <div class="text-primary fs-5" role="button">
+      <div class="d-flex align-items-center">
         <ksp-add-row-button
           [ngClass]="mode === 'view' ? 'text-secondary' : 'text-primary'"
           (addRowClick)="addFormArray(5)"
@@ -166,6 +220,19 @@
         >
           เพิ่ม
         </ksp-add-row-button>
+
+        <div *ngIf="showSeeButton">
+          <button
+            class="btn btn-link text-secondary w-auto p-0 ms-3"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseExample5"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+          >
+            ดูเพิ่มเติม <i class="bi bi-chevron-down"></i>
+          </button>
+        </div>
       </div>
     </div>
 
@@ -174,60 +241,62 @@
         *ngFor="let DegreeForm of licenseInfo5.controls; let i = index"
       >
         <ng-container [formGroupName]="i">
-          <hr />
+          <div class="collapse show" id="collapseExample5">
+            <hr />
 
-          <div class="d-flex justify-content-end" *ngIf="mode === 'edit'">
-            <i
-              class="bi bi-x-circle-fill text-danger"
-              role="button"
-              (click)="deleteFormArray(licenseInfo5, i)"
-            ></i>
-          </div>
-          <div class="row">
-            <div class="col-md mb-2">
-              <label class="form-label">ประเภทการรับรองการฝึกอกรม</label>
-              <input
-                class="form-control"
-                type="text"
-                formControlName="certificationType"
-              />
+            <div class="d-flex justify-content-end" *ngIf="mode === 'edit'">
+              <i
+                class="bi bi-x-circle-fill text-danger"
+                role="button"
+                (click)="deleteFormArray(licenseInfo5, i)"
+              ></i>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md mb-2">
-              <label class="form-label">จากสถาบัน</label>
-              <input
-                class="form-control"
-                type="text"
-                formControlName="recognizedOrganization"
-              />
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 mb-2">
-              <label class="form-label">เลขที่ใบรับรอง </label>
-              <input
-                class="form-control"
-                type="text"
-                formControlName="certificateNo"
-              />
-            </div>
-            <div class="col-md-6">
-              <label class="form-label">วันที่ออกใบประกาศ</label>
-              <div class="d-flex align-items-center">
+            <div class="row">
+              <div class="col-md mb-2">
+                <label class="form-label">ประเภทการรับรองการฝึกอกรม</label>
                 <input
-                  matInput
-                  [matDatepicker]="picker"
-                  autocomplete="off"
-                  class="form-control form-date"
-                  formControlName="issueDate"
+                  class="form-control"
+                  type="text"
+                  formControlName="certificationType"
                 />
-                <mat-datepicker-toggle
-                  class="button-date"
-                  matSuffix
-                  [for]="picker"
-                ></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md mb-2">
+                <label class="form-label">จากสถาบัน</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  formControlName="recognizedOrganization"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-2">
+                <label class="form-label">เลขที่ใบรับรอง </label>
+                <input
+                  class="form-control"
+                  type="text"
+                  formControlName="certificateNo"
+                />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">วันที่ออกใบประกาศ</label>
+                <div class="d-flex align-items-center">
+                  <input
+                    matInput
+                    [matDatepicker]="picker"
+                    autocomplete="off"
+                    class="form-control form-date"
+                    formControlName="issueDate"
+                  />
+                  <mat-datepicker-toggle
+                    class="button-date"
+                    matSuffix
+                    [for]="picker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </div>
               </div>
             </div>
           </div>

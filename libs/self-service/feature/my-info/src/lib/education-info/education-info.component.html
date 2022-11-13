@@ -8,6 +8,7 @@
   <form [formGroup]="form">
     <div class="detail__container p-3">
       <self-service-transfer-knowledge-education
+        [showSeeButton]="true"
         [mode]="mode"
         formControlName="eduinfo"
         [countries]="countries$ | async"

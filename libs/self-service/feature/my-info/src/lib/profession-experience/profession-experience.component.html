@@ -8,9 +8,9 @@
   <div class="detail__container p-3">
     <form [formGroup]="form">
       <div class="border rounded px-3 py-2 mb-3">
-        <div class="d-flex justify-content-between">
-          <div class="fs-5">สถานศึกษาฝึกประสบการณ์วิชาชีพ</div>
-          <div class="text-primary fs-5" role="button">
+        <div class="d-flex justify-content-between align-items-start">
+          <div class="fs-5 w-50">สถานศึกษาฝึกประสบการณ์วิชาชีพ</div>
+          <div class="d-flex align-items-center">
             <ksp-add-row-button
               [ngClass]="mode === 'view' ? 'text-secondary' : 'text-primary'"
               (addRowClick)="addFormArray(0)"
@@ -18,36 +18,49 @@
             >
               เพิ่ม
             </ksp-add-row-button>
+
+            <div *ngIf="showSeeButton">
+              <button
+                class="btn btn-link text-secondary w-auto p-0 ms-3"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseExample1"
+                aria-expanded="false"
+                aria-controls="collapseExample"
+              >
+                ดูเพิ่มเติม <i class="bi bi-chevron-down"></i>
+              </button>
+            </div>
           </div>
         </div>
-
         <ng-container formArrayName="licenseInfo1">
           <ng-container
             *ngFor="let DegreeForm of licenseInfo1.controls; let i = index"
           >
             <ng-container [formGroupName]="i">
-              <hr />
-              <div class="d-flex justify-content-end" *ngIf="mode === 'edit'">
-                <i
-                  class="bi bi-x-circle-fill text-danger"
-                  role="button"
-                  (click)="deleteFormArray(licenseInfo1, i)"
-                ></i>
-              </div>
+              <div class="collapse show" id="collapseExample1">
+                <hr />
+                <div class="d-flex justify-content-end" *ngIf="mode === 'edit'">
+                  <i
+                    class="bi bi-x-circle-fill text-danger"
+                    role="button"
+                    (click)="deleteFormArray(licenseInfo1, i)"
+                  ></i>
+                </div>
 
-              <self-service-form-user-training-workplace
-                [mode]="mode"
-                [trainingTimes]="i + 1"
-                formControlName="licenseForm"
-              ></self-service-form-user-training-workplace> </ng-container></ng-container
+                <self-service-form-user-training-workplace
+                  [mode]="mode"
+                  [trainingTimes]="i + 1"
+                  formControlName="licenseForm"
+                ></self-service-form-user-training-workplace>
+              </div> </ng-container></ng-container
         ></ng-container>
       </div>
 
       <div class="border rounded px-3 py-2 mb-3">
-        <div class="d-flex justify-content-between">
-          <div class="fs-5">สถานศึกษาที่ปฎิบัติการสอน</div>
-
-          <div class="text-primary fs-5" role="button">
+        <div class="d-flex justify-content-between align-items-start">
+          <div class="fs-5 w-50">สถานศึกษาที่ปฎิบัติการสอน</div>
+          <div class="d-flex align-items-center">
             <ksp-add-row-button
               [ngClass]="mode === 'view' ? 'text-secondary' : 'text-primary'"
               (addRowClick)="addFormArray(1)"
@@ -55,6 +68,19 @@
             >
               เพิ่ม
             </ksp-add-row-button>
+
+            <div *ngIf="showSeeButton">
+              <button
+                class="btn btn-link text-secondary w-auto p-0 ms-3"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseExample2"
+                aria-expanded="false"
+                aria-controls="collapseExample"
+              >
+                ดูเพิ่มเติม <i class="bi bi-chevron-down"></i>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -63,32 +89,33 @@
             *ngFor="let DegreeForm of licenseInfo2.controls; let i = index"
           >
             <ng-container [formGroupName]="i">
-              <hr />
-              <div class="d-flex justify-content-end" *ngIf="mode === 'edit'">
-                <i
-                  class="bi bi-x-circle-fill text-danger"
-                  role="button"
-                  (click)="deleteFormArray(licenseInfo2, i)"
-                ></i>
-              </div>
-              <self-service-form-user-workplace
-                [mode]="mode"
-                formControlName="licenseForm"
-                [provinces]="provinces1$ | async"
-                [amphurs]="amphurs1$ | async"
-                [tumbols]="tumbols1$ | async"
-                [bureaus]="bureau$ | async"
-                (provinceChanged)="provinceChanged(1, $event)"
-                (amphurChanged)="amphurChanged(1, $event)"
-              ></self-service-form-user-workplace> </ng-container></ng-container
+              <div class="collapse show" id="collapseExample2">
+                <hr />
+                <div class="d-flex justify-content-end" *ngIf="mode === 'edit'">
+                  <i
+                    class="bi bi-x-circle-fill text-danger"
+                    role="button"
+                    (click)="deleteFormArray(licenseInfo2, i)"
+                  ></i>
+                </div>
+                <self-service-form-user-workplace
+                  [mode]="mode"
+                  formControlName="licenseForm"
+                  [provinces]="provinces1$ | async"
+                  [amphurs]="amphurs1$ | async"
+                  [tumbols]="tumbols1$ | async"
+                  [bureaus]="bureau$ | async"
+                  (provinceChanged)="provinceChanged(1, $event)"
+                  (amphurChanged)="amphurChanged(1, $event)"
+                ></self-service-form-user-workplace>
+              </div> </ng-container></ng-container
         ></ng-container>
       </div>
 
       <div class="border rounded px-3 py-2 mb-3">
-        <div class="d-flex justify-content-between">
-          <div class="fs-5">ใบอนุญาตประกอบวิชาชีพครูจากต่างประเทศ</div>
-
-          <div class="text-primary fs-5" role="button">
+        <div class="d-flex justify-content-between align-items-start">
+          <div class="fs-5 w-50">ใบอนุญาตประกอบวิชาชีพครูจากต่างประเทศ</div>
+          <div class="d-flex align-items-center">
             <ksp-add-row-button
               [ngClass]="mode === 'view' ? 'text-secondary' : 'text-primary'"
               (addRowClick)="addFormArray(2)"
@@ -96,28 +123,42 @@
             >
               เพิ่ม
             </ksp-add-row-button>
+
+            <div *ngIf="showSeeButton">
+              <button
+                class="btn btn-link text-secondary w-auto p-0 ms-3"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseExample3"
+                aria-expanded="false"
+                aria-controls="collapseExample"
+              >
+                ดูเพิ่มเติม <i class="bi bi-chevron-down"></i>
+              </button>
+            </div>
           </div>
         </div>
-
         <ng-container formArrayName="licenseInfo3">
           <ng-container
             *ngFor="let DegreeForm of licenseInfo3.controls; let i = index"
           >
             <ng-container [formGroupName]="i">
-              <hr />
-              <div class="d-flex justify-content-end" *ngIf="mode === 'edit'">
-                <i
-                  class="bi bi-x-circle-fill text-danger"
-                  role="button"
-                  (click)="deleteFormArray(licenseInfo3, i)"
-                ></i>
-              </div>
-              <ksp-experience-form
-                [mode]="mode"
-                [countries]="countries$ | async"
-                [licenses]="licenses$ | async"
-                formControlName="licenseForm"
-              ></ksp-experience-form> </ng-container></ng-container
+              <div class="collapse show" id="collapseExample3">
+                <hr />
+                <div class="d-flex justify-content-end" *ngIf="mode === 'edit'">
+                  <i
+                    class="bi bi-x-circle-fill text-danger"
+                    role="button"
+                    (click)="deleteFormArray(licenseInfo3, i)"
+                  ></i>
+                </div>
+                <ksp-experience-form
+                  [mode]="mode"
+                  [countries]="countries$ | async"
+                  [licenses]="licenses$ | async"
+                  formControlName="licenseForm"
+                ></ksp-experience-form>
+              </div> </ng-container></ng-container
         ></ng-container>
       </div>
       <div class="mt-3">
