@@ -86,7 +86,10 @@ export function replaceEmptyWithNull(input: any) {
 export function formatDatePayload(input: any) {
   for (const [key, value] of Object.entries(input)) {
     if (key.includes('date') && input[key]) {
-      input[key] = formatDate(new Date(input[key]).toISOString());
+      //const date = new Date(input[key]).toUTCString(); //.toISOString();
+      const date = moment(input[key]).format('YYYY-MM-DD');
+      //console.log('date = ', date);
+      input[key] = formatDate(date);
     }
   }
   return input;

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -7,7 +7,7 @@ import {
   SchRequestStatus,
 } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
-import { selfOccupyList, SelfRequestProcess } from '@ksp/shared/constant';
+import { selfOccupyList } from '@ksp/shared/constant';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
@@ -39,7 +39,7 @@ export class EServiceLicenseSaveResultComponent extends KspFormBaseComponent {
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
-      this.form?.valueChanges.subscribe((value) => {
+      this.form?.valueChanges.subscribe((value: any) => {
         this.onChange(value);
         this.onTouched();
       })
