@@ -8,14 +8,16 @@
         <input
           class="form-control"
           type="text"
-          formControlName="thaiTestScore" />
+          formControlName="thaiTestScore"
+        />
       </div>
       <div class="col-md-6 mb-2">
         <label class="form-label required">ระดับผลคะแนน</label>
         <input
           class="form-control"
           type="text"
-          formControlName="thaiScoreLevel" />
+          formControlName="thaiScoreLevel"
+        />
       </div>
     </div>
     <div class="row">
@@ -27,11 +29,14 @@
             [matDatepicker]="picker1"
             autocomplete="off"
             class="form-control form-date"
-            formControlName="thaiScoreValidDate" />
+            formControlName="thaiScoreValidDate"
+            placeholder="วว/ดด/ปปปป"
+          />
           <mat-datepicker-toggle
             class="button-date"
             matSuffix
-            [for]="picker1"></mat-datepicker-toggle>
+            [for]="picker1"
+          ></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
         </div>
       </div>
@@ -46,14 +51,16 @@
         <input
           class="form-control"
           type="text"
-          formControlName="englishTestScore" />
+          formControlName="englishTestScore"
+        />
       </div>
       <div class="col-md-6 mb-2">
         <label class="form-label required">ระดับผลคะแนน</label>
         <input
           class="form-control"
           type="text"
-          formControlName="englishScoreLevel" />
+          formControlName="englishScoreLevel"
+        />
       </div>
     </div>
     <div class="row">
@@ -65,11 +72,14 @@
             [matDatepicker]="picker2"
             autocomplete="off"
             class="form-control form-date"
-            formControlName="englishScoreValidDate" />
+            formControlName="englishScoreValidDate"
+            placeholder="วว/ดด/ปปปป"
+          />
           <mat-datepicker-toggle
             class="button-date"
             matSuffix
-            [for]="picker2"></mat-datepicker-toggle>
+            [for]="picker2"
+          ></mat-datepicker-toggle>
           <mat-datepicker #picker2></mat-datepicker>
         </div>
       </div>
@@ -84,14 +94,16 @@
         <input
           class="form-control"
           type="text"
-          formControlName="techTestScore" />
+          formControlName="techTestScore"
+        />
       </div>
       <div class="col-md-6 mb-2">
         <label class="form-label required">ระดับผลคะแนน</label>
         <input
           class="form-control"
           type="text"
-          formControlName="techScoreLevel" />
+          formControlName="techScoreLevel"
+        />
       </div>
     </div>
     <div class="row">
@@ -103,11 +115,14 @@
             [matDatepicker]="picker3"
             autocomplete="off"
             class="form-control form-date"
-            formControlName="techScoreValidDate" />
+            formControlName="techScoreValidDate"
+            placeholder="วว/ดด/ปปปป"
+          />
           <mat-datepicker-toggle
             class="button-date"
             matSuffix
-            [for]="picker3"></mat-datepicker-toggle>
+            [for]="picker3"
+          ></mat-datepicker-toggle>
           <mat-datepicker #picker3></mat-datepicker>
         </div>
       </div>
@@ -118,14 +133,16 @@
     <div class="box-header">วิชาเอก</div>
     <ng-container formArrayName="degreeInfo">
       <ng-container
-        *ngFor="let DegreeForm of degreeInfo.controls; let i = index">
+        *ngFor="let DegreeForm of degreeInfo.controls; let i = index"
+      >
         <ng-container [formGroupName]="i">
           <hr />
           <div class="d-flex justify-content-end" *ngIf="i > 0">
             <i
               class="bi bi-x-circle-fill text-danger"
               role="button"
-              (click)="deleteFormArray(degreeInfo, i)"></i>
+              (click)="deleteFormArray(degreeInfo, i)"
+            ></i>
           </div>
           <div class="row">
             <div class="col-md-6 mb-2">
@@ -133,14 +150,18 @@
               <input
                 class="form-control"
                 type="text"
-                formControlName="subject" />
+                formControlName="subject"
+              />
             </div>
             <div class="col-md-6 mb-2">
-              <label class="form-label required">ผลคะแนนการทดสอบของหน่วยงาน</label>
+              <label class="form-label required"
+                >ผลคะแนนการทดสอบของหน่วยงาน</label
+              >
               <input
                 class="form-control"
                 type="text"
-                formControlName="testResult" />
+                formControlName="testResult"
+              />
             </div>
           </div>
           <div class="row">
@@ -149,7 +170,8 @@
               <input
                 class="form-control"
                 type="text"
-                formControlName="scoreLevel" />
+                formControlName="scoreLevel"
+              />
             </div>
             <div class="col-md-6 mb-2">
               <label class="form-label required">ใช้ผลคะแนนได้ถึงวันที่</label>
@@ -159,11 +181,14 @@
                   [matDatepicker]="picker4"
                   autocomplete="off"
                   class="form-control form-date"
-                  formControlName="scoreValidDate" />
+                  formControlName="scoreValidDate"
+                  placeholder="วว/ดด/ปปปป"
+                />
                 <mat-datepicker-toggle
                   class="button-date"
                   matSuffix
-                  [for]="picker4"></mat-datepicker-toggle>
+                  [for]="picker4"
+                ></mat-datepicker-toggle>
                 <mat-datepicker #picker4></mat-datepicker>
               </div>
             </div>
@@ -175,7 +200,8 @@
       <ksp-add-row-button
         *ngIf="mode !== 'view'"
         class="text-primary fs-6"
-        (addRowClick)="addFormArray(degreeInfo)">
+        (addRowClick)="addFormArray(degreeInfo)"
+      >
         เพิ่มข้อมูลวิชาเอก
       </ksp-add-row-button>
     </div>
