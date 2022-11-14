@@ -25,6 +25,7 @@ export class ValidateKspRequestComponent
 {
   @Input() requestType: string | null = '0';
   @Input() process: string | null = '0';
+  @Input() showUrgent = false;
 
   processTable!: SchRequestProcess | undefined;
 
@@ -33,6 +34,7 @@ export class ValidateKspRequestComponent
     shouldForward: [null, Validators.required],
     returndate: [null],
     reason: [],
+    isurgent: [],
   });
 
   constructor(private fb: FormBuilder) {

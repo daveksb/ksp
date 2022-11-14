@@ -284,7 +284,7 @@ export class ERequestService {
     );
   }
 
-  updateRequestUrgent(payload: any): Observable<any> {
+  setUrgentRequest(payload: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/e-service/ksprequestupdateisurgent`,
       payload

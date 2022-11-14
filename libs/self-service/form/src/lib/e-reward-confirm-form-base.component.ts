@@ -48,13 +48,13 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
       this.saveData = res;
       if (this.saveData.requestData.id)
         this.getApproveHistory(this.saveData.requestData.id);
-      console.log('save data = ', this.saveData);
+      //console.log('save data = ', this.saveData);
     });
     this.checkRequestId();
   }
 
   checkApproveResult(input: approveResult) {
-    console.log('check aa = ');
+    //console.log('check aa = ');
     const req = this.saveData.requestData;
     if (input.result === '1') {
       //ครบถ้วน และถูกต้อง
@@ -99,7 +99,6 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
   checkRequest() {
     this.checkApproveResult(<any>this.form.value.approvement);
     //console.log('save data = ', this.saveData);
-    //console.log('form = ', this.selectResult);
     const payload: KspApprovePayload = {
       requestid: this.saveData.requestData.id,
       process: `${this.targetProcess}`,
@@ -111,36 +110,12 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
     };
     //console.log('payload = ', payload);
     this.eRequestService.KspUpdateRequestProcess(payload).subscribe((res) => {
-      //console.log('result = ', res.app);
-      this.navigateBack();
-    });
-  }
-
-  considerRequest() {
-    this.checkApproveResult(<any>this.form.value.approvement);
-    //console.log('consider request  = ');
-    const form: any = this.form.value.approvement;
-    const payload: KspApprovePayload = {
-      requestid: this.saveData.requestData.id,
-      process: '6',
-      status: `${form.result}`,
-      detail: JSON.stringify(this.saveData.checkDetail),
-      systemtype: '4', // approve by e-service staff
-      userid: this.userId,
-      paymentstatus: null,
-    };
-
-    //console.log('payload = ', payload);
-
-    this.eRequestService.KspUpdateRequestProcess(payload).subscribe(() => {
-      //console.log('result = ', res.app);
       this.navigateBack();
     });
   }
 
   getApproveHistory(requestid: string) {
     this.eRequestService.getApproveHistory(requestid).subscribe((res) => {
-      //console.log('approve history = ', res);
       this.approveHistory = res;
     });
   }
@@ -168,11 +143,12 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
 
     dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        if (this.saveData.requestData.process === '5') {
+        this.checkRequest();
+        /*         if (this.saveData.requestData.process === '5') {
           this.considerRequest();
         } else {
           this.checkRequest();
-        }
+        } */
       }
     });
   }
@@ -190,6 +166,28 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
       }
     });
   }
+
+  /*   considerRequest() {
+    this.checkApproveResult(<any>this.form.value.approvement);
+    //console.log('consider request  = ');
+    const form: any = this.form.value.approvement;
+    const payload: KspApprovePayload = {
+      requestid: this.saveData.requestData.id,
+      process: '6',
+      status: `${form.result}`,
+      detail: JSON.stringify(this.saveData.checkDetail),
+      systemtype: '4', // approve by e-service staff
+      userid: this.userId,
+      paymentstatus: null,
+    };
+
+    //console.log('payload = ', payload);
+
+    this.eRequestService.KspUpdateRequestProcess(payload).subscribe(() => {
+      //console.log('result = ', res.app);
+      this.navigateBack();
+    });
+  } */
 
   abstract navigateBack(): void;
   abstract prevPage(): void;
