@@ -19,7 +19,7 @@ import {
   replaceEmptyWithNull,
   toLowercaseProp,
 } from '@ksp/shared/utility';
-import { SelfRequest } from '@ksp/shared/interface';
+import { FileGroup, SelfRequest } from '@ksp/shared/interface';
 import {
   SelfServiceRequestForType,
   SelfServiceRequestSubType,
@@ -28,7 +28,7 @@ import {
 import * as _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 
-const FILE_LIST = [
+/* const FILE_LIST = [
   {
     name: 'สำเนาหนังสือสำคัญการเปลี่ยนชื่อ/ชื่อสกุล/เปลี่ยนหรือเพิ่มคำนำหน้าชื่อ',
     fileid: '',
@@ -43,6 +43,21 @@ const FILE_LIST = [
     name: 'สำเนาหนังสือรับรองการใช้คำหน้านามหญิง (ถ้ามี)',
     fileid: '',
     filename: '',
+  },
+]; */
+
+const FILE_LIST: FileGroup[] = [
+  {
+    name: '1. สำเนาหนังสือสำคัญการเปลี่ยนชื่อ/ชื่อสกุล/เปลี่ยนหรือเพิ่มคำนำหน้าชื่อ',
+    files: [],
+  },
+  {
+    name: '2. สำเนาหลักฐานการสมรส หรือการสิ้นสุดการสมรส (ถ้ามี)',
+    files: [],
+  },
+  {
+    name: '3. สำเนาหนังสือรับรองการใช้คำหน้านามหญิง (ถ้ามี)',
+    files: [],
   },
 ];
 
