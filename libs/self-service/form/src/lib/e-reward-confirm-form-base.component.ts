@@ -122,7 +122,7 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
       this.eRequestService
         .setUrgentRequest(this.saveData.requestData.id, form.isurgent)
         .subscribe(() => {
-          //this.navigateBack();
+          this.navigateBack();
         });
     });
   }

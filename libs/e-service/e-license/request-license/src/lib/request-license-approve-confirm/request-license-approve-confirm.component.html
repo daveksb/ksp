@@ -50,7 +50,8 @@
         *ngIf="
           saveData.requestData.process === '2' ||
           saveData.requestData.process === '3' ||
-          saveData.requestData.process === '4'
+          (saveData.requestData.process === '4' &&
+            saveData.requestData.status !== '3')
         "
       >
         <ksp-validate-ksp-request
@@ -88,6 +89,8 @@
     (saveClicked)="confirmDialog()"
     [disableSaveButton]="
       form.invalid ||
+      (saveData.requestData.process === '4' &&
+        saveData.requestData.status === '3') ||
       saveData.requestData.process === '5' ||
       saveData.requestData.process === '6' ||
       saveData.requestData.process === '7'

@@ -65,7 +65,10 @@
       <ng-container matColumnDef="urgent">
         <th mat-header-cell *matHeaderCellDef>เร่งด่วน</th>
         <td mat-cell *matCellDef="let element">
-          <i class="bi bi-exclamation-triangle-fill text-danger"></i>
+          <i
+            *ngIf="element.isugent === '1'"
+            class="bi bi-exclamation-triangle-fill text-danger"
+          ></i>
         </td>
       </ng-container>
 
