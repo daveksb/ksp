@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UniRequestService } from '@ksp/shared/service';
-import { Observable } from 'rxjs';
 import localForage from 'localforage';
+import { KspPaginationComponent } from '@ksp/shared/interface';
 
 @Component({
   templateUrl: './retired-home.component.html',
   styleUrls: ['./retired-home.component.scss'],
 })
-export class RetiredHomeComponent implements OnInit {
+export class RetiredHomeComponent extends KspPaginationComponent {
   data: Array<any> = [];
   selectedUser: any;
   payload: any = {};
   constructor(
     private router: Router,
     private uniRequestService: UniRequestService
-  ) {}
-
-  ngOnInit(): void {}
+  ) {
+    super();
+  }
 
   handleClear(form: any) {
     this.selectedUser = null;
@@ -28,7 +28,7 @@ export class RetiredHomeComponent implements OnInit {
     if (form) {
       let nameData = {};
       if (form.name) {
-        let newName = form.name.split(' ');
+        const newName = form.name.split(' ');
         if (newName.length > 1) {
           nameData = {
             firstnameth: newName[0],
@@ -45,17 +45,22 @@ export class RetiredHomeComponent implements OnInit {
         ...nameData,
         unitype: form.searchType?.organization,
         unicode: form.searchType?.schoolid,
-        uniname: form.searchType?.instituteName
+        uniname: form.searchType?.instituteName,
+        ...this.tableRecord
       }
-      this.payload.row = 999;
       delete this.payload.searchType;
-      this.search(this.payload);
+      this.searchUser(this.payload);
     }
   }
 
-  search(form: any) {
+  override search(): void {
+      this.handleSearch({});
+  }
+
+  searchUser(form: any) {
     this.uniRequestService.searchUniRequest(form).subscribe(res=>{
       console.log(res)
+      this.pageEvent.length = res.countrow;
       if (res.returncode == "00" && res.datareturn) {
         this.data = res.datareturn.map((data: any) => {
           data.permissionname = data.permissionright == '1' 

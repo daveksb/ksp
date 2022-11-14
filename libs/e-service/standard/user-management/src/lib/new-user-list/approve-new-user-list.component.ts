@@ -11,7 +11,7 @@ import {
   RequestSearchFilter,
   SchoolUserPageType,
 } from '@ksp/shared/interface';
-import { ERequestService, UniInfoService } from '@ksp/shared/service';
+import { ERequestService, EUniService, UniInfoService } from '@ksp/shared/service';
 import {
   checkStatus,
   replaceEmptyWithNull,
@@ -39,7 +39,8 @@ export class ApproveNewUserListComponent implements AfterViewInit {
   constructor(
     private router: Router,
     private eRequestService: ERequestService,
-    private uniInfoService: UniInfoService
+    private uniInfoService: UniInfoService,
+    private eUniService: EUniService
   ) {
     this.getOptions();
   }
@@ -57,8 +58,8 @@ export class ApproveNewUserListComponent implements AfterViewInit {
   }
 
   search(params: RequestSearchFilter) {
-    //console.log('params  = ', params);
-    let payload: EsSearchPayload = {
+    console.log('params  = ', params);
+    let payload = {
       systemtype: '3',
       requesttype: params.requesttype,
       requestno: params.requestno,
@@ -68,9 +69,9 @@ export class ApproveNewUserListComponent implements AfterViewInit {
       passportno: null,
       process: null,
       status: params.requeststatus,
-      schoolid: params.schoolinfo?.schoolid,
-      schoolname: params.schoolinfo?.schoolname,
-      bureauid: params.schoolinfo?.bureauid,
+      unicode: params.schoolinfo?.schoolid,
+      uniname: params.schoolinfo?.schoolname,
+      unitype: params.schoolinfo?.bureauid,
       requestdatefrom: params.requestdatefrom,
       requestdateto: null,
       offset: '0',
@@ -79,7 +80,7 @@ export class ApproveNewUserListComponent implements AfterViewInit {
 
     payload = replaceEmptyWithNull(payload);
 
-    this.eRequestService.KspSearchRequest(payload).subscribe((res) => {
+    this.eUniService.KspSearchUniRequest(payload).subscribe((res) => {
       //console.log('res = ', res);
       if (res) {
         this.dataSource.data = res.map((data: any) => {

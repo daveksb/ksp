@@ -14,6 +14,7 @@ import {
   RetiredSearchComponent,
 } from '@ksp/shared/search';
 import { RetiredHomeComponent } from './retired-home/retired-home.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import { RetiredHomeComponent } from './retired-home/retired-home.component';
     ReactiveFormsModule,
     BasicInstituteSearchComponent,
     RetiredSearchComponent,
+    MatPaginatorModule
   ],
   declarations: [
     RetiredHomeComponent,

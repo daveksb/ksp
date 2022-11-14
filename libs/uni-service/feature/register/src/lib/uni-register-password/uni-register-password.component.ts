@@ -152,6 +152,7 @@ export class UniRegisterPasswordComponent implements OnInit {
             };
             const fileUpload = mapMultiFileInfo(this.uploadFileList);
             const payload = {
+              ...this.uniData,
               ...this.savingData,
               educationoccupy: JSON.stringify(educationoccupy),
               coordinatorinfo: JSON.stringify({

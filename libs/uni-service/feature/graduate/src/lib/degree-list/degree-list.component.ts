@@ -1,24 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UniInfoService, UniRequestService } from '@ksp/shared/service';
-import { getCookie, stringToThaiDate, thaiDate } from '@ksp/shared/utility';
+import { getCookie, thaiDate } from '@ksp/shared/utility';
 import { UniserviceImportType, KspPaginationComponent, ListData } from '@ksp/shared/interface';
 
 import {
   HistoryRequestAdmissionDialogComponent,
-  HistoryRequestDialogComponent,
   PrintRequestDialogComponent,
 } from '@ksp/uni-service/dialog';
 import { DegreeCertInfo } from '@ksp/uni-service/feature/edit-degree-cert';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   templateUrl: './degree-list.component.html',
   styleUrls: ['./degree-list.component.scss'],
 })
 export class DegreeListComponent extends KspPaginationComponent implements OnInit {
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   processType!: UniserviceImportType;
 
   displayedColumns: string[] = columns;
@@ -88,8 +90,7 @@ export class DegreeListComponent extends KspPaginationComponent implements OnIni
       courseacademicyear: form.openYear,
       requestno: form.requestNumber,
       requestdate: form.requestsubmitDate,
-      row: 10,
-      offset: 0
+      ...this.tableRecord
     };
   }
 

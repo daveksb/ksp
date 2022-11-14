@@ -29,7 +29,7 @@ export class FormRegisterRequesterInfoComponent
     affiliation: '',
   };
   permissionList: Array<any> = uniPermissionList;
-  validIdcard = false;
+  validIdcard = true;
 
   override form = createUniUserInfoForm(this.fb);
 
@@ -61,6 +61,7 @@ export class FormRegisterRequesterInfoComponent
   }
 
   checkID(event: any) {
+    console.log(event)
     const id = event?.target.value;
     if (id.length != 13) {
       this.validIdcard = false;

@@ -32,7 +32,7 @@
 
         <div class="d-flex">
           <div class="fs-5 text-secondary">สิทธิ์สำหรับการเข้าใช้งาน :</div>
-          <div class="fs-5 ms-3">{{ userInfo.permissionright }}</div>
+          <div class="fs-5 ms-3">{{ userInfo.permissionname }}</div>
         </div>
 
         <div class="d-flex mb-1">
@@ -68,8 +68,9 @@
       <br />
       <ksp-bottom-nav
         [disableNext]="form.invalid"
-        [isFirstPage]="true"
+        [isFirstPage]="false"
         [showCenterButtons]="false"
+        (prevClicked)="prevPage()"
         (nextClicked)="next()"
       ></ksp-bottom-nav>
     </div>
