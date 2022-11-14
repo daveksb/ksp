@@ -1,8 +1,14 @@
 <form [formGroup]="form">
   <div class="bg-white border py-3 px-4">
-    <div class="d-flex align-items-center mb-3">
-      <div class="box-header text-primary me-1">ยืนยันผลการตรวจสอบ</div>
-      <div class="text-danger">* กรุณาเลือกอย่างใดอย่างหนึ่งเท่านั้น</div>
+    <div class="d-flex justify-content-between mb-3">
+      <div class="d-flex align-items-center">
+        <div class="box-header text-primary me-1">ยืนยันผลการตรวจสอบ</div>
+        <div class="text-danger">* กรุณาเลือกอย่างใดอย่างหนึ่งเท่านั้น</div>
+      </div>
+      <div *ngIf="showUrgent" class="d-flex align-items-center">
+        <input formControlName="isurgent" type="checkbox" class="me-2" />
+        <label class="form-label mb-2">กรณีเร่งด่วน</label>
+      </div>
     </div>
 
     <div class="row mb-3">

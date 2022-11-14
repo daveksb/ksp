@@ -79,10 +79,13 @@ export class CreateLicenseIdDetailComponent implements OnInit {
     this.prefixList = this.generalInfoService.getPrefix();
   }
 
-  rowSelect(data: any) {
-    console.log('data = ', data);
+  rowSelect(id: any) {
+    console.log('id = ', id);
+    this.requestService.getSelfLicense(id).subscribe((data) => {
+      console.log('data = ', data);
+      this.form.patchValue(data);
+    });
     //this.myImage = atob(data.imagefileid);
-    this.form.patchValue(data);
   }
 
   createMultiLicense() {
@@ -92,10 +95,10 @@ export class CreateLicenseIdDetailComponent implements OnInit {
       data: this.dataSource2.data.map((ds) => {
         return {
           careertype: ds.careertype,
-          renewtype: '1',
+          renewtype: '0',
           isforeign: ds.isforeign,
           licenseno: '2',
-          requestno: ds.id,
+          requestno: ds.id, // store request id instead of no
           licensestartdate: '2022-11-12',
           licenseenddate: '2027-11-12',
           licensestatus: '1',
@@ -193,7 +196,7 @@ const column2 = [
   'create',
   'order',
   'rush',
-  'number',
+  //'number',
   'personId',
   'licenseType',
   'name',

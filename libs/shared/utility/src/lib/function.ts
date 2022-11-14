@@ -68,7 +68,6 @@ export function formatCheckboxData(input: any[], source: any[]) {
   const result = input
     .map((v, i) => (v ? source[i].value : null))
     .filter((v) => v !== null);
-  //console.log('map data = ', result);
   //return JSON.stringify(result);
   return result;
 }
@@ -86,7 +85,8 @@ export function replaceEmptyWithNull(input: any) {
 export function formatDatePayload(input: any) {
   for (const [key, value] of Object.entries(input)) {
     if (key.includes('date') && input[key]) {
-      input[key] = formatDate(new Date(input[key]).toISOString());
+      const date = moment(input[key]).format('YYYY-MM-DD');
+      input[key] = formatDate(date);
     }
   }
   return input;
