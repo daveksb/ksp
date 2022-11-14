@@ -134,7 +134,11 @@
 
         <ng-container matColumnDef="personId">
           <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
-          <td (click)="rowSelect(element)" mat-cell *matCellDef="let element">
+          <td
+            (click)="rowSelect(element.id)"
+            mat-cell
+            *matCellDef="let element"
+          >
             {{ element.idcardno }}
           </td>
         </ng-container>

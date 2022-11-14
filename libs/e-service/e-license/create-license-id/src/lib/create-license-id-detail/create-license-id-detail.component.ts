@@ -79,10 +79,13 @@ export class CreateLicenseIdDetailComponent implements OnInit {
     this.prefixList = this.generalInfoService.getPrefix();
   }
 
-  rowSelect(data: any) {
-    console.log('data = ', data);
+  rowSelect(id: any) {
+    console.log('id = ', id);
+    this.requestService.getSelfLicense(id).subscribe((data) => {
+      console.log('data = ', data);
+      this.form.patchValue(data);
+    });
     //this.myImage = atob(data.imagefileid);
-    this.form.patchValue(data);
   }
 
   createMultiLicense() {

@@ -49,6 +49,15 @@ export class ERequestService {
     );
   }
 
+  getSelfLicense(requestid: string): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/selflicenseselectbyrequestno`,
+      {
+        requestno: requestid,
+      }
+    );
+  }
+
   getSelfApproveGroupById(groupno: string): Observable<any> {
     return this.http.post<KspRequest>(
       `${environment.apiUrl}/e-service/selfapprovegroupsearchgroupno`,
