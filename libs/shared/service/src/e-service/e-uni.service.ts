@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
+import { EsSearchPayload, KspRequest } from '@ksp/shared/interface';
 import { getCookie } from '@ksp/shared/utility';
 import _ from 'lodash';
 import { map, Observable, shareReplay } from 'rxjs';
@@ -188,5 +189,11 @@ export class EUniService {
         tokenkey: getCookie('userToken'),
       }
     );
+  }
+
+  KspSearchUniRequest(payload: any): Observable<any[]> {
+    return this.http
+      .post(`${environment.shortApiUrl}/ksprequestjoinuniversitysearch_es.php`, payload)
+      .pipe(map((data: any) => data.datareturn));
   }
 }

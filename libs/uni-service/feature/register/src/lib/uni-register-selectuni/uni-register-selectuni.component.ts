@@ -25,6 +25,9 @@ export class UniRegisterSelectUniComponent {
   }
 
   back() {
+    localForage.removeItem('registerSelectedUniversity');
+    localForage.removeItem('registerUserForm');
+    localForage.removeItem('registerCoordinatorForm');
     this.router.navigate(['/login']);
   }
 

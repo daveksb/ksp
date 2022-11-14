@@ -46,7 +46,7 @@ export class AllUserListComponent extends KspPaginationComponent implements OnIn
         this.pageEvent.length = res.countrow;
         this.dataSource = res.datareturn.map((data: any) => {
           data.isuseractive = data.isuseractive == '1' ? 'ใช้งาน' : 'ไม่ใช้งาน';
-          data.createdate = stringToThaiDate(data.createdate);
+          data.createdate = data.createdate ? stringToThaiDate(data.createdate) : '';
           data.updatedate = data.updatedate ? stringToThaiDate(data.updatedate) : '';
           return data;
         });

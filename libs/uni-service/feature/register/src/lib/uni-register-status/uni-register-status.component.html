@@ -33,7 +33,14 @@
           </tr>
         </tbody>
       </table>
-
+      <mat-paginator
+        [length]="pageEvent.length"
+        [pageSize]="pageEvent.pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        (page)="onPaginatorEvent($event)"
+        [pageIndex]="pageEvent.pageIndex"
+      >
+    </mat-paginator>
       <div class="py-2 d-flex justify-content-center">
         <a
           class="btn btn-primary"
