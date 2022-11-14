@@ -16,6 +16,33 @@ import { getCookie, parseJson } from '@ksp/shared/utility';
 export class RequestLicenseApprovePrintComponent implements OnInit {
   groupNo!: number;
   accounts!: string;
+  licenseData = [
+    {
+      order: 1,
+      licenseType: 'ครู',
+      count: 0,
+    },
+    {
+      order: 2,
+      licenseType: 'ครูชาวต่างชาติ',
+      count: 0,
+    },
+    {
+      order: 3,
+      licenseType: 'ผู้บริหารสถานศึกษา',
+      count: 0,
+    },
+    {
+      order: 4,
+      licenseType: 'ผู้บริหารการศึกษา',
+      count: 0,
+    },
+    {
+      order: 5,
+      licenseType: 'ศึกษานิเทศก์',
+      count: 0,
+    },
+  ];
 
   constructor(
     private router: Router,

@@ -86,7 +86,7 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
 
     dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        const payload = {
+        const payload = formatDatePayload({
           id: this.id,
           matilevel1no: value.no,
           matilevel1date: value.date,
@@ -95,7 +95,7 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
           matilevel1result: value.result,
           matilevel1fileinfo: null,
           matilevel1detail: value.detail,
-        };
+        });
 
         this.requestService.updateApproveGroup(payload).subscribe((res) => {
           if (res?.returnmessage === 'success') {
