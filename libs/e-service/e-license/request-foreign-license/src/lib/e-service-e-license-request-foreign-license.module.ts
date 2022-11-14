@@ -35,6 +35,9 @@ import {
 } from '@ksp/e-service/e-license/approve-ksp-request';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { RequestLicenseForeignListComponent } from './request-license-foreign-list/request-license-foreign-list.component';
+import { RequestLicenseForeignDetailComponent } from './request-license-foreign-detail/request-license-foreign-detail.component';
+import { RequestStatusComponent } from '@ksp/self-service/ui';
+import { MatStepperModule } from '@angular/material/stepper';
 
 export const routes: Route[] = [
   {
@@ -49,6 +52,10 @@ export const routes: Route[] = [
       {
         path: 'list',
         component: RequestLicenseForeignListComponent,
+      },
+      {
+        path: 'detail/:id',
+        component: RequestLicenseForeignDetailComponent,
       },
     ],
   },
@@ -81,7 +88,12 @@ export const routes: Route[] = [
     EServiceLicenseSaveResultComponent,
     RequestLicenseApproveSummaryTableComponent,
     MatCheckboxModule,
+    RequestStatusComponent,
+    MatStepperModule,
   ],
-  declarations: [RequestLicenseForeignListComponent],
+  declarations: [
+    RequestLicenseForeignListComponent,
+    RequestLicenseForeignDetailComponent,
+  ],
 })
 export class EServiceELicenseRequestForeignLicenseModule {}

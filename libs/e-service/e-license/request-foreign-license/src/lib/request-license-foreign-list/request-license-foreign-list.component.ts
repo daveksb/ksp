@@ -112,7 +112,7 @@ export class RequestLicenseForeignListComponent implements AfterViewInit {
   }
 
   goToDetail(id: number) {
-    this.router.navigate(['/request-license', 'approve-detail', id]);
+    this.router.navigate(['/request-foreign-license', 'detail', id]);
   }
 
   clear() {
