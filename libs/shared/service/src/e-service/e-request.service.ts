@@ -49,6 +49,15 @@ export class ERequestService {
     );
   }
 
+  getSelfLicense(requestid: string): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/selflicenseselectbyrequestno`,
+      {
+        requestno: requestid,
+      }
+    );
+  }
+
   getSelfApproveGroupById(groupno: string): Observable<any> {
     return this.http.post<KspRequest>(
       `${environment.apiUrl}/e-service/selfapprovegroupsearchgroupno`,
@@ -284,7 +293,14 @@ export class ERequestService {
     );
   }
 
-  updateRequestUrgent(payload: any): Observable<any> {
+  setUrgentRequest(
+    requestId: string | null,
+    isurgent: boolean
+  ): Observable<any> {
+    const payload = {
+      id: requestId,
+      isurgent: isurgent ? '1' : '0',
+    };
     return this.http.post(
       `${environment.apiUrl}/e-service/ksprequestupdateisurgent`,
       payload

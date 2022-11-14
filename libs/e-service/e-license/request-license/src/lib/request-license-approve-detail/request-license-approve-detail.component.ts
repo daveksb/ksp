@@ -101,7 +101,7 @@ export class RequestLicenseApproveDetailComponent
           .getKspRequestById(this.requestId)
           .subscribe((res) => {
             if (res) {
-              console.log(res);
+              //console.log(res);
               this.requestData = res;
               this.patchData(res);
               switch (res.careertype) {

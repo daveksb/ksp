@@ -58,7 +58,7 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
 
       if (account) {
         this.requestService.getGroupByAccount(account).subscribe((res) => {
-          console.log('group = ', res);
+          //console.log('group = ', res);
           if (res) {
             this.id = res.id;
             this.groupNo = res.groupno;
@@ -75,7 +75,7 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
   }
 
   save(value: any) {
-    console.log(value);
+    console.log('form value = ', value);
 
     const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
@@ -86,7 +86,7 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
 
     dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        const payload = {
+        const payload = formatDatePayload({
           id: this.id,
           matilevel1no: value.no,
           matilevel1date: value.date,
@@ -95,7 +95,7 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
           matilevel1result: value.result,
           matilevel1fileinfo: null,
           matilevel1detail: value.detail,
-        };
+        });
 
         this.requestService.updateApproveGroup(payload).subscribe((res) => {
           if (res?.returnmessage === 'success') {
@@ -104,6 +104,9 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
               matilevel1: value.no,
               listno: this.listNo.split(' | ').join(','),
             });
+
+            console.log('payload = ', payload2);
+
             this.requestService
               .updateDateForMati1(payload2)
               .subscribe((res) => {
