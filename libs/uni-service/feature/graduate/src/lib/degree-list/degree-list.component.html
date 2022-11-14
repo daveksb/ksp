@@ -28,7 +28,13 @@
       <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="order">
           <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
-          <td mat-cell *matCellDef="let element">{{ element.order }}</td>
+          <td mat-cell *matCellDef="let element; let i = index">
+            {{
+              paginator.pageIndex === 0
+                ? i + 1
+                : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+            }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="edit">

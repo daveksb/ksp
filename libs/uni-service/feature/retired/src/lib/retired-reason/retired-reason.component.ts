@@ -41,6 +41,9 @@ export class RetiredReasonComponent implements OnInit {
         if (this.userInfo.phone) {
           this.userInfo.contactPhone = this.userInfo.phone;
         }
+        this.userInfo.permissionname = this.userInfo.permissionright == '1' 
+        ? 'เจ้าหน้าที่ประสานงาน (รับรองปริญญาและประกาศนียบัตรทางการศึกษา)' :
+        this.userInfo.permissionright == '2' ? 'เจ้าหน้าที่ประสานงาน (นำส่งรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา​)' : '';
       }
     });
   }
@@ -49,4 +52,12 @@ export class RetiredReasonComponent implements OnInit {
     localForage.setItem('retireReasonData', this.form.getRawValue());
     this.router.navigate(['/retired', 'attachment']);
   }
+
+  prevPage() {
+    localForage.removeItem('retireReasonData');
+    localForage.removeItem('userSelectedData');
+    localForage.removeItem('retireCoordinatorInfo');
+    this.router.navigate(['/', 'retired', 'home']);
+  }
+
 }

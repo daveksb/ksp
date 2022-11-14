@@ -20,6 +20,7 @@ import { UniRegisterStatusComponent } from './uni-register-status/uni-register-s
 import { RetiredSearchComponent } from '@ksp/shared/search';
 import { UniRegisterPasswordComponent } from './uni-register-password/uni-register-password.component';
 import { UniRegisterSelectUniComponent } from './uni-register-selectuni/uni-register-selectuni.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import { UniRegisterSelectUniComponent } from './uni-register-selectuni/uni-regi
     StepperNavComponent,
     ReactiveFormsModule,
     RetiredSearchComponent,
+    MatPaginatorModule
   ],
   declarations: [
     UniRegisterRequesterComponent,

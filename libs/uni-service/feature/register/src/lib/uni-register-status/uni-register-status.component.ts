@@ -3,26 +3,28 @@ import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
+import { KspPaginationComponent } from '@ksp/shared/interface';
 import { UniversitySearchComponent } from '@ksp/shared/search';
 import { GeneralInfoService, UniInfoService, UniRequestService } from '@ksp/shared/service';
 import { thaiDate } from '@ksp/shared/utility';
 import localForage from 'localforage';
+import _ from 'lodash';
 import { Observable } from 'rxjs';
 
 @Component({
   templateUrl: './uni-register-status.component.html',
   styleUrls: ['./uni-register-status.component.scss'],
 })
-export class UniRegisterStatusComponent implements OnInit {
+export class UniRegisterStatusComponent extends KspPaginationComponent {
   data: Array<any> = [];
   selectedUser: any;
   payload: any = {};
   constructor(
     private router: Router,
     private uniRequestService: UniRequestService
-  ) {}
-
-  ngOnInit(): void {}
+  ) {
+    super();
+  }
 
   handleClear(form: any) {
     this.handleSearch(form);
@@ -32,7 +34,7 @@ export class UniRegisterStatusComponent implements OnInit {
     if (form) {
       let nameData = {};
       if (form.name) {
-        let newName = form.name.split(' ');
+        const newName = form.name.split(' ');
         if (newName.length > 1) {
           nameData = {
             firstname: newName[0],
@@ -51,16 +53,21 @@ export class UniRegisterStatusComponent implements OnInit {
         permission: form.permissionright,
         unitype: form.searchType?.organization,
         unicode: form.searchType?.schoolid,
-        uniname: form.searchType?.instituteName
+        uniname: form.searchType?.instituteName,
+        ...this.tableRecord
       }
-      this.payload.row = 999;
       delete this.payload.searchType;
-      this.search(this.payload);
+      this.searchUser(this.payload);
     }
   }
 
-  search(form: any) {
+  override search(): void {
+      this.handleSearch({});
+  }
+
+  searchUser(form: any) {
     this.uniRequestService.uniRequestRegisterSearch(form).subscribe(res=>{
+      this.pageEvent.length = res.countrow;
       if (res.returncode == "00" && res.datareturn) {
         this.data = res.datareturn.map((data: any) => {
           if (data.educationoccupy) {

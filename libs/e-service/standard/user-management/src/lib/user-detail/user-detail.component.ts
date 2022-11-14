@@ -45,7 +45,10 @@ export class UserDetailComponent implements OnInit {
   });
 
   verifyForm = this.fb.group({
-    result: [null, Validators.required],
+    result: [{
+      result: '',
+      reason: ''
+    }, Validators.required]
   });
 
   uploadFileList: FileGroup[] = [
@@ -114,6 +117,10 @@ export class UserDetailComponent implements OnInit {
       this.requestType = this.requestData.requesttype ? parseInt(this.requestData.requesttype) : 0;
 
       res.status === '1' ? (this.mode = 'edit') : (this.mode = 'view');
+      this.verifyForm.controls.result.patchValue({
+        result: res?.status === '1' ? '' : res?.status === '2' ? '1' : '0', 
+        reason: res?.reasoninfo || ''
+      });
       if (res.birthdate) {
         res.birthdate = res.birthdate.split('T')[0];
       }

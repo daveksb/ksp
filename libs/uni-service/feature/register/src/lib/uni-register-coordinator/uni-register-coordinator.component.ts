@@ -85,6 +85,7 @@ export class UniRegisterCoordinatorComponent implements OnInit {
         this.form.patchValue({
           coordinator: res.form.coordinator,
         });
+        this.uploadFileList = res.file
       }
     });
     this.prefixName$ = this.generalInfoService.getPrefix();
@@ -103,7 +104,7 @@ export class UniRegisterCoordinatorComponent implements OnInit {
   }
 
   prevPage() {
-    let form = {
+    const form = {
       form: this.form.getRawValue(),
       file: this.uploadFileList,
     };
