@@ -56,10 +56,7 @@
         <ksp-validate-ksp-request
           [requestType]="saveData.requestData.requesttype"
           [process]="saveData.requestData.process"
-          [showUrgent]="
-            saveData.requestData.process === '4' ||
-            saveData.requestData.process === '3'
-          "
+          [showUrgent]="saveData.requestData.process === '4'"
           formControlName="approvement"
         ></ksp-validate-ksp-request>
       </ng-container>

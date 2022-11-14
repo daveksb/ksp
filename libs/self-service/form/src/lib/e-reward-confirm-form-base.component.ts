@@ -40,9 +40,9 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    /* this.form.valueChanges.subscribe((res) => {
+    this.form.valueChanges.subscribe((res) => {
       console.log(res.approvement);
-    }); */
+    });
 
     localForage.getItem('checkRequestData').then((res: any) => {
       this.saveData = res;
@@ -68,9 +68,17 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
         this.targetStatus = 3;
       } else if (input.shouldForward === '2') {
         //ส่งตรวจสอบลำดับต่อไป
-        console.log('//ส่งตรวจสอบลำดับต่อไป ');
-        this.targetProcess = Number(req.process) + 1;
-        this.targetStatus = 1;
+        //console.log('//ส่งตรวจสอบลำดับต่อไป ');
+        if (req.process === '2') {
+          this.targetProcess = 3;
+          this.targetStatus = 3;
+        } else if (req.process === '3') {
+          this.targetProcess = 4;
+          this.targetStatus = 1;
+        } else if (req.process === '4') {
+          this.targetProcess = 4;
+          this.targetStatus = 3;
+        }
       } else if (input.shouldForward === '4') {
         //ส่งเรื่องพิจารณา
         this.targetProcess = 5;
@@ -97,7 +105,8 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
   }
 
   checkRequest() {
-    this.checkApproveResult(<any>this.form.value.approvement);
+    const form: any = this.form.value.approvement;
+    this.checkApproveResult(form);
     //console.log('save data = ', this.saveData);
     const payload: KspApprovePayload = {
       requestid: this.saveData.requestData.id,
@@ -109,8 +118,12 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
       paymentstatus: null,
     };
     //console.log('payload = ', payload);
-    this.eRequestService.KspUpdateRequestProcess(payload).subscribe((res) => {
-      this.navigateBack();
+    this.eRequestService.KspUpdateRequestProcess(payload).subscribe(() => {
+      this.eRequestService
+        .setUrgentRequest(this.saveData.requestData.id, form.isurgent)
+        .subscribe(() => {
+          //this.navigateBack();
+        });
     });
   }
 
