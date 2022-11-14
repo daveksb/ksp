@@ -56,7 +56,7 @@ export class RenewLicenseThaiComponent
 
   workingInfoFiles: FileGroup[] = [
     {
-      name: '1.รางวัลอื่นและประกาศเกียรติคุณ',
+      name: '1.สำเนาผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน (3 กิจกรรม)',
       files: [],
     },
   ];
