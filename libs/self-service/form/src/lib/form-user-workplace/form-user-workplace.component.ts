@@ -24,7 +24,6 @@ const formList = [
   'province',
   'tumbol',
   'amphur',
-
   'phone',
   'fax',
   'email',
@@ -54,14 +53,12 @@ export class FormUserWorkplaceComponent
 
   schoolInfo = new SchInfo();
   school: any;
-
   schoolName: any;
   moo: any;
   road: any;
   zipcode: any;
   houseNo: any;
   alley: any;
-
   bureauid: any;
   province: any;
   amphur: any;
@@ -79,7 +76,6 @@ export class FormUserWorkplaceComponent
     tumbol: [null, Validators.required],
     amphur: [null, Validators.required],
     notRequired: [false],
-
     phone: [],
     fax: [],
     email: [],
@@ -89,7 +85,6 @@ export class FormUserWorkplaceComponent
   constructor(private dialog: MatDialog, private fb: FormBuilder) {
     super();
     this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value) => {
         //console.log(value);
         this.onChange(value);
@@ -124,7 +119,6 @@ export class FormUserWorkplaceComponent
   selectedUniversity(school: SchInfo) {
     this.schoolInfo = school;
     //console.log('activeUsers = ', school);
-
     /* this.bureauid = school.bureauid; */
     this.schoolName = school.schoolname;
     this.zipcode = school.zipcode;

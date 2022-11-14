@@ -40,9 +40,9 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.form.valueChanges.subscribe((res) => {
+    /* this.form.valueChanges.subscribe((res) => {
       console.log(res.approvement);
-    });
+    }); */
 
     localForage.getItem('checkRequestData').then((res: any) => {
       this.saveData = res;
@@ -70,8 +70,8 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
         //ส่งตรวจสอบลำดับต่อไป
         //console.log('//ส่งตรวจสอบลำดับต่อไป ');
         if (req.process === '2') {
-          this.targetProcess = 3;
-          this.targetStatus = 3;
+          this.targetProcess = 4;
+          this.targetStatus = 1;
         } else if (req.process === '3') {
           this.targetProcess = 4;
           this.targetStatus = 1;
@@ -81,8 +81,8 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
         }
       } else if (input.shouldForward === '4') {
         //ส่งเรื่องพิจารณา
-        this.targetProcess = 5;
-        this.targetStatus = 1;
+        this.targetProcess = 4;
+        this.targetStatus = 3;
       }
     } else if (input.result === '2') {
       //ขอแก้ไข / เพิ่มเติม
