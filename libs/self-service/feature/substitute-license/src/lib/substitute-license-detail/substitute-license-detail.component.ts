@@ -25,11 +25,12 @@ import {
 } from '@ksp/shared/utility';
 import { FileGroup, SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
+import { v4 as uuidv4 } from 'uuid';
 
 const OBJECTIVE_FILES: FileGroup[] = [
-  { name: '1.ใบอนุญาตประกอบวิชาชีพที่ชํารุด', files: [] },
+  { name: '1. ใบอนุญาตประกอบวิชาชีพที่ชํารุด', files: [] },
   {
-    name: '2.หลักฐานการรับแจงความของพนักงานสอบสวน หรือบันทึกถอยคํา กรณีใบอนุญาตสูญหาย',
+    name: '2. หลักฐานการรับแจ้งความของพนักงานสอบสวน หรือบันทึกถ้อยคํา กรณีใบอนุญาตสูญหาย',
     files: [],
   },
 ];
@@ -86,6 +87,7 @@ export class SubstituteLicenseDetailComponent
   override initializeFiles() {
     super.initializeFiles();
     this.objectiveFiles = structuredClone(OBJECTIVE_FILES);
+    this.uniqueTimestamp = uuidv4();
   }
 
   override patchData(data: SelfRequest) {

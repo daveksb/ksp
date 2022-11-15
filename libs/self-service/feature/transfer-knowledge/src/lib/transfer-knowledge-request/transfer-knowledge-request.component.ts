@@ -20,14 +20,29 @@ import {
   replaceEmptyWithNull,
   toLowercaseProp,
 } from '@ksp/shared/utility';
-import { SelfRequest } from '@ksp/shared/interface';
+import { FileGroup, SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { Observable } from 'rxjs';
+import { v4 as uuidv4 } from 'uuid';
 
-const EDU_FILES = [
+const EDU_FILES: FileGroup[] = [
+  {
+    name: '1. สำเนาใบรายงานผลการศึกษา (transcript)',
+    files: [],
+  },
+];
+
+const OBJECTIVE_FILES: FileGroup[] = [
+  {
+    name: '1. สำเนาคำอธิบายรายวิชาที่ขอเทียบโอนความรู้ฯตามหลักสูตรที่สำเร็จการศึกษาที่มีตราประทับของทางสถาบันที่สำเร็จการศึกษาและมีเจ้าหน้าที่ของสถาบันลงนามรับรองสำเนาถูกต้อง',
+    files: [],
+  },
+];
+
+/* const EDU_FILES = [
   {
     name: 'สำเนาใบรายงานผลการศึกษา (transcript)',
     fileid: '',
@@ -42,6 +57,7 @@ const OBJECTIVE_FILES = [
     filename: '',
   },
 ];
+ */
 
 @Component({
   selector: 'ksp-transfer-knowledge-request',
@@ -104,6 +120,7 @@ export class TransferKnowledgeRequestComponent
     super.initializeFiles();
     this.eduFiles = structuredClone(EDU_FILES);
     this.transferFiles = structuredClone(OBJECTIVE_FILES);
+    this.uniqueTimestamp = uuidv4();
   }
 
   override patchData(data: SelfRequest) {

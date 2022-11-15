@@ -1,11 +1,10 @@
 <ksp-top-nav [isSelfService]="true">
   <span header>ข้อมูลของฉัน</span>
-  <span subHeader>ข้อมูลส่วนตัว</span>
 </ksp-top-nav>
 
 <form [formGroup]="form">
   <div class="main__container full-height px-4 py-2">
-    <br />
+    <div class="box-header">ข้อมูลส่วนตัว</div>
     <self-service-form-upload-image
       [isEditMode]="status === 'view' ? false : true"
       [imgSrc]="imgSrc"
@@ -212,7 +211,10 @@
     </div>
 
     <div class="d-flex justify-content-center my-3">
-      <button class="btn btn-secondary me-2" (click)="clearData()">
+      <button
+        class="btn text-secondary bg-light border-secondary me-2"
+        (click)="clearData()"
+      >
         ล้างข้อมูล
       </button>
       <button

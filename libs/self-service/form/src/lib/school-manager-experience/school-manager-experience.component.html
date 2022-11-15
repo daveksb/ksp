@@ -6,19 +6,27 @@
           <input
             type="checkbox"
             class="me-2 mt-1"
-            formControlName="hasTeachingExperience" />
+            formControlName="hasTeachingExperience"
+          />
         </div>
         <label class="form-label">
           มีประสบการณ์ด้านปฎิบัติการสอนมาแล้วไม่น้อยกว่า 5 ปี
         </label>
       </div>
       <div class="d-flex align-items-center ms-4">
-        <label class="form-label me-3" [class.required]="form.controls.hasTeachingExperience.value">จำนวนปี</label>
+        <label
+          class="form-label me-3"
+          [class.required]="form.controls.hasTeachingExperience.value"
+          >จำนวนปี</label
+        >
         <input
           type="number"
           class="form-control w-auto"
-          [class.form-control-danger]="teachingYear.invalid && (teachingYear.dirty || teachingYear.touched)"
-          formControlName="teachingExperienceYear" />
+          [class.form-control-danger]="
+            teachingYear.invalid && (teachingYear.dirty || teachingYear.touched)
+          "
+          formControlName="teachingExperienceYear"
+        />
       </div>
     </div>
     <div class="col-md-6 mb-2">
@@ -27,7 +35,8 @@
           <input
             type="checkbox"
             class="me-2 mt-1"
-            formControlName="hasManagingExperience" />
+            formControlName="hasManagingExperience"
+          />
         </div>
         <label class="form-label">
           มีประสบการณ์ด้านปฎิบัติการสอนและมีประสบกรณ์ในตำแหน่งหัวหน้าหมวดหรือหัวหน้าสาย
@@ -36,12 +45,19 @@
         </label>
       </div>
       <div class="d-flex align-items-center ms-4">
-        <label class="form-label me-3" [class.required]="form.controls.hasManagingExperience.value">จำนวนปี</label>
+        <label
+          class="form-label me-3"
+          [class.required]="form.controls.hasManagingExperience.value"
+          >จำนวนปี</label
+        >
         <input
           type="number"
           class="form-control w-auto"
-          [class.form-control-danger]="managingYear.invalid && (managingYear.dirty || managingYear.touched)"
-          formControlName="managingExperienceYear" />
+          [class.form-control-danger]="
+            managingYear.invalid && (managingYear.dirty || managingYear.touched)
+          "
+          formControlName="managingExperienceYear"
+        />
       </div>
     </div>
   </div>
