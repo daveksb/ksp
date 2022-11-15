@@ -216,13 +216,15 @@ export class RequestLicenseApproveKmvComponent implements OnInit {
           if (res?.returnmessage === 'success') {
             const payload2 = formatDatePayload({
               approvedate: value.date,
+              process: '1',
+              status: '2',
               matilevel2: value.no,
               listno: this.listData
                 ? this.listData.split(' | ').join(',')
                 : null,
             });
             this.requestService
-              .updateDateForMati2(payload2)
+              .updateSelfApproveListMati2(payload2)
               .subscribe((res) => {
                 if (res?.returnmessage === 'success') {
                   this.completeDialog();
