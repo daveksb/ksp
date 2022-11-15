@@ -23,13 +23,13 @@ export class FormMultiAttachmentComponent {
 
   constructor(public dialog: MatDialog, private fileService: FileService) {}
 
-  view(group: FileGroup, index: number) {
+  view(group: FileGroup) {
     this.dialog.open(PdfViewerComponent, {
       width: '1200px',
       height: '100vh',
       data: {
         title: group.name,
-        file: group.files[index],
+        files: group.files,
       },
     });
   }
