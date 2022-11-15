@@ -24,6 +24,7 @@ export class StandardWorkingComponent
 
   selectedEducationType!: number;
   @Input() workingInfo: any[] = [];
+  @Input() workingInfo2: any[] = [];
 
   override form = this.fb.group({
     educationType: [null, Validators.required],

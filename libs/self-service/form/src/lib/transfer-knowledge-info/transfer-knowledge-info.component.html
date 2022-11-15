@@ -31,10 +31,11 @@
       *ngFor="let transferForm of standards.controls; let i = index"
     >
       <ng-container [formGroupName]="i">
-        <div class="bg-light py-2 px-3 mb-3">
+        <div class="bg-white border rounded py-2 px-3 mb-3">
           <div class="d-flex justify-content-between">
             <div class="form-label">มาตรฐานความรู้ที่ {{ i + 1 }}</div>
             <i
+              *ngIf="i > 0"
               class="bi bi-x-circle-fill text-danger"
               role="button"
               (click)="deleteStandard(i)"
@@ -69,58 +70,54 @@
               *ngFor="let subject of getSubjects(i).controls; let j = index"
             >
               <ng-container [formGroupName]="j">
-                <div class="py-2 px-3 bg-white mb-2">
-                  <div class="d-flex justify-content-end" *ngIf="j > 0">
-                    <i
-                      class="bi bi-x-circle-fill text-danger"
-                      role="button"
-                      (click)="deleteSubject(i, j)"
-                    ></i>
+                <div class="d-flex justify-content-end" *ngIf="j > 0">
+                  <i
+                    class="bi bi-x-circle-fill text-danger"
+                    role="button"
+                    (click)="deleteSubject(i, j)"
+                  ></i>
+                </div>
+                <div class="row">
+                  <div class="col-md-8">
+                    <label class="form-label required">ชื่อวิชาเทียบโอน</label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      formControlName="subjectName"
+                    />
                   </div>
-                  <div class="row">
-                    <div class="col-md-8">
-                      <label class="form-label required"
-                        >ชื่อวิชาเทียบโอน</label
-                      >
-                      <input
-                        class="form-control"
-                        type="text"
-                        formControlName="subjectName"
-                      />
-                    </div>
-                    <div class="col-md mt-md-0 mt-2">
-                      <label class="form-label required">รหัสวิชา</label>
-                      <input
-                        class="form-control"
-                        type="text"
-                        formControlName="subjectCode"
-                      />
-                    </div>
-                    <div class="col-md mt-md-0 mt-2">
-                      <label class="form-label required">ผลการเรียน</label>
-                      <input
-                        class="form-control"
-                        type="text"
-                        formControlName="grade"
-                      />
-                    </div>
+                  <div class="col-md mt-md-0 mt-2">
+                    <label class="form-label required">รหัสวิชา</label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      formControlName="subjectCode"
+                    />
                   </div>
+                  <div class="col-md mt-md-0 mt-2">
+                    <label class="form-label required">ผลการเรียน</label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      formControlName="grade"
+                    />
+                  </div>
+                </div>
 
-                  <div class="row mb-2">
-                    <div class="col-md mt-md-0 mt-2">
-                      <label class="form-label required">คำอธิบาย</label>
-                      <textarea
-                        rows="3"
-                        class="form-control"
-                        formControlName="detail"
-                      ></textarea>
-                    </div>
+                <div class="row mb-2">
+                  <div class="col-md mt-md-0 mt-2">
+                    <label class="form-label required">คำอธิบาย</label>
+                    <textarea
+                      rows="3"
+                      class="form-control"
+                      formControlName="detail"
+                    ></textarea>
                   </div>
                 </div>
               </ng-container>
             </ng-container>
           </ng-container>
-          <div class="d-flex">
+          <div class="d-flex justify-content-end">
             <ksp-add-row-button
               [classList]="'text-primary'"
               (addRowClick)="addSubject(i)"
