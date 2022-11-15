@@ -1,64 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SelfServiceRequestSubType } from '@ksp/shared/constant';
+import {
+  DEFAULT_REQUEST_TYPE_LIST,
+  SelfServiceRequestSubType,
+} from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
+import { KspRequest } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
-import { formatDatePayload, parseJson } from '@ksp/shared/utility';
-
-const DEFAULT_REQUEST_TYPE_LIST = [
-  {
-    order: 1,
-    licenseType: 'ครู',
-    // count: 0,
-    // approve: 0,
-    // unApprove: 0,
-    // urgent: 0,
-  },
-  {
-    order: 2,
-    licenseType: 'ครูชาวต่างชาติ',
-    count: 0,
-    approve: 0,
-    unApprove: 0,
-    urgent: 0,
-  },
-  {
-    order: 3,
-    licenseType: 'KSP Bundit',
-    count: 0,
-    approve: 0,
-    unApprove: 0,
-    urgent: 0,
-  },
-  {
-    order: 4,
-    licenseType: 'ผู้บริหารสถานศึกษา',
-    // count: 0,
-    // approve: 0,
-    // unApprove: 0,
-    // urgent: 0,
-  },
-  {
-    order: 5,
-    licenseType: 'ผู้บริหารการศึกษา',
-    // count: 0,
-    // approve: 0,
-    // unApprove: 0,
-    // urgent: 0,
-  },
-  {
-    order: 6,
-    licenseType: 'ศึกษานิเทศก์',
-    // count: 0,
-    // approve: 0,
-    // unApprove: 0,
-    // urgent: 0,
-  },
-];
+import {
+  formatDatePayload,
+  getLicenseType,
+  parseJson,
+} from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-request-license-approve-kmv',
@@ -69,7 +26,7 @@ export class RequestLicenseApproveKmvComponent implements OnInit {
   groupNo!: string;
   listData!: any;
   id!: string;
-  requestList: any[] = [];
+  requestList: KspRequest[] = [];
   requestTypeList: any[] = [];
 
   constructor(
@@ -102,71 +59,7 @@ export class RequestLicenseApproveKmvComponent implements OnInit {
           .subscribe((res) => {
             if (res && res.datareturn.length > 0) {
               this.requestList = res.datareturn;
-
-              const teacherCount = this.requestList.filter(
-                (item) => +item.careertype === SelfServiceRequestSubType.ครู
-              ).length;
-
-              const schoolManagerCount = this.requestList.filter(
-                (item) =>
-                  +item.careertype ===
-                  SelfServiceRequestSubType.ผู้บริหารสถานศึกษา
-              ).length;
-
-              const educationManagerCount = this.requestList.filter(
-                (item) =>
-                  +item.careertype ===
-                  SelfServiceRequestSubType.ผู้บริหารการศึกษา
-              ).length;
-
-              const educationConsultantCount = this.requestList.filter(
-                (item) =>
-                  +item.careertype === SelfServiceRequestSubType.ศึกษานิเทศก์
-              ).length;
-
-              this.requestTypeList = DEFAULT_REQUEST_TYPE_LIST.map((item) => {
-                if (item.order === 1) {
-                  return {
-                    ...item,
-                    count: teacherCount,
-                    approve: 0,
-                    unApprove: 0,
-                    urgent: 0,
-                  };
-                }
-
-                if (item.licenseType === 'ผู้บริหารสถานศึกษา') {
-                  return {
-                    ...item,
-                    count: schoolManagerCount,
-                    approve: 0,
-                    unApprove: 0,
-                    urgent: 0,
-                  };
-                }
-
-                if (item.licenseType === 'ผู้บริหารการศึกษา') {
-                  return {
-                    ...item,
-                    count: educationManagerCount,
-                    approve: 0,
-                    unApprove: 0,
-                    urgent: 0,
-                  };
-                }
-
-                if (item.licenseType === 'ศึกษานิเทศก์') {
-                  return {
-                    ...item,
-                    count: educationConsultantCount,
-                    approve: 0,
-                    unApprove: 0,
-                    urgent: 0,
-                  };
-                }
-
-                return item;
-              });
+              this.requestTypeList = getLicenseType(this.requestList);
             }
           });
       }

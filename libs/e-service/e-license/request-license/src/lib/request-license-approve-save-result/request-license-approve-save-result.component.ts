@@ -6,7 +6,11 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { ERequestService } from '@ksp/shared/service';
-import { formatDatePayload, parseJson } from '@ksp/shared/utility';
+import {
+  formatDatePayload,
+  getLicenseType,
+  parseJson,
+} from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-request-license-approve-save-result',
@@ -17,33 +21,7 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
   groupNo!: string | null;
   id!: string | null;
   listNo = '';
-  licenseData = [
-    {
-      order: 1,
-      licenseType: 'ครู',
-      count: 0,
-    },
-    {
-      order: 2,
-      licenseType: 'ครูชาวต่างชาติ',
-      count: 0,
-    },
-    {
-      order: 3,
-      licenseType: 'ผู้บริหารสถานศึกษา',
-      count: 0,
-    },
-    {
-      order: 4,
-      licenseType: 'ผู้บริหารการศึกษา',
-      count: 0,
-    },
-    {
-      order: 5,
-      licenseType: 'ศึกษานิเทศก์',
-      count: 0,
-    },
-  ];
+  licenseData: any;
 
   constructor(
     private router: Router,
@@ -73,7 +51,8 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
             this.requestService
               .getRequestListByGroupNo(payload)
               .subscribe((res) => {
-                console.log('requests = ', res.datareturn);
+                //console.log('requests = ', res.datareturn);
+                this.licenseData = getLicenseType(res.datareturn);
               });
           }
         });
