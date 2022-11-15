@@ -81,34 +81,25 @@ export class RequestLicenseForeignListComponent implements AfterViewInit {
       requestdateto: params.requestdateto,
       offset: '0',
       row: '1000',
+      isforeign: '1',
     };
 
     payload = replaceEmptyWithNull(payload);
 
-    this.requestService
-      .KspSearchRequest(payload)
-      .pipe(
-        map((res: any) => {
-          return res.filter(
-            (item: any) =>
-              +item.isforeign === SelfServiceRequestForType.ชาวต่างชาติ
-          );
-        })
-      )
-      .subscribe((res) => {
-        console.log(res);
-        this.dataSource.data = res;
-        // this.dataSource.data = processFilter(res);
-        this.dataSource.sort = this.sort;
+    this.requestService.KspSearchRequest(payload).subscribe((res) => {
+      console.log(res);
+      this.dataSource.data = res;
+      // this.dataSource.data = processFilter(res);
+      this.dataSource.sort = this.sort;
 
-        const sortState: Sort = {
-          active: 'processupdatedate',
-          direction: 'desc',
-        };
-        this.sort.active = sortState.active;
-        this.sort.direction = sortState.direction;
-        this.sort.sortChange.emit(sortState);
-      });
+      const sortState: Sort = {
+        active: 'processupdatedate',
+        direction: 'desc',
+      };
+      this.sort.active = sortState.active;
+      this.sort.direction = sortState.direction;
+      this.sort.sortChange.emit(sortState);
+    });
   }
 
   goToDetail(id: number) {

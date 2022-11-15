@@ -1,5 +1,6 @@
+import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -14,6 +15,19 @@ import {
 } from '@ksp/shared/service';
 import { parseJson } from '@ksp/shared/utility';
 
+const VERIFY_CHOICES = [
+  {
+    name: 'ครบถ้วน และถูกต้อง',
+    value: 'complete',
+  },
+  {
+    name: 'ไม่ครบถ้วน และไม่ถูกต้อง',
+    value: 'incomplete',
+  },
+];
+
+const FORM_TAB_COUNT = 4;
+
 @Component({
   selector: 'ksp-request-license-foreign-detail',
   templateUrl: './request-license-foreign-detail.component.html',
@@ -25,7 +39,13 @@ export class RequestLicenseForeignDetailComponent implements OnInit {
     personalDeclaration: [],
     foreignCheckDocument: [],
     foreignSelectUpload: [],
+
+    checkResult: this.fb.array([]),
   });
+
+  get checkResultFormArray() {
+    return this.form.controls.checkResult as FormArray;
+  }
 
   uniqueTimestamp!: string;
   requestId!: number;
@@ -41,6 +61,8 @@ export class RequestLicenseForeignDetailComponent implements OnInit {
   personalDeclaration: any;
   documentFiles: FileGroup[] = [];
   myImage = '';
+  verifyChoice: any[] = VERIFY_CHOICES;
+  selectedTab: StepperSelectionEvent = new StepperSelectionEvent();
 
   constructor(
     private router: Router,
@@ -55,6 +77,18 @@ export class RequestLicenseForeignDetailComponent implements OnInit {
     this.checkRequestId();
     this.academicFiles = structuredClone(ACADEMIC_FILES);
     this.documentFiles = structuredClone(REQUEST_DOCUMENT_FILES);
+    this.addCheckResultArray();
+  }
+
+  addCheckResultArray() {
+    for (let i = 0; i < FORM_TAB_COUNT; i++) {
+      this.checkResultFormArray.push(this.fb.control(null));
+    }
+    // this.checkResultFormArray.setValidators(allFilledValidator());
+  }
+
+  onStepChange(e: StepperSelectionEvent) {
+    this.selectedTab = e;
   }
 
   checkRequestId() {
@@ -156,5 +190,18 @@ export class RequestLicenseForeignDetailComponent implements OnInit {
         email,
       };
     }
+  }
+
+  next() {
+    // this.persistData(this.form.controls.checkResult.value);
+    // this.router.navigate([
+    //   '/request-license',
+    //   'approve-confirm',
+    //   this.requestId,
+    // ]);
+  }
+
+  cancel() {
+    this.router.navigate(['/request-foreign-license', 'list']);
   }
 }
