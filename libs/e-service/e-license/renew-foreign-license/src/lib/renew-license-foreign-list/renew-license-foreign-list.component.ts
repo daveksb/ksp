@@ -103,7 +103,7 @@ export class RenewLicenseForeignListComponent implements AfterViewInit {
   }
 
   goToDetail(id: number) {
-    this.router.navigate(['/request-foreign-license', 'detail', id]);
+    this.router.navigate(['/renew-foreign-license', 'detail', id]);
   }
 
   clear() {
