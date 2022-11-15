@@ -19,7 +19,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { parseJson, replaceEmptyWithNull } from '@ksp/shared/utility';
 import localForage from 'localforage';
-import { SchoolRetireReason } from 'libs/shared/constant/src/sch-request-constant';
+import { SchoolRetireReason } from '@ksp/shared/constant';
 
 @Component({
   templateUrl: './user-detail.component.html',

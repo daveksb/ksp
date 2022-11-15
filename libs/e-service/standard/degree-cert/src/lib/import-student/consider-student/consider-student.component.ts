@@ -189,21 +189,15 @@ export class ConsiderStudentComponent implements OnInit {
             if (this.form.value.result == '1' 
                 && this.payload.pagetype == 'admissionList'
                 && this.payload.studentlist.length) {
-                  this.payload.studentlist.forEach((student:any) => {
-                    this.requestService.insertStudent(student).subscribe((res: any) => {
-                      console.log('done')
-                    });
+                  this.requestService.insertStudent({ data: this.payload.studentlist }).subscribe((res: any) => {
+                    this.onConfirmed();
                   });
-              this.onConfirmed();
             } else if (this.form.value.result == '1' 
                 && this.payload.pagetype == 'graduateList'
                 && this.payload.studentlist.length) {
-              this.payload.studentlist.forEach((student:any) => {
-                this.requestService.updateStudent(student).subscribe((res: any) => {
-                  console.log('done')
-                });
-              });
-              this.onConfirmed();
+                  this.requestService.updateStudent({ data: this.payload.studentlist }).subscribe((res: any) => {
+                    this.onConfirmed();
+                  });
             } else {
               this.onConfirmed();
             }
