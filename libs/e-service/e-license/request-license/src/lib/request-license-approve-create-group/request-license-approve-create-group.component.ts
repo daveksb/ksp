@@ -170,6 +170,8 @@ export class RequestLicenseApproveCreateGroupComponent
       if (res) {
         const payload = {
           listno: this.listNo.toString(),
+          process: '1',
+          status: '1',
           forward_to_license_create: this.form.controls.createNumber.value
             ? '1'
             : '0',

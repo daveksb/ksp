@@ -24,7 +24,7 @@ export class RequestLicenseApproveLicenseTableComponent
   displayedColumns: string[] = [];
   dataSource = new MatTableDataSource<any>();
 
-  constructor(private router: Router) {}
+  //constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.dataSource.data = this.data;

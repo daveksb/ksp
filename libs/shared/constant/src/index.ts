@@ -5,3 +5,4 @@ export * from './degree-cert-constant';
 export * from './self-request-constant';
 export * from './uni-service-constant';
 export * from './e-service-constant';
+export * from './self-approve-list-constant';
