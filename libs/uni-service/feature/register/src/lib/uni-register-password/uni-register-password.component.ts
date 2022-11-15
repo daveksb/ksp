@@ -9,7 +9,7 @@ import {
 import { FormMode } from '@ksp/shared/interface';
 import { EMPTY, switchMap } from 'rxjs';
 import localForage from 'localforage';
-import { getCookie, mapMultiFileInfo, thaiDate } from '@ksp/shared/utility';
+import { getCookie, mapMultiFileInfo, replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
 import { UniRequestService } from '@ksp/shared/service';
 import * as CryptoJs from 'crypto-js';
 
@@ -145,6 +145,7 @@ export class UniRegisterPasswordComponent implements OnInit {
       .pipe(
         switchMap((res) => {
           if (res) {
+            this.savingData = replaceEmptyWithNull(this.savingData);
             const educationoccupy = {
               permission: this.savingData.permission,
               other: this.savingData.other,
