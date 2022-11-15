@@ -70,7 +70,7 @@ export const eLicenseMenu: MenuConfig[] = [
     subMenuName: 'renewForeign',
     subMenu: [
       {
-        path: '/renew-license/approve-list',
+        path: '/renew-foreign-license/list',
         label: 'รายการใบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
       },
       /* {
