@@ -17,7 +17,7 @@ import {
 import { ERequestService, GeneralInfoService, UniInfoService } from '@ksp/shared/service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { parseJson } from '@ksp/shared/utility';
+import { parseJson, replaceEmptyWithNull } from '@ksp/shared/utility';
 import localForage from 'localforage';
 import { SchoolRetireReason } from 'libs/shared/constant/src/sch-request-constant';
 
@@ -173,27 +173,27 @@ export class UserDetailComponent implements OnInit {
 
   approveUser() {
     // change process and status of SCH_REQUEST
-    const newUser = new UniUser();
-    newUser.uniid = this.requestData.uniid || null;
-    newUser.idcardno = this.requestData.idcardno || null;
-    newUser.firstnameth = this.requestData.firstnameth || null;
-    newUser.lastnameth = this.requestData.lastnameth || null;
-    newUser.email = this.requestData.email || null;
-    newUser.phone = this.requestData.contactphone || null;
+    let newUser = new UniUser();
+    newUser.uniid = this.requestData.uniid;
+    newUser.idcardno = this.requestData.idcardno;
+    newUser.firstnameth = this.requestData.firstnameth;
+    newUser.lastnameth = this.requestData.lastnameth;
+    newUser.email = this.requestData.email;
+    newUser.phone = this.requestData.contactphone;
     newUser.birthdate = this.requestData.birthdate === "" ? null : this.requestData.birthdate;
-    newUser.username = this.requestData.idcardno || null;
-    newUser.password = this.setPassword || null;
+    newUser.username = this.requestData.idcardno;
+    newUser.password = this.setPassword;
     newUser.isuseractive = "1"
-    newUser.position = this.requestData.position || null;
-    newUser.prefixth = this.requestData.prefixth || null;
-    newUser.prefixen = this.requestData.prefixen || null;
-    newUser.firstnameen = this.requestData.firstnameen || null;
-    newUser.lastnameen = this.requestData.lastnameen || null;
+    newUser.position = this.requestData.position;
+    newUser.prefixth = this.requestData.prefixth;
+    newUser.prefixen = this.requestData.prefixen;
+    newUser.firstnameen = this.requestData.firstnameen;
+    newUser.lastnameen = this.requestData.lastnameen;
     // newUser.coordinatorinfo = this.requestData.coordinatorinfo;
-    newUser.unitype = this.requestData.unitype || null;
-    newUser.requestno = this.requestData.requestno || null;
-    newUser.permissionright = this.permissionRight || null;
-
+    newUser.unitype = this.requestData.unitype;
+    newUser.requestno = this.requestData.requestno;
+    newUser.permissionright = this.permissionRight;
+    newUser = replaceEmptyWithNull(newUser);
     const approvePayload: KspApprovePayload = {
       requestid: `${this.requestId}`,
       process: '1',

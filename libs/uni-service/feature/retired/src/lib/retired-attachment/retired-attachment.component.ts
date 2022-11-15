@@ -7,7 +7,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { mapMultiFileInfo, thaiDate } from '@ksp/shared/utility';
+import { mapMultiFileInfo, replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
 import {
   GeneralInfoService,
   UniInfoService,
@@ -133,6 +133,7 @@ export class RetiredAttachmentComponent implements OnInit {
       .pipe(
         switchMap((res) => {
           if (res) {
+            this.userInfo = replaceEmptyWithNull(this.userInfo);
             const fileUpload = mapMultiFileInfo(this.retiredFiles);
             const educationoccupy = {
               schoolid: this.userInfo.uniid,
