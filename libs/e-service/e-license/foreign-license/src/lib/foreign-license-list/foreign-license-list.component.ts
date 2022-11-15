@@ -5,7 +5,11 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SchoolRequestSubType, SchoolRequestType } from '@ksp/shared/constant';
-import { EsSearchPayload, KspRequest } from '@ksp/shared/interface';
+import {
+  EsSearchPayload,
+  KspRequest,
+  SchRequestSearchFilter,
+} from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 import {
   checkProcess,
@@ -26,7 +30,7 @@ export class ForeignLicenseListComponent implements AfterViewInit {
   });
 
   displayedColumns: string[] = column;
-  dataSource = new MatTableDataSource<any>();
+  dataSource = new MatTableDataSource<KspRequest>();
   checkProcess = checkProcess;
   checkRequestType = schoolMapRequestType;
   checkStatus = checkStatus;
@@ -43,26 +47,25 @@ export class ForeignLicenseListComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  search(params: any) {
-    console.log(params);
+  search(p: Partial<SchRequestSearchFilter>) {
     //console.log('params = ', params);
     const payload: EsSearchPayload = {
-      systemtype: '2',
+      systemtype: null,
       requesttype: '4',
-      requestno: null,
-      careertype: null,
-      name: null,
+      requestno: p.requestno,
+      careertype: p.careertype,
+      name: p.name,
       idcardno: null,
       passportno: null,
-      process: null,
-      status: null,
+      process: p.process,
+      status: p.status,
       schoolid: null,
       schoolname: null,
       bureauid: null,
-      requestdatefrom: null,
-      requestdateto: null,
+      requestdatefrom: p.requestdatefrom,
+      requestdateto: p.requestdateto,
       offset: '0',
-      row: '25',
+      row: '2000',
     };
 
     this.eRequestService.KspSearchRequest(payload).subscribe((res) => {

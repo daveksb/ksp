@@ -20,8 +20,8 @@ import { Observable } from 'rxjs';
 })
 export class CreateLicenseIdDetailComponent implements OnInit {
   displayedColumns1: string[] = column1;
-  dataSource1 = new MatTableDataSource<info1>();
   displayedColumns2: string[] = column2;
+  dataSource1 = new MatTableDataSource<info1>();
   dataSource2 = new MatTableDataSource<KspRequest>();
   prefixList!: Observable<Prefix[]>;
   licenseTypes = [{ value: 1, name: 'ใบอนุญาตประกอบวิชาชีพครู' }];
@@ -54,19 +54,19 @@ export class CreateLicenseIdDetailComponent implements OnInit {
     localForage.getItem('selected-for-create-license').then((res: any) => {
       if (res) {
         this.dataSource1.data = res;
-        console.log(res);
+        //console.log(res);
         const listno = res.map((r: any) => r.listno).join(',');
-        console.log(listno);
+        //console.log(listno);
         if (listno) {
           const payload = {
             listno,
             offset: '0',
-            row: '10',
+            row: '500',
           };
           this.requestService
             .getRequestListByListNo(payload)
             .subscribe((res: any) => {
-              console.log(res);
+              //console.log(res);
               if (res?.datareturn) {
                 this.dataSource2.data = res.datareturn;
               }
@@ -80,9 +80,9 @@ export class CreateLicenseIdDetailComponent implements OnInit {
   }
 
   rowSelect(id: any) {
-    console.log('id = ', id);
+    //console.log('id = ', id);
     this.requestService.getSelfLicense(id).subscribe((data) => {
-      console.log('data = ', data);
+      //console.log('data = ', data);
       this.form.patchValue(data);
     });
     //this.myImage = atob(data.imagefileid);

@@ -2,7 +2,7 @@
   <div class="d-flex justify-content-between">
     <div class="box-header">Bachelor's Degree</div>
 
-    <div class="text-primary fs-5" role="button">
+    <div class="text-primary fs-5" role="button" *ngIf="mode !== 'view'">
       <ksp-add-row-button
         class="text-primary fs-6"
         (addRowClick)="addFormArray(licenseInfo1, 1)">
@@ -23,6 +23,7 @@
               (click)="deleteFormArray(licenseInfo1, i)"></i>
           </div>
           <self-service-foreign-step-two-tab-three-form
+            [mode]="mode"
             formControlName="licenseForm"
             [countries]="countries">
           </self-service-foreign-step-two-tab-three-form>
@@ -35,7 +36,7 @@
   <div class="d-flex justify-content-between">
     <div class="box-header">Master's Degree</div>
 
-    <div class="text-primary fs-5" role="button">
+    <div class="text-primary fs-5" role="button" *ngIf="mode !== 'view'">
       <ksp-add-row-button
         class="text-primary"
         (addRowClick)="addFormArray(licenseInfo2, 2)">
@@ -56,6 +57,7 @@
               (click)="deleteFormArray(licenseInfo2, i)"></i>
           </div>
           <self-service-foreign-step-two-tab-three-form
+            [mode]="mode"
             formControlName="licenseForm"
             [countries]="countries">
           </self-service-foreign-step-two-tab-three-form>
@@ -68,7 +70,7 @@
   <div class="d-flex justify-content-between">
     <div class="box-header">Doctoral's Degree</div>
 
-    <div class="text-primary fs-5" role="button">
+    <div class="text-primary fs-5" role="button" *ngIf="mode !== 'view'">
       <ksp-add-row-button
         class="text-primary"
         (addRowClick)="addFormArray(licenseInfo3, 3)">
@@ -89,6 +91,7 @@
               (click)="deleteFormArray(licenseInfo3, i)"></i>
           </div>
           <self-service-foreign-step-two-tab-three-form
+            [mode]="mode"
             formControlName="licenseForm"
             [countries]="countries">
           </self-service-foreign-step-two-tab-three-form>
@@ -101,7 +104,7 @@
   <div class="d-flex justify-content-between">
     <div class="box-header">Other Degree</div>
 
-    <div class="text-primary fs-5" role="button">
+    <div class="text-primary fs-5" role="button" *ngIf="mode !== 'view'">
       <ksp-add-row-button
         class="text-primary"
         (addRowClick)="addFormArray(licenseInfo4, 4)">
@@ -122,6 +125,7 @@
               (click)="deleteFormArray(licenseInfo4, i)"></i>
           </div>
           <self-service-foreign-step-two-tab-three-form
+            [mode]="mode"
             formControlName="licenseForm"
             [countries]="countries">
           </self-service-foreign-step-two-tab-three-form>
@@ -134,7 +138,7 @@
   <div class="d-flex justify-content-between">
     <div class="box-header">Professional Certification</div>
 
-    <div class="text-primary fs-5" role="button">
+    <div class="text-primary fs-5" role="button" *ngIf="mode !== 'view'">
       <ksp-add-row-button
         class="text-primary"
         (addRowClick)="addFormArray(licenseInfo5, 5)">

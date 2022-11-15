@@ -44,13 +44,15 @@
     <ng-container *ngIf="selectedEducationType === 0">
       <self-service-standard-working-teacher
         formControlName="educationLevelForm"
-        [mode]="mode">
+        [mode]="mode"
+      >
       </self-service-standard-working-teacher>
       <div class="mt-3">
-        <ksp-form-attachment
+        <ksp-form-multi-attachment
           [groups]="workingInfo"
           [uniqueTimestamp]="uniqueTimestamp"
-          [mode]="'edit'"></ksp-form-attachment>
+          [mode]="'edit'"
+        ></ksp-form-multi-attachment>
       </div>
     </ng-container>
   </div>
@@ -58,7 +60,15 @@
   <ng-container *ngIf="selectedEducationType === 1">
     <self-service-standard-working-non-teacher
       formControlName="educationLevelForm"
-      [mode]="mode">
+      [mode]="mode"
+    >
     </self-service-standard-working-non-teacher>
+    <div class="mt-3">
+      <ksp-form-multi-attachment
+        [groups]="workingInfo2"
+        [uniqueTimestamp]="uniqueTimestamp"
+        [mode]="'edit'"
+      ></ksp-form-multi-attachment>
+    </div>
   </ng-container>
 </form>

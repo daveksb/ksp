@@ -14,11 +14,14 @@
             [matDatepicker]="picker"
             autocomplete="off"
             formControlName="date"
-            class="form-control form-date" />
+            class="form-control form-date"
+            placeholder="วว/ดด/ปปปป"
+          />
           <mat-datepicker-toggle
             class="button-date"
             matSuffix
-            [for]="picker"></mat-datepicker-toggle>
+            [for]="picker"
+          ></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </div>
       </div>
@@ -35,7 +38,11 @@
 
       <div class="col-6">
         <label class="form-label">ชื่อประธาน</label>
-        <input class="form-control" type="text" formControlName="presidentname" />
+        <input
+          class="form-control"
+          type="text"
+          formControlName="presidentname"
+        />
         <!-- <select class="form-select" formControlName="currentprocess">
           <option value="null" disabled hidden>กรุณาเลือก</option>
         </select> -->
@@ -66,7 +73,13 @@
     <div class="row mb-2">
       <div class="col mb-3">
         <label class="form-label">รายละเอียด </label>
-        <textarea class="form-control" type="text" rows="3" formControlName="detail"> </textarea>
+        <textarea
+          class="form-control"
+          type="text"
+          rows="3"
+          formControlName="detail"
+        >
+        </textarea>
       </div>
     </div>
 
@@ -74,14 +87,16 @@
       <button
         (click)="cancel.emit(true)"
         type="button"
-        class="btn border-primary text-primary bg-white">
+        class="btn border-primary text-primary bg-white"
+      >
         ยกเลิก
       </button>
 
       <button
         (click)="save.emit(form.value)"
         type="button"
-        class="btn btn-primary ms-2">
+        class="btn btn-primary ms-2"
+      >
         บันทึก
       </button>
     </div>
