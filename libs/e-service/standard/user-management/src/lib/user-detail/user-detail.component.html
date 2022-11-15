@@ -116,6 +116,31 @@
       [mode]="'view'"
       [groups]="uploadFileList"
     ></ksp-form-attachment> -->
+    <div class="bg-light mt-3 px-4 py-2 pb-3" *ngIf="requestData?.requesttype === '2'">
+      <div class="box-header">เหตุผลการถอดถอน</div>
+
+      <div class="row">
+        <div class="col-5">
+          <label class="form-label required">เหตุผลการถอดถอน</label>
+          <select class="form-select" formControlName="retiredReason" [attr.disabled]="true">
+            <option value="null" selected disabled hidden>กรุณาเลือก</option>
+            <ng-container *ngFor="let reason of retireReason">
+              <option [value]="reason.id">{{ reason.name }}</option>
+            </ng-container>
+          </select>
+        </div>
+      </div>
+
+      <div class="mt-2">
+        <textarea
+          class="form-control"
+          rows="3"
+          placeholder="กรุณาระบุ"
+          formControlName="retiredDetail"
+          [attr.disabled]="true"
+        ></textarea>
+      </div>
+    </div>
     <ksp-form-multi-attachment
         [groups]="uploadFileList"
         title="หลักฐานเพื่อพิจารณา"

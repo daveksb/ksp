@@ -30,6 +30,7 @@ export class FormRegisterRequesterInfoComponent
   };
   permissionList: Array<any> = uniPermissionList;
   validIdcard = true;
+  validprefix = true;
 
   override form = createUniUserInfoForm(this.fb);
 
@@ -92,6 +93,15 @@ export class FormRegisterRequesterInfoComponent
     this.form.controls['other'].updateValueAndValidity();
   }
 
+  changePrefix(event: any) {
+    if ((this.form.controls.prefixth && this.form.controls.prefixen) &&
+      this.form.controls.prefixth.value != this.form.controls.prefixen.value) {
+      this.validprefix = false;
+    } else {
+      this.validprefix = true;
+    }
+  }
+
   get idCardNo() {
     return this.form.controls.idcardno;
   }
@@ -126,5 +136,13 @@ export class FormRegisterRequesterInfoComponent
 
   get position() {
     return this.form.controls.position;
+  }
+
+  get prefixth() {
+    return this.form.controls.prefixth;
+  }
+
+  get prefixen() {
+    return this.form.controls.prefixen;
   }
 }

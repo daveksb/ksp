@@ -64,7 +64,7 @@ export class EUniService {
 
   insertStudent(form: any): Observable<any> {
     return this.http.post(
-      `${environment.apiUrl}/e-service/unidegreeadmissioninsert`,
+      `${environment.shortApiUrl}/unidegreeadmissioninsertarray.php`,
       {
         ...form,
         tokenkey: getCookie('userToken'),
@@ -74,7 +74,7 @@ export class EUniService {
 
   updateStudent(form: any): Observable<any> {
     return this.http.post(
-      `${environment.apiUrl}/e-service/unidegreeadmissionupdate`,
+      `${environment.shortApiUrl}/unidegreeadmissionupdatearray.php`,
       {
         ...form,
         tokenkey: getCookie('userToken'),
