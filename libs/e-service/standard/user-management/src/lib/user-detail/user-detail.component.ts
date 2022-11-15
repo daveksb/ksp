@@ -19,6 +19,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { parseJson } from '@ksp/shared/utility';
 import localForage from 'localforage';
+import { SchoolRetireReason } from 'libs/shared/constant/src/sch-request-constant';
 
 @Component({
   templateUrl: './user-detail.component.html',
@@ -42,6 +43,8 @@ export class UserDetailComponent implements OnInit {
   form = this.fb.group({
     userInfo: [],
     coordinatorInfo: [],
+    retiredReason: [],
+    retiredDetail: []
   });
 
   verifyForm = this.fb.group({
@@ -67,6 +70,8 @@ export class UserDetailComponent implements OnInit {
     "ยื่นผู้ประสานงาน",
     "ยื่นถอดถอนผู้ประสานงาน"
   ]
+
+  retireReason = SchoolRetireReason;
 
   constructor(
     private router: Router,
@@ -125,6 +130,14 @@ export class UserDetailComponent implements OnInit {
         res.birthdate = res.birthdate.split('T')[0];
       }
 
+      if (res.requesttype == '2') {
+        const reasoninfo = parseJson(res.reasoninfo);
+        this.form.patchValue({
+          retiredReason: reasoninfo.retiredReason,
+          retiredDetail: reasoninfo.retiredDetail
+        })
+      }
+
       this.form.controls.userInfo.patchValue(<any>res);
       const coordinator = parseJson(res.coordinatorinfo);
       this.setPassword = coordinator.password;
@@ -161,25 +174,25 @@ export class UserDetailComponent implements OnInit {
   approveUser() {
     // change process and status of SCH_REQUEST
     const newUser = new UniUser();
-    newUser.uniid = this.requestData.uniid;
-    newUser.idcardno = this.requestData.idcardno;
-    newUser.firstnameth = this.requestData.firstnameth;
-    newUser.lastnameth = this.requestData.lastnameth;
-    newUser.email = this.requestData.email;
-    newUser.phone = this.requestData.contactphone;
+    newUser.uniid = this.requestData.uniid || null;
+    newUser.idcardno = this.requestData.idcardno || null;
+    newUser.firstnameth = this.requestData.firstnameth || null;
+    newUser.lastnameth = this.requestData.lastnameth || null;
+    newUser.email = this.requestData.email || null;
+    newUser.phone = this.requestData.contactphone || null;
     newUser.birthdate = this.requestData.birthdate === "" ? null : this.requestData.birthdate;
-    newUser.username = this.requestData.idcardno;
-    newUser.password = this.setPassword;
+    newUser.username = this.requestData.idcardno || null;
+    newUser.password = this.setPassword || null;
     newUser.isuseractive = "1"
-    newUser.position = this.requestData.position;
-    newUser.prefixth = this.requestData.prefixth;
-    newUser.prefixen = this.requestData.prefixen;
-    newUser.firstnameen = this.requestData.firstnameen;
-    newUser.lastnameen = this.requestData.lastnameen;
+    newUser.position = this.requestData.position || null;
+    newUser.prefixth = this.requestData.prefixth || null;
+    newUser.prefixen = this.requestData.prefixen || null;
+    newUser.firstnameen = this.requestData.firstnameen || null;
+    newUser.lastnameen = this.requestData.lastnameen || null;
     // newUser.coordinatorinfo = this.requestData.coordinatorinfo;
-    newUser.unitype = this.requestData.unitype;
-    newUser.requestno = this.requestData.requestno;
-    newUser.permissionright = this.permissionRight;
+    newUser.unitype = this.requestData.unitype || null;
+    newUser.requestno = this.requestData.requestno || null;
+    newUser.permissionright = this.permissionRight || null;
 
     const approvePayload: KspApprovePayload = {
       requestid: `${this.requestId}`,

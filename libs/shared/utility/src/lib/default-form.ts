@@ -88,7 +88,7 @@ export function createUniUserInfoForm(fb: FormBuilder) {
       null,
       [Validators.required, Validators.pattern(phonePattern)],
     ],
-    workphone: [null, [Validators.required, Validators.pattern(phonePattern)]],
+    workphone: [null, Validators.pattern(phonePattern)],
     nationality: [null],
     country: [null],
     visaclass: [null],
