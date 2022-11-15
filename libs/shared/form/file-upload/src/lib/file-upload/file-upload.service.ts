@@ -61,4 +61,10 @@ export class FileService {
       payload
     );
   }
+  downloadUniFile(payload: any) {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/unirequestfileselectbyid`,
+      payload
+    );
+  }
 }
