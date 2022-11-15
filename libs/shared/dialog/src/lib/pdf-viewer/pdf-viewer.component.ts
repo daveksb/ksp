@@ -22,22 +22,36 @@ export class PdfViewerComponent implements OnInit {
     public data: {
       title: string;
       file: KspFile;
+      systemType: string;
     },
     private fileService: FileService
   ) {}
 
   ngOnInit(): void {
     const id = this.data.file.fileid;
-    this.fileService.downloadSchoolFile({ id }).subscribe((res: any) => {
-      const extension = this.data.file.filename.split('.')[1];
-      const src = atob(res?.filedata ?? '');
-      this.type = extension;
-      if (extension == 'pdf') {
-        this.modifyPdf(src);
-      } else {
-        this.src = src;
-      }
-    });
+    if (this.data.systemType == 'uni') {
+      this.fileService.downloadUniFile({ id }).subscribe((res: any) => {
+        const extension = this.data.file.filename.split('.')[1];
+        const src = atob(res?.filedata ?? '');
+        this.type = extension;
+        if (extension == 'pdf') {
+          this.modifyPdf(src);
+        } else {
+          this.src = src;
+        }
+      });
+    } else {
+      this.fileService.downloadSchoolFile({ id }).subscribe((res: any) => {
+        const extension = this.data.file.filename.split('.')[1];
+        const src = atob(res?.filedata ?? '');
+        this.type = extension;
+        if (extension == 'pdf') {
+          this.modifyPdf(src);
+        } else {
+          this.src = src;
+        }
+      });
+    }
   }
   async modifyPdf(src: string) {
     const pdfDoc = await PDFDocument.load(src);
