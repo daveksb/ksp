@@ -38,6 +38,7 @@ import { RequestLicenseForeignListComponent } from './request-license-foreign-li
 import { RequestLicenseForeignDetailComponent } from './request-license-foreign-detail/request-license-foreign-detail.component';
 import { RequestStatusComponent } from '@ksp/self-service/ui';
 import { MatStepperModule } from '@angular/material/stepper';
+import { RequestLicenseForeignConfirmComponent } from './request-license-foreign-confirm/request-license-foreign-confirm.component';
 
 export const routes: Route[] = [
   {
@@ -56,6 +57,10 @@ export const routes: Route[] = [
       {
         path: 'detail/:id',
         component: RequestLicenseForeignDetailComponent,
+      },
+      {
+        path: 'confirm/:id',
+        component: RequestLicenseForeignConfirmComponent,
       },
     ],
   },
@@ -94,6 +99,7 @@ export const routes: Route[] = [
   declarations: [
     RequestLicenseForeignListComponent,
     RequestLicenseForeignDetailComponent,
+    RequestLicenseForeignConfirmComponent,
   ],
 })
 export class EServiceELicenseRequestForeignLicenseModule {}

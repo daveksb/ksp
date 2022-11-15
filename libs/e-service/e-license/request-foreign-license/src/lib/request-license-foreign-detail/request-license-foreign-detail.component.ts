@@ -7,13 +7,19 @@ import {
   ACADEMIC_FILES,
   REQUEST_DOCUMENT_FILES,
 } from '@ksp/self-service/feature/license';
-import { FileGroup, SelfGetRequest, SelfRequest } from '@ksp/shared/interface';
+import {
+  FileGroup,
+  KspApprovePersistData,
+  SelfGetRequest,
+  SelfRequest,
+} from '@ksp/shared/interface';
 import {
   ERequestService,
   MyInfoService,
   SelfRequestService,
 } from '@ksp/shared/service';
 import { parseJson } from '@ksp/shared/utility';
+import localForage from 'localforage';
 
 const VERIFY_CHOICES = [
   {
@@ -99,6 +105,7 @@ export class RequestLicenseForeignDetailComponent implements OnInit {
           .getKspRequestById(this.requestId)
           .subscribe((res) => {
             console.log(res);
+            this.requestData = res;
             if (res) {
               this.patchData(res);
             }
@@ -192,13 +199,22 @@ export class RequestLicenseForeignDetailComponent implements OnInit {
     }
   }
 
+  persistData(checkDetail: any) {
+    console.log(this.requestData);
+    const saveData: KspApprovePersistData = {
+      checkDetail,
+      requestData: this.requestData,
+    };
+    localForage.setItem('checkRequestData', saveData);
+  }
+
   next() {
-    // this.persistData(this.form.controls.checkResult.value);
-    // this.router.navigate([
-    //   '/request-license',
-    //   'approve-confirm',
-    //   this.requestId,
-    // ]);
+    this.persistData(this.form.controls.checkResult.value);
+    this.router.navigate([
+      '/request-foreign-license',
+      'confirm',
+      this.requestId,
+    ]);
   }
 
   cancel() {
