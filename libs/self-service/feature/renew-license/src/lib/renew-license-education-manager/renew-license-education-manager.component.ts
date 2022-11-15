@@ -17,7 +17,7 @@ import {
   SelfRequestService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { SelfRequest } from '@ksp/shared/interface';
+import { FileGroup, SelfRequest } from '@ksp/shared/interface';
 import {
   getCookie,
   parseJson,
@@ -25,12 +25,34 @@ import {
   toLowercaseProp,
 } from '@ksp/shared/utility';
 import * as _ from 'lodash';
+import { v4 as uuidv4 } from 'uuid';
 
-const WORKING_INFO_FILES = [
+const WORKING_INFO_FILES: FileGroup[] = [
   {
-    name: '1.รางวัลอื่นและประกาศเกียรติคุณ',
-    fileid: '',
-    filename: '',
+    name: '1.สำเนาผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน (3 กิจกรรม)',
+    files: [],
+  },
+];
+
+const WORKING_INFO_FILES_2: FileGroup[] = [
+  {
+    name: '1.สำเนาผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน',
+    files: [],
+  },
+];
+
+const STANDARD_INFO_FILES: FileGroup[] = [
+  {
+    name: '1. สำเนาวุฒิทางการศึกษา',
+    files: [],
+  },
+  {
+    name: '2. หนังสือรับรองคุณวุฒิ',
+    files: [],
+  },
+  {
+    name: '3. วุฒิบัตรอบรม',
+    files: [],
   },
 ];
 
@@ -71,6 +93,7 @@ export class RenewLicenseEducationManagerComponent
   disableNextButton = false;
 
   workingInfoFiles: any[] = [];
+  workingInfoFiles2: any[] = [];
   licenseFiles: any[] = [];
 
   constructor(
@@ -106,7 +129,9 @@ export class RenewLicenseEducationManagerComponent
   override initializeFiles() {
     super.initializeFiles();
     this.workingInfoFiles = structuredClone(WORKING_INFO_FILES);
-    this.licenseFiles = structuredClone(WORKING_INFO_FILES);
+    this.workingInfoFiles2 = structuredClone(WORKING_INFO_FILES_2);
+    this.licenseFiles = structuredClone(STANDARD_INFO_FILES);
+    this.uniqueTimestamp = uuidv4();
   }
 
   override patchData(data: SelfRequest) {
@@ -141,8 +166,9 @@ export class RenewLicenseEducationManagerComponent
 
     if (data.fileinfo) {
       const fileInfo = parseJson(data.fileinfo);
-      const { performancefiles, licensefiles } = fileInfo;
+      const { performancefiles, licensefiles, performancefiles2 } = fileInfo;
       this.workingInfoFiles = performancefiles;
+      this.workingInfoFiles2 = performancefiles2;
       this.licenseFiles = licensefiles;
     }
   }
@@ -199,6 +225,7 @@ export class RenewLicenseEducationManagerComponent
     };
 
     const performancefiles = this.workingInfoFiles;
+    const performancefiles2 = this.workingInfoFiles2;
     const licensefiles = this.licenseFiles;
 
     const payload = {
@@ -231,7 +258,13 @@ export class RenewLicenseEducationManagerComponent
         }),
       },
       ...{ prohibitproperty: JSON.stringify(forbidden) },
-      ...{ fileinfo: JSON.stringify({ performancefiles, licensefiles }) },
+      ...{
+        fileinfo: JSON.stringify({
+          performancefiles,
+          licensefiles,
+          performancefiles2,
+        }),
+      },
     };
     console.log(payload);
     return payload;

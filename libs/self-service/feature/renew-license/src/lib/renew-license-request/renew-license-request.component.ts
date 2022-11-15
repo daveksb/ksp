@@ -27,10 +27,18 @@ import {
 } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 import * as _ from 'lodash';
+import { v4 as uuidv4 } from 'uuid';
 
 const WORKING_INFO_FILES: FileGroup[] = [
   {
-    name: '1.รางวัลอื่นและประกาศเกียรติคุณ',
+    name: '1.สำเนาผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน (3 กิจกรรม)',
+    files: [],
+  },
+];
+
+const WORKING_INFO_FILES_2: FileGroup[] = [
+  {
+    name: '1.สำเนาผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน',
     files: [],
   },
 ];
@@ -64,6 +72,7 @@ export class RenewLicenseRequestComponent
   today = thaiDate(new Date());
 
   workingInfoFiles: any[] = [];
+  workingInfoFiles2: any[] = [];
 
   constructor(
     router: Router,
@@ -103,6 +112,8 @@ export class RenewLicenseRequestComponent
   override initializeFiles() {
     super.initializeFiles();
     this.workingInfoFiles = structuredClone(WORKING_INFO_FILES);
+    this.workingInfoFiles2 = structuredClone(WORKING_INFO_FILES_2);
+    this.uniqueTimestamp = uuidv4();
   }
 
   override patchData(data: SelfRequest) {
@@ -128,8 +139,9 @@ export class RenewLicenseRequestComponent
 
     if (data.fileinfo) {
       const fileInfo = parseJson(data.fileinfo);
-      const { performancefiles } = fileInfo;
+      const { performancefiles, performancefiles2 } = fileInfo;
       this.workingInfoFiles = performancefiles;
+      this.workingInfoFiles2 = performancefiles2;
     }
   }
 
@@ -180,6 +192,7 @@ export class RenewLicenseRequestComponent
     };
 
     const performancefiles = this.workingInfoFiles;
+    const performancefiles2 = this.workingInfoFiles2;
 
     const payload = {
       ...self,
@@ -205,7 +218,7 @@ export class RenewLicenseRequestComponent
         }),
       },
       ...{ prohibitproperty: JSON.stringify(forbidden) },
-      ...{ fileinfo: JSON.stringify({ performancefiles }) },
+      ...{ fileinfo: JSON.stringify({ performancefiles, performancefiles2 }) },
     };
     console.log(payload);
     return payload;

@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { KspParam, MenuConfig } from '@ksp/shared/interface';
+import { deleteCookie } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-side-menu',
@@ -23,5 +24,10 @@ export class SideMenuComponent {
     } else {
       this.router.navigate([url]);
     }
+  }
+
+  logout() {
+    deleteCookie('userToken');
+    this.router.navigate(['/']);
   }
 }
