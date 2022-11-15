@@ -698,6 +698,34 @@
       },
       "tags": []
     },
+    "e-service-e-license-request-foreign-license": {
+      "projectType": "library",
+      "root": "libs/e-service/e-license/request-foreign-license",
+      "sourceRoot": "libs/e-service/e-license/request-foreign-license/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/e-service/e-license/request-foreign-license"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/e-license/request-foreign-license/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/e-license/request-foreign-license/**/*.ts",
+              "libs/e-service/e-license/request-foreign-license/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "e-service-e-license-request-license": {
       "projectType": "library",
       "root": "libs/e-service/e-license/request-license",
