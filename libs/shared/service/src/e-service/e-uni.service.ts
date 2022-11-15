@@ -161,12 +161,20 @@ export class EUniService {
     );
   }
   getUserById(params: any): Observable<any> {
-    return this.http.post(
-      `${environment.apiUrl}/e-service/uniuserselectbyid`,
-      {
-        ...params,
-        tokenkey: getCookie('userToken'),
-      }
-    );
+    return this.http.post(`${environment.apiUrl}/e-service/uniuserselectbyid`, {
+      ...params,
+      tokenkey: getCookie('userToken'),
+    });
+  }
+  
+  getUniExamCourse(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/kspmasterdata/uniexamcourse`);
+  }
+
+  insertUniExamInfo(data: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/e-service/uniexaminfoinsert`, {
+      ...data,
+      tokenkey: getCookie('userToken'),
+    });
   }
 }

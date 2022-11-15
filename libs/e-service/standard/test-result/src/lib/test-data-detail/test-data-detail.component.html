@@ -7,6 +7,7 @@
 <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height-2">
   <div class="box-header">นำเข้าผลทดสอบ</div>
   <div class="bg-white p-3">
+   <form [formGroup]="form">
     <div class="bg-light p-3">
       <div class="box-header mb-3">
         กรุณาเลือกปีการศึกษา และรายวิชาที่ต้องการนำเข้า
@@ -17,9 +18,11 @@
           >ปีการศึกษาที่สอบ</label
         >
         <div class="col-4">
-          <select class="form-select">
-            <option>กรุณาเลือก</option>
-            <option *ngFor="let item of yearOption" [value]="item?.value">{{item?.label}}</option>
+          <select class="form-select" formControlName="calendaryear">
+            <option [defaultSelected]="true" [value]="null">กรุณาเลือก</option>
+            <option *ngFor="let item of yearOption" [value]="item?.value">
+              {{ item?.label }}
+            </option>
           </select>
         </div>
       </div>
@@ -29,8 +32,11 @@
           >รายวิชาที่สอบ</label
         >
         <div class="col-4">
-          <select class="form-select">
-            <option>กรุณาเลือก</option>
+          <select class="form-select" formControlName="subjectname">
+            <option [defaultSelected]="true" [value]="null">กรุณาเลือก</option>
+            <option *ngFor="let item of courseNameOption" [value]="item?.value">
+              {{ item?.label }}
+            </option>
           </select>
         </div>
       </div>
@@ -38,10 +44,11 @@
       <div class="row mb-3">
         <label class="form-label text-end text-black col-2">รหัสวิชา</label>
         <div class="col-5">
-          <label class="form-label">111</label>
+          <label class="form-label">{{this.subjectCode || "-"}}</label>
         </div>
       </div>
     </div>
+   </form>
 
     <div class="d-flex justify-content-end mt-3">
       <button class="btn border-success text-success w-auto">
@@ -118,7 +125,7 @@
           <ng-container matColumnDef="subjectname">
             <th mat-header-cell *matHeaderCellDef>ชื่อวิชา</th>
             <td mat-cell *matCellDef="let element">
-              {{ element.subjectName }}
+              {{ element.subjectname }}
             </td>
           </ng-container>
 
@@ -134,23 +141,21 @@
           <ng-container matColumnDef="fullname">
             <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
             <td mat-cell *matCellDef="let element">
-              {{
-               getFullName(element)
-              }}
+              {{ getFullName(element) }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="userscore">
             <th mat-header-cell *matHeaderCellDef>คะแนนเต็ม</th>
             <td mat-cell *matCellDef="let element">
-              {{ element.fullScore }}
+              {{ element.userscore }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="examscore">
             <th mat-header-cell *matHeaderCellDef>คะแนน</th>
             <td mat-cell *matCellDef="let element">
-              {{ element.userscore }}
+              {{ element.examscore }}
             </td>
           </ng-container>
 
@@ -171,7 +176,7 @@
           <ng-container matColumnDef="annoucedate">
             <th mat-header-cell *matHeaderCellDef>วันที่ประกาศ</th>
             <td mat-cell *matCellDef="let element">
-              {{ toThaiDate(element.annoucedate)  }}
+              {{ toThaiDate(element.annoucedate) }}
             </td>
           </ng-container>
 
@@ -207,4 +212,5 @@
     [disableSaveButton]="disableSaveButton"
     (saveClicked)="save()"
   ></ksp-bottom-nav>
+
 </div>

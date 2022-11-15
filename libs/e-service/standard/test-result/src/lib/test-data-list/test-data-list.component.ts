@@ -4,7 +4,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { EUniService } from '@ksp/shared/service';
 import { KspPaginationComponent, ListData } from '@ksp/shared/interface';
-const DEFAULT_DATE = new Date().getFullYear()+ 543  + ""
+import { map } from 'rxjs';
+const DEFAULT_DATE = new Date().getFullYear() + 543 + '';
 @Component({
   selector: 'ksp-test-data-list',
   templateUrl: './test-data-list.component.html',
@@ -17,7 +18,7 @@ export class TestDataListComponent
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<TestResult>();
   yearOption: ListData[] = [];
-
+  courseNameOption: ListData[] = [];
   form = this.fb.group({
     subjectid: [],
     subjectname: [],
@@ -55,19 +56,39 @@ export class TestDataListComponent
         if (res?.returncode === '00') {
           this.pageEvent.length = res.countrow;
           this.dataSource.data = res?.datareturn || [];
+        } else {
+          this.dataSource.data = [];
+          this.clearPageEvent();
         }
       });
   }
 
   clear() {
     this.dataSource.data = [];
+    this.form.reset()
   }
 
   import() {
     this.router.navigate(['/', 'import-test', 'detail']);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.eUniservice
+      .getUniExamCourse()
+      .pipe(
+        map((res: any): any => {
+          return (
+            res?.datareturn?.map((op: any) => ({
+              value: op?.coursename,
+              label: op?.coursename,
+            })) || []
+          );
+        })
+      )
+      .subscribe((res: any) => {
+        this.courseNameOption = res;
+      });
+  }
 }
 
 export const column = [
