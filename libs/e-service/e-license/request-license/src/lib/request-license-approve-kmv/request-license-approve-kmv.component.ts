@@ -97,7 +97,7 @@ export class RequestLicenseApproveKmvComponent implements OnInit {
           .getRequestListByGroupNo({
             groupno: group,
             offset: '0',
-            row: '100',
+            row: '500',
           })
           .subscribe((res) => {
             if (res && res.datareturn.length > 0) {

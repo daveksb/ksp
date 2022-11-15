@@ -58,7 +58,6 @@ export class RequestLicenseApproveSearchListComponent
 
     if (selectedData.length > 0) {
       this.canPrint = selectedData.every((item) => !item.groupno);
-
       const groupNo = selectedData[0].groupno;
       if (groupNo) {
         this.canSave = selectedData.every((item) => item.groupno === groupNo);
@@ -82,23 +81,10 @@ export class RequestLicenseApproveSearchListComponent
       offset: '0',
       row: '100',
     };
-    this.requestService.searchRequestList(payload).subscribe((res) => {
-      this.dataSource.data = res; /* [
-        {
-          select: true,
-          resolution: '01/2564',
-          resolution2: '01/2564',
-          group: '1',
-          account: '7020',
-          count: 100,
-          licenseType: 'ครู',
-          licenseGroup: 'ชาวไทย',
-          process: 'จัดทำกลุ่มบัญชีรายชื่อ',
-          status: 'ระหว่างดำเนินการ',
-          screenDate: '01 มิ.ย. 2564',
-          guaranteeDate: '01 มิ.ย. 2564',
-        },
-      ]; */
+    this.requestService.searchSelfApproveList(payload).subscribe((res) => {
+      this.dataSource.data = res.map((i) => {
+        return { ...i, count: JSON.parse(i.requestlist || '').length };
+      });
     });
   }
 

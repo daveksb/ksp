@@ -32,7 +32,8 @@ export class KspRequest {
   hiringinfo: string | null = null;
   idcardno: string | null = null;
   imagefileid: string | null = null;
-  isforeign: string | null = null;
+  isforeign: string | null = null; // add on 14/11/2022
+  isurgent?: string | null = null;
   kuruspano: string | null = null;
   lastnameen: string | null = null;
   lastnameth: string | null = null;

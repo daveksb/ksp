@@ -151,7 +151,7 @@ export class CreateLicenseIdDetailComponent implements OnInit {
       requestdatefrom: null,
       requestdateto: null,
       offset: '0',
-      row: '10',
+      row: '500',
     };
 
     payload = replaceEmptyWithNull(payload);
@@ -196,7 +196,6 @@ const column2 = [
   'create',
   'order',
   'rush',
-  //'number',
   'personId',
   'licenseType',
   'name',
