@@ -14,8 +14,8 @@ import { formatDatePayload, parseJson } from '@ksp/shared/utility';
   styleUrls: ['./request-license-approve-save-result.component.scss'],
 })
 export class RequestLicenseApproveSaveResultComponent implements OnInit {
-  groupNo!: string;
-  id!: string;
+  groupNo!: string | null;
+  id!: string | null;
   listNo = '';
   licenseData = [
     {
@@ -64,6 +64,17 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
             this.groupNo = res.groupno;
             const groupList = parseJson(res.grouplist);
             this.listNo = groupList.join(' | ');
+
+            const payload = {
+              groupno: this.groupNo,
+              offset: '0',
+              row: '500',
+            };
+            this.requestService
+              .getRequestListByGroupNo(payload)
+              .subscribe((res) => {
+                console.log('requests = ', res.datareturn);
+              });
           }
         });
       }
@@ -75,8 +86,7 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
   }
 
   save(value: any) {
-    console.log('form value = ', value);
-
+    //console.log('form value = ', value);
     const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการยืนยันข้อมูล
@@ -107,7 +117,7 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
               listno: this.listNo.split(' | ').join(','),
             });
 
-            console.log('payload = ', payload2);
+            //console.log('payload = ', payload2);
             this.requestService
               .updateSelfApproveListMati1(payload2)
               .subscribe((res) => {

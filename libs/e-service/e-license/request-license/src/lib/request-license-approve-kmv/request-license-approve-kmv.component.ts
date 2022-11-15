@@ -216,8 +216,8 @@ export class RequestLicenseApproveKmvComponent implements OnInit {
           if (res?.returnmessage === 'success') {
             const payload2 = formatDatePayload({
               approvedate: value.date,
-              process: '1',
-              status: '2',
+              process: '2',
+              status: value.result,
               matilevel2: value.no,
               listno: this.listData
                 ? this.listData.split(' | ').join(',')
