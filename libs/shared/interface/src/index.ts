@@ -11,7 +11,7 @@ export * from './lib/self-license';
 export * from './lib/self-request';
 export * from './lib/self-myinfo';
 export * from './lib/self-develop';
-export * from './lib/self-approve-list';
+export * from './lib/self-approve';
 
 export * from './lib/sch-user-page-type';
 export * from './lib/sch-user';

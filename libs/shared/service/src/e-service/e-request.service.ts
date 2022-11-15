@@ -15,6 +15,7 @@ import {
   GetLastApproveGroup,
   KspListResponse,
   SelfApproveList,
+  SelfApproveGroup,
 } from '@ksp/shared/interface';
 import { getCookie } from '@ksp/shared/utility';
 import { map, Observable, shareReplay } from 'rxjs';
@@ -224,8 +225,8 @@ export class ERequestService {
     );
   }
 
-  getGroupByAccount(account: string): Observable<any> {
-    return this.http.post(
+  getGroupByAccount(account: string): Observable<SelfApproveGroup> {
+    return this.http.post<SelfApproveGroup>(
       `${environment.apiUrl}/e-service/selfapprovegroupsearchgroup`,
       { grouplist: account }
     );

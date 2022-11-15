@@ -6,6 +6,57 @@ export enum SelfServiceRequestSubType {
   'อื่นๆ' = 5,
 }
 
+export const DEFAULT_REQUEST_TYPE_LIST = [
+  {
+    order: 1,
+    licenseType: 'ครู',
+    // count: 0,
+    // approve: 0,
+    // unApprove: 0,
+    // urgent: 0,
+  },
+  {
+    order: 2,
+    licenseType: 'ครูชาวต่างชาติ',
+    count: 0,
+    approve: 0,
+    unApprove: 0,
+    urgent: 0,
+  },
+  {
+    order: 3,
+    licenseType: 'KSP Bundit',
+    count: 0,
+    approve: 0,
+    unApprove: 0,
+    urgent: 0,
+  },
+  {
+    order: 4,
+    licenseType: 'ผู้บริหารสถานศึกษา',
+    // count: 0,
+    // approve: 0,
+    // unApprove: 0,
+    // urgent: 0,
+  },
+  {
+    order: 5,
+    licenseType: 'ผู้บริหารการศึกษา',
+    // count: 0,
+    // approve: 0,
+    // unApprove: 0,
+    // urgent: 0,
+  },
+  {
+    order: 6,
+    licenseType: 'ศึกษานิเทศก์',
+    // count: 0,
+    // approve: 0,
+    // unApprove: 0,
+    // urgent: 0,
+  },
+];
+
 export const SelfRequestType = [
   { id: 1, name: 'ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ' },
   { id: 2, name: 'ขอต่ออายุใบอนุญาตประกอบวิชาชีพ' },
