@@ -14,6 +14,7 @@ import {
   GetLastApproveList,
   GetLastApproveGroup,
   KspListResponse,
+  SelfApproveList,
 } from '@ksp/shared/interface';
 import { getCookie } from '@ksp/shared/utility';
 import { map, Observable, shareReplay } from 'rxjs';
@@ -67,7 +68,7 @@ export class ERequestService {
     );
   }
 
-  searchRequestList(payload: any): Observable<any> {
+  searchSelfApproveList(payload: any): Observable<SelfApproveList[]> {
     return this.http
       .post(`${environment.shortApiUrl}/selfapprovelistsearch.php`, payload)
       .pipe(map((data: any) => data.datareturn));
@@ -237,14 +238,14 @@ export class ERequestService {
     );
   }
 
-  updateDateForMati1(payload: any): Observable<any> {
+  updateSelfApproveListMati1(payload: any): Observable<any> {
     return this.http.post(
       `${environment.shortApiUrl}/uniapprovelistupdate_considerdate_es.php`,
       payload
     );
   }
 
-  updateDateForMati2(payload: any): Observable<any> {
+  updateSelfApproveListMati2(payload: any): Observable<any> {
     return this.http.post(
       `${environment.shortApiUrl}/uniapprovelistupdate_approvedate_es.php`,
       payload
@@ -265,8 +266,10 @@ export class ERequestService {
     );
   }
 
-  getRequestListByGroupNo(payload: any): Observable<any> {
-    return this.http.post(
+  getRequestListByGroupNo(
+    payload: any
+  ): Observable<KspListResponse<KspRequest>> {
+    return this.http.post<KspListResponse<KspRequest>>(
       `${environment.shortApiUrl}/ksprequestsearcharray_e-self_groupno.php`,
       payload
     );

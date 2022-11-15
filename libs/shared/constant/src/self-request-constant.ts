@@ -35,8 +35,8 @@ export const SelfRequestProcess: SchRequestProcess[] = [
     processId: 1,
     processName: 'สร้างใบคำขอ',
     status: [
-      { id: 0, sname: 'ยกเลิก', ename: '' },
-      { id: 1, sname: 'กำลังดำเนินการ', ename: '' },
+      { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
     ],
   },
   {
@@ -104,8 +104,8 @@ export const SelfRequestProcess: SchRequestProcess[] = [
     processId: 1,
     processName: 'สร้างใบคำขอ',
     status: [
-      { id: 0, sname: 'ยกเลิก', ename: '' },
-      { id: 1, sname: 'กำลังดำเนินการ', ename: '' },
+      { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
     ],
   },
   {
@@ -113,8 +113,8 @@ export const SelfRequestProcess: SchRequestProcess[] = [
     processId: 2,
     processName: 'สร้างและส่งใบคำขอ',
     status: [
-      { id: 0, sname: 'ยกเลิก', ename: '' },
-      { id: 1, sname: 'กำลังดำเนินการ', ename: '' },
+      { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
     ],
   },
   {

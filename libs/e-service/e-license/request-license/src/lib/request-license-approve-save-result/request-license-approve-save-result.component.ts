@@ -101,14 +101,15 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
           if (res?.returnmessage === 'success') {
             const payload2 = formatDatePayload({
               considerdate: value.date,
+              process: '1',
+              status: value.result,
               matilevel1: value.no,
               listno: this.listNo.split(' | ').join(','),
             });
 
             console.log('payload = ', payload2);
-
             this.requestService
-              .updateDateForMati1(payload2)
+              .updateSelfApproveListMati1(payload2)
               .subscribe((res) => {
                 if (res?.returnmessage === 'success') {
                   this.completeDialog();

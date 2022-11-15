@@ -18,6 +18,7 @@ export class FormMultiAttachmentComponent {
   @Input() title = 'กรุณาแนบหลักฐานประกอบ';
   @Input() uniqueTimestamp = '';
   @Input() requestType: number | null = null;
+  @Input() systemType: string | null = null;
   @Output() downloadClick = new EventEmitter<any>();
   @Output() uploadComplete = new EventEmitter<any>();
 
@@ -30,6 +31,7 @@ export class FormMultiAttachmentComponent {
       data: {
         title: group.name,
         files: group.files,
+        systemType: this.systemType,
       },
     });
   }

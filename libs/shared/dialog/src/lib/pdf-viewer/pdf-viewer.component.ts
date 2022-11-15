@@ -45,6 +45,7 @@ export class PdfViewerComponent implements OnInit {
     public data: {
       title: string;
       files: KspFile[];
+      systemType: string;
     },
     private fb: FormBuilder,
     private fileService: FileService,
@@ -62,16 +63,29 @@ export class PdfViewerComponent implements OnInit {
   getFile(index: number) {
     const file = this.data.files[index];
     const id = file.fileid;
-    this.fileService.downloadSchoolFile({ id }).subscribe((res: any) => {
-      const extension = this.pdfList[index].type;
-      const src = atob(res?.filedata ?? '');
-      if (extension == 'pdf') {
-        this.downloading(src, index);
-      } else {
-        this.pdfList[index].src = src;
-        this.pdfList[index].loading = false;
-      }
-    });
+    if (this.data.systemType == 'uni') {
+      this.fileService.downloadUniFile({ id }).subscribe((res: any) => {
+        const extension = this.pdfList[index].type;
+        const src = atob(res?.filedata ?? '');
+        if (extension == 'pdf') {
+          this.downloading(src, index);
+        } else {
+          this.pdfList[index].src = src;
+          this.pdfList[index].loading = false;
+        }
+      });
+    } else {
+      this.fileService.downloadSchoolFile({ id }).subscribe((res: any) => {
+        const extension = this.pdfList[index].type;
+        const src = atob(res?.filedata ?? '');
+        if (extension == 'pdf') {
+          this.downloading(src, index);
+        } else {
+          this.pdfList[index].src = src;
+          this.pdfList[index].loading = false;
+        }
+      });
+    }
   }
   async downloading(src: string, index: number) {
     const pdfDoc = await PDFDocument.load(src);

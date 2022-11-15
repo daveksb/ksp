@@ -22,6 +22,7 @@ export class FormRegisterCoordinatorInfoComponent extends KspFormBaseComponent {
   override form = createUniCoordinatorForm(this.fb);
   permissionList: Array<any> = uniPermissionList;
   validatorMessages = validatorMessages;
+  validprefix = true;
 
   constructor(private fb: FormBuilder) {
     super();
@@ -44,6 +45,15 @@ export class FormRegisterCoordinatorInfoComponent extends KspFormBaseComponent {
       })
     }
     this.form.controls['other'].updateValueAndValidity();
+  }
+
+  changePrefix(event: any) {
+    if ((this.form.controls.prefixth && this.form.controls.prefixen) &&
+      this.form.controls.prefixth.value != this.form.controls.prefixen.value) {
+      this.validprefix = false;
+    } else {
+      this.validprefix = true;
+    }
   }
 
   get firstNameTh() {
@@ -76,5 +86,13 @@ export class FormRegisterCoordinatorInfoComponent extends KspFormBaseComponent {
 
   get position() {
     return this.form.controls.position;
+  }
+
+  get prefixth() {
+    return this.form.controls.prefixth;
+  }
+
+  get prefixen() {
+    return this.form.controls.prefixen;
   }
 }
