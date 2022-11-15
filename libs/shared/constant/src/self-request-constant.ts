@@ -90,7 +90,7 @@ export const SelfRequestProcess: SchRequestProcess[] = [
   {
     requestType: 1,
     processId: 6,
-    processName: 'พิจารณาและรับรองคณะกรรมการ',
+    processName: 'พิจารณาและรับรองคณะกรรมการ', // กมว.
     status: [
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
       { id: 2, sname: 'รับรอง/พิจารณา', ename: 'รับรอง/พิจารณา' },
