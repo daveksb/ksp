@@ -66,7 +66,7 @@ export class RequestLicenseApproveGuarunteeComponent
           .getRequestListByGroupNo({
             groupno: this.groupNo,
             offset: '0',
-            row: '100',
+            row: '500',
           })
           .subscribe((res) => {
             console.log(res);

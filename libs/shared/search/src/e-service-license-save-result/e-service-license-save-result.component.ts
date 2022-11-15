@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
   KspFormBaseComponent,
   SchRequestProcess,
@@ -27,11 +27,11 @@ export class EServiceLicenseSaveResultComponent extends KspFormBaseComponent {
   statusList?: SchRequestStatus[] = [];
 
   override form = this.fb.group({
-    no: [null],
-    date: [null],
+    no: [null, Validators.required],
+    date: [null, Validators.required],
     boardname: [null],
     presidentname: [null],
-    result: [null],
+    result: [null, Validators.required],
     detail: [null],
     urgent: [false],
   });
