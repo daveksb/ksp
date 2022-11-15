@@ -13,8 +13,8 @@ import {
 } from '@ksp/shared/constant';
 import { EsSearchPayload, SelfRequest } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
-import { processFilter, replaceEmptyWithNull } from '@ksp/shared/utility';
-import { filter, map } from 'rxjs';
+import { replaceEmptyWithNull } from '@ksp/shared/utility';
+import { map } from 'rxjs';
 
 function checkProcess(processId: number, requestType: number) {
   const process = SelfRequestProcess.find((p) => {
