@@ -21,7 +21,7 @@ import moment from 'moment';
 
 const detailToState = (res: any) => {
   const newRes = res?.datareturn
-    .filter(({ process }: any) =>  ["3","4"].includes(process))
+    .filter(({ process }: any) =>  ["4","5"].includes(process))
     .map((data: any) => {
       return parseJson(data?.detail);
     });
@@ -150,7 +150,7 @@ export class ConsiderComponent implements OnInit {
         .pipe(
           map((res) => {
             this.daftRequest = res;
-            this.allowEdit =  ["2","3","4"].includes(res?.requestprocess)
+            this.allowEdit =  ["3","4","5"].includes(res?.requestprocess)
             return this.uniInfoService.mappingUniverSitySelectByIdWithForm(res);
           })
         )
@@ -194,7 +194,7 @@ export class ConsiderComponent implements OnInit {
     });
     const payload: any = {
       systemtype: '3',
-      process: '4',
+      process: '5',
       requestid: this.daftRequest?.requestid,
       status: _.get(this.form, 'value.verify.result', ''),
       detail,

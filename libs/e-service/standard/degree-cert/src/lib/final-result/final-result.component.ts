@@ -21,7 +21,7 @@ import _ from 'lodash';
 const detailToState = (res: any) => {
   const dataReturn = _.filter(
     res?.datareturn,
-    ({ process }: any) => process === '5'
+    ({ process }: any) => process === '6'
   ).map((data: any) => {
     return parseJson(data?.detail);
   });
@@ -45,6 +45,7 @@ export class FinalResultComponent implements OnInit {
   allowEdit = false;
   daftRequest: any;
   requestNumber = '';
+  uniRequestDegreeCert: any = '';
   step1Data: any = {};
   constructor(
     public dialog: MatDialog,
@@ -60,23 +61,31 @@ export class FinalResultComponent implements OnInit {
     this.getHistory();
   }
   getHistory() {
-    this.eRequestService
-      .kspUniRequestProcessSelectByRequestId(this.route.snapshot.params['key'])
-      .pipe(map(detailToState))
-      .subscribe((res) => {
-        this.getDegreeCert(res?.uniDegreeCertId);
-        // this.verifyResult = res?.verify;
-      });
+    if (this.route.snapshot.params['key']) {
+      this.eUniService
+        .uniRequestDegreeCertSelectById(this.route.snapshot.params['key'])
+        .subscribe((uniRequestRes) => {
+          if (uniRequestRes?.returncode !== 98) {
+            this.eRequestService
+              .kspUniRequestProcessSelectByRequestId(
+                this.route.snapshot.params['key']
+              )
+              .pipe(map(detailToState))
+              .subscribe((res) => {
+                this.getDegreeCert(res?.uniDegreeCertId, uniRequestRes?.requestprocess);
+              });
+          }
+        });
+    }
   }
-
-  getDegreeCert(id: any) {
+  getDegreeCert(id: any, process: any) {
     if (id) {
       this.eUniService
         .getUniDegreeCertById(id)
         .pipe(
           map((res) => {
             this.daftRequest = res;
-            this.allowEdit = res?.requestprocess === '5';
+            this.allowEdit = process === '6';
             return this.uniInfoService.mappingUniverSitySelectByIdWithForm(res);
           })
         )
@@ -198,7 +207,7 @@ export class FinalResultComponent implements OnInit {
       systemtype: '3',
       requestid: this.daftRequest?.requestid,
       userid: getCookie('userId'),
-      process: '6',
+      process: '7',
     };
     payload.status = '1';
     payload.detail = jsonStringify({

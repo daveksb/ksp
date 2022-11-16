@@ -25,7 +25,7 @@ import { map } from 'rxjs';
 import moment from 'moment';
 const detailToState = (res: any) => {
   const dataReturn = _.filter(res?.datareturn, ({ process }: any) =>
-    ['3', '4'].includes(process)
+    ['4', '5'].includes(process)
   ).map((data: any) => {
     return parseJson(data?.detail);
   });
@@ -118,7 +118,7 @@ export class ApproveComponent implements OnInit {
         .pipe(
           map((res) => {
             this.daftRequest = res;
-            this.allowEdit = res?.requestprocess === '4';
+            this.allowEdit = res?.requestprocess === '5';
             return this.uniInfoService.mappingUniverSitySelectByIdWithForm(res);
           })
         )
@@ -183,7 +183,7 @@ export class ApproveComponent implements OnInit {
       systemtype: '3',
       requestid: this.daftRequest?.requestid,
       userid: getCookie('userId'),
-      process: '5',
+      process: '6',
     };
     payload.status = _.get(this.form, 'value.verify.result', '');
     payload.detail = jsonStringify({
@@ -286,6 +286,7 @@ export class ApproveComponent implements OnInit {
       coordinatorinfo: this.step1Data?.coordinator
         ? JSON.stringify(this.step1Data?.coordinator)
         : null,
+        requestid: this.daftRequest?.requestid,
     };
     return payload;
   }

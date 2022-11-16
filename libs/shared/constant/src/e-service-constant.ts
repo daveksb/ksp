@@ -15,7 +15,7 @@ export const EUniApproveProcess: UniApproveProcess[] = [
   // ขั้นตอนที่ 1 ตรวจสอบข้อมูลและเอกสาร ลำดับที่ 1
   {
     requestType: 3,
-    processId: 1,
+    processId: 2,
     processName: 'ตรวจสอบเอกสาร ลำดับที่ 1',
     status: [
       { id: 1, sname: 'ครบถ้วน และถูกต้อง', ename: 'ครบถ้วน และถูกต้อง' },
@@ -25,7 +25,7 @@ export const EUniApproveProcess: UniApproveProcess[] = [
   // ขั้นตอนที่ 2 ตรวจสอบข้อมูลและเอกสาร ลำดับที่ 2
   {
     requestType: 3,
-    processId: 2,
+    processId: 3,
     processName: 'ตรวจสอบเอกสาร ลำดับที่ 2',
     status: [
       { id: 1, sname: 'รอการตรวจสอบ', ename: 'รอการตรวจสอบ' },
@@ -37,7 +37,7 @@ export const EUniApproveProcess: UniApproveProcess[] = [
   //ขั้นตอนที่ 3 ประเมินและบันทึกผลการประเมินสภาพจริง
   {
     requestType: 3,
-    processId: 3,
+    processId: 5,
     processName: 'ประเมินสภาพจริง',
     status: [
       { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
@@ -49,7 +49,7 @@ export const EUniApproveProcess: UniApproveProcess[] = [
   //ขั้นตอนที่ 4 บันทึกผลส่งพิจารณาเพื่อรับรอง และพิจารณาเพื่อไม่รับรอง เจ้าหน้าที่สามารถทำการบันทึกสถานะคำขอได้ 2 รูปแบบ
   {
     requestType: 3,
-    processId: 4,
+    processId: 6,
     processName: 'พิจารณาและรับรอง',
     status: [
       { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
