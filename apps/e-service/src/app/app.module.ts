@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {
   CacheInterceptor,
+  TokenFailInterceptor,
   TokenHandleInterceptor,
 } from '@ksp/shared/interceptor';
 import { MatMenuModule } from '@angular/material/menu';
@@ -17,6 +18,7 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import {
   MatDialogConfig,
+  MatDialogModule,
   MAT_DIALOG_DEFAULT_OPTIONS,
 } from '@angular/material/dialog';
 
@@ -40,11 +42,17 @@ const fileUrls: FileUploadUrls = {
     MatMenuModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    MatDialogModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenHandleInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenFailInterceptor,
       multi: true,
     },
     {
