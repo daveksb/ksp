@@ -121,8 +121,12 @@ export class PdfViewerComponent implements OnInit {
       pdfList.push({
         loading: true,
         type: this.getExtension(this.data.files[i]),
-        src: this.sanitizer.bypassSecurityTrustResourceUrl(''),
-        view: this.sanitizer.bypassSecurityTrustResourceUrl(''),
+        src: this.sanitizer.bypassSecurityTrustResourceUrl(
+          '/assets/images/empty.png'
+        ),
+        view: this.sanitizer.bypassSecurityTrustResourceUrl(
+          '/assets/images/empty.png'
+        ),
       });
     }
     return pdfList;
