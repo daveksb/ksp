@@ -10,6 +10,7 @@
       labelPosition="bottom"
       [animationDuration]="'0'"
       [selectedIndex]="0"
+      (selectionChange)="onStepChange($event)"
       #stepper>
       <mat-step [completed]="false">
         <ng-template matStepLabel>Personal Details</ng-template>
@@ -54,6 +55,18 @@
         </self-service-foreign-license-step-four>
       </mat-step>
     </mat-stepper>
+
+    <ng-container
+      formArrayName="checkResult"
+      *ngFor="let c of checkResultFormArray.controls; let i = index">
+      <div
+        class="bg-white px-3 py-2 mt-3"
+        [ngClass]="{ hide: (selectedTab.selectedIndex || 0) !== i }">
+        <e-service-license-check
+          [choices]="verifyChoice"
+          [formControlName]="i"></e-service-license-check>
+      </div>
+    </ng-container>
   </form>
 </div>
 
@@ -61,8 +74,9 @@
   <ksp-bottom-nav
     [showCenterButtons]="true"
     [isFirstPage]="true"
-    [disableNext]="false"></ksp-bottom-nav>
-  <!-- (nextClicked)="next()"
-    (cancelClicked)="cancel()" -->
+    [disableNext]="false"
+    (nextClicked)="next()"
+    (cancelClicked)="cancel()"></ksp-bottom-nav>
+
 
 </div>
