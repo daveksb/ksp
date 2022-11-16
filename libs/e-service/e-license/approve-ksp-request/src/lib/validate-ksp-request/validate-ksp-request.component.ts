@@ -27,6 +27,7 @@ export class ValidateKspRequestComponent
   @Input() process: string | null = '0';
   @Input() showUrgent = false;
 
+  today = new Date();
   processTable!: SchRequestProcess | undefined;
 
   override form = this.fb.group({
@@ -64,6 +65,10 @@ export class ValidateKspRequestComponent
       }
       this.shouldForward.reset();
     });
+  }
+
+  get reason() {
+    return this.form.controls.reason.value;
   }
 
   /*   ngOnChanges(changes: SimpleChanges): void {
