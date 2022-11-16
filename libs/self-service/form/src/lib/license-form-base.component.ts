@@ -185,7 +185,25 @@ export abstract class LicenseFormBaseComponent {
       width: '350px',
       data: {
         header: `ยกเลิกใบคำขอสำเร็จ`,
-        buttonLabel: 'กลับสู่หน้าหลัก',
+      },
+    });
+
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/home']);
+      }
+    });
+  }
+
+  saveCompleted() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      width: '350px',
+      data: {
+        showImg: true,
+        header: `บันทึกใบคำขอสำเร็จ`,
+        content: `วันที่ :
+        เลขที่ใบคำขอ :`,
+        subContent: 'หากมีข้อสงสัย กรุณาโทร 02 304 9899',
       },
     });
 
@@ -217,8 +235,9 @@ export abstract class LicenseFormBaseComponent {
     const completeDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
-        title: `คุณต้องการบันทึกข้อมูลใช่หรือไม่?`,
-        btnLabel: 'ยื่นแบบคำขอ',
+        title: `คุณต้องการบันทึกข้อมูลและยื่นคำขอ
+        ใช่หรือไม่?`,
+        btnLabel: 'บันทึกและยื่นคำขอ',
         cancelBtnLabel: 'บันทึก',
       },
     });
@@ -232,7 +251,7 @@ export abstract class LicenseFormBaseComponent {
         request(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res.returncode === '00') {
-            this.router.navigate(['/home']);
+            this.saveCompleted();
           }
         });
       }

@@ -1,4 +1,9 @@
 <div class="d-flex flex-column">
+  <ng-container *ngIf="data.showImg || false">
+    <div class="my-3 text-center">
+      <img src="/assets/images/Succees-2.png" class="w-25 h-25" /></div
+  ></ng-container>
+
   <div class="header__title">{{ data.header }}</div>
 
   <div class="detail__container">
