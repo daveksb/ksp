@@ -8,7 +8,6 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'ksp-request-license-approve-license-table',

@@ -1,26 +1,93 @@
-<div *ngIf="type === 'pdf'">
-  <ngx-extended-pdf-viewer
-    [src]="this.pdfBytes"
-    [height]="'90vh'"
-    [useBrowserLocale]="true"
-    [customToolbar]="additionalButtons"
-  ></ngx-extended-pdf-viewer>
-  <ng-template #additionalButtons>
-    <div id="toolbarViewer">
-      <div id="toolbarViewerLeft">
-        <pdf-toggle-sidebar></pdf-toggle-sidebar>
-        <div class="toolbarButtonSpacer"></div>
-        <pdf-find-button
-          [showFindButton]="true"
-          [textLayer]="true"
-        ></pdf-find-button>
-        <pdf-paging-area></pdf-paging-area>
-      </div>
-      <div id="toolbarViewerRight">
-        <pdf-print></pdf-print>
-        <pdf-download></pdf-download>
-      </div>
+<ng-container [formGroup]="form">
+  <ng-container formArrayName="checkResult">
+    <div style="display: flex; flex-direction: row">
+      <ng-container *ngFor="let pdf of pdfList; let i = index">
+        <div style="position: relative">
+          <iframe
+            style="z-index: 0"
+            *ngIf="pdf.type === 'pdf'"
+            [src]="pdf.src"
+          ></iframe>
+          <img style="z-index: 0" *ngIf="pdf.type !== 'pdf'" [src]="pdf.src" />
+          <div
+            (click)="selectFile(pdf, i)"
+            style="
+              top: 0px;
+              left: 0px;
+              z-index: 10;
+              position: absolute;
+              width: 100%;
+              height: 100%;
+            "
+          ></div>
+
+          <div *ngIf="pdf.loading" class="lds-roller">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+        <!-- <div
+          style="
+            position: relative;
+            width: 300px;
+            height: 150px;
+            top: 50%;
+            left: 50%;
+          "
+          *ngIf="pdf.loading"
+        >
+          <div class="lds-roller">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div> -->
+      </ng-container>
     </div>
-  </ng-template>
-</div>
-<img *ngIf="type !== 'pdf'" [src]="src" />
+    <ng-container *ngIf="selected">
+      <div *ngIf="selected.type === 'pdf'">
+        <ngx-extended-pdf-viewer
+          [src]="selected.view"
+          [height]="'90vh'"
+          [useBrowserLocale]="true"
+          [customToolbar]="additionalButtons"
+        ></ngx-extended-pdf-viewer>
+        <ng-template #additionalButtons>
+          <div id="toolbarViewer">
+            <div id="toolbarViewerLeft">
+              <pdf-toggle-sidebar></pdf-toggle-sidebar>
+              <div class="toolbarButtonSpacer"></div>
+              <pdf-find-button
+                [showFindButton]="true"
+                [textLayer]="true"
+              ></pdf-find-button>
+              <pdf-paging-area></pdf-paging-area>
+            </div>
+            <div id="toolbarViewerRight">
+              <pdf-print></pdf-print>
+              <pdf-download></pdf-download>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+      <img *ngIf="selected.type !== 'pdf'" [src]="selected.src" />
+      <div *ngIf="index !== null" class="bg-white px-3 py-2 mt-3">
+        <e-service-license-check
+          [choices]="choices"
+          [formControlName]="index"
+        ></e-service-license-check>
+      </div>
+    </ng-container>
+  </ng-container>
+</ng-container>

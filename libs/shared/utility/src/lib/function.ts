@@ -8,6 +8,7 @@ import {
   ThaiNumberMapping,
 } from '@ksp/shared/constant';
 import { FileGroup, KspRequest } from '@ksp/shared/interface';
+import _ from 'lodash';
 import moment from 'moment';
 
 export function hasRejectedRequest(requests: KspRequest[]): KspRequest[] {
@@ -333,4 +334,21 @@ export function addDate(
   const day = date.getDate();
   const c = new Date(year + y, month + m, day + d - 1);
   return c;
+}
+
+export function isIdCard(idCard: any) {
+  try {
+    if (_.isNaN(_.toNumber(idCard)) || idCard.length != 13) {
+      return false;
+    }
+    let sum = 0;
+    for (let i = 0; i < 12; i++) {
+      sum += parseInt(idCard.charAt(i)) * (13 - i);
+    }
+    const mod = sum % 11;
+    const check = (11 - mod) % 10;
+    return check == parseInt(idCard.charAt(12));
+  } catch (error) {
+    return false;
+  }
 }

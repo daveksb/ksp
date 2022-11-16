@@ -32,12 +32,7 @@ export class CreateLicenseIdListComponent {
     };
     this.requestService.searchSelfApproveList(payload).subscribe((res) => {
       res = res.map((i) => {
-        return {
-          ...i,
-          ...{
-            listcount: i.requestlist ? JSON.parse(i.requestlist).length : 0,
-          },
-        };
+        return { ...i, count: JSON.parse(i.requestlist || '').length };
       });
       this.dataSource.data = res;
     });

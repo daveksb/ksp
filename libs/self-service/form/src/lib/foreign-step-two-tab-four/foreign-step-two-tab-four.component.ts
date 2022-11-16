@@ -46,7 +46,7 @@ export class ForeignStepTwoTabFourComponent
     this.form.valueChanges
       .pipe(untilDestroyed(this), pairwise())
       .subscribe(([prev, next]) => {
-        if (prev.hasLicense !== next.hasLicense) {
+        if (prev.hasLicense !== next.hasLicense && this.mode !== 'view') {
           if (next.hasLicense === '1') {
             this.enableform();
 
