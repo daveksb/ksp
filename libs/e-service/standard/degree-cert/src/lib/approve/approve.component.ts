@@ -25,7 +25,7 @@ import { map } from 'rxjs';
 import moment from 'moment';
 const detailToState = (res: any) => {
   const dataReturn = _.filter(res?.datareturn, ({ process }: any) =>
-    ['4', '5'].includes(process)
+    ['3', '4', '5'].includes(process)
   ).map((data: any) => {
     return parseJson(data?.detail);
   });
@@ -118,7 +118,7 @@ export class ApproveComponent implements OnInit {
         .pipe(
           map((res) => {
             this.daftRequest = res;
-            this.allowEdit = res?.requestprocess === '5';
+            this.allowEdit = res?.requestprocess === '4';
             return this.uniInfoService.mappingUniverSitySelectByIdWithForm(res);
           })
         )
@@ -176,14 +176,15 @@ export class ApproveComponent implements OnInit {
     });
   }
 
-  onSubmitKSP(degreeApproveCode: any,uniDegreeCertId: any) {
-    if(!degreeApproveCode  || !uniDegreeCertId) return  this.onConfirmed("บันทึกข้อมูลไม่สำเร็จ");
+  onSubmitKSP(degreeApproveCode: any, uniDegreeCertId: any) {
+    if (!degreeApproveCode || !uniDegreeCertId)
+      return this.onConfirmed('บันทึกข้อมูลไม่สำเร็จ');
     const detail: any = _.pick(this.form.value, ['verify', 'approveData']);
     const payload: any = {
       systemtype: '3',
       requestid: this.daftRequest?.requestid,
       userid: getCookie('userId'),
-      process: '6',
+      process: '5',
     };
     payload.status = _.get(this.form, 'value.verify.result', '');
     payload.detail = jsonStringify({
@@ -191,7 +192,7 @@ export class ApproveComponent implements OnInit {
       considerCourses: this.newConsiderCourses,
       considerCert: this.newConsiderCert,
       degreeApproveCode: degreeApproveCode,
-      uniDegreeCertId:uniDegreeCertId,
+      uniDegreeCertId: uniDegreeCertId,
     });
     this.eRequestService
       .kspUpdateRequestUniRequestDegree(payload)
@@ -286,7 +287,7 @@ export class ApproveComponent implements OnInit {
       coordinatorinfo: this.step1Data?.coordinator
         ? JSON.stringify(this.step1Data?.coordinator)
         : null,
-        requestid: this.daftRequest?.requestid,
+      requestid: this.daftRequest?.requestid,
     };
     return payload;
   }
@@ -295,11 +296,11 @@ export class ApproveComponent implements OnInit {
     this.eUniService
       .uniDegreeCertInsert(this._getRequest())
       .subscribe((res) => {
-        this.onSubmitKSP(res?.degreeapprovecode,res?.id);
+        this.onSubmitKSP(res?.degreeapprovecode, res?.id);
       });
   }
 
-  onConfirmed(header = "บันทึกข้อมูลสำเร็จ") {
+  onConfirmed(header = 'บันทึกข้อมูลสำเร็จ') {
     const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header,

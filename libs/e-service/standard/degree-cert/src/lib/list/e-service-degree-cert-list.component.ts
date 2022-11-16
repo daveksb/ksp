@@ -184,7 +184,7 @@ export class EServiceDegreeCertListComponent
   }
 
   consider() {
-    this.router.navigate(['/degree-cert', 'verify', 1, 4], {
+    this.router.navigate(['/degree-cert', 'verify', 1, 3], {
       state: {
         dataSource: this.selection.selected,
       },
@@ -192,7 +192,7 @@ export class EServiceDegreeCertListComponent
   }
 
   approve() {
-    this.router.navigate(['/degree-cert', 'verify', 2, 4], {
+    this.router.navigate(['/degree-cert', 'verify', 2, 3], {
       state: {
         dataSource: this.selection.selected,
       },
@@ -248,7 +248,7 @@ export class EServiceDegreeCertListComponent
   }
   isSelect(row: any) {
     if (this.pageType === 1) {
-      return ['4', '3'].includes(row?.process);
+      return row?.process == "3"
     }
     return true;
   }

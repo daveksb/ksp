@@ -21,7 +21,7 @@ import _ from 'lodash';
 const detailToState = (res: any) => {
   const dataReturn = _.filter(
     res?.datareturn,
-    ({ process }: any) => process === '6'
+    ({ process }: any) => process === '5'
   ).map((data: any) => {
     return parseJson(data?.detail);
   });
@@ -85,7 +85,7 @@ export class FinalResultComponent implements OnInit {
         .pipe(
           map((res) => {
             this.daftRequest = res;
-            this.allowEdit = process === '6';
+            this.allowEdit = process === '5';
             return this.uniInfoService.mappingUniverSitySelectByIdWithForm(res);
           })
         )
@@ -207,7 +207,7 @@ export class FinalResultComponent implements OnInit {
       systemtype: '3',
       requestid: this.daftRequest?.requestid,
       userid: getCookie('userId'),
-      process: '7',
+      process: '6',
     };
     payload.status = '1';
     payload.detail = jsonStringify({
