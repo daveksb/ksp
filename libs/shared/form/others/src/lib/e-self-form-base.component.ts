@@ -6,7 +6,7 @@ import {
   EducationDetailService,
   ERequestService,
 } from '@ksp/shared/service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { parseJson } from '@ksp/shared/utility';
 import {
@@ -210,6 +210,13 @@ export abstract class ESelfFormBaseComponent {
 
   public uploadImageComplete(imageId: string) {
     this.imageId = imageId;
+  }
+
+  public allFilledValidator(): any {
+    return (form: FormArray) => {
+      const value: any[] = form.value;
+      return value.every((v) => v !== null) ? null : { allFilled: true };
+    };
   }
 
   abstract patchUserInfoForm(data: any): void;
