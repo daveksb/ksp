@@ -2,8 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import {
+  ACADEMIC_FILES,
+  REQUEST_DOCUMENT_FILES,
+} from '@ksp/self-service/feature/license';
 import { FileGroup, SelfGetRequest, SelfRequest } from '@ksp/shared/interface';
-import { MyInfoService, SelfRequestService } from '@ksp/shared/service';
+import {
+  ERequestService,
+  MyInfoService,
+  SelfRequestService,
+} from '@ksp/shared/service';
 import { parseJson } from '@ksp/shared/utility';
 
 @Component({
@@ -38,18 +46,31 @@ export class RenewLicenseForeignDetailComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private fb: FormBuilder,
-    private requestService: SelfRequestService,
+    private requestService: ERequestService,
     private route: ActivatedRoute,
     private myInfoService: MyInfoService
   ) {}
 
   ngOnInit(): void {
     this.checkRequestId();
+    this.academicFiles = structuredClone(ACADEMIC_FILES);
+    this.documentFiles = structuredClone(REQUEST_DOCUMENT_FILES);
   }
 
   checkRequestId() {
     this.route.paramMap.subscribe((params) => {
       this.requestId = Number(params.get('id'));
+      if (this.requestId) {
+        this.requestService
+          .getKspRequestById(this.requestId)
+          .subscribe((res) => {
+            console.log(res);
+            this.requestData = res;
+            if (res) {
+              this.patchData(res);
+            }
+          });
+      }
     });
   }
 

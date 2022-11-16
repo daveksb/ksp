@@ -15,6 +15,7 @@
         <ng-template matStepLabel>Personal Details</ng-template>
         <self-service-foreign-license-step-two
           formControlName="personalDetail"
+          [mode]="'view'"
           [isRenewLicense]="true"
           [userInfo]="userInfo"
           [addressInfo]="addressInfo"
@@ -29,7 +30,8 @@
       <mat-step [completed]="false">
         <ng-template matStepLabel>Renewal Requirements</ng-template>
         <self-service-renew-license-foreign-step-two
-          formControlName="renewalRequirements">
+          formControlName="renewalRequirements"
+          [mode]="'view'">
         </self-service-renew-license-foreign-step-two>
       </mat-step>
 
@@ -37,6 +39,7 @@
         <ng-template matStepLabel>Documents and evidence required</ng-template>
         <self-service-foreign-license-step-three
           formControlName="foreignSelectUpload"
+          [mode]="'view'"
           [documentTypes]="'renew'"
           [attachFiles]="documentFiles"
           [uniqueTimestamp]="uniqueNo"></self-service-foreign-license-step-three>
@@ -45,6 +48,7 @@
       <mat-step [completed]="false">
         <ng-template matStepLabel>Personal Declaration</ng-template>
         <self-service-foreign-license-step-four
+          [mode]="'view'"
           [personalDeclaration]="personalDeclaration"
           formControlName="personalDeclaration">
         </self-service-foreign-license-step-four>
