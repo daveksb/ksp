@@ -5,7 +5,7 @@
     <div class="row mb-2">
       <div class="col-md-6">
         <label class="form-label">สถาบัน / มหาวิทยาลัย</label>
-        <select class="form-select" formControlName="institution">
+        <select class="form-select" formControlName="institution" [attr.disabled]="true">
           <option value="null" selected disabled hidden>กรุณาเลือก</option>
           <option
             *ngFor="let university of uniUniversityOption"
@@ -21,6 +21,7 @@
           class="form-select"
           formControlName="affiliation"
           (change)="getUniversity.emit()"
+          [attr.disabled]="true"
         >
           <option value="null" selected disabled hidden>กรุณาเลือก</option>
           <option

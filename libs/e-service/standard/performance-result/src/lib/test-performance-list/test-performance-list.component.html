@@ -56,17 +56,6 @@
           </div>
         </div>
   
-        <div class="row mb-2">
-          <div class="col">
-            <label class="form-label">หมายเลขบัตรประชาชน</label>
-            <input class="form-control" type="text" />
-          </div>
-          <div class="col">
-            <label class="form-label">ชื่อ - นามสกุล</label>
-            <input class="form-control" type="text" />
-          </div>
-        </div>
-  
         <div class="d-flex justify-content-end">
           <button
             class="btn border-primary text-primary bg-white"
@@ -163,7 +152,20 @@
   </div>
   <br />
   <div class="bg-white p-3">
-    <div class="box-header">รายชื่อนักศึกษา</div>
+  
+    <form [formGroup]="formStudent">
+      <div class="row mb-2">
+        <div class="col">
+          <div class="box-header">รายชื่อนักศึกษา</div>
+        </div>
+        <div class="col">
+          <input class="form-control" type="text" placeholder="หมายเลขบัตรประชาชน" formControlName="idcardno" (input)="onSearch('idcardno', $event)" />
+        </div>
+        <div class="col">
+          <input class="form-control" type="text" placeholder="ชื่อ-นามสกุล" formControlName="name" (input)="onSearch('name', $event)" />
+        </div>
+      </div>
+    </form>
     <div class="table-reponsive bg-white">
       <table mat-table [dataSource]="dataSource2">
         <ng-container matColumnDef="personId">
@@ -188,7 +190,7 @@
 
         <ng-container matColumnDef="year">
           <th mat-header-cell *matHeaderCellDef>วันที่รับเข้าศึกษา</th>
-          <td mat-cell *matCellDef="let element">{{ element.admissiondate }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.admissiondate || '-' }}</td>
         </ng-container>
 
         <ng-container matColumnDef="importDate">
