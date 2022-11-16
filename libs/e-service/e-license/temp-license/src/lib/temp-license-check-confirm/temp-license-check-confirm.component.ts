@@ -55,13 +55,17 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
       //console.log('save data = ', this.saveData);
       if (this.saveData.requestData.id)
         this.getApproveHistory(this.saveData.requestData.id);
-      //console.log('save data = ', this.saveData);
     });
+
+    const temp: any = {
+      approveNo: '2/2565',
+      approveDate: new Date(),
+    };
+    this.form.controls.approvement.patchValue(temp);
   }
 
   getApproveHistory(requestid: string) {
     this.eRequestService.getApproveHistory(requestid).subscribe((res) => {
-      //console.log('approve history = ', res);
       this.approveHistory = res;
       this.approveHistory = this.approveHistory.map((h: any) => {
         return { ...h, ...{ detail: JSON.parse(h.detail) } };
