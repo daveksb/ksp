@@ -23,8 +23,8 @@ import { Location } from '@angular/common';
 
 import { ApproveStepStatusOption } from '@ksp/shared/constant';
 const detailToState = (res: any) => {
-  let newRes = _.filter(res?.datareturn, ({ process,detail }) =>
-    ['1', '2'].includes(process) && detail
+  let newRes = _.filter(res?.datareturn, ({ process }) =>
+    ['2', '3'].includes(process)
   ).map((data: any) => {
     return parseJson(data?.detail);
   });
@@ -99,7 +99,7 @@ export class CheckComponent implements OnInit, AfterContentChecked {
         .pipe(
           map((res) => {
             this.daftRequest = res;
-            this.allowEdit =  res?.requestprocess === "1"
+            this.allowEdit = ["1","2"].includes(res?.requestprocess)
             return this.uniInfoService.mappingUniverSitySelectByIdWithForm(res);
           })
         )
@@ -211,24 +211,28 @@ export class CheckComponent implements OnInit, AfterContentChecked {
     this.router.navigate(['/', 'degree-cert', 'list', 0]);
   }
   onSubmitKSP() {
-    const detail: any = _.pick(this.form.value, [
-      'verifyStep1',
-      'verifyStep2',
-      'verifyStep3',
-      'verifyStep4',
-    ]);
-    const payload: any = {
-      systemtype: '3',
-      requestid: this.daftRequest?.requestid,
-      userid: getCookie('userId'),
-    };
-    detail.returnDate = _.get(this.form, 'value.step5.returnDate', '');
-    payload.status = _.get(this.form, 'value.step5.verify', '');
-    payload.process = (_.size(this.verifyResult) + 1) +""
-    payload.detail = jsonStringify(detail);
-    this.eRequestService.kspUpdateRequestUniRequestDegree(payload).subscribe(() => {
-      this.onConfirmed();
-    });
+    try {
+      const detail: any = _.pick(this.form.value, [
+        'verifyStep1',
+        'verifyStep2',
+        'verifyStep3',
+        'verifyStep4',
+      ]);
+      const payload: any = {
+        systemtype: '3',
+        requestid: this.daftRequest?.requestid,
+        userid: getCookie('userId'),
+      };
+      detail.returnDate = _.get(this.form, 'value.step5.returnDate', '');
+      payload.status = _.get(this.form, 'value.step5.verify', '');
+      payload.process = _.toNumber(this.daftRequest?.requestprocess) + 1
+      payload.detail = jsonStringify(detail);
+      this.eRequestService.kspUpdateRequestUniRequestDegree(payload).subscribe(() => {
+        this.onConfirmed();
+      });
+    } catch (error) {
+      console.log(error)
+    }
   }
   save() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
