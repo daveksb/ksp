@@ -66,7 +66,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
       this.approveHistory = this.approveHistory.map((h: any) => {
         return { ...h, ...{ detail: JSON.parse(h.detail) } };
       });
-      console.log('approve history after= ', this.approveHistory);
+      //console.log('approve history after= ', this.approveHistory);
     });
   }
 
@@ -100,7 +100,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
         }
       } else if (input.result === '2') {
         //ขอแก้ไข / เพิ่มเติม
-        console.log('ขอแก้ไข / เพิ่มเติม  req.process =', req.process);
+        //console.log('ขอแก้ไข / เพิ่มเติม  req.process =', req.process);
         this.targetProcess = Number(req.process) + 1;
         this.targetStatus = 2;
       } else if (input.result === '3') {
