@@ -14,6 +14,7 @@ import localForage from 'localforage';
 import { KspApprovePersistData } from '../e-temp-license-detail/e-temp-license-detail.component';
 import { Location } from '@angular/common';
 import { checkStatus, getCookie } from '@ksp/shared/utility';
+import moment from 'moment';
 
 @UntilDestroy()
 @Component({
@@ -57,11 +58,19 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
         this.getApproveHistory(this.saveData.requestData.id);
     });
 
-    const temp: any = {
-      approveNo: '2/2565',
-      approveDate: new Date(),
-    };
-    this.form.controls.approvement.patchValue(temp);
+    this.updateLetterNo();
+  }
+
+  updateLetterNo() {
+    this.eRequestService.getThaiLetterNo().subscribe((res) => {
+      //console.log('res cc = ', res);
+      const be = moment().add(543, 'year').year();
+      const temp: any = {
+        approveNo: `${++res.runningno}/${be}`,
+        approveDate: new Date(),
+      };
+      this.form.controls.approvement.patchValue(temp);
+    });
   }
 
   getApproveHistory(requestid: string) {
@@ -70,7 +79,6 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
       this.approveHistory = this.approveHistory.map((h: any) => {
         return { ...h, ...{ detail: JSON.parse(h.detail) } };
       });
-      //console.log('approve history after= ', this.approveHistory);
     });
   }
 
@@ -169,7 +177,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
     this.checkApproveResult(<any>this.form.value.approvement);
     //console.log('save data = ', this.saveData);
     const form: any = this.form.controls.approvement.value;
-    console.log('form  check= ', form);
+    //console.log('form  check= ', form);
     const detail = {
       returndate: form.returndate,
       reason: form.reason,
@@ -253,7 +261,6 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   }
 
   prevPage() {
-    //this.router.navigate(['/temp-license', 'detail', this.requestId]);
     this.location.back();
   }
 
