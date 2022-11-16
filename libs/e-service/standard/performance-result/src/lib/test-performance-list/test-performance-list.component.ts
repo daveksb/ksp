@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
+import { Router, TitleStrategy } from '@angular/router';
 import { KspPaginationComponent, ListData } from '@ksp/shared/interface';
 import { EUniService, UniInfoService } from '@ksp/shared/service';
 import { parseJson, stringToThaiDate } from '@ksp/shared/utility';
+import _ from 'lodash';
 import { map } from 'rxjs';
 
 @Component({
@@ -29,6 +30,11 @@ export class TestPerformanceListComponent extends KspPaginationComponent impleme
     degreelevel: [null],
     calendaryear: [''],
     fulldegreename: ['']
+  })
+
+  formStudent = this.fb.group({
+    name: [''],
+    idcardno: ['']
   })
 
   constructor(
@@ -100,7 +106,8 @@ export class TestPerformanceListComponent extends KspPaginationComponent impleme
 
   selectRow(row: any) {
     this.rowSelected = row;
-    this.dataSource2 = row.studentlist ? JSON.parse(row.studentlist) : [];
+    this.rowSelected.studentlist = JSON.parse(row.studentlist);
+    this.dataSource2 = this.rowSelected.studentlist ? this.rowSelected.studentlist : [];
     console.log(this.dataSource2)
   }
 
@@ -108,6 +115,14 @@ export class TestPerformanceListComponent extends KspPaginationComponent impleme
     return [element?.prefixth, element?.firstnameth, element?.lastnameth]
       .filter((d: any) => d)
       .join(' ');
+  }
+
+  onSearch(search: any, event: any) {
+    const searchstring = event.target.value.trim().toLowerCase().replace(/\s/g, '');
+    this.dataSource2 = this.rowSelected.studentlist.filter((data: any) => {
+      return search == 'name' ? (data.prefixth+data.firstnameth+data.lastnameth).includes(searchstring) 
+      : data[search].includes(searchstring);
+    })
   }
 }
 
