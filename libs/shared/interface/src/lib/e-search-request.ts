@@ -15,4 +15,5 @@ export interface EsSearchPayload {
   requestdateto: string | null | undefined;
   offset: string | null | undefined;
   row: string | null | undefined;
+  isforeign?: string | null | undefined;
 }

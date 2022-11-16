@@ -33,11 +33,11 @@ function checkStatus(processId: number, statusId: number, requestType: number) {
 }
 
 @Component({
-  selector: 'ksp-request-license-foreign-list',
-  templateUrl: './request-license-foreign-list.component.html',
-  styleUrls: ['./request-license-foreign-list.component.scss'],
+  selector: 'ksp-renew-license-foreign-list',
+  templateUrl: './renew-license-foreign-list.component.html',
+  styleUrls: ['./renew-license-foreign-list.component.scss'],
 })
-export class RequestLicenseForeignListComponent implements AfterViewInit {
+export class RenewLicenseForeignListComponent implements AfterViewInit {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfRequest>();
   SchoolRequestSubType = SchoolRequestSubType;
@@ -66,7 +66,7 @@ export class RequestLicenseForeignListComponent implements AfterViewInit {
   search(params: any) {
     let payload: EsSearchPayload = {
       systemtype: '1',
-      requesttype: SelfServiceRequestType.ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ,
+      requesttype: SelfServiceRequestType.ขอต่ออายุใบอนุญาตประกอบวิชาชีพ,
       requestno: params.requestno,
       careertype: params.subtype,
       name: null,
@@ -103,7 +103,7 @@ export class RequestLicenseForeignListComponent implements AfterViewInit {
   }
 
   goToDetail(id: number) {
-    this.router.navigate(['/request-foreign-license', 'detail', id]);
+    this.router.navigate(['/renew-foreign-license', 'detail', id]);
   }
 
   clear() {

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RenewLicenseForeignListComponent } from './renew-license-foreign-list/renew-license-foreign-list.component';
 import { Route, RouterModule } from '@angular/router';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { BottomNavComponent, TopNavComponent } from '@ksp/shared/menu';
@@ -34,11 +35,9 @@ import {
   ValidateKspRequestComponent,
 } from '@ksp/e-service/e-license/approve-ksp-request';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { RequestLicenseForeignListComponent } from './request-license-foreign-list/request-license-foreign-list.component';
-import { RequestLicenseForeignDetailComponent } from './request-license-foreign-detail/request-license-foreign-detail.component';
-import { RequestStatusComponent } from '@ksp/self-service/ui';
 import { MatStepperModule } from '@angular/material/stepper';
-import { RequestLicenseForeignConfirmComponent } from './request-license-foreign-confirm/request-license-foreign-confirm.component';
+import { RequestStatusComponent } from '@ksp/self-service/ui';
+import { RenewLicenseForeignDetailComponent } from './renew-license-foreign-detail/renew-license-foreign-detail.component';
 
 export const routes: Route[] = [
   {
@@ -52,15 +51,11 @@ export const routes: Route[] = [
       },
       {
         path: 'list',
-        component: RequestLicenseForeignListComponent,
+        component: RenewLicenseForeignListComponent,
       },
       {
         path: 'detail/:id',
-        component: RequestLicenseForeignDetailComponent,
-      },
-      {
-        path: 'confirm/:id',
-        component: RequestLicenseForeignConfirmComponent,
+        component: RenewLicenseForeignDetailComponent,
       },
     ],
   },
@@ -97,9 +92,8 @@ export const routes: Route[] = [
     MatStepperModule,
   ],
   declarations: [
-    RequestLicenseForeignListComponent,
-    RequestLicenseForeignDetailComponent,
-    RequestLicenseForeignConfirmComponent,
+    RenewLicenseForeignListComponent,
+    RenewLicenseForeignDetailComponent,
   ],
 })
-export class EServiceELicenseRequestForeignLicenseModule {}
+export class EServiceELicenseRenewForeignLicenseModule {}

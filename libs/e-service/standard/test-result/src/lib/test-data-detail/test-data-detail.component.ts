@@ -1,3 +1,4 @@
+import { FormBuilder } from '@angular/forms';
 import { EUniService } from '@ksp/shared/service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,8 +13,33 @@ import _ from 'lodash';
 import { PageEvent } from '@angular/material/paginator';
 import { ListData } from '@ksp/shared/interface';
 import moment from 'moment';
-import { thaiDate } from '@ksp/shared/utility';
+import { thaiDate, isIdCard } from '@ksp/shared/utility';
+import { map, zip } from 'rxjs';
 const MAX_UPLOAD_DATA = 2000;
+const otDate = (sDate: any) => {
+  try {
+    return _.size(sDate) ? moment(sDate, 'DD MMM YY').format('YYYY-MM-DD') : '';
+  } catch (error) {
+    return '';
+  }
+};
+const covertToObject = (rowArr: any) =>
+  _.map(rowArr, (row: any) => ({
+    examcount: _.get(row, '0', '') + '',
+    calendaryear: _.get(row, '1', '') + '',
+    subjectid: _.get(row, '2', '') + '',
+    subjectname: _.get(row, '3', '') + '',
+    idcardno: _.get(row, '4', '') + '',
+    subjectcode: _.get(row, '5', '') + '',
+    firstname: _.get(row, '6', ''),
+    lastname: _.get(row, '7', ''),
+    userscore: _.get(row, '8', '') + '',
+    examscore: _.get(row, '9', '') + '',
+    examresult: _.get(row, '10', '') + '',
+    examstatus: _.get(row, '11', '') + '',
+    annoucedate: otDate(_.get(row, '12', '')),
+    expiredate: otDate(_.get(row, '13', '')),
+  }));
 @Component({
   selector: 'ksp-test-data-detail',
   templateUrl: './test-data-detail.component.html',
@@ -24,10 +50,16 @@ export class TestDataDetailComponent implements OnInit {
   displayedColumns: string[] = displayedColumns;
   importData: any = [];
   yearOption: ListData[] = [];
+  courseNameOption: ListData[] = [];
+  form = this.fb.group({
+    calendaryear: [],
+    subjectname: [],
+  });
   constructor(
     private router: Router,
     public dialog: MatDialog,
-    private eUniService: EUniService
+    private eUniService: EUniService,
+    private fb: FormBuilder
   ) {}
   getYear() {
     const year = new Date().getFullYear() + 543;
@@ -39,7 +71,25 @@ export class TestDataDetailComponent implements OnInit {
       };
     });
   }
+  getCourseNameOption() {
+    this.eUniService
+      .getUniExamCourse()
+      .pipe(
+        map((res: any): any => {
+          return (
+            res?.datareturn?.map((op: any) => ({
+              value: op?.id,
+              label: op?.coursename,
+            })) || []
+          );
+        })
+      )
+      .subscribe((res: any) => {
+        this.courseNameOption = res;
+      });
+  }
   ngOnInit(): void {
+    this.getCourseNameOption();
     this.getYear();
   }
 
@@ -61,22 +111,55 @@ export class TestDataDetailComponent implements OnInit {
 
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        let uploadData = this.importData;
-        if (_.size(uploadData) > MAX_UPLOAD_DATA) {
-          this.importData = _.slice(uploadData, 2000);
-          uploadData = _.slice(uploadData, 0, 1999);
-          this.dataSource.data = _.slice(this.importData, 0, 24);
-        } else {
-          this.importData = [];
-          this.dataSource.data = [];
-        }
         this.eUniService
-          .insertUniExamResult(
-            _.filter(uploadData, ({ isValid }) => _.isUndefined(isValid))
-          )
-          .subscribe(() => {
-            this.onCompleted();
+          .insertUniExamInfo({
+            uniuserid: null,
+            examcount: null,
+            subjectid: null,
+            subjectcode: this.subjectCode,
+            subjectname: this.subjectName,
+            calendaryear: this.form.value?.calendaryear,
+          })
+          .subscribe((res) => {
+            if (res?.id) {
+              let collection2000: any = _.chunk(
+                _.filter(this.importData, ({ isValid }) =>
+                  _.isUndefined(isValid)
+                ),
+                MAX_UPLOAD_DATA
+              );
+              collection2000 = collection2000.map((rows: any) => {
+                return this.eUniService.insertUniExamResult(
+                  rows?.map((row: any) => {
+                    return {
+                      ...row,
+                      uniexaminfoid: res?.id,
+                      fullname: [
+                        row?.firstname || '',
+                        row?.lastname || '',
+                      ].join(' '),
+                    };
+                  })
+                );
+              });
+              zip(collection2000).subscribe((res) => {
+                this.onCompleted()
+              });
+            }
           });
+        //   let uploadData = this.importData;
+        //   if (_.size(uploadData) > MAX_UPLOAD_DATA) {
+        //     this.importData = _.slice(uploadData, 2000);
+        //     uploadData = _.slice(uploadData, 0, 1999);
+        //     this.dataSource.data = _.slice(this.importData, 0, 24);
+        //   } else {
+        //     this.importData = [];
+        //     this.dataSource.data = [];
+        //   }
+
+        // .subscribe(() => {
+        //   this.onCompleted();
+        // });
       }
     });
   }
@@ -101,47 +184,29 @@ export class TestDataDetailComponent implements OnInit {
     });
     return false;
   }
-  otDate(sDate: any) {
-    try {
-      return _.size(sDate)
-        ? moment(sDate, 'DD MMM YY').format('YYYY-MM-DD')
-        : '';
-    } catch (error) {
-      return '';
-    }
-  }
   toThaiDate(sDate: any) {
     return thaiDate(moment(sDate, 'YYYY-MM-DD').toDate());
   }
   otObject(rowArr: any) {
-    return _.map(rowArr, (row: any) => {
-      const newOb: any = {
-        examcount: _.get(row, '0', '') + '',
-        calendaryear: _.get(row, '1', '') + '',
-        subjectid: _.get(row, '2', '') + '',
-        subjectname: _.get(row, '3', '') + '',
-        idcardno: _.get(row, '4', '') + '',
-        subjectcode: _.get(row, '5', '') + '',
-        firstname: _.get(row, '6', ''),
-        lastname: _.get(row, '7', ''),
-        userscore: _.get(row, '8', '') + '',
-        examscore: _.get(row, '9', '') + '',
-        examresult: _.get(row, '10', '') + '',
-        examstatus: _.get(row, '11', '') + '',
-        annoucedate: this.otDate(_.get(row, '12', '')),
-        expiredate: this.otDate(_.get(row, '13', '')),
-      };
+    let mappingColumn = covertToObject(rowArr);
+    mappingColumn = _.map(mappingColumn, (row: any) => {
       if (
-        _.some(_.keys(newOb), (key: any) => _.size(newOb[key]) === 0) ||
-        _.isNaN(_.toNumber(newOb?.idcardno)) ||
-        _.size(newOb?.idcardno) != 13 ||
-        _.isNaN(_.toNumber(newOb?.examscore)) ||
-        _.isNaN(_.toNumber(newOb?.userscore))
+        !isIdCard(row?.idcardno) ||
+        _.some(
+          _.keys(row),
+          (key: any) =>
+            _.size(row[key]) === 0 ||
+            _.size(_.filter(mappingColumn, { idcardno: row?.idcardno })) > 1
+        ) ||
+        _.isNaN(_.toNumber(row?.examscore)) ||
+        _.isNaN(_.toNumber(row?.userscore))
       ) {
-        newOb.isValid = false;
+        row.isValid = false;
       }
-      return newOb;
+      return row;
     });
+
+    return mappingColumn;
   }
   get exportDataSize() {
     return _.size(this.importData);
@@ -154,7 +219,10 @@ export class TestDataDetailComponent implements OnInit {
   }
   get disableSaveButton() {
     return (
-      this.exportDataSize === 0 || this.inValidSize === this.exportDataSize
+      this.exportDataSize === 0 ||
+      this.inValidSize === this.exportDataSize ||
+      !this.form.controls.calendaryear.value ||
+      !this.subjectCode
     );
   }
   async onFileSelected(event: any) {
@@ -198,6 +266,17 @@ export class TestDataDetailComponent implements OnInit {
       .filter((d: any) => d)
       .join(' ');
   }
+  get subjectName() {
+    let value: any = this.form.controls.subjectname.value;
+    value = _.find(this.courseNameOption, {
+      value,
+    })?.label;
+    return value;
+  }
+
+  get subjectCode() {
+    return this.form.controls.subjectname.value;
+  }
 }
 
 const displayedColumns: string[] = [
@@ -230,17 +309,3 @@ export interface ImportTest {
   expiredate: string;
   isValid?: boolean;
 }
-
-// export const data2: ImportTest = {
-//   year: '2564',
-//   subjectCode: '101',
-//   subjectName: 'วิชาชีพครู',
-//   personId: '3-1020-xXXXX-XX-1',
-//   name: 'นางสาวมาลัย ซ่อนกลิ่น',
-//   fullScore: '70',
-//   score: '70',
-//   testResult: 'ผ่าน',
-//   testStatus: 'มาสอบ',
-//   annouceDate: '01/02/2564',
-//   validDate: '01/02/2568',
-// };
