@@ -32,27 +32,6 @@
             <div></div>
           </div>
         </div>
-        <!-- <div
-          style="
-            position: relative;
-            width: 300px;
-            height: 150px;
-            top: 50%;
-            left: 50%;
-          "
-          *ngIf="pdf.loading"
-        >
-          <div class="lds-roller">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-        </div> -->
       </ng-container>
     </div>
     <ng-container *ngIf="selected">
@@ -91,3 +70,8 @@
     </ng-container>
   </ng-container>
 </ng-container>
+<div class="d-flex justify-content-center">
+  <button *ngIf="selected" type="button" class="btn btn-primary ms-2">
+    บันทึก
+  </button>
+</div>
