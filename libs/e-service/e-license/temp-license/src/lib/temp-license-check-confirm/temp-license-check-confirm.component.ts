@@ -14,6 +14,7 @@ import localForage from 'localforage';
 import { KspApprovePersistData } from '../e-temp-license-detail/e-temp-license-detail.component';
 import { Location } from '@angular/common';
 import { checkStatus, getCookie } from '@ksp/shared/utility';
+import moment from 'moment';
 
 @UntilDestroy()
 @Component({
@@ -52,7 +53,20 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
       //console.log('save data = ', this.saveData);
       if (this.saveData.requestData.id)
         this.getApproveHistory(this.saveData.requestData.id);
-      //console.log('save data = ', this.saveData);
+    });
+
+    this.updateLetterNo();
+  }
+
+  updateLetterNo() {
+    this.eRequestService.getThaiLetterNo().subscribe((res) => {
+      //console.log('res cc = ', res);
+      const be = moment().add(543, 'year').year();
+      const temp: any = {
+        approveNo: `${++res.runningno}/${be}`,
+        approveDate: new Date(),
+      };
+      this.form.controls.approvement.patchValue(temp);
     });
   }
   getFormInvalid() {
@@ -64,14 +78,10 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
 
   getApproveHistory(requestid: string) {
     this.eRequestService.getApproveHistory(requestid).subscribe((res) => {
-      //console.log('approve history = ', res);
       this.approveHistory = res;
-      if (this.approveHistory) {
-        this.approveHistory = this.approveHistory.map((h: any) => {
-          return { ...h, ...{ detail: JSON.parse(h.detail) } };
-        });
-      }
-      console.log('approve history after= ', this.approveHistory);
+      this.approveHistory = this.approveHistory.map((h: any) => {
+        return { ...h, ...{ detail: JSON.parse(h.detail) } };
+      });
     });
   }
 
@@ -105,7 +115,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
         }
       } else if (input.result === '2') {
         //ขอแก้ไข / เพิ่มเติม
-        console.log('ขอแก้ไข / เพิ่มเติม  req.process =', req.process);
+        //console.log('ขอแก้ไข / เพิ่มเติม  req.process =', req.process);
         this.targetProcess = Number(req.process) + 1;
         this.targetStatus = 2;
       } else if (input.result === '3') {
@@ -170,7 +180,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
     this.checkApproveResult(<any>this.form.value.approvement);
     //console.log('save data = ', this.saveData);
     const form: any = this.form.controls.approvement.value;
-    console.log('form  check= ', form);
+    //console.log('form  check= ', form);
     const detail = {
       returndate: form.returndate,
       reason: form.reason,
@@ -254,7 +264,6 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   }
 
   prevPage() {
-    //this.router.navigate(['/temp-license', 'detail', this.requestId]);
     this.location.back();
   }
 

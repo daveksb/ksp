@@ -51,6 +51,18 @@ export class ERequestService {
     );
   }
 
+  getThaiLetterNo(): Observable<any> {
+    return this.http.get(
+      `${environment.apiUrl}/e-service/genrunningtemplicensenumberth`
+    );
+  }
+
+  getForeignLetterNo(): Observable<any> {
+    return this.http.get(
+      `${environment.apiUrl}/e-service/genrunningtemplicensenumberen`
+    );
+  }
+
   getSelfLicense(requestid: string): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/e-service/selflicenseselectbyrequestno`,

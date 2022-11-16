@@ -7,6 +7,7 @@ import {
   KspRequest,
   Prefix,
   SchRequestSearchFilter,
+  SelfApproveList,
 } from '@ksp/shared/interface';
 import { ERequestService, GeneralInfoService } from '@ksp/shared/service';
 import { replaceEmptyWithNull } from '@ksp/shared/utility';
@@ -21,7 +22,7 @@ import { Observable } from 'rxjs';
 export class CreateLicenseIdDetailComponent implements OnInit {
   displayedColumns1: string[] = column1;
   displayedColumns2: string[] = column2;
-  dataSource1 = new MatTableDataSource<info1>();
+  dataSource1 = new MatTableDataSource<SelfApproveList>();
   dataSource2 = new MatTableDataSource<KspRequest>();
   prefixList!: Observable<Prefix[]>;
   licenseTypes = [{ value: 1, name: 'ใบอนุญาตประกอบวิชาชีพครู' }];
@@ -51,29 +52,34 @@ export class CreateLicenseIdDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    localForage.getItem('selected-for-create-license').then((res: any) => {
-      if (res) {
-        this.dataSource1.data = res;
-        //console.log(res);
-        const listno = res.map((r: any) => r.listno).join(',');
-        //console.log(listno);
-        if (listno) {
-          const payload = {
-            listno,
-            offset: '0',
-            row: '500',
-          };
-          this.requestService
-            .getRequestListByListNo(payload)
-            .subscribe((res: any) => {
-              //console.log(res);
-              if (res?.datareturn) {
-                this.dataSource2.data = res.datareturn;
-              }
-            });
+    localForage
+      .getItem<SelfApproveList[]>('selected-for-create-license')
+      .then((res) => {
+        if (res) {
+          this.dataSource1.data = res.map((i) => {
+            return { ...i, count: JSON.parse(i.requestlist || '').length };
+          });
+          console.log('res x = ', res);
+
+          const listno = res.map((r: any) => r.listno).join(',');
+          //console.log(listno);
+          if (listno) {
+            const payload = {
+              listno,
+              offset: '0',
+              row: '500',
+            };
+            this.requestService
+              .getRequestListByListNo(payload)
+              .subscribe((res: any) => {
+                //console.log(res);
+                if (res?.datareturn) {
+                  this.dataSource2.data = res.datareturn;
+                }
+              });
+          }
         }
-      }
-    });
+      });
 
     // this.search({});
     this.prefixList = this.generalInfoService.getPrefix();
@@ -178,19 +184,6 @@ const column1 = [
   'verifyDate',
   'approveDate',
 ];
-
-interface info1 {
-  order: string;
-  orderNo: string;
-  group: string;
-  number: string;
-  licenseType: string;
-  licenseGroup: string;
-  status: string;
-  releasedDate: string;
-  approveDate: string;
-  verifyDate: string;
-}
 
 const column2 = [
   'create',
