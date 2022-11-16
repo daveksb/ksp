@@ -25,7 +25,7 @@
                     type="text"
                     class="form-control"
                     formControlName="username"
-                    placeholder=""
+                    value="{{ passpoerNo }}"
                   />
                   <span class="fs-6 text-danger d-flex justify-content-end"
                     >Passport Number *</span
@@ -36,16 +36,34 @@
               <div class="row">
                 <div class="col-md mb-2">
                   <label class="form-label">Password</label>
-                  <input type="password" class="form-control" placeholder="" />
+                  <input
+                    type="password"
+                    class="form-control"
+                    formControlName="password"
+                  />
+                  <ng-container
+                    *ngIf="
+                      password.invalid && (password.dirty || password.touched)
+                    "
+                  >
+                    <span
+                      class="text-danger"
+                      *ngIf="password.errors?.['minlength']"
+                      >{{ validatorMessages.selfPassword }}
+                    </span>
+                  </ng-container>
                 </div>
+
                 <div class="col-md mb-2">
                   <label class="form-label">Confirm password</label>
                   <input
                     type="password"
-                    formControlName="password"
                     class="form-control"
-                    placeholder=""
+                    formControlName="confirmPassword"
                   />
+                  <ng-container *ngIf="confirmPasswordError">
+                    <span class="text-danger">{{ confirmPasswordError }} </span>
+                  </ng-container>
                 </div>
               </div>
 
@@ -55,6 +73,7 @@
                   (click)="save()"
                   type="submit"
                   class="btn btn-primary"
+                  [disabled]="form.invalid && disabledSubmit"
                 >
                   Save
                 </button>

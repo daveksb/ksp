@@ -21,7 +21,7 @@ import { formatDatePayload, validatorMessages } from '@ksp/shared/utility';
 export class RegisterPasswordComponent implements OnInit {
   form = this.fb.group(
     {
-      password: [null, [Validators.required, Validators.minLength(6)]],
+      password: [null, [Validators.required, Validators.minLength(8)]],
       confirmPassword: [null, Validators.required],
     },
     {

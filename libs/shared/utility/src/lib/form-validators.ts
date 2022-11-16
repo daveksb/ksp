@@ -24,5 +24,6 @@ export const validatorMessages = {
   email: 'กรุณากรอกข้อมูลในรูปแบบอีเมลเท่านั้น',
   loginFail: 'คุณกรอกรหัสเข้าใช้งาน หรือรหัสผ่านไม่ถูกต้อง',
   bankAccount: 'กรุณากรอกเลขที่บัญชีให้ถูกต้อง',
-  prefixNotMatching: 'กรุณาเลือกคำนำหน้าชื่อให้ตรงกัน'
+  prefixNotMatching: 'กรุณาเลือกคำนำหน้าชื่อให้ตรงกัน',
+  passwordNotMatchingEn: 'กรุณากรอกรหัสผ่านให้ตรงกัน',
 };
