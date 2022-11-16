@@ -32,27 +32,6 @@
             <div></div>
           </div>
         </div>
-        <!-- <div
-          style="
-            position: relative;
-            width: 300px;
-            height: 150px;
-            top: 50%;
-            left: 50%;
-          "
-          *ngIf="pdf.loading"
-        >
-          <div class="lds-roller">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-        </div> -->
       </ng-container>
     </div>
     <ng-container *ngIf="selected">
@@ -84,10 +63,21 @@
       <img *ngIf="selected.type !== 'pdf'" [src]="selected.src" />
       <div *ngIf="index !== null" class="bg-white px-3 py-2 mt-3">
         <e-service-license-check
-          [choices]="choices"
+          [choices]="verifyChoice"
           [formControlName]="index"
         ></e-service-license-check>
       </div>
     </ng-container>
   </ng-container>
 </ng-container>
+<div class="d-flex justify-content-center">
+  <button
+    *ngIf="selected"
+    [mat-dialog-close]="form.value"
+    cdkFocusInitial
+    type="button"
+    class="btn btn-primary ms-2"
+  >
+    บันทึก
+  </button>
+</div>

@@ -30,7 +30,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   targetStatus!: number | null;
   userId = `${getCookie('userId')}`;
   approveHistory: any[] = [];
-
+  formInValid = true;
   form = this.fb.group({
     approvement: [],
   });
@@ -43,15 +43,12 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
     public dialog: MatDialog,
     private eRequestService: ERequestService
   ) {}
-
   ngOnInit(): void {
     //console.log('jjj = ');
-    /* this.form.valueChanges.subscribe((res) => {
-      console.log(res.approvement);
-    }); */
     this.checkRequestId();
-
+    setTimeout(() => this.getFormInvalid(), 0);
     localForage.getItem('checkRequestData').then((res: any) => {
+      console.log(res);
       this.saveData = res;
       //console.log('save data = ', this.saveData);
       if (this.saveData.requestData.id)
@@ -70,6 +67,12 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
         approveDate: new Date(),
       };
       this.form.controls.approvement.patchValue(temp);
+    });
+  }
+  getFormInvalid() {
+    this.formInValid = this.form.invalid;
+    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe(() => {
+      this.formInValid = this.form.invalid;
     });
   }
 
