@@ -8,12 +8,12 @@ export abstract class KspPaginationComponent {
   pageEvent: PageEvent = {
     previousPageIndex: 1,
     pageIndex: 0,
-    pageSize: 10,
+    pageSize: 25,
     length: 0,
   };
   tableRecord = {
     offset: 0,
-    row: 10,
+    row: 25,
   };
   pageSizeOptions = [5, 10, 25, 100];
   onPaginatorEvent(e: PageEvent) {

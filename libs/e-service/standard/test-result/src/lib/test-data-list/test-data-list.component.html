@@ -13,7 +13,7 @@
           <div class="col">
             <label class="form-label">รหัสวิชา</label>
             <select formControlName="subjectid" class="form-select">
-              <option>กรุณาเลือก</option>
+              <option value="null" selected hidden disabled [value]="null">กรุณาเลือก</option>
               <option>xxx</option>
               <option>xxx</option>
               <option>xxx</option>
@@ -22,10 +22,8 @@
           <div class="col">
             <label class="form-label">ชื่อวิชา</label>
             <select formControlName="subjectname" class="form-select">
-              <option>กรุณาเลือก</option>
-              <option>xxx</option>
-              <option>xxx</option>
-              <option>xxx</option>
+              <option value="null" selected hidden disabled>กรุณาเลือก</option>
+              <option *ngFor="let item of courseNameOption" [value]="item?.value">{{item?.label}}</option>
             </select>
           </div>
         </div>
@@ -33,20 +31,18 @@
         <div class="row mb-2">
           <div class="col">
             <label class="form-label">ผลการทดสอบ</label>
-            <select formControlName="examstatus" class="form-select">
-              <option>กรุณาเลือก</option>
-              <option>xxx</option>
-              <option>xxx</option>
-              <option>xxx</option>
+            <select formControlName="examresult" class="form-select">
+              <option value="null" selected hidden disabled>กรุณาเลือก    (ผ่าน | ไม่ผ่าน)</option>
+              <option value="ผ่าน">ผ่าน</option>
+              <option value="ไม่ผ่าน">ไม่ผ่าน</option>
             </select>
           </div>
           <div class="col">
             <label class="form-label">สถานะการทดสอบ</label>
-            <select formControlName="examresult" class="form-select">
-              <option>กรุณาเลือก</option>
-              <option>xxx</option>
-              <option>xxx</option>
-              <option>xxx</option>
+            <select formControlName="examstatus" class="form-select">
+              <option value="null" selected hidden disabled>กรุณาเลือก   (มาสอบ | ขาดสอบ)</option>
+              <option value="มาสอบ">มาสอบ</option>
+              <option value="ขาดสอบ">ขาดสอบ</option>
             </select>
           </div>
         </div>
@@ -57,21 +53,19 @@
               >หมายเลขบัตรประชาชน / เลขประจำตัวคุรุสภา /
               หมายเลขหนังสือเดินทาง</label
             >
-            <select formControlName="idcardno" class="form-select">
-              <option>กรุณาเลือก</option>
-              <option>xxx</option>
-              <option>xxx</option>
-              <option>xxx</option>
-            </select>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="idcardno"
+            />
           </div>
           <div class="col">
             <label class="form-label">ชื่อ-นามสกุล</label>
-            <select formControlName="fullname" class="form-select">
-              <option>กรุณาเลือก</option>
-              <option>xxx</option>
-              <option>xxx</option>
-              <option>xxx</option>
-            </select>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="fullname"
+            />
           </div>
         </div>
 
@@ -79,8 +73,10 @@
           <div class="col-6">
             <label class="form-label">ปีการศึกษา</label>
             <select formControlName="calendaryear" class="form-select">
-              <option>กรุณาเลือก</option>
-              <option *ngFor="let item of yearOption" [value]="item?.value">{{item?.label}}</option>
+              <option value="null" selected hidden disabled>กรุณาเลือก</option>
+              <option *ngFor="let item of yearOption" [value]="item?.value">
+                {{ item?.label }}
+              </option>
             </select>
           </div>
         </div>
@@ -158,7 +154,7 @@
 
         <ng-container matColumnDef="examscore">
           <th mat-header-cell *matHeaderCellDef>สถานะการทดสอบ</th>
-          <td mat-cell *matCellDef="let element">{{ element.examscore }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.examstatus }}</td>
         </ng-container>
 
         <ng-container matColumnDef="annoucedate">
