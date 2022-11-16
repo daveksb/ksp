@@ -22,6 +22,8 @@ import { MatTableModule } from '@angular/material/table';
 import { RenewLicenseDetailComponent } from './renew-license-detail/renew-license-detail.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { RenewLicenseConfirmComponent } from './renew-license-confirm/renew-license-confirm.component';
+import { ValidateKspRequestComponent } from '@ksp/e-service/e-license/approve-ksp-request';
 
 export const routes: Route[] = [
   {
@@ -44,6 +46,10 @@ export const routes: Route[] = [
       {
         path: 'approve-detail/:id',
         component: RenewLicenseDetailComponent,
+      },
+      {
+        path: 'approve-confirm/:id',
+        component: RenewLicenseConfirmComponent,
       },
     ],
   },
@@ -68,8 +74,13 @@ export const routes: Route[] = [
     MatPaginatorModule,
     ThaiDatePipe,
     EServiceLicenseSearchComponent,
+    ValidateKspRequestComponent,
   ],
-  declarations: [RenewLicenseDetailComponent, RenewLicenseListComponent],
+  declarations: [
+    RenewLicenseDetailComponent,
+    RenewLicenseListComponent,
+    RenewLicenseConfirmComponent,
+  ],
   exports: [RenewLicenseDetailComponent, RenewLicenseListComponent],
 })
 export class EServiceELicenseRenewLicenseModule {}

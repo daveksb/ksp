@@ -115,6 +115,7 @@ export class RenewLicenseDetailComponent
           .subscribe((res) => {
             if (res) {
               console.log(res);
+              this.requestData = res;
               switch (res.careertype) {
                 case '1':
                   this.educationType = 'teacher';
