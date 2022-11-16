@@ -53,6 +53,18 @@ const routes: EthicsCustomRoute[] = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'renew-foreign-license',
+    data: {
+      menuConfig: eLicenseMenu,
+      headerLabel: 'ระบบใบอนุญาตประกอบวิชาชีพทางการศึกษา ',
+    },
+    loadChildren: () =>
+      import('@ksp/e-service/e-license/renew-foreign-license').then(
+        (m) => m.EServiceELicenseRenewForeignLicenseModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'edit-license',
     data: {
       menuConfig: eLicenseMenu,
