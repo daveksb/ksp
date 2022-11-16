@@ -37,3 +37,9 @@ export interface Nationality {
   nationName: string;
   nationNameEn: string;
 }
+
+export interface KspCheckResult {
+  reason: string;
+  detail: string;
+  result: number;
+}

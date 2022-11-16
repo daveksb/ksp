@@ -9,7 +9,7 @@ import {
 import { SchForgetPassword } from '@ksp/shared/interface';
 import { SchoolUserService } from '@ksp/shared/service';
 import { validatorMessages } from '@ksp/shared/utility';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { UntilDestroy } from '@ngneat/until-destroy';
 import localForage from 'localforage';
 import * as CryptoJs from 'crypto-js';
 

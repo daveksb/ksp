@@ -25,15 +25,19 @@ export class FormMultiAttachmentComponent {
   constructor(public dialog: MatDialog, private fileService: FileService) {}
 
   view(group: FileGroup) {
-    this.dialog.open(PdfViewerComponent, {
+    const dialogRef = this.dialog.open(PdfViewerComponent, {
       width: '1200px',
       height: '100vh',
       data: {
         title: group.name,
         files: group.files,
+        checkresult: group?.checkresult ?? [],
         systemType: this.systemType,
       },
     });
+    dialogRef
+      .afterClosed()
+      .subscribe((result) => (group.checkresult = result.checkResult));
   }
 
   deleteFile(file: KspFile) {

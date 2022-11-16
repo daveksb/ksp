@@ -19,6 +19,7 @@ import { FormBuilder } from '@angular/forms';
 import {
   formatDate,
   genKuruspaNo,
+  parseJson,
   replaceEmptyWithNull,
   thaiDate,
 } from '@ksp/shared/utility';
@@ -96,7 +97,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
       data.passportenddate = formatDate(data.passportenddate);
       data.visaexpiredate = formatDate(data.visaexpiredate);
     }
-    const fileinfo = JSON.parse(atob(data?.fileinfo || ''));
+    const fileinfo = parseJson(data.fileinfo);
     if (fileinfo) {
       this.evidenceFile.forEach(
         (group, index) => (group.files = fileinfo[index])
