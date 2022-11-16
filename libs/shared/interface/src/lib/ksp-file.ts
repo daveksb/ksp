@@ -1,3 +1,5 @@
+import { KspCheckResult } from './ksp-general';
+
 export interface KspFile {
   fileid: string;
   filename: string;
@@ -6,6 +8,7 @@ export interface KspFile {
 export interface FileGroup {
   files: KspFile[];
   name: string;
+  checkresult?: KspCheckResult[];
 }
 
 export interface FileUpload {
