@@ -27,6 +27,7 @@ import localForage from 'localforage';
 import {
   Amphur,
   FileGroup,
+  KspCheckResult,
   KspRequest,
   PositionType,
   Prefix,
@@ -121,13 +122,25 @@ export class ETempLicenseDetailComponent implements OnInit {
   // save data to indexed db
   persistData() {
     //console.log('check sub result = ', checkSubResult);
+    const edufiles = this.mappingCheckResultAttachment(this.eduFiles);
+    const teachingfiles = this.mappingCheckResultAttachment(this.teachingFiles);
+    const reasonfiles = this.mappingCheckResultAttachment(this.reasonFiles);
+    const attachfiles = this.mappingCheckResultAttachment(this.attachFiles);
     const saveData: KspApprovePersistData = {
-      checkDetail: this.form.controls.checkResult.value,
+      checkDetail: {
+        ...this.form.controls.checkResult.value,
+        edufiles,
+        teachingfiles,
+        reasonfiles,
+        attachfiles,
+      },
       requestData: this.requestData,
     };
     localForage.setItem('checkRequestData', saveData);
   }
-
+  mappingCheckResultAttachment(groups: FileGroup[]): KspCheckResult[][] {
+    return groups.map((group) => group.checkresult || []);
+  }
   checkRequestId() {
     this.route.paramMap.pipe(untilDestroyed(this)).subscribe((params) => {
       this.requestId = Number(params.get('id'));
