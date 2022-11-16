@@ -21,7 +21,7 @@ import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TempLicenseApproveListComponent } from './temp-license-approve-list/temp-license-approve-list.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { KspRequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 import { RequestSearchComponent } from '@ksp/shared/search';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSortModule } from '@angular/material/sort';
@@ -53,6 +53,7 @@ import {
     MatSortModule,
     ValidateKspRequestComponent,
     ConsiderKspRequestComponent,
+    KspRequestNoPipe,
   ],
   declarations: [
     ETempLicenseListComponent,

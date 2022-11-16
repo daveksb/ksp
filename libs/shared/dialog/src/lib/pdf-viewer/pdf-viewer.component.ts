@@ -4,7 +4,7 @@ import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PDFDocument } from 'pdf-lib';
 
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
-import { KspFile } from '@ksp/shared/interface';
+import { KspCheckResult, KspFile } from '@ksp/shared/interface';
 import { FileService } from '@ksp/shared/form/file-upload';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import { FormArray, FormBuilder, ReactiveFormsModule } from '@angular/forms';
@@ -26,14 +26,14 @@ export class PdfViewerComponent implements OnInit {
   pdfBytes: any;
   pdfList: IPdf[] = [];
   index!: number | null;
-  choices = [
+  verifyChoice = [
     {
       name: 'ครบถ้วน และถูกต้อง',
-      value: 2,
+      value: 'complete',
     },
     {
-      name: 'ไม่ครบถ้วน และถูกต้อง',
-      value: 3,
+      name: 'ไม่ครบถ้วน และไม่ถูกต้อง',
+      value: 'incomplete',
     },
   ];
   form = this.fb.group({
@@ -43,8 +43,9 @@ export class PdfViewerComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: {
-      title: string;
+      group: string;
       files: KspFile[];
+      checkresult: KspCheckResult[];
       systemType: string;
     },
     private fb: FormBuilder,
@@ -56,6 +57,13 @@ export class PdfViewerComponent implements OnInit {
   }
   ngOnInit(): void {
     this.addCheckResultArray(this.data.files.length);
+    setTimeout(() => {
+      console.log(this.data.checkresult);
+      this.checkResultFormArray.controls.forEach((form, index) =>
+        form.patchValue(this.data.checkresult[index] ?? {})
+      );
+    }, 0);
+
     this.pdfList = this.setDefault(this.data.files.length);
     this.getAllFileData();
   }
@@ -82,6 +90,7 @@ export class PdfViewerComponent implements OnInit {
           this.downloading(src, index);
         } else {
           this.pdfList[index].src = src;
+          this.pdfList[index].view = src;
           this.pdfList[index].loading = false;
         }
       });
@@ -112,8 +121,12 @@ export class PdfViewerComponent implements OnInit {
       pdfList.push({
         loading: true,
         type: this.getExtension(this.data.files[i]),
-        src: '',
-        view: '',
+        src: this.sanitizer.bypassSecurityTrustResourceUrl(
+          '/assets/images/empty.png'
+        ),
+        view: this.sanitizer.bypassSecurityTrustResourceUrl(
+          '/assets/images/empty.png'
+        ),
       });
     }
     return pdfList;
