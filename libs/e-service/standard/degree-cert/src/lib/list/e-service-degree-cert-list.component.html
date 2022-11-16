@@ -138,8 +138,7 @@
     </div>
     <mat-paginator
       [length]="pageEvent.length"
-      [pageSize]="pageEvent.pageSize"
-      [pageSizeOptions]="pageSizeOptions"
+      [pageSize]="25"
       (page)="onPaginatorEvent($event)"
       [pageIndex]="pageEvent.pageIndex"
     >
