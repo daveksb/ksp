@@ -1,69 +1,85 @@
-<ksp-top-nav><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span><span subHeader></span></ksp-top-nav>
+<ksp-top-nav
+  ><span header>ยื่นใบคำขอ</span
+  ><span subHeader>ใบคำขออนุญาตประกอบวิชาชีพ</span></ksp-top-nav
+>
 
-<div class="main__container py-2 px-4">
-  <div class="box-header text-center">
+<div class="bg-secondary bg-opacity-10 py-2 px-4">
+  <div class="box-header">
     THE TEACHERS' COUNCIL OF THAILAND TEACHING LICENSE APPLICATION FORM
   </div>
 
   <form [formGroup]="form">
-    <mat-stepper
-      labelPosition="bottom"
-      [animationDuration]="'0'"
-      [selectedIndex]="0"
-      (selectionChange)="onStepChange($event)"
-      #stepper>
-      <mat-step [completed]="false">
-        <ng-template matStepLabel>Check Documentation </ng-template>
-        <self-service-foreign-license-step-one
-          [mode]="'view'"
-          formControlName="foreignCheckDocument">
-        </self-service-foreign-license-step-one>
-      </mat-step>
+    <div class="bg-white p-3">
+      <mat-stepper
+        labelPosition="bottom"
+        [animationDuration]="'0'"
+        [selectedIndex]="0"
+        (selectionChange)="onStepChange($event)"
+        #stepper
+      >
+        <mat-step [completed]="false">
+          <ng-template matStepLabel>Check Documentation </ng-template>
+          <self-service-foreign-license-step-one
+            [mode]="'view'"
+            formControlName="foreignCheckDocument"
+          >
+          </self-service-foreign-license-step-one>
+        </mat-step>
 
-      <mat-step [completed]="false">
-        <ng-template matStepLabel>Personal Details</ng-template>
-        <self-service-foreign-license-step-two
-          [mode]="'view'"
-          formControlName="personalDetail"
-          [userInfo]="userInfo"
-          [addressInfo]="addressInfo"
-          [workplaceInfo]="workplaceInfo"
-          [grantionTeachingInfo]="grantionTeachingInfo"
-          [academicFiles]="academicFiles"
-          [uniqueTimestamp]="uniqueTimestamp"
-          [eduInfo]="eduInfo"
-          [myImage]="myImage"></self-service-foreign-license-step-two>
-      </mat-step>
+        <mat-step [completed]="false">
+          <ng-template matStepLabel>Personal Details</ng-template>
+          <self-service-foreign-license-step-two
+            [mode]="'view'"
+            formControlName="personalDetail"
+            [userInfo]="userInfo"
+            [addressInfo]="addressInfo"
+            [workplaceInfo]="workplaceInfo"
+            [grantionTeachingInfo]="grantionTeachingInfo"
+            [academicFiles]="academicFiles"
+            [uniqueTimestamp]="uniqueTimestamp"
+            [eduInfo]="eduInfo"
+            [myImage]="myImage"
+            [isEditMode]="false"
+          ></self-service-foreign-license-step-two>
+        </mat-step>
 
-      <mat-step [completed]="false">
-        <ng-template matStepLabel>Documents and evidence required</ng-template>
-        <self-service-foreign-license-step-three
-          [mode]="'view'"
-          formControlName="foreignSelectUpload"
-          [uniqueTimestamp]="uniqueTimestamp"
-          [attachFiles]="documentFiles">
-        </self-service-foreign-license-step-three>
-      </mat-step>
+        <mat-step [completed]="false">
+          <ng-template matStepLabel
+            >Documents and evidence required</ng-template
+          >
+          <self-service-foreign-license-step-three
+            [mode]="'view'"
+            formControlName="foreignSelectUpload"
+            [uniqueTimestamp]="uniqueTimestamp"
+            [attachFiles]="documentFiles"
+          >
+          </self-service-foreign-license-step-three>
+        </mat-step>
 
-      <mat-step [completed]="false">
-        <ng-template matStepLabel>Personal Declaration</ng-template>
-        <self-service-foreign-license-step-four
-          [mode]="'view'"
-          [personalDeclaration]="personalDeclaration"
-          formControlName="personalDeclaration">
-        </self-service-foreign-license-step-four>
-      </mat-step>
-    </mat-stepper>
+        <mat-step [completed]="false">
+          <ng-template matStepLabel>Personal Declaration</ng-template>
+          <self-service-foreign-license-step-four
+            [mode]="'view'"
+            [personalDeclaration]="personalDeclaration"
+            formControlName="personalDeclaration"
+          >
+          </self-service-foreign-license-step-four>
+        </mat-step>
+      </mat-stepper>
+    </div>
 
     <ng-container
       formArrayName="checkResult"
-      *ngFor="let c of checkResultFormArray.controls; let i = index">
+      *ngFor="let c of checkResultFormArray.controls; let i = index"
+    >
       <div
         class="bg-white px-3 py-2 mt-3"
-        [ngClass]="{ hide: (selectedTab.selectedIndex || 0) !== i }">
+        [ngClass]="{ hide: (selectedTab.selectedIndex || 0) !== i }"
+      >
         <e-service-license-check
           [choices]="verifyChoice"
-          [formControlName]="i"></e-service-license-check>
+          [formControlName]="i"
+        ></e-service-license-check>
       </div>
     </ng-container>
   </form>
@@ -75,6 +91,6 @@
     [isFirstPage]="true"
     [disableNext]="false"
     (nextClicked)="next()"
-    (cancelClicked)="cancel()"></ksp-bottom-nav>
-
+    (cancelClicked)="cancel()"
+  ></ksp-bottom-nav>
 </div>
