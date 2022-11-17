@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ETempLicenseListComponent } from './e-temp-license-list/e-temp-license-list.component';
-import { ETempLicenseDetailComponent } from './e-temp-license-detail/e-temp-license-detail.component';
+import { ETempLicenseDetailComponent } from './temp-license-detail/temp-license-detail.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { TempLicenseCheckForbiddenComponent } from './temp-license-check-forbidden/temp-license-check-forbidden.component';
 import { TempLicenseCheckConfirmComponent } from './temp-license-check-confirm/temp-license-check-confirm.component';
@@ -34,6 +33,7 @@ import {
   ValidateKspRequestComponent,
   ConsiderKspRequestComponent,
 } from '@ksp/e-service/e-license/approve-ksp-request';
+import { ETempLicenseListComponent } from './temp-license-list/temp-license-list.component';
 
 @NgModule({
   imports: [

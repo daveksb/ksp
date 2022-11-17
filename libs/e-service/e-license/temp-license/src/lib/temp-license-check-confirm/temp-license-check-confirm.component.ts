@@ -11,7 +11,7 @@ import { KspApprovePayload } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import localForage from 'localforage';
-import { KspApprovePersistData } from '../e-temp-license-detail/e-temp-license-detail.component';
+import { KspApprovePersistData } from '../temp-license-detail/temp-license-detail.component';
 import { Location } from '@angular/common';
 import { checkStatus, getCookie } from '@ksp/shared/utility';
 import moment from 'moment';
@@ -79,9 +79,11 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   getApproveHistory(requestid: string) {
     this.eRequestService.getApproveHistory(requestid).subscribe((res) => {
       this.approveHistory = res;
-      this.approveHistory = this.approveHistory.map((h: any) => {
-        return { ...h, ...{ detail: JSON.parse(h.detail) } };
-      });
+      if (res && res.length) {
+        this.approveHistory = this.approveHistory.map((h: any) => {
+          return { ...h, ...{ detail: JSON.parse(h.detail) } };
+        });
+      }
     });
   }
 
