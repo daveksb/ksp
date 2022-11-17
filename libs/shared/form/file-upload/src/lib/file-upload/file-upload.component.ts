@@ -6,7 +6,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { getBase64 } from '@ksp/shared/utility';
 import { FileService } from './file-upload.service';
 import { FileUpload, ImageUpload } from '@ksp/shared/interface';
-import { NgControlStatus } from '@angular/forms';
 
 @UntilDestroy()
 @Component({

@@ -99,7 +99,7 @@ export class SchoolRequestComponent implements OnInit {
   reasonFiles: FileGroup[] = [];
   attachFiles: FileGroup[] = [];
   eduSelected: number[] = [];
-
+  forbidden: any = null;
   form = this.fb.group({
     userInfo: [],
     addr1: [],
@@ -242,6 +242,11 @@ export class SchoolRequestComponent implements OnInit {
       ...{ schooladdrinfo: JSON.stringify(formData.schoolAddr) },
       ...{ reasoninfo: JSON.stringify(formData.reasoninfo) },
       ...{ fileinfo: JSON.stringify({ tab3, tab4, tab5, tab6 }) },
+      ...{
+        prohibitproperty: this.forbidden
+          ? JSON.stringify(this.forbidden)
+          : null,
+      },
     };
 
     //console.log('payload = ', payload);
@@ -314,6 +319,7 @@ export class SchoolRequestComponent implements OnInit {
       ...{ schooladdrinfo: JSON.stringify(formData.schoolAddr) },
       ...{ reasoninfo: JSON.stringify(formData.reasoninfo) },
       ...{ fileinfo: JSON.stringify({ tab3, tab4, tab5, tab6 }) },
+      ...{ prohibitproperty: JSON.stringify(this.forbidden || null) },
     };
 
     baseForm.patchValue(payload);
@@ -694,6 +700,7 @@ export class SchoolRequestComponent implements OnInit {
     dialogRef.componentInstance.confirmed
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
+        this.forbidden = res;
         if (res) {
           // confirm เพื่อ บันทึกและยื่นใบคำขอ
           this.confirmDialog(2);

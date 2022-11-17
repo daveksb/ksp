@@ -67,6 +67,7 @@ export class ETempLicenseDetailComponent implements OnInit {
   requestData = new KspRequest();
   userInfoFormType: number = UserInfoFormType.thai; // control the display field of user info form
   pageType = RequestPageType;
+  forbidden: any;
 
   form = this.fb.group({
     userInfo: [],
@@ -164,6 +165,7 @@ export class ETempLicenseDetailComponent implements OnInit {
       this.patchReasonInfo(parseJson(res.reasoninfo));
       this.patchSchoolAddrress(parseJson(res.schooladdrinfo));
       this.patchFileInfo(parseJson(res.fileinfo));
+      this.patchProhibitProperty(parseJson(res.prohibitproperty));
     });
   }
 
@@ -189,7 +191,9 @@ export class ETempLicenseDetailComponent implements OnInit {
     }
     //console.log('attach files = ', this.attachFiles);
   }
-
+  patchProhibitProperty(res: any) {
+    this.forbidden = res;
+  }
   patchReasonInfo(res: any) {
     this.form.controls.reasoninfo.patchValue(res);
   }
