@@ -199,9 +199,13 @@ export class EUniService {
     );
   }
 
-  KspSearchUniRequest(payload: any): Observable<any[]> {
-    return this.http
-      .post(`${environment.shortApiUrl}/ksprequestjoinuniversitysearch_es.php`, payload)
-      .pipe(map((data: any) => data.datareturn));
+  KspSearchUniRequest(params: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/ksprequestjoinuniversitysearch_es.php`,
+      {
+        ...params,
+        tokenkey: getCookie('userToken'),
+      }
+    );
   }
 }

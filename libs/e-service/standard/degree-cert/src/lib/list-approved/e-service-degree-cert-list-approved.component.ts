@@ -126,7 +126,7 @@ export class EServiceDegreeCertApprovedListComponent extends KspPaginationCompon
       fulldegreename: fulldegreename || '',
       unicode: unicode || '',
       uniid: uniid || '',
-      degredegreeapprovecodeelevel: degreeapprovecode || '',
+      degreeapprovecodeelevel: degreeapprovecode || '',
       degreelevel: degreelevel || '',
       admissionstatus: admissionstatus || '',
       graduatestatus: graduatestatus || '',
@@ -139,35 +139,39 @@ export class EServiceDegreeCertApprovedListComponent extends KspPaginationCompon
       this.data = [...this.data, data];
     }
     this.requestService.getDegreeCertList(this.getRequest()).subscribe((res: any) => {
-      this.pageEvent.length = res.countnumunidegree;
-      if (res.datareturnadmission) {
-        res.datareturnadmission = res.datareturnadmission.sort((data1:any,data2:any) => data1.unirequestadmissionid - data2.unirequestadmissionid);
+      if (res.returncode != '98') {
+        this.pageEvent.length = res.countnumunidegree;
+        if (res.datareturnadmission) {
+          res.datareturnadmission = res.datareturnadmission.sort((data1:any,data2:any) => data1.unirequestadmissionid - data2.unirequestadmissionid);
+        } else {
+          res.datareturnadmission = [];
+        }
+        if (res.datareturngraduation) {
+          res.datareturngraduation = res.datareturngraduation.sort((data1:any,data2:any) => data1.unirequestadmissionid - data2.unirequestadmissionid);
+        } else {
+          res.datareturngraduation = [];
+        }
+        this.dataSource.data = res.datareturn.map((item: any, index: any) => {
+          item.order = index+1;
+          const admission = res.datareturnadmission.filter((data: any) => {
+            return data.unidegreecertid == item.id}).slice(-1).pop() || {};
+          const graduate = res.datareturngraduation.filter((data: any) => {
+            return data.unidegreecertid == item.id}).slice(-1).pop() || {};
+          item.admissionstatus = this.mapStatusProcess(admission.status, admission.process),
+          item.graduatestatus = this.mapStatusProcess(graduate.status, graduate.process),
+          item.requestdate = thaiDate(new Date(item?.requestdate));
+          item.updatedate = item?.updatedate ? thaiDate(new Date(item?.updatedate)) : '';
+          const degreeLevel = this._findOptions(
+            this.degreeLevelOptions,
+            item?.degreelevel
+          );
+          console.log(degreeLevel)
+          item.degreelevelname = degreeLevel;
+          return item
+        });
       } else {
-        res.datareturnadmission = [];
+        this.dataSource.data = [];
       }
-      if (res.datareturngraduation) {
-        res.datareturngraduation = res.datareturngraduation.sort((data1:any,data2:any) => data1.unirequestadmissionid - data2.unirequestadmissionid);
-      } else {
-        res.datareturngraduation = [];
-      }
-      this.dataSource.data = res.datareturn.map((item: any, index: any) => {
-        item.order = index+1;
-        const admission = res.datareturnadmission.filter((data: any) => {
-          return data.unidegreecertid == item.id}).slice(-1).pop() || {};
-        const graduate = res.datareturngraduation.filter((data: any) => {
-          return data.unidegreecertid == item.id}).slice(-1).pop() || {};
-        item.admissionstatus = this.mapStatusProcess(admission.status, admission.process),
-        item.graduatestatus = this.mapStatusProcess(graduate.status, graduate.process),
-        item.requestdate = thaiDate(new Date(item?.requestdate));
-        item.updatedate = item?.updatedate ? thaiDate(new Date(item?.updatedate)) : '';
-        const degreeLevel = this._findOptions(
-          this.degreeLevelOptions,
-          item?.degreelevel
-        );
-        console.log(degreeLevel)
-        item.degreelevelname = degreeLevel;
-        return item
-      });
     });
   }
 

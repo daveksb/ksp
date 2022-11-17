@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router, TitleStrategy } from '@angular/router';
@@ -7,6 +7,8 @@ import { EUniService, UniInfoService } from '@ksp/shared/service';
 import { parseJson, stringToThaiDate } from '@ksp/shared/utility';
 import _ from 'lodash';
 import { map } from 'rxjs';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'ksp-test-performance-list',
@@ -14,6 +16,7 @@ import { map } from 'rxjs';
   styleUrls: ['./test-performance-list.component.scss'],
 })
 export class TestPerformanceListComponent extends KspPaginationComponent implements OnInit {
+
   displayedColumns1: string[] = column1;
   dataSource1 = new MatTableDataSource<course>();
 
@@ -21,7 +24,7 @@ export class TestPerformanceListComponent extends KspPaginationComponent impleme
   universityList: ListData[] = [];
   universityTypeList: ListData[] = [];
   degreeLevelList: ListData[] = [];
-  rowSelected: any;
+  rowSelected: any = {};
   dataSource2 = new MatTableDataSource<student>();
   form = this.fb.group({
     uniid: [null],
@@ -89,10 +92,12 @@ export class TestPerformanceListComponent extends KspPaginationComponent impleme
   override search() {
     this.eUniservice.getDegreeCertResultList(this.getRequest()).subscribe(res => {
       if (res) {
+        this.pageEvent.length = res.countnum;
         this.dataSource1.data = res.datareturn.map((data :any) => {
           const findType = this.universityTypeList.find(type => { return data.unitype == type.value });
           data.unitypename = findType ? findType.label : '';
           data.createdate = data.createdate ? stringToThaiDate(data.createdate) : '';
+          data.studentlist = data.studentlist ? JSON.parse(data.studentlist) : [];
           return data;
         });
       }
@@ -106,9 +111,7 @@ export class TestPerformanceListComponent extends KspPaginationComponent impleme
 
   selectRow(row: any) {
     this.rowSelected = row;
-    this.rowSelected.studentlist = JSON.parse(row.studentlist);
-    this.dataSource2 = this.rowSelected.studentlist ? this.rowSelected.studentlist : [];
-    console.log(this.dataSource2)
+    this.dataSource2 = this.rowSelected.studentlist;
   }
 
   getFullName(element: any) {
