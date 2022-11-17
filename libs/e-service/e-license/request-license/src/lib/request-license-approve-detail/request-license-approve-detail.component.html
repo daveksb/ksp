@@ -157,6 +157,7 @@
     [disableNext]="false"
     (nextClicked)="next()"
     (cancelClicked)="cancel()"
+    [disableNext]="checkResultFormArray.invalid"
   ></ksp-bottom-nav>
 </div>
 

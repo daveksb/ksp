@@ -4,31 +4,36 @@
 </ksp-top-nav>
 
 <div class="bg-secondary bg-opacity-10 px-3 py-3 full-height">
-  <div class="box-header mb-3">
-    สร้างกลุ่มบัญชีรายชื่อผู้ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพทางการศึกษา
-  </div>
-  <div class="d-flex align-items-center mb-3">
-    <span class="fs-5">บัญชีที่ / List No.</span>
-    <div class="mx-3">
-      <input class="form-control" type="text" [value]="listNo" disabled />
+  <div class="bg-white p-3 mb-3">
+    <div class="box-header">
+      สร้างกลุ่มบัญชีรายชื่อผู้ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพทางการศึกษา
     </div>
-    <!-- <span class="text-danger">Running No. (+1)</span> -->
+    <hr />
+    <div class="d-flex align-items-center mb-3 mt-3">
+      <span class="fs-5">บัญชีที่ / List No.</span>
+      <div class="mx-3">
+        <input class="form-control" type="text" [value]="listNo" disabled />
+      </div>
+      <!-- <span class="text-danger">Running No. (+1)</span> -->
+    </div>
+
+    <div class="box-header">สรุปจำนวนผู้ยื่นขอขึ้นทะเบียน</div>
+    <div class="mt-3">
+      <ksp-request-license-approve-license-table
+        [data]="licenseData"
+      ></ksp-request-license-approve-license-table>
+    </div>
   </div>
 
-  <div class="box-header mb-3">สรุปจำนวนผู้ยื่นขอขึ้นทะเบียน</div>
-  <div class="mx-5 px-5 mb-3">
-    <ksp-request-license-approve-license-table
-      [data]="licenseData"
-    ></ksp-request-license-approve-license-table>
-  </div>
-
-  <div class="box-header mb-3 d-flex justify-content-between">
-    ผลการค้นหา {{ dataSource.data.length }} รายการ
-  </div>
-  <div class="table__scroll">
+  <div class="d-flex justify-content-between align-items-center bg-white">
+    <div class="box-header ps-3">
+      ผลการค้นหา {{ dataSource.data.length }} รายการ
+    </div>
     <mat-paginator [pageSizeOptions]="[25]" showFirstLastButtons>
     </mat-paginator>
+  </div>
 
+  <div class="table__scroll px-3 pb-3 bg-white">
     <table mat-table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="check">
         <th mat-header-cell *matHeaderCellDef>
@@ -129,11 +134,11 @@
   <form [formGroup]="form">
     <div class="mt-3">
       <div class="bg-white p-3">
-        <div class="d-flex">
+        <div class="d-flex align-items-center">
           <div class="fs-5">
             กรณีเร่งด่วน กรุณาเลือกส่งสร้างเลขที่ใบอนุญาต :
           </div>
-          <div class="mx-3">
+          <div class="ms-3 d-flex align-items-center">
             <input
               type="checkbox"
               class="me-2"
@@ -141,7 +146,7 @@
             />
             <label class="fs-5">ส่งสร้างเลขที่ใบอนุญาต</label>
           </div>
-          <div class="mx-3">
+          <div class="ms-3 d-flex align-items-center">
             <input
               type="checkbox"
               class="me-2"
