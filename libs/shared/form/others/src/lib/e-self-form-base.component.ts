@@ -17,7 +17,7 @@ import {
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import localForage from 'localforage';
 
-const VERIFY_CHOICES = [
+export const VERIFY_CHOICES = [
   {
     name: 'ครบถ้วน และถูกต้อง',
     value: 'complete',
@@ -64,18 +64,24 @@ export abstract class ESelfFormBaseComponent {
     protected route: ActivatedRoute
   ) {}
 
-  tabChanged(e: MatTabChangeEvent) {
-    this.selectedTab = e;
-  }
-
   // save data to indexed db
-  persistData(checkDetail: any) {
-    console.log(this.requestData);
+  static persistData(checkDetail: any, requestData: any) {
     const saveData: KspApprovePersistData = {
       checkDetail,
-      requestData: this.requestData,
+      requestData,
     };
     localForage.setItem('checkRequestData', saveData);
+  }
+
+  static allFilledValidator(): any {
+    return (form: FormArray) => {
+      const value: any[] = form.value;
+      return value.every((v) => v !== null) ? null : { allFilled: true };
+    };
+  }
+
+  tabChanged(e: MatTabChangeEvent) {
+    this.selectedTab = e;
   }
 
   checkRequestId() {
@@ -210,13 +216,6 @@ export abstract class ESelfFormBaseComponent {
 
   public uploadImageComplete(imageId: string) {
     this.imageId = imageId;
-  }
-
-  public allFilledValidator(): any {
-    return (form: FormArray) => {
-      const value: any[] = form.value;
-      return value.every((v) => v !== null) ? null : { allFilled: true };
-    };
   }
 
   abstract patchUserInfoForm(data: any): void;
