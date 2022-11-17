@@ -3,7 +3,7 @@
   <span subHeader>ผลการนำเสนอใบอนุญาตประกอบวิชาชีพ </span>
 </ksp-top-nav>
 
-<div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
+<div class="bg-secondary bg-opacity-10 px-4 py-2 full-height full-width-2">
   <div class="box-header">
     ค้นหากลุ่มบัญชีรายชื่อผู้ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพทางการศึกษา
   </div>
@@ -86,7 +86,7 @@
           <th mat-header-cell *matHeaderCellDef>
             มติที่ประชุม (คณะอนุกรรมการ)
           </th>
-          <td (click)="editGroup()" mat-cell *matCellDef="let element">
+          <td mat-cell *matCellDef="let element">
             {{ element.matilevel1 }}
           </td>
         </ng-container>

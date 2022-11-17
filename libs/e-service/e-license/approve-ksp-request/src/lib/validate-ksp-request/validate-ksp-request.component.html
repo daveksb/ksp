@@ -46,6 +46,7 @@
         <div class="col-4">
           <div class="d-flex align-items-center">
             <input
+              [min]="today"
               matInput
               [matDatepicker]="picker"
               autocomplete="off"
@@ -86,19 +87,29 @@
           </div>
         </div>
 
-        <div class="col-8">
-          <div class="d-flex align-items-center">
-            <select class="form-select" formControlName="reason">
-              <option value="null" selected hidden disabled>กรุณาเลือก</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
+        <div class="row-cols-2 w-100">
+          <div class="col-12">
+            <div class="d-flex align-items-center">
+              <select class="form-select" formControlName="reason">
+                <option value="null" selected hidden disabled>
+                  กรุณาเลือก
+                </option>
+                <option value="1">1. มีอายุต่ำกว่ายี่สิบปีบริบูรณ์</option>
+                <option value="2">2. อื่นๆ</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-12 mt-2" *ngIf="reason === '2'">
+            <input
+              class="form-control"
+              type="text"
+              placeholder="กรุณาระบุเหตุผลอื่นๆ"
+            />
           </div>
         </div>
-      </div>
 
-      <!-- <div class="row align-items-center ms-5">
+        <!-- <div class="row align-items-center ms-5">
         <div class="col">
           <div class="form-label">หมายเหตุ / เหตุผล</div>
         </div>
@@ -112,11 +123,8 @@
           </select>
         </div>
       </div> -->
+      </div>
     </div>
-
-    <!--     <div class="mb-3 col-8">
-      <textarea class="form-control" rows="3"></textarea>
-    </div> -->
 
     <hr />
 

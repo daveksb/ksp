@@ -11,11 +11,11 @@ import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { CommonModule, NgIf } from '@angular/common';
-
+import { CommonModule } from '@angular/common';
 @UntilDestroy()
 @Component({
   templateUrl: './forbidden-property.component.html',
+  selector: 'ksp-forbidden-property',
   styleUrls: ['./forbidden-property.component.scss'],
   standalone: true,
   imports: [

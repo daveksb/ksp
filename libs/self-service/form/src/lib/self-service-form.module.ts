@@ -57,7 +57,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatTableModule,
     MatFormFieldModule,
     MatOptionModule,
-    SharedFormOthersModule,
     MatListModule,
     SharedFormEducationLevelModule,
     DynamicComponentDirective,
@@ -75,6 +74,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     SharedFormSelfRenewLicensePropertyFormModule,
     TestResultTableComponent,
     MatDatepickerModule,
+    SharedFormOthersModule,
   ],
   declarations: [
     FormUserEducationComponent,

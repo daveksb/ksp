@@ -88,7 +88,7 @@ export class SchoolRequestComponent implements OnInit {
   requestLabel = '';
 
   disableTempSave = true;
-  disableSave = true;
+  disableSave = false;
   disableCancel = true;
 
   schoolId = getCookie('schoolId');
@@ -376,7 +376,7 @@ export class SchoolRequestComponent implements OnInit {
       // สถานะ ยกเลิก disable ทุกอย่าง
       if (this.requestData.status === '0') {
         this.disableTempSave = true;
-        this.disableSave = true;
+        this.disableSave = false;
         this.disableCancel = true;
       }
 
@@ -397,7 +397,7 @@ export class SchoolRequestComponent implements OnInit {
       else if (this.form.valid && this.requestData.process === '2') {
         //console.log('สถานะเป็นสร้างและส่งใบคำขอ ');
         this.disableTempSave = true;
-        this.disableSave = true;
+        this.disableSave = false;
       }
       // formValid + สถานะเป็นส่งกลับเพื่อแก้ไข, บันทึกชั่วคราวได้ ส่งใบคำขอได้
       else if (condition1 || condition2) {
@@ -407,7 +407,7 @@ export class SchoolRequestComponent implements OnInit {
       // form invalid
       else {
         this.disableTempSave = true;
-        this.disableSave = true;
+        this.disableSave = false;
       }
 
       // มีหมายเลขใบคำขอแล้ว enable ปุ่มยกเลิก

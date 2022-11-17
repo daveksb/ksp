@@ -7,6 +7,6 @@
   </div>
   <div *ngIf="requestNumber" class="form-label text-secondary ms-4">
     {{ requestLabel2 }} :
-    <span class="text-primary">{{ requestNumber }}</span>
+    <span class="text-primary">{{ requestNumber | reqNoFormat }}</span>
   </div>
 </div>

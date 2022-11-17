@@ -153,6 +153,26 @@ export function checkStatus(
   return status;
 }
 
+export function eSelfCheckProcess(processId: number, requestType: number) {
+  const process = SelfRequestProcess.find((p) => {
+    return p.processId === processId && p.requestType === requestType;
+  });
+  //console.log('process = ', process);
+  return process;
+}
+
+export function eSelfCheckStatus(
+  processId: number,
+  statusId: number,
+  requestType: number
+) {
+  const process = eSelfCheckProcess(processId, requestType);
+  const status = process?.status.find((s) => {
+    return s.id == statusId;
+  });
+  return status;
+}
+
 export function SelfCheckProcess(processId: number) {
   const process = SelfRequestProcess.find((p) => {
     return p.processId === processId;
