@@ -122,11 +122,11 @@ export class SubstituteLicenseDetailComponent
       this.form.controls.checkResult.value,
       this.requestData
     );
-    this.router.navigate(['/sub-license', 'confirm', this.requestId]);
+    this.router.navigate(['/sub-license', 'approve-confirm', this.requestId]);
   }
 
   cancel() {
-    this.router.navigate(['/sub-license', 'list']);
+    this.router.navigate(['/sub-license', 'approve-list']);
   }
 }
 
