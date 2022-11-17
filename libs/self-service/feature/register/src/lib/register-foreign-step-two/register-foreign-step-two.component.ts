@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { VerifyOtpForeignDialogComponent } from '@ksp/self-service/dialog';
@@ -22,7 +22,7 @@ export class RegisterForeignStepTwoComponent implements OnInit {
   visaTypeList$!: Observable<any>;
   form = this.fb.group({
     idcardno: [],
-    passportno: [],
+    passportno: [null, Validators.required],
     passportstartdate: [],
     passportenddate: [],
     visaclass: [],
@@ -34,7 +34,8 @@ export class RegisterForeignStepTwoComponent implements OnInit {
     this.visaClassList$ = this.generalInfoService.getVisaClass();
     this.visaTypeList$ = this.generalInfoService.getVisaType();
   }
-  openDialog() {
+
+  /* openDialog() {
     const dialogRef = this.dialog.open(VerifyOtpForeignDialogComponent, {
       width: '600px',
     });
@@ -46,10 +47,16 @@ export class RegisterForeignStepTwoComponent implements OnInit {
         this.nextStep();
       });
     });
-  }
+  } */
+
   nextStep() {
-    this.router.navigate(['/register', 'en-step-3']);
+    localForage.getItem('registerForeigner').then((res: any) => {
+      const data = { ...res, ...this.form.value };
+      localForage.setItem('registerForeigner', data);
+      this.router.navigate(['/register', 'en-step-3']);
+    });
   }
+
   loginPage() {
     this.router.navigate(['/login']);
   }

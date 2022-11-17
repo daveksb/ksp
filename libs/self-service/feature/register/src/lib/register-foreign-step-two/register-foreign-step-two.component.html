@@ -28,7 +28,7 @@
                   />
                 </div>
                 <div class="col-md mb-2">
-                  <label class="form-label">Passport Number</label>
+                  <label class="form-label required">Passport Number</label>
                   <input
                     type="text"
                     formControlName="passportno"
@@ -64,7 +64,9 @@
                     class="form-select"
                     id="nationalityFormControlSelect"
                   >
-                    <option value="null" selected disabled hidden>กรุณาเลือก</option>
+                    <option value="null" selected disabled hidden>
+                      กรุณาเลือก
+                    </option>
                     <option
                       *ngFor="let v of visaClassList$ | async"
                       [value]="v.id"
@@ -107,13 +109,19 @@
               <div class="d-flex align-items-center flex-column mt-3">
                 <button
                   id="btn-next"
-                  (click)="openDialog()"
+                  (click)="nextStep()"
                   type="submit"
                   class="btn btn-primary"
+                  [disabled]="form.invalid"
                 >
                   Next
                 </button>
-                <div class="label__login" (click)="loginPage()">Login</div>
+                <div
+                  class="fs-5 text-decoration-underline text-secondary mt-3"
+                  (click)="loginPage()"
+                >
+                  Login
+                </div>
               </div>
             </form>
           </div>
