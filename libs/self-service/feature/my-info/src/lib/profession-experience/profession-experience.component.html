@@ -1,6 +1,5 @@
 <ksp-top-nav [isSelfService]="true">
   <span header>ข้อมูลของฉัน</span>
-  <span subHeader>ข้อมูลประสบการณ์วิชาชีพ</span>
 </ksp-top-nav>
 
 <div class="main__container px-4 py-2 full-height">
@@ -57,7 +56,7 @@
         ></ng-container>
       </div>
 
-      <div class="border rounded px-3 py-2 mb-3">
+      <div class="border rounded px-3 py-2 mt-3">
         <div class="d-flex justify-content-between align-items-start">
           <div class="fs-5 w-50">สถานศึกษาที่ปฎิบัติการสอน</div>
           <div class="d-flex align-items-center">
@@ -112,7 +111,7 @@
         ></ng-container>
       </div>
 
-      <div class="border rounded px-3 py-2 mb-3">
+      <div class="border rounded px-3 py-2 mt-3">
         <div class="d-flex justify-content-between align-items-start">
           <div class="fs-5 w-50">ใบอนุญาตประกอบวิชาชีพครูจากต่างประเทศ</div>
           <div class="d-flex align-items-center">
@@ -161,16 +160,18 @@
               </div> </ng-container></ng-container
         ></ng-container>
       </div>
-      <div class="mt-3">
+      <!-- <div class="mt-3">
         <ksp-form-attachment
           [groups]="info"
           [title]="'กรุณาแนบหลักฐานประกอบวุฒิทางการศึกษา'"
         ></ksp-form-attachment>
-      </div>
+      </div> -->
     </form>
   </div>
   <div class="d-flex justify-content-center my-3">
-    <button class="btn btn-secondary me-2">ล้างข้อมูล</button>
+    <button class="btn text-secondary bg-light border-secondary me-2">
+      ล้างข้อมูล
+    </button>
     <button
       class="btn"
       (click)="onSave()"

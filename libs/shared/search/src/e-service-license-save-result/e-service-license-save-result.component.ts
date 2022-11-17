@@ -9,11 +9,17 @@ import {
 import { providerFactory } from '@ksp/shared/utility';
 import { selfOccupyList } from '@ksp/shared/constant';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 
 @Component({
   selector: 'ksp-e-service-license-save-result',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatDatepickerModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    FileUploadComponent,
+  ],
   templateUrl: './e-service-license-save-result.component.html',
   styleUrls: ['./e-service-license-save-result.component.scss'],
   providers: providerFactory(EServiceLicenseSaveResultComponent),

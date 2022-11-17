@@ -49,7 +49,8 @@ export class FormRegisterCoordinatorInfoComponent extends KspFormBaseComponent {
 
   changePrefix(event: any) {
     if ((this.form.controls.prefixth && this.form.controls.prefixen) &&
-      this.form.controls.prefixth.value != this.form.controls.prefixen.value) {
+    (this.form.controls.prefixth.value != this.form.controls.prefixen.value) &&
+    (this.form.controls.prefixth.value != '0' && this.form.controls.prefixen.value != '0')) {
       this.validprefix = false;
     } else {
       this.validprefix = true;

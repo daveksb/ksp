@@ -1,7 +1,4 @@
-<ksp-top-nav
-  ><span header>ใบอนุญาตประกอบวิชาชีพ</span
-  ><span subHeader>ขอต่อใบอนุญาตประกอบวิชาชีพ</span></ksp-top-nav
->
+<ksp-top-nav><span header>ใบอนุญาตประกอบวิชาชีพ</span><span subHeader>ขอต่อใบอนุญาตประกอบวิชาชีพ</span></ksp-top-nav>
 
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
@@ -9,8 +6,7 @@
     <div class="bg-white px-3 py-2">
       <ksp-request-header-info
         [requestDate]="'requestDate'"
-        [requestNumber]="'requestNo'"
-      ></ksp-request-header-info>
+        [requestNumber]="'requestNo'"></ksp-request-header-info>
       <hr />
       <div class="row align-items-center bg-light py-2 mx-0 mb-3">
         <div class="col-lg-3 my-auto">
@@ -23,8 +19,7 @@
             [isDarkMode]="true"
             [prefixList]="prefixList$ | async"
             [nationList]="nationalitys$ | async"
-            [isSelfService]="true"
-          >
+            [isSelfService]="true">
           </ksp-form-user-info>
         </div>
       </div>
@@ -32,8 +27,8 @@
       <mat-tab-group
         class="tab-group mb-2"
         animationDuration="0ms"
-        [selectedIndex]="0"
-      >
+        (selectedTabChange)="tabChanged($event)"
+        [selectedIndex]="0">
         <mat-tab label="ที่อยู่" class="tab-content">
           <ksp-form-address
             formControlName="address1"
@@ -41,8 +36,7 @@
             [isDarkMode]="true"
             [provinces]="provinces$ | async"
             [amphurs]="amphurs1$ | async"
-            [tumbols]="tumbols1$ | async"
-          >
+            [tumbols]="tumbols1$ | async">
             <span>ที่อยู่ทะเบียนบ้าน</span>
           </ksp-form-address>
           <hr />
@@ -52,18 +46,15 @@
             [isDarkMode]="true"
             [provinces]="provinces$ | async"
             [amphurs]="amphurs2$ | async"
-            [tumbols]="tumbols2$ | async"
-          >
+            [tumbols]="tumbols2$ | async">
             <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
           </ksp-form-address>
         </mat-tab>
 
         <mat-tab label="สถานที่ทำงาน">
           <div class="d-flex align-items-center">
-            <input type="checkbox" class="me-2" />
-            <label class="form-label mb-2"
-              >เป็นผู้ประสงค์ประกอบวิชาชีพทางการศึกษา</label
-            >
+            <input type="checkbox" class="me-2" disabled />
+            <label class="form-label mb-2">เป็นผู้ประสงค์ประกอบวิชาชีพทางการศึกษา</label>
           </div>
           <self-service-form-user-workplace
             [showContactForm]="true"
@@ -71,8 +62,7 @@
             [mode]="'view'"
             [provinces]="provinces$ | async"
             [amphurs]="amphurs3$ | async"
-            [tumbols]="tumbols3$ | async"
-          >
+            [tumbols]="tumbols3$ | async">
           </self-service-form-user-workplace>
           <!-- <div class="row">
             <div class="col-md-6 mb-3">
@@ -112,13 +102,11 @@
 
         <mat-tab
           label="ข้อมูลคุณสมบัติของผู้ขอต่ออายุใบอนุญาต"
-          *ngIf="educationType !== 'teacher'"
-        >
+          *ngIf="educationType !== 'teacher'">
           <self-service-renew-license-property
             formControlName="educationForm"
             [mode]="'view'"
-            [renewLicenseTypes]="educationType"
-          ></self-service-renew-license-property>
+            [renewLicenseTypes]="educationType"></self-service-renew-license-property>
           <!-- [workingInfo]="licenseFiles" -->
           <!-- [uniqueTimestamp]="uniqueTimestamp" -->
         </mat-tab>
@@ -129,18 +117,21 @@
             [mode]="'view'"
             [educationType]="educationType"
             [uniqueTimestamp]="'uniqueTimestamp'"
-            [workingInfo]="workingInfoFiles"
-          ></self-service-standard-working>
+            [workingInfo]="workingInfoFiles"></self-service-standard-working>
         </mat-tab>
       </mat-tab-group>
     </div>
-    <div [formGroup]="form2" class="bg-white px-4 py-3 mt-3">
-      <e-service-license-check
-        formControlName="verifyResult"
-        [headerTitle]="'ผลการตรวจสอบ'"
-        [choices]="choices"
-      ></e-service-license-check>
-    </div>
+    <ng-container
+      formArrayName="checkResult"
+      *ngFor="let c of checkResultFormArray.controls; let i = index">
+      <div
+        class="bg-white px-3 py-2 mt-3"
+        [ngClass]="{ hide: (selectedTab.index || 0) !== i }">
+        <e-service-license-check
+          [choices]="verifyChoice"
+          [formControlName]="i"></e-service-license-check>
+      </div>
+    </ng-container>
   </div>
 </form>
 
@@ -148,5 +139,6 @@
   <ksp-bottom-nav
     [showCenterButtons]="true"
     [isFirstPage]="true"
-  ></ksp-bottom-nav>
+    (nextClicked)="next()"
+    (cancelClicked)="cancel()"></ksp-bottom-nav>
 </div>

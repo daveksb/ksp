@@ -1,19 +1,23 @@
-<ksp-top-nav><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span>
+<ksp-top-nav
+  ><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span>
   <span subHeader>รับรองใบอนุญาตประกอบวิชาชีพ </span>
 </ksp-top-nav>
 
-<div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
+<div class="bg-secondary bg-opacity-10 px-4 py-2 full-height-2">
   <div class="box-header">
     บันทึกผลพิจารณารับรองการออกใบอนุญาตประกอบวิชาชีพทางการศึกษา
   </div>
   <div class="bg-white px-3 py-3">
-    <div>บัญชีรายชื่อผู้ขอขึ้นทะเบียนรับใบอนุญาตประกอบวิชาชีพครู</div>
+    <div class="fs-5">
+      บัญชีรายชื่อผู้ขอขึ้นทะเบียนรับใบอนุญาตประกอบวิชาชีพครู
+    </div>
     <hr />
 
     <button
       type="button"
-      class="btn btn-primary ms-2 approve-btn mb-3"
-      (click)="approve()">
+      class="btn btn-primary approve-btn mb-3"
+      (click)="approve()"
+    >
       อนุมัติออกใบอนุญาต
     </button>
 
@@ -25,7 +29,8 @@
             <mat-checkbox
               (click)="$event.stopPropagation()"
               (change)="$event ? selection.toggle(row) : null"
-              [checked]="selection.isSelected(row)">
+              [checked]="selection.isSelected(row)"
+            >
             </mat-checkbox>
           </td>
         </ng-container>
@@ -40,9 +45,9 @@
           <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
           <td mat-cell *matCellDef="let element; let i = index">
             {{
-            paginator.pageIndex === 0
-            ? i + 1
-            : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+              paginator.pageIndex === 0
+                ? i + 1
+                : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
             }}
           </td>
         </ng-container>
@@ -74,7 +79,8 @@
             <input
               type="checkbox"
               class="me-2"
-              [checked]="element.experience" />
+              [checked]="element.experience"
+            />
           </td>
         </ng-container>
 
@@ -124,6 +130,7 @@
     [isFirstPage]="true"
     [isLastPage]="true"
     (cancelClicked)="back()"
-    (saveClicked)="confirmDialog()">
+    (saveClicked)="confirmDialog()"
+  >
   </ksp-bottom-nav>
 </div>

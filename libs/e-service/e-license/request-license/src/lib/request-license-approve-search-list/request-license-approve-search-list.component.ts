@@ -99,12 +99,8 @@ export class RequestLicenseApproveSearchListComponent
     });
   }
 
-  editGroup() {
-    this.router.navigate(['/request-license', 'create-group-list']);
-  }
-
   createGroup() {
-    this.router.navigate(['/request-license', 'create-group']);
+    this.router.navigate(['/request-license', 'create-group-list']);
   }
 
   kmv() {

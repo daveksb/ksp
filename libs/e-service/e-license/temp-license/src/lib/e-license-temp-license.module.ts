@@ -5,7 +5,11 @@ import { ETempLicenseDetailComponent } from './e-temp-license-detail/e-temp-lice
 import { MatTabsModule } from '@angular/material/tabs';
 import { TempLicenseCheckForbiddenComponent } from './temp-license-check-forbidden/temp-license-check-forbidden.component';
 import { TempLicenseCheckConfirmComponent } from './temp-license-check-confirm/temp-license-check-confirm.component';
-import { MatDialogModule } from '@angular/material/dialog';
+import {
+  MatDialogModule,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { TempLicenseApproveComponent } from './temp-license-approve/temp-license-approve.component';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { MatTableModule } from '@angular/material/table';
@@ -15,6 +19,7 @@ import { ELicenseTempLicenseRoutingModule } from './e-license-temp-license-routi
 import {
   FormTempLicenseNumberComponent,
   SharedFormOthersModule,
+  ForbiddenPropertyFormComponent,
 } from '@ksp/shared/form/others';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
@@ -54,6 +59,7 @@ import {
     ValidateKspRequestComponent,
     ConsiderKspRequestComponent,
     KspRequestNoPipe,
+    ForbiddenPropertyFormComponent,
   ],
   declarations: [
     ETempLicenseListComponent,
@@ -68,6 +74,10 @@ import {
     TempLicenseCheckConfirmComponent,
     TempLicenseApproveComponent,
     TempLicenseApproveListComponent,
+  ],
+  providers: [
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+    { provide: MatDialogRef, useValue: {} },
   ],
 })
 export class ELicenseTempLicenseModule {}

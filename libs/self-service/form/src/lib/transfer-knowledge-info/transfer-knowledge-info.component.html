@@ -34,6 +34,7 @@
         <div class="bg-white border rounded py-2 px-3 mb-3">
           <div class="d-flex justify-content-between">
             <div class="form-label">มาตรฐานความรู้ที่ {{ i + 1 }}</div>
+
             <i
               *ngIf="i > 0"
               class="bi bi-x-circle-fill text-danger"
@@ -70,12 +71,15 @@
               *ngFor="let subject of getSubjects(i).controls; let j = index"
             >
               <ng-container [formGroupName]="j">
-                <div class="d-flex justify-content-end" *ngIf="j > 0">
-                  <i
-                    class="bi bi-x-circle-fill text-danger"
-                    role="button"
-                    (click)="deleteSubject(i, j)"
-                  ></i>
+                <div class="mt-3" *ngIf="j > 0">
+                  <hr />
+                  <div class="d-flex justify-content-end">
+                    <i
+                      class="bi bi-x-circle-fill text-danger"
+                      role="button"
+                      (click)="deleteSubject(i, j)"
+                    ></i>
+                  </div>
                 </div>
                 <div class="row">
                   <div class="col-md-8">

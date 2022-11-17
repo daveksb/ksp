@@ -100,7 +100,7 @@ export class ETempLicenseDetailComponent implements OnInit {
   }
 
   addCheckResultArray() {
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 7; i++) {
       this.checkResultFormArray.push(this.fb.control([]));
     }
   }
