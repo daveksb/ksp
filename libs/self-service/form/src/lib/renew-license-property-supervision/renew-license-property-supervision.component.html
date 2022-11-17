@@ -4,8 +4,7 @@
       <select
         formControlName="standardKnowledgeType"
         class="form-select"
-        style="white-space: break-spaces"
-      >
+        style="white-space: break-spaces">
         <option selected hidden disabled value="null">กรุณาเลือก</option>
         <option *ngFor="let std of standardKnowledges" [value]="std.value">
           {{ std.label }}
@@ -18,33 +17,33 @@
     <ksp-renew-license-property-one
       [isSupervision]="true"
       formControlName="educationDetails"
-    ></ksp-renew-license-property-one>
+      [mode]="mode"></ksp-renew-license-property-one>
   </ng-container>
   <ng-container *ngIf="selectedstandardKnowledgeType === 1">
     <ksp-renew-license-property-four
       formControlName="educationDetails"
-    ></ksp-renew-license-property-four>
+      [mode]="mode"></ksp-renew-license-property-four>
   </ng-container>
   <ng-container *ngIf="selectedstandardKnowledgeType === 2">
     <ksp-renew-license-property-five
       formControlName="educationDetails"
-    ></ksp-renew-license-property-five>
+      [mode]="mode"></ksp-renew-license-property-five>
   </ng-container>
   <ng-container *ngIf="selectedstandardKnowledgeType === 3">
     <ksp-renew-license-property-three
       [formType]="'sup'"
       formControlName="educationDetails"
-    ></ksp-renew-license-property-three>
+      [mode]="mode"></ksp-renew-license-property-three>
   </ng-container>
   <ng-container *ngIf="selectedstandardKnowledgeType === 4">
     <ksp-renew-license-property-six
       formControlName="educationDetails"
-    ></ksp-renew-license-property-six>
+      [mode]="mode"></ksp-renew-license-property-six>
   </ng-container>
   <ng-container *ngIf="selectedstandardKnowledgeType === 5">
     <ksp-renew-license-property-six
       formControlName="educationDetails"
-    ></ksp-renew-license-property-six>
+      [mode]="mode"></ksp-renew-license-property-six>
   </ng-container>
 
   <ng-container *ngIf="selectedstandardKnowledgeType >= 0">
@@ -52,7 +51,7 @@
       <ksp-form-multi-attachment
         [groups]="workingInfo"
         [uniqueTimestamp]="uniqueTimestamp"
-        [mode]="'edit'"
-      ></ksp-form-multi-attachment></div
-  ></ng-container>
+        [mode]="mode"></ksp-form-multi-attachment>
+    </div>
+  </ng-container>
 </form>

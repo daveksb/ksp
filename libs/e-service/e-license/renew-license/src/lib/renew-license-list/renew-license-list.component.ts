@@ -14,6 +14,9 @@ import { ERequestService } from '@ksp/shared/service';
 import {
   checkProcess,
   checkStatus,
+  eSelfCheckProcess,
+  eSelfCheckStatus,
+  processFilter,
   replaceEmptyWithNull,
 } from '@ksp/shared/utility';
 
@@ -28,8 +31,8 @@ export class RenewLicenseListComponent implements AfterViewInit {
   SchoolRequestSubType = SchoolRequestSubType;
 
   requestTypeList = SchoolRequestType.filter((i) => i.id > 2);
-  checkProcess = checkProcess;
-  checkStatus = checkStatus;
+  checkProcess = eSelfCheckProcess;
+  checkStatus = eSelfCheckStatus;
 
   form = this.fb.group({
     search: [],
@@ -72,6 +75,7 @@ export class RenewLicenseListComponent implements AfterViewInit {
 
     this.requestService.KspSearchRequest(payload).subscribe((res) => {
       this.dataSource.data = res;
+      this.dataSource.data = processFilter(res);
       this.dataSource.sort = this.sort;
 
       const sortState: Sort = { active: 'id', direction: 'desc' };

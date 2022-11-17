@@ -10,11 +10,13 @@
       labelPosition="bottom"
       [animationDuration]="'0'"
       [selectedIndex]="0"
+      (selectionChange)="onStepChange($event)"
       #stepper>
       <mat-step [completed]="false">
         <ng-template matStepLabel>Personal Details</ng-template>
         <self-service-foreign-license-step-two
           formControlName="personalDetail"
+          [mode]="'view'"
           [isRenewLicense]="true"
           [userInfo]="userInfo"
           [addressInfo]="addressInfo"
@@ -29,7 +31,8 @@
       <mat-step [completed]="false">
         <ng-template matStepLabel>Renewal Requirements</ng-template>
         <self-service-renew-license-foreign-step-two
-          formControlName="renewalRequirements">
+          formControlName="renewalRequirements"
+          [mode]="'view'">
         </self-service-renew-license-foreign-step-two>
       </mat-step>
 
@@ -37,6 +40,7 @@
         <ng-template matStepLabel>Documents and evidence required</ng-template>
         <self-service-foreign-license-step-three
           formControlName="foreignSelectUpload"
+          [mode]="'view'"
           [documentTypes]="'renew'"
           [attachFiles]="documentFiles"
           [uniqueTimestamp]="uniqueNo"></self-service-foreign-license-step-three>
@@ -45,11 +49,24 @@
       <mat-step [completed]="false">
         <ng-template matStepLabel>Personal Declaration</ng-template>
         <self-service-foreign-license-step-four
+          [mode]="'view'"
           [personalDeclaration]="personalDeclaration"
           formControlName="personalDeclaration">
         </self-service-foreign-license-step-four>
       </mat-step>
     </mat-stepper>
+
+    <ng-container
+      formArrayName="checkResult"
+      *ngFor="let c of checkResultFormArray.controls; let i = index">
+      <div
+        class="bg-white px-3 py-2 mt-3"
+        [ngClass]="{ hide: (selectedTab.selectedIndex || 0) !== i }">
+        <e-service-license-check
+          [choices]="verifyChoice"
+          [formControlName]="i"></e-service-license-check>
+      </div>
+    </ng-container>
   </form>
 </div>
 
@@ -57,8 +74,9 @@
   <ksp-bottom-nav
     [showCenterButtons]="true"
     [isFirstPage]="true"
-    [disableNext]="false"></ksp-bottom-nav>
-  <!-- (nextClicked)="next()"
-    (cancelClicked)="cancel()" -->
+    [disableNext]="false"
+    (nextClicked)="next()"
+    (cancelClicked)="cancel()"></ksp-bottom-nav>
+
 
 </div>

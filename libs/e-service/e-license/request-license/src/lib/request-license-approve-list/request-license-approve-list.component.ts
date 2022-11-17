@@ -12,23 +12,12 @@ import {
 } from '@ksp/shared/constant';
 import { EsSearchPayload, SelfRequest } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
-import { processFilter, replaceEmptyWithNull } from '@ksp/shared/utility';
-
-function checkProcess(processId: number, requestType: number) {
-  const process = SelfRequestProcess.find((p) => {
-    return p.processId === processId && p.requestType === requestType;
-  });
-  //console.log('process = ', process);
-  return process;
-}
-
-function checkStatus(processId: number, statusId: number, requestType: number) {
-  const process = checkProcess(processId, requestType);
-  const status = process?.status.find((s) => {
-    return s.id == statusId;
-  });
-  return status;
-}
+import {
+  eSelfCheckProcess,
+  eSelfCheckStatus,
+  processFilter,
+  replaceEmptyWithNull,
+} from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-request-license-approve-list',
@@ -41,8 +30,8 @@ export class RequestLicenseApproveListComponent implements AfterViewInit {
   SchoolRequestSubType = SchoolRequestSubType;
 
   requestTypeList = SchoolRequestType.filter((i) => i.id > 2);
-  checkProcess = checkProcess;
-  checkStatus = checkStatus;
+  checkProcess = eSelfCheckProcess;
+  checkStatus = eSelfCheckStatus;
 
   form = this.fb.group({
     search: [{ requesttype: '3' }],

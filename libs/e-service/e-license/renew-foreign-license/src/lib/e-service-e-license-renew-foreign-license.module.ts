@@ -38,6 +38,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatStepperModule } from '@angular/material/stepper';
 import { RequestStatusComponent } from '@ksp/self-service/ui';
 import { RenewLicenseForeignDetailComponent } from './renew-license-foreign-detail/renew-license-foreign-detail.component';
+import { RenewLicenseForeignConfirmComponent } from './renew-license-foreign-confirm/renew-license-foreign-confirm.component';
 
 export const routes: Route[] = [
   {
@@ -56,6 +57,10 @@ export const routes: Route[] = [
       {
         path: 'detail/:id',
         component: RenewLicenseForeignDetailComponent,
+      },
+      {
+        path: 'confirm/:id',
+        component: RenewLicenseForeignConfirmComponent,
       },
     ],
   },
@@ -94,6 +99,7 @@ export const routes: Route[] = [
   declarations: [
     RenewLicenseForeignListComponent,
     RenewLicenseForeignDetailComponent,
+    RenewLicenseForeignConfirmComponent,
   ],
 })
 export class EServiceELicenseRenewForeignLicenseModule {}
