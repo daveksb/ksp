@@ -210,9 +210,9 @@ export const menu: MenuConfig[] = [
     label: 'ประวัติการชำระเงิน',
     path: '/my-info/payment-history',
   },
-  {
+  /* {
     icon: 'assets/images/icon-sidenav/gear-fill.svg',
     label: 'ออกจากระบบ',
     path: '',
-  },
+  }, */
 ];

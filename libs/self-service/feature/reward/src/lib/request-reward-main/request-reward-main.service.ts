@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import { FileGroup } from '@ksp/shared/interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RequestRewardMainService {
-  councilRewardFiles = [
+  /* councilRewardFiles = [
     { name: '1. รางวัลอื่นและประกาศเกียรติคุณ', fileid: '', filename: '' },
   ];
 
@@ -26,5 +27,42 @@ export class RequestRewardMainService {
 
   researchRewardFiles = [
     { name: '1. รางวัลอื่นและประกาศเกียรติคุณ', fileid: '', filename: '' },
+  ]; */
+
+  councilRewardFiles: FileGroup[] = [
+    {
+      name: '1. รางวัลอื่นและประกาศเกียรติคุณ',
+      files: [],
+    },
+  ];
+  thaiTeacherRewardFiles: FileGroup[] = [
+    {
+      name: '1. รางวัลอื่นและประกาศเกียรติคุณ',
+      files: [],
+    },
+  ];
+  bestTeacherRewardFiles: FileGroup[] = [
+    {
+      name: '1. รางวัลอื่นและประกาศเกียรติคุณ',
+      files: [],
+    },
+  ];
+  praiseRewardFiles: FileGroup[] = [
+    {
+      name: '1. รางวัลอื่นและประกาศเกียรติคุณ',
+      files: [],
+    },
+  ];
+  seniorTeacherRewardFiles: FileGroup[] = [
+    {
+      name: '1. รางวัลอื่นและประกาศเกียรติคุณ',
+      files: [],
+    },
+  ];
+  researchRewardFiles: FileGroup[] = [
+    {
+      name: '1. รางวัลอื่นและประกาศเกียรติคุณ',
+      files: [],
+    },
   ];
 }
