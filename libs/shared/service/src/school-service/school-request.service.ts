@@ -15,8 +15,8 @@ import { map, Observable, shareReplay } from 'rxjs';
 export class SchoolRequestService {
   constructor(private http: HttpClient) {}
 
-  getTempLicense(requestid: string): Observable<SchTempLicense> {
-    return this.http.post<SchTempLicense>(`${environment.apiUrl}/xxxxxx`, {
+  getTempLicense(requestid: string | null): Observable<SchTempLicense> {
+    return this.http.post<SchTempLicense>(`${environment.apiUrl}/xxxxxxxx`, {
       requestid,
     });
   }

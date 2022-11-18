@@ -52,7 +52,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   ngOnInit(): void {
     this.checkRequestId();
     this.loadStoreData();
-    this.updateLetterNo();
+    this.getLicenseNo();
     setTimeout(() => this.getFormInvalid(), 0);
   }
 
@@ -66,11 +66,12 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
     });
   }
 
-  updateLetterNo() {
-    this.eRequestService.getThaiLetterNo().subscribe((res) => {
+  getLicenseNo() {
+    this.eRequestService.getLicenseNoTh().subscribe((res) => {
       const be = moment().add(543, 'year').year();
+      console.log('call get license no = ', res.runningno);
       this.approveInfo = {
-        approveNo: `${++res.runningno}/${be}`,
+        approveNo: `${res.runningno}/${be}`,
         approveDate: new Date(),
       };
       this.form.controls.approvement.patchValue(this.approveInfo);

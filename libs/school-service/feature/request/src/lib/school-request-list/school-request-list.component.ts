@@ -143,13 +143,15 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     }
   }
 
-  getSchLicense(requestId: string) {
+  getTempLicense(requestId: string | null) {
     this.requestService.getTempLicense(requestId).subscribe((res) => {
       console.log('temp license = ', res);
     });
   }
 
   licensePdf(element: KspRequest) {
+    this.getTempLicense(element.id);
+
     const position = element?.position;
     const startDate = new Date(element.processupdatedate || '');
     const endDate = addDate(

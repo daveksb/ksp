@@ -52,13 +52,14 @@ export class ERequestService {
     );
   }
 
-  getThaiLetterNo(): Observable<any> {
+  getLicenseNoTh(): Observable<any> {
     return this.http.get(
-      `${environment.apiUrl}/e-service/genrunningtemplicensenumberth`
+      `${environment.apiUrl}/e-service/genrunningtemplicensenumberth`,
+      { headers: { 'Cache-Control': 'no-store' } }
     );
   }
 
-  getForeignLetterNo(): Observable<any> {
+  getLicenseNoEn(): Observable<any> {
     return this.http.get(
       `${environment.apiUrl}/e-service/genrunningtemplicensenumberen`
     );
