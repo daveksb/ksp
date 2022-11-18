@@ -5,6 +5,7 @@ import {
   KspRequest,
   KspRequestProcess,
   SchRequestSearchFilter,
+  SchTempLicense,
 } from '@ksp/shared/interface';
 import { map, Observable, shareReplay } from 'rxjs';
 
@@ -13,6 +14,15 @@ import { map, Observable, shareReplay } from 'rxjs';
 })
 export class SchoolRequestService {
   constructor(private http: HttpClient) {}
+
+  getTempLicense(requestid: string | null): Observable<SchTempLicense> {
+    return this.http.post<SchTempLicense>(
+      `${environment.apiUrl}/kspstaff/schtemplicenseselectrequestid`,
+      {
+        requestid,
+      }
+    );
+  }
 
   schCreateRequest(payload: Partial<KspRequest>): Observable<any> {
     return this.http.post(

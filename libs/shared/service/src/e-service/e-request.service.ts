@@ -16,6 +16,7 @@ import {
   KspListResponse,
   SelfApproveList,
   SelfApproveGroup,
+  SchTempLicense,
 } from '@ksp/shared/interface';
 import { getCookie } from '@ksp/shared/utility';
 import { map, Observable, shareReplay } from 'rxjs';
@@ -51,26 +52,25 @@ export class ERequestService {
     );
   }
 
-  getThaiLetterNo(): Observable<any> {
+  getLicenseNoTh(): Observable<any> {
     return this.http.get(
-      `${environment.apiUrl}/e-service/genrunningtemplicensenumberth`
+      `${environment.apiUrl}/e-service/genrunningtemplicensenumberth`,
+      { headers: { 'Cache-Control': 'no-store' } }
     );
   }
 
-  getForeignLetterNo(): Observable<any> {
+  getLicenseNoEn(): Observable<any> {
     return this.http.get(
       `${environment.apiUrl}/e-service/genrunningtemplicensenumberen`
     );
   }
 
-  /* createTempLicense(id: any): Observable<any> {
+  createTempLicense(payload: SchTempLicense): Observable<any> {
     return this.http.post<KspRequest>(
-      `${environment.apiUrl}/e-service/ksprequestselectbyid`,
-      {
-        id,
-      }
+      `${environment.apiUrl}/e-service/schtemplicenseinsert`,
+      payload
     );
-  } */
+  }
 
   getSelfLicense(requestid: string): Observable<any> {
     return this.http.post(

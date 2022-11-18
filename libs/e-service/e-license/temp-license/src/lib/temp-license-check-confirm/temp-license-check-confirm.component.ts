@@ -7,13 +7,17 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { KspApprovePayload } from '@ksp/shared/interface';
+import { KspApprovePayload, SchTempLicense } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import localForage from 'localforage';
 import { KspApprovePersistData } from '../temp-license-detail/temp-license-detail.component';
 import { Location } from '@angular/common';
-import { checkStatus, getCookie } from '@ksp/shared/utility';
+import {
+  checkStatus,
+  getCookie,
+  replaceEmptyWithNull,
+} from '@ksp/shared/utility';
 import moment from 'moment';
 
 @UntilDestroy()
@@ -48,7 +52,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   ngOnInit(): void {
     this.checkRequestId();
     this.loadStoreData();
-    this.updateLetterNo();
+    this.getLicenseNo();
     setTimeout(() => this.getFormInvalid(), 0);
   }
 
@@ -62,11 +66,12 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
     });
   }
 
-  updateLetterNo() {
-    this.eRequestService.getThaiLetterNo().subscribe((res) => {
+  getLicenseNo() {
+    this.eRequestService.getLicenseNoTh().subscribe((res) => {
       const be = moment().add(543, 'year').year();
+      console.log('call get license no = ', res.runningno);
       this.approveInfo = {
-        approveNo: `${++res.runningno}/${be}`,
+        approveNo: `${res.runningno}/${be}`,
         approveDate: new Date(),
       };
       this.form.controls.approvement.patchValue(this.approveInfo);
@@ -236,19 +241,56 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
       process: considerProcess,
       status: `${form.result}`,
       detail:
-        form.value === '2'
+        form.result === '2'
           ? JSON.stringify(detail)
           : JSON.stringify(this.saveData.checkDetail),
       systemtype: '4', // e-service
       userid: this.userId,
       paymentstatus: null,
     };
-    console.log('payload = ', payload);
+
+    const licensePayload: SchTempLicense = {
+      licenseno: this.approveInfo.approveNo,
+      licensetype: this.saveData.requestData.careertype,
+      licensestartdate: moment().format('yyyy-MM-DD'),
+      licenseenddate: moment().add(2, 'years').format('yyyy-MM-DD'),
+      workingstartdate: null,
+      workingenddate: null,
+      schoolid: this.saveData.requestData.schoolid,
+      staffid: this.saveData.requestData.userid,
+      idcardno: this.saveData.requestData.idcardno,
+      passportno: this.saveData.requestData.passportno,
+      prefixth: this.saveData.requestData.prefixth,
+      firstnameth: this.saveData.requestData.firstnameth,
+      middlenameth: this.saveData.requestData.middlenameth,
+      lastnameth: this.saveData.requestData.lastnameen,
+      prefixen: this.saveData.requestData.prefixen,
+      firstnameen: this.saveData.requestData.firstnameen,
+      middlenameen: this.saveData.requestData.middlenameen,
+      lastnameen: this.saveData.requestData.lastnameen,
+      sex: this.saveData.requestData.sex,
+      birthdate: this.saveData.requestData.birthdate,
+      email: this.saveData.requestData.email,
+      position: this.saveData.requestData.position,
+      contactphone: this.saveData.requestData.contactphone,
+      workphone: this.saveData.requestData.workphone,
+      isactive: '1',
+      requestid: this.saveData.requestData.id,
+      requestno: this.saveData.requestData.requestno,
+    };
+    //console.log('payload = ', payload);
     this.eRequestService.KspUpdateRequestProcess(payload).subscribe(() => {
-      if (form.value === '2') {
-        console.log('result = ', form.value);
+      //console.log('form = ', form);
+      if (form.result === '2') {
+        this.eRequestService
+          .createTempLicense(replaceEmptyWithNull(licensePayload))
+          .subscribe(() => {
+            //console.log('craete temp license done = ');
+            this.completeDialog();
+          });
+      } else {
+        this.completeDialog();
       }
-      //this.completeDialog();
     });
   }
 

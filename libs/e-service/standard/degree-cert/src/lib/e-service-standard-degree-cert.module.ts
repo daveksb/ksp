@@ -36,6 +36,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FormAddressTableComponent } from '@ksp/shared/form/others';
 import { ConsiderStudentComponent } from './import-student/consider-student/consider-student.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { EUniPipesModule } from '@ksp/shared/pipe';
 
 @NgModule({
   imports: [
@@ -66,7 +67,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatDatepickerModule,
     FormAddressTableComponent,
     MatPaginatorModule,
-    FormApproveMeetingRecordComponent
+    FormApproveMeetingRecordComponent,
+    EUniPipesModule
   ],
   declarations: [
     EServiceDegreeCertListComponent,

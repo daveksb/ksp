@@ -1,6 +1,7 @@
 <ng-container *ngIf="uploadType === 'button'">
   <button
     (click)="fileUpload.click()"
+    [disabled]="mode === 'view'"
     type="button"
     class="btn btn-sm btn-primary w-auto"
   >

@@ -7,6 +7,7 @@ export type UniApproveProcess = {
   requestType: number;
   processId: number;
   processName: string;
+  considerationName?:string;
   status: UniApproveStatus[]; 
 }
 
