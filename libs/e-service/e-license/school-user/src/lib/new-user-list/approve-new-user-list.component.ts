@@ -14,6 +14,7 @@ import {
 import { EducationDetailService, ERequestService } from '@ksp/shared/service';
 import {
   checkStatus,
+  parseJson,
   replaceEmptyWithNull,
   schoolMapRequestType,
 } from '@ksp/shared/utility';
@@ -31,6 +32,8 @@ export class ApproveNewUserListComponent implements AfterViewInit, OnInit {
   mapRequestType = schoolMapRequestType;
   selectedUniversity = '';
   bureau$!: Observable<any>;
+  searchNotFound = false;
+  xxx = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -79,22 +82,26 @@ export class ApproveNewUserListComponent implements AfterViewInit, OnInit {
     payload = replaceEmptyWithNull(payload);
 
     this.eRequestService.KspSearchRequest(payload).subscribe((res) => {
-      //console.log('res = ', res);
-      if (res) {
+      console.log('res = ', res);
+
+      if (res && res.length) {
         this.dataSource.data = res;
         this.dataSource.sort = this.sort;
         const sortState: Sort = { active: 'id', direction: 'desc' };
         this.sort.active = sortState.active;
         this.sort.direction = sortState.direction;
         this.sort.sortChange.emit(sortState);
+        this.searchNotFound = false;
       } else {
         this.clear();
+        this.searchNotFound = true;
       }
     });
   }
 
   clear() {
     this.dataSource.data = [];
+    this.searchNotFound = false;
   }
 
   onItemChange(universityCode: string) {
@@ -114,9 +121,9 @@ export const column: string[] = [
   'requestno',
   'name',
   'contactphone',
-  //'coordinatorname',
+  'coordinatorname',
   'schoolname',
-  //'provience',
+  'provience',
   'requestType',
   'requeststatus',
   'requestdate',
