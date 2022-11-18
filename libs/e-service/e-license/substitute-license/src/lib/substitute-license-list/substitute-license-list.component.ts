@@ -15,8 +15,8 @@ import {
 } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 import {
-  checkProcess,
-  checkStatus,
+  SelfCheckProcess,
+  SelfcheckStatus,
   replaceEmptyWithNull,
 } from '@ksp/shared/utility';
 
@@ -30,8 +30,8 @@ export class SubstituteLicenseListComponent implements AfterViewInit {
   dataSource = new MatTableDataSource<SelfRequest>();
   SchoolRequestSubType = SchoolRequestSubType;
 
-  checkProcess = checkProcess;
-  checkStatus = checkStatus;
+  checkProcess = SelfCheckProcess;
+  checkStatus = SelfcheckStatus;
 
   form = this.fb.group({
     search: [],

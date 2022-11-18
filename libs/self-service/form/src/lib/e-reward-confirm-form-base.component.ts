@@ -45,6 +45,7 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
     }); */
 
     localForage.getItem('checkRequestData').then((res: any) => {
+      console.log(res);
       this.saveData = res;
       if (this.saveData.requestData.id)
         this.getApproveHistory(this.saveData.requestData.id);

@@ -103,7 +103,9 @@ export class RenewLicenseDetailComponent
     for (let i = 0; i < FORM_TAB_COUNT; i++) {
       this.checkResultFormArray.push(this.fb.control(null));
     }
-    this.checkResultFormArray.setValidators(this.allFilledValidator());
+    this.checkResultFormArray.setValidators(
+      ESelfFormBaseComponent.allFilledValidator()
+    );
   }
 
   override checkRequestId() {
@@ -226,7 +228,10 @@ export class RenewLicenseDetailComponent
   }
 
   next() {
-    this.persistData(this.form.controls.checkResult.value);
+    ESelfFormBaseComponent.persistData(
+      this.form.controls.checkResult.value,
+      this.requestData
+    );
     this.router.navigate(['/renew-license', 'approve-confirm', this.requestId]);
   }
 

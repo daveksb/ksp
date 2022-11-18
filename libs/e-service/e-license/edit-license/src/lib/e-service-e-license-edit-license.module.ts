@@ -14,6 +14,9 @@ import { EServiceLicenseSearchComponent } from '@ksp/shared/search';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { MatDialogModule } from '@angular/material/dialog';
+import { EditLicenseApproveConfirmComponent } from './edit-license-approve-confirm/edit-license-approve-confirm.component';
+import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
+import { ValidateKspRequestComponent } from '@ksp/e-service/e-license/approve-ksp-request';
 
 export const routes: Routes = [
   {
@@ -37,6 +40,10 @@ export const routes: Routes = [
         path: 'detail/:id',
         component: EditLicenseApproveDetailComponent,
       },
+      {
+        path: 'confirm/:id',
+        component: EditLicenseApproveConfirmComponent,
+      },
     ],
   },
 ];
@@ -56,10 +63,13 @@ export const routes: Routes = [
     LicenseCheckComponent,
     SharedFormOthersModule,
     MatDialogModule,
+    RequestHeaderInfoComponent,
+    ValidateKspRequestComponent,
   ],
   declarations: [
     EditLicenseApproveListComponent,
     EditLicenseApproveDetailComponent,
+    EditLicenseApproveConfirmComponent,
   ],
   exports: [EditLicenseApproveListComponent, EditLicenseApproveDetailComponent],
 })
