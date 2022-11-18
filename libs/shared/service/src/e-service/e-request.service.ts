@@ -16,6 +16,7 @@ import {
   KspListResponse,
   SelfApproveList,
   SelfApproveGroup,
+  SchTempLicense,
 } from '@ksp/shared/interface';
 import { getCookie } from '@ksp/shared/utility';
 import { map, Observable, shareReplay } from 'rxjs';
@@ -63,12 +64,10 @@ export class ERequestService {
     );
   }
 
-  createTempLicense(id: any): Observable<any> {
+  createTempLicense(payload: SchTempLicense): Observable<any> {
     return this.http.post<KspRequest>(
-      `${environment.apiUrl}/e-service/ksprequestselectbyid`,
-      {
-        id,
-      }
+      `${environment.apiUrl}/e-service/schtemplicenseinsert`,
+      payload
     );
   }
 
