@@ -99,7 +99,7 @@
               [systemFileName]="'forbidden-file'"
               (uploadComplete)="uploadComplete($event)"
               [filename]="filename"
-              [showDeleteFile]="true"
+              [showDeleteFile]="mode !== 'view'"
             ></ksp-file-upload>
           </div></div
       ></ng-container>
