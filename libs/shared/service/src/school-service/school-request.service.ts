@@ -16,9 +16,12 @@ export class SchoolRequestService {
   constructor(private http: HttpClient) {}
 
   getTempLicense(requestid: string | null): Observable<SchTempLicense> {
-    return this.http.post<SchTempLicense>(`${environment.apiUrl}/xxxxxxxx`, {
-      requestid,
-    });
+    return this.http.post<SchTempLicense>(
+      `${environment.apiUrl}/kspstaff/schtemplicenseselectrequestid`,
+      {
+        requestid,
+      }
+    );
   }
 
   schCreateRequest(payload: Partial<KspRequest>): Observable<any> {
