@@ -22,7 +22,7 @@ import { RequestSearchComponent } from '@ksp/shared/search';
 import { SchoolTempLicenseRoutingModule } from './temp-license-routing.module';
 import { SchoolRequestComponent } from './school-request/school-request.component';
 import { MatSortModule } from '@angular/material/sort';
-import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { KspRequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { SchoolRequestListComponent } from './school-request-list/school-request-list.component';
 
@@ -47,6 +47,7 @@ import { SchoolRequestListComponent } from './school-request-list/school-request
     MatPaginatorModule,
     MatSortModule,
     ThaiDatePipe,
+    KspRequestNoPipe,
     UniFormBadgeComponent,
   ],
   declarations: [SchoolRequestListComponent, SchoolRequestComponent],
