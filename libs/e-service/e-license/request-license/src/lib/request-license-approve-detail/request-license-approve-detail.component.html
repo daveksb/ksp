@@ -1,6 +1,7 @@
 <ksp-top-nav
-  ><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span><span subHeader></span
-></ksp-top-nav>
+  ><span header>ยื่นใบคำขอ</span
+  ><span subHeader>ใบคำขอใบอนุญาตประกอบวิชาชีพ</span></ksp-top-nav
+>
 
 <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
   <div class="box-header">รายละเอียดใบคำขอใบอนุญาตประกอบวิชาชีพ</div>
@@ -157,6 +158,8 @@
     [disableNext]="false"
     (nextClicked)="next()"
     (cancelClicked)="cancel()"
+    [disableNext]="checkResultFormArray.invalid"
+    [disableNextMessage]="'กรุณาตรวจสอบให้ครบถ้วน'"
   ></ksp-bottom-nav>
 </div>
 

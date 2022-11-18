@@ -78,6 +78,7 @@ export class ForeignLicenseStepTwoComponent
   @Input() uniqueTimestamp!: string;
   @Input() isRenewLicense = false;
   @Input() myImage = '';
+  @Input() isEditMode = true;
 
   prefixList$!: Observable<Prefix[]>;
   provinces1$!: Observable<Province[]>;

@@ -107,9 +107,9 @@ export class LicenseRequestComponent
   ngOnInit(): void {
     this.getListData();
     this.checkRequestId();
-    /*     this.form.valueChanges.subscribe((res) => {
-      console.log('valid = ', this.form.valid);
-    }); */
+    this.form.valueChanges.subscribe((res) => {
+      //console.log('1 = ', this.userInfoForm.valid);
+    });
     this.myInfoService.getMyInfo().subscribe((res) => {
       this.userInfo = {
         ...res,
