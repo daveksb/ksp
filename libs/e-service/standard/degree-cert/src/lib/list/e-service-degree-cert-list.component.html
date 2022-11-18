@@ -136,7 +136,7 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
       <table>
-        <tr *ngIf="!dataSource.data.length">
+        <tr *ngIf="!dataSource?.data?.length">
           <td
             class="text-center text-danger fs-5"
             [attr.colspan]="displayedColumns.length"
