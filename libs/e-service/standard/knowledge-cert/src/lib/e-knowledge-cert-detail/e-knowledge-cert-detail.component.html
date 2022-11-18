@@ -61,7 +61,8 @@
             [mode]="'view'"
             [provinces]="provinces3$ | async"
             [amphurs]="amphurs3$ | async"
-            [tumbols]="tumbols3$ | async">
+            [tumbols]="tumbols3$ | async"
+            [bureaus]="bureau$ | async">
           </self-service-form-user-workplace>
         </mat-tab>
 
@@ -104,5 +105,8 @@
 <div class="sticky-bottom border px-2">
   <ksp-bottom-nav
     [showCenterButtons]="true"
-    [isFirstPage]="true"></ksp-bottom-nav>
+    [isFirstPage]="true"
+    [disableNext]="false"
+    (nextClicked)="next()"
+    (cancelClicked)="cancel()"></ksp-bottom-nav>
 </div>

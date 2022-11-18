@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
 import { ESelfFormBaseComponent } from '@ksp/shared/form/others';
 import { SelfGetRequest } from '@ksp/shared/interface';
@@ -73,7 +73,8 @@ export class EKnowledgeCertDetailComponent
     educationDetailService: EducationDetailService,
     fb: FormBuilder,
     requestService: ERequestService,
-    route: ActivatedRoute
+    route: ActivatedRoute,
+    private router: Router
   ) {
     super(
       generalInfoService,
@@ -132,5 +133,17 @@ export class EKnowledgeCertDetailComponent
 
   patchWorkPlaceForm(data: any): void {
     this.form.controls.workplace.patchValue(data);
+  }
+
+  next() {
+    ESelfFormBaseComponent.persistData(
+      this.form.controls.checkResult.value,
+      this.requestData
+    );
+    this.router.navigate(['/knowledge-cert/', 'confirm', this.requestId]);
+  }
+
+  cancel() {
+    this.router.navigate(['/knowledge-cert/', 'list']);
   }
 }
