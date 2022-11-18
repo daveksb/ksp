@@ -63,14 +63,14 @@ export class ERequestService {
     );
   }
 
-  /* createTempLicense(id: any): Observable<any> {
+  createTempLicense(id: any): Observable<any> {
     return this.http.post<KspRequest>(
       `${environment.apiUrl}/e-service/ksprequestselectbyid`,
       {
         id,
       }
     );
-  } */
+  }
 
   getSelfLicense(requestid: string): Observable<any> {
     return this.http.post(
