@@ -1,4 +1,5 @@
 export class SchTempLicense {
+  id?: string | null = null;
   licenseno: string | null = null;
   licensetype: string | null = null;
   licensestartdate: string | null = null;

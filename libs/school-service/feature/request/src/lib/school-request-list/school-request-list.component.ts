@@ -143,6 +143,12 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     }
   }
 
+  getSchLicense(requestId: string) {
+    this.requestService.getTempLicense(requestId).subscribe((res) => {
+      console.log('temp license = ', res);
+    });
+  }
+
   licensePdf(element: KspRequest) {
     const position = element?.position;
     const startDate = new Date(element.processupdatedate || '');
@@ -169,7 +175,8 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     const enden = changeToEnglishMonth(end);
     const careertype = SchoolRequestSubType[+(element?.careertype ?? '1')];
     const careertypeen = SchoolLangMapping[careertype ?? 'ครู'] ?? '';
-    const requestno = element.requestno ?? '';
+    //const requestno = element.requestno ?? '';
+    const requestno = '14/2565';
     this.schoolInfoService
       .getSchoolInfo(this.schoolId)
       .subscribe((res: any) => {
