@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
 import { ESelfFormBaseComponent } from '@ksp/shared/form/others';
@@ -12,6 +12,8 @@ import {
 } from '@ksp/shared/service';
 import { parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
+
+const FORM_TAB_COUNT = 4;
 
 @Component({
   selector: 'ksp-e-knowledge-cert-detail',
@@ -39,11 +41,12 @@ export class EKnowledgeCertDetailComponent
     workplace: [],
     educationInfo: [],
     transferKnowledgeInfo: [],
+    checkResult: this.fb.array([]),
   });
 
-  form2 = this.fb.group({
-    verifyResult: [null, Validators.required],
-  });
+  get checkResultFormArray() {
+    return this.form.controls.checkResult as FormArray;
+  }
 
   workingInfoFiles = [
     {
@@ -85,6 +88,16 @@ export class EKnowledgeCertDetailComponent
   ngOnInit(): void {
     this.getListData();
     this.checkRequestId();
+    this.addCheckResultArray();
+  }
+
+  addCheckResultArray() {
+    for (let i = 0; i < FORM_TAB_COUNT; i++) {
+      this.checkResultFormArray.push(this.fb.control(null));
+    }
+    this.checkResultFormArray.setValidators(
+      ESelfFormBaseComponent.allFilledValidator()
+    );
   }
 
   override patchData(data: SelfGetRequest): void {

@@ -27,6 +27,7 @@
       <mat-tab-group
         class="tab-group mb-3"
         animationDuration="0ms"
+        (selectedTabChange)="tabChanged($event)"
         [selectedIndex]="0">
         <mat-tab label="ที่อยู่" class="tab-content">
           <ksp-form-address
@@ -51,10 +52,10 @@
         </mat-tab>
 
         <mat-tab label="สถานที่ทำงาน">
-          <div class="d-flex align-items-center">
+          <!-- <div class="d-flex align-items-center">
             <input type="checkbox" class="me-2" />
             <label class="form-label mb-2">เป็นผู้ประสงค์ประกอบวิชาชีพทางการศึกษา</label>
-          </div>
+          </div> -->
           <self-service-form-user-workplace
             formControlName="workplace"
             [mode]="'view'"
@@ -86,12 +87,17 @@
         </mat-tab>
       </mat-tab-group>
     </div>
-    <div [formGroup]="form2" class="bg-white px-4 py-3 mt-3">
-      <e-service-license-check
-        formControlName="verifyResult"
-        [headerTitle]="'ผลการตรวจสอบ'"
-        [choices]="choices"></e-service-license-check>
-    </div>
+    <ng-container
+      formArrayName="checkResult"
+      *ngFor="let c of checkResultFormArray.controls; let i = index">
+      <div
+        class="bg-white px-3 py-2 mt-3"
+        [ngClass]="{ hide: (selectedTab.index || 0) !== i }">
+        <e-service-license-check
+          [choices]="verifyChoice"
+          [formControlName]="i"></e-service-license-check>
+      </div>
+    </ng-container>
   </div>
 </form>
 
