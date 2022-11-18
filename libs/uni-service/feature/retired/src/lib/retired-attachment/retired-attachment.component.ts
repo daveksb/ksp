@@ -7,7 +7,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { mapMultiFileInfo, thaiDate } from '@ksp/shared/utility';
+import { mapMultiFileInfo, replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
 import {
   GeneralInfoService,
   UniInfoService,
@@ -66,19 +66,55 @@ export class RetiredAttachmentComponent implements OnInit {
     localForage.getItem('retireCoordinatorInfo').then((res: any) => {
       if (res) {
         this.form.patchValue({
-          coordinator: res.coordinator,
+          coordinator: res.form.coordinator,
         });
+        this.retiredFiles = res.file
       }
     });
   }
 
   prevPage() {
-    localForage.setItem('retireCoordinatorInfo', this.form.getRawValue());
+    const form = {
+      form: this.form.getRawValue(),
+      file: this.retiredFiles
+    }
+    localForage.setItem('retireCoordinatorInfo', form);
     this.router.navigate(['/', 'retired', 'reason']);
   }
 
   cancel() {
-    this.router.navigate(['/', 'login']);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: `คุณต้องการยกเลิกรายการใบคำขอ
+        ใช่หรือไม่?`,
+        btnLabel: 'ยืนยัน',
+      },
+    });
+
+    dialogRef.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.onCancel();
+      }
+    });
+  }
+
+  onCancel() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      width: '350px',
+      data: {
+        header: 'ยกเลิกรายการสำเร็จ',
+      },
+    });
+
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        localForage.removeItem('retireReasonData');
+        localForage.removeItem('userSelectedData');
+        localForage.removeItem('retireCoordinatorInfo');
+        this.router.navigate(['/login']);
+      }
+    });
   }
 
   save() {
@@ -97,6 +133,7 @@ export class RetiredAttachmentComponent implements OnInit {
       .pipe(
         switchMap((res) => {
           if (res) {
+            this.userInfo = replaceEmptyWithNull(this.userInfo);
             const fileUpload = mapMultiFileInfo(this.retiredFiles);
             const educationoccupy = {
               schoolid: this.userInfo.uniid,

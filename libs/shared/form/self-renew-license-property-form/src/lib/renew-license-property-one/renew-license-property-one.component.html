@@ -6,8 +6,7 @@
           <i
             class="bi bi-x-circle-fill text-danger"
             (click)="deleteFormArray(degreeInfo, i)"
-            role="button"
-          ></i>
+            role="button"></i>
         </div>
         <div class="row">
           <div class="col-md-6 mb-2">
@@ -15,11 +14,8 @@
               <input
                 type="checkbox"
                 class="me-2"
-                formControlName="hasEducationCertificate"
-              />
-              <label class="form-label"
-                >วุฒิที่ใช้ในการตรวจสอบขอรับใบอนุญาต</label
-              >
+                formControlName="hasEducationCertificate" />
+              <label class="form-label">วุฒิที่ใช้ในการตรวจสอบขอรับใบอนุญาต</label>
             </div>
           </div>
 
@@ -28,8 +24,7 @@
               <input
                 type="checkbox"
                 class="me-2"
-                formControlName="hasDegreeLevel"
-              />
+                formControlName="hasDegreeLevel" />
               <label class="form-label">ระดับวุฒิปริญญา</label>
             </div>
 
@@ -37,8 +32,7 @@
             <select
               class="form-select"
               formControlName="level"
-              *ngIf="!isSupervision"
-            >
+              *ngIf="!isSupervision">
               <option value="null" selected hidden disabled>กรุณาเลือก</option>
               <option value="1">ปริญญาตรี</option>
               <option value="2">ปริญญาโท</option>
@@ -52,8 +46,7 @@
             <select
               class="form-select"
               formControlName="level"
-              *ngIf="isSupervision"
-            >
+              *ngIf="isSupervision">
               <option value="null" selected hidden disabled>กรุณาเลือก</option>
               <option value="1">ปริญญาโท</option>
               <option value="2">ปริญญาเอก</option>
@@ -66,8 +59,8 @@
 
         <div class="border rounded px-3 py-2 mb-2">
           <ksp-renew-license-property-degree-form
-            formControlName="degree"
-          ></ksp-renew-license-property-degree-form>
+            [mode]="mode"
+            formControlName="degree"></ksp-renew-license-property-degree-form>
         </div>
       </ng-container>
     </ng-container>
@@ -75,8 +68,6 @@
   <div class="d-flex justify-content-end" *ngIf="mode === 'edit'">
     <ksp-add-row-button
       class="text-primary"
-      (addRowClick)="addFormArray(degreeInfo)"
-      >เพิ่มวุฒิการศึกษา</ksp-add-row-button
-    >
+      (addRowClick)="addFormArray(degreeInfo)">เพิ่มวุฒิการศึกษา</ksp-add-row-button>
   </div>
 </form>

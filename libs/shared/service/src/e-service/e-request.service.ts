@@ -14,6 +14,8 @@ import {
   GetLastApproveList,
   GetLastApproveGroup,
   KspListResponse,
+  SelfApproveList,
+  SelfApproveGroup,
 } from '@ksp/shared/interface';
 import { getCookie } from '@ksp/shared/utility';
 import { map, Observable, shareReplay } from 'rxjs';
@@ -49,7 +51,46 @@ export class ERequestService {
     );
   }
 
-  searchRequestList(payload: any): Observable<any> {
+  getThaiLetterNo(): Observable<any> {
+    return this.http.get(
+      `${environment.apiUrl}/e-service/genrunningtemplicensenumberth`
+    );
+  }
+
+  getForeignLetterNo(): Observable<any> {
+    return this.http.get(
+      `${environment.apiUrl}/e-service/genrunningtemplicensenumberen`
+    );
+  }
+
+  /* createTempLicense(id: any): Observable<any> {
+    return this.http.post<KspRequest>(
+      `${environment.apiUrl}/e-service/ksprequestselectbyid`,
+      {
+        id,
+      }
+    );
+  } */
+
+  getSelfLicense(requestid: string): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/selflicenseselectbyrequestno`,
+      {
+        requestno: requestid,
+      }
+    );
+  }
+
+  getSelfApproveGroupById(groupno: string): Observable<any> {
+    return this.http.post<KspRequest>(
+      `${environment.apiUrl}/e-service/selfapprovegroupsearchgroupno`,
+      {
+        groupno,
+      }
+    );
+  }
+
+  searchSelfApproveList(payload: any): Observable<SelfApproveList[]> {
     return this.http
       .post(`${environment.shortApiUrl}/selfapprovelistsearch.php`, payload)
       .pipe(map((data: any) => data.datareturn));
@@ -195,6 +236,7 @@ export class ERequestService {
     );
   }
 
+  // ค้นหาใบคำขอที่มี สถานะตรวจเอกสารลำดับที่ 2
   getLevel2LicenseList(): Observable<KspListResponse<KspRequest>> {
     return this.http.get<KspListResponse<KspRequest>>(
       `${environment.shortApiUrl}/ksprequestsearch_e-self.php`,
@@ -204,8 +246,8 @@ export class ERequestService {
     );
   }
 
-  getGroupByAccount(account: string): Observable<any> {
-    return this.http.post(
+  getGroupByAccount(account: string): Observable<SelfApproveGroup> {
+    return this.http.post<SelfApproveGroup>(
       `${environment.apiUrl}/e-service/selfapprovegroupsearchgroup`,
       { grouplist: account }
     );
@@ -214,6 +256,20 @@ export class ERequestService {
   updateApproveGroup(payload: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/e-service/selfapprovegroupupdate`,
+      payload
+    );
+  }
+
+  updateSelfApproveListMati1(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/uniapprovelistupdate_considerdate_es.php`,
+      payload
+    );
+  }
+
+  updateSelfApproveListMati2(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/uniapprovelistupdate_approvedate_es.php`,
       payload
     );
   }
@@ -228,6 +284,50 @@ export class ERequestService {
   updateMultiList(payload: any): Observable<any> {
     return this.http.post(
       `${environment.shortApiUrl}/uniapprovelistupdate_es.php`,
+      payload
+    );
+  }
+
+  getRequestListByGroupNo(
+    payload: any
+  ): Observable<KspListResponse<KspRequest>> {
+    return this.http.post<KspListResponse<KspRequest>>(
+      `${environment.shortApiUrl}/ksprequestsearcharray_e-self_groupno.php`,
+      payload
+    );
+  }
+
+  getRequestListByListNo(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/ksprequestsearcharray_e-self.php`,
+      payload
+    );
+  }
+
+  createMultipleLicense(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/selflicenseinsertarray.php`,
+      payload
+    );
+  }
+
+  updateMultipleLicenseStatus(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/ksprequestprocessinsert.php`,
+      payload
+    );
+  }
+
+  setUrgentRequest(
+    requestId: string | null,
+    isurgent: boolean
+  ): Observable<any> {
+    const payload = {
+      id: requestId,
+      isurgent: isurgent ? '1' : '0',
+    };
+    return this.http.post(
+      `${environment.apiUrl}/e-service/ksprequestupdateisurgent`,
       payload
     );
   }

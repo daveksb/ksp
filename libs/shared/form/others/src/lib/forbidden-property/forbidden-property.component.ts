@@ -11,11 +11,11 @@ import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { CommonModule, NgIf } from '@angular/common';
-
+import { CommonModule } from '@angular/common';
 @UntilDestroy()
 @Component({
   templateUrl: './forbidden-property.component.html',
+  selector: 'ksp-forbidden-property',
   styleUrls: ['./forbidden-property.component.scss'],
   standalone: true,
   imports: [
@@ -32,6 +32,9 @@ export class ForbiddenPropertyFormComponent
   @Input()
   title = `ขอรับรองว่าไม่เป็นผู้มีลักษณะต้องห้ามตามที่กำหนดไว้ในมาตรา 44
   แห่งพระราชบัญญัติสภาครูและบุคลากรทางการศึกษา พ.ศ.2546`;
+  @Input() set input(value: any) {
+    if (value) this.form.patchValue(value);
+  }
   @Output() confirmed = new EventEmitter<any>();
 
   override form = this.fb.group({
@@ -67,12 +70,12 @@ export class ForbiddenPropertyFormComponent
     );
 
     if (this.data?.prohibitProperty) {
-      console.log(this.data.prohibitProperty);
       this.form.patchValue(this.data.prohibitProperty);
     }
   }
 
   ngOnInit(): void {
+    console.log(this.input);
     this.form.valueChanges.subscribe((res) => {
       this.prisonSelected = Number(res['prison']);
     });

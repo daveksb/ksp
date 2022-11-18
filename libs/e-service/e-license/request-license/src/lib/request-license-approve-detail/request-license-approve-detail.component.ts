@@ -14,13 +14,6 @@ import { parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
 const FORM_TAB_COUNT = 5;
-function allFilledValidator(): any {
-  return (form: FormArray) => {
-    const value: any[] = form.value;
-    return value.every((v) => v !== null) ? null : { allFilled: true };
-  };
-}
-
 @Component({
   selector: 'ksp-request-license-approve-detail',
   templateUrl: './request-license-approve-detail.component.html',
@@ -90,7 +83,9 @@ export class RequestLicenseApproveDetailComponent
     for (let i = 0; i < FORM_TAB_COUNT; i++) {
       this.checkResultFormArray.push(this.fb.control(null));
     }
-    this.checkResultFormArray.setValidators(allFilledValidator());
+    this.checkResultFormArray.setValidators(
+      ESelfFormBaseComponent.allFilledValidator()
+    );
   }
 
   override checkRequestId() {
@@ -101,7 +96,7 @@ export class RequestLicenseApproveDetailComponent
           .getKspRequestById(this.requestId)
           .subscribe((res) => {
             if (res) {
-              console.log(res);
+              //console.log(res);
               this.requestData = res;
               this.patchData(res);
               switch (res.careertype) {
@@ -169,7 +164,10 @@ export class RequestLicenseApproveDetailComponent
   }
 
   next() {
-    this.persistData(this.form.controls.checkResult.value);
+    ESelfFormBaseComponent.persistData(
+      this.form.controls.checkResult.value,
+      this.requestData
+    );
     this.router.navigate([
       '/request-license',
       'approve-confirm',

@@ -21,7 +21,7 @@ import { formatDatePayload, validatorMessages } from '@ksp/shared/utility';
 export class RegisterPasswordComponent implements OnInit {
   form = this.fb.group(
     {
-      password: [null, [Validators.required, Validators.minLength(6)]],
+      password: [null, [Validators.required, Validators.minLength(8)]],
       confirmPassword: [null, Validators.required],
     },
     {
@@ -33,6 +33,8 @@ export class RegisterPasswordComponent implements OnInit {
   myInfo = new SelfMyInfo();
   passwordEqual = false;
   validatorMessages = validatorMessages;
+  eyeIconClicked1 = false;
+  eyeIconClicked2 = false;
 
   constructor(
     public dialog: MatDialog,

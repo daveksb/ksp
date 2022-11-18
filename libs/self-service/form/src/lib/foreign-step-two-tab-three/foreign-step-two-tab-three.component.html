@@ -2,7 +2,7 @@
   <div class="d-flex justify-content-between">
     <div class="box-header">Bachelor's Degree</div>
 
-    <div class="text-primary fs-5" role="button">
+    <div class="text-primary fs-5" role="button" *ngIf="mode !== 'view'">
       <ksp-add-row-button
         class="text-primary fs-6"
         (addRowClick)="addFormArray(licenseInfo1, 1)">
@@ -16,13 +16,14 @@
       *ngFor="let DegreeForm of licenseInfo1.controls; let i = index">
       <ng-container [formGroupName]="i">
         <div class="border rounded p-3 mb-3">
-          <div class="d-flex justify-content-end">
+          <div class="d-flex justify-content-end" *ngIf="mode !== 'view'">
             <i
               class="bi bi-x-circle-fill text-danger"
               role="button"
               (click)="deleteFormArray(licenseInfo1, i)"></i>
           </div>
           <self-service-foreign-step-two-tab-three-form
+            [mode]="mode"
             formControlName="licenseForm"
             [countries]="countries">
           </self-service-foreign-step-two-tab-three-form>
@@ -35,7 +36,7 @@
   <div class="d-flex justify-content-between">
     <div class="box-header">Master's Degree</div>
 
-    <div class="text-primary fs-5" role="button">
+    <div class="text-primary fs-5" role="button" *ngIf="mode !== 'view'">
       <ksp-add-row-button
         class="text-primary"
         (addRowClick)="addFormArray(licenseInfo2, 2)">
@@ -49,13 +50,14 @@
       *ngFor="let DegreeForm of licenseInfo2.controls; let i = index">
       <ng-container [formGroupName]="i">
         <div class="border rounded p-3 mb-3">
-          <div class="d-flex justify-content-end">
+          <div class="d-flex justify-content-end" *ngIf="mode !== 'view'">
             <i
               class="bi bi-x-circle-fill text-danger"
               role="button"
               (click)="deleteFormArray(licenseInfo2, i)"></i>
           </div>
           <self-service-foreign-step-two-tab-three-form
+            [mode]="mode"
             formControlName="licenseForm"
             [countries]="countries">
           </self-service-foreign-step-two-tab-three-form>
@@ -68,7 +70,7 @@
   <div class="d-flex justify-content-between">
     <div class="box-header">Doctoral's Degree</div>
 
-    <div class="text-primary fs-5" role="button">
+    <div class="text-primary fs-5" role="button" *ngIf="mode !== 'view'">
       <ksp-add-row-button
         class="text-primary"
         (addRowClick)="addFormArray(licenseInfo3, 3)">
@@ -82,13 +84,14 @@
       *ngFor="let DegreeForm of licenseInfo3.controls; let i = index">
       <ng-container [formGroupName]="i">
         <div class="border rounded p-3 mb-3">
-          <div class="d-flex justify-content-end">
+          <div class="d-flex justify-content-end" *ngIf="mode !== 'view'">
             <i
               class="bi bi-x-circle-fill text-danger"
               role="button"
               (click)="deleteFormArray(licenseInfo3, i)"></i>
           </div>
           <self-service-foreign-step-two-tab-three-form
+            [mode]="mode"
             formControlName="licenseForm"
             [countries]="countries">
           </self-service-foreign-step-two-tab-three-form>
@@ -101,7 +104,7 @@
   <div class="d-flex justify-content-between">
     <div class="box-header">Other Degree</div>
 
-    <div class="text-primary fs-5" role="button">
+    <div class="text-primary fs-5" role="button" *ngIf="mode !== 'view'">
       <ksp-add-row-button
         class="text-primary"
         (addRowClick)="addFormArray(licenseInfo4, 4)">
@@ -115,13 +118,14 @@
       *ngFor="let DegreeForm of licenseInfo4.controls; let i = index">
       <ng-container [formGroupName]="i">
         <div class="border rounded p-3 mb-3">
-          <div class="d-flex justify-content-end">
+          <div class="d-flex justify-content-end" *ngIf="mode !== 'view'">
             <i
               class="bi bi-x-circle-fill text-danger"
               role="button"
               (click)="deleteFormArray(licenseInfo4, i)"></i>
           </div>
           <self-service-foreign-step-two-tab-three-form
+            [mode]="mode"
             formControlName="licenseForm"
             [countries]="countries">
           </self-service-foreign-step-two-tab-three-form>
@@ -134,7 +138,7 @@
   <div class="d-flex justify-content-between">
     <div class="box-header">Professional Certification</div>
 
-    <div class="text-primary fs-5" role="button">
+    <div class="text-primary fs-5" role="button" *ngIf="mode !== 'view'">
       <ksp-add-row-button
         class="text-primary"
         (addRowClick)="addFormArray(licenseInfo5, 5)">
@@ -148,7 +152,7 @@
       *ngFor="let DegreeForm of licenseInfo5.controls; let i = index">
       <ng-container [formGroupName]="i">
         <div class="border rounded p-3 mb-3">
-          <div class="d-flex justify-content-end">
+          <div class="d-flex justify-content-end" *ngIf="mode !== 'view'">
             <i
               class="bi bi-x-circle-fill text-danger"
               role="button"

@@ -95,6 +95,11 @@
   color: #666666;
 }
 
+.img__size {
+  height: 42px;
+  width: 42px;
+}
+
 @media only screen and (max-width: 768px) {
   .container {
     width: 100%;

@@ -95,4 +95,8 @@ export class WorkplaceInfoComponent implements OnInit {
       //
     });
   }
+
+  clearData() {
+    this.form.reset();
+  }
 }

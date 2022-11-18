@@ -18,20 +18,26 @@ export class FormMultiAttachmentComponent {
   @Input() title = 'กรุณาแนบหลักฐานประกอบ';
   @Input() uniqueTimestamp = '';
   @Input() requestType: number | null = null;
+  @Input() systemType: string | null = null;
   @Output() downloadClick = new EventEmitter<any>();
   @Output() uploadComplete = new EventEmitter<any>();
 
   constructor(public dialog: MatDialog, private fileService: FileService) {}
 
-  view(group: FileGroup, index: number) {
-    this.dialog.open(PdfViewerComponent, {
+  view(group: FileGroup) {
+    const dialogRef = this.dialog.open(PdfViewerComponent, {
       width: '1200px',
       height: '100vh',
       data: {
         title: group.name,
-        file: group.files[index],
+        files: group.files,
+        checkresult: group?.checkresult ?? [],
+        systemType: this.systemType,
       },
     });
+    dialogRef
+      .afterClosed()
+      .subscribe((result) => (group.checkresult = result.checkResult));
   }
 
   deleteFile(file: KspFile) {

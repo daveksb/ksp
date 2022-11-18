@@ -6,12 +6,13 @@ import { Router } from '@angular/router';
 import { SchoolRequestProcess } from '@ksp/shared/constant';
 import {
   EsSearchPayload,
+  KspPaginationComponent,
   KspRequest,
   ListData,
   RequestSearchFilter,
   SchoolUserPageType,
 } from '@ksp/shared/interface';
-import { ERequestService, UniInfoService } from '@ksp/shared/service';
+import { ERequestService, EUniService, UniInfoService } from '@ksp/shared/service';
 import {
   checkStatus,
   replaceEmptyWithNull,
@@ -22,7 +23,7 @@ import {
   templateUrl: './approve-new-user-list.component.html',
   styleUrls: ['./approve-new-user-list.component.scss'],
 })
-export class ApproveNewUserListComponent implements AfterViewInit {
+export class ApproveNewUserListComponent extends KspPaginationComponent {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<KspRequest>();
   checkStatus = checkStatus;
@@ -30,22 +31,18 @@ export class ApproveNewUserListComponent implements AfterViewInit {
   mapRequestType = schoolMapRequestType;
   searchType = "uni"
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-
   selectedUniversity = '';
   uniUniversityTypeOption: ListData[] = [];
+  payload: any;
 
   constructor(
     private router: Router,
     private eRequestService: ERequestService,
-    private uniInfoService: UniInfoService
+    private uniInfoService: UniInfoService,
+    private eUniService: EUniService
   ) {
+    super();
     this.getOptions();
-  }
-
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
   }
 
   getOptions() {
@@ -56,9 +53,8 @@ export class ApproveNewUserListComponent implements AfterViewInit {
     })
   }
 
-  search(params: RequestSearchFilter) {
-    //console.log('params  = ', params);
-    let payload: EsSearchPayload = {
+  handleSearch(params: RequestSearchFilter) {
+    this.payload = {
       systemtype: '3',
       requesttype: params.requesttype,
       requestno: params.requestno,
@@ -68,33 +64,28 @@ export class ApproveNewUserListComponent implements AfterViewInit {
       passportno: null,
       process: null,
       status: params.requeststatus,
-      schoolid: params.schoolinfo?.schoolid,
-      schoolname: params.schoolinfo?.schoolname,
-      bureauid: params.schoolinfo?.bureauid,
+      unicode: params.schoolinfo?.schoolid,
+      uniname: params.schoolinfo?.schoolname,
+      unitype: params.schoolinfo?.bureauid,
       requestdatefrom: params.requestdatefrom,
-      requestdateto: null,
-      offset: '0',
-      row: '500',
+      requestdateto: null
     };
+    this.payload = replaceEmptyWithNull(this.payload);
+    this.search();
+  }
 
-    payload = replaceEmptyWithNull(payload);
-
-    this.eRequestService.KspSearchRequest(payload).subscribe((res) => {
-      //console.log('res = ', res);
+  override search() {
+    this.payload = { ...this.payload, ...this.tableRecord };
+    this.eUniService.KspSearchUniRequest(this.payload).subscribe((res: any) => {
       if (res) {
-        this.dataSource.data = res.map((data: any) => {
+        this.pageEvent.length = res.countrow;
+        this.dataSource.data = res.datareturn.map((data: any) => {
           data.educationoccupy = JSON.parse(data.educationoccupy);
           data.coordinatorinfo = JSON.parse(data.coordinatorinfo);
           data.coordinatorname = data.coordinatorinfo?.firstnameth.concat(" ", data.coordinatorinfo?.lastnameth);
           data.requesttype = parseInt(data.requesttype);
           return data;
         });
-        this.dataSource.sort = this.sort;
-
-        const sortState: Sort = { active: 'id', direction: 'desc' };
-        this.sort.active = sortState.active;
-        this.sort.direction = sortState.direction;
-        this.sort.sortChange.emit(sortState);
       } else {
         this.clear();
       }

@@ -1,5 +1,5 @@
-<div class="bg-light px-3 pt-2 pb-3">
-  <div class="box-header pb-1" [class]="titleClass">
+<div class="bg-light px-3 pb-3 pt-2">
+  <div class="fs-5 text-black" [class]="titleClass">
     {{ title }} <span class="text-danger fs-6">{{ titleNote }}</span>
   </div>
   <div class="table-responsive">
@@ -43,13 +43,11 @@
             <td class="text-center"></td>
             <td *ngIf="mode === 'view'">
               <div class="mt-4">
-                <ng-container *ngFor="let file of group.files; index as i">
-                  <div class="d-flex align-items-center flex-row">
-                    <label class="view__label" (click)="view(group, i)"
-                      >ดูเอกสารแนบ</label
-                    >
-                  </div>
-                </ng-container>
+                <div class="d-flex flex-row justify-content-center">
+                  <label class="view__label" (click)="view(group)"
+                    >ดูเอกสารแนบ</label
+                  >
+                </div>
               </div>
             </td>
             <td *ngIf="mode === 'edit'" class="text-center">

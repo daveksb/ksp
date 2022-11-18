@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
@@ -10,6 +10,7 @@ import { HistoryRequestDialogComponent, PrintRequestDialogComponent } from '@ksp
 import { KspPaginationComponent, ListData } from '@ksp/shared/interface';
 import _ from 'lodash';
 import { map } from 'rxjs';
+import { MatPaginator } from '@angular/material/paginator';
 const mapOption = () =>
   map((data: any) => {
     return (
@@ -26,6 +27,8 @@ const mapOption = () =>
   providers: providerFactory(EditStudentListComponent),
 })
 export class EditStudentListComponent extends KspPaginationComponent implements OnInit {
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   displayedColumns: string[] = column;
   degreeLevelOptions: ListData[] = [];
   requestStatusOptions: ListData[] = requestStatus;

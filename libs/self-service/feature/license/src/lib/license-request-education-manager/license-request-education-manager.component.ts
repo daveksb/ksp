@@ -17,7 +17,7 @@ import {
   SelfRequestService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { SelfRequest } from '@ksp/shared/interface';
+import { FileGroup, SelfRequest } from '@ksp/shared/interface';
 import {
   getCookie,
   parseJson,
@@ -25,8 +25,9 @@ import {
   toLowercaseProp,
 } from '@ksp/shared/utility';
 import * as _ from 'lodash';
+import { v4 as uuidv4 } from 'uuid';
 
-const EXPERIENCE_FILES = [
+/* const EXPERIENCE_FILES = [
   { name: '1. สำเนาวุฒิทางการศึกษา', fileid: '', filename: '' },
   { name: '2. หนังสือรับรองคุณวุฒิ	', fileid: '', filename: '' },
   { name: '3. วุฒิบัตรอบรม', fileid: '', filename: '' },
@@ -40,6 +41,36 @@ const EDU_FILES = [
     filename: '',
   },
   { name: '3. วุฒิบัตรอบรม', fileid: '', filename: '' },
+]; */
+
+const EXPERIENCE_FILES: FileGroup[] = [
+  {
+    name: '1. สำเนาวุฒิทางการศึกษา',
+    files: [],
+  },
+  {
+    name: '2. หนังสือรับรองคุณวุฒิ',
+    files: [],
+  },
+  {
+    name: '3. วุฒิบัตรอบรม',
+    files: [],
+  },
+];
+
+const EDU_FILES: FileGroup[] = [
+  {
+    name: '1. สำเนาวุฒิทางการศึกษา',
+    files: [],
+  },
+  {
+    name: '2. เอกสารผู้สำเร็จการศึกษา (ระบบ KSP BUNDIT)',
+    files: [],
+  },
+  {
+    name: '3. วุฒิบัตรอบรม',
+    files: [],
+  },
 ];
 
 @UntilDestroy()
@@ -107,6 +138,7 @@ export class LicenseRequestEducationManagerComponent
     super.initializeFiles();
     this.eduFiles = structuredClone(EDU_FILES);
     this.experienceFiles = structuredClone(EXPERIENCE_FILES);
+    this.uniqueTimestamp = uuidv4();
   }
 
   override patchData(data: SelfRequest) {

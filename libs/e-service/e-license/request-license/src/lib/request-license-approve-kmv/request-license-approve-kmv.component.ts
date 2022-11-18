@@ -2,10 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
+  DEFAULT_REQUEST_TYPE_LIST,
+  SelfServiceRequestSubType,
+} from '@ksp/shared/constant';
+import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
+import { KspRequest } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
+import {
+  formatDatePayload,
+  getLicenseType,
+  parseJson,
+} from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-request-license-approve-kmv',
@@ -14,6 +24,11 @@ import { ERequestService } from '@ksp/shared/service';
 })
 export class RequestLicenseApproveKmvComponent implements OnInit {
   groupNo!: string;
+  listData!: any;
+  id!: string;
+  requestList: KspRequest[] = [];
+  requestTypeList: any[] = [];
+
   constructor(
     private dialog: MatDialog,
     private router: Router,
@@ -22,11 +37,31 @@ export class RequestLicenseApproveKmvComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // this.requestTypeList = [...DEFAULT_REQUEST_TYPE_LIST];
     this.route.queryParamMap.subscribe((params) => {
       const group = params.get('group') || '';
 
       if (group) {
         this.groupNo = group;
+        this.requestService.getSelfApproveGroupById(group).subscribe((res) => {
+          this.id = res.id;
+          this.listData = parseJson(res.grouplist)
+            .toString()
+            .replaceAll(',', ' | ');
+        });
+
+        this.requestService
+          .getRequestListByGroupNo({
+            groupno: group,
+            offset: '0',
+            row: '500',
+          })
+          .subscribe((res) => {
+            if (res && res.datareturn.length > 0) {
+              this.requestList = res.datareturn;
+              this.requestTypeList = getLicenseType(this.requestList);
+            }
+          });
       }
     });
   }
@@ -61,7 +96,7 @@ export class RequestLicenseApproveKmvComponent implements OnInit {
     dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         const payload = {
-          id: '44',
+          id: this.id,
           matilevel2no: value.no,
           matilevel2date: value.date,
           matilevel2boardname: value.boardname,
@@ -72,7 +107,22 @@ export class RequestLicenseApproveKmvComponent implements OnInit {
         };
         this.requestService.updateApproveGroup2(payload).subscribe((res) => {
           if (res?.returnmessage === 'success') {
-            this.completeDialog();
+            const payload2 = formatDatePayload({
+              approvedate: value.date,
+              process: '2',
+              status: value.result,
+              matilevel2: value.no,
+              listno: this.listData
+                ? this.listData.split(' | ').join(',')
+                : null,
+            });
+            this.requestService
+              .updateSelfApproveListMati2(payload2)
+              .subscribe((res) => {
+                if (res?.returnmessage === 'success') {
+                  this.completeDialog();
+                }
+              });
           }
         });
       }
@@ -90,6 +140,12 @@ export class RequestLicenseApproveKmvComponent implements OnInit {
       if (res) {
         this.cancel();
       }
+    });
+  }
+
+  onListOpen(order: string) {
+    this.router.navigate(['/request-license', 'guarantee-confirm'], {
+      queryParams: { order: order, group: this.groupNo },
     });
   }
 }

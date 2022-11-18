@@ -21,7 +21,12 @@ export class FormUserExperienceComponent
   override form = this.fb.group({
     TrainingAddressOne: [null, Validators.required],
     TrainingAddressTwo: [null, Validators.required],
-    teachingAddress: [null, Validators.required],
+    teachingAddressForm: this.fb.array([
+      this.fb.group({
+        teachingAddress: [null, Validators.required],
+      }),
+    ]),
+    /* teachingAddress: [null, Validators.required], */
     hasForeignLicense: [],
     foreignLicenseForm: [],
   });
@@ -57,9 +62,24 @@ export class FormUserExperienceComponent
       });
   }
 
+  deleteAddress(index: number) {
+    this.address.removeAt(index);
+  }
+
+  addAddress() {
+    const form = this.fb.group({
+      teachingAddress: [null, Validators.required],
+    });
+    this.address.push(form);
+  }
+
   resetForeignLicenseForm(evt: any) {
     const checked = evt.target.checked;
     if (!checked) this.form.controls.foreignLicenseForm.reset();
+  }
+
+  get address() {
+    return this.form.controls.teachingAddressForm;
   }
 
   get hasForeignLicense() {

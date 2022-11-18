@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
+import { EsSearchPayload, KspRequest } from '@ksp/shared/interface';
 import { getCookie } from '@ksp/shared/utility';
 import _ from 'lodash';
 import { map, Observable, shareReplay } from 'rxjs';
@@ -63,7 +64,7 @@ export class EUniService {
 
   insertStudent(form: any): Observable<any> {
     return this.http.post(
-      `${environment.apiUrl}/e-service/unidegreeadmissioninsert`,
+      `${environment.shortApiUrl}/unidegreeadmissioninsertarray.php`,
       {
         ...form,
         tokenkey: getCookie('userToken'),
@@ -73,7 +74,7 @@ export class EUniService {
 
   updateStudent(form: any): Observable<any> {
     return this.http.post(
-      `${environment.apiUrl}/e-service/unidegreeadmissionupdate`,
+      `${environment.shortApiUrl}/unidegreeadmissionupdatearray.php`,
       {
         ...form,
         tokenkey: getCookie('userToken'),
@@ -176,5 +177,35 @@ export class EUniService {
       ...data,
       tokenkey: getCookie('userToken'),
     });
+  }
+
+  getDegreeCertResultList(params: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/uniperformanceresult_unidegreecert.php`,
+      {
+        ...params,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
+
+  insertUniPerformanceResult(data: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/uniperformanceresultinsert`,
+      {
+        ...data,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
+
+  KspSearchUniRequest(params: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/ksprequestjoinuniversitysearch_es.php`,
+      {
+        ...params,
+        tokenkey: getCookie('userToken'),
+      }
+    );
   }
 }

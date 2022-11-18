@@ -21,6 +21,7 @@
             [matDatepicker]="picker1"
             autocomplete="off"
             class="form-control form-date"
+            placeholder="วว/ดด/ปปปป"
           />
           <mat-datepicker-toggle
             class="button-date"
@@ -63,6 +64,7 @@
             [matDatepicker]="picker2"
             autocomplete="off"
             class="form-control form-date"
+            placeholder="วว/ดด/ปปปป"
           />
           <mat-datepicker-toggle
             class="button-date"
@@ -82,6 +84,7 @@
             [matDatepicker]="picker3"
             autocomplete="off"
             class="form-control form-date"
+            placeholder="วว/ดด/ปปปป"
           />
           <mat-datepicker-toggle
             class="button-date"
@@ -122,7 +125,7 @@
           type="button"
           (click)="create()"
           [disabled]="!this.selection.selected.length"
-          class="btn text-primary bg-primary bg-opacity-10 w-auto"
+          class="btn text-primary bg-primary border-primary bg-opacity-10 w-auto"
         >
           + สร้างเลขที่ใบอนุญาต
         </button>
@@ -164,20 +167,21 @@
       <ng-container matColumnDef="rush">
         <th mat-header-cell *matHeaderCellDef>เร่งด่วน</th>
         <td mat-cell *matCellDef="let element">
-          <i class="bi bi-exclamation-triangle-fill text-danger"></i>
+          <i
+            *ngIf="element.isurgent === '1'"
+            class="bi bi-exclamation-triangle-fill text-danger"
+          ></i>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="listcount">
         <th mat-header-cell *matHeaderCellDef>จำนวน</th>
-        <td mat-cell *matCellDef="let element">{{ element.listcount }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.count }}</td>
       </ng-container>
 
       <ng-container matColumnDef="licenseType">
         <th mat-header-cell *matHeaderCellDef>ประเภทใบอนุญาต</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.careertype }}
-        </td>
+        <td mat-cell *matCellDef="let element">ใบคำขออนุญาตประกอบวิชาชีพครู</td>
       </ng-container>
 
       <ng-container matColumnDef="groupType">
@@ -191,7 +195,8 @@
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef>สถานะ</th>
         <td mat-cell *matCellDef="let element">
-          ระหว่างดำเนินการ<!-- {{ element.status }} -->
+          ระหว่างดำเนินการ
+          <!-- {{ element.status }} -->
         </td>
       </ng-container>
 

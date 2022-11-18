@@ -109,11 +109,11 @@
         <self-service-study-supervision-experience formControlName="experience">
         </self-service-study-supervision-experience>
         <div class="mt-3">
-          <ksp-form-attachment
+          <ksp-form-multi-attachment
             [groups]="experienceFiles"
             [uniqueTimestamp]="uniqueTimestamp"
             [title]="'กรุณาแนบหลักฐานประกอบ'"
-          ></ksp-form-attachment>
+          ></ksp-form-multi-attachment>
         </div>
       </mat-tab>
     </mat-tab-group>
@@ -140,7 +140,7 @@
       type="button"
       (click)="save()"
       class="ms-3 btn btn-primary"
-      [disabled]="!form.valid"
+      [disabled]="false"
     >
       ต่อไป
     </button>

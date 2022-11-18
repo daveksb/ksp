@@ -59,7 +59,7 @@ export class RegisterPasswordComponent implements OnInit {
   loadStoredData() {
     localForage.getItem('registerSelectedSchool').then((res: any) => {
       this.school = res;
-      this.address = `บ้านเลขที่ ${res.address} ซอย ${
+      this.address = `เลขที่ ${res.address} ซอย ${
         res?.street ?? '-'
       } หมู่ ${res?.moo ?? '-'} ถนน ${res?.road ?? '-'} ตำบล ${
         res.tumbon

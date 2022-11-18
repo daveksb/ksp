@@ -1,8 +1,14 @@
 <form [formGroup]="form">
   <div class="bg-white border py-3 px-4">
-    <div class="d-flex align-items-center mb-3">
-      <div class="box-header text-primary me-1">ยืนยันผลการตรวจสอบ</div>
-      <div class="text-danger">* กรุณาเลือกอย่างใดอย่างหนึ่งเท่านั้น</div>
+    <div class="d-flex justify-content-between mb-3">
+      <div class="d-flex align-items-center">
+        <div class="box-header text-primary me-1">ยืนยันผลการตรวจสอบ</div>
+        <div class="text-danger">* กรุณาเลือกอย่างใดอย่างหนึ่งเท่านั้น</div>
+      </div>
+      <div *ngIf="showUrgent" class="d-flex align-items-center">
+        <input formControlName="isurgent" type="checkbox" class="me-2" />
+        <label class="form-label mb-2">กรณีเร่งด่วน</label>
+      </div>
     </div>
 
     <div class="row mb-3">
@@ -40,11 +46,13 @@
         <div class="col-4">
           <div class="d-flex align-items-center">
             <input
+              [min]="today"
               matInput
               [matDatepicker]="picker"
               autocomplete="off"
               class="form-control form-date"
               formControlName="returndate"
+              placeholder="วว/ดด/ปปปป"
             />
             <mat-datepicker-toggle
               class="button-date"
@@ -79,19 +87,30 @@
           </div>
         </div>
 
-        <div class="col-8">
-          <div class="d-flex align-items-center">
-            <select class="form-select" formControlName="reason">
-              <option value="null" selected hidden disabled>กรุณาเลือก</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
+        <div class="row-cols-2 w-100">
+          <div class="col-12">
+            <div class="d-flex align-items-center">
+              <select class="form-select" formControlName="reason">
+                <option value="null" selected hidden disabled>
+                  กรุณาเลือก
+                </option>
+                <option value="1">1. มีอายุต่ำกว่ายี่สิบปีบริบูรณ์</option>
+                <option value="2">2. อื่นๆ</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-12 mt-2" *ngIf="reason === '2'">
+            <input
+              class="form-control"
+              type="text"
+              formControlName="otherDetail"
+              placeholder="กรุณาระบุเหตุผลอื่นๆ"
+            />
           </div>
         </div>
-      </div>
 
-      <!-- <div class="row align-items-center ms-5">
+        <!-- <div class="row align-items-center ms-5">
         <div class="col">
           <div class="form-label">หมายเหตุ / เหตุผล</div>
         </div>
@@ -105,11 +124,8 @@
           </select>
         </div>
       </div> -->
+      </div>
     </div>
-
-    <!--     <div class="mb-3 col-8">
-      <textarea class="form-control" rows="3"></textarea>
-    </div> -->
 
     <hr />
 

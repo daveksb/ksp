@@ -6,6 +6,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Amphur, Province, SchInfo } from '@ksp/shared/interface';
 import {
   AddressService,
@@ -25,6 +26,7 @@ import { BasicInstituteSearchComponent } from '../basic-institute-search/basic-i
     MatDialogModule,
     BasicInstituteSearchComponent,
     ReactiveFormsModule,
+    MatTooltipModule,
   ],
 })
 export class UniversitySearchComponent implements OnInit {
@@ -35,11 +37,12 @@ export class UniversitySearchComponent implements OnInit {
   universityType$!: Observable<any>;
   selectedUniversity = '';
   searchNotFound = false;
+  searchStatus = '';
 
   form = this.fb.group({
     institution: null,
-    provinceid: [null, Validators.required],
-    amphurid: [null, Validators.required],
+    provinceid: [null],
+    amphurid: [null],
     offset: '0',
     row: '25',
   });
@@ -66,11 +69,11 @@ export class UniversitySearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.getList();
-    if (this.data.searchType == 'uni') {
-      this.form.controls.provinceid.setValidators([Validators.required]);
-      this.form.controls.amphurid.setValidators([Validators.required]);
-      this.form.updateValueAndValidity();
-    }
+    // if (this.data.searchType == 'uni') {
+    //   this.form.controls.provinceid.setValidators([Validators.required]);
+    //   this.form.controls.amphurid.setValidators([Validators.required]);
+    //   this.form.updateValueAndValidity();
+    // }
   }
 
   getList() {
@@ -98,6 +101,8 @@ export class UniversitySearchComponent implements OnInit {
     const { provinceid, amphurid, offset, row } = data;
     let payload = {};
     this.currentPage = 1;
+    this.searchStatus = 'searching';
+
     if (this.data.searchType != 'uni') {
       payload = {
         bureauid: data?.institution?.bureauid,
@@ -117,9 +122,11 @@ export class UniversitySearchComponent implements OnInit {
           this.searchNotFound = false;
           this.schoolInfos = this.generateAddressShow(res);
           this.payload = payload;
+          this.searchStatus = 'success';
         } else {
-          this.schoolInfos = [];
           this.searchNotFound = true;
+          this.schoolInfos = [];
+          this.searchStatus = 'success';
         }
       });
     } else {
@@ -134,8 +141,16 @@ export class UniversitySearchComponent implements OnInit {
           row,
         };
         this.uniinfoService.searchUniversity(payload).subscribe((res: any) => {
-          this.schoolInfos = this.generateAddressShow(res);
-          this.payload = payload;
+          if (res && res.length) {
+            this.searchNotFound = false;
+            this.schoolInfos = this.generateAddressShow(res);
+            this.payload = payload;
+            this.searchStatus = 'success';
+          } else {
+            this.searchNotFound = true;
+            this.schoolInfos = [];
+            this.searchStatus = 'success';
+          }
         });
       }
     }
@@ -176,6 +191,7 @@ export class UniversitySearchComponent implements OnInit {
   provinceChange(evt: any) {
     const province = evt.target?.value;
     this.amphurs$ = this.addressService.getAmphurs(province);
+    this.form.controls.amphurid.reset();
   }
 
   goPrevious() {

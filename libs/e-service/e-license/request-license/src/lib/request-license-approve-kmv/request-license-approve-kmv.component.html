@@ -1,46 +1,47 @@
-<ksp-top-nav><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span>
+<ksp-top-nav
+  ><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span>
   <span subHeader>รับรองใบอนุญาตประกอบวิชาชีพ </span>
 </ksp-top-nav>
 
-<div class="bg-secondary bg-opacity-10 px-3 py-4 full-height">
+<div class="bg-secondary bg-opacity-10 px-3 py-3 full-height">
   <!-- <div class="fs-5 mb-3">บันทึกผลการนำเสนอคณะอนุกรรมการกลั่นกรอง</div> -->
-  <div class="bg-white px-3 py-3 mb-2">
+  <div class="bg-white px-3 py-3 mb-3">
     <!-- <div class="fs-5">รายงานนำเสนอคณะะอนุกรรมการกลั่นกรอง</div> -->
     <div class="fs-5">-</div>
     <hr />
-    <div class="px-4">
-      <div class="content mb-2">
-        กลุ่มที่เลือกสำหรับบันทึกมติที่ประชุมคณะอนุกรรมการกลั่นกรอง
-      </div>
-      <div class="d-flex align-items-center mt-2 mb-3">
-        <div class="content">กลุ่มที่ / Group No.</div>
-        <div class="content-sub" style="margin-left: 37px">{{ groupNo }}</div>
-      </div>
-      <div class="d-flex align-items-center mt-2 mb-3">
-        <div class="content">บัญชีที่ / List No.</div>
-        <div class="content-sub" style="margin-left: 37px">
-          7004 | 7005 | 7006 | 7007
-        </div>
-      </div>
-
-      <div class="content fs-4 mb-2">สรุปจำนวนผู้ยื่นขอขึ้นทะเบียน</div>
-      <ksp-request-license-approve-license-table
-        [isKmv]="true"
-        class="summary-table"></ksp-request-license-approve-license-table>
+    <div class="text-secondary mb-3">
+      กลุ่มที่เลือกสำหรับบันทึกมติที่ประชุมคณะอนุกรรมการกลั่นกรอง
     </div>
+    <div class="d-flex align-items-center mb-3">
+      <div class="text-secondary">กลุ่มที่ / Group No.</div>
+      <div class="content-sub">{{ groupNo }}</div>
+    </div>
+    <div class="d-flex align-items-center mb-3">
+      <div class="text-secondary">บัญชีที่ / List No.</div>
+      <div class="content-sub">
+        {{ listData }}
+      </div>
+    </div>
+
+    <div class="box-header mb-2">สรุปจำนวนผู้ยื่นขอขึ้นทะเบียน</div>
+    <ksp-request-license-approve-license-table
+      [isKmv]="true"
+      [data]="requestTypeList"
+      (listOpen)="onListOpen($event)"
+    ></ksp-request-license-approve-license-table>
   </div>
 
-  <div class="bg-white px-3 py-3 mb-2">
-    <div class="fs-5">สรุปจำนวนพิจารณาออกใบอนุญาตประกอบวิชาชีพทางการศึกษา</div>
+  <div class="bg-white px-3 py-3 mb-3">
+    <div class="box-header">สรุปจำนวนพิจารณาออกใบอนุญาตประกอบวิชาชีพทางการศึกษา</div>
     <hr />
     <e-service-request-license-approve-summary-table></e-service-request-license-approve-summary-table>
   </div>
 
   <div class="bg-white px-3 py-3">
-    <div class="mb-3">
-      <ksp-e-service-license-save-result
-        (cancel)="cancel()"
-        (save)="save($event)"></ksp-e-service-license-save-result>
-    </div>
+    <ksp-e-service-license-save-result
+      (cancel)="cancel()"
+      (save)="save($event)"
+    >
+    </ksp-e-service-license-save-result>
   </div>
 </div>

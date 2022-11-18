@@ -1,6 +1,5 @@
 <ksp-top-nav [isSelfService]="true">
   <span header>ข้อมูลของฉัน</span>
-  <span subHeader>ข้อมูลทางการศึกษา</span>
 </ksp-top-nav>
 
 <div class="main__container px-4 py-2 full-height">
@@ -8,6 +7,7 @@
   <form [formGroup]="form">
     <div class="detail__container p-3">
       <self-service-transfer-knowledge-education
+        [showSeeButton]="true"
         [mode]="mode"
         formControlName="eduinfo"
         [countries]="countries$ | async"
@@ -15,7 +15,9 @@
     </div>
   </form>
   <div class="d-flex justify-content-center my-3">
-    <button class="btn btn-secondary me-2">ล้างข้อมูล</button>
+    <button class="btn text-secondary bg-light border-secondary me-2">
+      ล้างข้อมูล
+    </button>
     <button
       class="btn"
       (click)="onClickSave()"

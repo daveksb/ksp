@@ -2,7 +2,16 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SelfApproveListProcesses } from '@ksp/shared/constant';
 import { ERequestService } from '@ksp/shared/service';
+
+export function getProcess(processId: string) {
+  return SelfApproveListProcesses.find((s) => s.processId === processId);
+}
+
+export function getStatusLabel(process: string, status: string) {
+  return getProcess(process)?.status.find((s) => s.id === +status)?.ename;
+}
 
 @Component({
   selector: 'ksp-request-license-approve-search-list',
@@ -30,6 +39,8 @@ export class RequestLicenseApproveSearchListComponent
   mode: 'create' | 'guarantee' = 'create';
   canPrint = false;
   canSave = false;
+  getProcess = getProcess;
+  getStatusLabel = getStatusLabel;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -58,7 +69,6 @@ export class RequestLicenseApproveSearchListComponent
 
     if (selectedData.length > 0) {
       this.canPrint = selectedData.every((item) => !item.groupno);
-
       const groupNo = selectedData[0].groupno;
       if (groupNo) {
         this.canSave = selectedData.every((item) => item.groupno === groupNo);
@@ -82,32 +92,15 @@ export class RequestLicenseApproveSearchListComponent
       offset: '0',
       row: '100',
     };
-    this.requestService.searchRequestList(payload).subscribe((res) => {
-      this.dataSource.data = res; /* [
-        {
-          select: true,
-          resolution: '01/2564',
-          resolution2: '01/2564',
-          group: '1',
-          account: '7020',
-          count: 100,
-          licenseType: 'ครู',
-          licenseGroup: 'ชาวไทย',
-          process: 'จัดทำกลุ่มบัญชีรายชื่อ',
-          status: 'ระหว่างดำเนินการ',
-          screenDate: '01 มิ.ย. 2564',
-          guaranteeDate: '01 มิ.ย. 2564',
-        },
-      ]; */
+    this.requestService.searchSelfApproveList(payload).subscribe((res) => {
+      this.dataSource.data = res.map((i) => {
+        return { ...i, count: JSON.parse(i.requestlist || '').length };
+      });
     });
   }
 
-  editGroup() {
-    this.router.navigate(['/request-license', 'create-group-list']);
-  }
-
   createGroup() {
-    this.router.navigate(['/request-license', 'create-group']);
+    this.router.navigate(['/request-license', 'create-group-list']);
   }
 
   kmv() {

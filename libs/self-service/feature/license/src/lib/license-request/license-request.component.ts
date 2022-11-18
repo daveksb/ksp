@@ -12,7 +12,7 @@ import {
   MyInfoService,
   SelfRequestService,
 } from '@ksp/shared/service';
-import { FileGroup, SelfRequest } from '@ksp/shared/interface';
+import { FileGroup, SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
 import {
   getCookie,
   parseJson,
@@ -62,6 +62,7 @@ export class LicenseRequestComponent
   implements OnInit
 {
   userInfoType = UserInfoFormType.thai;
+  userInfo!: SelfMyInfo;
 
   override form = this.fb.group({
     userInfo: [],
@@ -106,9 +107,14 @@ export class LicenseRequestComponent
   ngOnInit(): void {
     this.getListData();
     this.checkRequestId();
-    /*     this.form.valueChanges.subscribe((res) => {
-      console.log('valid = ', this.form.valid);
-    }); */
+    this.form.valueChanges.subscribe((res) => {
+      //console.log('1 = ', this.userInfoForm.valid);
+    });
+    this.myInfoService.getMyInfo().subscribe((res) => {
+      this.userInfo = {
+        ...res,
+      };
+    });
   }
 
   get userInfoForm() {

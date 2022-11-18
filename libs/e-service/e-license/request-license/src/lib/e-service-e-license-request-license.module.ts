@@ -42,6 +42,7 @@ import { RequestLicenseApproveLicenseTableComponent } from './request-license-ap
 import { RequestLicenseApprovePrintComponent } from './request-license-approve-print/request-license-approve-print.component';
 import { RequestLicenseApproveSaveResultComponent } from './request-license-approve-save-result/request-license-approve-save-result.component';
 import { RequestLicenseApproveKmvComponent } from './request-license-approve-kmv/request-license-approve-kmv.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 export const routes: Route[] = [
   {
@@ -131,6 +132,7 @@ export const routes: Route[] = [
     EServiceLicenseCreateGroupSearchComponent,
     EServiceLicenseSaveResultComponent,
     RequestLicenseApproveSummaryTableComponent,
+    MatCheckboxModule,
   ],
   declarations: [
     RequestLicenseApproveListComponent,

@@ -78,6 +78,7 @@ export class ForeignLicenseStepTwoComponent
   @Input() uniqueTimestamp!: string;
   @Input() isRenewLicense = false;
   @Input() myImage = '';
+  @Input() isEditMode = true;
 
   prefixList$!: Observable<Prefix[]>;
   provinces1$!: Observable<Province[]>;
@@ -106,7 +107,7 @@ export class ForeignLicenseStepTwoComponent
     ],
     birthdate: [null, Validators.required],
     nationality: [null, Validators.required],
-    foreignpassporttype: [null, Validators.required],
+    foreignpassporttype: ['', Validators.required],
     imagefileid: [''],
     addressForm: [],
     workplaceForm: [],

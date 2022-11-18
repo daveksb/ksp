@@ -39,6 +39,10 @@ export class FileUploadComponent {
 
   async onFileSelected(event: any) {
     const file: File = event.target.files[0];
+    if (this.inValidFileType(file.type)) {
+      alert('Invalid file Type');
+      return;
+    }
     const base64 = (await getBase64(file)) as string;
     //console.log(this.pageType);
 
@@ -116,5 +120,19 @@ export class FileUploadComponent {
         this.filename = '';
       }
     });
+  }
+  inValidFileType(type: string) {
+    switch (type) {
+      case 'image/png':
+        return false;
+      case 'image/jpg':
+        return false;
+      case 'image/jpeg':
+        return false;
+      case 'application/pdf':
+        return false;
+      default:
+        return true;
+    }
   }
 }

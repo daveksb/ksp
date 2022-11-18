@@ -69,6 +69,7 @@
                   autocomplete="off"
                   class="form-control form-date"
                   formControlName="year"
+                  placeholder="วว/ดด/ปปปป"
                 />
                 <mat-datepicker-toggle
                   class="button-date"
@@ -80,10 +81,10 @@
             </div>
           </div>
           <br />
-          <ksp-form-attachment
+          <ksp-form-multi-attachment
             [groups]="rewardFiles"
             [uniqueTimestamp]="uniqueTimestamp"
-          ></ksp-form-attachment>
+          ></ksp-form-multi-attachment>
         </div>
         <br />
       </ng-container>

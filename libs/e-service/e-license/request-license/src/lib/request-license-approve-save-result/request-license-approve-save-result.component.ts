@@ -6,7 +6,11 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { ERequestService } from '@ksp/shared/service';
-import { parseJson } from '@ksp/shared/utility';
+import {
+  formatDatePayload,
+  getLicenseType,
+  parseJson,
+} from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-request-license-approve-save-result',
@@ -14,9 +18,10 @@ import { parseJson } from '@ksp/shared/utility';
   styleUrls: ['./request-license-approve-save-result.component.scss'],
 })
 export class RequestLicenseApproveSaveResultComponent implements OnInit {
-  groupNo!: string;
-  id!: string;
+  groupNo!: string | null;
+  id!: string | null;
   listNo = '';
+  licenseData: any;
 
   constructor(
     private router: Router,
@@ -31,12 +36,24 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
 
       if (account) {
         this.requestService.getGroupByAccount(account).subscribe((res) => {
-          console.log('group = ', res);
+          //console.log('group = ', res);
           if (res) {
             this.id = res.id;
             this.groupNo = res.groupno;
             const groupList = parseJson(res.grouplist);
             this.listNo = groupList.join(' | ');
+
+            const payload = {
+              groupno: this.groupNo,
+              offset: '0',
+              row: '500',
+            };
+            this.requestService
+              .getRequestListByGroupNo(payload)
+              .subscribe((res) => {
+                //console.log('requests = ', res.datareturn);
+                this.licenseData = getLicenseType(res.datareturn);
+              });
           }
         });
       }
@@ -48,7 +65,7 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
   }
 
   save(value: any) {
-    console.log(value);
+    //console.log('form value = ', value);
     const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการยืนยันข้อมูล
@@ -58,7 +75,7 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
 
     dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        const payload = {
+        const payload = formatDatePayload({
           id: this.id,
           matilevel1no: value.no,
           matilevel1date: value.date,
@@ -67,10 +84,26 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
           matilevel1result: value.result,
           matilevel1fileinfo: null,
           matilevel1detail: value.detail,
-        };
+        });
+
         this.requestService.updateApproveGroup(payload).subscribe((res) => {
           if (res?.returnmessage === 'success') {
-            this.completeDialog();
+            const payload2 = formatDatePayload({
+              considerdate: value.date,
+              process: '1',
+              status: value.result,
+              matilevel1: value.no,
+              listno: this.listNo.split(' | ').join(','),
+            });
+
+            //console.log('payload = ', payload2);
+            this.requestService
+              .updateSelfApproveListMati1(payload2)
+              .subscribe((res) => {
+                if (res?.returnmessage === 'success') {
+                  this.completeDialog();
+                }
+              });
           }
         });
       }

@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
@@ -9,6 +14,7 @@ import { RegisterCompletedComponent } from '../register-completed/register-compl
 import localForage from 'localforage';
 import { SelfMyInfo } from '@ksp/shared/interface';
 import { v4 as uuidv4 } from 'uuid';
+import { validatorMessages } from '@ksp/shared/utility';
 
 @Component({
   selector: 'self-service-register-foreign-step-three',
@@ -22,19 +28,39 @@ export class RegisterForeignStepThreeComponent implements OnInit {
     private fb: FormBuilder,
     private myInfoService: MyInfoService
   ) {}
+
   savingData: any;
-  form = this.fb.group({
-    password: [],
-    username: [],
-  });
+  passpoerNo = '';
+
+  passwordEqual = false;
+  validatorMessages = validatorMessages;
+
+  eyeIconClicked1 = false;
+  eyeIconClicked2 = false;
+
+  form = this.fb.group(
+    {
+      username: [null, Validators.required],
+      password: [null, [Validators.required, Validators.minLength(8)]],
+      confirmPassword: [null, Validators.required],
+    },
+    {
+      validators: [Validation.match('password', 'confirmPassword')],
+    }
+  );
+
   loginPage() {
     this.router.navigate(['/login']);
   }
+
   ngOnInit(): void {
     localForage.getItem('registerForeigner').then((res: any) => {
       this.savingData = res;
+      this.passpoerNo = res.passportno;
+      console.log('xxx = ', this.passpoerNo);
     });
   }
+
   save() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
@@ -80,5 +106,47 @@ export class RegisterForeignStepThreeComponent implements OnInit {
         btnLabel: `Login`,
       },
     });
+  }
+
+  get confirmPasswordError() {
+    const errors = this.form.controls.confirmPassword.errors as any;
+    if (
+      (this.form.controls.confirmPassword.dirty ||
+        this.form.controls.confirmPassword.touched) &&
+      errors?.matching
+    )
+      return validatorMessages.passwordNotMatching;
+    return null;
+  }
+
+  get disabledSubmit() {
+    return (
+      !this.form.controls.password.valid ||
+      !this.form.controls.confirmPassword.valid
+    );
+  }
+
+  get password() {
+    return this.form.controls.password;
+  }
+}
+
+export default class Validation {
+  static match(controlName: string, checkControlName: string): ValidatorFn {
+    return (controls: AbstractControl) => {
+      const control = controls.get(controlName);
+      const checkControl = controls.get(checkControlName);
+
+      if (checkControl?.errors && !checkControl.errors['matching']) {
+        return null;
+      }
+
+      if (control?.value !== checkControl?.value) {
+        controls.get(checkControlName)?.setErrors({ matching: true });
+        return { matching: true };
+      } else {
+        return null;
+      }
+    };
   }
 }

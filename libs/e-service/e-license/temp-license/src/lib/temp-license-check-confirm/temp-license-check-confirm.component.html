@@ -7,7 +7,7 @@
 >
 
 <div class="bg-secondary bg-opacity-10 py-2 px-4 full-height-2">
-  <div class="box-header">รายละเอียดใบ {{ getLabel() }}</div>
+  <div class="box-header">รายละเอียดใบ{{ getLabel() }}</div>
   <div class="bg-white p-3">
     <div class="d-flex justify-content-between">
       <ksp-request-header-info
@@ -75,7 +75,7 @@
     (cancelClicked)="navigateBack()"
     (prevClicked)="prevPage()"
     (saveClicked)="confirmDialog()"
-    [disableSaveButton]="form.invalid"
+    [disableSaveButton]="formInValid"
     [showCenterButtons]="true"
     [isLastPage]="true"
     [showSaveButton]="true"

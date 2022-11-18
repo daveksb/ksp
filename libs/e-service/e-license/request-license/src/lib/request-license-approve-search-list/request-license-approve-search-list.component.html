@@ -1,15 +1,17 @@
-<ksp-top-nav><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span>
+<ksp-top-nav
+  ><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span>
   <span subHeader>ผลการนำเสนอใบอนุญาตประกอบวิชาชีพ </span>
 </ksp-top-nav>
 
-<div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
+<div class="bg-secondary bg-opacity-10 px-4 py-2 full-height full-width-2">
   <div class="box-header">
     ค้นหากลุ่มบัญชีรายชื่อผู้ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพทางการศึกษา
   </div>
   <div class="bg-white px-3 py-3">
     <div class="mb-3">
       <ksp-e-service-license-group-search
-        (search)="searchData($event)"></ksp-e-service-license-group-search>
+        (search)="searchData($event)"
+      ></ksp-e-service-license-group-search>
     </div>
 
     <div class="d-flex justify-content-end mb-3 mt-4">
@@ -18,7 +20,8 @@
           type="button"
           class="btn btn-success ms-2 create-group-btn"
           [disabled]="!canSave"
-          (click)="saveResult()">
+          (click)="saveResult()"
+        >
           บันทึกผลการนำเสนอกลั่นกรอง
         </button>
 
@@ -26,14 +29,16 @@
           type="button"
           class="btn btn-success ms-2 create-group-btn"
           [disabled]="!canPrint"
-          (click)="print()">
+          (click)="print()"
+        >
           พิมพ์รายงานนำเสนอกลั่นกรอง
         </button>
 
         <button
           type="button"
           class="btn btn-primary ms-2 create-group-btn"
-          (click)="createGroup()">
+          (click)="createGroup()"
+        >
           + สร้างกลุ่มบัญชีรายชื่อ
         </button>
       </ng-container>
@@ -43,11 +48,16 @@
           type="button"
           class="btn btn-success ms-2 create-group-btn"
           [disabled]="!canSave"
-          (click)="kmv()">
+          (click)="kmv()"
+        >
           บันทึกผลการนำเสนอ กมว.
         </button>
 
-        <button type="button" class="btn btn-success ms-2 create-group-btn" disabled>
+        <button
+          type="button"
+          class="btn btn-success ms-2 create-group-btn"
+          disabled
+        >
           พิมพ์รายงานนำเสนอ กมว.
         </button>
       </ng-container>
@@ -63,7 +73,12 @@
         <ng-container matColumnDef="select">
           <th mat-header-cell *matHeaderCellDef>เลือก</th>
           <td mat-cell *matCellDef="let element; let i = index">
-            <input type="checkbox" class="me-2" [checked]="element.select" (click)="onSelect(element)" />
+            <input
+              type="checkbox"
+              class="me-2"
+              [checked]="element.select"
+              (click)="onSelect(element)"
+            />
           </td>
         </ng-container>
 
@@ -71,15 +86,15 @@
           <th mat-header-cell *matHeaderCellDef>
             มติที่ประชุม (คณะอนุกรรมการ)
           </th>
-          <td (click)="editGroup()" mat-cell *matCellDef="let element">
-            {{ element.resolution }}
+          <td mat-cell *matCellDef="let element">
+            {{ element.matilevel1 }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="resolution2">
           <th mat-header-cell *matHeaderCellDef>มติที่ประชุม (กมว.)</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.resolution2 }}
+            {{ element.matilevel2 }}
           </td>
         </ng-container>
 
@@ -100,24 +115,26 @@
 
         <ng-container matColumnDef="licenseType">
           <th mat-header-cell *matHeaderCellDef>ประเภทใบอนุญาต</th>
-          <td mat-cell *matCellDef="let element">{{ element.careertype }}</td>
+          <td mat-cell *matCellDef="let element">ใบอนุญาตประกอบวิชาชีพครู</td>
         </ng-container>
 
         <ng-container matColumnDef="licenseGroup">
           <th mat-header-cell *matHeaderCellDef>กลุ่มผู้ขอใบอนุญาต</th>
-          <td mat-cell *matCellDef="let element">{{ element.isforeign }}</td>
+          <td mat-cell *matCellDef="let element">ชาวไทย</td>
         </ng-container>
 
         <ng-container matColumnDef="process">
           <th mat-header-cell *matHeaderCellDef>ขั้นตอนการดำเนินการ</th>
           <td mat-cell *matCellDef="let element">
-            {{ 'จัดทำกลุ่มบัญชีรายชื่อ' }}
+            {{ getProcess(element.process)?.processName }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="status">
           <th mat-header-cell *matHeaderCellDef>สถานะ</th>
-          <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+          <td mat-cell *matCellDef="let element">
+            {{ getStatusLabel(element.process, element.status) }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="screenDate">

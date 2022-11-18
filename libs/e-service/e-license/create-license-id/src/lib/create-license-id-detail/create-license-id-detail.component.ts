@@ -1,14 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import {
   EsSearchPayload,
+  KspRequest,
   Prefix,
   SchRequestSearchFilter,
+  SelfApproveList,
 } from '@ksp/shared/interface';
-import { ERequestService } from '@ksp/shared/service';
+import { ERequestService, GeneralInfoService } from '@ksp/shared/service';
 import { replaceEmptyWithNull } from '@ksp/shared/utility';
 import localForage from 'localforage';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ksp-create-license-id-detail',
@@ -17,26 +21,123 @@ import localForage from 'localforage';
 })
 export class CreateLicenseIdDetailComponent implements OnInit {
   displayedColumns1: string[] = column1;
-  dataSource1 = new MatTableDataSource<info1>();
-
   displayedColumns2: string[] = column2;
-  dataSource2 = new MatTableDataSource<any>();
+  dataSource1 = new MatTableDataSource<SelfApproveList>();
+  dataSource2 = new MatTableDataSource<KspRequest>();
+  prefixList!: Observable<Prefix[]>;
+  licenseTypes = [{ value: 1, name: 'ใบอนุญาตประกอบวิชาชีพครู' }];
+  myImage: any = null;
+
+  form = this.fb.group({
+    licenseno: [],
+    idcardno: [],
+    careertype: [],
+    prefixth: [],
+    firstnameth: [],
+    lastnameth: [],
+    prefixen: [],
+    firstnameen: [],
+    lastnameen: [],
+    sex: [],
+    birthdate: [],
+    licensestartdate: [],
+    licenseenddate: [],
+  });
 
   constructor(
     private router: Router,
-    private requestService: ERequestService
+    private requestService: ERequestService,
+    private fb: FormBuilder,
+    private generalInfoService: GeneralInfoService
   ) {}
 
-  @Input() prefixList: Prefix[] | null = [];
-
   ngOnInit(): void {
-    localForage.getItem('selected-for-create-license').then((res: any) => {
-      if (res) {
-        this.dataSource1.data = res;
-      }
-    });
+    localForage
+      .getItem<SelfApproveList[]>('selected-for-create-license')
+      .then((res) => {
+        if (res) {
+          this.dataSource1.data = res.map((i) => {
+            return { ...i, count: JSON.parse(i.requestlist || '').length };
+          });
+          console.log('res x = ', res);
 
-    this.search({});
+          const listno = res.map((r: any) => r.listno).join(',');
+          //console.log(listno);
+          if (listno) {
+            const payload = {
+              listno,
+              offset: '0',
+              row: '500',
+            };
+            this.requestService
+              .getRequestListByListNo(payload)
+              .subscribe((res: any) => {
+                //console.log(res);
+                if (res?.datareturn) {
+                  this.dataSource2.data = res.datareturn;
+                }
+              });
+          }
+        }
+      });
+
+    // this.search({});
+    this.prefixList = this.generalInfoService.getPrefix();
+  }
+
+  rowSelect(id: any) {
+    //console.log('id = ', id);
+    this.requestService.getSelfLicense(id).subscribe((data) => {
+      //console.log('data = ', data);
+      this.form.patchValue(data);
+    });
+    //this.myImage = atob(data.imagefileid);
+  }
+
+  createMultiLicense() {
+    console.log('ds = ', this.dataSource2.data);
+
+    const payload: any = {
+      data: this.dataSource2.data.map((ds) => {
+        return {
+          careertype: ds.careertype,
+          renewtype: '0',
+          isforeign: ds.isforeign,
+          licenseno: '2',
+          requestno: ds.id, // store request id instead of no
+          licensestartdate: '2022-11-12',
+          licenseenddate: '2027-11-12',
+          licensestatus: '1',
+          licensetype: '1',
+          teachercouncilidno: '1',
+          imageid: ds.imagefileid,
+          idcardno: ds.idcardno,
+          prefixth: ds.prefixth,
+          firstnameth: ds.firstnameth,
+          lastnameth: ds.lastnameth,
+          prefixen: ds.prefixen,
+          firstnameen: ds.firstnameen,
+          lastnameen: ds.lastnameen,
+          passportno: ds.passportno,
+          addressinfo: ds.addressinfo,
+          schooladdrinfo: ds.schooladdrinfo,
+          eduinfo: ds.schooladdrinfo,
+          experienceinfo: ds.experienceinfo,
+          competencyinfo: ds.competencyinfo,
+          selfdevelopmentinfo: null,
+          fileinfo: ds.fileinfo,
+          schoolid: ds.schoolid,
+          birthdate: ds.birthdate,
+          sex: ds.sex,
+          contactphone: ds.contactphone,
+          workphone: ds.workphone,
+          email: ds.email,
+        };
+      }),
+    };
+    this.requestService.createMultipleLicense(payload).subscribe((res) => {
+      console.log('result = ', res);
+    });
   }
 
   search(params: Partial<SchRequestSearchFilter>) {
@@ -56,13 +157,12 @@ export class CreateLicenseIdDetailComponent implements OnInit {
       requestdatefrom: null,
       requestdateto: null,
       offset: '0',
-      row: '10',
+      row: '500',
     };
 
     payload = replaceEmptyWithNull(payload);
 
     this.requestService.KspSearchRequest(payload).subscribe((res) => {
-      console.log('ds2 = ', res);
       this.dataSource2.data = res;
     });
   }
@@ -85,67 +185,14 @@ const column1 = [
   'approveDate',
 ];
 
-interface info1 {
-  order: string;
-  orderNo: string;
-  group: string;
-  number: string;
-  licenseType: string;
-  licenseGroup: string;
-  status: string;
-  releasedDate: string;
-  approveDate: string;
-  verifyDate: string;
-}
-
-const data1: info1[] = [
-  {
-    order: 'string',
-    orderNo: 'string',
-    group: 'string',
-    number: 'string',
-    licenseType: 'string',
-    licenseGroup: 'string',
-    status: 'string',
-    releasedDate: 'string',
-    approveDate: 'string',
-    verifyDate: 'string',
-  },
-];
-
 const column2 = [
   'create',
   'order',
   'rush',
-  'number',
   'personId',
   'licenseType',
   'name',
   'licenseGroup',
   'approveDate',
   'verifyDate',
-];
-
-interface info2 {
-  order: string;
-  number: string;
-  personId: string;
-  licenseType: string;
-  name: string;
-  licenseGroup: string;
-  approveDate: string;
-  verifyDate: string;
-}
-
-const data2: info2[] = [
-  {
-    order: 'string',
-    number: 'string',
-    personId: 'string',
-    licenseType: 'string',
-    name: 'string',
-    licenseGroup: 'string',
-    approveDate: 'string',
-    verifyDate: 'string',
-  },
 ];

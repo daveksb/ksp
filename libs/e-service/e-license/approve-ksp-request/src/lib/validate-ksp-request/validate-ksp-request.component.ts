@@ -25,14 +25,18 @@ export class ValidateKspRequestComponent
 {
   @Input() requestType: string | null = '0';
   @Input() process: string | null = '0';
+  @Input() showUrgent = false;
 
+  today = new Date();
   processTable!: SchRequestProcess | undefined;
 
   override form = this.fb.group({
+    isurgent: [],
     result: [null, Validators.required],
     shouldForward: [null, Validators.required],
     returndate: [null],
-    reason: [],
+    reason: [null],
+    otherDetail: [null],
   });
 
   constructor(private fb: FormBuilder) {
@@ -53,15 +57,44 @@ export class ValidateKspRequestComponent
     return this.form.controls.shouldForward;
   }
 
+  get reason() {
+    return this.form.controls.reason.value;
+  }
+
   ngOnInit(): void {
+    this.disabledForm();
+
     this.form.controls.result.valueChanges.subscribe(() => {
       if (this.result === '2') {
         this.shouldForward.clearValidators();
+        this.form.controls.returndate.setValidators([Validators.required]);
+        this.form.controls.returndate.enable();
+        this.form.controls.reason.disable();
+      } else if (this.result === '3') {
+        this.shouldForward.setValidators([Validators.required]);
+        this.form.controls.reason.setValidators([Validators.required]);
+        this.form.controls.reason.enable();
+        this.form.controls.returndate.disable();
       } else {
         this.shouldForward.addValidators(Validators.required);
+        this.disabledForm();
       }
-      this.shouldForward.reset();
+      this.resetForm();
     });
+  }
+
+  disabledForm() {
+    this.form.controls.reason.disable();
+    this.form.controls.returndate.disable();
+  }
+
+  resetForm() {
+    this.shouldForward.reset();
+    this.form.controls.returndate.reset();
+    this.form.controls.reason.reset();
+    this.form.controls.otherDetail.reset();
+    this.form.controls.returndate.clearValidators();
+    this.form.controls.reason.clearValidators();
   }
 
   /*   ngOnChanges(changes: SimpleChanges): void {

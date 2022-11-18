@@ -88,7 +88,7 @@ export class SchoolRequestComponent implements OnInit {
   requestLabel = '';
 
   disableTempSave = true;
-  disableSave = true;
+  disableSave = false;
   disableCancel = true;
 
   schoolId = getCookie('schoolId');
@@ -99,7 +99,7 @@ export class SchoolRequestComponent implements OnInit {
   reasonFiles: FileGroup[] = [];
   attachFiles: FileGroup[] = [];
   eduSelected: number[] = [];
-
+  forbidden: any = null;
   form = this.fb.group({
     userInfo: [],
     addr1: [],
@@ -242,6 +242,11 @@ export class SchoolRequestComponent implements OnInit {
       ...{ schooladdrinfo: JSON.stringify(formData.schoolAddr) },
       ...{ reasoninfo: JSON.stringify(formData.reasoninfo) },
       ...{ fileinfo: JSON.stringify({ tab3, tab4, tab5, tab6 }) },
+      ...{
+        prohibitproperty: this.forbidden
+          ? JSON.stringify(this.forbidden)
+          : null,
+      },
     };
 
     //console.log('payload = ', payload);
@@ -314,6 +319,7 @@ export class SchoolRequestComponent implements OnInit {
       ...{ schooladdrinfo: JSON.stringify(formData.schoolAddr) },
       ...{ reasoninfo: JSON.stringify(formData.reasoninfo) },
       ...{ fileinfo: JSON.stringify({ tab3, tab4, tab5, tab6 }) },
+      ...{ prohibitproperty: JSON.stringify(this.forbidden || null) },
     };
 
     baseForm.patchValue(payload);
@@ -376,7 +382,7 @@ export class SchoolRequestComponent implements OnInit {
       // สถานะ ยกเลิก disable ทุกอย่าง
       if (this.requestData.status === '0') {
         this.disableTempSave = true;
-        this.disableSave = true;
+        this.disableSave = false;
         this.disableCancel = true;
       }
 
@@ -397,7 +403,7 @@ export class SchoolRequestComponent implements OnInit {
       else if (this.form.valid && this.requestData.process === '2') {
         //console.log('สถานะเป็นสร้างและส่งใบคำขอ ');
         this.disableTempSave = true;
-        this.disableSave = true;
+        this.disableSave = false;
       }
       // formValid + สถานะเป็นส่งกลับเพื่อแก้ไข, บันทึกชั่วคราวได้ ส่งใบคำขอได้
       else if (condition1 || condition2) {
@@ -407,7 +413,7 @@ export class SchoolRequestComponent implements OnInit {
       // form invalid
       else {
         this.disableTempSave = true;
-        this.disableSave = true;
+        this.disableSave = false;
       }
 
       // มีหมายเลขใบคำขอแล้ว enable ปุ่มยกเลิก
@@ -694,6 +700,7 @@ export class SchoolRequestComponent implements OnInit {
     dialogRef.componentInstance.confirmed
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
+        this.forbidden = res;
         if (res) {
           // confirm เพื่อ บันทึกและยื่นใบคำขอ
           this.confirmDialog(2);

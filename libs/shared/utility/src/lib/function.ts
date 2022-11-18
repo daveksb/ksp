@@ -69,7 +69,6 @@ export function formatCheckboxData(input: any[], source: any[]) {
   const result = input
     .map((v, i) => (v ? source[i].value : null))
     .filter((v) => v !== null);
-  //console.log('map data = ', result);
   //return JSON.stringify(result);
   return result;
 }
@@ -87,7 +86,8 @@ export function replaceEmptyWithNull(input: any) {
 export function formatDatePayload(input: any) {
   for (const [key, value] of Object.entries(input)) {
     if (key.includes('date') && input[key]) {
-      input[key] = formatDate(new Date(input[key]).toISOString());
+      const date = moment(input[key]).format('YYYY-MM-DD');
+      input[key] = formatDate(date);
     }
   }
   return input;
@@ -150,6 +150,26 @@ export function checkStatus(
     return s.id == statusId;
   });
   //console.log('status = ', status);
+  return status;
+}
+
+export function eSelfCheckProcess(processId: number, requestType: number) {
+  const process = SelfRequestProcess.find((p) => {
+    return p.processId === processId && p.requestType === requestType;
+  });
+  //console.log('process = ', process);
+  return process;
+}
+
+export function eSelfCheckStatus(
+  processId: number,
+  statusId: number,
+  requestType: number
+) {
+  const process = eSelfCheckProcess(processId, requestType);
+  const status = process?.status.find((s) => {
+    return s.id == statusId;
+  });
   return status;
 }
 

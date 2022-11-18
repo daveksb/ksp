@@ -2,8 +2,7 @@
   <div class="box-header">วุฒิปริญญา</div>
   <div class="border rounded px-3 py-2 mb-3">
     <ksp-renew-license-property-degree-form
-      formControlName="degree"
-    ></ksp-renew-license-property-degree-form>
+      formControlName="degree"></ksp-renew-license-property-degree-form>
   </div>
 
   <div class="box-header" *ngIf="formMode === 'sch'">
@@ -14,8 +13,8 @@
   </div>
   <div class="border rounded px-3 py-2">
     <ksp-renew-license-property-degree-form
+      [mode]="mode"
       [degreeLabel]="'ระบุวุฒิการศึกษาที่จบ'"
-      formControlName="managingDegree"
-    ></ksp-renew-license-property-degree-form>
+      formControlName="managingDegree"></ksp-renew-license-property-degree-form>
   </div>
 </form>

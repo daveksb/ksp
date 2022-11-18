@@ -28,10 +28,10 @@ export const eLicenseMenu: MenuConfig[] = [
     label: 'ใบคำขอรับใบอนุญาตประกอบวิชาชีพ(ชาวต่างชาติ)',
     path: '',
     isExpanded: false,
-    subMenuName: 'license-foreign',
+    subMenuName: 'request-foreign-license',
     subMenu: [
       {
-        path: '/request-license/approve-list',
+        path: '/request-foreign-license/list',
         label: 'รายการใบคำขอรับใบอนุญาตประกอบวิชาชีพ',
       },
       {
@@ -70,7 +70,7 @@ export const eLicenseMenu: MenuConfig[] = [
     subMenuName: 'renewForeign',
     subMenu: [
       {
-        path: '/renew-license/approve-list',
+        path: '/renew-foreign-license/list',
         label: 'รายการใบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
       },
       /* {

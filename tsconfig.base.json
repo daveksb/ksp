@@ -52,8 +52,14 @@
       "@ksp/e-service/e-license/qualification-approve": [
         "libs/e-service/e-license/qualification-approve/src/index.ts"
       ],
+      "@ksp/e-service/e-license/renew-foreign-license": [
+        "libs/e-service/e-license/renew-foreign-license/src/index.ts"
+      ],
       "@ksp/e-service/e-license/renew-license": [
         "libs/e-service/e-license/renew-license/src/index.ts"
+      ],
+      "@ksp/e-service/e-license/request-foreign-license": [
+        "libs/e-service/e-license/request-foreign-license/src/index.ts"
       ],
       "@ksp/e-service/e-license/request-license": [
         "libs/e-service/e-license/request-license/src/index.ts"

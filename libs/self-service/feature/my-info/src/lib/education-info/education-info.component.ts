@@ -29,6 +29,7 @@ export class EducationInfoComponent implements OnInit {
   @ViewChild(TransferKnowledgeEducationComponent)
   formComponent!: TransferKnowledgeEducationComponent;
   baseForm = this.fb.group(new SelfMyInfo());
+
   ngOnInit(): void {
     this.countries$ = this.addressService.getCountry();
     this.myInfoService.getMyInfo().subscribe((res) => {

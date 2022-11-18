@@ -4,43 +4,154 @@ import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PDFDocument } from 'pdf-lib';
 
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
-import { KspFile } from '@ksp/shared/interface';
+import { KspCheckResult, KspFile } from '@ksp/shared/interface';
 import { FileService } from '@ksp/shared/form/file-upload';
+import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
+import { FormArray, FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   templateUrl: './pdf-viewer.component.html',
   styleUrls: ['./pdf-viewer.component.scss'],
   standalone: true,
-  imports: [CommonModule, MatDialogModule, NgxExtendedPdfViewerModule],
+  imports: [
+    CommonModule,
+    MatDialogModule,
+    NgxExtendedPdfViewerModule,
+    LicenseCheckComponent,
+    ReactiveFormsModule,
+  ],
 })
 export class PdfViewerComponent implements OnInit {
   pdfBytes: any;
-  src = '';
-  type = '';
+  pdfList: IPdf[] = [];
+  index!: number | null;
+  verifyChoice = [
+    {
+      name: 'ครบถ้วน และถูกต้อง',
+      value: 'complete',
+    },
+    {
+      name: 'ไม่ครบถ้วน และไม่ถูกต้อง',
+      value: 'incomplete',
+    },
+  ];
+  form = this.fb.group({
+    checkResult: this.fb.array([]),
+  });
+  selected!: IPdf | null;
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: {
-      title: string;
-      file: KspFile;
+      group: string;
+      files: KspFile[];
+      checkresult: KspCheckResult[];
+      systemType: string;
     },
-    private fileService: FileService
+    private fb: FormBuilder,
+    private fileService: FileService,
+    private sanitizer: DomSanitizer
   ) {}
-
+  get checkResultFormArray() {
+    return this.form.controls.checkResult as FormArray;
+  }
   ngOnInit(): void {
-    const id = this.data.file.fileid;
-    this.fileService.downloadSchoolFile({ id }).subscribe((res: any) => {
-      const extension = this.data.file.filename.split('.')[1];
-      const src = atob(res?.filedata ?? '');
-      this.type = extension;
-      if (extension == 'pdf') {
-        this.modifyPdf(src);
-      } else {
-        this.src = src;
-      }
+    this.addCheckResultArray(this.data.files.length);
+    setTimeout(() => {
+      console.log(this.data.checkresult);
+      this.checkResultFormArray.controls.forEach((form, index) =>
+        form.patchValue(this.data.checkresult[index] ?? {})
+      );
+    }, 0);
+
+    this.pdfList = this.setDefault(this.data.files.length);
+    this.getAllFileData();
+  }
+
+  getFile(index: number) {
+    const file = this.data.files[index];
+    const id = file.fileid;
+    if (this.data.systemType == 'uni') {
+      this.fileService.downloadUniFile({ id }).subscribe((res: any) => {
+        const extension = this.pdfList[index].type;
+        const src = atob(res?.filedata ?? '');
+        if (extension == 'pdf') {
+          this.downloading(src, index);
+        } else {
+          this.pdfList[index].src = src;
+          this.pdfList[index].loading = false;
+        }
+      });
+    } else {
+      this.fileService.downloadSchoolFile({ id }).subscribe((res: any) => {
+        const extension = this.pdfList[index].type;
+        const src = atob(res?.filedata ?? '');
+        if (extension == 'pdf') {
+          this.downloading(src, index);
+        } else {
+          this.pdfList[index].src = src;
+          this.pdfList[index].view = src;
+          this.pdfList[index].loading = false;
+        }
+      });
+    }
+  }
+  async downloading(src: string, index: number) {
+    const pdfDoc = await PDFDocument.load(src);
+    const base64 = (await pdfDoc.saveAsBase64({ dataUri: true })) || '';
+    this.pdfList[index].src =
+      this.sanitizer.bypassSecurityTrustResourceUrl(base64);
+    this.pdfList[index].view = await pdfDoc.save();
+    this.pdfList[index].loading = false;
+  }
+  addCheckResultArray(count: number) {
+    for (let i = 0; i < count; i++) {
+      this.checkResultFormArray.push(this.fb.control([]));
+    }
+  }
+  mappingFile(files: KspFile[]) {
+    files.map((file) => {
+      const id = file.fileid;
+      return this.fileService.downloadSchoolFile({ id });
     });
   }
-  async modifyPdf(src: string) {
-    const pdfDoc = await PDFDocument.load(src);
-    this.pdfBytes = await pdfDoc.save();
+  setDefault(count: number) {
+    const pdfList = [];
+    for (let i = 0; i < count; i++) {
+      pdfList.push({
+        loading: true,
+        type: this.getExtension(this.data.files[i]),
+        src: this.sanitizer.bypassSecurityTrustResourceUrl(
+          '/assets/images/empty.png'
+        ),
+        view: this.sanitizer.bypassSecurityTrustResourceUrl(
+          '/assets/images/empty.png'
+        ),
+      });
+    }
+    return pdfList;
   }
+  getExtension(file: KspFile) {
+    const extension = file.filename.split('.')[1];
+    return extension;
+  }
+  getAllFileData() {
+    for (const index in this.data.files) {
+      this.getFile(parseInt(index));
+    }
+  }
+  selectFile(file: IPdf, index: number) {
+    this.selected = file;
+    this.index = null;
+    setTimeout(() => {
+      this.index = index;
+    }, 0);
+  }
+}
+
+export interface IPdf {
+  loading: boolean;
+  type: string;
+  src: any;
+  view: any;
 }

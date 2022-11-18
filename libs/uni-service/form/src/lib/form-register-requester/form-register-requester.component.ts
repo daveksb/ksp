@@ -29,7 +29,8 @@ export class FormRegisterRequesterInfoComponent
     affiliation: '',
   };
   permissionList: Array<any> = uniPermissionList;
-  validIdcard = false;
+  validIdcard = true;
+  validprefix = true;
 
   override form = createUniUserInfoForm(this.fb);
 
@@ -61,6 +62,7 @@ export class FormRegisterRequesterInfoComponent
   }
 
   checkID(event: any) {
+    console.log(event)
     const id = event?.target.value;
     if (id.length != 13) {
       this.validIdcard = false;
@@ -89,6 +91,16 @@ export class FormRegisterRequesterInfoComponent
       });
     }
     this.form.controls['other'].updateValueAndValidity();
+  }
+
+  changePrefix(event: any) {
+    if ((this.form.controls.prefixth && this.form.controls.prefixen) &&
+      (this.form.controls.prefixth.value != this.form.controls.prefixen.value) &&
+      (this.form.controls.prefixth.value != '0' && this.form.controls.prefixen.value != '0')) {
+      this.validprefix = false;
+    } else {
+      this.validprefix = true;
+    }
   }
 
   get idCardNo() {
@@ -125,5 +137,13 @@ export class FormRegisterRequesterInfoComponent
 
   get position() {
     return this.form.controls.position;
+  }
+
+  get prefixth() {
+    return this.form.controls.prefixth;
+  }
+
+  get prefixen() {
+    return this.form.controls.prefixen;
   }
 }

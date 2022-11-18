@@ -23,10 +23,11 @@ import {
   replaceEmptyWithNull,
   toLowercaseProp,
 } from '@ksp/shared/utility';
-import { SelfRequest } from '@ksp/shared/interface';
+import { FileGroup, SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
+import { v4 as uuidv4 } from 'uuid';
 
-const EXPERIENCE_FILES = [
+/* const EXPERIENCE_FILES = [
   {
     name: '1. สำเนาวุฒิทางการศึกษา',
     fileid: '',
@@ -52,6 +53,36 @@ const EDU_FILES = [
     filename: '',
   },
   { name: '3. วุฒิบัตรอบรม', fileid: '', filename: '' },
+]; */
+
+const EXPERIENCE_FILES: FileGroup[] = [
+  {
+    name: '1. สำเนาวุฒิทางการศึกษา',
+    files: [],
+  },
+  {
+    name: '2. หนังสือรับรองคุณวุฒิ',
+    files: [],
+  },
+  {
+    name: '3. วุฒิบัตรอบรม',
+    files: [],
+  },
+];
+
+const EDU_FILES: FileGroup[] = [
+  {
+    name: '1. สำเนาวุฒิทางการศึกษา',
+    files: [],
+  },
+  {
+    name: '2. เอกสารผู้สำเร็จการศึกษา (ระบบ KSP BUNDIT)',
+    files: [],
+  },
+  {
+    name: '3. วุฒิบัตรอบรม',
+    files: [],
+  },
 ];
 
 @UntilDestroy()
@@ -121,6 +152,7 @@ export class LicenseRequestStudySupervisionComponent
     super.initializeFiles();
     this.experienceFiles = structuredClone(EXPERIENCE_FILES);
     this.eduFiles = structuredClone(EDU_FILES);
+    this.uniqueTimestamp = uuidv4();
   }
 
   override patchData(data: SelfRequest) {

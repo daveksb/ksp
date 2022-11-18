@@ -17,6 +17,8 @@
           class="form-control form-search"
           type="text"
           formControlName="teachingPlace"
+          placeholder="ค้นหาสถานที่สอน"
+          (click)="openSearchDialog1()"
         />
       </div>
     </div>
@@ -80,6 +82,7 @@
             autocomplete="off"
             class="form-control form-date"
             formControlName="startDate"
+            placeholder="วว/ดด/ปปปป"
           />
           <mat-datepicker-toggle
             class="button-date"
@@ -98,6 +101,7 @@
             autocomplete="off"
             class="form-control form-date"
             formControlName="endDate"
+            placeholder="วว/ดด/ปปปป"
           />
           <mat-datepicker-toggle
             class="button-date"
@@ -132,6 +136,8 @@
           class="form-control form-search"
           type="text"
           formControlName="currentTeachingPlace"
+          placeholder="ค้นหาสถานที่สอน"
+          (click)="openSearchDialog2()"
         />
       </div>
     </div>

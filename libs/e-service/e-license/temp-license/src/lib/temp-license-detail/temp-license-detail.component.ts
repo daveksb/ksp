@@ -22,17 +22,18 @@ import {
 import { parseJson } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
-import { TempLicenseDetailService } from './e-temp-license-detail.service';
 import localForage from 'localforage';
 import {
   Amphur,
   FileGroup,
+  KspCheckResult,
   KspRequest,
   PositionType,
   Prefix,
   Province,
   Tambol,
 } from '@ksp/shared/interface';
+import { TempLicenseDetailService } from './temp-license-detail.service';
 
 export class KspApprovePersistData {
   checkDetail: any = null;
@@ -41,8 +42,8 @@ export class KspApprovePersistData {
 @UntilDestroy()
 @Component({
   selector: 'e-service-temp-license-detail',
-  templateUrl: './e-temp-license-detail.component.html',
-  styleUrls: ['./e-temp-license-detail.component.scss'],
+  templateUrl: './temp-license-detail.component.html',
+  styleUrls: ['./temp-license-detail.component.scss'],
 })
 export class ETempLicenseDetailComponent implements OnInit {
   verifyChoice: any[] = [];
@@ -66,6 +67,7 @@ export class ETempLicenseDetailComponent implements OnInit {
   requestData = new KspRequest();
   userInfoFormType: number = UserInfoFormType.thai; // control the display field of user info form
   pageType = RequestPageType;
+  forbidden: any;
 
   form = this.fb.group({
     userInfo: [],
@@ -99,7 +101,7 @@ export class ETempLicenseDetailComponent implements OnInit {
   }
 
   addCheckResultArray() {
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 7; i++) {
       this.checkResultFormArray.push(this.fb.control([]));
     }
   }
@@ -121,11 +123,25 @@ export class ETempLicenseDetailComponent implements OnInit {
   // save data to indexed db
   persistData() {
     //console.log('check sub result = ', checkSubResult);
+    const edufiles = this.mappingCheckResultAttachment(this.eduFiles);
+    const teachingfiles = this.mappingCheckResultAttachment(this.teachingFiles);
+    const reasonfiles = this.mappingCheckResultAttachment(this.reasonFiles);
+    const attachfiles = this.mappingCheckResultAttachment(this.attachFiles);
     const saveData: KspApprovePersistData = {
-      checkDetail: this.form.controls.checkResult.value,
+      checkDetail: {
+        ...this.form.controls.checkResult.value,
+        edufiles,
+        teachingfiles,
+        reasonfiles,
+        attachfiles,
+      },
       requestData: this.requestData,
     };
     localForage.setItem('checkRequestData', saveData);
+  }
+
+  mappingCheckResultAttachment(groups: FileGroup[]): KspCheckResult[][] {
+    return groups.map((group) => group.checkresult || []);
   }
 
   checkRequestId() {
@@ -140,6 +156,7 @@ export class ETempLicenseDetailComponent implements OnInit {
 
   loadRequestFromId(requestId: number) {
     this.eRequestService.getKspRequestById(requestId).subscribe((res) => {
+      if ('returncode' in res) return;
       this.requestData = res;
       //console.log('details = ', parseJson(res.detail));
       this.pathUserInfo(res);
@@ -150,6 +167,7 @@ export class ETempLicenseDetailComponent implements OnInit {
       this.patchReasonInfo(parseJson(res.reasoninfo));
       this.patchSchoolAddrress(parseJson(res.schooladdrinfo));
       this.patchFileInfo(parseJson(res.fileinfo));
+      this.patchProhibitProperty(parseJson(res.prohibitproperty));
     });
   }
 
@@ -175,7 +193,9 @@ export class ETempLicenseDetailComponent implements OnInit {
     }
     //console.log('attach files = ', this.attachFiles);
   }
-
+  patchProhibitProperty(res: any) {
+    this.forbidden = res;
+  }
   patchReasonInfo(res: any) {
     this.form.controls.reasoninfo.patchValue(res);
   }

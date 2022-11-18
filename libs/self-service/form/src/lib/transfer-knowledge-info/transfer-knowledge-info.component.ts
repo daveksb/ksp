@@ -43,7 +43,6 @@ export class TransferKnowledgeInfoComponent
   }
 
   ngOnInit(): void {
-    this.deleteStandard(0);
     /* this.form.controls.standards.valueChanges.subscribe((res) => {
         console.log('std = ', res);
       }); */

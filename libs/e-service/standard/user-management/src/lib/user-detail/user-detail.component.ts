@@ -17,8 +17,9 @@ import {
 import { ERequestService, GeneralInfoService, UniInfoService } from '@ksp/shared/service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { parseJson } from '@ksp/shared/utility';
+import { parseJson, replaceEmptyWithNull } from '@ksp/shared/utility';
 import localForage from 'localforage';
+import { SchoolRetireReason } from '@ksp/shared/constant';
 
 @Component({
   templateUrl: './user-detail.component.html',
@@ -42,10 +43,15 @@ export class UserDetailComponent implements OnInit {
   form = this.fb.group({
     userInfo: [],
     coordinatorInfo: [],
+    retiredReason: [],
+    retiredDetail: []
   });
 
   verifyForm = this.fb.group({
-    result: [null, Validators.required],
+    result: [{
+      result: '',
+      reason: ''
+    }, Validators.required]
   });
 
   uploadFileList: FileGroup[] = [
@@ -64,6 +70,8 @@ export class UserDetailComponent implements OnInit {
     "ยื่นผู้ประสานงาน",
     "ยื่นถอดถอนผู้ประสานงาน"
   ]
+
+  retireReason = SchoolRetireReason;
 
   constructor(
     private router: Router,
@@ -114,8 +122,20 @@ export class UserDetailComponent implements OnInit {
       this.requestType = this.requestData.requesttype ? parseInt(this.requestData.requesttype) : 0;
 
       res.status === '1' ? (this.mode = 'edit') : (this.mode = 'view');
+      this.verifyForm.controls.result.patchValue({
+        result: res?.status === '1' ? '' : res?.status === '2' ? '1' : '0', 
+        reason: res?.reasoninfo || ''
+      });
       if (res.birthdate) {
         res.birthdate = res.birthdate.split('T')[0];
+      }
+
+      if (res.requesttype == '2') {
+        const reasoninfo = parseJson(res.reasoninfo);
+        this.form.patchValue({
+          retiredReason: reasoninfo.retiredReason,
+          retiredDetail: reasoninfo.retiredDetail
+        })
       }
 
       this.form.controls.userInfo.patchValue(<any>res);
@@ -153,7 +173,7 @@ export class UserDetailComponent implements OnInit {
 
   approveUser() {
     // change process and status of SCH_REQUEST
-    const newUser = new UniUser();
+    let newUser = new UniUser();
     newUser.uniid = this.requestData.uniid;
     newUser.idcardno = this.requestData.idcardno;
     newUser.firstnameth = this.requestData.firstnameth;
@@ -173,7 +193,7 @@ export class UserDetailComponent implements OnInit {
     newUser.unitype = this.requestData.unitype;
     newUser.requestno = this.requestData.requestno;
     newUser.permissionright = this.permissionRight;
-
+    newUser = replaceEmptyWithNull(newUser);
     const approvePayload: KspApprovePayload = {
       requestid: `${this.requestId}`,
       process: '1',

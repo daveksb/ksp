@@ -5,6 +5,7 @@ import {
   Amphur,
   KspFormBaseComponent,
   Province,
+  SchInfo,
   Tambol,
 } from '@ksp/shared/interface';
 import { UniversitySearchComponent } from '@ksp/shared/search';
@@ -23,7 +24,6 @@ const formList = [
   'province',
   'tumbol',
   'amphur',
-
   'phone',
   'fax',
   'email',
@@ -51,6 +51,19 @@ export class FormUserWorkplaceComponent
   @Output() provinceChanged = new EventEmitter<any>();
   @Output() amphurChanged = new EventEmitter<any>();
 
+  schoolInfo = new SchInfo();
+  school: any;
+  schoolName: any;
+  moo: any;
+  road: any;
+  zipcode: any;
+  houseNo: any;
+  alley: any;
+  bureauid: any;
+  province: any;
+  amphur: any;
+  tumbon: any;
+
   override form = this.fb.group({
     bureauid: [null, Validators.required],
     schoolname: [null, Validators.required],
@@ -63,7 +76,6 @@ export class FormUserWorkplaceComponent
     tumbol: [null, Validators.required],
     amphur: [null, Validators.required],
     notRequired: [false],
-
     phone: [],
     fax: [],
     email: [],
@@ -73,7 +85,6 @@ export class FormUserWorkplaceComponent
   constructor(private dialog: MatDialog, private fb: FormBuilder) {
     super();
     this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value) => {
         //console.log(value);
         this.onChange(value);
@@ -105,20 +116,51 @@ export class FormUserWorkplaceComponent
     }
   }
 
+  selectedUniversity(school: SchInfo) {
+    this.schoolInfo = school;
+    //console.log('activeUsers = ', school);
+    this.bureauid = school.bureauid;
+    this.schoolName = school.schoolname;
+    this.zipcode = school.zipcode;
+    this.moo = school.moo;
+    this.houseNo = school.address;
+    this.alley = school.street;
+    this.road = school.road;
+    this.province = school.provinceid;
+    this.tumbon = school.tumbonid;
+    this.amphur = school.amphurid;
+
+    this.form.controls.bureauid.patchValue(this.bureauid);
+    this.form.controls.schoolname.patchValue(this.schoolName);
+    this.form.controls.houseno.patchValue(this.houseNo);
+    this.form.controls.moo.patchValue(this.moo);
+    this.form.controls.postcode.patchValue(this.zipcode);
+    this.form.controls.road.patchValue(this.road);
+    this.form.controls.alley.patchValue(this.alley);
+    this.form.controls.province.patchValue(this.province);
+    this.form.controls.amphur.patchValue(this.amphur);
+    this.form.controls.tumbol.patchValue(this.tumbon);
+  }
+
   openSearchDialog() {
-    this.dialog.open(UniversitySearchComponent, {
+    const dialog = this.dialog.open(UniversitySearchComponent, {
       height: '100vh',
       width: '75vw',
       position: {
         top: '0px',
         right: '0px',
       },
-
       data: {
-        searchType: '',
+        searchType: 'school',
         subHeader: 'กรุณาเลือกหน่วยงาน/สถานศึกษาที่ท่านสังกัด',
         bureauList: this.bureaus,
       },
+    });
+
+    dialog.afterClosed().subscribe((res: SchInfo) => {
+      if (res) {
+        this.selectedUniversity(res);
+      }
     });
   }
 

@@ -1,35 +1,131 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
+import { Router, TitleStrategy } from '@angular/router';
+import { KspPaginationComponent, ListData } from '@ksp/shared/interface';
+import { EUniService, UniInfoService } from '@ksp/shared/service';
+import { parseJson, stringToThaiDate } from '@ksp/shared/utility';
+import _ from 'lodash';
+import { map } from 'rxjs';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'ksp-test-performance-list',
   templateUrl: './test-performance-list.component.html',
   styleUrls: ['./test-performance-list.component.scss'],
 })
-export class TestPerformanceListComponent implements OnInit {
+export class TestPerformanceListComponent extends KspPaginationComponent implements OnInit {
+
   displayedColumns1: string[] = column1;
   dataSource1 = new MatTableDataSource<course>();
 
   displayedColumns2: string[] = column2;
+  universityList: ListData[] = [];
+  universityTypeList: ListData[] = [];
+  degreeLevelList: ListData[] = [];
+  rowSelected: any = {};
   dataSource2 = new MatTableDataSource<student>();
+  form = this.fb.group({
+    uniid: [null],
+    unitype: [null],
+    degreeapprovecode: [''],
+    degreelevel: [null],
+    calendaryear: [''],
+    fulldegreename: ['']
+  })
 
-  constructor(private router: Router) {}
+  formStudent = this.fb.group({
+    name: [''],
+    idcardno: ['']
+  })
 
-  ngOnInit(): void {}
-
-  save() {
-    this.router.navigate(['/', 'import-performance', 'detail']);
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private eUniservice: EUniService,
+    private uniInfoService: UniInfoService
+  ) {
+    super();
   }
 
-  search() {
-    this.dataSource1.data = courseData;
-    this.dataSource2.data = studentData;
+  ngOnInit(): void {
+    this.getOptions();
+  }
+
+  getOptions() {
+    this.uniInfoService.getUniDegreelevel().pipe(
+      map((res) => {
+        return res?.datareturn?.map(({ id, name }: any) => ({
+          value: id,
+          label: name,
+        }));
+      })
+    )
+    .subscribe((data) => {
+      this.degreeLevelList = data;
+    });
+    this.uniInfoService.getUniversityType().pipe(
+      map((res) => {
+        return res?.map(({ id, name }: any) => ({
+          value: id,
+          label: name,
+        }));
+      })
+    )
+    .subscribe((data) => {
+      this.universityTypeList = data;
+    });
+  }
+
+  save() {
+    this.router.navigate(['/', 'import-performance', 'detail', this.rowSelected.id]);
+  }
+
+  getRequest() {
+    return {
+      ...this.form.getRawValue(),
+      ...this.tableRecord
+    }
+  }
+
+  override search() {
+    this.eUniservice.getDegreeCertResultList(this.getRequest()).subscribe(res => {
+      if (res) {
+        this.pageEvent.length = res.countnum;
+        this.dataSource1.data = res.datareturn.map((data :any) => {
+          const findType = this.universityTypeList.find(type => { return data.unitype == type.value });
+          data.unitypename = findType ? findType.label : '';
+          data.createdate = data.createdate ? stringToThaiDate(data.createdate) : '';
+          data.studentlist = data.studentlist ? JSON.parse(data.studentlist) : [];
+          return data;
+        });
+      }
+    })
   }
 
   clear() {
     this.dataSource1.data = [];
     this.dataSource2.data = [];
+  }
+
+  selectRow(row: any) {
+    this.rowSelected = row;
+    this.dataSource2 = this.rowSelected.studentlist;
+  }
+
+  getFullName(element: any) {
+    return [element?.prefixth, element?.firstnameth, element?.lastnameth]
+      .filter((d: any) => d)
+      .join(' ');
+  }
+
+  onSearch(search: any, event: any) {
+    const searchstring = event.target.value.trim().toLowerCase().replace(/\s/g, '');
+    this.dataSource2 = this.rowSelected.studentlist.filter((data: any) => {
+      return search == 'name' ? (data.prefixth+data.firstnameth+data.lastnameth).includes(searchstring) 
+      : data[search].includes(searchstring);
+    })
   }
 }
 

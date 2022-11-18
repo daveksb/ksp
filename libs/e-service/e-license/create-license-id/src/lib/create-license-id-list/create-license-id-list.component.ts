@@ -2,6 +2,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { SelfApproveList } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 import localForage from 'localforage';
 
@@ -12,7 +13,7 @@ import localForage from 'localforage';
 })
 export class CreateLicenseIdListComponent {
   displayedColumns: string[] = column;
-  dataSource = new MatTableDataSource<info>();
+  dataSource = new MatTableDataSource<SelfApproveList>();
   selection = new SelectionModel<any>(true, []);
 
   constructor(
@@ -21,26 +22,19 @@ export class CreateLicenseIdListComponent {
   ) {}
 
   search() {
-    //this.dataSource.data = data;
     const payload = {
       groupno: null, //params.groupno,
       process: null, //params.process,
       status: null, //params.status,
       createdate: null, //params.createdate,
       offset: '0',
-      row: '100',
+      row: '500',
     };
-    this.requestService.searchRequestList(payload).subscribe((res: any[]) => {
+    this.requestService.searchSelfApproveList(payload).subscribe((res) => {
       res = res.map((i) => {
-        return {
-          ...i,
-          ...{
-            listcount: i.requestlist ? JSON.parse(i.requestlist).length : 0,
-          },
-        };
+        return { ...i, count: JSON.parse(i.requestlist || '').length };
       });
       this.dataSource.data = res;
-      //console.log('search res = ', res);
     });
   }
 
@@ -67,30 +61,4 @@ const column = [
   'considerDate',
   'verifyDate',
   'approveDate',
-];
-
-interface info {
-  group: string;
-  list: string;
-  number: string;
-  licenseType: string;
-  groupType: string;
-  status: string;
-  considerDate: string;
-  verifyDate: string;
-  approveDate: string;
-}
-
-const data: info[] = [
-  {
-    group: 'string',
-    list: 'string',
-    number: 'string',
-    licenseType: 'string',
-    groupType: 'string',
-    status: 'string',
-    considerDate: 'string',
-    verifyDate: 'string',
-    approveDate: 'string',
-  },
 ];

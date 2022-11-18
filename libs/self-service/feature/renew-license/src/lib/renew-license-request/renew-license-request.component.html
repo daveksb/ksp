@@ -119,6 +119,7 @@
           [educationType]="'teacher'"
           [uniqueTimestamp]="uniqueTimestamp"
           [workingInfo]="workingInfoFiles"
+          [workingInfo2]="workingInfoFiles2"
         ></self-service-standard-working>
       </mat-tab>
     </mat-tab-group>
@@ -134,22 +135,22 @@
       *ngIf="requestId"
       (click)="cancel()"
       type="button"
-      class="ms-3 btn border-primary text-primary"
+      class="ms-3 btn border-primary text-primary bg-white"
     >
       ยกเลิกใบคำขอ
     </button>
     <button
       (click)="onSave(1)"
-      [disabled]="userInfoForm.invalid"
+      [disabled]="false"
       type="button"
-      class="ms-3 btn border-primary text-primary bg-white"
+      class="ms-3 btn btn-success"
     >
       บันทึกชั่วคราว
     </button>
     <button
       type="button"
       class="ms-3 btn btn-primary"
-      [disabled]="userInfoForm.invalid"
+      [disabled]="false"
       (click)="onSave(2)"
     >
       บันทึกและยื่น

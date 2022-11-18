@@ -12,7 +12,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
+import { FileGroup, SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
 import {
   MyInfoService,
   SelfRequestService,
@@ -28,8 +28,15 @@ import * as _ from 'lodash';
 import { Observable } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
-const ATTACH_FILES = [
-  { name: '1.สำเนาวุฒิการศึกษา', fileid: '', filename: '' },
+/* const ATTACH_FILES = [
+  { name: '1.สำเนาหน้าแรกสมุดเงินฝาก', fileid: '', filename: '' },
+]; */
+
+const ATTACH_FILES: FileGroup[] = [
+  {
+    name: '1. สำเนาหน้าแรกสมุดเงินฝาก',
+    files: [],
+  },
 ];
 
 @Component({
