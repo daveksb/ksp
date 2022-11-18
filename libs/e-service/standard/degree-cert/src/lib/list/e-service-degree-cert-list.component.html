@@ -74,21 +74,21 @@
         <ng-container matColumnDef="verifyStatus">
           <th mat-header-cell *matHeaderCellDef>สถานะตรวจสอบ</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.verifyStatus }}
+            {{ element | eUniCheckStatus }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="considerStatus">
           <th mat-header-cell *matHeaderCellDef>สถานะพิจารณา</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.considerStatus }}
+            {{ element | eUniConsiderationStatus }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="approveStatus">
           <th mat-header-cell *matHeaderCellDef>สถานะรับรอง</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.approveStatus }}
+            {{ element | eUniCertificationStatus }}
           </td>
         </ng-container>
 
@@ -109,14 +109,14 @@
         <ng-container matColumnDef="verify">
           <th mat-header-cell *matHeaderCellDef>ตรวจสอบ</th>
           <td mat-cell *matCellDef="let element">
-            <div [innerHTML]="getVerify(element)"></div>
+            <div [innerHTML]="element | eUniCheck"></div>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="consider">
           <th mat-header-cell *matHeaderCellDef>พิจารณา</th>
           <td mat-cell *matCellDef="let element">
-            <div [innerHTML]="getConsider(element)"></div>
+            <div [innerHTML]="element | eUniConsideration"></div>
           </td>
         </ng-container>
 
@@ -135,11 +135,20 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
+      <table>
+        <tr *ngIf="!dataSource?.data?.length">
+          <td
+            class="text-center text-danger fs-5"
+            [attr.colspan]="displayedColumns.length"
+          >
+            ไม่พบข้อมูล
+          </td>
+        </tr>
+      </table>
     </div>
     <mat-paginator
       [length]="pageEvent.length"
-      [pageSize]="pageEvent.pageSize"
-      [pageSizeOptions]="pageSizeOptions"
+      [pageSize]="25"
       (page)="onPaginatorEvent($event)"
       [pageIndex]="pageEvent.pageIndex"
     >
