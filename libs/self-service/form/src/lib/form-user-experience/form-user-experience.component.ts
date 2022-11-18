@@ -23,7 +23,7 @@ export class FormUserExperienceComponent
     TrainingAddressTwo: [null, Validators.required],
     teachingAddressForm: this.fb.array([
       this.fb.group({
-        teachingAddress: [''],
+        teachingAddress: [null, Validators.required],
       }),
     ]),
     /* teachingAddress: [null, Validators.required], */
@@ -66,9 +66,9 @@ export class FormUserExperienceComponent
     this.address.removeAt(index);
   }
 
-  addAddress(index: number) {
+  addAddress() {
     const form = this.fb.group({
-      teachingAddress: [''],
+      teachingAddress: [null, Validators.required],
     });
     this.address.push(form);
   }

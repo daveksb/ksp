@@ -46,7 +46,7 @@ export class RegisterIdCardComponent {
     this.imgId = evt.fileid;
   }
 
-  openDialog() {
+  /* openDialog() {
     const dialogRef = this.dialog.open(VerifyPhoneDialogComponent, {
       width: '600px',
     });
@@ -58,7 +58,7 @@ export class RegisterIdCardComponent {
       };
       localForage.setItem('th-register', data);
     });
-  }
+  } */
 
   nextPage() {
     const data = {

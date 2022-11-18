@@ -140,13 +140,19 @@
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        <tr class="mat-row text-center" *matNoDataRow>
+          <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+            ไม่พบข้อมูล
+          </td>
+        </tr>
       </table>
     </div>
     <mat-paginator
+      [pageSizeOptions]="[25]"
+      showFirstLastButtons
+      aria-label="Select page of periodic elements"
       [length]="pageEvent.length"
       [pageSize]="pageEvent.pageSize"
-      [pageSizeOptions]="pageSizeOptions"
-      (page)="onPaginatorEvent($event)"
       [pageIndex]="pageEvent.pageIndex"
     >
     </mat-paginator>

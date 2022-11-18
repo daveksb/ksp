@@ -35,6 +35,9 @@ export class RegisterForeignStepThreeComponent implements OnInit {
   passwordEqual = false;
   validatorMessages = validatorMessages;
 
+  eyeIconClicked1 = false;
+  eyeIconClicked2 = false;
+
   form = this.fb.group(
     {
       username: [null, Validators.required],
@@ -56,8 +59,6 @@ export class RegisterForeignStepThreeComponent implements OnInit {
       this.passpoerNo = res.passportno;
       console.log('xxx = ', this.passpoerNo);
     });
-
-    this.form.controls.username.disable();
   }
 
   save() {

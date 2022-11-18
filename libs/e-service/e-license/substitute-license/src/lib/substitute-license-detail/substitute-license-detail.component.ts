@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
+import { ESelfFormBaseComponent } from '@ksp/shared/form/others';
 import {
   AddressService,
   EducationDetailService,
@@ -11,12 +12,17 @@ import {
 import { parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
+const FORM_TAB_COUNT = 3;
+
 @Component({
   selector: 'ksp-substitute-license-detail',
   templateUrl: './substitute-license-detail.component.html',
   styleUrls: ['./substitute-license-detail.component.scss'],
 })
-export class SubstituteLicenseDetailComponent implements OnInit {
+export class SubstituteLicenseDetailComponent
+  extends ESelfFormBaseComponent
+  implements OnInit
+{
   userInfoType = UserInfoFormType.thai;
   approveChoices = choices;
 
@@ -26,66 +32,61 @@ export class SubstituteLicenseDetailComponent implements OnInit {
   disableNextButton = false;
   eduFiles: any[] = [];
   experienceFiles: any[] = [];
-  prefixList$!: Observable<any>;
-  nationalitys$!: Observable<any>;
   provinces$!: Observable<any>;
 
-  tumbols1$!: Observable<any>;
-  tumbols2$!: Observable<any>;
-  tumbols3$!: Observable<any>;
-  amphurs1$!: Observable<any>;
-  amphurs2$!: Observable<any>;
-  amphurs3$!: Observable<any>;
-
-  requestId!: number;
-
-  form = this.fb.group({
+  override form = this.fb.group({
     userInfo: [],
     address1: [],
     address2: [],
     workplace: [],
     replaceReasonInfo: [],
+    checkResult: this.fb.array([]),
   });
+
+  get checkResultFormArray() {
+    return this.form.controls.checkResult as FormArray;
+  }
 
   form2 = this.fb.group({
     verifyResult: [null, Validators.required],
   });
 
   constructor(
-    private fb: FormBuilder,
-    private addressService: AddressService,
-    private generalInfoService: GeneralInfoService,
-    private educationDetailService: EducationDetailService,
-    private route: ActivatedRoute,
-    private requestService: ERequestService
-  ) {}
+    fb: FormBuilder,
+    addressService: AddressService,
+    generalInfoService: GeneralInfoService,
+    educationDetailService: EducationDetailService,
+    route: ActivatedRoute,
+    requestService: ERequestService,
+    private router: Router
+  ) {
+    super(
+      generalInfoService,
+      addressService,
+      educationDetailService,
+      fb,
+      requestService,
+      route
+    );
+  }
 
   ngOnInit(): void {
     this.getListData();
     this.checkRequestId();
+    this.addCheckResultArray();
   }
 
-  checkRequestId() {
-    this.route.paramMap.subscribe((params) => {
-      this.requestId = Number(params.get('id'));
-      if (this.requestId) {
-        this.requestService
-          .getKspRequestById(this.requestId)
-          .subscribe((res) => {
-            if (res) {
-              this.patchData(res);
-            }
-          });
-      }
-    });
-  }
-
-  patchData(data: any) {
-    this.form.controls.userInfo.patchValue(data);
-    this.patchAddress(parseJson(data.addressinfo));
-    if (data.schooladdrinfo) {
-      this.patchWorkplace(parseJson(data.schooladdrinfo));
+  addCheckResultArray() {
+    for (let i = 0; i < FORM_TAB_COUNT; i++) {
+      this.checkResultFormArray.push(this.fb.control(null));
     }
+    this.checkResultFormArray.setValidators(
+      ESelfFormBaseComponent.allFilledValidator()
+    );
+  }
+
+  override patchData(data: any) {
+    super.patchData(data);
 
     if (data.replacereasoninfo) {
       const replaceReasonInfo = parseJson(data.replacereasoninfo);
@@ -93,36 +94,39 @@ export class SubstituteLicenseDetailComponent implements OnInit {
     }
   }
 
-  patchWorkplace(data: any) {
-    this.amphurs3$ = this.addressService.getAmphurs(data.province);
-    this.tumbols3$ = this.addressService.getTumbols(data.amphur);
-    this.form.controls.workplace.patchValue(data);
-  }
-
-  patchAddress(addrs: any[]) {
-    if (addrs && addrs.length) {
-      addrs.map((addr: any, i: number) => {
-        if (i === 0) {
-          this.amphurs1$ = this.addressService.getAmphurs(addr.province);
-          this.tumbols1$ = this.addressService.getTumbols(addr.amphur);
-          this.form.controls.address1.patchValue(addr);
-        }
-        if (i === 1) {
-          this.amphurs2$ = this.addressService.getAmphurs(addr.province);
-          this.tumbols2$ = this.addressService.getTumbols(addr.amphur);
-          this.form.controls.address2.patchValue(addr);
-        }
-      });
-    }
-  }
-
-  getListData() {
-    this.countries$ = this.addressService.getCountry();
-    this.countries2$ = this.countries$;
-    this.licenses$ = this.educationDetailService.getLicenseType();
+  override getListData() {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.nationalitys$ = this.generalInfoService.getNationality();
     this.provinces$ = this.addressService.getProvinces();
+    this.countries$ = this.addressService.getCountry();
+    this.countries2$ = this.countries$;
+    this.licenses$ = this.educationDetailService.getLicenseType();
+    this.bureau$ = this.educationDetailService.getBureau();
+  }
+
+  patchUserInfoForm(data: any): void {
+    this.form.controls.userInfo.patchValue(data);
+  }
+  patchAddress1Form(data: any): void {
+    this.form.controls.address1.patchValue(data);
+  }
+  patchAddress2Form(data: any): void {
+    this.form.controls.address2.patchValue(data);
+  }
+  patchWorkPlaceForm(data: any): void {
+    this.form.controls.workplace.patchValue(data);
+  }
+
+  next() {
+    ESelfFormBaseComponent.persistData(
+      this.form.controls.checkResult.value,
+      this.requestData
+    );
+    this.router.navigate(['/sub-license', 'approve-confirm', this.requestId]);
+  }
+
+  cancel() {
+    this.router.navigate(['/sub-license', 'approve-list']);
   }
 }
 

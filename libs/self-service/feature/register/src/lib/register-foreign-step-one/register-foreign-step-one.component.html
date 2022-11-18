@@ -122,14 +122,19 @@
               <div class="d-flex align-items-center flex-column mt-3">
                 <button
                   (click)="next()"
-                  [disabled]="false"
+                  [disabled]="form.invalid"
                   id="btn-next"
                   type="submit"
                   class="btn btn-primary"
                 >
                   Next
                 </button>
-                <div class="label__login" (click)="loginPage()">Login</div>
+                <div
+                  class="fs-5 text-decoration-underline text-secondary mt-3"
+                  (click)="loginPage()"
+                >
+                  Login
+                </div>
               </div>
             </form>
           </div>

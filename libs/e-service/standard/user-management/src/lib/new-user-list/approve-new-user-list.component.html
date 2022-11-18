@@ -7,7 +7,7 @@
 <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height full-width-2">
   <ksp-request-search
     (clear)="clear()"
-    (search)="search($event)"
+    (search)="handleSearch($event)"
     [statusList]="statusList"
     [searchType]="searchType"
     [universityType]="uniUniversityTypeOption"
@@ -17,14 +17,14 @@
     <div class="box-header">ผลการค้นหา</div>
     <hr />
     <div class="table__scroll">
-      <table mat-table matSort [dataSource]="dataSource" matSort>
+      <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
           <td mat-cell *matCellDef="let element; let i = index">
             {{
-              paginator.pageIndex === 0
+              pageEvent.pageIndex === 0
                 ? i + 1
-                : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+                : 1 + i + pageEvent.pageIndex * pageEvent.pageSize
             }}
           </td>
         </ng-container>
@@ -115,6 +115,10 @@
       [pageSizeOptions]="[25]"
       showFirstLastButtons
       aria-label="Select page of periodic elements"
+      [length]="pageEvent.length"
+      [pageSize]="pageEvent.pageSize"
+      [pageIndex]="pageEvent.pageIndex"
+      (page)="onPaginatorEvent($event)"
     >
     </mat-paginator>
   </div>

@@ -37,10 +37,18 @@
                 <div class="col-md mb-2">
                   <label class="form-label">Password</label>
                   <input
-                    type="password"
+                    [type]="eyeIconClicked1 ? 'text' : 'password'"
                     class="form-control"
                     formControlName="password"
                   />
+                  <i
+                    class="text-secondary fs-6"
+                    (click)="eyeIconClicked1 = !eyeIconClicked1"
+                    [ngClass]="{
+                      'bi-eye': eyeIconClicked1,
+                      'bi-eye-slash': !eyeIconClicked1
+                    }"
+                  ></i>
                   <ng-container
                     *ngIf="
                       password.invalid && (password.dirty || password.touched)
@@ -57,10 +65,18 @@
                 <div class="col-md mb-2">
                   <label class="form-label">Confirm password</label>
                   <input
-                    type="password"
+                    [type]="eyeIconClicked2 ? 'text' : 'password'"
                     class="form-control"
                     formControlName="confirmPassword"
                   />
+                  <i
+                    class="text-secondary fs-6"
+                    (click)="eyeIconClicked2 = !eyeIconClicked2"
+                    [ngClass]="{
+                      'bi-eye': eyeIconClicked2,
+                      'bi-eye-slash': !eyeIconClicked2
+                    }"
+                  ></i>
                   <ng-container *ngIf="confirmPasswordError">
                     <span class="text-danger">{{ confirmPasswordError }} </span>
                   </ng-container>
@@ -73,11 +89,17 @@
                   (click)="save()"
                   type="submit"
                   class="btn btn-primary"
-                  [disabled]="form.invalid && disabledSubmit"
+                  [disabled]="form.invalid || disabledSubmit"
                 >
                   Save
                 </button>
-                <div class="label__login" (click)="loginPage()">Login</div>
+                <div
+                  role="button"
+                  class="fs-5 text-decoration-underline text-secondary mt-3"
+                  (click)="loginPage()"
+                >
+                  Login
+                </div>
               </div>
             </form>
           </div>

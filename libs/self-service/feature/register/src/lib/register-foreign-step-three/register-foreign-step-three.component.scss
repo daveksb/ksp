@@ -10,18 +10,19 @@
   background-repeat: no-repeat;
 }
 
-.label__login {
-  font-size: 20px;
-  color: #666666;
-  text-decoration: underline;
-  margin-top: 24px;
-  cursor: pointer;
-}
-
 #btn-next {
   width: 27.5rem;
   border-radius: 10px;
   font-size: 20px;
+}
+
+i {
+  float: right;
+  margin-top: -28px;
+  position: relative;
+  height: 22px;
+  cursor: pointer;
+  margin-right: 8px;
 }
 
 /* mobile */

@@ -9,6 +9,8 @@ import { MatTableModule } from '@angular/material/table';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 const routes: Routes = [
   {
@@ -42,6 +44,8 @@ const routes: Routes = [
     MatDialogModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
+    MatPaginatorModule,
+    MatSortModule
   ],
   declarations: [TestPerformanceListComponent, TestPerformanceDetailComponent],
   exports: [TestPerformanceListComponent, TestPerformanceDetailComponent],
