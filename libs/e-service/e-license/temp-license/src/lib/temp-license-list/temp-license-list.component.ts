@@ -27,8 +27,8 @@ import {
 
 @Component({
   selector: 'e-service-temp-license-list',
-  templateUrl: './e-temp-license-list.component.html',
-  styleUrls: ['./e-temp-license-list.component.scss'],
+  templateUrl: './temp-license-list.component.html',
+  styleUrls: ['./temp-license-list.component.scss'],
 })
 export class ETempLicenseListComponent implements AfterViewInit {
   form!: any;

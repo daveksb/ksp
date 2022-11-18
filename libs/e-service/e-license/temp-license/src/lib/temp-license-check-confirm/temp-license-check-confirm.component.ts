@@ -11,7 +11,7 @@ import { KspApprovePayload } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import localForage from 'localforage';
-import { KspApprovePersistData } from '../e-temp-license-detail/e-temp-license-detail.component';
+import { KspApprovePersistData } from '../temp-license-detail/temp-license-detail.component';
 import { Location } from '@angular/common';
 import { checkStatus, getCookie } from '@ksp/shared/utility';
 import moment from 'moment';
@@ -31,6 +31,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   userId = `${getCookie('userId')}`;
   approveHistory: any[] = [];
   formInValid = true;
+  approveInfo!: any;
   form = this.fb.group({
     approvement: [],
   });
@@ -43,32 +44,35 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
     public dialog: MatDialog,
     private eRequestService: ERequestService
   ) {}
+
   ngOnInit(): void {
-    //console.log('jjj = ');
     this.checkRequestId();
+    this.loadStoreData();
+    this.updateLetterNo();
     setTimeout(() => this.getFormInvalid(), 0);
+  }
+
+  loadStoreData() {
     localForage.getItem('checkRequestData').then((res: any) => {
-      console.log(res);
+      //console.log(res);
       this.saveData = res;
       //console.log('save data = ', this.saveData);
       if (this.saveData.requestData.id)
         this.getApproveHistory(this.saveData.requestData.id);
     });
-
-    this.updateLetterNo();
   }
 
   updateLetterNo() {
     this.eRequestService.getThaiLetterNo().subscribe((res) => {
-      //console.log('res cc = ', res);
       const be = moment().add(543, 'year').year();
-      const temp: any = {
+      this.approveInfo = {
         approveNo: `${++res.runningno}/${be}`,
         approveDate: new Date(),
       };
-      this.form.controls.approvement.patchValue(temp);
+      this.form.controls.approvement.patchValue(this.approveInfo);
     });
   }
+
   getFormInvalid() {
     this.formInValid = this.form.invalid;
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe(() => {
@@ -79,9 +83,11 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   getApproveHistory(requestid: string) {
     this.eRequestService.getApproveHistory(requestid).subscribe((res) => {
       this.approveHistory = res;
-      this.approveHistory = this.approveHistory.map((h: any) => {
-        return { ...h, ...{ detail: JSON.parse(h.detail) } };
-      });
+      if (res && res.length) {
+        this.approveHistory = this.approveHistory.map((h: any) => {
+          return { ...h, ...{ detail: JSON.parse(h.detail) } };
+        });
+      }
     });
   }
 
@@ -214,20 +220,35 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
       considerProcess = '3';
     }
 
+    console.log('this.saveData.checkDetail = ', this.saveData.checkDetail);
+
+    const detail = {
+      ...this.saveData.checkDetail,
+      ...{
+        licenseNo: this.approveInfo.approveNo,
+        licenseDate: this.approveInfo.approveDate,
+      },
+    };
+
     const form: any = this.form.value.approvement;
     const payload: KspApprovePayload = {
       requestid: req.id,
       process: considerProcess,
       status: `${form.result}`,
-      detail: JSON.stringify(this.saveData.checkDetail),
+      detail:
+        form.value === '2'
+          ? JSON.stringify(detail)
+          : JSON.stringify(this.saveData.checkDetail),
       systemtype: '4', // e-service
       userid: this.userId,
       paymentstatus: null,
     };
-    //console.log('payload = ', payload);
-
+    console.log('payload = ', payload);
     this.eRequestService.KspUpdateRequestProcess(payload).subscribe(() => {
-      this.completeDialog();
+      if (form.value === '2') {
+        console.log('result = ', form.value);
+      }
+      //this.completeDialog();
     });
   }
 
@@ -240,9 +261,9 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   getLabel() {
     const req = this.saveData.requestData;
     if (req.requesttype === '6') {
-      return `ขอรับรองคุณวุฒิการศึกษาเพื่อใช้ในการขอรับใบอนุญาตประกอบวิชาชีพ`;
+      return `คำขอรับรองคุณวุฒิการศึกษาเพื่อใช้ในการขอรับใบอนุญาตประกอบวิชาชีพ`;
     } else {
-      const message = `ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ`;
+      const message = `คำขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ`;
       if (req.careertype === '1') {
         return message + 'ครู';
       } else if (req.careertype === '2') {
