@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -11,24 +11,26 @@ import {
   RequestSearchFilter,
   SchoolUserPageType,
 } from '@ksp/shared/interface';
-import { ERequestService } from '@ksp/shared/service';
+import { EducationDetailService, ERequestService } from '@ksp/shared/service';
 import {
   checkStatus,
   replaceEmptyWithNull,
   schoolMapRequestType,
 } from '@ksp/shared/utility';
+import { Observable } from 'rxjs';
 
 @Component({
   templateUrl: './approve-new-user-list.component.html',
   styleUrls: ['./approve-new-user-list.component.scss'],
 })
-export class ApproveNewUserListComponent implements AfterViewInit {
+export class ApproveNewUserListComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<KspRequest>();
   checkStatus = checkStatus;
   statusList = SchoolRequestProcess.find((i) => i.requestType === 1)?.status;
   mapRequestType = schoolMapRequestType;
   selectedUniversity = '';
+  bureau$!: Observable<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -41,8 +43,13 @@ export class ApproveNewUserListComponent implements AfterViewInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private eRequestService: ERequestService
+    private eRequestService: ERequestService,
+    private educationDetailService: EducationDetailService
   ) {}
+
+  ngOnInit(): void {
+    this.bureau$ = this.educationDetailService.getBureau();
+  }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;

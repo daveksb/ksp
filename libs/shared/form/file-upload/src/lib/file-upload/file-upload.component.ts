@@ -5,7 +5,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { MatIconModule } from '@angular/material/icon';
 import { getBase64 } from '@ksp/shared/utility';
 import { FileService } from './file-upload.service';
-import { FileUpload, ImageUpload } from '@ksp/shared/interface';
+import { FileUpload, ImageUpload, KspFile } from '@ksp/shared/interface';
 
 @UntilDestroy()
 @Component({
@@ -107,20 +107,21 @@ export class FileUploadComponent {
       });
   }
 
-  deleteFile() {
+  deleteFile(file: KspFile) {
     const payload = {
-      id: this.fileid,
+      id: file.fileid,
       requesttype: this.requestType,
-      uniquetimestamp: this.uniqueTimestamp,
+      uniquetimestamp: this.uniqueTimestamp ?? file?.uniquetimestamp,
     };
 
     this.uploadService.deleteFile(payload).subscribe((res: any) => {
-      if (res?.returnmessage == 'success') {
-        this.file = null;
+      if (res.returnmessage == 'success') {
+        this.fileid = '';
         this.filename = '';
       }
     });
   }
+
   inValidFileType(type: string) {
     switch (type) {
       case 'image/png':
