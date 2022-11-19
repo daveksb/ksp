@@ -159,7 +159,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     const position = element?.position;
     const startDate = new Date(element.licensestartdate || '');
     const endDate = new Date(element.licenseenddate || '');
-    const date = new Date('');
+    const date = new Date(element.licensestartdate || '');
     const thai = thaiDate(date);
     const [day, month, year] = thai.split(' ');
     const fulldateth = `${changeToThaiNumber(day)} เดือน ${month} พ.ศ. ${year}`;
