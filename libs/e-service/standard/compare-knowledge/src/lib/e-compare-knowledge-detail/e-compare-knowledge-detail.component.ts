@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
 import { ESelfFormBaseComponent } from '@ksp/shared/form/others';
 import { SelfGetRequest } from '@ksp/shared/interface';
@@ -12,6 +12,8 @@ import {
 } from '@ksp/shared/service';
 import { parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
+
+const FORM_TAB_COUNT = 5;
 
 @Component({
   selector: 'ksp-e-compare-knowledge-detail',
@@ -35,7 +37,12 @@ export class ECompareKnowledgeDetailComponent
     workplace: [],
     educationInfo: [],
     testResultCompareInfo: [],
+    checkResult: this.fb.array([]),
   });
+
+  get checkResultFormArray() {
+    return this.form.controls.checkResult as FormArray;
+  }
 
   form2 = this.fb.group({
     verifyResult: [null, Validators.required],
@@ -58,7 +65,8 @@ export class ECompareKnowledgeDetailComponent
     educationDetailService: EducationDetailService,
     fb: FormBuilder,
     requestService: ERequestService,
-    route: ActivatedRoute
+    route: ActivatedRoute,
+    private router: Router
   ) {
     super(
       generalInfoService,
@@ -73,6 +81,16 @@ export class ECompareKnowledgeDetailComponent
   ngOnInit(): void {
     this.getListData();
     this.checkRequestId();
+    this.addCheckResultArray();
+  }
+
+  addCheckResultArray() {
+    for (let i = 0; i < FORM_TAB_COUNT; i++) {
+      this.checkResultFormArray.push(this.fb.control(null));
+    }
+    this.checkResultFormArray.setValidators(
+      ESelfFormBaseComponent.allFilledValidator()
+    );
   }
 
   override patchData(data: SelfGetRequest): void {
@@ -107,5 +125,17 @@ export class ECompareKnowledgeDetailComponent
 
   patchWorkPlaceForm(data: any): void {
     this.form.controls.workplace.patchValue(data);
+  }
+
+  next() {
+    ESelfFormBaseComponent.persistData(
+      this.form.controls.checkResult.value,
+      this.requestData
+    );
+    this.router.navigate(['/compare-knowledge', 'confirm', this.requestId]);
+  }
+
+  cancel() {
+    this.router.navigate(['/compare-knowledge', 'list']);
   }
 }

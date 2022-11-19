@@ -6,11 +6,11 @@ import { ERewardConfirmFormBaseComponent } from '@ksp/self-service/form';
 import { ERequestService } from '@ksp/shared/service';
 
 @Component({
-  selector: 'ksp-refund-approve',
-  templateUrl: './refund-approve.component.html',
-  styleUrls: ['./refund-approve.component.scss'],
+  selector: 'ksp-e-knowledge-cert-confirm',
+  templateUrl: './e-knowledge-cert-confirm.component.html',
+  styleUrls: ['./e-knowledge-cert-confirm.component.scss'],
 })
-export class RefundApproveComponent extends ERewardConfirmFormBaseComponent {
+export class EKnowledgeCertConfirmComponent extends ERewardConfirmFormBaseComponent {
   constructor(
     fb: FormBuilder,
     route: ActivatedRoute,
@@ -21,11 +21,11 @@ export class RefundApproveComponent extends ERewardConfirmFormBaseComponent {
     super(fb, route, dialog, eRequestService);
   }
 
-  prevPage() {
-    this.router.navigate(['/', 'refund', 'detail', this.requestId]);
+  navigateBack() {
+    this.router.navigate(['/knowledge-cert', 'list']);
   }
 
-  navigateBack() {
-    this.router.navigate(['/', 'refund', 'list']);
+  prevPage() {
+    this.router.navigate(['/knowledge-cert', 'detail', this.requestId]);
   }
 }
