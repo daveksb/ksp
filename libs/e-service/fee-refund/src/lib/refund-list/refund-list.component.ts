@@ -8,7 +8,11 @@ import {
   SelfRequest,
 } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
-import { replaceEmptyWithNull } from '@ksp/shared/utility';
+import {
+  replaceEmptyWithNull,
+  SelfCheckProcess,
+  SelfcheckStatus,
+} from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-refund-list',
@@ -18,6 +22,8 @@ import { replaceEmptyWithNull } from '@ksp/shared/utility';
 export class RefundListComponent {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfRequest>();
+  checkProcess = SelfCheckProcess;
+  checkStatus = SelfcheckStatus;
 
   constructor(
     private router: Router,

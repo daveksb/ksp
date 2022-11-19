@@ -1,10 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SelfRequest } from '@ksp/shared/interface';
+import {
+  ESelfFormBaseComponent,
+  VERIFY_CHOICES,
+} from '@ksp/shared/form/others';
+import { KspRequest, SelfRequest } from '@ksp/shared/interface';
 import { ERequestService, GeneralInfoService } from '@ksp/shared/service';
 import { parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
+
+const FORM_TAB_COUNT = 1;
 
 @Component({
   selector: 'ksp-refund-detail',
@@ -28,7 +34,15 @@ export class RefundDetailComponent implements OnInit {
   form = this.fb.group({
     userInfo: [],
     refundInfo: [],
+    checkResult: this.fb.array([]),
   });
+
+  requestData = new KspRequest();
+  verifyChoice: any[] = VERIFY_CHOICES;
+
+  get checkResultFormArray() {
+    return this.form.controls.checkResult as FormArray;
+  }
 
   constructor(
     private router: Router,
@@ -39,6 +53,10 @@ export class RefundDetailComponent implements OnInit {
   ) {}
 
   nextPage() {
+    ESelfFormBaseComponent.persistData(
+      this.form.controls.checkResult.value,
+      this.requestData
+    );
     this.router.navigate(['/', 'refund', 'approve']);
   }
 
@@ -49,6 +67,16 @@ export class RefundDetailComponent implements OnInit {
   ngOnInit(): void {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.checkRequestId();
+    this.addCheckResultArray();
+  }
+
+  addCheckResultArray() {
+    for (let i = 0; i < FORM_TAB_COUNT; i++) {
+      this.checkResultFormArray.push(this.fb.control(null));
+    }
+    this.checkResultFormArray.setValidators(
+      ESelfFormBaseComponent.allFilledValidator()
+    );
   }
 
   checkRequestId() {
@@ -59,6 +87,7 @@ export class RefundDetailComponent implements OnInit {
           .getKspRequestById(this.requestId)
           .subscribe((res) => {
             if (res) {
+              this.requestData = res;
               this.patchData(res);
               console.log(res);
             }
