@@ -127,8 +127,8 @@ export class FormUserWorkplaceComponent
     this.alley = school.street;
     this.road = school.road;
     this.province = school.provinceid;
-    this.tumbon = school.tumbonid;
-    this.amphur = school.amphurid;
+    this.tumbon = school.tumbon;
+    this.amphur = school.amphurname;
 
     this.form.controls.bureauid.patchValue(this.bureauid);
     this.form.controls.schoolname.patchValue(this.schoolName);

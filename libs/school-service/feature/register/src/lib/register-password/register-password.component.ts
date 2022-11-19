@@ -59,11 +59,11 @@ export class RegisterPasswordComponent implements OnInit {
   loadStoredData() {
     localForage.getItem('registerSelectedSchool').then((res: any) => {
       this.school = res;
-      this.address = `เลขที่ ${res.address} ซอย ${
-        res?.street ?? '-'
-      } หมู่ ${res?.moo ?? '-'} ถนน ${res?.road ?? '-'} ตำบล ${
-        res.tumbon
-      } อำเภอ ${res.amphurname} จังหวัด ${res.provincename}`;
+      this.address = `เลขที่ ${res.address} ซอย ${res?.street ?? '-'} หมู่ ${
+        res?.moo ?? '-'
+      } ถนน ${res?.road ?? '-'} ตำบล ${res.tumbon} อำเภอ ${
+        res.amphurname
+      } จังหวัด ${res.provincename} รหัสไปรษณีย์ ${res.zipcode}`;
     });
 
     localForage.getItem('registerUserInfo').then((res) => {
@@ -119,7 +119,7 @@ export class RegisterPasswordComponent implements OnInit {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่?`,
         subTitle: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติ
         ใช่หรือไม่`,
-        schoolCode: `รหัสเข้าใช้งาน(รหัสโรงเรียน): ${this.school?.schoolid}`,
+        schoolCode: `รหัสเข้าใช้งาน(รหัสโรงเรียน) : ${this.school?.schoolid}`,
         btnLabel: 'บันทึก',
       },
     });

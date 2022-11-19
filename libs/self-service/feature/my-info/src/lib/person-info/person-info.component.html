@@ -128,9 +128,17 @@
           <label class="form-label">รหัสผ่าน</label>
           <input
             class="form-control"
-            type="password"
+            [type]="eyeIconClicked ? 'text' : 'password'"
             formControlName="password"
           />
+          <i
+            (click)="eyeIconClicked = !eyeIconClicked"
+            class="text-secondary"
+            [ngClass]="{
+              'bi-eye': eyeIconClicked,
+              'bi-eye-slash': !eyeIconClicked
+            }"
+          ></i>
         </div>
         <div class="col-md mb-3">
           <label class="form-label">เบอร์โทรศัพท์มือถือ</label>

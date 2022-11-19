@@ -18,6 +18,9 @@ export class SchoolRetiredSearchComponent implements OnInit {
   bureauList$!: Observable<Bureau[]>;
   searchEnd = false;
 
+  schoolName: any;
+  bureauName: any;
+
   form = this.fb.group({
     userSearch: [],
     userSelect: [],
@@ -44,6 +47,9 @@ export class SchoolRetiredSearchComponent implements OnInit {
   schoolSelected(school: SchInfo) {
     this.school = school;
     localForage.setItem('retiredSelectedSchool', school);
+
+    this.schoolName = school.schoolname;
+    this.bureauName = school.bureauname;
 
     this.schoolInfoService
       .searchSchUsers({ schoolid: school.schoolid })

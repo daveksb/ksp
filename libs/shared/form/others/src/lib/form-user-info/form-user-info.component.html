@@ -296,7 +296,7 @@
           [matDatepicker]="picker4"
           autocomplete="off"
           class="form-control form-date"
-          formControlName="birthdate"
+          formControlName="birthdateSixty"
           placeholder="วว/ดด/ปปปป"
         />
         <mat-datepicker-toggle
@@ -332,7 +332,12 @@
   <div class="row" *ngIf="_displayMode === FormTypeEnum.thai">
     <div class="col-md-6 mb-2">
       <label class="form-label required">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
-      <input class="form-control" type="tel" formControlName="contactphone" />
+      <input
+        class="form-control"
+        type="tel"
+        formControlName="contactphone"
+        maxlength="10"
+      />
       <ng-container
         *ngIf="
           contactPhone.invalid && (contactPhone.dirty || contactPhone.touched)
@@ -345,7 +350,12 @@
     </div>
     <div class="col-md-6 mb-2">
       <label class="form-label required">เบอร์โทรศัพท์ (ที่ทำงาน)</label>
-      <input class="form-control" type="tel" formControlName="workphone" />
+      <input
+        class="form-control"
+        type="tel"
+        formControlName="workphone"
+        maxlength="10"
+      />
       <ng-container
         *ngIf="workPhone.invalid && (workPhone.dirty || workPhone.touched)"
       >

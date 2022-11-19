@@ -63,6 +63,7 @@ export function createUserInfoForm(fb: FormBuilder) {
     permisson: [null],
     other: [null],
     affiliation: [null],
+    birthdateSixty: [null],
   });
 }
 

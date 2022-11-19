@@ -67,11 +67,11 @@ export class CoordinatorInfoComponent implements OnInit {
   getStoredData() {
     localForage.getItem('registerSelectedSchool').then((res: any) => {
       this.school = res;
-      this.address = `เลขที่ ${res.address} ซอย ${
-        res?.street ?? '-'
-      } หมู่ ${res?.moo ?? '-'} ถนน ${res?.road ?? '-'} ตำบล ${
-        res.tumbon
-      } อำเภอ ${res.amphurname} จังหวัด ${res.provincename}`;
+      this.address = `เลขที่ ${res.address} ซอย ${res?.street ?? '-'} หมู่ ${
+        res?.moo ?? '-'
+      } ถนน ${res?.road ?? '-'} ตำบล ${res.tumbon} อำเภอ ${
+        res.amphurname
+      } จังหวัด ${res.provincename} รหัสไปรษณีย์ ${res.zipcode}`;
       //console.log('school = ', res);
     });
   }

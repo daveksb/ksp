@@ -193,8 +193,10 @@ export class UserDetailComponent implements OnInit {
     });
   }
 
-  viewUser() {
-    this.router.navigate(['school', 'all-user']);
+  viewUser(schoolId: any) {
+    this.router.navigate(['school', 'all-user'], {
+      queryParams: { schoolId: schoolId },
+    });
   }
 
   cancel() {
