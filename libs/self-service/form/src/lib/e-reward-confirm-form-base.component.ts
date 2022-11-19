@@ -118,7 +118,7 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
       userid: this.userId,
       paymentstatus: null,
     };
-    //console.log('payload = ', payload);
+    // console.log('payload = ', payload);
     this.eRequestService.KspUpdateRequestProcess(payload).subscribe(() => {
       this.eRequestService
         .setUrgentRequest(this.saveData.requestData.id, form.isurgent)
