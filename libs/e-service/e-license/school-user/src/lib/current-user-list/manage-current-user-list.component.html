@@ -87,9 +87,13 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
+      <div *ngIf="searchNotFound" class="fs-5 text-center text-danger mt-2">
+        ไม่พบข้อมูล
+      </div>
     </div>
 
     <mat-paginator
+      [hidden]="!dataSource.data.length"
       [pageSizeOptions]="[25]"
       showFirstLastButtons
       aria-label="Select page of periodic elements"

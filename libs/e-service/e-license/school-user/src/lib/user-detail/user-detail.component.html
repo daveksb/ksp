@@ -20,7 +20,7 @@
       <hr />
     </ng-container>
 
-    <div class="px-4 py-2">
+    <div class="px-4 mb-3">
       <div class="row">
         <div class="col mb-2">
           <label class="form-label">สังกัด</label>
@@ -58,12 +58,20 @@
       <div class="row" *ngIf="pageType === pageTypeEnum.NewUser">
         <div class="col-6 mb-2">
           <label class="form-label">ประเภทใบคำขอ</label>
-          <input
-            class="form-control"
-            type="text"
-            disabled
-            value="ลงทะเบียนเข้าใช้งาน"
-          />
+          <ng-container *ngIf="requestData.requesttype === '1'">
+            <input
+              class="form-control"
+              type="text"
+              disabled
+              value="ขอยื่นผู้ประสานงาน"
+          /></ng-container>
+          <ng-container *ngIf="requestData.requesttype === '2'">
+            <input
+              class="form-control"
+              type="text"
+              disabled
+              value="ขอยื่นถอดถอนผู้ประสานงาน"
+          /></ng-container>
         </div>
       </div>
 
@@ -85,7 +93,6 @@
         ข้อมูลผู้ขอเข้ารหัสสำหรับเข้าใช้งานระบบ (ผู้ประสานงาน)
       </div>
       <ksp-form-coordinator-info
-        [hideForm1]="true"
         [mode]="'view'"
         [displayMode]="[0]"
         [prefixList]="prefixList$ | async"
@@ -95,13 +102,11 @@
         [nationalitys]="nationalitys$ | async" -->
       <!-- <ksp-form-requester-info [mode]="'view'"></ksp-form-requester-info> -->
     </div>
-    <br />
-    <div class="bg-light px-4 py-2">
+    <div class="bg-light px-4 py-2 mt-3">
       <div class="box-header">
         ข้อมูลผู้มีอำนาจแต่งตั้ง (ที่ระบุไว้ในเอกสารแนบ)
       </div>
       <ksp-form-coordinator-info
-        [hideForm2]="true"
         [positionLabel]="'ตำแหน่งทางการบริหาร'"
         [mode]="'view'"
         [displayMode]="[0]"
@@ -109,15 +114,15 @@
         formControlName="coordinatorInfo"
       ></ksp-form-coordinator-info>
     </div>
-    <br />
-    <ksp-form-multi-attachment
-      [title]="'หลักฐานเพื่อพิจารณา'"
-      mode="view"
-      [groups]="files"
-    ></ksp-form-multi-attachment>
+    <div class="mt-3">
+      <ksp-form-multi-attachment
+        [title]="'หลักฐานเพื่อพิจารณา'"
+        mode="view"
+        [groups]="files"
+      ></ksp-form-multi-attachment>
+    </div>
   </div>
-  <br />
-  <div [formGroup]="verifyForm" class="bg-white p-4">
+  <div [formGroup]="verifyForm" class="bg-white p-3 mt-3">
     <e-service-license-check
       [mode]="mode"
       formControlName="result"

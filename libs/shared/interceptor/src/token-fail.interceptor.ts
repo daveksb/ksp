@@ -8,13 +8,14 @@ import {
 } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from '@ksp/shared/dialog';
+import { CompleteDialogComponent } from '@ksp/shared/dialog';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TokenFailInterceptor implements HttpInterceptor {
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private router: Router) {}
 
   intercept(
     req: HttpRequest<any>,
@@ -25,10 +26,14 @@ export class TokenFailInterceptor implements HttpInterceptor {
         if (evt instanceof HttpResponse) {
           if (evt.body && evt.body.returnmessage === 'token fail') {
             //console.log('evt.body = ', evt.body.returnmessage);
-            this.dialog.open(ConfirmDialogComponent, {
+            const dialog = this.dialog.open(CompleteDialogComponent, {
               data: {
-                title: `Session หมดอายุ กรุณา Login ใหม่`,
+                header: `Session หมดอายุ กรุณา Login ใหม่อีกครั้ง`,
+                btnLabel: 'เข้าสู่ระบบ',
               },
+            });
+            dialog.componentInstance.completed.subscribe(() => {
+              this.router.navigate(['/login']);
             });
           }
         }
