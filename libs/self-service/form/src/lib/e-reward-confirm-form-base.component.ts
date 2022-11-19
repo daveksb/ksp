@@ -57,6 +57,7 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
   checkApproveResult(input: approveResult) {
     //console.log('check aa = ');
     const req = this.saveData.requestData;
+    console.log(req.process);
     if (input.result === '1') {
       //ครบถ้วน และถูกต้อง
       if (input.shouldForward === '1') {

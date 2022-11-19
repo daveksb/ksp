@@ -10,7 +10,12 @@ import {
   SelfRequest,
 } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
-import { eSelfCheckStatus, replaceEmptyWithNull } from '@ksp/shared/utility';
+import {
+  eSelfCheckStatus,
+  replaceEmptyWithNull,
+  SelfCheckProcess,
+  SelfcheckStatus,
+} from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-e-teacher-council-list',
@@ -20,7 +25,8 @@ import { eSelfCheckStatus, replaceEmptyWithNull } from '@ksp/shared/utility';
 export class ETeacherCouncilListComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfRequest>();
-  checkStatus = eSelfCheckStatus;
+  checkProcess = SelfCheckProcess;
+  checkStatus = SelfcheckStatus;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -45,7 +51,7 @@ export class ETeacherCouncilListComponent implements OnInit, AfterViewInit {
       idcardno: params.idcardno,
       passportno: null,
       process: null,
-      status: null,
+      status: params.status,
       schoolid: null,
       schoolname: null,
       bureauid: null,
