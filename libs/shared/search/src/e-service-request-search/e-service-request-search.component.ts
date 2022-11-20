@@ -31,6 +31,7 @@ export class EServiceRequestSearchComponent extends KspFormBaseComponent {
     requeststatus: [null],
   });
 
+  @Input() bureaus: any;
   @Input() searchType = '';
   @Input() statusList: any[] | undefined = [];
   @Input() universityType: any;

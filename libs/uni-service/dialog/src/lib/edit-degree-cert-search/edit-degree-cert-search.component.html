@@ -137,10 +137,16 @@
         </tr>
       </tbody>
     </table>
+    <table>
+      <tr *ngIf="!dataSource?.length">
+        <td class="text-center text-danger fs-5" [attr.colspan]="8">
+          ไม่พบข้อมูล
+        </td>
+      </tr>
+    </table>
     <mat-paginator
       [length]="pageEvent.length"
-      [pageSize]="pageEvent.pageSize"
-      [pageSizeOptions]="pageSizeOptions"
+      [pageSize]="25"
       (page)="onPaginatorEvent($event)"
       [pageIndex]="pageEvent.pageIndex"
     >

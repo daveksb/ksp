@@ -12,7 +12,10 @@
       </div></ng-container
     >
 
-    <div class="d-flex flex-column align-items-center col-xs-auto mb-1">
+    <div
+      class="d-flex flex-column align-items-center col-xs-auto mb-1"
+      *ngIf="requestNo !== 'ไม่มีข้อมูล'"
+    >
       <div class="text-black form-label">เลขใบคำขอ</div>
 
       <div class="form-label border rounded-5 content__box box__second">
@@ -20,7 +23,10 @@
       </div>
     </div>
 
-    <div class="d-flex flex-column align-items-center col-xs-auto mb-1">
+    <div
+      class="d-flex flex-column align-items-center col-xs-auto mb-1"
+      *ngIf="licenseNo !== 'ไม่มีข้อมูล'"
+    >
       <div class="text-black form-label">เลขที่ใบอนุญาต</div>
 
       <div class="form-label border rounded-5 content__box box__third">
@@ -28,7 +34,10 @@
       </div>
     </div>
 
-    <div class="d-flex flex-column align-items-center col-xs-auto mb-1">
+    <div
+      class="d-flex flex-column align-items-center col-xs-auto mb-1"
+      *ngIf="kurusapaNo !== 'ไม่มีข้อมูล'"
+    >
       <div class="text-black form-label">เลขที่ประจำตัวคุรุสภา</div>
 
       <div class="form-label border rounded-5 content__box box__fourth">
@@ -36,7 +45,10 @@
       </div>
     </div>
 
-    <div class="d-flex flex-column align-items-center col-xs-auto mb-1">
+    <div
+      class="d-flex flex-column align-items-center col-xs-auto mb-1"
+      *ngIf="idcardNo !== 'ไม่มีข้อมูล'"
+    >
       <div class="text-black form-label">เลขประจำตัวประชาชน</div>
 
       <div class="form-label border rounded-5 content__box box__primary">
@@ -44,7 +56,10 @@
       </div>
     </div>
 
-    <div class="d-flex flex-column align-items-center col-xs-auto mb-1">
+    <div
+      class="d-flex flex-column align-items-center col-xs-auto mb-1"
+      *ngIf="licenseStartDate !== 'ไม่มีข้อมูล'"
+    >
       <div class="text-black form-label">วันที่ออกใบอนุญาต</div>
 
       <div class="form-label border rounded-5 content__box box__second">
@@ -52,7 +67,10 @@
       </div>
     </div>
 
-    <div class="d-flex flex-column align-items-center col-xs-auto mb-1">
+    <div
+      class="d-flex flex-column align-items-center col-xs-auto mb-1"
+      *ngIf="licenseEndDate !== 'ไม่มีข้อมูล'"
+    >
       <div class="text-black form-label">วันที่หมดอายุใบอนุญาต</div>
 
       <div class="form-label border rounded-5 content__box box__third">

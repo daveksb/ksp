@@ -20,6 +20,7 @@ export * from './lib/sch-general';
 export * from './lib/sch-staff';
 export * from './lib/sch-request-process';
 export * from './lib/sch-login';
+export * from './lib/sch-temp-license';
 
 export * from './lib/ksp-form-base.component';
 export * from './lib/ksp-pagination.component';

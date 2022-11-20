@@ -5,8 +5,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { MatIconModule } from '@angular/material/icon';
 import { getBase64 } from '@ksp/shared/utility';
 import { FileService } from './file-upload.service';
-import { FileUpload, ImageUpload } from '@ksp/shared/interface';
-import { NgControlStatus } from '@angular/forms';
+import { FileUpload, ImageUpload, KspFile } from '@ksp/shared/interface';
 
 @UntilDestroy()
 @Component({
@@ -17,9 +16,8 @@ import { NgControlStatus } from '@angular/forms';
   imports: [CommonModule, MatIconModule, HttpClientModule],
 })
 export class FileUploadComponent {
-  @Input()
-  requiredFileType!: string;
-
+  @Input() mode: 'view' | 'edit' = 'edit';
+  @Input() requiredFileType!: string;
   @Input() buttonLabel = 'อัพโหลดไฟล์';
   @Input() systemFileName = '-'; // รายชื่ออ้างอิงในระบบ เช่น 'หนังสือนำส่งจากสถานศึกษา (ฉบับจริงและวันที่ออกหนังสือไม่เกิน 30 วัน)', 'รูปถ่าย 1 นิ้ว'
   @Input() pageType!: string; // tab ที่เรียกใช้งาน
@@ -108,20 +106,21 @@ export class FileUploadComponent {
       });
   }
 
-  deleteFile() {
+  deleteFile(file: KspFile) {
     const payload = {
-      id: this.fileid,
+      id: file.fileid,
       requesttype: this.requestType,
-      uniquetimestamp: this.uniqueTimestamp,
+      uniquetimestamp: this.uniqueTimestamp ?? file?.uniquetimestamp,
     };
 
     this.uploadService.deleteFile(payload).subscribe((res: any) => {
-      if (res?.returnmessage == 'success') {
-        this.file = null;
+      if (res.returnmessage == 'success') {
+        this.fileid = '';
         this.filename = '';
       }
     });
   }
+
   inValidFileType(type: string) {
     switch (type) {
       case 'image/png':

@@ -1,14 +1,22 @@
 import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { SelfServiceRequestType } from '@ksp/shared/constant';
+import {
+  RefundReason,
+  SelfServiceRequestSubType,
+  SelfServiceRequestType,
+} from '@ksp/shared/constant';
 import {
   ESelfSearchPayload,
   EsSearchPayload,
   SelfRequest,
 } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
-import { replaceEmptyWithNull } from '@ksp/shared/utility';
+import {
+  eSelfCheckProcess,
+  eSelfCheckStatus,
+  replaceEmptyWithNull,
+} from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-refund-list',
@@ -18,6 +26,11 @@ import { replaceEmptyWithNull } from '@ksp/shared/utility';
 export class RefundListComponent {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfRequest>();
+  checkProcess = eSelfCheckProcess;
+  checkStatus = eSelfCheckStatus;
+  SchoolRequestSubType = SelfServiceRequestSubType;
+  JSON = JSON;
+  RefundReason = RefundReason;
 
   constructor(
     private router: Router,

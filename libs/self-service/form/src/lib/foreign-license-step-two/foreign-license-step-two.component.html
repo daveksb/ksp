@@ -1,13 +1,14 @@
 <form [formGroup]="form">
   <div class="border shadow-sm rounded-4 bg-white p-3">
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-3 d-flex align-items-center justify-content-center">
         <self-service-form-upload-image
           [btnLabel]="'Upload Image'"
           [imgSrc]="myImage"
           [uniqueTimestamp]="uniqueTimestamp"
           [isForeignForm]="true"
           (uploadImageComplete)="uploadImageComplete($event)"
+          [isEditMode]="isEditMode"
         ></self-service-form-upload-image>
       </div>
 

@@ -4,10 +4,19 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { SchoolRequestSubType, SchoolRequestType } from '@ksp/shared/constant';
-import { EsSearchPayload, KspRequest } from '@ksp/shared/interface';
-import { ERequestService } from '@ksp/shared/service';
+import {
+  qualificationCareerTypeList,
+  SchoolRequestSubType,
+  SchoolRequestType,
+} from '@ksp/shared/constant';
+import {
+  EsSearchPayload,
+  KspRequest,
+  SchRequestSearchFilter,
+} from '@ksp/shared/interface';
+import { ERequestService, LoaderService } from '@ksp/shared/service';
 import { checkProcess, checkStatus } from '@ksp/shared/utility';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'ksp-e-qualification-approve-list',
@@ -15,17 +24,17 @@ import { checkProcess, checkStatus } from '@ksp/shared/utility';
   styleUrls: ['./e-qualification-approve-list.component.scss'],
 })
 export class EQualificationApproveListComponent implements AfterViewInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   requestTypeList = SchoolRequestType.filter((i) => i.id > 2);
   checkProcess = checkProcess;
   checkStatus = checkStatus;
   SchoolRequestSubType = SchoolRequestSubType;
-
+  careerTypeList = qualificationCareerTypeList;
+  displayedColumns: string[] = column;
+  dataSource = new MatTableDataSource<any>();
   form = this.fb.group({
     search: [{ requesttype: '6' }],
   });
-
-  displayedColumns: string[] = column;
-  dataSource = new MatTableDataSource<any>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -33,30 +42,31 @@ export class EQualificationApproveListComponent implements AfterViewInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private eRequestService: ERequestService
+    private eRequestService: ERequestService,
+    private loaderService: LoaderService
   ) {}
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
 
-  search(params: any) {
+  search(params: Partial<SchRequestSearchFilter>) {
     //console.log('params = ', params);
     const payload: EsSearchPayload = {
       systemtype: '2',
       requesttype: '6',
-      requestno: null,
-      careertype: null,
-      name: null,
-      idcardno: null,
-      passportno: null,
-      process: null,
-      status: null,
-      schoolid: null,
+      requestno: params.requestno,
+      careertype: params.careertype,
+      name: params.name,
+      idcardno: params.idcardno,
+      passportno: params.passportno,
+      process: params.process,
+      status: params.status,
+      schoolid: params.schoolid,
       schoolname: null,
       bureauid: null,
-      requestdatefrom: null,
-      requestdateto: null,
+      requestdatefrom: params.requestdatefrom,
+      requestdateto: params.requestdateto,
       offset: '0',
       row: '500',
     };

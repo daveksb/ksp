@@ -18,6 +18,8 @@ import { TopNavComponent, BottomNavComponent } from '@ksp/shared/menu';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
 import { EServiceLicenseSearchComponent } from '@ksp/shared/search';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
+import { SubstitueLicenseConfirmComponent } from './substitue-license-confirm/substitue-license-confirm.component';
+import { ValidateKspRequestComponent } from '@ksp/e-service/e-license/approve-ksp-request';
 
 export const routes: Route[] = [
   {
@@ -41,6 +43,10 @@ export const routes: Route[] = [
         path: 'approve-detail/:id',
         component: SubstituteLicenseDetailComponent,
       },
+      {
+        path: 'approve-confirm/:id',
+        component: SubstitueLicenseConfirmComponent,
+      },
     ],
   },
 ];
@@ -62,10 +68,12 @@ export const routes: Route[] = [
     SelfServiceFormModule,
     BottomNavComponent,
     LicenseCheckComponent,
+    ValidateKspRequestComponent,
   ],
   declarations: [
     SubstituteLicenseListComponent,
     SubstituteLicenseDetailComponent,
+    SubstitueLicenseConfirmComponent,
   ],
   exports: [SubstituteLicenseListComponent, SubstituteLicenseDetailComponent],
 })

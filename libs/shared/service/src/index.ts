@@ -19,3 +19,5 @@ export { EUniService } from './e-service/e-uni.service';
 
 export { UniRequestService } from './uni-service/uni-request.service';
 export { UniInfoService } from './uni-service/uni-info.service';
+
+export { LoaderService } from './loader.service';

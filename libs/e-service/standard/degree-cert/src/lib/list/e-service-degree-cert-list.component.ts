@@ -9,7 +9,7 @@ import { map } from 'rxjs';
 import { FormBuilder } from '@angular/forms';
 import { thaiDate } from '@ksp/shared/utility';
 import { EUniApproveProcess } from '@ksp/shared/constant';
-import _, { includes } from 'lodash';
+import _ from 'lodash';
 @Component({
   selector: 'e-service-degree-cert-list',
   templateUrl: './e-service-degree-cert-list.component.html',
@@ -218,37 +218,9 @@ export class EServiceDegreeCertListComponent
   lastStep(row: any) {
     this.router.navigate(['/degree-cert', 'final-result', row?.key]);
   }
-  getVerify(e: any) {
-    let classStatus = 'verify__status';
-    let status: any = _.find(EUniApproveProcess, {
-      requestType: _.toNumber(e?.requestType),
-      processId: _.toNumber(e?.process),
-    });
-    status = _.find(status?.status, { id: _.toNumber(e?.status) });
-    if (!status) {
-      classStatus = 'edit__status';
-    }
-    return `<span class="rounded-pill d-flex justify-content-center ${classStatus}">${
-      status?.sname || 'แก้ไข'
-    }</span>`;
-  }
-  getConsider(e: any) {
-    let classStatus = 'verify__status';
-    let status: any = _.find(EUniApproveProcess, {
-      requestType: _.toNumber(e?.requestType),
-      processId: _.toNumber(e?.process),
-    });
-    status = _.find(status?.status, { id: _.toNumber(e?.status) });
-    if (!status) {
-      classStatus = 'edit__status';
-    }
-    return `<span class="rounded-pill d-flex justify-content-center ${classStatus}">${
-      status?.sname || 'แก้ไข'
-    }</span>`;
-  }
   isSelect(row: any) {
     if (this.pageType === 1) {
-      return ['3', '2'].includes(row?.process);
+      return row?.process == "3"
     }
     return true;
   }

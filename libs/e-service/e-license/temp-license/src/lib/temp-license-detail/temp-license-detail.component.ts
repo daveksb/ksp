@@ -22,7 +22,6 @@ import {
 import { parseJson } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
-import { TempLicenseDetailService } from './e-temp-license-detail.service';
 import localForage from 'localforage';
 import {
   Amphur,
@@ -34,6 +33,7 @@ import {
   Province,
   Tambol,
 } from '@ksp/shared/interface';
+import { TempLicenseDetailService } from './temp-license-detail.service';
 
 export class KspApprovePersistData {
   checkDetail: any = null;
@@ -42,8 +42,8 @@ export class KspApprovePersistData {
 @UntilDestroy()
 @Component({
   selector: 'e-service-temp-license-detail',
-  templateUrl: './e-temp-license-detail.component.html',
-  styleUrls: ['./e-temp-license-detail.component.scss'],
+  templateUrl: './temp-license-detail.component.html',
+  styleUrls: ['./temp-license-detail.component.scss'],
 })
 export class ETempLicenseDetailComponent implements OnInit {
   verifyChoice: any[] = [];
@@ -67,6 +67,7 @@ export class ETempLicenseDetailComponent implements OnInit {
   requestData = new KspRequest();
   userInfoFormType: number = UserInfoFormType.thai; // control the display field of user info form
   pageType = RequestPageType;
+  forbidden: any;
 
   form = this.fb.group({
     userInfo: [],
@@ -138,9 +139,11 @@ export class ETempLicenseDetailComponent implements OnInit {
     };
     localForage.setItem('checkRequestData', saveData);
   }
+
   mappingCheckResultAttachment(groups: FileGroup[]): KspCheckResult[][] {
     return groups.map((group) => group.checkresult || []);
   }
+
   checkRequestId() {
     this.route.paramMap.pipe(untilDestroyed(this)).subscribe((params) => {
       this.requestId = Number(params.get('id'));
@@ -164,6 +167,7 @@ export class ETempLicenseDetailComponent implements OnInit {
       this.patchReasonInfo(parseJson(res.reasoninfo));
       this.patchSchoolAddrress(parseJson(res.schooladdrinfo));
       this.patchFileInfo(parseJson(res.fileinfo));
+      this.patchProhibitProperty(parseJson(res.prohibitproperty));
     });
   }
 
@@ -189,7 +193,9 @@ export class ETempLicenseDetailComponent implements OnInit {
     }
     //console.log('attach files = ', this.attachFiles);
   }
-
+  patchProhibitProperty(res: any) {
+    this.forbidden = res;
+  }
   patchReasonInfo(res: any) {
     this.form.controls.reasoninfo.patchValue(res);
   }

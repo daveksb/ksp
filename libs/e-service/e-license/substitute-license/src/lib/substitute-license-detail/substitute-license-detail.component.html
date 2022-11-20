@@ -1,7 +1,4 @@
-<ksp-top-nav
-  ><span header>ยื่นใบคำขอ</span
-  ><span subHeader>ขอใบแทนใบอนุญาตประกอบวิชาชีพ</span></ksp-top-nav
->
+<ksp-top-nav><span header>ยื่นใบคำขอ</span><span subHeader>ขอใบแทนใบอนุญาตประกอบวิชาชีพ</span></ksp-top-nav>
 
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
@@ -9,14 +6,12 @@
     <div class="bg-white px-4 py-2">
       <ksp-request-header-info
         [requestDate]="'requestDate'"
-        [requestNumber]="'requestNo'"
-      ></ksp-request-header-info>
+        [requestNumber]="'requestNo'"></ksp-request-header-info>
       <hr />
       <div class="row align-items-center bg-light py-2 mx-0 mb-3">
         <div class="col-lg-3 my-auto">
           <self-service-form-upload-image
-            [isEditMode]="false"
-          ></self-service-form-upload-image>
+            [isEditMode]="false"></self-service-form-upload-image>
         </div>
         <div class="col-md mt-md-0 mt-2">
           <ksp-form-user-info
@@ -25,16 +20,15 @@
             [mode]="'view'"
             [prefixList]="prefixList$ | async"
             [nationList]="nationalitys$ | async"
-            [isSelfService]="true"
-          ></ksp-form-user-info>
+            [isSelfService]="true"></ksp-form-user-info>
         </div>
       </div>
 
       <mat-tab-group
         class="tab-group mb-3"
         animationDuration="0ms"
-        [selectedIndex]="0"
-      >
+        (selectedTabChange)="tabChanged($event)"
+        [selectedIndex]="0">
         <mat-tab label="ที่อยู่" class="tab-content">
           <ksp-form-address
             [mode]="'view'"
@@ -42,8 +36,7 @@
             [isDarkMode]="false"
             [provinces]="provinces$ | async"
             [amphurs]="amphurs1$ | async"
-            [tumbols]="tumbols1$ | async"
-          >
+            [tumbols]="tumbols1$ | async">
             <span>ที่อยู่ทะเบียนบ้าน</span>
           </ksp-form-address>
           <hr />
@@ -53,16 +46,13 @@
             [isDarkMode]="false"
             [provinces]="provinces$ | async"
             [amphurs]="amphurs2$ | async"
-            [tumbols]="tumbols2$ | async"
-          >
+            [tumbols]="tumbols2$ | async">
             <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
-            <span class="text-danger ms-1 fs-6"
-              >*กรุณากรอกข้อมูลตำบล, อำเภอ</span
-            >
-            <div class="d-flex align-items-center">
+            <span class="text-danger ms-1 fs-6">*กรุณากรอกข้อมูลตำบล, อำเภอ</span>
+            <!-- <div class="d-flex align-items-center">
               <input type="checkbox" class="me-1" />
               <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
-            </div>
+            </div> -->
           </ksp-form-address>
         </mat-tab>
 
@@ -73,30 +63,33 @@
             [provinces]="provinces$ | async"
             [amphurs]="amphurs3$ | async"
             [tumbols]="tumbols3$ | async"
-          >
+            [bureaus]="bureau$ | async">
           </self-service-form-user-workplace>
         </mat-tab>
 
         <mat-tab label="วัตถุประสงค์ขอใบแทน">
           <self-service-substitute-objective
             [mode]="'view'"
-            formControlName="replaceReasonInfo"
-          ></self-service-substitute-objective>
+            formControlName="replaceReasonInfo"></self-service-substitute-objective>
           <br />
           <ksp-form-attachment
             [title]="'กรุณาแนบหลักฐานประกอบ'"
-            [uniqueTimestamp]="'uniqueTimestamp'"
-          ></ksp-form-attachment>
+            [uniqueTimestamp]="'uniqueTimestamp'"></ksp-form-attachment>
         </mat-tab>
       </mat-tab-group>
     </div>
-    <div [formGroup]="form2" class="bg-white px-4 py-3 mt-3">
-      <e-service-license-check
-        formControlName="verifyResult"
-        [headerTitle]="'ผลการตรวจสอบ'"
-        [choices]="approveChoices"
-      ></e-service-license-check>
-    </div>
+
+    <ng-container
+      formArrayName="checkResult"
+      *ngFor="let c of checkResultFormArray.controls; let i = index">
+      <div
+        class="bg-white px-3 py-2 mt-3"
+        [ngClass]="{ hide: (selectedTab.index || 0) !== i }">
+        <e-service-license-check
+          [choices]="verifyChoice"
+          [formControlName]="i"></e-service-license-check>
+      </div>
+    </ng-container>
   </div>
 </form>
 
@@ -104,5 +97,7 @@
   <ksp-bottom-nav
     [showCenterButtons]="true"
     [isFirstPage]="true"
-  ></ksp-bottom-nav>
+    [disableNext]="false"
+    (nextClicked)="next()"
+    (cancelClicked)="cancel()"></ksp-bottom-nav>
 </div>

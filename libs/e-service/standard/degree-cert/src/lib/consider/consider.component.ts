@@ -150,7 +150,7 @@ export class ConsiderComponent implements OnInit {
         .pipe(
           map((res) => {
             this.daftRequest = res;
-            this.allowEdit =  ["2","3","4"].includes(res?.requestprocess)
+            this.allowEdit =  ["3","4"].includes(res?.requestprocess)
             return this.uniInfoService.mappingUniverSitySelectByIdWithForm(res);
           })
         )
