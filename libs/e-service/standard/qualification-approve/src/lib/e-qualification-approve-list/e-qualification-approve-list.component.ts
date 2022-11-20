@@ -5,7 +5,11 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SchoolRequestSubType, SchoolRequestType } from '@ksp/shared/constant';
-import { EsSearchPayload, KspRequest } from '@ksp/shared/interface';
+import {
+  EsSearchPayload,
+  KspRequest,
+  SchRequestSearchFilter,
+} from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 import { checkProcess, checkStatus } from '@ksp/shared/utility';
 
@@ -40,23 +44,23 @@ export class EQualificationApproveListComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  search(params: any) {
+  search(params: Partial<SchRequestSearchFilter>) {
     //console.log('params = ', params);
     const payload: EsSearchPayload = {
       systemtype: '2',
       requesttype: '6',
-      requestno: null,
-      careertype: null,
-      name: null,
-      idcardno: null,
-      passportno: null,
-      process: null,
-      status: null,
-      schoolid: null,
+      requestno: params.requestno,
+      careertype: params.careertype,
+      name: params.name,
+      idcardno: params.idcardno,
+      passportno: params.passportno,
+      process: params.process,
+      status: params.status,
+      schoolid: params.schoolid,
       schoolname: null,
       bureauid: null,
-      requestdatefrom: null,
-      requestdateto: null,
+      requestdatefrom: params.requestdatefrom,
+      requestdateto: params.requestdateto,
       offset: '0',
       row: '500',
     };

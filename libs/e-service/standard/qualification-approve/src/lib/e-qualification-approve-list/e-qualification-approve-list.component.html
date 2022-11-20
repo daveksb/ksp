@@ -49,7 +49,7 @@
           <ng-container matColumnDef="requestno">
             <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
             <td mat-cell *matCellDef="let element">
-              {{ element.requestno }}
+              {{ element.requestno | reqNoFormat }}
             </td>
           </ng-container>
 

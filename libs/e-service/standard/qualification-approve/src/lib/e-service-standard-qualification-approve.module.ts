@@ -8,7 +8,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import { TopNavComponent, BottomNavComponent } from '@ksp/shared/menu';
-import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { KspRequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 import {
   EServiceRequestSearchComponent,
   RequestSearchComponent,
@@ -63,6 +63,7 @@ export const routes: Route[] = [
     RequestSearchComponent,
     MatPaginatorModule,
     ThaiDatePipe,
+    KspRequestNoPipe,
     MatSortModule,
   ],
   declarations: [
