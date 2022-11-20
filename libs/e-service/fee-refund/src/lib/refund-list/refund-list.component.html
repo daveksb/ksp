@@ -117,12 +117,14 @@
 
         <ng-container matColumnDef="ssn">
           <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
-          <td mat-cell *matCellDef="let element">{{ element.ssn }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.idcardno }}</td>
         </ng-container>
 
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
-          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+          <td mat-cell *matCellDef="let element">
+            {{ element.firstnameth }} {{ element.lastnameth }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="feeType">
@@ -133,20 +135,21 @@
         <ng-container matColumnDef="profession">
           <th mat-header-cell *matHeaderCellDef>ประเภทวิชาชีพ</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.profession }}
+            {{ SchoolRequestSubType[+element.careertype] }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="reason">
           <th mat-header-cell *matHeaderCellDef>เหตุผลในการคืนเงิน</th>
-          <td mat-cell *matCellDef="let element">{{ element.reason }}</td>
+          <td mat-cell *matCellDef="let element">{{ RefundReason[+JSON.parse(element.feerefundinfo)?.refundreason] }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="process">
           <th mat-header-cell *matHeaderCellDef>ขั้นตอน</th>
           <td mat-cell *matCellDef="let element">
             {{
-            checkProcess(+element.process)
+            checkProcess(+element.process, +element.requesttype)
             ?.processName
             }}
           </td>
@@ -159,7 +162,8 @@
             {{
             checkStatus(
             +element.process,
-            +element.status
+            +element.status,
+            +element.requesttype
             )?.ename
             }}
           </td>

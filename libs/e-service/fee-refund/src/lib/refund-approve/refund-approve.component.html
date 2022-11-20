@@ -41,6 +41,7 @@
     <div [formGroup]="form">
       <ng-container
         *ngIf="
+        saveData.requestData.process === '1' ||
           saveData.requestData.process === '2' ||
           saveData.requestData.process === '3' ||
           (saveData.requestData.process === '4' &&
