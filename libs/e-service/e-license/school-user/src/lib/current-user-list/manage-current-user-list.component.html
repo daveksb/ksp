@@ -6,6 +6,7 @@
 
 <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height full-width-2">
   <ksp-e-service-user-search
+    [bureaus]="bureau$ | async"
     (clear)="clear()"
     (search)="search($event)"
     [activeStatusList]="[
@@ -60,7 +61,7 @@
 
         <ng-container matColumnDef="province">
           <th mat-header-cell *matHeaderCellDef>จังหวัด</th>
-          <td mat-cell *matCellDef="let element">{{ element.province }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.provincename }}</td>
         </ng-container>
 
         <ng-container matColumnDef="requeststatus">

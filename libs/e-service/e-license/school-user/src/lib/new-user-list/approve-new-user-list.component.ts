@@ -33,7 +33,6 @@ export class ApproveNewUserListComponent implements AfterViewInit, OnInit {
   selectedUniversity = '';
   bureau$!: Observable<any>;
   searchNotFound = false;
-  xxx = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;

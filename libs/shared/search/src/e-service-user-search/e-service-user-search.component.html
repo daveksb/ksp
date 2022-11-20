@@ -5,6 +5,7 @@
     <div class="bg-light p-3">
       <ng-container *ngIf="showInstitution">
         <ksp-basic-institute-search
+          [bureaus]="bureaus"
           formControlName="institution"
         ></ksp-basic-institute-search
       ></ng-container>
