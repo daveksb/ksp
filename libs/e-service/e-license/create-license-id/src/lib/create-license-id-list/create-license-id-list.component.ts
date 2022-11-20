@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { selfOccupyList } from '@ksp/shared/constant';
 import { SelfApproveList } from '@ksp/shared/interface';
 import { ERequestService, LoaderService } from '@ksp/shared/service';
+import { formatDatePayload } from '@ksp/shared/utility';
 import localForage from 'localforage';
 import { Subject } from 'rxjs';
 
@@ -38,18 +39,19 @@ export class CreateLicenseIdListComponent {
 
   search() {
     const form: any = this.form.value;
-    const payload = {
+    const payload = formatDatePayload({
       groupno: form.groupno,
       process: null, //params.process,
       status: null, //params.status,
       isforeign: null,
       careertype: form.careertype,
       createdate: form.createdate,
-      approvedatefrom: form.approvedateto,
-      approvedateto: form.approvedatefrom,
+      approvedatefrom: form.approvedatefrom,
+      approvedateto: form.approvedateto,
       offset: '0',
       row: '500',
-    };
+    });
+    console.log('payload = ', payload);
     this.requestService.searchSelfApproveList(payload).subscribe((res) => {
       res = res.map((i) => {
         return { ...i, count: JSON.parse(i.requestlist || '').length };
