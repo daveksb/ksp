@@ -1,3 +1,8 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav
   ><span header> หน้าแรก </span
   ><span subHeader>ระบบงานทะเบียนและใบอนุญาต</span></ksp-top-nav
@@ -7,11 +12,11 @@
   <div class="box-header">
     ค้นหากลุ่มบัญชีรายชื่อผู้ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพทางการศึกษา
   </div>
-  <div class="bg-white px-3 py-3">
+  <div [formGroup]="form" class="bg-white px-3 py-3">
     <div class="row mb-2">
       <div class="col">
         <label class="form-label">กลุ่มที่ / Group No.</label>
-        <input type="text" class="form-control" />
+        <input type="text" class="form-control" formControlName="groupno" />
       </div>
       <div class="col">
         <label class="form-label">วันเดือนปีที่ทำรายการ</label>
@@ -22,6 +27,7 @@
             autocomplete="off"
             class="form-control form-date"
             placeholder="วว/ดด/ปปปป"
+            formControlName="createdate"
           />
           <mat-datepicker-toggle
             class="button-date"
@@ -35,20 +41,18 @@
     <div class="row mb-2">
       <div class="col">
         <label class="form-label">ประเภทใบอนุญาตประกอบวิชาชีพ</label>
-        <select class="form-select">
+        <select formControlName="careertype" class="form-select">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option *ngFor="let l of licenseTypes" [value]="l.id">
+            {{ l.name }}
+          </option>
         </select>
       </div>
       <div class="col">
         <label class="form-label">กลุ่มผู้ขอใบอนุญาตประกอบวิชาชีพ</label>
-        <select class="form-select">
+        <select formControlName="isforeign" class="form-select">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option value="1">ชาวไทย</option>
         </select>
       </div>
     </div>
@@ -65,6 +69,7 @@
             autocomplete="off"
             class="form-control form-date"
             placeholder="วว/ดด/ปปปป"
+            formControlName="approvedatefrom"
           />
           <mat-datepicker-toggle
             class="button-date"
@@ -85,6 +90,7 @@
             autocomplete="off"
             class="form-control form-date"
             placeholder="วว/ดด/ปปปป"
+            formControlName="approvedateto"
           />
           <mat-datepicker-toggle
             class="button-date"

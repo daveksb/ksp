@@ -18,7 +18,7 @@ import {
   RequestSearchComponent,
 } from '@ksp/shared/search';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { KspRequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
+import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 import { MatSortModule } from '@angular/material/sort';
 
 export const routes: Routes = [
@@ -64,7 +64,7 @@ export const routes: Routes = [
     EServiceRequestSearchComponent,
     MatPaginatorModule,
     ThaiDatePipe,
-    KspRequestNoPipe,
+    RequestNoPipe,
     RequestSearchComponent,
     MatSortModule,
   ],

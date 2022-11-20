@@ -25,7 +25,6 @@ import {
   getCookie,
   thaiDate,
   hasRejectedRequest,
-  addDate,
   changeToThaiNumber,
   changeToEnglishMonth,
 } from '@ksp/shared/utility';

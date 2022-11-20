@@ -1,10 +1,14 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { selfOccupyList } from '@ksp/shared/constant';
 import { SelfApproveList } from '@ksp/shared/interface';
-import { ERequestService } from '@ksp/shared/service';
+import { ERequestService, LoaderService } from '@ksp/shared/service';
+import { formatDatePayload } from '@ksp/shared/utility';
 import localForage from 'localforage';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'ksp-create-license-id-list',
@@ -12,24 +16,42 @@ import localForage from 'localforage';
   styleUrls: ['./create-license-id-list.component.scss'],
 })
 export class CreateLicenseIdListComponent {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfApproveList>();
   selection = new SelectionModel<any>(true, []);
+  licenseTypes = selfOccupyList.filter((i) => i.id < 5);
+  form = this.fb.group({
+    groupno: [],
+    createdate: [],
+    careertype: [],
+    isforeign: ['1'],
+    approvedatefrom: [],
+    approvedateto: [],
+  });
 
   constructor(
     private router: Router,
-    private requestService: ERequestService
+    private fb: FormBuilder,
+    private requestService: ERequestService,
+    private loaderService: LoaderService
   ) {}
 
   search() {
-    const payload = {
-      groupno: null, //params.groupno,
+    const form: any = this.form.value;
+    const payload = formatDatePayload({
+      groupno: form.groupno,
       process: null, //params.process,
       status: null, //params.status,
-      createdate: null, //params.createdate,
+      isforeign: null,
+      careertype: form.careertype,
+      createdate: form.createdate,
+      approvedatefrom: form.approvedatefrom,
+      approvedateto: form.approvedateto,
       offset: '0',
       row: '500',
-    };
+    });
+    console.log('payload = ', payload);
     this.requestService.searchSelfApproveList(payload).subscribe((res) => {
       res = res.map((i) => {
         return { ...i, count: JSON.parse(i.requestlist || '').length };
@@ -39,6 +61,7 @@ export class CreateLicenseIdListComponent {
   }
 
   clear() {
+    this.form.reset();
     this.dataSource.data = [];
   }
 

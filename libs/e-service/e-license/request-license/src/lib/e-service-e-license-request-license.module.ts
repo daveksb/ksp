@@ -28,7 +28,7 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { RequestLicenseApproveDetailComponent } from './request-license-approve-detail/request-license-approve-detail.component';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 import { RequestLicenseApproveConfirmComponent } from './request-license-approve-confirm/request-license-approve-confirm.component';
 import {
   ConsiderKspRequestComponent,
@@ -125,6 +125,7 @@ export const routes: Route[] = [
     MatPaginatorModule,
     RequestSearchComponent,
     ThaiDatePipe,
+    RequestNoPipe,
     EServiceLicenseSearchComponent,
     ValidateKspRequestComponent,
     ConsiderKspRequestComponent,

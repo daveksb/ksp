@@ -8,5 +8,5 @@
     "types": []
   },
   "exclude": ["jest.config.ts", "**/*.test.ts", "**/*.spec.ts"],
-  "include": ["**/*.ts"]
+  "include": ["**/*.ts", "../service/src/loader.service.ts"]
 }

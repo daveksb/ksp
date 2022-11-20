@@ -2,10 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
-  DEFAULT_REQUEST_TYPE_LIST,
-  SelfServiceRequestSubType,
-} from '@ksp/shared/constant';
-import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';

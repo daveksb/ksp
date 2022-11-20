@@ -27,17 +27,6 @@ const fileUrls: FileUploadUrls = {
   download: '/kspstaff/schrequestfileselectbyid',
 };
 
-/* class PickDateAdapter extends NativeDateAdapter {
-  override format(date: Date, displayFormat: any): string {
-    if (displayFormat === 'input') {
-      return formatDate(date, 'dd-mm-yyyy', this.locale);
-    } else {
-      return date.toDateString();
-    }
-    return date.toDateString();
-  }
-} */
-
 @NgModule({
   declarations: [AppComponent],
   imports: [

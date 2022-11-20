@@ -25,7 +25,7 @@ import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TempLicenseApproveListComponent } from './temp-license-approve-list/temp-license-approve-list.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { KspRequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
+import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 import { RequestSearchComponent } from '@ksp/shared/search';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSortModule } from '@angular/material/sort';
@@ -34,6 +34,7 @@ import {
   ConsiderKspRequestComponent,
 } from '@ksp/e-service/e-license/approve-ksp-request';
 import { ETempLicenseListComponent } from './temp-license-list/temp-license-list.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   imports: [
@@ -44,6 +45,7 @@ import { ETempLicenseListComponent } from './temp-license-list/temp-license-list
     SharedFormOthersModule,
     BottomNavComponent,
     RequestHeaderInfoComponent,
+    MatProgressSpinnerModule,
     TopNavComponent,
     MatTableModule,
     MatIconModule,
@@ -58,7 +60,7 @@ import { ETempLicenseListComponent } from './temp-license-list/temp-license-list
     MatSortModule,
     ValidateKspRequestComponent,
     ConsiderKspRequestComponent,
-    KspRequestNoPipe,
+    RequestNoPipe,
     ForbiddenPropertyFormComponent,
   ],
   declarations: [
