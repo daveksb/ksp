@@ -75,7 +75,6 @@ export class ForbiddenPropertyFormComponent
   }
 
   ngOnInit(): void {
-    console.log(this.input);
     this.form.valueChanges.subscribe((res) => {
       this.prisonSelected = Number(res['prison']);
     });

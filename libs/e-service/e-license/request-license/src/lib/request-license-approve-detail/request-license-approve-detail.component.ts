@@ -13,7 +13,7 @@ import {
 import { parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
-const FORM_TAB_COUNT = 5;
+const FORM_TAB_COUNT = 6;
 @Component({
   selector: 'ksp-request-license-approve-detail',
   templateUrl: './request-license-approve-detail.component.html',
@@ -135,7 +135,6 @@ export class RequestLicenseApproveDetailComponent
 
     if (data.experienceinfo) {
       const experienceInfo = parseJson(data.experienceinfo);
-      console.log(experienceInfo);
       this.form.controls.experience.patchValue({ ...experienceInfo });
     }
   }

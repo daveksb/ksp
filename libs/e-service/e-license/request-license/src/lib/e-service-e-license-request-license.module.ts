@@ -14,7 +14,10 @@ import {
   FormUploadImageComponent,
   SelfServiceFormModule,
 } from '@ksp/self-service/form';
-import { SharedFormOthersModule } from '@ksp/shared/form/others';
+import {
+  ForbiddenPropertyFormComponent,
+  SharedFormOthersModule,
+} from '@ksp/shared/form/others';
 import { TopNavComponent, BottomNavComponent } from '@ksp/shared/menu';
 import {
   EServiceLicenseCreateGroupSearchComponent,
@@ -43,6 +46,7 @@ import { RequestLicenseApprovePrintComponent } from './request-license-approve-p
 import { RequestLicenseApproveSaveResultComponent } from './request-license-approve-save-result/request-license-approve-save-result.component';
 import { RequestLicenseApproveKmvComponent } from './request-license-approve-kmv/request-license-approve-kmv.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export const routes: Route[] = [
   {
@@ -134,6 +138,7 @@ export const routes: Route[] = [
     EServiceLicenseSaveResultComponent,
     RequestLicenseApproveSummaryTableComponent,
     MatCheckboxModule,
+    ForbiddenPropertyFormComponent,
   ],
   declarations: [
     RequestLicenseApproveListComponent,
@@ -147,6 +152,10 @@ export const routes: Route[] = [
     RequestLicenseApprovePrintComponent,
     RequestLicenseApproveSaveResultComponent,
     RequestLicenseApproveKmvComponent,
+  ],
+  providers: [
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+    { provide: MatDialogRef, useValue: {} },
   ],
 })
 export class EServiceELicenseRequestLicenseModule {}

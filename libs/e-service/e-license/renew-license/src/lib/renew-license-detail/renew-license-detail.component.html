@@ -136,6 +136,15 @@
             [workingInfo]="workingInfoFiles"
           ></self-service-standard-working>
         </mat-tab>
+
+        <mat-tab label="ลักษณะต้องห้าม">
+          <div>
+            <ksp-forbidden-property
+              [input]="prohibitProperty"
+              [mode]="'view'"
+            ></ksp-forbidden-property>
+          </div>
+        </mat-tab>
       </mat-tab-group>
     </div>
     <ng-container
