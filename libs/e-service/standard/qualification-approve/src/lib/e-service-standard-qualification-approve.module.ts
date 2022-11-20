@@ -19,6 +19,7 @@ import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container
 import { EQualificationApproveListComponent } from './e-qualification-approve-list/e-qualification-approve-list.component';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { MatSortModule } from '@angular/material/sort';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export const routes: Route[] = [
   {
@@ -57,6 +58,7 @@ export const routes: Route[] = [
     MatDialogModule,
     ReactiveFormsModule,
     MatTableModule,
+    MatProgressSpinnerModule,
     EServiceRequestSearchComponent,
     LicenseCheckComponent,
     BottomNavComponent,
@@ -70,9 +72,5 @@ export const routes: Route[] = [
     EQualificationApproveListComponent,
     EQualificationApproveDetailComponent,
   ],
-  /*   exports: [
-    EQualificationApproveListComponent,
-    EQualificationApproveDetailComponent,
-  ], */
 })
 export class EServiceStandardQualificationApproveModule {}

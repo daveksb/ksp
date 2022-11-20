@@ -16,6 +16,7 @@ import {
 } from '@ksp/shared/interface';
 import { ERequestService, LoaderService } from '@ksp/shared/service';
 import { checkProcess, checkStatus } from '@ksp/shared/utility';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'ksp-e-qualification-approve-list',
@@ -23,6 +24,7 @@ import { checkProcess, checkStatus } from '@ksp/shared/utility';
   styleUrls: ['./e-qualification-approve-list.component.scss'],
 })
 export class EQualificationApproveListComponent implements AfterViewInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   requestTypeList = SchoolRequestType.filter((i) => i.id > 2);
   checkProcess = checkProcess;
   checkStatus = checkStatus;

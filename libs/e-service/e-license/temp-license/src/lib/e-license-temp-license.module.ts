@@ -34,6 +34,7 @@ import {
   ConsiderKspRequestComponent,
 } from '@ksp/e-service/e-license/approve-ksp-request';
 import { ETempLicenseListComponent } from './temp-license-list/temp-license-list.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   imports: [
@@ -44,6 +45,7 @@ import { ETempLicenseListComponent } from './temp-license-list/temp-license-list
     SharedFormOthersModule,
     BottomNavComponent,
     RequestHeaderInfoComponent,
+    MatProgressSpinnerModule,
     TopNavComponent,
     MatTableModule,
     MatIconModule,
