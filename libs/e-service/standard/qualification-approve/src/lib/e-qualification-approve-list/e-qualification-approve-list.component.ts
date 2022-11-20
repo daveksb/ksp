@@ -4,7 +4,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { SchoolRequestSubType, SchoolRequestType } from '@ksp/shared/constant';
+import {
+  qualificationCareerTypeList,
+  SchoolRequestSubType,
+  SchoolRequestType,
+} from '@ksp/shared/constant';
 import {
   EsSearchPayload,
   KspRequest,
@@ -23,13 +27,12 @@ export class EQualificationApproveListComponent implements AfterViewInit {
   checkProcess = checkProcess;
   checkStatus = checkStatus;
   SchoolRequestSubType = SchoolRequestSubType;
-
+  careerTypeList = qualificationCareerTypeList;
+  displayedColumns: string[] = column;
+  dataSource = new MatTableDataSource<any>();
   form = this.fb.group({
     search: [{ requesttype: '6' }],
   });
-
-  displayedColumns: string[] = column;
-  dataSource = new MatTableDataSource<any>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;

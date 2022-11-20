@@ -15,7 +15,8 @@
       <div class="mb-3">
         <ksp-school-request-search
           formControlName="search"
-          [disableRequestType]="false"
+          [disableRequestType]="true"
+          [careerTypeList]="careerTypeList"
           [requestTypeList]="requestTypeList"
           (clear)="clear()"
           (search)="search($event)"
