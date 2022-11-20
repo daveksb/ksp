@@ -14,7 +14,7 @@ import {
   KspRequest,
   SchRequestSearchFilter,
 } from '@ksp/shared/interface';
-import { ERequestService } from '@ksp/shared/service';
+import { ERequestService, LoaderService } from '@ksp/shared/service';
 import { checkProcess, checkStatus } from '@ksp/shared/utility';
 
 @Component({
@@ -40,7 +40,8 @@ export class EQualificationApproveListComponent implements AfterViewInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private eRequestService: ERequestService
+    private eRequestService: ERequestService,
+    private loaderService: LoaderService
   ) {}
 
   ngAfterViewInit() {

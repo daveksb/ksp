@@ -100,7 +100,7 @@
 
     <div class="d-flex justify-content-end mb-2 mt-4">
       <button
-        (click)="clear.emit(true)"
+        (click)="form.reset(); clear.emit(true)"
         type="button"
         class="btn border-primary text-primary bg-white"
       >

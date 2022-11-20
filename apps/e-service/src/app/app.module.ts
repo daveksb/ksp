@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {
   CacheInterceptor,
+  LoadingInterceptor,
   TokenFailInterceptor,
   TokenHandleInterceptor,
 } from '@ksp/shared/interceptor';
@@ -45,6 +46,11 @@ const fileUrls: FileUploadUrls = {
     MatDialogModule,
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true,
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenHandleInterceptor,
