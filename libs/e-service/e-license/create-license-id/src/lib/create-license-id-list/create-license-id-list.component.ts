@@ -1,7 +1,9 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { selfOccupyList } from '@ksp/shared/constant';
 import { SelfApproveList } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 import localForage from 'localforage';
@@ -15,18 +17,28 @@ export class CreateLicenseIdListComponent {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfApproveList>();
   selection = new SelectionModel<any>(true, []);
+  licenseTypes = selfOccupyList.filter((i) => i.id < 5);
+  form = this.fb.group({
+    groupno: [],
+    createdate: [],
+    isforeign: ['1'],
+    approvedatefrom: [],
+    approvedateto: [],
+  });
 
   constructor(
     private router: Router,
+    private fb: FormBuilder,
     private requestService: ERequestService
   ) {}
 
   search() {
+    const form: any = this.form.value;
     const payload = {
-      groupno: null, //params.groupno,
+      groupno: form.groupno,
       process: null, //params.process,
       status: null, //params.status,
-      createdate: null, //params.createdate,
+      createdate: form.createdate,
       offset: '0',
       row: '500',
     };
