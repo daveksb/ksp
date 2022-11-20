@@ -61,6 +61,29 @@ export const careerTypeList = [
   },
 ];
 
+export const qualificationCareerTypeList = [
+  {
+    systemId: 2,
+    id: 1,
+    name: 'ครู',
+  },
+  {
+    systemId: 2,
+    id: 2,
+    name: 'ผู้บริหารสถานศึกษา',
+  },
+  {
+    systemId: 2,
+    id: 3,
+    name: 'ผู้บริหารการศึกษา',
+  },
+  {
+    systemId: 2,
+    id: 4,
+    name: 'ศึกษานิเทศก์',
+  },
+];
+
 export const SchoolRequestProcess: SchRequestProcess[] = [
   //ลงทะเบียนผู้ประสานงาน
   {

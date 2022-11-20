@@ -7,6 +7,7 @@
 <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height full-width-2">
   <form [formGroup]="form">
     <ksp-request-search
+      [bureaus]="bureau$ | async"
       formControlName="search"
       (clear)="clear()"
       (search)="search($event)"
@@ -16,6 +17,7 @@
 
   <div class="bg-white p-3 mt-3">
     <div class="box-header">ผลการค้นหา</div>
+
     <hr />
     <div class="table__scroll">
       <table mat-table matSort [dataSource]="dataSource" matSort>
@@ -58,20 +60,25 @@
           <td mat-cell *matCellDef="let element">{{ element.contactphone }}</td>
         </ng-container>
 
-        <!--         <ng-container matColumnDef="coordinatorname">
+        <ng-container matColumnDef="coordinatorname">
           <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล ผู้แต่งตั้ง</th>
-          <td mat-cell *matCellDef="let element">{{ element.coordinator }}</td>
-        </ng-container> -->
+          <td mat-cell *matCellDef="let element">
+            <!-- {{ element.coordinatorinfo }}
+            {{ element.coordinatorinfo }} -->
+          </td>
+        </ng-container>
 
         <ng-container matColumnDef="schoolname">
           <th mat-header-cell *matHeaderCellDef>โรงเรียน/หน่วยงาน</th>
           <td mat-cell *matCellDef="let element">{{ element.schoolname }}</td>
         </ng-container>
 
-        <!-- <ng-container matColumnDef="provience">
-        <th mat-header-cell *matHeaderCellDef>จังหวัด</th>
-        <td mat-cell *matCellDef="let element"></td>
-      </ng-container> -->
+        <ng-container matColumnDef="provience">
+          <th mat-header-cell *matHeaderCellDef>จังหวัด</th>
+          <td mat-cell *matCellDef="let element">
+            <!-- {{ element.schooladdress }} -->
+          </td>
+        </ng-container>
 
         <ng-container matColumnDef="requestType">
           <th mat-header-cell *matHeaderCellDef>ประเภทใบคำขอ</th>
@@ -103,9 +110,13 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
+      <div *ngIf="searchNotFound" class="fs-5 text-center text-danger mt-2">
+        ไม่พบข้อมูล
+      </div>
     </div>
 
     <mat-paginator
+      [hidden]="!dataSource.data.length"
       [pageSizeOptions]="[25]"
       showFirstLastButtons
       aria-label="Select page of periodic elements"

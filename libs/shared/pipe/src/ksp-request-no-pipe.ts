@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   pure: true,
   standalone: true,
 })
-export class KspRequestNoPipe implements PipeTransform {
+export class RequestNoPipe implements PipeTransform {
   transform(input: string) {
     if (!input.includes('-')) {
       const s1 = input.slice(0, 1);

@@ -32,13 +32,16 @@
       <label class="form-label required">เหตุผลขอคืนเงินค่าธรรมเนียม</label>
       <select class="form-select" formControlName="refundreason">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
-        <option value="1">ขาดคุณสมบัติตามมาตรฐานวิชาชีพ</option>
+        <ng-container *ngFor="let item of keys">
+          <option [value]="item">{{ RefundReason[+item] }}</option>
+        </ng-container>
+        <!-- <option value="1">ขาดคุณสมบัติตามมาตรฐานวิชาชีพ</option>
         <option value="2">ได้รับการยกเว้นค่าธรรมเนียม</option>
         <option value="3">ชำระเงินซ้ำ</option>
         <option value="4">ชำระเงินผิดประเภท</option>
         <option value="5">ขอยกเลิกกการขึ้นทะเบียนรับใบอนุญาต</option>
         <option value="6">ขอยกเลิกการต่ออายุใบอนุญาต</option>
-        <option value="7">อื่นๆ</option>
+        <option value="7">อื่นๆ</option> -->
       </select>
     </div>
   </div>
@@ -49,8 +52,7 @@
         class="form-control"
         type="text"
         placeholder="เหตุผลขอคืนเงินค่าธรรมเนียม"
-        formControlName="otherreason"
-      />
+        formControlName="otherreason" />
     </div>
   </div>
   <div class="row">
@@ -69,17 +71,14 @@
   <div class="row mb-2">
     <span class="col-md-3 d-flex align-items-center">
       <input type="checkbox" class="me-2" formControlName="smsAlert" />
-      <label class="form-label" [class.required]="form.controls.smsAlert.value"
-        >ข้อความแจ้งเตือนผ่านโทรศัพท์มือถือ (SMS)
+      <label class="form-label" [class.required]="form.controls.smsAlert.value">ข้อความแจ้งเตือนผ่านโทรศัพท์มือถือ (SMS)
       </label>
     </span>
     <span class="col-md-3">
       <input class="form-control" type="text" formControlName="smsDetail" />
       <ng-container
-        *ngIf="smsPhone.invalid && (smsPhone.dirty || smsPhone.touched)"
-      >
-        <span class="text-danger" *ngIf="smsPhone.errors?.['pattern']"
-          >{{ validatorMessages.phone }}
+        *ngIf="smsPhone.invalid && (smsPhone.dirty || smsPhone.touched)">
+        <span class="text-danger" *ngIf="smsPhone.errors?.['pattern']">{{ validatorMessages.phone }}
         </span>
       </ng-container>
     </span>
@@ -90,8 +89,7 @@
       <input type="checkbox" class="me-2" formControlName="emailAlert" />
       <label
         class="form-label"
-        [class.required]="form.controls.emailAlert.value"
-        >จดหมายอิเล็กทรอนิกส์ (E-Mail)
+        [class.required]="form.controls.emailAlert.value">จดหมายอิเล็กทรอนิกส์ (E-Mail)
       </label>
     </span>
     <span class="col-md-3">
@@ -99,7 +97,7 @@
       <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
         <span class="text-danger" *ngIf="email.errors?.['email']">{{
           validatorMessages.email
-        }}</span>
+          }}</span>
       </ng-container>
     </span>
   </div>
@@ -140,10 +138,8 @@
       <ng-container
         *ngIf="
           bankAccount.invalid && (bankAccount.dirty || bankAccount.touched)
-        "
-      >
-        <span class="text-danger" *ngIf="bankAccount.errors?.['pattern']"
-          >{{ validatorMessages.bankAccount }}
+        ">
+        <span class="text-danger" *ngIf="bankAccount.errors?.['pattern']">{{ validatorMessages.bankAccount }}
         </span>
       </ng-container>
     </div>

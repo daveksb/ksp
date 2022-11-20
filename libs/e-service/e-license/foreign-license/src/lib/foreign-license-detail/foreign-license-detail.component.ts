@@ -193,7 +193,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
 
 const evidenceFiles: FileGroup[] = [
   {
-    name: '1.สำเนาสัญญาจ้าง',
+    name: '1. สำเนาหนังสือเดินทาง',
     files: [],
   },
 ];

@@ -84,7 +84,7 @@
 
       <ng-container *ngIf="prisonSelected === 1">
         <div class="row row-cols-2">
-          <div class="col offset-4">
+          <div class="col-6 offset-4">
             <input
               class="form-control"
               type="text"
@@ -92,8 +92,9 @@
               formControlName="prisonReason"
             />
           </div>
-          <div class="col offset-4 mt-3">
+          <div class="col-auto offset-4 mt-3">
             <ksp-file-upload
+              [mode]="'view'"
               [buttonLabel]="'อัพโหลดเอกสาร'"
               [uniqueTimestamp]="data.uniqueTimeStamp"
               [systemFileName]="'forbidden-file'"

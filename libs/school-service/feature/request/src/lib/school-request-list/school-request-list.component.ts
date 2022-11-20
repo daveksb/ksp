@@ -12,7 +12,11 @@ import {
   SchoolRequestType,
 } from '@ksp/shared/constant';
 import { PdfRenderComponent } from '@ksp/shared/dialog';
-import { KspRequest, SchRequestSearchFilter } from '@ksp/shared/interface';
+import {
+  KspRequest,
+  SchRequestSearchFilter,
+  SchTempLicense,
+} from '@ksp/shared/interface';
 import { SchoolInfoService, SchoolRequestService } from '@ksp/shared/service';
 import {
   checkProcess,
@@ -21,7 +25,6 @@ import {
   getCookie,
   thaiDate,
   hasRejectedRequest,
-  addDate,
   changeToThaiNumber,
   changeToEnglishMonth,
 } from '@ksp/shared/utility';
@@ -143,16 +146,19 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     }
   }
 
-  licensePdf(element: KspRequest) {
+  getTempLicense(request: KspRequest) {
+    this.requestService.getTempLicense(request.id).subscribe((res) => {
+      console.log('temp license = ', res);
+      this.licensePdf(res);
+    });
+  }
+
+  licensePdf(element: SchTempLicense) {
+    //console.log('element = ', element);
     const position = element?.position;
-    const startDate = new Date(element.processupdatedate || '');
-    const endDate = addDate(
-      new Date(element?.processupdatedate || '') ?? new Date(),
-      0,
-      0,
-      2
-    );
-    const date = new Date(element.requestdate || '');
+    const startDate = new Date(element.licensestartdate || '');
+    const endDate = new Date(element.licenseenddate || '');
+    const date = new Date(element.licensestartdate || '');
     const thai = thaiDate(date);
     const [day, month, year] = thai.split(' ');
     const fulldateth = `${changeToThaiNumber(day)} เดือน ${month} พ.ศ. ${year}`;
@@ -167,15 +173,14 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     const endth = changeToThaiNumber(end);
     const starten = changeToEnglishMonth(start);
     const enden = changeToEnglishMonth(end);
-    const careertype = SchoolRequestSubType[+(element?.careertype ?? '1')];
+    const careertype = SchoolRequestSubType[+(element?.licensetype ?? '1')];
     const careertypeen = SchoolLangMapping[careertype ?? 'ครู'] ?? '';
-    const requestno = element.requestno ?? '';
+    const requestno = element.licenseno ?? '';
     this.schoolInfoService
       .getSchoolInfo(this.schoolId)
       .subscribe((res: any) => {
         const schoolname = res.schoolName;
         const bureauname = res.bureauName;
-
         const schoolapprovename = 'ผู้อํานวยการสถานศึกษา';
         const schoolapprovenameen = 'director of the educational institution';
         this.dialog.open(PdfRenderComponent, {
@@ -183,7 +188,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
           height: '100vh',
           data: {
             pdfType: 99,
-            pdfSubType: element.requesttype,
+            pdfSubType: '3',
             input: {
               schoolapprovename,
               schoolapprovenameen,

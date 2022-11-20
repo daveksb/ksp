@@ -16,6 +16,7 @@ import { RefundConfirmComponent } from './refund-confirm/refund-confirm.componen
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ValidateKspRequestComponent } from '@ksp/e-service/e-license/approve-ksp-request';
 
 const routes: Routes = [
   {
@@ -63,6 +64,7 @@ const routes: Routes = [
     MatDatepickerModule,
     ThaiDatePipe,
     ReactiveFormsModule,
+    ValidateKspRequestComponent,
   ],
   declarations: [
     RefundListComponent,

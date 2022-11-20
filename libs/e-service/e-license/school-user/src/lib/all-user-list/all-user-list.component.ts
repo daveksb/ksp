@@ -18,7 +18,7 @@ export class AllUserListComponent implements OnInit {
   ngOnInit(): void {}
 
   back() {
-    this.router.navigate(['/school', 'new-user']);
+    this.router.navigate(['/school', 'user-detail']);
   }
 
   viewDetail() {

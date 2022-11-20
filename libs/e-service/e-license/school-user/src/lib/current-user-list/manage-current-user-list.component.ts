@@ -24,6 +24,7 @@ export class ManageCurrentUserListComponent implements AfterViewInit {
   selectedUniversity = '';
   mapSchUserStatus = mapSchUserStatus;
   mapRequestType = schoolMapRequestType;
+  searchNotFound = false;
 
   constructor(
     private router: Router,
@@ -51,6 +52,7 @@ export class ManageCurrentUserListComponent implements AfterViewInit {
 
     this.schStaffService.searchSchStaffs(payload).subscribe((res) => {
       if (res && res.length) {
+        this.searchNotFound = false;
         this.dataSource.data = res;
         this.dataSource.sort = this.sort;
         const sortState: Sort = { active: 'schmemberid', direction: 'desc' };
@@ -59,12 +61,14 @@ export class ManageCurrentUserListComponent implements AfterViewInit {
         this.sort.sortChange.emit(sortState);
       } else {
         this.clear();
+        this.searchNotFound = true;
       }
     });
   }
 
   clear() {
     this.dataSource.data = [];
+    this.searchNotFound = false;
   }
 
   goToDetail(id: number) {

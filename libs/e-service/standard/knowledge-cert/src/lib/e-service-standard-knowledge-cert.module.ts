@@ -22,6 +22,8 @@ import {
   EServiceLicenseSearchComponent,
 } from '@ksp/shared/search';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
+import { EKnowledgeCertConfirmComponent } from './e-knowledge-cert-confirm/e-knowledge-cert-confirm.component';
+import { ValidateKspRequestComponent } from '@ksp/e-service/e-license/approve-ksp-request';
 
 export const routes: Routes = [
   {
@@ -44,6 +46,10 @@ export const routes: Routes = [
       {
         path: 'detail/:id',
         component: EKnowledgeCertDetailComponent,
+      },
+      {
+        path: 'confirm/:id',
+        component: EKnowledgeCertConfirmComponent,
       },
     ],
   },
@@ -68,8 +74,13 @@ export const routes: Routes = [
     MatPaginatorModule,
     ThaiDatePipe,
     EServiceLicenseSearchComponent,
+    ValidateKspRequestComponent,
   ],
-  declarations: [EKnowledgeCertListComponent, EKnowledgeCertDetailComponent],
+  declarations: [
+    EKnowledgeCertListComponent,
+    EKnowledgeCertDetailComponent,
+    EKnowledgeCertConfirmComponent,
+  ],
   exports: [EKnowledgeCertListComponent, EKnowledgeCertDetailComponent],
 })
 export class EServiceStandardKnowledgeCertModule {}

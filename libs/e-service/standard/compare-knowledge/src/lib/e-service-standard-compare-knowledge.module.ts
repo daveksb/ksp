@@ -22,6 +22,8 @@ import {
   EServiceLicenseSearchComponent,
 } from '@ksp/shared/search';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
+import { ECompareKnowledgeConfirmComponent } from './e-compare-knowledge-confirm/e-compare-knowledge-confirm.component';
+import { ValidateKspRequestComponent } from '@ksp/e-service/e-license/approve-ksp-request';
 
 export const routes: Routes = [
   {
@@ -44,6 +46,10 @@ export const routes: Routes = [
       {
         path: 'detail/:id',
         component: ECompareKnowledgeDetailComponent,
+      },
+      {
+        path: 'confirm/:id',
+        component: ECompareKnowledgeConfirmComponent,
       },
     ],
   },
@@ -68,10 +74,12 @@ export const routes: Routes = [
     MatPaginatorModule,
     ThaiDatePipe,
     EServiceLicenseSearchComponent,
+    ValidateKspRequestComponent,
   ],
   declarations: [
     ECompareKnowledgeListComponent,
     ECompareKnowledgeDetailComponent,
+    ECompareKnowledgeConfirmComponent,
   ],
   exports: [ECompareKnowledgeListComponent, ECompareKnowledgeDetailComponent],
 })

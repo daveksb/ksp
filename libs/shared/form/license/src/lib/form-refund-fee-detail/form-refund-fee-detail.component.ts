@@ -10,6 +10,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { pairwise } from 'rxjs';
+import { RefundReason } from '@ksp/shared/constant';
 
 @UntilDestroy()
 @Component({
@@ -25,6 +26,7 @@ export class FormRefundFeeDetailComponent
   implements OnInit
 {
   validatorMessages = validatorMessages;
+  RefundReason = RefundReason;
 
   override form = this.fb.group({
     licensetype: [null, Validators.required],
@@ -91,5 +93,10 @@ export class FormRefundFeeDetailComponent
 
   get bankAccount() {
     return this.form.controls.bankAccount;
+  }
+
+  get keys() {
+    const keys = Object.values(this.RefundReason);
+    return keys.slice(keys.length / 2);
   }
 }

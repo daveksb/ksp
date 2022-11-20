@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { KspRequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
+import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 
 @Component({
   selector: 'ksp-request-header-info',
   templateUrl: './request-header-info.component.html',
   styleUrls: ['./request-header-info.component.scss'],
   standalone: true,
-  imports: [CommonModule, ThaiDatePipe, KspRequestNoPipe],
+  imports: [CommonModule, ThaiDatePipe, RequestNoPipe],
 })
 export class RequestHeaderInfoComponent {
   @Input() requestLabel1 = 'วันที่ทำรายการ';

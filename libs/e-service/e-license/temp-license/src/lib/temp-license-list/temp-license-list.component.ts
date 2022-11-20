@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -16,7 +16,7 @@ import {
   KspRequest,
   SchRequestSearchFilter,
 } from '@ksp/shared/interface';
-import { ERequestService } from '@ksp/shared/service';
+import { ERequestService, LoaderService } from '@ksp/shared/service';
 import {
   checkProcess,
   schoolMapRequestType,
@@ -24,6 +24,7 @@ import {
   processFilter,
   thaiDate,
 } from '@ksp/shared/utility';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'e-service-temp-license-list',
@@ -31,9 +32,9 @@ import {
   styleUrls: ['./temp-license-list.component.scss'],
 })
 export class ETempLicenseListComponent implements AfterViewInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   form!: any;
   defaultForm: any;
-
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<KspRequest>();
   SchoolRequestSubType = SchoolRequestSubType;
@@ -52,7 +53,8 @@ export class ETempLicenseListComponent implements AfterViewInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     public dialog: MatDialog,
-    private eRequestService: ERequestService
+    private eRequestService: ERequestService,
+    private loaderService: LoaderService
   ) {
     this.checkCareerType();
   }

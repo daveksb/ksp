@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -16,6 +21,7 @@ export class TransferKnowledgeInfoComponent
   selectedStandardName: any;
 
   transferForm = this.fb.group({
+    standardInfo: [null, Validators.required],
     subjects: this.fb.array([
       this.fb.group({
         subjectName: ['', Validators.required],
@@ -49,7 +55,13 @@ export class TransferKnowledgeInfoComponent
   }
 
   override set value(value: any) {
+    console.log(value);
+    if (this.mode === 'view') {
+      this.form.disable();
+    }
+
     this.form.patchValue({ standardInfo: value.standardInfo });
+    console.log(this.form);
     if (value.standards?.length) {
       this.form.controls.standards.removeAt(0);
       value.standards.forEach((item: any) => {
@@ -65,14 +77,11 @@ export class TransferKnowledgeInfoComponent
 
         control.push(
           this.fb.group({
+            standardInfo: new FormControl(item.standardInfo),
             subjects: new FormArray(subjects),
           })
         );
       });
-    }
-
-    if (this.mode === 'view') {
-      this.form.disable();
     }
 
     this.onChange(value);
@@ -81,6 +90,7 @@ export class TransferKnowledgeInfoComponent
 
   addStandard() {
     const transferForm = this.fb.group({
+      standardInfo: [null, Validators.required],
       subjects: this.fb.array([
         this.fb.group({
           subjectName: ['', Validators.required],

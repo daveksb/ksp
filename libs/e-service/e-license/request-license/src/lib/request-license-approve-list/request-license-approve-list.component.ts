@@ -8,6 +8,7 @@ import {
   SchoolRequestSubType,
   SchoolRequestType,
   SelfRequestProcess,
+  SelfServiceRequestSubType,
   SelfServiceRequestType,
 } from '@ksp/shared/constant';
 import { EsSearchPayload, SelfRequest } from '@ksp/shared/interface';
@@ -27,7 +28,7 @@ import {
 export class RequestLicenseApproveListComponent implements AfterViewInit {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfRequest>();
-  SchoolRequestSubType = SchoolRequestSubType;
+  SchoolRequestSubType = SelfServiceRequestSubType;
 
   requestTypeList = SchoolRequestType.filter((i) => i.id > 2);
   checkProcess = eSelfCheckProcess;
