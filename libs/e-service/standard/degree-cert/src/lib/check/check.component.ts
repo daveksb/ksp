@@ -44,7 +44,7 @@ const detailToState = (res: any) => {
   styleUrls: ['./check.component.scss'],
 })
 export class CheckComponent implements OnInit, AfterContentChecked {
-  form = this.fb.group<any>({
+  form:any = this.fb.group<any>({
     step1: [],
     step2: [
       {
@@ -53,7 +53,11 @@ export class CheckComponent implements OnInit, AfterContentChecked {
     ],
     step3: [],
     step4: [],
-    step5: [],
+    step5: [{
+      verify: null,
+      returnDate: "",
+      forward: null,
+    }],
     verifyStep1: [],
     verifyStep2: [],
     verifyStep3: [],
@@ -275,5 +279,14 @@ export class CheckComponent implements OnInit, AfterContentChecked {
         this.location.back();
       }
     });
+  }
+  get disableFields(): { forward: any[]; verify: any[] } {
+    if(this.form.controls.step5.value.verify == 1){
+      return { forward: [2,3,4], verify: [] };
+    }
+    if(this.form.controls.step5.value.verify == 2){
+      return { forward: [1], verify: [] };
+    }
+    return { forward: [], verify: [] };
   }
 }
