@@ -43,7 +43,7 @@ export class EBestTeacherListComponent implements OnInit, AfterViewInit {
       idcardno: params.idcardno,
       passportno: null,
       process: null,
-      status: null,
+      status: params.status,
       schoolid: null,
       schoolname: null,
       bureauid: null,

@@ -57,6 +57,7 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
   checkApproveResult(input: approveResult) {
     //console.log('check aa = ');
     const req = this.saveData.requestData;
+    console.log(req.process);
     if (input.result === '1') {
       //ครบถ้วน และถูกต้อง
       if (input.shouldForward === '1') {
@@ -118,7 +119,7 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
       userid: this.userId,
       paymentstatus: null,
     };
-    //console.log('payload = ', payload);
+    // console.log('payload = ', payload);
     this.eRequestService.KspUpdateRequestProcess(payload).subscribe(() => {
       this.eRequestService
         .setUrgentRequest(this.saveData.requestData.id, form.isurgent)
