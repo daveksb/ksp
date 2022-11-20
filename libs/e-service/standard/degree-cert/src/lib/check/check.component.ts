@@ -17,7 +17,7 @@ import {
   EUniService,
   UniInfoService,
 } from '@ksp/shared/service';
-import { map} from 'rxjs';
+import { map } from 'rxjs';
 import _ from 'lodash';
 import { Location } from '@angular/common';
 
@@ -79,7 +79,7 @@ export class CheckComponent implements OnInit, AfterContentChecked {
     private eUniService: EUniService,
     private eRequestService: ERequestService,
     private cdref: ChangeDetectorRef,
-    private location:Location
+    private location: Location
   ) {}
   ngAfterContentChecked(): void {
     this.cdref.detectChanges();
@@ -99,7 +99,7 @@ export class CheckComponent implements OnInit, AfterContentChecked {
         .pipe(
           map((res) => {
             this.daftRequest = res;
-            this.allowEdit = ["1","2"].includes(res?.requestprocess)
+            this.allowEdit = ['1', '2'].includes(res?.requestprocess);
             return this.uniInfoService.mappingUniverSitySelectByIdWithForm(res);
           })
         )
@@ -211,6 +211,11 @@ export class CheckComponent implements OnInit, AfterContentChecked {
     this.router.navigate(['/', 'degree-cert', 'list', 0]);
   }
   onSubmitKSP() {
+    const status = _.get(this.form, 'value.step5.verify', '');
+    let process = _.toNumber(this.daftRequest?.requestprocess);
+    if (status != 2) {
+      process += 1;
+    }
     try {
       const detail: any = _.pick(this.form.value, [
         'verifyStep1',
@@ -224,14 +229,16 @@ export class CheckComponent implements OnInit, AfterContentChecked {
         userid: getCookie('userId'),
       };
       detail.returnDate = _.get(this.form, 'value.step5.returnDate', '');
-      payload.status = _.get(this.form, 'value.step5.verify', '');
-      payload.process = _.toNumber(this.daftRequest?.requestprocess) + 1
+      payload.status = status;
+      payload.process = process;
       payload.detail = jsonStringify(detail);
-      this.eRequestService.kspUpdateRequestUniRequestDegree(payload).subscribe(() => {
-        this.onConfirmed();
-      });
+      this.eRequestService
+        .kspUpdateRequestUniRequestDegree(payload)
+        .subscribe(() => {
+          this.onConfirmed();
+        });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
   save() {
