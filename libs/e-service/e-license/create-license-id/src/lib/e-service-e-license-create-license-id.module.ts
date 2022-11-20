@@ -13,6 +13,7 @@ import { FormUploadImageComponent } from '@ksp/self-service/form';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export const routes: Routes = [
   {
@@ -50,6 +51,7 @@ export const routes: Routes = [
     ThaiDatePipe,
     MatCheckboxModule,
     ReactiveFormsModule,
+    MatProgressSpinnerModule,
   ],
   declarations: [CreateLicenseIdDetailComponent, CreateLicenseIdListComponent],
   exports: [CreateLicenseIdDetailComponent, CreateLicenseIdListComponent],
