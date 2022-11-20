@@ -5,8 +5,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { selfOccupyList } from '@ksp/shared/constant';
 import { SelfApproveList } from '@ksp/shared/interface';
-import { ERequestService } from '@ksp/shared/service';
+import { ERequestService, LoaderService } from '@ksp/shared/service';
 import localForage from 'localforage';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'ksp-create-license-id-list',
@@ -14,6 +15,7 @@ import localForage from 'localforage';
   styleUrls: ['./create-license-id-list.component.scss'],
 })
 export class CreateLicenseIdListComponent {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfApproveList>();
   selection = new SelectionModel<any>(true, []);
@@ -21,6 +23,7 @@ export class CreateLicenseIdListComponent {
   form = this.fb.group({
     groupno: [],
     createdate: [],
+    careertype: [],
     isforeign: ['1'],
     approvedatefrom: [],
     approvedateto: [],
@@ -29,7 +32,8 @@ export class CreateLicenseIdListComponent {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private requestService: ERequestService
+    private requestService: ERequestService,
+    private loaderService: LoaderService
   ) {}
 
   search() {
@@ -38,7 +42,11 @@ export class CreateLicenseIdListComponent {
       groupno: form.groupno,
       process: null, //params.process,
       status: null, //params.status,
+      isforeign: null,
+      careertype: form.careertype,
       createdate: form.createdate,
+      approvedatefrom: form.approvedateto,
+      approvedateto: form.approvedatefrom,
       offset: '0',
       row: '500',
     };
@@ -51,6 +59,7 @@ export class CreateLicenseIdListComponent {
   }
 
   clear() {
+    this.form.reset();
     this.dataSource.data = [];
   }
 

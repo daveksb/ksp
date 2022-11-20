@@ -1,3 +1,8 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav
   ><span header> หน้าแรก </span
   ><span subHeader>ระบบงานทะเบียนและใบอนุญาต</span></ksp-top-nav
@@ -36,7 +41,7 @@
     <div class="row mb-2">
       <div class="col">
         <label class="form-label">ประเภทใบอนุญาตประกอบวิชาชีพ</label>
-        <select class="form-select">
+        <select formControlName="careertype" class="form-select">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let l of licenseTypes" [value]="l.id">
             {{ l.name }}
