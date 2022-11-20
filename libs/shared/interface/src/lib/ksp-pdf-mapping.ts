@@ -958,6 +958,30 @@ export const kspPdfMapping: IKspPdfMapping[] = [
     ],
   },
   {
+    pdfType: 6,
+    pdfSubType: 1,
+    pdfSrc: 'assets/pdf/school-qualification-approve-teacher.pdf',
+    input: [],
+  },
+  {
+    pdfType: 6,
+    pdfSubType: 2,
+    pdfSrc: 'assets/pdf/school-qualification-approve-manager.pdf',
+    input: [],
+  },
+  {
+    pdfType: 6,
+    pdfSubType: 3,
+    pdfSrc: 'assets/pdf/school-qualification-approve-manager.pdf',
+    input: [],
+  },
+  {
+    pdfType: 6,
+    pdfSubType: 4,
+    pdfSrc: 'assets/pdf/school-qualification-approve-education-supervisor.pdf',
+    input: [],
+  },
+  {
     pdfType: 99,
     pdfSubType: 6,
     pdfSrc: 'assets/pdf/school-qualification-approve-temp-license.pdf',

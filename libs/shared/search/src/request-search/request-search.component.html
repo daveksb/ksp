@@ -23,7 +23,7 @@
       <label class="form-label">ประเภทวิชาชีพ</label>
       <select class="form-select" formControlName="careertype">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
-        <option *ngFor="let e of careerTypeList" [value]="e?.id">
+        <option *ngFor="let e of careerList" [value]="e?.id">
           {{ e?.name }}
         </option>
       </select>
