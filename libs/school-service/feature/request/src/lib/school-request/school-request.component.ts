@@ -550,7 +550,7 @@ export class SchoolRequestComponent implements OnInit {
           this.patchHiringInfo(parseJson(res.hiringinfo));
         } else {
           // search not found reset form and set idcard again
-          this.completeDialog('ไม่พบบุคคลากรที่ระบุ');
+          this.completeDialog('ไม่พบข้อมูลบุคคลากรที่ระบุ');
           this.form.reset();
           const temp: any = { idcardno: idCard };
           this.form.controls.userInfo.patchValue(temp);

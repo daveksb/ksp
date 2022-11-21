@@ -20,7 +20,7 @@ import {
 } from '@ksp/shared/form/school/register';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
-import { SelfUserListComponent } from './user-list/slef-user-list.component';
+import { SelfUserListComponent } from './user-list/self-user-list.component';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 

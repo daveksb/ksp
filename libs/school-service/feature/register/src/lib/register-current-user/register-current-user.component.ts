@@ -15,6 +15,9 @@ export class RegisterCurrentUserComponent {
   bureausList$!: Observable<any>;
   searchEnd = false;
 
+  schoolName: any;
+  bureauName: any;
+
   constructor(
     public router: Router,
     private schoolInfoService: SchoolInfoService,
@@ -34,6 +37,9 @@ export class RegisterCurrentUserComponent {
   selectedUniversity(school: SchInfo) {
     this.schoolInfo = school;
     localForage.setItem('registerSelectedSchool', school);
+
+    this.schoolName = school.schoolname;
+    this.bureauName = school.bureauname;
 
     this.schoolInfoService
       .searchSchUsers({ schoolid: school.schoolid })

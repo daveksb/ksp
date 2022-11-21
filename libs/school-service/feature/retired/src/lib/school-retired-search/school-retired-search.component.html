@@ -11,6 +11,8 @@
           [title]="'กรุณาเลือกหน่วยงาน/สถานศึกษาที่ท่านสังกัด'"
           [label1]="'สังกัด'"
           [label2]="'โรงเรียน / สถานศึกษา'"
+          [schoolName]="schoolName"
+          [bureauName]="bureauName"
           [bureauList]="bureauList$ | async"
           (selectedUniversity)="schoolSelected($event)"
         ></ksp-university-select>
@@ -68,7 +70,7 @@
         (nextClicked)="next()"
         [showCenterButtons]="false"
         [disableNext]="!selectUser"
-        disableNextMessage="กรุณาค้นหาผู้ประสานงานงานก่อน"
+        disableNextMessage="กรุณาเลือกผู้ประสานงานงานก่อน"
       ></ksp-bottom-nav>
     </div>
   </div>

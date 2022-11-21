@@ -86,14 +86,14 @@ export class RequestRewardFormComponent extends KspFormBaseComponent {
 
   addRow(data: MemberForm = defaultMember) {
     const rewardForm = this.fb.group({
-      membertype: [data.membertype],
-      idcardno: [data.idcardno],
-      prefix: [data.prefix],
-      firstname: [data.firstname],
-      lastname: [data.lastname],
-      phone: [data.phone],
-      email: [data.email],
-      academicstanding: [data.academicstanding],
+      membertype: [data.membertype, Validators.required],
+      idcardno: [data.idcardno, Validators.required],
+      prefix: [data.prefix, Validators.required],
+      firstname: [data.firstname, Validators.required],
+      lastname: [data.lastname, Validators.required],
+      phone: [data.phone, Validators.required],
+      email: [data.email, Validators.required],
+      academicstanding: [data.academicstanding, Validators.required],
     });
 
     //console.log('reward form = ', rewardForm);
