@@ -29,7 +29,7 @@ export class EKnowledgeCertDetailComponent
   licenses$!: Observable<any>;
   disableNextButton = false;
   eduFiles: any[] = [];
-  experienceFiles: any[] = [];
+  transferFiles: any[] = [];
   provinces$!: Observable<any>;
 
   userInfoType = UserInfoFormType.thai;
@@ -116,6 +116,13 @@ export class EKnowledgeCertDetailComponent
       this.form.controls.transferKnowledgeInfo.patchValue({
         ...transferKnowledgeInfo,
       });
+    }
+
+    if (data.fileinfo) {
+      const fileInfo = parseJson(data.fileinfo);
+      const { edufiles, transferknowledgeinfofiles } = fileInfo;
+      this.eduFiles = edufiles;
+      this.transferFiles = transferknowledgeinfofiles;
     }
   }
 
