@@ -145,6 +145,7 @@ export class RequestLicenseApproveCreateGroupComponent
         const payload = {
           listno: this.listNo.toString(),
           process: '5',
+          careertype: '1',
           status: '1',
           forward_to_license_create: this.form.controls.createNumber.value
             ? '1'
