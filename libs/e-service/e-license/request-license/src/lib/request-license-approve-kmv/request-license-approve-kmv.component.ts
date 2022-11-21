@@ -6,12 +6,13 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { KspRequest } from '@ksp/shared/interface';
-import { ERequestService } from '@ksp/shared/service';
+import { ERequestService, LoaderService } from '@ksp/shared/service';
 import {
   formatDatePayload,
   getLicenseType,
   parseJson,
 } from '@ksp/shared/utility';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'ksp-request-license-approve-kmv',
@@ -19,6 +20,7 @@ import {
   styleUrls: ['./request-license-approve-kmv.component.scss'],
 })
 export class RequestLicenseApproveKmvComponent implements OnInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   groupNo!: string;
   listData!: any;
   id!: string;
@@ -29,7 +31,8 @@ export class RequestLicenseApproveKmvComponent implements OnInit {
     private dialog: MatDialog,
     private router: Router,
     private requestService: ERequestService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {
@@ -91,7 +94,7 @@ export class RequestLicenseApproveKmvComponent implements OnInit {
 
     dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        const payload = {
+        const payload = formatDatePayload({
           id: this.id,
           matilevel2no: value.no,
           matilevel2date: value.date,
@@ -100,12 +103,13 @@ export class RequestLicenseApproveKmvComponent implements OnInit {
           matilevel2result: value.result,
           matilevel2fileinfo: null,
           matilevel2detail: value.detail,
-        };
+        });
+
         this.requestService.updateApproveGroup2(payload).subscribe((res) => {
           if (res?.returnmessage === 'success') {
             const payload2 = formatDatePayload({
               approvedate: value.date,
-              process: '2',
+              process: '7',
               status: value.result,
               matilevel2: value.no,
               listno: this.listData

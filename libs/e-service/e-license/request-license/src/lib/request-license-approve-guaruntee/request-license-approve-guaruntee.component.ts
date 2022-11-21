@@ -9,8 +9,9 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { ERequestService } from '@ksp/shared/service';
+import { ERequestService, LoaderService } from '@ksp/shared/service';
 import { Location } from '@angular/common';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'ksp-request-license-approve-guaruntee',
@@ -20,6 +21,7 @@ import { Location } from '@angular/common';
 export class RequestLicenseApproveGuarunteeComponent
   implements OnInit, AfterViewInit
 {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   displayedColumns = [
     'select',
     'order',
@@ -45,7 +47,8 @@ export class RequestLicenseApproveGuarunteeComponent
     private router: Router,
     private route: ActivatedRoute,
     private requestService: ERequestService,
-    private location: Location
+    private location: Location,
+    private loaderService: LoaderService
   ) {}
 
   ngAfterViewInit() {

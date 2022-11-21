@@ -5,12 +5,13 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { ERequestService } from '@ksp/shared/service';
+import { ERequestService, LoaderService } from '@ksp/shared/service';
 import {
   formatDatePayload,
   getLicenseType,
   parseJson,
 } from '@ksp/shared/utility';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'ksp-request-license-approve-save-result',
@@ -18,6 +19,7 @@ import {
   styleUrls: ['./request-license-approve-save-result.component.scss'],
 })
 export class RequestLicenseApproveSaveResultComponent implements OnInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   groupNo!: string | null;
   id!: string | null;
   listNo = '';
@@ -27,7 +29,8 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private requestService: ERequestService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {
@@ -86,16 +89,16 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
           matilevel1detail: value.detail,
         });
 
+        const payload2 = formatDatePayload({
+          considerdate: value.date,
+          process: '6',
+          status: value.result,
+          matilevel1: value.no,
+          listno: this.listNo.split(' | ').join(','),
+        });
+
         this.requestService.updateApproveGroup(payload).subscribe((res) => {
           if (res?.returnmessage === 'success') {
-            const payload2 = formatDatePayload({
-              considerdate: value.date,
-              process: '1',
-              status: value.result,
-              matilevel1: value.no,
-              listno: this.listNo.split(' | ').join(','),
-            });
-
             //console.log('payload = ', payload2);
             this.requestService
               .updateSelfApproveListMati1(payload2)
