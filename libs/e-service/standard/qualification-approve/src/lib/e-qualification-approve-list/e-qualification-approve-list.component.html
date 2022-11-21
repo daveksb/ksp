@@ -116,6 +116,7 @@
             <th mat-header-cell *matHeaderCellDef>ใบอนุญาต</th>
             <td mat-cell *matCellDef="let element">
               <i
+                (click)="renderLicense(element)"
                 *ngIf="element.process === '3' && element.status === '2'"
                 role="button"
                 class="bi bi-file-earmark-text-fill text-primary fs-5"

@@ -50,6 +50,10 @@ export class EQualificationApproveListComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
+  renderLicense(data: KspRequest) {
+    // render pdf
+  }
+
   search(params: Partial<SchRequestSearchFilter>) {
     //console.log('params = ', params);
     const payload: EsSearchPayload = {
