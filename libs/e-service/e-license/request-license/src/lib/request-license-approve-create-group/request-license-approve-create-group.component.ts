@@ -95,7 +95,7 @@ export class RequestLicenseApproveCreateGroupComponent
     });
 
     this.requestService.getLevel2LicenseList().subscribe((res) => {
-      console.log('res level 2 = ', res);
+      //console.log('res level 2 = ', res);
       this.dataSource.data = res.datareturn.map((item) => ({
         ...item,
         check: false,
@@ -135,7 +135,7 @@ export class RequestLicenseApproveCreateGroupComponent
         }
       } else if (
         item.licenseType === 'ครูชาวต่างชาติ' &&
-        element.careertype === '1' &&
+        element.careertype === '5' &&
         element.isforeign === '1'
       ) {
         if (element.check) {
@@ -216,9 +216,11 @@ export class RequestLicenseApproveCreateGroupComponent
   masterToggle() {
     if (this.isAllSelected()) {
       this.selection.clear();
+      this.dataSource.data.map((d) => this.onCheck(d));
       return;
     }
 
     this.selection.select(...this.dataSource.data);
+    this.dataSource.data.map((d) => this.onCheck(d));
   }
 }
