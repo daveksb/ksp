@@ -6,7 +6,7 @@ export interface SelfApproveListProcess {
   status: SchRequestStatus[]; //[{ id: 1, sname: 'ยกเลิก', ename: 'ยกเลิก' }],
 }
 
-export const SelfApproveListProcesses: SelfApproveListProcess[] = [
+/* export const SelfApproveListProcesses: SelfApproveListProcess[] = [
   //สถานะของบัญชีรายชื่อขอใบอนุญาตประกอบวิชาชีพ
   {
     processId: '1',
@@ -29,3 +29,4 @@ export const SelfApproveListProcesses: SelfApproveListProcess[] = [
     ],
   },
 ];
+ */

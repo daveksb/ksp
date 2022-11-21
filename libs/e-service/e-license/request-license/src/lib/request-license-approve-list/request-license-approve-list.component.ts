@@ -5,20 +5,19 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import {
-  SchoolRequestSubType,
   SchoolRequestType,
-  SelfRequestProcess,
   SelfServiceRequestSubType,
   SelfServiceRequestType,
 } from '@ksp/shared/constant';
 import { EsSearchPayload, SelfRequest } from '@ksp/shared/interface';
-import { ERequestService } from '@ksp/shared/service';
+import { ERequestService, LoaderService } from '@ksp/shared/service';
 import {
   eSelfCheckProcess,
   eSelfCheckStatus,
   processFilter,
   replaceEmptyWithNull,
 } from '@ksp/shared/utility';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'ksp-request-license-approve-list',
@@ -26,14 +25,13 @@ import {
   styleUrls: ['./request-license-approve-list.component.scss'],
 })
 export class RequestLicenseApproveListComponent implements AfterViewInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfRequest>();
   SchoolRequestSubType = SelfServiceRequestSubType;
-
   requestTypeList = SchoolRequestType.filter((i) => i.id > 2);
   checkProcess = eSelfCheckProcess;
   checkStatus = eSelfCheckStatus;
-
   form = this.fb.group({
     search: [{ requesttype: '3' }],
   });
@@ -41,7 +39,8 @@ export class RequestLicenseApproveListComponent implements AfterViewInit {
   constructor(
     private router: Router,
     private requestService: ERequestService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private loaderService: LoaderService
   ) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

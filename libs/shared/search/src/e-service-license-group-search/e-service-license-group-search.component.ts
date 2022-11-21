@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -22,15 +22,17 @@ export class EServiceLicenseGroupSearchComponent extends KspFormBaseComponent {
   @Output() clear = new EventEmitter<boolean>(false);
   @Output() search = new EventEmitter<any>();
 
-  eduOccupyList = selfOccupyList;
   processList: SchRequestProcess[] = [];
   statusList?: SchRequestStatus[] = [];
+  licenseTypes = selfOccupyList.filter((i) => i.id < 5);
 
   override form = this.fb.group({
     groupno: [null],
+    createdate: [null],
+    careertype: ['1'],
+    isforeign: ['1'],
     process: [null],
     status: [null],
-    createdate: [null],
   });
 
   constructor(private fb: FormBuilder) {
@@ -43,7 +45,7 @@ export class EServiceLicenseGroupSearchComponent extends KspFormBaseComponent {
     );
 
     this.processList = SelfRequestProcess.filter((i) => {
-      return `${i.requestType}` === '1';
+      return `${i.requestType}` === '1' && i.processId > 4;
     });
 
     this.form.controls.process.valueChanges.subscribe((currentProcess) => {

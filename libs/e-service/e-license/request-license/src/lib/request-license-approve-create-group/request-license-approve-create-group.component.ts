@@ -42,33 +42,7 @@ export class RequestLicenseApproveCreateGroupComponent
     'requestDate',
   ];
   dataSource = new MatTableDataSource<CheckKSPRequest>();
-  licenseData = [
-    {
-      order: 1,
-      licenseType: 'ครู',
-      count: 0,
-    },
-    {
-      order: 2,
-      licenseType: 'ครูชาวต่างชาติ',
-      count: 0,
-    },
-    {
-      order: 3,
-      licenseType: 'ผู้บริหารสถานศึกษา',
-      count: 0,
-    },
-    {
-      order: 4,
-      licenseType: 'ผู้บริหารการศึกษา',
-      count: 0,
-    },
-    {
-      order: 5,
-      licenseType: 'ศึกษานิเทศก์',
-      count: 0,
-    },
-  ];
+  licenseData = LicenseData;
   listNo!: number;
   selection = new SelectionModel<any>(true, []);
 
@@ -95,7 +69,7 @@ export class RequestLicenseApproveCreateGroupComponent
     });
 
     this.requestService.getLevel2LicenseList().subscribe((res) => {
-      console.log('res level 2 = ', res);
+      //console.log('res level 2 = ', res);
       this.dataSource.data = res.datareturn.map((item) => ({
         ...item,
         check: false,
@@ -135,7 +109,7 @@ export class RequestLicenseApproveCreateGroupComponent
         }
       } else if (
         item.licenseType === 'ครูชาวต่างชาติ' &&
-        element.careertype === '1' &&
+        element.careertype === '5' &&
         element.isforeign === '1'
       ) {
         if (element.check) {
@@ -170,7 +144,7 @@ export class RequestLicenseApproveCreateGroupComponent
       if (res) {
         const payload = {
           listno: this.listNo.toString(),
-          process: '1',
+          process: '5',
           status: '1',
           forward_to_license_create: this.form.controls.createNumber.value
             ? '1'
@@ -216,9 +190,39 @@ export class RequestLicenseApproveCreateGroupComponent
   masterToggle() {
     if (this.isAllSelected()) {
       this.selection.clear();
+      this.dataSource.data.map((d) => this.onCheck(d));
       return;
     }
 
     this.selection.select(...this.dataSource.data);
+    this.dataSource.data.map((d) => this.onCheck(d));
   }
 }
+
+export const LicenseData = [
+  {
+    order: 1,
+    licenseType: 'ครู',
+    count: 0,
+  },
+  {
+    order: 2,
+    licenseType: 'ครูชาวต่างชาติ',
+    count: 0,
+  },
+  {
+    order: 3,
+    licenseType: 'ผู้บริหารสถานศึกษา',
+    count: 0,
+  },
+  {
+    order: 4,
+    licenseType: 'ผู้บริหารการศึกษา',
+    count: 0,
+  },
+  {
+    order: 5,
+    licenseType: 'ศึกษานิเทศก์',
+    count: 0,
+  },
+];
