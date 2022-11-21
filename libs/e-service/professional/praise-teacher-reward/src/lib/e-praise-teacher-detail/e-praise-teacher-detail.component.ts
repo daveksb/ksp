@@ -49,6 +49,7 @@ export class EPraiseTeacherDetailComponent
     website: [],
     checkResult: this.fb.array([]),
   });
+  rewardFiles: any[] = [];
 
   get checkResultFormArray() {
     return this.form.controls.checkResult as FormArray;
@@ -119,6 +120,7 @@ export class EPraiseTeacherDetailComponent
       eduinfo,
       hiringinfo,
       rewardpunishmentinfo,
+      fileinfo,
     } = data;
     const myInfo = <any>{
       prefixth,
@@ -151,6 +153,11 @@ export class EPraiseTeacherDetailComponent
       rewardDetailInfo,
       rewardPunishmentInfo,
     });
+
+    if (fileinfo) {
+      const { rewardfiles } = parseJson(fileinfo);
+      this.rewardFiles = rewardfiles;
+    }
   }
 
   patchAddressInfo(value: any) {

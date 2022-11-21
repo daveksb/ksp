@@ -55,6 +55,8 @@ export class EBestTeacherDetailComponent
     checkResult: this.fb.array([]),
   });
 
+  rewardFiles: any[] = [];
+
   get checkResultFormArray() {
     return this.form.controls.checkResult as FormArray;
   }
@@ -125,6 +127,7 @@ export class EBestTeacherDetailComponent
       eduinfo,
       rewarddetailinfo,
       teachinginfo,
+      fileinfo,
     } = data;
     const myInfo = <any>{
       prefixth,
@@ -168,6 +171,11 @@ export class EBestTeacherDetailComponent
       rewardDetailInfo,
       teachingInfo,
     });
+
+    if (fileinfo) {
+      const { rewardfiles } = parseJson(fileinfo);
+      this.rewardFiles = rewardfiles;
+    }
   }
 
   patchAddressInfo(value: any) {
