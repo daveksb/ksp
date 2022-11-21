@@ -29,6 +29,8 @@ export class EServiceLicenseGroupSearchComponent extends KspFormBaseComponent {
   override form = this.fb.group({
     groupno: [null],
     createdate: [null],
+    careertype: ['1'],
+    isforeign: ['1'],
     process: [null],
     status: [null],
   });
@@ -43,7 +45,7 @@ export class EServiceLicenseGroupSearchComponent extends KspFormBaseComponent {
     );
 
     this.processList = SelfRequestProcess.filter((i) => {
-      return `${i.requestType}` === '1';
+      return `${i.requestType}` === '1' && i.processId > 4;
     });
 
     this.form.controls.process.valueChanges.subscribe((currentProcess) => {
