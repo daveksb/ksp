@@ -131,6 +131,15 @@
         <mat-tab label="ข้อมูลผลการประเมินสมรรถนะ">
           <self-service-form-user-performance></self-service-form-user-performance>
         </mat-tab>
+
+        <mat-tab label="ลักษณะต้องห้าม">
+          <div>
+            <ksp-forbidden-property
+              [input]="prohibitProperty"
+              [mode]="'view'"
+            ></ksp-forbidden-property>
+          </div>
+        </mat-tab>
       </mat-tab-group>
     </div>
 

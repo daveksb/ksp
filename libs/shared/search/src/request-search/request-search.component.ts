@@ -10,7 +10,11 @@ import {
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { providerFactory } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { SchoolRequestProcess, SchoolRequestType } from '@ksp/shared/constant';
+import {
+  qualificationCareerTypeList,
+  SchoolRequestProcess,
+  SchoolRequestType,
+} from '@ksp/shared/constant';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -56,7 +60,7 @@ export class RequestSearchComponent
   @Input() disableRequestType = false;
   @Input() requestTypeList = SchoolRequestType;
   @Input() careerTypeList: any[] = [];
-
+  careerList!: any[];
   processList: SchRequestProcess[] = [];
   statusList?: SchRequestStatus[] = [];
 
@@ -64,6 +68,12 @@ export class RequestSearchComponent
     super();
     this.subscriptions.push(
       this.form?.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
+        if (value.requesttype === '6') {
+          this.careerList = qualificationCareerTypeList;
+        } else {
+          this.careerList = this.careerTypeList;
+        }
+
         this.onChange(value);
         this.onTouched();
       })
