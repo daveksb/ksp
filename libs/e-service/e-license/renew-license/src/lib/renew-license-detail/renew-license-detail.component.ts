@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
 import { ESelfFormBaseComponent } from '@ksp/shared/form/others';
+import { FileGroup } from '@ksp/shared/interface';
 import {
   AddressService,
   EducationDetailService,
@@ -55,13 +56,9 @@ export class RenewLicenseDetailComponent
   educationType: 'teacher' | 'schManager' | 'eduManager' | 'supervision' =
     'teacher';
 
-  workingInfoFiles = [
-    {
-      name: '1.สำเนาผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน (3 กิจกรรม)',
-      fileid: '',
-      filename: '',
-    },
-  ];
+  workingInfoFiles: FileGroup[] = [];
+  workingInfoFiles2: FileGroup[] = [];
+  licenseFiles: FileGroup[] = [];
 
   choices = [
     {
@@ -143,12 +140,6 @@ export class RenewLicenseDetailComponent
   }
 
   override patchData(data: any) {
-    // this.form.controls.userInfo.patchValue(data);
-    // this.patchAddress(parseJson(data.addressinfo));
-    // if (data.schooladdrinfo) {
-    //   this.patchWorkplace(parseJson(data.schooladdrinfo));
-    // }
-
     super.patchData(data);
 
     if (data.eduinfo) {
@@ -180,30 +171,15 @@ export class RenewLicenseDetailComponent
         } as any);
       }
     }
+
+    if (data.fileinfo) {
+      const fileInfo = parseJson(data.fileinfo);
+      const { performancefiles, licensefiles, performancefiles2 } = fileInfo;
+      this.workingInfoFiles = performancefiles;
+      this.workingInfoFiles2 = performancefiles2;
+      this.licenseFiles = licensefiles;
+    }
   }
-
-  // patchWorkplace(data: any) {
-  //   this.amphurs3$ = this.addressService.getAmphurs(data.province);
-  //   this.tumbols3$ = this.addressService.getTumbols(data.district);
-  //   this.form.controls.workplace.patchValue(data);
-  // }
-
-  // patchAddress(addrs: any[]) {
-  //   if (addrs && addrs.length) {
-  //     addrs.map((addr: any, i: number) => {
-  //       if (i === 0) {
-  //         this.amphurs1$ = this.addressService.getAmphurs(addr.province);
-  //         this.tumbols1$ = this.addressService.getTumbols(addr.amphur);
-  //         this.form.controls.address1.patchValue(addr);
-  //       }
-  //       if (i === 1) {
-  //         this.amphurs2$ = this.addressService.getAmphurs(addr.province);
-  //         this.tumbols2$ = this.addressService.getTumbols(addr.amphur);
-  //         this.form.controls.address2.patchValue(addr);
-  //       }
-  //     });
-  //   }
-  // }
 
   override getListData() {
     this.countries$ = this.addressService.getCountry();

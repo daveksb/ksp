@@ -182,6 +182,7 @@ export class LicenseRequestComponent
 
     if (data.fileinfo) {
       const fileInfo = parseJson(data.fileinfo);
+      console.log(fileInfo);
       const { edufiles, experiencefiles, performancefiles } = fileInfo;
       this.eduFiles = edufiles;
       this.experienceFiles = experiencefiles;

@@ -38,6 +38,7 @@ export class EditLicenseApproveDetailComponent implements OnInit {
 
   requestData = new KspRequest();
   verifyChoice: any[] = VERIFY_CHOICES;
+  uploadFileList: any[] = [];
 
   get checkResultFormArray() {
     return this.form.controls.checkResult as FormArray;
@@ -94,12 +95,11 @@ export class EditLicenseApproveDetailComponent implements OnInit {
       this.form.controls.userInfo.patchValue(replaceReasonInfo);
     }
 
-    // if (data.fileinfo) {
-    //   const fileInfo = parseJson(data.fileinfo);
-    //   console.log(fileInfo);
-    //   const { attachfiles } = fileInfo;
-    //   this.uploadFileList = attachfiles;
-    // }
+    if (data.fileinfo) {
+      const fileInfo = parseJson(data.fileinfo);
+      const { attachfiles } = fileInfo;
+      this.uploadFileList = attachfiles;
+    }
   }
 
   next() {
