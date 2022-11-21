@@ -22,10 +22,9 @@
         <ksp-form-refund-fee-detail formControlName="refundInfo" [mode]="'view'"></ksp-form-refund-fee-detail>
       </div>
       <br />
-      <ksp-form-attachment
-        [groups]="refundInfo"
-        [mode]="'view'">
-      </ksp-form-attachment>
+      <ksp-form-multi-attachment
+        [groups]="files"
+        [mode]="'view'"></ksp-form-multi-attachment>
     </div>
     <br />
     <div class="bg-white p-3">
