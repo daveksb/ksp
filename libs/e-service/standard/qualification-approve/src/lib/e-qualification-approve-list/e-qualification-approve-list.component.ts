@@ -110,5 +110,5 @@ export const column = [
   'updatedate',
   'requestdate',
   'reqDoc',
-  //'approveDoc',
+  'license',
 ];

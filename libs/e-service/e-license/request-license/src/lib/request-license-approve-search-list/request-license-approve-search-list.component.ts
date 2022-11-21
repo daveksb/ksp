@@ -5,14 +5,12 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   SelfRequestProcess,
-  //SelfApproveListProcesses,
   SelfServiceRequestSubType,
 } from '@ksp/shared/constant';
 import { ERequestService, LoaderService } from '@ksp/shared/service';
 import { Subject } from 'rxjs';
 
 export function getProcess(processId: number) {
-  //return SelfApproveListProcesses.find((s) => s.processId === processId);
   return SelfRequestProcess.find((s) => s.processId === processId);
 }
 
