@@ -12,4 +12,6 @@ export * from './lib/forgot-password-set-new-password/forgot-password-set-new-pa
 
 export * from './lib/pdf-viewer/pdf-viewer.component';
 
+export * from './lib/pdf-viewer-no-license/pdf-viewer-no-license.component';
+
 export * from './lib/pdf-render/pdf-render.component';
