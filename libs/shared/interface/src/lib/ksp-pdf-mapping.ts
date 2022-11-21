@@ -991,26 +991,53 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'requestno',
             options: {
-              x: 130,
+              x: 115,
               y: 721,
               size: defaultSize,
               color: black,
             },
           },
           {
-            key: 'month',
+            key: 'approveresult',
             options: {
-              x: 380,
-              y: 650,
+              x: 85,
+              y: 397,
               size: defaultSize,
               color: black,
             },
           },
           {
-            key: 'year',
+            key: 'degreelevel',
             options: {
-              x: 420,
-              y: 650,
+              x: 245,
+              y: 397,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'degreename',
+            options: {
+              x: 425,
+              y: 397,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'name',
+            options: {
+              x: 255,
+              y: 380,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'degreefrom',
+            options: {
+              x: 115,
+              y: 380,
               size: defaultSize,
               color: black,
             },
@@ -1018,8 +1045,17 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'careertype',
             options: {
-              x: 340,
+              x: 345,
               y: 510,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'careertype',
+            options: {
+              x: 180,
+              y: 360,
               size: defaultSize,
               color: black,
             },

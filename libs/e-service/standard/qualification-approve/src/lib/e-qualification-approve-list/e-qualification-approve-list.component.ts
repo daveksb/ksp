@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -9,13 +10,14 @@ import {
   SchoolRequestSubType,
   SchoolRequestType,
 } from '@ksp/shared/constant';
+import { PdfRenderComponent } from '@ksp/shared/dialog';
 import {
   EsSearchPayload,
   KspRequest,
   SchRequestSearchFilter,
 } from '@ksp/shared/interface';
 import { ERequestService, LoaderService } from '@ksp/shared/service';
-import { checkProcess, checkStatus } from '@ksp/shared/utility';
+import { checkProcess, checkStatus, thaiDate } from '@ksp/shared/utility';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -43,15 +45,61 @@ export class EQualificationApproveListComponent implements AfterViewInit {
     private router: Router,
     private fb: FormBuilder,
     private eRequestService: ERequestService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    public dialog: MatDialog
   ) {}
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
 
-  renderLicense(data: KspRequest) {
+  renderLicense(request: KspRequest) {
+    console.log('xxx = ', request);
     // render pdf
+    const pdfType = 99;
+    const pdfSubType = 6;
+    const requestno = request.requestno;
+    const name = request.firstnameth + ' ' + request.lastnameth;
+    const position = request.position;
+    const bureauname = request.bureauname;
+    const schoolname = request.schoolname;
+    const approveresult = request.status;
+    const careertype = request.careertype;
+    const eduinfo = JSON.parse(request.eduinfo || '');
+    console.log('yyy = ', eduinfo);
+    const edu1 = eduinfo.find((item: any) => {
+      if (item?.degreeLevel) {
+        return item.degreeLevel === 1;
+      }
+      return false;
+    });
+    const degreelevel = edu1.degreeName ?? '';
+    const degreeof = edu1.degreeName ?? '';
+    const degreefrom = edu1.institution ?? '';
+    const degreename = edu1.major ?? '';
+
+    this.dialog.open(PdfRenderComponent, {
+      width: '1200px',
+      height: '100vh',
+      data: {
+        pdfType,
+        pdfSubType,
+        input: {
+          requestno,
+          approveresult,
+          name,
+          position,
+          bureauname,
+          schoolname,
+          careertype,
+          eduinfo,
+          degreename,
+          degreefrom,
+          degreelevel,
+          degreeof,
+        },
+      },
+    });
   }
 
   search(params: Partial<SchRequestSearchFilter>) {

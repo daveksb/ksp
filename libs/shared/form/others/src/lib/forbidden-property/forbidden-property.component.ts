@@ -32,6 +32,7 @@ export class ForbiddenPropertyFormComponent
   @Input()
   title = `ขอรับรองว่าไม่เป็นผู้มีลักษณะต้องห้ามตามที่กำหนดไว้ในมาตรา 44
   แห่งพระราชบัญญัติสภาครูและบุคลากรทางการศึกษา พ.ศ.2546`;
+
   @Input() set input(value: any) {
     if (value) this.form.patchValue(value);
   }
