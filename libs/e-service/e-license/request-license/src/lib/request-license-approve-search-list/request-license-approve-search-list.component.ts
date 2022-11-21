@@ -1,9 +1,11 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SelfApproveListProcesses } from '@ksp/shared/constant';
-import { ERequestService } from '@ksp/shared/service';
+import { ERequestService, LoaderService } from '@ksp/shared/service';
+import { Subject } from 'rxjs';
 
 export function getProcess(processId: string) {
   return SelfApproveListProcesses.find((s) => s.processId === processId);
@@ -21,6 +23,7 @@ export function getStatusLabel(process: string, status: string) {
 export class RequestLicenseApproveSearchListComponent
   implements OnInit, AfterViewInit
 {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   displayedColumns = [
     'select',
     'resolution',
@@ -43,11 +46,13 @@ export class RequestLicenseApproveSearchListComponent
   getStatusLabel = getStatusLabel;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private requestService: ERequestService
+    private requestService: ERequestService,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {

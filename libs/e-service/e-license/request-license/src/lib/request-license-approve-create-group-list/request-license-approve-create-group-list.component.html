@@ -1,3 +1,8 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav
   ><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span>
   <span subHeader>ผลการนำเสนอใบอนุญาตประกอบวิชาชีพ </span>
@@ -9,7 +14,6 @@
   </div>
   <div class="bg-white px-3 py-3">
     <div class="mb-3">
-
       <ksp-e-service-license-create-group-search></ksp-e-service-license-create-group-search>
     </div>
 

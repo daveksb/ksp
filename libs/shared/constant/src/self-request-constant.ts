@@ -77,6 +77,15 @@ export const SelfRequestProcess: SchRequestProcess[] = [
   {
     requestType: 1,
     processId: 5,
+    processName: 'จัดทำกลุ่มบัญชีรายชื่อ',
+    status: [
+      { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
+    ],
+  },
+  {
+    requestType: 1,
+    processId: 6,
     processName: 'พิจารณาและรับรองคณะอนุกรรมการ',
     status: [
       { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
@@ -89,7 +98,7 @@ export const SelfRequestProcess: SchRequestProcess[] = [
   },
   {
     requestType: 1,
-    processId: 6,
+    processId: 7,
     processName: 'พิจารณาและรับรองคณะกรรมการ', // กมว.
     status: [
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },

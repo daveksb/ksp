@@ -47,6 +47,7 @@ import { RequestLicenseApproveSaveResultComponent } from './request-license-appr
 import { RequestLicenseApproveKmvComponent } from './request-license-approve-kmv/request-license-approve-kmv.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export const routes: Route[] = [
   {
@@ -138,6 +139,7 @@ export const routes: Route[] = [
     EServiceLicenseSaveResultComponent,
     RequestLicenseApproveSummaryTableComponent,
     MatCheckboxModule,
+    MatProgressSpinnerModule,
     ForbiddenPropertyFormComponent,
   ],
   declarations: [

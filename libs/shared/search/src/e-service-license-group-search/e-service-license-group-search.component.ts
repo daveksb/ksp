@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -22,15 +22,15 @@ export class EServiceLicenseGroupSearchComponent extends KspFormBaseComponent {
   @Output() clear = new EventEmitter<boolean>(false);
   @Output() search = new EventEmitter<any>();
 
-  eduOccupyList = selfOccupyList;
   processList: SchRequestProcess[] = [];
   statusList?: SchRequestStatus[] = [];
+  licenseTypes = selfOccupyList.filter((i) => i.id < 5);
 
   override form = this.fb.group({
     groupno: [null],
+    createdate: [null],
     process: [null],
     status: [null],
-    createdate: [null],
   });
 
   constructor(private fb: FormBuilder) {
