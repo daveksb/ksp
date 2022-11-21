@@ -20,7 +20,7 @@
 
     <hr />
     <div class="table__scroll">
-      <table mat-table matSort [dataSource]="dataSource" matSort>
+      <table mat-table matSort [dataSource]="dataSource">
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
           <td mat-cell *matCellDef="let element; let i = index">
@@ -63,8 +63,8 @@
         <ng-container matColumnDef="coordinatorname">
           <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล ผู้แต่งตั้ง</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.coordinatorinfo['firstnameth'] }}
-            {{ element.coordinatorinfo['lastnameth'] }}
+            <!-- {{ element.coordinatorinfo }}
+            {{ element.coordinatorinfo }} -->
           </td>
         </ng-container>
 
@@ -76,7 +76,7 @@
         <ng-container matColumnDef="provience">
           <th mat-header-cell *matHeaderCellDef>จังหวัด</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.schooladdress['province'] }}
+            <!-- {{ element.schooladdress }} -->
           </td>
         </ng-container>
 
