@@ -10,7 +10,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { KspRequest } from '@ksp/shared/interface';
+import { KspRequest, SelfApproveList } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 import { getCookie } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -126,6 +126,8 @@ export class RequestLicenseApproveCreateGroupComponent
       }
       return item;
     });
+
+    console.log('license data = ', this.licenseData);
   }
 
   prev() {
@@ -142,12 +144,13 @@ export class RequestLicenseApproveCreateGroupComponent
 
     dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        const payload = {
+        const payload: Partial<SelfApproveList> = {
           listno: this.listNo.toString(),
           process: '5',
           careertype: '1',
+          isforeign: '0',
           status: '1',
-          forward_to_license_create: this.form.controls.createNumber.value
+          forwardtolicensecreate: this.form.controls.createNumber.value
             ? '1'
             : '0',
           requestlist: JSON.stringify(
@@ -203,12 +206,14 @@ export class RequestLicenseApproveCreateGroupComponent
 export const LicenseData = [
   {
     order: 1,
-    licenseType: 'ครู',
+    licenseType: 1,
+    label: 'ครู',
     count: 0,
   },
   {
     order: 2,
-    licenseType: 'ครูชาวต่างชาติ',
+    licenseType: '5',
+    label: 'ครูชาวต่างชาติ',
     count: 0,
   },
   {
