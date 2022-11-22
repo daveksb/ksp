@@ -147,21 +147,82 @@ export class ETempLicenseListComponent implements AfterViewInit {
       id12,
       id13,
     ] = request?.idcardno?.split('') ?? [];
+
     const eduinfo = JSON.parse(request.eduinfo || '');
+
     const edu1 = eduinfo.find((item: any) => {
       if (item?.degreeLevel) {
         return item.degreeLevel === '1';
       }
       return false;
     });
+
     const degreename1 = edu1?.degreeName ?? '';
     const institution1 = edu1?.institution ?? '';
     const major1 = edu1?.major ?? '';
-    const nameen = request.firstnameen + ' ' + request.lastnameen;
-    let checkbox1 = false;
+    const graduate1 = edu1?.graduateDate ?? '';
+    const grade1 = edu1?.grade ?? '';
+    let degree1 = false;
+
     if (degreename1) {
-      checkbox1 = true;
+      degree1 = true;
     }
+
+    const edu2 = eduinfo.find((item: any) => {
+      if (item?.degreeLevel) {
+        return item.degreeLevel === '2';
+      }
+      return false;
+    });
+
+    const degreename2 = edu2?.degreeName ?? '';
+    const institution2 = edu2?.institution ?? '';
+    const major2 = edu2?.major ?? '';
+    const graduate2 = edu2?.graduateDate ?? '';
+    const grade2 = edu2?.grade ?? '';
+    let degree2 = false;
+
+    if (degreename2) {
+      degree2 = true;
+    }
+
+    const teachinginfo = JSON.parse(request.teachinginfo || '');
+
+    let lv1 = false;
+    let lv2 = false;
+    let lv3 = false;
+    let lv4 = false;
+    let lv5 = false;
+    let lv6 = false;
+    let lv7 = false;
+
+    for (const index in teachinginfo.teachingLevel) {
+      console.log('xxx = ', index);
+      if (teachinginfo.teachingLevel[index] === 'level1') {
+        lv1 = true;
+      }
+      if (teachinginfo.teachingLevel[index] === 'level2') {
+        lv2 = true;
+      }
+      if (teachinginfo.teachingLevel[index] === 'level3') {
+        lv3 = true;
+      }
+      if (teachinginfo.teachingLevel[index] === 'level4') {
+        lv4 = true;
+      }
+      if (teachinginfo.teachingLevel[index] === 'level5') {
+        lv5 = true;
+      }
+      if (teachinginfo.teachingLevel[index] === 'level6') {
+        lv6 = true;
+      }
+      if (teachinginfo.teachingLevel[index] === 'level7') {
+        lv7 = true;
+      }
+    }
+
+    const nameen = request.firstnameen + ' ' + request.lastnameen;
+
     //console.log('request.schooladdrinfo = ', request.schooladdrinfo);
     const school = JSON.parse(request.schooladdrinfo || '');
     //console.log('school = ', school);
@@ -212,8 +273,23 @@ export class ETempLicenseListComponent implements AfterViewInit {
           degreename1,
           institution1,
           major1,
-          checkbox1,
+          graduate1,
+          grade1,
+          degree1,
+          degreename2,
+          institution2,
+          major2,
+          graduate2,
+          grade2,
+          degree2,
           nameen,
+          lv1,
+          lv2,
+          lv3,
+          lv4,
+          lv5,
+          lv6,
+          lv7,
         },
       },
     });
