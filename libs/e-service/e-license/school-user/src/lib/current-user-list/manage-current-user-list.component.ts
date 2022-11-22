@@ -59,13 +59,13 @@ export class ManageCurrentUserListComponent implements AfterViewInit, OnInit {
 
     this.schStaffService.searchSchStaffs(payload).subscribe((res) => {
       if (res && res.length) {
-        this.searchNotFound = false;
         this.dataSource.data = res;
         this.dataSource.sort = this.sort;
         const sortState: Sort = { active: 'schmemberid', direction: 'desc' };
         this.sort.active = sortState.active;
         this.sort.direction = sortState.direction;
         this.sort.sortChange.emit(sortState);
+        this.searchNotFound = false;
       } else {
         this.clear();
         this.searchNotFound = true;

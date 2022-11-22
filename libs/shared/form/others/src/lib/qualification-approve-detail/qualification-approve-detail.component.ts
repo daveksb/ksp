@@ -48,7 +48,8 @@ export class QualificationApproveDetailComponent implements OnInit {
     this.degreeName = education?.degreeName ?? '';
     this.major = education?.major ?? '';
     this.degreeLevelName =
-      this.degreelevelMapping.get(education?.degreeLevelName) ?? '';
+      this.degreelevelMapping.get(education?.degreeLevelName) ??
+      'วุฒิการศึกษาปริญญาตรี';
   }
   save() {
     this.dialogRef.close({ otherreason: this.form.value });
