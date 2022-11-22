@@ -121,6 +121,7 @@ export class ETeacherCouncilDetailComponent
       rewardethicinfo,
       rewardsuccessinfo,
       rewarddetailinfo,
+      fileinfo,
     } = data;
     const myInfo = <any>{
       prefixth,
@@ -150,6 +151,11 @@ export class ETeacherCouncilDetailComponent
       rewardSuccessInfo,
       rewardDetailInfo,
     });
+
+    if (fileinfo) {
+      const { rewardfiles } = parseJson(fileinfo);
+      this.rewardFiles = rewardfiles;
+    }
   }
 
   patchAddressInfo(value: any) {

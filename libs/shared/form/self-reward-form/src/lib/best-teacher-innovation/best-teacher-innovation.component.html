@@ -1,16 +1,14 @@
 <form [formGroup]="form">
   <ng-container formArrayName="innovationInfo">
     <ng-container
-      *ngFor="let DegreeForm of innovationInfo.controls; let i = index"
-    >
+      *ngFor="let DegreeForm of innovationInfo.controls; let i = index">
       <ng-container [formGroupName]="i">
         <div class="border rounded px-3 py-2">
           <div class="d-flex justify-content-end" *ngIf="i > 0">
             <i
               class="bi bi-x-circle-fill text-danger"
               (click)="deleteFormArray(innovationInfo, i)"
-              role="button"
-            ></i>
+              role="button"></i>
           </div>
           <div class="box-header text-primary">ข้อมูลนวัตกรรมและรางวัล</div>
 
@@ -31,8 +29,7 @@
               <input
                 class="form-control"
                 type="text"
-                formControlName="innovationName"
-              />
+                formControlName="innovationName" />
             </div>
           </div>
           <br />
@@ -69,13 +66,11 @@
                   autocomplete="off"
                   class="form-control form-date"
                   formControlName="year"
-                  placeholder="วว/ดด/ปปปป"
-                />
+                  placeholder="วว/ดด/ปปปป" />
                 <mat-datepicker-toggle
                   class="button-date"
                   matSuffix
-                  [for]="picker"
-                ></mat-datepicker-toggle>
+                  [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </div>
             </div>
@@ -83,8 +78,8 @@
           <br />
           <ksp-form-multi-attachment
             [groups]="rewardFiles"
-            [uniqueTimestamp]="uniqueTimestamp"
-          ></ksp-form-multi-attachment>
+            [mode]="mode"
+            [uniqueTimestamp]="uniqueTimestamp"></ksp-form-multi-attachment>
         </div>
         <br />
       </ng-container>
@@ -93,8 +88,6 @@
   <div class="d-flex justify-content-end" *ngIf="mode === 'edit'">
     <ksp-add-row-button
       class="text-primary"
-      (addRowClick)="addFormArray(innovationInfo)"
-      >เพิ่มรางวัล</ksp-add-row-button
-    >
+      (addRowClick)="addFormArray(innovationInfo)">เพิ่มรางวัล</ksp-add-row-button>
   </div>
 </form>

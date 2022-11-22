@@ -49,6 +49,7 @@ export class RequestLicenseApproveDetailComponent
   disableNextButton = false;
   eduFiles: FileGroup[] = [];
   experienceFiles: FileGroup[] = [];
+  performanceFiles: FileGroup[] = [];
   provinces$!: Observable<Province[]>;
 
   educationTypes: 'teacher' | 'schManager' | 'eduManager' | 'supervision' =
@@ -136,6 +137,15 @@ export class RequestLicenseApproveDetailComponent
     if (data.experienceinfo) {
       const experienceInfo = parseJson(data.experienceinfo);
       this.form.controls.experience.patchValue({ ...experienceInfo });
+    }
+
+    if (data.fileinfo) {
+      const fileInfo = parseJson(data.fileinfo);
+      console.log(fileInfo);
+      const { edufiles, experiencefiles, performancefiles } = fileInfo;
+      this.eduFiles = edufiles;
+      this.experienceFiles = experiencefiles;
+      this.performanceFiles = performancefiles;
     }
   }
 

@@ -83,9 +83,10 @@
         </mat-tab>
 
         <mat-tab label="เอกสารประกอบ">
-          <ksp-form-attachment
+          <ksp-form-multi-attachment
             [mode]="'view'"
-            [title]="'กรุณาแนบหลักฐานประกอบ'"></ksp-form-attachment>
+            [title]="'กรุณาแนบหลักฐานประกอบ'"
+            [groups]="objectiveFiles"></ksp-form-multi-attachment>
         </mat-tab>
       </mat-tab-group>
     </div>
