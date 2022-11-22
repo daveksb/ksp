@@ -1,9 +1,9 @@
-<ng-container *ngIf="uploadType === 'button'">
+<ng-container *ngIf="uploadType === 'button' && mode === 'edit'">
   <button
     (click)="fileUpload.click()"
     [disabled]="mode === 'view'"
     type="button"
-    class="btn btn-sm btn-primary w-auto"
+    class="btn btn-sm btn-primary w-auto me-3"
   >
     + {{ buttonLabel }}
   </button>
@@ -24,7 +24,7 @@
 
 <span
   *ngIf="showUploadedFileName"
-  class="fs-6 text-secondary text-decoration-underline ms-2"
+  class="fs-6 text-secondary text-decoration-underline"
   >{{ filename }}</span
 >
 <i
@@ -33,3 +33,7 @@
   class="bi bi-x-circle-fill text-danger fs-6 ms-2"
   role="button"
 ></i>
+
+<span class="text-orange ms-3" *ngIf="mode === 'view'" role="button"
+  >ดูเอกสารแนบ</span
+>

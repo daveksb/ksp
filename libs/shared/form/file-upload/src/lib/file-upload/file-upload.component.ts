@@ -16,7 +16,7 @@ import { FileUpload, ImageUpload, KspFile } from '@ksp/shared/interface';
   imports: [CommonModule, MatIconModule, HttpClientModule],
 })
 export class FileUploadComponent {
-  @Input() mode: 'view' | 'edit' = 'edit';
+  @Input() mode: any;
   @Input() requiredFileType!: string;
   @Input() buttonLabel = 'อัพโหลดไฟล์';
   @Input() systemFileName = '-'; // รายชื่ออ้างอิงในระบบ เช่น 'หนังสือนำส่งจากสถานศึกษา (ฉบับจริงและวันที่ออกหนังสือไม่เกิน 30 วัน)', 'รูปถ่าย 1 นิ้ว'
