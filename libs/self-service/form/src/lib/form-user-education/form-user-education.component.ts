@@ -23,6 +23,7 @@ export class FormUserEducationComponent
   @Input() countries: Country[] | null = [];
   @Input() attachFiles!: any[];
   @Input() uniqueTimestamp = '';
+  @Input() title = '';
 
   selectedEducationType!: number;
 
