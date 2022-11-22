@@ -16,8 +16,9 @@ import {
 } from '@ksp/shared/dialog';
 import { ERequestService, GeneralInfoService } from '@ksp/shared/service';
 import { FormBuilder, Validators } from '@angular/forms';
-import { concatMap, forkJoin, Observable } from 'rxjs';
+import { concatMap, forkJoin, Observable, skip } from 'rxjs';
 import { parseJson } from '@ksp/shared/utility';
+import localForage from 'localforage';
 
 @Component({
   templateUrl: './user-detail.component.html',
@@ -50,6 +51,12 @@ export class UserDetailComponent implements OnInit {
     coordinatorInfo: [],
   });
 
+  form2 = this.fb.group({
+    bureau: [''],
+    schoolName: [''],
+    schoolAddress: [''],
+  });
+
   verifyForm = this.fb.group({
     result: [null, Validators.required],
   });
@@ -70,6 +77,8 @@ export class UserDetailComponent implements OnInit {
     });
 
     this.prefixList$ = this.generalInfoService.getPrefix();
+
+    this.form2.disable();
   }
 
   checkRequestId() {
@@ -108,6 +117,10 @@ export class UserDetailComponent implements OnInit {
       //console.log('coordinator = ', coordinator);
       this.setPassword = coordinator.password;
       this.form.controls.coordinatorInfo.patchValue(coordinator.coordinator);
+
+      this.form2.controls.bureau.patchValue(res.bureauname);
+      this.form2.controls.schoolName.patchValue(res.schoolname);
+      this.form2.controls.schoolAddress.patchValue(res.schooladdress);
     });
   }
 
@@ -194,6 +207,8 @@ export class UserDetailComponent implements OnInit {
   }
 
   viewUser(schoolId: any) {
+    localForage.setItem('schoolDetail', this.form2.value);
+    //console.log('yyy = ', this.form2.value);
     this.router.navigate(['school', 'all-user'], {
       queryParams: { schoolId: schoolId },
     });

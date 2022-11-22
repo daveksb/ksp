@@ -30,6 +30,7 @@ export class EResearchRewardDetailComponent
   tumbols$!: Observable<any>;
   bureaus$!: Observable<any>;
   prefixList$!: Observable<any>;
+  rewardFiles: any[] = [];
 
   form = this.fb.group({
     userInfo: [],
@@ -110,6 +111,7 @@ export class EResearchRewardDetailComponent
       rewardresearcherinfo,
       rewardresearchinfo,
       rewardresearchhistory,
+      fileinfo,
     } = data;
     const myInfo = <any>{
       prefixth,
@@ -136,6 +138,11 @@ export class EResearchRewardDetailComponent
       rewardResearchInfo,
       rewardResearchHistory,
     });
+
+    if (fileinfo) {
+      const { rewardfiles } = parseJson(fileinfo);
+      this.rewardFiles = rewardfiles;
+    }
   }
 
   patchWorkplaceInfo(value: any) {

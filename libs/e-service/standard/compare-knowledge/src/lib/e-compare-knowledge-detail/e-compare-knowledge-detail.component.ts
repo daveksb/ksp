@@ -58,6 +58,7 @@ export class ECompareKnowledgeDetailComponent
       value: 3,
     },
   ];
+  objectiveFiles: any[] = [];
 
   constructor(
     generalInfoService: GeneralInfoService,
@@ -108,6 +109,12 @@ export class ECompareKnowledgeDetailComponent
       this.form.controls.testResultCompareInfo.patchValue({
         ...testResultCompareInfo,
       });
+    }
+
+    if (data.fileinfo) {
+      const fileInfo = parseJson(data.fileinfo);
+      const { attachfiles } = fileInfo;
+      this.objectiveFiles = attachfiles;
     }
   }
 

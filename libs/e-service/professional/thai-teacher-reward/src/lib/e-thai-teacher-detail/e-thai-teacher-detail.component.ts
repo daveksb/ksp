@@ -128,6 +128,7 @@ export class EThaiTeacherDetailComponent
       eduinfo,
       hiringinfo,
       teachinginfo,
+      fileinfo,
     } = data;
     const myInfo = <any>{
       prefixth,
@@ -171,6 +172,11 @@ export class EThaiTeacherDetailComponent
       hiringInfo,
       teachingInfo,
     });
+
+    if (fileinfo) {
+      const { rewardfiles } = parseJson(fileinfo);
+      this.rewardFiles = rewardfiles;
+    }
   }
 
   patchAddressInfo(value: any) {

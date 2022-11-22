@@ -8,24 +8,38 @@
   <div class="bg-white p-3">
     <div class="box-header">รายชื่อผู้เข้าใช้งานระบบของหน่วยงาน/สถานศึกษา</div>
     <hr />
-    <div class="row">
-      <div class="col mb-2">
-        <label class="form-label">สังกัด</label>
-        <input class="form-control" type="text" disabled [placeholder]="" />
+    <form [formGroup]="form">
+      <div class="row">
+        <div class="col mb-2">
+          <label class="form-label">สังกัด</label>
+          <input
+            class="form-control"
+            type="text"
+            formControlName="bureau"
+          />
+        </div>
+
+        <div class="col mb-2">
+          <label class="form-label">หน่วยงาน / สถานศึกษา</label>
+          <input
+            class="form-control"
+            type="text"
+            formControlName="schoolName"
+          />
+        </div>
       </div>
 
-      <div class="col mb-2">
-        <label class="form-label">หน่วยงาน / สถานศึกษา</label>
-        <input class="form-control" type="text" disabled [placeholder]="" />
+      <div class="row">
+        <div class="col mb-2">
+          <label class="form-label">ที่อยู่</label>
+          <input
+            class="form-control"
+            type="text"
+            formControlName="schoolAddress"
+          />
+        </div>
       </div>
-    </div>
-
-    <div class="row">
-      <div class="col mb-2">
-        <label class="form-label">ที่อยู่</label>
-        <input class="form-control" type="text" disabled [placeholder]="" />
-      </div>
-    </div>
+    </form>
     <hr />
     <div class="table__scroll mt-3">
       <table mat-table [dataSource]="dataSource">

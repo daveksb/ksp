@@ -109,9 +109,7 @@ export abstract class ESelfFormBaseComponent {
     if (data.prohibitproperty) {
       this.prohibitProperty = parseJson(data.prohibitproperty);
     }
-    // if (data.filedata) {
-    //   this.myImage = atob(data.filedata);
-    // }
+
     if (data.filedata) {
       this.myImage = atob(data.filedata);
     }

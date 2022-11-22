@@ -55,11 +55,6 @@ export class TransferKnowledgeInfoComponent
   }
 
   override set value(value: any) {
-    console.log(value);
-    if (this.mode === 'view') {
-      this.form.disable();
-    }
-
     this.form.patchValue({ standardInfo: value.standardInfo });
     console.log(this.form);
     if (value.standards?.length) {
@@ -82,6 +77,11 @@ export class TransferKnowledgeInfoComponent
           })
         );
       });
+    }
+
+    console.log(value);
+    if (this.mode === 'view') {
+      this.form.disable();
     }
 
     this.onChange(value);

@@ -72,9 +72,10 @@
             [mode]="'view'"
             formControlName="replaceReasonInfo"></self-service-substitute-objective>
           <br />
-          <ksp-form-attachment
+          <ksp-form-multi-attachment
             [title]="'กรุณาแนบหลักฐานประกอบ'"
-            [uniqueTimestamp]="'uniqueTimestamp'"></ksp-form-attachment>
+            [groups]="objectiveFiles"
+            [mode]="'view'"></ksp-form-multi-attachment>
         </mat-tab>
       </mat-tab-group>
     </div>
