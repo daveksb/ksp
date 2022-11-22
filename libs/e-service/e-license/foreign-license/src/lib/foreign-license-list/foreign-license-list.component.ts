@@ -72,7 +72,7 @@ export class ForeignLicenseListComponent implements AfterViewInit {
       if (res && res.length) {
         this.dataSource.data = res;
         this.dataSource.sort = this.sort;
-        const sortState: Sort = { active: 'id', direction: 'desc' };
+        const sortState: Sort = { active: 'requestdate', direction: 'asc' };
         this.sort.active = sortState.active;
         this.sort.direction = sortState.direction;
         this.sort.sortChange.emit(sortState);
