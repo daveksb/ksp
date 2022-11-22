@@ -17,7 +17,7 @@ import {
   SchRequestSearchFilter,
 } from '@ksp/shared/interface';
 import { ERequestService, LoaderService } from '@ksp/shared/service';
-import { checkProcess, checkStatus, thaiDate } from '@ksp/shared/utility';
+import { checkProcess, checkStatus } from '@ksp/shared/utility';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -54,7 +54,7 @@ export class EQualificationApproveListComponent implements AfterViewInit {
   }
 
   renderLicense(request: KspRequest) {
-    console.log('xxx = ', request);
+    //console.log('xxx = ', request);
     // render pdf
     const pdfType = 99;
     const pdfSubType = 6;
@@ -64,9 +64,9 @@ export class EQualificationApproveListComponent implements AfterViewInit {
     const bureauname = request.bureauname;
     const schoolname = request.schoolname;
     const approveresult = request.status;
-    const careertype = request.careertype;
+    const careertype = SchoolRequestSubType[Number(request.careertype)];
     const eduinfo = JSON.parse(request.eduinfo || '');
-    console.log('yyy = ', eduinfo);
+    //console.log('yyy = ', eduinfo);
     const edu1 = eduinfo.find((item: any) => {
       if (item?.degreeLevel) {
         return item.degreeLevel === 1;
