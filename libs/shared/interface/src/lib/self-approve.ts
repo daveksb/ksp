@@ -37,3 +37,10 @@ export class SelfApproveGroup {
   matilevel2result: string | null = null;
   userid: string | null = null;
 }
+
+export interface SelfApprovelicenseData {
+  order: number;
+  licenseType: string;
+  label: string;
+  count: number;
+}

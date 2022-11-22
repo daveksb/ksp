@@ -10,7 +10,11 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { KspRequest, SelfApproveList } from '@ksp/shared/interface';
+import {
+  KspRequest,
+  SelfApprovelicenseData,
+  SelfApproveList,
+} from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 import { getCookie } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -45,6 +49,7 @@ export class RequestLicenseApproveCreateGroupComponent
   licenseData = LicenseData;
   listNo!: number;
   selection = new SelectionModel<any>(true, []);
+  maxCareerType!: SelfApprovelicenseData; // วิชาชีพของคนกลุ่มใหญ่ในบัญชีนี้
 
   form = this.fb.group({
     createNumber: [false],
@@ -80,35 +85,26 @@ export class RequestLicenseApproveCreateGroupComponent
   onCheck(element: CheckKSPRequest) {
     element.check = !element.check;
     this.licenseData = this.licenseData.map((item: any) => {
-      if (
-        item.licenseType === 'ผู้บริหารสถานศึกษา' &&
-        element.careertype === '2'
-      ) {
+      if (item.licenseType === '2' && element.careertype === '2') {
+        if (element.check) {
+          item.count = item.count + 1;
+        } else {
+          item.count = item.count - 1;
+        }
+      } else if (item.licenseType === '3' && element.careertype === '3') {
+        if (element.check) {
+          item.count = item.count + 1;
+        } else {
+          item.count = item.count - 1;
+        }
+      } else if (item.licenseType === '4' && element.careertype === '4') {
         if (element.check) {
           item.count = item.count + 1;
         } else {
           item.count = item.count - 1;
         }
       } else if (
-        item.licenseType === 'ผู้บริหารการศึกษา' &&
-        element.careertype === '3'
-      ) {
-        if (element.check) {
-          item.count = item.count + 1;
-        } else {
-          item.count = item.count - 1;
-        }
-      } else if (
-        item.licenseType === 'ศึกษานิเทศก์' &&
-        element.careertype === '4'
-      ) {
-        if (element.check) {
-          item.count = item.count + 1;
-        } else {
-          item.count = item.count - 1;
-        }
-      } else if (
-        item.licenseType === 'ครูชาวต่างชาติ' &&
+        item.licenseType === '5' &&
         element.careertype === '5' &&
         element.isforeign === '1'
       ) {
@@ -117,7 +113,7 @@ export class RequestLicenseApproveCreateGroupComponent
         } else {
           item.count = item.count - 1;
         }
-      } else if (item.licenseType === 'ครู' && element.careertype === '1') {
+      } else if (item.licenseType === '1' && element.careertype === '1') {
         if (element.check) {
           item.count = item.count + 1;
         } else {
@@ -127,7 +123,13 @@ export class RequestLicenseApproveCreateGroupComponent
       return item;
     });
 
-    console.log('license data = ', this.licenseData);
+    this.maxCareerType = this.licenseData.reduce((acc, cur) => {
+      if (acc.count > cur.count) {
+        return acc;
+      } else {
+        return cur;
+      }
+    });
   }
 
   prev() {
@@ -143,11 +145,12 @@ export class RequestLicenseApproveCreateGroupComponent
     });
 
     dialog.componentInstance.confirmed.subscribe((res) => {
+      //console.log('max career type = ', this.maxCareerType);
       if (res) {
         const payload: Partial<SelfApproveList> = {
           listno: this.listNo.toString(),
           process: '5',
-          careertype: '1',
+          careertype: this.maxCareerType.licenseType,
           isforeign: '0',
           status: '1',
           forwardtolicensecreate: this.form.controls.createNumber.value
@@ -203,10 +206,10 @@ export class RequestLicenseApproveCreateGroupComponent
   }
 }
 
-export const LicenseData = [
+export const LicenseData: SelfApprovelicenseData[] = [
   {
     order: 1,
-    licenseType: 1,
+    licenseType: '1',
     label: 'ครู',
     count: 0,
   },
@@ -218,17 +221,20 @@ export const LicenseData = [
   },
   {
     order: 3,
-    licenseType: 'ผู้บริหารสถานศึกษา',
+    licenseType: '2',
+    label: 'ผู้บริหารสถานศึกษา',
     count: 0,
   },
   {
     order: 4,
-    licenseType: 'ผู้บริหารการศึกษา',
+    licenseType: '3',
+    label: 'ผู้บริหารการศึกษา',
     count: 0,
   },
   {
     order: 5,
-    licenseType: 'ศึกษานิเทศก์',
+    licenseType: '4',
+    label: 'ศึกษานิเทศก์',
     count: 0,
   },
 ];
