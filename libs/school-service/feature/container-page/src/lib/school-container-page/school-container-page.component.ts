@@ -43,7 +43,7 @@ export const menu: MenuConfig[] = [
         label:
           'ขออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)',
         path: '/temp-license/request',
-        params: { subtype: SchoolRequestSubType.อื่นๆ },
+        params: { subtype: SchoolRequestSubType.ชาวต่างชาติ },
       },
       {
         label: 'ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ',

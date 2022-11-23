@@ -144,7 +144,7 @@ export class SchoolRequestComponent implements OnInit {
         this.careerType = Number(params['subtype']);
       }
 
-      if (this.careerType === SchoolRequestSubType.อื่นๆ) {
+      if (this.careerType === SchoolRequestSubType.ชาวต่างชาติ) {
         this.userInfoFormType = UserInfoFormType.foreign;
       } else {
         this.userInfoFormType = UserInfoFormType.thai;
@@ -155,8 +155,9 @@ export class SchoolRequestComponent implements OnInit {
       } else if (this.careerType == SchoolRequestSubType.ผู้บริหารสถานศึกษา) {
         this.requestLabel =
           SchoolRequestSubType[SchoolRequestSubType.ผู้บริหารสถานศึกษา];
-      } else if (this.careerType == SchoolRequestSubType.อื่นๆ) {
-        this.requestLabel = SchoolRequestSubType[SchoolRequestSubType.อื่นๆ];
+      } else if (this.careerType == SchoolRequestSubType.ชาวต่างชาติ) {
+        this.requestLabel =
+          SchoolRequestSubType[SchoolRequestSubType.ชาวต่างชาติ];
       }
     });
   }
@@ -584,7 +585,7 @@ export class SchoolRequestComponent implements OnInit {
   pathUserInfo(data: any) {
     data.birthdate = data?.birthdate?.split('T')[0];
 
-    if (this.careerType === SchoolRequestSubType.อื่นๆ) {
+    if (this.careerType === SchoolRequestSubType.ชาวต่างชาติ) {
       data.passportstartdate = data.passportstartdate.split('T')[0];
       data.passportenddate = data.passportenddate.split('T')[0];
       //console.log('data = ', data);
