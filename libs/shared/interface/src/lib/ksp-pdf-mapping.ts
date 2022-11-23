@@ -787,34 +787,34 @@ export const kspPdfMapping: IKspPdfMapping[] = [
         ],
         svg: [
           {
-            key: 'forbid1',
+            key: 'forbid1_1',
             options: { x: 392, y: 739 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'forbid2',
+            key: 'forbid1_2',
             options: { x: 442, y: 739 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
 
           {
-            key: 'forbid3',
+            key: 'forbid2_1',
             options: { x: 335, y: 714 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'forbid4',
+            key: 'forbid2_2',
             options: { x: 386, y: 714 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
 
           {
-            key: 'forbid5',
+            key: 'forbid3_1',
             options: { x: 204, y: 691 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'forbid6',
+            key: 'forbid3_2',
             options: { x: 255, y: 691 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
@@ -1108,6 +1108,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
               color: black,
             },
           },
+
           {
             key: 'degreename1',
             options: {
@@ -1135,11 +1136,347 @@ export const kspPdfMapping: IKspPdfMapping[] = [
               color: black,
             },
           },
+          {
+            key: 'graduate1',
+            options: {
+              x: 415,
+              y: 250,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'grade1',
+            options: {
+              x: 180,
+              y: 227,
+              size: defaultSize,
+              color: black,
+            },
+          },
+
+          {
+            key: 'degreename2',
+            options: {
+              x: 200,
+              y: 180,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'major2',
+            options: {
+              x: 420,
+              y: 180,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'institution2',
+            options: {
+              x: 200,
+              y: 157,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'graduate2',
+            options: {
+              x: 415,
+              y: 157,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'grade2',
+            options: {
+              x: 180,
+              y: 134,
+              size: defaultSize,
+              color: black,
+            },
+          },
+
+          {
+            key: 'degreename3',
+            options: {
+              x: 200,
+              y: 89,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'major3',
+            options: {
+              x: 420,
+              y: 89,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'institution3',
+            options: {
+              x: 200,
+              y: 66,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'graduate3',
+            options: {
+              x: 415,
+              y: 66,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'grade3',
+            options: {
+              x: 180,
+              y: 43,
+              size: defaultSize,
+              color: black,
+            },
+          },
         ],
         svg: [
           {
-            key: 'deegree1',
+            key: 'approve1',
+            options: { x: 135, y: 364 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'approve2',
+            options: { x: 176, y: 364 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+
+          {
+            key: 'degree1',
             options: { x: 46, y: 313 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'degree2',
+            options: { x: 46, y: 220 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'degree3',
+            options: { x: 46, y: 128 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+        ],
+      },
+      {
+        text: [
+          {
+            key: 'position',
+            options: {
+              x: 260,
+              y: 767,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'reasonDetail',
+            options: {
+              x: 50,
+              y: 709,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'otherEvidence',
+            options: {
+              x: 205,
+              y: 107,
+              size: defaultSize,
+              color: black,
+            },
+          },
+        ],
+        svg: [
+          {
+            key: 'evidence1',
+            options: { x: 64, y: 563 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'evidence2',
+            options: { x: 64, y: 540 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'evidence3',
+            options: { x: 64, y: 516 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'evidence4',
+            options: { x: 64, y: 493 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'evidence5',
+            options: { x: 64, y: 470 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'evidence6',
+            options: { x: 64, y: 447 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'evidence7',
+            options: { x: 64, y: 424 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'evidence8',
+            options: { x: 64, y: 400 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+
+          {
+            key: 'evidence9',
+            options: { x: 64, y: 361 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'evidence10',
+            options: { x: 67, y: 320 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'evidence11',
+            options: { x: 64, y: 263 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+
+          {
+            key: 'evidence12',
+            options: { x: 64, y: 172 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'evidence13',
+            options: { x: 64, y: 148 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'evidence14',
+            options: { x: 64, y: 125 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+        ],
+      },
+      {
+        text: [
+          {
+            key: 'name',
+            options: {
+              x: 200,
+              y: 598,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'prisonDetail',
+            options: {
+              x: 325,
+              y: 512,
+              size: defaultSize,
+              color: black,
+            },
+          },
+
+          {
+            key: 'secondDegree',
+            options: {
+              x: 200,
+              y: 680,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'secondMajor',
+            options: {
+              x: 425,
+              y: 680,
+              size: defaultSize,
+              color: black,
+            },
+          },
+
+          {
+            key: 'secondInstitution',
+            options: {
+              x: 125,
+              y: 655,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'secondAdmission',
+            options: {
+              x: 460,
+              y: 655,
+              size: defaultSize,
+              color: black,
+            },
+          },
+        ],
+        svg: [
+          {
+            key: 'degreeApprove',
+            options: { x: 45, y: 740 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+
+          {
+            key: 'forbid1_1',
+            options: { x: 390, y: 575 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'forbid1_2',
+            options: { x: 440, y: 575 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+
+          {
+            key: 'forbid2_1',
+            options: { x: 335, y: 552 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'forbid2_2',
+            options: { x: 386, y: 552 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+
+          {
+            key: 'forbid3_1',
+            options: { x: 206, y: 529 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'forbid3_2',
+            options: { x: 257, y: 529 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
         ],
@@ -1292,6 +1629,24 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             },
           },
           {
+            key: 'schoolemail',
+            options: {
+              x: 175,
+              y: 472,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'email',
+            options: {
+              x: 415,
+              y: 472,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
             key: 'nameen',
             options: {
               x: 280,
@@ -1300,8 +1655,233 @@ export const kspPdfMapping: IKspPdfMapping[] = [
               color: black,
             },
           },
+
+          {
+            key: 'nationality',
+            options: {
+              x: 125,
+              y: 427,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'birthdate',
+            options: {
+              x: 250,
+              y: 427,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'passportno',
+            options: {
+              x: 450,
+              y: 427,
+              size: defaultSize,
+              color: black,
+            },
+          },
+
+          {
+            key: 'degreename1',
+            options: {
+              x: 200,
+              y: 405,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'major1',
+            options: {
+              x: 412,
+              y: 405,
+              size: defaultSize,
+              color: black,
+            },
+          },
+
+          {
+            key: 'institution1',
+            options: {
+              x: 175,
+              y: 383,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'country1',
+            options: {
+              x: 427,
+              y: 383,
+              size: defaultSize,
+              color: black,
+            },
+          },
+
+          {
+            key: 'admission1',
+            options: {
+              x: 177,
+              y: 361,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'graduate1',
+            options: {
+              x: 425,
+              y: 361,
+              size: defaultSize,
+              color: black,
+            },
+          },
+
+          {
+            key: 'subjectName',
+            options: {
+              x: 400,
+              y: 339,
+              size: defaultSize,
+              color: black,
+            },
+          },
+
+          {
+            key: 'level',
+            options: {
+              x: 150,
+              y: 317,
+              size: defaultSize,
+              color: black,
+            },
+          },
+
+          {
+            key: 'hiringstartdate',
+            options: {
+              x: 225,
+              y: 295,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'hiringenddate',
+            options: {
+              x: 400,
+              y: 295,
+              size: defaultSize,
+              color: black,
+            },
+          },
+
+          {
+            key: 'reasonDetail',
+            options: {
+              x: 250,
+              y: 273,
+              size: defaultSize,
+              color: black,
+            },
+          },
+
+          {
+            key: 'nameen',
+            options: {
+              x: 425,
+              y: 205,
+              size: defaultSize,
+              color: black,
+            },
+          },
         ],
-        svg: [],
+        svg: [
+          {
+            key: 'evidence1',
+            options: { x: 87, y: 157 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'evidence2',
+            options: { x: 87, y: 135 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'evidence3',
+            options: { x: 87, y: 111 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'evidence4',
+            options: { x: 87, y: 88 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+        ],
+      },
+      {
+        text: [],
+        svg: [
+          {
+            key: 'evidence5',
+            options: { x: 86, y: 708 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'evidence5',
+            options: { x: 88, y: 640 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'evidence7',
+            options: { x: 89, y: 572 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'evidence8',
+            options: { x: 89, y: 550 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+        ],
+      },
+      {
+        text: [
+          {
+            key: 'forbid3',
+            options: {
+              x: 145,
+              y: 432,
+              size: defaultSize,
+              color: black,
+            },
+          },
+        ],
+        svg: [
+          {
+            key: 'forbid1_1',
+            options: { x: 357, y: 557 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'forbid1_2',
+            options: { x: 418, y: 557 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'forbid2_1',
+            options: { x: 359, y: 513 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'forbid2_2',
+            options: { x: 420, y: 513 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+        ],
       },
     ],
   },
@@ -1349,7 +1929,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'approveresult',
             options: {
               x: 85,
-              y: 397,
+              y: 396,
               size: defaultSize,
               color: black,
             },
@@ -1358,7 +1938,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'degreelevel',
             options: {
               x: 245,
-              y: 397,
+              y: 396,
               size: defaultSize,
               color: black,
             },
@@ -1367,7 +1947,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'degreename',
             options: {
               x: 425,
-              y: 397,
+              y: 396,
               size: defaultSize,
               color: black,
             },
@@ -1376,7 +1956,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'name',
             options: {
               x: 255,
-              y: 380,
+              y: 377,
               size: defaultSize,
               color: black,
             },
@@ -1385,7 +1965,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'degreefrom',
             options: {
               x: 115,
-              y: 380,
+              y: 377,
               size: defaultSize,
               color: black,
             },
@@ -1394,7 +1974,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'careertype',
             options: {
               x: 310,
-              y: 510,
+              y: 507,
               size: defaultSize,
               color: black,
             },
@@ -1402,17 +1982,17 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'careertype',
             options: {
-              x: 155,
-              y: 360,
-              size: defaultSize,
+              x: 154,
+              y: 358,
+              size: defaultSize - 2,
               color: black,
             },
           },
           {
             key: 'name',
             options: {
-              x: 120,
-              y: 493,
+              x: 85,
+              y: 490,
               size: defaultSize,
               color: black,
             },
@@ -1420,8 +2000,8 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'position',
             options: {
-              x: 350,
-              y: 493,
+              x: 326,
+              y: 489,
               size: defaultSize,
               color: black,
             },
@@ -1429,8 +2009,8 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'schoolname',
             options: {
-              x: 105,
-              y: 475,
+              x: 85,
+              y: 471,
               size: defaultSize,
               color: black,
             },

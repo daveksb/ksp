@@ -1,4 +1,4 @@
-<ng-container *ngIf="uploadType === 'button' && mode === 'edit'">
+<ng-container *ngIf="uploadType === 'button' || mode !== 'view'">
   <button
     (click)="fileUpload.click()"
     [disabled]="mode === 'view'"
