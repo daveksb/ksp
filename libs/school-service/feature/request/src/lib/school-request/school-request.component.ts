@@ -40,6 +40,7 @@ import {
 import {
   AddressService,
   GeneralInfoService,
+  LoaderService,
   SchoolInfoService,
   SchoolRequestService,
   StaffService,
@@ -53,7 +54,7 @@ import {
   replaceEmptyWithNull,
 } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
 @UntilDestroy()
@@ -62,38 +63,32 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./school-request.component.scss'],
 })
 export class SchoolRequestComponent implements OnInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   uniqueNo!: string; // use for file upload reference, gen only first time component loaded
   pageType = RequestPageType;
-
   countries$!: Observable<Country[]>;
   nationList$!: Observable<Nationality[]>;
   visaTypeList!: Observable<VisaType[]>;
   visaClassList!: Observable<VisaClass[]>;
-
   provinces$!: Observable<Province[]>;
   amphurs1$!: Observable<Amphur[]>;
   tumbols1$!: Observable<Tambol[]>;
   amphurs2$!: Observable<Amphur[]>;
   tumbols2$!: Observable<Tambol[]>;
-
   staffTypes$!: Observable<StaffType[]>;
   positionTypes$!: Observable<PositionType[]>;
   academicTypes$!: Observable<AcademicStanding[]>;
   prefixList$!: Observable<Prefix[]>;
-
   requestId!: number;
   requestData = new KspRequest();
   staffData = new SchStaff();
   careerType = SchoolRequestSubType.ครู; // 1 ไทย 2 ผู้บริหาร 3 ต่างชาติ
   requestLabel = '';
-
   disableTempSave = true;
   disableSave = false;
   disableCancel = true;
-
   schoolId = getCookie('schoolId');
   userInfoFormType: number = UserInfoFormType.thai; // control the display field of user info form
-
   eduFiles: FileGroup[] = [];
   teachingFiles: FileGroup[] = [];
   reasonFiles: FileGroup[] = [];
@@ -125,7 +120,8 @@ export class SchoolRequestComponent implements OnInit {
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
     private staffService: StaffService,
-    private requestService: SchoolRequestService
+    private requestService: SchoolRequestService,
+    private loaderService: LoaderService
   ) {}
 
   eduSelect(degreeLevel: number, evt: any) {
@@ -449,7 +445,7 @@ export class SchoolRequestComponent implements OnInit {
         this.patchFileInfo(parseJson(res.fileinfo));
         const schoolAddr = parseJson(res.schooladdrinfo);
         this.form.controls.schoolAddr.patchValue(schoolAddr);
-        console.log('approve detail = ', parseJson(res.detail));
+        //console.log('approve detail = ', parseJson(res.detail));
       }
     });
   }
@@ -616,14 +612,12 @@ export class SchoolRequestComponent implements OnInit {
     this.teachingFiles = structuredClone(RequestTeachingFiles);
     this.reasonFiles = structuredClone(RequestReasonFiles);
     this.attachFiles = structuredClone(RequestAttachFiles);
-
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.provinces$ = this.addressService.getProvinces();
     this.countries$ = this.addressService.getCountry();
     this.nationList$ = this.generalInfoService.getNationality();
     this.visaClassList = this.generalInfoService.getVisaClass();
     this.visaTypeList = this.generalInfoService.getVisaType();
-
     this.staffTypes$ = this.staffService.getStaffTypes();
     this.positionTypes$ = this.staffService.getPositionTypes();
     this.academicTypes$ = this.staffService.getAcademicStandingTypes();
@@ -634,8 +628,8 @@ export class SchoolRequestComponent implements OnInit {
     this.schoolInfoService
       .getSchoolInfo(this.schoolId)
       .pipe(untilDestroyed(this))
-      .subscribe((res) => {
-        this.form.controls.schoolAddr.patchValue(<any>res);
+      .subscribe((res: any) => {
+        this.form.controls.schoolAddr.patchValue(res);
       });
   }
 

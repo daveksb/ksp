@@ -14,7 +14,6 @@ import {
 import { EducationDetailService, ERequestService } from '@ksp/shared/service';
 import {
   checkStatus,
-  parseJson,
   replaceEmptyWithNull,
   schoolMapRequestType,
 } from '@ksp/shared/utility';
