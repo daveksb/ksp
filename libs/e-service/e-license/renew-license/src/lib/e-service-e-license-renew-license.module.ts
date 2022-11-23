@@ -24,7 +24,7 @@ import {
 import { MatTableModule } from '@angular/material/table';
 import { RenewLicenseDetailComponent } from './renew-license-detail/renew-license-detail.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 import { RenewLicenseConfirmComponent } from './renew-license-confirm/renew-license-confirm.component';
 import { ValidateKspRequestComponent } from '@ksp/e-service/e-license/approve-ksp-request';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -80,6 +80,7 @@ export const routes: Route[] = [
     EServiceLicenseSearchComponent,
     ValidateKspRequestComponent,
     ForbiddenPropertyFormComponent,
+    RequestNoPipe,
   ],
   declarations: [
     RenewLicenseDetailComponent,

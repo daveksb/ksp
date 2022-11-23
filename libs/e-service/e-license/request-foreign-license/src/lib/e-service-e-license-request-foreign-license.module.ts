@@ -28,7 +28,7 @@ import {
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 import {
   ConsiderKspRequestComponent,
   ValidateKspRequestComponent,
@@ -95,6 +95,8 @@ export const routes: Route[] = [
     MatCheckboxModule,
     RequestStatusComponent,
     MatStepperModule,
+    ThaiDatePipe,
+    RequestNoPipe,
   ],
   declarations: [
     RequestLicenseForeignListComponent,

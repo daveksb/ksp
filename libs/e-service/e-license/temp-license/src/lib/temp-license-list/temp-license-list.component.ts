@@ -112,8 +112,8 @@ export class ETempLicenseListComponent implements AfterViewInit {
 
         this.dataSource.sort = this.sort;
         const sortState: Sort = {
-          active: 'processupdatedate',
-          direction: 'desc',
+          active: 'requestdate',
+          direction: 'asc',
         };
         this.sort.active = sortState.active;
         this.sort.direction = sortState.direction;
