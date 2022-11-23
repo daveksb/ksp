@@ -30,7 +30,7 @@ export enum SchoolRequestSubType {
   'ผู้บริหารสถานศึกษา' = 2,
   'ผู้บริหารการศึกษา' = 3,
   'ศึกษานิเทศก์' = 4,
-  'อื่นๆ' = 5,
+  'ชาวต่างชาติ' = 5,
 }
 
 export const SchoolLangMapping: { [key: string]: string } = {

@@ -25,6 +25,7 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { AllUserListComponent } from './all-user-list/all-user-list.component';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
 import { MatSortModule } from '@angular/material/sort';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export const routes: Routes = [
   {
@@ -81,6 +82,7 @@ export const routes: Routes = [
     RequestHeaderInfoComponent,
     ThaiDatePipe,
     MatSortModule,
+    MatProgressSpinnerModule,
   ],
   declarations: [
     ManageCurrentUserListComponent,

@@ -49,7 +49,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
   verifyChoice = verifyChoices;
   evidenceFile = evidenceFiles;
   requestData = new KspRequest();
-  requestSubType = SchoolRequestSubType.อื่นๆ;
+  requestSubType = SchoolRequestSubType.ชาวต่างชาติ;
 
   form = this.fb.group({
     foreignTeacherInfo: [],
@@ -91,7 +91,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
   pathUserInfo(data: any) {
     data.birthdate = formatDate(data.birthdate);
 
-    if (this.requestSubType === SchoolRequestSubType.อื่นๆ) {
+    if (this.requestSubType === SchoolRequestSubType.ชาวต่างชาติ) {
       data.birthdate = formatDate(data.birthdate);
       data.passportstartdate = formatDate(data.passportstartdate);
       data.passportenddate = formatDate(data.passportenddate);

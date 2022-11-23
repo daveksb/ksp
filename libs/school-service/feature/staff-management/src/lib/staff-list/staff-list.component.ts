@@ -6,9 +6,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { staffLicenseTypes } from '@ksp/shared/constant';
 import { ListData, PositionType, SchStaff } from '@ksp/shared/interface';
-import { StaffService } from '@ksp/shared/service';
+import { LoaderService, StaffService } from '@ksp/shared/service';
 import { getCookie } from '@ksp/shared/utility';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'school-service-staff-list',
@@ -16,19 +16,18 @@ import { Observable } from 'rxjs';
   styleUrls: ['./staff-list.component.scss'],
 })
 export class StaffListComponent implements AfterViewInit {
-  positions$!: Observable<PositionType[]>;
-  licenseTypes: ListData[] = staffLicenseTypes;
-  searchNotFound = false;
-
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
+  positions$!: Observable<PositionType[]>;
+  licenseTypes: ListData[] = staffLicenseTypes;
+  searchNotFound = false;
+  schoolId = getCookie('schoolId');
+  dataSource = new MatTableDataSource<SchStaff>();
   form = this.fb.group({
     searchFilter: [],
   });
-
-  schoolId = getCookie('schoolId');
-
   displayedColumns: string[] = [
     'id',
     'idcardno',
@@ -41,12 +40,12 @@ export class StaffListComponent implements AfterViewInit {
     'edit',
     'view',
   ];
-  dataSource = new MatTableDataSource<SchStaff>();
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private service: StaffService
+    private service: StaffService,
+    private loaderService: LoaderService
   ) {
     this.positions$ = this.service.getPositionTypes();
   }
@@ -57,7 +56,7 @@ export class StaffListComponent implements AfterViewInit {
 
   search(filter: any) {
     //console.log('filter = ', filter);
-    console.log('school id = ', this.schoolId);
+    //console.log('school id = ', this.schoolId);
     const payload = {
       licenseno: filter.licenseno,
       name: filter.name,
@@ -113,16 +112,4 @@ export class StaffListComponent implements AfterViewInit {
   editStaff(staffId: number) {
     this.router.navigate(['/staff-management', 'edit-staff', staffId]);
   }
-}
-
-export interface staffInfo {
-  id: number;
-  idcardno: string;
-  firstnameth: string;
-  lastnameth: string;
-  startdate: string;
-  enddate: string;
-  profession: boolean;
-  teaching: boolean;
-  tempLicense: boolean;
 }

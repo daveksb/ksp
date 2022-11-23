@@ -27,6 +27,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export const routes: Routes = [
   {
@@ -72,6 +73,7 @@ export const routes: Routes = [
     MatSortModule,
     ThaiDatePipe,
     MatDatepickerModule,
+    MatProgressSpinnerModule,
   ],
   declarations: [
     StaffListComponent,
