@@ -445,7 +445,7 @@ export class SchoolRequestComponent implements OnInit {
         this.patchFileInfo(parseJson(res.fileinfo));
         const schoolAddr = parseJson(res.schooladdrinfo);
         this.form.controls.schoolAddr.patchValue(schoolAddr);
-        console.log('approve detail = ', parseJson(res.detail));
+        //console.log('approve detail = ', parseJson(res.detail));
       }
     });
   }
@@ -612,14 +612,12 @@ export class SchoolRequestComponent implements OnInit {
     this.teachingFiles = structuredClone(RequestTeachingFiles);
     this.reasonFiles = structuredClone(RequestReasonFiles);
     this.attachFiles = structuredClone(RequestAttachFiles);
-
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.provinces$ = this.addressService.getProvinces();
     this.countries$ = this.addressService.getCountry();
     this.nationList$ = this.generalInfoService.getNationality();
     this.visaClassList = this.generalInfoService.getVisaClass();
     this.visaTypeList = this.generalInfoService.getVisaType();
-
     this.staffTypes$ = this.staffService.getStaffTypes();
     this.positionTypes$ = this.staffService.getPositionTypes();
     this.academicTypes$ = this.staffService.getAcademicStandingTypes();
@@ -630,8 +628,8 @@ export class SchoolRequestComponent implements OnInit {
     this.schoolInfoService
       .getSchoolInfo(this.schoolId)
       .pipe(untilDestroyed(this))
-      .subscribe((res) => {
-        this.form.controls.schoolAddr.patchValue(<any>res);
+      .subscribe((res: any) => {
+        this.form.controls.schoolAddr.patchValue(res);
       });
   }
 
