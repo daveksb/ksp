@@ -218,7 +218,7 @@ export class UserDetailComponent implements OnInit {
     if (this.pageType === SchoolUserPageType.NewUser) {
       this.router.navigate(['/school', 'new-user']);
     } else if (this.pageType === SchoolUserPageType.CurrentUser) {
-      this.router.navigate(['/manage-current-user']);
+      this.router.navigate(['/school', 'current-user']);
     }
   }
 
