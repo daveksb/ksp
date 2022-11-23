@@ -5,12 +5,13 @@
     <div class="box-header">รายละเอียดใบคำขอใบแทนใบอนุญาตประกอบวิชาชีพ</div>
     <div class="bg-white px-4 py-2">
       <ksp-request-header-info
-        [requestDate]="'requestDate'"
-        [requestNumber]="'requestNo'"></ksp-request-header-info>
+        [requestDate]="requestData.createdate"
+        [requestNumber]="requestData.requestno"></ksp-request-header-info>
       <hr />
       <div class="row align-items-center bg-light py-2 mx-0 mb-3">
         <div class="col-lg-3 my-auto">
           <self-service-form-upload-image
+            [imgSrc]="myImage"
             [isEditMode]="false"></self-service-form-upload-image>
         </div>
         <div class="col-md mt-md-0 mt-2">

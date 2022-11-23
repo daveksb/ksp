@@ -103,6 +103,10 @@ export class FormUserInfoComponent
       this.form.controls.sex.clearValidators();
       this.form.controls.email.clearValidators();
     }
+
+    if (this.isSelfService) {
+      this.form.controls.idcardno.clearValidators();
+    }
   }
 
   ngOnInit(): void {

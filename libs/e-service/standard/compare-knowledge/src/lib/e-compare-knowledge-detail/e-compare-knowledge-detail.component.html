@@ -8,12 +8,13 @@
     <div class="box-header">รายละเอียดใบคำขอใบอนุญาตประกอบวิชาชีพ</div>
     <div class="bg-white px-4 py-2">
       <ksp-request-header-info
-        [requestDate]="'requestDate'"
-        [requestNumber]="'requestNo'"></ksp-request-header-info>
+        [requestDate]="requestData.createdate"
+        [requestNumber]="requestData.requestno"></ksp-request-header-info>
       <hr />
       <div class="row mx-0 border shadow-sm rounded-4 px-2 py-4 bg-white my-4">
         <div class="col-lg-3 my-auto">
           <self-service-form-upload-image
+            [imgSrc]="myImage"
             [isEditMode]="false"></self-service-form-upload-image>
         </div>
         <div class="col-md mt-md-0 mt-2">
