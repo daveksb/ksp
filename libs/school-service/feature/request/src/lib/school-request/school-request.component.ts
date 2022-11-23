@@ -40,6 +40,7 @@ import {
 import {
   AddressService,
   GeneralInfoService,
+  LoaderService,
   SchoolInfoService,
   SchoolRequestService,
   StaffService,
@@ -53,7 +54,7 @@ import {
   replaceEmptyWithNull,
 } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
 @UntilDestroy()
@@ -62,38 +63,32 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./school-request.component.scss'],
 })
 export class SchoolRequestComponent implements OnInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   uniqueNo!: string; // use for file upload reference, gen only first time component loaded
   pageType = RequestPageType;
-
   countries$!: Observable<Country[]>;
   nationList$!: Observable<Nationality[]>;
   visaTypeList!: Observable<VisaType[]>;
   visaClassList!: Observable<VisaClass[]>;
-
   provinces$!: Observable<Province[]>;
   amphurs1$!: Observable<Amphur[]>;
   tumbols1$!: Observable<Tambol[]>;
   amphurs2$!: Observable<Amphur[]>;
   tumbols2$!: Observable<Tambol[]>;
-
   staffTypes$!: Observable<StaffType[]>;
   positionTypes$!: Observable<PositionType[]>;
   academicTypes$!: Observable<AcademicStanding[]>;
   prefixList$!: Observable<Prefix[]>;
-
   requestId!: number;
   requestData = new KspRequest();
   staffData = new SchStaff();
   careerType = SchoolRequestSubType.ครู; // 1 ไทย 2 ผู้บริหาร 3 ต่างชาติ
   requestLabel = '';
-
   disableTempSave = true;
   disableSave = false;
   disableCancel = true;
-
   schoolId = getCookie('schoolId');
   userInfoFormType: number = UserInfoFormType.thai; // control the display field of user info form
-
   eduFiles: FileGroup[] = [];
   teachingFiles: FileGroup[] = [];
   reasonFiles: FileGroup[] = [];
@@ -125,7 +120,8 @@ export class SchoolRequestComponent implements OnInit {
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
     private staffService: StaffService,
-    private requestService: SchoolRequestService
+    private requestService: SchoolRequestService,
+    private loaderService: LoaderService
   ) {}
 
   eduSelect(degreeLevel: number, evt: any) {
