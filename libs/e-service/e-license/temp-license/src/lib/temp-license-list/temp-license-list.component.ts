@@ -147,6 +147,10 @@ export class ETempLicenseListComponent implements AfterViewInit {
       id12,
       id13,
     ] = request?.idcardno?.split('') ?? [];
+    const email = request.email;
+    const nationality = request.nationality;
+    const birthdate = request.birthdate;
+    const passportno = request.passportno;
 
     const eduinfo = JSON.parse(request.eduinfo || '');
 
@@ -162,8 +166,10 @@ export class ETempLicenseListComponent implements AfterViewInit {
     const major1 = edu1?.major ?? '';
     const graduate1 = edu1?.graduateDate ?? '';
     const grade1 = edu1?.grade ?? '';
-    let degree1 = false;
+    const admission1 = edu1?.admissionDate ?? '';
+    const country1 = edu1?.country ?? '';
 
+    let degree1 = false;
     if (degreename1) {
       degree1 = true;
     }
@@ -180,8 +186,8 @@ export class ETempLicenseListComponent implements AfterViewInit {
     const major2 = edu2?.major ?? '';
     const graduate2 = edu2?.graduateDate ?? '';
     const grade2 = edu2?.grade ?? '';
-    let degree2 = false;
 
+    let degree2 = false;
     if (degreename2) {
       degree2 = true;
     }
@@ -233,6 +239,13 @@ export class ETempLicenseListComponent implements AfterViewInit {
     const provincename = school.provinceName;
     const zipcode = school.zipCode;
     const telphone = school.telphone;
+    const schoolemail = school.eMail;
+
+    const hiring = JSON.parse(request.hiringinfo || '');
+    const hiringStartDate = hiring.startDate;
+    const hiringEndDate = hiring.endDate;
+    const position = hiring.position;
+
     this.dialog.open(PdfRenderComponent, {
       width: '1200px',
       height: '100vh',
@@ -257,6 +270,11 @@ export class ETempLicenseListComponent implements AfterViewInit {
           name,
           phone,
           telphone,
+          email,
+          schoolemail,
+          nationality,
+          birthdate,
+          passportno,
           id1,
           id2,
           id3,
@@ -270,6 +288,8 @@ export class ETempLicenseListComponent implements AfterViewInit {
           id11,
           id12,
           id13,
+          country1,
+          admission1,
           degreename1,
           institution1,
           major1,
@@ -290,6 +310,9 @@ export class ETempLicenseListComponent implements AfterViewInit {
           lv5,
           lv6,
           lv7,
+          hiringStartDate,
+          hiringEndDate,
+          position,
         },
       },
     });

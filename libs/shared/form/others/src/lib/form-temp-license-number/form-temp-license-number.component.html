@@ -13,7 +13,7 @@
           type="button"
           class="btn btn-primary w-auto"
           style="height: 36px"
-          #viewHistory
+          (click)="viewHistory = !viewHistory"
         >
           ประวัติการขอหนังสืออนุญาตชั่วคราว
         </button>
@@ -21,7 +21,7 @@
     </div>
   </div>
 
-  <ng-container *ngIf="!viewHistory">
+  <ng-container *ngIf="viewHistory">
     <table class="table w-25 mt-3">
       <thead>
         <tr>
@@ -33,10 +33,10 @@
       <tbody>
         <tr>
           <th scope="row">1</th>
-          <td>10 พ.ค.2564</td>
-          <td>1 พ.ค.2564</td>
+          <td>10 พ.ค. 2564</td>
+          <td>10 พ.ค. 2565</td>
         </tr>
       </tbody>
-    </table></ng-container
-  >
+    </table>
+  </ng-container>
 </div>

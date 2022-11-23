@@ -9,6 +9,8 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./form-temp-license-number.component.scss'],
 })
 export class FormTempLicenseNumberComponent implements OnInit {
+  viewHistory = false;
+
   constructor() {}
 
   ngOnInit(): void {}
