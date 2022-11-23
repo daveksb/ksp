@@ -1929,7 +1929,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'approveresult',
             options: {
               x: 85,
-              y: 397,
+              y: 396,
               size: defaultSize,
               color: black,
             },
@@ -1938,7 +1938,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'degreelevel',
             options: {
               x: 245,
-              y: 397,
+              y: 396,
               size: defaultSize,
               color: black,
             },
@@ -1947,7 +1947,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'degreename',
             options: {
               x: 425,
-              y: 397,
+              y: 396,
               size: defaultSize,
               color: black,
             },
@@ -1956,7 +1956,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'name',
             options: {
               x: 255,
-              y: 380,
+              y: 377,
               size: defaultSize,
               color: black,
             },
@@ -1965,7 +1965,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'degreefrom',
             options: {
               x: 115,
-              y: 380,
+              y: 377,
               size: defaultSize,
               color: black,
             },
@@ -1974,7 +1974,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'careertype',
             options: {
               x: 310,
-              y: 510,
+              y: 507,
               size: defaultSize,
               color: black,
             },
@@ -1982,17 +1982,17 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'careertype',
             options: {
-              x: 155,
-              y: 360,
-              size: defaultSize,
+              x: 154,
+              y: 358,
+              size: defaultSize - 2,
               color: black,
             },
           },
           {
             key: 'name',
             options: {
-              x: 120,
-              y: 493,
+              x: 85,
+              y: 490,
               size: defaultSize,
               color: black,
             },
@@ -2000,8 +2000,8 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'position',
             options: {
-              x: 350,
-              y: 493,
+              x: 326,
+              y: 489,
               size: defaultSize,
               color: black,
             },
@@ -2009,8 +2009,8 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'schoolname',
             options: {
-              x: 105,
-              y: 475,
+              x: 85,
+              y: 471,
               size: defaultSize,
               color: black,
             },
