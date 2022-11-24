@@ -29,8 +29,8 @@ export class EServiceLicenseGroupSearchComponent extends KspFormBaseComponent {
   override form = this.fb.group({
     groupno: [null],
     createdate: [null],
-    careertype: ['1'],
-    isforeign: ['1'],
+    careertype: [null],
+    isforeign: [null],
     process: [null],
     status: [null],
   });
