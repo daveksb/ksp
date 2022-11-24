@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
@@ -10,6 +10,7 @@ import { providerFactory } from '@ksp/shared/utility';
 import { selfOccupyList } from '@ksp/shared/constant';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FileUploadComponent } from '@ksp/shared/form/file-upload';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'ksp-e-service-license-save-result',
@@ -24,13 +25,17 @@ import { FileUploadComponent } from '@ksp/shared/form/file-upload';
   styleUrls: ['./e-service-license-save-result.component.scss'],
   providers: providerFactory(EServiceLicenseSaveResultComponent),
 })
-export class EServiceLicenseSaveResultComponent extends KspFormBaseComponent {
+export class EServiceLicenseSaveResultComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
   @Output() cancel = new EventEmitter<boolean>(false);
   @Output() save = new EventEmitter<any>();
 
   eduOccupyList = selfOccupyList;
   processList: SchRequestProcess[] = [];
   statusList?: SchRequestStatus[] = [];
+  uniqueTimestamp!: string;
 
   override form = this.fb.group({
     no: [null, Validators.required],
@@ -50,5 +55,9 @@ export class EServiceLicenseSaveResultComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+  }
+
+  ngOnInit(): void {
+    this.uniqueTimestamp = uuidv4();
   }
 }
