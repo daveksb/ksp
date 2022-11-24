@@ -17,7 +17,11 @@ import {
   SchRequestSearchFilter,
   SchTempLicense,
 } from '@ksp/shared/interface';
-import { SchoolInfoService, SchoolRequestService } from '@ksp/shared/service';
+import {
+  LoaderService,
+  SchoolInfoService,
+  SchoolRequestService,
+} from '@ksp/shared/service';
 import {
   checkProcess,
   schoolMapRequestType,
@@ -28,12 +32,14 @@ import {
   changeToThaiNumber,
   changeToEnglishMonth,
 } from '@ksp/shared/utility';
+import { Subject } from 'rxjs';
 
 @Component({
   templateUrl: './school-request-list.component.html',
   styleUrls: ['./school-request-list.component.scss'],
 })
 export class SchoolRequestListComponent implements AfterViewInit, OnInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   schoolId = getCookie('schoolId');
   displayedColumns: string[] = displayedColumns;
   dataSource = new MatTableDataSource<KspRequest>();
@@ -64,7 +70,8 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     private fb: FormBuilder,
     private requestService: SchoolRequestService,
     public dialog: MatDialog,
-    private schoolInfoService: SchoolInfoService
+    private schoolInfoService: SchoolInfoService,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {
