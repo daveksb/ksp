@@ -106,6 +106,7 @@
         <ng-container *ngIf="educationTypes === 'teacher'">
           <mat-tab label="ข้อมูลผลการประเมินสมรรถนะ">
             <self-service-form-user-performance
+              [mode]="'view'"
               [performanceFiles]="performanceFiles">
             </self-service-form-user-performance>
           </mat-tab>
