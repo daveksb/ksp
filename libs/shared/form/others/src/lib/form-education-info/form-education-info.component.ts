@@ -49,12 +49,18 @@ export class FormEducationInfoComponent
   }
 
   ngOnInit(): void {
-    if (this.option) {
-      this.form.clearValidators();
-    }
+    this.clearValidator();
   }
 
   get degreeLevel() {
     return this.form.controls.degreeLevel;
+  }
+
+  clearValidator() {
+    if (this.option) {
+      this.form.controls.degreeName.clearValidators();
+      this.form.controls.major.clearValidators();
+      this.form.controls.institution.clearValidators();
+    }
   }
 }
