@@ -96,18 +96,18 @@
 
       <ng-template [ngIf]="activityType.value">
         <br />
-        <ksp-form-attachment
+        <ksp-form-multi-attachment
           title="กรุณาแนบหลักฐานประกอบการปฏิบัติงาน"
           [groups]="attachFiles"
           [uniqueTimestamp]="uniqueTimestamp"
-        ></ksp-form-attachment
+        ></ksp-form-multi-attachment
       ></ng-template>
     </div>
     <br />
     <div class="d-flex justify-content-center">
       <button type="button" class="btn btn-secondary">ล้างข้อมูล</button>
       <button
-        [disabled]="disabledSave"
+        [disabled]="disabledSave || !activityType.value"
         type="button"
         class="ms-3 btn btn-primary"
         (click)="onClickSave()"

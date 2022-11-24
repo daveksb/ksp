@@ -1,5 +1,6 @@
 <ksp-top-nav [isSelfService]="true">
-  <span header>ขอรับรางวัลการยกย่องเชิดชูเกียรติ</span>
+  <span header>ยื่นใบคำขอ</span>
+  <span subHeader>ขอรับรางวัลการยกย่องเชิดชูเกียรติ</span>
 </ksp-top-nav>
 
 <form [formGroup]="form">
@@ -28,7 +29,8 @@
         [addressInfo]="addressInfo"
         [prefixList]="prefixList$ | async"
         [rewardFiles]="rewardFiles"
-        [uniqueTimestamp]="uniqueTimestamp"></ksp-council-reward>
+        [uniqueTimestamp]="uniqueTimestamp"
+      ></ksp-council-reward>
     </div>
 
     <div *ngIf="rewardType.value === '41'">
@@ -40,7 +42,8 @@
         [bureaus]="bureau$ | async"
         [rewardFiles]="rewardFiles"
         [uniqueTimestamp]="uniqueTimestamp"
-        formControlName="rewardDetail"></ksp-thai-teacher-reward>
+        formControlName="rewardDetail"
+      ></ksp-thai-teacher-reward>
     </div>
 
     <div *ngIf="rewardType.value === '42'">
@@ -52,7 +55,8 @@
         [bureaus]="bureau$ | async"
         [rewardFiles]="rewardFiles"
         [uniqueTimestamp]="uniqueTimestamp"
-        [prefixList]="prefixList$ | async"></ksp-best-teacher-reward>
+        [prefixList]="prefixList$ | async"
+      ></ksp-best-teacher-reward>
     </div>
 
     <div *ngIf="rewardType.value === '43'">
@@ -64,7 +68,8 @@
         [bureaus]="bureau$ | async"
         [rewardFiles]="rewardFiles"
         [uniqueTimestamp]="uniqueTimestamp"
-        formControlName="rewardDetail"></ksp-praise-teacher-reward>
+        formControlName="rewardDetail"
+      ></ksp-praise-teacher-reward>
     </div>
 
     <div *ngIf="rewardType.value === '44'">
@@ -76,7 +81,8 @@
         [bureaus]="bureau$ | async"
         [rewardFiles]="rewardFiles"
         [uniqueTimestamp]="uniqueTimestamp"
-        formControlName="rewardDetail"></ksp-senior-teacher-reward>
+        formControlName="rewardDetail"
+      ></ksp-senior-teacher-reward>
     </div>
     <div *ngIf="rewardType.value === '45'">
       <ksp-research-reward
@@ -86,7 +92,8 @@
         [bureaus]="bureau$ | async"
         [rewardFiles]="rewardFiles"
         [uniqueTimestamp]="uniqueTimestamp"
-        formControlName="rewardDetail"></ksp-research-reward>
+        formControlName="rewardDetail"
+      ></ksp-research-reward>
     </div>
 
     <div *ngIf="rewardType.value !== '0'">
@@ -95,17 +102,24 @@
           type="button"
           *ngIf="requestId"
           (click)="cancel()"
-          class="ms-3 btn border-primary text-primary">
+          class="ms-3 btn border-primary text-primary"
+        >
           ยกเลิกใบคำขอ
         </button>
         <button
           (click)="tempSave()"
           type="button"
           class="ms-3 btn border-primary text-primary bg-white"
-          [disabled]="!form.valid">
+          [disabled]="!form.valid"
+        >
           บันทึกชั่วคราว
         </button>
-        <button (click)="save()" type="button" class="ms-3 btn btn-primary" [disabled]="!form.valid">
+        <button
+          (click)="save()"
+          type="button"
+          class="ms-3 btn btn-primary"
+          [disabled]="!form.valid"
+        >
           บันทึกและยื่น
         </button>
       </div>
