@@ -44,6 +44,7 @@ export class FormCoordinatorInfoComponent
   RequestTypeEnum = SchoolRequestType;
   validatorMessages = validatorMessages;
   FormTypeEnum = UserInfoFormType;
+  validprefix = true;
 
   /**
    * Dark Mode : all inputs will have gray background and form container will have white background
@@ -98,6 +99,26 @@ export class FormCoordinatorInfoComponent
     const th = { prefixth: prefix };
     this.form.patchValue(th);
     this.form.patchValue(en);
+  }
+
+  changePrefix(evt: any) {
+    if (
+      this.form.controls.prefixth &&
+      this.form.controls.prefixen &&
+      this.form.controls.prefixth.value != this.form.controls.prefixen.value
+    ) {
+      this.validprefix = false;
+    } else {
+      this.validprefix = true;
+    }
+  }
+
+  get prefixth() {
+    return this.form.controls.prefixth;
+  }
+
+  get prefixen() {
+    return this.form.controls.prefixen;
   }
 
   get idCardNo() {

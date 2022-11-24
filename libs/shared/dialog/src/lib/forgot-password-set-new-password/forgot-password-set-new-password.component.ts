@@ -11,11 +11,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import {
-  numberPattern,
-  selfPasswordPattern,
-  validatorMessages,
-} from '@ksp/shared/utility';
+import { validatorMessages } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-forgot-password-set-new-password',
