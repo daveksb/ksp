@@ -3,7 +3,7 @@
     (click)="fileUpload.click()"
     [disabled]="mode === 'view'"
     type="button"
-    class="btn btn-sm btn-primary w-auto me-3"
+    class="btn btn-sm btn-primary w-auto"
   >
     + {{ buttonLabel }}
   </button>
@@ -25,7 +25,7 @@
 
 <span
   *ngIf="showUploadedFileName"
-  class="fs-6 text-secondary text-decoration-underline me-3"
+  class="fs-6 text-secondary text-decoration-underline me-3 ms-3"
   >{{ filename }}</span
 >
 <i

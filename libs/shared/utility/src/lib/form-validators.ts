@@ -1,4 +1,4 @@
-export const phonePattern = '^(0[24689]{1})+([0-9]{7,8})+$';
+export const phonePattern = '^(0[23456789]{1})+([0-9]{7,8})+$';
 export const nameThPattern = '^[ก-๏]+$';
 export const selfPasswordPattern = '^{6}+$';
 export const numberPattern = '^[0-9]';
@@ -13,7 +13,6 @@ export const validatorMessages = {
   phone: 'กรุณากรอกข้อมูลในรูปแบบเบอร์โทรศัพท์',
   th: 'กรุณากรอกข้อมูลเป็นภาษาไทยเท่านั้น ',
   en: 'กรุณากรอกข้อมูลเป็นภาษาอังกฤษเท่านั้น ',
-  //idCardNo: 'กรุณากรอกข้อมูลเลขบัตรประชาชน 13 หลักเท่านั้น',
   idCardNo: 'กรุณากรอกข้อมูลเลขบัตรประชาชนที่ถูกต้อง',
   KuruspaNo: 'กรุณากรอกข้อมูลเลขคุรุสภา 13 หลักเท่านั้น',
   idCardBack: 'กรุณากรอก 2 หลักแรกเป็นภาษาอังกฤษและ 10 หลักหลังเป็นตัวเลข',
