@@ -157,7 +157,7 @@ export class ERequestService {
 
   createKuruspaNumber(payload: Partial<KspKuruspa>): Observable<any> {
     return this.http.post(
-      `${environment.apiUrl}/e-service/schkuruspanoinsertupdate`,
+      `${environment.apiUrl}/e-service/schkuruspanoinsert`,
       payload
     );
   }

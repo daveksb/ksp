@@ -268,7 +268,7 @@ export function processFilter(data: KspRequest[], process = 1) {
   return data.filter((d) => Number(d.process) > process);
 }
 
-export function genKuruspaNo() {
+/* export function genKuruspaNo() {
   const d1 = 6;
   const d2 = 5;
   const d3 = Math.floor(Math.random() * 10);
@@ -304,7 +304,7 @@ export function genKuruspaNo() {
   }
   const cid = `${d1}${d2}${d3}${d4}${d5}${d6}${d7}${d8}${d9}${d10}${d11}${d12}${d13}`;
   return cid;
-}
+} */
 
 export function validateIdCard(
   control: AbstractControl
