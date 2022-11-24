@@ -1,8 +1,8 @@
 export const phonePattern = '^(0[23456789]{1})+([0-9]{7,8})+$';
 export const nameThPattern = '^[ก-๏]+$';
-export const selfPasswordPattern = '^{6}+$';
-export const numberPattern = '^[0-9]';
 export const nameEnPattern = '^[a-zA-Z]+$';
+export const passwordPattern = '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,20}$';
+//export const numberPattern = '^[0-9]';
 export const idCardPattern = '^[0-9]{13}';
 //export const passportPattern = '^^[A-Z]{1}[0-9]{7,9}';
 //export const passportPattern = '[a-zA-Z0-9]*';
@@ -24,5 +24,5 @@ export const validatorMessages = {
   loginFail: 'คุณกรอกรหัสเข้าใช้งาน หรือรหัสผ่านไม่ถูกต้อง',
   bankAccount: 'กรุณากรอกเลขที่บัญชีให้ถูกต้อง',
   prefixNotMatching: 'กรุณาเลือกคำนำหน้าชื่อให้ตรงกัน',
-  passwordNotMatchingEn: 'กรุณากรอกรหัสผ่านให้ตรงกัน',
+  //passwordNotMatchingEn: 'Password is not macthing',
 };

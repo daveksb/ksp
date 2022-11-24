@@ -8,7 +8,7 @@ import {
 } from '@ksp/shared/dialog';
 import { SchForgetPassword } from '@ksp/shared/interface';
 import { SchoolUserService } from '@ksp/shared/service';
-import { validatorMessages } from '@ksp/shared/utility';
+import { passwordPattern, validatorMessages } from '@ksp/shared/utility';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import localForage from 'localforage';
 import * as CryptoJs from 'crypto-js';
@@ -23,10 +23,14 @@ export class SetNewPasswordComponent implements OnInit {
   eyeIconClickedSecond = false;
   validatorMessages = validatorMessages;
   payload!: SchForgetPassword;
+  username = '';
 
   form = this.fb.group({
-    password: [null, [Validators.required, Validators.minLength(8)]],
-    rePassword: [null, [Validators.required, Validators.minLength(8)]],
+    password: [
+      null,
+      [Validators.required, Validators.pattern(passwordPattern)],
+    ],
+    rePassword: [null, Validators.required],
   });
 
   constructor(
@@ -42,9 +46,21 @@ export class SetNewPasswordComponent implements OnInit {
     return password !== rePassword || !password || !rePassword;
   }
 
+  get passwordNotMatching() {
+    const { password, rePassword } = this.form.getRawValue();
+    this.validatorMessages.passwordNotMatching;
+    return password !== rePassword && rePassword;
+  }
+
+  get password() {
+    return this.form.controls.password;
+  }
+
   ngOnInit(): void {
     localForage.getItem('schSetNewPassword').then((res: any) => {
       this.payload = res;
+      this.username = res.schoolid;
+      console.log('res = ', res);
     });
   }
 
