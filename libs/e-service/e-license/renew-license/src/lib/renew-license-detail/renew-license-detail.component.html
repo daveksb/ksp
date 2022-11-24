@@ -1,7 +1,4 @@
-<ksp-top-nav
-  ><span header>ยื่นใบคำขอ</span
-  ><span subHeader>ขอต่อใบอนุญาตประกอบวิชาชีพ</span></ksp-top-nav
->
+<ksp-top-nav><span header>ยื่นใบคำขอ</span><span subHeader>ขอต่อใบอนุญาตประกอบวิชาชีพ</span></ksp-top-nav>
 
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
@@ -9,15 +6,13 @@
     <div class="bg-white px-3 py-2">
       <ksp-request-header-info
         [requestDate]="requestData.createdate"
-        [requestNumber]="requestData.requestno"
-      ></ksp-request-header-info>
+        [requestNumber]="requestData.requestno"></ksp-request-header-info>
       <hr />
       <div class="row align-items-center bg-light py-2 mx-0 mb-3">
         <div class="col-lg-3 my-auto">
           <self-service-form-upload-image
             [isEditMode]="false"
-            [imgSrc]="myImage"
-          ></self-service-form-upload-image>
+            [imgSrc]="myImage"></self-service-form-upload-image>
         </div>
         <div class="col-md mt-md-0 mt-2">
           <ksp-form-user-info
@@ -26,8 +21,7 @@
             [isDarkMode]="true"
             [prefixList]="prefixList$ | async"
             [nationList]="nationalitys$ | async"
-            [isSelfService]="true"
-          >
+            [isSelfService]="true">
           </ksp-form-user-info>
         </div>
       </div>
@@ -36,8 +30,7 @@
         class="tab-group mb-2"
         animationDuration="0ms"
         (selectedTabChange)="tabChanged($event)"
-        [selectedIndex]="0"
-      >
+        [selectedIndex]="0">
         <mat-tab label="ที่อยู่" class="tab-content">
           <ksp-form-address
             formControlName="address1"
@@ -45,8 +38,7 @@
             [isDarkMode]="true"
             [provinces]="provinces$ | async"
             [amphurs]="amphurs1$ | async"
-            [tumbols]="tumbols1$ | async"
-          >
+            [tumbols]="tumbols1$ | async">
             <span>ที่อยู่ทะเบียนบ้าน</span>
           </ksp-form-address>
           <hr />
@@ -56,27 +48,20 @@
             [isDarkMode]="true"
             [provinces]="provinces$ | async"
             [amphurs]="amphurs2$ | async"
-            [tumbols]="tumbols2$ | async"
-          >
+            [tumbols]="tumbols2$ | async">
             <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
           </ksp-form-address>
         </mat-tab>
 
         <mat-tab label="สถานที่ทำงาน">
-          <div class="d-flex align-items-center">
-            <input type="checkbox" class="me-2" disabled />
-            <label class="form-label mb-2"
-              >เป็นผู้ประสงค์ประกอบวิชาชีพทางการศึกษา</label
-            >
-          </div>
           <self-service-form-user-workplace
+            [showNotRequire]="true"
             [showContactForm]="true"
             formControlName="workplace"
             [mode]="'view'"
             [provinces]="provinces$ | async"
             [amphurs]="amphurs3$ | async"
-            [tumbols]="tumbols3$ | async"
-          >
+            [tumbols]="tumbols3$ | async">
           </self-service-form-user-workplace>
           <!-- <div class="row">
             <div class="col-md-6 mb-3">
@@ -116,14 +101,12 @@
 
         <mat-tab
           label="ข้อมูลคุณสมบัติของผู้ขอต่ออายุใบอนุญาต"
-          *ngIf="educationType !== 'teacher'"
-        >
+          *ngIf="educationType !== 'teacher'">
           <self-service-renew-license-property
             formControlName="educationForm"
             [mode]="'view'"
             [renewLicenseTypes]="educationType"
-            [workingInfo]="licenseFiles"
-          ></self-service-renew-license-property>
+            [workingInfo]="licenseFiles"></self-service-renew-license-property>
           <!-- [workingInfo]="licenseFiles" -->
           <!-- [uniqueTimestamp]="uniqueTimestamp" -->
         </mat-tab>
@@ -135,32 +118,27 @@
             [educationType]="educationType"
             [uniqueTimestamp]="'uniqueTimestamp'"
             [workingInfo]="workingInfoFiles"
-            [workingInfo2]="workingInfoFiles2"
-          ></self-service-standard-working>
+            [workingInfo2]="workingInfoFiles2"></self-service-standard-working>
         </mat-tab>
 
         <mat-tab label="ลักษณะต้องห้าม">
           <div>
             <ksp-forbidden-property
               [input]="prohibitProperty"
-              [mode]="'view'"
-            ></ksp-forbidden-property>
+              [mode]="'view'"></ksp-forbidden-property>
           </div>
         </mat-tab>
       </mat-tab-group>
     </div>
     <ng-container
       formArrayName="checkResult"
-      *ngFor="let c of checkResultFormArray.controls; let i = index"
-    >
+      *ngFor="let c of checkResultFormArray.controls; let i = index">
       <div
         class="bg-white px-3 py-2 mt-3"
-        [ngClass]="{ hide: (selectedTab.index || 0) !== i }"
-      >
+        [ngClass]="{ hide: (selectedTab.index || 0) !== i }">
         <e-service-license-check
           [choices]="verifyChoice"
-          [formControlName]="i"
-        ></e-service-license-check>
+          [formControlName]="i"></e-service-license-check>
       </div>
     </ng-container>
   </div>
@@ -171,6 +149,5 @@
     [showCenterButtons]="true"
     [isFirstPage]="true"
     (nextClicked)="next()"
-    (cancelClicked)="cancel()"
-  ></ksp-bottom-nav>
+    (cancelClicked)="cancel()"></ksp-bottom-nav>
 </div>
