@@ -16,7 +16,7 @@ import {
 } from '@ksp/shared/dialog';
 import { ERequestService, GeneralInfoService } from '@ksp/shared/service';
 import { FormBuilder, Validators } from '@angular/forms';
-import { concatMap, forkJoin, Observable, skip } from 'rxjs';
+import { concatMap, forkJoin, Observable } from 'rxjs';
 import { parseJson } from '@ksp/shared/utility';
 import localForage from 'localforage';
 
@@ -45,12 +45,10 @@ export class UserDetailComponent implements OnInit {
       files: [],
     },
   ];
-
   form = this.fb.group({
     userInfo: [],
     coordinatorInfo: [],
   });
-
   form2 = this.fb.group({
     bureau: [''],
     schoolName: [''],
@@ -77,7 +75,6 @@ export class UserDetailComponent implements OnInit {
     });
 
     this.prefixList$ = this.generalInfoService.getPrefix();
-
     this.form2.disable();
   }
 
@@ -93,20 +90,18 @@ export class UserDetailComponent implements OnInit {
   loadRequestFromId(id: number) {
     this.eRequestService.getKspRequestById(id).subscribe((res) => {
       this.requestData = res;
+
       res.status === '1' ? (this.mode = 'edit') : (this.mode = 'view');
       //console.log('file = ', parseJson(res.fileinfo));
 
       const files = parseJson(res.fileinfo);
-      console.log('files = ', files);
 
       if (files && Array.isArray(files)) {
         this.files.forEach((group, index) => {
-          console.log('group = ', group);
+          //console.log('group = ', group);
           return (group.files = files[index]);
         });
       }
-      console.log('files = ', this.files);
-
       //console.log('mode = ', this.mode);
       if (res.birthdate) {
         res.birthdate = res.birthdate.split('T')[0];
@@ -114,9 +109,9 @@ export class UserDetailComponent implements OnInit {
 
       this.form.controls.userInfo.patchValue(<any>res);
       const coordinator = parseJson(res.coordinatorinfo);
-      //console.log('coordinator = ', coordinator);
       this.setPassword = coordinator.password;
-      this.form.controls.coordinatorInfo.patchValue(coordinator.coordinator);
+      const data: any = coordinator.coordinatorTnfo;
+      this.form.controls.coordinatorInfo.patchValue(data);
 
       this.form2.controls.bureau.patchValue(res.bureauname);
       this.form2.controls.schoolName.patchValue(res.schoolname);
@@ -130,13 +125,13 @@ export class UserDetailComponent implements OnInit {
       process: '1',
       status: '2',
       detail: null,
-      systemtype: '2', // school
+      systemtype: '4', //e-service
       userid: null,
       paymentstatus: null,
     };
 
     this.eRequestService.KspUpdateRequestProcess(payload).subscribe((res) => {
-      console.log('update result = ', res);
+      //console.log('update result = ', res);
       this.completeDialog();
     });
 
@@ -160,7 +155,7 @@ export class UserDetailComponent implements OnInit {
       process: '1',
       status: '2',
       detail: null,
-      systemtype: '2', // school
+      systemtype: '4', //e-service
       userid: null,
       paymentstatus: null,
     };
@@ -195,7 +190,7 @@ export class UserDetailComponent implements OnInit {
       process: '1',
       status: '3',
       detail: null,
-      systemtype: '2', // school
+      systemtype: '4', //e-service
       userid: null,
       paymentstatus: null,
     };

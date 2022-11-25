@@ -48,12 +48,10 @@ export class KspApprovePersistData {
 export class ETempLicenseDetailComponent implements OnInit {
   verifyChoice: any[] = [];
   selectedTabIndex = 0;
-
   eduFiles: FileGroup[] = RequestEduFiles;
   teachingFiles: FileGroup[] = RequestTeachingFiles;
   reasonFiles: FileGroup[] = RequestReasonFiles;
   attachFiles: FileGroup[] = RequestAttachFiles;
-
   amphurs1$!: Observable<Amphur[]>;
   tumbols1$!: Observable<Tambol[]>;
   amphurs2$!: Observable<Amphur[]>;
@@ -62,13 +60,11 @@ export class ETempLicenseDetailComponent implements OnInit {
   prefixList$!: Observable<Prefix[]>;
   positionTypes$!: Observable<PositionType[]>;
   selectedTab: MatTabChangeEvent = new MatTabChangeEvent();
-
   requestId!: number;
   requestData = new KspRequest();
   userInfoFormType: number = UserInfoFormType.thai; // control the display field of user info form
   pageType = RequestPageType;
   forbidden: any;
-
   form = this.fb.group({
     userInfo: [],
     addr1: [],
@@ -147,7 +143,6 @@ export class ETempLicenseDetailComponent implements OnInit {
   checkRequestId() {
     this.route.paramMap.pipe(untilDestroyed(this)).subscribe((params) => {
       this.requestId = Number(params.get('id'));
-      //console.log('req id = ', this.requestId);
       if (this.requestId) {
         this.loadRequestFromId(this.requestId);
       }
