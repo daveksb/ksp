@@ -30,7 +30,7 @@ import { Observable, Subject } from 'rxjs';
 export class ApproveNewUserListComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
+  requestTypeLabel = 'ผู้แต่งตั้ง';
   isLoading: Subject<boolean> = this.loaderService.isLoading;
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<KspRequest>();
@@ -63,6 +63,12 @@ export class ApproveNewUserListComponent implements AfterViewInit, OnInit {
 
   search(params: RequestSearchFilter) {
     //console.log('params  = ', params);
+    if (params.requesttype === '2') {
+      this.requestTypeLabel = 'ผู้ถอดถอน';
+    } else {
+      this.requestTypeLabel = 'ผู้แต่งตั้ง';
+    }
+
     let payload: EsSearchPayload = {
       systemtype: '2',
       requesttype: params.requesttype,
@@ -85,20 +91,21 @@ export class ApproveNewUserListComponent implements AfterViewInit, OnInit {
     payload = replaceEmptyWithNull(payload);
 
     this.eRequestService.KspSearchRequest(payload).subscribe((res) => {
-      //console.log('res = ', res);
       if (res && res.length) {
+        console.log('11 = ');
         const data = res.map((i) => {
-          const coName = JSON.parse(i.coordinatorinfo || '');
+          const coName = JSON.parse(i.coordinatorinfo || '{}');
           return {
             ...i,
             ...{
               coordinator:
-                coName.coordinator.firstnameth +
+                coName?.coordinator?.firstnameth +
                 ' ' +
-                coName.coordinator.lastnameth,
+                coName?.coordinator?.lastnameth,
             },
           };
         });
+        console.log('data = ', data);
         this.dataSource.data = data;
         this.dataSource.sort = this.sort;
         const sortState: Sort = { active: 'requestdate', direction: 'asc' };
@@ -107,6 +114,7 @@ export class ApproveNewUserListComponent implements AfterViewInit, OnInit {
         this.sort.sortChange.emit(sortState);
         this.searchNotFound = false;
       } else {
+        console.log('22 = ');
         this.clear();
         this.searchNotFound = true;
       }
