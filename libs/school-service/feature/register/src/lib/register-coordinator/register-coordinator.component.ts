@@ -23,7 +23,6 @@ import { mapMultiFileInfo } from '@ksp/shared/utility';
   styleUrls: ['./register-coordinator.component.scss'],
 })
 export class CoordinatorInfoComponent implements OnInit {
-  //savingData: any;
   prefixList$!: Observable<Prefix[]>;
   nationList$!: Observable<Nationality[]>;
   mode: FormMode = 'edit';
@@ -59,7 +58,10 @@ export class CoordinatorInfoComponent implements OnInit {
   }
 
   save() {
-    localForage.setItem('registerCoordinator', this.form.value);
+    localForage.setItem(
+      'registerCoordinator',
+      this.form.controls.coordinator.value
+    );
     localForage.setItem('registerFile', mapMultiFileInfo(this.uploadFiles));
     this.router.navigate(['/register', 'password']);
   }

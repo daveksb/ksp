@@ -10,6 +10,7 @@ import { FormMode, KspRequest, SchInfo } from '@ksp/shared/interface';
 import { EMPTY, switchMap } from 'rxjs';
 import localForage from 'localforage';
 import {
+  formatRequestNo,
   thaiDate,
   validatePassword,
   validatorMessages,
@@ -173,7 +174,7 @@ export class RegisterPasswordComponent implements OnInit {
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,
         content: `วันที่ : ${thaiDate(new Date())}
-        เลขที่ใบคำขอ : ${requestNo}`,
+        เลขที่ใบคำขอ : ${formatRequestNo(requestNo)}`,
         subContent: `กรุณาตรวจสอบสถานะใบคำขอผ่านทางอีเมล
         ผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },

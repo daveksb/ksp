@@ -92,20 +92,17 @@ export class ApproveNewUserListComponent implements AfterViewInit, OnInit {
 
     this.eRequestService.KspSearchRequest(payload).subscribe((res) => {
       if (res && res.length) {
-        console.log('11 = ');
         const data = res.map((i) => {
           const coName = JSON.parse(i.coordinatorinfo || '{}');
           return {
             ...i,
             ...{
               coordinator:
-                coName?.coordinator?.firstnameth +
-                ' ' +
-                coName?.coordinator?.lastnameth,
+                coName?.coordinator?.firstnameth ||
+                '' + ' ' + (coName?.coordinator?.lastnameth || ''),
             },
           };
         });
-        console.log('data = ', data);
         this.dataSource.data = data;
         this.dataSource.sort = this.sort;
         const sortState: Sort = { active: 'requestdate', direction: 'asc' };
@@ -114,7 +111,6 @@ export class ApproveNewUserListComponent implements AfterViewInit, OnInit {
         this.sort.sortChange.emit(sortState);
         this.searchNotFound = false;
       } else {
-        console.log('22 = ');
         this.clear();
         this.searchNotFound = true;
       }
