@@ -11,19 +11,27 @@ import {
   RequestSearchFilter,
   SchoolUserPageType,
 } from '@ksp/shared/interface';
-import { EducationDetailService, ERequestService } from '@ksp/shared/service';
+import {
+  EducationDetailService,
+  ERequestService,
+  LoaderService,
+} from '@ksp/shared/service';
 import {
   checkStatus,
   replaceEmptyWithNull,
   schoolMapRequestType,
 } from '@ksp/shared/utility';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   templateUrl: './approve-new-user-list.component.html',
   styleUrls: ['./approve-new-user-list.component.scss'],
 })
 export class ApproveNewUserListComponent implements AfterViewInit, OnInit {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<KspRequest>();
   checkStatus = checkStatus;
@@ -32,10 +40,6 @@ export class ApproveNewUserListComponent implements AfterViewInit, OnInit {
   selectedUniversity = '';
   bureau$!: Observable<any>;
   searchNotFound = false;
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-
   defaultForm = { requesttype: '1' };
   form = this.fb.group({
     search: [this.defaultForm],
@@ -45,7 +49,8 @@ export class ApproveNewUserListComponent implements AfterViewInit, OnInit {
     private router: Router,
     private fb: FormBuilder,
     private eRequestService: ERequestService,
-    private educationDetailService: EducationDetailService
+    private educationDetailService: EducationDetailService,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {
@@ -80,10 +85,21 @@ export class ApproveNewUserListComponent implements AfterViewInit, OnInit {
     payload = replaceEmptyWithNull(payload);
 
     this.eRequestService.KspSearchRequest(payload).subscribe((res) => {
-      console.log('res = ', res);
-
+      //console.log('res = ', res);
       if (res && res.length) {
-        this.dataSource.data = res;
+        const data = res.map((i) => {
+          const coName = JSON.parse(i.coordinatorinfo || '');
+          return {
+            ...i,
+            ...{
+              coordinator:
+                coName.coordinator.firstnameth +
+                ' ' +
+                coName.coordinator.lastnameth,
+            },
+          };
+        });
+        this.dataSource.data = data;
         this.dataSource.sort = this.sort;
         const sortState: Sort = { active: 'requestdate', direction: 'asc' };
         this.sort.active = sortState.active;

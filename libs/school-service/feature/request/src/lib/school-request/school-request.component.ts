@@ -48,14 +48,17 @@ import {
 import {
   formatCheckboxData,
   formatDatePayload,
+  formatRequestNo,
   getCookie,
   mapMultiFileInfo,
   parseJson,
   replaceEmptyWithNull,
+  thaiDate,
 } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable, Subject } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
+import moment from 'moment';
 
 @UntilDestroy()
 @Component({
@@ -183,7 +186,6 @@ export class SchoolRequestComponent implements OnInit {
     const baseForm = this.fb.group(new KspRequest());
     const formData: any = this.form.getRawValue();
     //console.log('formdata = ', formData);
-
     const tab3 = mapMultiFileInfo(this.eduFiles);
     const tab4 = mapMultiFileInfo(this.teachingFiles);
     const tab5 = mapMultiFileInfo(this.reasonFiles);
@@ -246,16 +248,17 @@ export class SchoolRequestComponent implements OnInit {
       },
     };
 
-    //console.log('payload = ', payload);
-
     baseForm.patchValue(payload);
     //console.log('current form = ', baseForm.value);
-    this.requestService.schCreateRequest(baseForm.value).subscribe(() => {
+    this.requestService.schCreateRequest(baseForm.value).subscribe((res) => {
       // บันทึกและยื่น
       if (process === 2) {
         this.completeDialog(`ระบบทำการบันทึกเรียบร้อยแล้ว
+        เลขที่รายการ : ${formatRequestNo(res.requestno)}
+        วันที่ : ${thaiDate(new Date())}`);
+        /* this.completeDialog(`ระบบทำการบันทึกเรียบร้อยแล้ว
         สามารถตรวจสอบสถานะภายใน
-        3 - 15 วันทำการ`);
+        3 - 15 วันทำการ`); */
       } else if (process === 1) {
         // บันทึกชั่วคราว
         this.completeDialog(`ระบบทำการบันทึกชั่วคราวเรียบร้อยแล้ว`);

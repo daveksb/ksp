@@ -52,12 +52,10 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
   careerTypeList = careerTypeList;
   initialSearch = true;
   rejectedRequests: KspRequest[] = [];
-
   defaultForm = {
     requesttype: '3',
     careertype: '1',
   };
-
   form = this.fb.group({
     licenseSearch: [this.defaultForm],
   });
@@ -118,7 +116,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       // search without showing result do automatically after load
       if (this.initialSearch) {
         this.rejectedRequests = hasRejectedRequest(res);
-        //console.log('has reject = ', hasReject);
+        console.log('has reject = ', this.rejectedRequests);
       }
 
       if (res && res.length && !this.initialSearch) {
