@@ -59,6 +59,7 @@ export class RequestLicenseApproveKmvComponent implements OnInit {
             if (res && res.datareturn.length > 0) {
               this.requestList = res.datareturn;
               this.requestTypeList = getLicenseType(this.requestList);
+              console.log('type list = ', this.requestTypeList);
             }
           });
       }
