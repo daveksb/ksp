@@ -18,6 +18,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { parseJson } from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
 import { SelfGetRequest, SelfRequest } from '@ksp/shared/interface';
+import localForage from 'localforage';
 
 @Component({
   template: ``,
@@ -266,6 +267,8 @@ export abstract class LicenseFormBaseComponent {
         request(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res.returncode === '00') {
+            const requestno = res.requestno;
+            localForage.setItem('requestno', requestno);
             this.router.navigate(['/license', 'payment-channel']);
           }
         });

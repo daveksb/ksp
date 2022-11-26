@@ -25,6 +25,7 @@ import {
   ACADEMIC_FILES,
   RENEW_DOCUMENT_FILES,
 } from './renew-license-foreign-files';
+import localForage from 'localforage';
 
 @Component({
   selector: 'ksp-renew-license-foreign',
@@ -250,6 +251,8 @@ export class RenewLicenseForeignComponent implements OnInit {
         request(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res?.returncode === '00') {
+            const requestno = res.requestno;
+            localForage.setItem('requestno', requestno);
             this.router.navigate(['/license', 'payment-channel']);
           }
         });

@@ -3,7 +3,6 @@ import { FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { KspRequest, Prefix } from '@ksp/shared/interface';
 import { ERequestService, GeneralInfoService } from '@ksp/shared/service';
-import { parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -25,7 +24,6 @@ export class SchoolUserDetailComponent implements OnInit {
   form = this.fb.group({
     userInfo: [],
   });
-
   ngOnInit(): void {
     if (this.data.userid) {
       this.loadRequestFromId(this.data.userid);

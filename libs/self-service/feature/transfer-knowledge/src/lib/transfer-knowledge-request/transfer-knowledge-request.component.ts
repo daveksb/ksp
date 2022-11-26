@@ -27,6 +27,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { Observable } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
+import localForage from 'localforage';
 
 const EDU_FILES: FileGroup[] = [
   {
@@ -241,6 +242,8 @@ export class TransferKnowledgeRequestComponent
             if (currentProcess === 1) {
               this.router.navigate(['/home']);
             } else {
+              const requestno = res.requestno;
+              localForage.setItem('requestno', requestno);
               this.router.navigate(['/license', 'payment-channel']);
             }
           }
