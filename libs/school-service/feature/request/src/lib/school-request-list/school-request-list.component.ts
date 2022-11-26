@@ -166,7 +166,9 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     const date = new Date(element.licensestartdate || '');
     const thai = thaiDate(date);
     const [day, month, year] = thai.split(' ');
-    const fulldateth = `${changeToThaiNumber(day)} เดือน ${month} พ.ศ. ${year}`;
+    const fulldateth = `${changeToThaiNumber(
+      day
+    )} เดือน ${month} พ.ศ. ${changeToThaiNumber(year)}`;
     const fulldateen = `${day} Day of ${changeToEnglishMonth(month)} B.E. ${
       parseInt(year) - 543
     }`;

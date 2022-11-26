@@ -1902,7 +1902,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             options: {
               x: 385,
               y: 632,
-              size: defaultSize,
+              size: defaultSize - 2,
               color: black,
             },
           },
@@ -1936,9 +1936,9 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'schoolname',
             options: {
-              x: 210,
+              x: 208,
               y: 567,
-              size: defaultSize,
+              size: defaultSize - 5,
               color: black,
             },
           },
@@ -2407,7 +2407,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             options: {
               x: 387,
               y: 612,
-              size: defaultSize,
+              size: defaultSize - 1,
               color: black,
             },
           },
@@ -2443,7 +2443,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             options: {
               x: 210,
               y: 548,
-              size: defaultSize,
+              size: defaultSize - 5,
               color: black,
             },
           },
@@ -2948,7 +2948,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             options: {
               x: 387,
               y: 634,
-              size: defaultSize,
+              size: defaultSize - 1,
               color: black,
             },
           },
@@ -2984,7 +2984,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             options: {
               x: 210,
               y: 570,
-              size: defaultSize,
+              size: defaultSize - 5,
               color: black,
             },
           },

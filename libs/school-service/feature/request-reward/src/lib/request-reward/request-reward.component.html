@@ -44,6 +44,8 @@
     [disableTempSaveButton]="false"
     (prevClicked)="previousPage()"
     (cancelClicked)="cancelRequest()"
+    [cancelButtonLabel]="'ยกเลิกใบคำขอ'"
+    [showCancelButton]="requestId > 0"
     (tempSaveClicked)="confirmDialog(1)"
     (saveClicked)="confirmDialog(2)"
     [saveButtonLabel]="'บันทึกและตรวจสอบ'"

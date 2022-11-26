@@ -168,9 +168,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   }
 
   onClickPrev() {
-    if (this.mode == 'view') {
-      this.router.navigate(['/temp-license']);
-    }
+    this.router.navigate(['/temp-license', 'list']);
   }
 
   confirmDialog() {
