@@ -5,7 +5,17 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { MatIconModule } from '@angular/material/icon';
 import { getBase64 } from '@ksp/shared/utility';
 import { FileService } from './file-upload.service';
-import { FileUpload, ImageUpload, KspFile } from '@ksp/shared/interface';
+import {
+  FileGroup,
+  FileUpload,
+  ImageUpload,
+  KspFile,
+} from '@ksp/shared/interface';
+import {
+  PdfViewerComponent,
+  PdfViewerNoLicenseComponent,
+} from '@ksp/shared/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 @UntilDestroy()
 @Component({
@@ -31,10 +41,11 @@ export class FileUploadComponent {
   @Input() showDeleteFile = false;
   @Input() maxSize: number | null = null;
   @Output() uploadComplete = new EventEmitter<any>();
+  @Input() systemType: string | null = null;
 
   file: any;
 
-  constructor(private uploadService: FileService) {}
+  constructor(private uploadService: FileService, public dialog: MatDialog) {}
 
   async onFileSelected(event: any) {
     const file: File = event.target.files[0];
@@ -133,6 +144,43 @@ export class FileUploadComponent {
         return false;
       default:
         return true;
+    }
+  }
+
+  view() {
+    if (this.systemType != 'uni') {
+      const dialogRef = this.dialog.open(PdfViewerComponent, {
+        width: '1200px',
+        height: '100vh',
+        data: {
+          title: this.filename,
+          files: [
+            {
+              fileid: this.fileid,
+              filename: this.filename,
+            },
+          ],
+          checkresult: [],
+          systemType: this.systemType,
+        },
+      });
+      dialogRef.afterClosed().subscribe();
+    } else {
+      this.dialog.open(PdfViewerNoLicenseComponent, {
+        width: '1200px',
+        height: '100vh',
+        data: {
+          title: this.filename,
+          files: [
+            {
+              fileid: this.fileid,
+              filename: this.filename,
+            },
+          ],
+          checkresult: [],
+          systemType: this.systemType,
+        },
+      });
     }
   }
 }
