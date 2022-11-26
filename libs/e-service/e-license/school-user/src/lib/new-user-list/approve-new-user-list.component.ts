@@ -18,6 +18,7 @@ import {
 } from '@ksp/shared/service';
 import {
   checkStatus,
+  parseJson,
   replaceEmptyWithNull,
   schoolMapRequestType,
 } from '@ksp/shared/utility';
@@ -93,13 +94,13 @@ export class ApproveNewUserListComponent implements AfterViewInit, OnInit {
     this.eRequestService.KspSearchRequest(payload).subscribe((res) => {
       if (res && res.length) {
         const data = res.map((i) => {
-          const coName = JSON.parse(i.coordinatorinfo || '{}');
+          const coordinator = JSON.parse(i.coordinatorinfo || '{}');
           return {
             ...i,
             ...{
+              province: JSON.parse(i.schooladdrinfo || '{}'),
               coordinator:
-                coName?.coordinator?.firstnameth ||
-                '' + ' ' + (coName?.coordinator?.lastnameth || ''),
+                coordinator?.firstnameth + ' ' + coordinator?.lastnameth,
             },
           };
         });

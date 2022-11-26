@@ -55,6 +55,7 @@ export class RegisterPasswordComponent implements OnInit {
     localForage.removeItem('registerSelectedSchool');
     localForage.removeItem('registerUserInfo');
     localForage.removeItem('registerCoordinator');
+    localForage.clear();
   }
 
   loadStoredData() {
@@ -151,9 +152,10 @@ export class RegisterPasswordComponent implements OnInit {
             payload.status = '1';
             payload.schoolid = this.school.schoolid;
             payload.schoolname = this.school.schoolname;
+            payload.schooladdress = this.address;
+            payload.schooladdrinfo = JSON.stringify(this.school.provincename); // save province name
             payload.bureauid = this.school.bureauid;
             payload.bureauname = this.school.bureauname;
-            payload.schooladdress = this.address;
             payload.fileinfo = this.fileInfo;
             //console.log('payload = ', payload);
             return this.requestService.schCreateRequest(payload);
@@ -180,11 +182,9 @@ export class RegisterPasswordComponent implements OnInit {
       },
     });
 
-    dialog.componentInstance.completed.subscribe((res) => {
-      if (res) {
-        this.clearStoredData();
-        this.router.navigate(['/login']);
-      }
+    dialog.componentInstance.completed.subscribe(() => {
+      this.clearStoredData();
+      this.router.navigate(['/login']);
     });
   }
 

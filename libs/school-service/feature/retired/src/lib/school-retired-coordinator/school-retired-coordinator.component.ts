@@ -125,6 +125,7 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
             request.userid = this.selectUser.schmemberid;
             request.schoolid = this.schoolId;
             request.schoolname = this.school.schoolname;
+            request.schooladdrinfo = JSON.stringify(this.school.provincename);
             request.reasoninfo = JSON.stringify(this.reasoninfo);
             request.coordinatorinfo = JSON.stringify(coordinatorForm);
             const payload = replaceEmptyWithNull(request);

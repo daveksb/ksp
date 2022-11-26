@@ -110,8 +110,7 @@ export class UserDetailComponent implements OnInit {
       this.form.controls.userInfo.patchValue(<any>res);
       const coordinator = parseJson(res.coordinatorinfo);
       this.setPassword = coordinator.password;
-      const data: any = coordinator.coordinatorTnfo;
-      this.form.controls.coordinatorInfo.patchValue(data);
+      this.form.controls.coordinatorInfo.patchValue(coordinator);
 
       this.form2.controls.bureau.patchValue(res.bureauname);
       this.form2.controls.schoolName.patchValue(res.schoolname);
