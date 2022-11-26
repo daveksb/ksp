@@ -94,7 +94,7 @@ export const column = [
   'schoolName',
   'workName',
   'consider',
-  'lastEditDate',
+  'processupdatedate',
   'submitDate',
   'objection',
   'verify',

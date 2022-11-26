@@ -1,4 +1,7 @@
-<ksp-top-nav><span header>ยื่นใบคำขอรางวัล</span><span subHeader>ขอรางวัลคุรุสภา</span></ksp-top-nav>
+<ksp-top-nav
+  ><span header>ยื่นใบคำขอรางวัล</span
+  ><span subHeader>ขอรางวัลคุรุสภา</span></ksp-top-nav
+>
 
 <div class="bg-secondary full-height bg-opacity-10 px-4 py-2">
   <div class="box-header">รายการขอรางวัลคุรุสภา</div>
@@ -8,20 +11,21 @@
 
     <ksp-e-service-reward-search
       (search)="search($event)"
-      (clear)="clear()"></ksp-e-service-reward-search>
+      (clear)="clear()"
+    ></ksp-e-service-reward-search>
   </div>
   <br />
   <div class="bg-white p-3">
-    <div class="box-header mb-3">ผลการค้นหา</div>
+    <div class="box-header">ผลการค้นหา</div>
     <div class="table-responsive">
       <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="order">
           <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
           <td mat-cell *matCellDef="let element; let i = index">
             {{
-            paginator.pageIndex === 0
-            ? i + 1
-            : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+              paginator.pageIndex === 0
+                ? i + 1
+                : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
             }}
           </td>
         </ng-container>
@@ -59,9 +63,11 @@
           <td mat-cell *matCellDef="let element"></td>
         </ng-container>
 
-        <ng-container matColumnDef="lastEditDate">
+        <ng-container matColumnDef="processupdatedate">
           <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
-          <td mat-cell *matCellDef="let element">{{ element.updatedate | thaiDate }}</td>
+          <td mat-cell *matCellDef="let element">
+            {{ element.processupdatedate | thaiDate }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="submitDate">
@@ -72,7 +78,7 @@
         </ng-container>
 
         <ng-container matColumnDef="objection">
-          <th mat-header-cell *matHeaderCellDef>คัดค้าน/เพิกถอน</th>
+          <th mat-header-cell *matHeaderCellDef>สถานะการดำเนินการ</th>
           <td mat-cell *matCellDef="let element">
             {{ element.objection }}
           </td>
@@ -83,8 +89,9 @@
           <td mat-cell *matCellDef="let element">
             <i
               role="button"
-              class="bi bi-file-text fs-5 text-primary"
-              (click)="view(element.id)"></i>
+              class="bi bi-pencil-square fs-5 text-primary"
+              (click)="view(element.id)"
+            ></i>
           </td>
         </ng-container>
 
@@ -98,7 +105,7 @@
         <ng-container matColumnDef="edit">
           <th mat-header-cell *matHeaderCellDef>คัดค้าน/เพิกถอน</th>
           <td mat-cell *matCellDef="let row">
-            <i role="button" class="bi bi-pencil-square fs-5 text-primary"></i>
+            <i role="button" class="bi bi-file-x fs-5 text-danger"></i>
           </td>
         </ng-container>
 
