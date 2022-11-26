@@ -104,6 +104,9 @@ export class QualificationDetailComponent implements OnInit {
     this.getListData();
     this.checkRequestId();
     this.checkRequestSubType();
+    this.form.valueChanges.subscribe((res) => {
+      console.log('status = ', this.form.controls.userInfo.valid);
+    });
   }
 
   checkRequestId() {

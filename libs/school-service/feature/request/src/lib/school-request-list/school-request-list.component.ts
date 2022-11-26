@@ -296,21 +296,61 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       id12,
       id13,
     ] = element?.idcardno?.split('') ?? [];
+
+    const position = element.position;
+
+    console.log('hiringinfo = ', element);
+
     const eduinfo = JSON.parse(element.eduinfo || '');
+
+    const degreelevel = eduinfo[0].degreeLevel;
+
+    let checkbox1 = false;
+    if (degreelevel === 1) {
+      checkbox1 = true;
+    }
+
+    console.log('element = ', eduinfo);
+
     const edu1 = eduinfo.find((item: any) => {
       if (item?.degreeLevel) {
         return item.degreeLevel === '1';
       }
       return false;
     });
+
     const degreename1 = edu1?.degreeName ?? '';
     const institution1 = edu1?.institution ?? '';
     const major1 = edu1?.major ?? '';
-    const nameen = element.firstnameen + ' ' + element.lastnameen;
-    let checkbox1 = false;
+    const graduateDate1 = edu1?.graduateDate ?? '';
+
+    let degree1 = false;
     if (degreename1) {
-      checkbox1 = true;
+      degree1 = true;
     }
+
+    const edu2 = eduinfo.find((item: any) => {
+      if (item?.degreeLevel) {
+        return item.degreeLevel === '2';
+      }
+      return false;
+    });
+
+    const degreename2 = edu2?.degreeName ?? '';
+    const institution2 = edu2?.institution ?? '';
+    const major2 = edu2?.major ?? '';
+    const graduateDate2 = edu2?.graduateDate ?? '';
+
+    let degree2 = false;
+    if (degreename2) {
+      degree2 = true;
+    }
+
+    const nameen = element.firstnameen + ' ' + element.lastnameen;
+
+    /* const hiring = JSON.parse(element.hiringinfo || '');
+    const position = hiring.position; */
+
     this.schoolInfoService
       .getSchoolInfo(this.schoolId)
       .subscribe((res: any) => {
@@ -322,7 +362,8 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
         const provincename = res.provinceName;
         const zipcode = res.zipCode;
         const telphone = res.telphone;
-        console.log(id12);
+
+        //console.log(id12);
         this.dialog.open(PdfRenderComponent, {
           width: '1200px',
           height: '100vh',
@@ -347,6 +388,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
               name,
               phone,
               telphone,
+              position,
               id1,
               id2,
               id3,
@@ -363,8 +405,15 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
               degreename1,
               institution1,
               major1,
-              checkbox1,
+              degree1,
+              graduateDate1,
+              degreename2,
+              institution2,
+              major2,
+              degree2,
+              graduateDate2,
               nameen,
+              checkbox1,
             },
           },
         });
