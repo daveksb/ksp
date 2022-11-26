@@ -20,8 +20,12 @@
       <div class="bg-light px-4 py-2 mb-3">
         <div class="box-header text-primary">รายละเอียดข้อมูล</div>
         <ksp-form-user-info
-          [mode]="'view'"
           [prefixList]="prefixList$ | async"
+          [displayMode]="1"
+          [nationList]="nationList$ | async"
+          [countryList]="countries$ | async"
+          [visaClassList]="visaClassList | async"
+          [visaTypeList]="visaTypeList | async"
           formControlName="userInfo"
         ></ksp-form-user-info>
       </div>
