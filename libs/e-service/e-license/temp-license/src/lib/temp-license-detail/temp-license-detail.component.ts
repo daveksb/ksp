@@ -25,13 +25,17 @@ import { Observable } from 'rxjs';
 import localForage from 'localforage';
 import {
   Amphur,
+  Country,
   FileGroup,
   KspCheckResult,
   KspRequest,
+  Nationality,
   PositionType,
   Prefix,
   Province,
   Tambol,
+  VisaClass,
+  VisaType,
 } from '@ksp/shared/interface';
 import { TempLicenseDetailService } from './temp-license-detail.service';
 
@@ -59,6 +63,10 @@ export class ETempLicenseDetailComponent implements OnInit {
   provinces$!: Observable<Province[]>;
   prefixList$!: Observable<Prefix[]>;
   positionTypes$!: Observable<PositionType[]>;
+  countries$!: Observable<Country[]>;
+  nationList$!: Observable<Nationality[]>;
+  visaTypeList!: Observable<VisaType[]>;
+  visaClassList!: Observable<VisaClass[]>;
   selectedTab: MatTabChangeEvent = new MatTabChangeEvent();
   requestId!: number;
   requestData = new KspRequest();
@@ -271,6 +279,11 @@ export class ETempLicenseDetailComponent implements OnInit {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.provinces$ = this.addressService.getProvinces();
     this.positionTypes$ = this.staffService.getPositionTypes();
+
+    this.countries$ = this.addressService.getCountry();
+    this.nationList$ = this.generalInfoService.getNationality();
+    this.visaClassList = this.generalInfoService.getVisaClass();
+    this.visaTypeList = this.generalInfoService.getVisaType();
   }
 
   cancel() {

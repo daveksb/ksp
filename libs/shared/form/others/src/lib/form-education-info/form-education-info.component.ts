@@ -20,7 +20,7 @@ export class FormEducationInfoComponent
   @Input() showGraduateYearInput = false;
   @Input() countries: Country[] | null = [];
   @Input() showCheckbox = true;
-  @Input() option = false;
+  @Input() isOptional = false;
   @Input() userEducationType: any;
   FormTypeEnum = UserInfoFormType;
 
@@ -57,7 +57,7 @@ export class FormEducationInfoComponent
   }
 
   clearValidator() {
-    if (this.option) {
+    if (this.isOptional) {
       this.form.controls.degreeName.clearValidators();
       this.form.controls.major.clearValidators();
       this.form.controls.institution.clearValidators();

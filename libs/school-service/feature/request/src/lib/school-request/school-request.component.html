@@ -111,7 +111,7 @@
             </ksp-form-education-info>
             <div class="mt-3">
               <ksp-form-education-info
-                [option]="true"
+                [isOptional]="true"
                 [showCheckbox]="false"
                 [showSelectDegree]="false"
                 formControlName="edu2"
@@ -141,7 +141,7 @@
                 [showGradeInput]="true"
                 [showPropertyInput]="false"
                 [countries]="countries$ | async"
-                [option]="!eduSelected[1]"
+                [isOptional]="!eduSelected[1]"
               >
               </ksp-form-education-info></ng-container
           ></ng-container>
@@ -163,7 +163,7 @@
                 [showGradeInput]="false"
                 [showPropertyInput]="false"
                 [countries]="countries$ | async"
-                [option]="!eduSelected[4]"
+                [isOptional]="!eduSelected[4]"
               >
               </ksp-form-education-info></ng-container
           ></ng-container>
@@ -185,7 +185,7 @@
                 [showGradeInput]="false"
                 [showPropertyInput]="false"
                 [countries]="countries$ | async"
-                [option]="!eduSelected[2]"
+                [isOptional]="!eduSelected[2]"
                 [userEducationType]="userInfoFormType"
               >
               </ksp-form-education-info></ng-container
@@ -208,7 +208,7 @@
                 [showGradeInput]="false"
                 [showPropertyInput]="false"
                 [countries]="countries$ | async"
-                [option]="!eduSelected[3]"
+                [isOptional]="!eduSelected[3]"
                 [userEducationType]="userInfoFormType"
               >
               </ksp-form-education-info></ng-container
@@ -231,7 +231,7 @@
                 [showGradeInput]="false"
                 [showPropertyInput]="false"
                 [countries]="countries$ | async"
-                [option]="!eduSelected[5]"
+                [isOptional]="!eduSelected[5]"
                 [userEducationType]="userInfoFormType"
               >
               </ksp-form-education-info> </ng-container
@@ -254,7 +254,7 @@
                 [showGradeInput]="false"
                 [showPropertyInput]="false"
                 [countries]="countries$ | async"
-                [option]="!eduSelected[6]"
+                [isOptional]="!eduSelected[6]"
                 [userEducationType]="userInfoFormType"
               >
               </ksp-form-education-info></ng-container

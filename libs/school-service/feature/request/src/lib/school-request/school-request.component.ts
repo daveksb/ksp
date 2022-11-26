@@ -58,7 +58,6 @@ import {
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable, Subject } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
-import moment from 'moment';
 
 @UntilDestroy()
 @Component({
