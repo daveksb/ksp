@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CompleteDialogComponent } from '@ksp/shared/dialog';
-import { untilDestroyed } from '@ngneat/until-destroy';
-
+import { thaiDate } from '@ksp/shared/utility';
+import localForage from 'localforage';
 @Component({
   selector: 'self-service-promptpay',
   templateUrl: './promptpay.component.html',
@@ -11,7 +11,7 @@ import { untilDestroyed } from '@ngneat/until-destroy';
 })
 export class PromptpayComponent implements OnInit {
   pageType!: number;
-
+  requestno!: string;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -19,6 +19,10 @@ export class PromptpayComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    localForage.getItem('requestno').then((res: any) => {
+      this.requestno = res;
+      //console.log('xxx = ', res);
+    });
     this.route.paramMap.subscribe((res) => {
       this.pageType = Number(res.get('type'));
       //console.log('process type = ', this.pageType);
@@ -29,8 +33,8 @@ export class PromptpayComponent implements OnInit {
         data: {
           header: `ทำรายการสำเร็จ`,
           btnLabel: 'กลับสู่หน้าหลัก',
-          content: `วันที่ : 10 ตุลาคม 2565
-          เลขที่ใบคำขอ : 12234467876543`,
+          content: `วันที่ : ${thaiDate(new Date())}
+          เลขที่ใบคำขอ : ${this.requestno}`,
           subContent: 'หากมีข้อสงสัย กรุณาโทร 02 304 9899 ',
         },
       });
@@ -49,8 +53,8 @@ export class PromptpayComponent implements OnInit {
       data: {
         header: `ทำรายการชำระเงินไม่สำเร็จ`,
         btnLabel: 'กลับสู่หน้าหลัก',
-        content: `วันที่ : 10 ตุลาคม 2565
-        เลขที่ใบคำขอ : 12234467876543`,
+        content: `วันที่ : ${thaiDate(new Date())}
+        เลขที่ใบคำขอ : ${this.requestno}`,
         subContent: 'หากมีข้อสงสัย กรุณาโทร 02 304 9899 ',
       },
     });
