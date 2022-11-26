@@ -13,6 +13,7 @@
     <div class="box-header">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
     <hr />
     <ksp-e-service-reward-search
+      [isSelfReward]="false"
       (search)="search($event)"
       (clear)="clear()"
     ></ksp-e-service-reward-search>
@@ -66,6 +67,13 @@
           <td mat-cell *matCellDef="let element">{{ element.process }}</td>
         </ng-container>
 
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>สถานะการดำเนินการ</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.status }}
+          </td>
+        </ng-container>
+
         <ng-container matColumnDef="processupdatedate">
           <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
           <td mat-cell *matCellDef="let element">
@@ -77,13 +85,6 @@
           <th mat-header-cell *matHeaderCellDef>วันที่ยื่นใบคำขอ</th>
           <td mat-cell *matCellDef="let element">
             {{ element.requestdate | thaiDate }}
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="status">
-          <th mat-header-cell *matHeaderCellDef>สถานะการดำเนินการ</th>
-          <td mat-cell *matCellDef="let element">
-            {{ element.status }}
           </td>
         </ng-container>
 
