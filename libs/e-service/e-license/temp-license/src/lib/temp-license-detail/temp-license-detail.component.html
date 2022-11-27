@@ -78,6 +78,7 @@
               [mode]="'view'"
               formControlName="edu1"
               [showGradeInput]="true"
+              [countries]="countries$ | async"
             >
               <span class="box-header">วุฒิการศึกษาปริญญาตรี</span>
             </ksp-form-education-info>
@@ -88,6 +89,7 @@
               formControlName="edu2"
               class="mt-5"
               [mode]="'view'"
+              [countries]="countries$ | async"
               [showPropertyInput]="true"
             >
               <span class="box-header">วุฒิการศึกษาปริญญาโท</span>
