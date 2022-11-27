@@ -23,6 +23,7 @@ export class UniRegisterRequesterComponent implements OnInit {
   occupyList$!: Observable<any>;
   userInfoFormdisplayMode: number = UserInfoFormType.thai;
   uniData!: any;
+  submit = false;
   form = this.fb.group({
     requester: []
   });
@@ -54,18 +55,22 @@ export class UniRegisterRequesterComponent implements OnInit {
   }
 
   next() {
-    const data = this.form.getRawValue();
-    const { requester } = data as any;
-    const userInfo = {
-      ...requester,
-      schoolid: this.uniData.schoolid,
-      unitype: this.uniData.unitype,
-      institution: this.uniData.institution,
-      affiliation: this.uniData.affiliation
-    };
-    
-    localForage.setItem('registerUserForm', userInfo);
-    this.router.navigate(['/register', 'coordinator']);
+    this.submit = true;
+    if (this.form.valid) {
+      const data = this.form.getRawValue();
+      const { requester } = data as any;
+      const userInfo = {
+        ...requester,
+        schoolid: this.uniData.schoolid,
+        unitype: this.uniData.unitype,
+        institution: this.uniData.institution,
+        affiliation: this.uniData.affiliation
+      };
+      this.submit = false;
+      
+      localForage.setItem('registerUserForm', userInfo);
+      this.router.navigate(['/register', 'coordinator']);
+    }
   }
 
   back() {

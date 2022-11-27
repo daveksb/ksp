@@ -19,6 +19,7 @@ export class FormRegisterCoordinatorInfoComponent extends KspFormBaseComponent {
   @Input() prefixName: Array<any> = [];
   @Input() occupyList: Array<any> = [];
   @Input() formHeader = '';
+  @Input() isSubmit = false;
   override form = createUniCoordinatorForm(this.fb);
   permissionList: Array<any> = uniPermissionList;
   validatorMessages = validatorMessages;
@@ -95,5 +96,9 @@ export class FormRegisterCoordinatorInfoComponent extends KspFormBaseComponent {
 
   get prefixen() {
     return this.form.controls.prefixen;
+  }
+
+  get other() {
+    return this.form.controls.other;
   }
 }

@@ -16,12 +16,12 @@ import {
 })
 export class FormRegisterRequesterInfoComponent
   extends KspFormBaseComponent
-  implements OnInit
 {
   @Input() uniType: Array<any> = [];
   @Input() prefixName: Array<any> = [];
   @Input() occupyList: Array<any> = [];
   @Input() displayMode!: number[];
+  @Input() isSubmit = false;
   validatorMessages = validatorMessages;
   educationOccupy: any = {
     permission: '',
@@ -45,24 +45,7 @@ export class FormRegisterRequesterInfoComponent
     );
   }
 
-  ngOnInit(): void {
-    // ถ้าเป็น form คนไทยไม่ต้อง validate field เหล่านี้
-    //console.log('display mode = ', this.displayMode);
-    if (this.displayMode.includes(UserInfoFormType.thai)) {
-      this.form.controls.position.clearValidators();
-    }
-
-    if (this.displayMode.includes(UserInfoFormType.foreign)) {
-      this.form.controls.idcardno.clearValidators();
-      this.form.controls.workphone.clearValidators();
-      this.form.controls.contactphone.clearValidators();
-      this.form.controls.position.clearValidators();
-      this.form.controls.email.clearValidators();
-    }
-  }
-
   checkID(event: any) {
-    console.log(event)
     const id = event?.target.value;
     if (id.length != 13) {
       this.validIdcard = false;
@@ -79,18 +62,6 @@ export class FormRegisterRequesterInfoComponent
     } else {
       this.validIdcard = false;
     }
-  }
-
-  chageposition(event: any) {
-    if (event.target.value == '0') {
-      this.form.controls['other'].setValidators([Validators.required]);
-    } else {
-      this.form.controls['other'].clearValidators();
-      this.form.patchValue({
-        other: null,
-      });
-    }
-    this.form.controls['other'].updateValueAndValidity();
   }
 
   changePrefix(event: any) {
@@ -145,5 +116,9 @@ export class FormRegisterRequesterInfoComponent
 
   get prefixen() {
     return this.form.controls.prefixen;
+  }
+
+  get permission() {
+    return this.form.controls.permission;
   }
 }

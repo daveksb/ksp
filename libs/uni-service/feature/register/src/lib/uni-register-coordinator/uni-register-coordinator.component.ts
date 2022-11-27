@@ -50,6 +50,7 @@ export class UniRegisterCoordinatorComponent implements OnInit {
   uniqueTimestamp: any = '';
   pageType = RequestPageType;
   uniData: any;
+  submit = false;
 
   constructor(
     private router: Router,
@@ -147,11 +148,15 @@ export class UniRegisterCoordinatorComponent implements OnInit {
   }
 
   next() {
-    let form = {
-      form: this.form.getRawValue(),
-      file: this.uploadFileList,
-    };
-    localForage.setItem('registerCoordinatorForm', form);
-    this.router.navigate(['/', 'register', 'password']);
+    this.submit = true;
+    if (this.form.controls.coordinator.valid) {
+      const form = {
+        form: this.form.getRawValue(),
+        file: this.uploadFileList,
+      };
+      this.submit = false;
+      localForage.setItem('registerCoordinatorForm', form);
+      this.router.navigate(['/', 'register', 'password']);
+    }
   }
 }
