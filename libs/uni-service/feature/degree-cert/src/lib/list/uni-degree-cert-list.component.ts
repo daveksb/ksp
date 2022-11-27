@@ -9,7 +9,7 @@ import { TopNavComponent } from '@ksp/shared/menu';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
 import { DegreeCertSearchComponent } from '@ksp/shared/search';
 import { UniInfoService } from '@ksp/shared/service';
-import { UniFormBadgeComponent } from '@ksp/shared/ui';
+import { DegreeCertStatusComponent, UniFormBadgeComponent } from '@ksp/shared/ui';
 import { getCookie, stringToThaiDate, thaiDate } from '@ksp/shared/utility';
 import { lastValueFrom, map } from 'rxjs';
 
@@ -27,6 +27,7 @@ import { lastValueFrom, map } from 'rxjs';
     ReactiveFormsModule,
     MatPaginatorModule,
     ThaiDatePipe,
+    DegreeCertStatusComponent
   ],
 })
 export class UniDegreeCertListComponent
@@ -62,7 +63,6 @@ export class UniDegreeCertListComponent
       verifyStatus,
       approveStatus,
     } = this.form.controls.search.value as any;
-    console.log(date)
     return {
       uniid: institutionNumber || '',
       fulldegreenameth: degreeName || '',
@@ -102,6 +102,9 @@ export class UniDegreeCertListComponent
                 : '',
               verify: 'แก้ไข',
               consider: 'แก้ไข',
+              process: item?.process,
+              requestType: item?.requesttype,
+              status: item?.status,
             };
           }
         );

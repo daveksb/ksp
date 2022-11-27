@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { EUniApproveProcess } from '@ksp/shared/constant';
 import _ from 'lodash';
@@ -8,9 +9,11 @@ type INPUT_TYPE =
   | 'examine_status'
   | 'certification_status';
 @Component({
-  selector: 'e-service-degree-cert-status',
+  selector: 'ksp-degree-cert-status',
+  standalone: true,
   templateUrl: './degree-cert-status.component.html',
   styleUrls: ['./degree-cert-status.component.scss'],
+  imports: [CommonModule],
 })
 export class DegreeCertStatusComponent implements OnInit {
   @Input() type: INPUT_TYPE = 'consider';
