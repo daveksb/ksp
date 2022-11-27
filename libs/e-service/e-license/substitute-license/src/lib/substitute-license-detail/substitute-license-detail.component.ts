@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
 import { ESelfFormBaseComponent } from '@ksp/shared/form/others';
+import { FileGroup } from '@ksp/shared/interface';
 import {
   AddressService,
   EducationDetailService,
@@ -33,6 +34,7 @@ export class SubstituteLicenseDetailComponent
   eduFiles: any[] = [];
   experienceFiles: any[] = [];
   provinces$!: Observable<any>;
+  objectiveFiles: FileGroup[] = [];
 
   override form = this.fb.group({
     userInfo: [],
@@ -91,6 +93,12 @@ export class SubstituteLicenseDetailComponent
     if (data.replacereasoninfo) {
       const replaceReasonInfo = parseJson(data.replacereasoninfo);
       this.form.controls.replaceReasonInfo.patchValue(replaceReasonInfo);
+    }
+
+    if (data.fileinfo) {
+      const fileInfo = parseJson(data.fileinfo);
+      const { replacereasoninfofiles } = fileInfo;
+      this.objectiveFiles = replacereasoninfofiles;
     }
   }
 

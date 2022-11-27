@@ -13,7 +13,7 @@ import {
 import { parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
-const FORM_TAB_COUNT = 5;
+const FORM_TAB_COUNT = 6;
 @Component({
   selector: 'ksp-request-license-approve-detail',
   templateUrl: './request-license-approve-detail.component.html',
@@ -49,6 +49,7 @@ export class RequestLicenseApproveDetailComponent
   disableNextButton = false;
   eduFiles: FileGroup[] = [];
   experienceFiles: FileGroup[] = [];
+  performanceFiles: FileGroup[] = [];
   provinces$!: Observable<Province[]>;
 
   educationTypes: 'teacher' | 'schManager' | 'eduManager' | 'supervision' =
@@ -135,8 +136,16 @@ export class RequestLicenseApproveDetailComponent
 
     if (data.experienceinfo) {
       const experienceInfo = parseJson(data.experienceinfo);
-      console.log(experienceInfo);
       this.form.controls.experience.patchValue({ ...experienceInfo });
+    }
+
+    if (data.fileinfo) {
+      const fileInfo = parseJson(data.fileinfo);
+      console.log(fileInfo);
+      const { edufiles, experiencefiles, performancefiles } = fileInfo;
+      this.eduFiles = edufiles;
+      this.experienceFiles = experiencefiles;
+      this.performanceFiles = performancefiles;
     }
   }
 

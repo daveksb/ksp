@@ -1,7 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FileGroup, FormMode, KspFile } from '@ksp/shared/interface';
-import { PdfViewerComponent } from '@ksp/shared/dialog';
+import {
+  PdfViewerComponent,
+  PdfViewerNoLicenseComponent,
+} from '@ksp/shared/dialog';
 import { FileService } from '@ksp/shared/form/file-upload';
 
 @Component({
@@ -25,19 +28,32 @@ export class FormMultiAttachmentComponent {
   constructor(public dialog: MatDialog, private fileService: FileService) {}
 
   view(group: FileGroup) {
-    const dialogRef = this.dialog.open(PdfViewerComponent, {
-      width: '1200px',
-      height: '100vh',
-      data: {
-        title: group.name,
-        files: group.files,
-        checkresult: group?.checkresult ?? [],
-        systemType: this.systemType,
-      },
-    });
-    dialogRef
-      .afterClosed()
-      .subscribe((result) => (group.checkresult = result.checkResult));
+    if (this.systemType != 'uni') {
+      const dialogRef = this.dialog.open(PdfViewerComponent, {
+        width: '1200px',
+        height: '100vh',
+        data: {
+          title: group.name,
+          files: group.files,
+          checkresult: group?.checkresult ?? [],
+          systemType: this.systemType,
+        },
+      });
+      dialogRef
+        .afterClosed()
+        .subscribe((result) => (group.checkresult = result.checkResult));
+    } else {
+      this.dialog.open(PdfViewerNoLicenseComponent, {
+        width: '1200px',
+        height: '100vh',
+        data: {
+          title: group.name,
+          files: group.files,
+          checkresult: group?.checkresult ?? [],
+          systemType: this.systemType,
+        },
+      });
+    }
   }
 
   deleteFile(file: KspFile) {

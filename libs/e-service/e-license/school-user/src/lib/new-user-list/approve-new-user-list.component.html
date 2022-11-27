@@ -1,3 +1,8 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav
   ><span header
     >ใบคำขอผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)
@@ -20,7 +25,7 @@
 
     <hr />
     <div class="table__scroll">
-      <table mat-table matSort [dataSource]="dataSource" matSort>
+      <table mat-table matSort [dataSource]="dataSource">
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
           <td mat-cell *matCellDef="let element; let i = index">
@@ -44,8 +49,10 @@
         </ng-container>
 
         <ng-container matColumnDef="requestno">
-          <th mat-header-cell *matHeaderCellDef>เลขที่แบบคำขอ</th>
-          <td mat-cell *matCellDef="let element">{{ element.requestno }}</td>
+          <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.requestno | reqNoFormat }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="name">
@@ -61,10 +68,11 @@
         </ng-container>
 
         <ng-container matColumnDef="coordinatorname">
-          <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล ผู้แต่งตั้ง</th>
+          <th mat-header-cell *matHeaderCellDef>
+            ชื่อ-นามสกุล {{ requestTypeLabel }}
+          </th>
           <td mat-cell *matCellDef="let element">
-            <!-- {{ element.coordinatorinfo }}
-            {{ element.coordinatorinfo }} -->
+            {{ element.coordinator }}
           </td>
         </ng-container>
 
@@ -76,7 +84,7 @@
         <ng-container matColumnDef="provience">
           <th mat-header-cell *matHeaderCellDef>จังหวัด</th>
           <td mat-cell *matCellDef="let element">
-            <!-- {{ element.schooladdress }} -->
+            {{ element.province }}
           </td>
         </ng-container>
 

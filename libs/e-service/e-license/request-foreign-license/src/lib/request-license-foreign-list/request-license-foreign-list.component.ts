@@ -14,7 +14,6 @@ import {
 import { EsSearchPayload, SelfRequest } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 import { replaceEmptyWithNull } from '@ksp/shared/utility';
-import { map } from 'rxjs';
 
 function checkProcess(processId: number, requestType: number) {
   const process = SelfRequestProcess.find((p) => {
@@ -89,12 +88,11 @@ export class RequestLicenseForeignListComponent implements AfterViewInit {
     this.requestService.KspSearchRequest(payload).subscribe((res) => {
       console.log(res);
       this.dataSource.data = res;
-      // this.dataSource.data = processFilter(res);
       this.dataSource.sort = this.sort;
 
       const sortState: Sort = {
-        active: 'processupdatedate',
-        direction: 'desc',
+        active: 'requestdate',
+        direction: 'asc',
       };
       this.sort.active = sortState.active;
       this.sort.direction = sortState.direction;

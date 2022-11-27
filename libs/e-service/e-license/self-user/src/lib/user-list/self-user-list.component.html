@@ -5,8 +5,13 @@
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
     <ksp-e-service-user-search
+      [bureaus]="bureau$ | async"
       (clear)="clear()"
       (search)="search($event)"
+      [activeStatusList]="[
+        { id: 0, label: 'ไม่ใช้งาน' },
+        { id: 1, label: 'ใช้งาน' }
+      ]"
     ></ksp-e-service-user-search>
     <br />
     <div class="bg-white p-3">

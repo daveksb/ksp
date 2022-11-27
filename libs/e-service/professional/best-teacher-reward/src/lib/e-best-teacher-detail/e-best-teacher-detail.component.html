@@ -3,7 +3,9 @@
   <div class="bg-secondary bg-opacity-10 full-height-2 px-4 py-2">
     <div class="box-header">รายละเอียดรางวัลครูผู้สอนดีเด่น</div>
     <div class="bg-white p-3">
-      <ksp-request-header-info></ksp-request-header-info>
+      <ksp-request-header-info
+        [requestDate]="requestData.createdate"
+        [requestNumber]="requestData.requestno"></ksp-request-header-info>
       <hr />
       <div class="box-header">ข้อมูลรางวัลครูผู้สอนดีเด่น</div>
       <mat-tab-group
@@ -96,6 +98,7 @@
         <mat-tab label="ข้อมูลนวัตกรรมและรางวัล">
           <ksp-best-teacher-innovation
             [mode]="'view'"
+            [rewardFiles]="rewardFiles"
             formControlName="rewardDetailInfo"></ksp-best-teacher-innovation>
         </mat-tab>
       </mat-tab-group>

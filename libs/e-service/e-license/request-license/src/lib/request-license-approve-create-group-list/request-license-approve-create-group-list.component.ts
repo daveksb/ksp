@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { LoaderService } from '@ksp/shared/service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'ksp-request-license-approve-create-group-list',
@@ -8,6 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./request-license-approve-create-group-list.component.scss'],
 })
 export class RequestLicenseApproveCreateGroupListComponent implements OnInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   displayedColumns = [
     'select',
     'order',
@@ -30,7 +33,7 @@ export class RequestLicenseApproveCreateGroupListComponent implements OnInit {
   ];
   dataSource = new MatTableDataSource<any>();
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private loaderService: LoaderService) {}
 
   ngOnInit(): void {
     this.dataSource.data = [

@@ -10,6 +10,7 @@ import { FormMode, KspRequest, SchInfo } from '@ksp/shared/interface';
 import { EMPTY, switchMap } from 'rxjs';
 import localForage from 'localforage';
 import {
+  formatRequestNo,
   thaiDate,
   validatePassword,
   validatorMessages,
@@ -54,16 +55,17 @@ export class RegisterPasswordComponent implements OnInit {
     localForage.removeItem('registerSelectedSchool');
     localForage.removeItem('registerUserInfo');
     localForage.removeItem('registerCoordinator');
+    localForage.clear();
   }
 
   loadStoredData() {
     localForage.getItem('registerSelectedSchool').then((res: any) => {
       this.school = res;
-      this.address = `เลขที่ ${res.address} ซอย ${
-        res?.street ?? '-'
-      } หมู่ ${res?.moo ?? '-'} ถนน ${res?.road ?? '-'} ตำบล ${
-        res.tumbon
-      } อำเภอ ${res.amphurname} จังหวัด ${res.provincename}`;
+      this.address = `เลขที่ ${res.address} ซอย ${res?.street ?? '-'} หมู่ ${
+        res?.moo ?? '-'
+      } ถนน ${res?.road ?? '-'} ตำบล ${res.tumbon} อำเภอ ${
+        res.amphurname
+      } จังหวัด ${res.provincename} รหัสไปรษณีย์ ${res.zipcode}`;
     });
 
     localForage.getItem('registerUserInfo').then((res) => {
@@ -119,7 +121,7 @@ export class RegisterPasswordComponent implements OnInit {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่?`,
         subTitle: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติ
         ใช่หรือไม่`,
-        schoolCode: `รหัสเข้าใช้งาน(รหัสโรงเรียน): ${this.school?.schoolid}`,
+        schoolCode: `รหัสเข้าใช้งาน(รหัสโรงเรียน) : ${this.school?.schoolid}`,
         btnLabel: 'บันทึก',
       },
     });
@@ -150,9 +152,10 @@ export class RegisterPasswordComponent implements OnInit {
             payload.status = '1';
             payload.schoolid = this.school.schoolid;
             payload.schoolname = this.school.schoolname;
+            payload.schooladdress = this.address;
+            payload.schooladdrinfo = JSON.stringify(this.school.provincename); // save province name
             payload.bureauid = this.school.bureauid;
             payload.bureauname = this.school.bureauname;
-            payload.schooladdress = this.address;
             payload.fileinfo = this.fileInfo;
             //console.log('payload = ', payload);
             return this.requestService.schCreateRequest(payload);
@@ -173,17 +176,15 @@ export class RegisterPasswordComponent implements OnInit {
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,
         content: `วันที่ : ${thaiDate(new Date())}
-        เลขที่ใบคำขอ : ${requestNo}`,
+        เลขที่ใบคำขอ : ${formatRequestNo(requestNo)}`,
         subContent: `กรุณาตรวจสอบสถานะใบคำขอผ่านทางอีเมล
         ผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },
     });
 
-    dialog.componentInstance.completed.subscribe((res) => {
-      if (res) {
-        this.clearStoredData();
-        this.router.navigate(['/login']);
-      }
+    dialog.componentInstance.completed.subscribe(() => {
+      this.clearStoredData();
+      this.router.navigate(['/login']);
     });
   }
 

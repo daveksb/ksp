@@ -30,6 +30,7 @@ export class EResearchRewardDetailComponent
   tumbols$!: Observable<any>;
   bureaus$!: Observable<any>;
   prefixList$!: Observable<any>;
+  rewardFiles: any[] = [];
 
   form = this.fb.group({
     userInfo: [],
@@ -52,12 +53,12 @@ export class EResearchRewardDetailComponent
   constructor(
     private fb: FormBuilder,
     private generalInfoService: GeneralInfoService,
-    private route: ActivatedRoute,
-    private requestService: ERequestService,
+    route: ActivatedRoute,
+    requestService: ERequestService,
     private addressService: AddressService,
     private router: Router
   ) {
-    super();
+    super(route, requestService);
   }
 
   ngOnInit(): void {
@@ -78,21 +79,6 @@ export class EResearchRewardDetailComponent
     this.provinces$ = this.addressService.getProvinces();
   }
 
-  checkRequestId() {
-    this.route.paramMap.subscribe((params) => {
-      this.requestId = Number(params.get('id'));
-      if (this.requestId) {
-        this.requestService
-          .getKspRequestById(this.requestId)
-          .subscribe((res) => {
-            if (res) {
-              this.patchData(res);
-            }
-          });
-      }
-    });
-  }
-
   patchData(data: SelfRequest) {
     const {
       prefixth,
@@ -110,6 +96,7 @@ export class EResearchRewardDetailComponent
       rewardresearcherinfo,
       rewardresearchinfo,
       rewardresearchhistory,
+      fileinfo,
     } = data;
     const myInfo = <any>{
       prefixth,
@@ -136,6 +123,11 @@ export class EResearchRewardDetailComponent
       rewardResearchInfo,
       rewardResearchHistory,
     });
+
+    if (fileinfo) {
+      const { rewardfiles } = parseJson(fileinfo);
+      this.rewardFiles = rewardfiles;
+    }
   }
 
   patchWorkplaceInfo(value: any) {

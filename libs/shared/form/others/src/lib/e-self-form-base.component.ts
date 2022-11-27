@@ -106,12 +106,10 @@ export abstract class ESelfFormBaseComponent {
     if (data.schooladdrinfo) {
       this.patchWorkplace(parseJson(data.schooladdrinfo));
     }
-    // if (data.prohibitproperty) {
-    //   this.prohibitProperty = parseJson(data.prohibitproperty);
-    // }
-    // if (data.filedata) {
-    //   this.myImage = atob(data.filedata);
-    // }
+    if (data.prohibitproperty) {
+      this.prohibitProperty = parseJson(data.prohibitproperty);
+    }
+
     if (data.filedata) {
       this.myImage = atob(data.filedata);
     }

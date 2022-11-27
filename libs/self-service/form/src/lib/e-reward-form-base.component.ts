@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { KspRequest } from '@ksp/shared/interface';
+import { KspRequest, SelfRequest } from '@ksp/shared/interface';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import localForage from 'localforage';
 import { KspApprovePersistData } from '@ksp/shared/interface';
+import { ActivatedRoute } from '@angular/router';
+import { ERequestService } from '@ksp/shared/service';
 @Component({
   template: ``,
   standalone: true,
@@ -24,7 +26,10 @@ export abstract class ERewardFormBaseComponent {
   requestData = new KspRequest();
   requestId!: number;
 
-  constructor() {}
+  constructor(
+    protected route: ActivatedRoute,
+    protected requestService: ERequestService
+  ) {}
 
   tabChanged(e: MatTabChangeEvent) {
     this.selectedTab = e;
@@ -38,4 +43,22 @@ export abstract class ERewardFormBaseComponent {
     };
     localForage.setItem('checkRequestData', saveData);
   }
+
+  checkRequestId() {
+    this.route.paramMap.subscribe((params) => {
+      this.requestId = Number(params.get('id'));
+      if (this.requestId) {
+        this.requestService
+          .getKspRequestById(this.requestId)
+          .subscribe((res) => {
+            if (res) {
+              this.requestData = res;
+              this.patchData(res);
+            }
+          });
+      }
+    });
+  }
+
+  abstract patchData(data: SelfRequest): void;
 }

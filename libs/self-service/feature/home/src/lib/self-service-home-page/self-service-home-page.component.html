@@ -1,6 +1,11 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav [isSelfService]="true"><span header>หน้าแรก</span></ksp-top-nav>
 
-<div class="full-height main__container py-2 px-4">
+<div class="full-height full-width-2 main__container py-2 px-4">
   <!-- <div class="py-2">
     <ksp-uni-form-badge [mainTitle]="badgeTitle"></ksp-uni-form-badge>
   </div> -->
@@ -196,7 +201,7 @@
       <ng-container matColumnDef="requestno">
         <th mat-header-cell *matHeaderCellDef>เลขที่คำขอ</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.requestno }}
+          {{ element.requestno | reqNoFormat }}
         </td>
       </ng-container>
 
@@ -210,7 +215,7 @@
       <ng-container matColumnDef="requestdate">
         <th mat-header-cell *matHeaderCellDef>วันที่ยื่นคำขอ</th>
         <td mat-cell *matCellDef="let element">
-          {{ toThaiDate(element.requestdate) }}
+          {{ element.requestdate | thaiDate }}
         </td>
       </ng-container>
 
@@ -233,26 +238,24 @@
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="listStatus">
-        <th mat-header-cell *matHeaderCellDef>สถานะรายการ</th>
-        <td mat-cell *matCellDef="let element">
-          {{
-            checkStatus(+element.currentprocess, +element.requeststatus)?.sname
-          }}
-        </td>
-      </ng-container>
-
       <ng-container matColumnDef="process">
         <th mat-header-cell *matHeaderCellDef>ขั้นตอน</th>
         <td mat-cell *matCellDef="let element">
-          {{ checkProcess(+element.currentprocess)?.processName }}
+          {{ checkProcess(+element.process)?.processName }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="listStatus">
+        <th mat-header-cell *matHeaderCellDef>สถานะรายการ</th>
+        <td mat-cell *matCellDef="let element">
+          {{ checkStatus(+element.process, +element.status)?.sname }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="editDate">
         <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.editDate }}
+          {{ element.processupdatedate | thaiDate }}
         </td>
       </ng-container>
 

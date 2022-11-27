@@ -11,7 +11,7 @@
     <ng-container matColumnDef="licenseType">
       <th mat-header-cell *matHeaderCellDef>ประเภทใบอนุญาต</th>
       <td mat-cell *matCellDef="let element">
-        {{ element.licenseType }}
+        {{ element.label }}
       </td>
     </ng-container>
 
@@ -29,7 +29,8 @@
           (click)="viewDetail(element)"
           type="button"
           class="btn btn-sm btn-success"
-          [disabled]="element.count === 0">
+          [disabled]="element.count === 0"
+        >
           บัญชีรายชื่อ
         </button>
       </td>

@@ -25,13 +25,17 @@ import { Observable } from 'rxjs';
 import localForage from 'localforage';
 import {
   Amphur,
+  Country,
   FileGroup,
   KspCheckResult,
   KspRequest,
+  Nationality,
   PositionType,
   Prefix,
   Province,
   Tambol,
+  VisaClass,
+  VisaType,
 } from '@ksp/shared/interface';
 import { TempLicenseDetailService } from './temp-license-detail.service';
 
@@ -48,12 +52,10 @@ export class KspApprovePersistData {
 export class ETempLicenseDetailComponent implements OnInit {
   verifyChoice: any[] = [];
   selectedTabIndex = 0;
-
   eduFiles: FileGroup[] = RequestEduFiles;
   teachingFiles: FileGroup[] = RequestTeachingFiles;
   reasonFiles: FileGroup[] = RequestReasonFiles;
   attachFiles: FileGroup[] = RequestAttachFiles;
-
   amphurs1$!: Observable<Amphur[]>;
   tumbols1$!: Observable<Tambol[]>;
   amphurs2$!: Observable<Amphur[]>;
@@ -61,14 +63,16 @@ export class ETempLicenseDetailComponent implements OnInit {
   provinces$!: Observable<Province[]>;
   prefixList$!: Observable<Prefix[]>;
   positionTypes$!: Observable<PositionType[]>;
+  countries$!: Observable<Country[]>;
+  nationList$!: Observable<Nationality[]>;
+  visaTypeList!: Observable<VisaType[]>;
+  visaClassList!: Observable<VisaClass[]>;
   selectedTab: MatTabChangeEvent = new MatTabChangeEvent();
-
   requestId!: number;
   requestData = new KspRequest();
   userInfoFormType: number = UserInfoFormType.thai; // control the display field of user info form
   pageType = RequestPageType;
   forbidden: any;
-
   form = this.fb.group({
     userInfo: [],
     addr1: [],
@@ -147,7 +151,6 @@ export class ETempLicenseDetailComponent implements OnInit {
   checkRequestId() {
     this.route.paramMap.pipe(untilDestroyed(this)).subscribe((params) => {
       this.requestId = Number(params.get('id'));
-      //console.log('req id = ', this.requestId);
       if (this.requestId) {
         this.loadRequestFromId(this.requestId);
       }
@@ -276,6 +279,11 @@ export class ETempLicenseDetailComponent implements OnInit {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.provinces$ = this.addressService.getProvinces();
     this.positionTypes$ = this.staffService.getPositionTypes();
+
+    this.countries$ = this.addressService.getCountry();
+    this.nationList$ = this.generalInfoService.getNationality();
+    this.visaClassList = this.generalInfoService.getVisaClass();
+    this.visaTypeList = this.generalInfoService.getVisaType();
   }
 
   cancel() {

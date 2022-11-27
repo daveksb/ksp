@@ -15,7 +15,12 @@ import {
   SchUser,
 } from '@ksp/shared/interface';
 import { GeneralInfoService, SchoolRequestService } from '@ksp/shared/service';
-import { getCookie, replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
+import {
+  formatRequestNo,
+  getCookie,
+  replaceEmptyWithNull,
+  thaiDate,
+} from '@ksp/shared/utility';
 import localForage from 'localforage';
 import { EMPTY, Observable, switchMap } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
@@ -36,7 +41,7 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
   prefixList$!: Observable<Prefix[]>;
   uniqueNo!: string;
   retiredFiles: FileGroup[] = [
-    { name: 'หนังสือแต่งตั้งผู้ประสานงาน', files: [] },
+    { name: 'หนังสือถอดถอนผู้ประสานงาน', files: [] },
   ];
 
   constructor(
@@ -101,9 +106,10 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
     dialog.componentInstance.confirmed
       .pipe(
         switchMap((res) => {
-          console.log('user = ', this.selectUser);
+          //console.log('user = ', this.selectUser);
           if (res) {
-            const form: any = this.form.value;
+            const coordinatorForm: any =
+              this.form.controls.coordinatorTnfo.value;
             const request: KspRequest = new KspRequest(); //form.retiredTnfo;
             request.ref1 = '2';
             request.ref2 = '02';
@@ -119,9 +125,9 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
             request.userid = this.selectUser.schmemberid;
             request.schoolid = this.schoolId;
             request.schoolname = this.school.schoolname;
+            request.schooladdrinfo = JSON.stringify(this.school.provincename);
             request.reasoninfo = JSON.stringify(this.reasoninfo);
-            request.coordinatorinfo = JSON.stringify(form);
-
+            request.coordinatorinfo = JSON.stringify(coordinatorForm);
             const payload = replaceEmptyWithNull(request);
             return this.requestService.schCreateRequest(payload);
           }
@@ -154,7 +160,7 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
       data: {
         header: 'ยืนยันข้อมูลสำเร็จ',
         content: `วันที่ : ${thaiDate(new Date())}
-        เลขที่ใบคำขอ : ${requestno} `,
+        เลขที่ใบคำขอ : ${formatRequestNo(requestno)} `,
         subContent: `กรุณาตรวจสอบสถานะใบคำขอหรือรหัสเข้าใช้งาน
         ผ่านทางอีเมลผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Bureau, SchInfo, SchUser } from '@ksp/shared/interface';
 import { GeneralInfoService, SchoolInfoService } from '@ksp/shared/service';
@@ -17,10 +17,14 @@ export class SchoolRetiredSearchComponent implements OnInit {
   selectUser!: SchUser;
   bureauList$!: Observable<Bureau[]>;
   searchEnd = false;
+  notFound = false;
+
+  schoolName: any;
+  bureauName: any;
 
   form = this.fb.group({
     userSearch: [],
-    userSelect: [],
+    userSelect: [null, Validators.required],
   });
 
   constructor(
@@ -45,12 +49,24 @@ export class SchoolRetiredSearchComponent implements OnInit {
     this.school = school;
     localForage.setItem('retiredSelectedSchool', school);
 
+    this.resetForm();
+
+    this.schoolName = school.schoolname;
+    this.bureauName = school.bureauname;
+
     this.schoolInfoService
       .searchSchUsers({ schoolid: school.schoolid })
       .subscribe((res) => {
         this.searchEnd = true;
         this.schoolUsers = res.filter((user) => user.schuseractive === '1');
+
+        //console.log('xxx = ', this.schoolUsers);
       });
+  }
+
+  resetForm() {
+    this.schoolUsers.length = 0;
+    this.form.controls.userSelect.reset();
   }
 
   next() {

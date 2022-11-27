@@ -4,7 +4,9 @@
 
     <div class="box-header">รายละเอียดใบคำขอรางวัลผลงานวิจัยของคุรุสภา</div>
     <div class="bg-white p-3">
-      <ksp-request-header-info></ksp-request-header-info>
+      <ksp-request-header-info
+        [requestDate]="requestData.createdate"
+        [requestNumber]="requestData.requestno"></ksp-request-header-info>
       <hr />
       <div class="box-header">ข้อมูลรางวัลผลงานวิจัยของคุรุสภา</div>
       <mat-tab-group
@@ -79,9 +81,10 @@
         </mat-tab>
 
         <mat-tab label="เอกสารประกอบ">
-          <ksp-form-attachment
+          <ksp-form-multi-attachment
+            [groups]="rewardFiles"
             [mode]="'view'"
-            [titleClass]="'text-primary'"></ksp-form-attachment>
+            [titleClass]="'text-primary'"></ksp-form-multi-attachment>
         </mat-tab>
       </mat-tab-group>
     </div>

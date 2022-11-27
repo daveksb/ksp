@@ -6,7 +6,7 @@
         <ksp-add-row-button
           [ngClass]="mode === 'view' ? 'text-secondary' : 'text-primary'"
           (addRowClick)="addFormArray(1)"
-          [disabled]="mode === 'view'"
+          *ngif="mode === 'view'"
         >
           เพิ่ม
         </ksp-add-row-button>
@@ -59,7 +59,7 @@
         <ksp-add-row-button
           [ngClass]="mode === 'view' ? 'text-secondary' : 'text-primary'"
           (addRowClick)="addFormArray(2)"
-          [disabled]="mode === 'view'"
+          *ngif="mode === 'view'"
         >
           เพิ่ม
         </ksp-add-row-button>
@@ -112,7 +112,7 @@
         <ksp-add-row-button
           [ngClass]="mode === 'view' ? 'text-secondary' : 'text-primary'"
           (addRowClick)="addFormArray(3)"
-          [disabled]="mode === 'view'"
+          *ngif="mode === 'view'"
         >
           เพิ่ม
         </ksp-add-row-button>
@@ -165,7 +165,7 @@
         <ksp-add-row-button
           [ngClass]="mode === 'view' ? 'text-secondary' : 'text-primary'"
           (addRowClick)="addFormArray(4)"
-          [disabled]="mode === 'view'"
+          *ngif="mode === 'view'"
         >
           เพิ่ม
         </ksp-add-row-button>
@@ -216,7 +216,7 @@
         <ksp-add-row-button
           [ngClass]="mode === 'view' ? 'text-secondary' : 'text-primary'"
           (addRowClick)="addFormArray(5)"
-          [disabled]="mode === 'view'"
+          *ngif="mode === 'view'"
         >
           เพิ่ม
         </ksp-add-row-button>

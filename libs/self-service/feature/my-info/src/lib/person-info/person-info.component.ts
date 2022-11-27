@@ -25,6 +25,7 @@ export class PersonInfoComponent implements OnInit {
   label = 'แก้ไขข้อมูล';
   imgSrc = '';
   today = new Date();
+  eyeIconClicked = false;
 
   form = this.fb.group({
     prefixth: ['', Validators.required],

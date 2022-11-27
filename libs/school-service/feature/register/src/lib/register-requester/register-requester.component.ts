@@ -51,13 +51,13 @@ export class RegisterRequesterComponent implements OnInit {
 
   getStoredData() {
     localForage.getItem('registerSelectedSchool').then((res: any) => {
-      //console.log('school data = ', res);
+      console.log('school data = ', res);
       this.school = res;
-      this.address = `เลขที่ ${res.address} ซอย ${
-        res?.street ?? '-'
-      } หมู่ ${res?.moo ?? '-'} ถนน ${res?.road ?? '-'} ตำบล ${
-        res.tumbon
-      } อำเภอ ${res.amphurname} จังหวัด ${res.provincename} รหัสไปรษณีย์ ${res.zipcode}`;
+      this.address = `เลขที่ ${res.address} ซอย ${res?.street ?? '-'} หมู่ ${
+        res?.moo ?? '-'
+      } ถนน ${res?.road ?? '-'} ตำบล ${res.tumbon} อำเภอ ${
+        res.amphurname
+      } จังหวัด ${res.provincename} รหัสไปรษณีย์ ${res.zipcode}`;
     });
 
     localForage.getItem('registerUserInfo').then((res: any) => {

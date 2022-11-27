@@ -7,7 +7,8 @@
         <ksp-add-row-button
           *ngIf="mode !== 'view'"
           class="text-primary"
-          (addRowClick)="addFormArray1(degreeInfo1)">
+          (addRowClick)="addFormArray1(degreeInfo1)"
+        >
           เพิ่มข้อมูลประวัติการศึกษา
         </ksp-add-row-button>
       </div>
@@ -15,14 +16,16 @@
 
     <ng-container formArrayName="degreeInfo1">
       <ng-container
-        *ngFor="let DegreeForm of degreeInfo1.controls; let i = index">
+        *ngFor="let DegreeForm of degreeInfo1.controls; let i = index"
+      >
         <ng-container [formGroupName]="i">
           <hr />
           <div class="d-flex justify-content-end" *ngIf="mode !== 'view'">
             <i
               class="bi bi-x-circle-fill text-danger"
               role="button"
-              (click)="deleteFormArray(degreeInfo1, i)"></i>
+              (click)="deleteFormArray(degreeInfo1, i)"
+            ></i>
           </div>
           <div class="row">
             <div class="col-md-6 mb-2">
@@ -44,7 +47,8 @@
               <input
                 class="form-control"
                 type="text"
-                formControlName="institute" />
+                formControlName="institute"
+              />
             </div>
           </div>
         </ng-container>
@@ -59,7 +63,8 @@
         <ksp-add-row-button
           *ngIf="mode !== 'view'"
           class="text-primary"
-          (addRowClick)="addFormArray2(degreeInfo2)">
+          (addRowClick)="addFormArray2(degreeInfo2)"
+        >
           เพิ่มข้อมูลประวัติการศึกษา
         </ksp-add-row-button>
       </div>
@@ -67,18 +72,22 @@
 
     <ng-container formArrayName="degreeInfo2">
       <ng-container
-        *ngFor="let DegreeForm of degreeInfo2.controls; let i = index">
+        *ngFor="let DegreeForm of degreeInfo2.controls; let i = index"
+      >
         <ng-container [formGroupName]="i">
           <hr />
           <div class="d-flex justify-content-end" *ngIf="mode !== 'view'">
             <i
               class="bi bi-x-circle-fill text-danger"
               role="button"
-              (click)="deleteFormArray(degreeInfo2, i)"></i>
+              (click)="deleteFormArray(degreeInfo2, i)"
+            ></i>
           </div>
           <ksp-activity-add-degree
+            [mode]="mode"
             formControlName="degreeInfo"
-            [countries]="countries"></ksp-activity-add-degree>
+            [countries]="countries"
+          ></ksp-activity-add-degree>
         </ng-container>
       </ng-container>
     </ng-container>
@@ -92,7 +101,8 @@
         <ksp-add-row-button
           *ngIf="mode !== 'view'"
           class="text-primary"
-          (addRowClick)="addFormArray2(degreeInfo3)">
+          (addRowClick)="addFormArray2(degreeInfo3)"
+        >
           เพิ่มข้อมูลประวัติการศึกษา
         </ksp-add-row-button>
       </div>
@@ -100,18 +110,22 @@
 
     <ng-container formArrayName="degreeInfo3">
       <ng-container
-        *ngFor="let DegreeForm of degreeInfo3.controls; let i = index">
+        *ngFor="let DegreeForm of degreeInfo3.controls; let i = index"
+      >
         <ng-container [formGroupName]="i">
           <hr />
           <div class="d-flex justify-content-end" *ngIf="mode !== 'view'">
             <i
               class="bi bi-x-circle-fill text-danger"
               role="button"
-              (click)="deleteFormArray(degreeInfo3, i)"></i>
+              (click)="deleteFormArray(degreeInfo3, i)"
+            ></i>
           </div>
           <ksp-activity-add-degree
+            [mode]="mode"
             formControlName="degreeInfo"
-            [countries]="countries"></ksp-activity-add-degree>
+            [countries]="countries"
+          ></ksp-activity-add-degree>
         </ng-container>
       </ng-container>
     </ng-container>
@@ -125,7 +139,8 @@
         <ksp-add-row-button
           *ngIf="mode !== 'view'"
           class="text-primary"
-          (addRowClick)="addFormArray2(degreeInfo4)">
+          (addRowClick)="addFormArray2(degreeInfo4)"
+        >
           เพิ่มข้อมูลประวัติการศึกษา
         </ksp-add-row-button>
       </div>
@@ -133,18 +148,22 @@
 
     <ng-container formArrayName="degreeInfo4">
       <ng-container
-        *ngFor="let DegreeForm of degreeInfo4.controls; let i = index">
+        *ngFor="let DegreeForm of degreeInfo4.controls; let i = index"
+      >
         <ng-container [formGroupName]="i">
           <hr />
           <div class="d-flex justify-content-end" *ngIf="mode !== 'view'">
             <i
               class="bi bi-x-circle-fill text-danger"
               role="button"
-              (click)="deleteFormArray(degreeInfo4, i)"></i>
+              (click)="deleteFormArray(degreeInfo4, i)"
+            ></i>
           </div>
           <ksp-activity-add-degree
+            [mode]="mode"
             formControlName="degreeInfo"
-            [countries]="countries"></ksp-activity-add-degree>
+            [countries]="countries"
+          ></ksp-activity-add-degree>
         </ng-container>
       </ng-container>
     </ng-container>
@@ -158,7 +177,8 @@
         <ksp-add-row-button
           class="text-primary"
           *ngIf="mode !== 'view'"
-          (addRowClick)="addFormArray2(degreeInfo5)">
+          (addRowClick)="addFormArray2(degreeInfo5)"
+        >
           เพิ่มข้อมูลประวัติการศึกษา
         </ksp-add-row-button>
       </div>
@@ -166,18 +186,22 @@
 
     <ng-container formArrayName="degreeInfo5">
       <ng-container
-        *ngFor="let DegreeForm of degreeInfo5.controls; let i = index">
+        *ngFor="let DegreeForm of degreeInfo5.controls; let i = index"
+      >
         <ng-container [formGroupName]="i">
           <hr />
           <div class="d-flex justify-content-end" *ngIf="mode !== 'view'">
             <i
               class="bi bi-x-circle-fill text-danger"
               role="button"
-              (click)="deleteFormArray(degreeInfo5, i)"></i>
+              (click)="deleteFormArray(degreeInfo5, i)"
+            ></i>
           </div>
           <ksp-activity-add-degree
+            [mode]="mode"
             formControlName="degreeInfo"
-            [countries]="countries"></ksp-activity-add-degree>
+            [countries]="countries"
+          ></ksp-activity-add-degree>
         </ng-container>
       </ng-container>
     </ng-container>

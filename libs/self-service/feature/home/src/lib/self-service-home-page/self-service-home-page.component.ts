@@ -9,14 +9,15 @@ import {
   SelfServiceRequestForType,
 } from '@ksp/shared/constant';
 import { SelfRequest } from '@ksp/shared/interface';
-import { SelfRequestService } from '@ksp/shared/service';
+import { LoaderService, SelfRequestService } from '@ksp/shared/service';
 import {
+  formatDatePayload,
   getCookie,
   SelfCheckProcess,
   SelfcheckStatus,
   selfMapRequestType,
-  thaiDate,
 } from '@ksp/shared/utility';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'ksp-self-service-home-page',
@@ -24,39 +25,39 @@ import {
   styleUrls: ['./self-service-home-page.component.scss'],
 })
 export class SelfServiceHomePageComponent implements AfterViewInit {
-  badgeTitle = [
+  /*   badgeTitle = [
     `เลขที่ใบคำขอ : SF_010641000123 รายการขอขึ้นทะเบียนใบอนุญาต ถูกส่งคืน
   “ปรับแก้ไข / เพิ่มเติม” กดเพื่อตรวจสอบ`,
-  ];
+  ]; */
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   checkStatus = SelfcheckStatus;
   checkProcess = SelfCheckProcess;
   selfMapRequestType = selfMapRequestType;
-
   dataSource = new MatTableDataSource<SelfRequest>();
-  @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
   searchNotFound = false;
-
-  constructor(
-    private router: Router,
-    private requestService: SelfRequestService,
-    private fb: FormBuilder
-  ) {}
-
+  displayedColumns: string[] = column;
   form = this.fb.group({
     requestno: [],
     requesttype: [],
     requestdate: [],
   });
 
-  displayedColumns: string[] = column;
+  constructor(
+    private router: Router,
+    private requestService: SelfRequestService,
+    private fb: FormBuilder,
+    private loaderService: LoaderService
+  ) {}
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
+
   search() {
-    const payload = {
+    const payload = formatDatePayload({
       userid: getCookie('userId'),
       requesttype: this.form.controls.requesttype.value,
       requestno: this.form.controls.requestno.value,
@@ -65,7 +66,8 @@ export class SelfServiceHomePageComponent implements AfterViewInit {
       currentprocess: null,
       offset: '0',
       row: '200',
-    };
+    });
+
     this.requestService.searchMyRequests(payload).subscribe((res) => {
       if (res && res.length) {
         this.searchNotFound = false;
@@ -81,10 +83,6 @@ export class SelfServiceHomePageComponent implements AfterViewInit {
         this.searchNotFound = true;
       }
     });
-  }
-
-  toThaiDate(input: string) {
-    return thaiDate(new Date(input));
   }
 
   goToDetail(input: SelfRequest) {
@@ -336,8 +334,8 @@ export const column = [
   'requestdate',
   'name',
   'paymentStatus',
-  'listStatus',
   'process',
+  'listStatus',
   'editDate',
   'edit',
   'print',

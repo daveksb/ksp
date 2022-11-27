@@ -23,7 +23,6 @@ import { mapMultiFileInfo } from '@ksp/shared/utility';
   styleUrls: ['./register-coordinator.component.scss'],
 })
 export class CoordinatorInfoComponent implements OnInit {
-  //savingData: any;
   prefixList$!: Observable<Prefix[]>;
   nationList$!: Observable<Nationality[]>;
   mode: FormMode = 'edit';
@@ -59,7 +58,10 @@ export class CoordinatorInfoComponent implements OnInit {
   }
 
   save() {
-    localForage.setItem('registerCoordinator', this.form.value);
+    localForage.setItem(
+      'registerCoordinator',
+      this.form.controls.coordinator.value
+    );
     localForage.setItem('registerFile', mapMultiFileInfo(this.uploadFiles));
     this.router.navigate(['/register', 'password']);
   }
@@ -67,11 +69,11 @@ export class CoordinatorInfoComponent implements OnInit {
   getStoredData() {
     localForage.getItem('registerSelectedSchool').then((res: any) => {
       this.school = res;
-      this.address = `เลขที่ ${res.address} ซอย ${
-        res?.street ?? '-'
-      } หมู่ ${res?.moo ?? '-'} ถนน ${res?.road ?? '-'} ตำบล ${
-        res.tumbon
-      } อำเภอ ${res.amphurname} จังหวัด ${res.provincename}`;
+      this.address = `เลขที่ ${res.address} ซอย ${res?.street ?? '-'} หมู่ ${
+        res?.moo ?? '-'
+      } ถนน ${res?.road ?? '-'} ตำบล ${res.tumbon} อำเภอ ${
+        res.amphurname
+      } จังหวัด ${res.provincename} รหัสไปรษณีย์ ${res.zipcode}`;
       //console.log('school = ', res);
     });
   }

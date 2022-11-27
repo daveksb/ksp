@@ -187,15 +187,12 @@
 
       <ng-container matColumnDef="licenseType">
         <th mat-header-cell *matHeaderCellDef>ประเภทใบอนุญาต</th>
-        <td mat-cell *matCellDef="let element">ใบคำขออนุญาตประกอบวิชาชีพครู</td>
+        <td mat-cell *matCellDef="let element">ใบคำขออนุญาตประกอบวิชาชีพ</td>
       </ng-container>
 
       <ng-container matColumnDef="groupType">
         <th mat-header-cell *matHeaderCellDef>กลุ่มผู้ขอใบอนุญาต</th>
-        <td mat-cell *matCellDef="let element">
-          <!-- {{ element.groupType }} -->
-          ชาวไทย
-        </td>
+        <td mat-cell *matCellDef="let element">ชาวไทย</td>
       </ng-container>
 
       <ng-container matColumnDef="status">

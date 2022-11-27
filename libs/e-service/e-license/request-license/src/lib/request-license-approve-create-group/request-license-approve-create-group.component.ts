@@ -10,7 +10,11 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { KspRequest } from '@ksp/shared/interface';
+import {
+  KspRequest,
+  SelfApprovelicenseData,
+  SelfApproveList,
+} from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 import { getCookie } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -42,35 +46,10 @@ export class RequestLicenseApproveCreateGroupComponent
     'requestDate',
   ];
   dataSource = new MatTableDataSource<CheckKSPRequest>();
-  licenseData = [
-    {
-      order: 1,
-      licenseType: 'ครู',
-      count: 0,
-    },
-    {
-      order: 2,
-      licenseType: 'ครูชาวต่างชาติ',
-      count: 0,
-    },
-    {
-      order: 3,
-      licenseType: 'ผู้บริหารสถานศึกษา',
-      count: 0,
-    },
-    {
-      order: 4,
-      licenseType: 'ผู้บริหารการศึกษา',
-      count: 0,
-    },
-    {
-      order: 5,
-      licenseType: 'ศึกษานิเทศก์',
-      count: 0,
-    },
-  ];
+  licenseData = LicenseData;
   listNo!: number;
   selection = new SelectionModel<any>(true, []);
+  maxCareerType!: SelfApprovelicenseData; // วิชาชีพของคนกลุ่มใหญ่ในบัญชีนี้
 
   form = this.fb.group({
     createNumber: [false],
@@ -95,7 +74,7 @@ export class RequestLicenseApproveCreateGroupComponent
     });
 
     this.requestService.getLevel2LicenseList().subscribe((res) => {
-      console.log('res level 2 = ', res);
+      //console.log('res level 2 = ', res);
       this.dataSource.data = res.datareturn.map((item) => ({
         ...item,
         check: false,
@@ -106,36 +85,27 @@ export class RequestLicenseApproveCreateGroupComponent
   onCheck(element: CheckKSPRequest) {
     element.check = !element.check;
     this.licenseData = this.licenseData.map((item: any) => {
-      if (
-        item.licenseType === 'ผู้บริหารสถานศึกษา' &&
-        element.careertype === '2'
-      ) {
+      if (item.licenseType === '2' && element.careertype === '2') {
+        if (element.check) {
+          item.count = item.count + 1;
+        } else {
+          item.count = item.count - 1;
+        }
+      } else if (item.licenseType === '3' && element.careertype === '3') {
+        if (element.check) {
+          item.count = item.count + 1;
+        } else {
+          item.count = item.count - 1;
+        }
+      } else if (item.licenseType === '4' && element.careertype === '4') {
         if (element.check) {
           item.count = item.count + 1;
         } else {
           item.count = item.count - 1;
         }
       } else if (
-        item.licenseType === 'ผู้บริหารการศึกษา' &&
-        element.careertype === '3'
-      ) {
-        if (element.check) {
-          item.count = item.count + 1;
-        } else {
-          item.count = item.count - 1;
-        }
-      } else if (
-        item.licenseType === 'ศึกษานิเทศก์' &&
-        element.careertype === '4'
-      ) {
-        if (element.check) {
-          item.count = item.count + 1;
-        } else {
-          item.count = item.count - 1;
-        }
-      } else if (
-        item.licenseType === 'ครูชาวต่างชาติ' &&
-        element.careertype === '1' &&
+        item.licenseType === '5' &&
+        element.careertype === '5' &&
         element.isforeign === '1'
       ) {
         if (element.check) {
@@ -143,7 +113,7 @@ export class RequestLicenseApproveCreateGroupComponent
         } else {
           item.count = item.count - 1;
         }
-      } else if (item.licenseType === 'ครู' && element.careertype === '1') {
+      } else if (item.licenseType === '1' && element.careertype === '1') {
         if (element.check) {
           item.count = item.count + 1;
         } else {
@@ -151,6 +121,14 @@ export class RequestLicenseApproveCreateGroupComponent
         }
       }
       return item;
+    });
+
+    this.maxCareerType = this.licenseData.reduce((acc, cur) => {
+      if (acc.count > cur.count) {
+        return acc;
+      } else {
+        return cur;
+      }
     });
   }
 
@@ -167,12 +145,15 @@ export class RequestLicenseApproveCreateGroupComponent
     });
 
     dialog.componentInstance.confirmed.subscribe((res) => {
+      //console.log('max career type = ', this.maxCareerType);
       if (res) {
-        const payload = {
+        const payload: Partial<SelfApproveList> = {
           listno: this.listNo.toString(),
-          process: '1',
+          process: '5',
+          careertype: this.maxCareerType.licenseType,
+          isforeign: '0',
           status: '1',
-          forward_to_license_create: this.form.controls.createNumber.value
+          forwardtolicensecreate: this.form.controls.createNumber.value
             ? '1'
             : '0',
           requestlist: JSON.stringify(
@@ -216,9 +197,44 @@ export class RequestLicenseApproveCreateGroupComponent
   masterToggle() {
     if (this.isAllSelected()) {
       this.selection.clear();
+      this.dataSource.data.map((d) => this.onCheck(d));
       return;
     }
 
     this.selection.select(...this.dataSource.data);
+    this.dataSource.data.map((d) => this.onCheck(d));
   }
 }
+
+export const LicenseData: SelfApprovelicenseData[] = [
+  {
+    order: 1,
+    licenseType: '1',
+    label: 'ครู',
+    count: 0,
+  },
+  {
+    order: 2,
+    licenseType: '5',
+    label: 'ครูชาวต่างชาติ',
+    count: 0,
+  },
+  {
+    order: 3,
+    licenseType: '2',
+    label: 'ผู้บริหารสถานศึกษา',
+    count: 0,
+  },
+  {
+    order: 4,
+    licenseType: '3',
+    label: 'ผู้บริหารการศึกษา',
+    count: 0,
+  },
+  {
+    order: 5,
+    licenseType: '4',
+    label: 'ศึกษานิเทศก์',
+    count: 0,
+  },
+];

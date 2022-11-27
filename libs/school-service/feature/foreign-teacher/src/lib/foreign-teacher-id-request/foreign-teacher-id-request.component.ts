@@ -26,6 +26,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import {
   changeDate,
   formatDate,
+  formatRequestNo,
   getCookie,
   mapMultiFileInfo,
   thaiDate,
@@ -50,13 +51,11 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   visaTypeList$!: Observable<VisaType[]>;
   requestId!: number;
   requestData: KspRequest = new KspRequest();
-
+  foreignFiles: FileGroup[] = [{ name: '1.สำเนาหนังสือเดินทาง', files: [] }];
   form = this.fb.group({
     foreignTeacher: [],
     visainfo: [],
   });
-
-  foreignFiles: FileGroup[] = [{ name: '1.สำเนาหนังสือเดินทาง', files: [] }];
 
   constructor(
     private router: Router,
@@ -135,7 +134,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
                 process: `${this.requestData.process}`,
                 status: '0',
                 detail: null,
-                userid: null,
+                userid: getCookie('userId'),
                 paymentstatus: null,
               };
 
@@ -169,9 +168,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   }
 
   onClickPrev() {
-    if (this.mode == 'view') {
-      this.router.navigate(['/temp-license']);
-    }
+    this.router.navigate(['/temp-license', 'list']);
   }
 
   confirmDialog() {
@@ -218,22 +215,23 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
             userInfo.fileinfo = JSON.stringify(
               mapMultiFileInfo(this.foreignFiles)
             );
-            console.log('userInfo = ', userInfo);
+            //console.log('userInfo = ', userInfo);
             return this.requestService.schCreateRequest(userInfo);
           }
           return EMPTY;
         })
       )
-      .subscribe(() => {
-        this.onCompleted();
-        //console.log(res);
+      .subscribe((res) => {
+        this.onCompleted(res.requestno);
       });
   }
 
-  onCompleted() {
+  onCompleted(requestNo: string) {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       data: {
-        header: `ยืนยันข้อมูลสำเร็จ`,
+        header: `บึนทึกข้อมูลสำเร็จ`,
+        content: `เลขที่รายการ : ${formatRequestNo(requestNo)}
+        วันที่ : ${thaiDate(new Date())}`,
         buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
@@ -252,13 +250,11 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
       .subscribe((res: any) => {
         this.schoolName = res.schoolName;
         this.bureauName = res.bureauName;
-        this.address = `เลขที่ ${res.address} ซอย ${
-          res?.street ?? ''
-        } หมู่ ${res?.moo ?? ''} ถนน ${res?.road ?? ''} ตำบล ${
-          res.tumbon
-        } อำเภอ ${res.amphurName} จังหวัด ${res.provinceName} รหัสไปรษณีย์ ${
-          res.zipCode
-        }`;
+        this.address = `เลขที่ ${res.address} ซอย ${res?.street ?? ''} หมู่ ${
+          res?.moo ?? ''
+        } ถนน ${res?.road ?? ''} ตำบล ${res.tumbon} อำเภอ ${
+          res.amphurName
+        } จังหวัด ${res.provinceName} รหัสไปรษณีย์ ${res.zipCode}`;
       });
     this.countries$ = this.addressService.getCountry();
     this.prefixList$ = this.generalInfoService.getPrefix();

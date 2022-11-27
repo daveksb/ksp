@@ -1,13 +1,16 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav
   ><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span>
   <span subHeader>รับรองใบอนุญาตประกอบวิชาชีพ </span>
 </ksp-top-nav>
 
 <div class="bg-secondary bg-opacity-10 px-3 py-3 full-height">
-  <!-- <div class="fs-5 mb-3">บันทึกผลการนำเสนอคณะอนุกรรมการกลั่นกรอง</div> -->
   <div class="bg-white px-3 py-3 mb-3">
-    <!-- <div class="fs-5">รายงานนำเสนอคณะะอนุกรรมการกลั่นกรอง</div> -->
-    <div class="fs-5">-</div>
+    <div class="fs-5">บันทึกผลการนำเสนอ กมว.</div>
     <hr />
     <div class="text-secondary mb-3">
       กลุ่มที่เลือกสำหรับบันทึกมติที่ประชุมคณะอนุกรรมการกลั่นกรอง
@@ -32,7 +35,9 @@
   </div>
 
   <div class="bg-white px-3 py-3 mb-3">
-    <div class="box-header">สรุปจำนวนพิจารณาออกใบอนุญาตประกอบวิชาชีพทางการศึกษา</div>
+    <div class="box-header">
+      สรุปจำนวนพิจารณาออกใบอนุญาตประกอบวิชาชีพทางการศึกษา
+    </div>
     <hr />
     <e-service-request-license-approve-summary-table></e-service-request-license-approve-summary-table>
   </div>

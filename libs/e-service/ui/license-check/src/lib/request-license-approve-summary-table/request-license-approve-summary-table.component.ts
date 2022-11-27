@@ -13,15 +13,15 @@ export class RequestLicenseApproveSummaryTableComponent implements OnInit {
   @Input() data = [
     {
       result: 'อนุมัติออกใบอนุญาต',
-      count: 100,
+      count: 0,
     },
     {
       result: 'ไม่อนุมัติออกใบอนุญาต',
-      count: 1,
+      count: 0,
     },
     {
       result: 'กรณีเร่งด่วนออกใบอนุญาตแล้ว',
-      count: 2,
+      count: 0,
     },
   ];
   displayedColumns: string[] = ['result', 'count'];

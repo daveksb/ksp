@@ -136,6 +136,7 @@ export class PdfViewerComponent implements OnInit {
     return extension;
   }
   getAllFileData() {
+    console.log(this.data);
     for (const index in this.data.files) {
       this.getFile(parseInt(index));
     }

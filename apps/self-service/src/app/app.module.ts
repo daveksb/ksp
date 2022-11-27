@@ -14,6 +14,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {
   CacheInterceptor,
+  LoadingInterceptor,
   TokenHandleInterceptor,
 } from '@ksp/shared/interceptor';
 import { FileUploadUrls, File_UPLOAD_URLS } from '@ksp/shared/form/file-upload';
@@ -41,6 +42,11 @@ const fileUrls: FileUploadUrls = {
     MatDatepickerModule,
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true,
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenHandleInterceptor,

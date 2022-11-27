@@ -26,6 +26,7 @@ import {
 import { FileGroup, SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
+import localForage from 'localforage';
 
 const OBJECTIVE_FILES: FileGroup[] = [
   { name: '1. ใบอนุญาตประกอบวิชาชีพที่ชํารุด', files: [] },
@@ -204,6 +205,8 @@ export class SubstituteLicenseDetailComponent
         request(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res?.returncode === '00') {
+            const requestno = res.requestno;
+            localForage.setItem('requestno', requestno);
             this.router.navigate(['/license', 'payment-channel']);
           }
         });

@@ -23,8 +23,9 @@ import {
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { AllUserListComponent } from './all-user-list/all-user-list.component';
-import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 import { MatSortModule } from '@angular/material/sort';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export const routes: Routes = [
   {
@@ -81,6 +82,8 @@ export const routes: Routes = [
     RequestHeaderInfoComponent,
     ThaiDatePipe,
     MatSortModule,
+    RequestNoPipe,
+    MatProgressSpinnerModule,
   ],
   declarations: [
     ManageCurrentUserListComponent,

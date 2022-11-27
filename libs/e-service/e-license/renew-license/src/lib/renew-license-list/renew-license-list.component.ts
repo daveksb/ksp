@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -12,8 +12,6 @@ import {
 import { EsSearchPayload, SelfRequest } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 import {
-  checkProcess,
-  checkStatus,
   eSelfCheckProcess,
   eSelfCheckStatus,
   processFilter,
@@ -78,7 +76,7 @@ export class RenewLicenseListComponent implements AfterViewInit {
       this.dataSource.data = processFilter(res);
       this.dataSource.sort = this.sort;
 
-      const sortState: Sort = { active: 'id', direction: 'desc' };
+      const sortState: Sort = { active: 'requestdate', direction: 'asc' };
       this.sort.active = sortState.active;
       this.sort.direction = sortState.direction;
       this.sort.sortChange.emit(sortState);

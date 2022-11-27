@@ -206,10 +206,6 @@ export const eLicenseMenu: MenuConfig[] = [
         path: '/foreign-license/list',
         label: 'รายการใบคำเลขคุรุสภาสำหรับชาวต่างชาติ',
       },
-      {
-        path: '/xxx',
-        label: 'พิจารณาขอเลขคุรุสภาสำหรับชาวต่างชาติ',
-      },
     ],
   },
 

@@ -32,7 +32,9 @@ export class ForbiddenPropertyFormComponent
   @Input()
   title = `ขอรับรองว่าไม่เป็นผู้มีลักษณะต้องห้ามตามที่กำหนดไว้ในมาตรา 44
   แห่งพระราชบัญญัติสภาครูและบุคลากรทางการศึกษา พ.ศ.2546`;
+
   @Input() set input(value: any) {
+    console.log(value);
     if (value) this.form.patchValue(value);
   }
   @Output() confirmed = new EventEmitter<any>();
@@ -48,6 +50,10 @@ export class ForbiddenPropertyFormComponent
 
   get filename() {
     return this.form.controls.filename.value || '';
+  }
+
+  get fileid() {
+    return this.form.controls.fileid.value || '';
   }
 
   prisonSelected: any;
@@ -75,7 +81,6 @@ export class ForbiddenPropertyFormComponent
   }
 
   ngOnInit(): void {
-    console.log(this.input);
     this.form.valueChanges.subscribe((res) => {
       this.prisonSelected = Number(res['prison']);
     });

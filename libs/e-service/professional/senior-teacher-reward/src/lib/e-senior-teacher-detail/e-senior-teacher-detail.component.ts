@@ -50,6 +50,8 @@ export class ESeniorTeacherDetailComponent
     checkResult: this.fb.array([]),
   });
 
+  rewardFiles: any[] = [];
+
   get checkResultFormArray() {
     return this.form.controls.checkResult as FormArray;
   }
@@ -59,11 +61,11 @@ export class ESeniorTeacherDetailComponent
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
     private educationDetailService: EducationDetailService,
-    private route: ActivatedRoute,
-    private requestService: ERequestService,
+    route: ActivatedRoute,
+    requestService: ERequestService,
     private router: Router
   ) {
-    super();
+    super(route, requestService);
   }
 
   ngOnInit(): void {
@@ -86,21 +88,6 @@ export class ESeniorTeacherDetailComponent
     this.bureaus$ = this.educationDetailService.getBureau();
   }
 
-  checkRequestId() {
-    this.route.paramMap.subscribe((params) => {
-      this.requestId = Number(params.get('id'));
-      if (this.requestId) {
-        this.requestService
-          .getKspRequestById(this.requestId)
-          .subscribe((res) => {
-            if (res) {
-              this.patchData(res);
-            }
-          });
-      }
-    });
-  }
-
   patchData(data: SelfRequest) {
     const {
       prefixth,
@@ -119,6 +106,7 @@ export class ESeniorTeacherDetailComponent
       rewardteacherinfo,
       rewardcareerinfo,
       rewardmoneysupportinfo,
+      fileinfo,
     } = data;
     const myInfo = <any>{
       prefixth,
@@ -149,6 +137,11 @@ export class ESeniorTeacherDetailComponent
       rewardCareerInfo,
       rewardMoneySupportInfo,
     });
+
+    if (fileinfo) {
+      const { rewardfiles } = parseJson(fileinfo);
+      this.rewardFiles = rewardfiles;
+    }
   }
 
   patchAddressInfo(value: any) {

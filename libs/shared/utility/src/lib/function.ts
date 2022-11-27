@@ -22,6 +22,18 @@ export function hasRejectedRequest(requests: KspRequest[]): KspRequest[] {
   });
 }
 
+export function formatRequestNo(input: string) {
+  if (!input.includes('-')) {
+    const s1 = input.slice(0, 1);
+    const s2 = input.slice(1, 3);
+    const s3 = input.slice(3, 4);
+    const s4 = input.slice(4, 10);
+    const s5 = input.slice(10);
+    return `${s1}-${s2}-${s3}-${s4}-${s5}`;
+  } else {
+    return input;
+  }
+}
 // return Thai date format,
 export function stringToThaiDate(
   sDate: string,
@@ -268,7 +280,7 @@ export function processFilter(data: KspRequest[], process = 1) {
   return data.filter((d) => Number(d.process) > process);
 }
 
-export function genKuruspaNo() {
+/* export function genKuruspaNo() {
   const d1 = 6;
   const d2 = 5;
   const d3 = Math.floor(Math.random() * 10);
@@ -304,7 +316,7 @@ export function genKuruspaNo() {
   }
   const cid = `${d1}${d2}${d3}${d4}${d5}${d6}${d7}${d8}${d9}${d10}${d11}${d12}${d13}`;
   return cid;
-}
+} */
 
 export function validateIdCard(
   control: AbstractControl

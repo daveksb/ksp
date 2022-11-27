@@ -20,6 +20,7 @@ import {
 } from '@ksp/shared/menu';
 import { UniversitySelectComponent } from '@ksp/shared/form/university-select';
 import { RegisterPasswordComponent } from './register-password/register-password.component';
+import { RequestNoPipe } from '@ksp/shared/pipe';
 
 export const routes: Routes = [
   {
@@ -55,6 +56,7 @@ export const routes: Routes = [
     BottomNavComponent,
     UniversitySelectComponent,
     StepperNavComponent,
+    RequestNoPipe,
   ],
   declarations: [
     RegisterCurrentUserComponent,

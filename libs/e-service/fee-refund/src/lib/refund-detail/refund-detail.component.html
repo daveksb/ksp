@@ -6,8 +6,8 @@
     <div class="box-header">รายละเอียดใบคำขอ</div>
     <div class="bg-white p-3">
       <ksp-request-header-info
-        [requestDate]="'10 ตุลาคม 2565'"
-        [requestNumber]="'112234467876543'"></ksp-request-header-info>
+        [requestDate]="requestData.createdate"
+        [requestNumber]="requestData.requestno"></ksp-request-header-info>
       <hr />
       <div class="bg-light p-3">
         <div class="box-header">ข้อมูลผู้ยื่นใบคำขอ</div>
@@ -22,10 +22,9 @@
         <ksp-form-refund-fee-detail formControlName="refundInfo" [mode]="'view'"></ksp-form-refund-fee-detail>
       </div>
       <br />
-      <ksp-form-attachment
-        [groups]="refundInfo"
-        [mode]="'view'">
-      </ksp-form-attachment>
+      <ksp-form-multi-attachment
+        [groups]="files"
+        [mode]="'view'"></ksp-form-multi-attachment>
     </div>
     <br />
     <div class="bg-white p-3">

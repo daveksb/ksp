@@ -40,6 +40,7 @@ import {
 import {
   AddressService,
   GeneralInfoService,
+  LoaderService,
   SchoolInfoService,
   SchoolRequestService,
   StaffService,
@@ -47,13 +48,15 @@ import {
 import {
   formatCheckboxData,
   formatDatePayload,
+  formatRequestNo,
   getCookie,
   mapMultiFileInfo,
   parseJson,
   replaceEmptyWithNull,
+  thaiDate,
 } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
 @UntilDestroy()
@@ -62,38 +65,32 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./school-request.component.scss'],
 })
 export class SchoolRequestComponent implements OnInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   uniqueNo!: string; // use for file upload reference, gen only first time component loaded
   pageType = RequestPageType;
-
   countries$!: Observable<Country[]>;
   nationList$!: Observable<Nationality[]>;
   visaTypeList!: Observable<VisaType[]>;
   visaClassList!: Observable<VisaClass[]>;
-
   provinces$!: Observable<Province[]>;
   amphurs1$!: Observable<Amphur[]>;
   tumbols1$!: Observable<Tambol[]>;
   amphurs2$!: Observable<Amphur[]>;
   tumbols2$!: Observable<Tambol[]>;
-
   staffTypes$!: Observable<StaffType[]>;
   positionTypes$!: Observable<PositionType[]>;
   academicTypes$!: Observable<AcademicStanding[]>;
   prefixList$!: Observable<Prefix[]>;
-
   requestId!: number;
   requestData = new KspRequest();
   staffData = new SchStaff();
   careerType = SchoolRequestSubType.ครู; // 1 ไทย 2 ผู้บริหาร 3 ต่างชาติ
   requestLabel = '';
-
   disableTempSave = true;
   disableSave = false;
   disableCancel = true;
-
   schoolId = getCookie('schoolId');
   userInfoFormType: number = UserInfoFormType.thai; // control the display field of user info form
-
   eduFiles: FileGroup[] = [];
   teachingFiles: FileGroup[] = [];
   reasonFiles: FileGroup[] = [];
@@ -125,7 +122,8 @@ export class SchoolRequestComponent implements OnInit {
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
     private staffService: StaffService,
-    private requestService: SchoolRequestService
+    private requestService: SchoolRequestService,
+    private loaderService: LoaderService
   ) {}
 
   eduSelect(degreeLevel: number, evt: any) {
@@ -148,7 +146,7 @@ export class SchoolRequestComponent implements OnInit {
         this.careerType = Number(params['subtype']);
       }
 
-      if (this.careerType === SchoolRequestSubType.อื่นๆ) {
+      if (this.careerType === SchoolRequestSubType.ชาวต่างชาติ) {
         this.userInfoFormType = UserInfoFormType.foreign;
       } else {
         this.userInfoFormType = UserInfoFormType.thai;
@@ -159,8 +157,9 @@ export class SchoolRequestComponent implements OnInit {
       } else if (this.careerType == SchoolRequestSubType.ผู้บริหารสถานศึกษา) {
         this.requestLabel =
           SchoolRequestSubType[SchoolRequestSubType.ผู้บริหารสถานศึกษา];
-      } else if (this.careerType == SchoolRequestSubType.อื่นๆ) {
-        this.requestLabel = SchoolRequestSubType[SchoolRequestSubType.อื่นๆ];
+      } else if (this.careerType == SchoolRequestSubType.ชาวต่างชาติ) {
+        this.requestLabel =
+          SchoolRequestSubType[SchoolRequestSubType.ชาวต่างชาติ];
       }
     });
   }
@@ -186,7 +185,6 @@ export class SchoolRequestComponent implements OnInit {
     const baseForm = this.fb.group(new KspRequest());
     const formData: any = this.form.getRawValue();
     //console.log('formdata = ', formData);
-
     const tab3 = mapMultiFileInfo(this.eduFiles);
     const tab4 = mapMultiFileInfo(this.teachingFiles);
     const tab5 = mapMultiFileInfo(this.reasonFiles);
@@ -249,16 +247,17 @@ export class SchoolRequestComponent implements OnInit {
       },
     };
 
-    //console.log('payload = ', payload);
-
     baseForm.patchValue(payload);
     //console.log('current form = ', baseForm.value);
-    this.requestService.schCreateRequest(baseForm.value).subscribe(() => {
+    this.requestService.schCreateRequest(baseForm.value).subscribe((res) => {
       // บันทึกและยื่น
       if (process === 2) {
         this.completeDialog(`ระบบทำการบันทึกเรียบร้อยแล้ว
+        เลขที่รายการ : ${formatRequestNo(res.requestno)}
+        วันที่ : ${thaiDate(new Date())}`);
+        /* this.completeDialog(`ระบบทำการบันทึกเรียบร้อยแล้ว
         สามารถตรวจสอบสถานะภายใน
-        3 - 15 วันทำการ`);
+        3 - 15 วันทำการ`); */
       } else if (process === 1) {
         // บันทึกชั่วคราว
         this.completeDialog(`ระบบทำการบันทึกชั่วคราวเรียบร้อยแล้ว`);
@@ -449,7 +448,7 @@ export class SchoolRequestComponent implements OnInit {
         this.patchFileInfo(parseJson(res.fileinfo));
         const schoolAddr = parseJson(res.schooladdrinfo);
         this.form.controls.schoolAddr.patchValue(schoolAddr);
-        console.log('approve detail = ', parseJson(res.detail));
+        //console.log('approve detail = ', parseJson(res.detail));
       }
     });
   }
@@ -550,7 +549,7 @@ export class SchoolRequestComponent implements OnInit {
           this.patchHiringInfo(parseJson(res.hiringinfo));
         } else {
           // search not found reset form and set idcard again
-          this.completeDialog('ไม่พบบุคคลากรที่ระบุ');
+          this.completeDialog('ไม่พบข้อมูลบุคคลากรที่ระบุ');
           this.form.reset();
           const temp: any = { idcardno: idCard };
           this.form.controls.userInfo.patchValue(temp);
@@ -588,7 +587,7 @@ export class SchoolRequestComponent implements OnInit {
   pathUserInfo(data: any) {
     data.birthdate = data?.birthdate?.split('T')[0];
 
-    if (this.careerType === SchoolRequestSubType.อื่นๆ) {
+    if (this.careerType === SchoolRequestSubType.ชาวต่างชาติ) {
       data.passportstartdate = data.passportstartdate.split('T')[0];
       data.passportenddate = data.passportenddate.split('T')[0];
       //console.log('data = ', data);
@@ -616,14 +615,12 @@ export class SchoolRequestComponent implements OnInit {
     this.teachingFiles = structuredClone(RequestTeachingFiles);
     this.reasonFiles = structuredClone(RequestReasonFiles);
     this.attachFiles = structuredClone(RequestAttachFiles);
-
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.provinces$ = this.addressService.getProvinces();
     this.countries$ = this.addressService.getCountry();
     this.nationList$ = this.generalInfoService.getNationality();
     this.visaClassList = this.generalInfoService.getVisaClass();
     this.visaTypeList = this.generalInfoService.getVisaType();
-
     this.staffTypes$ = this.staffService.getStaffTypes();
     this.positionTypes$ = this.staffService.getPositionTypes();
     this.academicTypes$ = this.staffService.getAcademicStandingTypes();
@@ -634,8 +631,8 @@ export class SchoolRequestComponent implements OnInit {
     this.schoolInfoService
       .getSchoolInfo(this.schoolId)
       .pipe(untilDestroyed(this))
-      .subscribe((res) => {
-        this.form.controls.schoolAddr.patchValue(<any>res);
+      .subscribe((res: any) => {
+        this.form.controls.schoolAddr.patchValue(res);
       });
   }
 

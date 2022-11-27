@@ -55,6 +55,8 @@ export class EBestTeacherDetailComponent
     checkResult: this.fb.array([]),
   });
 
+  rewardFiles: any[] = [];
+
   get checkResultFormArray() {
     return this.form.controls.checkResult as FormArray;
   }
@@ -63,11 +65,11 @@ export class EBestTeacherDetailComponent
     private fb: FormBuilder,
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
-    private route: ActivatedRoute,
-    private requestService: ERequestService,
+    route: ActivatedRoute,
+    requestService: ERequestService,
     private router: Router
   ) {
-    super();
+    super(route, requestService);
   }
 
   ngOnInit(): void {
@@ -91,21 +93,6 @@ export class EBestTeacherDetailComponent
     this.provinces4$ = this.provinces1$;
   }
 
-  checkRequestId() {
-    this.route.paramMap.subscribe((params) => {
-      this.requestId = Number(params.get('id'));
-      if (this.requestId) {
-        this.requestService
-          .getKspRequestById(this.requestId)
-          .subscribe((res) => {
-            if (res) {
-              this.patchData(res);
-            }
-          });
-      }
-    });
-  }
-
   patchData(data: SelfRequest) {
     const {
       prefixth,
@@ -125,6 +112,7 @@ export class EBestTeacherDetailComponent
       eduinfo,
       rewarddetailinfo,
       teachinginfo,
+      fileinfo,
     } = data;
     const myInfo = <any>{
       prefixth,
@@ -168,6 +156,11 @@ export class EBestTeacherDetailComponent
       rewardDetailInfo,
       teachingInfo,
     });
+
+    if (fileinfo) {
+      const { rewardfiles } = parseJson(fileinfo);
+      this.rewardFiles = rewardfiles;
+    }
   }
 
   patchAddressInfo(value: any) {

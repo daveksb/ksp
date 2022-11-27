@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -8,14 +8,15 @@ import {
   SchoolUserPageType,
   SchUser,
 } from '@ksp/shared/interface';
-import { ESchStaffService } from '@ksp/shared/service';
+import { EducationDetailService, ESchStaffService } from '@ksp/shared/service';
 import { mapSchUserStatus, schoolMapRequestType } from '@ksp/shared/utility';
+import { Observable } from 'rxjs';
 
 @Component({
   templateUrl: './manage-current-user-list.component.html',
   styleUrls: ['./manage-current-user-list.component.scss'],
 })
-export class ManageCurrentUserListComponent implements AfterViewInit {
+export class ManageCurrentUserListComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -25,11 +26,17 @@ export class ManageCurrentUserListComponent implements AfterViewInit {
   mapSchUserStatus = mapSchUserStatus;
   mapRequestType = schoolMapRequestType;
   searchNotFound = false;
+  bureau$!: Observable<any>;
 
   constructor(
     private router: Router,
-    private schStaffService: ESchStaffService
+    private schStaffService: ESchStaffService,
+    private educationDetailService: EducationDetailService
   ) {}
+
+  ngOnInit(): void {
+    this.bureau$ = this.educationDetailService.getBureau();
+  }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -52,13 +59,13 @@ export class ManageCurrentUserListComponent implements AfterViewInit {
 
     this.schStaffService.searchSchStaffs(payload).subscribe((res) => {
       if (res && res.length) {
-        this.searchNotFound = false;
         this.dataSource.data = res;
         this.dataSource.sort = this.sort;
         const sortState: Sort = { active: 'schmemberid', direction: 'desc' };
         this.sort.active = sortState.active;
         this.sort.direction = sortState.direction;
         this.sort.sortChange.emit(sortState);
+        this.searchNotFound = false;
       } else {
         this.clear();
         this.searchNotFound = true;
@@ -84,7 +91,7 @@ export const columns = [
   'idcardno',
   'name',
   'schoolname',
-  //'province',
+  'province',
   'requeststatus',
   'requestdate',
   //'updatedate',

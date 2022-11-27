@@ -39,6 +39,7 @@ export class RefundDetailComponent implements OnInit {
 
   requestData = new KspRequest();
   verifyChoice: any[] = VERIFY_CHOICES;
+  files: any[] = [];
 
   get checkResultFormArray() {
     return this.form.controls.checkResult as FormArray;
@@ -106,11 +107,10 @@ export class RefundDetailComponent implements OnInit {
       this.form.controls.refundInfo.patchValue({ ...feeRefundInfo });
     }
 
-    // if (fileinfo) {
-    //   const fileInfo = parseJson(data.fileinfo);
-    //   console.log(fileInfo);
-    //   const { attachfiles } = fileInfo;
-    //   this.files = attachfiles;
-    // }
+    if (fileinfo) {
+      const fileInfo = parseJson(data.fileinfo);
+      const { attachfiles } = fileInfo;
+      this.files = attachfiles;
+    }
   }
 }
