@@ -105,7 +105,7 @@ export class AccusationDecisionComponent implements OnInit {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '375px',
       data: {
-        header: `บึนทึกข้อมูลสำเร็จ`,
+        header: `บันทึกข้อมูลสำเร็จ`,
         content: `เลขที่รายการ : ${this.ethicsId}
         วันที่ : ${this.today}`,
         subContent: 'ผู้บันทึกข้อมูล : นางสาวปาเจรา ไก่คลุก',

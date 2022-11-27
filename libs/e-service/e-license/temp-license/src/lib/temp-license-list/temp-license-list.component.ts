@@ -112,8 +112,8 @@ export class ETempLicenseListComponent implements AfterViewInit {
 
         this.dataSource.sort = this.sort;
         const sortState: Sort = {
-          active: 'processupdatedate',
-          direction: 'desc',
+          active: 'requestdate',
+          direction: 'asc',
         };
         this.sort.active = sortState.active;
         this.sort.direction = sortState.direction;
@@ -147,21 +147,88 @@ export class ETempLicenseListComponent implements AfterViewInit {
       id12,
       id13,
     ] = request?.idcardno?.split('') ?? [];
+    const email = request.email;
+    const nationality = request.nationality;
+    const birthdate = request.birthdate;
+    const passportno = request.passportno;
+
     const eduinfo = JSON.parse(request.eduinfo || '');
+
     const edu1 = eduinfo.find((item: any) => {
       if (item?.degreeLevel) {
         return item.degreeLevel === '1';
       }
       return false;
     });
+
     const degreename1 = edu1?.degreeName ?? '';
     const institution1 = edu1?.institution ?? '';
     const major1 = edu1?.major ?? '';
-    const nameen = request.firstnameen + ' ' + request.lastnameen;
-    let checkbox1 = false;
+    const graduate1 = edu1?.graduateDate ?? '';
+    const grade1 = edu1?.grade ?? '';
+    const admission1 = edu1?.admissionDate ?? '';
+    const country1 = edu1?.country ?? '';
+
+    let degree1 = false;
     if (degreename1) {
-      checkbox1 = true;
+      degree1 = true;
     }
+
+    const edu2 = eduinfo.find((item: any) => {
+      if (item?.degreeLevel) {
+        return item.degreeLevel === '2';
+      }
+      return false;
+    });
+
+    const degreename2 = edu2?.degreeName ?? '';
+    const institution2 = edu2?.institution ?? '';
+    const major2 = edu2?.major ?? '';
+    const graduate2 = edu2?.graduateDate ?? '';
+    const grade2 = edu2?.grade ?? '';
+
+    let degree2 = false;
+    if (degreename2) {
+      degree2 = true;
+    }
+
+    const teachinginfo = JSON.parse(request.teachinginfo || '');
+
+    let lv1 = false;
+    let lv2 = false;
+    let lv3 = false;
+    let lv4 = false;
+    let lv5 = false;
+    let lv6 = false;
+    let lv7 = false;
+
+    for (const index in teachinginfo.teachingLevel) {
+      console.log('xxx = ', index);
+      if (teachinginfo.teachingLevel[index] === 'level1') {
+        lv1 = true;
+      }
+      if (teachinginfo.teachingLevel[index] === 'level2') {
+        lv2 = true;
+      }
+      if (teachinginfo.teachingLevel[index] === 'level3') {
+        lv3 = true;
+      }
+      if (teachinginfo.teachingLevel[index] === 'level4') {
+        lv4 = true;
+      }
+      if (teachinginfo.teachingLevel[index] === 'level5') {
+        lv5 = true;
+      }
+      if (teachinginfo.teachingLevel[index] === 'level6') {
+        lv6 = true;
+      }
+      if (teachinginfo.teachingLevel[index] === 'level7') {
+        lv7 = true;
+      }
+    }
+
+    const nameen = request.firstnameen + ' ' + request.lastnameen;
+
     //console.log('request.schooladdrinfo = ', request.schooladdrinfo);
     const school = JSON.parse(request.schooladdrinfo || '');
     //console.log('school = ', school);
@@ -172,6 +239,13 @@ export class ETempLicenseListComponent implements AfterViewInit {
     const provincename = school.provinceName;
     const zipcode = school.zipCode;
     const telphone = school.telphone;
+    const schoolemail = school.eMail;
+
+    const hiring = JSON.parse(request.hiringinfo || '');
+    const hiringStartDate = hiring.startDate;
+    const hiringEndDate = hiring.endDate;
+    const position = hiring.position;
+
     this.dialog.open(PdfRenderComponent, {
       width: '1200px',
       height: '100vh',
@@ -196,6 +270,11 @@ export class ETempLicenseListComponent implements AfterViewInit {
           name,
           phone,
           telphone,
+          email,
+          schoolemail,
+          nationality,
+          birthdate,
+          passportno,
           id1,
           id2,
           id3,
@@ -209,11 +288,31 @@ export class ETempLicenseListComponent implements AfterViewInit {
           id11,
           id12,
           id13,
+          country1,
+          admission1,
           degreename1,
           institution1,
           major1,
-          checkbox1,
+          graduate1,
+          grade1,
+          degree1,
+          degreename2,
+          institution2,
+          major2,
+          graduate2,
+          grade2,
+          degree2,
           nameen,
+          lv1,
+          lv2,
+          lv3,
+          lv4,
+          lv5,
+          lv6,
+          lv7,
+          hiringStartDate,
+          hiringEndDate,
+          position,
         },
       },
     });

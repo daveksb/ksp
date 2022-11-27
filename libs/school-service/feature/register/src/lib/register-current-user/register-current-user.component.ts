@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SchInfo, SchUser } from '@ksp/shared/interface';
 import { GeneralInfoService, SchoolInfoService } from '@ksp/shared/service';
@@ -47,6 +47,10 @@ export class RegisterCurrentUserComponent {
         this.activeUsers = res;
         this.searchEnd = true;
         //console.log('activeUsers = ', this.activeUsers);
+
+        if (!this.activeUsers) {
+          this.next();
+        }
       });
   }
 }

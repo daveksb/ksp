@@ -33,6 +33,7 @@ export function getLicenseType(requestList: KspRequest[]): any {
     if (item.order === 1) {
       return {
         ...item,
+        label: 'ครู',
         count: teacherCount,
         approve: 0,
         unApprove: 0,
@@ -43,6 +44,7 @@ export function getLicenseType(requestList: KspRequest[]): any {
     if (item.licenseType === 'ผู้บริหารสถานศึกษา') {
       return {
         ...item,
+        label: 'ผู้บริหารสถานศึกษา',
         count: schoolManagerCount,
         approve: 0,
         unApprove: 0,
@@ -53,6 +55,7 @@ export function getLicenseType(requestList: KspRequest[]): any {
     if (item.licenseType === 'ผู้บริหารการศึกษา') {
       return {
         ...item,
+        label: 'ผู้บริหารการศึกษา',
         count: educationManagerCount,
         approve: 0,
         unApprove: 0,
@@ -63,6 +66,29 @@ export function getLicenseType(requestList: KspRequest[]): any {
     if (item.licenseType === 'ศึกษานิเทศก์') {
       return {
         ...item,
+        label: 'ศึกษานิเทศก์',
+        count: educationConsultantCount,
+        approve: 0,
+        unApprove: 0,
+        urgent: 0,
+      };
+    }
+
+    if (item.licenseType === 'ครูชาวต่างชาติ') {
+      return {
+        ...item,
+        label: 'ครูชาวต่างชาติ',
+        count: educationConsultantCount,
+        approve: 0,
+        unApprove: 0,
+        urgent: 0,
+      };
+    }
+
+    if (item.licenseType === 'KSP Bundit') {
+      return {
+        ...item,
+        label: 'KSP Bundit',
         count: educationConsultantCount,
         approve: 0,
         unApprove: 0,

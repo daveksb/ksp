@@ -1,4 +1,4 @@
-<ksp-top-nav><span header>ใบอนุญาตประกอบวิชาชีพ</span><span subHeader>ขอต่อใบอนุญาตประกอบวิชาชีพ</span></ksp-top-nav>
+<ksp-top-nav><span header>ยื่นใบคำขอ</span><span subHeader>ขอต่อใบอนุญาตประกอบวิชาชีพ</span></ksp-top-nav>
 
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
@@ -54,11 +54,8 @@
         </mat-tab>
 
         <mat-tab label="สถานที่ทำงาน">
-          <div class="d-flex align-items-center">
-            <input type="checkbox" class="me-2" disabled />
-            <label class="form-label mb-2">เป็นผู้ประสงค์ประกอบวิชาชีพทางการศึกษา</label>
-          </div>
           <self-service-form-user-workplace
+            [showNotRequire]="true"
             [showContactForm]="true"
             formControlName="workplace"
             [mode]="'view'"

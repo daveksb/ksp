@@ -1,10 +1,11 @@
 <ksp-top-nav [isSelfService]="true"
-  ><span header>ใบคำขอต่ออายุใบประกอบวิชาชีพ</span></ksp-top-nav
+  ><span header>ยื่นใบคำขอ</span
+  ><span subHeader>ขอต่ออายุใบประกอบวิชาชีพ (ครู)</span></ksp-top-nav
 >
 
 <div class="main__container px-4 py-2">
   <self-service-request-status
-    [title]="'รายละเอียดใบคำขอต่ออายุ'"
+    [title]="'รายละเอียดใบคำขอ'"
     [idcardNo]="(myInfo$ | async)?.idcardno || null"
   ></self-service-request-status>
 

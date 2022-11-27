@@ -18,7 +18,7 @@ import {
 import { FormBuilder } from '@angular/forms';
 import {
   formatDate,
-  genKuruspaNo,
+  formatDatePayload,
   parseJson,
   replaceEmptyWithNull,
   thaiDate,
@@ -31,6 +31,7 @@ import {
 } from '@ksp/shared/service';
 import { EMPTY, Observable, switchMap } from 'rxjs';
 import _ from 'lodash';
+import moment from 'moment';
 
 @Component({
   selector: 'ksp-foreign-license-detail',
@@ -49,7 +50,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
   verifyChoice = verifyChoices;
   evidenceFile = evidenceFiles;
   requestData = new KspRequest();
-  requestSubType = SchoolRequestSubType.อื่นๆ;
+  requestSubType = SchoolRequestSubType.ชาวต่างชาติ;
 
   form = this.fb.group({
     foreignTeacherInfo: [],
@@ -91,7 +92,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
   pathUserInfo(data: any) {
     data.birthdate = formatDate(data.birthdate);
 
-    if (this.requestSubType === SchoolRequestSubType.อื่นๆ) {
+    if (this.requestSubType === SchoolRequestSubType.ชาวต่างชาติ) {
       data.birthdate = formatDate(data.birthdate);
       data.passportstartdate = formatDate(data.passportstartdate);
       data.passportenddate = formatDate(data.passportenddate);
@@ -125,8 +126,6 @@ export class ForeignLicenseDetailComponent implements OnInit {
       },
     });
 
-    const kuruspaNo = genKuruspaNo();
-
     dialog.componentInstance.confirmed
       .pipe(
         switchMap((res) => {
@@ -137,7 +136,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
               process: '2',
               status: data.result,
               detail: data.detail,
-              systemtype: '2', // school
+              systemtype: '4', // e-service
               userid: null,
               paymentstatus: null,
             };
@@ -148,18 +147,43 @@ export class ForeignLicenseDetailComponent implements OnInit {
         switchMap((res) => {
           const data: any = this.form.controls.verifydetail.value;
           if (res && data.result === '2') {
-            const allowKey = Object.keys(new KspKuruspa());
-            let payload = _.pick(
-              this.requestData,
-              allowKey
-            ) as Partial<KspKuruspa>;
-            payload.id = null;
-            payload = replaceEmptyWithNull(payload);
-            payload.createdate = formatDate(payload.createdate);
-            payload.fileinfo = atob(payload?.fileinfo || '');
-            payload.kuruspano = kuruspaNo;
+            let payload = new KspKuruspa();
+
+            const countryCode = this.requestData.country ?? 0;
+            const countryCode3digits = countryCode.toString().padStart(3, '0');
+
+            payload.countrycode = countryCode3digits;
+            payload.requestno = this.requestData.requestno;
+            payload.createdate = moment().format('yyyy-MM-DD');
+            payload.idcardno = this.requestData.idcardno;
+            payload.passportno = this.requestData.passportno;
+            payload.passportstartdate = this.requestData.passportstartdate;
+            payload.passportenddate = this.requestData.passportenddate;
+            payload.prefixth = this.requestData.prefixth;
+            payload.firstnameth = this.requestData.firstnameth;
+            payload.lastnameth = this.requestData.lastnameth;
+            payload.prefixen = this.requestData.prefixen;
+            payload.firstnameen = this.requestData.firstnameen;
+            payload.lastnameen = this.requestData.lastnameen;
+            payload.sex = this.requestData.sex;
+            payload.birthdate = this.requestData.birthdate;
+            payload.email = this.requestData.email;
+            payload.position = this.requestData.position;
+            payload.contactphone = this.requestData.contactphone;
+            payload.nationality = this.requestData.nationality;
+            payload.country = this.requestData.country;
+            payload.fileinfo = this.requestData.fileinfo;
+            payload.bureauid = this.requestData.bureauid;
+            payload.bureauname = this.requestData.bureauname;
+            payload.schoolid = this.requestData.schoolid;
+            payload.schoolname = this.requestData.schoolname;
+            payload.schooladdress = this.requestData.schooladdress;
             payload.requestid = this.requestData.requestid;
-            return this.eRequestService.createKuruspaNumber(payload);
+
+            payload = replaceEmptyWithNull(payload);
+            return this.eRequestService.createKuruspaNumber(
+              formatDatePayload(payload)
+            );
           }
           return EMPTY;
         }),
@@ -167,7 +191,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
           if (res) {
             return this.eRequestService.updateRequestKuruspaNo(
               this.requestData.requestid,
-              kuruspaNo
+              res.returnkspid
             );
           }
           return EMPTY;

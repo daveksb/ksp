@@ -34,6 +34,7 @@ export class ForbiddenPropertyFormComponent
   แห่งพระราชบัญญัติสภาครูและบุคลากรทางการศึกษา พ.ศ.2546`;
 
   @Input() set input(value: any) {
+    console.log(value);
     if (value) this.form.patchValue(value);
   }
   @Output() confirmed = new EventEmitter<any>();
@@ -49,6 +50,10 @@ export class ForbiddenPropertyFormComponent
 
   get filename() {
     return this.form.controls.filename.value || '';
+  }
+
+  get fileid() {
+    return this.form.controls.fileid.value || '';
   }
 
   prisonSelected: any;

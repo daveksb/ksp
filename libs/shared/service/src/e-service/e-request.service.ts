@@ -27,14 +27,12 @@ import { map, Observable, shareReplay } from 'rxjs';
 export class ERequestService {
   constructor(private http: HttpClient) {}
 
-  // new API
   KspSearchRequest(payload: EsSearchPayload): Observable<KspRequest[]> {
     return this.http
       .post(`${environment.shortApiUrl}/ksprequestsearch_es.php`, payload)
       .pipe(map((data: any) => data.datareturn));
   }
 
-  // new API
   KspUpdateRequestProcess(payload: KspApprovePayload): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/e-service/ksprequestprocessinsert`,
@@ -42,7 +40,6 @@ export class ERequestService {
     );
   }
 
-  // new API
   getKspRequestById(id: number): Observable<KspRequest> {
     return this.http.post<KspRequest>(
       `${environment.apiUrl}/e-service/ksprequestselectbyid`,
@@ -96,7 +93,6 @@ export class ERequestService {
       .pipe(map((data: any) => data.datareturn));
   }
 
-  // new API
   getApproveHistory(requestid: string): Observable<SelfRequest[]> {
     return this.http
       .post(`${environment.shortApiUrl}/ksprequestprocess_systemtype.php`, {
@@ -157,7 +153,7 @@ export class ERequestService {
 
   createKuruspaNumber(payload: Partial<KspKuruspa>): Observable<any> {
     return this.http.post(
-      `${environment.apiUrl}/e-service/schkuruspanoinsertupdate`,
+      `${environment.apiUrl}/e-service/schkuruspanoinsert`,
       payload
     );
   }
@@ -201,6 +197,7 @@ export class ERequestService {
       { requestid, tokenkey: getCookie('userToken') }
     );
   }
+
   retiredUniUser(payload: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/e-service/uniuseractiveupdate`,

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserInfoFormType } from '@ksp/shared/constant';
+import { SchoolRequestSubType, UserInfoFormType } from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -86,6 +86,7 @@ export class QualificationDetailComponent implements OnInit {
   bureauName!: any;
   schoolName!: any;
   address!: any;
+  requestLabel = '';
 
   constructor(
     public dialog: MatDialog,
@@ -104,6 +105,9 @@ export class QualificationDetailComponent implements OnInit {
     this.getListData();
     this.checkRequestId();
     this.checkRequestSubType();
+    this.form.valueChanges.subscribe((res) => {
+      console.log('status = ', this.form.controls.userInfo.valid);
+    });
   }
 
   checkRequestId() {
@@ -119,6 +123,25 @@ export class QualificationDetailComponent implements OnInit {
     this.route.queryParams.pipe(untilDestroyed(this)).subscribe((params) => {
       if (Number(params['subtype'])) {
         this.careerType = params['subtype'];
+      }
+
+      if (Number(this.careerType) == SchoolRequestSubType.ครู) {
+        this.requestLabel = SchoolRequestSubType[SchoolRequestSubType.ครู];
+      } else if (
+        Number(this.careerType) == SchoolRequestSubType.ผู้บริหารสถานศึกษา
+      ) {
+        this.requestLabel =
+          SchoolRequestSubType[SchoolRequestSubType.ผู้บริหารสถานศึกษา];
+      } else if (
+        Number(this.careerType) == SchoolRequestSubType.ผู้บริหารการศึกษา
+      ) {
+        this.requestLabel =
+          SchoolRequestSubType[SchoolRequestSubType.ผู้บริหารการศึกษา];
+      } else if (Number(this.careerType) == SchoolRequestSubType.ศึกษานิเทศก์) {
+        this.requestLabel =
+          SchoolRequestSubType[SchoolRequestSubType.ศึกษานิเทศก์];
+      } else {
+        this.requestLabel;
       }
     });
   }

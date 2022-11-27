@@ -5,7 +5,7 @@
 
       <div class="row row-cols-4 flex-row-reverse mx-4">
         <label
-          class="d-flex flex-row align-items-center my-1 p-0"
+          class="col d-flex flex-row align-items-center my-1 p-0"
           formArrayName="teachingLevel"
           *ngFor="let order of teachingLevels.controls; let i = index"
         >
@@ -20,7 +20,7 @@
 
       <div class="row row-cols-3 mx-4">
         <label
-          class="d-flex flex-row align-items-center my-1 p-0"
+          class="col d-flex flex-row align-items-center my-1 p-0"
           formArrayName="teachingSubjects"
           *ngFor="let order of teachingSubjects.controls; let i = index"
         >

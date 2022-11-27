@@ -1,7 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FileGroup, FormMode, KspFile } from '@ksp/shared/interface';
-import { PdfViewerComponent, PdfViewerNoLicenseComponent } from '@ksp/shared/dialog';
+import {
+  PdfViewerComponent,
+  PdfViewerNoLicenseComponent,
+} from '@ksp/shared/dialog';
 import { FileService } from '@ksp/shared/form/file-upload';
 
 @Component({

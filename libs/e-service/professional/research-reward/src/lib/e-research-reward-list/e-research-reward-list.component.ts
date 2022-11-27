@@ -75,54 +75,16 @@ export class EResearchRewardListComponent implements OnInit, AfterViewInit {
   }
 }
 
-export interface userList {
-  order: number;
-  licenseNumber: string;
-  schoolCode: string;
-  schoolName: string;
-  workName: string;
-  consider: string;
-  lastEditDate: string;
-  submitDate: string;
-  objection: string;
-}
-
 export const column = [
   'order',
-  'licenseNumber',
-  'schoolCode',
-  'schoolName',
-  'workName',
-  'consider',
-  'lastEditDate',
+  'requestno',
+  'idcardno',
+  'name',
+  'status',
+  'process',
+  'processupdatedate',
   'submitDate',
-  'objection',
   'verify',
   'request',
   'edit',
-];
-
-export const data: userList[] = [
-  {
-    order: 1,
-    licenseNumber: 'xxx',
-    schoolCode: '1234xxxxxxxx',
-    schoolName: 'xxx xxxx xxxxxx',
-    workName: '098-xxx-xxxx',
-    consider: 'xxx xxxx xxxx',
-    lastEditDate: 'xxxxxx',
-    submitDate: 'xxxxxx',
-    objection: 'รอการอนุมัติ',
-  },
-  {
-    order: 2,
-    licenseNumber: 'xxx',
-    schoolCode: '1234xxxxxxxx',
-    schoolName: 'xxx xxxx xxxxxx',
-    workName: '098-xxx-xxxx',
-    consider: 'xxx xxxx xxxx',
-    lastEditDate: 'xxxxxx',
-    submitDate: 'xxxxxx',
-    objection: 'รอการอนุมัติ',
-  },
 ];

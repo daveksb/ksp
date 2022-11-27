@@ -26,6 +26,7 @@ import {
 } from '@ksp/shared/utility';
 import * as _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
+import localForage from 'localforage';
 
 const WORKING_INFO_FILES: FileGroup[] = [
   {
@@ -293,6 +294,8 @@ export class RenewLicenseSchoolManagerComponent
       console.log('request result = ', res);
       if (res.returncode === '00') {
         if (this.currentProcess === 2) {
+          const requestno = res.requestno;
+          localForage.setItem('requestno', requestno);
           this.router.navigate(['/license', 'payment-channel']);
         } else {
           this.router.navigate(['/home']);

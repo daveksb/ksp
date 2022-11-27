@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { FormMode } from '@ksp/shared/interface';
 
 @Component({
   selector: 'self-service-form-user-performance',
@@ -9,6 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
 export class FormUserPerformanceComponent implements OnInit {
   @Input() uniqueTimestamp = '';
   @Input() performanceFiles: any[] = [];
+  @Input() mode: FormMode = 'edit';
 
   typesOfSubject: string[] = [
     'วิชาชีพครู',

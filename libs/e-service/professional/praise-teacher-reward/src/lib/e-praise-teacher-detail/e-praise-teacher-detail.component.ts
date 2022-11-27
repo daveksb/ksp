@@ -58,12 +58,12 @@ export class EPraiseTeacherDetailComponent
   constructor(
     private fb: FormBuilder,
     private generalInfoService: GeneralInfoService,
-    private route: ActivatedRoute,
-    private requestService: ERequestService,
+    route: ActivatedRoute,
+    requestService: ERequestService,
     private addressService: AddressService,
     private router: Router
   ) {
-    super();
+    super(route, requestService);
   }
 
   ngOnInit(): void {
@@ -83,22 +83,6 @@ export class EPraiseTeacherDetailComponent
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.provinces1$ = this.addressService.getProvinces();
     this.provinces2$ = this.provinces1$;
-  }
-
-  checkRequestId() {
-    this.route.paramMap.subscribe((params) => {
-      this.requestId = Number(params.get('id'));
-      if (this.requestId) {
-        this.requestService
-          .getKspRequestById(this.requestId)
-          .subscribe((res) => {
-            if (res) {
-              this.requestData = res;
-              this.patchData(res);
-            }
-          });
-      }
-    });
   }
 
   patchData(data: SelfRequest) {
