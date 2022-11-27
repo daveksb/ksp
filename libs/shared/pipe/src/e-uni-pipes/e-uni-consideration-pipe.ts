@@ -9,6 +9,7 @@ import _ from 'lodash';
 })
 export class EUniConsiderationPipe implements PipeTransform {
   transform(value: any) {
+    if (['1', '2', '3'].includes(value?.process)) return '';
     let classStatus = 'verify__status';
     let status: any = _.find(EUniApproveProcess, {
       requestType: _.toNumber(value?.requestType),
@@ -18,7 +19,7 @@ export class EUniConsiderationPipe implements PipeTransform {
     if (!status) {
       classStatus = 'edit__status';
     }
-    return `<span class="rounded-pill d-flex justify-content-center ${classStatus}">${
+    return `<span class="rounded-pill d-flex justify-content-center text-center ${classStatus} text-wrap">${
       status?.sname || 'แก้ไข'
     }</span>`;
   }

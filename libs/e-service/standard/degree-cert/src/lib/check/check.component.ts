@@ -44,7 +44,7 @@ const detailToState = (res: any) => {
   styleUrls: ['./check.component.scss'],
 })
 export class CheckComponent implements OnInit, AfterContentChecked {
-  form:any = this.fb.group<any>({
+  form: any = this.fb.group<any>({
     step1: [],
     step2: [
       {
@@ -53,11 +53,13 @@ export class CheckComponent implements OnInit, AfterContentChecked {
     ],
     step3: [],
     step4: [],
-    step5: [{
-      verify: null,
-      returnDate: "",
-      forward: null,
-    }],
+    step5: [
+      {
+        verify: null,
+        returnDate: '',
+        forward: null,
+      },
+    ],
     verifyStep1: [],
     verifyStep2: [],
     verifyStep3: [],
@@ -73,7 +75,6 @@ export class CheckComponent implements OnInit, AfterContentChecked {
   degreeType = '';
   choices = ApproveStepStatusOption;
   daftRequest: any;
-  allowEdit = false;
   constructor(
     public dialog: MatDialog,
     private router: Router,
@@ -103,7 +104,6 @@ export class CheckComponent implements OnInit, AfterContentChecked {
         .pipe(
           map((res) => {
             this.daftRequest = res;
-            this.allowEdit = ['1', '2'].includes(res?.requestprocess);
             return this.uniInfoService.mappingUniverSitySelectByIdWithForm(res);
           })
         )
@@ -119,6 +119,9 @@ export class CheckComponent implements OnInit, AfterContentChecked {
           }
         });
     }
+  }
+  get allowEdit() {
+    return ['1', '2'].includes(this.daftRequest?.requestprocess) && this.daftRequest?.requeststatus !== "2";
   }
   ngOnInit(): void {
     this.getHistory();
@@ -281,10 +284,10 @@ export class CheckComponent implements OnInit, AfterContentChecked {
     });
   }
   get disableFields(): { forward: any[]; verify: any[] } {
-    if(this.form.controls.step5.value.verify == 1){
-      return { forward: [2,3,4], verify: [] };
+    if (this.form.controls.step5.value.verify == 1) {
+      return { forward: [2, 3, 4], verify: [] };
     }
-    if(this.form.controls.step5.value.verify == 2){
+    if (this.form.controls.step5.value.verify == 2) {
       return { forward: [1], verify: [] };
     }
     return { forward: [], verify: [] };

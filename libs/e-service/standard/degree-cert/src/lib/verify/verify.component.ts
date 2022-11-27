@@ -6,8 +6,37 @@ import { Location } from '@angular/common';
 import _ from 'lodash';
 import { FormBuilder } from '@angular/forms';
 import { ERequestService } from '@ksp/shared/service';
-import { jsonStringify } from '@ksp/shared/utility';
+import { jsonStringify, parseJson } from '@ksp/shared/utility';
+import { map } from 'rxjs';
+const detailToState = (res: any) => {
+  const newRes =
+    _.filter(res?.datareturn, ({ process }) => process === '3').map(
+      (data: any) => {
+        return parseJson(data?.detail);
+      }
+    ) || [];
+  const considerCourses = _.reduce(
+    newRes,
+    (prev: any, curr) => {
+      if (curr?.considerCourses) {
+        prev.considerCourses = _.concat(
+          prev.considerCourses,
+          curr?.considerCourses
+        );
+      }
 
+      if (curr?.considerCert) {
+        prev.considerCert = _.concat(prev.considerCert, curr?.considerCert);
+      }
+      return prev;
+    },
+    { considerCourses: [], considerCert: [] }
+  );
+  return {
+    isNotEmptyConsiderCourses: !!_.size(considerCourses?.considerCourses),
+    isNotEmptyConsiderCert: !!_.size(considerCourses?.considerCert),
+  };
+};
 @Component({
   selector: 'e-service-verify',
   templateUrl: './verify.component.html',
@@ -137,13 +166,32 @@ export class VerifyComponent implements OnInit {
 
     dialogRef.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.dataSource.map((data: any) => {
+        this.dataSource.forEach((data: any, index) => {
           payload.requestid = data?.key;
-          this.eRequestService
-            .kspUpdateRequestUniRequestDegree(payload)
-            .subscribe(() => {
-              this.location.back();
-            });
+          if (data.requeststatus === '1' && data.requestprocess === '3') {
+            this.eRequestService
+              .kspUniRequestProcessSelectByRequestId(payload.requestid)
+              .pipe(map(detailToState))
+              .subscribe((res) => {
+                if (
+                  (this.processType === 2 && res?.isNotEmptyConsiderCert) ||
+                  (this.processType === 1 && res?.isNotEmptyConsiderCourses)
+                ) {
+                  payload.process = '4';
+                }
+                if (
+                  !res?.isNotEmptyConsiderCourses &&
+                  !res?.isNotEmptyConsiderCert
+                ) {
+                  this.eRequestService
+                    .kspUpdateRequestUniRequestDegree(payload)
+                    .subscribe(() => {
+                      if (index === _.size(this.dataSource) - 1)
+                        this.location.back();
+                    });
+                }
+              });
+          }
         });
       }
     });

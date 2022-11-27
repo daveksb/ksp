@@ -18,8 +18,8 @@ export class EUniCheckPipe implements PipeTransform {
     if (!status) {
       classStatus = 'edit__status';
     }
-    return `<span class="rounded-pill d-flex justify-content-center ${classStatus}">${
-      status?.sname || 'แก้ไข'
+    return `<span class="rounded-pill d-flex justify-content-center text-center ${classStatus} text-wrap">${
+      status?.sname || 'กำลังดำเนินการ'
     }</span>`;
   }
 }
