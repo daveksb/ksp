@@ -9,8 +9,12 @@ import { TopNavComponent } from '@ksp/shared/menu';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
 import { DegreeCertSearchComponent } from '@ksp/shared/search';
 import { UniInfoService } from '@ksp/shared/service';
-import { DegreeCertStatusComponent, UniFormBadgeComponent } from '@ksp/shared/ui';
+import {
+  DegreeCertStatusComponent,
+  UniFormBadgeComponent,
+} from '@ksp/shared/ui';
 import { getCookie, stringToThaiDate, thaiDate } from '@ksp/shared/utility';
+import moment from 'moment';
 import { lastValueFrom, map } from 'rxjs';
 
 @Component({
@@ -27,7 +31,7 @@ import { lastValueFrom, map } from 'rxjs';
     ReactiveFormsModule,
     MatPaginatorModule,
     ThaiDatePipe,
-    DegreeCertStatusComponent
+    DegreeCertStatusComponent,
   ],
 })
 export class UniDegreeCertListComponent
@@ -67,7 +71,7 @@ export class UniDegreeCertListComponent
       uniid: institutionNumber || '',
       fulldegreenameth: degreeName || '',
       requestno: licenseNumber || '',
-      requestdate: date || '',
+      requestdate: date ? moment(date).format('YYYY-MM-DD') : '',
       coursestatus: courseStatus || '',
       degreelevel: submitDegreeLevel || '',
       requeststatus: approveStatus || '',
