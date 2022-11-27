@@ -20,12 +20,19 @@
         <ng-content select="[detail]"></ng-content>
       </span>
     </div>
-    <div (click)="logout()" class="user__info" *ngIf="!isSelfService">
+    <div class="user__info" *ngIf="!isSelfService">
       <div class="d-flex flex-column align-items-end">
         <div class="user__name">{{ firstName }} {{ lastName }}</div>
         <div class="login__time">เข้าใช้งานเมื่อวันที่ {{ today }}</div>
       </div>
-      <div class="ms-2"><img src="/assets/images/profile.png" /></div>
+      <div
+        class="ms-2"
+        (click)="logout()"
+        role="button"
+        matTooltip="คลิ๊กที่นี่ เพื่อออกจากระบบ"
+      >
+        <img src="/assets/images/profile.png" />
+      </div>
     </div>
   </div>
 </nav>

@@ -25,6 +25,7 @@ export class EServiceRewardSearchComponent
   @Input() disableRequestType = false;
   @Input() requestTypeList = SelfRequestType;
   @Input() careerTypeList: any[] = [];
+  @Input() isSelfReward = true;
   @Output() clear = new EventEmitter<boolean>();
   @Output() search = new EventEmitter<any>();
 

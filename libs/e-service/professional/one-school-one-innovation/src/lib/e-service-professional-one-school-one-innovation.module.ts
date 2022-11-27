@@ -16,6 +16,8 @@ import { MatTableModule } from '@angular/material/table';
 import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 import { EServiceRewardSearchComponent } from '@ksp/shared/search';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { ThaiDatePipe } from '@ksp/shared/pipe';
 
 const routes: Routes = [
   {
@@ -32,11 +34,11 @@ const routes: Routes = [
         component: OsoiListComponent,
       },
       {
-        path: 'approve',
+        path: 'detail/:id',
         component: OsoiDetailComponent,
       },
       {
-        path: 'confirm',
+        path: 'confirm/:id',
         component: OsoiConfirmComponent,
       },
       {
@@ -65,6 +67,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     EServiceRewardSearchComponent,
     MatDatepickerModule,
+    MatPaginatorModule,
+    ThaiDatePipe,
   ],
   declarations: [
     OsoiListComponent,

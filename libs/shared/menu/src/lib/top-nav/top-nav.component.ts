@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
 import { deleteCookie, getCookie, thaiDate } from '@ksp/shared/utility';
 
@@ -9,7 +10,7 @@ import { deleteCookie, getCookie, thaiDate } from '@ksp/shared/utility';
   styleUrls: ['./top-nav.component.scss'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule],
+  imports: [CommonModule, MatTooltipModule],
 })
 export class TopNavComponent {
   @Input() isSelfService = false;

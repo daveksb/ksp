@@ -1,19 +1,27 @@
 <form [formGroup]="form">
   <div class="row mb-2">
     <div class="col">
-      <label class="form-label">เลขที่คำขอ</label>
+      <label class="form-label">เลขที่ใบคำขอ</label>
       <input type="text" class="form-control" formControlName="requestno" />
     </div>
-    <div class="col">
+    <div class="col" *ngIf="isSelfReward">
       <label class="form-label">หมายเลขบัตรประชาชน</label>
       <input type="text" class="form-control" formControlName="idcardno" />
+    </div>
+    <div class="col" *ngIf="!isSelfReward">
+      <label class="form-label">รหัสโรงเรียน</label>
+      <input type="text" class="form-control" formControlName="schoolid" />
     </div>
   </div>
 
   <div class="row mb-2">
-    <div class="col">
+    <div class="col" *ngIf="isSelfReward">
       <label class="form-label">ชื่อ-นามสกุล</label>
       <input type="text" class="form-control" formControlName="name" />
+    </div>
+    <div class="col" *ngIf="!isSelfReward">
+      <label class="form-label">ชื่อหน่วยงาน/สถานศึกษา</label>
+      <input type="text" class="form-control" />
     </div>
     <div class="col">
       <label class="form-label">ประเภท/กลุ่มสาระการเรียนรู้</label>
@@ -25,7 +33,7 @@
     <div class="col">
       <label class="form-label">สถานะการดำเนินการ</label>
       <select class="form-select" formControlName="status">
-        <option value="null" disabled hidden>กรุณาเลือก</option>
+        <option value="" disabled hidden selected>กรุณาเลือก</option>
         <option *ngFor="let s of statusList" [value]="s.id">
           {{ s.sname }}
         </option>
@@ -43,7 +51,7 @@
   </div>
 
   <div class="row mb-2">
-    <div class="col">
+    <div class="col-3">
       <label class="form-label">จาก : วันเดือนปีที่ยื่นใบคำขอ</label>
       <div class="d-flex align-items-center">
         <input
@@ -63,7 +71,7 @@
       </div>
     </div>
 
-    <div class="col">
+    <div class="col-3">
       <label class="form-label">ถึง : วันเดือนปีที่ยื่นใบคำขอ</label>
       <div class="d-flex align-items-center">
         <input
