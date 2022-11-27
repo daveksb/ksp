@@ -62,6 +62,7 @@ export class UniDegreeCertListComponent
       verifyStatus,
       approveStatus,
     } = this.form.controls.search.value as any;
+    console.log(date)
     return {
       uniid: institutionNumber || '',
       fulldegreenameth: degreeName || '',

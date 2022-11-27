@@ -25,9 +25,15 @@ import {
   LicenseCheckComponent,
 } from '@ksp/e-service/ui/license-check';
 import { ReactiveFormsModule } from '@angular/forms';
-import { DegreeCertApprovedSearchComponent, DegreeCertSearchComponent } from '@ksp/shared/search';
+import {
+  DegreeCertApprovedSearchComponent,
+  DegreeCertSearchComponent,
+} from '@ksp/shared/search';
 import { RouterModule } from '@angular/router';
-import { FormApproveMeetingRecordComponent, FormMeetingRecordComponent } from '@ksp/e-service/ethics/form';
+import {
+  FormApproveMeetingRecordComponent,
+  FormMeetingRecordComponent,
+} from '@ksp/e-service/ethics/form';
 import { EServiceDegreeCertApprovedListComponent } from './list-approved/e-service-degree-cert-list-approved.component';
 import { ImportStudentComponent } from './import-student/import-student.component';
 import { CourseDetailComponent } from './course-detail/course-detail.component';
@@ -36,7 +42,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FormAddressTableComponent } from '@ksp/shared/form/others';
 import { ConsiderStudentComponent } from './import-student/consider-student/consider-student.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { EUniPipesModule } from '@ksp/shared/pipe';
+import { DegreeCertStatusComponent } from './degree-cert-status/degree-cert-status.component';
 
 @NgModule({
   imports: [
@@ -68,7 +74,6 @@ import { EUniPipesModule } from '@ksp/shared/pipe';
     FormAddressTableComponent,
     MatPaginatorModule,
     FormApproveMeetingRecordComponent,
-    EUniPipesModule
   ],
   declarations: [
     EServiceDegreeCertListComponent,
@@ -80,7 +85,8 @@ import { EUniPipesModule } from '@ksp/shared/pipe';
     FinalResultComponent,
     ImportStudentComponent,
     CourseDetailComponent,
-    ConsiderStudentComponent
+    ConsiderStudentComponent,
+    DegreeCertStatusComponent,
   ],
 })
 export class EServiceStandardDegreeCertModule {}

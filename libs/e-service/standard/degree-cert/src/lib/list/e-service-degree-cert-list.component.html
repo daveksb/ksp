@@ -74,21 +74,30 @@
         <ng-container matColumnDef="verifyStatus">
           <th mat-header-cell *matHeaderCellDef>สถานะตรวจสอบ</th>
           <td mat-cell *matCellDef="let element">
-            {{ element | eUniCheckStatus }}
+            <e-service-degree-cert-status
+              [dataSource]="element"
+              type="examine_status"
+            ></e-service-degree-cert-status>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="considerStatus">
           <th mat-header-cell *matHeaderCellDef>สถานะพิจารณา</th>
           <td mat-cell *matCellDef="let element">
-            {{ element | eUniConsiderationStatus }}
+            <e-service-degree-cert-status
+              [dataSource]="element"
+              type="consider_status"
+            ></e-service-degree-cert-status>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="approveStatus">
           <th mat-header-cell *matHeaderCellDef>สถานะรับรอง</th>
           <td mat-cell *matCellDef="let element">
-            {{ element | eUniCertificationStatus }}
+            <e-service-degree-cert-status
+              [dataSource]="element"
+              type="certification_status"
+            ></e-service-degree-cert-status>
           </td>
         </ng-container>
 
@@ -109,14 +118,20 @@
         <ng-container matColumnDef="verify">
           <th mat-header-cell *matHeaderCellDef>ตรวจสอบ</th>
           <td mat-cell *matCellDef="let element">
-            <div [innerHTML]="element | eUniCheck"></div>
+            <e-service-degree-cert-status
+              [dataSource]="element"
+              type="examine"
+            ></e-service-degree-cert-status>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="consider">
           <th mat-header-cell *matHeaderCellDef>พิจารณา</th>
           <td mat-cell *matCellDef="let element">
-            <div [innerHTML]="element | eUniConsideration"></div>
+            <e-service-degree-cert-status
+              [dataSource]="element"
+              type="consider"
+            ></e-service-degree-cert-status>
           </td>
         </ng-container>
 
