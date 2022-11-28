@@ -169,7 +169,7 @@ export class UserDetailComponent implements OnInit {
     this.eRequestService.retiredUniUser(retirePayload).subscribe((res) => {
       console.log('retired result = ', res);
     });
-    this.updateClosed();
+    // this.updateClosed();
   }
 
   updateClosed() {
@@ -222,7 +222,7 @@ export class UserDetailComponent implements OnInit {
       this.completeDialog();
     });
 
-    this.updateClosed();
+    // this.updateClosed();
   }
 
   unApproveUser() {
@@ -240,7 +240,7 @@ export class UserDetailComponent implements OnInit {
       //console.log('un approve result = ', res);
     });
 
-    this.updateClosed();
+    // this.updateClosed();
   }
 
   viewUser() {
