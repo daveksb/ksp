@@ -13,7 +13,8 @@ import {
 import { parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
-const FORM_TAB_COUNT = 6;
+const FORM_TAB_COUNT_1 = 6;
+const FORM_TAB_COUNT_2 = 5;
 @Component({
   selector: 'ksp-request-license-approve-detail',
   templateUrl: './request-license-approve-detail.component.html',
@@ -25,6 +26,7 @@ export class RequestLicenseApproveDetailComponent
 {
   approveTitles = 'ผลการตรวจสอบ';
   userInfoType = UserInfoFormType.thai;
+
   override form = this.fb.group({
     userInfo: [],
     address1: [],
@@ -77,16 +79,6 @@ export class RequestLicenseApproveDetailComponent
   ngOnInit(): void {
     this.getListData();
     this.checkRequestId();
-    this.addCheckResultArray();
-  }
-
-  addCheckResultArray() {
-    for (let i = 0; i < FORM_TAB_COUNT; i++) {
-      this.checkResultFormArray.push(this.fb.control(null));
-    }
-    this.checkResultFormArray.setValidators(
-      ESelfFormBaseComponent.allFilledValidator()
-    );
   }
 
   override checkRequestId() {
@@ -115,6 +107,11 @@ export class RequestLicenseApproveDetailComponent
                   break;
                 default:
                   this.educationTypes = 'teacher';
+              }
+              if (this.educationTypes === 'teacher') {
+                this.addCheckResultArray(FORM_TAB_COUNT_1);
+              } else {
+                this.addCheckResultArray(FORM_TAB_COUNT_2);
               }
             }
           });
@@ -157,6 +154,15 @@ export class RequestLicenseApproveDetailComponent
     this.licenses$ = this.educationDetailService.getLicenseType();
     this.provinces$ = this.addressService.getProvinces();
     this.bureau$ = this.educationDetailService.getBureau();
+  }
+
+  addCheckResultArray(num: number) {
+    for (let i = 0; i < num; i++) {
+      this.checkResultFormArray.push(this.fb.control(null));
+    }
+    this.checkResultFormArray.setValidators(
+      ESelfFormBaseComponent.allFilledValidator()
+    );
   }
 
   patchUserInfoForm(data: any): void {

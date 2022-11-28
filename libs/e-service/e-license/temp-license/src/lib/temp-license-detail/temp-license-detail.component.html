@@ -1,7 +1,9 @@
 <ksp-top-nav>
   <span header>ยื่นใบคำขอ</span>
   <span subHeader
-    >ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ
+    >ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ ({{
+      requestLabel
+    }})
   </span>
 </ksp-top-nav>
 
@@ -21,7 +23,7 @@
         <div class="box-header text-primary">รายละเอียดข้อมูล</div>
         <ksp-form-user-info
           [prefixList]="prefixList$ | async"
-          [displayMode]="1"
+          [displayMode]="userInfoFormType"
           [nationList]="nationList$ | async"
           [countryList]="countries$ | async"
           [visaClassList]="visaClassList | async"
@@ -130,12 +132,14 @@
             formControlName="reasoninfo"
             [mode]="'view'"
           ></ksp-form-reason-info>
-          <ksp-form-multi-attachment
-            [pageType]="pageType.reasonTab"
-            [groups]="reasonFiles"
-            title="หลักฐานประกอบ"
-            [mode]="'view'"
-          ></ksp-form-multi-attachment>
+          <div class="mt-3">
+            <ksp-form-multi-attachment
+              [pageType]="pageType.reasonTab"
+              [groups]="reasonFiles"
+              title="หลักฐานประกอบ"
+              [mode]="'view'"
+            ></ksp-form-multi-attachment>
+          </div>
         </mat-tab>
 
         <mat-tab label="เอกสารหลักฐานประกอบ">
@@ -191,5 +195,6 @@
     (nextClicked)="next()"
     [showCenterButtons]="true"
     [isFirstPage]="true"
+    [disableNext]="!checkResultFormArray.valid"
   ></ksp-bottom-nav>
 </div>

@@ -39,6 +39,7 @@ import { RequestLicenseForeignDetailComponent } from './request-license-foreign-
 import { RequestStatusComponent } from '@ksp/self-service/ui';
 import { MatStepperModule } from '@angular/material/stepper';
 import { RequestLicenseForeignConfirmComponent } from './request-license-foreign-confirm/request-license-foreign-confirm.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export const routes: Route[] = [
   {
@@ -97,6 +98,7 @@ export const routes: Route[] = [
     MatStepperModule,
     ThaiDatePipe,
     RequestNoPipe,
+    MatProgressSpinnerModule,
   ],
   declarations: [
     RequestLicenseForeignListComponent,

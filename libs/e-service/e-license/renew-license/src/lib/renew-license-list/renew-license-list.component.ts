@@ -10,13 +10,14 @@ import {
   SelfServiceRequestType,
 } from '@ksp/shared/constant';
 import { EsSearchPayload, SelfRequest } from '@ksp/shared/interface';
-import { ERequestService } from '@ksp/shared/service';
+import { ERequestService, LoaderService } from '@ksp/shared/service';
 import {
   eSelfCheckProcess,
   eSelfCheckStatus,
   processFilter,
   replaceEmptyWithNull,
 } from '@ksp/shared/utility';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'ksp-renew-license-list',
@@ -24,6 +25,7 @@ import {
   styleUrls: ['./renew-license-list.component.scss'],
 })
 export class RenewLicenseListComponent implements AfterViewInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfRequest>();
   SchoolRequestSubType = SchoolRequestSubType;
@@ -39,7 +41,8 @@ export class RenewLicenseListComponent implements AfterViewInit {
   constructor(
     private router: Router,
     private requestService: ERequestService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private loaderService: LoaderService
   ) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

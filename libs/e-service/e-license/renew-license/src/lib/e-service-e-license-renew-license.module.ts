@@ -28,6 +28,7 @@ import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 import { RenewLicenseConfirmComponent } from './renew-license-confirm/renew-license-confirm.component';
 import { ValidateKspRequestComponent } from '@ksp/e-service/e-license/approve-ksp-request';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export const routes: Route[] = [
   {
@@ -81,6 +82,7 @@ export const routes: Route[] = [
     ValidateKspRequestComponent,
     ForbiddenPropertyFormComponent,
     RequestNoPipe,
+    MatProgressSpinnerModule,
   ],
   declarations: [
     RenewLicenseDetailComponent,

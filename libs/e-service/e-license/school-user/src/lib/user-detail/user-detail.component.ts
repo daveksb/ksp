@@ -76,6 +76,10 @@ export class UserDetailComponent implements OnInit {
 
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.form2.disable();
+
+    this.verifyForm.valueChanges.subscribe((res) => {
+      console.log('res = ', res);
+    });
   }
 
   checkRequestId() {
@@ -92,6 +96,10 @@ export class UserDetailComponent implements OnInit {
       this.requestData = res;
 
       res.status === '1' ? (this.mode = 'edit') : (this.mode = 'view');
+
+      /* if (res.status === '1') {
+        this.verifyForm.patchValue(1)
+      } */
       //console.log('file = ', parseJson(res.fileinfo));
 
       const files = parseJson(res.fileinfo);

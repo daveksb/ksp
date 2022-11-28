@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -9,6 +9,7 @@ import {
   RequestPageType,
   RequestReasonFiles,
   RequestTeachingFiles,
+  SchoolRequestSubType,
   subjects,
   UserInfoFormType,
 } from '@ksp/shared/constant';
@@ -38,6 +39,7 @@ import {
   VisaType,
 } from '@ksp/shared/interface';
 import { TempLicenseDetailService } from './temp-license-detail.service';
+import { ESelfFormBaseComponent } from '@ksp/shared/form/others';
 
 export class KspApprovePersistData {
   checkDetail: any = null;
@@ -73,6 +75,9 @@ export class ETempLicenseDetailComponent implements OnInit {
   userInfoFormType: number = UserInfoFormType.thai; // control the display field of user info form
   pageType = RequestPageType;
   forbidden: any;
+  careerType = SchoolRequestSubType.ครู;
+  requestLabel = '';
+
   form = this.fb.group({
     userInfo: [],
     addr1: [],
@@ -102,12 +107,16 @@ export class ETempLicenseDetailComponent implements OnInit {
     this.getList();
     this.checkRequestId();
     this.addCheckResultArray();
+    this.checkSubType();
   }
 
   addCheckResultArray() {
     for (let i = 0; i < 7; i++) {
-      this.checkResultFormArray.push(this.fb.control([]));
+      this.checkResultFormArray.push(this.fb.control(null));
     }
+    this.checkResultFormArray.setValidators(
+      ESelfFormBaseComponent.allFilledValidator()
+    );
   }
 
   get checkResultFormArray() {
@@ -151,8 +160,26 @@ export class ETempLicenseDetailComponent implements OnInit {
   checkRequestId() {
     this.route.paramMap.pipe(untilDestroyed(this)).subscribe((params) => {
       this.requestId = Number(params.get('id'));
+
       if (this.requestId) {
         this.loadRequestFromId(this.requestId);
+      }
+    });
+  }
+
+  checkSubType() {
+    this.route.queryParams.pipe(untilDestroyed(this)).subscribe((params) => {
+      if (Number(params['subtype'])) {
+        this.careerType = Number(params['subtype']);
+      }
+      console.log('xxx= ', this.careerType);
+
+      if (this.careerType === 1) {
+        this.userInfoFormType = UserInfoFormType.thai;
+        this.requestLabel = 'ชาวไทย';
+      } else if (this.careerType === 5) {
+        this.userInfoFormType = UserInfoFormType.foreign;
+        this.requestLabel = 'ชาวต่างชาติ';
       }
     });
   }
