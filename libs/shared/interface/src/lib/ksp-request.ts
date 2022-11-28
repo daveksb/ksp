@@ -34,6 +34,7 @@ export class KspRequest {
   imagefileid: string | null = null;
   isforeign: string | null = null; // add on 14/11/2022
   isurgent?: string | null = null;
+  isclose?: string | null = null; // add on 28/11/2022
   kuruspano: string | null = null;
   lastnameen: string | null = null;
   lastnameth: string | null = null;

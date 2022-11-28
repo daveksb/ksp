@@ -70,6 +70,9 @@ export class RequestSearchComponent
       this.form?.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
         if (value.requesttype === '6') {
           this.careerList = qualificationCareerTypeList;
+        }
+        if (value.requesttype === '4') {
+          this.careerList = this.careerTypeList.filter((i) => i.id === 5);
         } else {
           this.careerList = this.careerTypeList;
         }
@@ -82,7 +85,7 @@ export class RequestSearchComponent
     this.form.controls.requesttype.valueChanges
       .pipe(untilDestroyed(this))
       .subscribe((requestType) => {
-        // update subtype list
+        // update career_type list
         if (requestType === '3' || requestType === '6') {
           this.form.controls.careertype.enable();
         } else {
