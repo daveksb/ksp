@@ -105,9 +105,9 @@ export class QualificationDetailComponent implements OnInit {
     this.getListData();
     this.checkRequestId();
     this.checkRequestSubType();
-    this.form.valueChanges.subscribe((res) => {
+    /*     this.form.valueChanges.subscribe((res) => {
       console.log('status = ', this.form.controls.userInfo.valid);
-    });
+    }); */
   }
 
   checkRequestId() {
@@ -146,23 +146,23 @@ export class QualificationDetailComponent implements OnInit {
     });
   }
 
-  pathUserInfo(data: any) {
-    data.birthdate = data?.birthdate?.split('T')[0];
+  patchUserInfo(data: any) {
+    /*     data.birthdate = data?.birthdate?.split('T')[0];
     data.passportstartdate = data.passportstartdate.split('T')[0];
-    data.passportenddate = data.passportenddate.split('T')[0];
+    data.passportenddate = data.passportenddate.split('T')[0]; */
     //console.log('data = ', data);
-    if (data?.visainfo) {
+    /*     if (data?.visainfo) {
       const visa = parseJson(data?.visainfo);
       data.visaclass = visa.visaclass;
       data.visatype = visa.visatype;
       data.visaenddate = visa.visaenddate;
-    }
-
+    } */
+    //console.log('data = ', data);
     this.form.controls.userInfo.patchValue(data);
   }
 
   searchStaffFromIdCard(idCard: string) {
-    if (!idCard) return;
+    if (!idCard || this.requestId) return;
     const payload = {
       idcardno: idCard,
       schoolid: this.schoolId,
@@ -173,8 +173,7 @@ export class QualificationDetailComponent implements OnInit {
       .subscribe((res) => {
         //console.log('req = ', res);
         if (res && res.returncode !== '98') {
-          //this.staffData = res;
-          this.pathUserInfo(res);
+          this.patchUserInfo(res);
           this.patchAddress(parseJson(res.addresses));
           this.patchEdu(parseJson(res.educations));
         } else {
@@ -202,8 +201,11 @@ export class QualificationDetailComponent implements OnInit {
     this.requestService.schGetRequestById(id).subscribe((req) => {
       if (req) {
         req.birthdate = formatDate(req.birthdate);
-        this.form.controls.userInfo.patchValue(<any>req);
+        req.isforeign = req.isforeign ? '1' : '0';
 
+        //console.log('xx = ', req);
+        //this.form.controls.userInfo.patchValue(<any>req);
+        this.patchUserInfo(req);
         this.patchAddress(parseJson(req.addressinfo));
         this.patchEdu(parseJson(req.eduinfo));
 
