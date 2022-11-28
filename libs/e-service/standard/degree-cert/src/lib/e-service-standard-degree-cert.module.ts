@@ -16,7 +16,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatStepperModule } from '@angular/material/stepper';
 import { SharedFormDegreeCertStepOneModule } from '@ksp/shared/form/degree-cert/step-one';
 import { MatIconModule } from '@angular/material/icon';
-import { DegreeCertStatusComponent, RequestHeaderInfoComponent } from '@ksp/shared/ui';
+import {
+  DegreeCertStatusComponent,
+  RequestHeaderInfoComponent,
+} from '@ksp/shared/ui';
 import { SharedFormDegreeCertStepTwoModule } from '@ksp/shared/form/degree-cert/step-two';
 import { FinalResultComponent } from './final-result/final-result.component';
 import { TopNavComponent } from '@ksp/shared/menu';
@@ -72,8 +75,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     FormAddressTableComponent,
     MatPaginatorModule,
     FormApproveMeetingRecordComponent,
-    DegreeCertStatusComponent
-
+    DegreeCertStatusComponent,
   ],
   declarations: [
     EServiceDegreeCertListComponent,
@@ -86,7 +88,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     ImportStudentComponent,
     CourseDetailComponent,
     ConsiderStudentComponent,
-    DegreeCertStatusComponent
   ],
 })
 export class EServiceStandardDegreeCertModule {}
