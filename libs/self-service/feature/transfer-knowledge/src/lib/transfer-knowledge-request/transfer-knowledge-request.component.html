@@ -121,6 +121,7 @@
         ย้อนกลับ
       </button> -->
       <button
+        *ngIf="requestId"
         type="button"
         [disabled]="!requestId"
         (click)="cancel()"
