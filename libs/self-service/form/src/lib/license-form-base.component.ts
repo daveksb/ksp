@@ -181,6 +181,21 @@ export abstract class LicenseFormBaseComponent {
     });
   }
 
+  useSameIdCard() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      width: '350px',
+      data: {
+        header: `หมายเลขบัตรประชาชนนี้ได้ถูกใช้ยื่นใบคำขอไปแล้ว`,
+      },
+    });
+
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/home']);
+      }
+    });
+  }
+
   cancelCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '350px',
@@ -254,18 +269,7 @@ export abstract class LicenseFormBaseComponent {
           if (res.returncode === '00') {
             this.saveCompleted(res);
           } else if (res.returncode === '409') {
-            const completeDialog = this.dialog.open(CompleteDialogComponent, {
-              width: '350px',
-              data: {
-                header: `หมายเลขบัตรประชาชนนี้ได้ถูกใช้ยื่นใบคำขอไปแล้ว`,
-              },
-            });
-
-            completeDialog.componentInstance.completed.subscribe((res) => {
-              if (res) {
-                this.router.navigate(['/home']);
-              }
-            });
+            this.useSameIdCard();
           }
         });
       }
@@ -284,18 +288,7 @@ export abstract class LicenseFormBaseComponent {
             localForage.setItem('requestno', requestno);
             this.router.navigate(['/license', 'payment-channel']);
           } else if (res.returncode === '409') {
-            const completeDialog = this.dialog.open(CompleteDialogComponent, {
-              width: '350px',
-              data: {
-                header: `หมายเลขบัตรประชาชนนี้ได้ถูกใช้ยื่นใบคำขอไปแล้ว`,
-              },
-            });
-
-            completeDialog.componentInstance.completed.subscribe((res) => {
-              if (res) {
-                this.router.navigate(['/home']);
-              }
-            });
+            this.useSameIdCard();
           }
         });
       }
