@@ -1,0 +1,15 @@
+<span
+  *ngIf="['consider', 'examine'].includes(type) && process?.message"
+  [class]="process?.classStatus"
+>
+  {{ process?.message }}
+</span>
+<span
+  *ngIf="
+    ['consider_status', 'examine_status', 'certification_status'].includes(
+      type
+    ) && process
+  "
+>
+  {{ process }}
+</span>
