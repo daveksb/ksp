@@ -18,6 +18,8 @@ import { EServiceRewardSearchComponent } from '@ksp/shared/search';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 
 const routes: Routes = [
   {
@@ -69,6 +71,8 @@ const routes: Routes = [
     MatDatepickerModule,
     MatPaginatorModule,
     ThaiDatePipe,
+    ReactiveFormsModule,
+    LicenseCheckComponent,
   ],
   declarations: [
     OsoiListComponent,
