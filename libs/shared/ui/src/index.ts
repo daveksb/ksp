@@ -9,3 +9,5 @@ export * from './lib/license-info/license-info.component';
 export * from './lib/uni-form-badge/uni-form-badge.component';
 
 export * from './lib/uni-warn-incorrect/uni-warn-incorrect.component';
+
+export * from './lib/degree-cert-status/degree-cert-status.component';

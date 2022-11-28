@@ -7,7 +7,9 @@
     <div class="row">
       <div class="col-6 mb-3">
         <label class="form-label required">สิทธิสำหรับการเข้าใช้งาน</label>
-        <select class="form-select" formControlName="permission">
+        <select class="form-select"
+                formControlName="permission"
+                [ngClass]="{'invalid': isSubmit && permission.invalid}">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option
             *ngFor="let permission of permissionList"
@@ -16,6 +18,15 @@
             {{ permission.label }}
           </option>
         </select>
+        <ng-container
+          *ngIf="
+            isSubmit && permission.invalid
+          "
+        >
+          <span class="text-danger">
+            {{ validatorMessages.requiredSelect.replace('field', 'สิทธิสำหรับการเข้าใช้งาน') }} !
+          </span>
+        </ng-container>
       </div>
     </div>
 
@@ -24,6 +35,7 @@
         <label class="form-label required">หมายเลขบัตรประชาชน</label>
         <input
           class="form-control"
+          [ngClass]="{'invalid': isSubmit && (idCardNo.invalid || !validIdcard)}"
           type="text"
           maxlength="13"
           placeholder="หมายเลขบัตรประชาชนจำนวน 13 หลัก"
@@ -31,9 +43,12 @@
           (input)="checkID($event)"
         />
         <ng-container
-          *ngIf="(idCardNo.invalid && (idCardNo.dirty || idCardNo.touched) || !validIdcard)"
+          *ngIf="isSubmit && idCardNo.invalid"
         >
-          <span class="text-danger" *ngIf="idCardNo.errors?.['pattern'] || !validIdcard">
+          <span class="text-danger" *ngIf="idCardNo.invalid && !idCardNo.value">
+            {{ validatorMessages.required.replace('field', 'หมายเลขบัตรประชาชน') }} !
+          </span>
+          <span class="text-danger" *ngIf="idCardNo.value && (idCardNo.errors?.['pattern'] || !validIdcard)">
             {{ validatorMessages.idCardNo }}
           </span>
         </ng-container>
@@ -43,16 +58,22 @@
     <div class="row mb-3">
       <div class="col-2">
         <label class="form-label required">คำนำหน้าชื่อภาษาไทย</label>
-        <select class="form-select" formControlName="prefixth" (change)="changePrefix($event)">
+        <select class="form-select" 
+                formControlName="prefixth" 
+                (change)="changePrefix($event)"
+                [ngClass]="{'invalid': isSubmit && prefixth.invalid}">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let prefix of prefixName" [value]="prefix.id">
             {{ prefix.name_th }}
           </option>
         </select>
         <ng-container
-          *ngIf="!validprefix && (prefixth.value && prefixen.value) && (prefixth.dirty || prefixth.touched)"
+          *ngIf="isSubmit"
         >
-          <span class="text-danger">
+          <span class="text-danger" *ngIf="prefixth.invalid && !prefixth.value">
+            {{ validatorMessages.required.replace('field', 'คำนำหน้าชื่อภาษาไทย') }}
+          </span>
+          <span class="text-danger" *ngIf="!validprefix && (prefixth.value && prefixen.value) && (prefixth.dirty || prefixth.touched)">
             {{ validatorMessages.prefixNotMatching }}
           </span>
         </ng-container>
@@ -64,13 +85,15 @@
           type="text"
           placeholder="กรุณากรอกชื่อภาษาไทย"
           formControlName="firstnameth"
+          [ngClass]="{'invalid': isSubmit && firstNameTh.invalid}"
         />
         <ng-container
-          *ngIf="
-            firstNameTh.invalid && (firstNameTh.dirty || firstNameTh.touched)
-          "
+          *ngIf="isSubmit && firstNameTh.invalid"
         >
-          <span class="text-danger" *ngIf="firstNameTh.errors?.['pattern']">
+          <span class="text-danger" *ngIf="firstNameTh.invalid && !firstNameTh.value">
+            {{ validatorMessages.required.replace('field', 'ชื่อภาษาไทย') }} !
+          </span>
+          <span class="text-danger" *ngIf="firstNameTh.value && firstNameTh.errors?.['pattern']">
             {{ validatorMessages.th }}
           </span>
         </ng-container>
@@ -82,11 +105,15 @@
           type="text"
           placeholder="กรุณากรอกนามสกุลภาษาไทย"
           formControlName="lastnameth"
+          [ngClass]="{'invalid': isSubmit && lastNameTh.invalid}"
         />
         <ng-container
-          *ngIf="lastNameTh.invalid && (lastNameTh.dirty || lastNameTh.touched)"
+          *ngIf="isSubmit && lastNameTh.invalid"
         >
-          <span class="text-danger" *ngIf="lastNameTh.errors?.['pattern']">
+          <span class="text-danger" *ngIf="lastNameTh.invalid && !lastNameTh.value">
+            {{ validatorMessages.required.replace('field', 'นามสกุลภาษาไทย') }} !
+          </span>
+          <span class="text-danger" *ngIf="lastNameTh.value && lastNameTh.errors?.['pattern']">
             {{ validatorMessages.th }}
           </span>
         </ng-container>
@@ -154,11 +181,15 @@
           type="text"
           placeholder="กรุณากรอกตำแหน่ง"
           formControlName="position"
+          [ngClass]="{'invalid': isSubmit && position.invalid}"
         />
         <ng-container
-          *ngIf="position.invalid && (position.dirty || position.touched)"
+          *ngIf="isSubmit && position.invalid"
         >
-          <span class="text-danger" *ngIf="position.errors?.['pattern']">
+          <span class="text-danger" *ngIf="position.invalid && !position.value">
+            {{ validatorMessages.required.replace('field', 'ตำแหน่ง') }} !
+          </span>
+          <span class="text-danger" *ngIf="position.value && position.errors?.['pattern']">
             {{ validatorMessages.en }}
           </span>
         </ng-container>
@@ -195,13 +226,15 @@
           class="form-control"
           type="text"
           formControlName="contactphone"
+          [ngClass]="{'invalid': isSubmit && contactPhone.invalid}"
         />
         <ng-container
-          *ngIf="
-            contactPhone.invalid && (contactPhone.dirty || contactPhone.touched)
-          "
+          *ngIf="isSubmit && contactPhone.invalid"
         >
-          <span class="text-danger" *ngIf="contactPhone.errors?.['pattern']"
+          <span class="text-danger" *ngIf="contactPhone.invalid && !contactPhone.value">
+            {{ validatorMessages.required.replace('field', 'เบอร์โทรศัพท์ (ที่ติดต่อได้)') }} !
+          </span>
+          <span class="text-danger" *ngIf="contactPhone.value && contactPhone.errors?.['pattern']"
             >{{ validatorMessages.phone }}
           </span>
         </ng-container>
@@ -211,9 +244,16 @@
     <div class="row mb-3">
       <div class="col-sm-6">
         <label class="form-label required">อีเมล</label>
-        <input class="form-control" type="text" formControlName="email" />
-        <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
-          <span class="text-danger" *ngIf="email.errors?.['email']">{{
+        <input 
+          class="form-control" 
+          type="text" 
+          formControlName="email"
+          [ngClass]="{'invalid': isSubmit && email.invalid}" />
+        <ng-container *ngIf="isSubmit && email.invalid">
+          <span class="text-danger" *ngIf="email.invalid && !email.value">
+            {{ validatorMessages.required.replace('field', 'อีเมล') }} !
+          </span>
+          <span class="text-danger" *ngIf="email.value && email.errors?.['email']">{{
             validatorMessages.email
           }}</span>
         </ng-container>

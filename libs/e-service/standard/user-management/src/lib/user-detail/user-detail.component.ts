@@ -180,6 +180,7 @@ export class UserDetailComponent implements OnInit {
     newUser.lastnameth = this.requestData.lastnameth;
     newUser.email = this.requestData.email;
     newUser.phone = this.requestData.contactphone;
+    newUser.workphone = this.requestData.workphone;
     newUser.birthdate = this.requestData.birthdate === "" ? null : this.requestData.birthdate;
     newUser.username = this.requestData.idcardno;
     newUser.password = this.setPassword;

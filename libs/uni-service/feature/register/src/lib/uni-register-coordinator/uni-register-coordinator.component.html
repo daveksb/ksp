@@ -40,6 +40,7 @@
             [uniType]="uniType$ | async"
             [prefixName]="prefixName$ | async"
             [occupyList]="occupyList$ | async"
+            [isSubmit]="submit"
           ></uni-form-register-coordinator>
         </div>
 
@@ -62,7 +63,6 @@
           [showCenterButtons]="true"
           [showSaveButton]="false"
           (nextClicked)="next()"
-          [disableNext]="form.controls.coordinator.invalid"
           (prevClicked)="prevPage()"
           (cancelClicked)="cancel()"
         >

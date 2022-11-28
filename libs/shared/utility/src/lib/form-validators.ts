@@ -24,5 +24,7 @@ export const validatorMessages = {
   loginFail: 'คุณกรอกรหัสเข้าใช้งาน หรือรหัสผ่านไม่ถูกต้อง',
   bankAccount: 'กรุณากรอกเลขที่บัญชีให้ถูกต้อง',
   prefixNotMatching: 'กรุณาเลือกคำนำหน้าชื่อให้ตรงกัน',
+  required: 'กรุณากรอก field',
+  requiredSelect: 'กรุณาเลือก field'
   //passwordNotMatchingEn: 'Password is not macthing',
 };

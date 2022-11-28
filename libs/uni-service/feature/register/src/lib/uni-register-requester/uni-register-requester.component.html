@@ -33,11 +33,11 @@
           [uniType]="uniType$ | async"
           [prefixName]="prefixName$ | async"
           [occupyList]="occupyList$ | async"
+          [isSubmit]="submit"
         ></uni-form-register-requester>
 
         <div class="my-2">
           <ksp-bottom-nav
-            [disableNext]="form.invalid"
             [isFirstPage]="false"
             [disableNextMessage]="'กรุณากรอกข้อมูลให้ครบถ้วน'"
             [showCenterButtons]="false"

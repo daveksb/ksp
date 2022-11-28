@@ -4,6 +4,7 @@ export class UniUser {
   lastnameth: string | null = null;
   email: string | null = null;
   phone: string | null = null;
+  workphone: string | null = null;
   birthdate: string | null = null;
   username: string | null = null;
   password: string | null = null;

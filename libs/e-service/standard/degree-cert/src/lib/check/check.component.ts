@@ -17,7 +17,7 @@ import {
   EUniService,
   UniInfoService,
 } from '@ksp/shared/service';
-import { map} from 'rxjs';
+import { map } from 'rxjs';
 import _ from 'lodash';
 import { Location } from '@angular/common';
 
@@ -44,7 +44,7 @@ const detailToState = (res: any) => {
   styleUrls: ['./check.component.scss'],
 })
 export class CheckComponent implements OnInit, AfterContentChecked {
-  form = this.fb.group<any>({
+  form: any = this.fb.group<any>({
     step1: [],
     step2: [
       {
@@ -53,7 +53,13 @@ export class CheckComponent implements OnInit, AfterContentChecked {
     ],
     step3: [],
     step4: [],
-    step5: [],
+    step5: [
+      {
+        verify: null,
+        returnDate: '',
+        forward: null,
+      },
+    ],
     verifyStep1: [],
     verifyStep2: [],
     verifyStep3: [],
@@ -69,7 +75,6 @@ export class CheckComponent implements OnInit, AfterContentChecked {
   degreeType = '';
   choices = ApproveStepStatusOption;
   daftRequest: any;
-  allowEdit = false;
   constructor(
     public dialog: MatDialog,
     private router: Router,
@@ -79,7 +84,7 @@ export class CheckComponent implements OnInit, AfterContentChecked {
     private eUniService: EUniService,
     private eRequestService: ERequestService,
     private cdref: ChangeDetectorRef,
-    private location:Location
+    private location: Location
   ) {}
   ngAfterContentChecked(): void {
     this.cdref.detectChanges();
@@ -99,7 +104,6 @@ export class CheckComponent implements OnInit, AfterContentChecked {
         .pipe(
           map((res) => {
             this.daftRequest = res;
-            this.allowEdit = ["1","2"].includes(res?.requestprocess)
             return this.uniInfoService.mappingUniverSitySelectByIdWithForm(res);
           })
         )
@@ -115,6 +119,9 @@ export class CheckComponent implements OnInit, AfterContentChecked {
           }
         });
     }
+  }
+  get allowEdit() {
+    return ['1', '2'].includes(this.daftRequest?.requestprocess) && this.daftRequest?.requeststatus !== "2";
   }
   ngOnInit(): void {
     this.getHistory();
@@ -211,6 +218,11 @@ export class CheckComponent implements OnInit, AfterContentChecked {
     this.router.navigate(['/', 'degree-cert', 'list', 0]);
   }
   onSubmitKSP() {
+    const status = _.get(this.form, 'value.step5.verify', '');
+    let process = _.toNumber(this.daftRequest?.requestprocess);
+    if (status != 2) {
+      process += 1;
+    }
     try {
       const detail: any = _.pick(this.form.value, [
         'verifyStep1',
@@ -224,14 +236,16 @@ export class CheckComponent implements OnInit, AfterContentChecked {
         userid: getCookie('userId'),
       };
       detail.returnDate = _.get(this.form, 'value.step5.returnDate', '');
-      payload.status = _.get(this.form, 'value.step5.verify', '');
-      payload.process = _.toNumber(this.daftRequest?.requestprocess) + 1
+      payload.status = status;
+      payload.process = process;
       payload.detail = jsonStringify(detail);
-      this.eRequestService.kspUpdateRequestUniRequestDegree(payload).subscribe(() => {
-        this.onConfirmed();
-      });
+      this.eRequestService
+        .kspUpdateRequestUniRequestDegree(payload)
+        .subscribe(() => {
+          this.onConfirmed();
+        });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
   save() {
@@ -268,5 +282,14 @@ export class CheckComponent implements OnInit, AfterContentChecked {
         this.location.back();
       }
     });
+  }
+  get disableFields(): { forward: any[]; verify: any[] } {
+    if (this.form.controls.step5.value.verify == 1) {
+      return { forward: [2, 3, 4], verify: [] };
+    }
+    if (this.form.controls.step5.value.verify == 2) {
+      return { forward: [1], verify: [] };
+    }
+    return { forward: [], verify: [] };
   }
 }
