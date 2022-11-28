@@ -15,7 +15,7 @@ import {
   CompleteDialogComponent,
 } from '@ksp/shared/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { parseJson } from '@ksp/shared/utility';
+import { formatRequestNo, parseJson, thaiDate } from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
 import { SelfGetRequest, SelfRequest } from '@ksp/shared/interface';
 import localForage from 'localforage';
@@ -196,14 +196,14 @@ export abstract class LicenseFormBaseComponent {
     });
   }
 
-  saveCompleted() {
+  saveCompleted(request: any) {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '350px',
       data: {
         showImg: true,
         header: `บันทึกใบคำขอสำเร็จ`,
-        content: `วันที่ :
-        เลขที่ใบคำขอ :`,
+        content: `วันที่ : ${thaiDate(new Date())}
+        เลขที่ใบคำขอ : ${formatRequestNo(request.requestno || this.requestNo)}`,
         subContent: 'หากมีข้อสงสัย กรุณาโทร 02 304 9899',
       },
     });
@@ -252,7 +252,7 @@ export abstract class LicenseFormBaseComponent {
         request(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res.returncode === '00') {
-            this.saveCompleted();
+            this.saveCompleted(res);
           }
         });
       }
