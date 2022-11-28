@@ -109,8 +109,9 @@ export class UniRegisterCoordinatorComponent implements OnInit {
       form: this.form.getRawValue(),
       file: this.uploadFileList,
     };
-    localForage.setItem('registerCoordinatorForm', form);
-    this.router.navigate(['/', 'register', 'requester']);
+    localForage.setItem('registerCoordinatorForm', form).then(()=>{
+      this.router.navigate(['/', 'register', 'requester']);
+    });
   }
 
   cancel() {
@@ -149,14 +150,17 @@ export class UniRegisterCoordinatorComponent implements OnInit {
 
   next() {
     this.submit = true;
-    if (this.form.controls.coordinator.valid) {
+    const data = this.form.getRawValue();
+    const { coordinator } = data as any;
+    if (this.form.controls.coordinator.valid && coordinator.prefixth == coordinator.prefixen) {
       const form = {
         form: this.form.getRawValue(),
         file: this.uploadFileList,
       };
       this.submit = false;
-      localForage.setItem('registerCoordinatorForm', form);
-      this.router.navigate(['/', 'register', 'password']);
+      localForage.setItem('registerCoordinatorForm', form).then(()=>{
+        this.router.navigate(['/', 'register', 'password']);
+      });
     }
   }
 }

@@ -79,8 +79,9 @@ export class RetiredHomeComponent extends KspPaginationComponent {
   }
 
   next() {
-    localForage.setItem('userSelectedData', this.selectedUser);
-    this.router.navigate(['/retired', 'reason']);
+    localForage.setItem('userSelectedData', this.selectedUser).then(()=>{
+      this.router.navigate(['/retired', 'reason']);
+    });
   }
 
 }

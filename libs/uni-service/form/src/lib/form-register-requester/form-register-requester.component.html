@@ -43,9 +43,9 @@
           (input)="checkID($event)"
         />
         <ng-container
-          *ngIf="isSubmit && idCardNo.invalid"
+          *ngIf="(isSubmit && idCardNo.invalid) || !validIdcard"
         >
-          <span class="text-danger" *ngIf="idCardNo.invalid && !idCardNo.value">
+          <span class="text-danger" *ngIf="isSubmit && idCardNo.invalid && !idCardNo.value">
             {{ validatorMessages.required.replace('field', 'หมายเลขบัตรประชาชน') }} !
           </span>
           <span class="text-danger" *ngIf="idCardNo.value && (idCardNo.errors?.['pattern'] || !validIdcard)">
@@ -60,7 +60,7 @@
         <label class="form-label required">คำนำหน้าชื่อภาษาไทย</label>
         <select class="form-select" 
                 formControlName="prefixth" 
-                (change)="changePrefix($event)"
+                (change)="changePrefixTH($event)"
                 [ngClass]="{'invalid': isSubmit && prefixth.invalid}">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let prefix of prefixName" [value]="prefix.id">

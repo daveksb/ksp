@@ -49,8 +49,9 @@ export class RetiredReasonComponent implements OnInit {
   }
 
   next() {
-    localForage.setItem('retireReasonData', this.form.getRawValue());
-    this.router.navigate(['/retired', 'attachment']);
+    localForage.setItem('retireReasonData', this.form.getRawValue()).then(()=>{
+      this.router.navigate(['/retired', 'attachment']);
+    });
   }
 
   prevPage() {
