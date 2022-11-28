@@ -151,12 +151,12 @@ export class QualificationDetailComponent implements OnInit {
     data.passportstartdate = data.passportstartdate.split('T')[0];
     data.passportenddate = data.passportenddate.split('T')[0]; */
     //console.log('data = ', data);
-    if (data?.visainfo) {
+    /*     if (data?.visainfo) {
       const visa = parseJson(data?.visainfo);
       data.visaclass = visa.visaclass;
       data.visatype = visa.visatype;
       data.visaenddate = visa.visaenddate;
-    }
+    } */
     //console.log('data = ', data);
     this.form.controls.userInfo.patchValue(data);
   }
