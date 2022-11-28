@@ -14,6 +14,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {
   CacheInterceptor,
   LoadingInterceptor,
+  TokenFailInterceptor,
   TokenHandleInterceptor,
 } from '@ksp/shared/interceptor';
 import { File_UPLOAD_URLS, FileUploadUrls } from '@ksp/shared/form/file-upload';
@@ -51,6 +52,11 @@ const fileUrls: FileUploadUrls = {
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenHandleInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenFailInterceptor,
       multi: true,
     },
     {

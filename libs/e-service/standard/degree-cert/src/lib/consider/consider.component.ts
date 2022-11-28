@@ -21,7 +21,7 @@ import moment from 'moment';
 
 const detailToState = (res: any) => {
   const newRes = res?.datareturn
-    .filter(({ process }: any) =>  ["3","4"].includes(process))
+    .filter(({ process }: any) => ['3', '4'].includes(process))
     .map((data: any) => {
       return parseJson(data?.detail);
     });
@@ -57,7 +57,7 @@ const detailToState = (res: any) => {
   styleUrls: ['./consider.component.scss'],
 })
 export class ConsiderComponent implements OnInit {
-  allowEdit= false;
+  allowEdit = false;
   form = this.fb.group({
     step1: [],
     step2: [
@@ -127,15 +127,14 @@ export class ConsiderComponent implements OnInit {
       .pipe(map(detailToState))
       .subscribe((res: any) => {
         this.verifyResult = res?.verifyResult;
-          this.considerCourses = [
-            ...(res?.considerCourses || []),
-            ...this.newConsiderCourses,
-
-          ];
-          this.considerCert = [
-            ...(res?.considerCert || []),
-            ...this.newConsiderCert,
-          ];
+        this.considerCourses = [
+          ...(res?.considerCourses || []),
+          ...this.newConsiderCourses,
+        ];
+        this.considerCert = [
+          ...(res?.considerCert || []),
+          ...this.newConsiderCert,
+        ];
         // this.form.patchValue({
         //   plan: lastData?.plan || {},
         //   considerationResult: lastData?.considerationResult || {},
@@ -150,7 +149,8 @@ export class ConsiderComponent implements OnInit {
         .pipe(
           map((res) => {
             this.daftRequest = res;
-            this.allowEdit =  ["3","4"].includes(res?.requestprocess)
+            this.allowEdit =
+              res?.requestprocess === '3' && res?.requestststus === '1';
             return this.uniInfoService.mappingUniverSitySelectByIdWithForm(res);
           })
         )

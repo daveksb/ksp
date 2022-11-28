@@ -94,20 +94,20 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     )} มิฉะนั้นใบคำขอจะถูกยกเลิก `;
   }
 
-  search(filters: Partial<SchRequestSearchFilter>) {
+  search(f: Partial<SchRequestSearchFilter>) {
     //console.log('filters = ', filters);
     const payload: SchRequestSearchFilter = {
       schoolid: `${this.schoolId}`,
-      requesttype: `${filters.requesttype}`,
-      requestno: filters.requestno,
-      careertype: filters.careertype,
-      name: filters.name,
-      idcardno: filters.idcardno,
-      passportno: filters.passportno,
-      process: filters.process,
-      status: filters.status,
-      requestdatefrom: filters.requestdatefrom,
-      requestdateto: filters.requestdateto,
+      requesttype: `${f.requesttype}`,
+      requestno: f.requestno,
+      careertype: f.careertype,
+      name: f.name,
+      idcardno: f.idcardno,
+      passportno: f.passportno,
+      process: f.process,
+      status: f.status,
+      requestdatefrom: f.requestdatefrom,
+      requestdateto: f.requestdateto,
       offset: '0',
       row: '500',
     };
@@ -116,7 +116,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       // search without showing result do automatically after load
       if (this.initialSearch) {
         this.rejectedRequests = hasRejectedRequest(res);
-        console.log('has reject = ', this.rejectedRequests);
+        //console.log('has reject = ', this.rejectedRequests);
       }
 
       if (res && res.length && !this.initialSearch) {
@@ -153,12 +153,12 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
 
   getTempLicense(request: KspRequest) {
     this.requestService.getTempLicense(request.id).subscribe((res) => {
-      console.log('temp license = ', res);
-      this.licensePdf(res);
+      //console.log('temp license = ', res);
+      this.genPdf(res);
     });
   }
 
-  licensePdf(element: SchTempLicense) {
+  genPdf(element: SchTempLicense) {
     //console.log('element = ', element);
     const position = element?.position;
     const startDate = new Date(element.licensestartdate || '');
@@ -312,7 +312,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       checkbox1 = true;
     }
 
-    console.log('element = ', eduinfo);
+    //console.log('element = ', eduinfo);
 
     const edu1 = eduinfo.find((item: any) => {
       if (item?.degreeLevel) {

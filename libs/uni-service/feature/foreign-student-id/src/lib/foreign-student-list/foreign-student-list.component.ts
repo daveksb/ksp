@@ -6,6 +6,7 @@ import { FormBuilder } from '@angular/forms';
 import { KspPaginationComponent } from '@ksp/shared/interface';
 import { UniInfoService } from '@ksp/shared/service';
 import { stringToThaiDate, thaiDate } from '@ksp/shared/utility';
+import moment from 'moment';
 import { map } from 'rxjs';
 
 @Component({
@@ -50,7 +51,7 @@ export class ForeignStudentListComponent
     } = this.form.value.search as any;
     this.uniInfoService
       .kspRequestSearchUni({
-        requestdatefrom: requestdatefrom || '',
+        requestdatefrom:  requestdatefrom ? moment(requestdatefrom).format('YYYY-MM-DD') : '',
         requestdateto: requestdateto || '',
         name: name || '',
         requestno: requestno || '',
