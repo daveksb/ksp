@@ -5,9 +5,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { staffLicenseTypes } from '@ksp/shared/constant';
 import { ListData, PositionType, SchStaff } from '@ksp/shared/interface';
-import { StaffService } from '@ksp/shared/service';
+import { LoaderService, StaffService } from '@ksp/shared/service';
 import { getCookie } from '@ksp/shared/utility';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'ksp-activity-list',
@@ -15,6 +15,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./activity-list.component.scss'],
 })
 export class ActivityListComponent implements AfterViewInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
+
   activityPageMode = activityPageMode;
   positions$!: Observable<PositionType[]>;
   licenseTypes: ListData[] = staffLicenseTypes;
@@ -45,7 +47,8 @@ export class ActivityListComponent implements AfterViewInit {
   constructor(
     public router: Router,
     private fb: FormBuilder,
-    private service: StaffService
+    private service: StaffService,
+    private loaderService: LoaderService
   ) {
     this.positions$ = this.service.getPositionTypes();
   }

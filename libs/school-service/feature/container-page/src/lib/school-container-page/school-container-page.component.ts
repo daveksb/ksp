@@ -91,7 +91,7 @@ export const menu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/display.svg',
     label: 'ทะเบียนหนังสืออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาต',
-    path: '/',
+    path: '/temp-license/*',
   },
   {
     icon: 'assets/images/icon-sidenav/display.svg',
@@ -101,7 +101,7 @@ export const menu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/file-earmark-text-fill.svg',
     label: 'รายงาน',
-    path: '/',
+    path: '/temp-license/**',
   },
   {
     icon: 'assets/images/icon-sidenav/gear-fill.svg',

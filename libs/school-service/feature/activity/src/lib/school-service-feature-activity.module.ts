@@ -22,6 +22,7 @@ import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { SchoolServiceFormActivityModule } from '@ksp/school-service/form/activity';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export const routes: Routes = [
   {
@@ -55,6 +56,7 @@ export const routes: Routes = [
     MatPaginatorModule,
     SchoolServiceFormActivityModule,
     ThaiDatePipe,
+    MatProgressSpinnerModule,
   ],
   declarations: [ActivityListComponent, ActivityDetailComponent],
 })
