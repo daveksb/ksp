@@ -1,3 +1,8 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav>
   <span header>{{ headers[pageType][0] }}</span>
   <span subHeader>{{ headers[pageType][1] }}</span>

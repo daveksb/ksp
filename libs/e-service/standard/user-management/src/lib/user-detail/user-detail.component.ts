@@ -14,10 +14,10 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { ERequestService, GeneralInfoService, UniInfoService } from '@ksp/shared/service';
+import { ERequestService, GeneralInfoService, LoaderService, UniInfoService } from '@ksp/shared/service';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { parseJson, replaceEmptyWithNull } from '@ksp/shared/utility';
+import { Observable, Subject } from 'rxjs';
+import { getCookie, parseJson, replaceEmptyWithNull } from '@ksp/shared/utility';
 import localForage from 'localforage';
 import { SchoolRetireReason } from '@ksp/shared/constant';
 
@@ -50,7 +50,8 @@ export class UserDetailComponent implements OnInit {
   verifyForm = this.fb.group({
     result: [{
       result: '',
-      reason: ''
+      reason: '',
+      detail: ''
     }, Validators.required]
   });
 
@@ -69,7 +70,8 @@ export class UserDetailComponent implements OnInit {
     "",
     "ยื่นผู้ประสานงาน",
     "ยื่นถอดถอนผู้ประสานงาน"
-  ]
+  ];
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   retireReason = SchoolRetireReason;
 
@@ -80,7 +82,8 @@ export class UserDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private eRequestService: ERequestService,
     private generalInfoService: GeneralInfoService,
-    private uniInfoService: UniInfoService
+    private uniInfoService: UniInfoService,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {
@@ -122,9 +125,11 @@ export class UserDetailComponent implements OnInit {
       this.requestType = this.requestData.requesttype ? parseInt(this.requestData.requesttype) : 0;
 
       res.status === '1' ? (this.mode = 'edit') : (this.mode = 'view');
+      const approvedetail = parseJson(res.detail);
       this.verifyForm.controls.result.patchValue({
         result: res?.status === '1' ? '' : res?.status === '2' ? '1' : '0', 
-        reason: res?.reasoninfo || ''
+        reason: approvedetail?.reason || '',
+        detail: approvedetail?.reason || ''
       });
       if (res.birthdate) {
         res.birthdate = res.birthdate.split('T')[0];
@@ -146,30 +151,32 @@ export class UserDetailComponent implements OnInit {
   }
 
   retireUser() {
+    const form: any = this.verifyForm.controls.result.value;
     const payload: KspApprovePayload = {
       requestid: `${this.requestId}`,
       process: '1',
       status: '2',
-      detail: null,
-      systemtype: '3', // school
+      detail: JSON.stringify({ reason: form.detail }),
+      systemtype: '3', // uni
       userid: null,
       paymentstatus: null,
     };
 
     this.eRequestService.KspUpdateRequestProcess(payload).subscribe((res) => {
       console.log('update result = ', res);
-      this.completeDialog();
+      const retirePayload = {
+        id: this.requestData.userid,
+        isuseractive: '0',
+      };
+  
+      this.eRequestService.retiredUniUser(retirePayload).subscribe((res) => {
+        console.log('retired result = ', res);
+        this.updateClosed();
+        this.completeDialog();
+      });
     });
 
-    const retirePayload = {
-      id: this.requestData.userid,
-      isuseractive: '0',
-    };
 
-    this.eRequestService.retiredUniUser(retirePayload).subscribe((res) => {
-      console.log('retired result = ', res);
-    });
-    // this.updateClosed();
   }
 
   updateClosed() {
@@ -202,13 +209,14 @@ export class UserDetailComponent implements OnInit {
     newUser.requestno = this.requestData.requestno;
     newUser.permissionright = this.permissionRight;
     newUser = replaceEmptyWithNull(newUser);
+    const form: any = this.verifyForm.controls.result.value;
     const approvePayload: KspApprovePayload = {
       requestid: `${this.requestId}`,
       process: '1',
       status: '2',
-      detail: null,
+      detail: JSON.stringify({ reason: form.detail }),
       systemtype: '3', // uni
-      userid: null,
+      userid: getCookie('userId'),
       paymentstatus: null,
     };
 
@@ -216,31 +224,31 @@ export class UserDetailComponent implements OnInit {
       .KspUpdateRequestProcess(approvePayload)
       .subscribe((res) => {
         console.log('approve result = ', res);
+        this.eRequestService.createUniUser(newUser).subscribe(() => {
+          this.updateClosed();
+          this.completeDialog();
+        });
       });
-
-    this.eRequestService.createUniUser(newUser).subscribe(() => {
-      this.completeDialog();
-    });
-
-    // this.updateClosed();
   }
 
   unApproveUser() {
+    const form: any = this.verifyForm.controls.result.value;
     const payload: KspApprovePayload = {
       requestid: `${this.requestId}`,
       process: '1',
       status: '3',
-      detail: null,
+      detail: JSON.stringify({ reason: form.detail }),
       systemtype: '3', // uni
-      userid: null,
+      userid: getCookie('userId'),
       paymentstatus: null,
     };
 
     this.eRequestService.KspUpdateRequestProcess(payload).subscribe((res) => {
-      //console.log('un approve result = ', res);
+      console.log('un approve result = ', res);
+      this.updateClosed();
+      this.completeDialog();
     });
 
-    // this.updateClosed();
   }
 
   viewUser() {
@@ -259,6 +267,7 @@ export class UserDetailComponent implements OnInit {
   }
 
   confirm() {
+    console.log(this.verifyForm.controls.result.value)
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการบันทึกข้อมูล

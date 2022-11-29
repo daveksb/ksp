@@ -15,6 +15,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const routes: Routes = [
   {
@@ -54,6 +55,7 @@ const routes: Routes = [
     MatIconModule,
     MatTooltipModule,
     RouterModule.forChild(routes),
+    MatProgressSpinnerModule,
   ],
   declarations: [EditStudentListComponent, EditStudentDetailComponent],
   exports: [EditStudentListComponent, EditStudentDetailComponent],

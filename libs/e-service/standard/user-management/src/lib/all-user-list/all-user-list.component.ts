@@ -4,9 +4,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SchoolUserDetailComponent } from '@ksp/e-service/dialog/school-user-detail';
 import { KspPaginationComponent } from '@ksp/shared/interface';
-import { EUniService } from '@ksp/shared/service';
+import { EUniService, LoaderService } from '@ksp/shared/service';
 import { stringToThaiDate } from '@ksp/shared/utility';
 import localForage from 'localforage';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'ksp-all-user-list',
@@ -17,13 +18,15 @@ export class AllUserListComponent extends KspPaginationComponent implements OnIn
   constructor(
     private router: Router, 
     private dialog: MatDialog,
-    private euniservice: EUniService) {
+    private euniservice: EUniService,
+    private loaderService: LoaderService) {
       super();
     }
 
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<any>([]);
   unidata: any;
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   ngOnInit(): void {
     localForage.getItem('uniseleced').then((res: any) => {

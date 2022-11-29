@@ -5,11 +5,11 @@ import { Router } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
 import { KspPaginationComponent } from '@ksp/shared/interface';
 import { UniversitySearchComponent } from '@ksp/shared/search';
-import { GeneralInfoService, UniInfoService, UniRequestService } from '@ksp/shared/service';
+import { GeneralInfoService, LoaderService, UniInfoService, UniRequestService } from '@ksp/shared/service';
 import { thaiDate } from '@ksp/shared/utility';
 import localForage from 'localforage';
 import _ from 'lodash';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   templateUrl: './uni-register-status.component.html',
@@ -19,9 +19,12 @@ export class UniRegisterStatusComponent extends KspPaginationComponent {
   data: Array<any> = [];
   selectedUser: any;
   payload: any = {};
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
+
   constructor(
     private router: Router,
-    private uniRequestService: UniRequestService
+    private uniRequestService: UniRequestService,
+    private loaderService: LoaderService
   ) {
     super();
   }

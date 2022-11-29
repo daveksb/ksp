@@ -1,3 +1,8 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav-2>ขอถอดถอนผู้ประสานงาน</ksp-top-nav-2>
 
 <form [formGroup]="form">

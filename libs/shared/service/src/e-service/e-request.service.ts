@@ -338,7 +338,7 @@ export class ERequestService {
       isclose: isclose ? '1' : '0',
     };
     return this.http.post(
-      `${environment.apiUrl}/e-service/ksprequestupdateisurgent`,
+      `${environment.apiUrl}/e-service/ksprequestupdateisclose`,
       payload
     );
   }

@@ -12,13 +12,14 @@ import {
   RequestSearchFilter,
   SchoolUserPageType,
 } from '@ksp/shared/interface';
-import { ERequestService, EUniService, UniInfoService } from '@ksp/shared/service';
+import { ERequestService, EUniService, LoaderService, UniInfoService } from '@ksp/shared/service';
 import {
   checkStatus,
   replaceEmptyWithNull,
   schoolMapRequestType,
 } from '@ksp/shared/utility';
 import _ from 'lodash';
+import { Subject } from 'rxjs';
 
 @Component({
   templateUrl: './approve-new-user-list.component.html',
@@ -31,7 +32,7 @@ export class ApproveNewUserListComponent extends KspPaginationComponent {
   statusList = SchoolRequestProcess.find((i) => i.requestType === 1)?.status;
   mapRequestType = schoolMapRequestType;
   searchType = "uni"
-
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   selectedUniversity = '';
   uniUniversityTypeOption: ListData[] = [];
   payload: any;
@@ -40,7 +41,8 @@ export class ApproveNewUserListComponent extends KspPaginationComponent {
     private router: Router,
     private eRequestService: ERequestService,
     private uniInfoService: UniInfoService,
-    private eUniService: EUniService
+    private eUniService: EUniService,
+    private loaderService: LoaderService
   ) {
     super();
     this.getOptions();
