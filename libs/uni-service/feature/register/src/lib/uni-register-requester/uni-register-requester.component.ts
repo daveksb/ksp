@@ -56,9 +56,9 @@ export class UniRegisterRequesterComponent implements OnInit {
 
   next() {
     this.submit = true;
-    if (this.form.valid) {
-      const data = this.form.getRawValue();
-      const { requester } = data as any;
+    const data = this.form.getRawValue();
+    const { requester } = data as any;
+    if (this.form.valid && requester.prefixth == requester.prefixen) {
       const userInfo = {
         ...requester,
         schoolid: this.uniData.schoolid,
@@ -68,8 +68,9 @@ export class UniRegisterRequesterComponent implements OnInit {
       };
       this.submit = false;
       
-      localForage.setItem('registerUserForm', userInfo);
-      this.router.navigate(['/register', 'coordinator']);
+      localForage.setItem('registerUserForm', userInfo).then(()=>{
+        this.router.navigate(['/register', 'coordinator']);
+      });
     }
   }
 

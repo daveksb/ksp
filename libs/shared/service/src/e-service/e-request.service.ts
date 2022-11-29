@@ -328,4 +328,18 @@ export class ERequestService {
       payload
     );
   }
+
+  updateRequestClosed(
+    requestId: number | null, 
+    isclose: string | null
+  ): Observable<any> {
+    const payload = {
+      id: requestId,
+      isclose: isclose ? '1' : '0',
+    };
+    return this.http.post(
+      `${environment.apiUrl}/e-service/ksprequestupdateisurgent`,
+      payload
+    );
+  }
 }

@@ -64,6 +64,12 @@ export class FormRegisterRequesterInfoComponent
     }
   }
 
+  changePrefixTH(event: any) {
+    this.form.patchValue({
+      prefixen: event.target.value
+    });
+  }
+
   changePrefix(event: any) {
     if ((this.form.controls.prefixth && this.form.controls.prefixen) &&
       (this.form.controls.prefixth.value != this.form.controls.prefixen.value) &&

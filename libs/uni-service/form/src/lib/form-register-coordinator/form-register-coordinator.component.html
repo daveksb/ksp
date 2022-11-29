@@ -11,7 +11,7 @@
         <select 
           class="form-select" 
           formControlName="prefixth" 
-          (change)="changePrefix($event)"
+          (change)="changePrefixTH($event)"
           [ngClass]="{'invalid': isSubmit && prefixth.invalid}">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let prefix of prefixName" [value]="prefix.id">{{prefix.name_th}}</option>

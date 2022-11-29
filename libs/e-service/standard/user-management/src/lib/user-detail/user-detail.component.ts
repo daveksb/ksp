@@ -169,6 +169,13 @@ export class UserDetailComponent implements OnInit {
     this.eRequestService.retiredUniUser(retirePayload).subscribe((res) => {
       console.log('retired result = ', res);
     });
+    // this.updateClosed();
+  }
+
+  updateClosed() {
+    this.eRequestService.updateRequestClosed(this.requestId, '1').subscribe((res) => {
+      console.log('close request result = ', res);
+    });
   }
 
   approveUser() {
@@ -214,6 +221,8 @@ export class UserDetailComponent implements OnInit {
     this.eRequestService.createUniUser(newUser).subscribe(() => {
       this.completeDialog();
     });
+
+    // this.updateClosed();
   }
 
   unApproveUser() {
@@ -230,6 +239,8 @@ export class UserDetailComponent implements OnInit {
     this.eRequestService.KspUpdateRequestProcess(payload).subscribe((res) => {
       //console.log('un approve result = ', res);
     });
+
+    // this.updateClosed();
   }
 
   viewUser() {
