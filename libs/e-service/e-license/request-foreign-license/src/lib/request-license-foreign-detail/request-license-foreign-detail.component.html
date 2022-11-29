@@ -92,5 +92,6 @@
     [disableNext]="false"
     (nextClicked)="next()"
     (cancelClicked)="cancel()"
+    [disableNext]="!checkResultFormArray.valid"
   ></ksp-bottom-nav>
 </div>

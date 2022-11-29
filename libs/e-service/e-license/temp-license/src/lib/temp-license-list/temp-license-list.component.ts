@@ -44,6 +44,7 @@ export class ETempLicenseListComponent implements AfterViewInit {
   requestTypeList = SchoolRequestType.filter((i) => i.id > 2);
   careerType = 1;
   careerTypeList: any[] = [];
+  requestLabel = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -76,9 +77,11 @@ export class ETempLicenseListComponent implements AfterViewInit {
       if (params.get('careertype') === '5') {
         this.careerType = Number(params.get('careertype'));
         this.careerTypeList = careerTypeList.filter((i) => i.id === 5);
+        this.requestLabel = 'ชาวต่างชาติ';
         //console.log('career type = ', this.careerType);
       } else {
         this.careerTypeList = careerTypeList.filter((i) => i.id < 3);
+        this.requestLabel = 'ชาวไทย';
         //console.log('no career type ');
       }
     });

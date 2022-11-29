@@ -11,8 +11,9 @@ import {
   SelfServiceRequestType,
 } from '@ksp/shared/constant';
 import { EsSearchPayload, SelfRequest } from '@ksp/shared/interface';
-import { ERequestService } from '@ksp/shared/service';
+import { ERequestService, LoaderService } from '@ksp/shared/service';
 import { replaceEmptyWithNull } from '@ksp/shared/utility';
+import { Subject } from 'rxjs';
 
 function checkProcess(processId: number, requestType: number) {
   const process = SelfRequestProcess.find((p) => {
@@ -36,6 +37,7 @@ function checkStatus(processId: number, statusId: number, requestType: number) {
   styleUrls: ['./renew-license-foreign-list.component.scss'],
 })
 export class RenewLicenseForeignListComponent implements AfterViewInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfRequest>();
   SchoolRequestSubType = SchoolRequestSubType;
@@ -51,7 +53,8 @@ export class RenewLicenseForeignListComponent implements AfterViewInit {
   constructor(
     private router: Router,
     private requestService: ERequestService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private loaderService: LoaderService
   ) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

@@ -1938,7 +1938,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             options: {
               x: 208,
               y: 567,
-              size: defaultSize - 5,
+              size: defaultSize - 3,
               color: black,
             },
           },
@@ -2443,7 +2443,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             options: {
               x: 210,
               y: 548,
-              size: defaultSize - 5,
+              size: defaultSize - 3,
               color: black,
             },
           },
@@ -2984,7 +2984,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             options: {
               x: 210,
               y: 570,
-              size: defaultSize - 5,
+              size: defaultSize - 3,
               color: black,
             },
           },

@@ -39,6 +39,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { RequestStatusComponent } from '@ksp/self-service/ui';
 import { RenewLicenseForeignDetailComponent } from './renew-license-foreign-detail/renew-license-foreign-detail.component';
 import { RenewLicenseForeignConfirmComponent } from './renew-license-foreign-confirm/renew-license-foreign-confirm.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export const routes: Route[] = [
   {
@@ -95,7 +96,8 @@ export const routes: Route[] = [
     MatCheckboxModule,
     RequestStatusComponent,
     MatStepperModule,
-    RequestNoPipe
+    RequestNoPipe,
+    MatProgressSpinnerModule,
   ],
   declarations: [
     RenewLicenseForeignListComponent,

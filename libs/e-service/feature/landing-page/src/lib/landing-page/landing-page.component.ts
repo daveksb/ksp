@@ -10,11 +10,11 @@ export class LandingPageComponent {
   constructor(private router: Router) {}
 
   elicense() {
-    this.router.navigate(['temp-license']);
+    this.router.navigate(['request-license', 'approve-list']);
   }
 
   standard() {
-    this.router.navigate(['degree-cert']);
+    this.router.navigate(['degree-cert', 'list', '1', '0']);
   }
 
   ethics() {
@@ -22,7 +22,7 @@ export class LandingPageComponent {
   }
 
   professional() {
-    this.router.navigate(['one-school-one-innovation']);
+    this.router.navigate(['teacher-council']);
   }
 
   fee() {
