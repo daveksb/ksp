@@ -24,14 +24,17 @@ import {
   styleUrls: ['./step-four.component.css'],
   providers: providerFactory(DegreeCertStepFourComponent),
 })
-export class DegreeCertStepFourComponent extends KspFormBaseComponent implements OnInit {
+export class DegreeCertStepFourComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
   @Input() formType = 'a';
   step4Incorrect = null;
   // step4Incorrect = [
   //   'ไม่ครบถ้วน และไม่ถูกต้อง',
   //   'หมายเหตุ สำเนาใบอนุญาตไม่ถูกต้อง',
   // ];
-  uniqueTimestamp = "";
+  uniqueTimestamp = '';
   override form = this.fb.group({
     files: [],
   });
@@ -41,6 +44,12 @@ export class DegreeCertStepFourComponent extends KspFormBaseComponent implements
     private fb: FormBuilder
   ) {
     super();
+    this.subscriptions.push(
+      this.form?.valueChanges.subscribe((value: any) => {
+        this.onChange(value);
+        this.onTouched();
+      })
+    );
   }
 
   private _uploadFilesCollection: any = {
@@ -58,9 +67,9 @@ export class DegreeCertStepFourComponent extends KspFormBaseComponent implements
       ...data,
       uniqueTimestamp: uuidv4(),
     }));
-  } 
-   ngOnInit(): void {
-   this.uniqueTimestamp =  uuidv4();
+  }
+  ngOnInit(): void {
+    this.uniqueTimestamp = uuidv4();
   }
   openDialog() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
@@ -84,14 +93,8 @@ export class DegreeCertStepFourComponent extends KspFormBaseComponent implements
   }
 
   override writeValue(value: any) {
-    const uploadFilesByType = this.uploadFilesCollection[this.formType || 'a'];
     if (value?.files?.length) {
-      const files = value?.files?.map((data: any) => {
-        let mergeData = _.find(uploadFilesByType, { key: data?.key });
-        mergeData = { ...data, ...mergeData };
-        return mergeData;
-      });
-      this.value = { files };
+      this.value = value;
     } else {
       this.value = {
         files: this.uploadFilesCollection[this.formType || 'a'],
@@ -120,9 +123,7 @@ export class DegreeCertStepFourComponent extends KspFormBaseComponent implements
   }
   uploadComplete(groups: any) {
     this.onChange({
-      files: _.map(groups, (data) =>
-        _.pick(data, ['fileid', 'filename', 'key', 'uniqueTimestamp'])
-      ),
+      files: groups,
     });
     this.onTouched();
   }
