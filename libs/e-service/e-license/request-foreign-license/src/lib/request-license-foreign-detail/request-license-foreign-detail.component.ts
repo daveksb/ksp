@@ -7,6 +7,7 @@ import {
   ACADEMIC_FILES,
   REQUEST_DOCUMENT_FILES,
 } from '@ksp/self-service/feature/license';
+import { ESelfFormBaseComponent } from '@ksp/shared/form/others';
 import {
   FileGroup,
   KspApprovePersistData,
@@ -90,7 +91,9 @@ export class RequestLicenseForeignDetailComponent implements OnInit {
     for (let i = 0; i < FORM_TAB_COUNT; i++) {
       this.checkResultFormArray.push(this.fb.control(null));
     }
-    // this.checkResultFormArray.setValidators(allFilledValidator());
+    this.checkResultFormArray.setValidators(
+      ESelfFormBaseComponent.allFilledValidator()
+    );
   }
 
   onStepChange(e: StepperSelectionEvent) {

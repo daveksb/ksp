@@ -1,6 +1,6 @@
 <ksp-top-nav [isSelfService]="true">
   <span header>ยื่นใบคำขอ</span>
-  <span subHeader>ขอเทียบเคียงผลการทดสอบและประเมิน</span>
+  <span subHeader>ขอยื่นเทียบเคียงความรู้</span>
 </ksp-top-nav>
 
 <form [formGroup]="form">
@@ -118,6 +118,7 @@
         ล้างข้อมูล
       </button> -->
       <button
+        *ngIf="requestId"
         type="button"
         [disabled]="!requestId"
         (click)="cancel()"

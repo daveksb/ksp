@@ -142,16 +142,16 @@
     </button>
     <button
       (click)="onSave(1)"
-      [disabled]="false"
+      [disabled]="!form.valid"
       type="button"
-      class="ms-3 btn btn-success"
+      class="ms-3 btn border-primary text-primary bg-white"
     >
       บันทึกชั่วคราว
     </button>
     <button
       type="button"
       class="ms-3 btn btn-primary"
-      [disabled]="false"
+      [disabled]="!form.valid"
       (click)="onSave(2)"
     >
       บันทึกและยื่น
