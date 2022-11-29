@@ -24,13 +24,14 @@ import {
   styleUrls: ['./step-four.component.css'],
   providers: providerFactory(DegreeCertStepFourComponent),
 })
-export class DegreeCertStepFourComponent extends KspFormBaseComponent {
+export class DegreeCertStepFourComponent extends KspFormBaseComponent implements OnInit {
   @Input() formType = 'a';
   step4Incorrect = null;
   // step4Incorrect = [
   //   'ไม่ครบถ้วน และไม่ถูกต้อง',
   //   'หมายเหตุ สำเนาใบอนุญาตไม่ถูกต้อง',
   // ];
+  uniqueTimestamp = "";
   override form = this.fb.group({
     files: [],
   });
@@ -41,6 +42,7 @@ export class DegreeCertStepFourComponent extends KspFormBaseComponent {
   ) {
     super();
   }
+
   private _uploadFilesCollection: any = {
     a: this.genUnique(UPLOAD_FILE_1),
     b: this.genUnique(UPLOAD_FILE_2),
@@ -56,6 +58,9 @@ export class DegreeCertStepFourComponent extends KspFormBaseComponent {
       ...data,
       uniqueTimestamp: uuidv4(),
     }));
+  } 
+   ngOnInit(): void {
+   this.uniqueTimestamp =  uuidv4();
   }
   openDialog() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
