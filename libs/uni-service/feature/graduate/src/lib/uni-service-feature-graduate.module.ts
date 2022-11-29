@@ -30,6 +30,7 @@ import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 import { DegreeSearchComponent } from '@ksp/shared/search';
 import { DropdownModule } from 'primeng/dropdown';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   imports: [
@@ -57,7 +58,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     AddRowButtonComponent,
     DropdownModule,
     FormAddressTableComponent,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
   ],
   declarations: [
     DegreeListComponent,
