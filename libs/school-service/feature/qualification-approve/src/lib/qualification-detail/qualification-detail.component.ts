@@ -187,10 +187,10 @@ export class QualificationDetailComponent implements OnInit {
           this.patchEdu(parseJson(res.educations));
         } else {
           // search not found reset form and set idcard again
-          //this.completeDialog('ไม่พบบุคคลากรที่ระบุ');
           this.form.reset();
           const temp: any = { idcardno: idCard };
           this.form.controls.userInfo.patchValue(temp);
+          //this.searchIdCardNotFound();
         }
       });
   }
@@ -454,6 +454,28 @@ export class QualificationDetailComponent implements OnInit {
 
   onClickPrev() {
     this.router.navigate(['/temp-license']);
+  }
+
+  searchIdCardNotFound() {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header: `ไม่พบข้อมูลบุคลากรภายในหน่วยงาน
+        จากหมายเลขบัตรประจำตัวประชาชนที่ระบุ`,
+        buttonLabel: 'กลับสู่หน้าหลัก',
+      },
+    });
+
+    dialog.componentInstance.completed
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        if (res) {
+          this.router.navigate(['/staff-management', 'list']);
+        }
+      });
+  }
+
+  backToListPage() {
+    this.router.navigate(['/temp-license', 'list']);
   }
 
   onCancelCompleted() {
