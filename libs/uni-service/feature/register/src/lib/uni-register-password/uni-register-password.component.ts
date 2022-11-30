@@ -7,10 +7,10 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { FormMode } from '@ksp/shared/interface';
-import { EMPTY, switchMap } from 'rxjs';
+import { EMPTY, Subject, switchMap } from 'rxjs';
 import localForage from 'localforage';
 import { getCookie, mapMultiFileInfo, replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
-import { UniRequestService } from '@ksp/shared/service';
+import { LoaderService, UniRequestService } from '@ksp/shared/service';
 import * as CryptoJs from 'crypto-js';
 
 @Component({
@@ -51,12 +51,14 @@ export class UniRegisterPasswordComponent implements OnInit {
   eyeIconClickedRe = false;
   wrongpass = false;
   submit = false;
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   constructor(
     private router: Router,
     public dialog: MatDialog,
     private fb: FormBuilder,
-    private requestService: UniRequestService
+    private requestService: UniRequestService,
+    private loaderService: LoaderService
   ) {}
   get disable() {
     const { password, repassword } = this.form.getRawValue();

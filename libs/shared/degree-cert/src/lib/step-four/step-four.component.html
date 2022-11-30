@@ -31,12 +31,19 @@
   </div>
 
   <div [ngSwitch]="formType">
-    <ksp-form-attachment
+    <!-- <ksp-form-attachment
       [mode]="mode"
       [title]="''"
       [groups]="value?.files"
       [requestType]="1"
+    ></ksp-form-attachment> -->
+
+    <ksp-form-multi-attachment
+      [groups]="value?.files"
+      [mode]="mode"
+      [uniqueTimestamp]="uniqueTimestamp"
+      [requestType]="1"
       (uploadComplete)="uploadComplete($event)"
-    ></ksp-form-attachment>
+    ></ksp-form-multi-attachment>
   </div>
 </div>

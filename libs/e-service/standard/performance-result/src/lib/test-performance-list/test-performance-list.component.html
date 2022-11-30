@@ -1,3 +1,8 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav
   ><span header>ทะเบียนข้อมูล</span>
   <span subHeader>รายการผลการประเมินสมรรถนะ</span></ksp-top-nav

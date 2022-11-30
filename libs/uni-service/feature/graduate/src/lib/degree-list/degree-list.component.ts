@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UniInfoService, UniRequestService } from '@ksp/shared/service';
+import { LoaderService, UniInfoService, UniRequestService } from '@ksp/shared/service';
 import { getCookie, thaiDate } from '@ksp/shared/utility';
 import { UniserviceImportType, KspPaginationComponent, ListData } from '@ksp/shared/interface';
 
@@ -13,6 +13,7 @@ import {
 } from '@ksp/uni-service/dialog';
 import { DegreeCertInfo } from '@ksp/uni-service/feature/edit-degree-cert';
 import { MatPaginator } from '@angular/material/paginator';
+import { Subject } from 'rxjs';
 
 @Component({
   templateUrl: './degree-list.component.html',
@@ -31,6 +32,7 @@ export class DegreeListComponent extends KspPaginationComponent implements OnIni
   });
   uniUniversityOption: ListData[] = [];
   uniUniversityTypeOption: ListData[] = [];
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   constructor(
     private fb: FormBuilder,
@@ -38,7 +40,8 @@ export class DegreeListComponent extends KspPaginationComponent implements OnIni
     private route: ActivatedRoute,
     public dialog: MatDialog,
     public uniRequestService: UniRequestService,
-    private uniInfoService: UniInfoService
+    private uniInfoService: UniInfoService,
+    private loaderService: LoaderService
   ) {
     super();
   }
@@ -54,7 +57,7 @@ export class DegreeListComponent extends KspPaginationComponent implements OnIni
       },
     });
     this.getOptions();
-    this.getDegreeCertList();
+    // this.getDegreeCertList();
   }
 
   getOptions() {

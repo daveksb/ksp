@@ -8,11 +8,11 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { ListData } from '@ksp/shared/interface';
-import { EUniService, UniInfoService } from '@ksp/shared/service';
+import { EUniService, LoaderService, UniInfoService } from '@ksp/shared/service';
 import { getCookie, parseJson, stringToThaiDate } from '@ksp/shared/utility';
 import _ from 'lodash';
 import moment from 'moment';
-import { map } from 'rxjs';
+import { map, Subject } from 'rxjs';
 import * as XLSX from 'xlsx';
 
 @Component({
@@ -34,6 +34,7 @@ export class TestPerformanceDetailComponent implements OnInit {
   form = this.fb.group({
     calendaryear: [null, Validators.required]
   })
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   constructor(
     private fb: FormBuilder,
@@ -41,7 +42,8 @@ export class TestPerformanceDetailComponent implements OnInit {
     public dialog: MatDialog,
     private route: ActivatedRoute,
     private eUniService: EUniService,
-    private uniInfoService: UniInfoService) {}
+    private uniInfoService: UniInfoService,
+    private loaderService: LoaderService) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((res) => {
