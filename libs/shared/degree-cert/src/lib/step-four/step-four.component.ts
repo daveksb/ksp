@@ -1,4 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
@@ -26,7 +32,7 @@ import {
 })
 export class DegreeCertStepFourComponent
   extends KspFormBaseComponent
-  implements OnInit
+  implements OnInit, OnChanges
 {
   @Input() formType = 'a';
   step4Incorrect = null;
@@ -93,15 +99,27 @@ export class DegreeCertStepFourComponent
   }
 
   override writeValue(value: any) {
+    console.log(value);
     if (value?.files?.length) {
       this.value = value;
     } else {
+      console.log(this.formType);
       this.value = {
         files: this.uploadFilesCollection[this.formType || 'a'],
       };
     }
   }
 
+  override ngOnChanges(event: any) {
+    if (event?.mode) {
+      this.mode = event.mode.currentValue;
+    }
+    if (event?.formType != this.form) {
+      this.value = {
+        files: this.uploadFilesCollection[this.formType || 'a'],
+      };
+    }
+  }
   onConfirmed() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '350px',
