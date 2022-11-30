@@ -99,7 +99,7 @@
         <button
           type="button"
           class="btn text-primary bg-primary bg-opacity-10 w-auto"
-          (click)="createMultiLicense()"
+          (click)="confirmDialog()"
         >
           สร้างเลขที่ใบอนุญาต (ทั้งหมด)
         </button>
@@ -111,7 +111,7 @@
           <th mat-header-cell *matHeaderCellDef>สร้าง</th>
           <td mat-cell *matCellDef="let element">
             <i
-              (click)="createMultiLicense(element.id)"
+              (click)="confirmDialog(element.id)"
               role="button"
               class="bi bi-pencil-square text-primary"
             ></i>

@@ -14,6 +14,8 @@ import { replaceEmptyWithNull } from '@ksp/shared/utility';
 import localForage from 'localforage';
 import { Observable } from 'rxjs';
 import moment from 'moment';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 
 @Component({
   selector: 'ksp-create-license-id-detail',
@@ -28,7 +30,6 @@ export class CreateLicenseIdDetailComponent implements OnInit {
   prefixList!: Observable<Prefix[]>;
   licenseTypes = [{ value: 1, name: 'ใบอนุญาตประกอบวิชาชีพครู' }];
   myImage: any = null;
-
   form = this.fb.group({
     licenseno: [],
     idcardno: [],
@@ -49,10 +50,16 @@ export class CreateLicenseIdDetailComponent implements OnInit {
     private router: Router,
     private requestService: ERequestService,
     private fb: FormBuilder,
-    private generalInfoService: GeneralInfoService
+    private generalInfoService: GeneralInfoService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
+    this.getStoredData();
+    this.prefixList = this.generalInfoService.getPrefix();
+  }
+
+  getStoredData() {
     localForage
       .getItem<SelfApproveList[]>('selected-for-create-license')
       .then((res) => {
@@ -60,10 +67,8 @@ export class CreateLicenseIdDetailComponent implements OnInit {
           this.dataSource1.data = res.map((i) => {
             return { ...i, count: JSON.parse(i.requestlist || '').length };
           });
-          console.log('res x = ', res);
 
           const listno = res.map((r: any) => r.listno).join(',');
-          //console.log(listno);
           if (listno) {
             const payload = {
               listno,
@@ -73,7 +78,6 @@ export class CreateLicenseIdDetailComponent implements OnInit {
             this.requestService
               .getRequestListByListNo(payload)
               .subscribe((res: any) => {
-                //console.log(res);
                 if (res?.datareturn) {
                   this.dataSource2.data = res.datareturn;
                 }
@@ -81,17 +85,28 @@ export class CreateLicenseIdDetailComponent implements OnInit {
           }
         }
       });
-
-    // this.search({});
-    this.prefixList = this.generalInfoService.getPrefix();
   }
 
   rowSelect(id: any) {
-    //console.log('id = ', id);
     this.requestService.getSelfLicense(id).subscribe((data) => {
       this.form.patchValue(data);
     });
     //this.myImage = atob(data.imagefileid);
+  }
+
+  confirmDialog(id: string | null = null) {
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: `คุณต้องการยืนยันข้อมูล
+        และสร้างใบอนุญาต ใช่หรือไม่? `,
+      },
+    });
+
+    dialog.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.createMultiLicense(id);
+      }
+    });
   }
 
   createMultiLicense(id: string | null = null) {
@@ -137,7 +152,6 @@ export class CreateLicenseIdDetailComponent implements OnInit {
         };
       }),
     };
-
     //console.log('payload = ', payload);
     this.requestService.createMultipleLicense(payload).subscribe((res) => {
       console.log('result = ', res);
@@ -163,9 +177,7 @@ export class CreateLicenseIdDetailComponent implements OnInit {
       offset: '0',
       row: '500',
     };
-
     payload = replaceEmptyWithNull(payload);
-
     this.requestService.KspSearchRequest(payload).subscribe((res) => {
       this.dataSource2.data = res;
     });
