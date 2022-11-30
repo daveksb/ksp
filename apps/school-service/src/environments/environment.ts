@@ -2,9 +2,13 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+const domain = 'https://kspapi.oceanicnetwork.net';
+
 export const environment = {
   production: false,
   systemType: '02',
+  shortApiUrl: domain,
+  apiUrl: domain + '/ksp',
 };
 
 /*

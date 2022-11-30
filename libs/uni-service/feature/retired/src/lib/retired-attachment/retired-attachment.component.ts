@@ -10,10 +10,11 @@ import {
 import { mapMultiFileInfo, replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
 import {
   GeneralInfoService,
+  LoaderService,
   UniInfoService,
   UniRequestService,
 } from '@ksp/shared/service';
-import { EMPTY, Observable, switchMap } from 'rxjs';
+import { EMPTY, Observable, Subject, switchMap } from 'rxjs';
 import localForage from 'localforage';
 import { v4 as uuidv4 } from 'uuid';
 import { FileGroup } from '@ksp/shared/interface';
@@ -35,6 +36,7 @@ export class RetiredAttachmentComponent implements OnInit {
   reasoninfo: any;
   userInfo: any;
   today = thaiDate(new Date());
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   constructor(
     private router: Router,
@@ -42,7 +44,8 @@ export class RetiredAttachmentComponent implements OnInit {
     private fb: FormBuilder,
     private generalInfoService: GeneralInfoService,
     private requestService: UniRequestService,
-    private uniinfoService: UniInfoService
+    private uniinfoService: UniInfoService,
+    private loaderService: LoaderService
   ) {}
 
   retiredFiles: FileGroup[] = [

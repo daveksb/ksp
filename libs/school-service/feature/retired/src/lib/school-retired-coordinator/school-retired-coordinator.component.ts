@@ -110,7 +110,7 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
           if (res) {
             const coordinatorForm: any =
               this.form.controls.coordinatorTnfo.value;
-            const request: KspRequest = new KspRequest(); //form.retiredTnfo;
+            const request: KspRequest = new KspRequest();
             request.ref1 = '2';
             request.ref2 = '02';
             request.ref3 = '5';

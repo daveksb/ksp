@@ -3,10 +3,10 @@ import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router, TitleStrategy } from '@angular/router';
 import { KspPaginationComponent, ListData } from '@ksp/shared/interface';
-import { EUniService, UniInfoService } from '@ksp/shared/service';
+import { EUniService, LoaderService, UniInfoService } from '@ksp/shared/service';
 import { parseJson, stringToThaiDate } from '@ksp/shared/utility';
 import _ from 'lodash';
-import { map } from 'rxjs';
+import { map, Subject } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 
@@ -39,12 +39,14 @@ export class TestPerformanceListComponent extends KspPaginationComponent impleme
     name: [''],
     idcardno: ['']
   })
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private eUniservice: EUniService,
-    private uniInfoService: UniInfoService
+    private uniInfoService: UniInfoService,
+    private loaderService: LoaderService
   ) {
     super();
   }

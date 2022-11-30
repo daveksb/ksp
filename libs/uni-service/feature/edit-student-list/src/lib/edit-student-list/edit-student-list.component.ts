@@ -4,12 +4,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { requestStatus } from '@ksp/shared/constant';
-import { UniInfoService, UniRequestService } from '@ksp/shared/service';
+import { LoaderService, UniInfoService, UniRequestService } from '@ksp/shared/service';
 import { providerFactory, thaiDate } from '@ksp/shared/utility';
 import { HistoryRequestDialogComponent, PrintRequestDialogComponent } from '@ksp/uni-service/dialog';
 import { KspPaginationComponent, ListData } from '@ksp/shared/interface';
 import _ from 'lodash';
-import { map } from 'rxjs';
+import { map, Subject } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 const mapOption = () =>
   map((data: any) => {
@@ -50,13 +50,15 @@ export class EditStudentListComponent extends KspPaginationComponent implements 
     offset: [0],
     row: [10]
   })
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   constructor(
     private router: Router, 
     public dialog: MatDialog,
     private fb: FormBuilder,
     private uniInfoService: UniInfoService,
-    private uniRequestService: UniRequestService) {
+    private uniRequestService: UniRequestService,
+    private loaderService: LoaderService) {
       super();
     }
 
