@@ -97,38 +97,32 @@ export class AddStaffComponent implements OnInit {
     this.getList();
     this.checkStaffId();
     //this.form.valueChanges.subscribe((res) => console.log(this.form.value));
-    this.searchLicense();
   }
 
-  searchLicense() {
+  searchLicense(staffId: any) {
     this.notFound = false;
-    this.activatedroute.paramMap
+
+    const payload = {
+      cardno: staffId,
+      licenseno: null,
+      name: null,
+      licensetype: null,
+      licensestatus: null,
+      offset: '0',
+      row: '100',
+    };
+
+    this.licenseService
+      .getStaffLicenses(payload)
       .pipe(untilDestroyed(this))
-      .subscribe((params) => {
-        const idcardno = Number(params.get('idcardno'));
-
-        const payload = {
-          cardno: idcardno,
-          licenseno: null,
-          name: null,
-          licensetype: null,
-          licensestatus: null,
-          offset: '0',
-          row: '100',
-        };
-
-        this.licenseService
-          .getStaffLicenses(payload)
-          .pipe(untilDestroyed(this))
-          .subscribe((res) => {
-            if (res) {
-              this.foundLicenses = res;
-            } else {
-              this.foundLicenses = [];
-              this.notFound = true;
-              console.log('res = ', this.notFound);
-            }
-          });
+      .subscribe((res) => {
+        if (res) {
+          this.foundLicenses = res;
+        } else {
+          this.foundLicenses = [];
+          this.notFound = true;
+          console.log('res = ', this.notFound);
+        }
       });
   }
 
@@ -196,6 +190,10 @@ export class AddStaffComponent implements OnInit {
           this.searchStaffDone = true;
           const temp: any = { kuruspano: `${kuruspano}` };
           this.form.controls.userInfo.patchValue(temp);
+        }
+
+        if (idcardno) {
+          this.searchLicense(idcardno);
         }
       });
   }
@@ -331,6 +329,10 @@ export class AddStaffComponent implements OnInit {
           this.userInfoType = UserInfoFormType.foreign;
         }
         this.patchAll(res);
+        if (res.idcardno) {
+          this.searchLicense(res.idcardno);
+          console.log('res = ', res);
+        }
       });
   }
 
@@ -351,6 +353,7 @@ export class AddStaffComponent implements OnInit {
     this.pathTeachingInfo(parseJson(res.teachinginfo));
     //console.log('hiring = ', parseJson(res.hiringinfo));
     this.form.controls.hiringInfo.patchValue(parseJson(res.hiringinfo));
+    console.log('hiring = ', parseJson(res.hiringinfo));
   }
 
   insertStaff() {

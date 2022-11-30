@@ -1,7 +1,9 @@
 <ksp-top-nav
   ><span header>ยื่นใบคำขอ</span
   ><span subHeader
-    >ขอรับรองคุณวุฒิการศึกษาเพื่อใช้ในการขอรับใบอนุญาตประกอบวิชาชีพ</span
+    >ขอรับรองคุณวุฒิการศึกษาเพื่อใช้ในการขอรับใบอนุญาตประกอบวิชาชีพ ({{
+      requestLabel
+    }})</span
   ></ksp-top-nav
 >
 
@@ -9,7 +11,6 @@
   <div class="bg-secondary bg-opacity-10 px-4 py-2">
     <div class="box-header">
       รายละเอียดใบคำขอรับรองคุณวุฒิการศึกษาเพื่อใช้ในการขอรับใบอนุญาตประกอบวิชาชีพ
-      ({{ requestLabel }})
     </div>
     <div class="bg-white py-3 px-4">
       <div>
@@ -97,6 +98,7 @@
                 type="checkbox"
                 class="me-2"
                 (change)="eduSelected(2, $event)"
+                [checked]="checkbox2"
               />
               <label class="fs-5">วุฒิการศึกษาปริญญาโท</label>
             </div>
@@ -118,6 +120,7 @@
                 type="checkbox"
                 class="me-2"
                 (change)="eduSelected(3, $event)"
+                [checked]="checkbox3"
               />
               <label class="fs-5">วุฒิการศึกษาปริญญาเอก</label>
             </div>
@@ -139,6 +142,7 @@
                 type="checkbox"
                 class="me-2"
                 (change)="eduSelected(4, $event)"
+                [checked]="checkbox4"
               />
               <label class="fs-5"
                 >วุฒิการศึกษาปริญญาอื่นๆที่เทียบเท่าปริญญาตรี /

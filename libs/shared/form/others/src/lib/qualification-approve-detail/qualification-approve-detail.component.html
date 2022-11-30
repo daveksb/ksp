@@ -1,41 +1,46 @@
 <div class="box-header text-center mb-3">จึงขอรับรองคุณวุฒิการศึกษา</div>
-<ng-container *ngIf="degreeLevelName">
-  <div class="mb-2">
-    <div class="d-flex align-items-center">
-      <input type="checkbox" class="me-2" />
-      <label class="fs-5">{{ degreeLevelName }}</label>
-    </div>
-  </div>
-  <div class="row mb-2">
-    <div class="col-6">
-      <label class="form-label">ชื่อปริญญา/หลักสูตร</label>
-      <input
-        type="text"
-        disabled
-        [placeholder]="degreeName"
-        class="form-control"
-      />
-    </div>
-
-    <div class="col-6">
-      <label class="form-label">สาขา/วิชาเอก</label>
-      <input type="text" disabled [placeholder]="major" class="form-control" />
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-6">
-      <label class="form-label">สถาบันการศึกษา</label>
-      <input
-        type="text"
-        disabled
-        [placeholder]="institution"
-        class="form-control"
-      />
-    </div></div
-></ng-container>
-
 <form [formGroup]="form">
+  <ng-container *ngIf="degreeLevelName">
+    <div class="mb-2">
+      <div class="d-flex align-items-center">
+        <input type="checkbox" class="me-2" formControlName="degree" />
+        <label class="fs-5">{{ degreeLevelName }}</label>
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-6">
+        <label class="form-label">ชื่อปริญญา/หลักสูตร</label>
+        <input
+          type="text"
+          disabled
+          [placeholder]="degreeName"
+          class="form-control"
+        />
+      </div>
+
+      <div class="col-6">
+        <label class="form-label">สาขา/วิชาเอก</label>
+        <input
+          type="text"
+          disabled
+          [placeholder]="major"
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <label class="form-label">สถาบันการศึกษา</label>
+        <input
+          type="text"
+          disabled
+          [placeholder]="institution"
+          class="form-control"
+        />
+      </div></div
+  ></ng-container>
+
   <div class="fs-5 mt-3">
     เนื่องจาก เป็นสาขาวิชาที่ตรงกับความต้องการของหน่วยงาน และ
   </div>
@@ -65,8 +70,19 @@
 </form>
 
 <div class="d-flex justify-content-center mt-3">
-  <button matDialogClose class="btn border-primary text-primary me-1">
+  <button
+    matDialogClose
+    type="button"
+    class="btn border-primary text-primary me-1"
+  >
     ยกเลิก
   </button>
-  <button (click)="save()" class="btn btn-primary ms-1">บันทึก</button>
+  <button
+    (click)="save()"
+    type="button"
+    class="btn btn-primary ms-1"
+    [disabled]="form.invalid"
+  >
+    บันทึก
+  </button>
 </div>
