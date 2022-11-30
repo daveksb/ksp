@@ -301,18 +301,15 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
 
     const position = element.position;
 
-    console.log('hiringinfo = ', element);
+    //console.log('hiringinfo = ', element);
 
     const eduinfo = JSON.parse(element.eduinfo || '');
-
     const degreelevel = eduinfo[0].degreeLevel;
 
     let checkbox1 = false;
     if (degreelevel === 1) {
       checkbox1 = true;
     }
-
-    //console.log('element = ', eduinfo);
 
     const edu1 = eduinfo.find((item: any) => {
       if (item?.degreeLevel) {
@@ -356,7 +353,6 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     this.schoolInfoService
       .getSchoolInfo(this.schoolId)
       .subscribe((res: any) => {
-        //console.log('res xx = ', res);
         const schoolname = res.schoolName;
         const bureauname = res.bureauName;
         const { address, moo, street, road, tumbon, fax } = res;
