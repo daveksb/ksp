@@ -13,6 +13,7 @@ import { ERequestService, GeneralInfoService } from '@ksp/shared/service';
 import { replaceEmptyWithNull } from '@ksp/shared/utility';
 import localForage from 'localforage';
 import { Observable } from 'rxjs';
+import moment from 'moment';
 
 @Component({
   selector: 'ksp-create-license-id-detail',
@@ -88,25 +89,26 @@ export class CreateLicenseIdDetailComponent implements OnInit {
   rowSelect(id: any) {
     //console.log('id = ', id);
     this.requestService.getSelfLicense(id).subscribe((data) => {
-      //console.log('data = ', data);
       this.form.patchValue(data);
     });
     //this.myImage = atob(data.imagefileid);
   }
 
-  createMultiLicense() {
-    console.log('ds = ', this.dataSource2.data);
+  createMultiLicense(id: string | null = null) {
+    const data = id
+      ? this.dataSource2.data.filter((i) => i.id === id)
+      : this.dataSource2.data;
 
-    const payload: any = {
-      data: this.dataSource2.data.map((ds) => {
+    const payload = {
+      data: data.map((ds) => {
         return {
           careertype: ds.careertype,
           renewtype: '0',
           isforeign: ds.isforeign,
-          licenseno: '2',
+          licenseno: null,
           requestno: ds.id, // store request id instead of no
-          licensestartdate: '2022-11-12',
-          licenseenddate: '2027-11-12',
+          licensestartdate: moment().format('yyyy-MM-DD'),
+          licenseenddate: moment().add(5, 'years').format('yyyy-MM-DD'), // มีอายุ 5 ปี
           licensestatus: '1',
           licensetype: '1',
           teachercouncilidno: '1',
@@ -135,6 +137,8 @@ export class CreateLicenseIdDetailComponent implements OnInit {
         };
       }),
     };
+
+    //console.log('payload = ', payload);
     this.requestService.createMultipleLicense(payload).subscribe((res) => {
       console.log('result = ', res);
     });
