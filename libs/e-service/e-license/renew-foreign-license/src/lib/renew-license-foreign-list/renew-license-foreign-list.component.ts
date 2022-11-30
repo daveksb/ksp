@@ -19,7 +19,6 @@ function checkProcess(processId: number, requestType: number) {
   const process = SelfRequestProcess.find((p) => {
     return p.processId === processId && p.requestType === requestType;
   });
-  //console.log('process = ', process);
   return process;
 }
 

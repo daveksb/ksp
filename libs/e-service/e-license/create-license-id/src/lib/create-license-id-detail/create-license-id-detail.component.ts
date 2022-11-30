@@ -9,13 +9,18 @@ import {
   SchRequestSearchFilter,
   SelfApproveList,
 } from '@ksp/shared/interface';
-import { ERequestService, GeneralInfoService } from '@ksp/shared/service';
+import {
+  ERequestService,
+  GeneralInfoService,
+  LoaderService,
+} from '@ksp/shared/service';
 import { replaceEmptyWithNull } from '@ksp/shared/utility';
 import localForage from 'localforage';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import moment from 'moment';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
+import { qualificationCareerTypeList } from '@ksp/shared/constant';
 
 @Component({
   selector: 'ksp-create-license-id-detail',
@@ -23,12 +28,13 @@ import { ConfirmDialogComponent } from '@ksp/shared/dialog';
   styleUrls: ['./create-license-id-detail.component.scss'],
 })
 export class CreateLicenseIdDetailComponent implements OnInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   displayedColumns1: string[] = column1;
   displayedColumns2: string[] = column2;
   dataSource1 = new MatTableDataSource<SelfApproveList>();
   dataSource2 = new MatTableDataSource<KspRequest>();
   prefixList!: Observable<Prefix[]>;
-  licenseTypes = [{ value: 1, name: 'ใบอนุญาตประกอบวิชาชีพครู' }];
+  licenseTypes = qualificationCareerTypeList;
   myImage: any = null;
   form = this.fb.group({
     licenseno: [],
@@ -51,7 +57,8 @@ export class CreateLicenseIdDetailComponent implements OnInit {
     private requestService: ERequestService,
     private fb: FormBuilder,
     private generalInfoService: GeneralInfoService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {
