@@ -1,6 +1,5 @@
-//const domain = 'https://kspapi.oceanicnetwork.net';
-//const domain = 'http://127.0.0.1';
-const domain = 'http://ksp-school.ksp.or.th';
+const domain = 'https://kspapi.oceanicnetwork.net';
+//const domain = 'https://ksp-school.ksp.or.th';
 
 export const environment = {
   production: false,
