@@ -61,7 +61,7 @@ export function englishDate(date: Date): string {
     day: 'numeric',
   });
 }
-export function changeToThaiNumber(text: string): string {
+export function changeToThaiNumber(text: string = ''): string {
   for (const key in ThaiNumberMapping) {
     const regExp = new RegExp(key, 'g');
     text = text.replace(regExp, ThaiNumberMapping[+key]);
