@@ -142,9 +142,9 @@ export class SchoolRequestComponent implements OnInit {
 
   duplicateRequestDialog() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
       data: {
-        header: `หมายเลขบัตรประชาชนนี้ได้ถูกใช้ยื่นใบคำขอไปแล้ว`,
+        header: `หมายเลขบัตรประชาชนนี้ได้ถูกใช้ยื่นใบคำขอ
+        และกำลังอยู่ในระหว่างดำเนินการ !`,
       },
     });
     completeDialog.componentInstance.completed.subscribe((res) => {
