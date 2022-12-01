@@ -106,6 +106,10 @@ export const routes: Routes = [
         component: PromptpayComponent,
       },
       {
+        path: '*',
+        component: PageNotFoundComponent,
+      },
+      {
         path: '**',
         component: PageNotFoundComponent,
       },

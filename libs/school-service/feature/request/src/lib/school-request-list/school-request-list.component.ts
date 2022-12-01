@@ -159,16 +159,14 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
   }
 
   genPdf(element: SchTempLicense) {
-    //console.log('element = ', element);
+    console.log('element = ', element);
     const position = element?.position;
     const startDate = new Date(element.licensestartdate || '');
     const endDate = new Date(element.licenseenddate || '');
     const date = new Date(element.licensestartdate || '');
     const thai = thaiDate(date);
     const [day, month, year] = thai.split(' ');
-    const fulldateth = `${changeToThaiNumber(
-      day
-    )} เดือน ${month} พ.ศ. ${changeToThaiNumber(year)}`;
+    const fulldateth = `${changeToThaiNumber(day)} เดือน ${month} พ.ศ. ${year}`;
     const fulldateen = `${day} Day of ${changeToEnglishMonth(month)} B.E. ${
       parseInt(year) - 543
     }`;
@@ -195,7 +193,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
           height: '100vh',
           data: {
             pdfType: 99,
-            pdfSubType: '3',
+            pdfSubType: 3,
             input: {
               schoolapprovename,
               schoolapprovenameen,

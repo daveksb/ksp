@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {
   AddressService,
   GeneralInfoService,
+  SchoolLicenseService,
   StaffService,
 } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
@@ -33,6 +34,7 @@ import {
   Prefix,
   Province,
   SchStaff,
+  SelfLicense,
   StaffType,
   Tambol,
   VisaClass,
@@ -66,6 +68,8 @@ export class AddStaffComponent implements OnInit {
   searchStaffDone = false;
   kuruspaNo = '';
   eduSelected: number[] = [];
+  foundLicenses: SelfLicense[] = [];
+  notFound = false;
 
   form = this.fb.group({
     userInfo: [],
@@ -83,7 +87,8 @@ export class AddStaffComponent implements OnInit {
     private staffService: StaffService,
     private addressService: AddressService,
     private generalInfoService: GeneralInfoService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private licenseService: SchoolLicenseService
   ) {}
 
   ngOnInit(): void {
@@ -92,6 +97,33 @@ export class AddStaffComponent implements OnInit {
     this.getList();
     this.checkStaffId();
     //this.form.valueChanges.subscribe((res) => console.log(this.form.value));
+  }
+
+  searchLicense(staffId: any) {
+    this.notFound = false;
+
+    const payload = {
+      cardno: staffId,
+      licenseno: null,
+      name: null,
+      licensetype: null,
+      licensestatus: null,
+      offset: '0',
+      row: '100',
+    };
+
+    this.licenseService
+      .getStaffLicenses(payload)
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        if (res) {
+          this.foundLicenses = res;
+        } else {
+          this.foundLicenses = [];
+          this.notFound = true;
+          console.log('res = ', this.notFound);
+        }
+      });
   }
 
   get edu() {
@@ -158,6 +190,10 @@ export class AddStaffComponent implements OnInit {
           this.searchStaffDone = true;
           const temp: any = { kuruspano: `${kuruspano}` };
           this.form.controls.userInfo.patchValue(temp);
+        }
+
+        if (idcardno) {
+          this.searchLicense(idcardno);
         }
       });
   }
@@ -278,7 +314,7 @@ export class AddStaffComponent implements OnInit {
    */
   patchDataFromLicense() {
     localForage.getItem('add-staff-has-license').then((res: any) => {
-      //console.log('stored data = ', res);
+      console.log('stored data = ', res);
       this.form.controls.userInfo.patchValue(res);
       //this.pathUserInfo(res);
     });
@@ -293,6 +329,10 @@ export class AddStaffComponent implements OnInit {
           this.userInfoType = UserInfoFormType.foreign;
         }
         this.patchAll(res);
+        if (res.idcardno) {
+          this.searchLicense(res.idcardno);
+          console.log('res = ', res);
+        }
       });
   }
 
@@ -313,6 +353,7 @@ export class AddStaffComponent implements OnInit {
     this.pathTeachingInfo(parseJson(res.teachinginfo));
     //console.log('hiring = ', parseJson(res.hiringinfo));
     this.form.controls.hiringInfo.patchValue(parseJson(res.hiringinfo));
+    console.log('hiring = ', parseJson(res.hiringinfo));
   }
 
   insertStaff() {

@@ -74,6 +74,7 @@ export const routes: Routes = [
     ThaiDatePipe,
     MatDatepickerModule,
     MatProgressSpinnerModule,
+    MatProgressSpinnerModule,
   ],
   declarations: [
     StaffListComponent,

@@ -67,10 +67,18 @@
             <input
               type="text"
               class="form-control"
+              [class]="
+                personId.invalid &&
+                (personId.dirty || personId.touched) &&
+                personId.value
+                  ? 'border-danger'
+                  : ''
+              "
               formControlName="personId"
+              maxlength="13"
             />
           </td>
-          <td style="width: 125px">
+          <td>
             <select class="form-select" formControlName="prefix">
               <option value="null" selected hidden disabled>เลือก</option>
               <option *ngFor="let prefix of prefixList" [value]="prefix.id">
@@ -83,6 +91,13 @@
               type="text"
               class="form-control"
               formControlName="firstName"
+              [class]="
+                firstName.invalid &&
+                (firstName.dirty || firstName.touched) &&
+                firstName.value
+                  ? 'border-danger'
+                  : ''
+              "
             />
           </td>
           <td>
@@ -90,13 +105,41 @@
               type="text"
               class="form-control"
               formControlName="lastName"
+              [class]="
+                lastName.invalid &&
+                (lastName.dirty || lastName.touched) &&
+                lastName.value
+                  ? 'border-danger'
+                  : ''
+              "
             />
           </td>
           <td>
-            <input type="text" class="form-control" formControlName="phone" />
+            <input
+              type="text"
+              class="form-control"
+              [class]="
+                selfPhone.invalid &&
+                (selfPhone.dirty || selfPhone.touched) &&
+                selfPhone.value
+                  ? 'border-danger'
+                  : ''
+              "
+              formControlName="phone"
+              maxlength="10"
+            />
           </td>
           <td>
-            <input type="text" class="form-control" formControlName="email" />
+            <input
+              type="text"
+              class="form-control"
+              formControlName="email"
+              [class]="
+                email.invalid && (email.dirty || email.touched) && email.value
+                  ? 'border-danger'
+                  : ''
+              "
+            />
           </td>
           <td>
             <input
@@ -146,6 +189,7 @@
                   type="text"
                   class="form-control"
                   formControlName="idcardno"
+                  maxlength="13"
                 />
               </td>
               <td>
@@ -175,6 +219,7 @@
                   type="text"
                   class="form-control"
                   formControlName="phone"
+                  maxlength="10"
                 />
               </td>
               <td>

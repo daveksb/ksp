@@ -54,10 +54,14 @@ export class FormHiringInfoComponent
       this.form.controls.academicStanding.clearValidators();
     }
 
-    this.form.controls.hiringStatus.valueChanges.pipe(skip(3)).subscribe(() => {
+    this.hiringStatus.valueChanges.pipe(skip(3)).subscribe(() => {
+      this.disableForm();
       this.form.controls.hiringStartDate.reset();
       this.form.controls.hiringEndDate.reset();
       this.form.controls.hiringCancelDate.reset();
+      if (this.mode !== 'view') {
+        this.enableForm();
+      }
     });
 
     this.startDate.valueChanges.subscribe(() => {
@@ -84,6 +88,29 @@ export class FormHiringInfoComponent
 
   get endDate() {
     return this.form.controls.endDate;
+  }
+
+  get hiringStatus() {
+    return this.form.controls.hiringStatus;
+  }
+
+  disableForm() {
+    this.form.controls.hiringStartDate.disable();
+    this.form.controls.hiringEndDate.disable();
+    this.form.controls.hiringCancelDate.disable();
+  }
+
+  enableForm() {
+    if (this.hiringStatus.value === '1') {
+      this.form.controls.hiringStartDate.enable();
+      this.form.controls.hiringStartDate.setValidators([Validators.required]);
+    } else if (this.hiringStatus.value === '2') {
+      this.form.controls.hiringEndDate.enable();
+      this.form.controls.hiringEndDate.setValidators([Validators.required]);
+    } else if (this.hiringStatus.value === '3') {
+      this.form.controls.hiringCancelDate.enable();
+      this.form.controls.hiringCancelDate.setValidators([Validators.required]);
+    }
   }
 }
 

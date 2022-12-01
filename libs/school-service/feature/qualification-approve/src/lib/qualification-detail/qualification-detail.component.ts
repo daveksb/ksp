@@ -42,6 +42,7 @@ import {
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { EMPTY, Observable, switchMap } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
+import localForage from 'localforage';
 
 @UntilDestroy()
 @Component({
@@ -75,18 +76,26 @@ export class QualificationDetailComponent implements OnInit {
   careerType = '';
   requestId!: number;
   requestData = new KspRequest();
-
   otherreason: any;
   refperson: any;
   evidenceFiles: FileGroup[] = files;
   mode: FormMode = 'edit';
-  showEdu2 = false;
-  showEdu3 = false;
-  showEdu4 = false;
   bureauName!: any;
   schoolName!: any;
   address!: any;
   requestLabel = '';
+
+  isOptional2 = false;
+  isOptional3 = false;
+  isOptional4 = false;
+
+  showEdu2 = false;
+  showEdu3 = false;
+  showEdu4 = false;
+
+  checkbox2 = false;
+  checkbox3 = false;
+  checkbox4 = false;
 
   constructor(
     public dialog: MatDialog,
@@ -105,8 +114,8 @@ export class QualificationDetailComponent implements OnInit {
     this.getListData();
     this.checkRequestId();
     this.checkRequestSubType();
-    /*     this.form.valueChanges.subscribe((res) => {
-      console.log('status = ', this.form.controls.userInfo.valid);
+    /* this.form.valueChanges.subscribe((res) => {
+      console.log('status2 = ', this.form.controls.edu2.valid);
     }); */
   }
 
@@ -178,10 +187,10 @@ export class QualificationDetailComponent implements OnInit {
           this.patchEdu(parseJson(res.educations));
         } else {
           // search not found reset form and set idcard again
-          //this.completeDialog('ไม่พบบุคคลากรที่ระบุ');
           this.form.reset();
           const temp: any = { idcardno: idCard };
           this.form.controls.userInfo.patchValue(temp);
+          //this.searchIdCardNotFound();
         }
       });
   }
@@ -239,18 +248,22 @@ export class QualificationDetailComponent implements OnInit {
     //console.log('edus = ', edus);
     if (edus && edus.length) {
       edus.map((edu, i) => {
-        if (edu.degreeLevel === 2) {
+        if (edu.degreeLevel === '2') {
           this.showEdu2 = true;
+          this.checkbox2 = true;
         }
-        if (edu.degreeLevel === 3) {
+        if (edu.degreeLevel === '3') {
           this.showEdu3 = true;
+          this.checkbox3 = true;
         }
-        if (edu.degreeLevel === 4) {
+        if (edu.degreeLevel === '4') {
           this.showEdu4 = true;
+          this.checkbox4 = true;
         }
         (this.form.get(`edu${i + 1}`) as AbstractControl<any, any>).patchValue(
           edu
         );
+        //console.log('edu1 = ', edu.degreeLevel);
       });
     }
   }
@@ -259,12 +272,15 @@ export class QualificationDetailComponent implements OnInit {
     const checked = evt.target.checked;
     if (type === 2) {
       this.showEdu2 = checked;
+      this.isOptional2 = checked;
     }
     if (type === 3) {
       this.showEdu3 = checked;
+      this.isOptional3 = checked;
     }
     if (type === 4) {
       this.showEdu4 = checked;
+      this.isOptional4 = checked;
     }
   }
 
@@ -329,7 +345,7 @@ export class QualificationDetailComponent implements OnInit {
       {
         width: '850px',
         data: {
-          education: this.form.get('education')?.value,
+          education: this.form.get('edu1')?.value,
           mode: this.mode,
           otherreason: this.otherreason,
         },
@@ -438,6 +454,28 @@ export class QualificationDetailComponent implements OnInit {
 
   onClickPrev() {
     this.router.navigate(['/temp-license']);
+  }
+
+  searchIdCardNotFound() {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header: `ไม่พบข้อมูลบุคลากรภายในหน่วยงาน
+        จากหมายเลขบัตรประจำตัวประชาชนที่ระบุ`,
+        buttonLabel: 'กลับสู่หน้าหลัก',
+      },
+    });
+
+    dialog.componentInstance.completed
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        if (res) {
+          this.router.navigate(['/staff-management', 'list']);
+        }
+      });
+  }
+
+  backToListPage() {
+    this.router.navigate(['/temp-license', 'list']);
   }
 
   onCancelCompleted() {

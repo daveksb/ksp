@@ -3,9 +3,10 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { staffLicenseTypes } from '@ksp/shared/constant';
 import { ListData, SelfLicense } from '@ksp/shared/interface';
-import { SchoolLicenseService } from '@ksp/shared/service';
+import { LoaderService, SchoolLicenseService } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import localForage from 'localforage';
+import { Subject } from 'rxjs';
 @UntilDestroy()
 @Component({
   selector: 'school-service-license-search',
@@ -13,6 +14,7 @@ import localForage from 'localforage';
   styleUrls: ['./license-search.component.scss'],
 })
 export class LicenseSearchComponent {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   licenseTypes: ListData[] = staffLicenseTypes;
 
   form = this.fb.group({
@@ -32,7 +34,8 @@ export class LicenseSearchComponent {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private licenseService: SchoolLicenseService
+    private licenseService: SchoolLicenseService,
+    private loaderService: LoaderService
   ) {}
 
   addStaff() {
@@ -46,6 +49,7 @@ export class LicenseSearchComponent {
   }
 
   search() {
+    this.notFoundItem = false;
     const payload = {
       cardno: this.form.controls.cardno.value,
       licenseno: this.form.controls.licenseno.value,
