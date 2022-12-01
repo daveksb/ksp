@@ -56,7 +56,7 @@ import {
   thaiDate,
 } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Observable, Subject } from 'rxjs';
+import { forkJoin, Observable, Subject } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
 @UntilDestroy()
@@ -166,7 +166,6 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   cancelRequest() {
-    //console.log('req data = ', this.requestData);
     const payload: KspRequestProcess = {
       requestid: `${this.requestId}`,
       process: this.requestData.process,
@@ -176,7 +175,20 @@ export class SchoolRequestComponent implements OnInit {
       paymentstatus: null,
     };
 
-    this.requestService.schCancelRequest(payload).subscribe(() => {
+    /* this.requestService.schUpdateRequestProcess(payload).subscribe(() => {
+      this.completeDialog(`ยกเลิกใบคำขอสำเร็จ`);
+    }); */
+
+    const updateRequest = this.requestService.schUpdateRequestProcess(payload);
+
+    const closePayload = {
+      id: `${this.requestId}`,
+      isclose: '1',
+    };
+    const closeRequest = this.requestService.schCloseRequest(closePayload);
+
+    forkJoin([updateRequest, closeRequest]).subscribe((res) => {
+      console.log('request = ', res);
       this.completeDialog(`ยกเลิกใบคำขอสำเร็จ`);
     });
   }

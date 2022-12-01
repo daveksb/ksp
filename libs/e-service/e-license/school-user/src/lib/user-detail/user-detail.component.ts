@@ -185,7 +185,7 @@ export class UserDetailComponent implements OnInit {
 
     const forkRequest = forkJoin([updateRequest, createUser]);
 
-    deActivateAllUser.pipe(concatMap(() => forkRequest)).subscribe((res) => {
+    deActivateAllUser.pipe(concatMap(() => forkRequest)).subscribe(() => {
       //console.log('res = ', res);
       this.completeDialog();
     });

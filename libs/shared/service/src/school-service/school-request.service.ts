@@ -48,9 +48,16 @@ export class SchoolRequestService {
     );
   }
 
-  schCancelRequest(payload: KspRequestProcess): Observable<any> {
+  schUpdateRequestProcess(payload: KspRequestProcess): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspstaff/ksprequestinsertstatus`,
+      payload
+    );
+  }
+
+  schCloseRequest(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspstaff/ksprequestupdateisclose`,
       payload
     );
   }
