@@ -549,7 +549,7 @@ export class SchoolRequestComponent implements OnInit {
           this.patchHiringInfo(parseJson(res.hiringinfo));
         } else {
           // search not found reset form and set idcard again
-          this.completeDialog('ไม่พบข้อมูลบุคคลากรที่ระบุ');
+          this.searchIdCardNotFound();
           this.form.reset();
           const temp: any = { idcardno: idCard };
           this.form.controls.userInfo.patchValue(temp);
@@ -768,6 +768,24 @@ export class SchoolRequestComponent implements OnInit {
       .subscribe((res) => {
         if (res) {
           this.backToListPage();
+        }
+      });
+  }
+
+  searchIdCardNotFound() {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header: `ไม่พบข้อมูลบุคลากรภายในหน่วยงาน
+        จากหมายเลขบัตรประชาชนที่ระบุ`,
+        btnLabel: 'เพิ่มข้อมูลบุคลากร',
+      },
+    });
+
+    dialog.componentInstance.completed
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        if (res) {
+          this.router.navigate(['/staff-management', 'list']);
         }
       });
   }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
 import { Prefix } from '@ksp/shared/interface';
 import { GeneralInfoService, SchoolInfoService } from '@ksp/shared/service';
@@ -28,7 +29,8 @@ export class SchoolInfoDetailComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private schoolInfoService: SchoolInfoService,
-    private generalInfoService: GeneralInfoService
+    private generalInfoService: GeneralInfoService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -59,15 +61,14 @@ export class SchoolInfoDetailComponent implements OnInit {
       .subscribe((res) => {
         //console.log('res = ', res[0]);
         if (res) {
-          /*  const coordinator: any = {
-            ...res[0],
-            contactphone: res[0].schmobile,
-            email: res[0].schemail,
-          }; */
           const coordinator: any = JSON.parse(res[0].coordinatorinfo);
           console.log('coordinator = ', coordinator);
           this.form.controls.coordinator.patchValue(coordinator);
         }
       });
+  }
+
+  cancel() {
+    this.router.navigate(['/temp-license', 'list']);
   }
 }
