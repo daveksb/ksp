@@ -14,7 +14,7 @@ import {
   GeneralInfoService,
   LoaderService,
 } from '@ksp/shared/service';
-import { replaceEmptyWithNull } from '@ksp/shared/utility';
+import { formatDatePayload, replaceEmptyWithNull } from '@ksp/shared/utility';
 import localForage from 'localforage';
 import { Observable, Subject } from 'rxjs';
 import moment from 'moment';
@@ -97,8 +97,8 @@ export class CreateLicenseIdDetailComponent implements OnInit {
   rowSelect(id: any) {
     this.requestService.getSelfLicense(id).subscribe((data) => {
       this.form.patchValue(data);
+      this.myImage = atob(data.filedata);
     });
-    //this.myImage = atob(data.imagefileid);
   }
 
   confirmDialog(id: string | null = null) {
@@ -123,9 +123,9 @@ export class CreateLicenseIdDetailComponent implements OnInit {
 
     const payload = {
       data: data.map((ds) => {
-        return {
+        return formatDatePayload({
           careertype: ds.careertype,
-          renewtype: '0',
+          renewtype: '1', // allow only 1 ขอขึ้นทะเบียน and 2 ต่ออายุ
           isforeign: ds.isforeign,
           licenseno: null,
           requestno: ds.id, // store request id instead of no
@@ -133,7 +133,7 @@ export class CreateLicenseIdDetailComponent implements OnInit {
           licenseenddate: moment().add(5, 'years').format('yyyy-MM-DD'), // มีอายุ 5 ปี
           licensestatus: '1',
           licensetype: '1',
-          teachercouncilidno: '1',
+          teachercouncilidno: ds.kuruspano, // the same as kuruspa no
           imageid: ds.imagefileid,
           idcardno: ds.idcardno,
           prefixth: ds.prefixth,
@@ -156,7 +156,8 @@ export class CreateLicenseIdDetailComponent implements OnInit {
           contactphone: ds.contactphone,
           workphone: ds.workphone,
           email: ds.email,
-        };
+          kuruspano: ds.kuruspano,
+        });
       }),
     };
     //console.log('payload = ', payload);
