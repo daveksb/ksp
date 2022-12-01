@@ -133,7 +133,7 @@ export class CreateLicenseIdDetailComponent implements OnInit {
           licenseenddate: moment().add(5, 'years').format('yyyy-MM-DD'), // มีอายุ 5 ปี
           licensestatus: '1',
           licensetype: '1',
-          teachercouncilidno: null,
+          teachercouncilidno: ds.kuruspano, // the same as kuruspa no
           imageid: ds.imagefileid,
           idcardno: ds.idcardno,
           prefixth: ds.prefixth,
@@ -156,7 +156,7 @@ export class CreateLicenseIdDetailComponent implements OnInit {
           contactphone: ds.contactphone,
           workphone: ds.workphone,
           email: ds.email,
-          kuruspano: null,
+          kuruspano: ds.kuruspano,
         });
       }),
     };

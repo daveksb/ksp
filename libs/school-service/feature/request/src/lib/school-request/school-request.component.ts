@@ -90,6 +90,7 @@ export class SchoolRequestComponent implements OnInit {
   disableSave = false;
   disableCancel = true;
   schoolId = getCookie('schoolId');
+  userId = getCookie('userId');
   userInfoFormType: number = UserInfoFormType.thai; // control the display field of user info form
   eduFiles: FileGroup[] = [];
   teachingFiles: FileGroup[] = [];
@@ -167,11 +168,11 @@ export class SchoolRequestComponent implements OnInit {
   cancelRequest() {
     //console.log('req data = ', this.requestData);
     const payload: KspRequestProcess = {
-      id: `${this.requestId}`,
+      requestid: `${this.requestId}`,
       process: this.requestData.process,
       status: '0',
       detail: null,
-      userid: null,
+      userid: this.userId,
       paymentstatus: null,
     };
 
@@ -200,7 +201,6 @@ export class SchoolRequestComponent implements OnInit {
     userInfo.ref1 = '2';
     userInfo.ref2 = '03';
     userInfo.ref3 = '1';
-
     userInfo.systemtype = '2';
     userInfo.requesttype = '3';
     userInfo.careertype = `${this.careerType}`;
@@ -327,14 +327,6 @@ export class SchoolRequestComponent implements OnInit {
       baseForm.value;
 
     const res = replaceEmptyWithNull(temp);
-
-    /* if (process === 'submit') {
-      res.process = `2`;
-      res.status = '1';
-    } else {
-      res.process = `1`;
-      res.status = '1';
-    } */
 
     //console.log('update payload = ', res);
     this.requestService.schUpdateRequest(res).subscribe(() => {
