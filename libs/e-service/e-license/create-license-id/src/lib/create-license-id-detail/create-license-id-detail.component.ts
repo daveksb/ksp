@@ -97,8 +97,8 @@ export class CreateLicenseIdDetailComponent implements OnInit {
   rowSelect(id: any) {
     this.requestService.getSelfLicense(id).subscribe((data) => {
       this.form.patchValue(data);
+      this.myImage = atob(data.filedata);
     });
-    //this.myImage = atob(data.imagefileid);
   }
 
   confirmDialog(id: string | null = null) {
