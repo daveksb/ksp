@@ -213,7 +213,8 @@ export class SchoolRequestComponent implements OnInit {
     formData.addr1.addresstype = 1;
     formData.addr2.addresstype = 2;
 
-    let { id, ...userInfo } = formData.userInfo;
+    /* let { id, ...userInfo } = formData.userInfo; */
+    let { ...userInfo } = formData.userInfo;
     userInfo.schoolid = this.schoolId;
     userInfo.process = `${process}`;
     userInfo.status = `1`;

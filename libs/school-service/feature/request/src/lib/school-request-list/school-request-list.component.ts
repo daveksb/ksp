@@ -181,43 +181,46 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     const careertype = SchoolRequestSubType[+(element?.licensetype ?? '1')];
     const careertypeen = SchoolLangMapping[careertype ?? 'ครู'] ?? '';
     const requestno = element.licenseno ?? '';
-    this.schoolInfoService
-      .getSchoolInfo(this.schoolId)
-      .subscribe((res: any) => {
-        const schoolname = res.schoolName;
-        const bureauname = res.bureauName;
-        const schoolapprovename = 'ผู้อํานวยการสถานศึกษา';
-        const schoolapprovenameen = 'director of the educational institution';
-        this.dialog.open(PdfRenderComponent, {
-          width: '1200px',
-          height: '100vh',
-          data: {
-            pdfType: 99,
-            pdfSubType: 3,
-            input: {
-              schoolapprovename,
-              schoolapprovenameen,
-              requestno,
-              careertype,
-              careertypeen,
-              name,
-              nameen,
-              startth,
-              endth,
-              starten,
-              enden,
-              schoolname,
-              bureauname,
-              day,
-              month,
-              year,
-              position,
-              fulldateth,
-              fulldateen,
-            },
+
+    const payload = {
+      schoolid: this.schoolId,
+    };
+
+    this.schoolInfoService.getSchoolInfo(payload).subscribe((res: any) => {
+      const schoolname = res.schoolname;
+      const bureauname = res.bureauname;
+      const schoolapprovename = 'ผู้อํานวยการสถานศึกษา';
+      const schoolapprovenameen = 'director of the educational institution';
+      this.dialog.open(PdfRenderComponent, {
+        width: '1200px',
+        height: '100vh',
+        data: {
+          pdfType: 99,
+          pdfSubType: 3,
+          input: {
+            schoolapprovename,
+            schoolapprovenameen,
+            requestno,
+            careertype,
+            careertypeen,
+            name,
+            nameen,
+            startth,
+            endth,
+            starten,
+            enden,
+            schoolname,
+            bureauname,
+            day,
+            month,
+            year,
+            position,
+            fulldateth,
+            fulldateen,
           },
-        });
+        },
       });
+    });
   }
 
   clear() {
@@ -345,72 +348,74 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     /* const hiring = JSON.parse(element.hiringinfo || '');
     const position = hiring.position; */
 
-    this.schoolInfoService
-      .getSchoolInfo(this.schoolId)
-      .subscribe((res: any) => {
-        const schoolname = res.schoolName;
-        const bureauname = res.bureauName;
-        const { address, moo, street, road, tumbon, fax } = res;
-        const amphurname = res.amphurName;
-        const provincename = res.provinceName;
-        const zipcode = res.zipCode;
-        const telphone = res.telphone;
+    const payload = {
+      schoolid: this.schoolId,
+    };
 
-        //console.log(id12);
-        this.dialog.open(PdfRenderComponent, {
-          width: '1200px',
-          height: '100vh',
-          data: {
-            pdfType,
-            pdfSubType,
-            input: {
-              day,
-              month,
-              year,
-              schoolname,
-              bureauname,
-              address,
-              moo,
-              street,
-              road,
-              tumbon,
-              amphurname,
-              provincename,
-              zipcode,
-              fax,
-              name,
-              phone,
-              telphone,
-              position,
-              id1,
-              id2,
-              id3,
-              id4,
-              id5,
-              id6,
-              id7,
-              id8,
-              id9,
-              id10,
-              id11,
-              id12,
-              id13,
-              degreename1,
-              institution1,
-              major1,
-              degree1,
-              graduateDate1,
-              degreename2,
-              institution2,
-              major2,
-              degree2,
-              graduateDate2,
-              nameen,
-              checkbox1,
-            },
+    this.schoolInfoService.getSchoolInfo(payload).subscribe((res: any) => {
+      const schoolname = res.schoolname;
+      const bureauname = res.bureauname;
+      const { address, moo, street, road, tumbon, fax } = res;
+      const amphurname = res.amphurname;
+      const provincename = res.provincename;
+      const zipcode = res.zipcode;
+      const telphone = res.telphone;
+
+      //console.log(id12);
+      this.dialog.open(PdfRenderComponent, {
+        width: '1200px',
+        height: '100vh',
+        data: {
+          pdfType,
+          pdfSubType,
+          input: {
+            day,
+            month,
+            year,
+            schoolname,
+            bureauname,
+            address,
+            moo,
+            street,
+            road,
+            tumbon,
+            amphurname,
+            provincename,
+            zipcode,
+            fax,
+            name,
+            phone,
+            telphone,
+            position,
+            id1,
+            id2,
+            id3,
+            id4,
+            id5,
+            id6,
+            id7,
+            id8,
+            id9,
+            id10,
+            id11,
+            id12,
+            id13,
+            degreename1,
+            institution1,
+            major1,
+            degree1,
+            graduateDate1,
+            degreename2,
+            institution2,
+            major2,
+            degree2,
+            graduateDate2,
+            nameen,
+            checkbox1,
           },
-        });
+        },
       });
+    });
   }
 }
 

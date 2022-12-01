@@ -246,6 +246,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     const payload = {
       schoolid: this.schoolId,
     };
+
     this.schoolInfoService
       .getSchoolInfo(payload)
       .pipe(untilDestroyed(this))
