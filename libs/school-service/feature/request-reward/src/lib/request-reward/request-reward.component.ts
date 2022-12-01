@@ -148,14 +148,14 @@ export class RequestRewardComponent implements OnInit {
 
   cancelRequest() {
     const payload: KspRequestProcess = {
-      id: `${this.requestId}`,
+      requestid: `${this.requestId}`,
       process: `${this.requestData.process}`,
       status: '0',
       detail: null,
       userid: null,
       paymentstatus: null,
     };
-    this.requestService.schCancelRequest(payload).subscribe(() => {
+    this.requestService.schUpdateRequestProcess(payload).subscribe(() => {
       //
     });
   }

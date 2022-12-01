@@ -298,9 +298,6 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     ] = element?.idcardno?.split('') ?? [];
 
     const position = element.position;
-
-    //console.log('hiringinfo = ', element);
-
     const eduinfo = JSON.parse(element.eduinfo || '');
     const degreelevel = eduinfo[0].degreeLevel;
 

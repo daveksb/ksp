@@ -57,7 +57,7 @@ import {
   thaiDate,
 } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Observable, Subject } from 'rxjs';
+import { forkJoin, Observable, Subject } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
 @UntilDestroy()
@@ -91,6 +91,7 @@ export class SchoolRequestComponent implements OnInit {
   disableSave = false;
   disableCancel = true;
   schoolId = getCookie('schoolId');
+  userId = getCookie('userId');
   userInfoFormType: number = UserInfoFormType.thai; // control the display field of user info form
   eduFiles: FileGroup[] = [];
   teachingFiles: FileGroup[] = [];
@@ -142,6 +143,20 @@ export class SchoolRequestComponent implements OnInit {
     this.checkButtonsDisableStatus();
   }
 
+  duplicateRequestDialog() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header: `หมายเลขบัตรประชาชนนี้ได้ถูกใช้ยื่นใบคำขอ
+        และกำลังอยู่ในระหว่างดำเนินการ !`,
+      },
+    });
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.backToListPage();
+      }
+    });
+  }
+
   checkCareerType() {
     this.route.queryParams.pipe(untilDestroyed(this)).subscribe((params) => {
       this.form.reset();
@@ -168,26 +183,28 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   cancelRequest() {
-    //console.log('req data = ', this.requestData);
     const payload: KspRequestProcess = {
-      id: `${this.requestId}`,
+      requestid: `${this.requestId}`,
       process: this.requestData.process,
       status: '0',
       detail: null,
-      userid: null,
+      userid: this.userId,
       paymentstatus: null,
     };
-
-    this.requestService.schCancelRequest(payload).subscribe(() => {
+    const updateRequest = this.requestService.schUpdateRequestProcess(payload);
+    const closePayload = {
+      id: `${this.requestId}`,
+      isclose: '1',
+    };
+    const closeRequest = this.requestService.schCloseRequest(closePayload);
+    forkJoin([updateRequest, closeRequest]).subscribe(() => {
       this.completeDialog(`ยกเลิกใบคำขอสำเร็จ`);
     });
   }
 
   createRequest(process: number) {
-    //console.log('create request = ');
     const baseForm = this.fb.group(new KspRequest());
     const formData: any = this.form.getRawValue();
-    //console.log('formdata = ', formData);
     const tab3 = mapMultiFileInfo(this.eduFiles);
     const tab4 = mapMultiFileInfo(this.teachingFiles);
     const tab5 = mapMultiFileInfo(this.reasonFiles);
@@ -203,7 +220,6 @@ export class SchoolRequestComponent implements OnInit {
     userInfo.ref1 = '2';
     userInfo.ref2 = '03';
     userInfo.ref3 = '1';
-
     userInfo.systemtype = '2';
     userInfo.requesttype = '3';
     userInfo.careertype = `${this.careerType}`;
@@ -254,6 +270,12 @@ export class SchoolRequestComponent implements OnInit {
     //console.log('current form = ', baseForm.value);
     this.requestService.schCreateRequest(baseForm.value).subscribe((res) => {
       // บันทึกและยื่น
+
+      if (res.returncode === '409') {
+        this.duplicateRequestDialog();
+        return;
+      }
+
       if (process === 2) {
         this.completeDialog(`ระบบทำการบันทึกเรียบร้อยแล้ว
         เลขที่รายการ : ${formatRequestNo(res.requestno)}
@@ -330,14 +352,6 @@ export class SchoolRequestComponent implements OnInit {
       baseForm.value;
 
     const res = replaceEmptyWithNull(temp);
-
-    /* if (process === 'submit') {
-      res.process = `2`;
-      res.status = '1';
-    } else {
-      res.process = `1`;
-      res.status = '1';
-    } */
 
     //console.log('update payload = ', res);
     this.requestService.schUpdateRequest(res).subscribe(() => {

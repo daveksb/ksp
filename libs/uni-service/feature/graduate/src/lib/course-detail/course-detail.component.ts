@@ -153,8 +153,9 @@ export class CourseDetailComponent implements OnInit {
       courseSelected: rowDetail,
       courseDetail: this.courseData
     };
-    localForage.setItem('courseData', course);
-    this.router.navigate(['/', 'student-list', 'import-student', type]);
+    localForage.setItem('courseData', course).then(()=>{
+      this.router.navigate(['/', 'student-list', 'import-student', type]);
+    });
   }
 
   cancel() {
