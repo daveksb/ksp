@@ -57,4 +57,10 @@ export class SchoolInfoService {
       .post(`${environment.apiUrl}/ksppublic/schuserselect`, payload)
       .pipe(map((data: any) => data.datareturn));
   }
+
+  getCoordinatorInfo(payload: any): Observable<any> {
+    return this.http
+      .post(`https://kspapi.oceanicnetwork.net/schuser_ksprequest.php`, payload)
+      .pipe(map((data: any) => data.datareturn));
+  }
 }

@@ -28,12 +28,13 @@ export class SchoolInfoDetailComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private schoolInfoService: SchoolInfoService,
-    private generalInfoService: GeneralInfoService,
+    private generalInfoService: GeneralInfoService
   ) {}
 
   ngOnInit(): void {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.getSchoolAddress();
+    this.getCoordinatorInfo();
   }
 
   getSchoolAddress() {
@@ -41,7 +42,32 @@ export class SchoolInfoDetailComponent implements OnInit {
       .getSchoolInfo(this.schoolId)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
+        console.log('schoolinfo = ', res);
         this.form.controls.schoolAddrTh.patchValue(<any>res);
+      });
+  }
+
+  getCoordinatorInfo() {
+    const payload = {
+      schoolid: this.schoolId,
+      offset: 0,
+      row: 30,
+    };
+    this.schoolInfoService
+      .getCoordinatorInfo(payload)
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        //console.log('res = ', res[0]);
+        if (res) {
+          /*  const coordinator: any = {
+            ...res[0],
+            contactphone: res[0].schmobile,
+            email: res[0].schemail,
+          }; */
+          const coordinator: any = JSON.parse(res[0].coordinatorinfo);
+          console.log('coordinator = ', coordinator);
+          this.form.controls.coordinator.patchValue(coordinator);
+        }
       });
   }
 }
