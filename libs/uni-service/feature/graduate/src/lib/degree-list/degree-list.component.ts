@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoaderService, UniInfoService, UniRequestService } from '@ksp/shared/service';
-import { getCookie, thaiDate } from '@ksp/shared/utility';
+import { getCookie, replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
 import { UniserviceImportType, KspPaginationComponent, ListData } from '@ksp/shared/interface';
 
 import {
@@ -84,6 +84,10 @@ export class DegreeListComponent extends KspPaginationComponent implements OnIni
 
   getRequest() {
     const form = this.form.controls.search.value as any;
+    if (form.requestsubmitDate) {
+      form.requestsubmitDate = new Date(form.requestsubmitDate)
+      form.requestsubmitDate.setHours(form.requestsubmitDate.getHours() + 7)
+    }
     return {
       uniid: form.institution,
       unitype: form.affiliation,
@@ -98,7 +102,7 @@ export class DegreeListComponent extends KspPaginationComponent implements OnIni
   }
 
   getDegreeCertList() {
-    this.uniRequestService.searchUniDegreeCert2(this.getRequest())
+    this.uniRequestService.searchUniDegreeCert2(replaceEmptyWithNull(this.getRequest()))
     .subscribe((res) => {
       if (!res?.datareturn) {
         this.dataSource.data = [];
