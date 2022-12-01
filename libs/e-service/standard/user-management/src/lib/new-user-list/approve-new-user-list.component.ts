@@ -57,6 +57,11 @@ export class ApproveNewUserListComponent extends KspPaginationComponent {
   }
 
   handleSearch(params: RequestSearchFilter) {
+    if (params.requestdatefrom) {
+      const newdate = new Date(params.requestdatefrom);
+      newdate.setHours(newdate.getHours() + 7);
+      params.requestdatefrom = newdate.toISOString();
+    }
     this.payload = {
       systemtype: '3',
       requesttype: params.requesttype,
@@ -80,7 +85,7 @@ export class ApproveNewUserListComponent extends KspPaginationComponent {
   override search() {
     this.payload = { ...this.payload, ...this.tableRecord };
     this.eUniService.KspSearchUniRequest(this.payload).subscribe((res: any) => {
-      if (res) {
+      if (res && res.datareturn.length) {
         this.pageEvent.length = res.countrow;
         this.dataSource.data = res.datareturn.map((data: any) => {
           // data.status = parseInt(data.status);
