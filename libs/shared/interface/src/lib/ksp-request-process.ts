@@ -1,5 +1,5 @@
 export class KspRequestProcess {
-  id?: string | null = null;
+  //id?: string | null = null;
   requesttable?: string | null = null; // SCH_REQUEST, UNI_REQUEST_DEGREE_CERT table ใบคำขอ
   requestid?: string | null = null; // id ใบคำขอ
   createdate?: string | null = null; // วันที่ทำรายการ

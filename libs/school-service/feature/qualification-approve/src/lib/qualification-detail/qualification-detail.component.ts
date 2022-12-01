@@ -318,7 +318,7 @@ export class QualificationDetailComponent implements OnInit {
           switchMap((res) => {
             if (res) {
               const payload: KspRequestProcess = {
-                id: `${this.requestId}`,
+                requestid: `${this.requestId}`,
                 process: `${this.requestData.process}`,
                 status: '0',
                 detail: null,
@@ -326,7 +326,7 @@ export class QualificationDetailComponent implements OnInit {
                 paymentstatus: null,
               };
 
-              return this.requestService.schCancelRequest(payload);
+              return this.requestService.schUpdateRequestProcess(payload);
             }
             return EMPTY;
           })
