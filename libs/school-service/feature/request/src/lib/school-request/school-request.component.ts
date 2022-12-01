@@ -29,6 +29,7 @@ import {
   PositionType,
   Prefix,
   Province,
+  SchInfo,
   SchRequestSearchFilter,
   SchStaff,
   StaffType,
@@ -97,6 +98,8 @@ export class SchoolRequestComponent implements OnInit {
   attachFiles: FileGroup[] = [];
   eduSelected: number[] = [];
   forbidden: any = null;
+  schoolInfo!: SchInfo;
+
   form = this.fb.group({
     userInfo: [],
     addr1: [],
@@ -547,6 +550,7 @@ export class SchoolRequestComponent implements OnInit {
           this.patchEdu(parseJson(res.educations));
           this.patchTeachingInfo(parseJson(res.teachinginfo));
           this.patchHiringInfo(parseJson(res.hiringinfo));
+          this.patchSchoolInfo();
         } else {
           // search not found reset form and set idcard again
           this.searchIdCardNotFound();
@@ -575,6 +579,7 @@ export class SchoolRequestComponent implements OnInit {
           this.patchEdu(parseJson(res.educations));
           this.patchTeachingInfo(parseJson(res.teachinginfo));
           this.patchHiringInfo(parseJson(res.hiringinfo));
+          this.patchSchoolInfo();
         } else {
           // search not found reset form and set idcard again
           // this.form.reset();
@@ -582,6 +587,10 @@ export class SchoolRequestComponent implements OnInit {
           // this.form.controls.userInfo.patchValue(temp);
         }
       });
+  }
+
+  patchSchoolInfo() {
+    this.form.controls.schoolAddr.patchValue(<any>this.schoolInfo);
   }
 
   pathUserInfo(data: any) {
@@ -624,15 +633,18 @@ export class SchoolRequestComponent implements OnInit {
     this.staffTypes$ = this.staffService.getStaffTypes();
     this.positionTypes$ = this.staffService.getPositionTypes();
     this.academicTypes$ = this.staffService.getAcademicStandingTypes();
-    this.getSchoolAddress();
+    this.getSchoolInfo();
   }
 
-  getSchoolAddress() {
+  getSchoolInfo() {
+    const payload = {
+      schoolid: this.schoolId,
+    };
     this.schoolInfoService
-      .getSchoolInfo(this.schoolId)
+      .getSchoolInfo(payload)
       .pipe(untilDestroyed(this))
       .subscribe((res: any) => {
-        this.form.controls.schoolAddr.patchValue(res);
+        this.schoolInfo = res;
       });
   }
 

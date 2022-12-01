@@ -244,17 +244,20 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   }
 
   getList() {
+    const payload = {
+      schoolid: this.schoolId,
+    };
     this.schoolInfoService
-      .getSchoolInfo(this.schoolId)
+      .getSchoolInfo(payload)
       .pipe(untilDestroyed(this))
       .subscribe((res: any) => {
-        this.schoolName = res.schoolName;
-        this.bureauName = res.bureauName;
+        this.schoolName = res.schoolname;
+        this.bureauName = res.bureauname;
         this.address = `เลขที่ ${res.address} ซอย ${res?.street ?? ''} หมู่ ${
           res?.moo ?? ''
         } ถนน ${res?.road ?? ''} ตำบล ${res.tumbon} อำเภอ ${
-          res.amphurName
-        } จังหวัด ${res.provinceName} รหัสไปรษณีย์ ${res.zipCode}`;
+          res.amphurname
+        } จังหวัด ${res.provincename} รหัสไปรษณีย์ ${res.zipcode}`;
       });
     this.countries$ = this.addressService.getCountry();
     this.prefixList$ = this.generalInfoService.getPrefix();

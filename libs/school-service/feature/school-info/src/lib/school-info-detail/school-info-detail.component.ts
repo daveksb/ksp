@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
 })
 export class SchoolInfoDetailComponent implements OnInit {
   userInfoFormType: number = UserInfoFormType.thai;
-  schoolId = getCookie('schoolId');
+  schoolid = getCookie('schoolId');
   prefixList$!: Observable<Prefix[]>;
 
   form = this.fb.group({
@@ -36,22 +36,53 @@ export class SchoolInfoDetailComponent implements OnInit {
   ngOnInit(): void {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.getSchoolAddress();
+    this.getSchoolManager();
     this.getCoordinatorInfo();
   }
 
   getSchoolAddress() {
+    const payload = {
+      schoolid: this.schoolid,
+    };
     this.schoolInfoService
-      .getSchoolInfo(this.schoolId)
+      .getSchoolInfo(payload)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
-        console.log('schoolinfo = ', res);
-        this.form.controls.schoolAddrTh.patchValue(<any>res);
+        //console.log('schoolinfo = ', res);
+        if (res) {
+          this.form.controls.schoolAddrTh.patchValue(<any>res);
+          this.form.controls.schoolAddrEn.patchValue(<any>res);
+        }
+      });
+  }
+
+  getSchoolManager() {
+    const payload = {
+      schoolid: this.schoolid,
+    };
+    this.schoolInfoService
+      .getSchoolInfo(payload)
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        //console.log('managerinfo = ', res);
+        if (res) {
+          const manager: any = {
+            ...res,
+            position: res.thposition,
+            firstnameth: res.thname,
+            lastnameth: res.thfamilyname,
+            prefixth: res.thprefixid,
+            idcardno: res.thkurusapan,
+            email: res.schsendemail,
+          };
+          this.form.controls.schManager.patchValue(manager);
+        }
       });
   }
 
   getCoordinatorInfo() {
     const payload = {
-      schoolid: this.schoolId,
+      schoolid: this.schoolid,
       offset: 0,
       row: 30,
     };
@@ -62,7 +93,7 @@ export class SchoolInfoDetailComponent implements OnInit {
         //console.log('res = ', res[0]);
         if (res) {
           const coordinator: any = JSON.parse(res[0].coordinatorinfo);
-          console.log('coordinator = ', coordinator);
+          //console.log('coordinator = ', coordinator);
           this.form.controls.coordinator.patchValue(coordinator);
         }
       });

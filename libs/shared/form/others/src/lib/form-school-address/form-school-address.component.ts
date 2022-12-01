@@ -13,17 +13,17 @@ export class FormSchoolAddressComponent extends KspFormBaseComponent {
   override form = this.fb.group({
     letternumber: [],
     letterrelease: [],
-    schoolId: [],
-    schoolName: [],
-    bureauName: [],
+    schoolid: [],
+    schoolname: [],
+    bureauname: [],
     address: [],
     road: [],
-    provinceName: [],
-    amphurName: [],
+    provincename: [],
+    amphurname: [],
     tumbon: [],
-    zipCode: [],
+    zipcode: [],
     moo: [],
-    eMail: [],
+    email: [],
     fax: [],
     street: [],
     telphone: [],
@@ -32,6 +32,7 @@ export class FormSchoolAddressComponent extends KspFormBaseComponent {
 
   @Input() showLicenseInfo = true;
   @Input() title = 'ที่อยู่ของสถานศึกษาที่ขออนุญาต';
+  @Input() schoolEngInfo = false;
 
   constructor(private fb: FormBuilder) {
     super();

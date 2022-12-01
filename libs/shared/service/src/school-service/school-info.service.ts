@@ -10,9 +10,10 @@ import { map, Observable, shareReplay } from 'rxjs';
 export class SchoolInfoService {
   constructor(private http: HttpClient) {}
 
-  getSchoolInfo(schoolId: string): Observable<SchInfo> {
-    return this.http.get<SchInfo>(
-      `${environment.apiUrl}/kspstaff/schschoolsearchschoolid?schoolId=${'schoolId'}`
+  getSchoolInfo(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspstaff/schschoolsearchschoolid`,
+      payload
     );
   }
 

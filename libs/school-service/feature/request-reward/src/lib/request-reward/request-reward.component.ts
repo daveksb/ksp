@@ -20,9 +20,11 @@ import {
   SchoolRequestService,
 } from '@ksp/shared/service';
 import { getCookie, mapFileInfo, parseJson } from '@ksp/shared/utility';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
+@UntilDestroy()
 @Component({
   selector: 'ksp-request-reward-detail',
   templateUrl: './request-reward.component.html',
@@ -63,10 +65,35 @@ export class RequestRewardComponent implements OnInit {
     this.getListData();
     this.checkRequestId();
     this.checkButtonDisableStatus();
+    this.getSchoolManager();
 
     this.form.valueChanges.subscribe(() => {
       this.checkButtonDisableStatus();
     });
+  }
+
+  getSchoolManager() {
+    const payload = {
+      schoolid: this.schoolId,
+    };
+    this.schoolInfoService
+      .getSchoolInfo(payload)
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        console.log('managerinfo = ', res);
+        if (res) {
+          const manager: any = {
+            ...res,
+            position: res.thposition,
+            firstName: res.thname,
+            lastName: res.thfamilyname,
+            prefix: res.thprefixid,
+            personId: res.thkurusapan,
+            email: res.schsendemail,
+          };
+          this.form.controls.reward.patchValue(manager);
+        }
+      });
   }
 
   checkButtonDisableStatus() {
