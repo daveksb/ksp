@@ -567,7 +567,8 @@ export class SchoolRequestComponent implements OnInit {
           this.patchSchoolInfo();
         } else {
           // search not found reset form and set idcard again
-          this.searchIdCardNotFound();
+          this.searchIdCardNotFound(`ไม่พบข้อมูลบุคลากรภายในหน่วยงาน
+          จากหมายเลขบัตรประชาชนที่ระบุ`);
           this.form.reset();
           const temp: any = { idcardno: idCard };
           this.form.controls.userInfo.patchValue(temp);
@@ -596,6 +597,8 @@ export class SchoolRequestComponent implements OnInit {
           this.patchSchoolInfo();
         } else {
           // search not found reset form and set idcard again
+          this.searchIdCardNotFound(`ไม่พบข้อมูลบุคลากรภายในหน่วยงาน
+          จากหมายเลขคุรุสภาสำหรับชาวต่างชาติที่ระบุ`);
           // this.form.reset();
           // const temp: any = { idcardno: idCard };
           // this.form.controls.userInfo.patchValue(temp);
@@ -798,11 +801,10 @@ export class SchoolRequestComponent implements OnInit {
       });
   }
 
-  searchIdCardNotFound() {
+  searchIdCardNotFound(header: string) {
     const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
-        header: `ไม่พบข้อมูลบุคลากรภายในหน่วยงาน
-        จากหมายเลขบัตรประชาชนที่ระบุ`,
+        header: header,
         btnLabel: 'เพิ่มข้อมูลบุคลากร',
       },
     });

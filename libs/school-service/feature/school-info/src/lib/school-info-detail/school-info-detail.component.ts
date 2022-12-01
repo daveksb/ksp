@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
+import {
+  CompleteDialogComponent,
+  ConfirmDialogComponent,
+} from '@ksp/shared/dialog';
 import { Prefix } from '@ksp/shared/interface';
 import { GeneralInfoService, SchoolInfoService } from '@ksp/shared/service';
 import { getCookie } from '@ksp/shared/utility';
@@ -30,7 +35,8 @@ export class SchoolInfoDetailComponent implements OnInit {
     private fb: FormBuilder,
     private schoolInfoService: SchoolInfoService,
     private generalInfoService: GeneralInfoService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -101,5 +107,38 @@ export class SchoolInfoDetailComponent implements OnInit {
 
   cancel() {
     this.router.navigate(['/temp-license', 'list']);
+  }
+
+  confirmDialog() {
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
+      },
+    });
+
+    dialog.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.completeDialog();
+        /*         if (this.saveData.requestData.process === '5') {
+            this.considerRequest();
+          } else {
+            this.checkRequest();
+          } */
+      }
+    });
+  }
+
+  completeDialog() {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header: `บันทึกข้อมูลสำเร็จ`,
+      },
+    });
+
+    dialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.cancel();
+      }
+    });
   }
 }
