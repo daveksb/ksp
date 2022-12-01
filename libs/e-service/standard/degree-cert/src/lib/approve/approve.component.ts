@@ -304,7 +304,6 @@ export class ApproveComponent implements OnInit {
     const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header,
-        buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 

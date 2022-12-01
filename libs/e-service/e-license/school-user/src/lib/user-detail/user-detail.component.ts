@@ -251,7 +251,6 @@ export class UserDetailComponent implements OnInit {
     const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header: `บันทึกข้อมูลสำเร็จ`,
-        buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 

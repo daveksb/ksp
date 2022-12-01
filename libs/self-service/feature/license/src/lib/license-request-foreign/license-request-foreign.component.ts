@@ -357,7 +357,6 @@ export class LicenseRequestForeignComponent implements OnInit {
     const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header: `ยกเลิกใบคำขอสำเร็จ`,
-        buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 

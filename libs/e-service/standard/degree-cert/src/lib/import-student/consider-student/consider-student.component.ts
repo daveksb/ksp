@@ -2,11 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { CompleteDialogComponent, ConfirmDialogComponent } from '@ksp/shared/dialog';
+import {
+  CompleteDialogComponent,
+  ConfirmDialogComponent,
+} from '@ksp/shared/dialog';
 import { EUniService } from '@ksp/shared/service';
-import { formatDate, getCookie, parseJson, thaiDate } from '@ksp/shared/utility';
+import {
+  formatDate,
+  getCookie,
+  parseJson,
+  thaiDate,
+} from '@ksp/shared/utility';
 import localForage from 'localforage';
-import { Location } from '@angular/common'
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'e-service-consider-student',
@@ -17,11 +25,11 @@ export class ConsiderStudentComponent implements OnInit {
   form = this.fb.group({
     result: [''],
     returndate: [''],
-    nextprocess: ['']
+    nextprocess: [''],
   });
   payload: any;
-  requestdate= null;
-  requestno= '';
+  requestdate = null;
+  requestno = '';
   historylist: Array<any> = [];
 
   choices = [
@@ -53,17 +61,18 @@ export class ConsiderStudentComponent implements OnInit {
           pagetype: res.pagetype,
           studentlist: res.studentlist,
           total: res.total,
-          payloaddetail: res.payload
+          payloaddetail: res.payload,
         };
         this.requestdate = res.requestdate;
         this.requestno = res.requestno;
-        this.payload.studentlist.forEach((student:any) => {
+        this.payload.studentlist.forEach((student: any) => {
           student.addressinfo = JSON.stringify(student.address);
           student.subjects = JSON.stringify(student.subjects);
           student.unidegreecertid = this.payload.payloaddetail.unidegreecertid;
           student.unirequestadmissionid = this.payload.payloaddetail.id;
           student.planyear = this.payload.payloaddetail.planyear.toString();
-          student.plancalendaryear = this.payload.payloaddetail.plancalendaryear;
+          student.plancalendaryear =
+            this.payload.payloaddetail.plancalendaryear;
           student.planname = this.payload.payloaddetail.planname;
           if (student.admissiondate) {
             const convertdate = new Date(student.admissiondate).toISOString();
@@ -98,31 +107,34 @@ export class ConsiderStudentComponent implements OnInit {
         });
         if (this.payload.total > this.payload.studentlist.length) {
           this.form.patchValue({
-            result: '2'
-          })
+            result: '2',
+          });
           this.form.controls['result'].disable();
           this.form.controls['nextprocess'].disable();
           this.form.controls['returndate'].enable();
         }
       } else {
         this.form.patchValue({
-          result: '2'
-        })
+          result: '2',
+        });
         this.form.controls['result'].disable();
         this.form.controls['nextprocess'].disable();
         this.form.controls['returndate'].enable();
       }
-      this.getProcessHistory();  
-    });    
+      this.getProcessHistory();
+    });
   }
 
   getProcessHistory() {
     this.requestService
-      .getProcessHistory({ requestid: this.payload.requestid }).subscribe((res:any)=>{
+      .getProcessHistory({ requestid: this.payload.requestid })
+      .subscribe((res: any) => {
         if (res.datareturn) {
-          this.historylist = res.datareturn.map((data: any)=>{
-            data.createdate = thaiDate(new Date(data?.createdate))
-            data.updatedate = data?.updatedate ? thaiDate(new Date(data?.updatedate)) : ''
+          this.historylist = res.datareturn.map((data: any) => {
+            data.createdate = thaiDate(new Date(data?.createdate));
+            data.updatedate = data?.updatedate
+              ? thaiDate(new Date(data?.updatedate))
+              : '';
             return data;
           });
         }
@@ -134,7 +146,7 @@ export class ConsiderStudentComponent implements OnInit {
   }
 
   prevPage() {
-    this.location.back()
+    this.location.back();
   }
 
   save() {
@@ -149,7 +161,7 @@ export class ConsiderStudentComponent implements OnInit {
     dialogRef.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         if (this.payload.total > this.payload.studentlist.length) {
-          this.payload.status = '2'
+          this.payload.status = '2';
         }
         let status = '1';
         let process = '2';
@@ -175,7 +187,9 @@ export class ConsiderStudentComponent implements OnInit {
           status = '2';
         }
 
-        this.payload.detail = JSON.stringify({ returndate: this.form.value.returndate || null });
+        this.payload.detail = JSON.stringify({
+          returndate: this.form.value.returndate || null,
+        });
         const realpayload = {
           requestid: this.payload.requestid,
           process: process,
@@ -183,26 +197,36 @@ export class ConsiderStudentComponent implements OnInit {
           detail: this.payload.detail,
           systemtype: this.payload.systemtype,
           userid: this.payload.userid,
-        }
-        this.requestService.requestProcessInsert(realpayload).subscribe((response: any)=>{
-          if (response) {
-            if (this.form.value.result == '1' 
-                && this.payload.pagetype == 'admissionList'
-                && this.payload.studentlist.length) {
-                  this.requestService.insertStudent({ data: this.payload.studentlist }).subscribe((res: any) => {
+        };
+        this.requestService
+          .requestProcessInsert(realpayload)
+          .subscribe((response: any) => {
+            if (response) {
+              if (
+                this.form.value.result == '1' &&
+                this.payload.pagetype == 'admissionList' &&
+                this.payload.studentlist.length
+              ) {
+                this.requestService
+                  .insertStudent({ data: this.payload.studentlist })
+                  .subscribe((res: any) => {
                     this.onConfirmed();
                   });
-            } else if (this.form.value.result == '1' 
-                && this.payload.pagetype == 'graduateList'
-                && this.payload.studentlist.length) {
-                  this.requestService.updateStudent({ data: this.payload.studentlist }).subscribe((res: any) => {
+              } else if (
+                this.form.value.result == '1' &&
+                this.payload.pagetype == 'graduateList' &&
+                this.payload.studentlist.length
+              ) {
+                this.requestService
+                  .updateStudent({ data: this.payload.studentlist })
+                  .subscribe((res: any) => {
                     this.onConfirmed();
                   });
-            } else {
-              this.onConfirmed();
+              } else {
+                this.onConfirmed();
+              }
             }
-          }
-        })
+          });
       }
     });
   }
@@ -211,7 +235,6 @@ export class ConsiderStudentComponent implements OnInit {
       width: '350px',
       data: {
         header: 'บันทึกข้อมูลสำเร็จ',
-        buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 
@@ -226,12 +249,12 @@ export class ConsiderStudentComponent implements OnInit {
     const process = event.target.value;
     if (process == '2') {
       this.form.patchValue({
-        result: '2'
+        result: '2',
       });
       this.form.controls['returndate'].enable();
     } else {
       this.form.patchValue({
-        returndate: ''
+        returndate: '',
       });
       this.form.controls['returndate'].disable();
     }

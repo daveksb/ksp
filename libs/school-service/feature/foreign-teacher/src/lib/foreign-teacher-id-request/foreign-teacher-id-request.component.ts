@@ -232,7 +232,6 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
         header: `บึนทึกข้อมูลสำเร็จ`,
         content: `เลขที่รายการ : ${formatRequestNo(requestNo)}
         วันที่ : ${thaiDate(new Date())}`,
-        buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 

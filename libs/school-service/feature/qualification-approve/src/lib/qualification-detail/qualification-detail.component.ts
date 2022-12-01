@@ -461,7 +461,6 @@ export class QualificationDetailComponent implements OnInit {
       data: {
         header: `ไม่พบข้อมูลบุคลากรภายในหน่วยงาน
         จากหมายเลขบัตรประจำตัวประชาชนที่ระบุ`,
-        buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 

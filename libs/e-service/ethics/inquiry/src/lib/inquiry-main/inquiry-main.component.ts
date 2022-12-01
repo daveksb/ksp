@@ -95,7 +95,6 @@ export class InquiryMainComponent implements OnInit {
         content: `เลขที่รายการ : 640120000123
         วันที่ : 10 ตุลาคม 2656`,
         subContent: 'ผู้บันทึกข้อมูล : นางสาวปาเจรา ใกล้คุก',
-        buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 

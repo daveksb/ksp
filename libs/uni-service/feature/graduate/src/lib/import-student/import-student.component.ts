@@ -69,7 +69,7 @@ export class ImportStudentComponent implements OnInit {
   };
   requestNo = '';
   userBackup: any;
-  requestDate:any = undefined;
+  requestDate: any = undefined;
   formStudent = this.fb.group({
     user: this.fb.array([]),
   });
@@ -151,7 +151,9 @@ export class ImportStudentComponent implements OnInit {
               data.unidegreecertid == this.courseData?.courseDetail.id &&
               data.planyear == this.payload.planyear &&
               data.plancalendaryear == this.payload.plancalendaryear &&
-              data.admissionlist && (data.process == '1' || (data.process == '3' && data.status == '2'))
+              data.admissionlist &&
+              (data.process == '1' ||
+                (data.process == '3' && data.status == '2'))
             );
           });
           if (findResponse) {
@@ -202,19 +204,23 @@ export class ImportStudentComponent implements OnInit {
               if (res.datareturn && res.datareturn.length) {
                 const findRequestGraduate = res.datareturn.find((data: any) => {
                   return (
-                    data.graduatelist != null && (data.process == '1' || (data.process == '3' && data.status == '2'))
+                    data.graduatelist != null &&
+                    (data.process == '1' ||
+                      (data.process == '3' && data.status == '2'))
                   );
                 });
                 if (findRequestGraduate) {
                   this.requestNo = findRequestGraduate.requestno;
-                  this.requestDate = findRequestGraduate.requestdate
+                  this.requestDate = findRequestGraduate.requestdate;
                   this.payload.id = findRequestGraduate.id;
                   const convertGraduateList = JSON.parse(
                     findRequestGraduate.graduatelist
                   );
                   convertGraduateList.map((data: any) => {
                     const findindex = this.user.value.findIndex((user: any) => {
-                      return data.idcardno == user.idcardno && data.id == user.id;
+                      return (
+                        data.idcardno == user.idcardno && data.id == user.id
+                      );
                     });
                     if (findindex != -1) {
                       const userAddress = JSON.parse(data.address);
@@ -310,10 +316,7 @@ export class ImportStudentComponent implements OnInit {
         '',
         [Validators.required, Validators.pattern(nameEnPattern)],
       ],
-      middlenameen: [
-        '',
-        [Validators.pattern(nameEnPattern)],
-      ],
+      middlenameen: ['', [Validators.pattern(nameEnPattern)]],
       lastnameen: [
         '',
         [Validators.required, Validators.pattern(nameEnPattern)],
@@ -343,7 +346,7 @@ export class ImportStudentComponent implements OnInit {
     if (this.pageType == 'admissionList') {
       userAddress = JSON.parse(data.address);
     } else {
-      const parsedata = JSON.parse(data.addressinfo)
+      const parsedata = JSON.parse(data.addressinfo);
       userAddress = parsedata?.addressInfo;
     }
     return this.fb.group({
@@ -358,9 +361,7 @@ export class ImportStudentComponent implements OnInit {
           ? [Validators.required, Validators.pattern(idCardPattern)]
           : undefined,
       ],
-      passportno: [
-        data.passportno
-      ],
+      passportno: [data.passportno],
       nationality: [
         data.nationality,
         this.pageType == 'admissionList' ? Validators.required : undefined,
@@ -427,7 +428,7 @@ export class ImportStudentComponent implements OnInit {
             subdistrictid: [userAddress?.subdistrictid || null],
             remark: [userAddress?.remark || null],
           },
-        ]
+        ],
       }),
       approveno: [
         data.approveno,
@@ -484,10 +485,7 @@ export class ImportStudentComponent implements OnInit {
         data.firstnameen,
         [Validators.required, Validators.pattern(nameEnPattern)],
       ],
-      middlenameen: [
-        data.middlenameen,
-        [Validators.pattern(nameEnPattern)],
-      ],
+      middlenameen: [data.middlenameen, [Validators.pattern(nameEnPattern)]],
       lastnameen: [
         data.lastnameen,
         [Validators.required, Validators.pattern(nameEnPattern)],
@@ -575,7 +573,7 @@ export class ImportStudentComponent implements OnInit {
       data: {
         teachingpracticeschool:
           this.user.at(index).value.teachingpracticeschool,
-        disableAll: false
+        disableAll: false,
       },
     });
     dialogRef.afterClosed().subscribe((response: any) => {
@@ -669,7 +667,6 @@ export class ImportStudentComponent implements OnInit {
       width: '350px',
       data: {
         header: 'บันทึกข้อมูลสำเร็จ',
-        buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 
@@ -714,7 +711,7 @@ export class ImportStudentComponent implements OnInit {
       };
       this.uniInfoService.searchSelfStudent(payload).subscribe((response) => {
         if (response.datareturn) {
-          response.datareturn.forEach((data:any) => {
+          response.datareturn.forEach((data: any) => {
             data.addressinfo = JSON.parse(data.addressinfo);
           });
           this.user.at(index).patchValue({
@@ -732,20 +729,63 @@ export class ImportStudentComponent implements OnInit {
             phone: response.datareturn[0].phone || null,
             birthdate: response.datareturn[0].birthdate || null,
           });
-          this.user.at(index).get('address')?.patchValue({
-            addressInfo: {
-              location: [response.datareturn[0].addressinfo ? response.datareturn[0].addressinfo[0].location : null],
-              housenumber: [response.datareturn[0].addressinfo ? response.datareturn[0].addressinfo[0].houseNo : null],
-              villagenumber: [response.datareturn[0].addressinfo ? response.datareturn[0].addressinfo[0].moo : null],
-              lane: [response.datareturn[0].addressinfo ? response.datareturn[0].addressinfo[0].alley : null],
-              road: [response.datareturn[0].addressinfo ? response.datareturn[0].addressinfo[0].houseNo : null],
-              zipcode: [response.datareturn[0].addressinfo ? response.datareturn[0].addressinfo[0].postcode : null],
-              provinceid: [response.datareturn[0].addressinfo ? response.datareturn[0].addressinfo[0].province : null],
-              districtid: [response.datareturn[0].addressinfo ? response.datareturn[0].addressinfo[0].amphur : null],
-              subdistrictid: [response.datareturn[0].addressinfo ? response.datareturn[0].addressinfo[0].tumbol : null],
-              remark: [response.datareturn[0].addressinfo ? response.datareturn[0].addressinfo[0].remark : null],
-            },
-          })
+          this.user
+            .at(index)
+            .get('address')
+            ?.patchValue({
+              addressInfo: {
+                location: [
+                  response.datareturn[0].addressinfo
+                    ? response.datareturn[0].addressinfo[0].location
+                    : null,
+                ],
+                housenumber: [
+                  response.datareturn[0].addressinfo
+                    ? response.datareturn[0].addressinfo[0].houseNo
+                    : null,
+                ],
+                villagenumber: [
+                  response.datareturn[0].addressinfo
+                    ? response.datareturn[0].addressinfo[0].moo
+                    : null,
+                ],
+                lane: [
+                  response.datareturn[0].addressinfo
+                    ? response.datareturn[0].addressinfo[0].alley
+                    : null,
+                ],
+                road: [
+                  response.datareturn[0].addressinfo
+                    ? response.datareturn[0].addressinfo[0].houseNo
+                    : null,
+                ],
+                zipcode: [
+                  response.datareturn[0].addressinfo
+                    ? response.datareturn[0].addressinfo[0].postcode
+                    : null,
+                ],
+                provinceid: [
+                  response.datareturn[0].addressinfo
+                    ? response.datareturn[0].addressinfo[0].province
+                    : null,
+                ],
+                districtid: [
+                  response.datareturn[0].addressinfo
+                    ? response.datareturn[0].addressinfo[0].amphur
+                    : null,
+                ],
+                subdistrictid: [
+                  response.datareturn[0].addressinfo
+                    ? response.datareturn[0].addressinfo[0].tumbol
+                    : null,
+                ],
+                remark: [
+                  response.datareturn[0].addressinfo
+                    ? response.datareturn[0].addressinfo[0].remark
+                    : null,
+                ],
+              },
+            });
           this.user.at(index).updateValueAndValidity();
         }
       });
@@ -757,7 +797,7 @@ export class ImportStudentComponent implements OnInit {
       '/',
       'student-list',
       'course-detail',
-      this.payload.unidegreecertid
+      this.payload.unidegreecertid,
     ]);
   }
 

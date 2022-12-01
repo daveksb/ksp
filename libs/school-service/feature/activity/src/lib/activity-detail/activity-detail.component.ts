@@ -132,7 +132,6 @@ export class ActivityDetailComponent implements OnInit {
     const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,
-        buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 
