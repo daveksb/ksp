@@ -4,6 +4,7 @@ import { environment } from '@ksp/shared/environment';
 import {
   KspRequest,
   KspRequestProcess,
+  KspResponse,
   SchRequestSearchFilter,
   SchTempLicense,
 } from '@ksp/shared/interface';
