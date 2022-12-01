@@ -12,7 +12,7 @@ export class SchoolInfoService {
 
   getSchoolInfo(schoolId: string): Observable<SchInfo> {
     return this.http.get<SchInfo>(
-      `${environment.apiUrl}/kspstaff/schschoolsearchschoolid?schoolId=${schoolId}`
+      `${environment.apiUrl}/kspstaff/schschoolsearchschoolid?schoolId=${'schoolId'}`
     );
   }
 

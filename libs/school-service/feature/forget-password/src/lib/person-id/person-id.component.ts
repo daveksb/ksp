@@ -4,15 +4,17 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { SchForgetPassword } from '@ksp/shared/interface';
-import { SchoolUserService } from '@ksp/shared/service';
+import { LoaderService, SchoolUserService } from '@ksp/shared/service';
 import { idCardPattern } from '@ksp/shared/utility';
 import localForage from 'localforage';
+import { Subject } from 'rxjs';
 
 @Component({
   templateUrl: './person-id.component.html',
   styleUrls: ['./person-id.component.scss'],
 })
 export class PersonIdComponent {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   form = this.fb.group({
     schoolid: [null, Validators.required],
     idcardno: [null, [Validators.required, Validators.pattern(idCardPattern)]],
@@ -22,7 +24,8 @@ export class PersonIdComponent {
     private router: Router,
     private fb: FormBuilder,
     public dialog: MatDialog,
-    private userService: SchoolUserService
+    private userService: SchoolUserService,
+    private loaderService: LoaderService
   ) {}
 
   cancel() {
