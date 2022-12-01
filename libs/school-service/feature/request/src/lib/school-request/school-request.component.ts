@@ -29,6 +29,7 @@ import {
   PositionType,
   Prefix,
   Province,
+  SchInfo,
   SchRequestSearchFilter,
   SchStaff,
   StaffType,
@@ -98,6 +99,8 @@ export class SchoolRequestComponent implements OnInit {
   attachFiles: FileGroup[] = [];
   eduSelected: number[] = [];
   forbidden: any = null;
+  schoolInfo!: SchInfo;
+
   form = this.fb.group({
     userInfo: [],
     addr1: [],
@@ -210,7 +213,8 @@ export class SchoolRequestComponent implements OnInit {
     formData.addr1.addresstype = 1;
     formData.addr2.addresstype = 2;
 
-    let { id, ...userInfo } = formData.userInfo;
+    /* let { id, ...userInfo } = formData.userInfo; */
+    let { ...userInfo } = formData.userInfo;
     userInfo.schoolid = this.schoolId;
     userInfo.process = `${process}`;
     userInfo.status = `1`;
@@ -561,9 +565,11 @@ export class SchoolRequestComponent implements OnInit {
           this.patchEdu(parseJson(res.educations));
           this.patchTeachingInfo(parseJson(res.teachinginfo));
           this.patchHiringInfo(parseJson(res.hiringinfo));
+          this.patchSchoolInfo();
         } else {
           // search not found reset form and set idcard again
-          this.completeDialog('ไม่พบข้อมูลบุคคลากรที่ระบุ');
+          this.searchIdCardNotFound(`ไม่พบข้อมูลบุคลากรภายในหน่วยงาน
+          จากหมายเลขบัตรประชาชนที่ระบุ`);
           this.form.reset();
           const temp: any = { idcardno: idCard };
           this.form.controls.userInfo.patchValue(temp);
@@ -589,13 +595,20 @@ export class SchoolRequestComponent implements OnInit {
           this.patchEdu(parseJson(res.educations));
           this.patchTeachingInfo(parseJson(res.teachinginfo));
           this.patchHiringInfo(parseJson(res.hiringinfo));
+          this.patchSchoolInfo();
         } else {
           // search not found reset form and set idcard again
+          this.searchIdCardNotFound(`ไม่พบข้อมูลบุคลากรภายในหน่วยงาน
+          จากหมายเลขคุรุสภาสำหรับชาวต่างชาติที่ระบุ`);
           // this.form.reset();
           // const temp: any = { idcardno: idCard };
           // this.form.controls.userInfo.patchValue(temp);
         }
       });
+  }
+
+  patchSchoolInfo() {
+    this.form.controls.schoolAddr.patchValue(<any>this.schoolInfo);
   }
 
   pathUserInfo(data: any) {
@@ -638,15 +651,18 @@ export class SchoolRequestComponent implements OnInit {
     this.staffTypes$ = this.staffService.getStaffTypes();
     this.positionTypes$ = this.staffService.getPositionTypes();
     this.academicTypes$ = this.staffService.getAcademicStandingTypes();
-    this.getSchoolAddress();
+    this.getSchoolInfo();
   }
 
-  getSchoolAddress() {
+  getSchoolInfo() {
+    const payload = {
+      schoolid: this.schoolId,
+    };
     this.schoolInfoService
-      .getSchoolInfo(this.schoolId)
+      .getSchoolInfo(payload)
       .pipe(untilDestroyed(this))
       .subscribe((res: any) => {
-        this.form.controls.schoolAddr.patchValue(res);
+        this.schoolInfo = res;
       });
   }
 
@@ -773,7 +789,6 @@ export class SchoolRequestComponent implements OnInit {
     const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header,
-        buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 
@@ -782,6 +797,23 @@ export class SchoolRequestComponent implements OnInit {
       .subscribe((res) => {
         if (res) {
           this.backToListPage();
+        }
+      });
+  }
+
+  searchIdCardNotFound(header: string) {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header: header,
+        btnLabel: 'เพิ่มข้อมูลบุคลากร',
+      },
+    });
+
+    dialog.componentInstance.completed
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        if (res) {
+          this.router.navigate(['/staff-management', 'list']);
         }
       });
   }

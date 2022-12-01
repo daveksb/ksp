@@ -290,17 +290,22 @@ export class QualificationDetailComponent implements OnInit {
     this.provinces2$ = this.provinces1$;
     this.countries$ = this.addressService.getCountry();
     this.nationalitys$ = this.generalInfoService.getNationality();
+
+    const payload = {
+      schoolid: this.schoolId,
+    };
+
     this.schoolInfoService
-      .getSchoolInfo(this.schoolId)
+      .getSchoolInfo(payload)
       .pipe(untilDestroyed(this))
       .subscribe((res: any) => {
-        this.schoolName = res.schoolName;
-        this.bureauName = res.bureauName;
+        this.schoolName = res.schoolname;
+        this.bureauName = res.bureauname;
         this.address = `เลขที่ ${res.address} ซอย ${res?.street ?? ''} หมู่ ${
           res?.moo ?? ''
         } ถนน ${res?.road ?? ''} ตำบล ${res.tumbon} อำเภอ ${
-          res.amphurName
-        } จังหวัด ${res.provinceName} รหัสไปรษณีย์ ${res.zipcode}`;
+          res.amphurname
+        } จังหวัด ${res.provincename} รหัสไปรษณีย์ ${res.zipcode}`;
       });
   }
 
@@ -461,7 +466,6 @@ export class QualificationDetailComponent implements OnInit {
       data: {
         header: `ไม่พบข้อมูลบุคลากรภายในหน่วยงาน
         จากหมายเลขบัตรประจำตัวประชาชนที่ระบุ`,
-        buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 

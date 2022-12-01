@@ -10,9 +10,10 @@ import { map, Observable, shareReplay } from 'rxjs';
 export class SchoolInfoService {
   constructor(private http: HttpClient) {}
 
-  getSchoolInfo(schoolId: string): Observable<SchInfo> {
-    return this.http.get<SchInfo>(
-      `${environment.apiUrl}/kspstaff/schschoolsearchschoolid?schoolId=${schoolId}`
+  getSchoolInfo(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspstaff/schschoolsearchschoolid`,
+      payload
     );
   }
 
@@ -55,6 +56,12 @@ export class SchoolInfoService {
   searchSchUsers(payload: any): Observable<SchUser[]> {
     return this.http
       .post(`${environment.apiUrl}/ksppublic/schuserselect`, payload)
+      .pipe(map((data: any) => data.datareturn));
+  }
+
+  getCoordinatorInfo(payload: any): Observable<any> {
+    return this.http
+      .post(`https://kspapi.oceanicnetwork.net/schuser_ksprequest.php`, payload)
       .pipe(map((data: any) => data.datareturn));
   }
 }

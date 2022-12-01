@@ -24,6 +24,7 @@ export class FormEducationInfoManagerComponent
   implements OnInit
 {
   @Input() requestType: any;
+  
   override form = this.fb.group({
     licenseCountry: [],
     releaseBy: [],

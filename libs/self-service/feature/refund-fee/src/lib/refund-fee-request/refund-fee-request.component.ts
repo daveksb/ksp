@@ -258,7 +258,6 @@ export class RefundFeeRequestComponent implements OnInit {
       width: '350px',
       data: {
         header: `ยกเลิกใบคำขอสำเร็จ`,
-        buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 

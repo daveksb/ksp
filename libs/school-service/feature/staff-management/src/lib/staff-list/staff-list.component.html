@@ -22,23 +22,24 @@
   ></school-service-staff-search>
 
   <div class="bg-white px-3 py-2 mt-3">
-    <div class="box-header">ทะเบียนรายชื่อบุคลากรภายในหน่วยงาน</div>
-    <hr />
-
-    <div class="d-flex justify-content-end">
-      <button
-        (click)="addStaff()"
-        class="btn text-primary bg-primary bg-opacity-10"
-      >
-        + เพิ่มบุคลากร
-      </button>
-      <button
-        (click)="searchLicense()"
-        class="ms-2 btn text-orange bg-orange bg-opacity-10"
-      >
-        ค้นหาใบอนุญาต
-      </button>
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="box-header">ทะเบียนรายชื่อบุคลากรภายในหน่วยงาน</div>
+      <div class="d-flex justify-content-end">
+        <button
+          (click)="addStaff()"
+          class="btn text-primary bg-primary bg-opacity-10"
+        >
+          + เพิ่มบุคลากร
+        </button>
+        <button
+          (click)="searchLicense()"
+          class="ms-2 btn text-orange bg-orange bg-opacity-10"
+        >
+          ค้นหาใบอนุญาต
+        </button>
+      </div>
     </div>
+    <hr />
 
     <div class="table__scroll">
       <table

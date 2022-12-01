@@ -8,16 +8,25 @@ import {
   KspRequest,
   Prefix,
   SchoolUserPageType,
-  UniUser
+  UniUser,
 } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { ERequestService, GeneralInfoService, LoaderService, UniInfoService } from '@ksp/shared/service';
+import {
+  ERequestService,
+  GeneralInfoService,
+  LoaderService,
+  UniInfoService,
+} from '@ksp/shared/service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
-import { getCookie, parseJson, replaceEmptyWithNull } from '@ksp/shared/utility';
+import {
+  getCookie,
+  parseJson,
+  replaceEmptyWithNull,
+} from '@ksp/shared/utility';
 import localForage from 'localforage';
 import { SchoolRetireReason } from '@ksp/shared/constant';
 
@@ -44,33 +53,32 @@ export class UserDetailComponent implements OnInit {
     userInfo: [],
     coordinatorInfo: [],
     retiredReason: [],
-    retiredDetail: []
+    retiredDetail: [],
   });
 
   verifyForm = this.fb.group({
-    result: [{
-      result: '',
-      reason: '',
-      detail: ''
-    }, Validators.required]
+    result: [
+      {
+        result: '',
+        reason: '',
+        detail: '',
+      },
+      Validators.required,
+    ],
   });
 
   uploadFileList: FileGroup[] = [
     {
       name: 'หนังสือแต่งตั้งผู้ประสานงาน',
-      files: []
+      files: [],
     },
     {
       name: 'สำเนาบัตรประชาชน',
-      files: []
+      files: [],
     },
   ] as FileGroup[];
 
-  requestTypeList = [
-    "",
-    "ยื่นผู้ประสานงาน",
-    "ยื่นถอดถอนผู้ประสานงาน"
-  ];
+  requestTypeList = ['', 'ยื่นผู้ประสานงาน', 'ยื่นถอดถอนผู้ประสานงาน'];
   isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   retireReason = SchoolRetireReason;
@@ -110,7 +118,11 @@ export class UserDetailComponent implements OnInit {
     this.eRequestService.getKspRequestById(id).subscribe((res) => {
       this.requestData = res;
       const fileInfo = parseJson(res.fileinfo);
-      if (fileInfo && fileInfo.fileUpload && Array.isArray(fileInfo.fileUpload)) {
+      if (
+        fileInfo &&
+        fileInfo.fileUpload &&
+        Array.isArray(fileInfo.fileUpload)
+      ) {
         this.uploadFileList.forEach(
           (group, index) => (group.files = fileInfo.fileUpload[index])
         );
@@ -122,14 +134,16 @@ export class UserDetailComponent implements OnInit {
       this.requestData.schoolname = education?.uniname || '';
       // this.requestData.schooladdress = education;
       this.permissionRight = education?.permission || null;
-      this.requestType = this.requestData.requesttype ? parseInt(this.requestData.requesttype) : 0;
+      this.requestType = this.requestData.requesttype
+        ? parseInt(this.requestData.requesttype)
+        : 0;
 
       res.status === '1' ? (this.mode = 'edit') : (this.mode = 'view');
       const approvedetail = parseJson(res.detail);
       this.verifyForm.controls.result.patchValue({
-        result: res?.status === '1' ? '' : res?.status === '2' ? '1' : '0', 
+        result: res?.status === '1' ? '' : res?.status === '2' ? '1' : '0',
         reason: approvedetail?.reason || '',
-        detail: approvedetail?.reason || ''
+        detail: approvedetail?.reason || '',
       });
       if (res.birthdate) {
         res.birthdate = res.birthdate.split('T')[0];
@@ -139,8 +153,8 @@ export class UserDetailComponent implements OnInit {
         const reasoninfo = parseJson(res.reasoninfo);
         this.form.patchValue({
           retiredReason: reasoninfo.retiredReason,
-          retiredDetail: reasoninfo.retiredDetail
-        })
+          retiredDetail: reasoninfo.retiredDetail,
+        });
       }
 
       this.form.controls.userInfo.patchValue(<any>res);
@@ -168,21 +182,21 @@ export class UserDetailComponent implements OnInit {
         id: this.requestData.userid,
         isuseractive: '0',
       };
-  
+
       this.eRequestService.retiredUniUser(retirePayload).subscribe((res) => {
         console.log('retired result = ', res);
         this.updateClosed();
         this.completeDialog();
       });
     });
-
-
   }
 
   updateClosed() {
-    this.eRequestService.updateRequestClosed(this.requestId, '1').subscribe((res) => {
-      console.log('close request result = ', res);
-    });
+    this.eRequestService
+      .updateRequestClosed(this.requestId, '1')
+      .subscribe((res) => {
+        console.log('close request result = ', res);
+      });
   }
 
   approveUser() {
@@ -195,10 +209,11 @@ export class UserDetailComponent implements OnInit {
     newUser.email = this.requestData.email;
     newUser.phone = this.requestData.contactphone;
     newUser.workphone = this.requestData.workphone;
-    newUser.birthdate = this.requestData.birthdate === "" ? null : this.requestData.birthdate;
+    newUser.birthdate =
+      this.requestData.birthdate === '' ? null : this.requestData.birthdate;
     newUser.username = this.requestData.idcardno;
     newUser.password = this.setPassword;
-    newUser.isuseractive = "1"
+    newUser.isuseractive = '1';
     newUser.position = this.requestData.position;
     newUser.prefixth = this.requestData.prefixth;
     newUser.prefixen = this.requestData.prefixen;
@@ -248,12 +263,11 @@ export class UserDetailComponent implements OnInit {
       this.updateClosed();
       this.completeDialog();
     });
-
   }
 
   viewUser() {
-    console.log(this.requestData)
-    localForage.setItem('uniseleced', this.requestData).then(()=>{
+    console.log(this.requestData);
+    localForage.setItem('uniseleced', this.requestData).then(() => {
       this.router.navigate(['uni', 'all-user']);
     });
   }
@@ -267,7 +281,7 @@ export class UserDetailComponent implements OnInit {
   }
 
   confirm() {
-    console.log(this.verifyForm.controls.result.value)
+    console.log(this.verifyForm.controls.result.value);
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการบันทึกข้อมูล
@@ -294,7 +308,6 @@ export class UserDetailComponent implements OnInit {
     const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header: `บันทึกข้อมูลสำเร็จ`,
-        buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 
