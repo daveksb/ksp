@@ -178,9 +178,10 @@
       requestData.process === '1' ||
       (requestData.process === '2' && requestData.status === '2')
     " -->
+<!--   [isFirstPage]="mode !== 'view'" -->
 <div class="sticky-bottom border px-2">
   <ksp-bottom-nav
-    [isFirstPage]="mode !== 'view'"
+    [isFirstPage]="false"
     [colorMode]="'blue'"
     [isLastPage]="true"
     [showCenterButtons]="true"
