@@ -77,6 +77,8 @@ export class ETempLicenseDetailComponent implements OnInit {
   forbidden: any;
   careerType = SchoolRequestSubType.ครู;
   requestLabel = '';
+  subRequestLabel = '';
+  eduSelected = true;
 
   form = this.fb.group({
     userInfo: [],
@@ -85,6 +87,9 @@ export class ETempLicenseDetailComponent implements OnInit {
     schoolAddr: [],
     edu1: [],
     edu2: [],
+    edu3: [],
+    edu4: [],
+    edu5: [],
     teachinginfo: [],
     hiringinfo: [],
     reasoninfo: [],
@@ -172,14 +177,19 @@ export class ETempLicenseDetailComponent implements OnInit {
       if (Number(params['subtype'])) {
         this.careerType = Number(params['subtype']);
       }
-      console.log('xxx= ', this.careerType);
 
       if (this.careerType === 1) {
         this.userInfoFormType = UserInfoFormType.thai;
         this.requestLabel = 'ชาวไทย';
+        this.subRequestLabel = 'ครู';
+      } else if (this.careerType === 2) {
+        this.userInfoFormType = UserInfoFormType.thai;
+        this.requestLabel = 'ชาวไทย';
+        this.subRequestLabel = 'ผู้บริหารสถานศึกษา';
       } else if (this.careerType === 5) {
         this.userInfoFormType = UserInfoFormType.foreign;
         this.requestLabel = 'ชาวต่างชาติ';
+        this.subRequestLabel = 'ครูชาวต่างชาติ';
       }
     });
   }
@@ -188,7 +198,7 @@ export class ETempLicenseDetailComponent implements OnInit {
     this.eRequestService.getKspRequestById(requestId).subscribe((res) => {
       if ('returncode' in res) return;
       this.requestData = res;
-      //console.log('details = ', parseJson(res.detail));
+      console.log('details = ', parseJson(res.schooladdrinfo));
       this.pathUserInfo(res);
       this.patchAddress(parseJson(res.addressinfo));
       this.patchEdu(parseJson(res.eduinfo));

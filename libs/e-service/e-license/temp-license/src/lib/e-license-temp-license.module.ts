@@ -19,6 +19,7 @@ import {
   FormTempLicenseNumberComponent,
   SharedFormOthersModule,
   ForbiddenPropertyFormComponent,
+  FormTeachingInfoManagerComponent,
 } from '@ksp/shared/form/others';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
@@ -62,6 +63,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     ConsiderKspRequestComponent,
     RequestNoPipe,
     ForbiddenPropertyFormComponent,
+    FormTeachingInfoManagerComponent,
   ],
   declarations: [
     ETempLicenseListComponent,

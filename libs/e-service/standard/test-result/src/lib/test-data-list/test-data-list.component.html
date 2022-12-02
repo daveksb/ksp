@@ -1,3 +1,8 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav
   ><span header>ทะเบียนข้อมูล</span>
   <span subHeader>ข้อมูลผลการทดสอบ</span></ksp-top-nav
@@ -13,7 +18,9 @@
           <div class="col">
             <label class="form-label">รหัสวิชา</label>
             <select formControlName="subjectid" class="form-select">
-              <option value="null" selected hidden disabled [value]="null">กรุณาเลือก</option>
+              <option value="null" selected hidden disabled [value]="null">
+                กรุณาเลือก
+              </option>
               <option>xxx</option>
               <option>xxx</option>
               <option>xxx</option>
@@ -23,7 +30,12 @@
             <label class="form-label">ชื่อวิชา</label>
             <select formControlName="subjectname" class="form-select">
               <option value="null" selected hidden disabled>กรุณาเลือก</option>
-              <option *ngFor="let item of courseNameOption" [value]="item?.value">{{item?.label}}</option>
+              <option
+                *ngFor="let item of courseNameOption"
+                [value]="item?.value"
+              >
+                {{ item?.label }}
+              </option>
             </select>
           </div>
         </div>
@@ -32,7 +44,9 @@
           <div class="col">
             <label class="form-label">ผลการทดสอบ</label>
             <select formControlName="examresult" class="form-select">
-              <option value="null" selected hidden disabled>กรุณาเลือก    (ผ่าน | ไม่ผ่าน)</option>
+              <option value="null" selected hidden disabled>
+                กรุณาเลือก (ผ่าน | ไม่ผ่าน)
+              </option>
               <option value="ผ่าน">ผ่าน</option>
               <option value="ไม่ผ่าน">ไม่ผ่าน</option>
             </select>
@@ -40,7 +54,9 @@
           <div class="col">
             <label class="form-label">สถานะการทดสอบ</label>
             <select formControlName="examstatus" class="form-select">
-              <option value="null" selected hidden disabled>กรุณาเลือก   (มาสอบ | ขาดสอบ)</option>
+              <option value="null" selected hidden disabled>
+                กรุณาเลือก (มาสอบ | ขาดสอบ)
+              </option>
               <option value="มาสอบ">มาสอบ</option>
               <option value="ขาดสอบ">ขาดสอบ</option>
             </select>

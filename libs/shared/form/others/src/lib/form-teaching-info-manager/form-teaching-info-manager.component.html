@@ -1,9 +1,18 @@
-<div class="bg-light px-3 py-3 mb-3">
-  <div class="box-header">ข้อมูลประสบการณ์ด้านการปฏิบัติการสอน</div>
-  <ng-container *ngFor="let item of items">
-    <div class="d-flex align-items-center">
-      <input type="checkbox" class="me-2" value="{{ item.value }}" />
-      <label class="form-label">{{ item.label }}</label>
-    </div></ng-container
-  >
-</div>
+<form [formGroup]="form">
+  <div class="bg-light px-3 py-3 mb-3">
+    <div class="box-header">ข้อมูลประสบการณ์ด้านการปฏิบัติการสอน</div>
+    <ng-container
+      formArrayName="teachingExperience"
+      *ngFor="let order of teachingExperience.controls; let i = index"
+    >
+      <div class="d-flex align-items-center">
+        <input
+          type="checkbox"
+          class="me-2"
+          [formControlName]="i"
+        />
+        <label class="form-label">{{ experiences[i].label }}</label>
+      </div></ng-container
+    >
+  </div>
+</form>

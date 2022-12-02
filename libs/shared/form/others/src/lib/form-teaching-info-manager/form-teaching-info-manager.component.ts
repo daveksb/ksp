@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { SharedFormOthersModule } from '../shared-form-others.module';
 import { providerFactory } from '@ksp/shared/utility';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { experiences } from '@ksp/shared/constant';
 
 @Component({
   selector: 'ksp-form-teaching-info-manager',
@@ -13,18 +14,17 @@ import { KspFormBaseComponent } from '@ksp/shared/interface';
   styleUrls: ['./form-teaching-info-manager.component.scss'],
   providers: providerFactory(FormTeachingInfoManagerComponent),
 })
-export class FormTeachingInfoManagerComponent
-  extends KspFormBaseComponent
-  implements OnInit
-{
-  items = items;
+export class FormTeachingInfoManagerComponent extends KspFormBaseComponent {
+  experiences = experiences;
 
-  override form = this.fb.group({});
+  override form = this.fb.group({
+    teachingExperience: this.fb.array([]),
+  });
 
   constructor(private fb: FormBuilder) {
     super();
+    this.addCheckboxes();
     this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value) => {
         this.onChange(value);
         this.onTouched();
@@ -32,18 +32,13 @@ export class FormTeachingInfoManagerComponent
     );
   }
 
-  ngOnInit(): void {}
-}
+  private addCheckboxes() {
+    this.experiences.forEach(() =>
+      this.teachingExperience.push(this.fb.control([null]))
+    );
+  }
 
-export const items = [
-  {
-    label: 'กรณี มีประสบการณ์ด้านปฏิบัติการสอนมาแล้วไม่น้อยกว่า 5 ปี',
-    name: 'lv1',
-    value: false,
-  },
-  {
-    label: `กรณี มีประสบการณ์ด้านการสอนด้านการสอนและมีประสบการณ์ในตำแหน่งหัวหน้าหมวดหรือหัวหน้าสาย หัวหน้างาน หรือตำแหน่งบริหารอื่น ในสถานศึกษาไม่น้อยกว่า 2 ปี`,
-    name: 'lv2',
-    value: false,
-  },
-];
+  get teachingExperience() {
+    return this.form.controls.teachingExperience as FormArray;
+  }
+}

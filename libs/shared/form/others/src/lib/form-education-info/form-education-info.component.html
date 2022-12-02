@@ -119,11 +119,19 @@
     <div class="row" *ngIf="userEducationType === FormTypeEnum.foreign">
       <div class="col-6 mb-2">
         <label class="form-label">หน่วยงานที่รับรองวิทยฐานะมหาวิทยาลัย</label>
-        <input class="form-control" type="text" />
+        <input
+          class="form-control"
+          type="text"
+          formControlName="institutionApprove"
+        />
       </div>
       <div class="col-6 mb-2">
         <label class="form-label">เว็บไซต์ของหน่วยงาน</label>
-        <input class="form-control" type="text" />
+        <input
+          class="form-control"
+          type="text"
+          formControlName="institutionWebsite"
+        />
       </div>
     </div>
 

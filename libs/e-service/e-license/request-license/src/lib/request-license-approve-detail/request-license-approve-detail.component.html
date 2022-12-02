@@ -1,6 +1,6 @@
 <ksp-top-nav
   ><span header>ยื่นใบคำขอ</span
-  ><span subHeader>ใบคำขอใบอนุญาตประกอบวิชาชีพ</span></ksp-top-nav
+  ><span subHeader>ใบคำขอใบอนุญาตประกอบวิชาชีพ (ชาวไทย)</span></ksp-top-nav
 >
 
 <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
@@ -41,7 +41,7 @@
           <ksp-form-address
             formControlName="address1"
             [mode]="'view'"
-            [isDarkMode]="false"
+            [isDarkMode]="true"
             [provinces]="provinces$ | async"
             [amphurs]="amphurs1$ | async"
             [tumbols]="tumbols1$ | async"
@@ -52,7 +52,7 @@
           <ksp-form-address
             formControlName="address2"
             [mode]="'view'"
-            [isDarkMode]="false"
+            [isDarkMode]="true"
             [provinces]="provinces$ | async"
             [amphurs]="amphurs2$ | async"
             [tumbols]="tumbols2$ | async"
@@ -130,7 +130,7 @@
         </ng-container>
 
         <mat-tab label="ลักษณะต้องห้าม">
-          <div>
+          <div class="bg-light p-3">
             <ksp-forbidden-property
               [input]="prohibitProperty"
               [mode]="'view'"

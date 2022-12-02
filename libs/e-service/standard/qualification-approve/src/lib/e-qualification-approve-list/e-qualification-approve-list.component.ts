@@ -34,6 +34,8 @@ export class EQualificationApproveListComponent implements AfterViewInit {
   careerTypeList = qualificationCareerTypeList;
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<any>();
+  searchNotFound = false;
+
   form = this.fb.group({
     search: [{ requesttype: '6' }],
   });
@@ -131,13 +133,16 @@ export class EQualificationApproveListComponent implements AfterViewInit {
         this.sort.active = sortState.active;
         this.sort.direction = sortState.direction;
         this.sort.sortChange.emit(sortState);
+        this.searchNotFound = false;
       } else {
         this.clear();
+        this.searchNotFound = true;
       }
     });
   }
 
   clear() {
+    this.searchNotFound = false;
     this.dataSource.data = [];
     this.form.reset();
     this.form.controls.search.patchValue({ requesttype: '3' });

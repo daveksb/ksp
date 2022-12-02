@@ -24,6 +24,7 @@ import {
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { EKnowledgeCertConfirmComponent } from './e-knowledge-cert-confirm/e-knowledge-cert-confirm.component';
 import { ValidateKspRequestComponent } from '@ksp/e-service/e-license/approve-ksp-request';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export const routes: Routes = [
   {
@@ -75,6 +76,7 @@ export const routes: Routes = [
     ThaiDatePipe,
     EServiceLicenseSearchComponent,
     ValidateKspRequestComponent,
+    MatProgressSpinnerModule,
   ],
   declarations: [
     EKnowledgeCertListComponent,

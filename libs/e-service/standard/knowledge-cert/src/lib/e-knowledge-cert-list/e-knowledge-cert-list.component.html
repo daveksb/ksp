@@ -1,5 +1,11 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
+
 <ksp-top-nav><span header>ยื่นใบคำขอ</span>
-  <span subHeader>ขอรับรองความรู้</span>
+  <span subHeader>ใบคำขอรับรองความรู้</span>
 </ksp-top-nav>
 
 <form [formGroup]="form">

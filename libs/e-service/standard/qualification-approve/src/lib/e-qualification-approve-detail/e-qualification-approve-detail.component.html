@@ -1,15 +1,11 @@
 <ksp-top-nav>
-  <span header>ย่ืนใบคำขอ</span>
-  <span subHeader
-    >ขอรับรองคุณวุฒิการศึกษาเพื่อใช้ในการขอรับใบอนุญาตประกอบวิชาชีพ</span
-  >
+  <span header>ยื่นใบคำขอ</span>
+  <span subHeader>ใบคำขอรับรองคุณวุฒิทางการศึกษา</span>
 </ksp-top-nav>
 
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 px-4 py-2">
-    <div class="box-header">
-      รายละเอียดใบคำขอรับรองคุณวุฒิการศึกษาเพื่อใช้ในการขอรับใบอนุญาตประกอบวิชาชีพ
-    </div>
+    <div class="box-header">รายละเอียดใบคำขอรับรองคุณวุฒิทางการศึกษา</div>
     <div class="bg-white py-3 px-4">
       <div>
         <ksp-request-header-info
@@ -20,7 +16,7 @@
 
         <div class="bg-light px-3 py-2 default-width">
           <div class="box-header text-primary">ข้อมูลผู้ขอยื่น</div>
-          <div class="row">
+          <div class="row mb-2">
             <div class="col-6">
               <label class="form-label">สังกัด</label>
               <input
@@ -158,7 +154,6 @@
         </mat-tab-group>
       </div>
     </div>
-    <br />
 
     <ng-container
       *ngIf="!(requestData.process === '3' && requestData.status !== '1')"
@@ -184,13 +179,12 @@
     </div> -->
   </div>
 </form>
-<div class="sticky-bottom border">
+<div class="sticky-bottom border px-2">
   <ksp-bottom-nav
     [isFirstPage]="true"
     [showCenterButtons]="true"
-    [showSaveButton]="true"
+    [showSaveButton]="false"
     (cancelClicked)="navigateBack()"
-    (saveClicked)="next()"
     (nextClicked)="next()"
   ></ksp-bottom-nav>
 </div>
