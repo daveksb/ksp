@@ -3,13 +3,13 @@
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-column-gap: 24px;
   background: #f6f6f6;
-  border-radius: 20px;
-  padding: 24px 60px;
+  border-radius: 18px;
+  padding: 24px 48px;
 }
 
 .box {
   text-align: center;
-  border-radius: 20px;
+  border-radius: 18px;
   padding: 12px;
 }
 
@@ -74,7 +74,7 @@
     grid-row-gap: 24px;
     background: #f6f6f6;
     border-radius: 20px;
-    padding: 24px 60px;
+    padding: 24px 48px;
   }
 }
 
@@ -85,8 +85,8 @@
     grid-column-gap: 24px;
     grid-row-gap: 24px;
     background: #f6f6f6;
-    border-radius: 20px;
-    padding: 24px 60px;
+    border-radius: 18px;
+    padding: 24px 48px;
   }
 }
 
@@ -97,7 +97,7 @@
     grid-column-gap: 12px;
     grid-row-gap: 12px;
     background: #f6f6f6;
-    border-radius: 20px;
+    border-radius: 18px;
     padding: 12px;
   }
 
