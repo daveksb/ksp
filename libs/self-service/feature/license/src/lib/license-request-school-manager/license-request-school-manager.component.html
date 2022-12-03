@@ -79,22 +79,9 @@
           [bureaus]="bureau$ | async"
           (provinceChanged)="provinceChanged(3, $event)"
           (amphurChanged)="amphurChanged(3, $event)"
+          [showOnlineForm]="true"
         >
         </self-service-form-user-workplace>
-        <div class="row mb-3">
-          <div class="col">
-            <label class="form-label">เว็บไซต์</label>
-            <input type="text" class="form-control" formControlName="website" />
-          </div>
-          <div class="col">
-            <label class="form-label">อีเมล</label>
-            <input
-              type="text"
-              class="form-control"
-              formControlName="workEmail"
-            />
-          </div>
-        </div>
       </mat-tab>
 
       <mat-tab label="ข้อมูลทางการศึกษา">
@@ -104,11 +91,6 @@
           [uniqueTimestamp]="uniqueTimestamp"
           [educationTypes]="'schManager'"
         ></self-service-form-user-education>
-        <!-- <hr />
-      <ksp-form-attachment
-        [groups]="eduFiles"
-        [title]="'กรุณาแนบหลักฐานประกอบวุฒิทางการศึกษา'"
-      ></ksp-form-attachment> -->
       </mat-tab>
 
       <mat-tab label="ข้อมูลประสบการณ์วิชาชีพ">

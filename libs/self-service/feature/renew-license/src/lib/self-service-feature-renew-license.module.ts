@@ -4,10 +4,7 @@ import { RenewLicenseRequestComponent } from './renew-license-request/renew-lice
 import { RouterModule, Routes } from '@angular/router';
 import { SelfServiceMasterPageComponent } from '@ksp/self-service/feature/master-page';
 import { MatTabsModule } from '@angular/material/tabs';
-import {
-  FormUploadImageComponent,
-  SelfServiceFormModule,
-} from '@ksp/self-service/form';
+import { FormUploadImageComponent, SelfServiceFormModule } from '@ksp/self-service/form';
 import { TopNavComponent } from '@ksp/shared/menu';
 import {
   RequestStatusComponent,
@@ -79,11 +76,11 @@ export const routes: Routes = [
     TopNavComponent,
     SelfServiceLicenseInfoComponent,
     SharedFormOthersModule,
-    SelfServiceFormModule,
     RequestStatusComponent,
     RouterModule.forChild(routes),
     MatStepperModule,
     ReactiveFormsModule,
+    SelfServiceFormModule,
   ],
   declarations: [
     RenewLicenseRequestComponent,

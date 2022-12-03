@@ -73,6 +73,7 @@
       <mat-tab label="สถานที่ทำงาน">
         <self-service-form-user-workplace
           formControlName="workplace"
+          [showOnlineForm]="true"
           [showNotRequire]="true"
           [showContactForm]="true"
           [provinces]="provinces3$ | async"
@@ -83,34 +84,6 @@
           (amphurChanged)="amphurChanged(3, $event)"
         >
         </self-service-form-user-workplace>
-        <!--  <div class="row">
-          <div class="col-md-6 mb-3">
-            <label class="form-label">โทรศัพท์</label>
-            <input
-              class="form-control"
-              type="text"
-              formControlName="workPhone"
-            />
-          </div>
-          <div class="col-md-6 mb-3">
-            <label class="form-label">โทรสาร</label>
-            <input class="form-control" type="text" formControlName="fax" />
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label class="form-label">อีเมล</label>
-            <input
-              class="form-control"
-              type="text"
-              formControlName="workEmail"
-            />
-          </div>
-          <div class="col-md-6 mb-3">
-            <label class="form-label">เว็บไซต์</label>
-            <input class="form-control" type="text" formControlName="website" />
-          </div>
-        </div> -->
       </mat-tab>
 
       <mat-tab label="ข้อมูลคุณสมบัติของผู้ขอต่ออายุใบอนุญาต">
