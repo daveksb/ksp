@@ -5,8 +5,7 @@
 
 <div class="main__container px-4 py-2">
   <self-service-request-status
-    [title]="'รายละเอียดใบคำขอ'"
-    [idcardNo]="(myInfo$ | async)?.idcardno || null"
+    [idcardNo]="userInfo && userInfo.idcardno"
   ></self-service-request-status>
 
   <form [formGroup]="form">

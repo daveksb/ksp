@@ -69,7 +69,6 @@ export class RenewLicenseRequestComponent
   });
 
   disableNextButton = false;
-  myInfo$!: Observable<SelfMyInfo>;
   today = thaiDate(new Date());
 
   workingInfoFiles: any[] = [];
@@ -100,7 +99,6 @@ export class RenewLicenseRequestComponent
   }
 
   ngOnInit(): void {
-    this.myInfo$ = this.myInfoService.getMyInfo();
     this.getListData();
     this.checkButtonsDisableStatus();
     this.checkRequestId();

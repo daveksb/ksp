@@ -17,7 +17,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { formatRequestNo, parseJson, thaiDate } from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
-import { SelfGetRequest, SelfRequest } from '@ksp/shared/interface';
+import { SelfGetRequest, SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
 import localForage from 'localforage';
 
 @Component({
@@ -46,6 +46,7 @@ export abstract class LicenseFormBaseComponent {
   prohibitProperty: any;
   myImage = '';
   imageId = '';
+  userInfo!: SelfMyInfo;
 
   constructor(
     protected generalInfoService: GeneralInfoService,
@@ -115,6 +116,9 @@ export abstract class LicenseFormBaseComponent {
           this.patchWorkplace(parseJson(res.schooladdrinfo));
         }
       }
+      this.userInfo = {
+        ...res,
+      };
     });
   }
 

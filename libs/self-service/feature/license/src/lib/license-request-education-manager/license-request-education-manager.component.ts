@@ -17,7 +17,7 @@ import {
   SelfRequestService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { FileGroup, SelfRequest } from '@ksp/shared/interface';
+import { FileGroup, SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
 import {
   getCookie,
   parseJson,
@@ -68,7 +68,6 @@ export class LicenseRequestEducationManagerComponent
   implements OnInit
 {
   userInfoType = UserInfoFormType.thai;
-
   experienceFiles: any[] = [];
   eduFiles: any[] = [];
 

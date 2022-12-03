@@ -62,7 +62,6 @@ export class LicenseRequestComponent
   implements OnInit
 {
   userInfoType = UserInfoFormType.thai;
-  userInfo!: SelfMyInfo;
 
   override form = this.fb.group({
     userInfo: [],
@@ -109,11 +108,6 @@ export class LicenseRequestComponent
     this.checkRequestId();
     this.form.valueChanges.subscribe((res) => {
       //console.log('1 = ', this.userInfoForm.valid);
-    });
-    this.myInfoService.getMyInfo().subscribe((res) => {
-      this.userInfo = {
-        ...res,
-      };
     });
   }
 

@@ -17,7 +17,7 @@ import {
   SelfRequestService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { FileGroup, SelfRequest } from '@ksp/shared/interface';
+import { FileGroup, SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
 import {
   getCookie,
   parseJson,
@@ -92,7 +92,6 @@ export class RenewLicenseEducationManagerComponent
   });
 
   disableNextButton = false;
-
   workingInfoFiles: any[] = [];
   workingInfoFiles2: any[] = [];
   licenseFiles: any[] = [];

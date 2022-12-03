@@ -22,7 +22,7 @@ import {
   replaceEmptyWithNull,
   toLowercaseProp,
 } from '@ksp/shared/utility';
-import { FileGroup, SelfRequest } from '@ksp/shared/interface';
+import { FileGroup, SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
 import { LicenseFormBaseComponent } from '@ksp/self-service/form';
 import * as _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
@@ -68,7 +68,6 @@ export class LicenseRequestSchoolManagerComponent
   implements OnInit
 {
   userInfoType = UserInfoFormType.thai;
-
   experienceFiles: any[] = [];
   eduFiles: any[] = [];
 

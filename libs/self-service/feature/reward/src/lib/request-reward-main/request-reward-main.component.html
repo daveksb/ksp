@@ -19,7 +19,9 @@
 
     <div *ngIf="rewardType.value !== '0'">
       <br />
-      <self-service-request-status></self-service-request-status>
+      <self-service-request-status
+        [idcardNo]="myInfo && myInfo.idcardno"
+      ></self-service-request-status>
     </div>
     <br />
     <div *ngIf="rewardType.value === '40'">

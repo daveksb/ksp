@@ -31,15 +31,6 @@ import * as _ from 'lodash';
 import { Observable } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
-/* const OBJECTIVE_FILES = [
-  { name: '1. ', fileid: '', filename: '' },
-  {
-    name: '2. รูปภาพถ่ายหน้าตรง ขนาด 1.5 x 2   นิ้ว',
-    fileid: '',
-    filename: '',
-  },
-]; */
-
 const OBJECTIVE_FILES: FileGroup[] = [
   {
     name: '1. สำเนาหลักฐานแสดงวุฒิการศึกษา',

@@ -23,7 +23,7 @@ import {
   replaceEmptyWithNull,
   toLowercaseProp,
 } from '@ksp/shared/utility';
-import { FileGroup, SelfRequest } from '@ksp/shared/interface';
+import { FileGroup, SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -68,7 +68,6 @@ export class LicenseRequestStudySupervisionComponent
   implements OnInit
 {
   userInfoType = UserInfoFormType.thai;
-
   experienceFiles: any[] = [];
   eduFiles: any[] = [];
 
