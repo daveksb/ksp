@@ -77,9 +77,9 @@ export class UserDetailComponent implements OnInit {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.form2.disable();
 
-    this.verifyForm.valueChanges.subscribe((res) => {
+    /* this.verifyForm.valueChanges.subscribe((res) => {
       console.log('res = ', res);
-    });
+    }); */
   }
 
   checkRequestId() {
@@ -94,14 +94,17 @@ export class UserDetailComponent implements OnInit {
   loadRequestFromId(id: number) {
     this.eRequestService.getKspRequestById(id).subscribe((res) => {
       this.requestData = res;
+      //console.log('res = ', res.status);
 
       res.status === '1' ? (this.mode = 'edit') : (this.mode = 'view');
 
-      /* if (res.status === '1') {
-        this.verifyForm.patchValue(1)
+     /*  if (res.status === '2') {
+        console.log('approve');
+      } else if (res.status === '3') {
+        console.log('not approve ');
       } */
-      //console.log('file = ', parseJson(res.fileinfo));
 
+      //console.log('file = ', parseJson(res.fileinfo));
       const files = parseJson(res.fileinfo);
 
       if (files && Array.isArray(files)) {

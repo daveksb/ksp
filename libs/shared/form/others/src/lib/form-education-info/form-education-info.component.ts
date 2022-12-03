@@ -36,6 +36,8 @@ export class FormEducationInfoComponent
     grade: [],
     otherProperty: [],
     academicYear: [],
+    institutionApprove: [],
+    institutionWebsite: [],
   });
 
   constructor(private fb: FormBuilder) {

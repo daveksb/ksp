@@ -2,9 +2,9 @@ import { FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { EUniService } from '@ksp/shared/service';
+import { EUniService, LoaderService } from '@ksp/shared/service';
 import { KspPaginationComponent, ListData } from '@ksp/shared/interface';
-import { map } from 'rxjs';
+import { map, Subject } from 'rxjs';
 const DEFAULT_DATE = new Date().getFullYear() + 543 + '';
 @Component({
   selector: 'ksp-test-data-list',
@@ -15,6 +15,7 @@ export class TestDataListComponent
   extends KspPaginationComponent
   implements OnInit
 {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<TestResult>();
   yearOption: ListData[] = [];
@@ -31,7 +32,8 @@ export class TestDataListComponent
   constructor(
     private router: Router,
     private eUniservice: EUniService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private loaderService: LoaderService
   ) {
     super();
     this.getYear();
@@ -65,7 +67,7 @@ export class TestDataListComponent
 
   clear() {
     this.dataSource.data = [];
-    this.form.reset()
+    this.form.reset();
   }
 
   import() {

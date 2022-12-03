@@ -12,7 +12,7 @@ import localForage from 'localforage';
   templateUrl: './self-service-thai-login.component.html',
   styleUrls: ['./self-service-thai-login.component.css'],
 })
-export class SelfServiceThaiLoginComponent implements OnInit {
+export class SelfServiceThaiLoginComponent {
   eyeIconClicked = false;
   loginFail = false;
 
@@ -29,12 +29,6 @@ export class SelfServiceThaiLoginComponent implements OnInit {
     private myInfoService: MyInfoService
   ) {}
 
-  ngOnInit(): void {
-    this.form.valueChanges.subscribe((res) => {
-      this.loginFail = false;
-    });
-  }
-
   register() {
     this.router.navigate(['/landing']);
   }
@@ -48,10 +42,12 @@ export class SelfServiceThaiLoginComponent implements OnInit {
         this.router.navigate(['/home']);
       } else if (res.returncode === '99') {
         this.loginFail = true;
+        this.form.reset();
       } else {
         return;
       }
     });
+    this.loginFail = false;
   }
 
   forgot() {

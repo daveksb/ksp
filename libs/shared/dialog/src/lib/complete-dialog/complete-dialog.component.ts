@@ -19,6 +19,7 @@ export class CompleteDialogComponent {
       subContent: string;
       showPrintButton: boolean;
       showImg: boolean;
+      isDanger: boolean;
     }
   ) {}
 

@@ -83,6 +83,11 @@ add asterisk for required feild
   background-size: 12px;
 }
 
+.form-select:disabled {
+  background-image: url(/assets/images/drop-down-first.png);
+  background-size: 12px;
+}
+
 .sticky-bottom {
   position: sticky;
   background-color: white;

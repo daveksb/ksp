@@ -9,12 +9,13 @@ import {
   SelfServiceRequestType,
 } from '@ksp/shared/constant';
 import { EsSearchPayload, SelfRequest } from '@ksp/shared/interface';
-import { ERequestService } from '@ksp/shared/service';
+import { ERequestService, LoaderService } from '@ksp/shared/service';
 import {
   checkProcess,
   checkStatus,
   replaceEmptyWithNull,
 } from '@ksp/shared/utility';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'ksp-edit-license-approve-list',
@@ -22,6 +23,7 @@ import {
   styleUrls: ['./edit-license-approve-list.component.scss'],
 })
 export class EditLicenseApproveListComponent implements AfterViewInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfRequest>();
   SchoolRequestSubType = SchoolRequestSubType;
@@ -36,7 +38,8 @@ export class EditLicenseApproveListComponent implements AfterViewInit {
   constructor(
     private fb: FormBuilder,
     private requestService: ERequestService,
-    private router: Router
+    private router: Router,
+    private loaderService: LoaderService
   ) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

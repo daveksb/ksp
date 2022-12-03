@@ -1,10 +1,18 @@
 <div class="d-flex flex-column">
   <ng-container *ngIf="data.showImg || false">
-    <div class="my-3 text-center">
-      <img src="/assets/images/Succees-2.png" class="w-25 h-25" /></div
+    <div class="my-3 text-center" *ngIf="data.isDanger">
+      <img src="/assets/images/x-circle-fill.svg" class="success-img" />
+    </div>
+    <div class="my-3 text-center" *ngIf="!data.isDanger">
+      <img src="/assets/images/check-circle-fill.svg" class="fail-img" /></div
   ></ng-container>
 
-  <div class="header__title">{{ data.header }}</div>
+  <div
+    class="header__title"
+    [class]="data.isDanger ? 'text-danger' : 'text-black'"
+  >
+    {{ data.header }}
+  </div>
 
   <div class="detail__container">
     <div class="detail__title">{{ data.content }}</div>

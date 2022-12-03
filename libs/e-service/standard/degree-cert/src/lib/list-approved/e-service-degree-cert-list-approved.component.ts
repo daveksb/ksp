@@ -42,7 +42,7 @@ export class EServiceDegreeCertApprovedListComponent extends KspPaginationCompon
 
   constructor(
     private fb: FormBuilder,
-    private router: Router, 
+    private router: Router,
     private route: ActivatedRoute,
     private requestService: EUniService,
     private uniInfoService: UniInfoService,

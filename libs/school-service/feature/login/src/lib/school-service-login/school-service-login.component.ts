@@ -10,7 +10,7 @@ import * as CryptoJs from 'crypto-js';
   templateUrl: './school-service-login.component.html',
   styleUrls: ['./school-service-login.component.scss'],
 })
-export class SchoolServiceLoginComponent implements OnInit {
+export class SchoolServiceLoginComponent {
   loginFail = false;
 
   form = this.fb.group({
@@ -23,12 +23,6 @@ export class SchoolServiceLoginComponent implements OnInit {
     private schoolServiceFeatureLoginService: SchoolServiceFeatureLoginService
   ) {}
 
-  ngOnInit(): void {
-    this.form.valueChanges.subscribe(() => {
-      this.loginFail = false;
-    });
-  }
-
   login() {
     const payload: any = this.form.controls.login.value;
     payload.password = CryptoJs.SHA256(`${payload.password}`).toString();
@@ -38,6 +32,7 @@ export class SchoolServiceLoginComponent implements OnInit {
       .subscribe((res) => {
         if (res.returnCode == 99) {
           this.loginFail = true;
+          this.form.controls.login.reset();
           return;
         }
 
@@ -48,6 +43,7 @@ export class SchoolServiceLoginComponent implements OnInit {
         setCookie('schoolId', res.schoolId, 1);
         this.router.navigate(['/temp-license', 'list']);
       });
+    this.loginFail = false;
   }
 
   register() {
