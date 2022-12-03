@@ -33,6 +33,7 @@ import {
 import {
   changeDate,
   formatDate,
+  formatRequestNo,
   getCookie,
   mapMultiFileInfo,
   parseJson,
@@ -42,7 +43,6 @@ import {
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { EMPTY, Observable, switchMap } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
-import localForage from 'localforage';
 
 @UntilDestroy()
 @Component({
@@ -73,6 +73,7 @@ export class QualificationDetailComponent implements OnInit {
   countries$!: Observable<Country[]>;
   nationalitys$!: Observable<Nationality[]>;
   schoolId = getCookie('schoolId');
+  userId = getCookie('userId');
   careerType = '';
   requestId!: number;
   requestData = new KspRequest();
@@ -84,15 +85,12 @@ export class QualificationDetailComponent implements OnInit {
   schoolName!: any;
   address!: any;
   requestLabel = '';
-
   isOptional2 = false;
   isOptional3 = false;
   isOptional4 = false;
-
   showEdu2 = false;
   showEdu3 = false;
   showEdu4 = false;
-
   checkbox2 = false;
   checkbox3 = false;
   checkbox4 = false;
@@ -209,6 +207,7 @@ export class QualificationDetailComponent implements OnInit {
   loadRequestData(id: number) {
     this.requestService.schGetRequestById(id).subscribe((req) => {
       if (req) {
+        this.requestData = req;
         req.birthdate = formatDate(req.birthdate);
         req.isforeign = req.isforeign ? '1' : '0';
 
@@ -310,38 +309,34 @@ export class QualificationDetailComponent implements OnInit {
   }
 
   cancel() {
-    if (this.mode == 'view') {
-      const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-        data: {
-          title: `คุณต้องการยกเลิกการยื่นคำขอ
+    console.log('this.requestData = ', this.requestData);
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: `คุณต้องการยกเลิกการยื่นคำขอ
           ใช่หรือไม่? `,
-          btnLabel: 'ยืนยัน',
-        },
+        btnLabel: 'ยืนยัน',
+      },
+    });
+    confirmDialog.componentInstance.confirmed
+      .pipe(
+        switchMap((res) => {
+          if (res) {
+            const payload: KspRequestProcess = {
+              requestid: `${this.requestId}`,
+              process: this.requestData.process,
+              status: '0',
+              detail: null,
+              userid: this.userId,
+              paymentstatus: null,
+            };
+            return this.requestService.schUpdateRequestProcess(payload);
+          }
+          return EMPTY;
+        })
+      )
+      .subscribe(() => {
+        this.onCancelCompleted();
       });
-      confirmDialog.componentInstance.confirmed
-        .pipe(
-          switchMap((res) => {
-            if (res) {
-              const payload: KspRequestProcess = {
-                requestid: `${this.requestId}`,
-                process: `${this.requestData.process}`,
-                status: '0',
-                detail: null,
-                userid: null,
-                paymentstatus: null,
-              };
-
-              return this.requestService.schUpdateRequestProcess(payload);
-            }
-            return EMPTY;
-          })
-        )
-        .subscribe(() => {
-          this.onCancelCompleted();
-        });
-    } else {
-      this.router.navigate(['/temp-license', 'list']);
-    }
   }
 
   onSave() {
@@ -407,7 +402,7 @@ export class QualificationDetailComponent implements OnInit {
             userInfo.bureauname = this.bureauName;
             userInfo.schoolname = this.schoolName;
             userInfo.schooladdress = this.address;
-            userInfo.process = '2';
+            userInfo.process = '1';
             userInfo.status = '1';
             userInfo.birthdate = changeDate(userInfo.birthdate);
             let eduForm = [{ ...formData.edu1, ...{ degreeLevel: 1 } }];
@@ -451,6 +446,11 @@ export class QualificationDetailComponent implements OnInit {
         })
       )
       .subscribe((res) => {
+        if (res.returncode === '409') {
+          this.duplicateRequestDialog();
+          return;
+        }
+
         if (res) {
           this.onCompleted();
         }
@@ -482,12 +482,26 @@ export class QualificationDetailComponent implements OnInit {
     this.router.navigate(['/temp-license', 'list']);
   }
 
+  duplicateRequestDialog() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header: `หมายเลขบัตรประชาชนนี้ได้ถูกใช้ยื่นใบคำขอ
+        และกำลังอยู่ในระหว่างดำเนินการ !`,
+      },
+    });
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.backToListPage();
+      }
+    });
+  }
+
   onCancelCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header: 'ระบบทำการยกเลิกเรียบร้อย',
         content: `วันที่ : ${thaiDate(new Date())}
-        เลขที่คำขอ : ${this.requestData.requestno}`,
+        เลขที่คำขอ : ${formatRequestNo(this.requestData.requestno || '')}`,
       },
     });
 

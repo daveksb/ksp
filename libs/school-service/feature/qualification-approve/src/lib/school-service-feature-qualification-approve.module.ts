@@ -8,6 +8,7 @@ import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SchoolContainerPageComponent } from '@ksp/school-service/feature/container-page';
 import { Route, RouterModule } from '@angular/router';
+import { RequestNoPipe } from '@ksp/shared/pipe';
 
 export const routes: Route[] = [
   {
@@ -36,6 +37,7 @@ export const routes: Route[] = [
     SharedFormOthersModule,
     MatTabsModule,
     BottomNavComponent,
+    RequestNoPipe,
   ],
   declarations: [QualificationDetailComponent],
   exports: [QualificationDetailComponent],
