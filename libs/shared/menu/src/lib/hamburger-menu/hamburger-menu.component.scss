@@ -157,6 +157,15 @@ nav .m-menu__checkbox:checked ~ .m-menu {
   color: #e87a02;
 }
 
+::-webkit-scrollbar {
+  height: 4px;
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.26);
+}
+
 @media (min-width: 576px) {
   .top-nav {
     background-color: #ffdec3;

@@ -17,6 +17,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { EditLicenseApproveConfirmComponent } from './edit-license-approve-confirm/edit-license-approve-confirm.component';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { ValidateKspRequestComponent } from '@ksp/e-service/e-license/approve-ksp-request';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export const routes: Routes = [
   {
@@ -65,6 +66,7 @@ export const routes: Routes = [
     MatDialogModule,
     RequestHeaderInfoComponent,
     ValidateKspRequestComponent,
+    MatProgressSpinnerModule,
   ],
   declarations: [
     EditLicenseApproveListComponent,

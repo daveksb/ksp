@@ -4,9 +4,9 @@
       <div class="fs-5 text-dark">ปริญญาตรี</div>
       <div class="d-flex align-items-center">
         <ksp-add-row-button
-          [ngClass]="mode === 'view' ? 'text-secondary' : 'text-primary'"
+          [class]="'text-primary'"
+          *ngIf="mode !== 'view'"
           (addRowClick)="addFormArray(1)"
-          *ngif="mode === 'view'"
         >
           เพิ่ม
         </ksp-add-row-button>
@@ -57,9 +57,9 @@
       <div class="fs-5 text-dark">ปริญญาโท</div>
       <div class="d-flex align-items-center">
         <ksp-add-row-button
-          [ngClass]="mode === 'view' ? 'text-secondary' : 'text-primary'"
+          [class]="'text-primary'"
+          *ngIf="mode !== 'view'"
           (addRowClick)="addFormArray(2)"
-          *ngif="mode === 'view'"
         >
           เพิ่ม
         </ksp-add-row-button>
@@ -110,9 +110,9 @@
       <div class="fs-5 text-dark">ปริญญาเอก</div>
       <div class="d-flex align-items-center">
         <ksp-add-row-button
-          [ngClass]="mode === 'view' ? 'text-secondary' : 'text-primary'"
+          [class]="'text-primary'"
+          *ngIf="mode !== 'view'"
           (addRowClick)="addFormArray(3)"
-          *ngif="mode === 'view'"
         >
           เพิ่ม
         </ksp-add-row-button>
@@ -163,9 +163,9 @@
       <div class="fs-5 text-dark">ปริญญาอื่นๆ</div>
       <div class="d-flex align-items-center">
         <ksp-add-row-button
-          [ngClass]="mode === 'view' ? 'text-secondary' : 'text-primary'"
+          [class]="'text-primary'"
+          *ngIf="mode !== 'view'"
           (addRowClick)="addFormArray(4)"
-          *ngif="mode === 'view'"
         >
           เพิ่ม
         </ksp-add-row-button>
@@ -214,9 +214,9 @@
       <div class="fs-5 text-dark">ใบรับรองฝึกอาชีพ</div>
       <div class="d-flex align-items-center">
         <ksp-add-row-button
-          [ngClass]="mode === 'view' ? 'text-secondary' : 'text-primary'"
+          [class]="'text-primary'"
+          *ngIf="mode !== 'view'"
           (addRowClick)="addFormArray(5)"
-          *ngif="mode === 'view'"
         >
           เพิ่ม
         </ksp-add-row-button>

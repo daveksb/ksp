@@ -9,12 +9,13 @@ import {
   SelfServiceRequestType,
 } from '@ksp/shared/constant';
 import { EsSearchPayload, SelfRequest } from '@ksp/shared/interface';
-import { ERequestService } from '@ksp/shared/service';
+import { ERequestService, LoaderService } from '@ksp/shared/service';
 import {
   SelfCheckProcess,
   SelfcheckStatus,
   replaceEmptyWithNull,
 } from '@ksp/shared/utility';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'ksp-e-knowledge-cert-list',
@@ -22,6 +23,7 @@ import {
   styleUrls: ['./e-knowledge-cert-list.component.scss'],
 })
 export class EKnowledgeCertListComponent implements AfterViewInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfRequest>();
   SchoolRequestSubType = SchoolRequestSubType;
@@ -36,7 +38,8 @@ export class EKnowledgeCertListComponent implements AfterViewInit {
   constructor(
     private fb: FormBuilder,
     private requestService: ERequestService,
-    private router: Router
+    private router: Router,
+    private loaderService: LoaderService
   ) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

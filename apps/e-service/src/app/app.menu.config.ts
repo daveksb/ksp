@@ -129,7 +129,7 @@ export const eLicenseMenu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอเปลี่ยนแปลง/แก้ไขใบอนุญาต(ชาวไทย)',
+    label: 'ใบคำขอเปลี่ยนแปลง/แก้ไขใบอนุญาต',
     path: '',
     isExpanded: false,
     subMenuName: 'edit-thai',
@@ -144,7 +144,7 @@ export const eLicenseMenu: MenuConfig[] = [
       },
     ],
   },
-  {
+  /* {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขอเปลี่ยนแปลง/แก้ไขใบอนุญาต(ชาวต่างชาติ)',
     path: '',
@@ -160,7 +160,7 @@ export const eLicenseMenu: MenuConfig[] = [
         label: 'พิจารณาขอเปลี่ยนแปลง/แก้ใบอนุญาต',
       },
     ],
-  },
+  }, */
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขอใบแทนใบอนุญาตประกอบวิชาชีพ',

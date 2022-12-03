@@ -10,10 +10,11 @@ import { providerFactory } from '@ksp/shared/utility';
   providers: providerFactory(FormReasonInfoComponent),
 })
 export class FormReasonInfoComponent extends KspFormBaseComponent {
-  @Input() careerType = 0;
+  @Input() careerType!: number;
 
   teacherReasonList = teacherReasonList;
   schoolReasonList = schoolReasonsList;
+  schoolReasonList2 = schoolReasonsList2;
 
   override form = this.fb.group({
     schoolReasons: this.fb.array([]),
@@ -109,7 +110,7 @@ export const schoolReasonsList = [
   },
 ];
 
-export const schoolReasons2 = [
+export const schoolReasonsList2 = [
   {
     label:
       'ผู้ขอประกอบวิชาชีพผู้บริหารสถานศึกษา เป็นผู้มีความรู้ ความสามารถในการบริหารสถานศึกษา',

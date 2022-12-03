@@ -303,9 +303,9 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   getLabel() {
     const req = this.saveData.requestData;
     if (req.requesttype === '6') {
-      return `คำขอรับรองคุณวุฒิการศึกษาเพื่อใช้ในการขอรับใบอนุญาตประกอบวิชาชีพ`;
+      return `คำขอรับรองคุณวุฒิการศึกษา`;
     } else {
-      const message = `คำขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ`;
+      const message = `คำขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)`;
       if (req.careertype === '1') {
         return message + 'ครู';
       } else if (req.careertype === '2') {

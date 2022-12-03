@@ -11,6 +11,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const routes: Routes = [
   {
@@ -47,6 +48,7 @@ const routes: Routes = [
     FormsModule,
     ThaiDatePipe,
     RouterModule.forChild(routes),
+    MatProgressSpinnerModule,
   ],
   declarations: [TestDataListComponent, TestDataDetailComponent],
   exports: [TestDataListComponent, TestDataDetailComponent],

@@ -20,6 +20,7 @@ import {
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 import { MatSortModule } from '@angular/material/sort';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export const routes: Routes = [
   {
@@ -67,6 +68,7 @@ export const routes: Routes = [
     RequestNoPipe,
     RequestSearchComponent,
     MatSortModule,
+    MatProgressSpinnerModule,
   ],
   declarations: [ForeignLicenseDetailComponent, ForeignLicenseListComponent],
 })

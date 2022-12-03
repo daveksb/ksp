@@ -48,24 +48,18 @@
           >
             <span>ที่อยู่ทะเบียนบ้าน</span>
           </ksp-form-address>
-          <hr />
-          <ksp-form-address
-            formControlName="address2"
-            [mode]="'view'"
-            [isDarkMode]="false"
-            [provinces]="provinces$ | async"
-            [amphurs]="amphurs2$ | async"
-            [tumbols]="tumbols2$ | async"
-          >
-            <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
-            <span class="text-danger ms-1 fs-6"
-              >*กรุณากรอกข้อมูลตำบล, อำเภอ</span
+          <div class="mt-3">
+            <ksp-form-address
+              formControlName="address2"
+              [mode]="'view'"
+              [isDarkMode]="false"
+              [provinces]="provinces$ | async"
+              [amphurs]="amphurs2$ | async"
+              [tumbols]="tumbols2$ | async"
             >
-            <!-- <div class="d-flex align-items-center">
-              <input type="checkbox" class="me-1" />
-              <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
-            </div> -->
-          </ksp-form-address>
+              <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
+            </ksp-form-address>
+          </div>
         </mat-tab>
 
         <mat-tab label="สถานที่ทำงาน">

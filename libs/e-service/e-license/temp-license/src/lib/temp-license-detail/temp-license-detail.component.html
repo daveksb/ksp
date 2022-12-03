@@ -11,6 +11,7 @@
   <div class="bg-secondary bg-opacity-10 px-4 py-2 full-width-2">
     <div class="box-header">
       รายละเอียดใบคำขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ
+      ({{ subRequestLabel }})
     </div>
 
     <div class="bg-white px-4 py-2">
@@ -29,6 +30,7 @@
           [visaClassList]="visaClassList | async"
           [visaTypeList]="visaTypeList | async"
           formControlName="userInfo"
+          [mode]="'view'"
         ></ksp-form-user-info>
       </div>
 
@@ -59,10 +61,6 @@
               [tumbols]="tumbols2$ | async"
             >
               <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
-              <!-- <div class="mt-2 ms-2 d-flex align-items-center">
-              <input type="checkbox" disabled />
-              <label class="form-label ms-2">ที่อยู่ตามทะเบียนบ้าน</label>
-            </div> -->
             </ksp-form-address>
           </div>
         </mat-tab>
@@ -75,7 +73,7 @@
         </mat-tab>
 
         <mat-tab label="ข้อมูลทางการศึกษา">
-          <div>
+          <!-- <div>
             <ksp-form-education-info
               [mode]="'view'"
               formControlName="edu1"
@@ -96,11 +94,154 @@
             >
               <span class="box-header">วุฒิการศึกษาปริญญาโท</span>
             </ksp-form-education-info>
-          </div>
+          </div> -->
+          <ng-container *ngIf="careerType === 1">
+            <ksp-form-education-info
+              [showCheckbox]="false"
+              formControlName="edu1"
+              [showGradeInput]="true"
+              [showSelectDegree]="true"
+              [showPropertyInput]="false"
+              [showSelectDegree]="false"
+              [countries]="countries$ | async"
+              [mode]="'view'"
+            >
+              <div class="box-header">วุฒิการศึกษาปริญญาตรี</div>
+            </ksp-form-education-info>
+            <div class="mt-3">
+              <ksp-form-education-info
+                [isOptional]="true"
+                [showCheckbox]="false"
+                [showSelectDegree]="false"
+                formControlName="edu2"
+                [showGradeInput]="false"
+                [showPropertyInput]="true"
+                [countries]="countries$ | async"
+                [mode]="'view'"
+              >
+                <div class="box-header">วุฒิการศึกษาปริญญาโท</div>
+              </ksp-form-education-info>
+            </div></ng-container
+          >
+
+          <ng-container *ngIf="careerType === 2 || careerType === 5">
+            <div class="d-flex align-items-center">
+              <input type="checkbox" class="me-2" disabled />
+              <label class="fs-5">วุฒิการศึกษาปริญญาตรี</label>
+            </div>
+            <ng-container *ngIf="eduSelected">
+              <ksp-form-education-info
+                [showCheckbox]="false"
+                [showSelectDegree]="false"
+                formControlName="edu1"
+                [showGradeInput]="careerType === 2 ? true : false"
+                [showPropertyInput]="false"
+                [countries]="countries$ | async"
+                [userEducationType]="userInfoFormType"
+                [mode]="'view'"
+              >
+              </ksp-form-education-info></ng-container
+          ></ng-container>
+
+          <ng-container *ngIf="careerType === 2 || careerType === 5">
+            <div class="d-flex align-items-center mt-3">
+              <input type="checkbox" class="me-2" disabled />
+              <label class="fs-5">วุฒิประกาศนียบัตรระดับบัณฑิตศึกษา</label>
+            </div>
+            <ng-container *ngIf="eduSelected">
+              <ksp-form-education-info
+                [showCheckbox]="false"
+                [showSelectDegree]="false"
+                formControlName="edu4"
+                [showGradeInput]="false"
+                [showPropertyInput]="false"
+                [countries]="countries$ | async"
+                [mode]="'view'"
+              >
+              </ksp-form-education-info></ng-container
+          ></ng-container>
+
+          <ng-container *ngIf="careerType === 2 || careerType === 5">
+            <div class="d-flex align-items-center mt-3">
+              <input type="checkbox" class="me-2" disabled />
+              <label class="fs-5">วุฒิปริญญาโท</label>
+            </div>
+            <ng-container *ngIf="eduSelected">
+              <ksp-form-education-info
+                [showCheckbox]="false"
+                [showSelectDegree]="false"
+                formControlName="edu2"
+                [showGradeInput]="false"
+                [showPropertyInput]="false"
+                [countries]="countries$ | async"
+                [userEducationType]="userInfoFormType"
+                [mode]="'view'"
+              >
+              </ksp-form-education-info></ng-container
+          ></ng-container>
+
+          <ng-container *ngIf="careerType === 2 || careerType === 5">
+            <div class="d-flex align-items-center mt-3">
+              <input type="checkbox" class="me-2" disabled />
+              <label class="fs-5">วุฒิปริญญาเอก</label>
+            </div>
+            <ng-container *ngIf="eduSelected">
+              <ksp-form-education-info
+                [showCheckbox]="false"
+                [showSelectDegree]="false"
+                formControlName="edu3"
+                [showGradeInput]="false"
+                [showPropertyInput]="false"
+                [countries]="countries$ | async"
+                [userEducationType]="userInfoFormType"
+                [mode]="'view'"
+              >
+              </ksp-form-education-info></ng-container
+          ></ng-container>
+
+          <ng-container *ngIf="careerType === 2 || careerType === 5">
+            <div class="d-flex align-items-center mt-3">
+              <input type="checkbox" class="me-2" disabled />
+              <label class="fs-5">วุฒิการศึกษาอื่นๆ</label>
+            </div>
+            <ng-container *ngIf="eduSelected">
+              <ksp-form-education-info
+                [showCheckbox]="false"
+                [showSelectDegree]="false"
+                formControlName="edu5"
+                [showGradeInput]="false"
+                [showPropertyInput]="false"
+                [countries]="countries$ | async"
+                [userEducationType]="userInfoFormType"
+                [mode]="'view'"
+              >
+              </ksp-form-education-info> </ng-container
+          ></ng-container>
         </mat-tab>
 
         <mat-tab label="ข้อมูลการสอนและการจ้าง">
-          <div class="mb-3">
+          <ng-container *ngIf="careerType === 1 || careerType === 5">
+            <ksp-form-teaching-info
+              [mode]="'view'"
+              formControlName="teachinginfo"
+            ></ksp-form-teaching-info>
+          </ng-container>
+
+          <ng-container *ngIf="careerType === 2">
+            <ksp-form-teaching-info-manager
+              formControlName="teachinginfo"
+              [mode]="'view'"
+            ></ksp-form-teaching-info-manager
+          ></ng-container>
+
+          <ksp-form-hiring-info
+            [positionTypes]="positionTypes$ | async"
+            formControlName="hiringinfo"
+            [mode]="'view'"
+            [displayMode]="'request'"
+          ></ksp-form-hiring-info>
+
+          <!-- <div class="mb-3">
             <ksp-form-teaching-info
               [mode]="'view'"
               formControlName="teachinginfo"
@@ -114,7 +255,7 @@
               [mode]="'view'"
               [displayMode]="'request'"
             ></ksp-form-hiring-info>
-          </div>
+          </div> -->
 
           <ksp-form-temp-license-number></ksp-form-temp-license-number>
 
@@ -128,7 +269,7 @@
 
         <mat-tab label="ข้อมูลชี้แจงเหตุผล">
           <ksp-form-reason-info
-            [careerType]="1"
+            [careerType]="careerType"
             formControlName="reasoninfo"
             [mode]="'view'"
           ></ksp-form-reason-info>
@@ -152,8 +293,11 @@
         </mat-tab>
 
         <mat-tab label="ลักษณะต้องห้าม">
-          <div>
+          <div class="bg-light p-3">
             <ksp-forbidden-property
+              [title]="
+                'ลักษณะต้องห้ามตามที่กำหนดไว้ในมาตรา 44 แห่งพระราชบัญญัติสภาครูและบุคลากรทางการศึกษา พ.ศ.2546'
+              "
               [input]="forbidden"
               [mode]="'view'"
             ></ksp-forbidden-property>

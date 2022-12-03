@@ -14,7 +14,7 @@
     <div class="bg-white p-3">
       <div class="bg-light p-3">
         <div class="box-header">ค้นหาข้อมูล/หลักสูตรที่ต้องการ</div>
-  
+
         <div class="row mb-2">
           <div class="col">
             <label class="form-label">สถาบัน / มหาวิทยาลัย</label>
@@ -33,7 +33,7 @@
             </select>
           </div>
         </div>
-  
+
         <div class="row mb-2">
           <div class="col">
             <label class="form-label">รหัสรับรองปริญญา</label>
@@ -46,7 +46,7 @@
             <input class="form-control" type="text" formControlName="fulldegreename" />
           </div>
         </div>
-  
+
         <div class="row mb-2">
           <div class="col">
             <label class="form-label">ระดับปริญญาทางการศึกษา</label>
@@ -60,7 +60,7 @@
             <input class="form-control" type="text" formControlName="calendaryear" />
           </div>
         </div>
-  
+
         <div class="d-flex justify-content-end">
           <button
             class="btn border-primary text-primary bg-white"
@@ -144,8 +144,8 @@
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
         <tr mat-row
-            [ngClass]="{'make-highlight': (rowSelected?.uniperformanceid === row.uniperformanceid && rowSelected?.id === row.id)}" 
-            *matRowDef="let row; columns: displayedColumns1" 
+            [ngClass]="{'make-highlight': (rowSelected?.uniperformanceid === row.uniperformanceid && rowSelected?.id === row.id)}"
+            *matRowDef="let row; columns: displayedColumns1"
             (click)="selectRow(row)"></tr>
         <tr class="mat-row text-center" *matNoDataRow>
           <td class="mat-cell" [attr.colspan]="displayedColumns1.length">
@@ -166,7 +166,7 @@
   </div>
   <br />
   <div class="bg-white p-3">
-  
+
     <form [formGroup]="formStudent">
       <div class="row mb-2">
         <div class="col">
