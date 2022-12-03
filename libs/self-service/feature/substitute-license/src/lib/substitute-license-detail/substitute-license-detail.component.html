@@ -4,7 +4,10 @@
 >
 <div class="main__container px-4 py-2">
   <self-service-request-status
-    [idcardNo]="userInfo && userInfo.idcardno"
+    [requestDate]="requestDate"
+    [idcardNo]="(myInfo$ | async)?.idcardno || ''"
+    [kurusapaNo]="(myInfo$ | async)?.kuruspano || ''"
+    [requestNo]="requestNo"
   ></self-service-request-status>
 
   <form [formGroup]="form">

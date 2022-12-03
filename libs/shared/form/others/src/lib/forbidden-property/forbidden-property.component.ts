@@ -62,6 +62,7 @@ export class ForbiddenPropertyFormComponent
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA)
     public data: {
+      title: string;
       prohibitProperty: any;
       uniqueTimeStamp: string;
     }

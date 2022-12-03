@@ -161,7 +161,7 @@ export const menu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'ใบอนุญาตประกอบวิชาชีพ',
-    path: '/home',
+    path: '/license/*',
   },
   {
     icon: 'assets/images/icon-sidenav/event.svg',

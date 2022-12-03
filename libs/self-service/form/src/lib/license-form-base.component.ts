@@ -42,11 +42,12 @@ export abstract class LicenseFormBaseComponent {
   requestId!: number;
   requestData!: SelfRequest;
   requestNo: string | null = '';
+  requestDate: string | null = '';
   currentProcess!: number;
   prohibitProperty: any;
   myImage = '';
   imageId = '';
-  userInfo!: SelfMyInfo;
+  myInfo$!: Observable<SelfMyInfo>;
 
   constructor(
     protected generalInfoService: GeneralInfoService,
@@ -71,6 +72,7 @@ export abstract class LicenseFormBaseComponent {
             console.log(res);
             this.requestData = res;
             this.requestNo = res.requestno;
+            this.requestDate = res.requestdate;
             this.currentProcess = Number(res.process);
             this.uniqueTimestamp = res.uniqueno || '';
             //console.log(this.uniqueTimestamp);
@@ -83,6 +85,7 @@ export abstract class LicenseFormBaseComponent {
         this.getMyInfo();
       }
     });
+    this.myInfo$ = this.myInfoService.getMyInfo();
   }
 
   patchData(data: SelfGetRequest) {
@@ -116,9 +119,6 @@ export abstract class LicenseFormBaseComponent {
           this.patchWorkplace(parseJson(res.schooladdrinfo));
         }
       }
-      this.userInfo = {
-        ...res,
-      };
     });
   }
 
@@ -239,6 +239,9 @@ export abstract class LicenseFormBaseComponent {
     const confirmDialog = this.dialog.open(ForbiddenPropertyFormComponent, {
       width: '900px',
       data: {
+        title: `ขอรับรองว่าข้าพเจ้ามีคุณสมบัติครบถ้วนตามที่พระราชบัญญัติสภาครูและบุคลากรทางการศึกษา
+        พ.ศ. 2546 ข้อบังคับคุรุสภาว่าด้วยใบอนุญาตประกอบวิชาชีพ พ.ศ. 2547 กำหนดไว้ทุกประการ
+        และขอแจ้งประวัติ ดังนี้ `,
         prohibitProperty: this.prohibitProperty,
         uniqueTimeStamp: this.uniqueTimestamp,
       },
@@ -290,7 +293,11 @@ export abstract class LicenseFormBaseComponent {
           if (res.returncode === '00') {
             const requestno = res.requestno;
             localForage.setItem('requestno', requestno);
-            this.router.navigate(['/license', 'payment-channel']);
+            this.router.navigate([
+              '/license',
+              'payment-channel',
+              res.requestId,
+            ]);
           } else if (res.returncode === '409') {
             this.useSameIdCard();
           }

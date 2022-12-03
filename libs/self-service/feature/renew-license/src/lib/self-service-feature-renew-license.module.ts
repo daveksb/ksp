@@ -18,6 +18,7 @@ import { RenewLicenseForeignComponent } from './renew-license-foreign/renew-lice
 import { MatStepperModule } from '@angular/material/stepper';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RenewLicenseThaiComponent } from './renew-license-thai/renew-license-thai.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export const routes: Routes = [
   {
@@ -81,6 +82,7 @@ export const routes: Routes = [
     MatStepperModule,
     ReactiveFormsModule,
     SelfServiceFormModule,
+    MatProgressSpinnerModule
   ],
   declarations: [
     RenewLicenseRequestComponent,

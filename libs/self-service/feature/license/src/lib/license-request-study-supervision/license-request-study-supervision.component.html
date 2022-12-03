@@ -1,3 +1,8 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav [isSelfService]="true">
   <span header>ยื่นใบคำขอ</span>
   <span subHeader>ขอขึ้นใบอนุญาตประกอบวิชาชีพ (ศึกษานิเทศก์)</span>
@@ -5,7 +10,10 @@
 
 <div class="main__container px-4 py-2">
   <self-service-request-status
-  [idcardNo]="userInfo && userInfo.idcardno"
+    [requestDate]="requestDate"
+    [idcardNo]="(myInfo$ | async)?.idcardno || ''"
+    [kurusapaNo]="(myInfo$ | async)?.kuruspano || ''"
+    [requestNo]="requestNo"
   ></self-service-request-status>
 
   <form [formGroup]="form">

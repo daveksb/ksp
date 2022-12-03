@@ -6,7 +6,7 @@
 <form [formGroup]="form">
   <div class="main__container px-4 py-2">
     <self-service-request-status
-      [idcardNo]="userInfo && userInfo.idcardno"
+      [idcardNo]="(myInfo$ | async)?.idcardno || null"
     ></self-service-request-status>
 
     <div class="row mx-0 border shadow-sm rounded-4 px-2 py-4 bg-white my-4">

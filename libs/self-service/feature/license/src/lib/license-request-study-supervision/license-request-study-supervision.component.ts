@@ -16,6 +16,7 @@ import {
   EducationDetailService,
   MyInfoService,
   SelfRequestService,
+  LoaderService,
 } from '@ksp/shared/service';
 import {
   getCookie,
@@ -26,6 +27,7 @@ import {
 import { FileGroup, SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
+import { Subject } from 'rxjs';
 
 const EXPERIENCE_FILES: FileGroup[] = [
   {
@@ -67,6 +69,7 @@ export class LicenseRequestStudySupervisionComponent
   extends LicenseFormBaseComponent
   implements OnInit
 {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   userInfoType = UserInfoFormType.thai;
   experienceFiles: any[] = [];
   eduFiles: any[] = [];
@@ -93,7 +96,8 @@ export class LicenseRequestStudySupervisionComponent
     educationDetailService: EducationDetailService,
     myInfoService: MyInfoService,
     requestService: SelfRequestService,
-    route: ActivatedRoute
+    route: ActivatedRoute,
+    private loaderService: LoaderService
   ) {
     super(
       generalInfoService,
