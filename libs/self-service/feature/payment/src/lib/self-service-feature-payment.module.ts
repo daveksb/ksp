@@ -9,6 +9,25 @@ import {
 } from '@ksp/self-service/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
+import { RouterModule, Routes } from '@angular/router';
+import { SelfServiceMasterPageComponent } from '@ksp/self-service/feature/master-page';
+
+export const routes: Routes = [
+  {
+    path: '',
+    component: SelfServiceMasterPageComponent,
+    children: [
+      {
+        path: 'payment-channel',
+        component: PaymentChannelComponent,
+      },
+      {
+        path: 'payment-promptpay/:type',
+        component: PromptpayComponent,
+      },
+    ],
+  },
+];
 
 @NgModule({
   imports: [
@@ -18,6 +37,7 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
     SelfServiceLicenseInfoComponent,
     RequestHeaderInfoComponent,
     RequestStatusComponent,
+    RouterModule.forChild(routes),
   ],
   declarations: [PaymentChannelComponent, PromptpayComponent],
   exports: [PaymentChannelComponent, PromptpayComponent],

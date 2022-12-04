@@ -25,7 +25,9 @@ import {
   ACADEMIC_FILES,
   REQUEST_DOCUMENT_FILES,
 } from './license-request-foreign-files';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'self-service-license-request-foreign',
   templateUrl: './license-request-foreign.component.html',
@@ -55,6 +57,8 @@ export class LicenseRequestForeignComponent implements OnInit {
   personalDeclaration: any;
   documentFiles: FileGroup[] = [];
   myImage = '';
+  requestType: any;
+  requestLabel = '';
 
   constructor(
     private router: Router,
@@ -67,9 +71,24 @@ export class LicenseRequestForeignComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkRequestId();
+    this.checkCareerType();
     /*     this.personalDetail.valueChanges.subscribe((res) => {
       console.log('valid = ', this.personalDetail.valid);
     }); */
+  }
+
+  checkCareerType() {
+    this.route.queryParams.pipe(untilDestroyed(this)).subscribe((params) => {
+      if (Number(params['type'])) {
+        this.requestType = Number(params['type']);
+      }
+
+      if (this.requestType === 1) {
+        this.requestLabel = 'TEACHER';
+      } else if (this.requestType === 2) {
+        this.requestLabel = 'ADMINISTRATORS';
+      }
+    });
   }
 
   get personalDetail() {

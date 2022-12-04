@@ -43,23 +43,6 @@ const OBJECTIVE_FILES: FileGroup[] = [
   },
 ];
 
-/* const EDU_FILES = [
-  {
-    name: 'สำเนาใบรายงานผลการศึกษา (transcript)',
-    fileid: '',
-    filename: '',
-  },
-];
-
-const OBJECTIVE_FILES = [
-  {
-    name: 'สำเนาคำอธิบายรายวิชาที่ขอเทียบโอนความรู้ฯตามหลักสูตรที่สำเร็จการศึกษาที่มีตราประทับของทางสถาบันที่สำเร็จการศึกษาและมีเจ้าหน้าที่ของสถาบันลงนามรับรองสำเนาถูกต้อง',
-    fileid: '',
-    filename: '',
-  },
-];
- */
-
 @Component({
   selector: 'ksp-transfer-knowledge-request',
   templateUrl: './transfer-knowledge-request.component.html',

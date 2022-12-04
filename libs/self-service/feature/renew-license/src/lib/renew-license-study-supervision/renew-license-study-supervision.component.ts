@@ -15,6 +15,7 @@ import {
   EducationDetailService,
   MyInfoService,
   SelfRequestService,
+  LoaderService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { FileGroup, SelfRequest } from '@ksp/shared/interface';
@@ -27,6 +28,7 @@ import {
 import * as _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 import localForage from 'localforage';
+import { Subject } from 'rxjs';
 
 const WORKING_INFO_FILES: FileGroup[] = [
   {
@@ -67,6 +69,7 @@ export class RenewLicenseStudySupervisionComponent
   extends LicenseFormBaseComponent
   implements OnInit
 {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   userInfoType = UserInfoFormType.thai;
   headerGroup = [
     'วันที่ทำรายการ',
@@ -105,7 +108,8 @@ export class RenewLicenseStudySupervisionComponent
     educationDetailService: EducationDetailService,
     requestService: SelfRequestService,
     myInfoService: MyInfoService,
-    route: ActivatedRoute
+    route: ActivatedRoute,
+    private loaderService: LoaderService
   ) {
     super(
       generalInfoService,

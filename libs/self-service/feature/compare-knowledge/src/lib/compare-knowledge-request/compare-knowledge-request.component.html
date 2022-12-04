@@ -5,7 +5,9 @@
 
 <form [formGroup]="form">
   <div class="main__container px-4 py-2">
-    <self-service-request-status></self-service-request-status>
+    <self-service-request-status
+      [idcardNo]="(myInfo$ | async)?.idcardno || null"
+    ></self-service-request-status>
 
     <div class="row mx-0 border shadow-sm rounded-4 px-2 py-4 bg-white my-4">
       <div class="col-lg-3 my-auto">
@@ -130,7 +132,7 @@
         type="button"
         class="btn border-primary text-primary bg-white mx-3"
         (click)="submit(1)"
-        [disabled]="userInfoForm.invalid"
+        [disabled]="!form.valid"
       >
         บันทึกชั่วคราว
       </button>
@@ -138,7 +140,7 @@
         type="button"
         (click)="submit(2)"
         class="btn btn-primary"
-        [disabled]="userInfoForm.invalid"
+        [disabled]="!form.valid"
       >
         บันทึกและยื่น
       </button>

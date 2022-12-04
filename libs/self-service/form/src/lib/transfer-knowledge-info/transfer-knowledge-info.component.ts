@@ -33,7 +33,7 @@ export class TransferKnowledgeInfoComponent
   });
 
   override form = this.fb.group({
-    standardInfo: [null, Validators.required],
+    standardInfo: [],
     standards: this.fb.array([this.transferForm]),
   });
 

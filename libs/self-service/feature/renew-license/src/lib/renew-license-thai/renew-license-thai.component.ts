@@ -51,7 +51,6 @@ export class RenewLicenseThaiComponent
   });
 
   disableNextButton = false;
-  myInfo$!: Observable<SelfMyInfo>;
   today = thaiDate(new Date());
 
   workingInfoFiles: FileGroup[] = [
@@ -89,7 +88,6 @@ export class RenewLicenseThaiComponent
     this.getListData();
     this.getMyInfo();
     this.checkButtonsDisableStatus();
-    this.myInfo$ = this.myInfoService.getMyInfo();
     this.initializeFiles();
   }
 

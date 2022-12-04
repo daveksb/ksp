@@ -16,6 +16,7 @@ import {
   EducationDetailService,
   MyInfoService,
   SelfRequestService,
+  LoaderService,
 } from '@ksp/shared/service';
 import {
   getCookie,
@@ -23,37 +24,10 @@ import {
   replaceEmptyWithNull,
   toLowercaseProp,
 } from '@ksp/shared/utility';
-import { FileGroup, SelfRequest } from '@ksp/shared/interface';
+import { FileGroup, SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
-
-/* const EXPERIENCE_FILES = [
-  {
-    name: '1. สำเนาวุฒิทางการศึกษา',
-    fileid: '',
-    filename: '',
-  },
-  {
-    name: '2. เอกสารผู้สำเร็จการศึกษา ( ระบบ KSP BUNDIT)',
-    fileid: '',
-    filename: '',
-  },
-  {
-    name: '3. วุฒิบัตรอบรม',
-    fileid: '',
-    filename: '',
-  },
-];
-
-const EDU_FILES = [
-  { name: '1. สำเนาวุฒิทางการศึกษา', fileid: '', filename: '' },
-  {
-    name: '2. เอกสารผู้สำเร็จการศึกษา ( ระบบ KSP BUNDIT)		',
-    fileid: '',
-    filename: '',
-  },
-  { name: '3. วุฒิบัตรอบรม', fileid: '', filename: '' },
-]; */
+import { Subject } from 'rxjs';
 
 const EXPERIENCE_FILES: FileGroup[] = [
   {
@@ -95,8 +69,8 @@ export class LicenseRequestStudySupervisionComponent
   extends LicenseFormBaseComponent
   implements OnInit
 {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   userInfoType = UserInfoFormType.thai;
-
   experienceFiles: any[] = [];
   eduFiles: any[] = [];
 
@@ -122,7 +96,8 @@ export class LicenseRequestStudySupervisionComponent
     educationDetailService: EducationDetailService,
     myInfoService: MyInfoService,
     requestService: SelfRequestService,
-    route: ActivatedRoute
+    route: ActivatedRoute,
+    private loaderService: LoaderService
   ) {
     super(
       generalInfoService,

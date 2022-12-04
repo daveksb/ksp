@@ -56,6 +56,7 @@ export class RefundFeeRequestComponent implements OnInit {
   requestData!: SelfRequest;
   requestNo: string | null = '';
   currentProcess!: number;
+  myInfo$!: Observable<SelfMyInfo>;
 
   form = this.fb.group({
     userInfo: [],
@@ -73,6 +74,7 @@ export class RefundFeeRequestComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.myInfo$ = this.myInfoService.getMyInfo();
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.checkRequestId();
   }
