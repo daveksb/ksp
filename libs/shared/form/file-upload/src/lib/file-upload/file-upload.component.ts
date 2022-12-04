@@ -11,11 +11,12 @@ import {
   ImageUpload,
   KspFile,
 } from '@ksp/shared/interface';
+
+import { MatDialog } from '@angular/material/dialog';
 import {
   PdfViewerComponent,
   PdfViewerNoLicenseComponent,
 } from '@ksp/shared/dialog';
-import { MatDialog } from '@angular/material/dialog';
 
 @UntilDestroy()
 @Component({
@@ -50,14 +51,14 @@ export class FileUploadComponent {
   async onFileSelected(event: any) {
     const file: File = event.target.files[0];
     if (this.inValidFileType(file.type)) {
-      alert('Invalid file Type');
+      alert('Invalid File Type !');
       return;
     }
     const base64 = (await getBase64(file)) as string;
     //console.log(this.pageType);
 
     if (this.maxSize && file.size > this.maxSize) {
-      alert('File Size Exceeded the Maximum Size');
+      alert('File Size Exceeded the Maximum Size !');
       return;
     }
 

@@ -51,9 +51,7 @@ export class SelfUserListComponent implements AfterViewInit, OnInit {
   }
 
   search(params: any) {
-    //console.log('params = ', params);
-
-    const payload: EsSearchPayload = {
+    /* const payload: EsSearchPayload = {
       systemtype: '1',
       requesttype: '1',
       requestno: null,
@@ -74,7 +72,7 @@ export class SelfUserListComponent implements AfterViewInit, OnInit {
 
     this.eRequestService.EsSearchRequest(payload).subscribe((res: any) => {
       this.dataSource.data = res;
-    });
+    }); */
   }
 
   clear() {

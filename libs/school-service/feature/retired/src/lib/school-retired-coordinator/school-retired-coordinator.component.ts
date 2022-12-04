@@ -37,6 +37,9 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
   userInfoFormType: number = UserInfoFormType.thai;
   prefixList$!: Observable<Prefix[]>;
   uniqueNo!: string;
+  fileId!: number;
+  fileUploadValid = false;
+
   retiredFiles: FileGroup[] = [
     { name: 'หนังสือถอดถอนผู้ประสานงาน', files: [] },
   ];
@@ -56,6 +59,11 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
     this.uniqueNo = uuidv4();
     this.getList();
     this.getStoreData();
+  }
+
+  onUploadComplete(evt: any) {
+    this.fileId = evt.length;
+    //console.log('this.fileId = ', evt);
   }
 
   prevPage() {

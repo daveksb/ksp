@@ -12,6 +12,7 @@ import {
   SchoolUserPageType,
 } from '@ksp/shared/interface';
 import {
+  AddressService,
   EducationDetailService,
   ERequestService,
   LoaderService,
@@ -40,6 +41,7 @@ export class ApproveNewUserListComponent implements AfterViewInit, OnInit {
   mapRequestType = schoolMapRequestType;
   selectedUniversity = '';
   bureau$!: Observable<any>;
+  provinces$!: Observable<any>;
   searchNotFound = false;
   defaultForm = { requesttype: '1' };
   form = this.fb.group({
@@ -51,11 +53,13 @@ export class ApproveNewUserListComponent implements AfterViewInit, OnInit {
     private fb: FormBuilder,
     private eRequestService: ERequestService,
     private educationDetailService: EducationDetailService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private addressService: AddressService
   ) {}
 
   ngOnInit(): void {
     this.bureau$ = this.educationDetailService.getBureau();
+    this.provinces$ = this.addressService.getProvinces();
   }
 
   ngAfterViewInit(): void {
@@ -72,7 +76,7 @@ export class ApproveNewUserListComponent implements AfterViewInit, OnInit {
 
     let payload: EsSearchPayload = {
       systemtype: '2',
-      requesttype: params.requesttype,
+      requesttype: params.requesttype || '1' || '2',
       requestno: params.requestno,
       careertype: null,
       name: params.name,

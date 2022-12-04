@@ -24,6 +24,7 @@ export class FormMultiAttachmentComponent {
   @Input() systemType: string | null = null;
   @Output() downloadClick = new EventEmitter<any>();
   @Output() uploadComplete = new EventEmitter<any>();
+  @Output() deleteComplete = new EventEmitter<any>();
 
   constructor(public dialog: MatDialog, private fileService: FileService) {}
 

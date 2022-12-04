@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { BasicInstituteSearchComponent } from '../basic-institute-search/basic-institute-search.component';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { KspFormBaseComponent, Province } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
@@ -29,8 +29,10 @@ export class EServiceRequestSearchComponent extends KspFormBaseComponent {
     name: [''],
     requestdatefrom: [''],
     requeststatus: [null],
+    province: [],
   });
 
+  @Input() provinces: Province[] | null = [];
   @Input() bureaus: any;
   @Input() searchType = '';
   @Input() statusList: any[] | undefined = [];

@@ -27,6 +27,7 @@
           [requestType]="1"
           [uniqueTimestamp]="uniqueNo"
           [groups]="retiredFiles"
+          (uploadComplete)="onUploadComplete($event)"
         ></ksp-form-multi-attachment>
       </div>
       <br />
@@ -35,7 +36,7 @@
         [isLastPage]="true"
         [showCenterButtons]="true"
         [showSaveButton]="true"
-        [disableSaveButton]="form.invalid"
+        [disableSaveButton]="!fileId || form.invalid"
         (prevClicked)="prevPage()"
         (cancelClicked)="confirmCancelDialog()"
         (saveClicked)="confirmSubmitDialog()"
