@@ -35,6 +35,19 @@ export function formatRequestNo(input: string) {
     return input;
   }
 }
+
+export function formatIdCard(input: string) {
+  if (!input.includes('-')) {
+    const s1 = input.slice(0, 1);
+    const s2 = input.slice(4, 5);
+    const s3 = input.slice(9, 10);
+    const s4 = input.slice(11, 12);
+    return `${s1}-${s2}-${s3}-${s4}`;
+  } else {
+    return input;
+  }
+}
+
 // return Thai date format,
 export function stringToThaiDate(
   sDate: string,

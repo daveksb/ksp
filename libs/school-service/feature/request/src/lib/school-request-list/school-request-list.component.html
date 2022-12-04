@@ -95,9 +95,6 @@
               class="text-center"
               mat-cell
               *matCellDef="let element; let i = index"
-              (click)="
-                viewRequest(element.requesttype, element.careertype, element.id)
-              "
             >
               {{
                 paginator.pageIndex === 0
@@ -110,6 +107,7 @@
           <ng-container matColumnDef="requestno">
             <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
             <td
+              class="text-primary link"
               (click)="
                 viewRequest(element.requesttype, element.careertype, element.id)
               "
@@ -125,7 +123,7 @@
               เลขบัตรประชาชน/เลขคุรุสภาสำหรับชาวต่างชาติ
             </th>
             <td mat-cell *matCellDef="let element">
-              {{ element.idcardno }} {{ element.kuruspano }}
+              {{  element.idcardno | idCardFormat }} {{ element.kuruspano }}
             </td>
           </ng-container>
 
