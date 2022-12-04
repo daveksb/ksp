@@ -18,6 +18,12 @@ export const ApproveStepStatusOption: ApproveUniOption[] = [
 export const EUniApproveProcess: UniApproveProcess[] = [
   {
     requestType: 3,
+    processId: 99,
+    processName: 'บันทึกชั่วคราว',
+    status: [],
+  },
+  {
+    requestType: 3,
     processId: 1,
     processName: 'สร้างและส่งใบคำขอ',
     status: [],

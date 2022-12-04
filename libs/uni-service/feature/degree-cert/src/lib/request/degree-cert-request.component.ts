@@ -105,7 +105,7 @@ export class DegreeCertRequestComponent {
     this.router.navigate(['/', 'degree-cert']);
   }
 
-  save() {
+  save(process:string) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -121,10 +121,10 @@ export class DegreeCertRequestComponent {
         const res = await (async () => {
           if (this.id)
             return await lastValueFrom(
-              this.uniRequestService.uniRequestUpdate(this._getRequest())
+              this.uniRequestService.uniRequestUpdate(this._getRequest(process))
             );
           return await lastValueFrom(
-            this.uniRequestService.uniRequestInsert(this._getRequest())
+            this.uniRequestService.uniRequestInsert(this._getRequest(process))
           );
         })();
 
@@ -133,7 +133,7 @@ export class DegreeCertRequestComponent {
       }
     });
   }
-  private _getRequest(): any {
+  private _getRequest(process:string): any {
     const step1: any = this.step1Form.value.step1;
     const step2: any = this.step2Form.value.step2;
     const step3: any = this.step3Form.value.step3;
@@ -144,7 +144,7 @@ export class DegreeCertRequestComponent {
       ref1: '3',
       ref2: '03',
       ref3: '5',
-      requestprocess: '1',
+      requestprocess: process,
       requeststatus: '1',
       systemtype: '3',
       requesttype: '3',
