@@ -7,6 +7,7 @@ import {
   KspRequest,
   ListData,
   SchStaff,
+  SchTempLicense,
   SelfLicense,
 } from '@ksp/shared/interface';
 import {
@@ -23,6 +24,7 @@ import {
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { v4 as uuidv4 } from 'uuid';
+import { MatTableDataSource } from '@angular/material/table';
 
 @UntilDestroy()
 @Component({
@@ -38,13 +40,18 @@ export class ActivityDetailComponent implements OnInit {
   activityPageMode = activityPageMode;
   uniqueTimestamp!: string;
   activityTypes: ListData[] = SchoolSelfDevelopActivityTies;
-  notFound = false;
   foundLicenses: SelfLicense[] = [];
   selectedStaffId = '';
   selectedReqId = '';
+  selectedIdCard = '';
   selfDevelop: any;
   tempLicense: any;
   kuruspaNo = '';
+  dataSource = new MatTableDataSource<SchTempLicense>();
+  dataSource2 = new MatTableDataSource<any>();
+  searchNotFound = false;
+  searchNotFound2 = false;
+  notFound = false;
   schoolMapSelfDevelopType = schoolMapSelfDevelopType;
 
   form = this.fb.group({
@@ -57,6 +64,24 @@ export class ActivityDetailComponent implements OnInit {
       name: '1.สำเนาผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน',
       files: [],
     },
+  ];
+
+  displayedColumns: string[] = [
+    'id',
+    'licenseno',
+    'name',
+    'licensestartdate',
+    'licenseenddate',
+    'view',
+  ];
+
+  displayedColumns2: string[] = [
+    'id',
+    'selfdeveloptype',
+    'updatedate',
+    'createdate',
+    'edit',
+    'view',
   ];
 
   constructor(
@@ -79,46 +104,47 @@ export class ActivityDetailComponent implements OnInit {
       //console.log('page type = ', this.pageType);
     });
 
-    /* this.route.paramMap.pipe(untilDestroyed(this)).subscribe((res) => {
-      this.selectedReqId = String(res.get('reqId'));
-      //console.log('req id = ', this.selectedReqId);
-    }); */
-
     this.getSelfDevelopInfo();
     this.getTempLicenseInfo();
+    this.searchSelfLicense();
   }
 
-  /* searchLicense(idCard: any) {
-    this.notFound = false;
+  searchSelfLicense() {
+    this.route.queryParams.pipe(untilDestroyed(this)).subscribe((params) => {
+      this.form.reset();
+      if (Number(params['idcard'])) {
+        this.selectedIdCard = String(params['idcard']);
+      }
 
-    const payload = {
-      cardno: idCard,
-      licenseno: null,
-      name: null,
-      licensetype: null,
-      licensestatus: null,
-      offset: '0',
-      row: '100',
-    };
+      const payload = {
+        cardno: this.selectedIdCard,
+        licenseno: null,
+        name: null,
+        licensetype: null,
+        licensestatus: null,
+        offset: '0',
+        row: '100',
+      };
 
-    this.licenseService
-      .getStaffLicenses(payload)
-      .pipe(untilDestroyed(this))
-      .subscribe((res) => {
-        if (res) {
-          this.foundLicenses = res;
-        } else {
-          this.foundLicenses = [];
-          this.notFound = true;
-          console.log('res = ', this.notFound);
-        }
-      });
-  } */
+      this.licenseService
+        .getStaffLicenses(payload)
+        .pipe(untilDestroyed(this))
+        .subscribe((res) => {
+          if (res) {
+            this.foundLicenses = res;
+          } else {
+            this.foundLicenses = [];
+            this.notFound = true;
+            console.log('res = ', this.notFound);
+          }
+        });
+    });
+  }
 
   getSelfDevelopInfo() {
     this.route.paramMap.pipe(untilDestroyed(this)).subscribe((res) => {
       this.selectedStaffId = String(res.get('staffId'));
-      //console.log('staff id = ', this.selectedStaffId);
+      console.log('staff id = ', this.selectedStaffId);
     });
 
     const payload = {
@@ -128,17 +154,27 @@ export class ActivityDetailComponent implements OnInit {
 
     this.service.getSelfDevelopInfo(payload).subscribe((res) => {
       if (res) {
-        this.selfDevelop = res;
+        this.dataSource2.data = res;
       } else {
-        this.notFound = true;
+        this.searchNotFound2 = true;
       }
-      console.log('notFound = ', this.notFound);
     });
   }
 
   getTempLicenseInfo() {
-    this.reqService.getTempLicense('524').subscribe((res) => {
-      this.tempLicense = res;
+    this.route.queryParams.pipe(untilDestroyed(this)).subscribe((params) => {
+      this.form.reset();
+      if (Number(params['requestid'])) {
+        this.tempLicense = Number(params['requestid']);
+      }
+
+      this.reqService.getTempLicense(this.tempLicense).subscribe((res: any) => {
+        if (res) {
+          this.dataSource.data = res;
+        } else {
+          this.searchNotFound = true;
+        }
+      });
     });
   }
 

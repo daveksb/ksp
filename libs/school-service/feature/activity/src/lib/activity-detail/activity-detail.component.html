@@ -10,95 +10,232 @@
     รายละเอียดเพิ่มกิจกรรมพัฒนาตนเอง
   </div>
   <div class="box-header" *ngIf="pageType === activityPageMode.view">
-    รายละเอียดกิจกรรมพัฒนาตนเอง (หนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต)
+    รายละเอียดเพิ่มกิจกรรมพัฒนาตนเอง (หนังสืออนุญาตให้ประกอบวิชาชีพ
+    โดยไม่มีใบอนุญาต)
   </div>
 
   <div class="bg-white p-3">
     <ksp-request-header-info></ksp-request-header-info>
     <hr />
-    <div class="p-3 pt-0 mb-3">
-      <div class="box-header">ข้อมูลใบอนุญาตประกอบวิชาชีพ</div>
-      <div class="text-center fs-5 text-danger">ไม่พบข้อมูล</div>
+    <div
+      class="bg-light d-flex flex-column justify-content-center p-3 pt-1 mb-3"
+    >
+      <div class="box-header mb-1">ข้อมูลใบอนุญาตประกอบวิชาชีพ</div>
+      <ng-container *ngIf="foundLicenses && foundLicenses.length">
+        <div
+          id="carouselExampleControls"
+          class="carousel carousel-dark slide"
+          data-bs-ride="carousel"
+        >
+          <div class="carousel-inner">
+            <ng-container
+              *ngFor="
+                let license of foundLicenses;
+                let first = first;
+                let last = last;
+                let i = index
+              "
+            >
+              <div class="carousel-item active" *ngIf="first">
+                <div class="d-flex flex-column">
+                  <ksp-license-info [license]="license"></ksp-license-info>
+                </div>
+              </div>
+              <div class="carousel-item" *ngIf="!first">
+                <div class="d-flex flex-column">
+                  <ksp-license-info [license]="license"></ksp-license-info>
+                  <div class="carousel-caption d-block top-0 start-0 p-0">
+                    <div class="form-label text-secondary">
+                      หมายเลขสมาชิกคุรุสภา
+                      <span class="form-label text-black ms-3">
+                        {{ kuruspaNo || i }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+          <ng-container
+            *ngFor="
+              let license of foundLicenses;
+              let first = first;
+              let last = last
+            "
+          >
+            <div *ngIf="!first">
+              <button
+                class="carousel-control-prev"
+                type="button"
+                data-bs-target="#carouselExampleControls"
+                data-bs-slide="prev"
+              >
+                <span
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+            </div>
+            <div *ngIf="!last">
+              <button
+                class="carousel-control-next"
+                type="button"
+                data-bs-target="#carouselExampleControls"
+                data-bs-slide="next"
+              >
+                <span
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div></ng-container
+          >
+        </div>
+      </ng-container>
+      <ng-container *ngIf="notFound && !foundLicenses.length">
+        <div class="fs-5 text-center">ไม่พบข้อมูล</div></ng-container
+      >
     </div>
 
-    <div class="bg-light px-3 py-3 mb-3">
+    <div class="bg-light mb-3 p-3 pt-1">
       <div class="box-header mb-1">
         ข้อมูลหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต
       </div>
 
-      <table class="table">
-        <thead class="header__table">
-          <tr>
-            <th scope="col">ลำดับ</th>
-            <th scope="col">เลขที่หนังสืออนุญาต</th>
-            <th scope="col">ชื่อ-นามสกุล</th>
-            <th scope="col">วันที่ออกหนังสือ</th>
-            <th scope="col">วันที่สิ้นสุด</th>
-            <th scope="col">ดูเอกสาร</th>
-          </tr>
-        </thead>
-        <tbody class="body__table">
-          <tr>
-            <td>1</td>
-            <td>{{ tempLicense.licenseno }}</td>
-            <td>{{ tempLicense.firstnameth }} {{ tempLicense.lastnameth }}</td>
-            <td>{{ tempLicense.licensestartdate | thaiDate }}</td>
-            <td>{{ tempLicense.licenseenddate | thaiDate }}</td>
-            <td>
+      <div class="table__scroll">
+        <table mat-table [dataSource]="dataSource" [hidden]="!dataSource.data">
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              {{ i + 1 }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="licenseno">
+            <th mat-header-cell *matHeaderCellDef>เลขที่หนังสืออนุญาต</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.licenseno }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.firstnameth }}{{ element.lastnameth }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="licensestartdate">
+            <th mat-header-cell *matHeaderCellDef>วันที่ออกหนังสือ</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.licensestartdate | thaiDate }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="licenseenddate">
+            <th mat-header-cell *matHeaderCellDef>วันที่สิ้นสุด</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.licenseenddate | thaiDate }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="view">
+            <th mat-header-cell *matHeaderCellDef>ดูเอกสาร</th>
+            <td mat-cell *matCellDef="let element">
               <i role="button" class="box-header text-success bi bi-eye"></i>
             </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+        <table>
+          <tr *ngIf="searchNotFound">
+            <td
+              class="text-center fs-5"
+              [attr.colspan]="displayedColumns.length"
+            >
+              ไม่พบข้อมูล
+            </td>
           </tr>
-        </tbody>
-      </table>
+        </table>
+      </div>
     </div>
 
-    <div class="bg-light px-3 py-3" *ngIf="pageType === activityPageMode.view">
+    <div class="bg-light p-3 pt-1" *ngIf="pageType === activityPageMode.view">
       <div class="box-header mb-1">ข้อมูลกิจกรรมพัฒนาตนเอง</div>
 
-      <table class="table">
-        <thead class="header__table">
-          <tr>
-            <th scope="col">ลำดับ</th>
-            <th scope="col">กิจกรรมพัฒนาตนเอง</th>
-            <th scope="col">วันที่แก้ไขล่าสุด</th>
-            <th scope="col">วันที่บันทึก</th>
-            <th scope="col">แก้ไขข้อมูล</th>
-            <th scope="col">ดูเข้อมูล</th>
-          </tr>
-        </thead>
-        <tbody class="body__table">
-          <tr *ngFor="let activity of selfDevelop; let i = index">
-            <td>{{ i + 1 }}</td>
-            <td>{{ schoolMapSelfDevelopType(+activity.selfdeveloptype) }}</td>
-            <td>{{ activity.updatedate | thaiDate }}</td>
-            <td>{{ activity.createdate | thaiDate }}</td>
-            <td>
-              <!--  <i
-                role="button"
-                class="box-header text-primary bi bi-pencil-square"
-                (click)="edit(activityPageMode.edit, staffId)"
-              ></i> -->
+      <div class="table__scroll">
+        <table
+          mat-table
+          [dataSource]="dataSource2"
+          [hidden]="!dataSource2.data.length"
+        >
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              {{ i + 1 }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="selfdeveloptype">
+            <th mat-header-cell *matHeaderCellDef>กิจกรรมพัฒนาตนเอง</th>
+            <td mat-cell *matCellDef="let element">
+              {{ schoolMapSelfDevelopType(+element.selfdeveloptype) }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="updatedate">
+            <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.updatedate | thaiDate }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="createdate">
+            <th mat-header-cell *matHeaderCellDef>วันที่บันทึก</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.createdate | thaiDate }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef class="text-center">
+              แก้ไขข้อมูล
+            </th>
+            <td mat-cell *matCellDef="let element" class="text-center">
               <i
                 role="button"
                 class="box-header text-primary bi bi-pencil-square"
               ></i>
             </td>
-            <td>
-              <!-- <i
-                role="button"
-                class="box-header text-success bi bi-eye"
-                (click)="view(activityPageMode.edit, staffId)"
-              ></i> -->
+          </ng-container>
+
+          <ng-container matColumnDef="view">
+            <th mat-header-cell *matHeaderCellDef class="text-center">
+              ดูข้อมูล
+            </th>
+            <td mat-cell *matCellDef="let element" class="text-center">
               <i role="button" class="box-header text-success bi bi-eye"></i>
             </td>
-          </tr>
-          <tr *ngIf="notFound">
-            <td colspan="6" class="text-center text-danger fs-5">
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns2"></tr>
+        </table>
+        <table>
+          <tr *ngIf="searchNotFound2">
+            <td
+              class="text-center fs-5"
+              [attr.colspan]="displayedColumns2.length"
+            >
               ไม่พบข้อมูล
             </td>
           </tr>
-        </tbody>
-      </table>
+        </table>
+      </div>
     </div>
 
     <ng-container *ngIf="pageType === activityPageMode.edit">
@@ -200,26 +337,16 @@
   </div>
 </div>
 
-<ng-container *ngIf="pageType === activityPageMode.view">
-  <div class="sticky-bottom border px-2">
-    <ksp-bottom-nav
-      [isFirstPage]="false"
-      [isLastPage]="true"
-      [showCenterButtons]="false"
-      (prevClicked)="cancel()"
-    ></ksp-bottom-nav></div
-></ng-container>
-
-<ng-container *ngIf="pageType === activityPageMode.edit">
-  <div class="sticky-bottom border">
-    <ksp-bottom-nav
-      [isFirstPage]="true"
-      [isLastPage]="true"
-      [showCenterButtons]="true"
-      [showCancelButton]="true"
-      [showSaveButton]="true"
-      [disableSaveButton]="form.invalid"
-      (saveClicked)="confirmDialog()"
-      (cancelClicked)="cancel()"
-    ></ksp-bottom-nav></div
-></ng-container>
+<div class="sticky-bottom border px-2">
+  <ksp-bottom-nav
+    [isFirstPage]="pageType === 1"
+    [isLastPage]="true"
+    [showCenterButtons]="pageType === 1"
+    [showCancelButton]="pageType === 1"
+    [showSaveButton]="pageType === 1"
+    (prevClicked)="cancel()"
+    (saveClicked)="confirmDialog()"
+    (cancelClicked)="cancel()"
+    [disableSaveButton]="form.invalid"
+  ></ksp-bottom-nav>
+</div>
