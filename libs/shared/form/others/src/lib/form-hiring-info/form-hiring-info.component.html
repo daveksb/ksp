@@ -2,7 +2,7 @@
   <div class="bg-light px-3 py-3 mb-3">
     <div class="box-header">ข้อมูลการจ้าง</div>
 
-    <div class="row mb-3" *ngIf="displayMode === 'staff'">
+    <div class="row mb-2" *ngIf="displayMode === 'staff'">
       <div class="col-6">
         <label class="form-label required">ประเภทบุคลากร</label>
         <select class="form-select" formControlName="psersonType">
@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <div class="row mb-3">
+    <div class="row mb-2">
       <div class="col">
         <label class="form-label required">ตำแหน่ง</label>
         <select class="form-select" formControlName="position">
@@ -43,7 +43,7 @@
       </div>
     </div>
 
-    <div class="row mb-3">
+    <div class="row mb-2">
       <div class="col-6">
         <label class="form-label required">วันที่เริ่มปฏิบัติงาน</label>
         <div class="d-flex align-items-center">

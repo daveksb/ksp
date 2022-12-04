@@ -28,4 +28,5 @@ export class SelfLicense {
   competencyinfo: string | null = null;
   selfdevelopmentinfo: string | null = null;
   fileinfo: string | null = null;
+  birthdate: string | null = null;
 }

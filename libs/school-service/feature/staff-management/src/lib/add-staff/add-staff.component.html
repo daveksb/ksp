@@ -42,7 +42,12 @@
 
     <ng-container *ngIf="searchStaffDone">
       <div class="box-header mt-3">ข้อมูลใบอนุญาตประกอบวิชาชีพ</div>
-
+      <div class="form-label text-secondary">
+        หมายเลขสมาชิกคุรุสภา
+        <span class="form-label text-black ms-2">
+          {{ kuruspaNo || '-' }}
+        </span>
+      </div>
       <!-- <div class="d-flex align-items-center">
           <div class="form-label text-secondary">หมายเลขสมาชิกคุรุสภา</div>
           <div class="form-label text-black ms-3">{{ kuruspaNo }}</div>
@@ -78,26 +83,26 @@
                   <div class="d-flex flex-column">
                     <ksp-license-info [license]="license"></ksp-license-info>
                   </div>
-                  <div class="carousel-caption d-block top-0 start-0 p-0">
+                  <!-- <div class="carousel-caption d-block top-0 start-0 p-0">
                     <div class="form-label text-secondary">
                       หมายเลขสมาชิกคุรุสภา
                       <span class="form-label text-black ms-3">
                         {{ kuruspaNo || i }}
                       </span>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
                 <div class="carousel-item" *ngIf="!first">
                   <div class="d-flex flex-column">
                     <ksp-license-info [license]="license"></ksp-license-info>
-                    <div class="carousel-caption d-block top-0 start-0 p-0">
+                    <!-- <div class="carousel-caption d-block top-0 start-0 p-0">
                       <div class="form-label text-secondary">
                         หมายเลขสมาชิกคุรุสภา
                         <span class="form-label text-black ms-3">
                           {{ kuruspaNo || i }}
                         </span>
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </ng-container>
