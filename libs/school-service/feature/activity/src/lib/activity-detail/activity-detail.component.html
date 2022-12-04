@@ -10,7 +10,7 @@
     รายละเอียดเพิ่มกิจกรรมพัฒนาตนเอง
   </div>
   <div class="box-header" *ngIf="pageType === activityPageMode.view">
-    รายละเอียดกิจกรรมพัฒนาตนเอง (หนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต)
+    รายละเอียดกิจกรรมพัฒนาตนเอง
   </div>
 
   <div class="bg-white p-3">
@@ -191,26 +191,15 @@
   </div>
 </div>
 
-<ng-container *ngIf="pageType === activityPageMode.view">
-  <div class="sticky-bottom border px-2">
-    <ksp-bottom-nav
-      [isFirstPage]="false"
-      [isLastPage]="true"
-      [showCenterButtons]="false"
-      (prevClicked)="cancel()"
-    ></ksp-bottom-nav></div
-></ng-container>
-
-<ng-container *ngIf="pageType === activityPageMode.edit">
-  <div class="sticky-bottom border">
-    <ksp-bottom-nav
-      [isFirstPage]="true"
-      [isLastPage]="true"
-      [showCenterButtons]="true"
-      [showCancelButton]="true"
-      [showSaveButton]="true"
-      [disableSaveButton]="form.invalid"
-      (saveClicked)="confirmDialog()"
-      (cancelClicked)="cancel()"
-    ></ksp-bottom-nav></div
-></ng-container>
+<div class="sticky-bottom border px-2">
+  <ksp-bottom-nav
+    [isFirstPage]="true"
+    [isLastPage]="true"
+    [showCenterButtons]="true"
+    [showCancelButton]="true"
+    [showSaveButton]="pageType === 1"
+    [disableSaveButton]="form.invalid"
+    (saveClicked)="confirmDialog()"
+    (cancelClicked)="cancel()"
+  ></ksp-bottom-nav>
+</div>

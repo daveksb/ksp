@@ -54,7 +54,7 @@ export class LicenseSearchComponent {
       cardno: this.form.controls.cardno.value,
       licenseno: this.form.controls.licenseno.value,
       name: this.form.controls.name.value,
-      licensetype: null,
+      licensetype: this.form.controls.licensetype.value,
       licensestatus: null,
       offset: '0',
       row: '100',

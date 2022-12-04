@@ -42,29 +42,17 @@
 
     <ng-container *ngIf="searchStaffDone">
       <div class="box-header mt-3">ข้อมูลใบอนุญาตประกอบวิชาชีพ</div>
-      <div class="form-label text-secondary">
+      <div class="form-label text-secondary" style="margin-left: 16px">
         หมายเลขสมาชิกคุรุสภา
         <span class="form-label text-black ms-2">
           {{ kuruspaNo || '-' }}
         </span>
       </div>
-      <!-- <div class="d-flex align-items-center">
-          <div class="form-label text-secondary">หมายเลขสมาชิกคุรุสภา</div>
-          <div class="form-label text-black ms-3">{{ kuruspaNo }}</div>
-        </div> -->
-      <!-- <ksp-license-type-button-group></ksp-license-type-button-group> -->
-      <!-- <ng-container *ngIf="foundLicenses.length">
-          <div class="d-flex flex-column">
-            <ng-container *ngFor="let license of foundLicenses; let i = index">
-              <ksp-license-info [license]="license"></ksp-license-info>
-            </ng-container></div
-        ></ng-container> -->
-
-      <ng-container *ngIf="foundLicenses && foundLicenses.length">
-        <div
-          class="bg-light d-flex flex-column justify-content-center p-3"
-          style="height: auto"
-        >
+      <div
+        class="bg-light d-flex flex-column justify-content-center p-3"
+        style="height: auto"
+      >
+        <ng-container *ngIf="foundLicenses && foundLicenses.length">
           <div
             id="carouselExampleControls"
             class="carousel carousel-dark slide"
@@ -83,26 +71,10 @@
                   <div class="d-flex flex-column">
                     <ksp-license-info [license]="license"></ksp-license-info>
                   </div>
-                  <!-- <div class="carousel-caption d-block top-0 start-0 p-0">
-                    <div class="form-label text-secondary">
-                      หมายเลขสมาชิกคุรุสภา
-                      <span class="form-label text-black ms-3">
-                        {{ kuruspaNo || i }}
-                      </span>
-                    </div>
-                  </div> -->
                 </div>
                 <div class="carousel-item" *ngIf="!first">
                   <div class="d-flex flex-column">
                     <ksp-license-info [license]="license"></ksp-license-info>
-                    <!-- <div class="carousel-caption d-block top-0 start-0 p-0">
-                      <div class="form-label text-secondary">
-                        หมายเลขสมาชิกคุรุสภา
-                        <span class="form-label text-black ms-3">
-                          {{ kuruspaNo || i }}
-                        </span>
-                      </div>
-                    </div> -->
                   </div>
                 </div>
               </ng-container>
@@ -144,13 +116,13 @@
               </div></ng-container
             >
           </div>
-        </div>
-      </ng-container>
-      <ng-container *ngIf="notFound && !foundLicenses.length">
-        <div class="fs-5 text-center mb-3 text-danger">
-          ไม่พบข้อมูล
-        </div></ng-container
-      >
+        </ng-container>
+        <ng-container *ngIf="notFound && !foundLicenses.length">
+          <div class="fs-5 text-center py-5 my-5">
+            ไม่พบข้อมูล
+          </div></ng-container
+        >
+      </div>
 
       <div class="mt-3">
         <mat-tab-group
