@@ -70,7 +70,7 @@
                 <td class="detail__table">{{ item?.verifyForm?.chairmanName || '' }}</td>
                 <td class="detail__table">{{ item?.verifyForm?.boardName || '' }}</td>
                 <td class="detail__table">{{ result[item?.considerationResult?.result || ''] }}</td>
-                <td class="detail__table"><label class="view__label">ดูเอกสารแนบ</label></td>
+                <td class="detail__table"><label class="view__label" (click)="view(item?.verifyForm)">ดูเอกสารแนบ</label></td>
               </tr>
             </tbody>
           </table>
@@ -102,7 +102,7 @@
                 <td class="detail__table">{{ toDate(item?.verifyForm?.date) || '' }}</td>
                 <td class="detail__table">{{ item?.verifyForm?.boardName || '' }}</td>
                 <td class="detail__table">{{ result[item?.considerationResult?.result || ''] }}</td>
-                <td class="detail__table"><label class="view__label">ดูเอกสารแนบ</label></td>
+                <td class="detail__table"><label class="view__label" (click)="view(item?.verifyForm)">ดูเอกสารแนบ</label></td>
               </tr>
             </tbody>
           </table>

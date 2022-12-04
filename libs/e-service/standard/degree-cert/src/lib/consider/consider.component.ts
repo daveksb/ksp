@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConfirmDialogComponent } from '@ksp/shared/dialog';
+import { ConfirmDialogComponent, PdfViewerComponent } from '@ksp/shared/dialog';
 import {
   ERequestService,
   EUniService,
@@ -18,6 +18,7 @@ import _ from 'lodash';
 import { map } from 'rxjs';
 import { Location } from '@angular/common';
 import moment from 'moment';
+import { FileGroup } from '@ksp/shared/interface';
 
 const detailToState = (res: any) => {
   const newRes = res?.datareturn
@@ -150,7 +151,7 @@ export class ConsiderComponent implements OnInit {
           map((res) => {
             this.daftRequest = res;
             this.allowEdit =
-              res?.requestprocess === '3' && res?.requestststus === '1';
+              res?.requestprocess === '3' && res?.requeststatus === '1';
             return this.uniInfoService.mappingUniverSitySelectByIdWithForm(res);
           })
         )
@@ -241,5 +242,23 @@ export class ConsiderComponent implements OnInit {
       'check',
       this.route.snapshot.params['key'],
     ]);
+  }
+
+  view(e: any) {
+    const dialogRef = this.dialog.open(PdfViewerComponent, {
+      width: '1200px',
+      height: '100vh',
+      data: {
+        title: e?.file?.filename,
+        files: [e?.file],
+        checkresult:  [],
+        systemType: "3",
+      },
+    });
+    dialogRef
+      .afterClosed()
+      .subscribe((result) =>{
+        console.log("")
+      });
   }
 }

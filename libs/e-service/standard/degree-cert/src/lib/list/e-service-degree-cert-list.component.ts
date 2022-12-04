@@ -180,6 +180,7 @@ export class EServiceDegreeCertListComponent
   }
 
   onClear() {
+    this.form.reset();
     this.dataSource.data = [];
   }
 

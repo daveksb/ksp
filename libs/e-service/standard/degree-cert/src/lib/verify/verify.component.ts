@@ -168,7 +168,7 @@ export class VerifyComponent implements OnInit {
       if (res) {
         this.dataSource.forEach((data: any, index) => {
           payload.requestid = data?.key;
-          if (data.requeststatus === '1' && data.requestprocess === '3') {
+          if (data?.status === '1' && data?.process === '3') {
             this.eRequestService
               .kspUniRequestProcessSelectByRequestId(payload.requestid)
               .pipe(map(detailToState))
