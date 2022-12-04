@@ -17,7 +17,7 @@
   <div class="bg-white p-3">
     <ksp-request-header-info></ksp-request-header-info>
     <hr />
-    <div
+    <!-- <div
       class="bg-light d-flex flex-column justify-content-center p-3 pt-1 mb-3"
     >
       <div class="box-header mb-1">ข้อมูลใบอนุญาตประกอบวิชาชีพ</div>
@@ -97,14 +97,14 @@
       <ng-container *ngIf="notFound && !foundLicenses.length">
         <div class="fs-5 text-center">ไม่พบข้อมูล</div></ng-container
       >
-    </div>
+    </div> -->
 
     <div class="bg-light mb-3 p-3 pt-1">
       <div class="box-header mb-1">
         ข้อมูลหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต
       </div>
 
-      <div class="table__scroll">
+      <!-- <div class="table__scroll">
         <table mat-table [dataSource]="dataSource" [hidden]="!dataSource.data">
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
@@ -161,7 +161,7 @@
             </td>
           </tr>
         </table>
-      </div>
+      </div> -->
     </div>
 
     <div class="bg-light p-3 pt-1" *ngIf="pageType === activityPageMode.view">
