@@ -16,13 +16,96 @@
   <div class="bg-white p-3">
     <ksp-request-header-info></ksp-request-header-info>
     <hr />
-
-    <div class="bg-light p-4 mb-3">
-      <ksp-license-info></ksp-license-info>
+    <div class="p-3 pt-0 mb-3">
+      <div class="box-header">ข้อมูลใบอนุญาตประกอบวิชาชีพ</div>
+      <div class="text-center fs-5 text-danger">ไม่พบข้อมูล</div>
     </div>
+    <!-- <ng-container *ngIf="foundLicenses && foundLicenses.length">
+      <div
+        class="bg-light d-flex flex-column justify-content-center p-3 mb-3"
+        style="height: auto"
+      >
+        <div
+          id="carouselExampleControls"
+          class="carousel carousel-dark slide"
+          data-bs-ride="carousel"
+        >
+          <div class="carousel-inner">
+            <ng-container
+              *ngFor="
+                let license of foundLicenses;
+                let first = first;
+                let last = last;
+                let i = index
+              "
+            >
+              <div class="carousel-item active" *ngIf="first">
+                <div class="d-flex flex-column">
+                  <ksp-license-info [license]="license"></ksp-license-info>
+                </div>
+              </div>
+              <div class="carousel-item" *ngIf="!first">
+                <div class="d-flex flex-column">
+                  <ksp-license-info [license]="license"></ksp-license-info>
+                  <div class="carousel-caption d-block top-0 start-0 p-0">
+                    <div class="form-label text-secondary">
+                      หมายเลขสมาชิกคุรุสภา
+                      <span class="form-label text-black ms-3">
+                        {{ kuruspaNo || i }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+          <ng-container
+            *ngFor="
+              let license of foundLicenses;
+              let first = first;
+              let last = last
+            "
+          >
+            <div *ngIf="!first">
+              <button
+                class="carousel-control-prev"
+                type="button"
+                data-bs-target="#carouselExampleControls"
+                data-bs-slide="prev"
+              >
+                <span
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+            </div>
+            <div *ngIf="!last">
+              <button
+                class="carousel-control-next"
+                type="button"
+                data-bs-target="#carouselExampleControls"
+                data-bs-slide="next"
+              >
+                <span
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div></ng-container
+          >
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="notFound && !foundLicenses.length">
+      <div class="fs-5 text-center mb-3 text-danger">
+        ไม่พบข้อมูล
+      </div></ng-container
+    > -->
 
     <div class="bg-light px-3 py-3 mb-3">
-      <div class="box-header mb-2">
+      <div class="box-header mb-1">
         ข้อมูลหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต
       </div>
 
@@ -40,10 +123,10 @@
         <tbody class="body__table">
           <tr>
             <td>1</td>
-            <td>123456</td>
-            <td>นายประวิทย์ มาสถาพร</td>
-            <td>12/สิงหาคม/2565</td>
-            <td>12/สิงหาคม/2565</td>
+            <td>{{ tempLicense.licenseno }}</td>
+            <td>{{ tempLicense.firstnameth }} {{ tempLicense.lastnameth }}</td>
+            <td>{{ tempLicense.licensestartdate | thaiDate }}</td>
+            <td>{{ tempLicense.licenseenddate | thaiDate }}</td>
             <td>
               <i role="button" class="box-header text-success bi bi-eye"></i>
             </td>
@@ -53,7 +136,7 @@
     </div>
 
     <div class="bg-light px-3 py-3" *ngIf="pageType === activityPageMode.view">
-      <div class="box-header mb-2">ข้อมูลกิจกรรมพัฒนาตนเอง</div>
+      <div class="box-header mb-1">ข้อมูลกิจกรรมพัฒนาตนเอง</div>
 
       <table class="table">
         <thead class="header__table">
@@ -67,26 +150,34 @@
           </tr>
         </thead>
         <tbody class="body__table">
-          <tr>
-            <td>1</td>
+          <tr *ngFor="let activity of selfDevelop; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ schoolMapSelfDevelopType(+activity.selfdeveloptype) }}</td>
+            <td>{{ activity.updatedate | thaiDate }}</td>
+            <td>{{ activity.createdate | thaiDate }}</td>
             <td>
-              มีวุฒิเพิ่มขึ้นในสาขาที่เกี่ยวข้องกับการประกอบวิชาชีพทางการศึกษา
-            </td>
-            <td>12/สิงหาคม/2565</td>
-            <td>12/สิงหาคม/2565</td>
-            <td>
-              <i
+              <!--  <i
                 role="button"
                 class="box-header text-primary bi bi-pencil-square"
                 (click)="edit(activityPageMode.edit, staffId)"
+              ></i> -->
+              <i
+                role="button"
+                class="box-header text-primary bi bi-pencil-square"
               ></i>
             </td>
             <td>
-              <i
+              <!-- <i
                 role="button"
                 class="box-header text-success bi bi-eye"
                 (click)="view(activityPageMode.edit, staffId)"
-              ></i>
+              ></i> -->
+              <i role="button" class="box-header text-success bi bi-eye"></i>
+            </td>
+          </tr>
+          <tr *ngIf="notFound">
+            <td colspan="6" class="text-center text-danger fs-5">
+              ไม่พบข้อมูล
             </td>
           </tr>
         </tbody>

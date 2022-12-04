@@ -3,6 +3,7 @@ import {
   EnglishMonthMapping,
   SchoolRequestProcess,
   SchoolRequestType,
+  SchoolSelfDevelopActivityTies,
   SelfRequestProcess,
   SelfRequestType,
   ThaiNumberMapping,
@@ -199,6 +200,10 @@ export function SelfcheckStatus(processId: number, statusId: number) {
     return s.id == statusId;
   });
   return status;
+}
+
+export function schoolMapSelfDevelopType(typeId: number) {
+  return SchoolSelfDevelopActivityTies.find((s) => s.value === typeId)?.label;
 }
 
 export function schoolMapRequestType(typeId: number) {

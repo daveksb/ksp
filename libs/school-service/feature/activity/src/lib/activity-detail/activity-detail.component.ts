@@ -2,14 +2,25 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FileGroup, ListData, SchStaff } from '@ksp/shared/interface';
+import {
+  FileGroup,
+  KspRequest,
+  ListData,
+  SchStaff,
+  SelfLicense,
+} from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { getCookie } from '@ksp/shared/utility';
+import { getCookie, schoolMapSelfDevelopType } from '@ksp/shared/utility';
 import { SchoolSelfDevelopActivityTies } from '@ksp/shared/constant';
-import { SelfDevelopService, StaffService } from '@ksp/shared/service';
+import {
+  SchoolLicenseService,
+  SchoolRequestService,
+  SelfDevelopService,
+  StaffService,
+} from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -27,6 +38,14 @@ export class ActivityDetailComponent implements OnInit {
   activityPageMode = activityPageMode;
   uniqueTimestamp!: string;
   activityTypes: ListData[] = SchoolSelfDevelopActivityTies;
+  notFound = false;
+  foundLicenses: SelfLicense[] = [];
+  selectedStaffId = '';
+  selectedReqId = '';
+  selfDevelop: any;
+  tempLicense: any;
+  kuruspaNo = '';
+  schoolMapSelfDevelopType = schoolMapSelfDevelopType;
 
   form = this.fb.group({
     type: [null, Validators.required],
@@ -46,7 +65,9 @@ export class ActivityDetailComponent implements OnInit {
     private fb: FormBuilder,
     public dialog: MatDialog,
     private service: SelfDevelopService,
-    private staffService: StaffService
+    private staffService: StaffService,
+    private reqService: SchoolRequestService,
+    private licenseService: SchoolLicenseService
   ) {}
 
   ngOnInit(): void {
@@ -55,7 +76,69 @@ export class ActivityDetailComponent implements OnInit {
 
     this.route.paramMap.pipe(untilDestroyed(this)).subscribe((res) => {
       this.pageType = Number(res.get('pageType'));
-      //console.log('process type = ', this.pageType);
+      //console.log('page type = ', this.pageType);
+    });
+
+    /* this.route.paramMap.pipe(untilDestroyed(this)).subscribe((res) => {
+      this.selectedReqId = String(res.get('reqId'));
+      //console.log('req id = ', this.selectedReqId);
+    }); */
+
+    this.getSelfDevelopInfo();
+    this.getTempLicenseInfo();
+  }
+
+  /* searchLicense(idCard: any) {
+    this.notFound = false;
+
+    const payload = {
+      cardno: idCard,
+      licenseno: null,
+      name: null,
+      licensetype: null,
+      licensestatus: null,
+      offset: '0',
+      row: '100',
+    };
+
+    this.licenseService
+      .getStaffLicenses(payload)
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        if (res) {
+          this.foundLicenses = res;
+        } else {
+          this.foundLicenses = [];
+          this.notFound = true;
+          console.log('res = ', this.notFound);
+        }
+      });
+  } */
+
+  getSelfDevelopInfo() {
+    this.route.paramMap.pipe(untilDestroyed(this)).subscribe((res) => {
+      this.selectedStaffId = String(res.get('staffId'));
+      //console.log('staff id = ', this.selectedStaffId);
+    });
+
+    const payload = {
+      staffid: this.selectedStaffId,
+      schoolid: this.schoolId,
+    };
+
+    this.service.getSelfDevelopInfo(payload).subscribe((res) => {
+      if (res) {
+        this.selfDevelop = res;
+      } else {
+        this.notFound = true;
+      }
+      console.log('notFound = ', this.notFound);
+    });
+  }
+
+  getTempLicenseInfo() {
+    this.reqService.getTempLicense('524').subscribe((res) => {
+      this.tempLicense = res;
     });
   }
 
@@ -74,6 +157,7 @@ export class ActivityDetailComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         this.staff = res;
+        console.log('staff = ', this.staff);
       });
   }
 
