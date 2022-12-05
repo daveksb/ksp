@@ -1,5 +1,5 @@
 <form [formGroup]="form">
-  <div class="ps-3 pe-3 pt-3 pb-3 bg-light">
+  <div [class]="isDarkMode ? 'p-3 bg-light' : 'p-0 bg-light'">
     <div class="box-header">
       <ng-content></ng-content>
     </div>

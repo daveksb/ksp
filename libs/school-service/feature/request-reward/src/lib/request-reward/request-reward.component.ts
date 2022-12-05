@@ -16,12 +16,13 @@ import {
 } from '@ksp/shared/interface';
 import {
   GeneralInfoService,
+  LoaderService,
   SchoolInfoService,
   SchoolRequestService,
 } from '@ksp/shared/service';
 import { getCookie, mapFileInfo, parseJson } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
 @UntilDestroy()
@@ -31,6 +32,8 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./request-reward.component.scss'],
 })
 export class RequestRewardComponent implements OnInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
+
   form = this.fb.group({
     reward: [],
   });
@@ -57,7 +60,8 @@ export class RequestRewardComponent implements OnInit {
     private fb: FormBuilder,
     private requestService: SchoolRequestService,
     private schoolInfoService: SchoolInfoService,
-    private generalInfoService: GeneralInfoService
+    private generalInfoService: GeneralInfoService,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {

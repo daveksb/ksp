@@ -21,6 +21,7 @@ export class FormEducationInfoComponent
   @Input() countries: Country[] | null = [];
   @Input() showCheckbox = true;
   @Input() isOptional = false;
+  @Input() isDarkMode = true;
   @Input() userEducationType: any;
   FormTypeEnum = UserInfoFormType;
 

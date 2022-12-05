@@ -26,6 +26,7 @@ import {
 import {
   AddressService,
   GeneralInfoService,
+  LoaderService,
   SchoolInfoService,
   SchoolRequestService,
   StaffService,
@@ -41,7 +42,7 @@ import {
   thaiDate,
 } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { EMPTY, Observable, switchMap } from 'rxjs';
+import { EMPTY, Observable, Subject, switchMap } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
 @UntilDestroy()
@@ -51,6 +52,8 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./qualification-detail.component.scss'],
 })
 export class QualificationDetailComponent implements OnInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
+
   form = this.fb.group({
     userInfo: [],
     addr1: [],
@@ -104,7 +107,8 @@ export class QualificationDetailComponent implements OnInit {
     private requestService: SchoolRequestService,
     private route: ActivatedRoute,
     private schoolInfoService: SchoolInfoService,
-    private staffService: StaffService
+    private staffService: StaffService,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {

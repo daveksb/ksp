@@ -50,7 +50,7 @@ export class FileUploadComponent {
   async onFileSelected(event: any) {
     const file: File = event.target.files[0];
     if (this.inValidFileType(file.type)) {
-      alert('Invalid file Type');
+      alert('Invalid File Type !');
       return;
     }
     const base64 = (await getBase64(file)) as string;

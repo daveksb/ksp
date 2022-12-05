@@ -1,3 +1,8 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav>
   <span header>
     กิจกรรมพัฒนาตนเอง (หนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต)
@@ -55,7 +60,7 @@
     <div class="bg-light px-3 py-3" *ngIf="pageType === activityPageMode.view">
       <div class="box-header mb-1">ข้อมูลกิจกรรมพัฒนาตนเอง</div>
 
-      <table class="table">
+      <table class="table" *ngIf="staffSelfDev && staffSelfDev.length">
         <thead class="header__table">
           <tr>
             <th scope="col">ลำดับ</th>
@@ -85,11 +90,11 @@
                 <i role="button" class="fs-5 text-success bi bi-eye"></i>
               </td></tr
           ></ng-container>
-          <tr *ngIf="!staffSelfDev.length">
-            <td colspan="6" class="text-center py-2 fs-5">ไม่พบข้อมูล</td>
-          </tr>
         </tbody>
       </table>
+      <ng-container *ngIf="!staffSelfDev.length">
+        <div class="text-center py-2 fs-5">ไม่พบข้อมูล</div></ng-container
+      >
     </div>
 
     <ng-container *ngIf="pageType === activityPageMode.edit">
@@ -198,7 +203,7 @@
     [showCenterButtons]="true"
     [showCancelButton]="true"
     [showSaveButton]="pageType === 1"
-    [disableSaveButton]="form.invalid"
+    [disableSaveButton]="!form.valid"
     (saveClicked)="confirmDialog()"
     (cancelClicked)="cancel()"
   ></ksp-bottom-nav>

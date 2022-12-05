@@ -9,6 +9,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { SchoolContainerPageComponent } from '@ksp/school-service/feature/container-page';
 import { Route, RouterModule } from '@angular/router';
 import { RequestNoPipe } from '@ksp/shared/pipe';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export const routes: Route[] = [
   {
@@ -38,6 +39,7 @@ export const routes: Route[] = [
     MatTabsModule,
     BottomNavComponent,
     RequestNoPipe,
+    MatProgressSpinnerModule
   ],
   declarations: [QualificationDetailComponent],
   exports: [QualificationDetailComponent],

@@ -4,10 +4,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {
   AddressService,
   GeneralInfoService,
+  LoaderService,
   SchoolLicenseService,
   StaffService,
 } from '@ksp/shared/service';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import {
   formatCheckboxData,
   formatDatePayload,
@@ -48,6 +49,7 @@ import localForage from 'localforage';
   styleUrls: ['./add-staff.component.scss'],
 })
 export class AddStaffComponent implements OnInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   staffId!: number;
   countries$!: Observable<Country[]>;
   nationList$!: Observable<Nationality[]>;
@@ -88,7 +90,9 @@ export class AddStaffComponent implements OnInit {
     private addressService: AddressService,
     private generalInfoService: GeneralInfoService,
     public dialog: MatDialog,
-    private licenseService: SchoolLicenseService
+    private licenseService: SchoolLicenseService,
+    private loaderService: LoaderService
+
   ) {}
 
   ngOnInit(): void {

@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { SharedFormOthersModule } from '../shared-form-others.module';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { Country, KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
@@ -24,7 +24,8 @@ export class FormEducationInfoManagerComponent
   implements OnInit
 {
   @Input() requestType: any;
-  
+  @Input() countries: Country[] | null = [];
+
   override form = this.fb.group({
     licenseCountry: [],
     releaseBy: [],
