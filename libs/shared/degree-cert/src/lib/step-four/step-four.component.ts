@@ -99,11 +99,9 @@ export class DegreeCertStepFourComponent
   }
 
   override writeValue(value: any) {
-    console.log(value);
     if (value?.files?.length) {
       this.value = value;
     } else {
-      console.log(this.formType);
       this.value = {
         files: this.uploadFilesCollection[this.formType || 'a'],
       };

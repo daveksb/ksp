@@ -6,6 +6,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
   FilesPreviewComponent,
+  PdfViewerComponent,
 } from '@ksp/shared/dialog';
 import { Location } from '@angular/common';
 import {
@@ -218,16 +219,22 @@ export class ApproveComponent implements OnInit {
     return _.get(this.form.controls.verify.value, 'result') == 1;
   }
 
-  view(rowData: any) {
-    const dialogRef = this.dialog.open(FilesPreviewComponent, {
-      width: '800px',
+  view(e: any) {
+    const dialogRef = this.dialog.open(PdfViewerComponent, {
+      width: '1200px',
+      height: '100vh',
+      data: {
+        title: e?.file?.filename,
+        files: [e?.file],
+        checkresult:  [],
+        systemType: "3",
+      },
     });
-
-    dialogRef.componentInstance.confirmed.subscribe((res) => {
-      if (res) {
-        this.dialog.closeAll();
-      }
-    });
+    dialogRef
+      .afterClosed()
+      .subscribe((result) =>{
+        console.log("")
+      });
   }
   toDetail() {
     this.router.navigate([
