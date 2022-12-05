@@ -35,6 +35,8 @@ export class UserDetailComponent implements OnInit {
   pageTypeEnum = SchoolUserPageType;
   setPassword = '';
   mode: FormMode = 'view';
+  checkedResult: any;
+
   files: FileGroup[] = [
     {
       name: 'หนังสือแต่งตั้งผู้ประสานงาน',
@@ -78,7 +80,8 @@ export class UserDetailComponent implements OnInit {
     this.form2.disable();
 
     /* this.verifyForm.valueChanges.subscribe((res) => {
-      console.log('res = ', res);
+      const form: any = this.verifyForm.controls.result.value;
+      const detail: string = form.detail;
     }); */
   }
 
@@ -94,15 +97,17 @@ export class UserDetailComponent implements OnInit {
   loadRequestFromId(id: number) {
     this.eRequestService.getKspRequestById(id).subscribe((res) => {
       this.requestData = res;
+      console.log('reszzz = ', res.detail);
       //console.log('res = ', res.status);
 
       res.status === '1' ? (this.mode = 'edit') : (this.mode = 'view');
 
-     /*  if (res.status === '2') {
-        console.log('approve');
+      //set value for checked approve result
+      if (res.status === '2') {
+        this.checkedResult = approveChoices[0][0].value;
       } else if (res.status === '3') {
-        console.log('not approve ');
-      } */
+        this.checkedResult = approveChoices[0][1].value;
+      }
 
       //console.log('file = ', parseJson(res.fileinfo));
       const files = parseJson(res.fileinfo);

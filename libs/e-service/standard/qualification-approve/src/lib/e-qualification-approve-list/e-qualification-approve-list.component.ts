@@ -167,5 +167,5 @@ export const column = [
   'updatedate',
   'requestdate',
   'reqDoc',
-  'license',
+  //'license',
 ];

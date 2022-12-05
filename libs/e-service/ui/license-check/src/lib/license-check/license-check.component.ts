@@ -18,6 +18,7 @@ export class LicenseCheckComponent extends KspFormBaseComponent {
   @Input() headerTitle = 'ผลการตรวจสอบ';
   //@Input() disabled = false;
   @Output() selectedItem = 0;
+  @Input() checkedResult: string[] = [];
 
   override form = this.fb.group({
     result: [],

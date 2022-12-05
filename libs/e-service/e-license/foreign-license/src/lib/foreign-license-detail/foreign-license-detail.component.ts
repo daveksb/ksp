@@ -51,6 +51,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
   evidenceFile = evidenceFiles;
   requestData = new KspRequest();
   requestSubType = SchoolRequestSubType.ชาวต่างชาติ;
+  checkedResult: any;
 
   form = this.fb.group({
     foreignTeacherInfo: [],
@@ -86,6 +87,12 @@ export class ForeignLicenseDetailComponent implements OnInit {
     this.eRequestService.getKspRequestById(id).subscribe((res) => {
       this.requestData = res;
       this.pathUserInfo(res);
+
+      if (res.status === '2') {
+        this.checkedResult = verifyChoices[0].value;
+      } else if (res.status === '3') {
+        this.checkedResult = verifyChoices[1].value;
+      }
     });
   }
 
@@ -197,8 +204,10 @@ export class ForeignLicenseDetailComponent implements OnInit {
           return EMPTY;
         })
       )
-      .subscribe(() => {
-        this.onCompleted();
+      .subscribe((res) => {
+        if (res.returncode === '00') {
+          this.onCompleted();
+        }
       });
   }
 

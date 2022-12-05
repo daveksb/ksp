@@ -1,3 +1,8 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav
   ><span header
     >ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)</span
@@ -5,15 +10,15 @@
 >
 
 <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height full-width-2">
-  <ksp-e-service-user-search
-    [bureaus]="bureau$ | async"
-    (clear)="clear()"
-    (search)="search($event)"
-    [activeStatusList]="[
-      { id: 0, label: 'ไม่ใช้งาน' },
-      { id: 1, label: 'ใช้งาน' }
-    ]"
-  ></ksp-e-service-user-search>
+  <form [formGroup]="form">
+    <ksp-e-service-user-search
+      [bureaus]="bureau$ | async"
+      (clear)="clear()"
+      (search)="search($event)"
+      formControlName="search"
+      [activeStatusList]="activeStatusList"
+    ></ksp-e-service-user-search>
+  </form>
 
   <div class="bg-white p-3 mt-3">
     <div class="box-header">รายชื่อผู้เข้าใช้งานระบบ school service</div>
