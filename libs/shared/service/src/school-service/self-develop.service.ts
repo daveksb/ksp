@@ -14,4 +14,10 @@ export class SelfDevelopService {
       .post(`${environment.apiUrl}/kspstaff/schselfdevelopinsert`, payload)
       .pipe(map((data: any) => data.datareturn));
   }
+
+  getSelfDevelopInfo(payload: any): Observable<any> {
+    return this.http
+      .post(`${environment.apiUrl}/kspstaff/schselfdevelopsearch`, payload)
+      .pipe(map((data: any) => data.datareturn));
+  }
 }

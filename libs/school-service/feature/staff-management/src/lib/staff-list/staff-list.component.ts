@@ -35,8 +35,8 @@ export class StaffListComponent implements AfterViewInit {
     'startdate',
     'enddate',
     'profession',
-    'teaching',
     'tempLicense',
+    'teaching',
     'edit',
     'view',
   ];

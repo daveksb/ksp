@@ -7,7 +7,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { getCookie } from '@ksp/shared/utility';
+import { getCookie, schoolMapSelfDevelopType } from '@ksp/shared/utility';
 import { SchoolSelfDevelopActivityTies } from '@ksp/shared/constant';
 import { SelfDevelopService, StaffService } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -27,6 +27,9 @@ export class ActivityDetailComponent implements OnInit {
   activityPageMode = activityPageMode;
   uniqueTimestamp!: string;
   activityTypes: ListData[] = SchoolSelfDevelopActivityTies;
+  selectedStaffId = '';
+  staffSelfDev: any[] = [];
+  schoolMapSelfDevelopType = schoolMapSelfDevelopType;
 
   form = this.fb.group({
     type: [null, Validators.required],
@@ -66,6 +69,7 @@ export class ActivityDetailComponent implements OnInit {
         this.loadStaffFromId(this.staffId);
       }
     });
+    this.getSelfDevelopInfo(this.staffId);
   }
 
   loadStaffFromId(id: number) {
@@ -98,6 +102,24 @@ export class ActivityDetailComponent implements OnInit {
 
     this.service.addSelfDevelop(payload).subscribe((res) => {
       this.completeDialog();
+    });
+  }
+
+  getSelfDevelopInfo(staffId: any) {
+    this.route.paramMap.pipe(untilDestroyed(this)).subscribe((res) => {
+      this.selectedStaffId = String(res.get('staffId'));
+      console.log('staff id = ', this.selectedStaffId);
+    });
+
+    const payload = {
+      staffid: staffId,
+      schoolid: this.schoolId,
+    };
+
+    this.service.getSelfDevelopInfo(payload).subscribe((res) => {
+      if (res) {
+        this.staffSelfDev = res;
+      }
     });
   }
 

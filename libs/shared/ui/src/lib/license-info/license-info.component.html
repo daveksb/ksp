@@ -37,7 +37,7 @@
         <div>{{ license.licensetype }}</div>
         <div>{{ license.firstnameth }} {{ license.lastnameth }}</div>
         <div>{{ license.firstnameen }} {{ license.firstnameen }}</div>
-        <div>-</div>
+        <div>{{ license.birthdate | thaiDate }}</div>
         <div>{{ license.licensestartdate | thaiDate }}</div>
         <div>{{ license.licenseenddate | thaiDate }}</div>
       </div>

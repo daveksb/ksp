@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { SchoolRequestSubType } from '@ksp/shared/constant';
 import { SelfLicense } from '@ksp/shared/interface';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
 
@@ -18,6 +19,7 @@ export class LicenseInfoComponent {
   @Input() rewardTitleName = '';
   @Input() license: SelfLicense | null = null;
   @Output() selected = new EventEmitter<string>();
+
 
   select(licenseno: string | null | undefined) {
     if (licenseno) {

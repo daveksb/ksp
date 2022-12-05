@@ -10,7 +10,7 @@
 </ksp-top-nav>
 
 <form [formGroup]="form">
-  <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
+  <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height full-width-2">
     <div class="box-header">
       กิจกรรมพัฒนาตนเอง (หนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต)
     </div>
@@ -46,14 +46,16 @@
 
           <ng-container matColumnDef="licenseID">
             <th mat-header-cell *matHeaderCellDef>เลขที่หนังสืออนุญาต</th>
-            <td mat-cell *matCellDef="let element"></td>
+            <td mat-cell *matCellDef="let element">{{ element.licenseno }}</td>
           </ng-container>
 
           <ng-container matColumnDef="idcardno">
             <th mat-header-cell *matHeaderCellDef>
-              หมายเลขบัตรประชาชน/เลขที่หนังสือเดินทาง
+              หมายเลขบัตรประชาชน/เลขคุรุสภาสำหรับชาวต่างชาติ
             </th>
-            <td mat-cell *matCellDef="let element">{{ element.idcardno }}</td>
+            <td mat-cell *matCellDef="let element">
+              {{ element.idcardno || element.kuruspano }}
+            </td>
           </ng-container>
 
           <ng-container matColumnDef="name">
@@ -65,12 +67,16 @@
 
           <ng-container matColumnDef="releaseDate">
             <th mat-header-cell *matHeaderCellDef>วันที่ออกหนังสือ</th>
-            <td mat-cell *matCellDef="let element"></td>
+            <td mat-cell *matCellDef="let element">
+              {{ element.licensestartdate | thaiDate }}
+            </td>
           </ng-container>
 
           <ng-container matColumnDef="finishedDate">
             <th mat-header-cell *matHeaderCellDef>วันที่สิ้นสุด</th>
-            <td mat-cell *matCellDef="let element"></td>
+            <td mat-cell *matCellDef="let element">
+              {{ element.licenseenddate | thaiDate }}
+            </td>
           </ng-container>
 
           <ng-container matColumnDef="startdate">
