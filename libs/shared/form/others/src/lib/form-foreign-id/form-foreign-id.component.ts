@@ -1,6 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { FileGroup, KspFormBaseComponent } from '@ksp/shared/interface';
+import {
+  Country,
+  FileGroup,
+  KspFormBaseComponent,
+  Prefix,
+} from '@ksp/shared/interface';
 import {
   createUserInfoForm,
   providerFactory,
@@ -20,14 +25,13 @@ export class FormForeignIdComponent
   implements OnInit
 {
   override form = createUserInfoForm(this.fb);
-  validatorMessages = validatorMessages;
-
-  today = new Date();
   @Input() formHeader = 'ข้อมูลครูชาวต่างชาติ';
   @Input() passportLabel = 'หมายเลขหนังสือเดินทาง (Passport Number)';
-  @Input() prefixList: any;
-  @Input() countries: any;
+  @Input() prefixList: Prefix[] | null = [];
+  @Input() countries: Country[] | null = [];
 
+  validatorMessages = validatorMessages;
+  today = new Date();
   files: FileGroup[] = [{ name: '1.สำเนาหนังสือเดินทาง', files: [] }];
 
   constructor(private fb: FormBuilder) {
