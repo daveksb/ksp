@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -7,9 +8,11 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, MatTableModule],
   selector: 'ksp-request-license-approve-license-table',
   templateUrl: './request-license-approve-license-table.component.html',
   styleUrls: ['./request-license-approve-license-table.component.scss'],

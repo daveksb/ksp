@@ -141,6 +141,7 @@ export const routes: Route[] = [
     MatCheckboxModule,
     MatProgressSpinnerModule,
     ForbiddenPropertyFormComponent,
+    RequestLicenseApproveLicenseTableComponent,
   ],
   declarations: [
     RequestLicenseApproveListComponent,
@@ -150,7 +151,6 @@ export const routes: Route[] = [
     RequestLicenseApproveSearchListComponent,
     RequestLicenseApproveCreateGroupListComponent,
     RequestLicenseApproveGuarunteeComponent,
-    RequestLicenseApproveLicenseTableComponent,
     RequestLicenseApprovePrintComponent,
     RequestLicenseApproveSaveResultComponent,
     RequestLicenseApproveKmvComponent,
