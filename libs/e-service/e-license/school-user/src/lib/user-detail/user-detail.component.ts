@@ -17,7 +17,7 @@ import {
 import { ERequestService, GeneralInfoService } from '@ksp/shared/service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { concatMap, forkJoin, Observable } from 'rxjs';
-import { jsonParse, parseJson } from '@ksp/shared/utility';
+import { getCookie, jsonParse, parseJson } from '@ksp/shared/utility';
 import localForage from 'localforage';
 import moment from 'moment';
 
@@ -37,7 +37,6 @@ export class UserDetailComponent implements OnInit {
   setPassword = '';
   mode: FormMode = 'view';
   checkedResult: any;
-
   files: FileGroup[] = [
     {
       name: 'หนังสือแต่งตั้งผู้ประสานงาน',
@@ -100,7 +99,6 @@ export class UserDetailComponent implements OnInit {
       this.requestData = res;
       //console.log('res = ', res.status);
       res.status === '1' ? (this.mode = 'edit') : (this.mode = 'view');
-
       //set value for checked approve result
       if (res.status === '2') {
         this.checkedResult = approveChoices[0][0].value;
@@ -140,7 +138,7 @@ export class UserDetailComponent implements OnInit {
       status: '2',
       detail: null,
       systemtype: '4', //e-service
-      userid: null,
+      userid: getCookie('userId'),
       paymentstatus: null,
     };
 
@@ -170,7 +168,7 @@ export class UserDetailComponent implements OnInit {
       status: '2',
       detail: null,
       systemtype: '4', //e-service
-      userid: null,
+      userid: getCookie('userId'),
       paymentstatus: null,
     };
     const updateRequest =
@@ -210,7 +208,7 @@ export class UserDetailComponent implements OnInit {
       status: '3',
       detail: null,
       systemtype: '4', //e-service
-      userid: null,
+      userid: getCookie('userId'),
       paymentstatus: null,
     };
 
@@ -222,7 +220,6 @@ export class UserDetailComponent implements OnInit {
 
   viewUser(schoolId: any) {
     localForage.setItem('schoolDetail', this.form2.value);
-    //console.log('yyy = ', this.form2.value);
     this.router.navigate(['school', 'all-user'], {
       queryParams: { schoolId: schoolId },
     });

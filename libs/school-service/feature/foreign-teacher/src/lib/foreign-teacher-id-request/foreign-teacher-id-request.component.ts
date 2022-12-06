@@ -27,6 +27,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import {
   changeDate,
   formatDate,
+  formatDatePayload,
   formatRequestNo,
   getCookie,
   mapMultiFileInfo,
@@ -71,13 +72,6 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     private loaderService: LoaderService
   ) {}
 
-  get formValid() {
-    return (
-      !this.form.get('foreignTeacher')?.valid ||
-      !this.form.get('visainfo')?.valid
-    );
-  }
-
   ngOnInit(): void {
     this.uniqueNo = uuidv4();
     this.getList();
@@ -93,6 +87,13 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     });
   }
 
+  get formValid() {
+    return (
+      !this.form.get('foreignTeacher')?.valid ||
+      !this.form.get('visainfo')?.valid
+    );
+  }
+
   loadRequestData(id: number) {
     this.requestService.schGetRequestById(id).subscribe((res) => {
       if (res) {
@@ -104,9 +105,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
         res.passportstartdate = formatDate(res.passportstartdate);
         res.passportenddate = formatDate(res.passportenddate);
         res.visaexpiredate = formatDate(res.visaexpiredate);
-
         const fileinfo = JSON.parse(atob(res?.fileinfo || ''));
-
         if (fileinfo) {
           this.foreignFiles.forEach(
             (group, index) => (group.files = fileinfo[index])
@@ -204,13 +203,9 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
             userInfo.schoolid = this.schoolId;
             userInfo.process = `2`;
             userInfo.status = `1`;
-            userInfo.birthdate = changeDate(userInfo.birthdate);
-            userInfo.passportstartdate = changeDate(userInfo.passportstartdate);
-            userInfo.passportenddate = changeDate(userInfo.passportenddate);
             const visaform = this.form.value.visainfo as any;
             userInfo.visaclass = visaform?.visaclass;
             userInfo.visatype = visaform?.visatype;
-            userInfo.visaexpiredate = changeDate(visaform?.visaexpiredate);
             userInfo.bureauname = this.bureauName;
             userInfo.schoolid = this.schoolId;
             userInfo.schoolname = this.schoolName;
@@ -218,8 +213,8 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
             userInfo.fileinfo = JSON.stringify(
               mapMultiFileInfo(this.foreignFiles)
             );
-            //console.log('userInfo = ', userInfo);
-            return this.requestService.schCreateRequest(userInfo);
+            const payload = formatDatePayload(userInfo);
+            return this.requestService.schCreateRequest(payload);
           }
           return EMPTY;
         })
