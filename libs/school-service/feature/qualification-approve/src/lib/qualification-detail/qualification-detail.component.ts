@@ -32,8 +32,8 @@ import {
   StaffService,
 } from '@ksp/shared/service';
 import {
-  changeDate,
   formatDate,
+  formatDatePayload,
   formatRequestNo,
   getCookie,
   mapMultiFileInfo,
@@ -408,7 +408,6 @@ export class QualificationDetailComponent implements OnInit {
             userInfo.schooladdress = this.address;
             userInfo.process = '1';
             userInfo.status = '1';
-            userInfo.birthdate = changeDate(userInfo.birthdate);
             let eduForm = [{ ...formData.edu1, ...{ degreeLevel: 1 } }];
             formData?.edu2
               ? (eduForm = [
@@ -443,8 +442,9 @@ export class QualificationDetailComponent implements OnInit {
               fileinfo: JSON.stringify({ file }),
             };
 
-            const temp = replaceEmptyWithNull(payload);
-            return this.requestService.schCreateRequest(temp);
+            const data = replaceEmptyWithNull(payload);
+            const formatedData = formatDatePayload(data);
+            return this.requestService.schCreateRequest(formatedData);
           }
           return EMPTY;
         })
