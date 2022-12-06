@@ -77,7 +77,7 @@ export class ApproveNewUserListComponent implements AfterViewInit, OnInit {
 
     let payload: EsSearchPayload = {
       systemtype: '2',
-      requesttype: params.requesttype,
+      requesttype: params.requesttype || '1',
       requestno: params.requestno,
       careertype: null,
       name: params.name,

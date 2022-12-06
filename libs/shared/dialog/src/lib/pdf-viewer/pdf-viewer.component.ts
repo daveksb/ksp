@@ -28,11 +28,11 @@ export class PdfViewerComponent implements OnInit {
   index!: number | null;
   verifyChoice = [
     {
-      name: 'ครบถ้วน และถูกต้อง',
+      name: 'รับเอกสารแล้ว',
       value: 'complete',
     },
     {
-      name: 'ไม่ครบถ้วน และไม่ถูกต้อง',
+      name: 'ขอเอกสารเพิ่มเติม',
       value: 'incomplete',
     },
   ];
