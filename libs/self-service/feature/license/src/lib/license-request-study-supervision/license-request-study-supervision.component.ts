@@ -115,6 +115,12 @@ export class LicenseRequestStudySupervisionComponent
   ngOnInit(): void {
     this.getListData();
     this.checkRequestId();
+    this.form.valueChanges.subscribe((res) => {
+      console.log(
+        'this.form = ',
+        this.form.controls.workplace.value
+      );
+    });
   }
 
   override resetForm() {

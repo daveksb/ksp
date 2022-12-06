@@ -8,14 +8,16 @@ import {
   SelfServiceRequestSubType,
   SelfServiceRequestForType,
 } from '@ksp/shared/constant';
-import { SelfRequest } from '@ksp/shared/interface';
+import { KspRequest, SelfRequest } from '@ksp/shared/interface';
 import { LoaderService, SelfRequestService } from '@ksp/shared/service';
 import {
   formatDatePayload,
   getCookie,
+  hasRejectedRequest,
   SelfCheckProcess,
   SelfcheckStatus,
   selfMapRequestType,
+  thaiDate,
 } from '@ksp/shared/utility';
 import { Subject } from 'rxjs';
 
@@ -39,6 +41,9 @@ export class SelfServiceHomePageComponent implements AfterViewInit {
   dataSource = new MatTableDataSource<SelfRequest>();
   searchNotFound = false;
   displayedColumns: string[] = column;
+  initialSearch = true;
+  rejectedRequests: KspRequest[] = [];
+
   form = this.fb.group({
     requestno: [],
     requesttype: [],
@@ -69,6 +74,11 @@ export class SelfServiceHomePageComponent implements AfterViewInit {
     });
 
     this.requestService.searchMyRequests(payload).subscribe((res) => {
+      if (this.initialSearch) {
+        this.rejectedRequests = hasRejectedRequest(res);
+        //console.log('has reject = ', this.rejectedRequests);
+      }
+
       if (res && res.length) {
         this.searchNotFound = false;
         this.dataSource.data = res;
@@ -78,9 +88,11 @@ export class SelfServiceHomePageComponent implements AfterViewInit {
         this.sort.active = sortState.active;
         this.sort.direction = sortState.direction;
         this.sort.sortChange.emit(sortState);
+        this.initialSearch = false;
       } else {
         this.dataSource.data = [];
         this.searchNotFound = true;
+        this.initialSearch = false;
       }
     });
   }
@@ -324,6 +336,17 @@ export class SelfServiceHomePageComponent implements AfterViewInit {
       'request',
       ...(id ? [`${id}`] : []),
     ]);
+  }
+
+  genAlertMessage(req: KspRequest) {
+    const detail: any = JSON.parse(req.detail || '');
+    //console.log('return date = ', detail.returndate);
+    return `แจ้งเตือน เลขที่คำขอ: ${
+      req.requestno
+    } ถูกส่งคืน "ปรับแก้ไข/เพิ่มเติม"
+    กรุณาส่งกลับภายในวันที่ ${thaiDate(
+      new Date(detail.returndate)
+    )} มิฉะนั้นใบคำขอจะถูกยกเลิก `;
   }
 }
 

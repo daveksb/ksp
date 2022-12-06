@@ -1,5 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 import { Country, KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -18,15 +23,15 @@ export class FormUserExperienceComponent
 {
   @Input() countries: Country[] | null = [];
   @Input() licenses: any[] = [];
+
+  teachingAddress = this.fb.group({
+    teachingAddress: [null, Validators.required],
+  });
+
   override form = this.fb.group({
     TrainingAddressOne: [null, Validators.required],
     TrainingAddressTwo: [null, Validators.required],
-    teachingAddressForm: this.fb.array([
-      this.fb.group({
-        teachingAddress: [null, Validators.required],
-      }),
-    ]),
-    /* teachingAddress: [null, Validators.required], */
+    teachingAddressForm: this.fb.array([this.teachingAddress]),
     hasForeignLicense: [],
     foreignLicenseForm: [],
   });
@@ -62,15 +67,39 @@ export class FormUserExperienceComponent
       });
   }
 
-  deleteAddress(index: number) {
-    this.address.removeAt(index);
+  override set value(value: any) {
+    this.form.patchValue({ TrainingAddressOne: value.TrainingAddressOne });
+    this.form.patchValue({ TrainingAddressTwo: value.TrainingAddressTwo });
+
+    if (value.teachingAddressForm?.length) {
+      this.form.controls.teachingAddressForm.removeAt(0);
+
+      value.teachingAddressForm.forEach((item: any, index: number) => {
+        this.addAddress();
+        this.address.at(index).patchValue(item);
+      });
+    }
+
+    this.form.patchValue({ hasForeignLicense: value.hasForeignLicense });
+    this.form.patchValue({ foreignLicenseForm: value.foreignLicenseForm });
+
+    if (this.mode === 'view') {
+      this.form.disable();
+    }
+
+    this.onChange(value);
+    this.onTouched();
   }
 
   addAddress() {
-    const form = this.fb.group({
+    const teachingAddressForm = this.fb.group({
       teachingAddress: [null, Validators.required],
     });
-    this.address.push(form);
+    this.address.push(teachingAddressForm);
+  }
+
+  deleteAddress(index: number) {
+    this.address.removeAt(index);
   }
 
   resetForeignLicenseForm(evt: any) {
@@ -85,4 +114,8 @@ export class FormUserExperienceComponent
   get hasForeignLicense() {
     return this.form.controls.hasForeignLicense.value;
   }
+
+  /* getAddress(index: number) {
+    return this.address.controls[index].controls.teachingAddress;
+  } */
 }
