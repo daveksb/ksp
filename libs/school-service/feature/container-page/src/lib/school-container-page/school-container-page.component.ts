@@ -105,7 +105,7 @@ export const menu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/gear-fill.svg',
-    label: 'ข้อมูลโรงเรียน',
+    label: 'ข้อมูลโรงเรียน/สถานศึกษา',
     path: '/school-info/detail',
   },
 ];

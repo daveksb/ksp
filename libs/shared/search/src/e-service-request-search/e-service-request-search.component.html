@@ -61,6 +61,18 @@
             <mat-datepicker #picker></mat-datepicker>
           </div>
         </div>
+        <div class="col" *ngIf="showProvince">
+          <label class="form-label">จังหวัด</label>
+          <select class="form-select" formControlName="requeststatus">
+            <option selected hidden disabled value="null">กรุณาเลือก</option>
+            <option
+              *ngFor="let province of provinces"
+              [value]="province?.province_id"
+            >
+              {{ province?.province_name }}
+            </option>
+          </select>
+        </div>
       </div>
     </div>
 

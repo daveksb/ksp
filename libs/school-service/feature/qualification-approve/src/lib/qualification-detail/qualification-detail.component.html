@@ -1,3 +1,8 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav
   ><span header>ยื่นใบคำขอ</span
   ><span subHeader
@@ -10,7 +15,8 @@
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 px-4 py-2">
     <div class="box-header">
-      รายละเอียดใบคำขอรับรองคุณวุฒิทางการศึกษา เพื่อใช้ในการขอรับใบอนุญาตประกอบวิชาชีพ
+      รายละเอียดใบคำขอรับรองคุณวุฒิทางการศึกษา
+      เพื่อใช้ในการขอรับใบอนุญาตประกอบวิชาชีพ
     </div>
     <div class="bg-white py-3 px-4">
       <div>
@@ -79,7 +85,7 @@
 
           <mat-tab label="ข้อมูลทางการศึกษา">
             <div class="d-flex align-items-center">
-              <label class="fs-5">วุฒิการศึกษาปริญญาตรี</label>
+              <label class="box-header">วุฒิการศึกษาปริญญาตรี</label>
             </div>
 
             <ksp-form-education-info
@@ -100,7 +106,7 @@
                 (change)="eduSelected(2, $event)"
                 [checked]="checkbox2"
               />
-              <label class="fs-5">วุฒิการศึกษาปริญญาโท</label>
+              <label class="box-header">วุฒิการศึกษาปริญญาโท</label>
             </div>
             <ng-container *ngIf="showEdu2">
               <ksp-form-education-info
@@ -122,7 +128,7 @@
                 (change)="eduSelected(3, $event)"
                 [checked]="checkbox3"
               />
-              <label class="fs-5">วุฒิการศึกษาปริญญาเอก</label>
+              <label class="box-header">วุฒิการศึกษาปริญญาเอก</label>
             </div>
             <ng-container *ngIf="showEdu3">
               <ksp-form-education-info
@@ -144,7 +150,7 @@
                 (change)="eduSelected(4, $event)"
                 [checked]="checkbox4"
               />
-              <label class="fs-5"
+              <label class="box-header"
                 >วุฒิการศึกษาปริญญาอื่นๆที่เทียบเท่าปริญญาตรี /
                 ปริญญาทางการศึกษา</label
               >

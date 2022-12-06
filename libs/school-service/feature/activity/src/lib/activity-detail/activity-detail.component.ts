@@ -9,9 +9,10 @@ import {
 } from '@ksp/shared/dialog';
 import { getCookie, schoolMapSelfDevelopType } from '@ksp/shared/utility';
 import { SchoolSelfDevelopActivityTies } from '@ksp/shared/constant';
-import { SelfDevelopService, StaffService } from '@ksp/shared/service';
+import { LoaderService, SelfDevelopService, StaffService } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { v4 as uuidv4 } from 'uuid';
+import { Subject } from 'rxjs';
 
 @UntilDestroy()
 @Component({
@@ -20,6 +21,7 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./activity-detail.component.scss'],
 })
 export class ActivityDetailComponent implements OnInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   schoolId = getCookie('schoolId');
   staffId!: number;
   staff = new SchStaff();
@@ -49,7 +51,8 @@ export class ActivityDetailComponent implements OnInit {
     private fb: FormBuilder,
     public dialog: MatDialog,
     private service: SelfDevelopService,
-    private staffService: StaffService
+    private staffService: StaffService,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {

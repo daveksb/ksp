@@ -8,10 +8,12 @@ import { SchoolRequestProcess } from '@ksp/shared/constant';
 import {
   EsSearchPayload,
   KspRequest,
+  Province,
   RequestSearchFilter,
   SchoolUserPageType,
 } from '@ksp/shared/interface';
 import {
+  AddressService,
   EducationDetailService,
   ERequestService,
   LoaderService,
@@ -42,6 +44,7 @@ export class ApproveNewUserListComponent implements AfterViewInit, OnInit {
   bureau$!: Observable<any>;
   searchNotFound = false;
   defaultForm = { requesttype: '1' };
+  provinces$!: Observable<Province[]>;
   form = this.fb.group({
     search: [this.defaultForm],
   });
@@ -51,11 +54,13 @@ export class ApproveNewUserListComponent implements AfterViewInit, OnInit {
     private fb: FormBuilder,
     private eRequestService: ERequestService,
     private educationDetailService: EducationDetailService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private addressService: AddressService
   ) {}
 
   ngOnInit(): void {
     this.bureau$ = this.educationDetailService.getBureau();
+    this.provinces$ = this.addressService.getProvinces();
   }
 
   ngAfterViewInit(): void {

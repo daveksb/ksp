@@ -1,9 +1,15 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav
   ><span header>ยื่นใบคำขอ</span
   ><span subHeader
     >ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ
   </span></ksp-top-nav
 >
+
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 px-4 py-2">
     <div class="box-header">
@@ -59,27 +65,25 @@
           </div>
         </div>
       </div>
-      <br />
-      <div class="mb-3">
-        <ksp-form-foreign-id
+      <hr />
+      <ksp-form-foreign-id
+        [mode]="mode"
+        formControlName="foreignTeacher"
+        [prefixList]="prefixList$ | async"
+        [countries]="countries$ | async"
+        [formHeader]="'ข้อมูลครูชาวต่างชาติ'"
+      >
+        <ksp-form-visa-info
           [mode]="mode"
-          formControlName="foreignTeacher"
-          [prefixList]="prefixList$ | async"
-          [countries]="countries$ | async"
-          [formHeader]="'ข้อมูลครูชาวต่างชาติ'"
-        >
-          <ksp-form-visa-info
-            [mode]="mode"
-            [visaTypeList]="visaTypeList$ | async"
-            formControlName="visainfo"
-          ></ksp-form-visa-info>
-        </ksp-form-foreign-id>
-      </div>
+          [visaTypeList]="visaTypeList$ | async"
+          formControlName="visainfo"
+        ></ksp-form-visa-info>
+      </ksp-form-foreign-id>
 
       <div class="mb-2 mt-3">
         <ksp-form-multi-attachment
           [uniqueTimestamp]="uniqueNo"
-          [title]="'กรุณาแนบหลักฐานประกอบการปฏิบัติงาน '"
+          [title]="'กรุณาแนบหลักฐานประกอบ'"
           [groups]="foreignFiles"
           [mode]="mode"
         ></ksp-form-multi-attachment>

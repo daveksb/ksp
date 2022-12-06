@@ -15,10 +15,11 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { FormBuilder } from '@angular/forms';
-import { EMPTY, Observable, switchMap } from 'rxjs';
+import { EMPTY, Observable, Subject, switchMap } from 'rxjs';
 import {
   AddressService,
   GeneralInfoService,
+  LoaderService,
   SchoolInfoService,
   SchoolRequestService,
 } from '@ksp/shared/service';
@@ -39,6 +40,7 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./foreign-teacher-id-request.component.scss'],
 })
 export class ForeignTeacherIdRequestComponent implements OnInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   uniqueNo!: string;
   bureauName = '';
   schoolId = getCookie('schoolId');
@@ -65,7 +67,8 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
     private requestService: SchoolRequestService,
-    private schoolInfoService: SchoolInfoService
+    private schoolInfoService: SchoolInfoService,
+    private loaderService: LoaderService
   ) {}
 
   get formValid() {

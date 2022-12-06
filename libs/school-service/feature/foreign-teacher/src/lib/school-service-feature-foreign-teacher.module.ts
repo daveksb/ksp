@@ -9,6 +9,7 @@ import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export const routes: Route[] = [
   {
@@ -36,6 +37,7 @@ export const routes: Route[] = [
     BottomNavComponent,
     RequestHeaderInfoComponent,
     ReactiveFormsModule,
+    MatProgressSpinnerModule
   ],
   declarations: [ForeignTeacherIdRequestComponent],
 })

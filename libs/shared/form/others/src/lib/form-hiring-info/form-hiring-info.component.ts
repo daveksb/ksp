@@ -55,12 +55,12 @@ export class FormHiringInfoComponent
     }
 
     this.hiringStatus.valueChanges.pipe(skip(3)).subscribe(() => {
-      this.disableForm();
+      this.disableStatusForm();
       this.form.controls.hiringStartDate.reset();
       this.form.controls.hiringEndDate.reset();
       this.form.controls.hiringCancelDate.reset();
       if (this.mode !== 'view') {
-        this.enableForm();
+        this.enableStatusForm();
       }
     });
 
@@ -94,13 +94,13 @@ export class FormHiringInfoComponent
     return this.form.controls.hiringStatus;
   }
 
-  disableForm() {
+  disableStatusForm() {
     this.form.controls.hiringStartDate.disable();
     this.form.controls.hiringEndDate.disable();
     this.form.controls.hiringCancelDate.disable();
   }
 
-  enableForm() {
+  enableStatusForm() {
     if (this.hiringStatus.value === '1') {
       this.form.controls.hiringStartDate.enable();
       this.form.controls.hiringStartDate.setValidators([Validators.required]);

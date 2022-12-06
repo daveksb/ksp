@@ -16,7 +16,6 @@ import { Observable, Subject } from 'rxjs';
 })
 export class ActivityListComponent implements AfterViewInit {
   isLoading: Subject<boolean> = this.loaderService.isLoading;
-
   activityPageMode = activityPageMode;
   positions$!: Observable<PositionType[]>;
   licenseTypes: ListData[] = staffLicenseTypes;
