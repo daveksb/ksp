@@ -1,17 +1,17 @@
 <div class="container-sm p-0">
   <div class="card justify-content-center">
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center px-3">
       <div class="d-flex justify-content-center">
         <img
           src="/assets/images/img-profile.png"
           class="me-3"
-          style="width: 121px; height: 175px"
+          style="width: 96px; height: 144px"
         />
       </div>
       <div class="d-flex flex-column justify-content-between">
-        <div class="title">ใบอนุญาตประกอบวิชาชีพครู</div>
+        <div class="fs-4 text-orange">ใบอนุญาตประกอบวิชาชีพครู</div>
         <div class="fs-6">นาย ธนานุรักษ์ ใจสะอาด</div>
-        <div class="fs-6">MR. Thananurk jaisa-ard</div>
+        <div class="fs-6">MR. Thananurk jaisaard</div>
         <div class="fs-6">เลขสมาชิก 239579-43957997</div>
         <div class="d-flex my-2">
           <div class="me-3 text-secondary">
@@ -22,7 +22,7 @@
           </div>
         </div>
 
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center" *ngIf="showButton">
           <button
             class="btn btn-sm border-primary text-primary bg-white me-2 w-50"
           >

@@ -41,8 +41,8 @@ export class RequestLicenseApproveSearchListComponent
     'status',
     'screenDate',
     'guaranteeDate',
-    'checkDate',
-    'edit',
+    //'checkDate',
+    //'edit',
   ];
   dataSource = new MatTableDataSource<any>();
   mode: 'create' | 'guarantee' = 'create';
