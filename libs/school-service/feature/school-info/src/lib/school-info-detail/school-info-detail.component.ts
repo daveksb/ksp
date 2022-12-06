@@ -99,7 +99,7 @@ export class SchoolInfoDetailComponent implements OnInit {
         //console.log('res = ', res[0]);
         if (res) {
           const coordinator: any = JSON.parse(res[0].coordinatorinfo);
-          //console.log('coordinator = ', coordinator);
+          console.log('coordinator = ', coordinator);
           this.form.controls.coordinator.patchValue(coordinator);
         }
       });

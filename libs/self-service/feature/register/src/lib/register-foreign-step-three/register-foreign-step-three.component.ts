@@ -57,13 +57,11 @@ export class RegisterForeignStepThreeComponent implements OnInit {
     localForage.getItem('registerForeigner').then((res: any) => {
       this.savingData = res;
       this.passportNo = res.passportno;
-      console.log('xxx = ', this.passportNo);
     });
   }
 
   save() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
       data: {
         title: `Confirm?`,
         subTitle: `You want to save this information`,
