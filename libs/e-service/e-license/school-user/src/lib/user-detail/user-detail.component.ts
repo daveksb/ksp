@@ -17,8 +17,9 @@ import {
 import { ERequestService, GeneralInfoService } from '@ksp/shared/service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { concatMap, forkJoin, Observable } from 'rxjs';
-import { parseJson } from '@ksp/shared/utility';
+import { jsonParse, parseJson } from '@ksp/shared/utility';
 import localForage from 'localforage';
+import moment from 'moment';
 
 @Component({
   templateUrl: './user-detail.component.html',
@@ -97,9 +98,7 @@ export class UserDetailComponent implements OnInit {
   loadRequestFromId(id: number) {
     this.eRequestService.getKspRequestById(id).subscribe((res) => {
       this.requestData = res;
-      console.log('reszzz = ', res.detail);
       //console.log('res = ', res.status);
-
       res.status === '1' ? (this.mode = 'edit') : (this.mode = 'view');
 
       //set value for checked approve result
@@ -178,6 +177,8 @@ export class UserDetailComponent implements OnInit {
       this.eRequestService.KspUpdateRequestProcess(updatePayload);
 
     const user = new SchUser();
+    const coordinatorinfo = jsonParse(this.requestData.coordinatorinfo || '{}');
+
     user.idcardno = this.requestData.idcardno;
     user.prefixth = this.requestData.prefixth;
     user.schemail = this.requestData.email;
@@ -186,13 +187,16 @@ export class UserDetailComponent implements OnInit {
     user.lastnameth = this.requestData.lastnameth;
     user.schusername = this.requestData.schoolid;
     user.schoolid = this.requestData.schoolid;
+    user.schmobile = this.requestData.contactphone;
     user.schpassword = this.setPassword;
     user.requestid = this.requestData.id;
     user.schuseractive = '1';
+    user.schuserstartdate = moment().format('yyyy-MM-DD');
+    user.coordinatorinfo = JSON.stringify(coordinatorinfo);
+    //console.log('user = ', user);
+
     const createUser = this.eRequestService.createSchUser(user);
-
     const forkRequest = forkJoin([updateRequest, createUser]);
-
     deActivateAllUser.pipe(concatMap(() => forkRequest)).subscribe(() => {
       //console.log('res = ', res);
       this.completeDialog();
