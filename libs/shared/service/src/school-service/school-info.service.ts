@@ -46,7 +46,7 @@ export class SchoolInfoService {
 
   searchSchool(payload: any): Observable<SchInfo[]> {
     return this.http
-      .post(`https://kspapi.oceanicnetwork.net/schschoolsearch.php`, payload)
+      .post(`${environment.shortApiUrl}/schschoolsearch.php`, payload)
       .pipe(
         shareReplay(),
         map((data: any) => data.datareturn)
@@ -61,7 +61,7 @@ export class SchoolInfoService {
 
   getCoordinatorInfo(payload: any): Observable<any> {
     return this.http
-      .post(`https://kspapi.oceanicnetwork.net/schuser_ksprequest.php`, payload)
+      .post(`${environment.shortApiUrl}/schuser_ksprequest.php`, payload)
       .pipe(map((data: any) => data.datareturn));
   }
 }
