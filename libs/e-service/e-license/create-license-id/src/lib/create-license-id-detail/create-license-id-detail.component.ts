@@ -36,6 +36,19 @@ export class CreateLicenseIdDetailComponent implements OnInit {
   prefixList!: Observable<Prefix[]>;
   licenseTypes = qualificationCareerTypeList;
   myImage: any = null;
+
+  licensetype = '';
+  licenseno = '';
+  prefixth = '-';
+  firstnameth = '';
+  lastnameth = '';
+  prefixen = '-';
+  firstnameen = '';
+  lastnameen = '';
+  kuruspano = '';
+  licensestartdate: any;
+  licenseenddate: any;
+
   form = this.fb.group({
     licenseno: [],
     idcardno: [],
@@ -96,8 +109,21 @@ export class CreateLicenseIdDetailComponent implements OnInit {
 
   rowSelect(id: any) {
     this.requestService.getSelfLicense(id).subscribe((data) => {
+      console.log('data = ', data);
       this.form.patchValue(data);
       this.myImage = atob(data.filedata);
+
+      this.licensetype = data.careertype;
+      this.licenseno = data.licenseno;
+      this.prefixth = data.prefixth;
+      this.firstnameth = data.firstnameth;
+      this.lastnameth = data.lastnameth;
+      this.prefixen = data.prefixen;
+      this.firstnameen = data.firstnameen;
+      this.lastnameen = data.lastnameen;
+      this.kuruspano = data.kuruspano;
+      this.licensestartdate = data.licensestartdate;
+      this.licenseenddate = data.licenseenddate;
     });
   }
 
@@ -219,4 +245,5 @@ const column2 = [
   'licenseGroup',
   'approveDate',
   'verifyDate',
+  'view',
 ];
