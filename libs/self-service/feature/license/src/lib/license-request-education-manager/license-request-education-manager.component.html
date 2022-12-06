@@ -12,6 +12,7 @@
 
 <div class="main__container px-4 py-2">
   <self-service-request-status
+    [requestDate]="requestDate"
     [idcardNo]="(myInfo$ | async)?.idcardno || ''"
     [kurusapaNo]="(myInfo$ | async)?.kuruspano || ''"
     [requestNo]="requestNo"

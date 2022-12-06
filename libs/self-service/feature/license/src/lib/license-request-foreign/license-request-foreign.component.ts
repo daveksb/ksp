@@ -59,6 +59,7 @@ export class LicenseRequestForeignComponent implements OnInit {
   myImage = '';
   requestType: any;
   requestLabel = '';
+  requestDate: any;
 
   constructor(
     private router: Router,
@@ -104,6 +105,7 @@ export class LicenseRequestForeignComponent implements OnInit {
           if (res) {
             console.log(res);
             this.requestData = res;
+            this.requestDate = res.requestdate;
             this.requestNo = res.requestno;
             this.currentProcess = Number(res.process);
             this.uniqueTimestamp = res.uniqueno || '';

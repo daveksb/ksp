@@ -15,15 +15,15 @@ export class SlideshowComponent implements OnInit {
 
   @Input() showButton = true;
 
-  @Input() licensetype = 'null';
-  @Input() licenseno = 'null';
-  @Input() prefixth = 'null';
-  @Input() firstnameth = 'null';
-  @Input() lastnameth = 'null';
-  @Input() prefixen = 'null';
-  @Input() firstnameen = 'null';
-  @Input() lastnameen = 'null';
-  @Input() kuruspano = 'null';
+  @Input() licensetype = '-';
+  @Input() licenseno = '-';
+  @Input() prefixth = '-';
+  @Input() firstnameth = '-';
+  @Input() lastnameth = '-';
+  @Input() prefixen = '-';
+  @Input() firstnameen = '-';
+  @Input() lastnameen = '-';
+  @Input() kuruspano = '-';
   @Input() licensestartdate: any;
   @Input() licenseenddate: any;
 
