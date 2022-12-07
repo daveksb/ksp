@@ -9,6 +9,7 @@ import {
   Tambol,
 } from '@ksp/shared/interface';
 import { UniversitySearchComponent } from '@ksp/shared/search';
+import { AddressService } from '@ksp/shared/service';
 import { providerFactory } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { pairwise } from 'rxjs/operators';
@@ -87,7 +88,11 @@ export class FormUserWorkplaceComponent
     website: [],
   });
 
-  constructor(private dialog: MatDialog, private fb: FormBuilder) {
+  constructor(
+    private dialog: MatDialog,
+    private fb: FormBuilder,
+    private addressService: AddressService
+  ) {
     super();
     this.subscriptions.push(
       this.form?.valueChanges.subscribe((value) => {
@@ -99,7 +104,6 @@ export class FormUserWorkplaceComponent
   }
 
   ngOnInit(): void {
-    console.log(this.mode);
     if (this.mode !== 'view') {
       this.form.valueChanges
         .pipe(untilDestroyed(this), pairwise())
@@ -118,7 +122,6 @@ export class FormUserWorkplaceComponent
             });
           }
         });
-
     }
   }
 
@@ -134,10 +137,10 @@ export class FormUserWorkplaceComponent
     this.road = school.road;
     this.province = school.provinceid;
     if (this.province) {
-      this.tumbon = school.tumbonid;
+      this.amphur = school.amphurid;
     }
     if (this.tumbon) {
-      this.amphur = school.amphurid;
+      this.tumbon = school.tumbonid;
     }
     this.phone = school.telphone;
     this.fax = school.fax;
@@ -178,8 +181,18 @@ export class FormUserWorkplaceComponent
     this.form.controls.road.patchValue(this.road);
     this.form.controls.alley.patchValue(this.alley);
     this.form.controls.province.patchValue(this.province);
-    this.form.controls.amphur.patchValue(this.amphur);
-    this.form.controls.tumbol.patchValue(this.tumbon);
+    if (this.province) {
+      this.addressService.getAmphurs(this.province).subscribe((res) => {
+        this.amphurs = res;
+        this.form.controls.amphur.patchValue(this.amphur);
+      });
+    }
+    if (this.amphur) {
+      this.addressService.getTumbols(this.amphur).subscribe((res) => {
+        this.tumbols = res;
+        this.form.controls.tumbol.patchValue(this.tumbon);
+      });
+    }
     this.form.controls.phone.patchValue(this.phone);
     this.form.controls.fax.patchValue(this.fax);
     this.form.controls.email.patchValue(this.email);
