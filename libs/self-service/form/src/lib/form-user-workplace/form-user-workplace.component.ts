@@ -118,6 +118,7 @@ export class FormUserWorkplaceComponent
             });
           }
         });
+
     }
   }
 
@@ -132,8 +133,12 @@ export class FormUserWorkplaceComponent
     this.alley = school.street;
     this.road = school.road;
     this.province = school.provinceid;
-    this.tumbon = school.tumbonid;
-    this.amphur = school.amphurid;
+    if (this.province) {
+      this.tumbon = school.tumbonid;
+    }
+    if (this.tumbon) {
+      this.amphur = school.amphurid;
+    }
     this.phone = school.telphone;
     this.fax = school.fax;
     this.email = school.schsendemail;

@@ -90,6 +90,7 @@ export class ETempLicenseDetailComponent implements OnInit {
     edu3: [],
     edu4: [],
     edu5: [],
+    edu6: [],
     teachinginfo: [],
     hiringinfo: [],
     reasoninfo: [],
@@ -277,6 +278,18 @@ export class ETempLicenseDetailComponent implements OnInit {
         }
         if (i === 1) {
           this.form.controls.edu2.patchValue(edu);
+        }
+        if (i === 2) {
+          this.form.controls.edu3.patchValue(edu);
+        }
+        if (i === 3) {
+          this.form.controls.edu4.patchValue(edu);
+        }
+        if (i === 4) {
+          this.form.controls.edu5.patchValue(edu);
+        }
+        if (i === 5) {
+          this.form.controls.edu6.patchValue(edu);
         }
       });
     }

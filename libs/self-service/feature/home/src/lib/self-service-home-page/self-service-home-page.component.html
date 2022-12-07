@@ -6,9 +6,13 @@
 <ksp-top-nav [isSelfService]="true"><span header>หน้าแรก</span></ksp-top-nav>
 
 <div class="full-height full-width-2 main__container py-2 px-4">
-  <!-- <div class="py-2">
-    <ksp-uni-form-badge [mainTitle]="badgeTitle"></ksp-uni-form-badge>
-  </div> -->
+  <ng-container *ngFor="let req of rejectedRequests; let i = index">
+    <div role="button">
+      <ksp-uni-form-badge
+        [mainTitle]="genAlertMessage(req)"
+      ></ksp-uni-form-badge>
+    </div>
+  </ng-container>
 
   <div
     class="d-flex flex-column flex-lg-row gap-0 gap-md-4 mb-3"
@@ -81,7 +85,7 @@
         <select class="form-select">
           <option selected hidden disabled value="null">กรุณาเลือก</option>
           <option value="1">ชำระเงินแล้ว</option>
-          <option value="2">รอชำระ</option>
+          <option value="2">รอชำระเงิน</option>
         </select>
       </div>
       <div class="col-md mb-2">
@@ -267,7 +271,7 @@
 
       <ng-container matColumnDef="edit">
         <th mat-header-cell *matHeaderCellDef>แก้ไข</th>
-        <td mat-cell *matCellDef="let element">
+        <td mat-cell *matCellDef="let element" class="text-center">
           <i
             (click)="goToDetail(element)"
             role="button"
@@ -278,7 +282,7 @@
 
       <ng-container matColumnDef="print">
         <th mat-header-cell *matHeaderCellDef>พิมพ์ใบคำขอ</th>
-        <td mat-cell *matCellDef="let element">
+        <td mat-cell *matCellDef="let element" class="text-center">
           <i role="button" class="bi bi-printer-fill text-primary fs-5"></i>
         </td>
       </ng-container>

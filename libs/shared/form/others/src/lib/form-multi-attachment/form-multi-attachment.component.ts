@@ -32,6 +32,10 @@ export class FormMultiAttachmentComponent {
       const dialogRef = this.dialog.open(PdfViewerComponent, {
         width: '1200px',
         height: '100vh',
+        position: {
+          top: '0px',
+          right: '0px',
+        },
         data: {
           title: group.name,
           files: group.files,
@@ -46,6 +50,10 @@ export class FormMultiAttachmentComponent {
       this.dialog.open(PdfViewerNoLicenseComponent, {
         width: '1200px',
         height: '100vh',
+        position: {
+          top: '0px',
+          right: '0px',
+        },
         data: {
           title: group.name,
           files: group.files,

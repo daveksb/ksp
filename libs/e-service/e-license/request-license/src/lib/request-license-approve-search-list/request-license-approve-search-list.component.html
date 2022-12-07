@@ -3,7 +3,8 @@
   </mat-progress-spinner>
 </div>
 
-<ksp-top-nav><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span>
+<ksp-top-nav
+  ><span header>ใบคำขออนุญาตประกอบวิชาชีพ</span>
   <span subHeader>ผลการนำเสนอใบอนุญาตประกอบวิชาชีพ </span>
 </ksp-top-nav>
 
@@ -14,7 +15,8 @@
   <div class="bg-white px-3 py-3">
     <div class="mb-3">
       <ksp-e-service-license-group-search
-        (search)="searchData($event)"></ksp-e-service-license-group-search>
+        (search)="searchData($event)"
+      ></ksp-e-service-license-group-search>
     </div>
 
     <div class="d-flex justify-content-end mb-3 mt-4">
@@ -23,7 +25,8 @@
           type="button"
           class="btn btn-success ms-2 create-group-btn"
           [disabled]="!canSave"
-          (click)="saveResult()">
+          (click)="saveResult()"
+        >
           บันทึกผลการนำเสนอกลั่นกรอง
         </button>
 
@@ -31,16 +34,19 @@
           type="button"
           class="btn btn-success ms-2 create-group-btn"
           [disabled]="!canPrint"
-          (click)="print()">
+          (click)="print()"
+        >
           พิมพ์รายงานนำเสนอกลั่นกรอง
         </button>
 
-        <button
+        <!-- <button
           type="button"
           class="btn btn-primary ms-2 create-group-btn"
-          (click)="createGroup()">
+          (click)="createGroup()"
+          disabled
+        >
           + สร้างกลุ่มบัญชีรายชื่อ
-        </button>
+        </button> -->
       </ng-container>
 
       <ng-container *ngIf="mode === 'guarantee'">
@@ -48,25 +54,25 @@
           type="button"
           class="btn btn-success ms-2 create-group-btn"
           [disabled]="!canSave"
-          (click)="kmv()">
+          (click)="kmv()"
+        >
           บันทึกผลการนำเสนอ กมว.
         </button>
 
         <button
           type="button"
           class="btn btn-success ms-2 create-group-btn"
-          disabled>
+          disabled
+        >
           พิมพ์รายงานนำเสนอ กมว.
         </button>
       </ng-container>
     </div>
 
     <hr />
-
+    <mat-paginator [pageSizeOptions]="[25]" showFirstLastButtons>
+    </mat-paginator>
     <div class="table__scroll">
-      <mat-paginator [pageSizeOptions]="[25]" showFirstLastButtons>
-      </mat-paginator>
-
       <table mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="select">
           <th mat-header-cell *matHeaderCellDef>เลือก</th>
@@ -75,7 +81,8 @@
               type="checkbox"
               class="me-2"
               [checked]="element.select"
-              (click)="onSelect(element)" />
+              (click)="onSelect(element)"
+            />
           </td>
         </ng-container>
 
@@ -114,7 +121,7 @@
           <th mat-header-cell *matHeaderCellDef>ประเภทใบอนุญาต</th>
           <td mat-cell *matCellDef="let element">
             ใบอนุญาตประกอบวิชาชีพ{{
-            SelfServiceRequestSubType[+element.careertype]
+              SelfServiceRequestSubType[+element.careertype]
             }}
           </td>
         </ng-container>
@@ -154,16 +161,13 @@
 
         <ng-container matColumnDef="checkDate">
           <th mat-header-cell *matHeaderCellDef>วันที่ผ่านการตรวจสอบ</th>
-          <td mat-cell *matCellDef="let element">
-          </td>
+          <td mat-cell *matCellDef="let element"></td>
         </ng-container>
 
         <ng-container matColumnDef="edit">
           <th mat-header-cell *matHeaderCellDef>แก้ไข</th>
           <td mat-cell *matCellDef="let element">
-            <i
-              role="button"
-              class="bi bi-pencil-square text-primary fs-5"></i>
+            <i role="button" class="bi bi-pencil-square text-primary fs-5"></i>
           </td>
         </ng-container>
 

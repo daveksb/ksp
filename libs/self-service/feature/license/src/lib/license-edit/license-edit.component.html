@@ -24,33 +24,32 @@
         *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
         โปรดตรวจสอบอีกครั้งก่อนการบันทึกลงระบบ
       </label>
-
-      <div class="d-flex justify-content-center mt-2">
-        <button
-          *ngIf="requestId"
-          type="button"
-          class="ms-3 btn border-primary text-primary"
-          (click)="onCancel()"
-        >
-          ยกเลิกใบคำขอ
-        </button>
-        <button
-          *ngIf="!requestId"
-          (click)="onCancel()"
-          type="button"
-          class="ms-3 btn border-primary text-primary"
-        >
-          ยกเลิก
-        </button>
-        <button
-          (click)="onConfirm()"
-          type="button"
-          class="ms-3 btn btn-primary"
-          [disabled]="!form.valid"
-        >
-          บันทึก
-        </button>
-      </div>
+    </div>
+    <div class="d-flex justify-content-center mb-2 mt-3">
+      <button
+        *ngIf="requestId"
+        type="button"
+        class="ms-3 btn border-primary text-primary"
+        (click)="onCancel()"
+      >
+        ยกเลิกใบคำขอ
+      </button>
+      <button
+        *ngIf="!requestId"
+        (click)="onCancel()"
+        type="button"
+        class="ms-3 btn border-primary bg-white text-primary"
+      >
+        ยกเลิก
+      </button>
+      <button
+        (click)="onConfirm()"
+        type="button"
+        class="ms-3 btn btn-primary"
+        [disabled]="!form.valid"
+      >
+        บันทึก
+      </button>
     </div>
   </div>
 </form>
