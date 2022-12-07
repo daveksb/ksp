@@ -77,6 +77,8 @@ export class RequestSearchComponent
           this.careerList = this.careerTypeList;
         }
 
+        console.log('this.careerList = ', this.careerList);
+
         this.onChange(value);
         this.onTouched();
       })
