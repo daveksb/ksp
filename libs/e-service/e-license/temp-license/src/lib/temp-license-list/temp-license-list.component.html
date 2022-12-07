@@ -19,7 +19,7 @@
     <div class="bg-white px-3 py-3">
       <div class="mb-3">
         <ksp-school-request-search
-          formControlName="search"
+          [formControl]="form.controls['search']"
           [disableRequestType]="true"
           [careerTypeList]="careerTypeList"
           [requestTypeList]="requestTypeList"
