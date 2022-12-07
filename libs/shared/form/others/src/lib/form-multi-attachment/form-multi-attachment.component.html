@@ -23,16 +23,14 @@
                   <div
                     class="text-secondary"
                     role="button"
-                    (click)="downloadFile(file)"
-                  >
+                    (click)="downloadFile(file)">
                     {{ file?.filename }}
                   </div>
                   <i
                     (click)="deleteFile(file)"
                     *ngIf="file?.fileid && mode === 'edit'"
                     class="bi bi-x-circle-fill text-danger fs-6 ms-2"
-                    role="button"
-                  ></i>
+                    role="button"></i>
 
                   <!-- <div *ngIf="i === 0 && mode === 'edit'" class="text-danger">
                     ขอเอกสารเพิ่มเติม: เนื่องจากขาดข้อมูลหน้าที่ 11-20
@@ -41,12 +39,10 @@
               </ng-container>
             </th>
             <td class="text-center"></td>
-            <td *ngIf="mode === 'view'">
+            <td *ngIf="mode === 'view' && group.files.length > 0">
               <div class="mt-4">
                 <div class="d-flex flex-row justify-content-center">
-                  <label class="view__label" (click)="view(group)"
-                    >ดูเอกสารแนบ</label
-                  >
+                  <label class="view__label" (click)="view(group)">ดูเอกสารแนบ</label>
                 </div>
               </div>
             </td>
@@ -57,8 +53,7 @@
                 [systemFileName]="group.name"
                 [requestType]="requestType"
                 [uniqueTimestamp]="uniqueTimestamp"
-                (uploadComplete)="updateComplete($event, group)"
-              ></ksp-file-upload>
+                (uploadComplete)="updateComplete($event, group)"></ksp-file-upload>
             </td>
             <td></td>
             <!-- (uploadComplete)="updateComplete($event, group)" -->

@@ -64,6 +64,7 @@ export class PdfViewerComponent implements OnInit {
       );
     }, 0);
 
+    this.data.files = this.data.files.filter((file) => file.fileid);
     this.pdfList = this.setDefault(this.data.files.length);
     this.getAllFileData();
   }
@@ -136,7 +137,6 @@ export class PdfViewerComponent implements OnInit {
     return extension;
   }
   getAllFileData() {
-    console.log(this.data);
     for (const index in this.data.files) {
       this.getFile(parseInt(index));
     }
