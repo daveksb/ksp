@@ -213,7 +213,7 @@ export class ETempLicenseDetailComponent implements OnInit {
   }
 
   patchFileInfo(res: any) {
-    /*  if (res && res.tab3 && Array.isArray(res.tab3)) {
+    if (res && res.tab3 && Array.isArray(res.tab3)) {
       this.eduFiles.forEach((group, index) => (group.files = res.tab3[index]));
     }
     if (res && res.tab4 && Array.isArray(res.tab4)) {
@@ -221,7 +221,7 @@ export class ETempLicenseDetailComponent implements OnInit {
         (group, index) => (group.files = res.tab4[index])
       );
     }
-    */
+
     if (res && res.tab5 && Array.isArray(res.tab5)) {
       this.reasonFiles.forEach(
         (group, index) => (group.files = res.tab5[index])
