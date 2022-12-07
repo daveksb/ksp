@@ -57,8 +57,12 @@ export const eLicenseMenu: MenuConfig[] = [
         label: 'รายการใบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
       },
       {
-        path: '/xxx',
-        label: 'พิจารณารับรองใบอนุญาตประกอบวิชาชีพ',
+        path: '/renew-license/search-list',
+        label: 'จัดทำบัญชีรายชื่อและนำเสนอขอใบอนุญาตประกอบวิชาชีพ',
+      },
+      {
+        path: '/renew-license/guarantee',
+        label: 'รับรองใบอนุญาตประกอบวิชาขีพ',
       },
     ],
   },

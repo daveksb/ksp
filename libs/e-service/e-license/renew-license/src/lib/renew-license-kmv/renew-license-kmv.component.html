@@ -1,0 +1,49 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
+<ksp-top-nav><span header>ใบคำขอต่ออนุญาตประกอบวิชาชีพ</span>
+  <span subHeader>รับรองใบอนุญาตประกอบวิชาชีพ </span>
+</ksp-top-nav>
+
+<div class="bg-secondary bg-opacity-10 px-3 py-3 full-height">
+  <div class="bg-white px-3 py-3 mb-3">
+    <div class="fs-5">บันทึกผลการนำเสนอ กมว.</div>
+    <hr />
+    <div class="text-secondary mb-3">
+      กลุ่มที่เลือกสำหรับบันทึกมติที่ประชุมคณะอนุกรรมการกลั่นกรอง
+    </div>
+    <div class="d-flex align-items-center mb-3">
+      <div class="text-secondary">กลุ่มที่ / Group No.</div>
+      <div class="content-sub">{{ groupNo }}</div>
+    </div>
+    <div class="d-flex align-items-center mb-3">
+      <div class="text-secondary">บัญชีที่ / List No.</div>
+      <div class="content-sub">
+        {{ listData }}
+      </div>
+    </div>
+
+    <div class="box-header mb-2">สรุปจำนวนผู้ยื่นขอขึ้นทะเบียน</div>
+    <ksp-request-license-approve-license-table
+      [isKmv]="true"
+      [data]="requestTypeList"
+      (listOpen)="onListOpen($event)"></ksp-request-license-approve-license-table>
+  </div>
+
+  <div class="bg-white px-3 py-3 mb-3">
+    <div class="box-header">
+      สรุปจำนวนพิจารณาออกใบอนุญาตประกอบวิชาชีพทางการศึกษา
+    </div>
+    <hr />
+    <e-service-request-license-approve-summary-table></e-service-request-license-approve-summary-table>
+  </div>
+
+  <div class="bg-white px-3 py-3">
+    <ksp-e-service-license-save-result
+      (cancel)="cancel()"
+      (save)="save($event)">
+    </ksp-e-service-license-save-result>
+  </div>
+</div>
