@@ -9,15 +9,20 @@ import {
   SelfServiceRequestSubType,
   SelfServiceRequestType,
 } from '@ksp/shared/constant';
-import { EsSearchPayload, SelfRequest } from '@ksp/shared/interface';
-import { ERequestService, LoaderService } from '@ksp/shared/service';
+import { EsSearchPayload, Province, SelfRequest } from '@ksp/shared/interface';
+import {
+  AddressService,
+  ERequestService,
+  GeneralInfoService,
+  LoaderService,
+} from '@ksp/shared/service';
 import {
   eSelfCheckProcess,
   eSelfCheckStatus,
   processFilter,
   replaceEmptyWithNull,
 } from '@ksp/shared/utility';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'ksp-request-license-approve-list',
@@ -32,6 +37,7 @@ export class RequestLicenseApproveListComponent implements AfterViewInit {
   requestTypeList = SchoolRequestType.filter((i) => i.id > 2);
   checkProcess = eSelfCheckProcess;
   checkStatus = eSelfCheckStatus;
+  provinces$!: Observable<Province[]>;
   form = this.fb.group({
     search: [{ requesttype: '3' }],
   });
@@ -40,7 +46,8 @@ export class RequestLicenseApproveListComponent implements AfterViewInit {
     private router: Router,
     private requestService: ERequestService,
     private fb: FormBuilder,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private addressService: AddressService
   ) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -48,11 +55,13 @@ export class RequestLicenseApproveListComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.provinces$ = this.addressService.getProvinces();
   }
 
   search(params: any) {
     let payload: EsSearchPayload = {
-      systemtype: '1',
+      systemtype: null,
+      provinceid: params.province,
       requesttype: SelfServiceRequestType.ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ,
       requestno: params.requestno,
       careertype: params.subtype,
