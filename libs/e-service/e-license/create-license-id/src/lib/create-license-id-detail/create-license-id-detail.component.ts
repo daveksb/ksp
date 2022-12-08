@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import {
@@ -8,6 +8,7 @@ import {
   Prefix,
   SchRequestSearchFilter,
   SelfApproveList,
+  SelfLicense,
 } from '@ksp/shared/interface';
 import {
   ERequestService,
@@ -36,21 +37,22 @@ export class CreateLicenseIdDetailComponent implements OnInit {
   prefixList!: Observable<Prefix[]>;
   licenseTypes = qualificationCareerTypeList;
   myImage: any = null;
+  selectedLicense = new SelfLicense();
 
-  licensetype = '';
-  licenseno = '';
-  prefixth = '-';
-  firstnameth = '';
-  lastnameth = '';
-  prefixen = '-';
-  firstnameen = '';
-  lastnameen = '';
-  kuruspano = '';
-  licensestartdate: any;
-  licenseenddate: any;
+  licensetype: string | null = '';
+  licenseno: string | null = '';
+  prefixth: string | null = '-';
+  firstnameth: string | null = '';
+  lastnameth: string | null = '';
+  prefixen: string | null = '-';
+  firstnameen: string | null = '';
+  lastnameen: string | null = '';
+  kuruspano: string | null = '';
+  licensestartdate: string | null = null;
+  licenseenddate: string | null = null;
 
   form = this.fb.group({
-    licenseno: [],
+    licenseno: [null, Validators.required],
     idcardno: [],
     careertype: [],
     prefixth: [],
@@ -77,6 +79,16 @@ export class CreateLicenseIdDetailComponent implements OnInit {
   ngOnInit(): void {
     this.getStoredData();
     this.prefixList = this.generalInfoService.getPrefix();
+  }
+
+  saveLicense() {
+    const payload = formatDatePayload({
+      ...this.form.value,
+      ...{ id: this.selectedLicense.id },
+    });
+    this.requestService.updateLicense(payload).subscribe((res) => {
+      //console.log('update = ', res);
+    });
   }
 
   getStoredData() {
@@ -110,9 +122,9 @@ export class CreateLicenseIdDetailComponent implements OnInit {
   rowSelect(id: any) {
     this.requestService.getSelfLicense(id).subscribe((data) => {
       console.log('data = ', data);
-      this.form.patchValue(data);
-      this.myImage = atob(data.filedata);
-
+      this.selectedLicense = data;
+      this.form.patchValue(<any>data);
+      this.myImage = atob(data.filedata || '{}');
       this.licensetype = data.careertype;
       this.licenseno = data.licenseno;
       this.prefixth = data.prefixth;
@@ -121,7 +133,7 @@ export class CreateLicenseIdDetailComponent implements OnInit {
       this.prefixen = data.prefixen;
       this.firstnameen = data.firstnameen;
       this.lastnameen = data.lastnameen;
-      this.kuruspano = data.kuruspano;
+      this.kuruspano = ''; //data.kuruspano;
       this.licensestartdate = data.licensestartdate;
       this.licenseenddate = data.licenseenddate;
     });

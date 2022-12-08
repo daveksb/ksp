@@ -392,7 +392,7 @@
     >
       <self-service-slideshow
         [showButton]="false"
-        [licensetype]="licensetype"
+        [licensetype]="licensetype || '1'"
         [licenseno]="licenseno"
         [prefixth]="prefixth"
         [firstnameth]="firstnameth"
@@ -412,8 +412,10 @@
   <ksp-bottom-nav
     [isLastPage]="true"
     [isFirstPage]="true"
-    (cancelClicked)="back()"
     [showCenterButtons]="true"
     [showSaveButton]="true"
+    [disableSaveButton]="form.invalid"
+    (cancelClicked)="back()"
+    (saveClicked)="saveLicense()"
   ></ksp-bottom-nav>
 </div>

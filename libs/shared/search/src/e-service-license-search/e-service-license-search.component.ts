@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import {
   KspFormBaseComponent,
+  Province,
   SchRequestProcess,
   SchRequestStatus,
 } from '@ksp/shared/interface';
@@ -21,6 +22,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 export class EServiceLicenseSearchComponent extends KspFormBaseComponent {
   @Output() clear = new EventEmitter<boolean>(false);
   @Output() search = new EventEmitter<any>();
+  @Input() provinces: Province[] | null = [];
 
   eduOccupyList = selfOccupyList;
   processList: SchRequestProcess[] = [];
@@ -30,6 +32,7 @@ export class EServiceLicenseSearchComponent extends KspFormBaseComponent {
     requestno: [null],
     subtype: [null],
     idcardno: [''],
+    province: [null],
     currentprocess: [null],
     requeststatus: [null],
     requestdatefrom: [null],

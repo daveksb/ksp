@@ -15,6 +15,7 @@
       <div class="mb-3">
         <ksp-e-service-license-search
           formControlName="search"
+          [provinces]="provinces$ | async"
           (clear)="clear()"
           (search)="search($event)"
         ></ksp-e-service-license-search>
