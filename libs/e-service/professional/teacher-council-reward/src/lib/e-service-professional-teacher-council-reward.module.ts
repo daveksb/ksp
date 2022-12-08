@@ -14,7 +14,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { SelfServiceFeatureRewardModule } from '@ksp/self-service/feature/reward';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { EServiceRewardSearchComponent } from '@ksp/shared/search';
-import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import { ETeacherCouncilConfirmComponent } from './e-teacher-council-confirm/e-teacher-council-confirm.component';
 import {
@@ -67,6 +67,7 @@ const routes: Routes = [
     LicenseCheckComponent,
     ValidateKspRequestComponent,
     MatPaginatorModule,
+    RequestNoPipe,
   ],
   declarations: [
     ETeacherCouncilListComponent,

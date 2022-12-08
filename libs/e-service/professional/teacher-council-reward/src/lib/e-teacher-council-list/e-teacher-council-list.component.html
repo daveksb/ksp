@@ -1,7 +1,4 @@
-<ksp-top-nav
-  ><span header>ยื่นใบคำขอรางวัล</span
-  ><span subHeader>ขอรางวัลคุรุสภา</span></ksp-top-nav
->
+<ksp-top-nav><span header>ยื่นใบคำขอรางวัล</span><span subHeader>ขอรางวัลคุรุสภา</span></ksp-top-nav>
 
 <div class="bg-secondary full-height full-width-2 bg-opacity-10 px-4 py-2">
   <div class="box-header">รายการขอรางวัลคุรุสภา</div>
@@ -11,8 +8,7 @@
 
     <ksp-e-service-reward-search
       (search)="search($event)"
-      (clear)="clear()"
-    ></ksp-e-service-reward-search>
+      (clear)="clear()"></ksp-e-service-reward-search>
   </div>
   <br />
   <div class="bg-white p-3">
@@ -23,9 +19,9 @@
           <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
           <td mat-cell *matCellDef="let element; let i = index">
             {{
-              paginator.pageIndex === 0
-                ? i + 1
-                : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+            paginator.pageIndex === 0
+            ? i + 1
+            : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
             }}
           </td>
         </ng-container>
@@ -33,7 +29,7 @@
         <ng-container matColumnDef="requestno">
           <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.requestno }}
+            {{ element.requestno | reqNoFormat }}
           </td>
         </ng-container>
 
@@ -53,13 +49,13 @@
 
         <ng-container matColumnDef="process">
           <th mat-header-cell *matHeaderCellDef>ผลการพิจารณา</th>
-          <td mat-cell *matCellDef="let element">{{ element.process }}</td>
+          <td mat-cell *matCellDef="let element">ผ่าน</td>
         </ng-container>
 
         <ng-container matColumnDef="status">
           <th mat-header-cell *matHeaderCellDef>สถานะการดำเนินการ</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.status }}
+            {{ checkStatus(1, +element.status, 40)?.ename }}
           </td>
         </ng-container>
 
@@ -83,8 +79,7 @@
             <i
               role="button"
               class="bi bi-pencil-square fs-5 text-primary"
-              (click)="view(element.id)"
-            ></i>
+              (click)="view(element.id)"></i>
           </td>
         </ng-container>
 
