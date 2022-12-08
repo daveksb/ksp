@@ -10,24 +10,20 @@ import { SelfServiceRequestSubType } from '@ksp/shared/constant';
   templateUrl: './slideshow.component.html',
   styleUrls: ['./slideshow.component.scss'],
 })
-export class SlideshowComponent implements OnInit {
+export class SlideshowComponent {
   SchoolRequestSubType = SelfServiceRequestSubType;
 
   @Input() showButton = true;
 
-  @Input() licensetype = '-';
-  @Input() licenseno = '-';
-  @Input() prefixth = '-';
-  @Input() firstnameth = '-';
-  @Input() lastnameth = '-';
-  @Input() prefixen = '-';
-  @Input() firstnameen = '-';
-  @Input() lastnameen = '-';
-  @Input() kuruspano = '-';
-  @Input() licensestartdate: any;
-  @Input() licenseenddate: any;
-
-  constructor() {}
-
-  ngOnInit(): void {}
+  @Input() licensetype: string = '-';
+  @Input() licenseno: string | null = '-';
+  @Input() prefixth: string | null = '-';
+  @Input() firstnameth: string | null = '-';
+  @Input() lastnameth: string | null = '-';
+  @Input() prefixen: string | null = '-';
+  @Input() firstnameen: string | null = '-';
+  @Input() lastnameen: string | null = '-';
+  @Input() kuruspano: string | null = '-';
+  @Input() licensestartdate: string | null = null;
+  @Input() licenseenddate: string | null = null;
 }
