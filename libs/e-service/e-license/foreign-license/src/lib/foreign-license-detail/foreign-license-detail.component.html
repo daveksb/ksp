@@ -15,7 +15,7 @@
       ></ksp-request-header-info>
       <hr />
 
-      <div class="px-3 pt-1 pb-2 mb-3">
+      <div class="px-3 pt-1 pb-2">
         <div class="row mb-2">
           <div class="col-6">
             <label class="form-label">สังกัด</label>
@@ -61,20 +61,21 @@
           </div>
         </div>
       </div>
-
-      <ksp-form-foreign-id
-        [mode]="'view'"
-        [prefixList]="prefixList$ | async"
-        [countries]="countries$ | async"
-        formControlName="foreignTeacherInfo"
-      >
-        <ksp-form-visa-info
+      <hr />
+      <div class="my-3">
+        <ksp-form-foreign-id
           [mode]="'view'"
-          [visaTypeList]="visaTypeList$ | async"
-          formControlName="foreignVisaInfo"
-        ></ksp-form-visa-info>
-      </ksp-form-foreign-id>
-      <br />
+          [prefixList]="prefixList$ | async"
+          [countries]="countries$ | async"
+          formControlName="foreignTeacherInfo"
+        >
+          <ksp-form-visa-info
+            [mode]="'view'"
+            [visaTypeList]="visaTypeList$ | async"
+            formControlName="foreignVisaInfo"
+          ></ksp-form-visa-info>
+        </ksp-form-foreign-id>
+      </div>
 
       <ksp-form-multi-attachment
         [groups]="evidenceFile"
