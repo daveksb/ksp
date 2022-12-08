@@ -13,7 +13,6 @@ import { EsSearchPayload, Province, SelfRequest } from '@ksp/shared/interface';
 import {
   AddressService,
   ERequestService,
-  GeneralInfoService,
   LoaderService,
 } from '@ksp/shared/service';
 import {
