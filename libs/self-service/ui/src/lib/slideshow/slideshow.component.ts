@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
 import { SelfServiceRequestSubType } from '@ksp/shared/constant';
@@ -15,7 +15,7 @@ export class SlideshowComponent {
 
   @Input() showButton = true;
 
-  @Input() licensetype: string = '-';
+  @Input() licensetype = '-';
   @Input() licenseno: string | null = '-';
   @Input() prefixth: string | null = '-';
   @Input() firstnameth: string | null = '-';
