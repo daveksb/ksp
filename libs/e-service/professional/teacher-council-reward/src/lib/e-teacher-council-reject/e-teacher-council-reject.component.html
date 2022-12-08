@@ -1,0 +1,207 @@
+<ksp-top-nav><span header>ยื่นใบคำขอ</span><span subHeader>ขอรางวัลคุรุสภา</span></ksp-top-nav>
+<div class="bg-secondary bg-opacity-10 full-height-2 px-4 py-2">
+  <div class="box-header">การคัดค้านและเพิกถอนรางวัลคุรุสภา</div>
+  <div class="bg-white p-3">
+    <ksp-request-header-info
+      [requestDate]="requestData.createdate"
+      [requestNumber]="requestData.requestno"></ksp-request-header-info>
+    <hr />
+    <div class="box-header">
+      ประวัติการตรวจสอบคุณสมบัติและเอกสาร
+    </div>
+
+    <table class="table w-75 mb-5">
+      <thead>
+        <tr>
+          <th scope="col">ครั้งที่</th>
+          <th scope="col">ชื่อ-นามสกุล เจ้าหน้าที่</th>
+          <th scope="col">วันที่ตรวจสอบ</th>
+          <th scope="col">ผลการตรวจสอบ</th>
+        </tr>
+      </thead>
+    </table>
+
+    <div class="bg-white border py-3 px-4 mb-4">
+      <div class="d-flex justify-content-between mb-3">
+        <div class="d-flex align-items-center">
+          <div class="box-header me-1">ข้อมูลผู้ขอรางวัล</div>
+        </div>
+      </div>
+      <hr />
+      <div class="row mb-3" style="width: 430px">
+        <div>
+          <label class="form-label">หมายเลขบัตรประชาชน</label>
+          <input type="text" class="form-control" />
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div style="width: 180px;">
+          <label class="form-label">คำนำหน้าชื่อ</label>
+          <input type="text" class="form-control" />
+        </div>
+
+        <div style="width: 400px;">
+          <label class="form-label">ชื่อ</label>
+          <input type="text" class="form-control" />
+        </div>
+
+        <div style="width: 400px;">
+          <label class="form-label">นามสกุล</label>
+          <input type="text" class="form-control" />
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white border py-3 px-4 mb-4">
+      <div class="d-flex justify-content-between mb-3">
+        <div class="d-flex align-items-center">
+          <div class="box-header me-1">ข้อมูลการขอคัดค้าน</div>
+        </div>
+      </div>
+      <hr />
+
+      <div class="row mb-3">
+        <div class="d-flex align-items-center" style="width: 213px; margin-right: 113px">
+          <input
+            class="form-check-input my-0 radio"
+            type="radio"
+            value="1" />
+          <div style="width: 12.5rem">
+            <label class="ms-4"> ไม่มีการคัดค้าน </label>
+          </div>
+        </div>
+
+        <div class="d-flex align-items-center" style="width: 213px;">
+          <input
+            class=" form-check-input my-0 radio"
+            type="radio"
+            value="2" />
+          <div style="width: 12.5rem">
+            <label class="ms-4"> มีการคัดค้าน </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3" style="width: 430px">
+        <div>
+          <label class="form-label">หมายเลขบัตรประชาชน</label>
+          <input type="text" class="form-control" />
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div style="width: 180px;">
+          <label class="form-label">คำนำหน้าชื่อ</label>
+          <input type="text" class="form-control" />
+        </div>
+
+        <div style="width: 400px;">
+          <label class="form-label">ชื่อ</label>
+          <input type="text" class="form-control" />
+        </div>
+
+        <div style="width: 400px;">
+          <label class="form-label">นามสกุล</label>
+          <input type="text" class="form-control" />
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div>
+          <label class="form-label">เหตุผลการคัดค้าน </label>
+          <textarea
+            class="form-control"
+            type="text"
+            rows="3"
+            formControlName="accusationincidentplace">
+      </textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white border py-3 px-4 mb-4">
+      <div class="d-flex justify-content-between mb-3">
+        <div class="d-flex align-items-center">
+          <div class="box-header me-1">ข้อมูลการเพิกถอน</div>
+        </div>
+      </div>
+      <hr />
+
+      <div class="row mb-3">
+        <div class="d-flex align-items-center" style="width: 213px; margin-right: 113px">
+          <input
+            class="form-check-input my-0 radio"
+            type="radio"
+            value="1" />
+          <div style="width: 12.5rem">
+            <label class="ms-4"> ไม่มีการเพิกถอน </label>
+          </div>
+        </div>
+
+        <div class="d-flex align-items-center" style="width: 213px;">
+          <input
+            class=" form-check-input my-0 radio"
+            type="radio"
+            value="2" />
+          <div style="width: 12.5rem">
+            <label class="ms-4"> มีการเพิกถอน </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div style="width: 180px;">
+          <label class="form-label">มติครั้งที่</label>
+          <input type="text" class="form-control" />
+        </div>
+
+        <div style="width: 300px;">
+          <label class="form-label">วันที่</label>
+          <div class="d-flex align-items-center">
+            <input
+              matInput
+              [matDatepicker]="picker1"
+              autocomplete="off"
+              class="form-control form-date"
+              formControlName="accusationincidentdate"
+              placeholder="วว/ดด/ปปปป" />
+            <mat-datepicker-toggle
+              class="button-date"
+              matSuffix
+              [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </div>
+        </div>
+
+        <div style="width: 300px;">
+          <label class="form-label">วันที่เพิกถอน</label>
+          <div class="d-flex align-items-center">
+            <input
+              matInput
+              [matDatepicker]="picker2"
+              autocomplete="off"
+              class="form-control form-date"
+              formControlName="accusationincidentdate"
+              placeholder="วว/ดด/ปปปป" />
+            <mat-datepicker-toggle
+              class="button-date"
+              matSuffix
+              [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sticky-bottom border px-2">
+  <ksp-bottom-nav
+    [isFirstPage]="true"
+    [isLastPage]="true"
+    [colorMode]="'blue'"
+    [showCenterButtons]="true"
+    [showSaveButton]="true"
+    [showCancelButton]="true"></ksp-bottom-nav>
+</div>

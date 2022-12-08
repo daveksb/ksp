@@ -22,6 +22,8 @@ import {
   ConsiderKspRequestComponent,
 } from '@ksp/e-service/e-license/approve-ksp-request';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { ETeacherCouncilRejectComponent } from './e-teacher-council-reject/e-teacher-council-reject.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 const routes: Routes = [
   {
@@ -44,6 +46,10 @@ const routes: Routes = [
       {
         path: 'confirm/:id',
         component: ETeacherCouncilConfirmComponent,
+      },
+      {
+        path: 'reject/:id',
+        component: ETeacherCouncilRejectComponent,
       },
     ],
   },
@@ -68,11 +74,13 @@ const routes: Routes = [
     ValidateKspRequestComponent,
     MatPaginatorModule,
     RequestNoPipe,
+    MatDatepickerModule,
   ],
   declarations: [
     ETeacherCouncilListComponent,
     ETeacherCouncilDetailComponent,
     ETeacherCouncilConfirmComponent,
+    ETeacherCouncilRejectComponent,
   ],
   exports: [ETeacherCouncilListComponent, ETeacherCouncilDetailComponent],
 })
