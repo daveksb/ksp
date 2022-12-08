@@ -36,7 +36,7 @@
         ><span *ngIf="!isForeignForm">พิมพ์เมื่อ</span>
         <span *ngIf="isForeignForm">Published Date</span></label
       >
-      <div class="d-flex align-items-center">
+      <div class="d-flex align-items-center" *ngIf="!isForeignForm">
         <input
           matInput
           [matDatepicker]="picker1"
@@ -51,6 +51,14 @@
           [for]="picker1"
         ></mat-datepicker-toggle>
         <mat-datepicker #picker1></mat-datepicker>
+      </div>
+
+      <div *ngIf="isForeignForm">
+        <input
+          type="date"
+          class="form-control"
+          formControlName="bookPublishDate"
+        />
       </div>
     </div>
   </div>
@@ -115,7 +123,7 @@
         ><span *ngIf="!isForeignForm">พิมพ์เมื่อ</span>
         <span *ngIf="isForeignForm">Published Date</span></label
       >
-      <div class="d-flex align-items-center">
+      <div class="d-flex align-items-center" *ngIf="!isForeignForm">
         <input
           matInput
           [matDatepicker]="picker2"
@@ -130,6 +138,14 @@
           [for]="picker2"
         ></mat-datepicker-toggle>
         <mat-datepicker #picker2></mat-datepicker>
+      </div>
+
+      <div *ngIf="isForeignForm">
+        <input
+          type="date"
+          class="form-control"
+          formControlName="articlePublishDate"
+        />
       </div>
     </div>
   </div>
@@ -168,7 +184,7 @@
         ><span *ngIf="!isForeignForm">วันเดือนปีที่ใช้</span>
         <span *ngIf="isForeignForm">Applied Date</span></label
       >
-      <div class="d-flex align-items-center">
+      <div class="d-flex align-items-center" *ngIf="!isForeignForm">
         <input
           matInput
           [matDatepicker]="picker3"
@@ -183,6 +199,14 @@
           [for]="picker3"
         ></mat-datepicker-toggle>
         <mat-datepicker #picker3></mat-datepicker>
+      </div>
+
+      <div *ngIf="isForeignForm">
+        <input
+          type="date"
+          class="form-control"
+          formControlName="achievementDate"
+        />
       </div>
     </div>
   </div>

@@ -33,7 +33,7 @@
         ><span *ngIf="!isForeignForm">วันที่</span>
         <span *ngIf="isForeignForm">Attended Date To</span></label
       >
-      <div class="d-flex align-items-center">
+      <div class="d-flex align-items-center" *ngIf="!isForeignForm">
         <input
           matInput
           [matDatepicker]="picker1"
@@ -49,6 +49,10 @@
         ></mat-datepicker-toggle>
         <mat-datepicker #picker1></mat-datepicker>
       </div>
+
+      <div *ngIf="isForeignForm">
+        <input type="date" class="form-control" formControlName="dateFrom" />
+      </div>
     </div>
 
     <div class="col-md-6 mb-2" *ngIf="showDateTo">
@@ -56,7 +60,7 @@
         ><span *ngIf="!isForeignForm">ถึงวันที่</span>
         <span *ngIf="isForeignForm">Attended Date Form</span></label
       >
-      <div class="d-flex align-items-center">
+      <div class="d-flex align-items-center" *ngIf="!isForeignForm">
         <input
           matInput
           [matDatepicker]="picker2"
@@ -71,6 +75,10 @@
           class="button-date"
         ></mat-datepicker-toggle>
         <mat-datepicker #picker2></mat-datepicker>
+      </div>
+
+      <div *ngIf="isForeignForm">
+        <input type="date" class="form-control" formControlName="dateTo" />
       </div>
     </div>
   </div>

@@ -1,11 +1,17 @@
 <form [formGroup]="form">
   <div class="fs-6 text-danger">
-    * please select only 1 activity done pursuant to the standard of
-    performance since issued date of license until present.
+    * please select only 1 activity done pursuant to the standard of performance
+    since issued date of license until present.
   </div>
   <div class="d-flex mt-2">
-    <input type="checkbox" class="me-2 mt-1" formControlName="activity13" />
-    <label class="form-label">Having taken a training course in knowledge of professional standard and
+    <input
+      type="checkbox"
+      class="me-2 mt-1"
+      formControlName="activity13"
+      [attr.disabled]="activity2 || activity3 === true ? true : null"
+    />
+    <label class="form-label"
+      >Having taken a training course in knowledge of professional standard and
       code of ethics as stipulated by the Teachers' Council of Thailand Board
     </label>
   </div>
@@ -15,13 +21,20 @@
       <ksp-standard-train-pass
         [isForeignForm]="true"
         formControlName="trainInfo"
-        [mode]="mode"></ksp-standard-train-pass>
+        [mode]="mode"
+      ></ksp-standard-train-pass>
     </div>
   </ng-container>
 
   <div class="d-flex mt-2">
-    <input type="checkbox" class="me-2 mt-1" formControlName="activity14" />
-    <label class="form-label">Having passed the test of knowledge on professional standard and code of
+    <input
+      type="checkbox"
+      class="me-2 mt-1"
+      formControlName="activity14"
+      [attr.disabled]="activity1 || activity3 === true ? true : null"
+    />
+    <label class="form-label"
+      >Having passed the test of knowledge on professional standard and code of
       ethics as stipulated by the Teachers' Council of Thailand Board
     </label>
   </div>
@@ -31,13 +44,20 @@
       <ksp-standard-test-pass
         [isForeignForm]="true"
         formControlName="testInfo"
-        [mode]="mode"></ksp-standard-test-pass>
+        [mode]="mode"
+      ></ksp-standard-test-pass>
     </div>
   </ng-container>
 
   <div class="d-flex mt-2">
-    <input type="checkbox" class="me-2 mt-1" formControlName="activity15" />
-    <label class="form-label">Being in the process of training or testing knowledge of professional
+    <input
+      type="checkbox"
+      class="me-2 mt-1"
+      formControlName="activity15"
+      [attr.disabled]="activity1 || activity2 === true ? true : null"
+    />
+    <label class="form-label"
+      >Being in the process of training or testing knowledge of professional
       standard and code of ethics as stipulated by the Teachers' Council of
       Thailand Board (must be finished within six months)
     </label>

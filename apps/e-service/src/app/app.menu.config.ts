@@ -291,7 +291,7 @@ export const eLicenseMenu: MenuConfig[] = [
         label: 'ใบคำขอผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
       }, */
       {
-        path: '/self/current-user',
+        path: '/xxx',
         label: 'ผู้ใช้งานระบบบริการด้วยตนเอง (self Service)',
       },
       {
