@@ -215,7 +215,6 @@ export class ETempLicenseListComponent implements AfterViewInit {
     let lv7 = false;
 
     for (const index in teachinginfo.teachingLevel) {
-      console.log('xxx = ', index);
       if (teachinginfo.teachingLevel[index] === 'level1') {
         lv1 = true;
       }
@@ -332,7 +331,7 @@ export class ETempLicenseListComponent implements AfterViewInit {
 
   clearData() {
     this.dataSource.data = [];
-    this.form.reset();
+    //this.form.reset();
     this.form.controls.search.patchValue(this.defaultForm);
   }
 

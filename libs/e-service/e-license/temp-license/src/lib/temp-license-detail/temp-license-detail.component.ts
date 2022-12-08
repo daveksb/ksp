@@ -40,6 +40,7 @@ import {
 } from '@ksp/shared/interface';
 import { TempLicenseDetailService } from './temp-license-detail.service';
 import { ESelfFormBaseComponent } from '@ksp/shared/form/others';
+import { Location } from '@angular/common';
 
 export class KspApprovePersistData {
   checkDetail: any = null;
@@ -105,7 +106,8 @@ export class ETempLicenseDetailComponent implements OnInit {
     private eRequestService: ERequestService,
     private addressService: AddressService,
     private generalInfoService: GeneralInfoService,
-    private staffService: StaffService
+    private staffService: StaffService,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -329,7 +331,6 @@ export class ETempLicenseDetailComponent implements OnInit {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.provinces$ = this.addressService.getProvinces();
     this.positionTypes$ = this.staffService.getPositionTypes();
-
     this.countries$ = this.addressService.getCountry();
     this.nationList$ = this.generalInfoService.getNationality();
     this.visaClassList = this.generalInfoService.getVisaClass();
@@ -341,6 +342,7 @@ export class ETempLicenseDetailComponent implements OnInit {
   }
 
   prevPage() {
-    this.router.navigate(['/temp-license', 'list']);
+    //this.router.navigate(['/temp-license', 'list']);
+    this.location.back();
   }
 }

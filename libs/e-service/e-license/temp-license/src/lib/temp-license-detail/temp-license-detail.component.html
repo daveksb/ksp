@@ -352,11 +352,11 @@
 
 <div class="sticky-bottom border px-2">
   <ksp-bottom-nav
-    (cancelClicked)="cancel()"
     (prevClicked)="prevPage()"
     (nextClicked)="next()"
     [showCenterButtons]="true"
-    [isFirstPage]="true"
+    [showCancelButton]="false"
+    [isFirstPage]="false"
     [disableNext]="!checkResultFormArray.valid"
   ></ksp-bottom-nav>
 </div>
