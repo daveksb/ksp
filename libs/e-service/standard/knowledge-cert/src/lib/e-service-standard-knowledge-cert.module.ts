@@ -15,7 +15,7 @@ import {
 } from '@ksp/self-service/form';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { TopNavComponent, BottomNavComponent } from '@ksp/shared/menu';
-import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 import {
   EServiceRequestSearchComponent,
   RequestSearchComponent,
@@ -77,6 +77,7 @@ export const routes: Routes = [
     EServiceLicenseSearchComponent,
     ValidateKspRequestComponent,
     MatProgressSpinnerModule,
+    RequestNoPipe
   ],
   declarations: [
     EKnowledgeCertListComponent,

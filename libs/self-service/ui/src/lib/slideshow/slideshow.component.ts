@@ -1,7 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
-import { SelfPrefixEn, SelfPrefixTh, SelfServiceRequestSubType } from '@ksp/shared/constant';
+import {
+  SelfPrefixEn,
+  SelfPrefixTh,
+  SelfServiceRequestSubType,
+} from '@ksp/shared/constant';
 
 @Component({
   selector: 'self-service-slideshow',
@@ -16,16 +20,16 @@ export class SlideshowComponent {
   SelfPrefixEn = SelfPrefixEn;
 
   @Input() showButton = true;
-
+  @Input() myImage: any;
   @Input() licensetype = '-';
-  @Input() licenseno: string | null = '-';
-  @Input() prefixth: string | null = '-';
-  @Input() firstnameth: string | null = '-';
-  @Input() lastnameth: string | null = '-';
-  @Input() prefixen: string | null = '-';
-  @Input() firstnameen: string | null = '-';
-  @Input() lastnameen: string | null = '-';
-  @Input() kuruspano: string | null = '-';
+  @Input() licenseno: string | null = '';
+  @Input() prefixth = '-';
+  @Input() firstnameth: string | null = '';
+  @Input() lastnameth: string | null = '';
+  @Input() prefixen = '-';
+  @Input() firstnameen: string | null = '';
+  @Input() lastnameen: string | null = '';
+  @Input() kuruspano: string | null = '';
   @Input() licensestartdate: string | null = null;
   @Input() licenseenddate: string | null = null;
 }

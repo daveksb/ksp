@@ -9,7 +9,7 @@ import { BottomNavComponent, TopNavComponent } from '@ksp/shared/menu';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 import { EServiceLicenseSearchComponent } from '@ksp/shared/search';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
@@ -67,6 +67,7 @@ export const routes: Routes = [
     RequestHeaderInfoComponent,
     ValidateKspRequestComponent,
     MatProgressSpinnerModule,
+    RequestNoPipe
   ],
   declarations: [
     EditLicenseApproveListComponent,
