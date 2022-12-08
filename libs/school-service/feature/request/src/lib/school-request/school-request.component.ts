@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   levels,
@@ -40,6 +41,7 @@ import {
 
 import {
   AddressService,
+  ERequestService,
   GeneralInfoService,
   LoaderService,
   SchoolInfoService,
@@ -57,6 +59,7 @@ import {
   thaiDate,
 } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+
 import { forkJoin, Observable, Subject } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -100,7 +103,7 @@ export class SchoolRequestComponent implements OnInit {
   eduSelected: number[] = [];
   forbidden: any = null;
   schoolInfo!: SchInfo;
-
+  selectedTab: MatTabChangeEvent = new MatTabChangeEvent();
   form = this.fb.group({
     userInfo: [],
     addr1: [],
@@ -115,8 +118,9 @@ export class SchoolRequestComponent implements OnInit {
     teachinginfo: [],
     hiringinfo: [],
     reasoninfo: [],
+    checkResult: this.fb.array([]),
   });
-
+  verifyChoice: any[] = [];
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -127,8 +131,13 @@ export class SchoolRequestComponent implements OnInit {
     private addressService: AddressService,
     private staffService: StaffService,
     private requestService: SchoolRequestService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private eRequestService: ERequestService
   ) {}
+
+  get checkResultFormArray() {
+    return this.form.controls.checkResult as FormArray;
+  }
 
   eduSelect(degreeLevel: number, evt: any) {
     const checked = evt.target.checked;
@@ -136,11 +145,22 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.verifyChoice = [
+      {
+        name: 'ครบถ้วน และถูกต้อง',
+        value: 'complete',
+      },
+      {
+        name: 'ไม่ครบถ้วน และไม่ถูกต้อง',
+        value: 'incomplete',
+      },
+    ];
     this.uniqueNo = uuidv4();
     this.getList();
     this.checkRequestId();
     this.checkCareerType();
     this.checkButtonsDisableStatus();
+    this.addCheckResultArray();
   }
 
   duplicateRequestDialog() {
@@ -449,6 +469,9 @@ export class SchoolRequestComponent implements OnInit {
       this.requestId = Number(params.get('id'));
       if (this.requestId) {
         this.loadRequestFromId(this.requestId);
+        // this.eRequestService
+        //   .kspRequestProcessSelectByRequestId(String(this.requestId))
+        //   .subscribe((result) => console.log(result));
       }
     });
   }
@@ -841,6 +864,15 @@ export class SchoolRequestComponent implements OnInit {
       } else if (type === 2) {
         this.tumbols2$ = this.addressService.getTumbols(amphur);
       }
+    }
+  }
+  tabChanged(e: MatTabChangeEvent) {
+    //console.log('tab event = ', e);
+    this.selectedTab = e;
+  }
+  addCheckResultArray() {
+    for (let i = 0; i < 7; i++) {
+      this.checkResultFormArray.push(this.fb.control(null));
     }
   }
 }

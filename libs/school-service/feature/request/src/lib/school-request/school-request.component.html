@@ -18,7 +18,7 @@
       requestLabel
     }})
   </div>
-  <div [formGroup]="form" class="bg-white py-3 px-4">
+  <form [formGroup]="form" class="bg-white py-3 px-4">
     <div>
       <ksp-request-header-info
         [requestDate]="requestData.requestdate"
@@ -52,6 +52,7 @@
         class="tab-group mt-3"
         selectedIndex="0"
         animationDuration="0ms"
+        (selectedTabChange)="tabChanged($event)"
       >
         <mat-tab label="ที่อยู่" class="tab-content">
           <ksp-form-address
@@ -360,8 +361,25 @@
         *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
         โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
       </div>
+      <ng-container *ngIf="requestData?.status ?? 0 >= 3">
+        <ng-container
+          formArrayName="checkResult"
+          *ngFor="let c of checkResultFormArray.controls; let i = index"
+        >
+          <div
+            class="bg-white px-3 py-2 mt-3"
+            [ngClass]="{ hide: (selectedTab.index || 0) !== i }"
+          >
+            <e-service-license-check
+              mode="view"
+              [choices]="verifyChoice"
+              [formControlName]="i"
+            ></e-service-license-check>
+          </div>
+        </ng-container>
+      </ng-container>
     </div>
-  </div>
+  </form>
 </div>
 
 <!-- (tempSaveClicked)="confirmDialog(1)" -->
