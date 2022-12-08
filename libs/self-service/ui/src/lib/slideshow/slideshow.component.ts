@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
-import { SelfServiceRequestSubType } from '@ksp/shared/constant';
+import { SelfPrefixEn, SelfPrefixTh, SelfServiceRequestSubType } from '@ksp/shared/constant';
 
 @Component({
   selector: 'self-service-slideshow',
@@ -12,6 +12,8 @@ import { SelfServiceRequestSubType } from '@ksp/shared/constant';
 })
 export class SlideshowComponent implements OnInit {
   SchoolRequestSubType = SelfServiceRequestSubType;
+  SelfPrefixTh = SelfPrefixTh;
+  SelfPrefixEn = SelfPrefixEn;
 
   @Input() showButton = true;
 

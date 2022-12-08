@@ -12,12 +12,14 @@
         <div class="title">
           ใบอนุญาตประกอบวิชาชีพ {{ SchoolRequestSubType[+licensetype] }}
         </div>
-        <div class="fs-6">เลขที่ {{ licenseno }}</div>
-        <div class="fs-6">
-          {{ prefixth }} {{ firstnameth }} {{ lastnameth }}
+        <div class="fs-6 text-black me-3">
+          <span class="text-secondary">เลขที่</span> {{ licenseno }}
         </div>
         <div class="fs-6">
-          {{ prefixen }} {{ firstnameen }} {{ lastnameen }}
+          {{ SelfPrefixTh[+prefixth] }} {{ firstnameth }} {{ lastnameth }}
+        </div>
+        <div class="fs-6">
+          {{ SelfPrefixEn[+prefixen] }} {{ firstnameen }} {{ lastnameen }}
         </div>
         <div class="fs-6 text-secondary mt-1">เลขสมาชิก {{ kuruspano }}</div>
         <div class="d-flex">
