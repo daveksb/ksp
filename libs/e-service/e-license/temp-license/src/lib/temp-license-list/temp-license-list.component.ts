@@ -14,9 +14,14 @@ import { PdfRenderComponent } from '@ksp/shared/dialog';
 import {
   EsSearchPayload,
   KspRequest,
+  Province,
   SchRequestSearchFilter,
 } from '@ksp/shared/interface';
-import { ERequestService, LoaderService } from '@ksp/shared/service';
+import {
+  AddressService,
+  ERequestService,
+  LoaderService,
+} from '@ksp/shared/service';
 import {
   checkProcess,
   schoolMapRequestType,
@@ -24,7 +29,7 @@ import {
   processFilter,
   thaiDate,
 } from '@ksp/shared/utility';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'e-service-temp-license-list',
@@ -45,6 +50,7 @@ export class ETempLicenseListComponent implements AfterViewInit {
   careerType = 1;
   careerTypeList: any[] = [];
   requestLabel = '';
+  provinces$!: Observable<Province[]>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -55,13 +61,15 @@ export class ETempLicenseListComponent implements AfterViewInit {
     private fb: FormBuilder,
     public dialog: MatDialog,
     private eRequestService: ERequestService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private addressService: AddressService
   ) {
     this.checkCareerType();
   }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+    this.provinces$ = this.addressService.getProvinces();
   }
 
   checkCareerType() {
@@ -97,6 +105,7 @@ export class ETempLicenseListComponent implements AfterViewInit {
       name: params.name,
       idcardno: params.idcardno,
       passportno: params.passportno,
+      provinceid: params.provinceid,
       process: params.process,
       status: params.status,
       schoolid: null,
