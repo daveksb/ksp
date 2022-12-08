@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import {
   KspFormBaseComponent,
+  Province,
   SchRequestProcess,
   SchRequestSearchFilter,
   SchRequestStatus,
@@ -46,6 +47,7 @@ export class RequestSearchComponent
     name: [''],
     idcardno: [''],
     passportno: [''],
+    provinceid: [null],
     process: [''],
     status: [''],
     requestdatefrom: [''],
@@ -60,6 +62,8 @@ export class RequestSearchComponent
   @Input() disableRequestType = false;
   @Input() requestTypeList = SchoolRequestType;
   @Input() careerTypeList: any[] = [];
+  @Input() provinces: Province[] | null = [];
+
   careerList!: any[];
   processList: SchRequestProcess[] = [];
   statusList?: SchRequestStatus[] = [];
@@ -76,9 +80,6 @@ export class RequestSearchComponent
         } else {
           this.careerList = this.careerTypeList;
         }
-
-        console.log('this.careerList = ', this.careerList);
-
         this.onChange(value);
         this.onTouched();
       })
