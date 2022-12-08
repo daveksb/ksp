@@ -8,14 +8,18 @@ import {
   SchoolRequestSubType,
   SelfServiceRequestType,
 } from '@ksp/shared/constant';
-import { EsSearchPayload, SelfRequest } from '@ksp/shared/interface';
-import { ERequestService, LoaderService } from '@ksp/shared/service';
+import { EsSearchPayload, Province, SelfRequest } from '@ksp/shared/interface';
+import {
+  AddressService,
+  ERequestService,
+  LoaderService,
+} from '@ksp/shared/service';
 import {
   SelfCheckProcess,
   SelfcheckStatus,
   replaceEmptyWithNull,
 } from '@ksp/shared/utility';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'ksp-e-compare-knowledge-list',
@@ -27,7 +31,7 @@ export class ECompareKnowledgeListComponent implements AfterViewInit {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfRequest>();
   SchoolRequestSubType = SchoolRequestSubType;
-
+  provinces$!: Observable<Province[]>;
   checkProcess = SelfCheckProcess;
   checkStatus = SelfcheckStatus;
 
@@ -39,7 +43,8 @@ export class ECompareKnowledgeListComponent implements AfterViewInit {
     private fb: FormBuilder,
     private requestService: ERequestService,
     private router: Router,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private addressService: AddressService
   ) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -47,6 +52,7 @@ export class ECompareKnowledgeListComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.provinces$ = this.addressService.getProvinces();
   }
 
   search(params: any) {

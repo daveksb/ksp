@@ -14,6 +14,7 @@
     <div class="bg-white px-3 py-3">
       <div class="mb-3">
         <ksp-e-service-license-search
+          [provinces]="provinces$ | async"
           formControlName="search"
           (clear)="clear()"
           (search)="search($event)"

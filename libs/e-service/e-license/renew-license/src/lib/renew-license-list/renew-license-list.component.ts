@@ -9,15 +9,19 @@ import {
   SchoolRequestType,
   SelfServiceRequestType,
 } from '@ksp/shared/constant';
-import { EsSearchPayload, SelfRequest } from '@ksp/shared/interface';
-import { ERequestService, LoaderService } from '@ksp/shared/service';
+import { EsSearchPayload, Province, SelfRequest } from '@ksp/shared/interface';
+import {
+  AddressService,
+  ERequestService,
+  LoaderService,
+} from '@ksp/shared/service';
 import {
   eSelfCheckProcess,
   eSelfCheckStatus,
   processFilter,
   replaceEmptyWithNull,
 } from '@ksp/shared/utility';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'ksp-renew-license-list',
@@ -29,7 +33,7 @@ export class RenewLicenseListComponent implements AfterViewInit {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfRequest>();
   SchoolRequestSubType = SchoolRequestSubType;
-
+  provinces$!: Observable<Province[]>;
   requestTypeList = SchoolRequestType.filter((i) => i.id > 2);
   checkProcess = eSelfCheckProcess;
   checkStatus = eSelfCheckStatus;
@@ -42,7 +46,8 @@ export class RenewLicenseListComponent implements AfterViewInit {
     private router: Router,
     private requestService: ERequestService,
     private fb: FormBuilder,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private addressService: AddressService
   ) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -50,6 +55,7 @@ export class RenewLicenseListComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.provinces$ = this.addressService.getProvinces();
   }
 
   search(params: any) {

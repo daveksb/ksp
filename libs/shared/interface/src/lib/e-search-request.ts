@@ -1,5 +1,6 @@
 export interface EsSearchPayload {
   systemtype: string | null | undefined;
+  provinceid?: string | null | undefined;
   requesttype: string | null | undefined;
   requestno: string | null | undefined;
   careertype: string | null | undefined;
