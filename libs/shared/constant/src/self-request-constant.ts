@@ -230,4 +230,34 @@ export const SelfRequestProcess: SchRequestProcess[] = [
       },
     ],
   },
+
+  //ขอรับรางวัล xxx
+  {
+    requestType: 40,
+    processId: 1,
+    processName: 'เจ้าหน้าที่ส่วนจังหวัดตรวจสอบ',
+    status: [
+      { id: 0, sname: 'ครบถ้วนและถูกต้อง', ename: '' },
+      { id: 1, sname: 'ขอแก้ไข/เพิ่มเติม', ename: '' },
+      { id: 2, sname: 'คัดค้าน/เพิกถอน', ename: '' },
+    ],
+  },
+  /*   {
+    requestType: 40,
+    processId: 2,
+    processName: 'เจ้าหน้าที่ส่วนจังหวัดจัดทำบัญชีรายชื่อ',
+    status: [
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
+      { id: 3, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+    ],
+  },
+  {
+    requestType: 40,
+    processId: 3,
+    processName: 'เจ้าหน้าที่ส่วนจังวัดจักทำบัญชีรายชื่อ',
+    status: [
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
+      { id: 3, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+    ],
+  }, */
 ];

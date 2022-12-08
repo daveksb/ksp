@@ -20,6 +20,7 @@ export interface SchRequestSearchFilter {
   careertype: string | undefined | null;
   name: string | undefined | null;
   idcardno: string | undefined | null;
+  provinceid?: string | undefined | null;
   passportno: string | undefined | null;
   process: string | undefined | null;
   status: string | undefined | null;

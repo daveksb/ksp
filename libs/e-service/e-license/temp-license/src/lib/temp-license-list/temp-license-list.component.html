@@ -23,6 +23,7 @@
           [disableRequestType]="true"
           [careerTypeList]="careerTypeList"
           [requestTypeList]="requestTypeList"
+          [provinces]="provinces$ | async"
           (clear)="clearData()"
           (search)="search($event)"
         ></ksp-school-request-search>
