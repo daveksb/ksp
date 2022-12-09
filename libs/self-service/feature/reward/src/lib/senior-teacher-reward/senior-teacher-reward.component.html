@@ -41,28 +41,6 @@
         (amphurChanged)="amphurChanged(2, $event)"
       >
       </self-service-form-user-workplace>
-      <!-- <div class="row">
-        <div class="col-md-6 mb-2">
-          <label class="form-label">โทรศัพท์</label>
-          <input class="form-control" type="text" formControlName="phone" />
-        </div>
-
-        <div class="col-md-6 mb-2">
-          <label class="form-label">โทรสาร</label>
-          <input class="form-control" type="text" formControlName="fax" />
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6 mb-2">
-          <label class="form-label">อีเมล</label>
-          <input class="form-control" type="text" formControlName="email" />
-        </div>
-
-        <div class="col-md-6 mb-2">
-          <label class="form-label">เว็บไซต์</label>
-          <input class="form-control" type="text" formControlName="website" />
-        </div>
-      </div> -->
     </mat-tab>
 
     <mat-tab label="ข้อมูลครูอาวุโส">
@@ -88,16 +66,7 @@
       <ksp-form-multi-attachment
         [groups]="rewardFiles"
         [uniqueTimestamp]="uniqueTimestamp"
-        [titleClass]="'text-primary'"
       ></ksp-form-multi-attachment>
     </mat-tab>
   </mat-tab-group>
 </form>
-
-<!-- <div class="d-flex justify-content-center my-3">
-  <button type="button" class="btn border-primary text-primary bg-white">
-    บันทึกชั่วคราว
-  </button>
-  <button type="button" class="ms-3 btn btn-primary">บันทึกและยื่น</button>
-</div>
- -->
