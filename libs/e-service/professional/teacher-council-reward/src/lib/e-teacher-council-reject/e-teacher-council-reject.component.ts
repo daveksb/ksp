@@ -1,9 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { KspFormBaseComponent, KspRequest } from '@ksp/shared/interface';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
+import {
+  CompleteDialogComponent,
+  ConfirmDialogComponent,
+} from '@ksp/shared/dialog';
+import {
+  KspApprovePayload,
+  KspFormBaseComponent,
+  KspRequest,
+} from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
-import { providerFactory } from '@ksp/shared/utility';
+import { getCookie, providerFactory } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-e-teacher-council-reject',
@@ -17,6 +26,7 @@ export class ETeacherCouncilRejectComponent
 {
   requestData = new KspRequest();
   requestId!: number;
+  userId = `${getCookie('userId')}`;
 
   override form = this.fb.group({
     rewardInfo: [null],
@@ -27,7 +37,9 @@ export class ETeacherCouncilRejectComponent
   constructor(
     private route: ActivatedRoute,
     private requestService: ERequestService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private dialog: MatDialog,
+    private router: Router
   ) {
     super();
   }
@@ -48,6 +60,42 @@ export class ETeacherCouncilRejectComponent
   }
 
   save() {
-    console.log(this.form.value);
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: `คุณต้องการยืนยันข้อมูล
+        ใช่หรือไม่? `,
+      },
+    });
+
+    dialog.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        const payload: KspApprovePayload = {
+          requestid: this.requestData.id,
+          process: `1`,
+          status: `2`,
+          detail: JSON.stringify(this.form.value),
+          systemtype: '4', // approve by e-service staff
+          userid: this.userId,
+          paymentstatus: null,
+        };
+        this.requestService.KspUpdateRequestProcess(payload).subscribe(() => {
+          this.completeDialog();
+        });
+      }
+    });
+  }
+
+  completeDialog() {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header: `บันทึกข้อมูลสำเร็จ`,
+      },
+    });
+
+    dialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/teacher-council', 'list']);
+      }
+    });
   }
 }
