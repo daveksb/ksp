@@ -110,7 +110,8 @@ export class RenewLicenseSearchListComponent implements OnInit, AfterViewInit {
   }
 
   createGroup() {
-    this.router.navigate(['/renew-license', 'create-group-list']);
+    this.router.navigate(['/renew-license', 'create-group']);
+    //this.router.navigate(['/renew-license', 'create-group-list']);
   }
 
   kmv() {

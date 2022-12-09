@@ -39,7 +39,7 @@ export class CreateLicenseIdDetailComponent implements OnInit {
   myImage: any = null;
   selectedLicense = new SelfLicense();
 
-  licensetype: string | null = '';
+  licensetype: any = '';
   licenseno: string | null = '';
   prefixth: string | null = '-';
   firstnameth: string | null = '';
@@ -124,7 +124,7 @@ export class CreateLicenseIdDetailComponent implements OnInit {
       console.log('data = ', data);
       this.selectedLicense = data;
       this.form.patchValue(<any>data);
-      this.myImage = atob(data.filedata || '{}');
+      /* this.myImage = atob(data.filedata || '{}'); */
       this.licensetype = data.careertype;
       this.licenseno = data.licenseno;
       this.prefixth = data.prefixth;

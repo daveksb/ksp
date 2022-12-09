@@ -5,7 +5,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import {
-  SchoolRequestSubType,
+  SelfServiceRequestSubType,
   SelfServiceRequestType,
 } from '@ksp/shared/constant';
 import { EsSearchPayload, Province, SelfRequest } from '@ksp/shared/interface';
@@ -30,7 +30,7 @@ export class EditLicenseApproveListComponent implements AfterViewInit {
   isLoading: Subject<boolean> = this.loaderService.isLoading;
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfRequest>();
-  SchoolRequestSubType = SchoolRequestSubType;
+  SelfServiceRequestSubType = SelfServiceRequestSubType;
   provinces$!: Observable<Province[]>;
   checkProcess = checkProcess;
   checkStatus = checkStatus;

@@ -112,7 +112,8 @@ export class RequestLicenseApproveSearchListComponent
   }
 
   createGroup() {
-    this.router.navigate(['/request-license', 'create-group-list']);
+    this.router.navigate(['/request-license', 'create-group']);
+    //this.router.navigate(['/renew-license', 'create-group-list']);
   }
 
   kmv() {

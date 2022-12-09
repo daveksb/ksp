@@ -17,7 +17,7 @@ import {
   SchRequestSearchFilter,
 } from '@ksp/shared/interface';
 import { ERequestService, LoaderService } from '@ksp/shared/service';
-import { checkProcess, checkStatus } from '@ksp/shared/utility';
+import { checkProcess, checkStatus, thaiDate } from '@ksp/shared/utility';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -99,6 +99,144 @@ export class EQualificationApproveListComponent implements AfterViewInit {
           degreefrom,
           degreelevel,
           degreeof,
+        },
+      },
+    });
+  }
+
+  requestPdf(request: KspRequest) {
+    const pdfType = 6;
+    const pdfSubType = request.careertype;
+    const date = new Date(request.requestdate || '');
+    const thai = thaiDate(date);
+    const [day, month, year] = thai.split(' ');
+    const name = request.firstnameth + ' ' + request.lastnameth;
+    const phone = request.contactphone;
+    const telphone = request.workphone;
+    const bureauname = request.bureauname;
+    const schoolname = request.schoolname;
+    const [
+      id1,
+      id2,
+      id3,
+      id4,
+      id5,
+      id6,
+      id7,
+      id8,
+      id9,
+      id10,
+      id11,
+      id12,
+      id13,
+    ] = request?.idcardno?.split('') ?? [];
+
+    const position = request.position;
+    const eduinfo = JSON.parse(request.eduinfo || '');
+    const degreelevel = eduinfo[0].degreeLevel;
+
+    let checkbox1 = false;
+    if (degreelevel === 1) {
+      checkbox1 = true;
+    }
+
+    const edu1 = eduinfo.find((item: any) => {
+      if (item?.degreeLevel) {
+        return item.degreeLevel === '1';
+      }
+      return false;
+    });
+
+    const degreename1 = edu1?.degreeName ?? '';
+    const institution1 = edu1?.institution ?? '';
+    const major1 = edu1?.major ?? '';
+    const graduateDate1 = edu1?.graduateDate ?? '';
+
+    let degree1 = false;
+    if (degreename1) {
+      degree1 = true;
+    }
+
+    const edu2 = eduinfo.find((item: any) => {
+      if (item?.degreeLevel) {
+        return item.degreeLevel === '2';
+      }
+      return false;
+    });
+
+    const degreename2 = edu2?.degreeName ?? '';
+    const institution2 = edu2?.institution ?? '';
+    const major2 = edu2?.major ?? '';
+    const graduateDate2 = edu2?.graduateDate ?? '';
+
+    let degree2 = false;
+    if (degreename2) {
+      degree2 = true;
+    }
+
+    const nameen = request.firstnameen + ' ' + request.lastnameen;
+
+    /* const hiring = JSON.parse(request.hiringinfo || '');
+    const position = hiring.position; */
+
+   /*  const school = JSON.parse(request.schooladdrinfo || '');
+
+    const { address, moo, street, road, tumbon, fax } = school;
+    const amphurname = school.amphurname;
+    const provincename = school.provincename;
+    const zipcode = school.zipcode;
+    const zipcode = school.fax;  */
+
+    this.dialog.open(PdfRenderComponent, {
+      width: '1200px',
+      height: '100vh',
+      data: {
+        pdfType,
+        pdfSubType,
+        input: {
+          day,
+          month,
+          year,
+          schoolname,
+          bureauname,
+         /*  address,
+          moo,
+          street,
+          road,
+          tumbon,
+          amphurname,
+          provincename,
+          zipcode,
+          fax, */
+          name,
+          phone,
+          telphone,
+          position,
+          id1,
+          id2,
+          id3,
+          id4,
+          id5,
+          id6,
+          id7,
+          id8,
+          id9,
+          id10,
+          id11,
+          id12,
+          id13,
+          degreename1,
+          institution1,
+          major1,
+          degree1,
+          graduateDate1,
+          degreename2,
+          institution2,
+          major2,
+          degree2,
+          graduateDate2,
+          nameen,
+          checkbox1,
         },
       },
     });

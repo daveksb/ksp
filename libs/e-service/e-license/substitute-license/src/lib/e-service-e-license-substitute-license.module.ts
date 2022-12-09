@@ -15,7 +15,7 @@ import {
 } from '@ksp/self-service/form';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { TopNavComponent, BottomNavComponent } from '@ksp/shared/menu';
-import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 import { EServiceLicenseSearchComponent } from '@ksp/shared/search';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SubstitueLicenseConfirmComponent } from './substitue-license-confirm/substitue-license-confirm.component';
@@ -71,6 +71,7 @@ export const routes: Route[] = [
     LicenseCheckComponent,
     ValidateKspRequestComponent,
     MatProgressSpinnerModule,
+    RequestNoPipe
   ],
   declarations: [
     SubstituteLicenseListComponent,

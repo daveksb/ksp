@@ -71,10 +71,6 @@
               [amphurs]="amphurs2$ | async"
               [tumbols]="tumbols2$ | async"
               >ที่อยู่ที่ติดต่อได้สะดวก
-              <div class="d-flex align-items-center">
-                <input type="checkbox" class="me-2" />
-                <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
-              </div>
             </ksp-form-address>
           </mat-tab>
 
@@ -94,7 +90,7 @@
             ></ksp-form-education-info>
             <br />
             <div class="d-flex align-items-center">
-              <input type="checkbox" class="me-2" />
+              <input type="checkbox" class="me-2" disabled />
               <label class="fs-5">วุฒิการศึกษาปริญญาโท</label>
             </div>
             <ng-container>
@@ -110,7 +106,7 @@
             </ng-container>
 
             <div class="d-flex align-items-center mt-2">
-              <input type="checkbox" class="me-2" />
+              <input type="checkbox" class="me-2" disabled />
               <label class="fs-5">วุฒิการศึกษาปริญญาเอก</label>
             </div>
             <ng-container>
@@ -126,7 +122,7 @@
             </ng-container>
 
             <div class="d-flex align-items-center mt-2">
-              <input type="checkbox" class="me-2" />
+              <input type="checkbox" class="me-2" disabled />
               <label class="fs-5"
                 >วุฒิการศึกษาปริญญาอื่นๆที่เทียบเท่าปริญญาตรี /
                 ปริญญาทางการศึกษา</label

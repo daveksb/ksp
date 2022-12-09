@@ -1,6 +1,11 @@
 <form [formGroup]="form">
   <div class="d-flex align-items-center mb-2">
-    <input type="checkbox" class="me-2" formControlName="isAcademicChecked" />
+    <input
+      type="checkbox"
+      class="me-2"
+      formControlName="isAcademicChecked"
+      [attr.disabled]="checkbox2 === true ? true : null"
+    />
     <label class="form-label"
       ><span *ngIf="!isForeignForm">เลื่อนวิทยฐานะ</span>
       <span *ngIf="isForeignForm"
@@ -63,7 +68,7 @@
         ><span *ngIf="!isForeignForm">ลงวันที่</span>
         <span *ngIf="isForeignForm">To Date</span></label
       >
-      <div class="d-flex align-items-center">
+      <div class="d-flex align-items-center" *ngIf="!isForeignForm">
         <input
           matInput
           [matDatepicker]="picker"
@@ -79,6 +84,10 @@
         ></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </div>
+
+      <div *ngIf="isForeignForm">
+        <input type="date" class="form-control" formControlName="orderDate" />
+      </div>
     </div>
   </div>
   <hr />
@@ -89,6 +98,7 @@
         type="checkbox"
         class="me-2 mt-1"
         formControlName="isPendingAcademicChecked"
+        [attr.disabled]="checkbox1 === true ? true : null"
       />
     </div>
     <label class="form-label"
@@ -96,7 +106,7 @@
         >อยู่ระหว่างการพิจารณาประเมินให้มีหรือเลื่อนวิทยฐานะ</span
       >
       <span *ngIf="isForeignForm"
-        >Or process of evaluation for getting promotion
+        >or Process of evaluation for getting promotion
       </span></label
     >
   </div>

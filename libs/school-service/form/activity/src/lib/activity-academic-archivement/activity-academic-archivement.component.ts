@@ -98,11 +98,20 @@ export class ActivityAcademicArchivementComponent
           this.form.controls['oldPendingAcademic'].updateValueAndValidity();
           this.form.controls['newPendingAcademic'].updateValueAndValidity();
         }
+        console.log('xxx = ', this.form.controls.isAcademicChecked.value);
       });
   }
 
   override ngOnDestroy(): void {
     this.onChange(null);
     this.onTouched();
+  }
+
+  get checkbox1() {
+    return this.form.controls.isAcademicChecked.value;
+  }
+
+  get checkbox2() {
+    return this.form.controls.isPendingAcademicChecked.value;
   }
 }

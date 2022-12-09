@@ -8,4 +8,7 @@ import { providerFactory } from '@ksp/shared/utility';
   styleUrls: ['./renew-license-foreign-non-teacher.component.scss'],
   providers: providerFactory(RenewLicenseForeignNonTeacherComponent),
 })
-export class RenewLicenseForeignNonTeacherComponent extends NonTeacherFormBaseComponent {}
+export class RenewLicenseForeignNonTeacherComponent extends NonTeacherFormBaseComponent {
+
+
+}
