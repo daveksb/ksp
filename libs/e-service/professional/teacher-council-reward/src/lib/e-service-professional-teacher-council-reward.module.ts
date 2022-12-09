@@ -24,6 +24,7 @@ import {
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ETeacherCouncilRejectComponent } from './e-teacher-council-reject/e-teacher-council-reject.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { EServiceUiRewardRejectFormModule } from '@ksp/e-service/ui/reward-reject-form';
 
 const routes: Routes = [
   {
@@ -75,6 +76,7 @@ const routes: Routes = [
     MatPaginatorModule,
     RequestNoPipe,
     MatDatepickerModule,
+    EServiceUiRewardRejectFormModule,
   ],
   declarations: [
     ETeacherCouncilListComponent,
