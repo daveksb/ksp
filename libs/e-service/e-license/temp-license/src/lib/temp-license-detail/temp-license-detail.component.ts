@@ -149,6 +149,7 @@ export class ETempLicenseDetailComponent implements OnInit {
       },
       requestData: this.requestData,
     };
+    //console.log('saveData = ', saveData);
     localForage.setItem('checkRequestData', saveData);
   }
 
@@ -159,7 +160,6 @@ export class ETempLicenseDetailComponent implements OnInit {
   checkRequestId() {
     this.route.paramMap.pipe(untilDestroyed(this)).subscribe((params) => {
       this.requestId = Number(params.get('id'));
-
       if (this.requestId) {
         this.loadRequestFromId(this.requestId);
       }
@@ -334,6 +334,8 @@ export class ETempLicenseDetailComponent implements OnInit {
   nextTab() {
     if (this.selectedTabIndex < 6) {
       this.selectedTabIndex++;
+    } else {
+      this.nextPage();
     }
   }
 
