@@ -85,7 +85,7 @@ export class AllUserListComponent implements OnInit {
     this.router.navigate(['/school', 'user-detail']);
   }
 
-  viewDetail(id: number) {
+  viewDetail(id: string | null) {
     this.dialog.open(SchoolUserDetailComponent, {
       width: '1200px',
       height: '100vh',
@@ -93,9 +93,7 @@ export class AllUserListComponent implements OnInit {
         top: '0px',
         right: '0px',
       },
-      data: {
-        userid: id,
-      },
+      data: this.dataSource.data.find((d) => d.schmemberid === id),
     });
   }
 }
