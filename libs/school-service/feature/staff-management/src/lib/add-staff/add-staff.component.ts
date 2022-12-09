@@ -92,7 +92,6 @@ export class AddStaffComponent implements OnInit {
     public dialog: MatDialog,
     private licenseService: SchoolLicenseService,
     private loaderService: LoaderService
-
   ) {}
 
   ngOnInit(): void {
@@ -357,7 +356,7 @@ export class AddStaffComponent implements OnInit {
     this.pathTeachingInfo(parseJson(res.teachinginfo));
     //console.log('hiring = ', parseJson(res.hiringinfo));
     this.form.controls.hiringInfo.patchValue(parseJson(res.hiringinfo));
-    console.log('hiring = ', parseJson(res.hiringinfo));
+    //console.log('hiring = ', parseJson(res.hiringinfo));
   }
 
   insertStaff() {

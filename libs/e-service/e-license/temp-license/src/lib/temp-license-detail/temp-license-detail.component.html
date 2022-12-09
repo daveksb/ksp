@@ -38,7 +38,8 @@
         class="tab-group mb-3"
         animationDuration="0ms"
         dynamicHeight="true"
-        (selectedTabChange)="tabChanged($event)"
+        (selectedIndexChange)="selectedTabIndex = $event"
+        [selectedIndex]="selectedTabIndex"
         selectedIndex="0"
       >
         <mat-tab label="ที่อยู่">
@@ -338,7 +339,7 @@
       >
         <div
           class="bg-white px-3 py-2 mt-3"
-          [ngClass]="{ hide: (selectedTab.index || 0) !== i }"
+          [ngClass]="{ hide: (selectedTabIndex || 0) !== i }"
         >
           <e-service-license-check
             [choices]="verifyChoice"
@@ -352,11 +353,11 @@
 
 <div class="sticky-bottom border px-2">
   <ksp-bottom-nav
-    (prevClicked)="prevPage()"
-    (nextClicked)="next()"
+    (prevClicked)="prevTab()"
+    (nextClicked)="nextTab()"
     [showCenterButtons]="true"
     [showCancelButton]="false"
     [isFirstPage]="false"
-    [disableNext]="!checkResultFormArray.valid"
   ></ksp-bottom-nav>
+  <!-- [disableNext]="!checkResultFormArray.valid" -->
 </div>

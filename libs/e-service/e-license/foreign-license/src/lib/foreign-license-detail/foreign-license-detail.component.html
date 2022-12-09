@@ -106,6 +106,9 @@
     [showCenterButtons]="true"
     [showSaveButton]="true"
     (saveClicked)="confirm()"
+    [disableCancelButton]="
+      requestData.status === '2' || requestData.status === '3'
+    "
     [disableSaveButton]="
       requestData.status === '2' || requestData.status === '3'
     "

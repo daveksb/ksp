@@ -19,6 +19,8 @@ export class StaffListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  idCardLabel = `หมายเลขบัตรประชาชน/
+  เลขคุรุสภาสำหรับชาวต่างชาติ`;
   isLoading: Subject<boolean> = this.loaderService.isLoading;
   positions$!: Observable<PositionType[]>;
   licenseTypes: ListData[] = staffLicenseTypes;
