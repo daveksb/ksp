@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
-import { SelfLicense } from '@ksp/shared/interface';
+import { KspKuruspa, SelfLicense } from '@ksp/shared/interface';
 import { map, Observable } from 'rxjs';
 
 @Injectable({
@@ -14,5 +14,14 @@ export class SchoolLicenseService {
     return this.http
       .post(`${environment.shortApiUrl}/selflicensesearch.php`, payload)
       .pipe(map((data: any) => data.datareturn));
+  }
+
+  searchKuruspaNo(kuruspano: string): Observable<KspKuruspa> {
+    return this.http.post<KspKuruspa>(
+      `${environment.apiUrl}/kspstaff/schkuruspano`,
+      {
+        kuruspano,
+      }
+    );
   }
 }

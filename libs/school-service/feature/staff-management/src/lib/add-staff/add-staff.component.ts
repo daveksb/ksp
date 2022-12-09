@@ -230,17 +230,21 @@ export class AddStaffComponent implements OnInit {
       });
   }
 
-  searchKuruspaNo(kuruspano: string) {
+  searchKuruspaNo(kuruspaNo: string) {
     if (this.mode === 'view') {
       return;
     }
 
-    const payload = {
-      kuruspano,
-      schoolid: this.schoolId,
-    };
+    this.licenseService.searchKuruspaNo(kuruspaNo).subscribe((res) => {
+      console.log('res = ', res);
+    });
 
-    this.staffService
+    /* const payload = {
+      kuruspaNo,
+      schoolid: this.schoolId,
+    }; */
+
+    /*     this.staffService
       .searchStaffFromKuruspaNo(payload)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
@@ -256,7 +260,7 @@ export class AddStaffComponent implements OnInit {
           ]);
         }
         this.searchStaffDone = true;
-      });
+      }); */
   }
 
   save() {
