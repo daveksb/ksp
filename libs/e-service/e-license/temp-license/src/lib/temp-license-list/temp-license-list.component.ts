@@ -331,7 +331,7 @@ export class ETempLicenseListComponent implements AfterViewInit {
 
   clearData() {
     this.dataSource.data = [];
-    //this.form.reset();
+    this.form.reset();
     this.form.controls.search.patchValue(this.defaultForm);
   }
 
