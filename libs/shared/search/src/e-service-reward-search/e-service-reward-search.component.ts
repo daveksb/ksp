@@ -75,11 +75,11 @@ export class EServiceRewardSearchComponent
     //   });
 
     this.processList = SelfRequestProcess.filter((i) => {
-      return `${i.requestType}` === '1' && i.processId > 1;
+      return `${i.requestType}` === '40' && i.processId === 1;
     });
 
     this.statusList = this.processList.find(
-      (p) => `${p.processId}` === '3'
+      (p) => `${p.processId}` === '1'
     )?.status;
 
     // this.form.controls.process.valueChanges.subscribe((currentProcess) => {

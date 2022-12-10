@@ -14,7 +14,7 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SelfServiceFormModule } from '@ksp/self-service/form';
 import { SharedFormSelfRewardFormModule } from '@ksp/shared/form/self-reward-form';
 import { EServiceRewardSearchComponent } from '@ksp/shared/search';
-import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import {
   ValidateKspRequestComponent,
@@ -68,6 +68,7 @@ const routes: Routes = [
     LicenseCheckComponent,
     ValidateKspRequestComponent,
     MatPaginatorModule,
+    RequestNoPipe,
   ],
   declarations: [
     EBestTeacherListComponent,

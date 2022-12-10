@@ -39,7 +39,7 @@
               </ng-container>
             </th>
             <td class="text-center"></td>
-            <td *ngIf="mode === 'view' && group.files.length > 0">
+            <td *ngIf="mode === 'view' && group?.files?.length">
               <div class="mt-4">
                 <div class="d-flex flex-row justify-content-center">
                   <label class="view__label" (click)="view(group)">ดูเอกสารแนบ</label>

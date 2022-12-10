@@ -237,9 +237,9 @@ export const SelfRequestProcess: SchRequestProcess[] = [
     processId: 1,
     processName: 'เจ้าหน้าที่ส่วนจังหวัดตรวจสอบ',
     status: [
-      { id: 0, sname: 'ครบถ้วนและถูกต้อง', ename: '' },
-      { id: 1, sname: 'ขอแก้ไข/เพิ่มเติม', ename: '' },
-      { id: 2, sname: 'คัดค้าน/เพิกถอน', ename: '' },
+      { id: 0, sname: 'ครบถ้วนและถูกต้อง', ename: 'ครบถ้วนและถูกต้อง' },
+      { id: 1, sname: 'ขอแก้ไข/เพิ่มเติม', ename: 'ขอแก้ไข/เพิ่มเติม' },
+      { id: 2, sname: 'คัดค้าน/เพิกถอน', ename: 'คัดค้าน/เพิกถอน' },
     ],
   },
   /*   {
