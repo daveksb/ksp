@@ -16,7 +16,7 @@
     </div>
 
     <form [formGroup]="step1Form">
-      <ksp-degree-cert-step-one 
+      <ksp-degree-cert-step-one
         [mode]="'view'"
         formControlName="step1"
         (degreeType)="step1DegreeType = $event"
@@ -25,10 +25,10 @@
       </ksp-degree-cert-step-one>
     </form>
 
-    <div class="mt-3">
-      <button 
-        type="button" 
-        class="btn btn-primary" 
+    <div class="mb-3">
+      <button
+        type="button"
+        class="btn btn-primary"
         style="width: auto"
         (click)="viewCourseDetail()">
         กดเพื่อดูใบคำขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา
