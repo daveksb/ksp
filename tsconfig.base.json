@@ -156,6 +156,9 @@
       "@ksp/e-service/ui/license-check": [
         "libs/e-service/ui/license-check/src/index.ts"
       ],
+      "@ksp/e-service/ui/reward-reject-form": [
+        "libs/e-service/ui/reward-reject-form/src/index.ts"
+      ],
       "@ksp/e-service/ui/verify-result-box": [
         "libs/e-service/ui/verify-result-box/src/index.ts"
       ],

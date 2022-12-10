@@ -2800,6 +2800,32 @@
         }
       ]
     },
+    "e-service-ui-reward-reject-form": {
+      "projectType": "library",
+      "root": "libs/e-service/ui/reward-reject-form",
+      "sourceRoot": "libs/e-service/ui/reward-reject-form/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/e-service/ui/reward-reject-form"],
+          "options": {
+            "jestConfig": "libs/e-service/ui/reward-reject-form/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/ui/reward-reject-form/**/*.ts",
+              "libs/e-service/ui/reward-reject-form/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "e-service-ui-verify-result-box": {
       "root": "libs/e-service/ui/verify-result-box",
       "projectType": "library",
