@@ -1,24 +1,33 @@
-<ksp-top-nav><span header>ยื่นใบคำขอ</span><span subHeader>ขอรางวัลคุรุสภา</span></ksp-top-nav>
-<div class="bg-secondary bg-opacity-10 full-height-2 px-4 py-2" [formGroup]="form">
+<ksp-top-nav
+  ><span header>ยื่นใบคำขอ</span
+  ><span subHeader>ขอรางวัลคุรุสภา</span></ksp-top-nav
+>
+<div
+  class="bg-secondary bg-opacity-10 full-height-2 px-4 py-2"
+  [formGroup]="form"
+>
   <div class="box-header">รายละเอียดใบคำขอรางวัลคุรุสภา</div>
   <div class="bg-white p-3">
     <ksp-request-header-info
       [requestDate]="requestData.createdate"
-      [requestNumber]="requestData.requestno"></ksp-request-header-info>
+      [requestNumber]="requestData.requestno"
+    ></ksp-request-header-info>
     <hr />
     <div class="box-header mb-2">ข้อมูลรางวัลคุรุสภา</div>
     <mat-tab-group
       class="tab-group"
       animationDuration="0ms"
       (selectedTabChange)="tabChanged($event)"
-      [selectedIndex]="0">
+      [selectedIndex]="0"
+    >
       <mat-tab label="ข้อมูลส่วนตัว">
         <ksp-form-user-info
           [mode]="'view'"
           [isSelfService]="true"
           [prefixList]="prefixList$ | async"
           [requiredIdCardNo]="false"
-          formControlName="userInfo"></ksp-form-user-info>
+          formControlName="userInfo"
+        ></ksp-form-user-info>
       </mat-tab>
 
       <mat-tab label="ที่อยู่" class="tab-content">
@@ -27,7 +36,8 @@
           formControlName="address1"
           [provinces]="provinces1$ | async"
           [amphurs]="amphurs1$ | async"
-          [tumbols]="tumbols1$ | async">
+          [tumbols]="tumbols1$ | async"
+        >
           <span class="text-primary">ที่อยู่ทะเบียนบ้าน</span>
         </ksp-form-address>
         <hr />
@@ -36,49 +46,62 @@
           formControlName="address2"
           [provinces]="provinces2$ | async"
           [amphurs]="amphurs2$ | async"
-          [tumbols]="tumbols2$ | async">
+          [tumbols]="tumbols2$ | async"
+        >
           <span class="text-primary">ที่อยู่ที่ติดต่อได้สะดวก</span>
-          <!-- <div class="d-flex align-items-center">
-            <input type="checkbox" class="me-2" />
-            <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
-          </div> -->
         </ksp-form-address>
       </mat-tab>
 
       <mat-tab label="ข้อมูลการศึกษา">
-        <ksp-council-education [mode]="'view'" formControlName="eduInfo"></ksp-council-education>
+        <ksp-council-education
+          [mode]="'view'"
+          formControlName="eduInfo"
+        ></ksp-council-education>
       </mat-tab>
 
       <mat-tab label="ข้อมูลการทำงาน">
-        <ksp-council-working [mode]="'view'" formControlName="hiringInfo"></ksp-council-working>
+        <ksp-council-working
+          [mode]="'view'"
+          formControlName="hiringInfo"
+        ></ksp-council-working>
       </mat-tab>
 
       <mat-tab label="ข้อมูลการปฏิบัติตนตามจรรยาบรรณ">
-        <ksp-council-ethic [mode]="'view'" formControlName="rewardEthicInfo"></ksp-council-ethic>
+        <ksp-council-ethic
+          [mode]="'view'"
+          formControlName="rewardEthicInfo"
+        ></ksp-council-ethic>
       </mat-tab>
 
       <mat-tab label="รายงานผลสำเร็จจากการปฏิบัติงาน">
-        <ksp-council-success [mode]="'view'" formControlName="rewardSuccessInfo"></ksp-council-success>
+        <ksp-council-success
+          [mode]="'view'"
+          formControlName="rewardSuccessInfo"
+        ></ksp-council-success>
       </mat-tab>
 
       <mat-tab label="ข้อมูลรางวัลและหลักฐานประกอบ">
         <ksp-council-evidence
           [mode]="'view'"
           [rewardFiles]="rewardFiles"
-          formControlName="rewardDetailInfo"></ksp-council-evidence>
+          formControlName="rewardDetailInfo"
+        ></ksp-council-evidence>
       </mat-tab>
     </mat-tab-group>
   </div>
 
   <ng-container
     formArrayName="checkResult"
-    *ngFor="let c of checkResultFormArray.controls; let i = index">
+    *ngFor="let c of checkResultFormArray.controls; let i = index"
+  >
     <div
       class="bg-white px-3 py-2 mt-3"
-      [ngClass]="{ hide: (selectedTab.index || 0) !== i }">
+      [ngClass]="{ hide: (selectedTab.index || 0) !== i }"
+    >
       <e-service-license-check
         [choices]="verifyChoice"
-        [formControlName]="i"></e-service-license-check>
+        [formControlName]="i"
+      ></e-service-license-check>
     </div>
   </ng-container>
 </div>
@@ -90,5 +113,6 @@
     [showCenterButtons]="true"
     [showCancelButton]="true"
     (nextClicked)="next()"
-    (cancelClicked)="cancel()"></ksp-bottom-nav>
+    (cancelClicked)="cancel()"
+  ></ksp-bottom-nav>
 </div>

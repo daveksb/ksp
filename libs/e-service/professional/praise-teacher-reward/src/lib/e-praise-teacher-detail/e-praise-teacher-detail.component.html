@@ -1,24 +1,33 @@
-<ksp-top-nav><span header>ยื่นใบคำขอ</span><span subHeader>ขอรางวัลคุรุสดุดี</span></ksp-top-nav>
-<div class="bg-secondary bg-opacity-10 full-height-2 px-4 py-2" [formGroup]="form">
+<ksp-top-nav
+  ><span header>ยื่นใบคำขอ</span
+  ><span subHeader>ขอรางวัลคุรุสดุดี</span></ksp-top-nav
+>
+<div
+  class="bg-secondary bg-opacity-10 full-height-2 px-4 py-2"
+  [formGroup]="form"
+>
   <div class="box-header">รายละเอียดใบคำขอรางวัลคุรุสดุดี</div>
   <div class="bg-white p-3">
     <ksp-request-header-info
       [requestDate]="requestData.createdate"
-      [requestNumber]="requestData.requestno"></ksp-request-header-info>
+      [requestNumber]="requestData.requestno"
+    ></ksp-request-header-info>
     <hr />
     <div class="box-header mb-2">ข้อมูลรางวัลคุรุสดุดี</div>
     <mat-tab-group
       class="tab-group"
       animationDuration="0ms"
       (selectedTabChange)="tabChanged($event)"
-      [selectedIndex]="0">
+      [selectedIndex]="0"
+    >
       <mat-tab label="ข้อมูลส่วนตัว">
         <ksp-form-user-info
           [mode]="'view'"
           [isSelfService]="true"
           [prefixList]="prefixList$ | async"
           [requiredIdCardNo]="false"
-          formControlName="userInfo"></ksp-form-user-info>
+          formControlName="userInfo"
+        ></ksp-form-user-info>
       </mat-tab>
 
       <mat-tab label="ที่อยู่" class="tab-content">
@@ -28,7 +37,8 @@
           [isDarkMode]="false"
           [provinces]="provinces1$ | async"
           [amphurs]="amphurs1$ | async"
-          [tumbols]="tumbols1$ | async">
+          [tumbols]="tumbols1$ | async"
+        >
           <span class="text-primary">ที่อยู่ที่สามารถติดต่อได้</span>
         </ksp-form-address>
         <hr />
@@ -40,74 +50,61 @@
           [provinces]="provinces2$ | async"
           [amphurs]="amphurs2$ | async"
           [tumbols]="tumbols2$ | async"
-          [bureaus]="bureaus$ | async">
+          [bureaus]="bureaus$ | async"
+        >
         </self-service-form-user-workplace>
-        <!-- <div class="row">
-          <div class="col-md-6 mb-2">
-            <label class="form-label">โทรศัพท์</label>
-            <input class="form-control" type="text" formControlName="phone" />
-          </div>
-
-          <div class="col-md-6 mb-2">
-            <label class="form-label">โทรสาร</label>
-            <input class="form-control" type="text" formControlName="fax" />
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 mb-2">
-            <label class="form-label">อีเมล</label>
-            <input class="form-control" type="text" formControlName="email" />
-          </div>
-
-          <div class="col-md-6 mb-2">
-            <label class="form-label">เว็บไซต์</label>
-            <input class="form-control" type="text" formControlName="website" />
-          </div>
-        </div> -->
       </mat-tab>
 
       <mat-tab label="ข้อมูลการศึกษา">
         <ksp-council-education
           [mode]="'view'"
-          formControlName="eduInfo"></ksp-council-education>
+          formControlName="eduInfo"
+        ></ksp-council-education>
       </mat-tab>
 
       <mat-tab label="ข้อมูลการทำงาน">
         <ksp-praise-teacher-working
           [mode]="'view'"
-          formControlName="hiringInfo"></ksp-praise-teacher-working>
+          formControlName="hiringInfo"
+        ></ksp-praise-teacher-working>
       </mat-tab>
 
       <mat-tab label="ข้อมูลรางวัล">
         <ksp-praise-teacher-reward-info
           [mode]="'view'"
-          formControlName="rewardDetailInfo"></ksp-praise-teacher-reward-info>
+          formControlName="rewardDetailInfo"
+        ></ksp-praise-teacher-reward-info>
       </mat-tab>
 
       <mat-tab label="ข้อมูลการถูกลงโทษทางวินัย">
         <ksp-praise-teacher-punished
           [mode]="'view'"
-          formControlName="rewardPunishmentInfo"></ksp-praise-teacher-punished>
+          formControlName="rewardPunishmentInfo"
+        ></ksp-praise-teacher-punished>
       </mat-tab>
 
       <mat-tab label="เอกสารประกอบ">
         <ksp-form-multi-attachment
           [groups]="rewardFiles"
           [mode]="'view'"
-          [titleClass]="'text-primary'"></ksp-form-multi-attachment>
+          [titleClass]="'text-primary'"
+        ></ksp-form-multi-attachment>
       </mat-tab>
     </mat-tab-group>
   </div>
 
   <ng-container
     formArrayName="checkResult"
-    *ngFor="let c of checkResultFormArray.controls; let i = index">
+    *ngFor="let c of checkResultFormArray.controls; let i = index"
+  >
     <div
       class="bg-white px-3 py-2 mt-3"
-      [ngClass]="{ hide: (selectedTab.index || 0) !== i }">
+      [ngClass]="{ hide: (selectedTab.index || 0) !== i }"
+    >
       <e-service-license-check
         [choices]="verifyChoice"
-        [formControlName]="i"></e-service-license-check>
+        [formControlName]="i"
+      ></e-service-license-check>
     </div>
   </ng-container>
 </div>
@@ -119,5 +116,6 @@
     [showCenterButtons]="true"
     [showCancelButton]="true"
     (nextClicked)="next()"
-    (cancelClicked)="cancel()"></ksp-bottom-nav>
+    (cancelClicked)="cancel()"
+  ></ksp-bottom-nav>
 </div>
