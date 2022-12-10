@@ -21,6 +21,7 @@
       >
         <mat-tab label="ข้อมูลส่วนตัว">
           <ksp-form-user-info
+            [isHasSixtiesDate]="true"
             [isSelfService]="true"
             [mode]="'view'"
             [prefixList]="prefixList$ | async"
