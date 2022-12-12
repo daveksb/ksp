@@ -74,6 +74,10 @@ export class EPraiseTeacherListComponent implements OnInit, AfterViewInit {
   view(id: number) {
     this.router.navigate(['/praise-teacher', 'detail', id]);
   }
+
+  reject(id: number) {
+    this.router.navigate(['/praise-teacher', 'reject', id]);
+  }
 }
 
 export const column = [
