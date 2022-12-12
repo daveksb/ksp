@@ -22,6 +22,8 @@ import {
 } from '@ksp/e-service/e-license/approve-ksp-request';
 import { EBestTeacherConfirmComponent } from './e-best-teacher-confirm/e-best-teacher-confirm.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { EBestTeacherRejectComponent } from './e-best-teacher-reject/e-best-teacher-reject.component';
+import { EServiceUiRewardRejectFormModule } from '@ksp/e-service/ui/reward-reject-form';
 
 const routes: Routes = [
   {
@@ -44,6 +46,10 @@ const routes: Routes = [
       {
         path: 'confirm/:id',
         component: EBestTeacherConfirmComponent,
+      },
+      {
+        path: 'reject/:id',
+        component: EBestTeacherRejectComponent,
       },
     ],
   },
@@ -69,11 +75,13 @@ const routes: Routes = [
     ValidateKspRequestComponent,
     MatPaginatorModule,
     RequestNoPipe,
+    EServiceUiRewardRejectFormModule,
   ],
   declarations: [
     EBestTeacherListComponent,
     EBestTeacherDetailComponent,
     EBestTeacherConfirmComponent,
+    EBestTeacherRejectComponent,
   ],
   exports: [EBestTeacherListComponent, EBestTeacherDetailComponent],
 })

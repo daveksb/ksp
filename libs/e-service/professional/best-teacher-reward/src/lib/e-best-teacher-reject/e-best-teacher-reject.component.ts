@@ -11,11 +11,11 @@ import { ERequestService } from '@ksp/shared/service';
 import { getCookie } from '@ksp/shared/utility';
 
 @Component({
-  selector: 'ksp-e-teacher-council-reject',
-  templateUrl: './e-teacher-council-reject.component.html',
-  styleUrls: ['./e-teacher-council-reject.component.scss'],
+  selector: 'ksp-e-best-teacher-reject',
+  templateUrl: './e-best-teacher-reject.component.html',
+  styleUrls: ['./e-best-teacher-reject.component.scss'],
 })
-export class ETeacherCouncilRejectComponent implements OnInit {
+export class EBestTeacherRejectComponent implements OnInit {
   requestData = new KspRequest();
   requestId!: number;
   userId = `${getCookie('userId')}`;

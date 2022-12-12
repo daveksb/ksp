@@ -74,6 +74,10 @@ export class EBestTeacherListComponent implements OnInit, AfterViewInit {
   view(id: number) {
     this.router.navigate(['/best-teacher', 'detail', id]);
   }
+
+  reject(id: number) {
+    this.router.navigate(['/best-teacher', 'reject', id]);
+  }
 }
 
 export const column = [
