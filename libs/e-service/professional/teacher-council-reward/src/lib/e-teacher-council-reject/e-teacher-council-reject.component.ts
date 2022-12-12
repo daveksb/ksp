@@ -29,9 +29,7 @@ export class ETeacherCouncilRejectComponent
   userId = `${getCookie('userId')}`;
 
   override form = this.fb.group({
-    rewardInfo: [null],
-    rejectInfo: [null],
-    revokeInfo: [null],
+    rewardRejectInfo: [null],
   });
 
   constructor(
@@ -73,7 +71,7 @@ export class ETeacherCouncilRejectComponent
           requestid: this.requestData.id,
           process: `1`,
           status: `2`,
-          detail: JSON.stringify(this.form.value),
+          detail: JSON.stringify(this.form.value.rewardRejectInfo),
           systemtype: '4', // approve by e-service staff
           userid: this.userId,
           paymentstatus: null,
