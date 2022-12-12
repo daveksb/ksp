@@ -82,7 +82,7 @@ export class EThaiTeacherRejectComponent implements OnInit {
 
     dialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/teacher-council', 'list']);
+        this.router.navigate(['/thai-teacher', 'list']);
       }
     });
   }

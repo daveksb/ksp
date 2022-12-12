@@ -11,11 +11,11 @@ import { ERequestService } from '@ksp/shared/service';
 import { getCookie } from '@ksp/shared/utility';
 
 @Component({
-  selector: 'ksp-e-best-teacher-reject',
-  templateUrl: './e-best-teacher-reject.component.html',
-  styleUrls: ['./e-best-teacher-reject.component.scss'],
+  selector: 'ksp-e-research-reward-reject',
+  templateUrl: './e-research-reward-reject.component.html',
+  styleUrls: ['./e-research-reward-reject.component.scss'],
 })
-export class EBestTeacherRejectComponent implements OnInit {
+export class EResearchRewardRejectComponent implements OnInit {
   requestData = new KspRequest();
   requestId!: number;
   userId = `${getCookie('userId')}`;
@@ -82,7 +82,7 @@ export class EBestTeacherRejectComponent implements OnInit {
 
     dialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/best-teacher', 'list']);
+        this.router.navigate(['/research-reward', 'list']);
       }
     });
   }

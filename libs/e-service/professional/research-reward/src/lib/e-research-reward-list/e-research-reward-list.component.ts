@@ -74,6 +74,10 @@ export class EResearchRewardListComponent implements OnInit, AfterViewInit {
   view(id: number) {
     this.router.navigate(['/research-reward', 'detail', id]);
   }
+
+  reject(id: number) {
+    this.router.navigate(['/research-reward', 'reject', id]);
+  }
 }
 
 export const column = [
