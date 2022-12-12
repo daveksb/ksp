@@ -57,7 +57,7 @@
 
         <ng-container matColumnDef="idcardno">
           <th mat-header-cell *matHeaderCellDef>
-            หมายเลขบัตรประชาชน/เลขคุรุสภาสำหรับชาวต่างชาติ
+            {{ idCardLabel }}
           </th>
           <td mat-cell *matCellDef="let element">
             {{ element.idcardno || element.kuruspano }}

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
-import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   levels,
@@ -70,7 +69,6 @@ export class ETempLicenseDetailComponent implements OnInit {
   nationList$!: Observable<Nationality[]>;
   visaTypeList!: Observable<VisaType[]>;
   visaClassList!: Observable<VisaClass[]>;
-  selectedTab: MatTabChangeEvent = new MatTabChangeEvent();
   requestId!: number;
   requestData = new KspRequest();
   userInfoFormType: number = UserInfoFormType.thai; // control the display field of user info form
@@ -80,6 +78,9 @@ export class ETempLicenseDetailComponent implements OnInit {
   requestLabel = '';
   subRequestLabel = '';
   eduSelected = true;
+  btnNextPrev = {
+    index: 0,
+  };
 
   form = this.fb.group({
     userInfo: [],
@@ -131,16 +132,6 @@ export class ETempLicenseDetailComponent implements OnInit {
     return this.form.controls.checkResult as FormArray;
   }
 
-  tabChanged(e: MatTabChangeEvent) {
-    //console.log('tab event = ', e);
-    this.selectedTab = e;
-  }
-
-  next() {
-    this.persistData();
-    this.router.navigate(['/temp-license', 'confirm', this.requestId]);
-  }
-
   // save data to indexed db
   persistData() {
     //console.log('check sub result = ', checkSubResult);
@@ -158,6 +149,7 @@ export class ETempLicenseDetailComponent implements OnInit {
       },
       requestData: this.requestData,
     };
+    //console.log('saveData = ', saveData);
     localForage.setItem('checkRequestData', saveData);
   }
 
@@ -168,7 +160,6 @@ export class ETempLicenseDetailComponent implements OnInit {
   checkRequestId() {
     this.route.paramMap.pipe(untilDestroyed(this)).subscribe((params) => {
       this.requestId = Number(params.get('id'));
-
       if (this.requestId) {
         this.loadRequestFromId(this.requestId);
       }
@@ -201,7 +192,6 @@ export class ETempLicenseDetailComponent implements OnInit {
     this.eRequestService.getKspRequestById(requestId).subscribe((res) => {
       if ('returncode' in res) return;
       this.requestData = res;
-      console.log('details = ', parseJson(res.schooladdrinfo));
       this.pathUserInfo(res);
       this.patchAddress(parseJson(res.addressinfo));
       this.patchEdu(parseJson(res.eduinfo));
@@ -341,8 +331,31 @@ export class ETempLicenseDetailComponent implements OnInit {
     this.router.navigate(['/temp-license']);
   }
 
+  nextTab() {
+    if (this.selectedTabIndex < 6) {
+      this.selectedTabIndex++;
+    } else {
+      this.nextPage();
+    }
+  }
+
+  prevTab() {
+    if (this.selectedTabIndex == 0) {
+      this.prevPage();
+    } else {
+      this.selectedTabIndex--;
+    }
+  }
+
   prevPage() {
     //this.router.navigate(['/temp-license', 'list']);
     this.location.back();
+  }
+
+  nextPage() {
+    if (this.checkResultFormArray.valid) {
+      this.persistData();
+      this.router.navigate(['/temp-license', 'confirm', this.requestId]);
+    }
   }
 }
