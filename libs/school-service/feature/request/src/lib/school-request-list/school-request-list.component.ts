@@ -159,7 +159,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
   }
 
   genPdf(element: SchTempLicense) {
-    console.log('element = ', element);
+    //console.log('element = ', element);
     const position = element?.position;
     const startDate = new Date(element.licensestartdate || '');
     const endDate = new Date(element.licenseenddate || '');
@@ -181,7 +181,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     const careertype = SchoolRequestSubType[+(element?.licensetype ?? '1')];
     const careertypeen = SchoolLangMapping[careertype ?? 'ครู'] ?? '';
     const requestno = element.licenseno ?? '';
-
+    const prefix = element.licensetype == '1' ? 'ท.' : 'อ.';
     const payload = {
       schoolid: this.schoolId,
     };
@@ -198,6 +198,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
           pdfType: 99,
           pdfSubType: 3,
           input: {
+            prefix,
             schoolapprovename,
             schoolapprovenameen,
             requestno,

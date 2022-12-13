@@ -192,6 +192,10 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
             const userInfo: Partial<KspRequest> = this.form.value
               .foreignTeacher as any;
 
+            const countryCode = userInfo.country ?? 0;
+            const countryCode3digits = countryCode.toString().padStart(3, '0');
+
+            userInfo.country = countryCode3digits;
             userInfo.ref1 = '2';
             userInfo.ref2 = '04';
             userInfo.ref3 = '5';
@@ -202,9 +206,10 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
             userInfo.schoolid = this.schoolId;
             userInfo.process = `2`;
             userInfo.status = `1`;
-            const visaform = this.form.value.visainfo as any;
+            const visaform: any = this.form.value.visainfo;
             userInfo.visaclass = visaform?.visaclass;
             userInfo.visatype = visaform?.visatype;
+            userInfo.visaexpiredate = visaform.visaexpiredate;
             userInfo.bureauname = this.bureauName;
             userInfo.schoolid = this.schoolId;
             userInfo.schoolname = this.schoolName;
@@ -213,12 +218,13 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
               mapMultiFileInfo(this.foreignFiles)
             );
             const payload = formatDatePayload(userInfo);
+            //console.log('payload = ', payload);
             return this.requestService.schCreateRequest(payload);
           }
           return EMPTY;
         })
       )
-      .subscribe((res) => {
+      .subscribe((res: any) => {
         this.onCompleted(res.requestno);
       });
   }
