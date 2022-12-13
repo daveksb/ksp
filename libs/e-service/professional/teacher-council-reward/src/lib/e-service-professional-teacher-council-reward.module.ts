@@ -14,7 +14,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { SelfServiceFeatureRewardModule } from '@ksp/self-service/feature/reward';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { EServiceRewardSearchComponent } from '@ksp/shared/search';
-import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import { ETeacherCouncilConfirmComponent } from './e-teacher-council-confirm/e-teacher-council-confirm.component';
 import {
@@ -22,6 +22,9 @@ import {
   ConsiderKspRequestComponent,
 } from '@ksp/e-service/e-license/approve-ksp-request';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { ETeacherCouncilRejectComponent } from './e-teacher-council-reject/e-teacher-council-reject.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { EServiceUiRewardRejectFormModule } from '@ksp/e-service/ui/reward-reject-form';
 
 const routes: Routes = [
   {
@@ -45,6 +48,10 @@ const routes: Routes = [
         path: 'confirm/:id',
         component: ETeacherCouncilConfirmComponent,
       },
+      {
+        path: 'reject/:id',
+        component: ETeacherCouncilRejectComponent,
+      },
     ],
   },
 ];
@@ -67,11 +74,15 @@ const routes: Routes = [
     LicenseCheckComponent,
     ValidateKspRequestComponent,
     MatPaginatorModule,
+    RequestNoPipe,
+    MatDatepickerModule,
+    EServiceUiRewardRejectFormModule,
   ],
   declarations: [
     ETeacherCouncilListComponent,
     ETeacherCouncilDetailComponent,
     ETeacherCouncilConfirmComponent,
+    ETeacherCouncilRejectComponent,
   ],
   exports: [ETeacherCouncilListComponent, ETeacherCouncilDetailComponent],
 })

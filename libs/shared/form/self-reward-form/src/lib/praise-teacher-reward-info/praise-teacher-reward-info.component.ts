@@ -73,4 +73,8 @@ export class PraiseTeacherRewardInfoComponent
   get rewardInfo() {
     return this.form.controls['rewardInfo'] as FormArray;
   }
+
+  get hasReward() {
+    return this.form.controls.receivedReward.value;
+  }
 }

@@ -358,6 +358,8 @@
     [showCenterButtons]="true"
     [showCancelButton]="false"
     [isFirstPage]="false"
+    [disableNext]="!checkResultFormArray.valid && selectedTabIndex === 6"
+    [disableNextMessage]="'กรุณาตรวจสอบให้ครบก่อน'"
   ></ksp-bottom-nav>
   <!-- [disableNext]="!checkResultFormArray.valid" -->
 </div>

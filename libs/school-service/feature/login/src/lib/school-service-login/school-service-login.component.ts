@@ -24,6 +24,7 @@ export class SchoolServiceLoginComponent {
   ) {}
 
   login() {
+    this.loginFail = false;
     const payload: any = this.form.controls.login.value;
     payload.password = CryptoJs.SHA256(`${payload.password}`).toString();
 
@@ -32,7 +33,7 @@ export class SchoolServiceLoginComponent {
       .subscribe((res) => {
         if (res.returnCode == 99) {
           this.loginFail = true;
-          this.form.controls.login.reset();
+          this.form.reset();
           return;
         }
 

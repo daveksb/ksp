@@ -1,0 +1,42 @@
+<ksp-top-nav><span header>ยื่นใบคำขอ</span><span subHeader>ขอรางวัลคุรุสภา</span></ksp-top-nav>
+<div class="bg-secondary bg-opacity-10 full-height-2 px-4 py-2" [formGroup]="form">
+  <div class="box-header">การคัดค้านและเพิกถอนรางวัลคุรุสภา</div>
+  <div class="bg-white p-3">
+    <ksp-request-header-info
+      [requestDate]="requestData.createdate"
+      [requestNumber]="requestData.requestno"></ksp-request-header-info>
+    <hr />
+    <div class="box-header">
+      ประวัติการตรวจสอบคุณสมบัติและเอกสาร
+    </div>
+
+    <table class="table w-75 mb-5">
+      <thead>
+        <tr>
+          <th scope="col">ครั้งที่</th>
+          <th scope="col">ชื่อ-นามสกุล เจ้าหน้าที่</th>
+          <th scope="col">วันที่ตรวจสอบ</th>
+          <th scope="col">ผลการตรวจสอบ</th>
+        </tr>
+      </thead>
+    </table>
+
+    <ksp-reward-info-form formControlName="rewardInfo"></ksp-reward-info-form>
+
+    <ksp-reject-info-form formControlName="rejectInfo"></ksp-reject-info-form>
+
+    <ksp-revoke-info-form formControlName="revokeInfo"></ksp-revoke-info-form>
+
+  </div>
+</div>
+
+<div class="sticky-bottom border px-2">
+  <ksp-bottom-nav
+    [isFirstPage]="true"
+    [isLastPage]="true"
+    [colorMode]="'blue'"
+    [showCenterButtons]="true"
+    [showSaveButton]="true"
+    [showCancelButton]="true"
+    (saveClicked)="save()"></ksp-bottom-nav>
+</div>
