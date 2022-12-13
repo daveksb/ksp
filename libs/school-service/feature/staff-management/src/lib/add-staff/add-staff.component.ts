@@ -205,12 +205,10 @@ export class AddStaffComponent implements OnInit {
     if (this.mode === 'view') {
       return;
     }
-
     const payload = {
       idcardno,
       schoolid: this.schoolId,
     };
-
     this.staffService
       .searchStaffFromIdCard(payload)
       .pipe(untilDestroyed(this))
@@ -230,17 +228,28 @@ export class AddStaffComponent implements OnInit {
       });
   }
 
-  searchKuruspaNo(kuruspano: string) {
+  searchKuruspaNo(kuruspaNo: string) {
     if (this.mode === 'view') {
       return;
     }
 
-    const payload = {
-      kuruspano,
-      schoolid: this.schoolId,
-    };
+    this.licenseService.searchKuruspaNo(kuruspaNo).subscribe((res) => {
+      console.log('res = ', res);
+      if (res && res.kuruspano) {
+        this.router.navigate([
+          '/staff-management',
+          'add-staff-foreign',
+          kuruspaNo,
+        ]);
+      }
+    });
 
-    this.staffService
+    /* const payload = {
+      kuruspaNo,
+      schoolid: this.schoolId,
+    }; */
+
+    /*     this.staffService
       .searchStaffFromKuruspaNo(payload)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
@@ -256,7 +265,7 @@ export class AddStaffComponent implements OnInit {
           ]);
         }
         this.searchStaffDone = true;
-      });
+      }); */
   }
 
   save() {
@@ -307,6 +316,7 @@ export class AddStaffComponent implements OnInit {
     } else if (this.router.url.includes('add-staff-foreign')) {
       this.mode = 'add';
       this.userInfoType = UserInfoFormType.foreign;
+      this.patchDataFromLicense();
     } else if (this.router.url.includes('edit-staff')) {
       this.mode = 'edit';
     }
