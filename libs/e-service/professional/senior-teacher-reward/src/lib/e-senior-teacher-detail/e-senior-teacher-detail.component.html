@@ -21,6 +21,7 @@
       >
         <mat-tab label="ข้อมูลส่วนตัว">
           <ksp-form-user-info
+            [isHasSixtiesDate]="true"
             [isSelfService]="true"
             [mode]="'view'"
             [prefixList]="prefixList$ | async"
@@ -51,32 +52,6 @@
             [bureaus]="bureaus$ | async"
           >
           </self-service-form-user-workplace>
-          <!--       <div class="row">
-            <div class="col-md-6 mb-2">
-              <label class="form-label">โทรศัพท์</label>
-              <input class="form-control" type="text" formControlName="phone" />
-            </div>
-
-            <div class="col-md-6 mb-2">
-              <label class="form-label">โทรสาร</label>
-              <input class="form-control" type="text" formControlName="fax" />
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 mb-2">
-              <label class="form-label">อีเมล</label>
-              <input class="form-control" type="text" formControlName="email" />
-            </div>
-
-            <div class="col-md-6 mb-2">
-              <label class="form-label">เว็บไซต์</label>
-              <input
-                class="form-control"
-                type="text"
-                formControlName="website"
-              />
-            </div>
-          </div> -->
         </mat-tab>
 
         <mat-tab label="ข้อมูลครูอาวุโส">

@@ -1,7 +1,7 @@
 <form [formGroup]="form">
   <div class="box-header">อาจารย์นิเทศก์</div>
 
-  <div class="row mb-3">
+  <div class="row align-items-end mb-3">
     <div class="col-2">
       <label class="form-label">ระบุจำนวน</label>
       <input
@@ -15,8 +15,13 @@
       />
     </div>
     <div class="col-3">
-      <br />
-      <button (click)="addNitet()" type="button" class="btn btn-primary w-auto">
+      <label class="form-label"><br /></label>
+      <button
+        (click)="addNitet()"
+        type="button"
+        class="btn btn-primary w-auto"
+        style="height: 36px"
+      >
         กรอกข้อมูลอาจารย์นิเทศก์
       </button>
     </div>
