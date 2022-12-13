@@ -14,6 +14,7 @@ import {
 import { DegreeCertInfo } from '@ksp/uni-service/feature/edit-degree-cert';
 import { MatPaginator } from '@angular/material/paginator';
 import { Subject } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   templateUrl: './degree-list.component.html',
@@ -60,24 +61,25 @@ export class DegreeListComponent extends KspPaginationComponent implements OnIni
     // this.getDegreeCertList();
   }
 
-  getOptions() {
-    this.getUniversity();
-    this.getUniversityType();
+  async getOptions() {
+    const [university, universityTypes] =
+      await Promise.all([
+        lastValueFrom(this.uniInfoService.getUniuniversity()),
+        lastValueFrom(this.uniInfoService.getUniversityType()),
+      ]);
+    this.uniUniversityOption = university.datareturn.map((data: any) => {
+      if (data.campusname) {
+        data.name = data.name + `, ${data.campusname}`
+      }
+      return data;
+    });
+    this.uniUniversityTypeOption = universityTypes;
   }
 
   getUniversity() {
-    const { affiliation } = this.form.controls.search.value as any;
-    this.uniInfoService.getUniversity(affiliation).subscribe(response=>{
+    this.uniInfoService.getUniuniversity().subscribe(response=>{
       if (response) {
         this.uniUniversityOption = response;
-      }
-    })
-  }
-
-  getUniversityType() {
-    this.uniInfoService.getUniversityType().subscribe(response=>{
-      if (response) {
-        this.uniUniversityTypeOption = response;
       }
     })
   }

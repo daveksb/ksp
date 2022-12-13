@@ -6,6 +6,7 @@ import { EUniService, UniInfoService, UniRequestService } from '@ksp/shared/serv
 import { getCookie, parseJson, thaiDate } from '@ksp/shared/utility';
 import moment from 'moment';
 import localForage from 'localforage';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   templateUrl: './course-detail.component.html',
@@ -57,23 +58,26 @@ export class CourseDetailComponent implements OnInit {
         this.courseData.processtrainning = parseJson(response?.processtrainning);
         this.courseData.responsibleunit = parseJson(response?.responsibleunit);
         this.courseData.teachinglocation = parseJson(response?.teachinglocation);
-        this.courseData.totalStudent = this.courseData.coursestructure.reduce((curr: any,prev: any)=>{
+        this.courseData.totalStudent = this.courseData.coursestructure ? this.courseData.coursestructure.reduce((curr: any,prev: any)=>{
           return curr + parseInt(prev.student)
-        }, 0);
+        }, 0) : 0;
         this.getAdmissionDetail(this.courseData);
         this._mappingResponseWithForm(response);
       }
     })
   }
 
-  private _mappingResponseWithForm(res: any): any {
+  private async _mappingResponseWithForm(res: any) {
+    const uniById = await Promise.all([
+      lastValueFrom(this.uniInfoService.univerSitySelectById(res.uniid)),
+    ]) as any;
     this.requestNo = res?.requestno ?? '';
     this.step1Form.setValue({
       step1: {
-        institutionsCode: res?.universitycode || '',
-        institutionsGroup: res?.unitype || '',
-        institutionsName: res?.uniname || '',
-        provience: res?.uniprovince || '',
+        institutionsCode: uniById[0]?.universitycode || '',
+        institutionsGroup: uniById[0]?.typeid || '',
+        institutionsName: uniById[0]?.name + ', ' + uniById[0]?.campusname || '',
+        provience: uniById[0]?.provinceid || '',
         courseDetailType: res?.coursedetailtype,
         courseDetail: res?.coursedetailinfo
           ? parseJson(res?.coursedetailinfo)
