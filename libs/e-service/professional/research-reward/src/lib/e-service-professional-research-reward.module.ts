@@ -19,6 +19,7 @@ import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import {
   ValidateKspRequestComponent,
   ConsiderKspRequestComponent,
+  RewardValidateRequestComponent,
 } from '@ksp/e-service/e-license/approve-ksp-request';
 import { EResearchRewardConfirmComponent } from './e-research-reward-confirm/e-research-reward-confirm.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -76,6 +77,7 @@ const routes: Routes = [
     MatPaginatorModule,
     RequestNoPipe,
     EServiceUiRewardRejectFormModule,
+    RewardValidateRequestComponent,
   ],
   declarations: [
     EResearchRewardListComponent,

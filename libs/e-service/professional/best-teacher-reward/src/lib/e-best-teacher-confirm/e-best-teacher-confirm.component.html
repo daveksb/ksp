@@ -1,7 +1,4 @@
-<ksp-top-nav
-  ><span header>ยื่นใบคำขอ</span
-  ><span subHeader>ขอรางวัลครูผู้สอนดีเด่น </span></ksp-top-nav
->
+<ksp-top-nav><span header>ยื่นใบคำขอ</span><span subHeader>ขอรางวัลครูผู้สอนดีเด่น </span></ksp-top-nav>
 
 <div class="bg-secondary bg-opacity-10 py-2 px-4 full-height-2">
   <div class="box-header">รายละเอียดรางวัลครูผู้สอนดีเด่น</div>
@@ -9,8 +6,7 @@
     <div class="d-flex justify-content-between">
       <ksp-request-header-info
         [requestDate]="saveData.requestData.requestdate"
-        [requestNumber]="saveData.requestData.requestno"
-      ></ksp-request-header-info>
+        [requestNumber]="saveData.requestData.requestno"></ksp-request-header-info>
     </div>
     <hr />
     <div class="box-header text-primary">
@@ -29,20 +25,10 @@
     </table>
 
     <div [formGroup]="form">
-      <ng-container *ngIf="saveData.requestData.process === '5'; else approve">
-        <ng-container *ngIf="saveData.requestData.status === '1'">
-          <ksp-consider-ksp-request
-            formControlName="approvement"
-          ></ksp-consider-ksp-request>
-        </ng-container>
-      </ng-container>
-      <ng-template #approve>
-        <ksp-validate-ksp-request
-          [requestType]="saveData.requestData.requesttype"
-          [process]="saveData.requestData.process"
-          formControlName="approvement"
-        ></ksp-validate-ksp-request>
-      </ng-template>
+      <ksp-reward-validate-request
+        [requestType]="saveData.requestData.requesttype"
+        [process]="saveData.requestData.process"
+        formControlName="approvement"></ksp-reward-validate-request>
     </div>
   </div>
 </div>
@@ -56,6 +42,5 @@
     [showCenterButtons]="true"
     [isLastPage]="true"
     [showSaveButton]="true"
-    [showCancelButton]="true"
-  ></ksp-bottom-nav>
+    [showCancelButton]="true"></ksp-bottom-nav>
 </div>
