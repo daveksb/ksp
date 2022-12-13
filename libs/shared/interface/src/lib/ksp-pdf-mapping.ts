@@ -11,6 +11,15 @@ export const kspPdfMapping: IKspPdfMapping[] = [
       {
         text: [
           {
+            key: 'prefix',
+            options: {
+              x: 90,
+              y: 750,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
             key: 'requestno',
             options: {
               x: 100,

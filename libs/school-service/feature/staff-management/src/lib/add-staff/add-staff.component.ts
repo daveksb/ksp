@@ -366,7 +366,7 @@ export class AddStaffComponent implements OnInit {
         this.patchAll(res);
         if (res.idcardno) {
           this.searchLicense(res.idcardno);
-          console.log('res = ', res);
+          //console.log('res = ', res);
         }
       });
   }

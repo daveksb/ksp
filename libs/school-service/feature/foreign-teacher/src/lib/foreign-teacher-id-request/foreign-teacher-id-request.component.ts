@@ -206,7 +206,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
             userInfo.schoolid = this.schoolId;
             userInfo.process = `2`;
             userInfo.status = `1`;
-            const visaform = this.form.value.visainfo as any;
+            const visaform: any = this.form.value.visainfo;
             userInfo.visaclass = visaform?.visaclass;
             userInfo.visatype = visaform?.visatype;
             userInfo.visaexpiredate = visaform.visaexpiredate;
