@@ -194,7 +194,12 @@ export class AddStaffComponent implements OnInit {
           /* const temp: any = { kuruspano: `${kuruspano}` };
           this.form.controls.userInfo.patchValue(temp); */
           localForage.getItem('sch-kuruspa-no').then((res: any) => {
-            this.form.controls.userInfo.patchValue(res);
+            console.log('res = ', res);
+            const data = {
+              ...res,
+              ...{ visaexpireddate: res.visaenddate },
+            };
+            this.form.controls.userInfo.patchValue(data);
           });
         }
 
@@ -237,7 +242,7 @@ export class AddStaffComponent implements OnInit {
     }
 
     this.licenseService.searchKuruspaNo(kuruspaNo).subscribe((res) => {
-      console.log('res = ', res);
+      //console.log('res = ', res);
       if (res && res.kuruspano) {
         localForage.setItem('sch-kuruspa-no', res);
         this.router.navigate([

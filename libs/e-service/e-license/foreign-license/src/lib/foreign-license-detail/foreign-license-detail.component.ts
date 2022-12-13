@@ -199,11 +199,10 @@ export class ForeignLicenseDetailComponent implements OnInit {
             const countryCode = this.requestData.country ?? 0;
             const countryCode3digits = countryCode.toString().padStart(3, '0');
 
-            payload.countrycode = countryCode3digits;
+            payload.country = countryCode3digits;
             payload.requestno = this.requestData.requestno;
             payload.createdate = moment().format('yyyy-MM-DD');
             payload.expireddate = moment().add(2, 'years').format('yyyy-MM-DD');
-            payload.visaenddate = this.requestData.visaexpiredate;
             payload.idcardno = this.requestData.idcardno;
             payload.passportno = this.requestData.passportno;
             payload.passportstartdate = this.requestData.passportstartdate;
@@ -220,7 +219,6 @@ export class ForeignLicenseDetailComponent implements OnInit {
             payload.position = this.requestData.position;
             payload.contactphone = this.requestData.contactphone;
             payload.nationality = this.requestData.nationality;
-            payload.country = this.requestData.country;
             payload.fileinfo = null; //this.requestData.fileinfo
             payload.bureauid = this.requestData.bureauid;
             payload.bureauname = this.requestData.bureauname;
