@@ -191,8 +191,11 @@ export class AddStaffComponent implements OnInit {
 
         if (kuruspano) {
           this.searchStaffDone = true;
-          const temp: any = { kuruspano: `${kuruspano}` };
-          this.form.controls.userInfo.patchValue(temp);
+          /* const temp: any = { kuruspano: `${kuruspano}` };
+          this.form.controls.userInfo.patchValue(temp); */
+          localForage.getItem('sch-kuruspa-no').then((res: any) => {
+            this.form.controls.userInfo.patchValue(res);
+          });
         }
 
         if (idcardno) {
@@ -236,11 +239,25 @@ export class AddStaffComponent implements OnInit {
     this.licenseService.searchKuruspaNo(kuruspaNo).subscribe((res) => {
       console.log('res = ', res);
       if (res && res.kuruspano) {
+        localForage.setItem('sch-kuruspa-no', res);
         this.router.navigate([
           '/staff-management',
           'add-staff-foreign',
           kuruspaNo,
         ]);
+      } else {
+        const dialog = this.dialog.open(CompleteDialogComponent, {
+          data: {
+            header: `ไม่พบข้อมูลหมายเลขคุรุสภาที่ระบุ`,
+            btnLabel: 'ตกลง',
+          },
+        });
+
+        dialog.componentInstance.completed.subscribe((res) => {
+          if (res) {
+            this.router.navigate(['/staff-management', 'add-staff']);
+          }
+        });
       }
     });
 
