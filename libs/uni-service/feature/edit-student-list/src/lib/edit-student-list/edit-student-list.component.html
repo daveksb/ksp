@@ -278,6 +278,11 @@
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        <tr class="mat-row text-center" *matNoDataRow>
+          <td class="text-center text-danger fs-5" [attr.colspan]="displayedColumns.length">
+            ไม่พบข้อมูล
+          </td>
+        </tr>
       </table>
     </div>
     <mat-paginator
