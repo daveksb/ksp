@@ -74,6 +74,10 @@ export class EThaiTeacherListComponent implements OnInit, AfterViewInit {
   view(id: number) {
     this.router.navigate(['/thai-teacher', 'detail', id]);
   }
+
+  reject(id: number) {
+    this.router.navigate(['/thai-teacher', 'reject', id]);
+  }
 }
 
 export const column = [
