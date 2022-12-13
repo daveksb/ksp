@@ -95,7 +95,7 @@ export class UniInfoService {
   searchTypeidUniUniversity(id: any): Observable<any> {
     return this.http
       .get(
-        `${environment.apiUrl}/kspmasterdata/searchtypeiduniuniversity?searchTypeId=${id}`
+        `${environment.apiUrl}/kspmasterdata/searchtypeiduniuniversity?searchtypeid=${id}`
       )
       .pipe(map((res: any) => res?.datareturn));
   }
@@ -119,7 +119,7 @@ export class UniInfoService {
   getUniversity(typeId: any): Observable<any> {
     return this.http
       .get(
-        `${environment.apiUrl}/kspmasterdata/searchtypeiduniuniversity?searchTypeId=${typeId}`
+        `${environment.apiUrl}/kspmasterdata/searchtypeiduniuniversity?searchtypeid=${typeId}`
       )
       .pipe(
         map((data: any) => data.datareturn),
