@@ -74,6 +74,10 @@ export class ESeniorTeacherListComponent implements OnInit, AfterViewInit {
   view(id: number) {
     this.router.navigate(['/senior-teacher', 'detail', id]);
   }
+
+  reject(id: number) {
+    this.router.navigate(['/senior-teacher', 'reject', id]);
+  }
 }
 
 export const column = [
