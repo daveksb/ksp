@@ -205,12 +205,10 @@ export class AddStaffComponent implements OnInit {
     if (this.mode === 'view') {
       return;
     }
-
     const payload = {
       idcardno,
       schoolid: this.schoolId,
     };
-
     this.staffService
       .searchStaffFromIdCard(payload)
       .pipe(untilDestroyed(this))
@@ -237,6 +235,13 @@ export class AddStaffComponent implements OnInit {
 
     this.licenseService.searchKuruspaNo(kuruspaNo).subscribe((res) => {
       console.log('res = ', res);
+      if (res && res.kuruspano) {
+        this.router.navigate([
+          '/staff-management',
+          'add-staff-foreign',
+          kuruspaNo,
+        ]);
+      }
     });
 
     /* const payload = {
@@ -311,6 +316,7 @@ export class AddStaffComponent implements OnInit {
     } else if (this.router.url.includes('add-staff-foreign')) {
       this.mode = 'add';
       this.userInfoType = UserInfoFormType.foreign;
+      this.patchDataFromLicense();
     } else if (this.router.url.includes('edit-staff')) {
       this.mode = 'edit';
     }
