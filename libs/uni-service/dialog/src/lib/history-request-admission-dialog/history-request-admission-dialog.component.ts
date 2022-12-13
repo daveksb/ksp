@@ -13,14 +13,16 @@ export class HistoryRequestAdmissionDialogComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public dataSource: any) {}
 
   ngOnInit(): void {
-    this.dataSource.data.map((data:any)=>{
-      if (this.dataSource.system == 'uniservice') {
-        data.statusname = this.mapStatusUniserviceProcess(data.requeststatus, data.requestprocess);
-      } else {
-        data.statusname = this.mapStatusEServiceProcess(data.requeststatus, data.requestprocess);
-      }
-      return data;
-    })
+    if (this.dataSource.data) {
+      this.dataSource.data.map((data:any)=>{
+        if (this.dataSource.system == 'uniservice') {
+          data.statusname = this.mapStatusUniserviceProcess(data.requeststatus, data.requestprocess);
+        } else {
+          data.statusname = this.mapStatusEServiceProcess(data.requeststatus, data.requestprocess);
+        }
+        return data;
+      })
+    }
   }
   toDateTh(date: any) {
     try {

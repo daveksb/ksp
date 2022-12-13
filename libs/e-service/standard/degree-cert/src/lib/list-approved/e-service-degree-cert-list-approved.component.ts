@@ -75,9 +75,9 @@ export class EServiceDegreeCertApprovedListComponent extends KspPaginationCompon
     .getUniuniversity()
     .pipe(
       map((res) => {
-        return res?.datareturn?.map(({ id, name }: any) => ({
+        return res?.datareturn?.map(({ id, name, campusname }: any) => ({
           value: id,
-          label: name,
+          label: name + campusname ? `, ${campusname}` : '',
         }));
       })
     )
