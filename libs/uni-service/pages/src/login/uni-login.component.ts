@@ -21,7 +21,7 @@ import { setCookie } from '@ksp/shared/utility';
   standalone: true,
   imports: [CommonModule, LoginFormComponent, ReactiveFormsModule],
 })
-export class UniLoginComponent implements OnInit {
+export class UniLoginComponent {
   loginFail = false;
 
   form = this.fb.group({
@@ -35,12 +35,6 @@ export class UniLoginComponent implements OnInit {
     private uniLoginService: UniLoginService
   ) {}
 
-  ngOnInit(): void {
-    this.form.valueChanges.subscribe(() => {
-      this.loginFail = false;
-    });
-  }
-
   /* showWarningDialog(title: string) {
     this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
@@ -51,11 +45,13 @@ export class UniLoginComponent implements OnInit {
     });
   } */
   async login() {
+    this.loginFail = false;
     try {
       const res = await lastValueFrom<any>(
         this.uniLoginService.validateLogin(this.form?.value?.user)
       );
       if (res?.returncode == 99) {
+        this.form.reset();
         this.loginFail = true;
         return;
       }

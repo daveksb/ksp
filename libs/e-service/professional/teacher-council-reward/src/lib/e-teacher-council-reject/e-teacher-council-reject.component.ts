@@ -6,32 +6,22 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import {
-  KspApprovePayload,
-  KspFormBaseComponent,
-  KspRequest,
-} from '@ksp/shared/interface';
+import { KspApprovePayload, KspRequest } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
-import { getCookie, providerFactory } from '@ksp/shared/utility';
+import { getCookie } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-e-teacher-council-reject',
   templateUrl: './e-teacher-council-reject.component.html',
   styleUrls: ['./e-teacher-council-reject.component.scss'],
-  providers: providerFactory(ETeacherCouncilRejectComponent),
 })
-export class ETeacherCouncilRejectComponent
-  extends KspFormBaseComponent
-  implements OnInit
-{
+export class ETeacherCouncilRejectComponent implements OnInit {
   requestData = new KspRequest();
   requestId!: number;
   userId = `${getCookie('userId')}`;
 
-  override form = this.fb.group({
-    rewardInfo: [null],
-    rejectInfo: [null],
-    revokeInfo: [null],
+  form = this.fb.group({
+    rewardRejectInfo: [null],
   });
 
   constructor(
@@ -40,9 +30,7 @@ export class ETeacherCouncilRejectComponent
     private fb: FormBuilder,
     private dialog: MatDialog,
     private router: Router
-  ) {
-    super();
-  }
+  ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -73,7 +61,7 @@ export class ETeacherCouncilRejectComponent
           requestid: this.requestData.id,
           process: `1`,
           status: `2`,
-          detail: JSON.stringify(this.form.value),
+          detail: JSON.stringify(this.form.value.rewardRejectInfo),
           systemtype: '4', // approve by e-service staff
           userid: this.userId,
           paymentstatus: null,

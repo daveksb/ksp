@@ -13,18 +13,14 @@ export class StaffService {
   addStaff(payload: Partial<SchStaff>): Observable<KspResponse> {
     return this.http.post<KspResponse>(
       `${environment.apiUrl}/kspstaff/schstaff2insert`,
-      {
-        ...payload,
-      }
+      payload
     );
   }
 
   updateStaff(payload: Partial<SchStaff>): Observable<KspResponse> {
     return this.http.post<KspResponse>(
       `${environment.apiUrl}/kspstaff/schstaff2update`,
-      {
-        ...payload,
-      }
+      payload
     );
   }
 
@@ -34,35 +30,27 @@ export class StaffService {
     };
     return this.http.post<SchStaff>(
       `${environment.apiUrl}/kspstaff/schstaff2select`,
-      {
-        ...payload,
-      }
+      payload
     );
   }
 
   searchStaffFromIdCard(payload: any): Observable<any> {
     return this.http.post<SchStaff>(
       `${environment.apiUrl}/kspstaff/schstaff2selectidcardno`,
-      {
-        ...payload,
-      }
+      payload
     );
   }
 
   searchStaffFromKuruspaNo(payload: any): Observable<any> {
     return this.http.post<SchStaff>(
       `${environment.apiUrl}/kspstaff/schstaff2search`,
-      {
-        ...payload,
-      }
+      payload
     );
   }
 
   searchStaffs(payload: any): Observable<SchStaff[]> {
     return this.http
-      .post(`${environment.shortApiUrl}/schstaff2search.php`, {
-        ...payload,
-      })
+      .post(`${environment.shortApiUrl}/schstaff2search.php`, payload)
       .pipe(map((data: any) => data.datareturn));
   }
 

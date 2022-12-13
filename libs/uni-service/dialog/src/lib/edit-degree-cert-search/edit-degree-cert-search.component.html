@@ -92,7 +92,7 @@
       </div>
     </div>
 
-    <div class="d-flex justify-content-end mt-2">
+    <div class="d-flex justify-content-end my-3">
       <button
         class="btn border-primary text-primary bg-white"
         (click)="clear()"
@@ -125,6 +125,7 @@
                 type="radio"
                 (change)="onItemChange(item.key)"
                 name="university"
+                class="form-check-input"
               />
             </div>
           </th>
@@ -151,8 +152,7 @@
       [pageIndex]="pageEvent.pageIndex"
     >
     </mat-paginator>
-    <br />
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center mt-3">
       <button
         matDialogClose
         class="btn btn-primary"

@@ -34,6 +34,7 @@ export class SelfServiceThaiLoginComponent {
   }
 
   login() {
+    this.loginFail = false;
     this.loginService.validateLogin(this.form.value).subscribe((res) => {
       if (res && res.id && res.usertoken) {
         localForage.setItem('my-info', res);

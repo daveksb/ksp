@@ -18,12 +18,12 @@
     </div>
 
     <div *ngIf="rewardType.value !== '0'">
-      <br />
-      <self-service-request-status
-        [idcardNo]="myInfo && myInfo.idcardno"
-      ></self-service-request-status>
+      <div class="my-3">
+        <self-service-request-status
+          [idcardNo]="myInfo && myInfo.idcardno"
+        ></self-service-request-status>
+      </div>
     </div>
-    <br />
     <div *ngIf="rewardType.value === '40'">
       <ksp-council-reward
         formControlName="rewardDetail"

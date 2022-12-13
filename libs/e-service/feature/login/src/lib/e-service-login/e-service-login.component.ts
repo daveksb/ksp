@@ -9,7 +9,7 @@ import { EServiceLoginService } from './e-service-login.service';
   templateUrl: './e-service-login.component.html',
   styleUrls: ['./e-service-login.component.scss'],
 })
-export class EServiceLoginComponent implements OnInit {
+export class EServiceLoginComponent {
   loginFail = false;
 
   form = this.fb.group({
@@ -22,16 +22,12 @@ export class EServiceLoginComponent implements OnInit {
     private loginService: EServiceLoginService
   ) {}
 
-  ngOnInit(): void {
-    this.form.valueChanges.subscribe(() => {
-      this.loginFail = false;
-    });
-  }
-
   login() {
+    this.loginFail = false;
     this.loginService.validateLogin(this.form.value.user).subscribe((res) => {
       if (res.returncode == 99) {
         this.loginFail = true;
+        this.form.reset();
         return;
       }
       this.loginService.config = res;

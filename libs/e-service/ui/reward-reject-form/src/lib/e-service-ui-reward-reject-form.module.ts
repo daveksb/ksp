@@ -5,6 +5,7 @@ import { RejectInfoFormComponent } from './reject-info-form/reject-info-form.com
 import { RevokeInfoFormComponent } from './revoke-info-form/revoke-info-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { RewardRejectFormComponent } from './reward-reject-form/reward-reject-form.component';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, MatDatepickerModule],
@@ -12,11 +13,13 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     RewardInfoFormComponent,
     RejectInfoFormComponent,
     RevokeInfoFormComponent,
+    RewardRejectFormComponent,
   ],
   exports: [
     RejectInfoFormComponent,
     RevokeInfoFormComponent,
     RewardInfoFormComponent,
+    RewardRejectFormComponent,
   ],
 })
 export class EServiceUiRewardRejectFormModule {}

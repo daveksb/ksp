@@ -62,7 +62,7 @@ export class EditDegreeListComponent
   searchLicense() {
     this.dialog.open(EditDegreeCertSearchComponent, {
       height: '100vh',
-      width: '1000px',
+      width: '75vw',
       position: {
         top: '0px',
         right: '0px',
