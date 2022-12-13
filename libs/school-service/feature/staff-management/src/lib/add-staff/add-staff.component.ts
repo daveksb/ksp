@@ -191,15 +191,9 @@ export class AddStaffComponent implements OnInit {
 
         if (kuruspano) {
           this.searchStaffDone = true;
-          /* const temp: any = { kuruspano: `${kuruspano}` };
-          this.form.controls.userInfo.patchValue(temp); */
           localForage.getItem('sch-kuruspa-no').then((res: any) => {
             console.log('res = ', res);
-            const data = {
-              ...res,
-              ...{ visaexpireddate: res.visaenddate },
-            };
-            this.form.controls.userInfo.patchValue(data);
+            this.form.controls.userInfo.patchValue(res);
           });
         }
 
@@ -349,7 +343,7 @@ export class AddStaffComponent implements OnInit {
    */
   patchDataFromLicense() {
     localForage.getItem('add-staff-has-license').then((res: any) => {
-      console.log('stored data = ', res);
+      //console.log('stored data = ', res);
       this.form.controls.userInfo.patchValue(res);
       //this.pathUserInfo(res);
     });
