@@ -15,6 +15,7 @@ import {
 } from '@ksp/shared/service';
 import { getCookie, mapMultiFileInfo, thaiDate } from '@ksp/shared/utility';
 import { EMPTY, Observable, switchMap } from 'rxjs';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'ksp-edit-student-detail',
@@ -80,7 +81,7 @@ export class EditStudentDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.uniqueTimestamp = `${new Date().getTime()}`;
+    this.uniqueTimestamp = uuidv4();
     this.studentDetail.disable();
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.nationalityList$ = this.generalInfoService.getNationality();
