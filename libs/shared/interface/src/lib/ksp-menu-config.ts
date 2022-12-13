@@ -6,6 +6,7 @@ export interface MenuConfig {
   subMenu?: MenuConfig[];
   subMenuName?: string;
   isExpanded?: boolean;
+  permission?: string;
 }
 
 export interface KspParam {

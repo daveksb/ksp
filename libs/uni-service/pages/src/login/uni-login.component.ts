@@ -65,6 +65,7 @@ export class UniLoginComponent implements OnInit {
       setCookie('uniId', res?.uniid || '', 1);
       setCookie('uniType', res?.unitype || '', 1);
       setCookie('userId', res?.id, 1);
+      setCookie('permission', res?.permissionright, 1)
 
       this.router.navigate(['/home']);
     } catch (error: any) {
