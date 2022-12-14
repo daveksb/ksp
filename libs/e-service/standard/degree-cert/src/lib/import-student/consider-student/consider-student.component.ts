@@ -6,7 +6,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { EUniService } from '@ksp/shared/service';
+import { EUniService, LoaderService } from '@ksp/shared/service';
 import {
   formatDate,
   getCookie,
@@ -15,6 +15,7 @@ import {
 } from '@ksp/shared/utility';
 import localForage from 'localforage';
 import { Location } from '@angular/common';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'e-service-consider-student',
@@ -39,13 +40,15 @@ export class ConsiderStudentComponent implements OnInit {
     'ส่งคืนหลักสูตร',
     'ยกเลิกการรับรอง',
   ];
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   constructor(
     public dialog: MatDialog,
     private router: Router,
     private fb: FormBuilder,
     private requestService: EUniService,
-    private location: Location
+    private location: Location,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {

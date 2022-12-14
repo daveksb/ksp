@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UniserviceImportType } from '@ksp/shared/interface';
-import { EUniService, UniInfoService, UniRequestService } from '@ksp/shared/service';
+import { EUniService, LoaderService, UniInfoService } from '@ksp/shared/service';
 import { getCookie, parseJson, thaiDate } from '@ksp/shared/utility';
 import moment from 'moment';
 import localForage from 'localforage';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, Subject } from 'rxjs';
 
 @Component({
   templateUrl: './course-detail.component.html',
@@ -23,7 +23,8 @@ export class CourseDetailComponent implements OnInit {
     private router: Router, private route: ActivatedRoute,
     private uniRequestService: EUniService,
     private fb: FormBuilder,
-    private uniInfoService: UniInfoService
+    private uniInfoService: UniInfoService,
+    private loaderService: LoaderService
   ) {}
   step1Form: any = this.fb.group({
     step1: [],
@@ -36,6 +37,7 @@ export class CourseDetailComponent implements OnInit {
     'ขอยื่นรายชื่อผู้สำเร็จการศึกษา',
   ];
   planCount: any;
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   async ngOnInit() {
     this.route.paramMap.subscribe((res) => {
@@ -68,16 +70,13 @@ export class CourseDetailComponent implements OnInit {
   }
 
   private async _mappingResponseWithForm(res: any) {
-    const uniById = await Promise.all([
-      lastValueFrom(this.uniInfoService.univerSitySelectById(res.uniid)),
-    ]) as any;
     this.requestNo = res?.requestno ?? '';
     this.step1Form.setValue({
       step1: {
-        institutionsCode: uniById[0]?.universitycode || '',
-        institutionsGroup: uniById[0]?.typeid || '',
-        institutionsName: uniById[0]?.name + ', ' + uniById[0]?.campusname || '',
-        provience: uniById[0]?.provinceid || '',
+        institutionsCode: res?.unicode || '',
+        institutionsGroup: res?.unitype || '',
+        institutionsName: res?.uniname,
+        provience: res?.uniprovince || '',
         courseDetailType: res?.coursedetailtype,
         courseDetail: res?.coursedetailinfo
           ? parseJson(res?.coursedetailinfo)

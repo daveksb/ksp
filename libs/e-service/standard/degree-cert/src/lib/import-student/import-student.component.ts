@@ -15,12 +15,13 @@ import { FormAddressTableComponent } from '@ksp/shared/form/others';
 import {
   EUniService,
   GeneralInfoService,
+  LoaderService,
   UniInfoService,
   UniRequestService,
 } from '@ksp/shared/service';
 import localForage from 'localforage';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
-import { EMPTY, switchMap } from 'rxjs';
+import { EMPTY, Subject, switchMap } from 'rxjs';
 import * as XLSX from 'xlsx';
 import {
   getCookie,
@@ -65,6 +66,7 @@ export class ImportStudentComponent implements OnInit {
     user: this.fb.array([]),
   });
   filterColumn = ['idcardno'];
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   constructor(
     public dialog: MatDialog,
@@ -74,7 +76,8 @@ export class ImportStudentComponent implements OnInit {
     private generalInfoService: GeneralInfoService,
     private fb: FormBuilder,
     private requestService: EUniService,
-    private uniInfoService: UniInfoService
+    private uniInfoService: UniInfoService,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit() {
@@ -116,11 +119,6 @@ export class ImportStudentComponent implements OnInit {
           graduatelist: [],
         };
         this.getAdmissionList();
-        // if (this.pageType == 'admissionList') {
-        //   this.getAdmissionList();
-        // } else {
-        //   this.getGraduateList();
-        // }
       }
     });
     this.getNationality();
@@ -151,7 +149,6 @@ export class ImportStudentComponent implements OnInit {
                 : data.requesttype == '06')
             );
           });
-          console.log(findResponse);
           if (findResponse && findResponse.process == '2') {
             let parseuser: any;
             if (this.pageType == 'admissionList') {
@@ -159,7 +156,6 @@ export class ImportStudentComponent implements OnInit {
             } else {
               parseuser = JSON.parse(findResponse.graduatelist);
             }
-            console.log(parseuser);
             parseuser.forEach((user: any, index: any) => {
               user.index = index;
               user.subjects = JSON.parse(user.subjects);
@@ -207,7 +203,6 @@ export class ImportStudentComponent implements OnInit {
     } else {
       userAddress = JSON.parse(data.address);
     }
-    console.log(userAddress);
     return this.fb.group({
       id: [data.id],
       checked: [false],

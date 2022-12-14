@@ -9,6 +9,7 @@ import _ from 'lodash';
 import { map, Subject } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'ksp-test-performance-list',
@@ -55,29 +56,48 @@ export class TestPerformanceListComponent extends KspPaginationComponent impleme
     this.getOptions();
   }
 
-  getOptions() {
-    this.uniInfoService.getUniDegreelevel().pipe(
-      map((res) => {
-        return res?.datareturn?.map(({ id, name }: any) => ({
-          value: id,
-          label: name,
-        }));
-      })
-    )
-    .subscribe((data) => {
-      this.degreeLevelList = data;
+  async getOptions() {
+    const [university, universityTypes, degreeLevel] =
+    await Promise.all([
+      lastValueFrom(this.uniInfoService.getUniuniversity()),
+      lastValueFrom(this.uniInfoService.getUniversityType()),
+      lastValueFrom(this.uniInfoService.getUniDegreelevel())
+    ]);
+    console.log(university, universityTypes, degreeLevel)
+    this.universityList = university.datareturn.map((data: any) => {
+      data.value = data.id;
+      if (data.campusname) {
+        data.label = data.name + `, ${data.campusname}`
+      } else {
+        data.label = data.name;
+      }
+      return data;
     });
-    this.uniInfoService.getUniversityType().pipe(
-      map((res) => {
-        return res?.map(({ id, name }: any) => ({
-          value: id,
-          label: name,
-        }));
-      })
-    )
-    .subscribe((data) => {
-      this.universityTypeList = data;
-    });
+    this.universityTypeList = universityTypes.map(({ id, name }: any) => ({
+      value: id,
+      label: name,
+    }));;
+    this.degreeLevelList = degreeLevel?.datareturn.map(({ id, name }: any) => ({
+      value: id,
+      label: name,
+    }));
+  }
+
+  getUniversity() {
+    const { unitype } = this.form.getRawValue();
+    this.uniInfoService.getUniversity(unitype).subscribe(response=>{
+      if (response) {
+        this.universityList = response.map((data: any) => {
+          data.value = data.id;
+          if (data.campusname) {
+            data.label = data.name + `, ${data.campusname}`
+          } else {
+            data.label = data.name;
+          }
+          return data;
+        });
+      }
+    })
   }
 
   save() {
@@ -93,7 +113,7 @@ export class TestPerformanceListComponent extends KspPaginationComponent impleme
 
   override search() {
     this.eUniservice.getDegreeCertResultList(this.getRequest()).subscribe(res => {
-      if (res) {
+      if (res.datareturn) {
         this.pageEvent.length = res.countnum;
         this.dataSource1.data = res.datareturn.map((data :any) => {
           const findType = this.universityTypeList.find(type => { return data.unitype == type.value });
@@ -106,6 +126,9 @@ export class TestPerformanceListComponent extends KspPaginationComponent impleme
           }) : [];
           return data;
         });
+      } else {
+        this.dataSource1.data = [];
+        this.dataSource2.data = [];
       }
     })
   }

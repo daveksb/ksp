@@ -29,12 +29,12 @@ export class PdfViewerNoLicenseComponent implements OnInit {
   index!: number | null;
   verifyChoice = [
     {
-      name: 'ครบถ้วน และถูกต้อง',
-      value: 'complete',
+      name: 'อนุมัติ',
+      value: 1,
     },
     {
-      name: 'ไม่ครบถ้วน และไม่ถูกต้อง',
-      value: 'incomplete',
+      name: 'ไม่อนุมัติ',
+      value: 0,
     },
   ];
   form = this.fb.group({
