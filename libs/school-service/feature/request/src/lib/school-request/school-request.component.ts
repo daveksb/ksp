@@ -548,7 +548,8 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   searchStaffFromIdCard(idCard: string) {
-    if (!idCard) return;
+    if (!idCard || this.requestId) return;
+
     const payload = {
       idcardno: idCard,
       schoolid: this.schoolId,
@@ -557,7 +558,6 @@ export class SchoolRequestComponent implements OnInit {
       .searchStaffFromIdCard(payload)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
-        //console.log('req = ', res);
         if (res && res.returncode !== '98') {
           this.staffData = res;
           this.pathUserInfo(res);
@@ -578,7 +578,7 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   searchStaffFromKuruspaNo(kuruspano: string) {
-    if (!kuruspano) return;
+    if (!kuruspano || this.requestId) return;
     const payload = {
       kuruspano,
       schoolid: this.schoolId,

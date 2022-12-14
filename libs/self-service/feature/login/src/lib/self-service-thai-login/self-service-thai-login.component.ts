@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -40,6 +40,7 @@ export class SelfServiceThaiLoginComponent {
         localForage.setItem('my-info', res);
         setCookie('userToken', res.usertoken, 1);
         setCookie('userId', res.id, 1);
+        setCookie('idCardNo', `${res.idcardno}`, 1);
         this.router.navigate(['/home']);
       } else if (res.returncode === '99') {
         this.loginFail = true;
