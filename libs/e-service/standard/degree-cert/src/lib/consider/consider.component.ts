@@ -251,14 +251,12 @@ export class ConsiderComponent implements OnInit {
       data: {
         title: e?.file?.filename,
         files: [e?.file],
-        checkresult:  [],
-        systemType: "3",
+        checkresult: [],
+        systemType: 'uni',
       },
     });
-    dialogRef
-      .afterClosed()
-      .subscribe((result) =>{
-        console.log("")
-      });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('');
+    });
   }
 }
