@@ -20,14 +20,12 @@
             <label class="form-label">สถาบัน / มหาวิทยาลัย</label>
             <select class="form-select" formControlName="uniid">
               <option value="null" selected disabled hidden>กรุณาเลือก</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              <option *ngFor="let type of universityList" [value]="type.value">{{ type.label }}</option>
             </select>
           </div>
           <div class="col">
             <label class="form-label">สังกัด / คณะหน่วยงาน </label>
-            <select class="form-select" formControlName="unitype">
+            <select class="form-select" formControlName="unitype" (change)="getUniversity()">
               <option value="null" selected disabled hidden>กรุณาเลือก</option>
               <option *ngFor="let type of universityTypeList" [value]="type.value">{{ type.label }}</option>
             </select>

@@ -20,7 +20,7 @@
         <select
           class="form-select"
           formControlName="affiliation"
-          (change)="getUniversity.emit()"
+          (change)="handleGetUniByType()"
           [attr.disabled]="true"
         >
           <option value="null" selected disabled hidden>กรุณาเลือก</option>

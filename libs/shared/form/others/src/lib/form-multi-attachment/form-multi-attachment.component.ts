@@ -24,6 +24,7 @@ export class FormMultiAttachmentComponent {
   @Input() systemType: string | null = null;
   @Output() downloadClick = new EventEmitter<any>();
   @Output() uploadComplete = new EventEmitter<any>();
+  @Output() confirmChoice = new EventEmitter<any>();
 
   constructor(public dialog: MatDialog, private fileService: FileService) {}
 
@@ -47,7 +48,7 @@ export class FormMultiAttachmentComponent {
         .afterClosed()
         .subscribe((result) => (group.checkresult = result.checkResult));
     } else {
-      this.dialog.open(PdfViewerNoLicenseComponent, {
+      const dialogRef = this.dialog.open(PdfViewerNoLicenseComponent, {
         width: '1200px',
         height: '100vh',
         position: {
@@ -61,6 +62,9 @@ export class FormMultiAttachmentComponent {
           systemType: this.systemType,
         },
       });
+      dialogRef
+        .afterClosed()
+        .subscribe((result) => (this.confirmChoice.emit(result)));
     }
   }
 

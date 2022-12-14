@@ -1,5 +1,10 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav>
-  <span header>รายการใบรับรองปริญญาและประกาศนียบัตรทางการศึกษา</span>
+  <span header>รายการใบคำขอส่งรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา</span>
 </ksp-top-nav>
 
 <div class="bg-secondary bg-opacity-10 py-2 px-4 full-height full-width-2">
