@@ -8,12 +8,17 @@ import {
   SelfServiceRequestSubType,
   SelfServiceRequestForType,
 } from '@ksp/shared/constant';
-import { KspRequest, SelfRequest } from '@ksp/shared/interface';
+import {
+  KspRequest,
+  KSPRequestSearchFilter,
+  SelfRequest,
+} from '@ksp/shared/interface';
 import { LoaderService, SelfRequestService } from '@ksp/shared/service';
 import {
   formatDatePayload,
   getCookie,
   hasRejectedRequest,
+  replaceEmptyWithNull,
   SelfCheckProcess,
   SelfcheckStatus,
   selfMapRequestType,
@@ -62,16 +67,20 @@ export class SelfServiceHomePageComponent implements AfterViewInit {
   }
 
   search() {
-    const payload = formatDatePayload({
-      userid: getCookie('userId'),
+    let payload: KSPRequestSearchFilter = {
       requesttype: this.form.controls.requesttype.value,
       requestno: this.form.controls.requestno.value,
       requestdate: this.form.controls.requestdate.value,
-      requeststatus: null,
-      currentprocess: null,
+      status: null,
+      process: null,
+      paymentstatus: null,
+      idcardno: getCookie('idCardNo'),
+      kuruspano: getCookie('kuruspaNo'),
       offset: '0',
       row: '200',
-    });
+    };
+
+    payload = replaceEmptyWithNull(payload);
 
     this.requestService.searchMyRequests(payload).subscribe((res) => {
       if (this.initialSearch) {

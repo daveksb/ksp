@@ -29,3 +29,16 @@ export interface SchRequestSearchFilter {
   offset: string | undefined | null;
   row: string | undefined | null;
 }
+
+export interface KSPRequestSearchFilter {
+  requesttype: string | null;
+  requestno: string | null;
+  requestdate: string | null;
+  status: string | null;
+  process: string | null;
+  paymentstatus: string | null;
+  idcardno: string | null;
+  kuruspano: string | null;
+  offset: string | undefined | null;
+  row: string | undefined | null;
+}
