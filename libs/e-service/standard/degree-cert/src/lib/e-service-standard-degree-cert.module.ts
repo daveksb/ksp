@@ -45,6 +45,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FormAddressTableComponent } from '@ksp/shared/form/others';
 import { ConsiderStudentComponent } from './import-student/consider-student/consider-student.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @NgModule({
   imports: [
     CommonModule,
@@ -76,6 +77,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatPaginatorModule,
     FormApproveMeetingRecordComponent,
     DegreeCertStatusComponent,
+    MatProgressSpinnerModule,
   ],
   declarations: [
     EServiceDegreeCertListComponent,

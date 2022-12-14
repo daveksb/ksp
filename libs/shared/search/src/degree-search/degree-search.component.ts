@@ -41,7 +41,7 @@ export class DegreeSearchComponent extends KspFormBaseComponent {
   @Input() uniUniversityTypeOption: Array<any> = [];
   @Output() clear = new EventEmitter<boolean>();
   @Output() search = new EventEmitter<boolean>();
-  @Output() getUniversity = new EventEmitter<boolean>();
+  @Output() getUniversity = new EventEmitter<any>();
 
   constructor(private fb: FormBuilder, private uniInfoService: UniInfoService) {
     super();
@@ -61,6 +61,11 @@ export class DegreeSearchComponent extends KspFormBaseComponent {
         this.degreeLevelList = response;
       }
     })
+  }
+
+  handleGetUniByType() {
+    const { affiliation } = this.form.getRawValue();
+    this.getUniversity.emit(affiliation)
   }
 
 }

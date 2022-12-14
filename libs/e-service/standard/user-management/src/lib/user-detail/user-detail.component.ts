@@ -319,6 +319,14 @@ export class UserDetailComponent implements OnInit {
       }
     });
   }
+
+  applyChoice(res: any) {
+    this.verifyForm.controls.result.patchValue({
+      result: res.checkResult[0]?.result,
+      reason: res.checkResult[0]?.reason || '',
+      detail: res.checkResult[0]?.detail || '',
+    });
+  }
 }
 
 const approveChoices = [

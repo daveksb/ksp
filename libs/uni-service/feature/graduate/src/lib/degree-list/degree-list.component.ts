@@ -76,8 +76,8 @@ export class DegreeListComponent extends KspPaginationComponent implements OnIni
     this.uniUniversityTypeOption = universityTypes;
   }
 
-  getUniversity() {
-    this.uniInfoService.getUniuniversity().subscribe(response=>{
+  getUniversity(unitype: any) {
+    this.uniInfoService.getUniversity(unitype).subscribe(response=>{
       if (response) {
         this.uniUniversityOption = response;
       }
