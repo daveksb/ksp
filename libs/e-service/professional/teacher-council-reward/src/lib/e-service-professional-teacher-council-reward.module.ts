@@ -20,6 +20,7 @@ import { ETeacherCouncilConfirmComponent } from './e-teacher-council-confirm/e-t
 import {
   ValidateKspRequestComponent,
   ConsiderKspRequestComponent,
+  RewardValidateRequestComponent,
 } from '@ksp/e-service/e-license/approve-ksp-request';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ETeacherCouncilRejectComponent } from './e-teacher-council-reject/e-teacher-council-reject.component';
@@ -77,6 +78,7 @@ const routes: Routes = [
     RequestNoPipe,
     MatDatepickerModule,
     EServiceUiRewardRejectFormModule,
+    RewardValidateRequestComponent,
   ],
   declarations: [
     ETeacherCouncilListComponent,

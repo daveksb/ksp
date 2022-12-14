@@ -21,7 +21,7 @@ import { getCookie } from '@ksp/shared/utility';
   template: ``,
   standalone: true,
 })
-export abstract class ERewardConfirmFormBaseComponent implements OnInit {
+export abstract class ESelfConfirmFormBaseComponent implements OnInit {
   requestId!: number;
   saveData = new KspApprovePersistData();
   targetProcess!: number | null;
@@ -40,6 +40,10 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    /* this.form.valueChanges.subscribe((res) => {
+      console.log(res.approvement);
+    }); */
+
     localForage.getItem('checkRequestData').then((res: any) => {
       console.log(res);
       this.saveData = res;
@@ -68,8 +72,14 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
         //ส่งตรวจสอบลำดับต่อไป
         //console.log('//ส่งตรวจสอบลำดับต่อไป ');
         if (req.process === '2') {
-          this.targetProcess = 3;
+          this.targetProcess = 4;
           this.targetStatus = 1;
+        } else if (req.process === '3') {
+          this.targetProcess = 4;
+          this.targetStatus = 1;
+        } else if (req.process === '4') {
+          this.targetProcess = 4;
+          this.targetStatus = 3;
         }
       } else if (input.shouldForward === '4') {
         //ส่งเรื่องพิจารณา
@@ -85,6 +95,13 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
         this.targetProcess = Number(req.process) + 1;
       } else {
         this.targetProcess = Number(req.process);
+      }
+      if (input.shouldForward === '3') {
+        //ไม่ผ่านการตรวจสอบ เนื่องจากไม่ครบถ้วน / ไม่ถูกต้อง
+        this.targetStatus = 4;
+      } else if (input.shouldForward === '5') {
+        //ยกเลิก
+        this.targetStatus = 5;
       }
     }
   }
@@ -164,6 +181,28 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
       }
     });
   }
+
+  /*   considerRequest() {
+    this.checkApproveResult(<any>this.form.value.approvement);
+    //console.log('consider request  = ');
+    const form: any = this.form.value.approvement;
+    const payload: KspApprovePayload = {
+      requestid: this.saveData.requestData.id,
+      process: '6',
+      status: `${form.result}`,
+      detail: JSON.stringify(this.saveData.checkDetail),
+      systemtype: '4', // approve by e-service staff
+      userid: this.userId,
+      paymentstatus: null,
+    };
+
+    //console.log('payload = ', payload);
+
+    this.eRequestService.KspUpdateRequestProcess(payload).subscribe(() => {
+      //console.log('result = ', res.app);
+      this.navigateBack();
+    });
+  } */
 
   abstract navigateBack(): void;
   abstract prevPage(): void;

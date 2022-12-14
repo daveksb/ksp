@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { approveResult } from '@ksp/e-service/e-license/approve-ksp-request';
-import { ERewardConfirmFormBaseComponent } from '@ksp/self-service/form';
+import { ESelfConfirmFormBaseComponent } from '@ksp/self-service/form';
 import { ERequestService } from '@ksp/shared/service';
 
 @Component({
@@ -11,7 +11,7 @@ import { ERequestService } from '@ksp/shared/service';
   templateUrl: './refund-approve.component.html',
   styleUrls: ['./refund-approve.component.scss'],
 })
-export class RefundApproveComponent extends ERewardConfirmFormBaseComponent {
+export class RefundApproveComponent extends ESelfConfirmFormBaseComponent {
   constructor(
     fb: FormBuilder,
     route: ActivatedRoute,

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ERewardConfirmFormBaseComponent } from '@ksp/self-service/form';
+import { ESelfConfirmFormBaseComponent } from '@ksp/self-service/form';
 import { ERequestService } from '@ksp/shared/service';
 
 @Component({
@@ -11,7 +11,7 @@ import { ERequestService } from '@ksp/shared/service';
   styleUrls: ['./renew-license-foreign-confirm.component.scss'],
 })
 export class RenewLicenseForeignConfirmComponent
-  extends ERewardConfirmFormBaseComponent
+  extends ESelfConfirmFormBaseComponent
   implements OnInit
 {
   constructor(

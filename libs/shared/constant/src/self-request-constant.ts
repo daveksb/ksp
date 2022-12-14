@@ -235,6 +235,24 @@ export const SelfRequestProcess: SchRequestProcess[] = [
   {
     requestType: 40,
     processId: 1,
+    processName: 'สร้างใบคำขอ',
+    status: [
+      { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
+    ],
+  },
+  {
+    requestType: 40,
+    processId: 2,
+    processName: 'สร้างและส่งใบคำขอ',
+    status: [
+      { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
+    ],
+  },
+  {
+    requestType: 40,
+    processId: 3,
     processName: 'เจ้าหน้าที่ส่วนจังหวัดตรวจสอบ',
     status: [
       { id: 0, sname: 'ครบถ้วนและถูกต้อง', ename: 'ครบถ้วนและถูกต้อง' },
@@ -242,22 +260,31 @@ export const SelfRequestProcess: SchRequestProcess[] = [
       { id: 2, sname: 'คัดค้าน/เพิกถอน', ename: 'คัดค้าน/เพิกถอน' },
     ],
   },
-  /*   {
+  {
     requestType: 40,
-    processId: 2,
+    processId: 4,
     processName: 'เจ้าหน้าที่ส่วนจังหวัดจัดทำบัญชีรายชื่อ',
     status: [
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
-      { id: 3, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+      { id: 2, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
     ],
   },
   {
     requestType: 40,
-    processId: 3,
-    processName: 'เจ้าหน้าที่ส่วนจังวัดจักทำบัญชีรายชื่อ',
+    processId: 5,
+    processName: 'เจ้าหน้าที่ส่วนกลาง ตรวจสอบ บันทึกผล',
     status: [
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
-      { id: 3, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+      { id: 2, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
     ],
-  }, */
+  },
+  {
+    requestType: 40,
+    processId: 6,
+    processName: 'เจ้าหน้าที่ส่วนกลาง ประกาศรายชื่อ',
+    status: [
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
+      { id: 2, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+    ],
+  },
 ];
