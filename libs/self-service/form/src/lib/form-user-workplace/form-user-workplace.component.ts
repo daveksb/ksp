@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import {
   Amphur,
+  Bureau,
   KspFormBaseComponent,
   Province,
   SchInfo,
@@ -48,7 +49,7 @@ export class FormUserWorkplaceComponent
   @Input() provinces: Province[] | null = [];
   @Input() amphurs: Amphur[] | null = [];
   @Input() tumbols: Tambol[] | null = [];
-  @Input() bureaus: any[] = [];
+  @Input() bureaus: Bureau[] | null = [];
   @Input() showNotRequire = false;
   @Output() provinceChanged = new EventEmitter<any>();
   @Output() amphurChanged = new EventEmitter<any>();
