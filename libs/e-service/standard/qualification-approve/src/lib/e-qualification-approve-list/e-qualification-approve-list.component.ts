@@ -35,7 +35,6 @@ export class EQualificationApproveListComponent implements AfterViewInit {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<any>();
   searchNotFound = false;
-
   form = this.fb.group({
     search: [{ requesttype: '6' }],
   });
@@ -56,7 +55,6 @@ export class EQualificationApproveListComponent implements AfterViewInit {
   }
 
   renderLicense(request: KspRequest) {
-    //console.log('xxx = ', request);
     // render pdf
     const pdfType = 99;
     const pdfSubType = 6;
@@ -179,7 +177,7 @@ export class EQualificationApproveListComponent implements AfterViewInit {
     /* const hiring = JSON.parse(request.hiringinfo || '');
     const position = hiring.position; */
 
-   /*  const school = JSON.parse(request.schooladdrinfo || '');
+    /*  const school = JSON.parse(request.schooladdrinfo || '');
 
     const { address, moo, street, road, tumbon, fax } = school;
     const amphurname = school.amphurname;
@@ -199,7 +197,7 @@ export class EQualificationApproveListComponent implements AfterViewInit {
           year,
           schoolname,
           bureauname,
-         /*  address,
+          /*  address,
           moo,
           street,
           road,
@@ -242,23 +240,23 @@ export class EQualificationApproveListComponent implements AfterViewInit {
     });
   }
 
-  search(params: Partial<SchRequestSearchFilter>) {
+  search(p: Partial<SchRequestSearchFilter>) {
     //console.log('params = ', params);
     const payload: EsSearchPayload = {
-      systemtype: '2',
+      systemtype: null,
       requesttype: '6',
-      requestno: params.requestno,
-      careertype: params.careertype,
-      name: params.name,
-      idcardno: params.idcardno,
-      passportno: params.passportno,
-      process: params.process,
-      status: params.status,
-      schoolid: params.schoolid,
+      requestno: p.requestno,
+      careertype: p.careertype,
+      name: p.name,
+      idcardno: p.idcardno,
+      passportno: p.passportno,
+      process: p.process,
+      status: p.status,
+      schoolid: p.schoolid,
       schoolname: null,
       bureauid: null,
-      requestdatefrom: params.requestdatefrom,
-      requestdateto: params.requestdateto,
+      requestdatefrom: p.requestdatefrom,
+      requestdateto: p.requestdateto,
       offset: '0',
       row: '500',
     };
