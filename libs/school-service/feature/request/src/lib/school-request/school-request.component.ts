@@ -399,14 +399,16 @@ export class SchoolRequestComponent implements OnInit {
       // สถานะ ยกเลิก disable ทุกอย่าง
       if (this.requestData.status === '0') {
         this.disableTempSave = true;
-        this.disableSave = false;
+        this.disableSave = true;
         this.disableCancel = true;
+        return;
       }
 
       // formValid + ไม่มีหมายเลขใบคำขอ ทำได้ทุกอย่าง
       else if (this.form.valid && !this.requestId) {
         this.disableTempSave = false;
         this.disableSave = false;
+        return;
       }
 
       // formValid + สถานะเป็นสร้างใบคำขอ, บันทึกชั่วคราวได้ ส่งใบคำขอได้
@@ -414,23 +416,36 @@ export class SchoolRequestComponent implements OnInit {
         //console.log('สถานะเป็นสร้างใบคำขอ ');
         this.disableTempSave = false;
         this.disableSave = false;
+        return;
       }
 
       // formValid + สถานะเป็นสร้างและส่งใบคำขอ, บันทึกชั่วคราวไม่ได้ ส่งใบคำขอไม่ได้
       else if (this.form.valid && this.requestData.process === '2') {
         //console.log('สถานะเป็นสร้างและส่งใบคำขอ ');
         this.disableTempSave = true;
-        this.disableSave = false;
+        this.disableSave = true;
+        return;
       }
+
+      // สถานะ พิจาณาและรับรอง
+      else if (this.requestData.process === '5') {
+        console.log('สถานะรับรอง = ');
+        this.disableTempSave = true;
+        this.disableSave = true;
+        this.disableCancel = true;
+        return;
+      }
+
       // formValid + สถานะเป็นส่งกลับเพื่อแก้ไข, บันทึกชั่วคราวได้ ส่งใบคำขอได้
       else if (condition1 || condition2) {
         this.disableTempSave = false;
         this.disableSave = false;
+        return;
       }
       // form invalid
       else {
         this.disableTempSave = true;
-        this.disableSave = false;
+        this.disableSave = true;
       }
 
       // มีหมายเลขใบคำขอแล้ว enable ปุ่มยกเลิก
