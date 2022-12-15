@@ -295,11 +295,13 @@ export class ETempLicenseListComponent implements AfterViewInit {
     let forbid3_1 = false;
     let forbid3_2 = false;
     let forbid3 = '';
+    let prisonDetail = '';
     if (request.careertype !== '5') {
       if (prison === '2') {
         forbid3_1 = true;
       } else {
         forbid3_2 = true;
+        prisonDetail = prohibit.prisonReason;
       }
     } else {
       if (immoral === '2') {
@@ -435,6 +437,7 @@ export class ETempLicenseListComponent implements AfterViewInit {
           reasonDetail2,
           reasonDetail3,
           forbid3,
+          prisonDetail,
         },
       },
     });
