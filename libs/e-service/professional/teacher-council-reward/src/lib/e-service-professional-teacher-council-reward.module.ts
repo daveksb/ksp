@@ -13,7 +13,10 @@ import { SharedFormSelfRewardFormModule } from '@ksp/shared/form/self-reward-for
 import { MatDialogModule } from '@angular/material/dialog';
 import { SelfServiceFeatureRewardModule } from '@ksp/self-service/feature/reward';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
-import { EServiceRewardSearchComponent } from '@ksp/shared/search';
+import {
+  EServiceRewardAccountSearchComponent,
+  EServiceRewardSearchComponent,
+} from '@ksp/shared/search';
 import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import { ETeacherCouncilConfirmComponent } from './e-teacher-council-confirm/e-teacher-council-confirm.component';
@@ -86,6 +89,7 @@ const routes: Routes = [
     EServiceUiRewardRejectFormModule,
     RewardValidateRequestComponent,
     MatProgressSpinnerModule,
+    EServiceRewardAccountSearchComponent,
   ],
   declarations: [
     ETeacherCouncilListComponent,

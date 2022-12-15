@@ -15,3 +15,4 @@ export * from './degree-cert-approved-search/degree-cert-approved-search.compone
 export * from './e-service-license-group-search/e-service-license-group-search.component';
 export * from './e-service-license-create-group-search/e-service-license-create-group-search.component';
 export * from './e-service-license-save-result/e-service-license-save-result.component';
+export * from './e-service-reward-account-search/e-service-reward-account-search.component';
