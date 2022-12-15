@@ -255,6 +255,7 @@ export class ApproveComponent implements OnInit {
       coursemajor: this.daftRequest?.coursemajor || null,
       requestno: this.daftRequest?.requestno || null,
       requestid: this.daftRequest?.requestid || null,
+      requestdate: moment(this.daftRequest?.requestdate).format("YYYY-MM-DD[T]HH:mm:ss"),
       uniid: this.daftRequest?.uniid || null,
       attachfiles: step4 ? JSON.stringify(step4?.files) : null,
       uniname: step1?.institutionsName || null,
