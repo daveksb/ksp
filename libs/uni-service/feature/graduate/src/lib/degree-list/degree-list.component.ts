@@ -67,12 +67,7 @@ export class DegreeListComponent extends KspPaginationComponent implements OnIni
         lastValueFrom(this.uniInfoService.getUniuniversity()),
         lastValueFrom(this.uniInfoService.getUniversityType()),
       ]);
-    this.uniUniversityOption = university.datareturn.map((data: any) => {
-      if (data.campusname) {
-        data.name = data.name + `, ${data.campusname}`
-      }
-      return data;
-    });
+    this.uniUniversityOption = university.datareturn;
     this.uniUniversityTypeOption = universityTypes;
   }
 
@@ -132,7 +127,7 @@ export class DegreeListComponent extends KspPaginationComponent implements OnIni
               key: item?.id,
               order: this.pageEvent.pageIndex * this.pageEvent.pageSize + ++index,
               degreeCode: item?.degreeapprovecode,
-              sendDate: thaiDate(new Date(item?.requestdate)),
+              sendDate: item?.requestdate ? thaiDate(new Date(item?.requestdate)) : '',
               major: item?.coursename,
               branch: item?.coursefieldofstudy,
               degreeName: item?.fulldegreenameth,
