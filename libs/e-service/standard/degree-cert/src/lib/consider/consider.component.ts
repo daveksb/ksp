@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConfirmDialogComponent, PdfViewerComponent } from '@ksp/shared/dialog';
+import {
+  CompleteDialogComponent,
+  ConfirmDialogComponent,
+  PdfViewerComponent,
+} from '@ksp/shared/dialog';
 import {
   ERequestService,
   EUniService,
@@ -157,17 +161,10 @@ export class ConsiderComponent implements OnInit {
         )
         .subscribe((res) => {
           if (res?.returncode !== 98) {
-            const plan: any[] = [];
-            if (res.step2.plan1.plans && res.step2.plan1.plans.length > 0) {
-              res.step2.plan1.plans.map((data: any) => {
-                plan.push({ ...data, ...{ consider: false } });
-              });
-            }
-            const plans = { ...res.step2.plan1, ...{ plansResult: plan } };
             this.requestNumber = res?.requestNo;
             this.form.patchValue({
               step1: res.step1,
-              plan: plans,
+              plan: res?.step2?.plan1 || res?.step2?.plan2,
             });
           }
         });
@@ -215,7 +212,7 @@ export class ConsiderComponent implements OnInit {
         this.eRequestService
           .kspUpdateRequestUniRequestDegree(payload)
           .subscribe(() => {
-            this.router.navigate(['/', 'degree-cert', 'list', 3, 1]);
+            this.onConfirmed();
           });
       }
     });
@@ -257,6 +254,20 @@ export class ConsiderComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       console.log('');
+    });
+  }
+
+  onConfirmed(header = 'บันทึกข้อมูลสำเร็จ') {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header,
+      },
+    });
+
+    dialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/', 'degree-cert', 'list', 3, 1]);
+      }
     });
   }
 }
