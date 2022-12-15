@@ -79,16 +79,16 @@ export class CourseDetailComponent implements OnInit {
   }
 
   private async _mappingResponseWithForm(res: any) {
-    // const uniById = await Promise.all([
-    //   lastValueFrom(this.uniInfoService.univerSitySelectById(res.uniid)),
-    // ]) as any;
+    const uniById = await Promise.all([
+      lastValueFrom(this.uniRequestService.getUniversityById({id: res.uniid})),
+    ]) as any;
     this.requestNo = res?.requestno ?? '';
     this.step1Form.setValue({
       step1: {
-        institutionsCode: res?.unicode || '',
-        institutionsGroup: res?.unitype || '',
-        institutionsName: res?.uniname,
-        provience: res?.uniprovince || '',
+        institutionsCode: uniById[0]?.universitycode || '',
+        institutionsGroup: uniById[0]?.typeid || '',
+        institutionsName: uniById[0]?.name + ', ' + uniById[0]?.campusname || '',
+        provience: uniById[0]?.provinceid || '',
         courseDetailType: res?.coursedetailtype,
         courseDetail: res?.coursedetailinfo
           ? parseJson(res?.coursedetailinfo)
