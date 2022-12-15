@@ -26,6 +26,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { ETeacherCouncilRejectComponent } from './e-teacher-council-reject/e-teacher-council-reject.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { EServiceUiRewardRejectFormModule } from '@ksp/e-service/ui/reward-reject-form';
+import { ETeacherCouncilAccountListComponent } from './e-teacher-council-account-list/e-teacher-council-account-list.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const routes: Routes = [
   {
@@ -53,6 +55,10 @@ const routes: Routes = [
         path: 'reject/:id',
         component: ETeacherCouncilRejectComponent,
       },
+      {
+        path: 'account-list',
+        component: ETeacherCouncilAccountListComponent,
+      },
     ],
   },
 ];
@@ -79,12 +85,14 @@ const routes: Routes = [
     MatDatepickerModule,
     EServiceUiRewardRejectFormModule,
     RewardValidateRequestComponent,
+    MatProgressSpinnerModule,
   ],
   declarations: [
     ETeacherCouncilListComponent,
     ETeacherCouncilDetailComponent,
     ETeacherCouncilConfirmComponent,
     ETeacherCouncilRejectComponent,
+    ETeacherCouncilAccountListComponent,
   ],
   exports: [ETeacherCouncilListComponent, ETeacherCouncilDetailComponent],
 })
