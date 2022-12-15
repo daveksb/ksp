@@ -54,10 +54,6 @@ export class UniInfoService {
         : null,
     };
     formData.step2 = {
-      plan1: {
-        plans: res.coursestructure ? parseJson(res.coursestructure) : [],
-        subjects: res.courseplan ? parseJson(res.courseplan) : [],
-      },
       teacher: {
         teachers: res.courseteacher ? parseJson(res.courseteacher) : [],
       },
@@ -69,6 +65,17 @@ export class UniInfoService {
         advisors: res.courseadvisor ? parseJson(res.courseadvisor) : [],
       },
     };
+    if (['a', 'b', 'c'].includes(res?.degreelevel)) {
+      formData.step2.plan1 = {
+        plans: res.coursestructure ? parseJson(res.coursestructure) : [],
+        subjects: res.courseplan ? parseJson(res.courseplan) : [],
+      };
+    } else {
+      formData.step2.plan2 = {
+        plans: res.coursestructure ? parseJson(res.coursestructure) : [],
+        subjects: res.courseplan ? parseJson(res.courseplan) : [],
+      };
+    }
     formData.step3 = {
       training: {
         rows: res.processtrainning ? parseJson(res.processtrainning) : [],

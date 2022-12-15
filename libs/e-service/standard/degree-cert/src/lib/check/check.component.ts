@@ -222,10 +222,8 @@ export class CheckComponent implements OnInit, AfterContentChecked {
   }
   onSubmitKSP() {
     const status = _.get(this.form, 'value.step5.verify', '');
-    let process = _.toNumber(this.daftRequest?.requestprocess);
-    if (status != 2) {
-      process += 1;
-    }
+    const process = _.toNumber(this.daftRequest?.requestprocess) + 1;
+
     try {
       const detail: any = _.pick(this.form.value, [
         'verifyStep1',
