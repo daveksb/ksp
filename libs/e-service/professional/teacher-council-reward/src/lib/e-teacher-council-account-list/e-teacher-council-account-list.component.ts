@@ -30,19 +30,14 @@ export class ETeacherCouncilAccountListComponent
   SelfServiceRequestSubType = SelfServiceRequestSubType;
   displayedColumns = [
     'select',
-    'resolution',
-    'resolution2',
-    'group',
-    'account',
-    'count',
-    'licenseType',
-    'licenseGroup',
-    'process',
-    'status',
-    'screenDate',
-    'guaranteeDate',
-    //'checkDate',
-    //'edit',
+    'order',
+    'accountGroup',
+    'careerType',
+    'result',
+    'createDate',
+    'view',
+    'accountList',
+    'book',
   ];
   dataSource = new MatTableDataSource<any>();
   mode: 'create' | 'guarantee' = 'create';
