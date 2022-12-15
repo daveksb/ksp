@@ -208,4 +208,14 @@ export class EUniService {
       }
     );
   }
+
+  getUniversityById(data: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/universityselectbyid`,
+      {
+        ...data,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
 }

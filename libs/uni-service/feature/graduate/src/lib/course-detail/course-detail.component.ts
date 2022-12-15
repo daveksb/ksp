@@ -58,9 +58,18 @@ export class CourseDetailComponent implements OnInit {
         this.courseData.processtrainning = parseJson(response?.processtrainning);
         this.courseData.responsibleunit = parseJson(response?.responsibleunit);
         this.courseData.teachinglocation = parseJson(response?.teachinglocation);
-        this.courseData.totalStudent = this.courseData.coursestructure ? this.courseData.coursestructure.reduce((curr: any,prev: any)=>{
-          return curr + parseInt(prev.student)
-        }, 0) : 0;
+        if (this.courseData.coursestructure) {
+          this.courseData.totalStudent = this.courseData.coursestructure.reduce((curr: any,prev: any)=>{
+            return curr + parseInt(prev.student)
+          }, 0);
+          this.courseData.coursestructure.map((data: any, index: any) => {
+            data.admissioncount = 0;
+            data.indexyear = index+1;
+            return data;
+          });
+        } else {
+          this.courseData.totalStudent = 0;
+        }
         this.getAdmissionDetail(this.courseData);
         this._mappingResponseWithForm(response);
       }
@@ -116,7 +125,6 @@ export class CourseDetailComponent implements OnInit {
   getAdmissionDetail(data: any) {
     const payload = {
       unidegreecertid: data.id,
-      plancalendaryear: '2562',
       row: 10,
       offset: 0
     }

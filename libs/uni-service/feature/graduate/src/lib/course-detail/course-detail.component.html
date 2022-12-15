@@ -81,7 +81,7 @@
             </td>
             <td class="text-center form-label vertical-middle">
               <div>
-               {{ row.admissioncount }} / {{ row.student }}
+               {{ row.admissioncount || 0 }} / {{ row.student }}
                 <span
                   role="button"
                   *ngIf="row.admissioncount < row.student"
@@ -97,7 +97,7 @@
               class="text-center form-label vertical-middle"
             >
               <div>
-                {{ row.graduatecount }} / {{ row.student }}
+                {{ row.graduatecount || 0 }} / {{ row.student }}
                 <span
                   role="button"
                   *ngIf="checkGraduate(row)"
