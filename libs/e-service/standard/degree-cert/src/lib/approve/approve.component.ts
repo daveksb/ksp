@@ -226,15 +226,13 @@ export class ApproveComponent implements OnInit {
       data: {
         title: e?.file?.filename,
         files: [e?.file],
-        checkresult:  [],
-        systemType: "3",
+        checkresult: [],
+        systemType: 'uni',
       },
     });
-    dialogRef
-      .afterClosed()
-      .subscribe((result) =>{
-        console.log("")
-      });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('');
+    });
   }
   toDetail() {
     this.router.navigate([
@@ -295,6 +293,7 @@ export class ApproveComponent implements OnInit {
         ? JSON.stringify(this.step1Data?.coordinator)
         : null,
       requestid: this.daftRequest?.requestid,
+      uniid: this.daftRequest?.uniid,
     };
     return payload;
   }

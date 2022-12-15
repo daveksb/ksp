@@ -179,17 +179,12 @@ export class VerifyComponent implements OnInit {
                 ) {
                   payload.process = '4';
                 }
-                if (
-                  !res?.isNotEmptyConsiderCourses &&
-                  !res?.isNotEmptyConsiderCert
-                ) {
-                  this.eRequestService
-                    .kspUpdateRequestUniRequestDegree(payload)
-                    .subscribe(() => {
-                      if (index === _.size(this.dataSource) - 1)
-                        this.location.back();
-                    });
-                }
+                this.eRequestService
+                  .kspUpdateRequestUniRequestDegree(payload)
+                  .subscribe(() => {
+                    if (index === _.size(this.dataSource) - 1)
+                      this.location.back();
+                  });
               });
           }
         });
