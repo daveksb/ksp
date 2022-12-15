@@ -642,6 +642,24 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             },
           },
           {
+            key: 'reasonDetail2',
+            options: {
+              x: 50,
+              y: 538,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'reasonDetail3',
+            options: {
+              x: 50,
+              y: 514,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
             key: 'otherLevel',
             options: {
               x: 345,
@@ -1309,6 +1327,24 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             },
           },
           {
+            key: 'reasonDetail2',
+            options: {
+              x: 50,
+              y: 685,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'reasonDetail3',
+            options: {
+              x: 50,
+              y: 662,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
             key: 'otherEvidence',
             options: {
               x: 205,
@@ -1775,18 +1811,18 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           },
 
           {
-            key: 'hiringstartdate',
+            key: 'hiringStartDate',
             options: {
-              x: 225,
+              x: 215,
               y: 295,
               size: defaultSize,
               color: black,
             },
           },
           {
-            key: 'hiringenddate',
+            key: 'hiringEndDate',
             options: {
-              x: 400,
+              x: 390,
               y: 295,
               size: defaultSize,
               color: black,
@@ -1798,6 +1834,15 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             options: {
               x: 250,
               y: 273,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'reasonDetail2',
+            options: {
+              x: 75,
+              y: 250,
               size: defaultSize,
               color: black,
             },

@@ -241,18 +241,124 @@ export class ETempLicenseListComponent implements AfterViewInit {
     //console.log('request.schooladdrinfo = ', request.schooladdrinfo);
     const school = JSON.parse(request.schooladdrinfo || '');
     const { address, moo, street, road, tumbon, fax } = school;
-    const schoolname = school.schoolName;
-    const bureauname = school.bureauName;
-    const amphurname = school.amphurName;
-    const provincename = school.provinceName;
-    const zipcode = school.zipCode;
+    const schoolname = school.schoolname;
+    const bureauname = school.bureauname;
+    const amphurname = school.amphurname;
+    const provincename = school.provincename;
+    const zipcode = school.zipcode;
     const telphone = school.telphone;
-    const schoolemail = school.eMail;
+    const schoolemail = school.email;
 
     const hiring = JSON.parse(request.hiringinfo || '');
     const hiringStartDate = hiring.startDate;
     const hiringEndDate = hiring.endDate;
     const position = hiring.position;
+
+    const prohibit = JSON.parse(request.prohibitproperty || '');
+
+    const immoral = prohibit.immoral;
+    const incompetent = prohibit.incompetent;
+    const prison = prohibit.prison;
+
+    let forbid1_1 = false;
+    let forbid1_2 = false;
+    if (request.careertype !== '5') {
+      if (immoral === '2') {
+        forbid1_1 = true;
+      } else {
+        forbid1_2 = true;
+      }
+    } else {
+      if (immoral === '2') {
+        forbid1_2 = true;
+      } else {
+        forbid1_1 = true;
+      }
+    }
+
+    let forbid2_1 = false;
+    let forbid2_2 = false;
+    if (request.careertype !== '5') {
+      if (incompetent === '2') {
+        forbid2_1 = true;
+      } else {
+        forbid2_2 = true;
+      }
+    } else {
+      if (immoral === '2') {
+        forbid2_2 = true;
+      } else {
+        forbid2_1 = true;
+      }
+    }
+
+    let forbid3_1 = false;
+    let forbid3_2 = false;
+    let forbid3 = '';
+    let prisonDetail = '';
+    if (request.careertype !== '5') {
+      if (prison === '2') {
+        forbid3_1 = true;
+      } else {
+        forbid3_2 = true;
+        prisonDetail = prohibit.prisonReason;
+      }
+    } else {
+      if (immoral === '2') {
+        forbid3 = 'No';
+      } else {
+        forbid3 = 'Yes' + ' ' + prohibit.prisonReason;
+      }
+    }
+
+    let label1 = '';
+    let label2 = '';
+    let label3 = '';
+    let label4 = '';
+
+    let reasonDetail = '';
+    let reasonDetail2 = '';
+    let reasonDetail3 = '';
+
+    const reason = JSON.parse(request.reasoninfo || '');
+    const schReason = reason.schoolReasons;
+
+    if (schReason[0] === true) {
+      if (request.careertype === '2') {
+        label1 =
+          'ผู้ขอประกอบวิชาชีพผู้บริหารสถานศึกษา เป็นผู้มีความรู้ ความสามารถในการบริหารสถานศึกษา ';
+      } else {
+        label1 = 'ผู้ขอประกอบวิชาชีพครูเป็นผู้มีความรู้ ความสามารถในการสอน ';
+      }
+    }
+    if (schReason[1] === true) {
+      if (request.careertype === '2') {
+        label2 =
+          'ผู้ขอประกอบวิชาชีพผู้บริหารสถานศึกษา เป็นผู้มีประสบการณ์ในการบริหารสถานศึกษา ';
+      } else {
+        label2 = 'ผู้ขอประกอบวิชาชีพครูเป็นผู้มีประสบการณ์ ในการสอน ';
+      }
+    }
+    if (schReason[2] === true) {
+      if (request.careertype === '2') {
+        label3 = 'ขาดแคลนผู้บริหารสถานศึกษาที่มีใบอนุญาตประกอบวิชาชีพ ';
+      } else {
+        label3 = 'ขาดแคลนครูผู้สอนที่มีใบอนุญาตประกอบวิชาชีพ ';
+      }
+    }
+    if (schReason[3] === true) {
+      label4 = 'และ' + reason.schoolOtherDetail;
+    }
+
+    reasonDetail = label1;
+    if (request.careertype !== '5') {
+      reasonDetail2 = label2;
+      reasonDetail3 = label3 + label4;
+    } else {
+      reasonDetail2 = label2 + label3 + label4;
+    }
+
+    console.log('res = ', schReason[0]);
 
     this.dialog.open(PdfRenderComponent, {
       width: '1200px',
@@ -321,6 +427,17 @@ export class ETempLicenseListComponent implements AfterViewInit {
           hiringStartDate,
           hiringEndDate,
           position,
+          forbid1_1,
+          forbid2_1,
+          forbid3_1,
+          forbid1_2,
+          forbid2_2,
+          forbid3_2,
+          reasonDetail,
+          reasonDetail2,
+          reasonDetail3,
+          forbid3,
+          prisonDetail,
         },
       },
     });
