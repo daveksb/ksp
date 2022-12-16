@@ -149,10 +149,14 @@ export class UniHomeComponent extends KspPaginationComponent implements OnInit {
     if (getCookie('uniType')) {
       this.uniInfoService
         .getUniversity(getCookie('uniType')).subscribe((res) => {
-          this.universities = res.map((data: any) => ({
-            label: _.get(data, 'name') + (_.get(data, 'campusname') ? `, ${_.get(data, 'campusname')}` : ''),
-            value: _.get(data, 'id'),
-          })) || [];
+          if (res) {
+            this.universities = res.map((data: any) => ({
+              label: _.get(data, 'name') + (_.get(data, 'campusname') ? `, ${_.get(data, 'campusname')}` : ''),
+              value: _.get(data, 'id'),
+            })) || [];
+          } else {
+            this.universities = [];
+          }
         });
     }
     this.uniInfoService

@@ -56,6 +56,7 @@ export class UniLoginComponent {
         return;
       }
       setCookie('userToken', res?.usertoken || '', 1);
+      setCookie('systemName', 'uni-service' || '', 1);
       setCookie('firstNameTh', res?.firstnameth || '', 1);
       setCookie('lastNameTh', res?.lastnameth || '', 1);
       setCookie('uniId', res?.uniid || '', 1);
