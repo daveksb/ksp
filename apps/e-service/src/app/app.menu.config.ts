@@ -512,8 +512,8 @@ export const professionalMenu: MenuConfig[] = [
         label: 'รายการใบคำขอรับรางวัลคุรุสภา',
       },
       {
-        path: '/xxx',
-        label: 'พิจารณารางวัลคุรุสภา',
+        path: '/teacher-council/account-list',
+        label: 'จัดทำบัญชีรายชื่อ',
       },
     ],
   },

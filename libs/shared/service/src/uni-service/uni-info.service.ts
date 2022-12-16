@@ -19,7 +19,7 @@ export class UniInfoService {
     formData.step1 = {
       institutionsCode: res?.unicode || '',
       institutionsGroup: res?.unitype || '',
-      institutionsName: res?.name || '',
+      institutionsName: res?.uniname || '',
       provience: res?.uniprovince || '',
       courseDetailType: res?.coursedetailtype,
       courseDetail: res?.coursedetailinfo

@@ -78,6 +78,8 @@ export class ApproveComponent implements OnInit {
   allowEdit = false;
   step1Data: any;
   daftRequest: any;
+  formData: any;
+
   verifyResult: any;
   requestNumber = '';
   choices = [
@@ -127,6 +129,7 @@ export class ApproveComponent implements OnInit {
           if (res?.returncode !== 98) {
             this.requestNumber = res?.requestNo;
             this.step1Data = res.step1;
+            this.formData = res;
             this.form.patchValue({
               step1: res.step1,
             });
@@ -242,50 +245,94 @@ export class ApproveComponent implements OnInit {
     ]);
   }
   private _getRequest(): any {
-    let reqKeys: any = [
-      'requestid',
-      'requestno',
-      'degreeapprovecode',
-      'uniid',
-      'unitype',
-      'uniname',
-      'unicode',
-      'uniprovince',
-      'degreelevel',
-      'courseacademicyear',
-      'coursename',
-      'coursetype',
-      'coursestatus',
-      'coursemajor',
-      'coursefieldofstudy',
-      'coursesubjects',
-      'fulldegreenameth',
-      'fulldegreenameen',
-      'shortdegreenameth',
-      'shortdegreenameen',
-      'courseapprovetime',
-      'courseapprovedate',
-      'courseacceptdate',
-      'coursedetailtype',
-      'coursedetailinfo',
-      'teachinglocation',
-      'responsibleunit',
-      'evaluatelocation',
-      'coordinatorinfo',
-      'coursestructure',
-      'courseplan',
-      'courseteacher',
-      'courseinstructor',
-      'courseadvisor',
-      'processtrainning',
-      'processteaching',
-      'attachfiles',
-      'tokenkey',
-    ];
-    reqKeys = _.pick(this.daftRequest, reqKeys);
-    return reqKeys;
-  }
+    const step1: any = this.formData.step1;
+    const step2: any = this.formData.step2;
+    const step3: any = this.formData.step3;
+    const step4: any = this.formData.step4;
+    const reqBody: any = {
+      degreeapprovecode: this.daftRequest?.degreeapprovecode || null,
+      coursesubjects: this.daftRequest?.coursesubjects || null,
+      coursemajor: this.daftRequest?.coursemajor || null,
+      requestno: this.daftRequest?.requestno || null,
+      requestid: this.daftRequest?.requestid || null,
+      requestdate: moment(this.daftRequest?.requestdate).format("YYYY-MM-DD[T]HH:mm:ss"),
+      uniid: this.daftRequest?.uniid || null,
+      attachfiles: step4 ? JSON.stringify(step4?.files) : null,
+      uniname: step1?.institutionsName || null,
+      unitype: step1?.institutionsGroup || null,
+      uniprovince: step1?.provience || null,
+      unicode: step1?.institutionsCode || null,
+      degreelevel: step1?.degreeTypeForm?.degreeType || null,
+      courseacademicyear: step1?.degreeTypeForm?.courseYear || null,
+      coursename: step1?.degreeTypeForm?.courseName || null,
+      coursetype: step1?.degreeTypeForm?.courseType || null,
+      coursestatus: step1?.degreeTypeForm?.courseStatus || null,
+      fulldegreenameth: step1?.degreeTypeForm?.degreeNameThFull || null,
+      shortdegreenameth: step1?.degreeTypeForm?.degreeNameThShort || null,
+      fulldegreenameen: step1?.degreeTypeForm?.degreeNameEnFull || null,
+      shortdegreenameen: step1?.degreeTypeForm?.degreeNameEnShort || null,
+      courseapprovetime: step1?.degreeTypeForm?.courseApproveTime || null,
+      courseapprovedate: step1?.degreeTypeForm?.courseApproveDate
+        ? formatDate(
+            new Date(step1?.degreeTypeForm?.courseApproveDate).toISOString()
+          )
+        : null,
+      courseacceptdate: step1?.degreeTypeForm?.courseAcceptDate
+        ? formatDate(
+            new Date(step1?.degreeTypeForm?.courseAcceptDate).toISOString()
+          )
+        : null,
+      coursedetailtype: step1?.courseDetailType || null,
+      coursedetailinfo: step1?.courseDetail
+        ? JSON.stringify(step1?.courseDetail)
+        : null,
+      teachinglocation: step1?.locations
+        ? JSON.stringify(step1?.locations)
+        : null,
+      responsibleunit: step1?.institutions
+        ? JSON.stringify(step1?.institutions)
+        : null,
+      evaluatelocation: step1?.locations2
+        ? JSON.stringify(step1?.locations2)
+        : null,
+      coordinatorinfo: step1?.coordinator
+        ? JSON.stringify(step1?.coordinator)
+        : null,
+      courseteacher: step2?.teacher?.teachers
+        ? JSON.stringify(step2?.teacher?.teachers)
+        : null,
+      courseinstructor: step2?.nitet?.nitets
+        ? JSON.stringify(step2?.nitet?.nitets)
+        : null,
+      courseadvisor: step2?.advisor?.advisors
+        ? JSON.stringify(step2?.advisor?.advisors)
+        : null,
+      processtrainning: step3?.training?.rows
+        ? JSON.stringify(step3?.training?.rows)
+        : null,
+      processteaching: step3?.teaching?.rows
+        ? JSON.stringify(step3?.teaching?.rows)
+        : null,
+      tokenkey: getCookie('userToken') || null,
+    };
+    if (['a', 'b', 'c'].includes(this.daftRequest?.degreelevel)) {
+      reqBody['coursestructure'] = step2?.plan1?.plans
+        ? JSON.stringify(step2?.plan1?.plans)
+        : null;
 
+      reqBody['courseplan'] = step2?.plan1?.subjects
+        ? JSON.stringify(step2?.plan1?.subjects)
+        : null;
+    } else {
+      reqBody['coursestructure'] = step2?.plan2?.plans
+        ? JSON.stringify(step2?.plan2?.plans)
+        : null;
+      reqBody['courseplan'] = step2?.plan2?.subjects
+        ? JSON.stringify(step2?.plan2?.subjects)
+        : null;
+    }
+    return reqBody;
+  }
   onSubmitDeGreeCert() {
     this.eUniService
       .uniDegreeCertInsert(this._getRequest())
