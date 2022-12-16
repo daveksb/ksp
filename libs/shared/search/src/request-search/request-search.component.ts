@@ -60,6 +60,8 @@ export class RequestSearchComponent
   @Output() clear = new EventEmitter<boolean>(false);
   @Output() search = new EventEmitter<Partial<SchRequestSearchFilter>>();
   @Input() disableRequestType = false;
+  @Input() isNotRequest = false;
+  @Input() showProvince = false;
   @Input() requestTypeList = SchoolRequestType;
   @Input() careerTypeList: any[] = [];
   @Input() provinces: Province[] | null = [];

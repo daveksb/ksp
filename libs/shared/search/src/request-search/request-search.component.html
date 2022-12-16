@@ -2,7 +2,7 @@
   <div class="text-primary box-header">ค้นหารายการ</div>
 
   <div class="row mb-2">
-    <div class="col">
+    <div class="col-6">
       <label class="form-label required">ประเภทใบคำขอ</label>
       <select class="form-select" formControlName="requesttype">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
@@ -11,7 +11,13 @@
         </option>
       </select>
     </div>
+    <div class="col-6" *ngIf="!isNotRequest">
+      <label class="form-label">เลขที่ใบคำขอ </label>
+      <input class="form-control" type="text" formControlName="requestno" />
+    </div>
+  </div>
 
+  <div class="row mb-2">
     <div class="col">
       <label class="form-label">ประเภทวิชาชีพ</label>
       <select class="form-select" formControlName="careertype">
@@ -21,14 +27,7 @@
         </option>
       </select>
     </div>
-  </div>
-
-  <div class="row mb-2">
-    <div class="col">
-      <label class="form-label">เลขที่ใบคำขอ </label>
-      <input class="form-control" type="text" formControlName="requestno" />
-    </div>
-    <div class="col">
+    <div class="col-6">
       <label class="form-label">ชื่อ-นามสกุล </label>
       <input class="form-control" type="text" formControlName="name" />
     </div>
@@ -50,7 +49,7 @@
     </div>
   </div>
 
-  <div class="row mb-2">
+  <div class="row mb-2" *ngIf="!isNotRequest">
     <div class="col-6">
       <label class="form-label">ขั้นตอนการดำเนินการ</label>
       <select class="form-select" formControlName="process">
@@ -73,7 +72,7 @@
   </div>
 
   <div class="row mb-2">
-    <div class="col-6">
+    <div class="col-6" *ngIf="showProvince">
       <label class="form-label">จังหวัด</label>
       <select class="form-select" formControlName="provinceid">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
@@ -83,7 +82,12 @@
       </select>
     </div>
     <div class="col">
-      <label class="form-label">วันเดือนปีที่ยื่นใบคำขอ : จาก</label>
+      <label class="form-label" *ngIf="!isNotRequest"
+        >วันเดือนปีที่ยื่นใบคำขอ : จาก</label
+      >
+      <label class="form-label" *ngIf="isNotRequest"
+        >วันที่ได้รับหนังสืออนุญาต : จาก</label
+      >
       <div class="d-flex align-items-center">
         <input
           matInput
@@ -103,7 +107,12 @@
     </div>
 
     <div class="col">
-      <label class="form-label">วันเดือนปีที่ยื่นใบคำขอ : ถึง</label>
+      <label class="form-label" *ngIf="!isNotRequest"
+        >วันเดือนปีที่ยื่นใบคำขอ : ถึง</label
+      >
+      <label class="form-label" *ngIf="isNotRequest"
+        >วันที่ได้รับหนังสืออนุญาต : ถึง</label
+      >
       <div class="d-flex align-items-center">
         <input
           matInput
@@ -123,7 +132,7 @@
     </div>
   </div>
 
-  <div class="d-flex justify-content-end mb-2 mt-4">
+  <div class="d-flex justify-content-end mb-1 mt-3">
     <button
       (click)="clear.emit(true)"
       type="button"
