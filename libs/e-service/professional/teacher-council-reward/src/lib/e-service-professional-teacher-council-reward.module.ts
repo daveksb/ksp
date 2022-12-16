@@ -31,6 +31,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { EServiceUiRewardRejectFormModule } from '@ksp/e-service/ui/reward-reject-form';
 import { ETeacherCouncilAccountListComponent } from './e-teacher-council-account-list/e-teacher-council-account-list.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ETeacherCouncilCreateAccountComponent } from './e-teacher-council-create-account/e-teacher-council-create-account.component';
 
 const routes: Routes = [
   {
@@ -61,6 +62,10 @@ const routes: Routes = [
       {
         path: 'account-list',
         component: ETeacherCouncilAccountListComponent,
+      },
+      {
+        path: 'create-account',
+        component: ETeacherCouncilCreateAccountComponent,
       },
     ],
   },
@@ -97,6 +102,7 @@ const routes: Routes = [
     ETeacherCouncilConfirmComponent,
     ETeacherCouncilRejectComponent,
     ETeacherCouncilAccountListComponent,
+    ETeacherCouncilCreateAccountComponent,
   ],
   exports: [ETeacherCouncilListComponent, ETeacherCouncilDetailComponent],
 })
