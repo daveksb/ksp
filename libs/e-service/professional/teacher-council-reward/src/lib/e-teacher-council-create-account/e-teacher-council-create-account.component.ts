@@ -13,13 +13,15 @@ export class ETeacherCouncilCreateAccountComponent implements OnInit {
   displayedColumns = [
     'select',
     'order',
-    'accountGroup',
+    'requestNo',
+    'id',
+    'name',
     'careerType',
+    'province',
     'result',
     'createDate',
+    'requestDate',
     'view',
-    'accountList',
-    'book',
   ];
   dataSource = new MatTableDataSource<any>();
 

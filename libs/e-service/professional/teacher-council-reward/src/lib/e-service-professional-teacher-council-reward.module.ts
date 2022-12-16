@@ -15,6 +15,7 @@ import { SelfServiceFeatureRewardModule } from '@ksp/self-service/feature/reward
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import {
   EServiceRewardAccountSearchComponent,
+  EServiceRewardRequestSearchComponent,
   EServiceRewardSearchComponent,
 } from '@ksp/shared/search';
 import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
@@ -95,6 +96,7 @@ const routes: Routes = [
     RewardValidateRequestComponent,
     MatProgressSpinnerModule,
     EServiceRewardAccountSearchComponent,
+    EServiceRewardRequestSearchComponent,
   ],
   declarations: [
     ETeacherCouncilListComponent,

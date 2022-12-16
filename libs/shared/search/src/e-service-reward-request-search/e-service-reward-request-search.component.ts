@@ -11,14 +11,14 @@ import { selfOccupyList } from '@ksp/shared/constant';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
-  selector: 'ksp-e-service-reward-account-search',
+  selector: 'ksp-e-service-reward-request-search',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, MatDatepickerModule],
-  templateUrl: './e-service-reward-account-search.component.html',
-  styleUrls: ['./e-service-reward-account-search.component.scss'],
-  providers: providerFactory(EServiceRewardAccountSearchComponent),
+  templateUrl: './e-service-reward-request-search.component.html',
+  styleUrls: ['./e-service-reward-request-search.component.scss'],
+  providers: providerFactory(EServiceRewardRequestSearchComponent),
 })
-export class EServiceRewardAccountSearchComponent extends KspFormBaseComponent {
+export class EServiceRewardRequestSearchComponent extends KspFormBaseComponent {
   @Output() clear = new EventEmitter<boolean>(false);
   @Output() search = new EventEmitter<any>();
 
@@ -27,11 +27,13 @@ export class EServiceRewardAccountSearchComponent extends KspFormBaseComponent {
   licenseTypes = selfOccupyList.filter((i) => i.id < 5);
 
   override form = this.fb.group({
-    groupno: [null],
+    requestno: [null],
     careertype: [null],
-    result: [null],
     createFrom: [null],
     createTo: [null],
+    requestFrom: [null],
+    requestTo: [null],
+    province: [null],
   });
 
   constructor(private fb: FormBuilder) {
