@@ -1,6 +1,6 @@
 <ksp-top-nav
   ><span header>ยื่นใบคำขอ</span
-  ><span subHeader>ขอต่อใบอนุญาตประกอบวิชาชีพ</span></ksp-top-nav
+  ><span subHeader>ขอต่อใบอนุญาตประกอบวิชาชีพ (ชาวไทย)</span></ksp-top-nav
 >
 
 <form [formGroup]="form">
@@ -66,6 +66,7 @@
           <self-service-form-user-workplace
             [showNotRequire]="true"
             [showContactForm]="true"
+            [showOnlineForm]="true"
             formControlName="workplace"
             [mode]="'view'"
             [provinces]="provinces$ | async"
@@ -73,40 +74,6 @@
             [tumbols]="tumbols3$ | async"
           >
           </self-service-form-user-workplace>
-          <!-- <div class="row">
-            <div class="col-md-6 mb-3">
-              <label class="form-label">โทรศัพท์</label>
-              <input
-                class="form-control"
-                type="text"
-                formControlName="workPhone"
-              />
-            </div>
-
-            <div class="col-md-6 mb-3">
-              <label class="form-label">โทรสาร</label>
-              <input class="form-control" type="text" formControlName="fax" />
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label class="form-label">อีเมล</label>
-              <input
-                class="form-control"
-                type="text"
-                formControlName="workEmail"
-              />
-            </div>
-
-            <div class="col-md-6 mb-3">
-              <label class="form-label">เว็บไซต์</label>
-              <input
-                class="form-control"
-                type="text"
-                formControlName="website"
-              />
-            </div>
-          </div> -->
         </mat-tab>
 
         <mat-tab
@@ -135,8 +102,11 @@
         </mat-tab>
 
         <mat-tab label="ลักษณะต้องห้าม">
-          <div>
+          <div class="bg-light p-3">
             <ksp-forbidden-property
+              [title]="
+                'ลักษณะต้องห้ามตามที่กำหนดไว้ในมาตรา 44 แห่งพระราชบัญญัติสภาครูและบุคลากรทางการศึกษา พ.ศ.2546'
+              "
               [input]="prohibitProperty"
               [mode]="'view'"
             ></ksp-forbidden-property>

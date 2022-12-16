@@ -16,19 +16,24 @@ import {
 } from '@ksp/shared/interface';
 import {
   GeneralInfoService,
+  LoaderService,
   SchoolInfoService,
   SchoolRequestService,
 } from '@ksp/shared/service';
 import { getCookie, mapFileInfo, parseJson } from '@ksp/shared/utility';
-import { Observable } from 'rxjs';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { Observable, Subject } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
+@UntilDestroy()
 @Component({
   selector: 'ksp-request-reward-detail',
   templateUrl: './request-reward.component.html',
   styleUrls: ['./request-reward.component.scss'],
 })
 export class RequestRewardComponent implements OnInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
+
   form = this.fb.group({
     reward: [],
   });
@@ -55,7 +60,8 @@ export class RequestRewardComponent implements OnInit {
     private fb: FormBuilder,
     private requestService: SchoolRequestService,
     private schoolInfoService: SchoolInfoService,
-    private generalInfoService: GeneralInfoService
+    private generalInfoService: GeneralInfoService,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {
@@ -63,10 +69,35 @@ export class RequestRewardComponent implements OnInit {
     this.getListData();
     this.checkRequestId();
     this.checkButtonDisableStatus();
+    this.getSchoolManager();
 
     this.form.valueChanges.subscribe(() => {
       this.checkButtonDisableStatus();
     });
+  }
+
+  getSchoolManager() {
+    const payload = {
+      schoolid: this.schoolId,
+    };
+    this.schoolInfoService
+      .getSchoolInfo(payload)
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        console.log('managerinfo = ', res);
+        if (res) {
+          const manager: any = {
+            ...res,
+            position: res.thposition,
+            firstName: res.thname,
+            lastName: res.thfamilyname,
+            prefix: res.thprefixid,
+            personId: res.thkurusapan,
+            email: res.schsendemail,
+          };
+          this.form.controls.reward.patchValue(manager);
+        }
+      });
   }
 
   checkButtonDisableStatus() {
@@ -121,14 +152,14 @@ export class RequestRewardComponent implements OnInit {
 
   cancelRequest() {
     const payload: KspRequestProcess = {
-      id: `${this.requestId}`,
+      requestid: `${this.requestId}`,
       process: `${this.requestData.process}`,
       status: '0',
       detail: null,
       userid: null,
       paymentstatus: null,
     };
-    this.requestService.schCancelRequest(payload).subscribe(() => {
+    this.requestService.schUpdateRequestProcess(payload).subscribe(() => {
       //
     });
   }

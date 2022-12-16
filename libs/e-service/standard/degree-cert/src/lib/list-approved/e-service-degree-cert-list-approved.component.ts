@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
-import { EUniService, UniInfoService } from '@ksp/shared/service';
+import { EUniService, LoaderService, UniInfoService } from '@ksp/shared/service';
 import { KspPaginationComponent, ListData } from '@ksp/shared/interface';
-import { map } from 'rxjs';
+import { map, Subject } from 'rxjs';
 import _ from 'lodash';
 import { HistoryRequestAdmissionDialogComponent } from '@ksp/uni-service/dialog';
 import { MatDialog } from '@angular/material/dialog';
@@ -39,14 +39,16 @@ export class EServiceDegreeCertApprovedListComponent extends KspPaginationCompon
   form = this.fb.group({
     search: [{}],
   });
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   constructor(
     private fb: FormBuilder,
-    private router: Router, 
+    private router: Router,
     private route: ActivatedRoute,
     private requestService: EUniService,
     private uniInfoService: UniInfoService,
     public dialog: MatDialog,
+    private loaderService: LoaderService
     ) {
       super();
     }

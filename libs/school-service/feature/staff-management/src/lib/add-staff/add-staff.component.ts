@@ -4,9 +4,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {
   AddressService,
   GeneralInfoService,
+  LoaderService,
+  SchoolLicenseService,
   StaffService,
 } from '@ksp/shared/service';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import {
   formatCheckboxData,
   formatDatePayload,
@@ -33,6 +35,7 @@ import {
   Prefix,
   Province,
   SchStaff,
+  SelfLicense,
   StaffType,
   Tambol,
   VisaClass,
@@ -46,6 +49,7 @@ import localForage from 'localforage';
   styleUrls: ['./add-staff.component.scss'],
 })
 export class AddStaffComponent implements OnInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   staffId!: number;
   countries$!: Observable<Country[]>;
   nationList$!: Observable<Nationality[]>;
@@ -66,6 +70,8 @@ export class AddStaffComponent implements OnInit {
   searchStaffDone = false;
   kuruspaNo = '';
   eduSelected: number[] = [];
+  foundLicenses: SelfLicense[] = [];
+  notFound = false;
 
   form = this.fb.group({
     userInfo: [],
@@ -83,7 +89,9 @@ export class AddStaffComponent implements OnInit {
     private staffService: StaffService,
     private addressService: AddressService,
     private generalInfoService: GeneralInfoService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private licenseService: SchoolLicenseService,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {
@@ -92,6 +100,33 @@ export class AddStaffComponent implements OnInit {
     this.getList();
     this.checkStaffId();
     //this.form.valueChanges.subscribe((res) => console.log(this.form.value));
+  }
+
+  searchLicense(staffId: any) {
+    this.notFound = false;
+
+    const payload = {
+      cardno: staffId,
+      licenseno: null,
+      name: null,
+      licensetype: null,
+      licensestatus: null,
+      offset: '0',
+      row: '100',
+    };
+
+    this.licenseService
+      .getStaffLicenses(payload)
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        if (res) {
+          this.foundLicenses = res;
+        } else {
+          this.foundLicenses = [];
+          this.notFound = true;
+          console.log('res = ', this.notFound);
+        }
+      });
   }
 
   get edu() {
@@ -156,8 +191,14 @@ export class AddStaffComponent implements OnInit {
 
         if (kuruspano) {
           this.searchStaffDone = true;
-          const temp: any = { kuruspano: `${kuruspano}` };
-          this.form.controls.userInfo.patchValue(temp);
+          localForage.getItem('sch-kuruspa-no').then((res: any) => {
+            console.log('res = ', res);
+            this.form.controls.userInfo.patchValue(res);
+          });
+        }
+
+        if (idcardno) {
+          this.searchLicense(idcardno);
         }
       });
   }
@@ -166,12 +207,10 @@ export class AddStaffComponent implements OnInit {
     if (this.mode === 'view') {
       return;
     }
-
     const payload = {
       idcardno,
       schoolid: this.schoolId,
     };
-
     this.staffService
       .searchStaffFromIdCard(payload)
       .pipe(untilDestroyed(this))
@@ -191,17 +230,42 @@ export class AddStaffComponent implements OnInit {
       });
   }
 
-  searchKuruspaNo(kuruspano: string) {
+  searchKuruspaNo(kuruspaNo: string) {
     if (this.mode === 'view') {
       return;
     }
 
-    const payload = {
-      kuruspano,
-      schoolid: this.schoolId,
-    };
+    this.licenseService.searchKuruspaNo(kuruspaNo).subscribe((res) => {
+      //console.log('res = ', res);
+      if (res && res.kuruspano) {
+        localForage.setItem('sch-kuruspa-no', res);
+        this.router.navigate([
+          '/staff-management',
+          'add-staff-foreign',
+          kuruspaNo,
+        ]);
+      } else {
+        const dialog = this.dialog.open(CompleteDialogComponent, {
+          data: {
+            header: `ไม่พบข้อมูลหมายเลขคุรุสภาที่ระบุ`,
+            btnLabel: 'ตกลง',
+          },
+        });
 
-    this.staffService
+        dialog.componentInstance.completed.subscribe((res) => {
+          if (res) {
+            this.router.navigate(['/staff-management', 'add-staff']);
+          }
+        });
+      }
+    });
+
+    /* const payload = {
+      kuruspaNo,
+      schoolid: this.schoolId,
+    }; */
+
+    /*     this.staffService
       .searchStaffFromKuruspaNo(payload)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
@@ -217,7 +281,7 @@ export class AddStaffComponent implements OnInit {
           ]);
         }
         this.searchStaffDone = true;
-      });
+      }); */
   }
 
   save() {
@@ -268,6 +332,7 @@ export class AddStaffComponent implements OnInit {
     } else if (this.router.url.includes('add-staff-foreign')) {
       this.mode = 'add';
       this.userInfoType = UserInfoFormType.foreign;
+      this.patchDataFromLicense();
     } else if (this.router.url.includes('edit-staff')) {
       this.mode = 'edit';
     }
@@ -293,6 +358,10 @@ export class AddStaffComponent implements OnInit {
           this.userInfoType = UserInfoFormType.foreign;
         }
         this.patchAll(res);
+        if (res.idcardno) {
+          this.searchLicense(res.idcardno);
+          //console.log('res = ', res);
+        }
       });
   }
 
@@ -313,6 +382,7 @@ export class AddStaffComponent implements OnInit {
     this.pathTeachingInfo(parseJson(res.teachinginfo));
     //console.log('hiring = ', parseJson(res.hiringinfo));
     this.form.controls.hiringInfo.patchValue(parseJson(res.hiringinfo));
+    //console.log('hiring = ', parseJson(res.hiringinfo));
   }
 
   insertStaff() {

@@ -5,7 +5,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'ksp-qualification-approve-detail',
@@ -31,6 +31,7 @@ export class QualificationApproveDetailComponent implements OnInit {
     ['4', 'วุฒิการศึกษาปริญญาอื่นๆที่เทียบเท่าปริญญาตรี / ปริญญาทางการศึกษา'],
   ]);
   form = this.fb.group({
+    degree: ['', Validators.required],
     reason1: [],
     reason2: [],
   });

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -12,7 +12,7 @@ import localForage from 'localforage';
   templateUrl: './self-service-thai-login.component.html',
   styleUrls: ['./self-service-thai-login.component.css'],
 })
-export class SelfServiceThaiLoginComponent implements OnInit {
+export class SelfServiceThaiLoginComponent {
   eyeIconClicked = false;
   loginFail = false;
 
@@ -29,29 +29,27 @@ export class SelfServiceThaiLoginComponent implements OnInit {
     private myInfoService: MyInfoService
   ) {}
 
-  ngOnInit(): void {
-    this.form.valueChanges.subscribe((res) => {
-      this.loginFail = false;
-    });
-  }
-
   register() {
     this.router.navigate(['/landing']);
   }
 
   login() {
+    this.loginFail = false;
     this.loginService.validateLogin(this.form.value).subscribe((res) => {
       if (res && res.id && res.usertoken) {
         localForage.setItem('my-info', res);
         setCookie('userToken', res.usertoken, 1);
         setCookie('userId', res.id, 1);
+        setCookie('idCardNo', `${res.idcardno}`, 1);
         this.router.navigate(['/home']);
       } else if (res.returncode === '99') {
         this.loginFail = true;
+        this.form.reset();
       } else {
         return;
       }
     });
+    this.loginFail = false;
   }
 
   forgot() {

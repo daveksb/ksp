@@ -24,6 +24,7 @@ export class FormMultiAttachmentComponent {
   @Input() systemType: string | null = null;
   @Output() downloadClick = new EventEmitter<any>();
   @Output() uploadComplete = new EventEmitter<any>();
+  @Output() confirmChoice = new EventEmitter<any>();
 
   constructor(public dialog: MatDialog, private fileService: FileService) {}
 
@@ -32,6 +33,10 @@ export class FormMultiAttachmentComponent {
       const dialogRef = this.dialog.open(PdfViewerComponent, {
         width: '1200px',
         height: '100vh',
+        position: {
+          top: '0px',
+          right: '0px',
+        },
         data: {
           title: group.name,
           files: group.files,
@@ -43,9 +48,13 @@ export class FormMultiAttachmentComponent {
         .afterClosed()
         .subscribe((result) => (group.checkresult = result.checkResult));
     } else {
-      this.dialog.open(PdfViewerNoLicenseComponent, {
+      const dialogRef = this.dialog.open(PdfViewerNoLicenseComponent, {
         width: '1200px',
         height: '100vh',
+        position: {
+          top: '0px',
+          right: '0px',
+        },
         data: {
           title: group.name,
           files: group.files,
@@ -53,6 +62,9 @@ export class FormMultiAttachmentComponent {
           systemType: this.systemType,
         },
       });
+      dialogRef
+        .afterClosed()
+        .subscribe((result) => (this.confirmChoice.emit(result)));
     }
   }
 
@@ -90,7 +102,7 @@ export class FormMultiAttachmentComponent {
   updateComplete(file: any, group: any) {
     const { fileid, filename } = file;
     group.files.push({ fileid, filename });
-    console.log(group.files);
+    //console.log(group.files);
     this.uploadComplete.emit(this.groups);
   }
 }

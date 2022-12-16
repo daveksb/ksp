@@ -18,10 +18,12 @@
     </div>
 
     <div *ngIf="rewardType.value !== '0'">
-      <br />
-      <self-service-request-status></self-service-request-status>
+      <div class="my-3">
+        <self-service-request-status
+          [idcardNo]="myInfo && myInfo.idcardno"
+        ></self-service-request-status>
+      </div>
     </div>
-    <br />
     <div *ngIf="rewardType.value === '40'">
       <ksp-council-reward
         formControlName="rewardDetail"
@@ -97,6 +99,10 @@
     </div>
 
     <div *ngIf="rewardType.value !== '0'">
+      <div class="fs-6 text-danger">
+        *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
+        โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
+      </div>
       <div class="d-flex justify-content-center my-3">
         <button
           type="button"

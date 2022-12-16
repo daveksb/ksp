@@ -50,7 +50,7 @@ export class FileUploadComponent {
   async onFileSelected(event: any) {
     const file: File = event.target.files[0];
     if (this.inValidFileType(file.type)) {
-      alert('Invalid file Type');
+      alert('Invalid File Type !');
       return;
     }
     const base64 = (await getBase64(file)) as string;
@@ -70,11 +70,11 @@ export class FileUploadComponent {
       };
       this.uploadImage(payload);
     } else {
-      const payload: FileUpload = {
+      const payload = {
         pagetype: this.pageType,
         originalname: file.name,
         systemname: this.systemFileName,
-        file: btoa(base64),
+        filedata: btoa(base64),
         uniquetimestamp: this.uniqueTimestamp,
         requesttype: this.requestType?.toString() ?? '3',
       };
@@ -94,7 +94,7 @@ export class FileUploadComponent {
           const evt = {
             fileid: event.body.id,
             filename: this.filename,
-            file: atob(payload.file),
+            file: atob(payload.filedata),
           };
           this.file = evt;
           this.uploadComplete.emit(evt);

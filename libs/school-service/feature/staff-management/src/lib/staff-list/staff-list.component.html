@@ -22,27 +22,27 @@
   ></school-service-staff-search>
 
   <div class="bg-white px-3 py-2 mt-3">
-    <div class="box-header">ทะเบียนรายชื่อบุคลากรภายในหน่วยงาน</div>
-    <hr />
-
-    <div class="d-flex justify-content-end">
-      <button
-        (click)="addStaff()"
-        class="btn text-primary bg-primary bg-opacity-10"
-      >
-        + เพิ่มบุคลากร
-      </button>
-      <button
-        (click)="searchLicense()"
-        class="ms-2 btn text-orange bg-orange bg-opacity-10"
-      >
-        ค้นหาใบอนุญาต
-      </button>
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="box-header">ทะเบียนรายชื่อบุคลากรภายในหน่วยงาน</div>
+      <div class="d-flex justify-content-end">
+        <button
+          (click)="addStaff()"
+          class="btn text-primary bg-primary bg-opacity-10"
+        >
+          + เพิ่มบุคลากร
+        </button>
+        <button
+          (click)="searchLicense()"
+          class="ms-2 btn text-orange bg-orange bg-opacity-10"
+        >
+          ค้นหาใบอนุญาต
+        </button>
+      </div>
     </div>
+    <hr />
 
     <div class="table__scroll">
       <table
-        class="mt-2"
         matSort
         mat-table
         [dataSource]="dataSource"
@@ -57,10 +57,10 @@
 
         <ng-container matColumnDef="idcardno">
           <th mat-header-cell *matHeaderCellDef>
-            หมายเลขบัตรประชาชน/เลขคุรุสภาสำหรับชาวต่างชาติ
+            {{ idCardLabel }}
           </th>
           <td mat-cell *matCellDef="let element">
-            {{ element.idcardno }}{{ element.kuruspano }}
+            {{ element.idcardno || element.kuruspano }}
           </td>
         </ng-container>
 
@@ -86,38 +86,46 @@
         </ng-container>
 
         <ng-container matColumnDef="profession">
-          <th mat-header-cell *matHeaderCellDef>ใบอนุญาตประกอบวิชาชีพ</th>
-          <td mat-cell *matCellDef="let element">
+          <th mat-header-cell *matHeaderCellDef class="text-center">
+            ใบอนุญาตประกอบวิชาชีพ
+          </th>
+          <td mat-cell *matCellDef="let element" class="text-center">
             <i
-              *ngIf="element.profession"
-              class="bi bi-check-square text-orange fs-5"
+              *ngIf="element.selflicensecount > 0"
+              class="bi bi-check-square-fill text-orange fs-5"
             ></i>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="teaching">
-          <th mat-header-cell *matHeaderCellDef>ใบปฏิบัติการสอน</th>
-          <td mat-cell *matCellDef="let element">
+          <th mat-header-cell *matHeaderCellDef class="text-center">
+            ใบปฏิบัติการสอน
+          </th>
+          <td mat-cell *matCellDef="let element" class="text-center">
             <i
               *ngIf="element.teaching"
-              class="bi bi-check-square text-orange fs-5"
+              class="bi bi-check-square-fill text-orange fs-5"
             ></i>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="tempLicense">
-          <th mat-header-cell *matHeaderCellDef>หนังสืออนุญาตชั่วคราว</th>
-          <td mat-cell *matCellDef="let element">
+          <th mat-header-cell *matHeaderCellDef class="text-center">
+            หนังสืออนุญาตชั่วคราว
+          </th>
+          <td mat-cell *matCellDef="let element" class="text-center">
             <i
-              *ngIf="element.tempLicense"
-              class="bi bi-check-square text-orange fs-5"
+              *ngIf="element.templicensecount > 0"
+              class="bi bi-check-square-fill text-orange fs-5"
             ></i>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="edit">
-          <th mat-header-cell *matHeaderCellDef>ดูข้อมูล</th>
-          <td mat-cell *matCellDef="let element">
+          <th mat-header-cell *matHeaderCellDef class="text-center">
+            ดูข้อมูล
+          </th>
+          <td mat-cell *matCellDef="let element" class="text-center">
             <i
               (click)="viewStaff(element.id)"
               role="button"
@@ -127,8 +135,8 @@
         </ng-container>
 
         <ng-container matColumnDef="view">
-          <th mat-header-cell *matHeaderCellDef>แก้ไข</th>
-          <td mat-cell *matCellDef="let element">
+          <th mat-header-cell *matHeaderCellDef class="text-center">แก้ไข</th>
+          <td mat-cell *matCellDef="let element" class="text-center">
             <i
               (click)="editStaff(element.id)"
               role="button"

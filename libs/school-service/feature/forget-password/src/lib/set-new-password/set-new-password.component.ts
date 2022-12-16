@@ -7,11 +7,12 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { SchForgetPassword } from '@ksp/shared/interface';
-import { SchoolUserService } from '@ksp/shared/service';
+import { LoaderService, SchoolUserService } from '@ksp/shared/service';
 import { passwordPattern, validatorMessages } from '@ksp/shared/utility';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import localForage from 'localforage';
 import * as CryptoJs from 'crypto-js';
+import { Subject } from 'rxjs';
 
 @UntilDestroy()
 @Component({
@@ -19,6 +20,7 @@ import * as CryptoJs from 'crypto-js';
   styleUrls: ['./set-new-password.component.scss'],
 })
 export class SetNewPasswordComponent implements OnInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   eyeIconClicked = false;
   eyeIconClickedSecond = false;
   validatorMessages = validatorMessages;
@@ -37,7 +39,8 @@ export class SetNewPasswordComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private fb: FormBuilder,
-    private userService: SchoolUserService
+    private userService: SchoolUserService,
+    private loaderService: LoaderService
   ) {}
 
   get disableBtn() {

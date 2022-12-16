@@ -31,11 +31,6 @@
   white-space: pre-line;
 }
 
-.print__button {
-  display: flex;
-  justify-content: center;
-}
-
 #btn-print {
   margin-bottom: 12px;
   width: 240px;
@@ -43,4 +38,16 @@
 
 #btn-home {
   width: 240px;
+}
+
+.fail-img {
+  width: 100px;
+  height: 100px;
+  fill: red;
+}
+
+.success-img {
+  width: 100px;
+  height: 100px;
+  fill: green;
 }

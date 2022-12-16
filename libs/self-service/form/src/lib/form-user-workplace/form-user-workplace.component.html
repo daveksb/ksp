@@ -13,7 +13,7 @@
         <label
           (click)="openSearchDialog()"
           role="button"
-          class="form-label text-primary text-decoration-underline"
+          class="text-primary text-decoration-underline fs-6"
           ><i class="bi bi-search me-1 fs-6"></i>ค้นหาสถานศึกษา</label
         >
       </div>
@@ -157,6 +157,8 @@
         <input class="form-control" type="text" formControlName="fax" />
       </div>
     </div>
+  </ng-container>
+  <ng-container *ngIf="showOnlineForm">
     <div class="row">
       <div class="col-md-6 mb-2">
         <label class="form-label">อีเมล</label>

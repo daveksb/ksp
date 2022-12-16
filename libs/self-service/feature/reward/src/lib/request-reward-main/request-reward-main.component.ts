@@ -486,7 +486,6 @@ export class RequestRewardMainComponent implements OnInit {
       width: '350px',
       data: {
         header: `ยกเลิกใบคำขอสำเร็จ`,
-        buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 
@@ -502,7 +501,6 @@ export class RequestRewardMainComponent implements OnInit {
       width: '350px',
       data: {
         header: `ทำรายการสร้างใบคำขอสำเร็จ`,
-        buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 

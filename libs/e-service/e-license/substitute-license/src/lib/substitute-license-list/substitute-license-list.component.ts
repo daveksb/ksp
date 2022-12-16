@@ -5,20 +5,21 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import {
-  SchoolRequestSubType,
+  SelfServiceRequestSubType,
   SelfServiceRequestType,
 } from '@ksp/shared/constant';
+import { EsSearchPayload, Province, SelfRequest } from '@ksp/shared/interface';
 import {
-  ESelfSearchPayload,
-  EsSearchPayload,
-  SelfRequest,
-} from '@ksp/shared/interface';
-import { ERequestService } from '@ksp/shared/service';
+  AddressService,
+  ERequestService,
+  LoaderService,
+} from '@ksp/shared/service';
 import {
   SelfCheckProcess,
   SelfcheckStatus,
   replaceEmptyWithNull,
 } from '@ksp/shared/utility';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'ksp-substitute-license-list',
@@ -26,10 +27,11 @@ import {
   styleUrls: ['./substitute-license-list.component.scss'],
 })
 export class SubstituteLicenseListComponent implements AfterViewInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfRequest>();
-  SchoolRequestSubType = SchoolRequestSubType;
-
+  SelfServiceRequestSubType = SelfServiceRequestSubType;
+  provinces$!: Observable<Province[]>;
   checkProcess = SelfCheckProcess;
   checkStatus = SelfcheckStatus;
 
@@ -40,7 +42,9 @@ export class SubstituteLicenseListComponent implements AfterViewInit {
   constructor(
     private fb: FormBuilder,
     private requestService: ERequestService,
-    private router: Router
+    private router: Router,
+    private loaderService: LoaderService,
+    private addressService: AddressService
   ) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -48,6 +52,7 @@ export class SubstituteLicenseListComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.provinces$ = this.addressService.getProvinces();
   }
 
   search(params: any) {

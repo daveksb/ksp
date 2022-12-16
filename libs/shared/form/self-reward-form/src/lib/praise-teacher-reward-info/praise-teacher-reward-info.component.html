@@ -1,9 +1,9 @@
 <form [formGroup]="form">
-  <div class="d-flex flex-column flex-md-row mb-3">
+  <div class="d-flex flex-column flex-md-row">
     <div class="d-flex align-items-center me-5">
       <input
         type="radio"
-        value="1"
+        value="hasReward"
         class="me-1"
         formControlName="receivedReward"
       />
@@ -12,7 +12,7 @@
     <div class="d-flex align-items-center">
       <input
         type="radio"
-        value="2"
+        value="noReward"
         class="me-1"
         formControlName="receivedReward"
       />
@@ -20,59 +20,62 @@
     </div>
   </div>
 
-  <ng-container formArrayName="rewardInfo">
-    <ng-container *ngFor="let DegreeForm of rewardInfo.controls; let i = index">
-      <ng-container [formGroupName]="i">
-        <div class="border rounded px-3 py-2">
-          <div class="d-flex justify-content-end" *ngIf="i > 0">
-            <i
-              class="bi bi-x-circle-fill text-danger"
-              (click)="deleteFormArray(rewardInfo, i)"
-              role="button"
-            ></i>
-          </div>
-          <div class="row">
-            <div class="col-md-6 mb-2">
-              <label class="form-label required">ปีที่ได้รับรางวัล</label>
-              <input
-                class="form-control"
-                type="text"
-                formControlName="rewardReceiveYear"
-              />
+  <ng-container *ngIf="hasReward === 'hasReward'">
+    <ng-container formArrayName="rewardInfo">
+      <ng-container
+        *ngFor="let DegreeForm of rewardInfo.controls; let i = index"
+      >
+        <ng-container [formGroupName]="i">
+          <div class="border rounded px-3 py-2 mt-3">
+            <div class="d-flex justify-content-end" *ngIf="i > 0">
+              <i
+                class="bi bi-x-circle-fill text-danger"
+                (click)="deleteFormArray(rewardInfo, i)"
+                role="button"
+              ></i>
             </div>
-            <div class="col-md-6 mb-2">
-              <label class="form-label required">ชื่อรางวัลระดับชาติ</label>
-              <input
-                class="form-control"
-                type="text"
-                formControlName="rewardName"
-              />
+            <div class="row">
+              <div class="col-md-6 mb-2">
+                <label class="form-label required">ปีที่ได้รับรางวัล</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  formControlName="rewardReceiveYear"
+                />
+              </div>
+              <div class="col-md-6 mb-2">
+                <label class="form-label required">ชื่อรางวัลระดับชาติ</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  formControlName="rewardName"
+                />
+              </div>
             </div>
-          </div>
 
-          <div class="row">
-            <div class="col-md-6 mb-2">
-              <label class="form-label required"
-                >รายละเอียดของรางวัลระดับชาติ</label
-              >
-              <input
-                class="form-control"
-                type="text"
-                formControlName="rewardDetail"
-              />
+            <div class="row">
+              <div class="col-md-6 mb-2">
+                <label class="form-label required"
+                  >รายละเอียดของรางวัลระดับชาติ</label
+                >
+                <input
+                  class="form-control"
+                  type="text"
+                  formControlName="rewardDetail"
+                />
+              </div>
             </div>
           </div>
-        </div>
-        <br />
+        </ng-container>
       </ng-container>
     </ng-container>
-  </ng-container>
 
-  <div class="d-flex justify-content-end" *ngIf="mode === 'edit'">
-    <ksp-add-row-button
-      class="text-primary"
-      (addRowClick)="addFormArray(rewardInfo)"
-      >เพิ่มรางวัล</ksp-add-row-button
-    >
-  </div>
+    <div class="d-flex justify-content-end mt-3" *ngIf="mode === 'edit'">
+      <ksp-add-row-button
+        class="text-primary"
+        (addRowClick)="addFormArray(rewardInfo)"
+        >เพิ่มรางวัล</ksp-add-row-button
+      >
+    </div></ng-container
+  >
 </form>

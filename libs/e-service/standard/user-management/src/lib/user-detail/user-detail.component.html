@@ -115,19 +115,23 @@
         [systemform]="'uni'"
       ></ksp-form-coordinator-info>
     </div>
-    <br />
     <!-- <ksp-form-attachment
       [title]="'หลักฐานเพื่อพิจารณา'"
       [mode]="'view'"
       [groups]="uploadFileList"
     ></ksp-form-attachment> -->
-    <div class="bg-light mt-3 px-4 py-2 pb-3" *ngIf="requestData?.requesttype === '2'">
+    <br />
+    <div class="bg-light px-4 py-2" *ngIf="requestData?.requesttype === '2'">
       <div class="box-header">เหตุผลการถอดถอน</div>
 
-      <div class="row">
+      <div class="row mb-2">
         <div class="col-5">
           <label class="form-label required">เหตุผลการถอดถอน</label>
-          <select class="form-select" formControlName="retiredReason" [attr.disabled]="true">
+          <select
+            class="form-select"
+            formControlName="retiredReason"
+            [attr.disabled]="true"
+          >
             <option value="null" selected disabled hidden>กรุณาเลือก</option>
             <ng-container *ngFor="let reason of retireReason">
               <option [value]="reason.id">{{ reason.name }}</option>
@@ -136,7 +140,7 @@
         </div>
       </div>
 
-      <div class="mt-2">
+      <div class="mb-2">
         <textarea
           class="form-control"
           rows="3"
@@ -146,15 +150,17 @@
         ></textarea>
       </div>
     </div>
+    <br />
     <ksp-form-multi-attachment
-        [groups]="uploadFileList"
-        title="หลักฐานเพื่อพิจารณา"
-        [mode]="'view'"
-        [systemType]="'uni'"
+      [groups]="uploadFileList"
+      title="หลักฐานเพื่อพิจารณา"
+      [mode]="'view'"
+      [systemType]="'uni'"
+      (confirmChoice)="applyChoice($event)"
     ></ksp-form-multi-attachment>
   </div>
   <br />
-  <div [formGroup]="verifyForm" class="bg-white p-4">
+  <div [formGroup]="verifyForm" class="bg-white p-3">
     <e-service-license-check
       [mode]="mode"
       formControlName="result"

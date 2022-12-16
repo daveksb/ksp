@@ -18,12 +18,18 @@
     </div>
 
     <ng-container *ngIf="selectedEducationType === 0">
-      <self-service-renew-license-foreign-teacher formControlName="educationLevelForm" [mode]="mode">
+      <self-service-renew-license-foreign-teacher
+        formControlName="educationLevelForm"
+        [mode]="mode"
+      >
       </self-service-renew-license-foreign-teacher>
     </ng-container>
 
     <ng-container *ngIf="selectedEducationType === 1">
-      <self-service-renew-license-foreign-non-teacher formControlName="educationLevelForm" [mode]="mode">
+      <self-service-renew-license-foreign-non-teacher
+        formControlName="educationLevelForm"
+        [mode]="mode"
+      >
       </self-service-renew-license-foreign-non-teacher>
     </ng-container>
   </div>

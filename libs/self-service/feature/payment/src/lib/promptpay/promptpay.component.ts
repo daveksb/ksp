@@ -27,24 +27,26 @@ export class PromptpayComponent implements OnInit {
       this.pageType = Number(res.get('type'));
       //console.log('process type = ', this.pageType);
     });
-    setTimeout(() => {
-      const completeDialog = this.dialog.open(CompleteDialogComponent, {
-        width: '350px',
-        data: {
-          header: `ทำรายการสำเร็จ`,
-          btnLabel: 'กลับสู่หน้าหลัก',
-          content: `วันที่ : ${thaiDate(new Date())}
-          เลขที่ใบคำขอ : ${this.requestno}`,
-          subContent: 'หากมีข้อสงสัย กรุณาโทร 02 304 9899 ',
-        },
-      });
+  }
 
-      completeDialog.componentInstance.completed.subscribe((res) => {
-        if (res) {
-          this.router.navigate(['/', 'home']);
-        }
-      });
-    }, 15000);
+  complete() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      width: '350px',
+      data: {
+        header: `ทำรายการสำเร็จ`,
+        btnLabel: 'กลับสู่หน้าหลัก',
+        content: `วันที่ : ${thaiDate(new Date())}
+        เลขที่ใบคำขอ : ${this.requestno}`,
+        subContent: 'หากมีข้อสงสัย กรุณาโทร 02 304 9899',
+        showImg: true,
+      },
+    });
+
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/', 'home']);
+      }
+    });
   }
 
   cancel() {
@@ -55,7 +57,9 @@ export class PromptpayComponent implements OnInit {
         btnLabel: 'กลับสู่หน้าหลัก',
         content: `วันที่ : ${thaiDate(new Date())}
         เลขที่ใบคำขอ : ${this.requestno}`,
-        subContent: 'หากมีข้อสงสัย กรุณาโทร 02 304 9899 ',
+        subContent: 'หากมีข้อสงสัย กรุณาโทร 02 304 9899',
+        showImg: true,
+        isDanger: true,
       },
     });
 

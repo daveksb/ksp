@@ -7,11 +7,12 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { getCookie } from '@ksp/shared/utility';
+import { getCookie, schoolMapSelfDevelopType } from '@ksp/shared/utility';
 import { SchoolSelfDevelopActivityTies } from '@ksp/shared/constant';
-import { SelfDevelopService, StaffService } from '@ksp/shared/service';
+import { LoaderService, SelfDevelopService, StaffService } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { v4 as uuidv4 } from 'uuid';
+import { Subject } from 'rxjs';
 
 @UntilDestroy()
 @Component({
@@ -20,6 +21,7 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./activity-detail.component.scss'],
 })
 export class ActivityDetailComponent implements OnInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   schoolId = getCookie('schoolId');
   staffId!: number;
   staff = new SchStaff();
@@ -27,6 +29,9 @@ export class ActivityDetailComponent implements OnInit {
   activityPageMode = activityPageMode;
   uniqueTimestamp!: string;
   activityTypes: ListData[] = SchoolSelfDevelopActivityTies;
+  selectedStaffId = '';
+  staffSelfDev: any[] = [];
+  schoolMapSelfDevelopType = schoolMapSelfDevelopType;
 
   form = this.fb.group({
     type: [null, Validators.required],
@@ -46,7 +51,8 @@ export class ActivityDetailComponent implements OnInit {
     private fb: FormBuilder,
     public dialog: MatDialog,
     private service: SelfDevelopService,
-    private staffService: StaffService
+    private staffService: StaffService,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {
@@ -66,6 +72,7 @@ export class ActivityDetailComponent implements OnInit {
         this.loadStaffFromId(this.staffId);
       }
     });
+    this.getSelfDevelopInfo(this.staffId);
   }
 
   loadStaffFromId(id: number) {
@@ -101,6 +108,24 @@ export class ActivityDetailComponent implements OnInit {
     });
   }
 
+  getSelfDevelopInfo(staffId: any) {
+    this.route.paramMap.pipe(untilDestroyed(this)).subscribe((res) => {
+      this.selectedStaffId = String(res.get('staffId'));
+      console.log('staff id = ', this.selectedStaffId);
+    });
+
+    const payload = {
+      staffid: staffId,
+      schoolid: this.schoolId,
+    };
+
+    this.service.getSelfDevelopInfo(payload).subscribe((res) => {
+      if (res) {
+        this.staffSelfDev = res;
+      }
+    });
+  }
+
   edit(pageType: any, staffId: number) {
     this.router.navigate(['/activity', 'detail', pageType, staffId]);
   }
@@ -132,7 +157,6 @@ export class ActivityDetailComponent implements OnInit {
     const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,
-        buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 

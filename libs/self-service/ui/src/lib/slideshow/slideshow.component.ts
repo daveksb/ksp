@@ -1,15 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ThaiDatePipe } from '@ksp/shared/pipe';
+import {
+  SelfPrefixEn,
+  SelfPrefixTh,
+  SelfServiceRequestSubType,
+} from '@ksp/shared/constant';
 
 @Component({
   selector: 'self-service-slideshow',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ThaiDatePipe],
   templateUrl: './slideshow.component.html',
   styleUrls: ['./slideshow.component.scss'],
 })
-export class SlideshowComponent implements OnInit {
-  constructor() {}
+export class SlideshowComponent {
+  SchoolRequestSubType = SelfServiceRequestSubType;
+  SelfPrefixTh = SelfPrefixTh;
+  SelfPrefixEn = SelfPrefixEn;
 
-  ngOnInit(): void {}
+  @Input() showButton = true;
+  @Input() myImage: any;
+  @Input() licensetype = '-';
+  @Input() licenseno: string | null = '';
+  @Input() prefixth = '-';
+  @Input() firstnameth: string | null = '';
+  @Input() lastnameth: string | null = '';
+  @Input() prefixen = '-';
+  @Input() firstnameen: string | null = '';
+  @Input() lastnameen: string | null = '';
+  @Input() kuruspano: string | null = '';
+  @Input() licensestartdate: string | null = null;
+  @Input() licenseenddate: string | null = null;
 }

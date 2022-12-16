@@ -1,28 +1,47 @@
 <div class="container-sm p-0">
   <div class="card justify-content-center">
-    <div class="d-flex justify-content-center">
-      <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center px-3 gap-4">
+      <div class="d-flex justify-content-center align-items-center">
         <img
           src="/assets/images/img-profile.png"
-          class="me-3"
-          style="width: 125px; height: 200px"
+          style="width: 96px; height: 144px"
         />
       </div>
+      <!-- <self-service-form-upload-image
+          [isEditMode]="false"
+          [imgSrc]="myImage"
+        ></self-service-form-upload-image> -->
       <div class="d-flex flex-column justify-content-between">
-        <div class="title">ใบอนุญาตประกอบวิชาชีพครู</div>
-        <div class="fs-6">นาย ธนานุรักษ์ ใจสะอาด</div>
-        <div class="fs-6">MR. Thananurk jaisa-ard</div>
-        <div class="fs-6">เลขสมาชิก 239579-43957997</div>
-        <div class="d-flex my-2">
+        <!-- <div class="title">คุรุสภา</div> -->
+        <div class="title">
+          ใบอนุญาตประกอบวิชาชีพ {{ SchoolRequestSubType[+licensetype] }}
+        </div>
+        <div class="fs-6 text-black me-3">
+          <span class="text-secondary">เลขที่</span> {{ licenseno }}
+        </div>
+        <div class="fs-6">
+          {{ SelfPrefixTh[+prefixth] }} {{ firstnameth }} {{ lastnameth }}
+        </div>
+        <div class="fs-6">
+          {{ SelfPrefixEn[+prefixen] }} {{ firstnameen }} {{ lastnameen }}
+        </div>
+        <div class="fs-6 text-secondary mt-1">เลขสมาชิก {{ kuruspano }}</div>
+        <div class="d-flex">
           <div class="me-3 text-secondary">
-            วันที่ออกบัตร <span class="text-black">1 มกราคม 2560</span>
+            วันที่ออกบัตร
+            <span class="text-black"
+              >{{ (licensestartdate | thaiDate) || 'วว-ดด-ปปปป' }}
+            </span>
           </div>
           <div class="text-secondary">
-            หมดอายุ <span class="text-black">1 มกราคม 2565</span>
+            หมดอายุ
+            <span class="text-black">{{
+              (licenseenddate | thaiDate) || 'วว-ดด-ปปปป'
+            }}</span>
           </div>
         </div>
 
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center" *ngIf="showButton">
           <button
             class="btn btn-sm border-primary text-primary bg-white me-2 w-50"
           >
@@ -31,6 +50,13 @@
           <button class="btn btn-sm btn-primary w-50">ใบอนุญาต</button>
         </div>
       </div>
+      <!-- <div class="d-flex justify-content-center">
+        <img
+          src="/assets/images/img-profile.png"
+          class="ms-2"
+          style="width: 96px; height: 144px"
+        />
+      </div> -->
     </div>
   </div>
 </div>

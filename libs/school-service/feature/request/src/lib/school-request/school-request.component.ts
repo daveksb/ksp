@@ -29,6 +29,7 @@ import {
   PositionType,
   Prefix,
   Province,
+  SchInfo,
   SchRequestSearchFilter,
   SchStaff,
   StaffType,
@@ -56,7 +57,7 @@ import {
   thaiDate,
 } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Observable, Subject } from 'rxjs';
+import { forkJoin, Observable, Subject } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
 @UntilDestroy()
@@ -90,6 +91,7 @@ export class SchoolRequestComponent implements OnInit {
   disableSave = false;
   disableCancel = true;
   schoolId = getCookie('schoolId');
+  userId = getCookie('userId');
   userInfoFormType: number = UserInfoFormType.thai; // control the display field of user info form
   eduFiles: FileGroup[] = [];
   teachingFiles: FileGroup[] = [];
@@ -97,6 +99,8 @@ export class SchoolRequestComponent implements OnInit {
   attachFiles: FileGroup[] = [];
   eduSelected: number[] = [];
   forbidden: any = null;
+  schoolInfo!: SchInfo;
+
   form = this.fb.group({
     userInfo: [],
     addr1: [],
@@ -139,6 +143,20 @@ export class SchoolRequestComponent implements OnInit {
     this.checkButtonsDisableStatus();
   }
 
+  duplicateRequestDialog() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header: `หมายเลขบัตรประชาชนนี้ได้ถูกใช้ยื่นใบคำขอ
+        และกำลังอยู่ในระหว่างดำเนินการ !`,
+      },
+    });
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.backToListPage();
+      }
+    });
+  }
+
   checkCareerType() {
     this.route.queryParams.pipe(untilDestroyed(this)).subscribe((params) => {
       this.form.reset();
@@ -165,26 +183,28 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   cancelRequest() {
-    //console.log('req data = ', this.requestData);
     const payload: KspRequestProcess = {
-      id: `${this.requestId}`,
+      requestid: `${this.requestId}`,
       process: this.requestData.process,
       status: '0',
       detail: null,
-      userid: null,
+      userid: this.userId,
       paymentstatus: null,
     };
-
-    this.requestService.schCancelRequest(payload).subscribe(() => {
+    const updateRequest = this.requestService.schUpdateRequestProcess(payload);
+    const closePayload = {
+      id: `${this.requestId}`,
+      isclose: '1',
+    };
+    const closeRequest = this.requestService.schCloseRequest(closePayload);
+    forkJoin([updateRequest, closeRequest]).subscribe(() => {
       this.completeDialog(`ยกเลิกใบคำขอสำเร็จ`);
     });
   }
 
   createRequest(process: number) {
-    //console.log('create request = ');
     const baseForm = this.fb.group(new KspRequest());
     const formData: any = this.form.getRawValue();
-    //console.log('formdata = ', formData);
     const tab3 = mapMultiFileInfo(this.eduFiles);
     const tab4 = mapMultiFileInfo(this.teachingFiles);
     const tab5 = mapMultiFileInfo(this.reasonFiles);
@@ -193,14 +213,14 @@ export class SchoolRequestComponent implements OnInit {
     formData.addr1.addresstype = 1;
     formData.addr2.addresstype = 2;
 
-    let { id, ...userInfo } = formData.userInfo;
+    /* let { id, ...userInfo } = formData.userInfo; */
+    let { ...userInfo } = formData.userInfo;
     userInfo.schoolid = this.schoolId;
     userInfo.process = `${process}`;
     userInfo.status = `1`;
     userInfo.ref1 = '2';
     userInfo.ref2 = '03';
     userInfo.ref3 = '1';
-
     userInfo.systemtype = '2';
     userInfo.requesttype = '3';
     userInfo.careertype = `${this.careerType}`;
@@ -251,6 +271,12 @@ export class SchoolRequestComponent implements OnInit {
     //console.log('current form = ', baseForm.value);
     this.requestService.schCreateRequest(baseForm.value).subscribe((res) => {
       // บันทึกและยื่น
+
+      if (res.returncode === '409') {
+        this.duplicateRequestDialog();
+        return;
+      }
+
       if (process === 2) {
         this.completeDialog(`ระบบทำการบันทึกเรียบร้อยแล้ว
         เลขที่รายการ : ${formatRequestNo(res.requestno)}
@@ -328,14 +354,6 @@ export class SchoolRequestComponent implements OnInit {
 
     const res = replaceEmptyWithNull(temp);
 
-    /* if (process === 'submit') {
-      res.process = `2`;
-      res.status = '1';
-    } else {
-      res.process = `1`;
-      res.status = '1';
-    } */
-
     //console.log('update payload = ', res);
     this.requestService.schUpdateRequest(res).subscribe(() => {
       if (process === 2) {
@@ -381,14 +399,16 @@ export class SchoolRequestComponent implements OnInit {
       // สถานะ ยกเลิก disable ทุกอย่าง
       if (this.requestData.status === '0') {
         this.disableTempSave = true;
-        this.disableSave = false;
+        this.disableSave = true;
         this.disableCancel = true;
+        return;
       }
 
       // formValid + ไม่มีหมายเลขใบคำขอ ทำได้ทุกอย่าง
       else if (this.form.valid && !this.requestId) {
         this.disableTempSave = false;
         this.disableSave = false;
+        return;
       }
 
       // formValid + สถานะเป็นสร้างใบคำขอ, บันทึกชั่วคราวได้ ส่งใบคำขอได้
@@ -396,23 +416,36 @@ export class SchoolRequestComponent implements OnInit {
         //console.log('สถานะเป็นสร้างใบคำขอ ');
         this.disableTempSave = false;
         this.disableSave = false;
+        return;
       }
 
       // formValid + สถานะเป็นสร้างและส่งใบคำขอ, บันทึกชั่วคราวไม่ได้ ส่งใบคำขอไม่ได้
       else if (this.form.valid && this.requestData.process === '2') {
         //console.log('สถานะเป็นสร้างและส่งใบคำขอ ');
         this.disableTempSave = true;
-        this.disableSave = false;
+        this.disableSave = true;
+        return;
       }
+
+      // สถานะ พิจาณาและรับรอง
+      else if (this.requestData.process === '5') {
+        console.log('สถานะรับรอง = ');
+        this.disableTempSave = true;
+        this.disableSave = true;
+        this.disableCancel = true;
+        return;
+      }
+
       // formValid + สถานะเป็นส่งกลับเพื่อแก้ไข, บันทึกชั่วคราวได้ ส่งใบคำขอได้
       else if (condition1 || condition2) {
         this.disableTempSave = false;
         this.disableSave = false;
+        return;
       }
       // form invalid
       else {
         this.disableTempSave = true;
-        this.disableSave = false;
+        this.disableSave = true;
       }
 
       // มีหมายเลขใบคำขอแล้ว enable ปุ่มยกเลิก
@@ -530,7 +563,8 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   searchStaffFromIdCard(idCard: string) {
-    if (!idCard) return;
+    if (!idCard || this.requestId) return;
+
     const payload = {
       idcardno: idCard,
       schoolid: this.schoolId,
@@ -539,7 +573,6 @@ export class SchoolRequestComponent implements OnInit {
       .searchStaffFromIdCard(payload)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
-        //console.log('req = ', res);
         if (res && res.returncode !== '98') {
           this.staffData = res;
           this.pathUserInfo(res);
@@ -547,9 +580,11 @@ export class SchoolRequestComponent implements OnInit {
           this.patchEdu(parseJson(res.educations));
           this.patchTeachingInfo(parseJson(res.teachinginfo));
           this.patchHiringInfo(parseJson(res.hiringinfo));
+          this.patchSchoolInfo();
         } else {
           // search not found reset form and set idcard again
-          this.completeDialog('ไม่พบข้อมูลบุคคลากรที่ระบุ');
+          this.searchIdCardNotFound(`ไม่พบข้อมูลบุคลากรภายในหน่วยงาน
+          จากหมายเลขบัตรประชาชนที่ระบุ`);
           this.form.reset();
           const temp: any = { idcardno: idCard };
           this.form.controls.userInfo.patchValue(temp);
@@ -558,7 +593,7 @@ export class SchoolRequestComponent implements OnInit {
   }
 
   searchStaffFromKuruspaNo(kuruspano: string) {
-    if (!kuruspano) return;
+    if (!kuruspano || this.requestId) return;
     const payload = {
       kuruspano,
       schoolid: this.schoolId,
@@ -575,13 +610,20 @@ export class SchoolRequestComponent implements OnInit {
           this.patchEdu(parseJson(res.educations));
           this.patchTeachingInfo(parseJson(res.teachinginfo));
           this.patchHiringInfo(parseJson(res.hiringinfo));
+          this.patchSchoolInfo();
         } else {
           // search not found reset form and set idcard again
+          this.searchIdCardNotFound(`ไม่พบข้อมูลบุคลากรภายในหน่วยงาน
+          จากหมายเลขคุรุสภาสำหรับชาวต่างชาติที่ระบุ`);
           // this.form.reset();
           // const temp: any = { idcardno: idCard };
           // this.form.controls.userInfo.patchValue(temp);
         }
       });
+  }
+
+  patchSchoolInfo() {
+    this.form.controls.schoolAddr.patchValue(<any>this.schoolInfo);
   }
 
   pathUserInfo(data: any) {
@@ -624,15 +666,18 @@ export class SchoolRequestComponent implements OnInit {
     this.staffTypes$ = this.staffService.getStaffTypes();
     this.positionTypes$ = this.staffService.getPositionTypes();
     this.academicTypes$ = this.staffService.getAcademicStandingTypes();
-    this.getSchoolAddress();
+    this.getSchoolInfo();
   }
 
-  getSchoolAddress() {
+  getSchoolInfo() {
+    const payload = {
+      schoolid: this.schoolId,
+    };
     this.schoolInfoService
-      .getSchoolInfo(this.schoolId)
+      .getSchoolInfo(payload)
       .pipe(untilDestroyed(this))
       .subscribe((res: any) => {
-        this.form.controls.schoolAddr.patchValue(res);
+        this.schoolInfo = res;
       });
   }
 
@@ -759,7 +804,6 @@ export class SchoolRequestComponent implements OnInit {
     const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header,
-        buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 
@@ -768,6 +812,23 @@ export class SchoolRequestComponent implements OnInit {
       .subscribe((res) => {
         if (res) {
           this.backToListPage();
+        }
+      });
+  }
+
+  searchIdCardNotFound(header: string) {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header: header,
+        btnLabel: 'เพิ่มข้อมูลบุคลากร',
+      },
+    });
+
+    dialog.componentInstance.completed
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        if (res) {
+          this.router.navigate(['/staff-management', 'list']);
         }
       });
   }

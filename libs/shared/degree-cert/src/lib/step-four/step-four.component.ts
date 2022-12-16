@@ -1,4 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
@@ -24,13 +30,17 @@ import {
   styleUrls: ['./step-four.component.css'],
   providers: providerFactory(DegreeCertStepFourComponent),
 })
-export class DegreeCertStepFourComponent extends KspFormBaseComponent {
+export class DegreeCertStepFourComponent
+  extends KspFormBaseComponent
+  implements OnInit, OnChanges
+{
   @Input() formType = 'a';
   step4Incorrect = null;
   // step4Incorrect = [
   //   'ไม่ครบถ้วน และไม่ถูกต้อง',
   //   'หมายเหตุ สำเนาใบอนุญาตไม่ถูกต้อง',
   // ];
+  uniqueTimestamp = '';
   override form = this.fb.group({
     files: [],
   });
@@ -40,7 +50,14 @@ export class DegreeCertStepFourComponent extends KspFormBaseComponent {
     private fb: FormBuilder
   ) {
     super();
+    this.subscriptions.push(
+      this.form?.valueChanges.subscribe((value: any) => {
+        this.onChange(value);
+        this.onTouched();
+      })
+    );
   }
+
   private _uploadFilesCollection: any = {
     a: this.genUnique(UPLOAD_FILE_1),
     b: this.genUnique(UPLOAD_FILE_2),
@@ -56,6 +73,9 @@ export class DegreeCertStepFourComponent extends KspFormBaseComponent {
       ...data,
       uniqueTimestamp: uuidv4(),
     }));
+  }
+  ngOnInit(): void {
+    this.uniqueTimestamp = uuidv4();
   }
   openDialog() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
@@ -79,14 +99,8 @@ export class DegreeCertStepFourComponent extends KspFormBaseComponent {
   }
 
   override writeValue(value: any) {
-    const uploadFilesByType = this.uploadFilesCollection[this.formType || 'a'];
     if (value?.files?.length) {
-      const files = value?.files?.map((data: any) => {
-        let mergeData = _.find(uploadFilesByType, { key: data?.key });
-        mergeData = { ...data, ...mergeData };
-        return mergeData;
-      });
-      this.value = { files };
+      this.value = value;
     } else {
       this.value = {
         files: this.uploadFilesCollection[this.formType || 'a'],
@@ -94,6 +108,16 @@ export class DegreeCertStepFourComponent extends KspFormBaseComponent {
     }
   }
 
+  override ngOnChanges(event: any) {
+    if (event?.mode) {
+      this.mode = event.mode.currentValue;
+    }
+    if (event?.formType != this.form) {
+      this.value = {
+        files: this.uploadFilesCollection[this.formType || 'a'],
+      };
+    }
+  }
   onConfirmed() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '350px',
@@ -103,7 +127,6 @@ export class DegreeCertStepFourComponent extends KspFormBaseComponent {
         เลขที่ใบคำขอ : 12234467876543 `,
         subContent: `กรุณาตรวจสอบสถานะใบคำขอหรือรหัสเข้าใช้งาน
         ผ่านทางอีเมลผู้ที่ลงทะเบียนภายใน 3 วัน`,
-        buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 
@@ -115,9 +138,7 @@ export class DegreeCertStepFourComponent extends KspFormBaseComponent {
   }
   uploadComplete(groups: any) {
     this.onChange({
-      files: _.map(groups, (data) =>
-        _.pick(data, ['fileid', 'filename', 'key', 'uniqueTimestamp'])
-      ),
+      files: groups,
     });
     this.onTouched();
   }

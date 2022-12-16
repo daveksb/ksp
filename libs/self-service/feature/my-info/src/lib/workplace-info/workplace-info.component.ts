@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { FormMode, SelfMyInfo } from '@ksp/shared/interface';
+import {
+  Amphur,
+  Bureau,
+  FormMode,
+  Province,
+  SelfMyInfo,
+  Tambol,
+} from '@ksp/shared/interface';
 import {
   AddressService,
   EducationDetailService,
@@ -17,7 +24,11 @@ import { replaceEmptyWithNull } from '@ksp/shared/utility';
 export class WorkplaceInfoComponent implements OnInit {
   label = 'แก้ไขข้อมูล';
   mode: FormMode = 'view';
-
+  provinces1$!: Observable<Province[]>;
+  amphurs1$!: Observable<Amphur[]>;
+  tumbols1$!: Observable<Tambol[]>;
+  bureau$!: Observable<Bureau[]>;
+  baseForm = this.fb.group(new SelfMyInfo());
   form = this.fb.group({
     workplace: [],
   });
@@ -29,15 +40,8 @@ export class WorkplaceInfoComponent implements OnInit {
     private myInfoService: MyInfoService
   ) {}
 
-  provinces1$!: Observable<any>;
-  amphurs1$!: Observable<any>;
-  tumbols1$!: Observable<any>;
-  bureau$!: Observable<any>;
-
-  baseForm = this.fb.group(new SelfMyInfo());
   ngOnInit(): void {
-    this.bureau$ = this.educationDetailService.getBureau();
-    this.provinces1$ = this.addressService.getProvinces();
+    this.getListData();
     this.myInfoService.getMyInfo().subscribe((res) => {
       res = this.myInfoService.formatMyInfo(res);
       this.baseForm.patchValue(res);
@@ -45,13 +49,16 @@ export class WorkplaceInfoComponent implements OnInit {
     });
   }
 
+  getListData() {
+    this.bureau$ = this.educationDetailService.getBureau();
+    this.provinces1$ = this.addressService.getProvinces();
+  }
+
   patchWorkPlace(res: SelfMyInfo) {
-    //console.log('res = ', res);
-    //const workplace = parseJson(res.schooladdrinfo);
+    console.log('res = ', res);
     const workplace = JSON.parse(`${res?.schooladdrinfo}`);
-    //console.log('workplace = ', workplace);
     this.amphurs1$ = this.addressService.getAmphurs(workplace.province);
-    this.tumbols1$ = this.addressService.getTumbols(workplace.district);
+    this.tumbols1$ = this.addressService.getTumbols(workplace.amphur);
     this.form.patchValue({ workplace });
   }
 
@@ -91,8 +98,9 @@ export class WorkplaceInfoComponent implements OnInit {
       schooladdrinfo: JSON.stringify(formData.workplace),
     });
     const payload: SelfMyInfo = replaceEmptyWithNull(this.baseForm.value);
+    console.log('payload = ', payload);
     this.myInfoService.updateMyInfo(payload).subscribe((res) => {
-      //
+      //console.log('update res = ', res);
     });
   }
 

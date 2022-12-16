@@ -13,15 +13,24 @@ import { SharedFormSelfRewardFormModule } from '@ksp/shared/form/self-reward-for
 import { MatDialogModule } from '@angular/material/dialog';
 import { SelfServiceFeatureRewardModule } from '@ksp/self-service/feature/reward';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
-import { EServiceRewardSearchComponent } from '@ksp/shared/search';
-import { ThaiDatePipe } from '@ksp/shared/pipe';
+import {
+  EServiceRewardAccountSearchComponent,
+  EServiceRewardSearchComponent,
+} from '@ksp/shared/search';
+import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import { ETeacherCouncilConfirmComponent } from './e-teacher-council-confirm/e-teacher-council-confirm.component';
 import {
   ValidateKspRequestComponent,
   ConsiderKspRequestComponent,
+  RewardValidateRequestComponent,
 } from '@ksp/e-service/e-license/approve-ksp-request';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { ETeacherCouncilRejectComponent } from './e-teacher-council-reject/e-teacher-council-reject.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { EServiceUiRewardRejectFormModule } from '@ksp/e-service/ui/reward-reject-form';
+import { ETeacherCouncilAccountListComponent } from './e-teacher-council-account-list/e-teacher-council-account-list.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const routes: Routes = [
   {
@@ -45,6 +54,14 @@ const routes: Routes = [
         path: 'confirm/:id',
         component: ETeacherCouncilConfirmComponent,
       },
+      {
+        path: 'reject/:id',
+        component: ETeacherCouncilRejectComponent,
+      },
+      {
+        path: 'account-list',
+        component: ETeacherCouncilAccountListComponent,
+      },
     ],
   },
 ];
@@ -67,11 +84,19 @@ const routes: Routes = [
     LicenseCheckComponent,
     ValidateKspRequestComponent,
     MatPaginatorModule,
+    RequestNoPipe,
+    MatDatepickerModule,
+    EServiceUiRewardRejectFormModule,
+    RewardValidateRequestComponent,
+    MatProgressSpinnerModule,
+    EServiceRewardAccountSearchComponent,
   ],
   declarations: [
     ETeacherCouncilListComponent,
     ETeacherCouncilDetailComponent,
     ETeacherCouncilConfirmComponent,
+    ETeacherCouncilRejectComponent,
+    ETeacherCouncilAccountListComponent,
   ],
   exports: [ETeacherCouncilListComponent, ETeacherCouncilDetailComponent],
 })

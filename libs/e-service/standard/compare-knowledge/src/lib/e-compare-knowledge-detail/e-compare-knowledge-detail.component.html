@@ -1,6 +1,6 @@
 <ksp-top-nav [isSelfService]="true">
   <span header>ยื่นใบคำขอ</span>
-  <span subHeader>ขอเทียบเคียงความรู้</span>
+  <span subHeader>ใบคำขอเทียบเคียงความรู้</span>
 </ksp-top-nav>
 
 <form [formGroup]="form">
@@ -31,23 +31,23 @@
       </div>
 
       <mat-tab-group
-        class="tab-group"
+        class="tab-group mb-3"
         animationDuration="0ms"
         (selectedTabChange)="tabChanged($event)"
         [selectedIndex]="0"
       >
         <mat-tab label="ที่อยู่" class="tab-content">
-          <ksp-form-address
-            formControlName="address1"
-            [mode]="'view'"
-            [provinces]="provinces1$ | async"
-            [amphurs]="amphurs1$ | async"
-            [tumbols]="tumbols1$ | async"
-          >
-            <span>ที่อยู่ทะเบียนบ้าน</span>
-          </ksp-form-address>
-
-          <hr />
+          <div class="mb-3">
+            <ksp-form-address
+              formControlName="address1"
+              [mode]="'view'"
+              [provinces]="provinces1$ | async"
+              [amphurs]="amphurs1$ | async"
+              [tumbols]="tumbols1$ | async"
+            >
+              <span>ที่อยู่ทะเบียนบ้าน</span>
+            </ksp-form-address>
+          </div>
           <ksp-form-address
             formControlName="address2"
             [mode]="'view'"

@@ -30,7 +30,7 @@ export class RegisterForeignStepThreeComponent implements OnInit {
   ) {}
 
   savingData: any;
-  passpoerNo = '';
+  passportNo = '';
 
   passwordEqual = false;
   validatorMessages = validatorMessages;
@@ -56,14 +56,12 @@ export class RegisterForeignStepThreeComponent implements OnInit {
   ngOnInit(): void {
     localForage.getItem('registerForeigner').then((res: any) => {
       this.savingData = res;
-      this.passpoerNo = res.passportno;
-      console.log('xxx = ', this.passpoerNo);
+      this.passportNo = res.passportno;
     });
   }
 
   save() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
       data: {
         title: `Confirm?`,
         subTitle: `You want to save this information`,

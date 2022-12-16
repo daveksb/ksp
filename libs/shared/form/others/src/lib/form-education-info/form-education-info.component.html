@@ -1,5 +1,5 @@
 <form [formGroup]="form">
-  <div class="ps-3 pe-3 pt-3 pb-3 bg-light">
+  <div [class]="isDarkMode ? 'p-3 bg-light' : 'p-0 bg-light'">
     <div class="box-header">
       <ng-content></ng-content>
     </div>
@@ -119,11 +119,19 @@
     <div class="row" *ngIf="userEducationType === FormTypeEnum.foreign">
       <div class="col-6 mb-2">
         <label class="form-label">หน่วยงานที่รับรองวิทยฐานะมหาวิทยาลัย</label>
-        <input class="form-control" type="text" />
+        <input
+          class="form-control"
+          type="text"
+          formControlName="institutionApprove"
+        />
       </div>
       <div class="col-6 mb-2">
         <label class="form-label">เว็บไซต์ของหน่วยงาน</label>
-        <input class="form-control" type="text" />
+        <input
+          class="form-control"
+          type="text"
+          formControlName="institutionWebsite"
+        />
       </div>
     </div>
 

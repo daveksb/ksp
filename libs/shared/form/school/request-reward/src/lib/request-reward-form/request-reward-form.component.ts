@@ -14,7 +14,13 @@ import {
   Validators,
 } from '@angular/forms';
 import { FileGroup, KspFormBaseComponent } from '@ksp/shared/interface';
-import { providerFactory } from '@ksp/shared/utility';
+import {
+  idCardPattern,
+  nameThPattern,
+  phonePattern,
+  providerFactory,
+  validatorMessages,
+} from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-request-reward-form',
@@ -31,6 +37,7 @@ import { providerFactory } from '@ksp/shared/utility';
   providers: providerFactory(RequestRewardFormComponent),
 })
 export class RequestRewardFormComponent extends KspFormBaseComponent {
+  validatorMessages = validatorMessages;
   @Input() osoiTypes: any = [];
   @Input() personTypes: any = [];
   @Input() prefixList: any = [];
@@ -50,15 +57,17 @@ export class RequestRewardFormComponent extends KspFormBaseComponent {
     rewardname: [null, Validators.required],
     rewardtype: [null, Validators.required],
     submitbefore: [null, Validators.required],
-    vdolink: [''],
-    osoimember: this.fb.array([]),
-    personId: [null, Validators.required],
+
+    personId: [null, [Validators.required, Validators.pattern(idCardPattern)]],
     prefix: [null, Validators.required],
-    firstName: [null, Validators.required],
-    lastName: [null, Validators.required],
-    phone: [null, Validators.required],
-    email: [null, Validators.required],
+    firstName: [null, [Validators.required, Validators.pattern(nameThPattern)]],
+    lastName: [null, [Validators.required, Validators.pattern(nameThPattern)]],
+    phone: [null, [Validators.required, Validators.pattern(phonePattern)]],
+    email: [null, [Validators.required, Validators.email]],
     academicStanding: [null, Validators.required],
+
+    osoimember: this.fb.array([]),
+    vdolink: [''],
   });
 
   rewardFiles: FileGroup[] = [
@@ -84,15 +93,47 @@ export class RequestRewardFormComponent extends KspFormBaseComponent {
     return this.form.controls.osoimember as FormArray;
   }
 
+  get personId() {
+    return this.form.controls.personId;
+  }
+
+  get firstName() {
+    return this.form.controls.firstName;
+  }
+
+  get lastName() {
+    return this.form.controls.lastName;
+  }
+
+  get selfPhone() {
+    return this.form.controls.phone;
+  }
+
+  get email() {
+    return this.form.controls.email;
+  }
+
   addRow(data: MemberForm = defaultMember) {
     const rewardForm = this.fb.group({
       membertype: [data.membertype, Validators.required],
-      idcardno: [data.idcardno, Validators.required],
+      idcardno: [
+        data.idcardno,
+        [Validators.required, Validators.pattern(idCardPattern)],
+      ],
       prefix: [data.prefix, Validators.required],
-      firstname: [data.firstname, Validators.required],
-      lastname: [data.lastname, Validators.required],
-      phone: [data.phone, Validators.required],
-      email: [data.email, Validators.required],
+      firstname: [
+        data.firstname,
+        [Validators.required, Validators.pattern(nameThPattern)],
+      ],
+      lastname: [
+        data.lastname,
+        [Validators.required, Validators.pattern(nameThPattern)],
+      ],
+      phone: [
+        data.phone,
+        [Validators.required, Validators.pattern(phonePattern)],
+      ],
+      email: [data.email, [Validators.required, Validators.email]],
       academicstanding: [data.academicstanding, Validators.required],
     });
 

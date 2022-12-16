@@ -32,7 +32,7 @@
       ></ksp-school-request-search>
 
       <hr />
-      <div class="d-flex justify-content-between">
+      <div class="d-flex justify-content-between align-items-center">
         <div class="box-header text-primary">รายการยื่นใบคำขอ</div>
 
         <button
@@ -95,9 +95,6 @@
               class="text-center"
               mat-cell
               *matCellDef="let element; let i = index"
-              (click)="
-                viewRequest(element.requesttype, element.careertype, element.id)
-              "
             >
               {{
                 paginator.pageIndex === 0
@@ -110,6 +107,7 @@
           <ng-container matColumnDef="requestno">
             <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
             <td
+              class="text-primary list-link"
               (click)="
                 viewRequest(element.requesttype, element.careertype, element.id)
               "
@@ -122,10 +120,10 @@
 
           <ng-container matColumnDef="idcardno">
             <th mat-header-cell *matHeaderCellDef>
-              เลขบัตรประชาชน/เลขคุรุสภาสำหรับชาวต่างชาติ
+              หมายเลขบัตรประชาชน/เลขคุรุสภาสำหรับชาวต่างชาติ
             </th>
             <td mat-cell *matCellDef="let element">
-              {{ element.idcardno }} {{ element.kuruspano }}
+              {{ element.idcardno || element.kuruspano }}
             </td>
           </ng-container>
 
@@ -183,14 +181,14 @@
 
           <ng-container matColumnDef="updatedate">
             <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
-            <td mat-cell *matCellDef="let element" class="text-center">
+            <td mat-cell *matCellDef="let element">
               {{ element.processupdatedate | thaiDate }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="requestdate">
             <th mat-header-cell *matHeaderCellDef>วันที่ยื่นใบคำขอ</th>
-            <td mat-cell *matCellDef="let element" class="text-center">
+            <td mat-cell *matCellDef="let element">
               {{ element.requestdate | thaiDate }}
             </td>
           </ng-container>

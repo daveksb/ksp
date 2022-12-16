@@ -5,7 +5,7 @@
         ><span *ngIf="!isForeignForm">เมื่อ</span>
         <span *ngIf="isForeignForm">Training Date</span></label
       >
-      <div class="d-flex align-items-center">
+      <div class="d-flex align-items-center" *ngIf="!isForeignForm">
         <input
           matInput
           [matDatepicker]="picker"
@@ -20,6 +20,10 @@
           class="button-date"
         ></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
+      </div>
+
+      <div *ngIf="isForeignForm">
+        <input type="date" class="form-control" formControlName="date" />
       </div>
     </div>
   </div>

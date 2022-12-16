@@ -51,6 +51,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
   evidenceFile = evidenceFiles;
   requestData = new KspRequest();
   requestSubType = SchoolRequestSubType.ชาวต่างชาติ;
+  checkedResult: any;
 
   form = this.fb.group({
     foreignTeacherInfo: [],
@@ -86,6 +87,12 @@ export class ForeignLicenseDetailComponent implements OnInit {
     this.eRequestService.getKspRequestById(id).subscribe((res) => {
       this.requestData = res;
       this.pathUserInfo(res);
+
+      if (res.status === '2') {
+        this.checkedResult = verifyChoices[0].value;
+      } else if (res.status === '3') {
+        this.checkedResult = verifyChoices[1].value;
+      }
     });
   }
 
@@ -118,6 +125,47 @@ export class ForeignLicenseDetailComponent implements OnInit {
     this.router.navigate(['/foreign-license', 'list']);
   }
 
+  /*   confirm() {
+    const payload = {
+      countrycode: '086',
+      requestno: '204565120900062',
+      createdate: '2022-12-09',
+      expireddate: null,
+      kuruspano: null,
+      idcardno: null,
+      passportno: 'A12545451',
+      passportstartdate: '2016-02-16',
+      passportenddate: '2022-12-05',
+      visastartdate: null,
+      visaenddate: null,
+      prefixth: '1',
+      firstnameth: 'พอล',
+      lastnameth: 'เฟอร์ดินานด์',
+      prefixen: '1',
+      firstnameen: 'Paul',
+      lastnameen: 'Ferdinand',
+      sex: '1',
+      birthdate: '1999-02-01',
+      email: 'test@afaf.afa',
+      position: null,
+      contactphone: '025656684',
+      nationality: null,
+      country: '86',
+      fileinfo: null, //'W1tdXQ==',
+      bureauid: null,
+      bureauname: 'สำนักงานคณะกรรมการการอาชีวศึกษา',
+      schoolid: '1314016102',
+      schoolname: 'วิทยาลัยเทคโนโลยีและอุตสาหกรรมการต่อเรือพระนครศรีอยุธยา',
+      schooladdress:
+        'เลขที่ 25 ซอย  หมู่ 2 ถนน  ตำบล หัวรอ อำเภอ พระนครศรีอยุธยา จังหวัด พระนครศรีอยุธยา รหัสไปรษณีย์ 13000',
+      requestid: '1421',
+    };
+
+    this.eRequestService
+      .createKuruspaNumber(formatDatePayload(payload))
+      .subscribe((res) => console.log('res = ', res));
+  } */
+
   confirm() {
     const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
@@ -148,13 +196,13 @@ export class ForeignLicenseDetailComponent implements OnInit {
           const data: any = this.form.controls.verifydetail.value;
           if (res && data.result === '2') {
             let payload = new KspKuruspa();
-
             const countryCode = this.requestData.country ?? 0;
             const countryCode3digits = countryCode.toString().padStart(3, '0');
 
-            payload.countrycode = countryCode3digits;
+            payload.country = countryCode3digits;
             payload.requestno = this.requestData.requestno;
             payload.createdate = moment().format('yyyy-MM-DD');
+            payload.expireddate = moment().add(2, 'years').format('yyyy-MM-DD');
             payload.idcardno = this.requestData.idcardno;
             payload.passportno = this.requestData.passportno;
             payload.passportstartdate = this.requestData.passportstartdate;
@@ -171,16 +219,15 @@ export class ForeignLicenseDetailComponent implements OnInit {
             payload.position = this.requestData.position;
             payload.contactphone = this.requestData.contactphone;
             payload.nationality = this.requestData.nationality;
-            payload.country = this.requestData.country;
-            payload.fileinfo = this.requestData.fileinfo;
+            payload.fileinfo = null; //this.requestData.fileinfo
             payload.bureauid = this.requestData.bureauid;
             payload.bureauname = this.requestData.bureauname;
             payload.schoolid = this.requestData.schoolid;
             payload.schoolname = this.requestData.schoolname;
             payload.schooladdress = this.requestData.schooladdress;
             payload.requestid = this.requestData.requestid;
-
             payload = replaceEmptyWithNull(payload);
+
             return this.eRequestService.createKuruspaNumber(
               formatDatePayload(payload)
             );
@@ -197,8 +244,10 @@ export class ForeignLicenseDetailComponent implements OnInit {
           return EMPTY;
         })
       )
-      .subscribe(() => {
-        this.onCompleted();
+      .subscribe((res) => {
+        if (res.returncode === '00') {
+          this.onCompleted();
+        }
       });
   }
 

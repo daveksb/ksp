@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
-import { MatTabChangeEvent } from '@angular/material/tabs';
+import { FormArray, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   levels,
@@ -40,6 +39,7 @@ import {
 } from '@ksp/shared/interface';
 import { TempLicenseDetailService } from './temp-license-detail.service';
 import { ESelfFormBaseComponent } from '@ksp/shared/form/others';
+import { Location } from '@angular/common';
 
 export class KspApprovePersistData {
   checkDetail: any = null;
@@ -69,7 +69,6 @@ export class ETempLicenseDetailComponent implements OnInit {
   nationList$!: Observable<Nationality[]>;
   visaTypeList!: Observable<VisaType[]>;
   visaClassList!: Observable<VisaClass[]>;
-  selectedTab: MatTabChangeEvent = new MatTabChangeEvent();
   requestId!: number;
   requestData = new KspRequest();
   userInfoFormType: number = UserInfoFormType.thai; // control the display field of user info form
@@ -77,6 +76,11 @@ export class ETempLicenseDetailComponent implements OnInit {
   forbidden: any;
   careerType = SchoolRequestSubType.ครู;
   requestLabel = '';
+  subRequestLabel = '';
+  eduSelected = true;
+  btnNextPrev = {
+    index: 0,
+  };
 
   form = this.fb.group({
     userInfo: [],
@@ -85,6 +89,10 @@ export class ETempLicenseDetailComponent implements OnInit {
     schoolAddr: [],
     edu1: [],
     edu2: [],
+    edu3: [],
+    edu4: [],
+    edu5: [],
+    edu6: [],
     teachinginfo: [],
     hiringinfo: [],
     reasoninfo: [],
@@ -99,7 +107,8 @@ export class ETempLicenseDetailComponent implements OnInit {
     private eRequestService: ERequestService,
     private addressService: AddressService,
     private generalInfoService: GeneralInfoService,
-    private staffService: StaffService
+    private staffService: StaffService,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -123,16 +132,6 @@ export class ETempLicenseDetailComponent implements OnInit {
     return this.form.controls.checkResult as FormArray;
   }
 
-  tabChanged(e: MatTabChangeEvent) {
-    //console.log('tab event = ', e);
-    this.selectedTab = e;
-  }
-
-  next() {
-    this.persistData();
-    this.router.navigate(['/temp-license', 'confirm', this.requestId]);
-  }
-
   // save data to indexed db
   persistData() {
     //console.log('check sub result = ', checkSubResult);
@@ -150,6 +149,7 @@ export class ETempLicenseDetailComponent implements OnInit {
       },
       requestData: this.requestData,
     };
+    //console.log('saveData = ', saveData);
     localForage.setItem('checkRequestData', saveData);
   }
 
@@ -160,7 +160,6 @@ export class ETempLicenseDetailComponent implements OnInit {
   checkRequestId() {
     this.route.paramMap.pipe(untilDestroyed(this)).subscribe((params) => {
       this.requestId = Number(params.get('id'));
-
       if (this.requestId) {
         this.loadRequestFromId(this.requestId);
       }
@@ -172,14 +171,19 @@ export class ETempLicenseDetailComponent implements OnInit {
       if (Number(params['subtype'])) {
         this.careerType = Number(params['subtype']);
       }
-      console.log('xxx= ', this.careerType);
 
       if (this.careerType === 1) {
         this.userInfoFormType = UserInfoFormType.thai;
         this.requestLabel = 'ชาวไทย';
+        this.subRequestLabel = 'ครู';
+      } else if (this.careerType === 2) {
+        this.userInfoFormType = UserInfoFormType.thai;
+        this.requestLabel = 'ชาวไทย';
+        this.subRequestLabel = 'ผู้บริหารสถานศึกษา';
       } else if (this.careerType === 5) {
         this.userInfoFormType = UserInfoFormType.foreign;
         this.requestLabel = 'ชาวต่างชาติ';
+        this.subRequestLabel = 'ครูชาวต่างชาติ';
       }
     });
   }
@@ -188,7 +192,6 @@ export class ETempLicenseDetailComponent implements OnInit {
     this.eRequestService.getKspRequestById(requestId).subscribe((res) => {
       if ('returncode' in res) return;
       this.requestData = res;
-      //console.log('details = ', parseJson(res.detail));
       this.pathUserInfo(res);
       this.patchAddress(parseJson(res.addressinfo));
       this.patchEdu(parseJson(res.eduinfo));
@@ -198,11 +201,12 @@ export class ETempLicenseDetailComponent implements OnInit {
       this.patchSchoolAddrress(parseJson(res.schooladdrinfo));
       this.patchFileInfo(parseJson(res.fileinfo));
       this.patchProhibitProperty(parseJson(res.prohibitproperty));
+      console.log('res = ', res.prohibitproperty);
     });
   }
 
   patchFileInfo(res: any) {
-    /*  if (res && res.tab3 && Array.isArray(res.tab3)) {
+    if (res && res.tab3 && Array.isArray(res.tab3)) {
       this.eduFiles.forEach((group, index) => (group.files = res.tab3[index]));
     }
     if (res && res.tab4 && Array.isArray(res.tab4)) {
@@ -210,7 +214,7 @@ export class ETempLicenseDetailComponent implements OnInit {
         (group, index) => (group.files = res.tab4[index])
       );
     }
-    */
+
     if (res && res.tab5 && Array.isArray(res.tab5)) {
       this.reasonFiles.forEach(
         (group, index) => (group.files = res.tab5[index])
@@ -268,6 +272,18 @@ export class ETempLicenseDetailComponent implements OnInit {
         if (i === 1) {
           this.form.controls.edu2.patchValue(edu);
         }
+        if (i === 2) {
+          this.form.controls.edu3.patchValue(edu);
+        }
+        if (i === 3) {
+          this.form.controls.edu4.patchValue(edu);
+        }
+        if (i === 4) {
+          this.form.controls.edu5.patchValue(edu);
+        }
+        if (i === 5) {
+          this.form.controls.edu6.patchValue(edu);
+        }
       });
     }
   }
@@ -306,7 +322,6 @@ export class ETempLicenseDetailComponent implements OnInit {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.provinces$ = this.addressService.getProvinces();
     this.positionTypes$ = this.staffService.getPositionTypes();
-
     this.countries$ = this.addressService.getCountry();
     this.nationList$ = this.generalInfoService.getNationality();
     this.visaClassList = this.generalInfoService.getVisaClass();
@@ -317,7 +332,31 @@ export class ETempLicenseDetailComponent implements OnInit {
     this.router.navigate(['/temp-license']);
   }
 
+  nextTab() {
+    if (this.selectedTabIndex < 6) {
+      this.selectedTabIndex++;
+    } else {
+      this.nextPage();
+    }
+  }
+
+  prevTab() {
+    if (this.selectedTabIndex == 0) {
+      this.prevPage();
+    } else {
+      this.selectedTabIndex--;
+    }
+  }
+
   prevPage() {
-    this.router.navigate(['/temp-license', 'list']);
+    //this.router.navigate(['/temp-license', 'list']);
+    this.location.back();
+  }
+
+  nextPage() {
+    if (this.checkResultFormArray.valid) {
+      this.persistData();
+      this.router.navigate(['/temp-license', 'confirm', this.requestId]);
+    }
   }
 }

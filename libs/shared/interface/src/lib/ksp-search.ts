@@ -20,11 +20,25 @@ export interface SchRequestSearchFilter {
   careertype: string | undefined | null;
   name: string | undefined | null;
   idcardno: string | undefined | null;
+  provinceid?: string | undefined | null;
   passportno: string | undefined | null;
   process: string | undefined | null;
   status: string | undefined | null;
   requestdatefrom: string | undefined | null;
   requestdateto: string | undefined | null;
+  offset: string | undefined | null;
+  row: string | undefined | null;
+}
+
+export interface KSPRequestSearchFilter {
+  requesttype: string | null;
+  requestno: string | null;
+  requestdate: string | null;
+  status: string | null;
+  process: string | null;
+  paymentstatus: string | null;
+  idcardno: string | null;
+  kuruspano: string | null;
   offset: string | undefined | null;
   row: string | undefined | null;
 }

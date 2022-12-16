@@ -5,18 +5,16 @@
 
 <div [formGroup]="form" class="main__container px-4 py-2">
   <self-service-request-status
-    [idcardNo]="userInfo && userInfo.idcardno"
+    [idcardNo]="(myInfo$ | async)?.idcardno || null"
   ></self-service-request-status>
-  <br />
-  <div class="border shadow-sm rounded-4 px-3 py-4 bg-white">
+  <div class="border shadow-sm rounded-4 px-3 py-4 bg-white mt-3">
     <ksp-form-user-info
       [isSelfService]="true"
       [prefixList]="prefixList$ | async"
       formControlName="userInfo"
     ></ksp-form-user-info>
   </div>
-  <br />
-  <div class="border shadow-sm rounded-4 px-3 py-4 bg-white">
+  <div class="border shadow-sm rounded-4 px-3 py-4 bg-white mt-3">
     <ksp-form-refund-fee-detail
       formControlName="refundInfo"
     ></ksp-form-refund-fee-detail>

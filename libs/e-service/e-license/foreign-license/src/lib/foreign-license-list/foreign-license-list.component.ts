@@ -10,12 +10,13 @@ import {
   KspRequest,
   SchRequestSearchFilter,
 } from '@ksp/shared/interface';
-import { ERequestService } from '@ksp/shared/service';
+import { ERequestService, LoaderService } from '@ksp/shared/service';
 import {
   checkProcess,
   schoolMapRequestType,
   checkStatus,
 } from '@ksp/shared/utility';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'ksp-foreign-license-list',
@@ -29,6 +30,7 @@ export class ForeignLicenseListComponent implements AfterViewInit {
     search: [{ requesttype: '4' }],
   });
 
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<KspRequest>();
   checkProcess = checkProcess;
@@ -40,7 +42,8 @@ export class ForeignLicenseListComponent implements AfterViewInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private eRequestService: ERequestService
+    private eRequestService: ERequestService,
+    private loaderService: LoaderService
   ) {}
 
   ngAfterViewInit(): void {

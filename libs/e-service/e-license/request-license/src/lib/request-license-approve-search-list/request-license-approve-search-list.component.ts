@@ -41,8 +41,8 @@ export class RequestLicenseApproveSearchListComponent
     'status',
     'screenDate',
     'guaranteeDate',
-    'checkDate',
-    'edit',
+    //'checkDate',
+    //'edit',
   ];
   dataSource = new MatTableDataSource<any>();
   mode: 'create' | 'guarantee' = 'create';
@@ -103,6 +103,7 @@ export class RequestLicenseApproveSearchListComponent
       createdate: params.createdate,
       offset: '0',
       row: '500',
+      requesttype: '1',
     };
     this.requestService.searchSelfApproveList(payload).subscribe((res) => {
       this.dataSource.data = res.map((i) => {
@@ -112,7 +113,8 @@ export class RequestLicenseApproveSearchListComponent
   }
 
   createGroup() {
-    this.router.navigate(['/request-license', 'create-group-list']);
+    this.router.navigate(['/request-license', 'create-group']);
+    //this.router.navigate(['/renew-license', 'create-group-list']);
   }
 
   kmv() {

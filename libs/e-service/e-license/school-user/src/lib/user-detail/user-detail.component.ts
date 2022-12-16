@@ -17,8 +17,9 @@ import {
 import { ERequestService, GeneralInfoService } from '@ksp/shared/service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { concatMap, forkJoin, Observable } from 'rxjs';
-import { parseJson } from '@ksp/shared/utility';
+import { getCookie, jsonParse, parseJson } from '@ksp/shared/utility';
 import localForage from 'localforage';
+import moment from 'moment';
 
 @Component({
   templateUrl: './user-detail.component.html',
@@ -35,6 +36,7 @@ export class UserDetailComponent implements OnInit {
   pageTypeEnum = SchoolUserPageType;
   setPassword = '';
   mode: FormMode = 'view';
+  checkedResult: any;
   files: FileGroup[] = [
     {
       name: 'หนังสือแต่งตั้งผู้ประสานงาน',
@@ -77,9 +79,10 @@ export class UserDetailComponent implements OnInit {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.form2.disable();
 
-    this.verifyForm.valueChanges.subscribe((res) => {
-      console.log('res = ', res);
-    });
+    /* this.verifyForm.valueChanges.subscribe((res) => {
+      const form: any = this.verifyForm.controls.result.value;
+      const detail: string = form.detail;
+    }); */
   }
 
   checkRequestId() {
@@ -94,14 +97,16 @@ export class UserDetailComponent implements OnInit {
   loadRequestFromId(id: number) {
     this.eRequestService.getKspRequestById(id).subscribe((res) => {
       this.requestData = res;
-
+      //console.log('res = ', res.status);
       res.status === '1' ? (this.mode = 'edit') : (this.mode = 'view');
+      //set value for checked approve result
+      if (res.status === '2') {
+        this.checkedResult = approveChoices[0][0].value;
+      } else if (res.status === '3') {
+        this.checkedResult = approveChoices[0][1].value;
+      }
 
-      /* if (res.status === '1') {
-        this.verifyForm.patchValue(1)
-      } */
       //console.log('file = ', parseJson(res.fileinfo));
-
       const files = parseJson(res.fileinfo);
 
       if (files && Array.isArray(files)) {
@@ -133,7 +138,7 @@ export class UserDetailComponent implements OnInit {
       status: '2',
       detail: null,
       systemtype: '4', //e-service
-      userid: null,
+      userid: getCookie('userId'),
       paymentstatus: null,
     };
 
@@ -163,13 +168,15 @@ export class UserDetailComponent implements OnInit {
       status: '2',
       detail: null,
       systemtype: '4', //e-service
-      userid: null,
+      userid: getCookie('userId'),
       paymentstatus: null,
     };
     const updateRequest =
       this.eRequestService.KspUpdateRequestProcess(updatePayload);
 
     const user = new SchUser();
+    const coordinatorinfo = jsonParse(this.requestData.coordinatorinfo || '{}');
+
     user.idcardno = this.requestData.idcardno;
     user.prefixth = this.requestData.prefixth;
     user.schemail = this.requestData.email;
@@ -178,14 +185,17 @@ export class UserDetailComponent implements OnInit {
     user.lastnameth = this.requestData.lastnameth;
     user.schusername = this.requestData.schoolid;
     user.schoolid = this.requestData.schoolid;
+    user.schmobile = this.requestData.contactphone;
     user.schpassword = this.setPassword;
     user.requestid = this.requestData.id;
     user.schuseractive = '1';
+    user.schuserstartdate = moment().format('yyyy-MM-DD');
+    user.coordinatorinfo = JSON.stringify(coordinatorinfo);
+    //console.log('user = ', user);
+
     const createUser = this.eRequestService.createSchUser(user);
-
     const forkRequest = forkJoin([updateRequest, createUser]);
-
-    deActivateAllUser.pipe(concatMap(() => forkRequest)).subscribe((res) => {
+    deActivateAllUser.pipe(concatMap(() => forkRequest)).subscribe(() => {
       //console.log('res = ', res);
       this.completeDialog();
     });
@@ -198,7 +208,7 @@ export class UserDetailComponent implements OnInit {
       status: '3',
       detail: null,
       systemtype: '4', //e-service
-      userid: null,
+      userid: getCookie('userId'),
       paymentstatus: null,
     };
 
@@ -210,7 +220,6 @@ export class UserDetailComponent implements OnInit {
 
   viewUser(schoolId: any) {
     localForage.setItem('schoolDetail', this.form2.value);
-    //console.log('yyy = ', this.form2.value);
     this.router.navigate(['school', 'all-user'], {
       queryParams: { schoolId: schoolId },
     });
@@ -251,7 +260,6 @@ export class UserDetailComponent implements OnInit {
     const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header: `บันทึกข้อมูลสำเร็จ`,
-        buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 

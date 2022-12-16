@@ -5,7 +5,7 @@
         display: flex;
         flex-direction: row;
         max-width: 1200px;
-        overflow: scroll;
+        overflow: auto;
       "
     >
       <ng-container *ngFor="let pdf of pdfList; let i = index">
@@ -20,17 +20,20 @@
             *ngIf="pdf.type !== 'pdf'"
             [src]="pdf.src"
           />
-          <div
-            (click)="selectFile(pdf, i)"
-            style="
-              top: 0px;
-              left: 0px;
-              z-index: 10;
-              position: absolute;
-              width: 100%;
-              height: 100%;
-            "
-          ></div>
+          <div>
+            <div
+              (click)="selectFile(pdf, i)"
+              style="
+                top: 0px;
+                left: 0px;
+                z-index: 10;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                overflow-y: scroll;
+              "
+            ></div>
+          </div>
           <div *ngIf="pdf.loading" class="lds-roller">
             <div></div>
             <div></div>
@@ -73,6 +76,24 @@
       <div class="d-flex justify-content-center">
         <img *ngIf="selected.type !== 'pdf'" [src]="selected.src" />
       </div>
+      <div *ngIf="index !== null" class="bg-white mt-3">
+        <hr />
+        <e-service-license-check
+          [choices]="verifyChoice"
+          [formControlName]="index"
+        ></e-service-license-check>
+      </div>
     </ng-container>
   </ng-container>
 </ng-container>
+<div class="d-flex justify-content-center mt-3">
+  <button
+    *ngIf="selected"
+    [mat-dialog-close]="form.value"
+    cdkFocusInitial
+    type="button"
+    class="btn btn-primary"
+  >
+    บันทึก
+  </button>
+</div>

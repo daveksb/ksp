@@ -15,17 +15,18 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { FormBuilder } from '@angular/forms';
-import { EMPTY, Observable, switchMap } from 'rxjs';
+import { EMPTY, Observable, Subject, switchMap } from 'rxjs';
 import {
   AddressService,
   GeneralInfoService,
+  LoaderService,
   SchoolInfoService,
   SchoolRequestService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import {
-  changeDate,
   formatDate,
+  formatDatePayload,
   formatRequestNo,
   getCookie,
   mapMultiFileInfo,
@@ -39,6 +40,7 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./foreign-teacher-id-request.component.scss'],
 })
 export class ForeignTeacherIdRequestComponent implements OnInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   uniqueNo!: string;
   bureauName = '';
   schoolId = getCookie('schoolId');
@@ -65,15 +67,9 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
     private requestService: SchoolRequestService,
-    private schoolInfoService: SchoolInfoService
+    private schoolInfoService: SchoolInfoService,
+    private loaderService: LoaderService
   ) {}
-
-  get formValid() {
-    return (
-      !this.form.get('foreignTeacher')?.valid ||
-      !this.form.get('visainfo')?.valid
-    );
-  }
 
   ngOnInit(): void {
     this.uniqueNo = uuidv4();
@@ -90,6 +86,13 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     });
   }
 
+  get formValid() {
+    return (
+      !this.form.get('foreignTeacher')?.valid ||
+      !this.form.get('visainfo')?.valid
+    );
+  }
+
   loadRequestData(id: number) {
     this.requestService.schGetRequestById(id).subscribe((res) => {
       if (res) {
@@ -101,9 +104,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
         res.passportstartdate = formatDate(res.passportstartdate);
         res.passportenddate = formatDate(res.passportenddate);
         res.visaexpiredate = formatDate(res.visaexpiredate);
-
         const fileinfo = JSON.parse(atob(res?.fileinfo || ''));
-
         if (fileinfo) {
           this.foreignFiles.forEach(
             (group, index) => (group.files = fileinfo[index])
@@ -130,7 +131,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
           switchMap((res) => {
             if (res) {
               const payload: KspRequestProcess = {
-                id: `${this.requestId}`,
+                requestid: `${this.requestId}`,
                 process: `${this.requestData.process}`,
                 status: '0',
                 detail: null,
@@ -138,7 +139,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
                 paymentstatus: null,
               };
 
-              return this.requestService.schCancelRequest(payload);
+              return this.requestService.schUpdateRequestProcess(payload);
             }
             return EMPTY;
           })
@@ -191,6 +192,10 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
             const userInfo: Partial<KspRequest> = this.form.value
               .foreignTeacher as any;
 
+            const countryCode = userInfo.country ?? 0;
+            const countryCode3digits = countryCode.toString().padStart(3, '0');
+
+            userInfo.country = countryCode3digits;
             userInfo.ref1 = '2';
             userInfo.ref2 = '04';
             userInfo.ref3 = '5';
@@ -201,13 +206,10 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
             userInfo.schoolid = this.schoolId;
             userInfo.process = `2`;
             userInfo.status = `1`;
-            userInfo.birthdate = changeDate(userInfo.birthdate);
-            userInfo.passportstartdate = changeDate(userInfo.passportstartdate);
-            userInfo.passportenddate = changeDate(userInfo.passportenddate);
-            const visaform = this.form.value.visainfo as any;
+            const visaform: any = this.form.value.visainfo;
             userInfo.visaclass = visaform?.visaclass;
             userInfo.visatype = visaform?.visatype;
-            userInfo.visaexpiredate = changeDate(visaform?.visaexpiredate);
+            userInfo.visaexpiredate = visaform.visaexpiredate;
             userInfo.bureauname = this.bureauName;
             userInfo.schoolid = this.schoolId;
             userInfo.schoolname = this.schoolName;
@@ -215,13 +217,14 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
             userInfo.fileinfo = JSON.stringify(
               mapMultiFileInfo(this.foreignFiles)
             );
-            //console.log('userInfo = ', userInfo);
-            return this.requestService.schCreateRequest(userInfo);
+            const payload = formatDatePayload(userInfo);
+            //console.log('payload = ', payload);
+            return this.requestService.schCreateRequest(payload);
           }
           return EMPTY;
         })
       )
-      .subscribe((res) => {
+      .subscribe((res: any) => {
         this.onCompleted(res.requestno);
       });
   }
@@ -232,7 +235,6 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
         header: `บึนทึกข้อมูลสำเร็จ`,
         content: `เลขที่รายการ : ${formatRequestNo(requestNo)}
         วันที่ : ${thaiDate(new Date())}`,
-        buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 
@@ -244,17 +246,21 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   }
 
   getList() {
+    const payload = {
+      schoolid: this.schoolId,
+    };
+
     this.schoolInfoService
-      .getSchoolInfo(this.schoolId)
+      .getSchoolInfo(payload)
       .pipe(untilDestroyed(this))
       .subscribe((res: any) => {
-        this.schoolName = res.schoolName;
-        this.bureauName = res.bureauName;
+        this.schoolName = res.schoolname;
+        this.bureauName = res.bureauname;
         this.address = `เลขที่ ${res.address} ซอย ${res?.street ?? ''} หมู่ ${
           res?.moo ?? ''
         } ถนน ${res?.road ?? ''} ตำบล ${res.tumbon} อำเภอ ${
-          res.amphurName
-        } จังหวัด ${res.provinceName} รหัสไปรษณีย์ ${res.zipCode}`;
+          res.amphurname
+        } จังหวัด ${res.provincename} รหัสไปรษณีย์ ${res.zipcode}`;
       });
     this.countries$ = this.addressService.getCountry();
     this.prefixList$ = this.generalInfoService.getPrefix();

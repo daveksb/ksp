@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoaderService, UniInfoService, UniRequestService } from '@ksp/shared/service';
-import { getCookie, thaiDate } from '@ksp/shared/utility';
+import { getCookie, replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
 import { UniserviceImportType, KspPaginationComponent, ListData } from '@ksp/shared/interface';
 
 import {
@@ -14,6 +14,7 @@ import {
 import { DegreeCertInfo } from '@ksp/uni-service/feature/edit-degree-cert';
 import { MatPaginator } from '@angular/material/paginator';
 import { Subject } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   templateUrl: './degree-list.component.html',
@@ -60,30 +61,30 @@ export class DegreeListComponent extends KspPaginationComponent implements OnIni
     // this.getDegreeCertList();
   }
 
-  getOptions() {
-    this.getUniversity();
-    this.getUniversityType();
+  async getOptions() {
+    const [university, universityTypes] =
+      await Promise.all([
+        lastValueFrom(this.uniInfoService.getUniuniversity()),
+        lastValueFrom(this.uniInfoService.getUniversityType()),
+      ]);
+    this.uniUniversityOption = university.datareturn;
+    this.uniUniversityTypeOption = universityTypes;
   }
 
-  getUniversity() {
-    const { affiliation } = this.form.controls.search.value as any;
-    this.uniInfoService.getUniversity(affiliation).subscribe(response=>{
+  getUniversity(unitype: any) {
+    this.uniInfoService.getUniversity(unitype).subscribe(response=>{
       if (response) {
         this.uniUniversityOption = response;
       }
     })
   }
 
-  getUniversityType() {
-    this.uniInfoService.getUniversityType().subscribe(response=>{
-      if (response) {
-        this.uniUniversityTypeOption = response;
-      }
-    })
-  }
-
   getRequest() {
     const form = this.form.controls.search.value as any;
+    if (form.requestsubmitDate) {
+      form.requestsubmitDate = new Date(form.requestsubmitDate)
+      form.requestsubmitDate.setHours(form.requestsubmitDate.getHours() + 7)
+    }
     return {
       uniid: form.institution,
       unitype: form.affiliation,
@@ -98,7 +99,7 @@ export class DegreeListComponent extends KspPaginationComponent implements OnIni
   }
 
   getDegreeCertList() {
-    this.uniRequestService.searchUniDegreeCert2(this.getRequest())
+    this.uniRequestService.searchUniDegreeCert2(replaceEmptyWithNull(this.getRequest()))
     .subscribe((res) => {
       if (!res?.datareturn) {
         this.dataSource.data = [];
@@ -126,7 +127,7 @@ export class DegreeListComponent extends KspPaginationComponent implements OnIni
               key: item?.id,
               order: this.pageEvent.pageIndex * this.pageEvent.pageSize + ++index,
               degreeCode: item?.degreeapprovecode,
-              sendDate: thaiDate(new Date(item?.requestdate)),
+              sendDate: item?.requestdate ? thaiDate(new Date(item?.requestdate)) : '',
               major: item?.coursename,
               branch: item?.coursefieldofstudy,
               degreeName: item?.fulldegreenameth,

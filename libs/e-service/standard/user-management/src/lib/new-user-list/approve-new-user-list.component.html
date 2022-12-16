@@ -16,6 +16,7 @@
     [statusList]="statusList"
     [searchType]="searchType"
     [universityType]="uniUniversityTypeOption"
+    [showProvince]="false"
   ></ksp-request-search>
 
   <div class="bg-white p-3 mt-3">
@@ -36,7 +37,7 @@
 
         <ng-container matColumnDef="view">
           <th mat-header-cell *matHeaderCellDef>ดู/ตรวจสอบ</th>
-          <td mat-cell *matCellDef="let element">
+          <td mat-cell *matCellDef="let element" class="text-center">
             <i
               role="button"
               (click)="goToDetail(element.id)"
@@ -71,7 +72,9 @@
 
         <ng-container matColumnDef="schoolname">
           <th mat-header-cell *matHeaderCellDef>สถาบัน/มหาวิทยาลัย</th>
-          <td mat-cell *matCellDef="let element">{{ element.educationoccupy?.uniname }}</td>
+          <td mat-cell *matCellDef="let element">
+            {{ element.educationoccupy?.uniname }}
+          </td>
         </ng-container>
 
         <!-- <ng-container matColumnDef="provience">
@@ -109,7 +112,7 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         <tr class="mat-row text-center" *matNoDataRow>
-          <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+          <td class="mat-cell fs-5" [attr.colspan]="displayedColumns.length">
             ไม่พบข้อมูล
           </td>
         </tr>

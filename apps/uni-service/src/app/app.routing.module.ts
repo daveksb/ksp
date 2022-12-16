@@ -8,6 +8,7 @@ import {
   UniHomeComponent,
   UniLoginComponent,
 } from '@ksp/uni-service/pages';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: 'login', component: UniLoginComponent },
@@ -41,6 +42,7 @@ const routes: Routes = [
       import('@ksp/uni-service/feature/degree-cert').then(
         (m) => m.UniServiceFeatureDegreeCertModule
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: 'student-list',
@@ -48,6 +50,7 @@ const routes: Routes = [
       import('@ksp/uni-service/feature/graduate').then(
         (m) => m.UniServiceFeatureGraduateModule
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: 'foreign-student-id',
@@ -55,6 +58,7 @@ const routes: Routes = [
     import('@ksp/uni-service/feature/foreign-student-id').then(
       (m) => m.UniServiceFeatureForeignStudentIdModule
     ),
+    canActivate: [AuthGuard],
   },
   {
     path: 'edit-degree-cert',
@@ -65,6 +69,7 @@ const routes: Routes = [
       import('@ksp/uni-service/feature/edit-degree-cert').then(
         (m) => m.UniServiceFeatureEditDegreeCertModule
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: 'edit-student-list',
@@ -75,6 +80,7 @@ const routes: Routes = [
       import('@ksp/uni-service/feature/edit-student-list').then(
         (m) => m.UniServiceFeatureEditStudentListModule
       ),
+    canActivate: [AuthGuard],
   },
   /* {
     path: 'test-data-result',

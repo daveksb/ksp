@@ -156,6 +156,9 @@
       "@ksp/e-service/ui/license-check": [
         "libs/e-service/ui/license-check/src/index.ts"
       ],
+      "@ksp/e-service/ui/reward-reject-form": [
+        "libs/e-service/ui/reward-reject-form/src/index.ts"
+      ],
       "@ksp/e-service/ui/verify-result-box": [
         "libs/e-service/ui/verify-result-box/src/index.ts"
       ],
@@ -194,6 +197,9 @@
       ],
       "@ksp/school-service/feature/staff-management": [
         "libs/school-service/feature/staff-management/src/index.ts"
+      ],
+      "@ksp/school-service/feature/temp-license-register": [
+        "libs/school-service/feature/temp-license-register/src/index.ts"
       ],
       "@ksp/school-service/form/activity": [
         "libs/school-service/form/activity/src/index.ts"

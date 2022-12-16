@@ -39,7 +39,7 @@
         ><span *ngIf="!isForeignForm">วัน/เดือน/ปี ที่เข้าศึกษา</span>
         <span *ngIf="isForeignForm">Start of Graduated Date</span></label
       >
-      <div class="d-flex align-items-center">
+      <div class="d-flex align-items-center" *ngIf="!isForeignForm">
         <input
           matInput
           [matDatepicker]="picker1"
@@ -55,6 +55,13 @@
         ></mat-datepicker-toggle>
         <mat-datepicker #picker1></mat-datepicker>
       </div>
+      <div *ngIf="isForeignForm">
+        <input
+          type="date"
+          class="form-control"
+          formControlName="admissionDate"
+        />
+      </div>
     </div>
 
     <div class="col-md-3 mb-2">
@@ -62,7 +69,7 @@
         ><span *ngIf="!isForeignForm">วัน/เดือน/ปี ที่สำเร็จการศึกษา</span>
         <span *ngIf="isForeignForm">End of Graduated Date</span></label
       >
-      <div class="d-flex align-items-center">
+      <div class="d-flex align-items-center" *ngIf="!isForeignForm">
         <input
           matInput
           [matDatepicker]="picker2"
@@ -77,6 +84,13 @@
           [for]="picker2"
         ></mat-datepicker-toggle>
         <mat-datepicker #picker2></mat-datepicker>
+      </div>
+      <div *ngIf="isForeignForm">
+        <input
+          type="date"
+          class="form-control"
+          formControlName="graduateDate"
+        />
       </div>
     </div>
   </div>

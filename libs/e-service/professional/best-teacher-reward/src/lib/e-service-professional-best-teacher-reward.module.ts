@@ -14,14 +14,17 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SelfServiceFormModule } from '@ksp/self-service/form';
 import { SharedFormSelfRewardFormModule } from '@ksp/shared/form/self-reward-form';
 import { EServiceRewardSearchComponent } from '@ksp/shared/search';
-import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import {
   ValidateKspRequestComponent,
   ConsiderKspRequestComponent,
+  RewardValidateRequestComponent,
 } from '@ksp/e-service/e-license/approve-ksp-request';
 import { EBestTeacherConfirmComponent } from './e-best-teacher-confirm/e-best-teacher-confirm.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { EBestTeacherRejectComponent } from './e-best-teacher-reject/e-best-teacher-reject.component';
+import { EServiceUiRewardRejectFormModule } from '@ksp/e-service/ui/reward-reject-form';
 
 const routes: Routes = [
   {
@@ -44,6 +47,10 @@ const routes: Routes = [
       {
         path: 'confirm/:id',
         component: EBestTeacherConfirmComponent,
+      },
+      {
+        path: 'reject/:id',
+        component: EBestTeacherRejectComponent,
       },
     ],
   },
@@ -68,11 +75,15 @@ const routes: Routes = [
     LicenseCheckComponent,
     ValidateKspRequestComponent,
     MatPaginatorModule,
+    RequestNoPipe,
+    EServiceUiRewardRejectFormModule,
+    RewardValidateRequestComponent,
   ],
   declarations: [
     EBestTeacherListComponent,
     EBestTeacherDetailComponent,
     EBestTeacherConfirmComponent,
+    EBestTeacherRejectComponent,
   ],
   exports: [EBestTeacherListComponent, EBestTeacherDetailComponent],
 })

@@ -10,16 +10,19 @@ import {
   SelfRequestProcess,
   SelfServiceRequestType,
 } from '@ksp/shared/constant';
-import { EsSearchPayload, SelfRequest } from '@ksp/shared/interface';
-import { ERequestService, LoaderService } from '@ksp/shared/service';
+import { EsSearchPayload, Province, SelfRequest } from '@ksp/shared/interface';
+import {
+  AddressService,
+  ERequestService,
+  LoaderService,
+} from '@ksp/shared/service';
 import { replaceEmptyWithNull } from '@ksp/shared/utility';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 function checkProcess(processId: number, requestType: number) {
   const process = SelfRequestProcess.find((p) => {
     return p.processId === processId && p.requestType === requestType;
   });
-  //console.log('process = ', process);
   return process;
 }
 
@@ -41,7 +44,7 @@ export class RenewLicenseForeignListComponent implements AfterViewInit {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfRequest>();
   SchoolRequestSubType = SchoolRequestSubType;
-
+  provinces$!: Observable<Province[]>;
   requestTypeList = SchoolRequestType.filter((i) => i.id > 2);
   checkProcess = checkProcess;
   checkStatus = checkStatus;
@@ -54,7 +57,8 @@ export class RenewLicenseForeignListComponent implements AfterViewInit {
     private router: Router,
     private requestService: ERequestService,
     private fb: FormBuilder,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private addressService: AddressService
   ) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -62,6 +66,7 @@ export class RenewLicenseForeignListComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.provinces$ = this.addressService.getProvinces();
   }
 
   search(params: any) {

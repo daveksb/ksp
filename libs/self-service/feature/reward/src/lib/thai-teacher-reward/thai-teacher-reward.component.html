@@ -7,7 +7,8 @@
         [isSelfService]="true"
         [prefixList]="prefixList"
         [requiredIdCardNo]="false"
-        formControlName="userInfo"></ksp-form-user-info>
+        formControlName="userInfo"
+      ></ksp-form-user-info>
     </mat-tab>
 
     <mat-tab label="ที่อยู่" class="tab-content">
@@ -18,7 +19,8 @@
         [amphurs]="amphurs1$ | async"
         [tumbols]="tumbols1$ | async"
         (provinceChanged)="provinceChanged(1, $event)"
-        (amphurChanged)="amphurChanged(1, $event)">
+        (amphurChanged)="amphurChanged(1, $event)"
+      >
         <span class="text-primary">ที่อยู่ที่สามารถติดต่อได้</span>
       </ksp-form-address>
       <hr />
@@ -31,35 +33,15 @@
         [tumbols]="tumbols2$ | async"
         [bureaus]="bureaus"
         (provinceChanged)="provinceChanged(2, $event)"
-        (amphurChanged)="amphurChanged(2, $event)">
+        (amphurChanged)="amphurChanged(2, $event)"
+      >
       </self-service-form-user-workplace>
-      <!-- <div class="row">
-        <div class="col-md-6 mb-2">
-          <label class="form-label">โทรศัพท์</label>
-          <input class="form-control" type="text" formControlName="phone" />
-        </div>
-
-        <div class="col-md-6 mb-2">
-          <label class="form-label">โทรสาร</label>
-          <input class="form-control" type="text" formControlName="fax" />
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6 mb-2">
-          <label class="form-label">อีเมล</label>
-          <input class="form-control" type="text" formControlName="email" />
-        </div>
-
-        <div class="col-md-6 mb-2">
-          <label class="form-label">เว็บไซต์</label>
-          <input class="form-control" type="text" formControlName="website" />
-        </div>
-      </div> -->
     </mat-tab>
 
     <mat-tab label="ข้อมูลครูภาษาไทยดีเด่น">
       <ksp-thai-teacher-info
-        formControlName="rewardTeacherInfo"></ksp-thai-teacher-info>
+        formControlName="rewardTeacherInfo"
+      ></ksp-thai-teacher-info>
     </mat-tab>
 
     <mat-tab label="ข้อมูลการศึกษา">
@@ -84,13 +66,15 @@
         (amphurChanged)="amphurChanged(3, $event)"
         (province2Changed)="provinceChanged(4, $event)"
         (amphur2Changed)="amphurChanged(4, $event)"
-        (sameAddress)="onSameAddress()"></ksp-thai-teacher-teaching>
-      <br />
-      <ksp-form-multi-attachment
-        [groups]="rewardFiles"
-        [mode]="mode"
-        [uniqueTimestamp]="uniqueTimestamp"
-        [titleClass]="'text-primary'"></ksp-form-multi-attachment>
+        (sameAddress)="onSameAddress()"
+      ></ksp-thai-teacher-teaching>
+      <div class="mt-3">
+        <ksp-form-multi-attachment
+          [groups]="rewardFiles"
+          [mode]="mode"
+          [uniqueTimestamp]="uniqueTimestamp"
+        ></ksp-form-multi-attachment>
+      </div>
     </mat-tab>
   </mat-tab-group>
 </form>

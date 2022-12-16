@@ -5,16 +5,21 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import {
-  SchoolRequestSubType,
+  SelfServiceRequestSubType,
   SelfServiceRequestType,
 } from '@ksp/shared/constant';
-import { EsSearchPayload, SelfRequest } from '@ksp/shared/interface';
-import { ERequestService } from '@ksp/shared/service';
+import { EsSearchPayload, Province, SelfRequest } from '@ksp/shared/interface';
+import {
+  AddressService,
+  ERequestService,
+  LoaderService,
+} from '@ksp/shared/service';
 import {
   checkProcess,
   checkStatus,
   replaceEmptyWithNull,
 } from '@ksp/shared/utility';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'ksp-edit-license-approve-list',
@@ -22,10 +27,11 @@ import {
   styleUrls: ['./edit-license-approve-list.component.scss'],
 })
 export class EditLicenseApproveListComponent implements AfterViewInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfRequest>();
-  SchoolRequestSubType = SchoolRequestSubType;
-
+  SelfServiceRequestSubType = SelfServiceRequestSubType;
+  provinces$!: Observable<Province[]>;
   checkProcess = checkProcess;
   checkStatus = checkStatus;
 
@@ -36,7 +42,9 @@ export class EditLicenseApproveListComponent implements AfterViewInit {
   constructor(
     private fb: FormBuilder,
     private requestService: ERequestService,
-    private router: Router
+    private router: Router,
+    private loaderService: LoaderService,
+    private addressService: AddressService
   ) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -44,6 +52,7 @@ export class EditLicenseApproveListComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.provinces$ = this.addressService.getProvinces();
   }
 
   search(params: any) {

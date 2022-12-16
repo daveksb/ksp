@@ -1,10 +1,15 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav>
   <span header>ยื่นใบคำขอ</span>
   <span subHeader>ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ </span>
 </ksp-top-nav>
 
 <form [formGroup]="form">
-  <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
+  <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height full-width-2">
     <div class="box-header">
       รายการใบคำขอสร้างเลขคุรุสภาสำหรับครูชาวต่างชาติ
     </div>
@@ -23,75 +28,7 @@
       <div class="box-header">
         รายการใบคำขอสร้างเลขคุรุสภาสำหรับครูชาวต่างชาติ
       </div>
-      <!-- <div class="px-3 py-2">
-        <table mat-table [dataSource]="dataSource">
-          <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
-            <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-          </ng-container>
-
-          <ng-container matColumnDef="requestno">
-            <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
-            <td mat-cell *matCellDef="let element">{{ element.requestno }}</td>
-          </ng-container>
-
-          <ng-container matColumnDef="passportno">
-            <th mat-header-cell *matHeaderCellDef>เลขที่หนังสือเดินทาง</th>
-            <td mat-cell *matCellDef="let element">{{ element.passportno }}</td>
-          </ng-container>
-
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
-            <td mat-cell *matCellDef="let element">
-              {{ element.firstnameen }} {{ element.lastnameen }}
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="requeststatus">
-            <th mat-header-cell *matHeaderCellDef>สถานะ</th>
-            <td mat-cell *matCellDef="let element">
-              {{ element.requeststatus }}
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="updatedate">
-            <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
-            <th></th>
-            <td mat-cell *matCellDef="let element">
-              {{ element.updatedate | thaiDate }}
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="requestdate">
-            <th mat-header-cell *matHeaderCellDef>วันที่ยื่นใบคำขอ</th>
-            <td mat-cell *matCellDef="let element">
-              {{ element.requestdate | thaiDate }}
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="view">
-            <th mat-header-cell *matHeaderCellDef>ใบอนุญาต</th>
-            <td mat-cell *matCellDef="let element">
-              <i
-                role="button"
-                (click)="nextPage(element.id)"
-                class="bi bi-eye text-primary fs-5"
-              ></i>
-            </td>
-          </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-        </table>
-
-        <mat-paginator
-          [pageSizeOptions]="[10]"
-          showFirstLastButtons
-          aria-label="Select page of periodic elements"
-        >
-        </mat-paginator>
-      </div> -->
-      <div class="bottom-content">
+      <div class="table__scroll">
         <table mat-table [dataSource]="dataSource" matSort>
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
@@ -106,7 +43,7 @@
 
           <ng-container matColumnDef="edit">
             <th mat-header-cell *matHeaderCellDef>ตรวจสอบ</th>
-            <td mat-cell *matCellDef="let element">
+            <td mat-cell *matCellDef="let element" class="text-center">
               <i
                 role="button"
                 class="bi bi-file-earmark-check text-primary fs-5"
@@ -172,7 +109,7 @@
 
           <ng-container matColumnDef="reqDoc">
             <th mat-header-cell *matHeaderCellDef>ใบคำขอ</th>
-            <td mat-cell *matCellDef="let element">
+            <td mat-cell *matCellDef="let element" class="text-center">
               <i
                 role="button"
                 class="bi bi-file-earmark-text-fill text-primary fs-5"
@@ -193,10 +130,9 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
-
-        <mat-paginator [pageSizeOptions]="[25]" showFirstLastButtons>
-        </mat-paginator>
       </div>
+      <mat-paginator [pageSizeOptions]="[25]" showFirstLastButtons>
+      </mat-paginator>
     </div>
   </div>
 </form>

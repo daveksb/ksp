@@ -15,7 +15,7 @@ import {
 } from '@ksp/self-service/form';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { TopNavComponent, BottomNavComponent } from '@ksp/shared/menu';
-import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 import {
   EServiceRequestSearchComponent,
   RequestSearchComponent,
@@ -24,6 +24,7 @@ import {
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { ECompareKnowledgeConfirmComponent } from './e-compare-knowledge-confirm/e-compare-knowledge-confirm.component';
 import { ValidateKspRequestComponent } from '@ksp/e-service/e-license/approve-ksp-request';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export const routes: Routes = [
   {
@@ -75,6 +76,8 @@ export const routes: Routes = [
     ThaiDatePipe,
     EServiceLicenseSearchComponent,
     ValidateKspRequestComponent,
+    MatProgressSpinnerModule,
+    RequestNoPipe
   ],
   declarations: [
     ECompareKnowledgeListComponent,

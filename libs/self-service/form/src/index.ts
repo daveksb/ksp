@@ -69,3 +69,5 @@ export * from './lib/foreign-step-two-tab-four-renew/foreign-step-two-tab-four-r
 export * from './lib/e-reward-form-base.component';
 
 export * from './lib/e-reward-confirm-form-base.component';
+
+export * from './lib/e-self-confirm-form-base.component';

@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -8,9 +9,9 @@ import {
   SchoolUserPageType,
   SchUser,
 } from '@ksp/shared/interface';
-import { EducationDetailService, ESchStaffService } from '@ksp/shared/service';
+import { EducationDetailService, ESchStaffService, LoaderService } from '@ksp/shared/service';
 import { mapSchUserStatus, schoolMapRequestType } from '@ksp/shared/utility';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   templateUrl: './manage-current-user-list.component.html',
@@ -19,7 +20,7 @@ import { Observable } from 'rxjs';
 export class ManageCurrentUserListComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   displayedColumns: string[] = columns;
   dataSource = new MatTableDataSource<SchUser>();
   selectedUniversity = '';
@@ -28,10 +29,21 @@ export class ManageCurrentUserListComponent implements AfterViewInit, OnInit {
   searchNotFound = false;
   bureau$!: Observable<any>;
 
+  activeStatusList = [
+    { id: 0, label: 'ไม่ใช้งาน' },
+    { id: 1, label: 'ใช้งาน' },
+  ];
+
+  form = this.fb.group({
+    search: [],
+  });
+
   constructor(
     private router: Router,
     private schStaffService: ESchStaffService,
-    private educationDetailService: EducationDetailService
+    private educationDetailService: EducationDetailService,
+    private fb: FormBuilder,
+    private loaderService: LoaderService,
   ) {}
 
   ngOnInit(): void {
@@ -48,11 +60,13 @@ export class ManageCurrentUserListComponent implements AfterViewInit, OnInit {
   }
 
   search(param: ESchUserSearch) {
-    //console.log('params = ', param);
+    console.log('params = ', param);
     const payload = {
       schoolid: param.institution ? param.institution.schoolid : null,
       schoolname: param.institution ? param.institution.schoolname : null,
       name: param.name,
+      schuseractive: param.status,
+      idcardno: param.personId,
       offset: '0',
       row: '500',
     };

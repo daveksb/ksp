@@ -36,6 +36,7 @@ export class KspRequest {
   isurgent?: string | null = null;
   isclose?: string | null = null; // add on 28/11/2022
   kuruspano: string | null = null;
+  lastupdatesystemtype?: string | null = null; // add on 8/12/2022  ระบบที่อัพเดตข้อมูลล่าสุด เช่น e-service, school-service
   lastnameen: string | null = null;
   lastnameth: string | null = null;
   licenseid: string | null = null;

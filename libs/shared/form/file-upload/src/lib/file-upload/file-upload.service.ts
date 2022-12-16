@@ -55,12 +55,14 @@ export class FileService {
       }
     );
   }
+
   downloadSchoolFile(payload: any) {
     return this.http.post(
       `${environment.apiUrl}/e-service/schrequestfileselectbyid`,
       payload
     );
   }
+
   downloadUniFile(payload: any) {
     return this.http.post(
       `${environment.apiUrl}/e-service/unirequestfileselectbyid`,

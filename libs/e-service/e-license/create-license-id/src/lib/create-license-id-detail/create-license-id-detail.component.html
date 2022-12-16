@@ -1,3 +1,8 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav
   ><span header> หน้าแรก </span
   ><span subHeader>ระบบงานทะเบียนและใบอนุญาต</span></ksp-top-nav
@@ -99,7 +104,7 @@
         <button
           type="button"
           class="btn text-primary bg-primary bg-opacity-10 w-auto"
-          (click)="createMultiLicense()"
+          (click)="confirmDialog()"
         >
           สร้างเลขที่ใบอนุญาต (ทั้งหมด)
         </button>
@@ -110,7 +115,11 @@
         <ng-container matColumnDef="create">
           <th mat-header-cell *matHeaderCellDef>สร้าง</th>
           <td mat-cell *matCellDef="let element">
-            <i role="button" class="bi bi-pencil-square text-primary"></i>
+            <i
+              (click)="confirmDialog(element.id)"
+              role="button"
+              class="bi bi-pencil-square text-primary"
+            ></i>
           </td>
         </ng-container>
 
@@ -136,13 +145,20 @@
           <td mat-cell *matCellDef="let element">{{ element.number }}</td>
         </ng-container> -->
 
+        <ng-container matColumnDef="view">
+          <th mat-header-cell *matHeaderCellDef>ดู</th>
+          <td mat-cell *matCellDef="let element">
+            <i
+              (click)="rowSelect(element.id)"
+              role="button"
+              class="bi bi-eye-fill text-success"
+            ></i>
+          </td>
+        </ng-container>
+
         <ng-container matColumnDef="personId">
           <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
-          <td
-            (click)="rowSelect(element.id)"
-            mat-cell
-            *matCellDef="let element"
-          >
+          <td mat-cell *matCellDef="let element">
             {{ element.idcardno }}
           </td>
         </ng-container>
@@ -193,14 +209,14 @@
   <div [formGroup]="form" class="bg-white px-3 py-3 mt-3">
     <div class="row">
       <div class="col-lg-3 my-auto">
-        <!-- [imgSrc]="myImage" -->
         <self-service-form-upload-image
           [isEditMode]="false"
+          [imgSrc]="myImage"
         ></self-service-form-upload-image>
       </div>
       <div class="col-md mt-md-0 mt-2">
         <div class="row">
-          <div class="col-md-3 mb-2">
+          <div class="col-md-4 mb-2">
             <label class="form-label">เลขที่ใบอนุญาตประกอบวิชาชีพ</label>
             <input
               class="form-control"
@@ -208,7 +224,7 @@
               formControlName="licenseno"
             />
           </div>
-          <div class="col-md-3 mb-2">
+          <div class="col-md-4 mb-2">
             <label class="form-label">เลขที่บัตรประชาชน</label>
             <input
               class="form-control"
@@ -217,11 +233,11 @@
             />
           </div>
 
-          <div class="col-md-6 mb-2">
+          <div class="col-md-4 mb-2">
             <label class="form-label">ประเภทใบอนุญาตประกอบวิชาชีพ</label>
             <select class="form-select" formControlName="careertype">
               <option disabled hidden selected value="null">กรุณาเลือก</option>
-              <option *ngFor="let l of licenseTypes" [value]="l.value">
+              <option *ngFor="let l of licenseTypes" [value]="l.id">
                 {{ l.name }}
               </option>
             </select>
@@ -372,14 +388,23 @@
     <hr />
     <div class="box-header">แบบร่าง ใบอนุญาตประกอบวิชาชีพ</div>
     <div
-      class="bg-secondary bg-opacity-10 py-3 border d-flex justify-content-center"
+      class="bg-secondary bg-opacity-10 py-5 border d-flex justify-content-center"
     >
-      <div
-        class="bg-white d-flex justify-content-center flex-column align-items-center"
-        style="height: 300px; width: 475px"
-      >
-        ใบอนุญาตประกอบวิชาชีพ
-      </div>
+      <self-service-slideshow
+        [showButton]="false"
+        [myImage]="myImage"
+        [licensetype]="licensetype || ''"
+        [licenseno]="licenseno"
+        [prefixth]="prefixth || ''"
+        [firstnameth]="firstnameth"
+        [lastnameth]="lastnameth"
+        [prefixen]="prefixen || ''"
+        [firstnameen]="firstnameen"
+        [lastnameen]="lastnameen"
+        [kuruspano]="kuruspano"
+        [licensestartdate]="licensestartdate"
+        [licenseenddate]="licenseenddate"
+      ></self-service-slideshow>
     </div>
   </div>
 </div>
@@ -388,8 +413,10 @@
   <ksp-bottom-nav
     [isLastPage]="true"
     [isFirstPage]="true"
-    (cancelClicked)="back()"
     [showCenterButtons]="true"
     [showSaveButton]="true"
+    [disableSaveButton]="form.invalid"
+    (cancelClicked)="back()"
+    (saveClicked)="saveLicense()"
   ></ksp-bottom-nav>
 </div>

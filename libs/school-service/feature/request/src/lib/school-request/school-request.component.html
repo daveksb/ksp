@@ -47,7 +47,7 @@
     </div>
 
     <!-- (selectedIndexChange)="onTabIndexChanged($event)" -->
-    <div class="full-width pb-2">
+    <div class="full-width">
       <mat-tab-group
         class="tab-group mt-3"
         selectedIndex="0"
@@ -82,10 +82,10 @@
               </div>
             </ksp-form-address>
           </div>
-          <div class="text-danger">
+          <!-- <div class="text-danger">
             *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
             โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
-          </div>
+          </div> -->
         </mat-tab>
 
         <mat-tab label="ที่อยู่ของสถานศึกษาที่ขออนุญาต">
@@ -123,171 +123,175 @@
               </ksp-form-education-info>
             </div></ng-container
           >
+          <div
+            class="p-3 bg-light"
+            *ngIf="careerType === 2 || careerType === 5"
+          >
+            <ng-container *ngIf="careerType === 2 || careerType === 5">
+              <div class="d-flex align-items-center mb-2">
+                <input
+                  (change)="eduSelect(1, $event)"
+                  type="checkbox"
+                  class="me-2"
+                />
+                <label class="box-header">วุฒิการศึกษาปริญญาตรี</label>
+              </div>
+              <ng-container *ngIf="eduSelected[1]">
+                <ksp-form-education-info
+                  [isDarkMode]="false"
+                  [showCheckbox]="false"
+                  [showSelectDegree]="false"
+                  formControlName="edu1"
+                  [showGradeInput]="careerType === 2 ? true : false"
+                  [showPropertyInput]="false"
+                  [countries]="countries$ | async"
+                  [isOptional]="!eduSelected[1]"
+                  [userEducationType]="userInfoFormType"
+                >
+                </ksp-form-education-info></ng-container
+            ></ng-container>
 
-          <ng-container *ngIf="careerType === 2 || careerType === 5">
-            <div class="d-flex align-items-center">
-              <input
-                (change)="eduSelect(1, $event)"
-                type="checkbox"
-                class="me-2"
-              />
-              <label class="fs-5">วุฒิการศึกษาปริญญาตรี</label>
-            </div>
-            <ng-container *ngIf="eduSelected[1]">
-              <ksp-form-education-info
-                [showCheckbox]="false"
-                [showSelectDegree]="false"
-                formControlName="edu1"
-                [showGradeInput]="true"
-                [showPropertyInput]="false"
-                [countries]="countries$ | async"
-                [isOptional]="!eduSelected[1]"
-              >
-              </ksp-form-education-info></ng-container
-          ></ng-container>
+            <ng-container *ngIf="careerType === 2 || careerType === 5">
+              <div class="d-flex align-items-center my-2">
+                <input
+                  (change)="eduSelect(4, $event)"
+                  type="checkbox"
+                  class="me-2"
+                />
+                <label class="box-header"
+                  >วุฒิประกาศนียบัตรระดับบัณฑิตศึกษา</label
+                >
+              </div>
+              <ng-container *ngIf="eduSelected[4]">
+                <ksp-form-education-info
+                  [isDarkMode]="false"
+                  [showCheckbox]="false"
+                  [showSelectDegree]="false"
+                  formControlName="edu4"
+                  [showGradeInput]="false"
+                  [showPropertyInput]="false"
+                  [countries]="countries$ | async"
+                  [isOptional]="!eduSelected[4]"
+                >
+                </ksp-form-education-info></ng-container
+            ></ng-container>
 
-          <ng-container *ngIf="careerType === 2 || careerType === 5">
-            <div class="d-flex align-items-center mt-3">
-              <input
-                (change)="eduSelect(4, $event)"
-                type="checkbox"
-                class="me-2"
-              />
-              <label class="fs-5">วุฒิประกาศนียบัตรระดับบัณฑิตศึกษา</label>
-            </div>
-            <ng-container *ngIf="eduSelected[4]">
-              <ksp-form-education-info
-                [showCheckbox]="false"
-                [showSelectDegree]="false"
-                formControlName="edu4"
-                [showGradeInput]="false"
-                [showPropertyInput]="false"
-                [countries]="countries$ | async"
-                [isOptional]="!eduSelected[4]"
-              >
-              </ksp-form-education-info></ng-container
-          ></ng-container>
+            <ng-container *ngIf="careerType === 2 || careerType === 5">
+              <div class="d-flex align-items-center my-2">
+                <input
+                  (change)="eduSelect(2, $event)"
+                  type="checkbox"
+                  class="me-2"
+                />
+                <label class="box-header">วุฒิปริญญาโท</label>
+              </div>
+              <ng-container *ngIf="eduSelected[2]">
+                <ksp-form-education-info
+                  [isDarkMode]="false"
+                  [showCheckbox]="false"
+                  [showSelectDegree]="false"
+                  formControlName="edu2"
+                  [showGradeInput]="false"
+                  [showPropertyInput]="false"
+                  [countries]="countries$ | async"
+                  [isOptional]="!eduSelected[2]"
+                  [userEducationType]="userInfoFormType"
+                >
+                </ksp-form-education-info></ng-container
+            ></ng-container>
 
-          <ng-container *ngIf="careerType === 2 || careerType === 5">
-            <div class="d-flex align-items-center mt-3">
-              <input
-                (change)="eduSelect(2, $event)"
-                type="checkbox"
-                class="me-2"
-              />
-              <label class="fs-5">วุฒิปริญญาโท</label>
-            </div>
-            <ng-container *ngIf="eduSelected[2]">
-              <ksp-form-education-info
-                [showCheckbox]="false"
-                [showSelectDegree]="false"
-                formControlName="edu2"
-                [showGradeInput]="false"
-                [showPropertyInput]="false"
-                [countries]="countries$ | async"
-                [isOptional]="!eduSelected[2]"
-                [userEducationType]="userInfoFormType"
-              >
-              </ksp-form-education-info></ng-container
-          ></ng-container>
+            <ng-container *ngIf="careerType === 2 || careerType === 5">
+              <div class="d-flex align-items-center my-2">
+                <input
+                  (change)="eduSelect(3, $event)"
+                  type="checkbox"
+                  class="me-2"
+                />
+                <label class="box-header">วุฒิปริญญาเอก</label>
+              </div>
+              <ng-container *ngIf="eduSelected[3]">
+                <ksp-form-education-info
+                  [isDarkMode]="false"
+                  [showCheckbox]="false"
+                  [showSelectDegree]="false"
+                  formControlName="edu3"
+                  [showGradeInput]="false"
+                  [showPropertyInput]="false"
+                  [countries]="countries$ | async"
+                  [isOptional]="!eduSelected[3]"
+                  [userEducationType]="userInfoFormType"
+                >
+                </ksp-form-education-info></ng-container
+            ></ng-container>
 
-          <ng-container *ngIf="careerType === 2 || careerType === 5">
-            <div class="d-flex align-items-center mt-3">
-              <input
-                (change)="eduSelect(3, $event)"
-                type="checkbox"
-                class="me-2"
-              />
-              <label class="fs-5">วุฒิปริญญาเอก</label>
-            </div>
-            <ng-container *ngIf="eduSelected[3]">
-              <ksp-form-education-info
-                [showCheckbox]="false"
-                [showSelectDegree]="false"
-                formControlName="edu3"
-                [showGradeInput]="false"
-                [showPropertyInput]="false"
-                [countries]="countries$ | async"
-                [isOptional]="!eduSelected[3]"
-                [userEducationType]="userInfoFormType"
-              >
-              </ksp-form-education-info></ng-container
-          ></ng-container>
+            <ng-container *ngIf="careerType === 2 || careerType === 5">
+              <div class="d-flex align-items-center my-2">
+                <input
+                  (change)="eduSelect(5, $event)"
+                  type="checkbox"
+                  class="me-2"
+                />
+                <label class="box-header">วุฒิการศึกษาอื่นๆ</label>
+              </div>
+              <ng-container *ngIf="eduSelected[5]">
+                <ksp-form-education-info
+                  [isDarkMode]="false"
+                  [showCheckbox]="false"
+                  [showSelectDegree]="false"
+                  formControlName="edu5"
+                  [showGradeInput]="false"
+                  [showPropertyInput]="false"
+                  [countries]="countries$ | async"
+                  [isOptional]="!eduSelected[5]"
+                  [userEducationType]="userInfoFormType"
+                >
+                </ksp-form-education-info> </ng-container
+            ></ng-container>
 
-          <ng-container *ngIf="careerType === 2">
-            <div class="d-flex align-items-center mt-3">
-              <input
-                (change)="eduSelect(5, $event)"
-                type="checkbox"
-                class="me-2"
-              />
-              <label class="fs-5">วุฒิการศึกษาอื่นๆ</label>
-            </div>
-            <ng-container *ngIf="eduSelected[5]">
-              <ksp-form-education-info
-                [showCheckbox]="false"
-                [showSelectDegree]="false"
-                formControlName="edu5"
-                [showGradeInput]="false"
-                [showPropertyInput]="false"
-                [countries]="countries$ | async"
-                [isOptional]="!eduSelected[5]"
-                [userEducationType]="userInfoFormType"
-              >
-              </ksp-form-education-info> </ng-container
-          ></ng-container>
+            <ng-container *ngIf="careerType === 2">
+              <div class="d-flex align-items-center mt-2">
+                <input
+                  type="checkbox"
+                  class="me-2"
+                  (change)="eduSelect(6, $event)"
+                />
+                <label class="box-header"
+                  >คุณสมบัติอื่นที่สอดคล้องหรือเป็นประโยชน์ต่อการจัดการเรียนการสอนในกลุ่มสาระหรือรายวิชาที่สอน
+                  (พิจารณาเป็นรายกรณี)</label
+                >
+              </div>
+              <ng-container *ngIf="eduSelected[6]">
+                <div class="row">
+                  <div class="col mt-2">
+                    <textarea
+                      class="form-control"
+                      rows="3"
+                      placeholder="โปรดระบุ"
+                      formControlName="edu6"
+                    ></textarea>
+                  </div></div></ng-container
+            ></ng-container>
 
-          <ng-container *ngIf="careerType === 5">
-            <div class="d-flex align-items-center mt-3">
-              <input
-                (change)="eduSelect(6, $event)"
-                type="checkbox"
-                class="me-2"
-              />
-              <label class="fs-5">ใบอนุญาตประกอบวิชาชีพครูจากต่างประเทศ </label>
-            </div>
-            <ng-container *ngIf="eduSelected[6]">
-              <ksp-form-education-info
-                [showCheckbox]="false"
-                [showSelectDegree]="false"
-                formControlName="edu6"
-                [showGradeInput]="false"
-                [showPropertyInput]="false"
-                [countries]="countries$ | async"
-                [isOptional]="!eduSelected[6]"
-                [userEducationType]="userInfoFormType"
-              >
-              </ksp-form-education-info></ng-container
-          ></ng-container>
+            <ng-container *ngIf="careerType === 5">
+              <div class="d-flex align-items-center mt-2">
+                <input
+                  (change)="eduSelect(6, $event)"
+                  type="checkbox"
+                  class="me-2"
+                />
+                <label class="box-header"
+                  >ใบอนุญาตประกอบวิชาชีพครูจากต่างประเทศ
+                </label>
+              </div>
+              <ng-container *ngIf="eduSelected[6]">
+                <div class="mt-2">
+                  <ksp-form-education-info-manager
+                    [countries]="countries$ | async"
+                    formControlName="edu6"
+                  ></ksp-form-education-info-manager></div></ng-container
+            ></ng-container>
+          </div>
 
-          <!--  <ng-container *ngIf="careerType === 2">
-            <div class="d-flex align-items-center mt-3">
-              <input type="checkbox" class="me-2" [formControl]="option6" />
-              <label class="fs-5"
-                >คุณสมบัติอื่นที่สอดคล้องหรือเป็นประโยชน์ต่อการจัดการเรียนการสอนในกลุ่มสาระหรือรายวิชาที่สอน
-                (พิจารณาเป็นรายกรณี)</label
-              >
-            </div>
-            <ng-container *ngIf="Option6$ | async">
-              <div class="row">
-                <div class="col">
-                  <textarea
-                    class="form-control"
-                    rows="3"
-                    placeholder="โปรดระบุ"
-                  ></textarea>
-                </div></div></ng-container
-          ></ng-container>
-
-          <ng-container *ngIf="careerType === 5">
-            <div class="d-flex align-items-center mt-3">
-              <input type="checkbox" class="me-2" [formControl]="option6" />
-              <label class="fs-5">ใบอนุญาตประกอบวิชาชีพครูจากต่างประเทศ </label>
-            </div>
-            <ng-container *ngIf="Option6$ | async">
-              <ksp-form-education-info-manager></ksp-form-education-info-manager></ng-container
-            ><br
-          /></ng-container> -->
           <div class="mt-3">
             <ksp-form-multi-attachment
               [pageType]="pageType.educationTab"
@@ -305,7 +309,9 @@
           </ng-container>
 
           <ng-container *ngIf="careerType === 2">
-            <ksp-form-teaching-info-manager></ksp-form-teaching-info-manager
+            <ksp-form-teaching-info-manager
+              formControlName="teachinginfo"
+            ></ksp-form-teaching-info-manager
           ></ng-container>
 
           <div class="mt-3">
@@ -343,12 +349,17 @@
 
         <mat-tab label="เอกสารหลักฐานประกอบ">
           <ksp-form-multi-attachment
+            [titleClass]="'text-primary'"
             [uniqueTimestamp]="uniqueNo"
             [pageType]="pageType.fileAttachTab"
             [groups]="attachFiles"
           ></ksp-form-multi-attachment>
         </mat-tab>
       </mat-tab-group>
+      <div class="text-danger">
+        *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
+        โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
+      </div>
     </div>
   </div>
 </div>

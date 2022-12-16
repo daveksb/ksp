@@ -57,8 +57,12 @@ export const eLicenseMenu: MenuConfig[] = [
         label: 'รายการใบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
       },
       {
-        path: '/xxx',
-        label: 'พิจารณารับรองใบอนุญาตประกอบวิชาชีพ',
+        path: '/renew-license/search-list',
+        label: 'จัดทำบัญชีรายชื่อและนำเสนอขอใบอนุญาตประกอบวิชาชีพ',
+      },
+      {
+        path: '/renew-license/guarantee',
+        label: 'รับรองใบอนุญาตประกอบวิชาขีพ',
       },
     ],
   },
@@ -129,7 +133,7 @@ export const eLicenseMenu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอเปลี่ยนแปลง/แก้ไขใบอนุญาต(ชาวไทย)',
+    label: 'ใบคำขอเปลี่ยนแปลง/แก้ไขใบอนุญาต',
     path: '',
     isExpanded: false,
     subMenuName: 'edit-thai',
@@ -144,7 +148,7 @@ export const eLicenseMenu: MenuConfig[] = [
       },
     ],
   },
-  {
+  /* {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขอเปลี่ยนแปลง/แก้ไขใบอนุญาต(ชาวต่างชาติ)',
     path: '',
@@ -160,7 +164,7 @@ export const eLicenseMenu: MenuConfig[] = [
         label: 'พิจารณาขอเปลี่ยนแปลง/แก้ใบอนุญาต',
       },
     ],
-  },
+  }, */
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขอใบแทนใบอนุญาตประกอบวิชาชีพ',
@@ -287,7 +291,7 @@ export const eLicenseMenu: MenuConfig[] = [
         label: 'ใบคำขอผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
       }, */
       {
-        path: '/self/current-user',
+        path: '/xxx',
         label: 'ผู้ใช้งานระบบบริการด้วยตนเอง (self Service)',
       },
       {
@@ -508,8 +512,8 @@ export const professionalMenu: MenuConfig[] = [
         label: 'รายการใบคำขอรับรางวัลคุรุสภา',
       },
       {
-        path: '/xxx',
-        label: 'พิจารณารางวัลคุรุสภา',
+        path: '/teacher-council/account-list',
+        label: 'จัดทำบัญชีรายชื่อ',
       },
     ],
   },

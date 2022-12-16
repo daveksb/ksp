@@ -3,6 +3,7 @@ import {
   EnglishMonthMapping,
   SchoolRequestProcess,
   SchoolRequestType,
+  SchoolSelfDevelopActivityTies,
   SelfRequestProcess,
   SelfRequestType,
   ThaiNumberMapping,
@@ -61,7 +62,7 @@ export function englishDate(date: Date): string {
     day: 'numeric',
   });
 }
-export function changeToThaiNumber(text: string): string {
+export function changeToThaiNumber(text: string = ''): string {
   for (const key in ThaiNumberMapping) {
     const regExp = new RegExp(key, 'g');
     text = text.replace(regExp, ThaiNumberMapping[+key]);
@@ -205,6 +206,10 @@ export function schoolMapRequestType(typeId: number) {
   return SchoolRequestType.find((s) => s.id === typeId)?.name;
 }
 
+export function schoolMapSelfDevelopType(typeId: number) {
+  return SchoolSelfDevelopActivityTies.find((s) => s.value === typeId)?.label;
+}
+
 export function selfMapRequestType(typeId: string) {
   return SelfRequestType.find((s) => s.id.toString() === typeId)?.name;
 }
@@ -219,19 +224,6 @@ export function getBase64(
     reader.onload = () => res(reader.result);
     reader.onerror = (error) => rej(error);
   });
-}
-
-export function changeDate(
-  input: Date | string | null | undefined
-): string | null {
-  if (input instanceof Date) {
-    input = input.toISOString();
-  }
-  if (input && input.length) {
-    return input.split('T')[0];
-  } else {
-    return input ?? null;
-  }
 }
 
 export function mapFileInfo(fileGroups: any[]) {

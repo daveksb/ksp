@@ -168,7 +168,7 @@ export class VerifyComponent implements OnInit {
       if (res) {
         this.dataSource.forEach((data: any, index) => {
           payload.requestid = data?.key;
-          if (data.requeststatus === '1' && data.requestprocess === '3') {
+          if (data?.status === '1' && data?.process === '3') {
             this.eRequestService
               .kspUniRequestProcessSelectByRequestId(payload.requestid)
               .pipe(map(detailToState))
@@ -179,17 +179,12 @@ export class VerifyComponent implements OnInit {
                 ) {
                   payload.process = '4';
                 }
-                if (
-                  !res?.isNotEmptyConsiderCourses &&
-                  !res?.isNotEmptyConsiderCert
-                ) {
-                  this.eRequestService
-                    .kspUpdateRequestUniRequestDegree(payload)
-                    .subscribe(() => {
-                      if (index === _.size(this.dataSource) - 1)
-                        this.location.back();
-                    });
-                }
+                this.eRequestService
+                  .kspUpdateRequestUniRequestDegree(payload)
+                  .subscribe(() => {
+                    if (index === _.size(this.dataSource) - 1)
+                      this.location.back();
+                  });
               });
           }
         });

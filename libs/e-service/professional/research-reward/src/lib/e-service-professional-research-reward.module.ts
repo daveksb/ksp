@@ -14,14 +14,17 @@ import { TopNavComponent, BottomNavComponent } from '@ksp/shared/menu';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SelfServiceFormModule } from '@ksp/self-service/form';
 import { EServiceRewardSearchComponent } from '@ksp/shared/search';
-import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import {
   ValidateKspRequestComponent,
   ConsiderKspRequestComponent,
+  RewardValidateRequestComponent,
 } from '@ksp/e-service/e-license/approve-ksp-request';
 import { EResearchRewardConfirmComponent } from './e-research-reward-confirm/e-research-reward-confirm.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { EResearchRewardRejectComponent } from './e-research-reward-reject/e-research-reward-reject.component';
+import { EServiceUiRewardRejectFormModule } from '@ksp/e-service/ui/reward-reject-form';
 
 const routes: Routes = [
   {
@@ -44,6 +47,10 @@ const routes: Routes = [
       {
         path: 'confirm/:id',
         component: EResearchRewardConfirmComponent,
+      },
+      {
+        path: 'reject/:id',
+        component: EResearchRewardRejectComponent,
       },
     ],
   },
@@ -68,11 +75,15 @@ const routes: Routes = [
     LicenseCheckComponent,
     ValidateKspRequestComponent,
     MatPaginatorModule,
+    RequestNoPipe,
+    EServiceUiRewardRejectFormModule,
+    RewardValidateRequestComponent,
   ],
   declarations: [
     EResearchRewardListComponent,
     EResearchRewardDetailComponent,
     EResearchRewardConfirmComponent,
+    EResearchRewardRejectComponent,
   ],
   exports: [EResearchRewardListComponent, EResearchRewardDetailComponent],
 })

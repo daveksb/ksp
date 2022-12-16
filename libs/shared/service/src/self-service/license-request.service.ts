@@ -1,7 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
-import { SelfGetRequest, SelfRequest } from '@ksp/shared/interface';
+import {
+  KSPRequestSearchFilter,
+  SelfGetRequest,
+  SelfRequest,
+} from '@ksp/shared/interface';
 import { map, Observable } from 'rxjs';
 
 @Injectable({
@@ -31,7 +35,7 @@ export class SelfRequestService {
     );
   }
 
-  searchMyRequests(payload: any): Observable<SelfRequest[]> {
+  searchMyRequests(payload: KSPRequestSearchFilter): Observable<SelfRequest[]> {
     return this.http
       .post<SelfRequest[]>(
         `${environment.shortApiUrl}/ksprequestsearch_self.php`,

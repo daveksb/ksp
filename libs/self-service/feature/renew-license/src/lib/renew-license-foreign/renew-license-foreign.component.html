@@ -1,15 +1,21 @@
 <ksp-top-nav [isSelfService]="true"
-  ><span header>TEACHING LICENSE APPLICATION FORM</span>
+  ><span header
+    >TEACHING LICENSE RENEW APPLICATION FORM ({{ requestLabel }})</span
+  >
 </ksp-top-nav>
 
 <div class="main__container full-height px-4 py-2">
   <self-service-request-status
-    [title]="'TEACHING LICENSE APPLICATION FORM'"
+    [headerLabel1]="'Issue Date'"
+    [headerLabel2]="'Form ID'"
+    [title]="'TEACHING LICENSE RENEW APPLICATION FORM'"
+    [requestNo]="requestNo"
+    [requestDate]="requestDate"
   ></self-service-request-status>
 
   <br />
   <div class="box-header text-center">
-    THE TEACHERS' COUNCIL OF THAILAND TEACHING LICENSE APPLICATION FORM
+    THE TEACHERS' COUNCIL OF THAILAND TEACHING LICENSE RENEW APPLICATION FORM
   </div>
 
   <form [formGroup]="form">

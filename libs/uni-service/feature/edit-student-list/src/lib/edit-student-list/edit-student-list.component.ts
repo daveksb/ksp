@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { requestStatus } from '@ksp/shared/constant';
 import { LoaderService, UniInfoService, UniRequestService } from '@ksp/shared/service';
-import { providerFactory, thaiDate } from '@ksp/shared/utility';
+import { providerFactory, replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
 import { HistoryRequestDialogComponent, PrintRequestDialogComponent } from '@ksp/uni-service/dialog';
 import { KspPaginationComponent, ListData } from '@ksp/shared/interface';
 import _ from 'lodash';
@@ -112,7 +112,16 @@ export class EditStudentListComponent extends KspPaginationComponent implements 
   }
 
   searchdata() {
-    this.uniRequestService.getEditRequestAdmision(this.form.value)
+    const form = this.form.value as any;
+    if (form.requestdatefrom) {
+      form.requestdatefrom = new Date(form.requestdatefrom)
+      form.requestdatefrom.setHours(form.requestdatefrom.getHours() + 7)
+    }
+    if (form.requestdateto) {
+      form.requestdateto = new Date(form.requestdateto)
+      form.requestdateto.setHours(form.requestdateto.getHours() + 7)
+    }
+    this.uniRequestService.getEditRequestAdmision(replaceEmptyWithNull(form))
     .subscribe((response: any) => {
       if (response.datareturn) {
         this.pageEvent.length = response.countrow;

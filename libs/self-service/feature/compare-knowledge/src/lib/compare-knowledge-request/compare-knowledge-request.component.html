@@ -5,7 +5,9 @@
 
 <form [formGroup]="form">
   <div class="main__container px-4 py-2">
-    <self-service-request-status></self-service-request-status>
+    <self-service-request-status
+      [idcardNo]="(myInfo$ | async)?.idcardno || null"
+    ></self-service-request-status>
 
     <div class="row mx-0 border shadow-sm rounded-4 px-2 py-4 bg-white my-4">
       <div class="col-lg-3 my-auto">
@@ -65,10 +67,6 @@
             <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
           </div>
         </ksp-form-address>
-        <div class="fs-6 text-danger">
-          *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
-          โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
-        </div>
       </mat-tab>
 
       <mat-tab label="สถานที่ทำงาน">
@@ -104,14 +102,21 @@
           [title]="'กรุณาแนบหลักฐานประกอบ'"
           [groups]="objectiveFiles"
           [uniqueTimestamp]="uniqueTimestamp"
+          [titleNote]="
+            '*กรุณาส่งเอกสารแสดงผลคะแนนที่ใช้เทียบเคียงผลการทดสอบ(ฉบับจริง) ตามรายวิชาที่ยื่นเทียบเคียงผลการทดสอบไปยังสำนักงานเลขาธิการคุรุสภา'
+          "
         ></ksp-form-multi-attachment>
-        <div class="fs-6 text-danger">
+        <!-- <div class="fs-6 text-danger">
           *กรุณาส่งเอกสารแสดงผลคะแนนที่ใช้เทียบเคียงผลการทดสอบ (ฉบับจริง)
           ตามรายวิชาที่ยื่นเทียบเคียงผลการทดสอบไปยัง สำนักงานเลขาธิการคุรุสภา
           เลขที่ 128/1 ถนนนครราชสีมา แขวงดุสิต เขตดุสิต กรุงเทพมหานคร 10300
-        </div>
+        </div> -->
       </mat-tab>
     </mat-tab-group>
+    <div class="fs-6 text-danger">
+      *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
+      โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
+    </div>
 
     <div class="d-flex justify-content-center my-3">
       <!-- <button type="button" class="btn btn-secondary" (click)="resetForm()">
@@ -130,7 +135,7 @@
         type="button"
         class="btn border-primary text-primary bg-white mx-3"
         (click)="submit(1)"
-        [disabled]="userInfoForm.invalid"
+        [disabled]="!form.valid"
       >
         บันทึกชั่วคราว
       </button>
@@ -138,7 +143,7 @@
         type="button"
         (click)="submit(2)"
         class="btn btn-primary"
-        [disabled]="userInfoForm.invalid"
+        [disabled]="!form.valid"
       >
         บันทึกและยื่น
       </button>

@@ -1,3 +1,8 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav>
   <span header>
     กิจกรรมพัฒนาตนเอง (หนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต)
@@ -10,19 +15,19 @@
     รายละเอียดเพิ่มกิจกรรมพัฒนาตนเอง
   </div>
   <div class="box-header" *ngIf="pageType === activityPageMode.view">
-    รายละเอียดกิจกรรมพัฒนาตนเอง (หนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต)
+    รายละเอียดกิจกรรมพัฒนาตนเอง
   </div>
 
   <div class="bg-white p-3">
     <ksp-request-header-info></ksp-request-header-info>
     <hr />
 
-    <div class="bg-light p-4 mb-3">
+    <div class="bg-light py-5 mb-3">
       <ksp-license-info></ksp-license-info>
     </div>
 
     <div class="bg-light px-3 py-3 mb-3">
-      <div class="box-header mb-2">
+      <div class="box-header mb-1">
         ข้อมูลหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต
       </div>
 
@@ -53,13 +58,13 @@
     </div>
 
     <div class="bg-light px-3 py-3" *ngIf="pageType === activityPageMode.view">
-      <div class="box-header mb-2">ข้อมูลกิจกรรมพัฒนาตนเอง</div>
+      <div class="box-header mb-1">ข้อมูลกิจกรรมพัฒนาตนเอง</div>
 
-      <table class="table">
+      <table class="table" *ngIf="staffSelfDev && staffSelfDev.length">
         <thead class="header__table">
           <tr>
             <th scope="col">ลำดับ</th>
-            <th scope="col">กิจกรรมพัฒนาตนเอง</th>
+            <th scope="col">กิจกรรมการพัฒนาตนเอง</th>
             <th scope="col">วันที่แก้ไขล่าสุด</th>
             <th scope="col">วันที่บันทึก</th>
             <th scope="col">แก้ไขข้อมูล</th>
@@ -67,30 +72,29 @@
           </tr>
         </thead>
         <tbody class="body__table">
-          <tr>
-            <td>1</td>
-            <td>
-              มีวุฒิเพิ่มขึ้นในสาขาที่เกี่ยวข้องกับการประกอบวิชาชีพทางการศึกษา
-            </td>
-            <td>12/สิงหาคม/2565</td>
-            <td>12/สิงหาคม/2565</td>
-            <td>
-              <i
-                role="button"
-                class="box-header text-primary bi bi-pencil-square"
-                (click)="edit(activityPageMode.edit, staffId)"
-              ></i>
-            </td>
-            <td>
-              <i
-                role="button"
-                class="box-header text-success bi bi-eye"
-                (click)="view(activityPageMode.edit, staffId)"
-              ></i>
-            </td>
-          </tr>
+          <ng-container *ngIf="staffSelfDev && staffSelfDev.length">
+            <tr *ngFor="let activity of staffSelfDev; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>
+                {{ schoolMapSelfDevelopType(+activity.selfdeveloptype) }}
+              </td>
+              <td>{{ activity.updatedate | thaiDate }}</td>
+              <td>{{ activity.createdate | thaiDate }}</td>
+              <td>
+                <i
+                  role="button"
+                  class="fs-5 text-primary bi bi-pencil-square"
+                ></i>
+              </td>
+              <td>
+                <i role="button" class="fs-5 text-success bi bi-eye"></i>
+              </td></tr
+          ></ng-container>
         </tbody>
       </table>
+      <ng-container *ngIf="!staffSelfDev.length">
+        <div class="text-center fs-5">ไม่พบข้อมูล</div></ng-container
+      >
     </div>
 
     <ng-container *ngIf="pageType === activityPageMode.edit">
@@ -183,35 +187,24 @@
 
       <ng-container *ngIf="selector.value !== 'null'">
         <div class="mt-3">
-          <ksp-form-attachment
+          <ksp-form-multi-attachment
             [uniqueTimestamp]="uniqueTimestamp"
             title="กรุณาแนบหลักฐานประกอบการปฏิบัติงาน"
             [groups]="attachFiles"
-          ></ksp-form-attachment></div></ng-container
+          ></ksp-form-multi-attachment></div></ng-container
     ></ng-container>
   </div>
 </div>
 
-<ng-container *ngIf="pageType === activityPageMode.view">
-  <div class="sticky-bottom border px-2">
-    <ksp-bottom-nav
-      [isFirstPage]="false"
-      [isLastPage]="true"
-      [showCenterButtons]="false"
-      (prevClicked)="cancel()"
-    ></ksp-bottom-nav></div
-></ng-container>
-
-<ng-container *ngIf="pageType === activityPageMode.edit">
-  <div class="sticky-bottom border">
-    <ksp-bottom-nav
-      [isFirstPage]="true"
-      [isLastPage]="true"
-      [showCenterButtons]="true"
-      [showCancelButton]="true"
-      [showSaveButton]="true"
-      [disableSaveButton]="form.invalid"
-      (saveClicked)="confirmDialog()"
-      (cancelClicked)="cancel()"
-    ></ksp-bottom-nav></div
-></ng-container>
+<div class="sticky-bottom border px-2">
+  <ksp-bottom-nav
+    [isFirstPage]="true"
+    [isLastPage]="true"
+    [showCenterButtons]="true"
+    [showCancelButton]="true"
+    [showSaveButton]="pageType === 1"
+    [disableSaveButton]="!form.valid"
+    (saveClicked)="confirmDialog()"
+    (cancelClicked)="cancel()"
+  ></ksp-bottom-nav>
+</div>

@@ -26,7 +26,9 @@ import {
   RENEW_DOCUMENT_FILES,
 } from './renew-license-foreign-files';
 import localForage from 'localforage';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'ksp-renew-license-foreign',
   templateUrl: './renew-license-foreign.component.html',
@@ -54,6 +56,9 @@ export class RenewLicenseForeignComponent implements OnInit {
   personalDeclaration: any;
   documentFiles: FileGroup[] = [];
   myImage = '';
+  requestType: any;
+  requestLabel = '';
+  requestDate: any;
 
   constructor(
     private router: Router,
@@ -65,10 +70,25 @@ export class RenewLicenseForeignComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.checkRequestId();
+    this.checkCareerType();
   }
 
   get personalDetail() {
     return this.form.controls.personalDetail;
+  }
+
+  checkCareerType() {
+    this.route.queryParams.pipe(untilDestroyed(this)).subscribe((params) => {
+      if (Number(params['type'])) {
+        this.requestType = Number(params['type']);
+      }
+
+      if (this.requestType === 1) {
+        this.requestLabel = 'TEACHER';
+      } else if (this.requestType === 2) {
+        this.requestLabel = 'ADMINISTRATORS';
+      }
+    });
   }
 
   checkRequestId() {
@@ -79,6 +99,7 @@ export class RenewLicenseForeignComponent implements OnInit {
           if (res) {
             console.log(res);
             this.requestData = res;
+            this.requestDate = res.requestdate;
             this.requestNo = res.requestno;
             this.currentProcess = Number(res.process);
             this.uniqueNo = res.uniqueno || '';
@@ -363,7 +384,6 @@ export class RenewLicenseForeignComponent implements OnInit {
       width: '350px',
       data: {
         header: `ยกเลิกใบคำขอสำเร็จ`,
-        buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 

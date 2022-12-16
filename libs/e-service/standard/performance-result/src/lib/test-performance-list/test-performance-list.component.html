@@ -14,26 +14,24 @@
     <div class="bg-white p-3">
       <div class="bg-light p-3">
         <div class="box-header">ค้นหาข้อมูล/หลักสูตรที่ต้องการ</div>
-  
+
         <div class="row mb-2">
           <div class="col">
             <label class="form-label">สถาบัน / มหาวิทยาลัย</label>
             <select class="form-select" formControlName="uniid">
               <option value="null" selected disabled hidden>กรุณาเลือก</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              <option *ngFor="let type of universityList" [value]="type.value">{{ type.label }}</option>
             </select>
           </div>
           <div class="col">
             <label class="form-label">สังกัด / คณะหน่วยงาน </label>
-            <select class="form-select" formControlName="unitype">
+            <select class="form-select" formControlName="unitype" (change)="getUniversity()">
               <option value="null" selected disabled hidden>กรุณาเลือก</option>
               <option *ngFor="let type of universityTypeList" [value]="type.value">{{ type.label }}</option>
             </select>
           </div>
         </div>
-  
+
         <div class="row mb-2">
           <div class="col">
             <label class="form-label">รหัสรับรองปริญญา</label>
@@ -46,7 +44,7 @@
             <input class="form-control" type="text" formControlName="fulldegreename" />
           </div>
         </div>
-  
+
         <div class="row mb-2">
           <div class="col">
             <label class="form-label">ระดับปริญญาทางการศึกษา</label>
@@ -60,7 +58,7 @@
             <input class="form-control" type="text" formControlName="calendaryear" />
           </div>
         </div>
-  
+
         <div class="d-flex justify-content-end">
           <button
             class="btn border-primary text-primary bg-white"
@@ -144,8 +142,8 @@
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
         <tr mat-row
-            [ngClass]="{'make-highlight': (rowSelected?.uniperformanceid === row.uniperformanceid && rowSelected?.id === row.id)}" 
-            *matRowDef="let row; columns: displayedColumns1" 
+            [ngClass]="{'make-highlight': (rowSelected?.uniperformanceid === row.uniperformanceid && rowSelected?.id === row.id)}"
+            *matRowDef="let row; columns: displayedColumns1"
             (click)="selectRow(row)"></tr>
         <tr class="mat-row text-center" *matNoDataRow>
           <td class="mat-cell" [attr.colspan]="displayedColumns1.length">
@@ -166,7 +164,7 @@
   </div>
   <br />
   <div class="bg-white p-3">
-  
+
     <form [formGroup]="formStudent">
       <div class="row mb-2">
         <div class="col">
@@ -180,43 +178,208 @@
         </div>
       </div>
     </form>
-    <div class="table-reponsive bg-white">
+    <div class="table-reponsive bg-white table__scroll">
       <table mat-table [dataSource]="dataSource2">
+        <ng-container matColumnDef="idcardnoHeader">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            [attr.rowspan]="2"
+            style="min-width: 10rem;"
+          >
+            หมายเลขบัตรประชุาชน
+          </th>
+        </ng-container>
         <ng-container matColumnDef="personId">
-          <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชุาชน</th>
+          <th mat-header-cell *matHeaderCellDef [ngStyle]="{ display: 'none' }">หมายเลขบัตรประชุาชน</th>
           <td mat-cell *matCellDef="let element">{{ element.idcardno }}</td>
         </ng-container>
 
+        <ng-container matColumnDef="nameHeader">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            [attr.rowspan]="2"
+            style="min-width: 15rem;"
+          >
+            ชื่อ-นามสกุล
+          </th>
+        </ng-container>
         <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+          <th mat-header-cell *matHeaderCellDef [ngStyle]="{ display: 'none' }">ชื่อ-นามสกุล</th>
           <td mat-cell *matCellDef="let element">{{ getFullName(element) }}</td>
         </ng-container>
 
+        <ng-container matColumnDef="academicHeader">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            [attr.rowspan]="2"
+            style="min-width: 20rem;"
+          >
+            สังกัด/คณะ
+          </th>
+        </ng-container>
         <ng-container matColumnDef="faculty">
-          <th mat-header-cell *matHeaderCellDef>สังกัด/คณะ</th>
+          <th mat-header-cell *matHeaderCellDef [ngStyle]="{ display: 'none' }">สังกัด/คณะ</th>
           <td mat-cell *matCellDef="let element">{{ element.unitypename }}</td>
         </ng-container>
 
+        <ng-container matColumnDef="courseHeader">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            [attr.rowspan]="2"
+            style="min-width: 10rem;"
+          >
+            สาขาวิชา
+          </th>
+        </ng-container>
         <ng-container matColumnDef="branch">
-          <th mat-header-cell *matHeaderCellDef>สาขาวิชา</th>
+          <th mat-header-cell *matHeaderCellDef [ngStyle]="{ display: 'none' }">สาขาวิชา</th>
           <td mat-cell *matCellDef="let element">{{ element.coursemajor }}</td>
         </ng-container>
 
+        <ng-container matColumnDef="importDateHeader">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            [attr.rowspan]="2"
+            style="min-width: 10rem;"
+          >
+            วันที่รับเข้าศึกษา
+          </th>
+        </ng-container>
         <ng-container matColumnDef="year">
-          <th mat-header-cell *matHeaderCellDef>วันที่รับเข้าศึกษา</th>
+          <th mat-header-cell *matHeaderCellDef [ngStyle]="{ display: 'none' }">วันที่รับเข้าศึกษา</th>
           <td mat-cell *matCellDef="let element">{{ element.admissiondate || '-' }}</td>
         </ng-container>
 
+        <ng-container matColumnDef="importTestHeader">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            [attr.rowspan]="2"
+            style="min-width: 10rem;"
+          >
+            วันที่นำเข้าผลทดสอบ
+          </th>
+        </ng-container>
         <ng-container matColumnDef="importDate">
-          <th mat-header-cell *matHeaderCellDef>วันที่นำเข้าผลทดสอบ</th>
+          <th mat-header-cell *matHeaderCellDef [ngStyle]="{ display: 'none' }">วันที่นำเข้าผลทดสอบ</th>
           <td mat-cell *matCellDef="let element">{{ element.importdate }}</td>
         </ng-container>
 
+        <ng-container matColumnDef="statusHeader">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            [attr.rowspan]="2"
+            style="min-width: 5rem;"
+          >
+          สถานะ
+          </th>
+        </ng-container>
         <ng-container matColumnDef="status">
-          <th mat-header-cell *matHeaderCellDef>สถานะ</th>
+          <th mat-header-cell *matHeaderCellDef [ngStyle]="{ display: 'none' }">สถานะ</th>
           <td mat-cell *matCellDef="let element">{{ element.importstatus === '1' ? 'สำเร็จ' : '-' }}</td>
         </ng-container>
 
+        <ng-container matColumnDef="knowledgeavg">
+          <th mat-header-cell *matHeaderCellDef style="min-width: 100px;">คะแนน</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.knowledgeavg }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="knowledgeresult">
+          <th mat-header-cell *matHeaderCellDef style="min-width: 100px;">ผลการประเมิน</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.knowledgeresult }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="relationavg">
+          <th mat-header-cell *matHeaderCellDef style="min-width: 100px;">คะแนน</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.relationavg }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="relationresult">
+          <th mat-header-cell *matHeaderCellDef style="min-width: 100px;">ผลการประเมิน</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.relationresult }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="ethicavg">
+          <th mat-header-cell *matHeaderCellDef style="min-width: 100px;">คะแนน</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.ethicavg }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="ethicresult">
+          <th mat-header-cell *matHeaderCellDef style="min-width: 100px;">ผลการประเมิน</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.ethicresult }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="averageavg">
+          <th mat-header-cell *matHeaderCellDef style="min-width: 100px;">คะแนน</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.averageavg }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="averageresult">
+          <th mat-header-cell *matHeaderCellDef style="min-width: 100px;">ผลการประเมิน</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.averageresult }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="learning">
+          <th mat-header-cell *matHeaderCellDef [attr.colspan]="2" style="min-width: 250px;">
+            ด้านการจัดการเรียนรู้
+          </th>
+        </ng-container>
+
+        <ng-container matColumnDef="average">
+          <th mat-header-cell *matHeaderCellDef [attr.colspan]="2" style="min-width: 250px;">
+            คะแนนเฉลี่ยรวมผลการประเมิน
+          </th>
+        </ng-container>
+
+        <ng-container matColumnDef="ethics">
+          <th mat-header-cell *matHeaderCellDef [attr.colspan]="2" style="min-width: 300px;">
+            ด้านการปฏิบัติหน้าที่ครูและจรรยาบรรณของวิชาชีพ
+          </th>
+        </ng-container>
+
+        <ng-container matColumnDef="relationship">
+          <th mat-header-cell *matHeaderCellDef [attr.colspan]="2" style="min-width: 300px;">
+            ด้านความสัมพันธ์กับผู้ปกครองและชุมชน
+          </th>
+        </ng-container>
+        <tr
+          mat-header-row
+          *matHeaderRowDef="[
+            'idcardnoHeader',
+            'nameHeader',
+            'academicHeader',
+            'courseHeader',
+            'importDateHeader',
+            'importTestHeader',
+            'statusHeader',
+            'learning',
+            'relationship',
+            'ethics',
+            'average'
+          ]"
+        ></tr>
         <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns2"></tr>
         <tr class="mat-row text-center" *matNoDataRow>

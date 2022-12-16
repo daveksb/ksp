@@ -33,7 +33,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     RouterModule,
     SchoolTempLicenseRoutingModule,
     MatTabsModule,
-    SharedFormOthersModule,
     MatMenuModule,
     TopNavComponent,
     MatTableModule,
@@ -51,6 +50,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     RequestNoPipe,
     UniFormBadgeComponent,
     MatProgressSpinnerModule,
+    SharedFormOthersModule,
   ],
   declarations: [SchoolRequestListComponent, SchoolRequestComponent],
 })

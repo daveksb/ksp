@@ -19,7 +19,7 @@ export class UniInfoService {
     formData.step1 = {
       institutionsCode: res?.unicode || '',
       institutionsGroup: res?.unitype || '',
-      institutionsName: res?.name || '',
+      institutionsName: res?.uniname || '',
       provience: res?.uniprovince || '',
       courseDetailType: res?.coursedetailtype,
       courseDetail: res?.coursedetailinfo
@@ -54,10 +54,6 @@ export class UniInfoService {
         : null,
     };
     formData.step2 = {
-      plan1: {
-        plans: res.coursestructure ? parseJson(res.coursestructure) : [],
-        subjects: res.courseplan ? parseJson(res.courseplan) : [],
-      },
       teacher: {
         teachers: res.courseteacher ? parseJson(res.courseteacher) : [],
       },
@@ -69,6 +65,17 @@ export class UniInfoService {
         advisors: res.courseadvisor ? parseJson(res.courseadvisor) : [],
       },
     };
+    if (['a', 'b', 'c'].includes(res?.degreelevel)) {
+      formData.step2.plan1 = {
+        plans: res.coursestructure ? parseJson(res.coursestructure) : [],
+        subjects: res.courseplan ? parseJson(res.courseplan) : [],
+      };
+    } else {
+      formData.step2.plan2 = {
+        plans: res.coursestructure ? parseJson(res.coursestructure) : [],
+        subjects: res.courseplan ? parseJson(res.courseplan) : [],
+      };
+    }
     formData.step3 = {
       training: {
         rows: res.processtrainning ? parseJson(res.processtrainning) : [],
@@ -95,7 +102,7 @@ export class UniInfoService {
   searchTypeidUniUniversity(id: any): Observable<any> {
     return this.http
       .get(
-        `${environment.apiUrl}/kspmasterdata/searchtypeiduniuniversity?searchTypeId=${id}`
+        `${environment.apiUrl}/kspmasterdata/searchtypeiduniuniversity?searchtypeid=${id}`
       )
       .pipe(map((res: any) => res?.datareturn));
   }
@@ -119,7 +126,7 @@ export class UniInfoService {
   getUniversity(typeId: any): Observable<any> {
     return this.http
       .get(
-        `${environment.apiUrl}/kspmasterdata/searchtypeiduniuniversity?searchTypeId=${typeId}`
+        `${environment.apiUrl}/kspmasterdata/searchtypeiduniuniversity?searchtypeid=${typeId}`
       )
       .pipe(
         map((data: any) => data.datareturn),

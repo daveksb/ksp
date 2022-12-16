@@ -35,6 +35,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { LicenseForeignAgreementComponent } from './license-foreign-agreement/license-foreign-agreement.component';
 import { EditLicenseComponent } from '@ksp/shared/form/license';
 import { LicenseRequestThaiComponent } from './license-request-thai/license-request-thai.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export const routes: Routes = [
   {
@@ -81,10 +82,6 @@ export const routes: Routes = [
         path: 'study-supervision/:id',
         component: LicenseRequestStudySupervisionComponent,
       },
-      // {
-      //   path: 'request/:type',
-      //   component: LicenseRequestComponent,
-      // },
       {
         path: 'agreement',
         component: LicenseForeignAgreementComponent,
@@ -98,7 +95,7 @@ export const routes: Routes = [
         component: LicenseEditComponent,
       },
       {
-        path: 'payment-channel',
+        path: 'payment-channel/:id',
         component: PaymentChannelComponent,
       },
       {
@@ -106,7 +103,7 @@ export const routes: Routes = [
         component: PromptpayComponent,
       },
       {
-        path: '**',
+        path: '*',
         component: PageNotFoundComponent,
       },
     ],
@@ -132,6 +129,7 @@ export const routes: Routes = [
     MatStepperModule,
     RequestStatusComponent,
     EditLicenseComponent,
+    MatProgressSpinnerModule,
   ],
   declarations: [
     LicenseRequestComponent,

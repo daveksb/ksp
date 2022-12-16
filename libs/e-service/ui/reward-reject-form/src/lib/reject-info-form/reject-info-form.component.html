@@ -1,0 +1,68 @@
+<div class="bg-white border py-3 px-4 mb-4" [formGroup]="form">
+  <div class="d-flex justify-content-between mb-3">
+    <div class="d-flex align-items-center">
+      <div class="box-header me-1">ข้อมูลการขอคัดค้าน</div>
+    </div>
+  </div>
+  <hr />
+
+  <div class="row mb-3">
+    <div class="d-flex align-items-center" style="width: 213px; margin-right: 113px">
+      <input
+        class="form-check-input my-0 radio"
+        type="radio"
+        value="1"
+        formControlName="isReject" />
+      <div style="width: 12.5rem">
+        <label class="ms-4"> ไม่มีการคัดค้าน </label>
+      </div>
+    </div>
+
+    <div class="d-flex align-items-center" style="width: 213px;">
+      <input
+        class=" form-check-input my-0 radio"
+        type="radio"
+        value="2"
+        formControlName="isReject" />
+      <div style="width: 12.5rem">
+        <label class="ms-4"> มีการคัดค้าน </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-3" style="width: 430px">
+    <div>
+      <label class="form-label">หมายเลขบัตรประชาชน</label>
+      <input type="text" class="form-control" formControlName="id" />
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div style="width: 180px;">
+      <label class="form-label">คำนำหน้าชื่อ</label>
+      <input type="text" class="form-control" formControlName="prefix" />
+    </div>
+
+    <div style="width: 400px;">
+      <label class="form-label">ชื่อ</label>
+      <input type="text" class="form-control" formControlName="name" />
+    </div>
+
+    <div style="width: 400px;">
+      <label class="form-label">นามสกุล</label>
+      <input type="text" class="form-control" formControlName="surname" />
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div>
+      <label class="form-label">เหตุผลการคัดค้าน </label>
+      <textarea
+        class="form-control"
+        type="text"
+        rows="3"
+        formControlName="rejectReason">
+  </textarea>
+    </div>
+  </div>
+</div>

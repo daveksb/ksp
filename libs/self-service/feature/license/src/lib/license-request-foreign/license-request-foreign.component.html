@@ -1,5 +1,5 @@
 <ksp-top-nav [isSelfService]="true"
-  ><span header>TEACHING LICENSE APPLICATION FORM</span>
+  ><span header>TEACHING LICENSE APPLICATION FORM ({{ requestLabel }})</span>
 </ksp-top-nav>
 
 <div class="main__container py-2 px-4">
@@ -7,6 +7,8 @@
     [headerLabel1]="'Issue Date'"
     [headerLabel2]="'Form ID'"
     [title]="'TEACHING LICENSE APPLICATION FORM'"
+    [requestNo]="requestNo"
+    [requestDate]="requestDate"
   ></self-service-request-status>
 
   <br />
@@ -80,9 +82,8 @@
         type="button"
         (click)="save()"
         class="ms-3 btn btn-primary"
-        [disabled]="false"
+        [disabled]="personalDetail.invalid"
       >
-        <!-- [disabled]="personalDetail.invalid" -->
         Save (Draft)
       </button>
     </div>

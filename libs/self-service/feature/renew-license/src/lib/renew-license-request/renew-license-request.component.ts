@@ -15,6 +15,7 @@ import {
   EducationDetailService,
   MyInfoService,
   SelfRequestService,
+  LoaderService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { FileGroup, SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
@@ -25,7 +26,7 @@ import {
   thaiDate,
   toLowercaseProp,
 } from '@ksp/shared/utility';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import * as _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 import localForage from 'localforage';
@@ -54,6 +55,7 @@ export class RenewLicenseRequestComponent
   extends LicenseFormBaseComponent
   implements OnInit
 {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   userInfoType = UserInfoFormType.thai;
 
   override form = this.fb.group({
@@ -69,8 +71,7 @@ export class RenewLicenseRequestComponent
   });
 
   disableNextButton = false;
-  myInfo$!: Observable<SelfMyInfo>;
-  today = thaiDate(new Date());
+  today = new Date();
 
   workingInfoFiles: any[] = [];
   workingInfoFiles2: any[] = [];
@@ -84,7 +85,8 @@ export class RenewLicenseRequestComponent
     educationDetailService: EducationDetailService,
     requestService: SelfRequestService,
     myInfoService: MyInfoService,
-    route: ActivatedRoute
+    route: ActivatedRoute,
+    private loaderService: LoaderService
   ) {
     super(
       generalInfoService,
@@ -100,7 +102,6 @@ export class RenewLicenseRequestComponent
   }
 
   ngOnInit(): void {
-    this.myInfo$ = this.myInfoService.getMyInfo();
     this.getListData();
     this.checkButtonsDisableStatus();
     this.checkRequestId();

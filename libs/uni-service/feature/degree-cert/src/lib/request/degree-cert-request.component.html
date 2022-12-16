@@ -72,9 +72,12 @@
     [showCenterButtons]="stepper.selectedIndex === 3"
     [showSaveButton]="true"
     [showCancelButton]="true"
-    (saveClicked)="save()"
+    [showTempSaveButton]="true"
+    [disableTempSaveButton]="false"
+    (saveClicked)="save('1')"
     (nextClicked)="goForward()"
     (prevClicked)="goBack()"
     (cancelClicked)="navigateBack()"
+    (tempSaveClicked)="save('99')"
   ></ksp-bottom-nav>
 </div>

@@ -1,10 +1,13 @@
 <form [formGroup]="form">
-  <div class="ps-3 pe-3 pt-3 pb-3 bg-light">
+  <div class="bg-light">
     <div class="row mb-2">
       <div class="col">
         <label class="form-label">ใบอนุญาตของประเทศ</label>
         <select class="form-select" formControlName="licenseCountry">
-          <option>กรุณาเลือก</option>
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option *ngFor="let c of countries" [value]="+c.countryNo">
+            {{ c?.countryN }}
+          </option>
         </select>
       </div>
       <div class="col">

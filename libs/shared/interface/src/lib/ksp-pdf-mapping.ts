@@ -11,6 +11,15 @@ export const kspPdfMapping: IKspPdfMapping[] = [
       {
         text: [
           {
+            key: 'prefix',
+            options: {
+              x: 90,
+              y: 750,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
             key: 'requestno',
             options: {
               x: 100,
@@ -628,6 +637,24 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             options: {
               x: 50,
               y: 560,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'reasonDetail2',
+            options: {
+              x: 50,
+              y: 538,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'reasonDetail3',
+            options: {
+              x: 50,
+              y: 514,
               size: defaultSize,
               color: black,
             },
@@ -1300,6 +1327,24 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             },
           },
           {
+            key: 'reasonDetail2',
+            options: {
+              x: 50,
+              y: 685,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'reasonDetail3',
+            options: {
+              x: 50,
+              y: 662,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
             key: 'otherEvidence',
             options: {
               x: 205,
@@ -1766,18 +1811,18 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           },
 
           {
-            key: 'hiringstartdate',
+            key: 'hiringStartDate',
             options: {
-              x: 225,
+              x: 215,
               y: 295,
               size: defaultSize,
               color: black,
             },
           },
           {
-            key: 'hiringenddate',
+            key: 'hiringEndDate',
             options: {
-              x: 400,
+              x: 390,
               y: 295,
               size: defaultSize,
               color: black,
@@ -1789,6 +1834,15 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             options: {
               x: 250,
               y: 273,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'reasonDetail2',
+            options: {
+              x: 75,
+              y: 250,
               size: defaultSize,
               color: black,
             },
@@ -2289,22 +2343,22 @@ export const kspPdfMapping: IKspPdfMapping[] = [
         ],
         svg: [
           {
-            key: 'checkbox1',
+            key: 'degree1',
             options: { x: 79, y: 424 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'degree2',
             options: { x: 79, y: 373 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'degree3',
             options: { x: 79, y: 321 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'degree4',
             options: { x: 79, y: 269 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
@@ -2333,60 +2387,60 @@ export const kspPdfMapping: IKspPdfMapping[] = [
         ],
         svg: [
           {
-            key: 'checkbox1',
+            key: 'evidence1',
             options: { x: 93, y: 691 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'evidence2',
             options: { x: 93, y: 673 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'evidence3',
             options: { x: 93, y: 655 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'evidence4',
             options: { x: 93, y: 637 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'evidence5',
             options: { x: 93, y: 619 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'evidence6',
             options: { x: 93, y: 601 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'evidence7',
             options: { x: 93, y: 567 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'evidence8',
             options: { x: 93, y: 550 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
 
           {
-            key: 'checkbox1',
+            key: 'evidence8_1',
             options: { x: 128, y: 532 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
 
           {
-            key: 'checkbox1',
+            key: 'evidence8_2',
             options: { x: 126, y: 498 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
 
           {
-            key: 'checkbox1',
+            key: 'evidence8_3',
             options: { x: 126, y: 412 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
@@ -2813,22 +2867,22 @@ export const kspPdfMapping: IKspPdfMapping[] = [
         ],
         svg: [
           {
-            key: 'checkbox1',
+            key: 'degree1',
             options: { x: 81, y: 388 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'degree2',
             options: { x: 81, y: 336 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'degree3',
             options: { x: 81, y: 284 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'degree4',
             options: { x: 82, y: 232 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
@@ -2857,70 +2911,70 @@ export const kspPdfMapping: IKspPdfMapping[] = [
         ],
         svg: [
           {
-            key: 'checkbox1',
+            key: 'evidence1',
             options: { x: 94, y: 702 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'evidence2',
             options: { x: 93, y: 684 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'evidence3',
             options: { x: 93, y: 666 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'evidence4',
             options: { x: 93, y: 648 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'evidence5',
             options: { x: 93, y: 630 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'evidence6',
             options: { x: 93, y: 613 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'evidence7',
             options: { x: 94, y: 580 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'evidence8',
             options: { x: 94, y: 563 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'evidence9',
             options: { x: 94, y: 545 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
 
           {
-            key: 'checkbox1',
+            key: 'evidence9_1',
             options: { x: 129, y: 526 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
 
           {
-            key: 'checkbox1',
+            key: 'evidence9_2',
             options: { x: 129, y: 475 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
 
           {
-            key: 'checkbox1',
+            key: 'evidence9_3',
             options: { x: 129, y: 371 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'evidence9_4',
             options: { x: 129, y: 336 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
@@ -3354,22 +3408,22 @@ export const kspPdfMapping: IKspPdfMapping[] = [
         ],
         svg: [
           {
-            key: 'checkbox1',
+            key: 'degree1',
             options: { x: 81, y: 410 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'degree2',
             options: { x: 81, y: 359 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'degree3',
             options: { x: 81, y: 307 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'degree4',
             options: { x: 82, y: 255 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
@@ -3398,70 +3452,70 @@ export const kspPdfMapping: IKspPdfMapping[] = [
         ],
         svg: [
           {
-            key: 'checkbox1',
+            key: 'evidence1',
             options: { x: 94, y: 695 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'evidence2',
             options: { x: 94, y: 677 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'evidence3',
             options: { x: 94, y: 659 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'evidence4',
             options: { x: 94, y: 641 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'evidence5',
             options: { x: 94, y: 623 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'evidence6',
             options: { x: 94, y: 605 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'evidence7',
             options: { x: 94, y: 571 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'evidence8',
             options: { x: 94, y: 554 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'evidence9',
             options: { x: 94, y: 536 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
 
           {
-            key: 'checkbox1',
+            key: 'evidence9_1',
             options: { x: 130, y: 520 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
 
           {
-            key: 'checkbox1',
+            key: 'evidence9_2',
             options: { x: 130, y: 485 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
 
           {
-            key: 'checkbox1',
+            key: 'evidence9_3',
             options: { x: 130, y: 381 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'checkbox1',
+            key: 'evidence9_4',
             options: { x: 130, y: 345 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },

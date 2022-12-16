@@ -121,7 +121,10 @@ export class CheckComponent implements OnInit, AfterContentChecked {
     }
   }
   get allowEdit() {
-    return ['1', '2'].includes(this.daftRequest?.requestprocess) && this.daftRequest?.requeststatus !== "2";
+    return (
+      ['1', '2'].includes(this.daftRequest?.requestprocess) &&
+      this.daftRequest?.requeststatus !== '2'
+    );
   }
   ngOnInit(): void {
     this.getHistory();
@@ -219,10 +222,8 @@ export class CheckComponent implements OnInit, AfterContentChecked {
   }
   onSubmitKSP() {
     const status = _.get(this.form, 'value.step5.verify', '');
-    let process = _.toNumber(this.daftRequest?.requestprocess);
-    if (status != 2) {
-      process += 1;
-    }
+    const process = _.toNumber(this.daftRequest?.requestprocess) + 1;
+
     try {
       const detail: any = _.pick(this.form.value, [
         'verifyStep1',
@@ -272,7 +273,7 @@ export class CheckComponent implements OnInit, AfterContentChecked {
         header: 'ยืนยันข้อมูลสำเร็จ',
         subContent: `ระบบส่งใบคำขอเพื่อพิจารณาประเมินหลักสูตร
         เรียบร้อย`,
-        buttonLabel: 'กลับสู่หน้าหลัก',
+
         showPrintButton: true,
       },
     });

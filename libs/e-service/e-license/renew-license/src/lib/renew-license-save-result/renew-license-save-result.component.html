@@ -1,0 +1,38 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
+<ksp-top-nav><span header>ใบคำขอต่ออนุญาตประกอบวิชาชีพ</span>
+  <span subHeader>ผลการนำเสนอใบอนุญาตประกอบวิชาชีพ </span>
+</ksp-top-nav>
+
+<div class="bg-secondary bg-opacity-10 px-3 py-2 full-height">
+  <div class="box-header">บันทึกผลการนำเสนอคณะอนุกรรมการกลั่นกรอง</div>
+  <div class="bg-white px-3 py-3 mb-3">
+    <div class="box-header">รายงานนำเสนอคณะอนุกรรมการกลั่นกรอง</div>
+    <hr />
+    <div class="text-secondary mb-3">
+      บัญชีรายชื่อที่เลือกสำหรับพิมพ์รายงานนำเสนอคณะอนุกรรมการกลั่นกรอง
+    </div>
+    <div class="d-flex align-items-center mb-3">
+      <div class="text-secondary">บัญชีที่ / List No.</div>
+      <div class="content-sub" style="margin-left: 37px">
+        {{ listNo }}
+      </div>
+    </div>
+    <div class="d-flex align-items-center mb-3">
+      <div class="text-secondary">กลุ่มที่ / Group No.</div>
+      <div class="content-sub" style="margin-left: 37px">{{ groupNo }}</div>
+    </div>
+
+    <ksp-request-license-approve-license-table
+      [data]="licenseData"></ksp-request-license-approve-license-table>
+  </div>
+
+  <div class="bg-white px-3 py-3">
+    <ksp-e-service-license-save-result
+      (save)="save($event)"
+      (cancel)="cancel()"></ksp-e-service-license-save-result>
+  </div>
+</div>

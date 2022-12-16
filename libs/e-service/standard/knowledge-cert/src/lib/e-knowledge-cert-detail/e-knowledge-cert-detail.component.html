@@ -1,6 +1,6 @@
 <ksp-top-nav
   ><span header>ยื่นใบคำขอ</span
-  ><span subHeader>ขอรับรองความรู้</span></ksp-top-nav
+  ><span subHeader>ใบคำขอรับรองความรู้</span></ksp-top-nav
 >
 
 <form [formGroup]="form">
@@ -63,10 +63,6 @@
         </mat-tab>
 
         <mat-tab label="สถานที่ทำงาน">
-          <!-- <div class="d-flex align-items-center">
-            <input type="checkbox" class="me-2" />
-            <label class="form-label mb-2">เป็นผู้ประสงค์ประกอบวิชาชีพทางการศึกษา</label>
-          </div> -->
           <self-service-form-user-workplace
             formControlName="workplace"
             [mode]="'view'"

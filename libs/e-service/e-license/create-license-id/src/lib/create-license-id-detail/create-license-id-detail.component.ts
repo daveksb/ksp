@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import {
@@ -8,11 +8,20 @@ import {
   Prefix,
   SchRequestSearchFilter,
   SelfApproveList,
+  SelfLicense,
 } from '@ksp/shared/interface';
-import { ERequestService, GeneralInfoService } from '@ksp/shared/service';
-import { replaceEmptyWithNull } from '@ksp/shared/utility';
+import {
+  ERequestService,
+  GeneralInfoService,
+  LoaderService,
+} from '@ksp/shared/service';
+import { formatDatePayload, replaceEmptyWithNull } from '@ksp/shared/utility';
 import localForage from 'localforage';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import moment from 'moment';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '@ksp/shared/dialog';
+import { qualificationCareerTypeList } from '@ksp/shared/constant';
 
 @Component({
   selector: 'ksp-create-license-id-detail',
@@ -20,16 +29,30 @@ import { Observable } from 'rxjs';
   styleUrls: ['./create-license-id-detail.component.scss'],
 })
 export class CreateLicenseIdDetailComponent implements OnInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   displayedColumns1: string[] = column1;
   displayedColumns2: string[] = column2;
   dataSource1 = new MatTableDataSource<SelfApproveList>();
   dataSource2 = new MatTableDataSource<KspRequest>();
   prefixList!: Observable<Prefix[]>;
-  licenseTypes = [{ value: 1, name: 'ใบอนุญาตประกอบวิชาชีพครู' }];
+  licenseTypes = qualificationCareerTypeList;
   myImage: any = null;
+  selectedLicense = new SelfLicense();
+
+  licensetype: any = '';
+  licenseno: string | null = '';
+  prefixth: string | null = '-';
+  firstnameth: string | null = '';
+  lastnameth: string | null = '';
+  prefixen: string | null = '-';
+  firstnameen: string | null = '';
+  lastnameen: string | null = '';
+  kuruspano: string | null = '';
+  licensestartdate: string | null = null;
+  licenseenddate: string | null = null;
 
   form = this.fb.group({
-    licenseno: [],
+    licenseno: [null, Validators.required],
     idcardno: [],
     careertype: [],
     prefixth: [],
@@ -48,10 +71,27 @@ export class CreateLicenseIdDetailComponent implements OnInit {
     private router: Router,
     private requestService: ERequestService,
     private fb: FormBuilder,
-    private generalInfoService: GeneralInfoService
+    private generalInfoService: GeneralInfoService,
+    public dialog: MatDialog,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {
+    this.getStoredData();
+    this.prefixList = this.generalInfoService.getPrefix();
+  }
+
+  saveLicense() {
+    const payload = formatDatePayload({
+      ...this.form.value,
+      ...{ id: this.selectedLicense.id },
+    });
+    this.requestService.updateLicense(payload).subscribe((res) => {
+      //console.log('update = ', res);
+    });
+  }
+
+  getStoredData() {
     localForage
       .getItem<SelfApproveList[]>('selected-for-create-license')
       .then((res) => {
@@ -59,10 +99,8 @@ export class CreateLicenseIdDetailComponent implements OnInit {
           this.dataSource1.data = res.map((i) => {
             return { ...i, count: JSON.parse(i.requestlist || '').length };
           });
-          console.log('res x = ', res);
 
           const listno = res.map((r: any) => r.listno).join(',');
-          //console.log(listno);
           if (listno) {
             const payload = {
               listno,
@@ -72,7 +110,6 @@ export class CreateLicenseIdDetailComponent implements OnInit {
             this.requestService
               .getRequestListByListNo(payload)
               .subscribe((res: any) => {
-                //console.log(res);
                 if (res?.datareturn) {
                   this.dataSource2.data = res.datareturn;
                 }
@@ -80,36 +117,61 @@ export class CreateLicenseIdDetailComponent implements OnInit {
           }
         }
       });
-
-    // this.search({});
-    this.prefixList = this.generalInfoService.getPrefix();
   }
 
   rowSelect(id: any) {
-    //console.log('id = ', id);
     this.requestService.getSelfLicense(id).subscribe((data) => {
-      //console.log('data = ', data);
-      this.form.patchValue(data);
+      console.log('data = ', data);
+      this.selectedLicense = data;
+      this.form.patchValue(<any>data);
+      /* this.myImage = atob(data.filedata || '{}'); */
+      this.licensetype = data.careertype;
+      this.licenseno = data.licenseno;
+      this.prefixth = data.prefixth;
+      this.firstnameth = data.firstnameth;
+      this.lastnameth = data.lastnameth;
+      this.prefixen = data.prefixen;
+      this.firstnameen = data.firstnameen;
+      this.lastnameen = data.lastnameen;
+      this.kuruspano = ''; //data.kuruspano;
+      this.licensestartdate = data.licensestartdate;
+      this.licenseenddate = data.licenseenddate;
     });
-    //this.myImage = atob(data.imagefileid);
   }
 
-  createMultiLicense() {
-    console.log('ds = ', this.dataSource2.data);
+  confirmDialog(id: string | null = null) {
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: `คุณต้องการยืนยันข้อมูล
+        และสร้างใบอนุญาต ใช่หรือไม่? `,
+      },
+    });
 
-    const payload: any = {
-      data: this.dataSource2.data.map((ds) => {
-        return {
+    dialog.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.createMultiLicense(id);
+      }
+    });
+  }
+
+  createMultiLicense(id: string | null = null) {
+    const data = id
+      ? this.dataSource2.data.filter((i) => i.id === id)
+      : this.dataSource2.data;
+
+    const payload = {
+      data: data.map((ds) => {
+        return formatDatePayload({
           careertype: ds.careertype,
-          renewtype: '0',
+          renewtype: '1', // allow only 1 ขอขึ้นทะเบียน and 2 ต่ออายุ
           isforeign: ds.isforeign,
-          licenseno: '2',
+          licenseno: null,
           requestno: ds.id, // store request id instead of no
-          licensestartdate: '2022-11-12',
-          licenseenddate: '2027-11-12',
+          licensestartdate: moment().format('yyyy-MM-DD'),
+          licenseenddate: moment().add(5, 'years').format('yyyy-MM-DD'), // มีอายุ 5 ปี
           licensestatus: '1',
           licensetype: '1',
-          teachercouncilidno: '1',
+          teachercouncilidno: ds.kuruspano, // the same as kuruspa no
           imageid: ds.imagefileid,
           idcardno: ds.idcardno,
           prefixth: ds.prefixth,
@@ -132,9 +194,11 @@ export class CreateLicenseIdDetailComponent implements OnInit {
           contactphone: ds.contactphone,
           workphone: ds.workphone,
           email: ds.email,
-        };
+          kuruspano: ds.kuruspano,
+        });
       }),
     };
+    //console.log('payload = ', payload);
     this.requestService.createMultipleLicense(payload).subscribe((res) => {
       console.log('result = ', res);
     });
@@ -159,9 +223,7 @@ export class CreateLicenseIdDetailComponent implements OnInit {
       offset: '0',
       row: '500',
     };
-
     payload = replaceEmptyWithNull(payload);
-
     this.requestService.KspSearchRequest(payload).subscribe((res) => {
       this.dataSource2.data = res;
     });
@@ -195,4 +257,5 @@ const column2 = [
   'licenseGroup',
   'approveDate',
   'verifyDate',
+  'view',
 ];

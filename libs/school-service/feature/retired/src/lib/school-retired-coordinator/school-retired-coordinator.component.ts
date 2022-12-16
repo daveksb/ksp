@@ -30,9 +30,6 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./school-retired-coordinator.component.scss'],
 })
 export class SchoolRetiredCoordinatorComponent implements OnInit {
-  form = this.fb.group({
-    coordinatorTnfo: [],
-  });
   reasoninfo: any;
   schoolId = getCookie('schoolId');
   school = new SchInfo();
@@ -40,9 +37,14 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
   userInfoFormType: number = UserInfoFormType.thai;
   prefixList$!: Observable<Prefix[]>;
   uniqueNo!: string;
+  fileId!: number;
+
   retiredFiles: FileGroup[] = [
     { name: 'หนังสือถอดถอนผู้ประสานงาน', files: [] },
   ];
+  form = this.fb.group({
+    coordinatorTnfo: [],
+  });
 
   constructor(
     private router: Router,
@@ -53,20 +55,14 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    localForage.getItem('retireReasonInfoFormValue').then((res) => {
-      this.reasoninfo = res;
-    });
-
-    localForage.getItem('retiredSelectedSchool').then((res: any) => {
-      this.school = res;
-    });
-
-    localForage.getItem('retiredSelectedUser').then((res: any) => {
-      this.selectUser = res;
-    });
-
     this.uniqueNo = uuidv4();
     this.getList();
+    this.getStoreData();
+  }
+
+  onUploadComplete(evt: any) {
+    this.fileId = evt.length;
+    //console.log('evt = ', evt);
   }
 
   prevPage() {
@@ -75,6 +71,18 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
 
   getList() {
     this.prefixList$ = this.generalInfoService.getPrefix();
+  }
+
+  getStoreData() {
+    localForage.getItem('retireReasonInfoFormValue').then((res) => {
+      this.reasoninfo = res;
+    });
+    localForage.getItem('retiredSelectedSchool').then((res: any) => {
+      this.school = res;
+    });
+    localForage.getItem('retiredSelectedUser').then((res: any) => {
+      this.selectUser = res;
+    });
   }
 
   confirmCancelDialog() {
@@ -110,7 +118,7 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
           if (res) {
             const coordinatorForm: any =
               this.form.controls.coordinatorTnfo.value;
-            const request: KspRequest = new KspRequest(); //form.retiredTnfo;
+            const request: KspRequest = new KspRequest();
             request.ref1 = '2';
             request.ref2 = '02';
             request.ref3 = '5';

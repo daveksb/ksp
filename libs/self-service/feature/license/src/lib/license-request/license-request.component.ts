@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { LicenseRequestService } from './license-request.service';
 import {
   AddressService,
@@ -11,6 +11,7 @@ import {
   EducationDetailService,
   MyInfoService,
   SelfRequestService,
+  LoaderService,
 } from '@ksp/shared/service';
 import { FileGroup, SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
 import {
@@ -62,8 +63,7 @@ export class LicenseRequestComponent
   implements OnInit
 {
   userInfoType = UserInfoFormType.thai;
-  userInfo!: SelfMyInfo;
-
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   override form = this.fb.group({
     userInfo: [],
     address1: [],
@@ -89,7 +89,8 @@ export class LicenseRequestComponent
     educationDetailService: EducationDetailService,
     requestService: SelfRequestService,
     myInfoService: MyInfoService,
-    route: ActivatedRoute
+    route: ActivatedRoute,
+    private loaderService: LoaderService
   ) {
     super(
       generalInfoService,
@@ -109,11 +110,6 @@ export class LicenseRequestComponent
     this.checkRequestId();
     this.form.valueChanges.subscribe((res) => {
       //console.log('1 = ', this.userInfoForm.valid);
-    });
-    this.myInfoService.getMyInfo().subscribe((res) => {
-      this.userInfo = {
-        ...res,
-      };
     });
   }
 
@@ -177,7 +173,12 @@ export class LicenseRequestComponent
 
     if (data.experienceinfo) {
       const experienceInfo = parseJson(data.experienceinfo);
-      this.form.controls.experience.patchValue({ ...experienceInfo });
+      this.form.controls.experience.patchValue({
+        ...experienceInfo,
+      } as any);
+      console.log('exp = ', experienceInfo);
+      /* const experienceInfo = parseJson(data.experienceinfo);
+      this.form.controls.experience.patchValue({ ...experienceInfo } as any); */
     }
 
     if (data.fileinfo) {

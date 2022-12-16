@@ -21,6 +21,7 @@ export class FormEducationInfoComponent
   @Input() countries: Country[] | null = [];
   @Input() showCheckbox = true;
   @Input() isOptional = false;
+  @Input() isDarkMode = true;
   @Input() userEducationType: any;
   FormTypeEnum = UserInfoFormType;
 
@@ -36,6 +37,8 @@ export class FormEducationInfoComponent
     grade: [],
     otherProperty: [],
     academicYear: [],
+    institutionApprove: [],
+    institutionWebsite: [],
   });
 
   constructor(private fb: FormBuilder) {
@@ -49,18 +52,22 @@ export class FormEducationInfoComponent
   }
 
   ngOnInit(): void {
-    this.clearValidator();
+    this.optionalEdu();
   }
 
   get degreeLevel() {
     return this.form.controls.degreeLevel;
   }
 
-  clearValidator() {
+  optionalEdu() {
     if (this.isOptional) {
-      this.form.controls.degreeName.clearValidators();
-      this.form.controls.major.clearValidators();
-      this.form.controls.institution.clearValidators();
+      this.clearValidator();
     }
+  }
+
+  clearValidator() {
+    this.form.controls.degreeName.clearValidators();
+    this.form.controls.major.clearValidators();
+    this.form.controls.institution.clearValidators();
   }
 }
