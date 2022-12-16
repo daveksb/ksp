@@ -17,7 +17,7 @@
               <option value="null" selected hidden disabled>กรุณาเลือก</option>
               <option
                 *ngFor="let item of universityTypes"
-                [value]="item?.value && showEditCheckbox"
+                [value]="item?.value"
               >
                 {{ item.label }}
               </option>
@@ -52,7 +52,7 @@
               <option value="null" selected hidden disabled>กรุณาเลือก</option>
               <option
                 *ngFor="let item of provinces"
-                [value]="item?.value && showEditCheckbox"
+                [value]="item?.value"
               >
                 {{ item.label }}
               </option>
