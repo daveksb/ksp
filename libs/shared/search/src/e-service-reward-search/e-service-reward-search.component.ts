@@ -26,6 +26,7 @@ export class EServiceRewardSearchComponent
   @Input() requestTypeList = SelfRequestType;
   @Input() careerTypeList: any[] = [];
   @Input() isSelfReward = true;
+  @Input() showDeclareDate = false;
   @Output() clear = new EventEmitter<boolean>();
   @Output() search = new EventEmitter<any>();
 
@@ -37,6 +38,8 @@ export class EServiceRewardSearchComponent
     status: [''],
     requestdatefrom: [''],
     requestdateto: [''],
+    declaredatefrom: [''],
+    declaredateto: [''],
 
     careertype: [],
     passportno: [''],

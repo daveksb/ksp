@@ -140,6 +140,44 @@
       </div>
     </div>
 
+    <ng-container *ngIf="checkMode">
+      <hr />
+
+      <div class="d-flex justify-content-between mb-3">
+        <div class="d-flex align-items-center">
+          <div class="box-header text-primary me-1">ผลการพิจารณารางวัล</div>
+          <div class="text-danger">* กรุณาเลือกอย่างใดอย่างหนึ่งเท่านั้น</div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="d-flex align-items-center">
+          <input
+            class="form-check-input my-0 radio"
+            type="radio"
+            value="1"
+            formControlName="reward" />
+          <div class="form-control" style="width: 12.5rem">
+            <label class="ms-4"> ได้รับรางวัล</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="d-flex align-items-center">
+          <input
+            class="form-check-input my-0 radio"
+            type="radio"
+            value="2"
+            formControlName="reward" />
+          <div class="form-control" style="width: 12.5rem">
+            <label class="ms-4"> ไม่ได้รับรางวัล </label>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+
     <hr />
 
     <div class="d-flex align-items-center mb-3">
@@ -169,7 +207,8 @@
         value="2"
         formControlName="shouldForward" />
       <div class="form-control" style="width: 25rem">
-        <label class="ms-4"> ส่งข้อมูลจัดบัญชีรายชื่อ </label>
+        <label class="ms-4" *ngIf="checkMode"> ส่งข้อมูลประกาศรายชื่อ </label>
+        <label class="ms-4" *ngIf="!checkMode"> ส่งข้อมูลจัดบัญชีรายชื่อ </label>
       </div>
     </div>
 
