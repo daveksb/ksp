@@ -72,6 +72,10 @@ const routes: Routes = [
       },
       {
         path: 'check/:id',
+        component: ETeacherCouncilDetailComponent,
+      },
+      {
+        path: 'check-confirm/:id',
         component: ETeacherCouncilCheckComponent,
       },
       {

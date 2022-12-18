@@ -84,7 +84,7 @@ export class ETeacherCouncilCheckListComponent
   }
 
   view(id: number) {
-    this.router.navigate(['/teacher-council', 'detail', id]);
+    this.router.navigate(['/teacher-council', 'check', id]);
   }
 }
 

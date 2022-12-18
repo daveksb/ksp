@@ -25,6 +25,7 @@ export abstract class ERewardFormBaseComponent {
   selectedTab: MatTabChangeEvent = new MatTabChangeEvent();
   requestData = new KspRequest();
   requestId!: number;
+  mode: 'confirm' | 'check' = 'confirm';
 
   constructor(
     protected route: ActivatedRoute,
@@ -56,6 +57,14 @@ export abstract class ERewardFormBaseComponent {
               this.patchData(res);
             }
           });
+      }
+    });
+  }
+
+  getMode() {
+    this.route.url.subscribe((url) => {
+      if (url[0].path === 'check') {
+        this.mode = 'check';
       }
     });
   }

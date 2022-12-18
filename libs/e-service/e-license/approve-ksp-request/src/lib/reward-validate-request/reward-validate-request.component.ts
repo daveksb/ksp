@@ -4,6 +4,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { KspFormBaseComponent, SchRequestProcess } from '@ksp/shared/interface';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { providerFactory } from '@ksp/shared/utility';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'ksp-reward-validate-request',
@@ -20,6 +21,7 @@ export class RewardValidateRequestComponent
   @Input() requestType: string | null = '0';
   @Input() process: string | null = '0';
   @Input() showUrgent = false;
+  @Input() checkMode = false;
 
   today = new Date();
   processTable!: SchRequestProcess | undefined;
@@ -32,9 +34,10 @@ export class RewardValidateRequestComponent
     reason: [null],
     editReason: [null],
     lackReason: [null],
+    reward: [null],
   });
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private route: ActivatedRoute) {
     super();
     this.subscriptions.push(
       this.form?.valueChanges.subscribe((value: any) => {
@@ -58,6 +61,7 @@ export class RewardValidateRequestComponent
 
   ngOnInit(): void {
     this.disabledForm();
+    this.getMode();
 
     this.form.controls.result.valueChanges.subscribe(() => {
       if (this.result === '2') {
@@ -75,6 +79,14 @@ export class RewardValidateRequestComponent
         this.disabledForm();
       }
       this.resetForm();
+    });
+  }
+
+  getMode() {
+    this.route.url.subscribe((url) => {
+      if (url[0].path === 'check-confirm') {
+        this.checkMode = true;
+      }
     });
   }
 
