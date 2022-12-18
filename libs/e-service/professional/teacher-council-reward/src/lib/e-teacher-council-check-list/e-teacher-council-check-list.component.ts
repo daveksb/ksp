@@ -2,7 +2,10 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { SelfServiceRequestType } from '@ksp/shared/constant';
+import {
+  SelfServiceRequestSubType,
+  SelfServiceRequestType,
+} from '@ksp/shared/constant';
 import {
   EsSearchPayload,
   SchRequestSearchFilter,
@@ -16,15 +19,18 @@ import {
 } from '@ksp/shared/utility';
 
 @Component({
-  selector: 'ksp-e-teacher-council-list',
-  templateUrl: './e-teacher-council-list.component.html',
-  styleUrls: ['./e-teacher-council-list.component.scss'],
+  selector: 'ksp-e-teacher-council-check-list',
+  templateUrl: './e-teacher-council-check-list.component.html',
+  styleUrls: ['./e-teacher-council-check-list.component.scss'],
 })
-export class ETeacherCouncilListComponent implements OnInit, AfterViewInit {
+export class ETeacherCouncilCheckListComponent
+  implements OnInit, AfterViewInit
+{
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfRequest>();
   checkProcess = SelfCheckProcess;
   checkStatus = eSelfCheckStatus;
+  SelfServiceRequestSubType = SelfServiceRequestSubType;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -80,10 +86,6 @@ export class ETeacherCouncilListComponent implements OnInit, AfterViewInit {
   view(id: number) {
     this.router.navigate(['/teacher-council', 'detail', id]);
   }
-
-  reject(id: number) {
-    this.router.navigate(['/teacher-council', 'reject', id]);
-  }
 }
 
 export const column = [
@@ -91,11 +93,13 @@ export const column = [
   'requestno',
   'idcardno',
   'name',
+  'careertype',
   'status',
   'process',
+  'reject',
+  'considerdate',
   'processupdatedate',
   'submitDate',
+  'declaredate',
   'verify',
-  'request',
-  'edit',
 ];

@@ -33,6 +33,8 @@ import { EServiceUiRewardRejectFormModule } from '@ksp/e-service/ui/reward-rejec
 import { ETeacherCouncilAccountListComponent } from './e-teacher-council-account-list/e-teacher-council-account-list.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ETeacherCouncilCreateAccountComponent } from './e-teacher-council-create-account/e-teacher-council-create-account.component';
+import { ETeacherCouncilCheckComponent } from './e-teacher-council-check/e-teacher-council-check.component';
+import { ETeacherCouncilCheckListComponent } from './e-teacher-council-check-list/e-teacher-council-check-list.component';
 
 const routes: Routes = [
   {
@@ -67,6 +69,14 @@ const routes: Routes = [
       {
         path: 'create-account',
         component: ETeacherCouncilCreateAccountComponent,
+      },
+      {
+        path: 'check/:id',
+        component: ETeacherCouncilCheckComponent,
+      },
+      {
+        path: 'check-list',
+        component: ETeacherCouncilCheckListComponent,
       },
     ],
   },
@@ -105,6 +115,8 @@ const routes: Routes = [
     ETeacherCouncilRejectComponent,
     ETeacherCouncilAccountListComponent,
     ETeacherCouncilCreateAccountComponent,
+    ETeacherCouncilCheckComponent,
+    ETeacherCouncilCheckListComponent,
   ],
   exports: [ETeacherCouncilListComponent, ETeacherCouncilDetailComponent],
 })
