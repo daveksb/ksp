@@ -73,7 +73,12 @@ export class RequestLicenseApproveCreateGroupComponent
       this.listNo = +res.listno + 1;
     });
 
-    this.requestService.getLevel2LicenseList().subscribe((res) => {
+    const payload = {
+      offset: 0,
+      row: 500,
+    };
+
+    this.requestService.getLevel2LicenseList(payload).subscribe((res) => {
       //console.log('res level 2 = ', res);
       this.dataSource.data = res.datareturn.map((item) => ({
         ...item,

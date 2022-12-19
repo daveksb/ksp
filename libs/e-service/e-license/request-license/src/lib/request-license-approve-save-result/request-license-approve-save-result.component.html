@@ -33,9 +33,13 @@
   </div>
 
   <div class="bg-white px-3 py-3">
-    <ksp-e-service-license-save-result
-      (save)="save($event)"
-      (cancel)="cancel()"
-    ></ksp-e-service-license-save-result>
+    <form [formGroup]="form">
+      <ksp-e-service-license-save-result
+        formControlName="matiDetail"
+        [disabled]="disableForm"
+        (save)="save($event)"
+        (cancel)="cancel()"
+      ></ksp-e-service-license-save-result>
+    </form>
   </div>
 </div>

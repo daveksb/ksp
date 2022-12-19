@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
@@ -29,8 +29,21 @@ export class EServiceLicenseSaveResultComponent
   extends KspFormBaseComponent
   implements OnInit
 {
+  _disabled = false;
+
   @Output() cancel = new EventEmitter<boolean>(false);
   @Output() save = new EventEmitter<any>();
+
+  @Input()
+  set disabled(value: boolean) {
+    this._disabled = value;
+    if (value) {
+      this.form.disable();
+    }
+  }
+  get disabled(): boolean {
+    return this._disabled;
+  }
 
   eduOccupyList = selfOccupyList;
   processList: SchRequestProcess[] = [];

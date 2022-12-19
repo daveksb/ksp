@@ -55,7 +55,6 @@ export class EQualificationApproveListComponent implements AfterViewInit {
   }
 
   renderLicense(request: KspRequest) {
-    // render pdf
     const pdfType = 99;
     const pdfSubType = 6;
     const requestno = request.requestno;

@@ -229,7 +229,7 @@ export class ERequestService {
 
   createAprroveList(payload: Partial<SelfApproveList>): Observable<any> {
     return this.http.post(
-      `${environment.apiUrl}/e-service/selfapprovelistinsert`,
+      `${environment.shortApiUrl}/selfapprovelistinsert.php`,
       payload
     );
   }
@@ -242,12 +242,10 @@ export class ERequestService {
   }
 
   // ค้นหาใบคำขอที่มี สถานะตรวจเอกสารลำดับที่ 2
-  getLevel2LicenseList(): Observable<KspListResponse<KspRequest>> {
-    return this.http.get<KspListResponse<KspRequest>>(
-      `${environment.shortApiUrl}/ksprequestsearch_e-self.php`,
-      {
-        headers: { 'Cache-Control': 'no-store' },
-      }
+  getLevel2LicenseList(payload: any): Observable<KspListResponse<KspRequest>> {
+    return this.http.post<KspListResponse<KspRequest>>(
+      `${environment.shortApiUrl}/ksprequestsearch_listno_isnull_es.php`,
+      payload
     );
   }
 
