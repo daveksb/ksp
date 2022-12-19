@@ -13,8 +13,6 @@ import {
 import { parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
-const FORM_TAB_COUNT_1 = 6;
-const FORM_TAB_COUNT_2 = 5;
 @Component({
   selector: 'ksp-request-license-approve-detail',
   templateUrl: './request-license-approve-detail.component.html',
@@ -26,6 +24,7 @@ export class RequestLicenseApproveDetailComponent
 {
   approveTitles = 'ผลการตรวจสอบ';
   userInfoType = UserInfoFormType.thai;
+  selectedTabIndex = 0;
 
   override form = this.fb.group({
     userInfo: [],
@@ -36,10 +35,6 @@ export class RequestLicenseApproveDetailComponent
     experience: [],
     checkResult: this.fb.array([]),
   });
-
-  get checkResultFormArray() {
-    return this.form.controls.checkResult as FormArray;
-  }
 
   form2 = this.fb.group({
     verifyResult: [null, Validators.required],
@@ -53,7 +48,8 @@ export class RequestLicenseApproveDetailComponent
   experienceFiles: FileGroup[] = [];
   performanceFiles: FileGroup[] = [];
   provinces$!: Observable<Province[]>;
-
+  tabsCount!: number;
+  careerName = '';
   educationTypes: 'teacher' | 'schManager' | 'eduManager' | 'supervision' =
     'teacher';
 
@@ -95,23 +91,29 @@ export class RequestLicenseApproveDetailComponent
               switch (res.careertype) {
                 case '1':
                   this.educationTypes = 'teacher';
+                  this.careerName = 'ครู';
                   break;
                 case '2':
                   this.educationTypes = 'schManager';
+                  this.careerName = 'ผู้บริหารสถานศึกษา';
                   break;
                 case '3':
                   this.educationTypes = 'eduManager';
+                  this.careerName = 'ผู้บริหารการศึกษา';
                   break;
                 case '4':
                   this.educationTypes = 'supervision';
+                  this.careerName = 'ศึกษานิเทศก์';
                   break;
                 default:
                   this.educationTypes = 'teacher';
               }
               if (this.educationTypes === 'teacher') {
-                this.addCheckResultArray(FORM_TAB_COUNT_1);
+                this.tabsCount = 5;
+                this.addCheckResultArray(6);
               } else {
-                this.addCheckResultArray(FORM_TAB_COUNT_2);
+                this.tabsCount = 4;
+                this.addCheckResultArray(5);
               }
             }
           });
@@ -165,6 +167,10 @@ export class RequestLicenseApproveDetailComponent
     );
   }
 
+  get checkResultFormArray() {
+    return this.form.controls.checkResult as FormArray;
+  }
+
   patchUserInfoForm(data: any): void {
     this.form.controls.userInfo.patchValue(data);
   }
@@ -176,6 +182,22 @@ export class RequestLicenseApproveDetailComponent
   }
   patchWorkPlaceForm(data: any): void {
     this.form.controls.workplace.patchValue(data);
+  }
+
+  nextTab(index: number) {
+    if (this.selectedTabIndex < index) {
+      this.selectedTabIndex++;
+    } else {
+      this.next();
+    }
+  }
+
+  prevTab() {
+    if (this.selectedTabIndex == 0) {
+      this.cancel();
+    } else {
+      this.selectedTabIndex--;
+    }
   }
 
   next() {

@@ -13,8 +13,6 @@ import {
 import { parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
-const FORM_TAB_COUNT = 4;
-
 @Component({
   selector: 'ksp-renew-license-detail',
   templateUrl: './renew-license-detail.component.html',
@@ -25,6 +23,7 @@ export class RenewLicenseDetailComponent
   implements OnInit
 {
   userInfoType = UserInfoFormType.thai;
+  selectedTabIndex = 0;
 
   override form = this.fb.group({
     userInfo: [],
@@ -37,10 +36,6 @@ export class RenewLicenseDetailComponent
     standardWorking: [],
     checkResult: this.fb.array([]),
   });
-
-  get checkResultFormArray() {
-    return this.form.controls.checkResult as FormArray;
-  }
 
   form2 = this.fb.group({
     verifyResult: [null, Validators.required],
@@ -55,10 +50,11 @@ export class RenewLicenseDetailComponent
   provinces$!: Observable<any>;
   educationType: 'teacher' | 'schManager' | 'eduManager' | 'supervision' =
     'teacher';
-
+  tabsCount!: number;
   workingInfoFiles: FileGroup[] = [];
   workingInfoFiles2: FileGroup[] = [];
   licenseFiles: FileGroup[] = [];
+  careerName = '';
 
   choices = [
     {
@@ -93,16 +89,6 @@ export class RenewLicenseDetailComponent
   ngOnInit(): void {
     this.getListData();
     this.checkRequestId();
-    this.addCheckResultArray();
-  }
-
-  addCheckResultArray() {
-    for (let i = 0; i < FORM_TAB_COUNT; i++) {
-      this.checkResultFormArray.push(this.fb.control(null));
-    }
-    this.checkResultFormArray.setValidators(
-      ESelfFormBaseComponent.allFilledValidator()
-    );
   }
 
   override checkRequestId() {
@@ -118,25 +104,48 @@ export class RenewLicenseDetailComponent
               switch (res.careertype) {
                 case '1':
                   this.educationType = 'teacher';
+                  this.careerName = 'ครู';
                   break;
                 case '2':
                   this.educationType = 'schManager';
-                  console.log(this.educationType);
+                  this.careerName = 'ผู้บริหารสถานศึกษา';
                   break;
                 case '3':
                   this.educationType = 'eduManager';
+                  this.careerName = 'ผู้บริหารการศึกษา';
                   break;
                 case '4':
                   this.educationType = 'supervision';
+                  this.careerName = 'ศึกษานิเทศก์';
                   break;
                 default:
                   this.educationType = 'teacher';
               }
               this.patchData(res);
             }
+            if (this.educationType === 'teacher') {
+              this.tabsCount = 3;
+              this.addCheckResultArray(4);
+            } else {
+              this.tabsCount = 4;
+              this.addCheckResultArray(5);
+            }
           });
       }
     });
+  }
+
+  addCheckResultArray(number: number) {
+    for (let i = 0; i < number; i++) {
+      this.checkResultFormArray.push(this.fb.control(null));
+    }
+    this.checkResultFormArray.setValidators(
+      ESelfFormBaseComponent.allFilledValidator()
+    );
+  }
+
+  get checkResultFormArray() {
+    return this.form.controls.checkResult as FormArray;
   }
 
   override patchData(data: any) {
@@ -201,6 +210,22 @@ export class RenewLicenseDetailComponent
   }
   patchWorkPlaceForm(data: any): void {
     this.form.controls.workplace.patchValue(data);
+  }
+
+  nextTab(index: number) {
+    if (this.selectedTabIndex < index) {
+      this.selectedTabIndex++;
+    } else {
+      this.next();
+    }
+  }
+
+  prevTab() {
+    if (this.selectedTabIndex == 0) {
+      this.cancel();
+    } else {
+      this.selectedTabIndex--;
+    }
   }
 
   next() {

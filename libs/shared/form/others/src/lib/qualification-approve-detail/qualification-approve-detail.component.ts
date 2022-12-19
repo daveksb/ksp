@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   MatDialogModule,
@@ -6,20 +6,21 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'ksp-qualification-approve-detail',
   standalone: true,
-  imports: [CommonModule, MatDialogModule, ReactiveFormsModule],
   templateUrl: './qualification-approve-detail.component.html',
   styleUrls: ['./qualification-approve-detail.component.scss'],
+  imports: [CommonModule, MatDialogModule, ReactiveFormsModule],
 })
-export class QualificationApproveDetailComponent implements OnInit {
-  constructor(
-    public dialogRef: MatDialogRef<QualificationApproveDetailComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private fb: FormBuilder
-  ) {}
+export class QualificationApproveDetailComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
   degreeLevelName = '';
   degreeName = '';
   institution = '';
@@ -30,12 +31,32 @@ export class QualificationApproveDetailComponent implements OnInit {
     ['3', 'ปริญญาเอก'],
     ['4', 'วุฒิการศึกษาปริญญาอื่นๆที่เทียบเท่าปริญญาตรี / ปริญญาทางการศึกษา'],
   ]);
-  form = this.fb.group({
+
+  override form = this.fb.group({
     degree: ['', Validators.required],
     reason1: [],
     reason2: [],
   });
+  @Input() set input(value: any) {
+    //console.log(value);
+    if (value) this.form.patchValue(value);
+  }
   @Output() confirmed = new EventEmitter<boolean>();
+
+  constructor(
+    public dialogRef: MatDialogRef<QualificationApproveDetailComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private fb: FormBuilder
+  ) {
+    super();
+    this.subscriptions.push(
+      this.form?.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
+        // console.log(value);
+        this.onChange(value);
+        this.onTouched();
+      })
+    );
+  }
 
   ngOnInit(): void {
     const education = this.data.education;
