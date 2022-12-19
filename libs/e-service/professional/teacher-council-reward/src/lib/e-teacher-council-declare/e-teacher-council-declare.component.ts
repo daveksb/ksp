@@ -80,6 +80,10 @@ export class ETeacherCouncilDeclareComponent implements OnInit, AfterViewInit {
   clear() {
     this.dataSource.data = [];
   }
+
+  create() {
+    this.router.navigate(['/teacher-council', 'create-declare']);
+  }
 }
 
 export const column = [
