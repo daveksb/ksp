@@ -9,7 +9,7 @@ import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { EsSearchPayload, SchoolUserPageType } from '@ksp/shared/interface';
+import { SchoolUserPageType } from '@ksp/shared/interface';
 import { EducationDetailService, ERequestService } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 
@@ -52,7 +52,6 @@ export class SelfUserListComponent implements AfterViewInit, OnInit {
 
   search(params: any) {
     //console.log('params = ', params);
-
     /* const payload: EsSearchPayload = {
       systemtype: '1',
       requesttype: '1',

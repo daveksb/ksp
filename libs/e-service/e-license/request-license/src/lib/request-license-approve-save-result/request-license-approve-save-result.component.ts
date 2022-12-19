@@ -49,7 +49,7 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
           if (res) {
             const formData: any = {
               no: res.matilevel1no,
-              date: res.createdate,
+              date: res.matilevel1date,
               boardname: res.matilevel1boardname,
               presidentname: res.matilevel1presidentname,
               result: res.matilevel1result,

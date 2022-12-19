@@ -229,7 +229,7 @@ export class ERequestService {
 
   createAprroveList(payload: Partial<SelfApproveList>): Observable<any> {
     return this.http.post(
-      `${environment.apiUrl}/e-service/selfapprovelistinsert`,
+      `${environment.shortApiUrl}/selfapprovelistinsert.php`,
       payload
     );
   }

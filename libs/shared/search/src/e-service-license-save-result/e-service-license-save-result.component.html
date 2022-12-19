@@ -52,7 +52,11 @@
     <div class="row mb-2">
       <div class="col-6">
         <label class="form-label required">มติที่ประชุม</label>
-        <div class="form-control d-flex flex-row" style="height: 36px">
+        <div
+          class="form-control d-flex flex-row"
+          style="height: 36px"
+          [style.background-color]="disabled ? '#e9ecef' : null"
+        >
           <div class="d-flex align-items-center me-5">
             <input
               type="radio"
