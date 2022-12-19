@@ -1,4 +1,4 @@
-<div class="box-header text-primary">ผู้รับรองข้อมูล</div>
+<div class="box-header">ผู้รับรองข้อมูล</div>
 <hr />
 <form [formGroup]="form">
   <div class="fs-5 text-black">ผู้ที่หน่วยงานขอรับรองคุณวุฒิ</div>
@@ -53,8 +53,8 @@
     </div>
   </div>
 </form>
-<br />
-<div class="d-flex justify-content-center">
+
+<div class="d-flex justify-content-center mt-3" *ngIf="mode !== 'view'">
   <button matDialogClose class="btn border-primary text-primary me-1">
     ยกเลิก
   </button>

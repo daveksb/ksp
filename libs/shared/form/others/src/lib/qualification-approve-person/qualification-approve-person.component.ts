@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   MatDialogModule,
@@ -8,7 +15,10 @@ import {
 import { GeneralInfoService } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'ksp-qualification-approve-person',
   standalone: true,
@@ -16,17 +26,17 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
   templateUrl: './qualification-approve-person.component.html',
   styleUrls: ['./qualification-approve-person.component.scss'],
 })
-export class QualificationApprovePersonComponent implements OnInit {
+export class QualificationApprovePersonComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
   prefixList$!: Observable<any>;
-  constructor(
-    public dialogRef: MatDialogRef<QualificationApprovePersonComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private generalInfoService: GeneralInfoService,
-    private fb: FormBuilder
-  ) {}
-
+  @Input() set input(value: any) {
+    //console.log(value);
+    if (value) this.form.patchValue(value);
+  }
   @Output() completed = new EventEmitter<boolean>();
-  form = this.fb.group({
+  override form = this.fb.group({
     prefixth1: [],
     firstnameth1: [],
     lastnameth1: [],
@@ -36,6 +46,22 @@ export class QualificationApprovePersonComponent implements OnInit {
     lastnameth2: [],
     position2: [],
   });
+
+  constructor(
+    public dialogRef: MatDialogRef<QualificationApprovePersonComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private generalInfoService: GeneralInfoService,
+    private fb: FormBuilder
+  ) {
+    super();
+    this.subscriptions.push(
+      this.form?.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
+        // console.log(value);
+        this.onChange(value);
+        this.onTouched();
+      })
+    );
+  }
 
   ngOnInit(): void {
     const mode = this.data.mode;

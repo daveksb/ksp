@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EQualificationApproveDetailComponent } from './e-qualification-approve-detail/e-qualification-approve-detail.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -17,7 +17,7 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { Route, RouterModule } from '@angular/router';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { EQualificationApproveListComponent } from './e-qualification-approve-list/e-qualification-approve-list.component';
-import { SharedFormOthersModule } from '@ksp/shared/form/others';
+import { ForbiddenPropertyFormComponent, QualificationApproveDetailComponent, QualificationApprovePersonComponent, SharedFormOthersModule } from '@ksp/shared/form/others';
 import { MatSortModule } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
@@ -67,10 +67,17 @@ export const routes: Route[] = [
     ThaiDatePipe,
     RequestNoPipe,
     MatSortModule,
+    QualificationApprovePersonComponent,
+    QualificationApproveDetailComponent,
+    ForbiddenPropertyFormComponent
   ],
   declarations: [
     EQualificationApproveListComponent,
     EQualificationApproveDetailComponent,
+  ],
+  providers: [
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+    { provide: MatDialogRef, useValue: {} },
   ],
 })
 export class EServiceStandardQualificationApproveModule {}

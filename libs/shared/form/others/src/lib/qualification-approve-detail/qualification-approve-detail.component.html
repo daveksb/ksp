@@ -1,4 +1,4 @@
-<div class="box-header text-center mb-3">จึงขอรับรองคุณวุฒิการศึกษา</div>
+<div class="box-header text-center">จึงขอรับรองคุณวุฒิการศึกษา</div>
 <form [formGroup]="form">
   <ng-container *ngIf="degreeLevelName">
     <div class="mb-2">
@@ -69,7 +69,7 @@
   ></textarea>
 </form>
 
-<div class="d-flex justify-content-center mt-3">
+<div class="d-flex justify-content-center mt-3" *ngIf="mode !== 'view'">
   <button
     matDialogClose
     type="button"
