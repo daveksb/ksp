@@ -102,7 +102,11 @@ export class EQualificationApproveDetailComponent implements OnInit {
 
   next() {
     this.persistData();
-    this.router.navigate(['/temp-license', 'confirm', this.requestData.id]);
+    this.router.navigate([
+      '/qualification-approve',
+      'confirm',
+      this.requestData.id,
+    ]);
   }
 
   // save data to indexed db
