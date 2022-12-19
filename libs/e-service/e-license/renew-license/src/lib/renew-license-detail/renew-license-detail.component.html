@@ -5,7 +5,9 @@
 
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
-    <div class="box-header">รายละเอียดใบคำขอต่อใบอนุญาตประกอบวิชาชีพ</div>
+    <div class="box-header">
+      รายละเอียดใบคำขอต่อใบอนุญาตประกอบวิชาชีพ ({{ careerName }})
+    </div>
     <div class="bg-white px-3 py-2">
       <ksp-request-header-info
         [requestDate]="requestData.createdate"
@@ -33,10 +35,12 @@
       </div>
 
       <mat-tab-group
-        class="tab-group mb-2"
+        class="tab-group mb-3"
         animationDuration="0ms"
-        (selectedTabChange)="tabChanged($event)"
-        [selectedIndex]="0"
+        dynamicHeight="true"
+        (selectedIndexChange)="selectedTabIndex = $event"
+        [selectedIndex]="selectedTabIndex"
+        selectedIndex="0"
       >
         <mat-tab label="ที่อยู่" class="tab-content">
           <ksp-form-address
@@ -120,7 +124,7 @@
     >
       <div
         class="bg-white px-3 py-2 mt-3"
-        [ngClass]="{ hide: (selectedTab.index || 0) !== i }"
+        [ngClass]="{ hide: (selectedTabIndex || 0) !== i }"
       >
         <e-service-license-check
           [choices]="verifyChoice"
@@ -134,9 +138,12 @@
 <div class="sticky-bottom border px-2">
   <ksp-bottom-nav
     [showCenterButtons]="true"
-    [isFirstPage]="true"
-    (nextClicked)="next()"
-    (cancelClicked)="cancel()"
-    [disableNext]="!checkResultFormArray.valid"
+    [showCancelButton]="false"
+    (nextClicked)="nextTab(tabsCount)"
+    (prevClicked)="prevTab()"
+    [disableNextMessage]="'กรุณาตรวจสอบให้ครบถ้วน'"
+    [disableNext]="
+      !checkResultFormArray.valid && selectedTabIndex === tabsCount
+    "
   ></ksp-bottom-nav>
 </div>
