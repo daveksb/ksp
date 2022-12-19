@@ -71,6 +71,7 @@ export class ETeacherCouncilDetailComponent
     this.getListData();
     this.checkRequestId();
     this.addCheckResultArray();
+    this.getMode();
   }
 
   addCheckResultArray() {
@@ -161,10 +162,22 @@ export class ETeacherCouncilDetailComponent
 
   next() {
     this.persistData(this.form.controls.checkResult.value);
-    this.router.navigate(['/teacher-council', 'confirm', this.requestId]);
+    if (this.mode === 'check') {
+      this.router.navigate([
+        '/teacher-council',
+        'check-confirm',
+        this.requestId,
+      ]);
+    } else {
+      this.router.navigate(['/teacher-council', 'confirm', this.requestId]);
+    }
   }
 
   cancel() {
-    this.router.navigate(['/teacher-council']);
+    if (this.mode === 'check') {
+      this.router.navigate(['/teacher-council', 'check-list']);
+    } else {
+      this.router.navigate(['/teacher-council']);
+    }
   }
 }

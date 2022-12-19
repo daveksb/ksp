@@ -82,6 +82,14 @@ const routes: Routes = [
       ),
     canActivate: [AuthGuard],
   },
+  {
+    path: 'temp-license-register',
+    loadChildren: () =>
+      import('@ksp/school-service/feature/temp-license-register').then(
+        (m) => m.SchoolServiceFeatureTempLicenseRegisterModule
+      ),
+    canActivate: [AuthGuard],
+  },
 
   { path: '**', component: SchoolServiceLoginComponent },
 ];

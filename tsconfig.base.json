@@ -198,6 +198,9 @@
       "@ksp/school-service/feature/staff-management": [
         "libs/school-service/feature/staff-management/src/index.ts"
       ],
+      "@ksp/school-service/feature/temp-license-register": [
+        "libs/school-service/feature/temp-license-register/src/index.ts"
+      ],
       "@ksp/school-service/form/activity": [
         "libs/school-service/form/activity/src/index.ts"
       ],

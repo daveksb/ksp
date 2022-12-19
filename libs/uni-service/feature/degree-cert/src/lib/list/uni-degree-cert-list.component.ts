@@ -45,6 +45,7 @@ export class UniDegreeCertListComponent
     search: [{}],
   });
   uniUniversityOption: ListData[] = [];
+  degreeLevelOption: ListData[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -58,6 +59,7 @@ export class UniDegreeCertListComponent
   }
   getRequest() {
     const {
+      institutionName,
       institutionNumber,
       licenseNumber,
       degreeName,
@@ -68,7 +70,8 @@ export class UniDegreeCertListComponent
       approveStatus,
     } = this.form.controls.search.value as any;
     return {
-      uniid: institutionNumber || '',
+      unicode: institutionNumber || '',
+      uniid: institutionName || '',
       fulldegreenameth: degreeName || '',
       requestno: licenseNumber || '',
       requestdate: date ? moment(date).format('YYYY-MM-DD') : '',
@@ -133,20 +136,27 @@ export class UniDegreeCertListComponent
     let resData = await lastValueFrom(
       this.uniInfoService.univerSitySelectById(getCookie('uniType'))
     );
+    const degreeLevel = await lastValueFrom(
+      this.uniInfoService.uniDegreeLevel().pipe(
+        map((data) => {
+          return data.map(({ id, name, campusname }: any) => ({ value: id, label: name + (campusname ? `, ${campusname}` : '') }));
+        })
+      )
+    );
     this.form.setValue({
       search: {
-        institutionNumber: getCookie('uniId'),
-        institutionName: getCookie('uniType'),
+        institutionName: getCookie('uniId'),
       },
     });
     resData = await lastValueFrom(
       this.uniInfoService.searchTypeidUniUniversity(resData.typeid).pipe(
         map((data) => {
-          return data.map(({ id, name }: any) => ({ value: id, label: name }));
+          return data.map(({ id, name, campusname }: any) => ({ value: id, label: name + (campusname ? `, ${campusname}` : '') }));
         })
       )
     );
     this.uniUniversityOption = resData;
+    this.degreeLevelOption = degreeLevel;
   }
 }
 

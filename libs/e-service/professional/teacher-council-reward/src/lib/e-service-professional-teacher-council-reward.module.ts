@@ -15,6 +15,7 @@ import { SelfServiceFeatureRewardModule } from '@ksp/self-service/feature/reward
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import {
   EServiceRewardAccountSearchComponent,
+  EServiceRewardRequestSearchComponent,
   EServiceRewardSearchComponent,
 } from '@ksp/shared/search';
 import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
@@ -31,6 +32,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { EServiceUiRewardRejectFormModule } from '@ksp/e-service/ui/reward-reject-form';
 import { ETeacherCouncilAccountListComponent } from './e-teacher-council-account-list/e-teacher-council-account-list.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ETeacherCouncilCreateAccountComponent } from './e-teacher-council-create-account/e-teacher-council-create-account.component';
+import { ETeacherCouncilCheckComponent } from './e-teacher-council-check/e-teacher-council-check.component';
+import { ETeacherCouncilCheckListComponent } from './e-teacher-council-check-list/e-teacher-council-check-list.component';
 
 const routes: Routes = [
   {
@@ -62,6 +66,22 @@ const routes: Routes = [
         path: 'account-list',
         component: ETeacherCouncilAccountListComponent,
       },
+      {
+        path: 'create-account',
+        component: ETeacherCouncilCreateAccountComponent,
+      },
+      {
+        path: 'check/:id',
+        component: ETeacherCouncilDetailComponent,
+      },
+      {
+        path: 'check-confirm/:id',
+        component: ETeacherCouncilCheckComponent,
+      },
+      {
+        path: 'check-list',
+        component: ETeacherCouncilCheckListComponent,
+      },
     ],
   },
 ];
@@ -90,6 +110,7 @@ const routes: Routes = [
     RewardValidateRequestComponent,
     MatProgressSpinnerModule,
     EServiceRewardAccountSearchComponent,
+    EServiceRewardRequestSearchComponent,
   ],
   declarations: [
     ETeacherCouncilListComponent,
@@ -97,6 +118,9 @@ const routes: Routes = [
     ETeacherCouncilConfirmComponent,
     ETeacherCouncilRejectComponent,
     ETeacherCouncilAccountListComponent,
+    ETeacherCouncilCreateAccountComponent,
+    ETeacherCouncilCheckComponent,
+    ETeacherCouncilCheckListComponent,
   ],
   exports: [ETeacherCouncilListComponent, ETeacherCouncilDetailComponent],
 })

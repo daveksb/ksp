@@ -50,6 +50,42 @@
   </div>
 
   <div class="row mb-2">
+    <div class="col-3" *ngIf="showDeclareDate">
+      <label class="form-label">จาก : วันเดือนปีที่ยื่นใบคำขอ</label>
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker3"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="declaredatefrom"
+          placeholder="วว/ดด/ปปปป" />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker3"></mat-datepicker-toggle>
+        <mat-datepicker #picker3></mat-datepicker>
+      </div>
+    </div>
+
+    <div class="col-3" *ngIf="showDeclareDate">
+      <label class="form-label">ถึง : วันเดือนปีที่ยื่นใบคำขอ</label>
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker4"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="declaredateto"
+          placeholder="วว/ดด/ปปปป" />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker4"></mat-datepicker-toggle>
+        <mat-datepicker #picker4></mat-datepicker>
+      </div>
+    </div>
+
     <div class="col-3">
       <label class="form-label">จาก : วันเดือนปีที่ยื่นใบคำขอ</label>
       <div class="d-flex align-items-center">

@@ -108,37 +108,36 @@ export class ETeacherCouncilAccountListComponent
   }
 
   createGroup() {
-    this.router.navigate(['/request-license', 'create-group']);
-    //this.router.navigate(['/renew-license', 'create-group-list']);
+    this.router.navigate(['/teacher-council', 'create-account']);
   }
 
-  kmv() {
-    const selectedData = this.dataSource.data.filter((item) => item.select);
-    const group = selectedData[0].groupno;
-    this.router.navigate(['/request-license', 'kmv'], {
-      queryParams: { group },
-    });
-  }
+  // kmv() {
+  //   const selectedData = this.dataSource.data.filter((item) => item.select);
+  //   const group = selectedData[0].groupno;
+  //   this.router.navigate(['/request-license', 'kmv'], {
+  //     queryParams: { group },
+  //   });
+  // }
 
-  guarantee() {
-    this.router.navigate(['/request-license', 'guarantee-confirm']);
-  }
+  // guarantee() {
+  //   this.router.navigate(['/request-license', 'guarantee-confirm']);
+  // }
 
-  print() {
-    const selectedAccount = this.dataSource.data
-      .filter((item) => item.select)
-      .map((item) => item.listno)
-      .join(',');
-    this.router.navigate(['/request-license', 'print'], {
-      queryParams: { accounts: selectedAccount },
-    });
-  }
+  // print() {
+  //   const selectedAccount = this.dataSource.data
+  //     .filter((item) => item.select)
+  //     .map((item) => item.listno)
+  //     .join(',');
+  //   this.router.navigate(['/request-license', 'print'], {
+  //     queryParams: { accounts: selectedAccount },
+  //   });
+  // }
 
-  saveResult() {
-    const selectedData = this.dataSource.data.filter((item) => item.select);
-    const account = selectedData[0].listno;
-    this.router.navigate(['/request-license', 'save-result'], {
-      queryParams: { account },
-    });
-  }
+  // saveResult() {
+  //   const selectedData = this.dataSource.data.filter((item) => item.select);
+  //   const account = selectedData[0].listno;
+  //   this.router.navigate(['/request-license', 'save-result'], {
+  //     queryParams: { account },
+  //   });
+  // }
 }
