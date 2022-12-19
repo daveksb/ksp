@@ -15,6 +15,7 @@ import { SelfServiceFeatureRewardModule } from '@ksp/self-service/feature/reward
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import {
   EServiceRewardAccountSearchComponent,
+  EServiceRewardCreateDeclareSearchComponent,
   EServiceRewardDeclareSearchComponent,
   EServiceRewardRequestSearchComponent,
   EServiceRewardSearchComponent,
@@ -123,6 +124,7 @@ const routes: Routes = [
     EServiceRewardAccountSearchComponent,
     EServiceRewardRequestSearchComponent,
     EServiceRewardDeclareSearchComponent,
+    EServiceRewardCreateDeclareSearchComponent,
   ],
   declarations: [
     ETeacherCouncilListComponent,
