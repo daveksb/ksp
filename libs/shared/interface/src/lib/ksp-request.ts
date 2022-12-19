@@ -103,4 +103,7 @@ export class KspRequest {
   visaexpiredate: string | null = null;
   visatype: string | null = null;
   workphone: string | null = null;
+
+  listno?: string | null = null; //add on 19/12/2022
+  groupno?: string | null = null; //add on 19/12/2022
 }
