@@ -147,6 +147,24 @@
               [groups]="file"
             ></ksp-form-multi-attachment>
           </mat-tab>
+
+          <mat-tab label="ข้อมูลขอรับรองคุณวุฒิการศึกษา">
+            <div class="bg-light p-3">
+              <ksp-qualification-approve-detail
+                [input]="otherReason"
+                [mode]="'view'"
+              ></ksp-qualification-approve-detail>
+            </div>
+          </mat-tab>
+
+          <mat-tab label="ข้อมูลผู้รับรองข้อมูล">
+            <div class="bg-light p-3">
+              <ksp-qualification-approve-person
+                [input]="refPerson"
+                [mode]="'view'"
+              ></ksp-qualification-approve-person>
+            </div>
+          </mat-tab>
         </mat-tab-group>
       </div>
     </div>

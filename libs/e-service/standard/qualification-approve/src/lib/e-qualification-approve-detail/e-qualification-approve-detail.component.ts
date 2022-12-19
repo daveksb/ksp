@@ -43,6 +43,8 @@ export class EQualificationApproveDetailComponent implements OnInit {
   bureauname = '';
   schoolname = '';
   selectedTab: MatTabChangeEvent = new MatTabChangeEvent();
+  refPerson: any;
+  otherReason: any;
 
   form = this.fb.group({
     userInfo: [],
@@ -71,7 +73,7 @@ export class EQualificationApproveDetailComponent implements OnInit {
   }
 
   addCheckResultArray() {
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 5; i++) {
       this.checkResultFormArray.push(this.fb.control([]));
     }
   }
@@ -145,15 +147,26 @@ export class EQualificationApproveDetailComponent implements OnInit {
         }
 
         res.refperson
-          ? (res.refperson = JSON.parse(atob(res.refperson)))
+          ? (this.refPerson = JSON.parse(atob(res.refperson)))
           : null;
 
         res.otherreason
-          ? (res.otherreason = JSON.parse(atob(res.otherreason)))
+          ? (this.otherReason = JSON.parse(atob(res.otherreason)))
           : null;
+
+        console.log(' = ', this.refPerson);
+        console.log(' = ', this.otherReason);
       }
     });
   }
+
+  /* patchRefPerson(res: any) {
+    this.refPerson = res;
+  } */
+
+  /* patchOtherReason(res: any) {
+    this.resPerson = res;
+  } */
 
   patchEdu(edus: any[]) {
     //console.log('edus = ', edus);
