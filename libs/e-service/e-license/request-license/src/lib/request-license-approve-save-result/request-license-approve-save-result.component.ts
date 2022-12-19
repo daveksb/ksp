@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -24,13 +25,18 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
   id!: string | null;
   listNo = '';
   licenseData: any;
+  disableForm = false;
+  form = this.fb.group({
+    matiDetail: [''],
+  });
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private requestService: ERequestService,
     public dialog: MatDialog,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -39,8 +45,22 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
 
       if (account) {
         this.requestService.getGroupByAccount(account).subscribe((res) => {
-          //console.log('group = ', res);
+          console.log('group = ', res);
           if (res) {
+            const formData: any = {
+              no: res.matilevel1no,
+              date: res.createdate,
+              boardname: res.matilevel1boardname,
+              presidentname: res.matilevel1presidentname,
+              result: res.matilevel1result,
+              detail: res.matilevel1detail,
+            };
+            this.form.controls.matiDetail.patchValue(formData);
+
+            if (res && res.matilevel1no) {
+              this.disableForm = true;
+            }
+
             this.id = res.id;
             this.groupNo = res.groupno;
             const groupList = parseJson(res.grouplist);

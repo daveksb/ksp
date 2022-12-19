@@ -15,11 +15,13 @@
             autocomplete="off"
             formControlName="date"
             class="form-control form-date"
-            placeholder="วว/ดด/ปปปป" />
+            placeholder="วว/ดด/ปปปป"
+          />
           <mat-datepicker-toggle
             class="button-date"
             matSuffix
-            [for]="picker"></mat-datepicker-toggle>
+            [for]="picker"
+          ></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </div>
       </div>
@@ -39,7 +41,8 @@
         <input
           class="form-control"
           type="text"
-          formControlName="presidentname" />
+          formControlName="presidentname"
+        />
         <!-- <select class="form-select" formControlName="currentprocess">
           <option value="null" disabled hidden>กรุณาเลือก</option>
         </select> -->
@@ -55,7 +58,9 @@
               type="radio"
               class="form-check-input my-0"
               value="2"
-              formControlName="result" />
+              [attr.disabled]="disabled ? true : null"
+              formControlName="result"
+            />
             <label class="form-label ms-2">ผ่านการพิจารณา</label>
           </div>
           <div class="d-flex align-items-center">
@@ -63,7 +68,9 @@
               type="radio"
               class="form-check-input my-0"
               value="3"
-              formControlName="result" />
+              [attr.disabled]="disabled ? true : null"
+              formControlName="result"
+            />
             <label class="form-label ms-2">ไม่ผ่านการพิจารณา</label>
           </div>
         </div>
@@ -71,12 +78,13 @@
 
       <div class="col-6">
         <label class="form-label">แนบเอกสาร</label>
-        <div class="d-flex ">
+        <div class="d-flex">
           <ksp-file-upload
             [uploadType]="'link'"
             [showDeleteFile]="true"
             [buttonLabel]="'อัพโหลดเอกสาร'"
-            [uniqueTimestamp]="uniqueTimestamp"></ksp-file-upload>
+            [uniqueTimestamp]="uniqueTimestamp"
+          ></ksp-file-upload>
         </div>
       </div>
     </div>
@@ -88,7 +96,8 @@
           class="form-control"
           type="text"
           rows="3"
-          formControlName="detail">
+          formControlName="detail"
+        >
         </textarea>
       </div>
     </div>
@@ -97,15 +106,17 @@
       <button
         (click)="cancel.emit(true)"
         type="button"
-        class="btn border-primary text-primary bg-white">
+        class="btn border-primary text-primary bg-white"
+      >
         ยกเลิก
       </button>
 
       <button
         (click)="save.emit(form.value)"
-        [disabled]="form.invalid"
+        [disabled]="form.invalid || disabled"
         type="button"
-        class="btn btn-primary ms-2">
+        class="btn btn-primary ms-2"
+      >
         บันทึก
       </button>
     </div>

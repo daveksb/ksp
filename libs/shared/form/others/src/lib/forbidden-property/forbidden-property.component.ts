@@ -34,7 +34,6 @@ export class ForbiddenPropertyFormComponent
   แห่งพระราชบัญญัติสภาครูและบุคลากรทางการศึกษา พ.ศ.2546`;
 
   @Input() set input(value: any) {
-    //console.log(value);
     if (value) this.form.patchValue(value);
   }
   @Output() confirmed = new EventEmitter<any>();
@@ -70,7 +69,6 @@ export class ForbiddenPropertyFormComponent
     super();
     this.subscriptions.push(
       this.form?.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
-        // console.log(value);
         this.onChange(value);
         this.onTouched();
       })
@@ -88,10 +86,10 @@ export class ForbiddenPropertyFormComponent
   }
 
   uploadComplete(evt: any) {
-    console.log('upload result = ', evt);
+    //console.log('upload result = ', evt);
     const fileInfo: any = evt;
     this.form.patchValue(fileInfo);
-    console.log('this.form.value = ', this.form.value);
+    //console.log('this.form.value = ', this.form.value);
   }
 
   save() {

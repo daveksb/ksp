@@ -14,11 +14,7 @@ import {
   SelfGetRequest,
   SelfRequest,
 } from '@ksp/shared/interface';
-import {
-  ERequestService,
-  MyInfoService,
-  SelfRequestService,
-} from '@ksp/shared/service';
+import { ERequestService, MyInfoService } from '@ksp/shared/service';
 import { parseJson } from '@ksp/shared/utility';
 import localForage from 'localforage';
 

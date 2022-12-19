@@ -12,7 +12,6 @@ export class SelfApproveList {
   matilevel2: string | null = null;
   process: string | null = null;
   requestlist: string | null = null;
-  requestliststring?: string | null = null; // add on 19-12-2022
   status: string | null = null;
   userid: string | null = null;
 }

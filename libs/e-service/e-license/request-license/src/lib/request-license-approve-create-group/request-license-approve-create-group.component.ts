@@ -166,10 +166,6 @@ export class RequestLicenseApproveCreateGroupComponent
               .filter((item) => item.check)
               .map((item) => item.id)
           ),
-          requestliststring: this.dataSource.data
-            .filter((item) => item.check)
-            .map((item) => item.id)
-            .toString(),
           userid: `${getCookie('userId')}`,
         };
         this.requestService.createAprroveList(payload).subscribe((res) => {

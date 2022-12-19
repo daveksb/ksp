@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
@@ -31,6 +31,7 @@ export class EServiceLicenseSaveResultComponent
 {
   @Output() cancel = new EventEmitter<boolean>(false);
   @Output() save = new EventEmitter<any>();
+  @Input() disabled = false;
 
   eduOccupyList = selfOccupyList;
   processList: SchRequestProcess[] = [];
