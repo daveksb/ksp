@@ -2,7 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EQualificationApproveDetailComponent } from './e-qualification-approve-detail/e-qualification-approve-detail.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialogModule,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -17,9 +21,15 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { Route, RouterModule } from '@angular/router';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { EQualificationApproveListComponent } from './e-qualification-approve-list/e-qualification-approve-list.component';
-import { ForbiddenPropertyFormComponent, QualificationApproveDetailComponent, QualificationApprovePersonComponent, SharedFormOthersModule } from '@ksp/shared/form/others';
+import {
+  QualificationApproveDetailComponent,
+  QualificationApprovePersonComponent,
+  SharedFormOthersModule,
+} from '@ksp/shared/form/others';
 import { MatSortModule } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { EQualificationConfirmComponent } from './e-qualification-confirm/e-qualification-confirm.component';
+import { ValidateKspRequestComponent } from '@ksp/e-service/e-license/approve-ksp-request';
 
 export const routes: Route[] = [
   {
@@ -35,13 +45,13 @@ export const routes: Route[] = [
         path: 'list',
         component: EQualificationApproveListComponent,
       },
-      /*       {
-        path: 'detail',
-        component: EQualificationApproveDetailComponent,
-      }, */
       {
         path: 'detail/:id',
         component: EQualificationApproveDetailComponent,
+      },
+            {
+        path: 'confirm/:id',
+        component: EQualificationConfirmComponent,
       },
     ],
   },
@@ -69,15 +79,17 @@ export const routes: Route[] = [
     MatSortModule,
     QualificationApprovePersonComponent,
     QualificationApproveDetailComponent,
-    ForbiddenPropertyFormComponent
+    ValidateKspRequestComponent,
   ],
   declarations: [
     EQualificationApproveListComponent,
     EQualificationApproveDetailComponent,
+    EQualificationConfirmComponent,
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },
     { provide: MatDialogRef, useValue: {} },
   ],
+  exports: [EQualificationConfirmComponent],
 })
 export class EServiceStandardQualificationApproveModule {}
