@@ -10,6 +10,7 @@ import { FormBuilder } from '@angular/forms';
 import { thaiDate } from '@ksp/shared/utility';
 import { EUniApproveProcess } from '@ksp/shared/constant';
 import _ from 'lodash';
+import moment from 'moment';
 @Component({
   selector: 'e-service-degree-cert-list',
   templateUrl: './e-service-degree-cert-list.component.html',
@@ -134,7 +135,7 @@ export class EServiceDegreeCertListComponent
       uniid: institutionNumber || '',
       fulldegreenameth: degreeName || '',
       requestno: licenseNumber || '',
-      requestdate: date || '',
+      requestdate: date ? moment(date).format('YYYY-MM-DD') : '',
       coursestatus: courseStatus || '',
       degreelevel: submitDegreeLevel || '',
       requeststatus: approveStatus || '',
@@ -221,7 +222,7 @@ export class EServiceDegreeCertListComponent
   }
   isSelect(row: any) {
     if (this.pageType === 1) {
-      return row?.process == "3"
+      return row?.process == '3';
     }
     return true;
   }
