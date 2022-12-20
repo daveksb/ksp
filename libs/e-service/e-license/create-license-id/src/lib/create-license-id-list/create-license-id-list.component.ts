@@ -1,6 +1,8 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { selfOccupyList } from '@ksp/shared/constant';
@@ -15,7 +17,7 @@ import { Subject } from 'rxjs';
   templateUrl: './create-license-id-list.component.html',
   styleUrls: ['./create-license-id-list.component.scss'],
 })
-export class CreateLicenseIdListComponent {
+export class CreateLicenseIdListComponent implements AfterViewInit {
   isLoading: Subject<boolean> = this.loaderService.isLoading;
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfApproveList>();
@@ -37,12 +39,19 @@ export class CreateLicenseIdListComponent {
     private loaderService: LoaderService
   ) {}
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
   search() {
     const form: any = this.form.value;
     const payload = formatDatePayload({
       groupno: form.groupno,
-      process: null, //params.process,
-      status: null, //params.status,
+      process: 7, //พิจารณาและรับรองคณะกรรมการ กมว.
+      status: 2, //ผ่านการพิจารณา
       isforeign: null,
       careertype: form.careertype,
       createdate: form.createdate,
@@ -51,7 +60,7 @@ export class CreateLicenseIdListComponent {
       offset: '0',
       row: '500',
     });
-    console.log('payload = ', payload);
+    //console.log('payload = ', payload);
     this.requestService.searchSelfApproveList(payload).subscribe((res) => {
       res = res.map((i) => {
         return { ...i, count: JSON.parse(i.requestlist || '').length };
