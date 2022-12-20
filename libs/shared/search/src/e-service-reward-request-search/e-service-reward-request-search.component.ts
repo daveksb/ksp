@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -9,6 +9,8 @@ import {
 import { providerFactory } from '@ksp/shared/utility';
 import { selfOccupyList } from '@ksp/shared/constant';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { Observable } from 'rxjs';
+import { AddressService } from '@ksp/shared/service';
 
 @Component({
   selector: 'ksp-e-service-reward-request-search',
@@ -18,13 +20,17 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
   styleUrls: ['./e-service-reward-request-search.component.scss'],
   providers: providerFactory(EServiceRewardRequestSearchComponent),
 })
-export class EServiceRewardRequestSearchComponent extends KspFormBaseComponent {
+export class EServiceRewardRequestSearchComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
   @Output() clear = new EventEmitter<boolean>(false);
   @Output() search = new EventEmitter<any>();
 
   processList: SchRequestProcess[] = [];
   statusList?: SchRequestStatus[] = [];
   licenseTypes = selfOccupyList.filter((i) => i.id < 5);
+  provinces$!: Observable<any>;
 
   override form = this.fb.group({
     requestno: [null],
@@ -36,7 +42,7 @@ export class EServiceRewardRequestSearchComponent extends KspFormBaseComponent {
     provinceid: [null],
   });
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private addressService: AddressService) {
     super();
     this.subscriptions.push(
       this.form?.valueChanges.subscribe((value) => {
@@ -44,5 +50,9 @@ export class EServiceRewardRequestSearchComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+  }
+
+  ngOnInit(): void {
+    this.provinces$ = this.addressService.getProvinces();
   }
 }

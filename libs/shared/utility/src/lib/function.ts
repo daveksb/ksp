@@ -180,7 +180,6 @@ export function eSelfCheckStatus(
   requestType: number
 ) {
   const process = eSelfCheckProcess(processId, requestType);
-  console.log('process = ', process);
   const status = process?.status.find((s) => {
     return s.id == statusId;
   });

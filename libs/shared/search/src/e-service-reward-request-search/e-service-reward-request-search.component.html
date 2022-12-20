@@ -108,6 +108,11 @@
         <label class="form-label">จังหวัดที่ขอยื่น</label>
         <select formControlName="provinceid" class="form-select">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option
+            *ngFor="let province of (provinces$ | async)"
+            [value]="province?.province_id">
+            {{ province?.province_name }}
+          </option>
         </select>
       </div>
     </div>
