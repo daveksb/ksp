@@ -10,6 +10,7 @@ import { ESchStaffService, SchoolInfoService } from '@ksp/shared/service';
 import { mapSchUserStatus } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import localForage from 'localforage';
+import { Location } from '@angular/common';
 
 @UntilDestroy()
 @Component({
@@ -36,7 +37,8 @@ export class AllUserListComponent implements OnInit {
     private dialog: MatDialog,
     private route: ActivatedRoute,
     private schStaffService: ESchStaffService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private location: Location,
   ) {}
 
   displayedColumns: string[] = column;
@@ -82,7 +84,7 @@ export class AllUserListComponent implements OnInit {
   }
 
   back() {
-    this.router.navigate(['/school', 'user-detail']);
+    this.location.back();
   }
 
   viewDetail(id: string | null) {

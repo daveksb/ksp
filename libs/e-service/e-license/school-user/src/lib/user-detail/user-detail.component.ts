@@ -71,10 +71,13 @@ export class UserDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.checkRequestId();
     this.route.queryParams.subscribe((res) => {
       this.pageType = Number(res['type']);
     });
+
+    if (this.pageType === SchoolUserPageType.NewUser) {
+      this.checkRequestId();
+    }
 
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.form2.disable();
