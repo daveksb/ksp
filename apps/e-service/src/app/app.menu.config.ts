@@ -519,6 +519,10 @@ export const professionalMenu: MenuConfig[] = [
         path: '/teacher-council/check-list',
         label: 'เจ้าหน้าที่ส่วนกลางตรวจสอบบันทึกผล',
       },
+      {
+        path: '/teacher-council/declare',
+        label: 'ประกาศรายชื่อ',
+      },
     ],
   },
   {

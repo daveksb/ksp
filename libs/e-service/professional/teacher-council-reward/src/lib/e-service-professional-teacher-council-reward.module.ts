@@ -15,6 +15,8 @@ import { SelfServiceFeatureRewardModule } from '@ksp/self-service/feature/reward
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import {
   EServiceRewardAccountSearchComponent,
+  EServiceRewardCreateDeclareSearchComponent,
+  EServiceRewardDeclareSearchComponent,
   EServiceRewardRequestSearchComponent,
   EServiceRewardSearchComponent,
 } from '@ksp/shared/search';
@@ -35,6 +37,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ETeacherCouncilCreateAccountComponent } from './e-teacher-council-create-account/e-teacher-council-create-account.component';
 import { ETeacherCouncilCheckComponent } from './e-teacher-council-check/e-teacher-council-check.component';
 import { ETeacherCouncilCheckListComponent } from './e-teacher-council-check-list/e-teacher-council-check-list.component';
+import { ETeacherCouncilDeclareComponent } from './e-teacher-council-declare/e-teacher-council-declare.component';
+import { ETeacherCouncilCreateDeclareComponent } from './e-teacher-council-create-declare/e-teacher-council-create-declare.component';
 
 const routes: Routes = [
   {
@@ -82,6 +86,14 @@ const routes: Routes = [
         path: 'check-list',
         component: ETeacherCouncilCheckListComponent,
       },
+      {
+        path: 'declare',
+        component: ETeacherCouncilDeclareComponent,
+      },
+      {
+        path: 'create-declare',
+        component: ETeacherCouncilCreateDeclareComponent,
+      },
     ],
   },
 ];
@@ -111,6 +123,8 @@ const routes: Routes = [
     MatProgressSpinnerModule,
     EServiceRewardAccountSearchComponent,
     EServiceRewardRequestSearchComponent,
+    EServiceRewardDeclareSearchComponent,
+    EServiceRewardCreateDeclareSearchComponent,
   ],
   declarations: [
     ETeacherCouncilListComponent,
@@ -121,6 +135,8 @@ const routes: Routes = [
     ETeacherCouncilCreateAccountComponent,
     ETeacherCouncilCheckComponent,
     ETeacherCouncilCheckListComponent,
+    ETeacherCouncilDeclareComponent,
+    ETeacherCouncilCreateDeclareComponent,
   ],
   exports: [ETeacherCouncilListComponent, ETeacherCouncilDetailComponent],
 })
