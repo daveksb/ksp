@@ -45,7 +45,7 @@ export class RequestLicenseApproveSaveResultComponent implements OnInit {
 
       if (account) {
         this.requestService.getGroupByAccount(account).subscribe((res) => {
-          console.log('group = ', res);
+          //console.log('group = ', res);
           if (res) {
             const formData: any = {
               no: res.matilevel1no,
