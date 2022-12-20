@@ -17,7 +17,7 @@ import {
 } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 import { getCookie } from '@ksp/shared/utility';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { UntilDestroy } from '@ngneat/until-destroy';
 
 interface CheckKSPRequest extends KspRequest {
   check: boolean;

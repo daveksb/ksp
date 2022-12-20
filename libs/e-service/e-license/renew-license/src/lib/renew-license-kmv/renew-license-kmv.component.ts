@@ -23,7 +23,7 @@ export class RenewLicenseKmvComponent implements OnInit {
   isLoading: Subject<boolean> = this.loaderService.isLoading;
   groupNo!: string;
   listData!: any;
-  id!: string;
+  id!: string | null;
   requestList: KspRequest[] = [];
   requestTypeList: any[] = [];
 

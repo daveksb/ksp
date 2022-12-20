@@ -20,7 +20,10 @@ import localForage from 'localforage';
 import { Observable, Subject } from 'rxjs';
 import moment from 'moment';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from '@ksp/shared/dialog';
+import {
+  CompleteDialogComponent,
+  ConfirmDialogComponent,
+} from '@ksp/shared/dialog';
 import { qualificationCareerTypeList } from '@ksp/shared/constant';
 
 @Component({
@@ -154,6 +157,20 @@ export class CreateLicenseIdDetailComponent implements OnInit {
     });
   }
 
+  completeDialog() {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header: `สร้างใบอนุญาตสำเร็จ`,
+      },
+    });
+
+    /* dialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        //this.createMultiLicense(id);
+      }
+    }); */
+  }
+
   createMultiLicense(id: string | null = null) {
     const data = id
       ? this.dataSource2.data.filter((i) => i.id === id)
@@ -200,7 +217,8 @@ export class CreateLicenseIdDetailComponent implements OnInit {
     };
     //console.log('payload = ', payload);
     this.requestService.createMultipleLicense(payload).subscribe((res) => {
-      console.log('result = ', res);
+      //console.log('result = ', res);
+      this.completeDialog();
     });
   }
 

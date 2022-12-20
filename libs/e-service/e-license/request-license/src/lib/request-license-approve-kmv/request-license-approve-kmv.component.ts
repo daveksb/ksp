@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -23,16 +24,21 @@ export class RequestLicenseApproveKmvComponent implements OnInit {
   isLoading: Subject<boolean> = this.loaderService.isLoading;
   groupNo!: string;
   listData!: any;
-  id!: string;
+  id!: string | null;
   requestList: KspRequest[] = [];
   requestTypeList: any[] = [];
+  disableForm = false;
+  form = this.fb.group({
+    matiDetail: [''],
+  });
 
   constructor(
     private dialog: MatDialog,
     private router: Router,
     private requestService: ERequestService,
     private route: ActivatedRoute,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -43,6 +49,22 @@ export class RequestLicenseApproveKmvComponent implements OnInit {
       if (group) {
         this.groupNo = group;
         this.requestService.getSelfApproveGroupById(group).subscribe((res) => {
+          //console.log('res = ', res);
+
+          const formData: any = {
+            no: res.matilevel2no,
+            date: res.matilevel2date,
+            boardname: res.matilevel2boardname,
+            presidentname: res.matilevel2presidentname,
+            result: res.matilevel2result,
+            detail: res.matilevel2detail,
+          };
+          this.form.controls.matiDetail.patchValue(formData);
+
+          if (res && res.matilevel2no) {
+            this.disableForm = true;
+          }
+
           this.id = res.id;
           this.listData = parseJson(res.grouplist)
             .toString()
@@ -59,7 +81,7 @@ export class RequestLicenseApproveKmvComponent implements OnInit {
             if (res && res.datareturn.length > 0) {
               this.requestList = res.datareturn;
               this.requestTypeList = getLicenseType(this.requestList);
-              console.log('type list = ', this.requestTypeList);
+              //console.log('type list = ', this.requestTypeList);
             }
           });
       }
