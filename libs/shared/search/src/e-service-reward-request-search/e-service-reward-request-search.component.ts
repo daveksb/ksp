@@ -31,9 +31,9 @@ export class EServiceRewardRequestSearchComponent extends KspFormBaseComponent {
     careertype: [null],
     createFrom: [null],
     createTo: [null],
-    requestFrom: [null],
-    requestTo: [null],
-    province: [null],
+    requestdatefrom: [null],
+    requestdateto: [null],
+    provinceid: [null],
   });
 
   constructor(private fb: FormBuilder) {
