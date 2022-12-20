@@ -27,11 +27,10 @@ export class EServiceRewardCreateDeclareSearchComponent extends KspFormBaseCompo
   licenseTypes = selfOccupyList.filter((i) => i.id < 5);
 
   override form = this.fb.group({
-    groupno: [null],
+    requestno: [null],
     careertype: [null],
-    result: [null],
-    createFrom: [null],
-    createTo: [null],
+    requestdatefrom: [null],
+    requestdateto: [null],
   });
 
   constructor(private fb: FormBuilder) {
