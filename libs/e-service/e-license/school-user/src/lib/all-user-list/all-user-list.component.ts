@@ -6,7 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SchoolUserDetailComponent } from '@ksp/e-service/dialog/school-user-detail';
 import { SchUser } from '@ksp/shared/interface';
-import { ESchStaffService, SchoolInfoService } from '@ksp/shared/service';
+import { ESchStaffService } from '@ksp/shared/service';
 import { mapSchUserStatus } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import localForage from 'localforage';
@@ -33,12 +33,11 @@ export class AllUserListComponent implements OnInit {
   });
 
   constructor(
-    private router: Router,
     private dialog: MatDialog,
     private route: ActivatedRoute,
     private schStaffService: ESchStaffService,
     private fb: FormBuilder,
-    private location: Location,
+    private location: Location
   ) {}
 
   displayedColumns: string[] = column;
