@@ -100,7 +100,7 @@ export const routes: Routes = [
         component: PaymentChannelComponent,
       },
       {
-        path: 'payment-promptpay/:type',
+        path: 'payment-promptpay/:id',
         component: PromptpayComponent,
       },
       {

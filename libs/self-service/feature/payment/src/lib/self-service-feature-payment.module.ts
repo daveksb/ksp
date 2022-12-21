@@ -9,8 +9,6 @@ import {
 } from '@ksp/self-service/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
-import { RouterModule, Routes } from '@angular/router';
-import { SelfServiceMasterPageComponent } from '@ksp/self-service/feature/master-page';
 import { QRCodeModule } from 'angularx-qrcode';
 import { NgxBarcodeModule } from 'ngx-barcode';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
@@ -55,6 +53,5 @@ import { PaymentKtbComponent } from './payment-ktb/payment-ktb.component';
     PromptpayComponent,
     PaymentKtbComponent,
   ],
-  //exports: [PaymentChannelComponent, PromptpayComponent],
 })
 export class SelfServiceFeaturePaymentModule {}

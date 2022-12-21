@@ -3,9 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CompleteDialogComponent } from '@ksp/shared/dialog';
 import { thaiDate } from '@ksp/shared/utility';
-import localForage from 'localforage';
 import { Location } from '@angular/common';
 import { KspRequest } from '@ksp/shared/interface';
+import { SelfRequestService } from '@ksp/shared/service';
 @Component({
   selector: 'self-service-promptpay',
   templateUrl: './promptpay.component.html',
@@ -14,28 +14,25 @@ import { KspRequest } from '@ksp/shared/interface';
 export class PromptpayComponent implements OnInit {
   pageType!: number;
   qrString = '';
-  kspRequest: KspRequest | null = new KspRequest();
-  today = new Date();
+  kspRequest: KspRequest = new KspRequest();
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     public dialog: MatDialog,
-    private location: Location
+    private location: Location,
+    private reqService: SelfRequestService
   ) {}
 
   ngOnInit(): void {
-    localForage.getItem<KspRequest>('ksp-request').then((res) => {
-      this.kspRequest = res;
-      console.log('res = ', res);
-      if (res && res.idcardno) {
-        this.qrString = res.idcardno + res.requestno;
-        console.log('qr string = ', this.qrString);
-      }
-    });
     this.route.paramMap.subscribe((res) => {
-      this.pageType = Number(res.get('type'));
-      //console.log('process type = ', this.pageType);
+      this.reqService.getRequestById(Number(res.get('id'))).subscribe((res) => {
+        this.kspRequest = res;
+        if (res && res.idcardno) {
+          this.qrString = res.idcardno + res.requestno;
+          //console.log('qr string = ', this.qrString);
+        }
+      });
     });
   }
 

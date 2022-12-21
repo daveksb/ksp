@@ -8,7 +8,9 @@
     <div class="content__container">
       <div class="header__label">รายการค่าธรรมเนียม</div>
       <div class="content__label">
-        กรุณาชำระเงินก่อนวันที่<span class="date__label">25 ต.ค. 2565</span>
+        กรุณาชำระเงินก่อนวันที่<span class="date__label">{{
+          kspRequest.createdate | thaiDate
+        }}</span>
       </div>
       <div class="table-responsive">
         <table class="table">
@@ -46,7 +48,7 @@
       <div class="d-flex justify-content-between align-items-center">
         <div class="content__label">
           วันเดือนปีที่ทำรายการ<span class="date__label">{{
-            today.toDateString() | thaiDate
+            kspRequest.createdate | thaiDate
           }}</span>
         </div>
         <div *ngIf="pageType === 1 || pageType === 3">
