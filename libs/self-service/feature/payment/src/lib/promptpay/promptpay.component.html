@@ -88,10 +88,28 @@
           </div>
         </div>
         <div class="col d-flex justify-content-center">
-          <img
-            src="/assets/images/promptpay.png"
-            style="width: 250px; height: 350px"
-          />
+          <ngx-barcode
+            [bc-value]="requestno"
+            [bc-display-value]="true"
+          ></ngx-barcode>
+
+          <qrcode
+            [qrdata]="requestno"
+            [allowEmptyString]="true"
+            [ariaLabel]="'QR Code image with the following content...'"
+            [cssClass]="'center'"
+            [colorDark]="'#000000ff'"
+            [colorLight]="'#ffffffff'"
+            [elementType]="'canvas'"
+            [errorCorrectionLevel]="'M'"
+            [imageSrc]="'./assets/angular-logo.png'"
+            [imageHeight]="20"
+            [imageWidth]="20"
+            [margin]="4"
+            [scale]="1"
+            [title]="'A custom title attribute'"
+            [width]="175"
+          ></qrcode>
         </div>
       </div>
     </div>

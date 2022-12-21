@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CompleteDialogComponent } from '@ksp/shared/dialog';
 import { thaiDate } from '@ksp/shared/utility';
 import localForage from 'localforage';
+import { Location } from '@angular/common';
 @Component({
   selector: 'self-service-promptpay',
   templateUrl: './promptpay.component.html',
@@ -15,7 +16,8 @@ export class PromptpayComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -50,6 +52,10 @@ export class PromptpayComponent implements OnInit {
   }
 
   cancel() {
+    this.location.back();
+  }
+
+  /*   cancel() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '350px',
       data: {
@@ -68,7 +74,7 @@ export class PromptpayComponent implements OnInit {
         this.router.navigate(['/', 'home']);
       }
     });
-  }
+  } */
 }
 
 /* setTimeout(() => {

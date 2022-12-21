@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CompleteDialogComponent } from '@ksp/shared/dialog';
-import { thaiDate } from '@ksp/shared/utility';
+import { Router } from '@angular/router';
 import localForage from 'localforage';
 
 @Component({
@@ -23,6 +20,6 @@ export class PaymentChannelComponent implements OnInit {
   }
 
   promptpay(type: any) {
-    this.router.navigate(['/', 'license', 'payment-promptpay', type]);
+    this.router.navigate(['/license', 'payment-promptpay', type]);
   }
 }

@@ -11,6 +11,8 @@ import { TopNavComponent } from '@ksp/shared/menu';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { RouterModule, Routes } from '@angular/router';
 import { SelfServiceMasterPageComponent } from '@ksp/self-service/feature/master-page';
+import { QRCodeModule } from 'angularx-qrcode';
+import { NgxBarcodeModule } from 'ngx-barcode';
 
 export const routes: Routes = [
   {
@@ -37,6 +39,8 @@ export const routes: Routes = [
     SelfServiceLicenseInfoComponent,
     RequestHeaderInfoComponent,
     RequestStatusComponent,
+    QRCodeModule,
+    NgxBarcodeModule,
     RouterModule.forChild(routes),
   ],
   declarations: [PaymentChannelComponent, PromptpayComponent],
