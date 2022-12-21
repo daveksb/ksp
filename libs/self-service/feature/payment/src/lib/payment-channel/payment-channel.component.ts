@@ -36,11 +36,10 @@ export class PaymentChannelComponent implements OnInit {
   }
 
   paymentKtb() {
-    console.log('cccc = ');
     this.router.navigate([
       '/license',
       'payment-ktb',
-      10, //this.kspRequest.requestid,
+      this.kspRequest.requestid,
     ]);
   }
 }

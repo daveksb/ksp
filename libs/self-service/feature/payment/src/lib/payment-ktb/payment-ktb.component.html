@@ -8,7 +8,9 @@
     <div class="content__container">
       <div class="header__label">รายการค่าธรรมเนียม</div>
       <div class="content__label">
-        กรุณาชำระเงินก่อนวันที่<span class="date__label">25 ต.ค. 2565</span>
+        กรุณาชำระเงินก่อนวันที่<span class="date__label">{{
+          kspRequest.requestdate | thaiDate
+        }}</span>
       </div>
       <div class="table-responsive">
         <table class="table">
@@ -46,10 +48,10 @@
       <div class="d-flex justify-content-between align-items-center">
         <div class="content__label">
           วันเดือนปีที่ทำรายการ<span class="date__label">{{
-            today.toDateString() | thaiDate
+            kspRequest.requestdate | thaiDate
           }}</span>
         </div>
-        <div *ngIf="pageType === 1 || pageType === 3">
+        <div>
           <button type="button" class="btn btn-sm btn-primary">
             พิมพ์แบบชำระเงิน
           </button>
@@ -76,13 +78,7 @@
           </div>
           <br />
           <div class="qrcode__label">
-            <span *ngIf="pageType === 1">
-              3. พิมพ์แบบชำระเงิน เพื่อนำไปชำระที่ศูนย์บริการชำระเงินเคาน์เตอร์
-              เซอร์วิส</span
-            ><span *ngIf="pageType === 2">
-              3. หากรายการคำสั่งซื้อเสร็จสมบูรณ์
-              ระบบจะพาท่านมายังหน้าขอบคุณ</span
-            >
+            <span> 3. พิมพ์แบบชำระเงิน เพื่อนำไปชำระที่ธนาคารกรุงไทย</span>
           </div>
         </div>
         <div class="col d-flex justify-content-center">

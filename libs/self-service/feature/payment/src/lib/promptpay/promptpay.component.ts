@@ -28,7 +28,7 @@ export class PromptpayComponent implements OnInit {
     localForage.getItem<KspRequest>('ksp-request').then((res) => {
       this.kspRequest = res;
       console.log('res = ', res);
-      if (res && res.idcardno && res.requestno) {
+      if (res && res.idcardno) {
         this.qrString = res.idcardno + res.requestno;
         console.log('qr string = ', this.qrString);
       }
