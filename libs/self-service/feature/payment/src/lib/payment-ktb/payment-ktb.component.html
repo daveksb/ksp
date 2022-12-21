@@ -1,0 +1,120 @@
+<ksp-top-nav [isSelfService]="true"><span header>ชำระเงิน</span></ksp-top-nav>
+<div class="main__container">
+  <div class="px-3">
+    <self-service-request-status></self-service-request-status>
+  </div>
+  <br />
+  <div class="container">
+    <div class="content__container">
+      <div class="header__label">รายการค่าธรรมเนียม</div>
+      <div class="content__label">
+        กรุณาชำระเงินก่อนวันที่<span class="date__label">25 ต.ค. 2565</span>
+      </div>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">ลำดับ</th>
+              <th scope="col" class="header__container">รายการค่าธรรมเนียม</th>
+              <th scope="col" class="header__container">
+                อัตราค่าธรรมเนียม (บาท)
+              </th>
+              <th scope="col" class="header__container">จำนวน</th>
+              <th scope="col" class="header__container">จำนวนเงิน (บาท)</th>
+            </tr>
+          </thead>
+          <tbody class="body__table">
+            <tr>
+              <th scope="row">1</th>
+              <td class="detail__table">ค่าขึ้นทะเบียนรับใบอนุญาต</td>
+              <td class="detail__table">500.00</td>
+              <td class="detail__table">1</td>
+              <td class="detail__table">500.00</td>
+            </tr>
+            <tr>
+              <th scope="row"></th>
+              <td class="detail__table"></td>
+              <td class="detail__table"></td>
+              <td class="detail__table">รวมทั้งสิ้น</td>
+              <td class="detail__table">500.00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <br />
+
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="content__label">
+          วันเดือนปีที่ทำรายการ<span class="date__label">{{
+            today.toDateString() | thaiDate
+          }}</span>
+        </div>
+        <div *ngIf="pageType === 1 || pageType === 3">
+          <button type="button" class="btn btn-sm btn-primary">
+            พิมพ์แบบชำระเงิน
+          </button>
+        </div>
+      </div>
+
+      <div
+        class="d-flex fs-2 justify-content-center justify-content-md-start my-3"
+      >
+        คิวอาร์โค้ด ธนาคารกรุงไทย
+      </div>
+      <div class="row flex-column-reverse flex-md-row">
+        <div class="col d-flex flex-column">
+          <div class="qrcode__title">ขั้นตอนการชำระผ่าน คิวอาร์โค้ด</div>
+          <br />
+          <div class="qrcode__label">
+            1. เปิดแอป Mobile Banking จากนั้นเลือกเมนู "สแกนจ่าย" หรือ
+            บันทึกภาพลงยังโทรศัพท์มือถือ
+          </div>
+          <br />
+          <div class="qrcode__label">
+            2. สแกน QR Code หรือ เลือกรูปภาพที่บันทึกในเครื่องโทรศัพท์มือถือ
+            ตรวจสอบยอด และกด "ยืนยัน" เพื่อชำระเงิน
+          </div>
+          <br />
+          <div class="qrcode__label">
+            <span *ngIf="pageType === 1">
+              3. พิมพ์แบบชำระเงิน เพื่อนำไปชำระที่ศูนย์บริการชำระเงินเคาน์เตอร์
+              เซอร์วิส</span
+            ><span *ngIf="pageType === 2">
+              3. หากรายการคำสั่งซื้อเสร็จสมบูรณ์
+              ระบบจะพาท่านมายังหน้าขอบคุณ</span
+            >
+          </div>
+        </div>
+        <div class="col d-flex justify-content-center">
+          <ngx-barcode
+            [bc-value]="qrString"
+            [bc-display-value]="true"
+          ></ngx-barcode>
+
+          <qrcode
+            [qrdata]="qrString"
+            [allowEmptyString]="true"
+            [ariaLabel]="'QR Code image with the following content...'"
+            [cssClass]="'center'"
+            [colorDark]="'#000000ff'"
+            [colorLight]="'#ffffffff'"
+            [elementType]="'canvas'"
+            [errorCorrectionLevel]="'M'"
+            [imageSrc]="'./assets/angular-logo.png'"
+            [imageHeight]="20"
+            [imageWidth]="20"
+            [margin]="4"
+            [scale]="1"
+            [title]="'A custom title attribute'"
+            [width]="175"
+          ></qrcode>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center py-3">
+    <button type="button" class="btn btn-primary" (click)="cancel()">
+      ยกเลิก
+    </button>
+  </div>
+</div>

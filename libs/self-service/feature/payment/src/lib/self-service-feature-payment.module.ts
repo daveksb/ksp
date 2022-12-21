@@ -14,19 +14,20 @@ import { SelfServiceMasterPageComponent } from '@ksp/self-service/feature/master
 import { QRCodeModule } from 'angularx-qrcode';
 import { NgxBarcodeModule } from 'ngx-barcode';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { PaymentKtbComponent } from './payment-ktb/payment-ktb.component';
 
-export const routes: Routes = [
+/* export const routes: Routes = [
   {
     path: '',
     component: SelfServiceMasterPageComponent,
     children: [
-      /*       {
-        path: 'payment-channel',
-        component: PaymentChannelComponent,
-      }, */
       {
         path: 'payment-channel/:id',
         component: PaymentChannelComponent,
+      },
+      {
+        path: 'payment-ktb/:id',
+        component: PaymentKtbComponent,
       },
       {
         path: 'payment-promptpay/:type',
@@ -34,7 +35,7 @@ export const routes: Routes = [
       },
     ],
   },
-];
+]; */
 
 @NgModule({
   imports: [
@@ -47,9 +48,13 @@ export const routes: Routes = [
     QRCodeModule,
     NgxBarcodeModule,
     ThaiDatePipe,
-    RouterModule.forChild(routes),
+    //RouterModule.forChild(routes),
   ],
-  declarations: [PaymentChannelComponent, PromptpayComponent],
-  exports: [PaymentChannelComponent, PromptpayComponent],
+  declarations: [
+    PaymentChannelComponent,
+    PromptpayComponent,
+    PaymentKtbComponent,
+  ],
+  //exports: [PaymentChannelComponent, PromptpayComponent],
 })
 export class SelfServiceFeaturePaymentModule {}
