@@ -7,10 +7,11 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { FormBuilder } from '@angular/forms';
-import { EMPTY, Observable, switchMap } from 'rxjs';
+import { EMPTY, Observable, Subject, switchMap } from 'rxjs';
 import {
   AddressService,
   GeneralInfoService,
+  LoaderService,
   UniInfoService,
   UniRequestService,
 } from '@ksp/shared/service';
@@ -38,6 +39,7 @@ export class ForeignStudentIdComponent {
   uniid = '';
   unitype = '';
   requestNumber = '';
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   constructor(
     public dialog: MatDialog,
     private router: Router,
@@ -45,7 +47,8 @@ export class ForeignStudentIdComponent {
     private uniRequestService: UniRequestService,
     private addressService: AddressService,
     private generalInfoService: GeneralInfoService,
-    private uniInfoService: UniInfoService
+    private uniInfoService: UniInfoService,
+    private loaderService: LoaderService
   ) {
     this.uniqueTimestamp = uuidv4();
 

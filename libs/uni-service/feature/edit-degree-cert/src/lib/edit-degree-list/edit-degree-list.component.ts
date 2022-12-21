@@ -4,14 +4,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ListData, KspPaginationComponent } from '@ksp/shared/interface';
-import { UniInfoService, AddressService } from '@ksp/shared/service';
+import { UniInfoService, AddressService, LoaderService } from '@ksp/shared/service';
 import {
   EditDegreeCertSearchComponent,
   HistoryRequestDialogComponent,
 } from '@ksp/uni-service/dialog';
 import _ from 'lodash';
 import moment from 'moment';
-import { map, switchMap, lastValueFrom } from 'rxjs';
+import { map, switchMap, lastValueFrom, Subject } from 'rxjs';
 const mapOption = () =>
   map((data: any) => {
     return (
@@ -43,12 +43,14 @@ export class EditDegreeListComponent
   provinces: ListData[] = [];
   universityType: ListData[] = [];
   universities: ListData[] = [];
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   constructor(
     public dialog: MatDialog,
     private fb: FormBuilder,
     private uniInfoService: UniInfoService,
     private addressService: AddressService,
-    private router: Router
+    private router: Router,
+    private loaderService: LoaderService
   ) {
     super();
     this.getAll();
