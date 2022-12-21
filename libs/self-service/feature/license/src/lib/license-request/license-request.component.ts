@@ -110,7 +110,6 @@ export class LicenseRequestComponent
   override getListData() {
     super.getListData();
     this.countries$ = this.addressService.getCountry();
-    //this.countries2$ = this.countries$;
     this.licenses$ = this.educationDetailService.getLicenseType();
   }
 
@@ -131,7 +130,6 @@ export class LicenseRequestComponent
   }
 
   patchAddress2FormWithAddress1(): void {
-    //console.log(this.form.controls.address1.value);
     this.form.controls.address2.patchValue(this.form.controls.address1.value);
     //console.log(this.form.controls.address2.value);
   }
@@ -152,14 +150,14 @@ export class LicenseRequestComponent
       this.form.controls.experience.patchValue({
         ...experienceInfo,
       } as any);
-      console.log('exp = ', experienceInfo);
+      //console.log('exp = ', experienceInfo);
       /* const experienceInfo = parseJson(data.experienceinfo);
       this.form.controls.experience.patchValue({ ...experienceInfo } as any); */
     }
 
     if (data.fileinfo) {
       const fileInfo = parseJson(data.fileinfo);
-      console.log(fileInfo);
+      //console.log(fileInfo);
       const { edufiles, experiencefiles, performancefiles } = fileInfo;
       this.eduFiles = edufiles;
       this.experienceFiles = experiencefiles;
@@ -209,7 +207,6 @@ export class LicenseRequestComponent
     self.isforeign = `${SelfServiceRequestForType.ชาวไทย}`;
     self.uniqueno = this.uniqueTimestamp;
     self.userid = getCookie('userId');
-
     //console.log('user info = ', userInfo);
 
     const selectData = _.pick(userInfo, allowKey);
@@ -246,7 +243,7 @@ export class LicenseRequestComponent
         }),
       },
     };
-    console.log('payload = ', payload);
+    //console.log('payload = ', payload);
     return payload;
   }
 }

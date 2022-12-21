@@ -13,14 +13,19 @@ import { RouterModule, Routes } from '@angular/router';
 import { SelfServiceMasterPageComponent } from '@ksp/self-service/feature/master-page';
 import { QRCodeModule } from 'angularx-qrcode';
 import { NgxBarcodeModule } from 'ngx-barcode';
+import { ThaiDatePipe } from '@ksp/shared/pipe';
 
 export const routes: Routes = [
   {
     path: '',
     component: SelfServiceMasterPageComponent,
     children: [
-      {
+      /*       {
         path: 'payment-channel',
+        component: PaymentChannelComponent,
+      }, */
+      {
+        path: 'payment-channel/:id',
         component: PaymentChannelComponent,
       },
       {
@@ -41,6 +46,7 @@ export const routes: Routes = [
     RequestStatusComponent,
     QRCodeModule,
     NgxBarcodeModule,
+    ThaiDatePipe,
     RouterModule.forChild(routes),
   ],
   declarations: [PaymentChannelComponent, PromptpayComponent],
