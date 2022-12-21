@@ -47,7 +47,7 @@
         <div class="content__label">
           วันเดือนปีที่ทำรายการ<span class="date__label">25 ต.ค. 2565</span>
         </div>
-        <div *ngIf="pageType === 1">
+        <div *ngIf="pageType === 1 || pageType === 3">
           <button type="button" class="btn btn-sm btn-primary">
             พิมพ์แบบชำระเงิน
           </button>
@@ -60,12 +60,11 @@
         คิวอาร์โค้ด
         <span *ngIf="pageType === 1">ชำระผ่านเคาน์เตอร์ เซอร์วิส</span>
         <span *ngIf="pageType === 2">พร้อมเพย์</span>
+        <span *ngIf="pageType === 3">ธนาคารกรุงไทย</span>
       </div>
       <div class="row flex-column-reverse flex-md-row">
         <div class="col d-flex flex-column">
-          <div class="qrcode__title">
-            ขั้นตอนการชำระผ่าน คิวอาร์โค้ด พร้อมเพย์
-          </div>
+          <div class="qrcode__title">ขั้นตอนการชำระผ่าน คิวอาร์โค้ด</div>
           <br />
           <div class="qrcode__label">
             1. เปิดแอป Mobile Banking จากนั้นเลือกเมนู "สแกนจ่าย" หรือ

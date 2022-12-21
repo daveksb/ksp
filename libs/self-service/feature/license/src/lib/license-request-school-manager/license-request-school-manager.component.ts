@@ -7,7 +7,7 @@ import {
   SelfServiceRequestType,
   SelfServiceRequestForType,
 } from '@ksp/shared/constant';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { UntilDestroy } from '@ngneat/until-destroy';
 import { FormBuilder } from '@angular/forms';
 import {
   AddressService,
@@ -23,7 +23,7 @@ import {
   replaceEmptyWithNull,
   toLowercaseProp,
 } from '@ksp/shared/utility';
-import { FileGroup, SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
+import { FileGroup, SelfRequest } from '@ksp/shared/interface';
 import { LicenseFormBaseComponent } from '@ksp/self-service/form';
 import * as _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';

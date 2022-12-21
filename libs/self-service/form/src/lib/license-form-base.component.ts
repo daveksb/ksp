@@ -28,8 +28,6 @@ export abstract class LicenseFormBaseComponent {
   prefixList$!: Observable<any>;
   nationalitys$!: Observable<any>;
   provinces1$!: Observable<any>;
-  provinces2$!: Observable<any>;
-  provinces3$!: Observable<any>;
   amphurs1$!: Observable<any>;
   tumbols1$!: Observable<any>;
   amphurs2$!: Observable<any>;
@@ -126,8 +124,8 @@ export abstract class LicenseFormBaseComponent {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.nationalitys$ = this.generalInfoService.getNationality();
     this.provinces1$ = this.addressService.getProvinces();
-    this.provinces2$ = this.provinces1$;
-    this.provinces3$ = this.provinces1$;
+    //this.provinces2$ = this.provinces1$;
+    //this.provinces3$ = this.provinces1$;
     this.bureau$ = this.educationDetailService.getBureau();
   }
 
@@ -369,7 +367,7 @@ export abstract class LicenseFormBaseComponent {
     if (checked) {
       this.amphurs2$ = this.amphurs1$;
       this.tumbols2$ = this.tumbols1$;
-      this.provinces2$ = this.provinces1$;
+      //this.provinces2$ = this.provinces1$;
       this.patchAddress2FormWithAddress1();
     }
   }

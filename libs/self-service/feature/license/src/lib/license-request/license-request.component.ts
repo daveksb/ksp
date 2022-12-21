@@ -30,29 +30,6 @@ import { LicenseFormBaseComponent } from '@ksp/self-service/form';
 import * as _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 
-const mockPerformances = [
-  {
-    id: 1,
-    score: '89',
-    result: 'ผ่าน',
-    announceDate: '12/มกราคม/2565',
-    endDate: '31/มกราคม/2565',
-  },
-  {
-    id: 2,
-    score: '96',
-    result: 'ผ่าน',
-    announceDate: '12/มกราคม/2565',
-    endDate: '31/มกราคม/2565',
-  },
-  {
-    id: 3,
-    score: '96',
-    result: 'ไม่พบข้อมูล',
-    announceDate: '12/มกราคม/2565',
-    endDate: '31/มกราคม/2565',
-  },
-];
 @UntilDestroy()
 @Component({
   templateUrl: './license-request.component.html',
@@ -232,7 +209,7 @@ export class LicenseRequestComponent
     self.isforeign = `${SelfServiceRequestForType.ชาวไทย}`;
     self.uniqueno = this.uniqueTimestamp;
     self.userid = getCookie('userId');
-    //userInfo.idcardno = '23654518004';
+
     //console.log('user info = ', userInfo);
 
     const selectData = _.pick(userInfo, allowKey);
@@ -273,3 +250,27 @@ export class LicenseRequestComponent
     return payload;
   }
 }
+
+const mockPerformances = [
+  {
+    id: 1,
+    score: '89',
+    result: 'ผ่าน',
+    announceDate: '12/มกราคม/2565',
+    endDate: '31/มกราคม/2565',
+  },
+  {
+    id: 2,
+    score: '96',
+    result: 'ผ่าน',
+    announceDate: '12/มกราคม/2565',
+    endDate: '31/มกราคม/2565',
+  },
+  {
+    id: 3,
+    score: '96',
+    result: 'ไม่พบข้อมูล',
+    announceDate: '12/มกราคม/2565',
+    endDate: '31/มกราคม/2565',
+  },
+];

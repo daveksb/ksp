@@ -23,7 +23,6 @@ export class PromptpayComponent implements OnInit {
   ngOnInit(): void {
     localForage.getItem('requestno').then((res: any) => {
       this.requestno = res;
-      //console.log('xxx = ', res);
     });
     this.route.paramMap.subscribe((res) => {
       this.pageType = Number(res.get('type'));
@@ -33,7 +32,6 @@ export class PromptpayComponent implements OnInit {
 
   complete() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
       data: {
         header: `ทำรายการสำเร็จ`,
         btnLabel: 'กลับสู่หน้าหลัก',
@@ -46,7 +44,7 @@ export class PromptpayComponent implements OnInit {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'home']);
+        this.router.navigate(['/home']);
       }
     });
   }
