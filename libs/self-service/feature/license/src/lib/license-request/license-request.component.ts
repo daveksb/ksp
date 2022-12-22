@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { UntilDestroy } from '@ngneat/until-destroy';
 import { Observable, Subject } from 'rxjs';
 import { LicenseRequestService } from './license-request.service';
 import {
@@ -13,7 +13,7 @@ import {
   SelfRequestService,
   LoaderService,
 } from '@ksp/shared/service';
-import { FileGroup, SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
+import { Country, FileGroup, SelfRequest } from '@ksp/shared/interface';
 import {
   getCookie,
   parseJson,
@@ -30,29 +30,6 @@ import { LicenseFormBaseComponent } from '@ksp/self-service/form';
 import * as _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 
-const mockPerformances = [
-  {
-    id: 1,
-    score: '89',
-    result: 'ผ่าน',
-    announceDate: '12/มกราคม/2565',
-    endDate: '31/มกราคม/2565',
-  },
-  {
-    id: 2,
-    score: '96',
-    result: 'ผ่าน',
-    announceDate: '12/มกราคม/2565',
-    endDate: '31/มกราคม/2565',
-  },
-  {
-    id: 3,
-    score: '96',
-    result: 'ไม่พบข้อมูล',
-    announceDate: '12/มกราคม/2565',
-    endDate: '31/มกราคม/2565',
-  },
-];
 @UntilDestroy()
 @Component({
   templateUrl: './license-request.component.html',
@@ -72,8 +49,7 @@ export class LicenseRequestComponent
     education: [],
     experience: [],
   });
-  countries$!: Observable<any>;
-  countries2$!: Observable<any>;
+  countries$!: Observable<Country[]>;
   licenses$!: Observable<any>;
   eduFiles: FileGroup[] = [];
   experienceFiles: FileGroup[] = [];
@@ -108,9 +84,9 @@ export class LicenseRequestComponent
   ngOnInit(): void {
     this.getListData();
     this.checkRequestId();
-    this.form.valueChanges.subscribe((res) => {
+    /*     this.form.valueChanges.subscribe((res) => {
       //console.log('1 = ', this.userInfoForm.valid);
-    });
+    }); */
   }
 
   get userInfoForm() {
@@ -134,7 +110,6 @@ export class LicenseRequestComponent
   override getListData() {
     super.getListData();
     this.countries$ = this.addressService.getCountry();
-    this.countries2$ = this.countries$;
     this.licenses$ = this.educationDetailService.getLicenseType();
   }
 
@@ -155,9 +130,8 @@ export class LicenseRequestComponent
   }
 
   patchAddress2FormWithAddress1(): void {
-    console.log(this.form.controls.address1.value);
     this.form.controls.address2.patchValue(this.form.controls.address1.value);
-    console.log(this.form.controls.address2.value);
+    //console.log(this.form.controls.address2.value);
   }
 
   override patchData(data: SelfRequest) {
@@ -176,14 +150,14 @@ export class LicenseRequestComponent
       this.form.controls.experience.patchValue({
         ...experienceInfo,
       } as any);
-      console.log('exp = ', experienceInfo);
+      //console.log('exp = ', experienceInfo);
       /* const experienceInfo = parseJson(data.experienceinfo);
       this.form.controls.experience.patchValue({ ...experienceInfo } as any); */
     }
 
     if (data.fileinfo) {
       const fileInfo = parseJson(data.fileinfo);
-      console.log(fileInfo);
+      //console.log(fileInfo);
       const { edufiles, experiencefiles, performancefiles } = fileInfo;
       this.eduFiles = edufiles;
       this.experienceFiles = experiencefiles;
@@ -228,12 +202,12 @@ export class LicenseRequestComponent
     if (formData?.address2?.addressType) formData.address2.addresstype = 2;
 
     const { id, ...rawUserInfo } = formData.userInfo;
-    console.log('id ', id);
-    console.log('requestId ', this.requestId);
+    //console.log('requestId ', this.requestId);
     const userInfo = toLowercaseProp(rawUserInfo);
     self.isforeign = `${SelfServiceRequestForType.ชาวไทย}`;
     self.uniqueno = this.uniqueTimestamp;
     self.userid = getCookie('userId');
+    //console.log('user info = ', userInfo);
 
     const selectData = _.pick(userInfo, allowKey);
 
@@ -269,7 +243,31 @@ export class LicenseRequestComponent
         }),
       },
     };
-    console.log(payload);
+    //console.log('payload = ', payload);
     return payload;
   }
 }
+
+const mockPerformances = [
+  {
+    id: 1,
+    score: '89',
+    result: 'ผ่าน',
+    announceDate: '12/มกราคม/2565',
+    endDate: '31/มกราคม/2565',
+  },
+  {
+    id: 2,
+    score: '96',
+    result: 'ผ่าน',
+    announceDate: '12/มกราคม/2565',
+    endDate: '31/มกราคม/2565',
+  },
+  {
+    id: 3,
+    score: '96',
+    result: 'ไม่พบข้อมูล',
+    announceDate: '12/มกราคม/2565',
+    endDate: '31/มกราคม/2565',
+  },
+];

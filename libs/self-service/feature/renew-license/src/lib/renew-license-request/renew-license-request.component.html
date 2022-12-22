@@ -58,7 +58,7 @@
         <ksp-form-address
           formControlName="address2"
           [isDarkMode]="true"
-          [provinces]="provinces2$ | async"
+          [provinces]="provinces1$ | async"
           [amphurs]="amphurs2$ | async"
           [tumbols]="tumbols2$ | async"
           (provinceChanged)="provinceChanged(2, $event)"
@@ -82,7 +82,7 @@
           [showOnlineForm]="true"
           [showNotRequire]="true"
           [showContactForm]="true"
-          [provinces]="provinces3$ | async"
+          [provinces]="provinces1$ | async"
           [amphurs]="amphurs3$ | async"
           [tumbols]="tumbols3$ | async"
           [bureaus]="bureau$ | async"
@@ -126,13 +126,9 @@
     >
       บันทึกชั่วคราว
     </button>
-    <button
-      type="button"
-      class="ms-3 btn btn-primary"
-      [disabled]="!form.valid"
-      (click)="onSave(2)"
-    >
+    <button type="button" class="ms-3 btn btn-primary" (click)="onSave(2)">
       บันทึกและยื่น
     </button>
+    <!-- [disabled]="!form.valid" -->
   </div>
 </div>

@@ -46,16 +46,17 @@ export class ETeacherCouncilCreateDeclareComponent
   }
 
   search(params: Partial<SchRequestSearchFilter>) {
+    console.log(params);
     let payload: EsSearchPayload = {
       systemtype: '1',
       requesttype: SelfServiceRequestType.ขอรับรางวัลคุรุสภา,
       requestno: params.requestno,
-      careertype: null,
-      name: params.name,
-      idcardno: params.idcardno,
+      careertype: params.careertype,
+      name: null,
+      idcardno: null,
       passportno: null,
       process: null,
-      status: params.status,
+      status: null,
       schoolid: null,
       schoolname: null,
       bureauid: null,

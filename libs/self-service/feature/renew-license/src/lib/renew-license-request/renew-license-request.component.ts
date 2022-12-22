@@ -183,6 +183,7 @@ export class RenewLicenseRequestComponent
 
     const { id, ...rawUserInfo } = formData.userInfo;
     const userInfo = toLowercaseProp(rawUserInfo);
+
     self.isforeign = `${SelfServiceRequestForType.ชาวไทย}`;
     self.uniqueno = this.uniqueTimestamp;
     self.userid = getCookie('userId');
@@ -244,11 +245,12 @@ export class RenewLicenseRequestComponent
       : this.requestService.createRequest.bind(this.requestService);
     request(payload).subscribe((res) => {
       console.log('request result = ', res);
+      this.router.navigate(['/license', 'payment-channel', 102541254]);
+
       if (res.returncode === '00') {
         if (this.currentProcess === 2) {
           const requestno = res.requestno;
           localForage.setItem('requestno', requestno);
-          this.router.navigate(['/license', 'payment-channel']);
         } else {
           this.router.navigate(['/home']);
         }
