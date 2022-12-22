@@ -30,7 +30,6 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 export class EQualificationApproveDetailComponent implements OnInit {
   file = files;
   choice = verifyChoices;
-
   requestData = new KspRequest();
   userInfoFormdisplayMode: number = UserInfoFormType.thai;
   prefixList$!: Observable<Prefix[]>;
@@ -83,7 +82,6 @@ export class EQualificationApproveDetailComponent implements OnInit {
   }
 
   tabChanged(e: MatTabChangeEvent) {
-    //console.log('tab event = ', e);
     this.selectedTab = e;
   }
 
@@ -121,7 +119,6 @@ export class EQualificationApproveDetailComponent implements OnInit {
       requestData: this.requestData,
     };
     localForage.setItem('checkRequestData', saveData);
-    //localForage.setItem('qualification-check-request-data', saveData);
   }
 
   loadRequestData(id: number) {
@@ -134,7 +131,7 @@ export class EQualificationApproveDetailComponent implements OnInit {
 
         this.form.controls.userInfo.patchValue(<any>res);
         const edus = parseJson(res.eduinfo);
-        console.log('edu = ', edus[0]);
+        //console.log('edu = ', edus[0]);
         this.patchEdu(edus);
 
         const addressinfo: any = parseJson(res.addressinfo);
@@ -163,19 +160,11 @@ export class EQualificationApproveDetailComponent implements OnInit {
           ? (this.otherReason = JSON.parse(atob(res.otherreason)))
           : null;
 
-        console.log('ref = ', this.refPerson);
-        console.log('other = ', this.otherReason);
+        //console.log('ref = ', this.refPerson);
+        //console.log('other = ', this.otherReason);
       }
     });
   }
-
-  /* patchRefPerson(res: any) {
-    this.refPerson = res;
-  } */
-
-  /* patchOtherReason(res: any) {
-    this.resPerson = res;
-  } */
 
   patchEdu(edus: any[]) {
     //console.log('edus = ', edus);

@@ -346,7 +346,7 @@ export class QualificationDetailComponent implements OnInit {
     );
     confirmDialog.afterClosed().subscribe((res) => {
       if (res) {
-        console.log('other reason = ', res);
+        //console.log('other reason = ', res);
         this.saved(res);
       }
     });

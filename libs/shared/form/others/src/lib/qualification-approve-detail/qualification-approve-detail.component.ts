@@ -45,6 +45,10 @@ export class QualificationApproveDetailComponent
     reason2: [],
   });
 
+  @Input() set otherReason(value: any) {
+    if (value) this.form.patchValue(value);
+  }
+
   @Output() confirmed = new EventEmitter<boolean>();
 
   constructor(
