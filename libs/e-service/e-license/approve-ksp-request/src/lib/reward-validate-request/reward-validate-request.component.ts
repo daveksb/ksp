@@ -48,7 +48,6 @@ export class RewardValidateRequestComponent
     super();
     this.subscriptions.push(
       this.form?.valueChanges.subscribe((value: any) => {
-        console.log(value);
         this.onChange(value);
         this.onTouched();
       })

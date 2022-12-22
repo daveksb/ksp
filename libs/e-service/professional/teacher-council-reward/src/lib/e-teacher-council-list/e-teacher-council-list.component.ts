@@ -8,12 +8,13 @@ import {
   SchRequestSearchFilter,
   SelfRequest,
 } from '@ksp/shared/interface';
-import { ERequestService } from '@ksp/shared/service';
+import { ERequestService, LoaderService } from '@ksp/shared/service';
 import {
   replaceEmptyWithNull,
   SelfCheckProcess,
   eSelfCheckStatus,
 } from '@ksp/shared/utility';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'ksp-e-teacher-council-list',
@@ -21,6 +22,7 @@ import {
   styleUrls: ['./e-teacher-council-list.component.scss'],
 })
 export class ETeacherCouncilListComponent implements OnInit, AfterViewInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfRequest>();
   checkProcess = SelfCheckProcess;
@@ -30,7 +32,8 @@ export class ETeacherCouncilListComponent implements OnInit, AfterViewInit {
 
   constructor(
     private router: Router,
-    private requestService: ERequestService
+    private requestService: ERequestService,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {}
