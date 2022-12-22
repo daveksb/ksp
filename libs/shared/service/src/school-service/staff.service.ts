@@ -34,7 +34,7 @@ export class StaffService {
     );
   }
 
-  searchStaffFromIdCard(payload: any): Observable<any> {
+  searchStaffFromIdCard(payload: any): Observable<SchStaff> {
     return this.http.post<SchStaff>(
       `${environment.apiUrl}/kspstaff/schstaff2selectidcardno`,
       payload

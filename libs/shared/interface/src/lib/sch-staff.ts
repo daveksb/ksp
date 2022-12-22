@@ -29,4 +29,6 @@ export class SchStaff {
   visaclass: string | null | undefined = null;
   visaenddate: string | null | undefined = null;
   kuruspano: string | null | undefined = null;
+
+  returncode?: string | null | undefined = null;
 }
