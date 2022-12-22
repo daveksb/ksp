@@ -30,6 +30,7 @@ import {
   formatRequestNo,
   getCookie,
   mapMultiFileInfo,
+  parseJson,
   thaiDate,
 } from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
@@ -104,7 +105,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
         res.passportstartdate = formatDate(res.passportstartdate);
         res.passportenddate = formatDate(res.passportenddate);
         res.visaexpiredate = formatDate(res.visaexpiredate);
-        const fileinfo = JSON.parse(atob(res?.fileinfo || ''));
+        const fileinfo = parseJson(res?.fileinfo || '');
         if (fileinfo) {
           this.foreignFiles.forEach(
             (group, index) => (group.files = fileinfo[index])

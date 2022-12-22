@@ -51,7 +51,7 @@ export class ForeignLicenseListComponent implements AfterViewInit {
   }
 
   search(p: Partial<SchRequestSearchFilter>) {
-    console.log('params = ', p);
+    //console.log('params = ', p);
     const payload: EsSearchPayload = {
       systemtype: null,
       requesttype: '4',
