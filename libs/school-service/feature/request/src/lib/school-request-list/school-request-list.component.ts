@@ -85,10 +85,10 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
 
   genAlertMessage(req: KspRequest) {
     const detail: any = JSON.parse(req.detail || '');
-    //console.log('return date = ', detail.returndate);
-    return `แจ้งเตือน เลขที่คำขอ: ${
-      req.requestno
-    } ถูกส่งคืน "ปรับแก้ไข/เพิ่มเติม"
+    console.log('return date = ', req);
+    return `แจ้งเตือน เลขที่คำขอ : ${req.requestno} ใบคำ${schoolMapRequestType(
+      +Number(req.requesttype)
+    )} ถูกส่งคืน "ปรับแก้ไข/เพิ่มเติม"
     กรุณาส่งกลับภายในวันที่ ${thaiDate(
       new Date(detail.returndate)
     )} มิฉะนั้นใบคำขอจะถูกยกเลิก `;
