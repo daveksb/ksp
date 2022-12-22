@@ -10,34 +10,19 @@
     <div class="row mb-2">
       <div class="col-6">
         <label class="form-label">ชื่อปริญญา/หลักสูตร</label>
-        <input
-          type="text"
-          disabled
-          [placeholder]="degreeName"
-          class="form-control"
-        />
+        <input type="text" formControlName="degreename" class="form-control" />
       </div>
 
       <div class="col-6">
         <label class="form-label">สาขา/วิชาเอก</label>
-        <input
-          type="text"
-          disabled
-          [placeholder]="major"
-          class="form-control"
-        />
+        <input type="text" formControlName="major" class="form-control" />
       </div>
     </div>
 
     <div class="row">
       <div class="col-6">
         <label class="form-label">สถาบันการศึกษา</label>
-        <input
-          type="text"
-          disabled
-          [placeholder]="institution"
-          class="form-control"
-        />
+        <input type="text" formControlName="institute" class="form-control" />
       </div></div
   ></ng-container>
 
