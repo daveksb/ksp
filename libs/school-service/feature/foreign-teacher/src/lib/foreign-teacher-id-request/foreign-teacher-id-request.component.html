@@ -66,19 +66,21 @@
         </div>
       </div>
       <hr />
-      <ksp-form-foreign-id
-        [mode]="mode"
-        formControlName="foreignTeacher"
-        [prefixList]="prefixList$ | async"
-        [countries]="countries$ | async"
-        [formHeader]="'ข้อมูลครูชาวต่างชาติ'"
-      >
-        <ksp-form-visa-info
+      <div class="mt-3">
+        <ksp-form-foreign-id
           [mode]="mode"
-          [visaTypeList]="visaTypeList$ | async"
-          formControlName="visainfo"
-        ></ksp-form-visa-info>
-      </ksp-form-foreign-id>
+          formControlName="foreignTeacher"
+          [prefixList]="prefixList$ | async"
+          [countries]="countries$ | async"
+          [formHeader]="'ข้อมูลครูชาวต่างชาติ'"
+        >
+          <ksp-form-visa-info
+            [mode]="mode"
+            [visaTypeList]="visaTypeList$ | async"
+            formControlName="visainfo"
+          ></ksp-form-visa-info>
+        </ksp-form-foreign-id>
+      </div>
 
       <div class="mb-2 mt-3">
         <ksp-form-multi-attachment

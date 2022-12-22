@@ -4,7 +4,7 @@ const defaultSize = 13;
 export const kspPdfMapping: IKspPdfMapping[] = [
   //ใบอนุญาตของ หนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ
   {
-    pdfType: 99,
+    pdfType: 1,
     pdfSubType: 3,
     pdfSrc: 'assets/pdf/school-temp-approve-license.pdf',
     input: [
