@@ -46,6 +46,7 @@ export class QualificationApproveDetailComponent
   });
 
   @Input() set otherReason(value: any) {
+    //console.log('value = ', value);
     if (value) this.form.patchValue(value);
   }
 
@@ -72,9 +73,9 @@ export class QualificationApproveDetailComponent
 
     const eduData: any = {
       degree: true,
-      major: this.data.education.major,
-      institute: this.data.education.institution,
-      degreename: this.data.education.degreeName,
+      major: this.data?.education?.major,
+      institute: this.data?.education?.institution,
+      degreename: this.data?.education?.degreeName,
     };
     this.form.patchValue(eduData);
 
@@ -92,7 +93,8 @@ export class QualificationApproveDetailComponent
       this.degreelevelMapping.get(education?.degreeLevelName) ??
       'วุฒิการศึกษาปริญญาตรี';
   }
+
   save() {
-    this.dialogRef.close({ otherreason: this.form.value });
+    this.dialogRef.close({ otherreason: this.form.getRawValue() });
   }
 }
