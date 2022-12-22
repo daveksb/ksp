@@ -84,9 +84,9 @@ export class QualificationDetailComponent implements OnInit {
   refperson: any;
   evidenceFiles: FileGroup[] = files;
   mode: FormMode = 'edit';
-  bureauName!: any;
-  schoolName!: any;
-  address!: any;
+  bureauName!: string;
+  schoolName!: string;
+  address!: string;
   requestLabel = '';
   isOptional2 = false;
   isOptional3 = false;
@@ -158,17 +158,6 @@ export class QualificationDetailComponent implements OnInit {
   }
 
   patchUserInfo(data: any) {
-    /*     data.birthdate = data?.birthdate?.split('T')[0];
-    data.passportstartdate = data.passportstartdate.split('T')[0];
-    data.passportenddate = data.passportenddate.split('T')[0]; */
-    //console.log('data = ', data);
-    /*     if (data?.visainfo) {
-      const visa = parseJson(data?.visainfo);
-      data.visaclass = visa.visaclass;
-      data.visatype = visa.visatype;
-      data.visaenddate = visa.visaenddate;
-    } */
-    //console.log('data = ', data);
     this.form.controls.userInfo.patchValue(data);
   }
 
@@ -313,7 +302,7 @@ export class QualificationDetailComponent implements OnInit {
   }
 
   cancel() {
-    console.log('this.requestData = ', this.requestData);
+    //console.log('this.requestData = ', this.requestData);
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการยกเลิกการยื่นคำขอ
@@ -357,6 +346,7 @@ export class QualificationDetailComponent implements OnInit {
     );
     confirmDialog.afterClosed().subscribe((res) => {
       if (res) {
+        console.log('other reason = ', res);
         this.saved(res);
       }
     });
