@@ -19,6 +19,7 @@ import {
   KspRequest,
   KspRequestProcess,
   Nationality,
+  PositionType,
   Prefix,
   Province,
   Tambol,
@@ -76,6 +77,7 @@ export class QualificationDetailComponent implements OnInit {
   tumbols2$!: Observable<Tambol[]>;
   countries$!: Observable<Country[]>;
   nationalitys$!: Observable<Nationality[]>;
+  positions: PositionType[] = [];
   schoolId = getCookie('schoolId');
   userId = getCookie('userId');
   careerType = '';
@@ -172,9 +174,17 @@ export class QualificationDetailComponent implements OnInit {
       .searchStaffFromIdCard(payload)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
-        //console.log('req = ', res);
         if (res && res.returncode !== '98') {
-          this.patchUserInfo(res);
+          //console.log('res = ', parseJson(res.hiringinfo));
+          const position = this.positions.find(
+            (p) => p.id == parseJson(res.hiringinfo).position
+          );
+
+          const userInfo = {
+            ...res,
+            position: position?.name,
+          };
+          this.patchUserInfo(userInfo);
           this.patchAddress(parseJson(res.addresses));
           this.patchEdu(parseJson(res.educations));
         } else {
@@ -283,7 +293,10 @@ export class QualificationDetailComponent implements OnInit {
     this.provinces2$ = this.provinces1$;
     this.countries$ = this.addressService.getCountry();
     this.nationalitys$ = this.generalInfoService.getNationality();
-
+    this.staffService.getPositionTypes().subscribe((res) => {
+      this.positions = res;
+      //console.log('position = ', res);
+    });
     this.schoolInfoService
       .getSchoolInfo({
         schoolid: this.schoolId,
