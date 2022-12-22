@@ -36,6 +36,7 @@ import { LicenseForeignAgreementComponent } from './license-foreign-agreement/li
 import { EditLicenseComponent } from '@ksp/shared/form/license';
 import { LicenseRequestThaiComponent } from './license-request-thai/license-request-thai.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { PaymentKtbComponent } from 'libs/self-service/feature/payment/src/lib/payment-ktb/payment-ktb.component';
 
 export const routes: Routes = [
   {
@@ -99,8 +100,12 @@ export const routes: Routes = [
         component: PaymentChannelComponent,
       },
       {
-        path: 'payment-promptpay/:type',
+        path: 'payment-promptpay/:id',
         component: PromptpayComponent,
+      },
+      {
+        path: 'payment-ktb/:id',
+        component: PaymentKtbComponent,
       },
       {
         path: '*',

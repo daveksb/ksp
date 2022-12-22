@@ -60,7 +60,7 @@
         <ksp-form-address
           formControlName="address2"
           [isDarkMode]="true"
-          [provinces]="provinces2$ | async"
+          [provinces]="provinces1$ | async"
           [amphurs]="amphurs2$ | async"
           [tumbols]="tumbols2$ | async"
           (provinceChanged)="provinceChanged(2, $event)"
@@ -84,7 +84,7 @@
           [showOnlineForm]="true"
           [showContactForm]="true"
           [showNotRequire]="true"
-          [provinces]="provinces3$ | async"
+          [provinces]="provinces1$ | async"
           [amphurs]="amphurs3$ | async"
           [tumbols]="tumbols3$ | async"
           [bureaus]="bureau$ | async"

@@ -18,7 +18,7 @@ import {
   LoaderService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { FileGroup, SelfRequest } from '@ksp/shared/interface';
+import { FileGroup, KspRequest, SelfRequest } from '@ksp/shared/interface';
 import {
   getCookie,
   parseJson,
@@ -197,7 +197,7 @@ export class RenewLicenseStudySupervisionComponent
     this.form.controls.address2.patchValue(this.form.controls.address1.value);
   }
 
-  createRequest(forbidden: any, currentProcess: number) {
+  createRequest(forbidden: any, currentProcess: number): KspRequest {
     const self = new SelfRequest(
       '1',
       SelfServiceRequestType.ขอต่ออายุใบอนุญาตประกอบวิชาชีพ,
@@ -232,7 +232,7 @@ export class RenewLicenseStudySupervisionComponent
     const performancefiles2 = this.workingInfoFiles2;
     const licensefiles = this.licenseFiles;
 
-    const payload = {
+    const payload: KspRequest = {
       ...self,
       ...replaceEmptyWithNull(selectData),
       ...(this.requestId && { id: `${this.requestId}` }),

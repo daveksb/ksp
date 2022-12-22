@@ -1,19 +1,23 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { KspRequest } from '@ksp/shared/interface';
 import { Location } from '@angular/common';
 import { SelfRequestService } from '@ksp/shared/service';
-import { KspRequest } from '@ksp/shared/interface';
 
 @Component({
-  templateUrl: './payment-channel.component.html',
-  styleUrls: ['./payment-channel.component.css'],
+  selector: 'self-service-payment-ktb',
+  templateUrl: './payment-ktb.component.html',
+  styleUrls: ['./payment-ktb.component.scss'],
 })
-export class PaymentChannelComponent implements OnInit {
-  kspRequest = new KspRequest();
+export class PaymentKtbComponent implements OnInit {
+  qrString = '';
+  kspRequest: KspRequest = new KspRequest();
 
   constructor(
-    public router: Router,
+    private router: Router,
     private route: ActivatedRoute,
+    public dialog: MatDialog,
     private location: Location,
     private reqService: SelfRequestService
   ) {}
@@ -21,25 +25,16 @@ export class PaymentChannelComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((res) => {
       this.reqService.getRequestById(Number(res.get('id'))).subscribe((res) => {
-        //console.log('res = ', res);
         this.kspRequest = res;
+        if (res && res.idcardno) {
+          this.qrString = res.idcardno + res.requestno;
+          //console.log('qr string = ', this.qrString);
+        }
       });
     });
   }
 
   cancel() {
     this.location.back();
-  }
-
-  promptpay(type: any) {
-    this.router.navigate(['/license', 'payment-promptpay', type]);
-  }
-
-  paymentKtb() {
-    this.router.navigate([
-      '/license',
-      'payment-ktb',
-      this.kspRequest.requestid,
-    ]);
   }
 }

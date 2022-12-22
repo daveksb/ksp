@@ -44,6 +44,7 @@ import {
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { EMPTY, Observable, Subject, switchMap } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
+import { Base64 } from 'js-base64';
 
 @UntilDestroy()
 @Component({
@@ -84,9 +85,9 @@ export class QualificationDetailComponent implements OnInit {
   refperson: any;
   evidenceFiles: FileGroup[] = files;
   mode: FormMode = 'edit';
-  bureauName!: any;
-  schoolName!: any;
-  address!: any;
+  bureauName!: string;
+  schoolName!: string;
+  address!: string;
   requestLabel = '';
   isOptional2 = false;
   isOptional3 = false;
@@ -158,17 +159,6 @@ export class QualificationDetailComponent implements OnInit {
   }
 
   patchUserInfo(data: any) {
-    /*     data.birthdate = data?.birthdate?.split('T')[0];
-    data.passportstartdate = data.passportstartdate.split('T')[0];
-    data.passportenddate = data.passportenddate.split('T')[0]; */
-    //console.log('data = ', data);
-    /*     if (data?.visainfo) {
-      const visa = parseJson(data?.visainfo);
-      data.visaclass = visa.visaclass;
-      data.visatype = visa.visatype;
-      data.visaenddate = visa.visaenddate;
-    } */
-    //console.log('data = ', data);
     this.form.controls.userInfo.patchValue(data);
   }
 
@@ -294,12 +284,10 @@ export class QualificationDetailComponent implements OnInit {
     this.countries$ = this.addressService.getCountry();
     this.nationalitys$ = this.generalInfoService.getNationality();
 
-    const payload = {
-      schoolid: this.schoolId,
-    };
-
     this.schoolInfoService
-      .getSchoolInfo(payload)
+      .getSchoolInfo({
+        schoolid: this.schoolId,
+      })
       .pipe(untilDestroyed(this))
       .subscribe((res: any) => {
         this.schoolName = res.schoolname;
@@ -313,7 +301,7 @@ export class QualificationDetailComponent implements OnInit {
   }
 
   cancel() {
-    console.log('this.requestData = ', this.requestData);
+    //console.log('this.requestData = ', this.requestData);
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการยกเลิกการยื่นคำขอ
@@ -357,6 +345,7 @@ export class QualificationDetailComponent implements OnInit {
     );
     confirmDialog.afterClosed().subscribe((res) => {
       if (res) {
+        //console.log('other reason = ', res);
         this.saved(res);
       }
     });

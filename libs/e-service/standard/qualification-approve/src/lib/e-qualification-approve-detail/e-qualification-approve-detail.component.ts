@@ -3,9 +3,15 @@ import { AbstractControl, FormArray, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
 import {
+  Amphur,
+  Country,
   FileGroup,
   KspApprovePersistData,
   KspRequest,
+  Nationality,
+  Prefix,
+  Province,
+  Tambol,
 } from '@ksp/shared/interface';
 import {
   AddressService,
@@ -16,6 +22,8 @@ import { formatDate, parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 import localForage from 'localforage';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { Base64 } from 'js-base64';
+
 @Component({
   selector: 'ksp-e-qualification-approve-detail',
   templateUrl: './e-qualification-approve-detail.component.html',
@@ -24,19 +32,16 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 export class EQualificationApproveDetailComponent implements OnInit {
   file = files;
   choice = verifyChoices;
-
   requestData = new KspRequest();
   userInfoFormdisplayMode: number = UserInfoFormType.thai;
-
-  prefixList$!: Observable<any>;
-  provinces1$!: Observable<any>;
-  provinces2$!: Observable<any>;
-  amphurs1$!: Observable<any>;
-  tumbols1$!: Observable<any>;
-  amphurs2$!: Observable<any>;
-  tumbols2$!: Observable<any>;
-  countries$!: Observable<any>;
-  nationalitys$!: Observable<any>;
+  prefixList$!: Observable<Prefix[]>;
+  provinces1$!: Observable<Province[]>;
+  amphurs1$!: Observable<Amphur[]>;
+  tumbols1$!: Observable<Tambol[]>;
+  amphurs2$!: Observable<Amphur[]>;
+  tumbols2$!: Observable<Tambol[]>;
+  countries$!: Observable<Country[]>;
+  nationalitys$!: Observable<Nationality[]>;
   showEdu2 = false;
   showEdu3 = false;
   showEdu4 = false;
@@ -79,7 +84,6 @@ export class EQualificationApproveDetailComponent implements OnInit {
   }
 
   tabChanged(e: MatTabChangeEvent) {
-    //console.log('tab event = ', e);
     this.selectedTab = e;
   }
 
@@ -117,7 +121,6 @@ export class EQualificationApproveDetailComponent implements OnInit {
       requestData: this.requestData,
     };
     localForage.setItem('checkRequestData', saveData);
-    //localForage.setItem('qualification-check-request-data', saveData);
   }
 
   loadRequestData(id: number) {
@@ -145,35 +148,22 @@ export class EQualificationApproveDetailComponent implements OnInit {
             form?.patchValue(addressinfo[i]);
           }
         }
+
         const json = parseJson(res.fileinfo);
         if (json && json.file && Array.isArray(json.file)) {
           files.forEach((group, index) => (group.files = json.file[index]));
         }
 
-        res.refperson
-          ? (this.refPerson = JSON.parse(atob(res.refperson)))
-          : null;
+        res.refperson ? (this.refPerson = parseJson(res.refperson)) : null;
 
         res.otherreason
-          ? (this.otherReason = JSON.parse(atob(res.otherreason)))
+          ? (this.otherReason = parseJson(res.otherreason))
           : null;
-
-        console.log(' = ', this.refPerson);
-        console.log(' = ', this.otherReason);
       }
     });
   }
 
-  /* patchRefPerson(res: any) {
-    this.refPerson = res;
-  } */
-
-  /* patchOtherReason(res: any) {
-    this.resPerson = res;
-  } */
-
   patchEdu(edus: any[]) {
-    //console.log('edus = ', edus);
     if (edus && edus.length) {
       edus.map((edu, i) => {
         if (edu.degreeLevel === 2) {
@@ -208,7 +198,6 @@ export class EQualificationApproveDetailComponent implements OnInit {
   getListData() {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.provinces1$ = this.addressService.getProvinces();
-    this.provinces2$ = this.provinces1$;
     this.countries$ = this.addressService.getCountry();
     this.nationalitys$ = this.generalInfoService.getNationality();
   }

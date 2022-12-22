@@ -17,7 +17,16 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { formatRequestNo, parseJson, thaiDate } from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
-import { SelfGetRequest, SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
+import {
+  Amphur,
+  Nationality,
+  Prefix,
+  Province,
+  SelfGetRequest,
+  SelfMyInfo,
+  SelfRequest,
+  Tambol,
+} from '@ksp/shared/interface';
 import localForage from 'localforage';
 
 @Component({
@@ -25,13 +34,11 @@ import localForage from 'localforage';
   standalone: true,
 })
 export abstract class LicenseFormBaseComponent {
-  prefixList$!: Observable<any>;
-  nationalitys$!: Observable<any>;
-  provinces1$!: Observable<any>;
-  provinces2$!: Observable<any>;
-  provinces3$!: Observable<any>;
-  amphurs1$!: Observable<any>;
-  tumbols1$!: Observable<any>;
+  prefixList$!: Observable<Prefix[]>;
+  nationalitys$!: Observable<Nationality[]>;
+  provinces1$!: Observable<Province[]>;
+  amphurs1$!: Observable<Amphur[]>;
+  tumbols1$!: Observable<Tambol[]>;
   amphurs2$!: Observable<any>;
   tumbols2$!: Observable<any>;
   amphurs3$!: Observable<any>;
@@ -76,7 +83,6 @@ export abstract class LicenseFormBaseComponent {
             this.currentProcess = Number(res.process);
             this.uniqueTimestamp = res.uniqueno || '';
             //console.log(this.uniqueTimestamp);
-
             this.patchData(res);
           }
         });
@@ -126,8 +132,8 @@ export abstract class LicenseFormBaseComponent {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.nationalitys$ = this.generalInfoService.getNationality();
     this.provinces1$ = this.addressService.getProvinces();
-    this.provinces2$ = this.provinces1$;
-    this.provinces3$ = this.provinces1$;
+    //this.provinces2$ = this.provinces1$;
+    //this.provinces3$ = this.provinces1$;
     this.bureau$ = this.educationDetailService.getBureau();
   }
 
@@ -159,7 +165,6 @@ export abstract class LicenseFormBaseComponent {
 
   public cancel() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
       data: {
         title: `คุณต้องการยกเลิกรายการใบคำขอ
         ใช่หรือไม่? `,
@@ -185,9 +190,8 @@ export abstract class LicenseFormBaseComponent {
     });
   }
 
-  useSameIdCard() {
+  sameIdCardDialog() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
       data: {
         header: `หมายเลขบัตรประชาชนนี้ได้ถูกใช้ยื่นใบคำขอไปแล้ว`,
       },
@@ -202,7 +206,6 @@ export abstract class LicenseFormBaseComponent {
 
   cancelCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
       data: {
         header: `ยกเลิกใบคำขอสำเร็จ`,
       },
@@ -217,7 +220,6 @@ export abstract class LicenseFormBaseComponent {
 
   saveCompleted(request: any) {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
       data: {
         showImg: true,
         header: `บันทึกใบคำขอสำเร็จ`,
@@ -235,7 +237,7 @@ export abstract class LicenseFormBaseComponent {
   }
 
   public save() {
-    console.log(this.form.value);
+    //console.log(this.form.value);
     const confirmDialog = this.dialog.open(ForbiddenPropertyFormComponent, {
       width: '900px',
       data: {
@@ -256,7 +258,6 @@ export abstract class LicenseFormBaseComponent {
 
   onCompleted(forbidden: any) {
     const completeDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
       data: {
         title: `คุณต้องการบันทึกข้อมูลและยื่นคำขอ
         ใช่หรือไม่?`,
@@ -272,11 +273,11 @@ export abstract class LicenseFormBaseComponent {
           ? this.requestService.updateRequest.bind(this.requestService)
           : this.requestService.createRequest.bind(this.requestService);
         request(payload).subscribe((res) => {
-          console.log('request result = ', res);
+          console.log('request = ', res);
           if (res.returncode === '00') {
             this.saveCompleted(res);
           } else if (res.returncode === '409') {
-            this.useSameIdCard();
+            this.sameIdCardDialog();
           }
         });
       }
@@ -289,17 +290,11 @@ export abstract class LicenseFormBaseComponent {
           ? this.requestService.updateRequest.bind(this.requestService)
           : this.requestService.createRequest.bind(this.requestService);
         request(payload).subscribe((res) => {
-          console.log('request result = ', res);
+          //console.log('request confirm = ', res);
           if (res.returncode === '00') {
-            const requestno = res.requestno;
-            localForage.setItem('requestno', requestno);
-            this.router.navigate([
-              '/license',
-              'payment-channel',
-              res.requestId,
-            ]);
+            this.router.navigate(['/license', 'payment-channel', res.id]);
           } else if (res.returncode === '409') {
-            this.useSameIdCard();
+            this.sameIdCardDialog();
           }
         });
       }
@@ -369,7 +364,6 @@ export abstract class LicenseFormBaseComponent {
     if (checked) {
       this.amphurs2$ = this.amphurs1$;
       this.tumbols2$ = this.tumbols1$;
-      this.provinces2$ = this.provinces1$;
       this.patchAddress2FormWithAddress1();
     }
   }

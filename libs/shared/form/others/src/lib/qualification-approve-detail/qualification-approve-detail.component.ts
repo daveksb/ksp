@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   MatDialogModule,
@@ -22,9 +29,6 @@ export class QualificationApproveDetailComponent
   implements OnInit
 {
   degreeLevelName = '';
-  degreeName = '';
-  institution = '';
-  major = '';
   degreelevelMapping = new Map([
     ['1', 'ปริญญาตรี'],
     ['2', 'ปริญญาโท'],
@@ -34,13 +38,18 @@ export class QualificationApproveDetailComponent
 
   override form = this.fb.group({
     degree: ['', Validators.required],
+    degreename: [],
+    major: [],
+    institute: [],
     reason1: [],
     reason2: [],
   });
-  @Input() set input(value: any) {
-    //console.log(value);
+
+  @Input() set otherReason(value: any) {
+    //console.log('value = ', value);
     if (value) this.form.patchValue(value);
   }
+
   @Output() confirmed = new EventEmitter<boolean>();
 
   constructor(
@@ -51,7 +60,6 @@ export class QualificationApproveDetailComponent
     super();
     this.subscriptions.push(
       this.form?.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
-        // console.log(value);
         this.onChange(value);
         this.onTouched();
       })
@@ -61,19 +69,32 @@ export class QualificationApproveDetailComponent
   ngOnInit(): void {
     const education = this.data.education;
     const mode = this.data.mode;
-    if (mode == 'view')
+    //console.log('data = ', this.data);
+
+    const eduData: any = {
+      degree: true,
+      major: this.data?.education?.major,
+      institute: this.data?.education?.institution,
+      degreename: this.data?.education?.degreeName,
+    };
+    this.form.patchValue(eduData);
+
+    if (mode == 'view') {
       setTimeout(() => {
-        this.form.patchValue(this.data.otherreason);
         this.form.disable();
       }, 0);
-    this.institution = education?.institution ?? '';
-    this.degreeName = education?.degreeName ?? '';
-    this.major = education?.major ?? '';
+    } else {
+      this.form.controls.degreename.disable();
+      this.form.controls.major.disable();
+      this.form.controls.institute.disable();
+    }
+
     this.degreeLevelName =
       this.degreelevelMapping.get(education?.degreeLevelName) ??
       'วุฒิการศึกษาปริญญาตรี';
   }
+
   save() {
-    this.dialogRef.close({ otherreason: this.form.value });
+    this.dialogRef.close({ otherreason: this.form.getRawValue() });
   }
 }

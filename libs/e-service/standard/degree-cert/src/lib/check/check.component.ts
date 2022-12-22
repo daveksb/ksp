@@ -28,14 +28,18 @@ const detailToState = (res: any) => {
   ).map((data: any) => {
     return parseJson(data?.detail);
   });
-  newRes = newRes?.map((data: any) => {
-    const verifyObject: any = {};
-    verifyObject.isBasicValid = _.get(data, 'verifyStep1.result') === '1';
-    verifyObject.isCourseValid = _.get(data, 'verifyStep2.result') === '1';
-    verifyObject.isAttachmentValid = _.get(data, 'verifyStep3.result') === '1';
-    verifyObject.isProcessValid = _.get(data, 'verifyStep4.result') === '1';
-    return verifyObject;
-  });
+  newRes = _.filter(newRes, (data: any) => !data?.considerCourses)?.map(
+    (data: any) => {
+      const verifyObject: any = {};
+      verifyObject.isBasicValid = _.get(data, 'verifyStep1.result') === '1';
+      verifyObject.isCourseValid = _.get(data, 'verifyStep2.result') === '1';
+      verifyObject.isAttachmentValid =
+        _.get(data, 'verifyStep3.result') === '1';
+      verifyObject.isProcessValid = _.get(data, 'verifyStep4.result') === '1';
+      return verifyObject;
+    }
+  );
+
   return newRes || [];
 };
 @Component({
