@@ -2,20 +2,21 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Router, RouterModule } from '@angular/router';
 import { KspPaginationComponent, ListData } from '@ksp/shared/interface';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
 import { DegreeCertSearchComponent } from '@ksp/shared/search';
-import { UniInfoService } from '@ksp/shared/service';
+import { LoaderService, UniInfoService } from '@ksp/shared/service';
 import {
   DegreeCertStatusComponent,
   UniFormBadgeComponent,
 } from '@ksp/shared/ui';
 import { getCookie, stringToThaiDate, thaiDate } from '@ksp/shared/utility';
 import moment from 'moment';
-import { lastValueFrom, map } from 'rxjs';
+import { lastValueFrom, map, Subject } from 'rxjs';
 
 @Component({
   templateUrl: './uni-degree-cert-list.component.html',
@@ -32,6 +33,7 @@ import { lastValueFrom, map } from 'rxjs';
     MatPaginatorModule,
     ThaiDatePipe,
     DegreeCertStatusComponent,
+    MatProgressSpinnerModule
   ],
 })
 export class UniDegreeCertListComponent
@@ -46,11 +48,13 @@ export class UniDegreeCertListComponent
   });
   uniUniversityOption: ListData[] = [];
   degreeLevelOption: ListData[] = [];
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   constructor(
     private fb: FormBuilder,
     private uniInfoService: UniInfoService,
-    private router: Router
+    private router: Router,
+    private loaderService: LoaderService
   ) {
     super();
   }
