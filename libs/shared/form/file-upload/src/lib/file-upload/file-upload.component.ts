@@ -5,12 +5,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { MatIconModule } from '@angular/material/icon';
 import { getBase64 } from '@ksp/shared/utility';
 import { FileService } from './file-upload.service';
-import {
-  FileGroup,
-  FileUpload,
-  ImageUpload,
-  KspFile,
-} from '@ksp/shared/interface';
+import { FileUpload, ImageUpload, KspFile } from '@ksp/shared/interface';
 import {
   PdfViewerComponent,
   PdfViewerNoLicenseComponent,
@@ -70,11 +65,11 @@ export class FileUploadComponent {
       };
       this.uploadImage(payload);
     } else {
-      const payload = {
+      const payload: FileUpload = {
         pagetype: this.pageType,
         originalname: file.name,
         systemname: this.systemFileName,
-        filedata: btoa(base64),
+        file: btoa(base64),
         uniquetimestamp: this.uniqueTimestamp,
         requesttype: this.requestType?.toString() ?? '3',
       };
