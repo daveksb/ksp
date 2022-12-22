@@ -44,6 +44,7 @@ import {
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { EMPTY, Observable, Subject, switchMap } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
+import { Base64 } from 'js-base64';
 
 @UntilDestroy()
 @Component({
@@ -283,12 +284,10 @@ export class QualificationDetailComponent implements OnInit {
     this.countries$ = this.addressService.getCountry();
     this.nationalitys$ = this.generalInfoService.getNationality();
 
-    const payload = {
-      schoolid: this.schoolId,
-    };
-
     this.schoolInfoService
-      .getSchoolInfo(payload)
+      .getSchoolInfo({
+        schoolid: this.schoolId,
+      })
       .pipe(untilDestroyed(this))
       .subscribe((res: any) => {
         this.schoolName = res.schoolname;

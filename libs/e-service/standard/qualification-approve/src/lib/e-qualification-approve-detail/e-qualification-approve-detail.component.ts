@@ -22,6 +22,8 @@ import { formatDate, parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 import localForage from 'localforage';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { Base64 } from 'js-base64';
+
 @Component({
   selector: 'ksp-e-qualification-approve-detail',
   templateUrl: './e-qualification-approve-detail.component.html',
@@ -131,7 +133,6 @@ export class EQualificationApproveDetailComponent implements OnInit {
 
         this.form.controls.userInfo.patchValue(<any>res);
         const edus = parseJson(res.eduinfo);
-        //console.log('edu = ', edus[0]);
         this.patchEdu(edus);
 
         const addressinfo: any = parseJson(res.addressinfo);
@@ -147,27 +148,22 @@ export class EQualificationApproveDetailComponent implements OnInit {
             form?.patchValue(addressinfo[i]);
           }
         }
+
         const json = parseJson(res.fileinfo);
         if (json && json.file && Array.isArray(json.file)) {
           files.forEach((group, index) => (group.files = json.file[index]));
         }
 
-        res.refperson
-          ? (this.refPerson = JSON.parse(atob(res.refperson)))
-          : null;
+        res.refperson ? (this.refPerson = parseJson(res.refperson)) : null;
 
         res.otherreason
-          ? (this.otherReason = JSON.parse(atob(res.otherreason)))
+          ? (this.otherReason = parseJson(res.otherreason))
           : null;
-
-        //console.log('ref = ', this.refPerson);
-        //console.log('other = ', this.otherReason);
       }
     });
   }
 
   patchEdu(edus: any[]) {
-    //console.log('edus = ', edus);
     if (edus && edus.length) {
       edus.map((edu, i) => {
         if (edu.degreeLevel === 2) {

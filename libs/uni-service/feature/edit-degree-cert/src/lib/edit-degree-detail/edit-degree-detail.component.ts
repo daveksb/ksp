@@ -8,8 +8,8 @@ import {
 } from '@ksp/shared/dialog';
 import { formatDate, getCookie, parseJson, thaiDate } from '@ksp/shared/utility';
 import moment from 'moment';
-import { lastValueFrom, switchMap } from 'rxjs';
-import { UniInfoService, UniRequestService } from '@ksp/shared/service';
+import { lastValueFrom, Subject, switchMap } from 'rxjs';
+import { LoaderService, UniInfoService, UniRequestService } from '@ksp/shared/service';
 import { MatStepper } from '@angular/material/stepper';
 import _ from 'lodash';
 
@@ -44,6 +44,7 @@ export class EditDegreeDetailComponent implements OnInit {
     step4: [],
   });
   date = thaiDate(new Date());
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   constructor(
     private router: Router,
@@ -51,7 +52,8 @@ export class EditDegreeDetailComponent implements OnInit {
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private uniInfoService: UniInfoService,
-    private uniRequestService: UniRequestService
+    private uniRequestService: UniRequestService,
+    private loaderService: LoaderService
   ) {
     this.initForm();
   }
