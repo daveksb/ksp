@@ -31,10 +31,10 @@
         ข้อมูลหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต
       </div>
 
-      <table class="table">
+      <table class="table" *ngIf="requestid">
         <thead class="header__table">
           <tr>
-            <th scope="col">ลำดับ</th>
+            <!-- <th scope="col">ลำดับ</th> -->
             <th scope="col">เลขที่หนังสืออนุญาต</th>
             <th scope="col">ชื่อ-นามสกุล</th>
             <th scope="col">วันที่ออกหนังสือ</th>
@@ -44,17 +44,20 @@
         </thead>
         <tbody class="body__table">
           <tr>
-            <td>1</td>
-            <td>123456</td>
-            <td>นายประวิทย์ มาสถาพร</td>
-            <td>12/สิงหาคม/2565</td>
-            <td>12/สิงหาคม/2565</td>
+            <!-- <td>1</td> -->
+            <td>{{ tempLicense?.licenseno }}</td>
+            <td>{{ tempLicense?.firstname }} {{ tempLicense?.lastname }}</td>
+            <td>{{ tempLicense?.startdate | thaiDate }}</td>
+            <td>{{ tempLicense?.enddate | thaiDate }}</td>
             <td>
               <i role="button" class="box-header text-success bi bi-eye"></i>
             </td>
           </tr>
         </tbody>
       </table>
+      <ng-container *ngIf="!requestid">
+        <div class="text-center fs-5">ไม่พบข้อมูล</div></ng-container
+      >
     </div>
 
     <div class="bg-light px-3 py-3" *ngIf="pageType === activityPageMode.view">
