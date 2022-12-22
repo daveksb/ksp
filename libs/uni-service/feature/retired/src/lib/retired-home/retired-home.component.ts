@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UniRequestService } from '@ksp/shared/service';
+import { LoaderService, UniRequestService } from '@ksp/shared/service';
 import localForage from 'localforage';
 import { KspPaginationComponent } from '@ksp/shared/interface';
+import { Subject } from 'rxjs';
 
 @Component({
   templateUrl: './retired-home.component.html',
@@ -12,9 +13,11 @@ export class RetiredHomeComponent extends KspPaginationComponent {
   data: Array<any> = [];
   selectedUser: any;
   payload: any = {};
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   constructor(
     private router: Router,
-    private uniRequestService: UniRequestService
+    private uniRequestService: UniRequestService,
+    private loaderService: LoaderService
   ) {
     super();
   }

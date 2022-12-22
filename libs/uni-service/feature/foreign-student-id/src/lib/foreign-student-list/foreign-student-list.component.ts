@@ -4,10 +4,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { KspPaginationComponent } from '@ksp/shared/interface';
-import { UniInfoService } from '@ksp/shared/service';
+import { LoaderService, UniInfoService } from '@ksp/shared/service';
 import { stringToThaiDate, thaiDate } from '@ksp/shared/utility';
 import moment from 'moment';
-import { map } from 'rxjs';
+import { map, Subject } from 'rxjs';
 
 @Component({
   selector: 'ksp-foreign-student-list',
@@ -21,10 +21,14 @@ export class ForeignStudentListComponent
   dataSource = [];
   uniUniversityOption: any[] = [];
   displayedColumns = displayedColumns;
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   form = this.fb.group({
     search: [{}],
   });
-  constructor(private uniInfoService: UniInfoService, private fb: FormBuilder) {
+  constructor(
+    private uniInfoService: UniInfoService, 
+    private fb: FormBuilder,
+    private loaderService: LoaderService) {
     super();
   }
 

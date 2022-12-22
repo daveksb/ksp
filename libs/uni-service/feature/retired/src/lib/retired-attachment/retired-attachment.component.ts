@@ -36,7 +36,6 @@ export class RetiredAttachmentComponent implements OnInit {
   reasoninfo: any;
   userInfo: any;
   today = thaiDate(new Date());
-  isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   constructor(
     private router: Router,
@@ -44,8 +43,7 @@ export class RetiredAttachmentComponent implements OnInit {
     private fb: FormBuilder,
     private generalInfoService: GeneralInfoService,
     private requestService: UniRequestService,
-    private uniinfoService: UniInfoService,
-    private loaderService: LoaderService
+    private uniinfoService: UniInfoService
   ) {}
 
   retiredFiles: FileGroup[] = [

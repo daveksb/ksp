@@ -13,6 +13,7 @@ import { SharedDegreeCertModule } from '@ksp/shared/degree-cert';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const routes: Routes = [
   {
@@ -50,6 +51,7 @@ const routes: Routes = [
     MatPaginatorModule,
     RouterModule.forChild(routes),
     ThaiDatePipe,
+    MatProgressSpinnerModule,
   ],
   declarations: [EditDegreeListComponent, EditDegreeDetailComponent],
   exports: [EditDegreeListComponent, EditDegreeDetailComponent],

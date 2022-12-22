@@ -13,6 +13,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ForeignIdSearchComponent } from '@ksp/shared/search';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const routes: Routes = [
   {
@@ -47,6 +48,7 @@ const routes: Routes = [
     MatPaginatorModule,
     MatTableModule,
     RouterModule.forChild(routes),
+    MatProgressSpinnerModule,
   ],
   declarations: [
     ForeignStudentIdComponent,

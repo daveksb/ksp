@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import localForage from 'localforage';
 import { SchoolRetireReason } from '@ksp/shared/constant';
 import { thaiDate } from '@ksp/shared/utility';
+import { Subject } from 'rxjs';
+import { LoaderService } from '@ksp/shared/service';
 
 @Component({
   selector: 'uni-service-retired-reason',
@@ -20,7 +22,12 @@ export class RetiredReasonComponent implements OnInit {
   userInfo: any = {};  
   requestNo = '';
   today = thaiDate(new Date());
-  constructor(private router: Router, private fb: FormBuilder) {}
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
+  constructor(
+    private router: Router, 
+    private fb: FormBuilder,
+    private loaderService: LoaderService
+  ) {}
 
   ngOnInit(): void {
     localForage.getItem('retireReasonData').then((res:any) => {
