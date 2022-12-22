@@ -13,7 +13,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { approveResult } from '@ksp/e-service/e-license/approve-ksp-request';
+import { RewardApproveResult } from '@ksp/e-service/e-license/approve-ksp-request';
 import { getCookie } from '@ksp/shared/utility';
 
 @UntilDestroy()
@@ -50,13 +50,14 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
     this.checkRequestId();
   }
 
-  checkApproveResult(input: approveResult) {
+  checkApproveResult(input: RewardApproveResult) {
     //console.log('check aa = ');
     const req = this.saveData.requestData;
     console.log(req.process);
+    console.log('input ', input);
     if (input.result === '1') {
       //ครบถ้วน และถูกต้อง
-      if (input.shouldForward === '1') {
+      if (input.shouldForward === false) {
         //ไม่ส่งตรวจสอบลำดับต่อไป
         if (req.process === '2') {
           this.targetProcess = Number(req.process) + 1;
@@ -64,28 +65,34 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
           this.targetProcess = Number(req.process);
         }
         this.targetStatus = 3;
-      } else if (input.shouldForward === '2') {
+      } else if (input.shouldForward === true) {
         //ส่งตรวจสอบลำดับต่อไป
-        //console.log('//ส่งตรวจสอบลำดับต่อไป ');
         if (req.process === '2') {
-          this.targetProcess = 3;
+          this.targetProcess = 4;
+          this.targetStatus = 1;
+        } else if (req.process === '3') {
+          this.targetProcess = 4;
+          this.targetStatus = 1;
+        } else if (req.process === '4') {
+          this.targetProcess = 6;
+          this.targetStatus = 1;
+        } else if (req.process === '5') {
+          this.targetProcess = 6;
           this.targetStatus = 1;
         }
-      } else if (input.shouldForward === '4') {
-        //ส่งเรื่องพิจารณา
-        this.targetProcess = 4;
-        this.targetStatus = 3;
       }
     } else if (input.result === '2') {
       //ขอแก้ไข / เพิ่มเติม
       this.targetProcess = Number(req.process) + 1;
       this.targetStatus = 2;
     } else if (input.result === '3') {
+      //ขาดคุณสมบัติ
       if (req.process === '2') {
         this.targetProcess = Number(req.process) + 1;
       } else {
         this.targetProcess = Number(req.process);
       }
+      this.targetStatus = 4;
     }
   }
 

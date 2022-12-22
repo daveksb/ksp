@@ -6,6 +6,13 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { providerFactory } from '@ksp/shared/utility';
 import { ActivatedRoute } from '@angular/router';
 
+export interface RewardApproveResult {
+  result: string;
+  shouldForward: boolean;
+  returnDate: string;
+  reason: string;
+}
+
 @Component({
   selector: 'ksp-reward-validate-request',
   standalone: true,
@@ -29,7 +36,7 @@ export class RewardValidateRequestComponent
   override form = this.fb.group({
     isurgent: [],
     result: [null, Validators.required],
-    shouldForward: [null, Validators.required],
+    shouldForward: [null],
     returndate: [null],
     reason: [null],
     editReason: [null],
@@ -41,6 +48,7 @@ export class RewardValidateRequestComponent
     super();
     this.subscriptions.push(
       this.form?.valueChanges.subscribe((value: any) => {
+        console.log(value);
         this.onChange(value);
         this.onTouched();
       })
