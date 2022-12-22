@@ -8,11 +8,12 @@ import { SelfServiceFormModule } from '@ksp/self-service/form';
 import { ListData, KspPaginationComponent } from '@ksp/shared/interface';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { DegreeHomeSearchComponent } from '@ksp/shared/search';
-import { AddressService, UniInfoService } from '@ksp/shared/service';
+import { AddressService, LoaderService, UniInfoService } from '@ksp/shared/service';
 import { UniFormBadgeComponent } from '@ksp/shared/ui';
 import _ from 'lodash';
 import moment from 'moment';
-import { lastValueFrom, map } from 'rxjs';
+import { lastValueFrom, map, Subject } from 'rxjs';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 const mapOption = () =>
   map((data: any) => {
     return (
@@ -35,6 +36,7 @@ const mapOption = () =>
     DegreeHomeSearchComponent,
     UniFormBadgeComponent,
     MatPaginatorModule,
+    MatProgressSpinnerModule
   ],
 })
 export class UniHomeComponent extends KspPaginationComponent implements OnInit {
@@ -62,10 +64,12 @@ export class UniHomeComponent extends KspPaginationComponent implements OnInit {
   provinces: ListData[] = [];
   universityType: ListData[] = [];
   universities: ListData[] = [];
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   constructor(
     private fb: FormBuilder,
     private uniInfoService: UniInfoService,
-    private addressService: AddressService
+    private addressService: AddressService,
+    private loaderService: LoaderService
   ) {
     super();
     this.getAll();
