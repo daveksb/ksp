@@ -7,7 +7,12 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { getCookie, schoolMapSelfDevelopType } from '@ksp/shared/utility';
+import {
+  getCookie,
+  mapMultiFileInfo,
+  parseJson,
+  schoolMapSelfDevelopType,
+} from '@ksp/shared/utility';
 import { SchoolSelfDevelopActivityTies } from '@ksp/shared/constant';
 import {
   LoaderService,
@@ -18,6 +23,7 @@ import {
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { v4 as uuidv4 } from 'uuid';
 import { Subject } from 'rxjs';
+import { Location } from '@angular/common';
 
 @UntilDestroy()
 @Component({
@@ -29,14 +35,17 @@ export class ActivityDetailComponent implements OnInit {
   isLoading: Subject<boolean> = this.loaderService.isLoading;
   schoolId = getCookie('schoolId');
   staffId!: number;
-  requestid!: number;
+  requestId!: number;
+  activityId!: any;
   staff = new SchStaff();
   pageType!: number;
   activityPageMode = activityPageMode;
-  uniqueTimestamp!: string;
+  uniqueNo!: string;
   activityTypes: ListData[] = SchoolSelfDevelopActivityTies;
   selectedStaffId = '';
   selectedRequestId = '';
+  mode: 'view' | 'edit' = 'edit';
+
   staffSelfDev: any[] = [];
   tempLicense: any;
   schoolMapSelfDevelopType = schoolMapSelfDevelopType;
@@ -61,16 +70,21 @@ export class ActivityDetailComponent implements OnInit {
     private service: SelfDevelopService,
     private staffService: StaffService,
     private loaderService: LoaderService,
-    private license: SchoolRequestService
+    private license: SchoolRequestService,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
-    this.uniqueTimestamp = uuidv4();
+    this.uniqueNo = uuidv4();
     this.checkStaffId();
 
     this.route.paramMap.pipe(untilDestroyed(this)).subscribe((res) => {
       this.pageType = Number(res.get('pageType'));
       //console.log('process type = ', this.pageType);
+      if (this.pageType === 0) {
+        this.form.controls.type.disable();
+        this.mode = 'view';
+      }
     });
   }
 
@@ -85,9 +99,9 @@ export class ActivityDetailComponent implements OnInit {
 
     this.route.queryParams.pipe(untilDestroyed(this)).subscribe((params) => {
       if (Number(params['requestid'])) {
-        this.requestid = Number(params['requestid']);
+        this.requestId = Number(params['requestid']);
       }
-      this.getTempLicense(this.requestid);
+      this.getTempLicense(this.requestId);
     });
   }
 
@@ -113,7 +127,7 @@ export class ActivityDetailComponent implements OnInit {
       lastnameth: `${this.staff.lastnameth}`,
       selfdeveloptype: formValue.type,
       selfdevelopdetail: JSON.stringify(formValue.detail),
-      selfdevelopfiles: null,
+      selfdevelopfiles: JSON.stringify(mapMultiFileInfo(this.attachFiles)),
       staffid: `${this.staffId}`,
       schoolid: `${this.schoolId}`,
     };
@@ -124,12 +138,24 @@ export class ActivityDetailComponent implements OnInit {
     });
   }
 
-  getSelfDevelopInfo(staffId: any) {
-    /* this.route.paramMap.pipe(untilDestroyed(this)).subscribe((res) => {
-      this.selectedStaffId = String(res.get('staffId'));
-      console.log('staff id = ', this.selectedStaffId);
-    }); */
+  patchData(res: any) {
+    const data = parseJson(res[this.activityId].selfdevelopdetail || '');
+    //console.log('data = ', data);
 
+    this.form.controls.type.patchValue(res[this.activityId].selfdeveloptype);
+    if (this.form.controls.type.value) {
+      this.form.controls.detail.patchValue(data);
+
+      const fileinfo = parseJson(res.selfdevelopfiles || '');
+      if (fileinfo) {
+        this.attachFiles.forEach(
+          (group, index) => (group.files = fileinfo[index])
+        );
+      }
+    }
+  }
+
+  getSelfDevelopInfo(staffId: any) {
     const payload = {
       staffid: staffId,
       schoolid: this.schoolId,
@@ -138,16 +164,23 @@ export class ActivityDetailComponent implements OnInit {
     this.service.getSelfDevelopInfo(payload).subscribe((res) => {
       if (res) {
         this.staffSelfDev = res;
+
+        this.route.queryParams
+          .pipe(untilDestroyed(this))
+          .subscribe((params) => {
+            if (Number(params['activityid'])) {
+              this.activityId = Number(params['activityid'] - 1);
+              //console.log('process type = ', this.activityId);
+              if (this.activityId >= '0') {
+                this.patchData(res);
+              }
+            }
+          });
       }
     });
   }
 
   getTempLicense(reqid: any) {
-    /* this.route.paramMap.pipe(untilDestroyed(this)).subscribe((res) => {
-      this.selectedRequestId = String(res.get('requestid'));
-      console.log('staff id = ', this.selectedRequestId);
-    }); */
-
     this.license.getTempLicense(reqid).subscribe((res) => {
       if (res) {
         const licenseno = res.licenseno;
@@ -165,21 +198,17 @@ export class ActivityDetailComponent implements OnInit {
         };
 
         this.tempLicense = data;
-        console.log('this.tempLicense = ', this.tempLicense);
+        //console.log('this.tempLicense = ', this.tempLicense);
       }
     });
   }
 
-  edit(pageType: any, staffId: number) {
-    this.router.navigate(['/activity', 'detail', pageType, staffId]);
-  }
-
-  view(pageType: any, staffId: number) {
-    this.router.navigate(['/activity', 'detail', pageType, staffId]);
-  }
-
   cancel() {
     this.router.navigate(['/activity', 'list']);
+  }
+
+  back() {
+    this.location.back();
   }
 
   confirmDialog() {
