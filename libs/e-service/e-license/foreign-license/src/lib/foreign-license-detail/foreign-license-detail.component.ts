@@ -125,47 +125,6 @@ export class ForeignLicenseDetailComponent implements OnInit {
     this.router.navigate(['/foreign-license', 'list']);
   }
 
-  /*   confirm() {
-    const payload = {
-      countrycode: '086',
-      requestno: '204565120900062',
-      createdate: '2022-12-09',
-      expireddate: null,
-      kuruspano: null,
-      idcardno: null,
-      passportno: 'A12545451',
-      passportstartdate: '2016-02-16',
-      passportenddate: '2022-12-05',
-      visastartdate: null,
-      visaenddate: null,
-      prefixth: '1',
-      firstnameth: 'พอล',
-      lastnameth: 'เฟอร์ดินานด์',
-      prefixen: '1',
-      firstnameen: 'Paul',
-      lastnameen: 'Ferdinand',
-      sex: '1',
-      birthdate: '1999-02-01',
-      email: 'test@afaf.afa',
-      position: null,
-      contactphone: '025656684',
-      nationality: null,
-      country: '86',
-      fileinfo: null, //'W1tdXQ==',
-      bureauid: null,
-      bureauname: 'สำนักงานคณะกรรมการการอาชีวศึกษา',
-      schoolid: '1314016102',
-      schoolname: 'วิทยาลัยเทคโนโลยีและอุตสาหกรรมการต่อเรือพระนครศรีอยุธยา',
-      schooladdress:
-        'เลขที่ 25 ซอย  หมู่ 2 ถนน  ตำบล หัวรอ อำเภอ พระนครศรีอยุธยา จังหวัด พระนครศรีอยุธยา รหัสไปรษณีย์ 13000',
-      requestid: '1421',
-    };
-
-    this.eRequestService
-      .createKuruspaNumber(formatDatePayload(payload))
-      .subscribe((res) => console.log('res = ', res));
-  } */
-
   confirm() {
     const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
@@ -178,7 +137,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
       .pipe(
         switchMap((res) => {
           if (res) {
-            const data = this.form.controls.verifydetail.value as any;
+            const data: any = this.form.controls.verifydetail.value;
             const payload: KspApprovePayload = {
               requestid: this.requestData.requestid,
               process: '2',
@@ -199,10 +158,15 @@ export class ForeignLicenseDetailComponent implements OnInit {
             const countryCode = this.requestData.country ?? 0;
             const countryCode3digits = countryCode.toString().padStart(3, '0');
 
-            payload.country = countryCode3digits;
+            payload.country = this.requestData.country;
+            payload.countrycode = countryCode3digits;
             payload.requestno = this.requestData.requestno;
             payload.createdate = moment().format('yyyy-MM-DD');
             payload.expireddate = moment().add(2, 'years').format('yyyy-MM-DD');
+            payload.visaclass = this.requestData.visaclass;
+            payload.visatype = this.requestData.visatype;
+            //payload.visastartdate = '';
+            payload.visaexpireddate = this.requestData.visaexpiredate;
             payload.idcardno = this.requestData.idcardno;
             payload.passportno = this.requestData.passportno;
             payload.passportstartdate = this.requestData.passportstartdate;
