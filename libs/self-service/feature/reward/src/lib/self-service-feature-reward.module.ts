@@ -27,6 +27,7 @@ import { MatTableModule } from '@angular/material/table';
 import { HonorPinRequestComponent } from './honor-pin-request/honor-pin-request.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 export const routes: Routes = [
   {
@@ -78,6 +79,7 @@ export const routes: Routes = [
     UniFormBadgeComponent,
     MatDatepickerModule,
     MatProgressSpinnerModule,
+    MatPaginatorModule,
   ],
   declarations: [
     ThaiTeacherRewardComponent,

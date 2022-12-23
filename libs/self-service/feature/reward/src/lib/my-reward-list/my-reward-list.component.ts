@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
@@ -7,15 +8,19 @@ import { Router } from '@angular/router';
   templateUrl: './my-reward-list.component.html',
   styleUrls: ['./my-reward-list.component.scss'],
 })
-export class MyRewardListComponent {
+export class MyRewardListComponent implements AfterViewInit {
   badgeTitle = [
-    `กรุณาลงทะเบียนรายงานตัวเพื่อยืนยันเข้าเฝ้ารับเข็มเชิดชูเกียรติภายในวันที่ 24/มิ.ย./2564  กดเพื่อตรวจสอบ`,
+    `กรุณาลงทะเบียนรายงานตัวเพื่อยืนยันเข้าเฝ้ารับเข็มเชิดชูเกียรติภายในวันที่ 24/มิ.ย./2564`,
   ];
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  displayedColumns: string[] = column;
+  dataSource = new MatTableDataSource<PersonLicense>();
 
   constructor(private router: Router) {}
 
-  displayedColumns: string[] = column;
-  dataSource = new MatTableDataSource<PersonLicense>();
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
 
   search() {
     this.dataSource.data = data;

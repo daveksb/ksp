@@ -148,10 +148,14 @@
       >
         ยกเลิกใบคำขอ
       </button>
-      <button (click)="save()" type="button" class="ms-3 btn btn-primary">
+      <button
+        (click)="save()"
+        type="button"
+        class="ms-3 btn btn-primary"
+        [disabled]="form.invalid"
+      >
         ต่อไป
       </button>
-      <!-- [disabled]="form.invalid" -->
     </div>
   </form>
 </div>

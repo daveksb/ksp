@@ -27,27 +27,29 @@
       <div class="carousel-inner">
         <ng-container *ngFor="let req of rejectedRequests; let i = index">
           <div class="carousel-item active" *ngIf="i === 0">
-            <div
-              role="button"
-              (click)="viewRequest(req.requesttype, req.careertype, req.id)"
+            <ksp-uni-form-badge [mainTitle]="genAlertMessage(req)"
+              ><span
+                class="text-primary text-decoration-underline"
+                role="button"
+                (click)="viewRequest(req.requesttype, req.careertype, req.id)"
+              >
+                กดเพื่อตรวจสอบ
+              </span></ksp-uni-form-badge
             >
-              <ksp-uni-form-badge
-                [mainTitle]="genAlertMessage(req)"
-              ></ksp-uni-form-badge>
-            </div>
           </div>
         </ng-container>
 
         <ng-container *ngFor="let req of rejectedRequests; let i = index">
           <div class="carousel-item" *ngIf="i > 0">
-            <div
-              role="button"
-              (click)="viewRequest(req.requesttype, req.careertype, req.id)"
-            >
-              <ksp-uni-form-badge
-                [mainTitle]="genAlertMessage(req)"
-              ></ksp-uni-form-badge>
-            </div>
+            <ksp-uni-form-badge [mainTitle]="genAlertMessage(req)">
+              <span
+                class="text-primary text-decoration-underline"
+                role="button"
+                (click)="viewRequest(req.requesttype, req.careertype, req.id)"
+              >
+                กดเพื่อตรวจสอบ
+              </span>
+            </ksp-uni-form-badge>
           </div>
         </ng-container>
       </div>
