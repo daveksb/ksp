@@ -67,12 +67,7 @@ export class TempLicenseRegisterListComponent implements OnInit, AfterViewInit {
     private schoolInfoService: SchoolInfoService
   ) {}
 
-  ngOnInit(): void {
-    /*  const filters: Partial<SchRequestSearchFilter> = {
-      requesttype: '3',
-    };
-    this.search(filters); */
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -122,7 +117,7 @@ export class TempLicenseRegisterListComponent implements OnInit, AfterViewInit {
         width: '1200px',
         height: '100vh',
         data: {
-          pdfType: 99,
+          pdfType: element.licensetype,
           pdfSubType: 3,
           input: {
             prefix,

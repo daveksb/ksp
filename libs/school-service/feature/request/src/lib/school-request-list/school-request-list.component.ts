@@ -85,10 +85,9 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
 
   genAlertMessage(req: KspRequest) {
     const detail: any = JSON.parse(req.detail || '');
-    //console.log('return date = ', detail.returndate);
-    return `แจ้งเตือน เลขที่คำขอ: ${
-      req.requestno
-    } ถูกส่งคืน "ปรับแก้ไข/เพิ่มเติม"
+    return `แจ้งเตือน เลขที่คำขอ : ${req.requestno} ใบคำ${schoolMapRequestType(
+      +Number(req.requesttype)
+    )} ถูกส่งคืน "ปรับแก้ไข/เพิ่มเติม"
     กรุณาส่งกลับภายในวันที่ ${thaiDate(
       new Date(detail.returndate)
     )} มิฉะนั้นใบคำขอจะถูกยกเลิก `;
@@ -159,7 +158,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
   }
 
   genPdf(element: SchTempLicense) {
-    //console.log('element = ', element);
+    console.log('element = ', element);
     const position = element?.position;
     const startDate = new Date(element.licensestartdate || '');
     const endDate = new Date(element.licenseenddate || '');
@@ -195,7 +194,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
         width: '1200px',
         height: '100vh',
         data: {
-          pdfType: 99,
+          pdfType: element.licensetype,
           pdfSubType: 3,
           input: {
             prefix,

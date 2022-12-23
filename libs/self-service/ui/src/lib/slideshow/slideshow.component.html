@@ -2,17 +2,13 @@
   <div class="card justify-content-center">
     <div class="d-flex justify-content-center px-3 gap-4">
       <div class="d-flex justify-content-center align-items-center">
-        <img
-          src="/assets/images/img-profile.png"
-          style="width: 96px; height: 144px"
-        />
+        <ng-content></ng-content>
       </div>
       <!-- <self-service-form-upload-image
           [isEditMode]="false"
           [imgSrc]="myImage"
         ></self-service-form-upload-image> -->
       <div class="d-flex flex-column justify-content-between">
-        <!-- <div class="title">คุรุสภา</div> -->
         <div class="title">
           ใบอนุญาตประกอบวิชาชีพ {{ SchoolRequestSubType[+licensetype] }}
         </div>
@@ -20,23 +16,25 @@
           <span class="text-secondary">เลขที่</span> {{ licenseno }}
         </div>
         <div class="fs-6">
-          {{ SelfPrefixTh[+prefixth] }} {{ firstnameth }} {{ lastnameth }}
+          {{ SelfPrefixTh[+prefixth] || '-' }} {{ firstnameth }}
+          {{ lastnameth }}
         </div>
         <div class="fs-6">
-          {{ SelfPrefixEn[+prefixen] }} {{ firstnameen }} {{ lastnameen }}
+          {{ SelfPrefixEn[+prefixen] || '-' }} {{ firstnameen }}
+          {{ lastnameen }}
         </div>
         <div class="fs-6 text-secondary mt-1">เลขสมาชิก {{ kuruspano }}</div>
         <div class="d-flex">
           <div class="me-3 text-secondary">
             วันที่ออกบัตร
             <span class="text-black"
-              >{{ (licensestartdate | thaiDate) || 'วว-ดด-ปปปป' }}
+              >{{ (licensestartdate | thaiDate) || 'วว/ดด/ปปปป' }}
             </span>
           </div>
           <div class="text-secondary">
             หมดอายุ
             <span class="text-black">{{
-              (licenseenddate | thaiDate) || 'วว-ดด-ปปปป'
+              (licenseenddate | thaiDate) || 'วว/ดด/ปปปป'
             }}</span>
           </div>
         </div>

@@ -93,12 +93,16 @@ export class ActivityListComponent implements AfterViewInit {
     this.searchNotFound = false;
   }
 
-  edit(pageType: any, staffId: number) {
-    this.router.navigate(['/activity', 'detail', pageType, staffId]);
+  edit(pageType: any, staffId: number, requestid: number) {
+    this.router.navigate(['/activity', 'detail', pageType, staffId], {
+      queryParams: { requestid: requestid },
+    });
   }
 
-  view(pageType: any, staffId: number) {
-    this.router.navigate(['/activity', 'detail', pageType, staffId]);
+  view(pageType: any, staffId: number, requestid: number) {
+    this.router.navigate(['/activity', 'detail', pageType, staffId], {
+      queryParams: { requestid: requestid },
+    });
   }
 }
 

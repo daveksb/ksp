@@ -9,7 +9,12 @@ import {
 } from '@ksp/shared/dialog';
 import { getCookie, schoolMapSelfDevelopType } from '@ksp/shared/utility';
 import { SchoolSelfDevelopActivityTies } from '@ksp/shared/constant';
-import { LoaderService, SelfDevelopService, StaffService } from '@ksp/shared/service';
+import {
+  LoaderService,
+  SchoolRequestService,
+  SelfDevelopService,
+  StaffService,
+} from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { v4 as uuidv4 } from 'uuid';
 import { Subject } from 'rxjs';
@@ -24,13 +29,16 @@ export class ActivityDetailComponent implements OnInit {
   isLoading: Subject<boolean> = this.loaderService.isLoading;
   schoolId = getCookie('schoolId');
   staffId!: number;
+  requestid!: number;
   staff = new SchStaff();
   pageType!: number;
   activityPageMode = activityPageMode;
   uniqueTimestamp!: string;
   activityTypes: ListData[] = SchoolSelfDevelopActivityTies;
   selectedStaffId = '';
+  selectedRequestId = '';
   staffSelfDev: any[] = [];
+  tempLicense: any;
   schoolMapSelfDevelopType = schoolMapSelfDevelopType;
 
   form = this.fb.group({
@@ -52,7 +60,8 @@ export class ActivityDetailComponent implements OnInit {
     public dialog: MatDialog,
     private service: SelfDevelopService,
     private staffService: StaffService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private license: SchoolRequestService
   ) {}
 
   ngOnInit(): void {
@@ -70,9 +79,16 @@ export class ActivityDetailComponent implements OnInit {
       this.staffId = Number(params.get('staffid'));
       if (this.staffId) {
         this.loadStaffFromId(this.staffId);
+        this.getSelfDevelopInfo(this.staffId);
       }
     });
-    this.getSelfDevelopInfo(this.staffId);
+
+    this.route.queryParams.pipe(untilDestroyed(this)).subscribe((params) => {
+      if (Number(params['requestid'])) {
+        this.requestid = Number(params['requestid']);
+      }
+      this.getTempLicense(this.requestid);
+    });
   }
 
   loadStaffFromId(id: number) {
@@ -109,10 +125,10 @@ export class ActivityDetailComponent implements OnInit {
   }
 
   getSelfDevelopInfo(staffId: any) {
-    this.route.paramMap.pipe(untilDestroyed(this)).subscribe((res) => {
+    /* this.route.paramMap.pipe(untilDestroyed(this)).subscribe((res) => {
       this.selectedStaffId = String(res.get('staffId'));
       console.log('staff id = ', this.selectedStaffId);
-    });
+    }); */
 
     const payload = {
       staffid: staffId,
@@ -122,6 +138,34 @@ export class ActivityDetailComponent implements OnInit {
     this.service.getSelfDevelopInfo(payload).subscribe((res) => {
       if (res) {
         this.staffSelfDev = res;
+      }
+    });
+  }
+
+  getTempLicense(reqid: any) {
+    /* this.route.paramMap.pipe(untilDestroyed(this)).subscribe((res) => {
+      this.selectedRequestId = String(res.get('requestid'));
+      console.log('staff id = ', this.selectedRequestId);
+    }); */
+
+    this.license.getTempLicense(reqid).subscribe((res) => {
+      if (res) {
+        const licenseno = res.licenseno;
+        const firstname = res.firstnameth;
+        const lastname = res.lastnameth;
+        const startdate = res.licensestartdate;
+        const enddate = res.licenseenddate;
+
+        const data = {
+          licenseno,
+          firstname,
+          lastname,
+          startdate,
+          enddate,
+        };
+
+        this.tempLicense = data;
+        console.log('this.tempLicense = ', this.tempLicense);
       }
     });
   }

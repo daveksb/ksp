@@ -53,7 +53,7 @@ export class RequestLicenseForeignDetailComponent implements OnInit {
   get checkResultFormArray() {
     return this.form.controls.checkResult as FormArray;
   }
-
+  careerName = '';
   uniqueTimestamp!: string;
   requestId!: number;
   requestData!: SelfRequest;
@@ -111,6 +111,12 @@ export class RequestLicenseForeignDetailComponent implements OnInit {
             this.requestData = res;
             if (res) {
               this.patchData(res);
+            }
+
+            if (res.careertype === '1') {
+              this.careerName = 'ครู';
+            } else {
+              this.careerName = 'ผู้บริหารสถานศึกษา';
             }
           });
       }

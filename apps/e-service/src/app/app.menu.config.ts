@@ -212,8 +212,7 @@ export const eLicenseMenu: MenuConfig[] = [
       },
     ],
   },
-
-  {
+  /* {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'กิจกรรมพัฒนาตนเอง',
     path: '',
@@ -229,8 +228,8 @@ export const eLicenseMenu: MenuConfig[] = [
         label: 'พิจารณากิจกรรมพัฒนาตนเอง',
       },
     ],
-  },
-  {
+  }, */
+  /* {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ข้อมูลลักษณะต้องห้ามของผู้ขอใบอนุญาตประกอบวิชาชีพ',
     path: '',
@@ -246,12 +245,7 @@ export const eLicenseMenu: MenuConfig[] = [
         label: 'พิจารณาข้อมูลลักษณะต้องห้ามของผู้ขอรับใบอนุญาตประกอบวิชาชีพ',
       },
     ],
-  },
-  {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
-    path: '/school/new-user',
-  },
+  }, */
   {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'ทะเบียนข้อมูล',
@@ -278,6 +272,11 @@ export const eLicenseMenu: MenuConfig[] = [
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'รายงาน',
     path: '/xxx',
+  },
+  {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'ใบคำขอผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
+    path: '/school/new-user',
   },
   {
     icon: 'assets/images/icon-sidenav/people.svg',
@@ -376,7 +375,7 @@ export const standardMenu: MenuConfig[] = [
       },
     ],
   },
-  {
+  /* {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'ใบคำขอเทียบโอนความรู้',
     path: '',
@@ -396,28 +395,7 @@ export const standardMenu: MenuConfig[] = [
         label: 'พิจารณารับรองและพิมพ์วุฒิบัตร',
       },
     ],
-  },
-  {
-    icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'ใบคำขอรับรองคุณวุฒิทางการศึกษา',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'qualification',
-    subMenu: [
-      {
-        path: '/qualification-approve/list',
-        label: 'รายการใบคำรับรองคุณวุฒิทางการศึกษา',
-      },
-      {
-        path: '/cc',
-        label: 'บัญชีรายชื่อและพิมพ์หนังสือคุณวุฒิทางการศึกษา',
-      },
-      {
-        path: '/bb',
-        label: 'พิจารณารับรองคุณวุฒิทางการศึกษา',
-      },
-    ],
-  },
+  }, */
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขอเทียบเคียงความรู้',
@@ -457,6 +435,27 @@ export const standardMenu: MenuConfig[] = [
       {
         path: '/xxx',
         label: 'พิจารณารับรองรับรองความรู้',
+      },
+    ],
+  },
+  {
+    icon: 'assets/images/icon-sidenav/card.svg',
+    label: 'ใบคำขอรับรองคุณวุฒิทางการศึกษา',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'qualification',
+    subMenu: [
+      {
+        path: '/qualification-approve/list',
+        label: 'รายการใบคำรับรองคุณวุฒิทางการศึกษา',
+      },
+      {
+        path: '/cc',
+        label: 'บัญชีรายชื่อและพิมพ์หนังสือคุณวุฒิทางการศึกษา',
+      },
+      {
+        path: '/bb',
+        label: 'พิจารณารับรองคุณวุฒิทางการศึกษา',
       },
     ],
   },
