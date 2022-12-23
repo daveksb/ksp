@@ -101,6 +101,8 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
         this.showCancelButton = Boolean(res.status);
         this.requestData.requestdate = res.requestdate ?? '';
         this.requestData.requestno = res.requestno ?? '';
+        this.requestData.isclose =
+          this.requestData.isclose === '1' ? true : false;
         res.birthdate = formatDate(res.birthdate);
         res.passportstartdate = formatDate(res.passportstartdate);
         res.passportenddate = formatDate(res.passportenddate);
@@ -164,12 +166,12 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
 
     dialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/temp-license', 'list']);
+        this.goToListPage();
       }
     });
   }
 
-  onClickPrev() {
+  goToListPage() {
     this.router.navigate(['/temp-license', 'list']);
   }
 
@@ -192,10 +194,8 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
           if (res && this.form.value.foreignTeacher) {
             const userInfo: Partial<KspRequest> = this.form.value
               .foreignTeacher as any;
-
             const countryCode = userInfo.country ?? 0;
             const countryCode3digits = countryCode.toString().padStart(3, '0');
-
             userInfo.country = countryCode3digits;
             userInfo.ref1 = '2';
             userInfo.ref2 = '04';
@@ -225,7 +225,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
           return EMPTY;
         })
       )
-      .subscribe((res: any) => {
+      .subscribe((res) => {
         this.onCompleted(res.requestno);
       });
   }
@@ -254,7 +254,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     this.schoolInfoService
       .getSchoolInfo(payload)
       .pipe(untilDestroyed(this))
-      .subscribe((res: any) => {
+      .subscribe((res) => {
         this.schoolName = res.schoolname;
         this.bureauName = res.bureauname;
         this.address = `เลขที่ ${res.address} ซอย ${res?.street ?? ''} หมู่ ${

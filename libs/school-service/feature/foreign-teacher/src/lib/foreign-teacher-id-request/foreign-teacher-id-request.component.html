@@ -101,10 +101,11 @@
     [showCancelButton]="showCancelButton"
     [showSaveButton]="mode !== 'view'"
     [disableSaveButton]="formValid"
+    [disableCancelButton]="requestData.isclose"
     (cancelClicked)="cancel()"
     (saveClicked)="confirmDialog()"
     [cancelButtonLabel]="'ยกเลิกใบคำขอ'"
     [saveButtonLabel]="'บันทึกและยื่นอนุมัติ'"
-    (prevClicked)="onClickPrev()"
+    (prevClicked)="goToListPage()"
   ></ksp-bottom-nav>
 </div>

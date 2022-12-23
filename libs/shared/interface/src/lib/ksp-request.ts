@@ -34,7 +34,7 @@ export class KspRequest {
   imagefileid: string | null = null;
   isforeign: string | null = null; // add on 14/11/2022
   isurgent?: string | null = null;
-  isclose?: string | null = null; // add on 28/11/2022
+  isclose?: string | null | boolean = null; // add on 28/11/2022
   kuruspano: string | null = null;
   lastupdatesystemtype?: string | null = null; // add on 8/12/2022  ระบบที่อัพเดตข้อมูลล่าสุด เช่น e-service, school-service
   lastnameen: string | null = null;
