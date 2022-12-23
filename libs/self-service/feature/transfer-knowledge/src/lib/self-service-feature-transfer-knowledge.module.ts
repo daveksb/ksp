@@ -15,6 +15,7 @@ import {
   SelfServiceLicenseInfoComponent,
 } from '@ksp/self-service/ui';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export const routes: Routes = [
   {
@@ -45,6 +46,7 @@ export const routes: Routes = [
     SharedFormOthersModule,
     SelfServiceFormModule,
     RequestStatusComponent,
+    MatProgressSpinnerModule
   ],
   declarations: [TransferKnowledgeRequestComponent],
   exports: [TransferKnowledgeRequestComponent],

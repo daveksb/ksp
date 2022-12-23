@@ -17,6 +17,7 @@ import {
   MyInfoService,
   SelfRequestService,
   GeneralInfoService,
+  LoaderService,
 } from '@ksp/shared/service';
 import {
   getCookie,
@@ -25,7 +26,7 @@ import {
   thaiDate,
 } from '@ksp/shared/utility';
 import * as _ from 'lodash';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
 /* const ATTACH_FILES = [
@@ -45,6 +46,7 @@ const ATTACH_FILES: FileGroup[] = [
   styleUrls: ['./refund-fee-request.component.scss'],
 })
 export class RefundFeeRequestComponent implements OnInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   files: any[] = [];
   headerGroup = ['วันที่ทำรายการ', 'เลขใบคำขอ'];
   userInfoType = UserInfoFormType.thai;
@@ -70,7 +72,8 @@ export class RefundFeeRequestComponent implements OnInit {
     private myInfoService: MyInfoService,
     private requestService: SelfRequestService,
     private generalInfoService: GeneralInfoService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {

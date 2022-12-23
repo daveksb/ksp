@@ -16,6 +16,7 @@ import {
   EducationDetailService,
   MyInfoService,
   SelfRequestService,
+  LoaderService,
 } from '@ksp/shared/service';
 import {
   getCookie,
@@ -27,6 +28,7 @@ import { FileGroup, SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 import localForage from 'localforage';
+import { Subject } from 'rxjs';
 
 const OBJECTIVE_FILES: FileGroup[] = [
   { name: '1. ใบอนุญาตประกอบวิชาชีพที่ชํารุด', files: [] },
@@ -45,6 +47,7 @@ export class SubstituteLicenseDetailComponent
   extends LicenseFormBaseComponent
   implements OnInit
 {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   userInfoType = UserInfoFormType.thai;
   objectiveFiles: FileGroup[] = [];
 
@@ -65,7 +68,8 @@ export class SubstituteLicenseDetailComponent
     educationDetailService: EducationDetailService,
     myInfoService: MyInfoService,
     requestService: SelfRequestService,
-    route: ActivatedRoute
+    route: ActivatedRoute,
+    private loaderService: LoaderService
   ) {
     super(
       generalInfoService,
