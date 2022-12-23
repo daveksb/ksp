@@ -6,7 +6,7 @@ import {
 
 export const ApproveStepStatusOption: ApproveUniOption[] = [
   {
-    name: 'เครบถ้วน และถูกต้อง',
+    name: 'ครบถ้วน และถูกต้อง',
     value: 1,
   },
   {
