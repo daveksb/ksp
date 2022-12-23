@@ -2,20 +2,34 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FileGroup, ListData, SchStaff } from '@ksp/shared/interface';
+import {
+  FileGroup,
+  ListData,
+  SchStaff,
+  SchTempLicense,
+} from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
+  PdfRenderComponent,
 } from '@ksp/shared/dialog';
 import {
+  changeToEnglishMonth,
+  changeToThaiNumber,
   getCookie,
   mapMultiFileInfo,
   parseJson,
   schoolMapSelfDevelopType,
+  thaiDate,
 } from '@ksp/shared/utility';
-import { SchoolSelfDevelopActivityTies } from '@ksp/shared/constant';
+import {
+  SchoolLangMapping,
+  SchoolRequestSubType,
+  SchoolSelfDevelopActivityTies,
+} from '@ksp/shared/constant';
 import {
   LoaderService,
+  SchoolInfoService,
   SchoolRequestService,
   SelfDevelopService,
   StaffService,
@@ -45,6 +59,7 @@ export class ActivityDetailComponent implements OnInit {
   selectedStaffId = '';
   selectedRequestId = '';
   mode: 'view' | 'edit' = 'edit';
+  pdfTempLicense: any;
 
   staffSelfDev: any[] = [];
   tempLicense: any;
@@ -71,7 +86,8 @@ export class ActivityDetailComponent implements OnInit {
     private staffService: StaffService,
     private loaderService: LoaderService,
     private license: SchoolRequestService,
-    private location: Location
+    private location: Location,
+    private schoolInfoService: SchoolInfoService
   ) {}
 
   ngOnInit(): void {
@@ -200,6 +216,73 @@ export class ActivityDetailComponent implements OnInit {
         this.tempLicense = data;
         //console.log('this.tempLicense = ', this.tempLicense);
       }
+      this.pdfTempLicense = res;
+    });
+  }
+
+  genPdf(element: SchTempLicense) {
+    console.log('element = ', element);
+    const position = element?.position;
+    const startDate = new Date(element.licensestartdate || '');
+    const endDate = new Date(element.licenseenddate || '');
+    const date = new Date(element.licensestartdate || '');
+    const thai = thaiDate(date);
+    const [day, month, year] = thai.split(' ');
+    const fulldateth = `${changeToThaiNumber(day)} เดือน ${month} พ.ศ. ${year}`;
+    const fulldateen = `${day} Day of ${changeToEnglishMonth(month)} B.E. ${
+      parseInt(year) - 543
+    }`;
+    const name = element.firstnameth + ' ' + element.lastnameth;
+    const nameen = element.firstnameen + ' ' + element.lastnameen;
+    const start = thaiDate(startDate);
+    const end = thaiDate(endDate);
+    const startth = changeToThaiNumber(start);
+    const endth = changeToThaiNumber(end);
+    const starten = changeToEnglishMonth(start);
+    const enden = changeToEnglishMonth(end);
+    const careertype = SchoolRequestSubType[+(element?.licensetype ?? '1')];
+    const careertypeen = SchoolLangMapping[careertype ?? 'ครู'] ?? '';
+    const requestno = element.licenseno ?? '';
+    const prefix = element.licensetype == '1' ? 'ท.' : 'อ.';
+    const payload = {
+      schoolid: this.schoolId,
+    };
+
+    this.schoolInfoService.getSchoolInfo(payload).subscribe((res: any) => {
+      const schoolname = res.schoolname;
+      const bureauname = res.bureauname;
+      const schoolapprovename = 'ผู้อํานวยการสถานศึกษา';
+      const schoolapprovenameen = 'director of the educational institution';
+      this.dialog.open(PdfRenderComponent, {
+        width: '1200px',
+        height: '100vh',
+        data: {
+          pdfType: element.licensetype,
+          pdfSubType: 3,
+          input: {
+            prefix,
+            schoolapprovename,
+            schoolapprovenameen,
+            requestno,
+            careertype,
+            careertypeen,
+            name,
+            nameen,
+            startth,
+            endth,
+            starten,
+            enden,
+            schoolname,
+            bureauname,
+            day,
+            month,
+            year,
+            position,
+            fulldateth,
+            fulldateen,
+          },
+        },
+      });
     });
   }
 

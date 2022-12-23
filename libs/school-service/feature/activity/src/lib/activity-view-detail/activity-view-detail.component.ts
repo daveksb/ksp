@@ -2,15 +2,32 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SchoolSelfDevelopActivityTies } from '@ksp/shared/constant';
-import { SchStaff, ListData, FileGroup } from '@ksp/shared/interface';
+import {
+  SchoolLangMapping,
+  SchoolRequestSubType,
+  SchoolSelfDevelopActivityTies,
+} from '@ksp/shared/constant';
+import { PdfRenderComponent } from '@ksp/shared/dialog';
+import {
+  SchStaff,
+  ListData,
+  FileGroup,
+  SchTempLicense,
+} from '@ksp/shared/interface';
 import {
   SelfDevelopService,
   StaffService,
   LoaderService,
   SchoolRequestService,
+  SchoolInfoService,
 } from '@ksp/shared/service';
-import { getCookie, schoolMapSelfDevelopType } from '@ksp/shared/utility';
+import {
+  changeToEnglishMonth,
+  changeToThaiNumber,
+  getCookie,
+  schoolMapSelfDevelopType,
+  thaiDate,
+} from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Subject } from 'rxjs';
 
@@ -24,7 +41,7 @@ export class ActivityViewDetailComponent implements OnInit {
   isLoading: Subject<boolean> = this.loaderService.isLoading;
   schoolId = getCookie('schoolId');
   staffId!: number;
-  requestid!: number;
+  requestId!: number;
   staff = new SchStaff();
   pageType!: number;
   uniqueTimestamp!: string;
@@ -35,6 +52,7 @@ export class ActivityViewDetailComponent implements OnInit {
   tempLicense: any;
   schoolMapSelfDevelopType = schoolMapSelfDevelopType;
   activityPageMode = activityPageMode;
+  pdfTempLicense: any;
 
   form = this.fb.group({
     type: [null, Validators.required],
@@ -56,7 +74,8 @@ export class ActivityViewDetailComponent implements OnInit {
     private service: SelfDevelopService,
     private staffService: StaffService,
     private loaderService: LoaderService,
-    private license: SchoolRequestService
+    private license: SchoolRequestService,
+    private schoolInfoService: SchoolInfoService
   ) {}
 
   ngOnInit(): void {
@@ -79,9 +98,9 @@ export class ActivityViewDetailComponent implements OnInit {
 
     this.route.queryParams.pipe(untilDestroyed(this)).subscribe((params) => {
       if (Number(params['requestid'])) {
-        this.requestid = Number(params['requestid']);
+        this.requestId = Number(params['requestid']);
       }
-      this.getTempLicense(this.requestid);
+      this.getTempLicense(this.requestId);
     });
   }
 
@@ -107,6 +126,72 @@ export class ActivityViewDetailComponent implements OnInit {
     });
   }
 
+  genPdf(element: SchTempLicense) {
+    console.log('element = ', element);
+    const position = element?.position;
+    const startDate = new Date(element.licensestartdate || '');
+    const endDate = new Date(element.licenseenddate || '');
+    const date = new Date(element.licensestartdate || '');
+    const thai = thaiDate(date);
+    const [day, month, year] = thai.split(' ');
+    const fulldateth = `${changeToThaiNumber(day)} เดือน ${month} พ.ศ. ${year}`;
+    const fulldateen = `${day} Day of ${changeToEnglishMonth(month)} B.E. ${
+      parseInt(year) - 543
+    }`;
+    const name = element.firstnameth + ' ' + element.lastnameth;
+    const nameen = element.firstnameen + ' ' + element.lastnameen;
+    const start = thaiDate(startDate);
+    const end = thaiDate(endDate);
+    const startth = changeToThaiNumber(start);
+    const endth = changeToThaiNumber(end);
+    const starten = changeToEnglishMonth(start);
+    const enden = changeToEnglishMonth(end);
+    const careertype = SchoolRequestSubType[+(element?.licensetype ?? '1')];
+    const careertypeen = SchoolLangMapping[careertype ?? 'ครู'] ?? '';
+    const requestno = element.licenseno ?? '';
+    const prefix = element.licensetype == '1' ? 'ท.' : 'อ.';
+    const payload = {
+      schoolid: this.schoolId,
+    };
+
+    this.schoolInfoService.getSchoolInfo(payload).subscribe((res: any) => {
+      const schoolname = res.schoolname;
+      const bureauname = res.bureauname;
+      const schoolapprovename = 'ผู้อํานวยการสถานศึกษา';
+      const schoolapprovenameen = 'director of the educational institution';
+      this.dialog.open(PdfRenderComponent, {
+        width: '1200px',
+        height: '100vh',
+        data: {
+          pdfType: element.licensetype,
+          pdfSubType: 3,
+          input: {
+            prefix,
+            schoolapprovename,
+            schoolapprovenameen,
+            requestno,
+            careertype,
+            careertypeen,
+            name,
+            nameen,
+            startth,
+            endth,
+            starten,
+            enden,
+            schoolname,
+            bureauname,
+            day,
+            month,
+            year,
+            position,
+            fulldateth,
+            fulldateen,
+          },
+        },
+      });
+    });
+  }
+
   getTempLicense(reqid: any) {
     this.license.getTempLicense(reqid).subscribe((res) => {
       if (res) {
@@ -126,12 +211,15 @@ export class ActivityViewDetailComponent implements OnInit {
 
         this.tempLicense = data;
       }
+      this.pdfTempLicense = res;
     });
   }
 
-  /* edit(pageType: any, staffId: number) {
-    this.router.navigate(['/activity', 'detail', pageType, staffId]);
-  } */
+  edit(pageType: any, staffId: number, requestid: number, activityid: number) {
+    this.router.navigate(['/activity', 'detail', pageType, staffId], {
+      queryParams: { requestid: requestid, activityid: activityid },
+    });
+  }
 
   view(pageType: any, staffId: number, requestid: number, activityid: number) {
     this.router.navigate(['/activity', 'detail', pageType, staffId], {

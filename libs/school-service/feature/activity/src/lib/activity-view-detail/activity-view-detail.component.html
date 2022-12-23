@@ -17,11 +17,11 @@
     </div> -->
 
     <div class="bg-light px-3 py-3 mb-3">
-      <div class="box-header mb-1">
+      <div class="box-header">
         ข้อมูลหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต
       </div>
 
-      <table class="table" *ngIf="requestid">
+      <table class="table" *ngIf="requestId">
         <thead class="header__table">
           <tr>
             <th scope="col">เลขที่หนังสืออนุญาต</th>
@@ -38,12 +38,16 @@
             <td>{{ tempLicense?.startdate | thaiDate }}</td>
             <td>{{ tempLicense?.enddate | thaiDate }}</td>
             <td>
-              <i role="button" class="box-header text-success bi bi-eye"></i>
+              <i
+                role="button"
+                class="box-header text-success bi bi-eye"
+                (click)="genPdf(pdfTempLicense)"
+              ></i>
             </td>
           </tr>
         </tbody>
       </table>
-      <ng-container *ngIf="!requestid">
+      <ng-container *ngIf="!requestId">
         <div class="text-center fs-5 mb-4">ไม่พบข้อมูล</div></ng-container
       >
     </div>
@@ -75,6 +79,14 @@
                 <i
                   role="button"
                   class="fs-5 text-primary bi bi-pencil-square"
+                  (click)="
+                    edit(
+                      activityPageMode.edit,
+                      activity.staffid,
+                      requestId,
+                      i + 1
+                    )
+                  "
                 ></i>
               </td>
               <td>
@@ -85,7 +97,7 @@
                     view(
                       activityPageMode.view,
                       activity.staffid,
-                      requestid,
+                      requestId,
                       i + 1
                     )
                   "

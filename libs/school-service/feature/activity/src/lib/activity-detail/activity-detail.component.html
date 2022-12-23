@@ -22,7 +22,7 @@
     </div> -->
 
     <div class="bg-light px-3 py-3 mb-3">
-      <div class="box-header mb-1">
+      <div class="box-header">
         ข้อมูลหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต
       </div>
 
@@ -43,7 +43,11 @@
             <td>{{ tempLicense?.startdate | thaiDate }}</td>
             <td>{{ tempLicense?.enddate | thaiDate }}</td>
             <td>
-              <i role="button" class="box-header text-success bi bi-eye"></i>
+              <i
+                role="button"
+                class="box-header text-success bi bi-eye"
+                (click)="genPdf(pdfTempLicense)"
+              ></i>
             </td>
           </tr>
         </tbody>
