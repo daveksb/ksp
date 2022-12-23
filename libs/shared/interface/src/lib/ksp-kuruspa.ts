@@ -10,8 +10,7 @@ export class KspKuruspa {
   passportenddate: string | null = null;
 
   visaclass: string | null = null;
-  VisaType: string | null = null;
-
+  visatype: string | null = null;
   visastartdate: string | null = null;
   visaexpireddate: string | null = null;
 
