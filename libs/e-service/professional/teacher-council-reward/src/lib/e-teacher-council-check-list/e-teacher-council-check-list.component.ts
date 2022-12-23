@@ -11,12 +11,13 @@ import {
   SchRequestSearchFilter,
   SelfRequest,
 } from '@ksp/shared/interface';
-import { ERequestService } from '@ksp/shared/service';
+import { ERequestService, LoaderService } from '@ksp/shared/service';
 import {
   replaceEmptyWithNull,
   SelfCheckProcess,
   eSelfCheckStatus,
 } from '@ksp/shared/utility';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'ksp-e-teacher-council-check-list',
@@ -31,12 +32,14 @@ export class ETeacherCouncilCheckListComponent
   checkProcess = SelfCheckProcess;
   checkStatus = eSelfCheckStatus;
   SelfServiceRequestSubType = SelfServiceRequestSubType;
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private router: Router,
-    private requestService: ERequestService
+    private requestService: ERequestService,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {}
