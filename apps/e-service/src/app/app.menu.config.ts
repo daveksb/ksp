@@ -288,7 +288,7 @@ export const ethicsMenu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'รายงาน',
-    path: '',
+    path: '/xxx',
   },
 ];
 
@@ -672,6 +672,6 @@ export const refundFeeMenu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'รายงาน',
-    path: '',
+    path: '/xxx',
   },
 ];

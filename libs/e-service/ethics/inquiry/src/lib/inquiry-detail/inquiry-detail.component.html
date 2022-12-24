@@ -60,11 +60,12 @@
           <th scope="col">หมายเลขบัตรประชาชน</th>
           <th scope="col">เลขที่ใบอนุญาต</th>
           <th scope="col">ตำแหน่งกรรมการ</th>
+          <th scope="col"></th>
           <th scope="col">ชื่อ</th>
           <th scope="col">นามสกุล</th>
           <th scope="col">ตำแหน่ง</th>
           <th scope="col">สังกัด - หน่วยงาน/สถานศึกษา</th>
-          <th scope="col">แก้ไข</th>
+          <!-- <th scope="col">แก้ไข</th> -->
           <th scope="col">ลบ</th>
         </tr>
       </thead>
@@ -88,11 +89,26 @@
                 />
               </td>
               <td>
-                <input
-                  type="text"
-                  class="form-control"
-                  formControlName="positioncommittee"
-                />
+                <select class="form-select" formControlName="positioncommittee">
+                  <option disabled selected hidden value="null">
+                    กรุณาเลือก
+                  </option>
+                  <option value="1">ประธานอนุกรรมการ</option>
+                  <option value="2">อนุกรรมการ</option>
+                  <option value="3">อนุกรรมการและเลขานุการ</option>
+                  <option value="4">ผู้ช่วยเลขานุการ</option>
+                </select>
+              </td>
+              <td>
+                <select class="form-select" formControlName="prefix">
+                  <option value="null" selected hidden disabled>เลือก</option>
+                  <option
+                    *ngFor="let prefix of prefixList$ | async"
+                    [value]="prefix.id"
+                  >
+                    {{ prefix?.name_th }}
+                  </option>
+                </select>
               </td>
               <td>
                 <input
@@ -122,12 +138,12 @@
                   formControlName="bureau"
                 />
               </td>
-              <td>
+              <!-- <td>
                 <i
                   role="button"
                   class="bi bi-pencil-square fs-5 text-primary"
                 ></i>
-              </td>
+              </td> -->
               <td>
                 <i
                   (click)="deleteRow(i)"
@@ -220,10 +236,7 @@
         formControlName="inquiryreport"
       ></textarea>
     </div>
-    <ksp-file-upload></ksp-file-upload>
   </div>
-
-  <hr />
 
   <div class="bg-light px-3 py-2" formGroupName="inquiryresult">
     <div class="box-header">การพิจารณาดำเนินการ</div>
@@ -277,22 +290,42 @@
 
     <div class="my-3">
       <div class="d-flex align-items-center mb-2">
-        <input type="radio" value="1" formControlName="consider" />
+        <input
+          type="radio"
+          class="form-check-input"
+          value="1"
+          formControlName="consider"
+        />
         <label class="form-label ms-2">ยกข้อกล่าวหา/กล่าวโทษ</label>
       </div>
 
       <div class="d-flex align-items-center mb-2">
-        <input type="radio" value="2" formControlName="consider" />
+        <input
+          type="radio"
+          class="form-check-input"
+          value="2"
+          formControlName="consider"
+        />
         <label class="form-label ms-2">ตักเตือน</label>
       </div>
 
       <div class="d-flex align-items-center mb-2">
-        <input type="radio" value="3" formControlName="consider" />
+        <input
+          type="radio"
+          class="form-check-input"
+          value="3"
+          formControlName="consider"
+        />
         <label class="form-label ms-2">ภาคทัณฑ์</label>
       </div>
 
       <div class="d-flex align-items-center mb-2">
-        <input type="radio" value="4" formControlName="consider" />
+        <input
+          type="radio"
+          class="form-check-input"
+          value="4"
+          formControlName="consider"
+        />
 
         <label class="form-label ms-2">พักใช้</label>
         <label class="form-label mx-3">ระยะเวลา</label>
@@ -347,14 +380,19 @@
       </div>
 
       <div class="d-flex align-items-center mb-2">
-        <input type="radio" value="5" formControlName="consider" />
+        <input
+          type="radio"
+          class="form-check-input"
+          value="5"
+          formControlName="consider"
+        />
         <label class="form-label ms-2">เพิกถอนใบอนุญาตประกอบวิชาชีพ</label>
       </div>
 
       <div class="d-flex align-items-center">
         <input
           type="radio"
-          name="consider"
+          class="form-check-input"
           value="6"
           formControlName="consider"
         />

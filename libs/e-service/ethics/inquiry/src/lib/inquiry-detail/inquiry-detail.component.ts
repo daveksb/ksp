@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -19,12 +19,14 @@ import {
   KspFormBaseComponent,
 } from '@ksp/shared/interface';
 import { BottomNavComponent } from '@ksp/shared/menu';
+import { GeneralInfoService } from '@ksp/shared/service';
 import {
   LicenseInfoComponent,
   LicenseTypeButtonGroupComponent,
   RequestHeaderInfoComponent,
 } from '@ksp/shared/ui';
 import { providerFactory, thaiDate } from '@ksp/shared/utility';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'e-service-inquiry-detail',
@@ -47,7 +49,10 @@ import { providerFactory, thaiDate } from '@ksp/shared/utility';
   ],
   providers: providerFactory(InquiryDetailComponent),
 })
-export class InquiryDetailComponent extends KspFormBaseComponent {
+export class InquiryDetailComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
   override form = this.fb.group({
     inquiryorderno: [],
     inquiryorderdate: [],
@@ -67,9 +72,14 @@ export class InquiryDetailComponent extends KspFormBaseComponent {
       otherreason: [],
     }),
   });
+  prefixList$!: Observable<any>;
   today = thaiDate(new Date());
   requestNumber = '';
-  constructor(private router: Router, private fb: FormBuilder) {
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private generalInfoService: GeneralInfoService
+  ) {
     super();
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
@@ -78,6 +88,9 @@ export class InquiryDetailComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+  }
+  ngOnInit(): void {
+    this.getListData();
   }
   get members() {
     return this.form.controls.inquirysubcommittee as FormArray;
@@ -95,6 +108,7 @@ export class InquiryDetailComponent extends KspFormBaseComponent {
       idcardno: data.idcardno,
       idnumber: data.idnumber,
       positioncommittee: data.positioncommittee,
+      prefix: data.prefix,
       firstname: data.firstname,
       lastname: data.lastname,
       position: data.position,
@@ -104,5 +118,8 @@ export class InquiryDetailComponent extends KspFormBaseComponent {
   }
   deleteRow(index: number) {
     this.members.removeAt(index);
+  }
+  getListData() {
+    this.prefixList$ = this.generalInfoService.getPrefix();
   }
 }

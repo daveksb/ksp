@@ -1,4 +1,12 @@
-<div class="box-header text-primary">ข้อมูลผู้ถูกกล่าวหา/กล่าวโทษ</div>
+<div class="d-flex justify-content-between align-items-center">
+  <div class="box-header">ข้อมูลผู้ถูกกล่าวหา/กล่าวโทษ</div>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    matDialogClose
+  ></button>
+</div>
 <hr />
 <form [formGroup]="form">
   <div class="bg-white">
@@ -68,7 +76,7 @@
       </div>
     </div>
 
-    <div class="d-flex justify-content-end mt-3">
+    <div class="d-flex justify-content-end my-3">
       <button
         (click)="clear()"
         type="button"
@@ -87,10 +95,22 @@
 <div class="box-header">ผลการค้นหา</div>
 
 <table mat-table [dataSource]="dataSource">
+  <ng-container matColumnDef="order">
+    <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+    <td mat-cell *matCellDef="let row; let i = index">
+      {{ i + 1 }}
+    </td>
+  </ng-container>
+
   <ng-container matColumnDef="select">
     <th mat-header-cell *matHeaderCellDef>เลือก</th>
     <td mat-cell *matCellDef="let row">
-      <input (change)="onClickRadio(row)" type="radio" name="license1" />
+      <input
+        (change)="onClickRadio(row)"
+        type="radio"
+        class="form-check-input"
+        name="license1"
+      />
     </td>
   </ng-container>
 
@@ -136,7 +156,9 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
 
-<nav *ngIf="dataSource.data.length > 0" style="padding-top: 20px">
+<mat-paginator [pageSizeOptions]="[25]" showFirstLastButtons> </mat-paginator>
+
+<!-- <nav *ngIf="dataSource.data.length > 0" style="padding-top: 20px">
   <ul class="pagination">
     <li role="button" (click)="goPrevious()" class="page-item">
       <a class="page-link"><i class="bi bi-chevron-left"></i></a>
@@ -148,12 +170,12 @@
       <a class="page-link"><i class="bi bi-chevron-right"></i></a>
     </li>
   </ul>
-</nav>
+</nav> -->
 
-<div class="d-flex justify-content-center mt-3">
-  <button matDialogClose type="button" class="btn border-success text-success">
+<div class="d-flex justify-content-center mb-3">
+  <!-- <button matDialogClose type="button" class="btn border-success text-success">
     ยกเลิก
-  </button>
+  </button> -->
   <button
     [mat-dialog-close]="selectedIdCard"
     [disabled]="selectedIdCard ? null : true"
@@ -163,33 +185,35 @@
     ตกลง
   </button>
 </div>
-<br />
-<mat-tab-group class="tab-group" animationDuration="0ms" dynamicHeight="true">
-  <mat-tab label="ข้อมูลผู้ได้รับใบอนุญาต" class="tab-content">
-    <ng-container *ngIf="dataSource.data.length && personSelected">
-      <e-service-person-info></e-service-person-info>
-    </ng-container>
-  </mat-tab>
 
-  <mat-tab label="ข้อมูลใบอนุญาต">
-    <ng-container *ngIf="dataSource.data.length && personSelected">
-      <div class="box-header">
-        ข้อมูลใบอนุญาตประกอบวิชาชีพทางการศึกษา (ยังไม่หมดอายุ)
-      </div>
-      <ksp-license-type-button-group></ksp-license-type-button-group>
-      <ksp-license-info></ksp-license-info>
-    </ng-container>
-  </mat-tab>
+<ng-container *ngIf="dataSource.data.length && personSelected">
+  <mat-tab-group class="tab-group" animationDuration="0ms" dynamicHeight="true">
+    <mat-tab label="ข้อมูลผู้ได้รับใบอนุญาต" class="tab-content">
+      <ng-container *ngIf="dataSource.data.length && personSelected">
+        <e-service-person-info></e-service-person-info>
+      </ng-container>
+    </mat-tab>
 
-  <mat-tab label="ที่อยู่">
-    <ng-container *ngIf="dataSource.data.length && personSelected"
-      ><e-service-address-info></e-service-address-info
-    ></ng-container>
-  </mat-tab>
+    <mat-tab label="ข้อมูลใบอนุญาต">
+      <ng-container *ngIf="dataSource.data.length && personSelected">
+        <div class="box-header">
+          ข้อมูลใบอนุญาตประกอบวิชาชีพทางการศึกษา (ยังไม่หมดอายุ)
+        </div>
+        <ksp-license-type-button-group></ksp-license-type-button-group>
+        <ksp-license-info></ksp-license-info>
+      </ng-container>
+    </mat-tab>
 
-  <mat-tab label="สถานที่ทำงาน">
-    <ng-container *ngIf="dataSource.data.length && personSelected">
-      <e-service-workplace-info></e-service-workplace-info>
-    </ng-container>
-  </mat-tab>
-</mat-tab-group>
+    <mat-tab label="ที่อยู่">
+      <ng-container *ngIf="dataSource.data.length && personSelected"
+        ><e-service-address-info></e-service-address-info
+      ></ng-container>
+    </mat-tab>
+
+    <mat-tab label="สถานที่ทำงาน">
+      <ng-container *ngIf="dataSource.data.length && personSelected">
+        <e-service-workplace-info></e-service-workplace-info>
+      </ng-container>
+    </mat-tab>
+  </mat-tab-group>
+</ng-container>

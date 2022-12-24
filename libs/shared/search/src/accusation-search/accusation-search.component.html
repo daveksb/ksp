@@ -144,7 +144,7 @@
       </div>
     </div>
 
-    <div class="mt-2 d-flex justify-content-end">
+    <div class="d-flex justify-content-end my-3">
       <button
         (click)="submited.emit(false)"
         type="button"
@@ -166,7 +166,12 @@
 <div class="bg-white px-3 py-2">
   <div class="d-flex justify-content-between">
     <div class="box-header">รายการการกล่าวหา/กล่าวโทษ</div>
-    <button (click)="createNew()" type="button" class="btn btn-primary w-auto">
+    <button
+      (click)="createNew()"
+      type="button"
+      class="btn btn-primary w-auto"
+      *ngIf="showAddButton"
+    >
       + บันทึกการกล่าวหา/กล่าวโทษ
     </button>
   </div>
