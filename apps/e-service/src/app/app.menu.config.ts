@@ -34,6 +34,10 @@ export const eLicenseMenu: MenuConfig[] = [
         path: '/request-foreign-license/list',
         label: 'รายการใบคำขอรับใบอนุญาตประกอบวิชาชีพ',
       },
+      /* {
+        path: '/xxx',
+        label: 'บัญชีรายชื่อและผลการนำเสนอขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
+      }, */
       {
         path: '/xxx',
         label: 'พิจารณารับรองใบอนุญาตประกอบวิชาชีพ',
@@ -98,13 +102,8 @@ export const eLicenseMenu: MenuConfig[] = [
         path: '/temp-license/list/1',
         label: 'รายการใบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
       },
-      /* {
-        path: '/xxx',
-        label:
-          'บัญชีรายชื่อและผลการนำเสนอขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
-      }, */
       {
-        path: '/xxx',
+        path: '/temp-license/consider-list/1',
         label: 'พิจารณารับรองหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
       },
     ],
@@ -120,13 +119,8 @@ export const eLicenseMenu: MenuConfig[] = [
         path: '/temp-license/list/5',
         label: 'รายการใบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
       },
-      /* {
-        path: '/xxx',
-        label:
-          'บัญชีรายชื่อและผลการนำเสนอขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
-      }, */
       {
-        path: '/xxx',
+        path: '/temp-license/consider-list/5',
         label: 'พิจารณารับรองหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
       },
     ],
@@ -148,23 +142,6 @@ export const eLicenseMenu: MenuConfig[] = [
       },
     ],
   },
-  /* {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอเปลี่ยนแปลง/แก้ไขใบอนุญาต(ชาวต่างชาติ)',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'edit-foreign',
-    subMenu: [
-      {
-        path: '/edit-license/list',
-        label: 'รายการใบคำขอแก้ไข/เปลี่ยนแปลงใบอนุญาต',
-      },
-      {
-        path: '/xxx',
-        label: 'พิจารณาขอเปลี่ยนแปลง/แก้ใบอนุญาต',
-      },
-    ],
-  }, */
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขอใบแทนใบอนุญาตประกอบวิชาชีพ',
@@ -182,23 +159,6 @@ export const eLicenseMenu: MenuConfig[] = [
       },
     ],
   },
-  /* {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอหนังสือรับรองความรู้',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'knowledge',
-    subMenu: [
-      {
-        path: '/knowledge-cert/list',
-        label: 'รายการใบคำขอหนังสือรับรองความรู้',
-      },
-      {
-        path: '/xxx',
-        label: 'พิจารณาหนังสือรับรองความรู้',
-      },
-    ],
-  }, */
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
@@ -285,10 +245,6 @@ export const eLicenseMenu: MenuConfig[] = [
     isExpanded: false,
     subMenuName: 'user-management',
     subMenu: [
-      /* {
-        path: '/school/new-user',
-        label: 'ใบคำขอผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
-      }, */
       {
         path: '/xxx',
         label: 'ผู้ใช้งานระบบบริการด้วยตนเอง (self Service)',
@@ -450,11 +406,7 @@ export const standardMenu: MenuConfig[] = [
         label: 'รายการใบคำรับรองคุณวุฒิทางการศึกษา',
       },
       {
-        path: '/cc',
-        label: 'บัญชีรายชื่อและพิมพ์หนังสือคุณวุฒิทางการศึกษา',
-      },
-      {
-        path: '/bb',
+        path: '/qualification-approve/consider-list',
         label: 'พิจารณารับรองคุณวุฒิทางการศึกษา',
       },
     ],

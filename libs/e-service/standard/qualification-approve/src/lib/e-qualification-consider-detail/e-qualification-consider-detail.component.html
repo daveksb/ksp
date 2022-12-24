@@ -1,15 +1,11 @@
 <ksp-top-nav
   ><span header>ยื่นใบคำขอ</span
-  ><span subHeader
-    >พิจารณารับรองหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต
-  </span></ksp-top-nav
+  ><span subHeader>พิจารณารับรองหนังสือคุณวุฒิ </span></ksp-top-nav
 >
 
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 px-4 py-2">
-    <div class="box-header">
-      ยืนยันผลการตรวจสอบ และออกหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาต
-    </div>
+    <div class="box-header">ยืนยันผลการตรวจสอบ และออกหนังสือรับรองคุณวุฒิ</div>
     <div class="bg-white p-3">
       <ksp-request-header-info
         [requestNumber]="'112234467876543'"
@@ -17,8 +13,8 @@
 
       <hr />
 
-      <div class="d-flex justify-content-between align-items-center mb-1">
-        <div class="box-header">ประวัติผลการตรวจสอบคุณสมบัติและเอกสาร</div>
+      <div class="d-flex justify-content-between mb-2 align-items-center">
+        <div class="box-header">ประวัติการตรวจสอบคุณสมบัติและเอกสาร</div>
         <button class="btn btn-success">ดูใบคำขอ</button>
       </div>
 
@@ -50,15 +46,14 @@
     <div class="bg-white p-3">
       <div class="box-header">ผลการยืนยันการตรวจสอบ</div>
       <hr />
+
       <ksp-consider-ksp-request></ksp-consider-ksp-request>
     </div>
 
     <br />
     <div class="bg-white p-3">
       <div class="d-flex justify-content-between">
-        <div class="box-header">
-          หนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาต
-        </div>
+        <div class="box-header">หนังสือแจ้งผล</div>
         <button class="btn btn-success">พิมพ์เอกสาร</button>
       </div>
 
@@ -70,6 +65,7 @@
           </div>
         </div>
       </div>
+      <!-- <ksp-pdf-viewer-preview></ksp-pdf-viewer-preview> -->
     </div>
   </div>
 </form>
