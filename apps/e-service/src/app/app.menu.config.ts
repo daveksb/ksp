@@ -554,6 +554,18 @@ export const professionalMenu: MenuConfig[] = [
         path: '/xxx',
         label: 'พิจารณารางวัลครูอาวุโส',
       },
+      {
+        path: '/xxx',
+        label: 'ลงทะเบียนรายงานตัวรับรางวัลครูอาวุโส',
+      },
+      {
+        path: '/xxx',
+        label: 'ลงทะเบียนรายงานตัววันเข้าเฝ้า',
+      },
+      {
+        path: '/xxx',
+        label: 'เอกสารและหนังสือผู้ได้รับรางวัลครูอาวุโส',
+      },
     ],
   },
   {
@@ -568,7 +580,7 @@ export const professionalMenu: MenuConfig[] = [
         label: 'รายการใบคำขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม',
       },
       {
-        path: '/one-school-one-innovation/ranking',
+        path: '/one-school-one-innovation/ranking-list',
         label: 'พิจารณารางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม',
       },
     ],

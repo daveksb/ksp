@@ -1,22 +1,28 @@
-<div *ngIf="isLoading | async" class="overlay">
-  <mat-progress-spinner class="spinner" mode="indeterminate">
-  </mat-progress-spinner>
-</div>
-
-<ksp-top-nav><span header>ยื่นใบคำขอรางวัล</span><span subHeader>ขอรางวัลคุรุสภา</span></ksp-top-nav>
+<ksp-top-nav
+  ><span header>ยื่นใบคำขอรางวัล</span
+  ><span subHeader
+    >พิจารณารางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม (One School One Innovation:
+    OSOI)</span
+  ></ksp-top-nav
+>
 
 <div class="bg-secondary full-height full-width-2 bg-opacity-10 px-4 py-2">
-  <div class="box-header">รายการขอรางวัลคุรุสภา</div>
+  <div class="box-header">
+    พิจารณารางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม (One School One Innovation: OSOI)
+  </div>
   <div class="bg-white p-3">
     <div class="box-header">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
     <hr />
-
-    <ksp-e-service-reward-search
-      (search)="search($event)"
-      (clear)="clear()"></ksp-e-service-reward-search>
+    <form [formGroup]="form">
+      <ksp-e-service-reward-search
+        [isSelfReward]="false"
+        (search)="search($event)"
+        (clear)="clear()"
+        formControlName="search"
+      ></ksp-e-service-reward-search>
+    </form>
   </div>
-  <br />
-  <div class="bg-white p-3">
+  <div class="bg-white p-3 mt-3">
     <div class="box-header">ผลการค้นหา</div>
     <div class="table__scroll">
       <table mat-table [dataSource]="dataSource">
@@ -24,9 +30,9 @@
           <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
           <td mat-cell *matCellDef="let element; let i = index">
             {{
-            paginator.pageIndex === 0
-            ? i + 1
-            : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+              paginator.pageIndex === 0
+                ? i + 1
+                : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
             }}
           </td>
         </ng-container>
@@ -34,33 +40,40 @@
         <ng-container matColumnDef="requestno">
           <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.requestno | reqNoFormat }}
+            {{ element.requestno }}
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="idcardno">
-          <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
+        <ng-container matColumnDef="schoolid">
+          <th mat-header-cell *matHeaderCellDef>รหัสโรงเรียน</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.idcardno }}
+            {{ element.schoolid }}
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+        <ng-container matColumnDef="schoolname">
+          <th mat-header-cell *matHeaderCellDef>ชื่อหน่วยงาน/สถานศึกษา</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.firstnameth }} {{ element.lastnameth }}
+            {{ element.schoolname }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="workname">
+          <th mat-header-cell *matHeaderCellDef>ชื่อผลงาน</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.workname }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="process">
           <th mat-header-cell *matHeaderCellDef>ผลการพิจารณา</th>
-          <td mat-cell *matCellDef="let element">ผ่าน</td>
+          <td mat-cell *matCellDef="let element">{{ element.process }}</td>
         </ng-container>
 
         <ng-container matColumnDef="status">
           <th mat-header-cell *matHeaderCellDef>สถานะการดำเนินการ</th>
           <td mat-cell *matCellDef="let element">
-            {{ checkStatus(+element.process, +element.status, 40)?.ename }}
+            {{ element.status }}
           </td>
         </ng-container>
 
@@ -71,7 +84,7 @@
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="submitDate">
+        <ng-container matColumnDef="requestdate">
           <th mat-header-cell *matHeaderCellDef>วันที่ยื่นใบคำขอ</th>
           <td mat-cell *matCellDef="let element">
             {{ element.requestdate | thaiDate }}
@@ -79,35 +92,41 @@
         </ng-container>
 
         <ng-container matColumnDef="verify">
-          <th mat-header-cell *matHeaderCellDef>ตรวจสอบ</th>
-          <td mat-cell *matCellDef="let element">
+          <th mat-header-cell *matHeaderCellDef class="text-center">ตรวจสอบ</th>
+          <td mat-cell *matCellDef="let element" class="text-center">
             <i
               role="button"
               class="bi bi-pencil-square fs-5 text-primary"
-              (click)="view(element.id)"></i>
+              (click)="view()"
+            ></i>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="request">
-          <th mat-header-cell *matHeaderCellDef>ใบคำขอ</th>
-          <td mat-cell *matCellDef="let row">
+          <th mat-header-cell *matHeaderCellDef class="text-center">ใบคำขอ</th>
+          <td mat-cell *matCellDef="let row" class="text-center">
             <i role="button" class="bi bi-file-text fs-5 text-primary"></i>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="edit">
-          <th mat-header-cell *matHeaderCellDef>คัดค้าน/เพิกถอน</th>
-          <td mat-cell *matCellDef="let element">
-            <i role="button" class="bi bi-file-x fs-5 text-danger" (click)="reject(element.id)"></i>
+          <th mat-header-cell *matHeaderCellDef class="text-center">
+            คัดค้าน/เพิกถอน
+          </th>
+          <td mat-cell *matCellDef="let row" class="text-center">
+            <i
+              role="button"
+              (click)="cancelRequest()"
+              class="bi bi-file-x fs-5 text-danger"
+            ></i>
           </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
-
-      <mat-paginator [pageSizeOptions]="[25]" showFirstLastButtons>
-      </mat-paginator>
     </div>
+    <mat-paginator [pageSizeOptions]="[25]" showFirstLastButtons>
+    </mat-paginator>
   </div>
 </div>
