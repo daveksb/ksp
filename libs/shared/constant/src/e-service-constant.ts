@@ -6,7 +6,7 @@ import {
 
 export const ApproveStepStatusOption: ApproveUniOption[] = [
   {
-    name: 'เครบถ้วน และถูกต้อง',
+    name: 'ครบถ้วน และถูกต้อง',
     value: 1,
   },
   {
@@ -20,7 +20,7 @@ export const EUniApproveProcess: UniApproveProcess[] = [
     requestType: 3,
     processId: 99,
     processName: 'บันทึกชั่วคราว',
-    status: [],
+    status: [{ id: 1, sname: 'บันทึกชั่วคราว', ename: 'บันทึกชั่วคราว' }],
   },
   {
     requestType: 3,
@@ -54,7 +54,7 @@ export const EUniApproveProcess: UniApproveProcess[] = [
     requestType: 3,
     processId: 4,
     processName: 'ประเมินสภาพจริง',
-    considerationName:"ประเมินสภาพจริง",
+    considerationName: 'ประเมินสภาพจริง',
     status: [
       {
         sname: 'เห็นควรพิจารณาให้การรับรอง',
