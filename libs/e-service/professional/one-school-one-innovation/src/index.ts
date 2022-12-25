@@ -9,3 +9,5 @@ export * from './lib/osoi-confirm/osoi-confirm.component';
 export * from './lib/osoi-ranking/osoi-ranking.component';
 
 export * from './lib/osoi-objection/osoi-objection.component';
+
+export * from './lib/osoi-ranking-list/osoi-ranking-list.component';

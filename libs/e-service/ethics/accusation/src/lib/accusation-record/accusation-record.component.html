@@ -23,11 +23,11 @@
         <tr>
           <th scope="col">ลำดับ</th>
           <th scope="col">หมายเลขบัตรประชาชน</th>
-          <th scope="col">คำนำหน้าชื่อ</th>
+          <th scope="col"></th>
           <th scope="col">ชื่อ</th>
           <th scope="col">นามสกุล</th>
           <th scope="col">เบอร์โทรศัพท์</th>
-          <th scope="col">แก้ไข</th>
+          <!-- <th scope="col">แก้ไข</th> -->
           <th scope="col">ลบ</th>
         </tr>
       </thead>
@@ -75,14 +75,18 @@
                   formControlName="phone"
                 />
               </td>
-              <td>
+              <!-- <td>
                 <i
                   role="button"
                   class="bi bi-pencil-square fs-5 text-primary"
                 ></i>
-              </td>
+              </td> -->
               <td>
-                <i role="button" class="bi bi-trash fs-5 text-danger"></i>
+                <i
+                  role="button"
+                  class="bi bi-trash fs-5 text-danger"
+                  (click)="deleteRow(i)"
+                ></i>
               </td>
             </tr>
           </ng-container>
@@ -103,7 +107,7 @@
     </button>
   </div>
 
-  <div class="my-3">
+  <div class="mb-3">
     <mat-tab-group class="tab-group" animationDuration="0ms">
       <mat-tab label="ข้อมูลผู้ได้รับใบอนุญาต" class="tab-content"
         ><e-service-person-info></e-service-person-info>
@@ -126,9 +130,8 @@
       </mat-tab>
     </mat-tab-group>
   </div>
-  <br />
-  <div class="box-header">รายละเอียดการกล่าวหา/กล่าวโทษ</div>
 
+  <div class="box-header">รายละเอียดการกล่าวหา/กล่าวโทษ</div>
   <div class="row">
     <div class="col mb-3">
       <label class="form-label required">หมายเลขคดีดำ</label>

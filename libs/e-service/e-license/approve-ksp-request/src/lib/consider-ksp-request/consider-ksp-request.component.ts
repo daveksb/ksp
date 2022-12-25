@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { providerFactory } from '@ksp/shared/utility';
@@ -13,7 +13,10 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
   styleUrls: ['./consider-ksp-request.component.scss'],
   providers: providerFactory(ConsiderKspRequestComponent),
 })
-export class ConsiderKspRequestComponent extends KspFormBaseComponent {
+export class ConsiderKspRequestComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
@@ -29,4 +32,26 @@ export class ConsiderKspRequestComponent extends KspFormBaseComponent {
     approveNo: [],
     approveDate: [],
   });
+
+  ngOnInit(): void {
+    /* this.form.controls.approveNo.disable();
+    this.form.controls.approveDate.disable();
+    this.form.valueChanges.subscribe((res) => {
+      this.disableForm();
+    }); */
+  }
+
+ /*  disableForm() {
+    if (this.result === 2) {
+      this.form.controls.approveNo.enable();
+      this.form.controls.approveDate.enable();
+    } else {
+      this.form.controls.approveNo.disable();
+      this.form.controls.approveDate.disable();
+    }
+  }
+
+  get result() {
+    return this.form.controls.result.value;
+  } */
 }

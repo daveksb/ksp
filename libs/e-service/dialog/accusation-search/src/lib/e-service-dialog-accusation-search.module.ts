@@ -12,6 +12,7 @@ import {
   LicenseTypeButtonGroupComponent,
 } from '@ksp/shared/ui';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     LicenseInfoComponent,
     ReactiveFormsModule,
     FormsModule,
+    MatPaginatorModule,
   ],
   declarations: [AccusationSearchComponent],
   exports: [AccusationSearchComponent],

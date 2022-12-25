@@ -19,6 +19,7 @@ import {
   EducationDetailService,
   MyInfoService,
   SelfRequestService,
+  LoaderService,
 } from '@ksp/shared/service';
 import {
   getCookie,
@@ -28,7 +29,7 @@ import {
 } from '@ksp/shared/utility';
 import { FileGroup, SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
 const OBJECTIVE_FILES: FileGroup[] = [
@@ -51,6 +52,7 @@ export class CompareKnowledgeRequestComponent
   extends LicenseFormBaseComponent
   implements OnInit
 {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   objectiveFiles: any[] = [];
   userInfoType = UserInfoFormType.thai;
   countries$!: Observable<any>;
@@ -73,7 +75,8 @@ export class CompareKnowledgeRequestComponent
     educationDetailService: EducationDetailService,
     myInfoService: MyInfoService,
     requestService: SelfRequestService,
-    route: ActivatedRoute
+    route: ActivatedRoute,
+    private loaderService: LoaderService
   ) {
     super(
       generalInfoService,

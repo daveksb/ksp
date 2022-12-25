@@ -25,7 +25,7 @@ import { SharedFormOthersModule } from '@ksp/shared/form/others';
 export class FormMeetingRecordComponent extends KspFormBaseComponent {
   override form = this.fb.group({
     reasonTimes: [],
-    date: [],
+    year: [],
     boardType: [],
     boardName: [],
     chairmanName: [],

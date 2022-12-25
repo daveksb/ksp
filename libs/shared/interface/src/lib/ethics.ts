@@ -93,6 +93,7 @@ export const defaultSubcommittee: EhicsSubcommittee = {
   idcardno: null,
   idnumber: null,
   positioncommittee: null,
+  prefix: null,
   firstname: null,
   lastname: null,
   position: null,
@@ -109,6 +110,7 @@ export interface EhicsSubcommittee {
   idcardno: string | null;
   idnumber: number | null;
   positioncommittee: string | null;
+  prefix: string | null;
   firstname: string | null;
   lastname: string | null;
   position: string | null;

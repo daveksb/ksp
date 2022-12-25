@@ -131,8 +131,8 @@
       </mat-tab>
     </mat-tab-group>
 
-    <div class="fs-6 text-danger mt-2">
-      * กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
+    <div class="fs-6 text-danger mt-1">
+      *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
       โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
     </div>
 
@@ -144,14 +144,18 @@
         *ngIf="requestId"
         (click)="cancel()"
         type="button"
-        class="ms-3 btn border-primary text-primary"
+        class="ms-3 btn border-primary bg-white text-primary"
       >
         ยกเลิกใบคำขอ
       </button>
-      <button (click)="save()" type="button" class="ms-3 btn btn-primary">
+      <button
+        (click)="save()"
+        type="button"
+        class="ms-3 btn btn-primary"
+        [disabled]="form.invalid"
+      >
         ต่อไป
       </button>
-      <!-- [disabled]="form.invalid" -->
     </div>
   </form>
 </div>

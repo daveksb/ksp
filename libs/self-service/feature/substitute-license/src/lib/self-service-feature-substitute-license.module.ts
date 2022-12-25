@@ -15,6 +15,7 @@ import {
 } from '@ksp/self-service/ui';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export const routes: Routes = [
   {
@@ -45,6 +46,7 @@ export const routes: Routes = [
     SelfServiceFormModule,
     RequestStatusComponent,
     RouterModule.forChild(routes),
+    MatProgressSpinnerModule,
   ],
   declarations: [SubstituteLicenseDetailComponent],
   exports: [SubstituteLicenseDetailComponent],

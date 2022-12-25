@@ -80,7 +80,10 @@
     </div>
 
     <div class="d-flex justify-content-center mt-2">
-      <button class="btn btn-secondary me-2" (click)="clear()">
+      <button
+        class="btn border-secondary bg-light text-secondary me-2"
+        (click)="clear()"
+      >
         ล้างข้อมูล
       </button>
       <button class="btn btn-primary ms-2" (click)="search()">ค้นหา</button>
@@ -139,4 +142,11 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
   </div>
+  <mat-paginator
+    [hidden]="!dataSource.data.length"
+    [length]="dataSource.data.length"
+    [pageSize]="25"
+    [showFirstLastButtons]="true"
+  >
+  </mat-paginator>
 </div>
