@@ -42,20 +42,9 @@ export class CreateLicenseIdDetailComponent implements OnInit {
   myImage: any = null;
   selectedLicense = new SelfLicense();
 
-  licensetype: any = '';
-  licenseno: string | null = '';
-  prefixth: string | null = '-';
-  firstnameth: string | null = '';
-  lastnameth: string | null = '';
-  prefixen: string | null = '-';
-  firstnameen: string | null = '';
-  lastnameen: string | null = '';
-  kuruspano: string | null = '';
-  licensestartdate: string | null = null;
-  licenseenddate: string | null = null;
-
   form = this.fb.group({
-    licenseno: [null, Validators.required],
+    licenseInfo: this.fb.array([]),
+    /* licenseno: [null, Validators.required],
     idcardno: [],
     careertype: [],
     prefixth: [],
@@ -67,8 +56,12 @@ export class CreateLicenseIdDetailComponent implements OnInit {
     sex: [],
     birthdate: [],
     licensestartdate: [],
-    licenseenddate: [],
+    licenseenddate: [], */
   });
+
+  get licenseInfoFormArray() {
+    return this.form.controls.licenseInfo;
+  }
 
   constructor(
     private router: Router,
@@ -112,7 +105,7 @@ export class CreateLicenseIdDetailComponent implements OnInit {
             };
             this.requestService
               .getRequestListByListNo(payload)
-              .subscribe((res: any) => {
+              .subscribe((res) => {
                 if (res?.datareturn) {
                   this.dataSource2.data = res.datareturn;
                 }
@@ -124,21 +117,10 @@ export class CreateLicenseIdDetailComponent implements OnInit {
 
   rowSelect(id: any) {
     this.requestService.getSelfLicense(id).subscribe((data) => {
-      console.log('data = ', data);
+      //console.log('data = ', data);
       this.selectedLicense = data;
       this.form.patchValue(<any>data);
       this.myImage = atob(data.filedata || '{}');
-      this.licensetype = data.careertype;
-      this.licenseno = data.licenseno;
-      this.prefixth = data.prefixth;
-      this.firstnameth = data.firstnameth;
-      this.lastnameth = data.lastnameth;
-      this.prefixen = data.prefixen;
-      this.firstnameen = data.firstnameen;
-      this.lastnameen = data.lastnameen;
-      this.kuruspano = ''; //data.kuruspano;
-      this.licensestartdate = data.licensestartdate;
-      this.licenseenddate = data.licenseenddate;
     });
   }
 
@@ -163,12 +145,6 @@ export class CreateLicenseIdDetailComponent implements OnInit {
         header: `สร้างใบอนุญาตสำเร็จ`,
       },
     });
-
-    /* dialog.componentInstance.completed.subscribe((res) => {
-      if (res) {
-        //this.createMultiLicense(id);
-      }
-    }); */
   }
 
   createMultiLicense(id: string | null = null) {
@@ -217,7 +193,10 @@ export class CreateLicenseIdDetailComponent implements OnInit {
     };
     //console.log('payload = ', payload);
     this.requestService.createMultipleLicense(payload).subscribe((res) => {
-      //console.log('result = ', res);
+      console.log('create license = ', res);
+      /* for (let i = 0; i < 5; i++) {
+        this.licenseInfoFormArray.push(this.fb.control(null));
+      } */
       this.completeDialog();
     });
   }
