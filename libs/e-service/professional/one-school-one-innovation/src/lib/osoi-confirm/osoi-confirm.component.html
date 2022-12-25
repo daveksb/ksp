@@ -34,181 +34,18 @@
 
         <tbody>
           <tr>
-            <td>x</td>
-            <td>x</td>
-            <td>x</td>
-            <td>x</td>
-            <td>x</td>
+            <td colspan="5" class="text-center">ยังไม่พบประวัติ</td>
           </tr>
         </tbody>
       </table>
     </div>
-    <br />
-    <div class="bg-white border py-3 px-4">
-      <div class="d-flex align-items-center mb-3">
-        <div class="box-header text-primary me-1">ยืนยันผลการตรวจสอบ</div>
-        <div class="text-danger">* กรุณาเลือกอย่างใดอย่างหนึ่งเท่านั้น</div>
-      </div>
-
-      <div class="row mb-3">
-        <div class="col-2 d-flex align-items-center">
-          <div class="form-control">
-            <div class="d-flex align-items-center">
-              <input
-                class="radio"
-                type="radio"
-                value="1"
-                formControlName="verify"
-              />
-              <label class="form-label ms-2"> ครบถ้วน และถูกต้อง </label>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row mb-3">
-        <div class="col-2 d-flex align-items-center">
-          <div class="form-control">
-            <div class="d-flex align-items-center">
-              <input
-                class="radio"
-                type="radio"
-                value="2"
-                formControlName="verify"
-              />
-              <label class="form-label ms-2"> ขอแก้ไข / เพิ่มเติม </label>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-4 d-flex align-items-center">
-          <div class="form-label text-center w-100">
-            วันที่ต้องการใบคำขอส่งกลับ
-          </div>
-          <div class="d-flex align-items-center">
-            <input
-              matInput
-              [matDatepicker]="picker"
-              autocomplete="off"
-              class="form-control form-date"
-              formControlName="returnDate"
-              placeholder="วว/ดด/ปปปป"
-            />
-            <mat-datepicker-toggle
-              class="button-date"
-              matSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </div>
-        </div>
-      </div>
-
-      <div class="mb-3 col-8">
-        <textarea class="form-control" rows="3"></textarea>
-      </div>
-
-      <div class="row mb-3">
-        <div class="col-2 d-flex align-items-center">
-          <div class="form-control">
-            <div class="d-flex align-items-center">
-              <input
-                class="radio"
-                type="radio"
-                value="3"
-                formControlName="verify"
-              />
-              <label class="form-label ms-2"> ขาดคุณสมบัติ </label>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-4 d-flex align-items-center">
-          <div class="form-label text-center w-100">หมายเหตุ / เหตุผล</div>
-          <select class="form-select" formControlName="reason">
-            <option value="null" selected hidden disabled>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="mb-3 col-8">
-        <textarea class="form-control" rows="3"></textarea>
-      </div>
-
-      <hr />
-
-      <div class="d-flex align-items-center mb-3">
-        <div class="box-header text-primary me-1">
-          ต้องการส่งตรวจสอบลำดับต่อไป หรือส่งเพื่อพิจารณา
-        </div>
-        <div class="text-danger">* กรุณาเลือกอย่างใดอย่างหนึ่งเท่านั้น</div>
-      </div>
-
-      <div class="d-flex align-items-center col-4 mb-3">
-        <div class="form-control">
-          <div class="d-flex align-items-center">
-            <input
-              class="radio"
-              type="radio"
-              value="1"
-              formControlName="forward"
-            />
-            <label class="form-label ms-2"> ส่งตรวจสอบลำดับต่อไป </label>
-          </div>
-        </div>
-      </div>
-
-      <div class="d-flex align-items-center col-4 mb-3">
-        <div class="form-control">
-          <div class="d-flex align-items-center">
-            <input
-              class="radio"
-              type="radio"
-              value="2"
-              formControlName="forward"
-            />
-            <label class="form-label ms-2">
-              ไม่ผ่านการตรวจสอบ เนื่องจากไม่ครบถ้วน / ไม่ถูกต้อง
-            </label>
-          </div>
-        </div>
-      </div>
-
-      <div class="d-flex align-items-center col-4 mb-3">
-        <div class="form-control">
-          <div class="d-flex align-items-center">
-            <input
-              class="radio"
-              type="radio"
-              value="3"
-              formControlName="forward"
-            />
-            <label class="form-label ms-2"> ส่งเรื่องพิจารณา </label>
-          </div>
-        </div>
-      </div>
-
-      <div class="d-flex align-items-center col-4 mb-3">
-        <div class="form-control">
-          <div class="d-flex align-items-center">
-            <input
-              class="radio"
-              type="radio"
-              value="4"
-              formControlName="forward"
-            />
-            <label class="form-label ms-2"> ยกเลิก </label>
-          </div>
-        </div>
-      </div>
+    <div class="mt-3">
+      <ksp-validate-ksp-request></ksp-validate-ksp-request>
     </div>
   </div>
 </div>
 
-<div class="sticky-bottom border">
+<div class="sticky-bottom border px-2">
   <ksp-bottom-nav
     [showCenterButtons]="true"
     [isLastPage]="true"

@@ -58,13 +58,13 @@ export class RequestRewardFormComponent extends KspFormBaseComponent {
     rewardtype: [null, Validators.required],
     submitbefore: [null, Validators.required],
 
-    personId: [null, [Validators.required, Validators.pattern(idCardPattern)]],
-    prefix: [null, Validators.required],
-    firstName: [null, [Validators.required, Validators.pattern(nameThPattern)]],
-    lastName: [null, [Validators.required, Validators.pattern(nameThPattern)]],
-    phone: [null, [Validators.required, Validators.pattern(phonePattern)]],
+    idcardno: [null, [Validators.required, Validators.pattern(idCardPattern)]],
+    prefixth: [null, Validators.required],
+    firstnameth: [null, [Validators.required, Validators.pattern(nameThPattern)]],
+    lastnameth: [null, [Validators.required, Validators.pattern(nameThPattern)]],
+    contactphone: [null, [Validators.required, Validators.pattern(phonePattern)]],
     email: [null, [Validators.required, Validators.email]],
-    academicStanding: [null, Validators.required],
+    position: [null, Validators.required],
 
     osoimember: this.fb.array([]),
     vdolink: [''],
@@ -94,19 +94,19 @@ export class RequestRewardFormComponent extends KspFormBaseComponent {
   }
 
   get personId() {
-    return this.form.controls.personId;
+    return this.form.controls.idcardno;
   }
 
   get firstName() {
-    return this.form.controls.firstName;
+    return this.form.controls.firstnameth;
   }
 
   get lastName() {
-    return this.form.controls.lastName;
+    return this.form.controls.lastnameth;
   }
 
   get selfPhone() {
-    return this.form.controls.phone;
+    return this.form.controls.contactphone;
   }
 
   get email() {
