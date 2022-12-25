@@ -96,7 +96,7 @@ export class AccusationMainComponent implements OnInit {
   }
 
   next() {
-    this.router.navigate(['/accusation', 'decision', this.ethicsId || null]);
+    this.router.navigate(['/accusation', 'decision', this.ethicsId || '']);
   }
 
   cancel() {
