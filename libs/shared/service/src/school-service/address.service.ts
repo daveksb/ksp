@@ -34,4 +34,10 @@ export class AddressService {
       .get(`${environment.apiUrl}/kspmasterdata/tambol?amphurCode=${aid}`)
       .pipe(map((data: any) => data?.datareturn));
   }
+
+  getAddressByPostcode(postcode: string | null): Observable<any> {
+    return this.http
+      .post(`${environment.shortApiUrl}/postcodesearch.php`, { postcode: postcode, offset: 0, row: 10 })
+      .pipe(map((data: any) => data?.datareturn));
+  }
 }

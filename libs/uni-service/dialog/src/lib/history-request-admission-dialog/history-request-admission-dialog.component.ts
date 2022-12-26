@@ -18,7 +18,7 @@ export class HistoryRequestAdmissionDialogComponent implements OnInit {
         if (this.dataSource.system == 'uniservice') {
           data.statusname = this.mapStatusUniserviceProcess(data.requeststatus, data.requestprocess);
         } else {
-          data.statusname = this.mapStatusEServiceProcess(data.requeststatus, data.requestprocess);
+          data.statusname = this.mapStatusEServiceProcess(data.status, data.process);
         }
         return data;
       })

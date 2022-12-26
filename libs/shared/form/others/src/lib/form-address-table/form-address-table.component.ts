@@ -85,6 +85,19 @@ export class FormAddressTableComponent
     this.getProvince();
   }
 
+  onSearchPostcode() {
+    const { zipcode } = this.form.getRawValue();
+    this.addressService.getAddressByPostcode(zipcode).subscribe((response) => {
+      if (response) {
+        this.form.patchValue({
+          provinceid: response[0].provinceid,
+          districtid: response[0].amphurcode
+        })
+        this.getProvince();
+      }
+    });
+  }
+
   getProvince() {
     this.addressService.getProvinces().subscribe((response) => {
       if (response) {
