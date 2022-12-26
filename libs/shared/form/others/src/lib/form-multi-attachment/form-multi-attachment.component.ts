@@ -64,7 +64,7 @@ export class FormMultiAttachmentComponent {
       });
       dialogRef
         .afterClosed()
-        .subscribe((result) => (this.confirmChoice.emit(result)));
+        .subscribe((result) => (group.checkresult = result.checkResult));
     }
   }
 

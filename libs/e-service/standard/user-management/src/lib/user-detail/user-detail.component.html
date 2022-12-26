@@ -87,7 +87,7 @@
 
     <div class="bg-light px-4 py-2">
       <div class="box-header">
-        ข้อมูลผู้ขอเข้ารหัสสำหรับเข้าใช้งานระบบ (ผู้ประสานงาน)
+        {{headerRequest[requestType]}}
       </div>
       <ksp-form-coordinator-info
         [mode]="'view'"
@@ -156,7 +156,6 @@
       title="หลักฐานเพื่อพิจารณา"
       [mode]="'view'"
       [systemType]="'uni'"
-      (confirmChoice)="applyChoice($event)"
     ></ksp-form-multi-attachment>
   </div>
   <br />

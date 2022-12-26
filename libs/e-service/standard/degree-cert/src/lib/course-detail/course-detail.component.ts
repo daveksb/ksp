@@ -167,8 +167,9 @@ export class CourseDetailComponent implements OnInit {
       courseSelected: rowDetail,
       courseDetail: this.courseData
     };
-    localForage.setItem('courseData', course);
-    this.router.navigate(['/degree-cert', 'student-list', type]);
+    localForage.setItem('courseData', course).then(()=>{
+      this.router.navigate(['/degree-cert', 'student-list', type]);
+    })
   }
 
   cancel() {
@@ -179,7 +180,8 @@ export class CourseDetailComponent implements OnInit {
     const yearnow = (new Date().getFullYear() + 543);
     return (Number(row.year)+2) <= yearnow 
           && row.graduatecount < row.student
-          && row.student == row.admissioncount;
+          && row.student == row.admissioncount
+          && row.graduatecount > 0;
   }
 
   viewCourseDetail() {
