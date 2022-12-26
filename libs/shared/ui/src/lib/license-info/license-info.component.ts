@@ -1,6 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { SchoolRequestSubType } from '@ksp/shared/constant';
+import {
+  SchoolRequestSubType,
+  SelfPrefixEn,
+  SelfPrefixTh,
+  SelfServiceRequestSubType,
+} from '@ksp/shared/constant';
 import { SelfLicense } from '@ksp/shared/interface';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
 
@@ -17,9 +22,11 @@ export class LicenseInfoComponent {
   @Input() subTitle1 = 'วันเดือนปีที่ออก';
   @Input() subTitle2 = 'วันเดือนปีที่หมดอายุ';
   @Input() rewardTitleName = '';
-  @Input() license: SelfLicense | null = null;
+  @Input() license: SelfLicense | null | any = null;
   @Output() selected = new EventEmitter<string>();
-
+  SelfServiceRequestSubType = SelfServiceRequestSubType;
+  SelfPrefixTh = SelfPrefixTh;
+  SelfPrefixEn = SelfPrefixEn;
 
   select(licenseno: string | null | undefined) {
     if (licenseno) {
