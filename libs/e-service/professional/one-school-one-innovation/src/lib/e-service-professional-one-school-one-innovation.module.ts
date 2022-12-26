@@ -20,6 +20,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
+import { OsoiRankingListComponent } from './osoi-ranking-list/osoi-ranking-list.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const routes: Routes = [
   {
@@ -44,7 +46,11 @@ const routes: Routes = [
         component: OsoiConfirmComponent,
       },
       {
-        path: 'ranking',
+        path: 'ranking-list',
+        component: OsoiRankingListComponent,
+      },
+      {
+        path: 'ranking-detail',
         component: OsoiRankingComponent,
       },
       {
@@ -73,6 +79,7 @@ const routes: Routes = [
     ThaiDatePipe,
     ReactiveFormsModule,
     LicenseCheckComponent,
+    MatProgressSpinnerModule,
   ],
   declarations: [
     OsoiListComponent,
@@ -80,7 +87,9 @@ const routes: Routes = [
     OsoiConfirmComponent,
     OsoiRankingComponent,
     OsoiObjectionComponent,
+    OsoiRankingListComponent,
   ],
+  /* exports: [OsoiRankingListComponent], */
   /*   exports: [
     OsoiListComponent,
     OsoiDetailComponent,

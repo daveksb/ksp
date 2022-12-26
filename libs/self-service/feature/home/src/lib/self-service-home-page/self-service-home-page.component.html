@@ -244,7 +244,11 @@
       <ng-container matColumnDef="paymentStatus">
         <th mat-header-cell *matHeaderCellDef>สถานะการชำระเงิน</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.paymentStatus || 'รอชำระเงิน' }}
+          {{
+            element.requesttype === '1' || element.requesttype === '2'
+              ? element.paymentstatus
+              : '-'
+          }}
         </td>
       </ng-container>
 

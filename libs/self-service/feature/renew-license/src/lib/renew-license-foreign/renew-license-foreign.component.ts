@@ -12,6 +12,7 @@ import {
   SelfServiceRequestForType,
 } from '@ksp/shared/constant';
 import {
+  changeToEnglishMonth,
   getCookie,
   parseJson,
   replaceEmptyWithNull,
@@ -35,6 +36,8 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   styleUrls: ['./renew-license-foreign.component.scss'],
 })
 export class RenewLicenseForeignComponent implements OnInit {
+  changeToEnglishMonth = changeToEnglishMonth;
+
   form = this.fb.group({
     personalDetail: [],
     personalDeclaration: [],
@@ -99,7 +102,7 @@ export class RenewLicenseForeignComponent implements OnInit {
           if (res) {
             console.log(res);
             this.requestData = res;
-            this.requestDate = res.requestdate;
+            this.requestDate = changeToEnglishMonth(res.requestdate || '');
             this.requestNo = res.requestno;
             this.currentProcess = Number(res.process);
             this.uniqueNo = res.uniqueno || '';

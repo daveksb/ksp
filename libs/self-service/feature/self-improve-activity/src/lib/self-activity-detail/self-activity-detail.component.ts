@@ -78,6 +78,10 @@ export class SelfActivityDetailComponent implements OnInit {
       console.log(res);
     });
   }
+
+  clear() {
+    this.form.reset();
+  }
 }
 
 const attachFiles: FileGroup[] = [{ name: '1. วุฒิบัตร', files: [] }];

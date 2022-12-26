@@ -6,6 +6,7 @@ import {
   SelfRequestService,
   GeneralInfoService,
   EducationDetailService,
+  LoaderService,
 } from '@ksp/shared/service';
 import {
   getCookie,
@@ -14,7 +15,7 @@ import {
   toLowercaseProp,
 } from '@ksp/shared/utility';
 import * as _ from 'lodash';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { parseJson } from '@ksp/shared/utility';
 import { MatDialog } from '@angular/material/dialog';
 import {
@@ -38,6 +39,8 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   providers: providerFactory(RequestRewardMainComponent),
 })
 export class RequestRewardMainComponent implements OnInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
+
   headerGroup = [
     'วันที่ทำรายการ',
     'เลขใบคำขอ',
@@ -76,7 +79,8 @@ export class RequestRewardMainComponent implements OnInit {
     private dialog: MatDialog,
     private router: Router,
     private service: RequestRewardMainService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {

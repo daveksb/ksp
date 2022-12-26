@@ -23,6 +23,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { SchoolServiceFormActivityModule } from '@ksp/school-service/form/activity';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ActivityViewDetailComponent } from './activity-view-detail/activity-view-detail.component';
 
 export const routes: Routes = [
   {
@@ -32,6 +33,7 @@ export const routes: Routes = [
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: 'list', component: ActivityListComponent },
       { path: 'detail', component: ActivityDetailComponent },
+      { path: 'view-detail/:staffid', component: ActivityViewDetailComponent },
       {
         path: 'detail/:pageType/:staffid',
         component: ActivityDetailComponent,
@@ -61,6 +63,11 @@ export const routes: Routes = [
     ThaiDatePipe,
     MatProgressSpinnerModule,
   ],
-  declarations: [ActivityListComponent, ActivityDetailComponent],
+  declarations: [
+    ActivityListComponent,
+    ActivityDetailComponent,
+    ActivityViewDetailComponent,
+  ],
+  exports: [ActivityViewDetailComponent],
 })
 export class SchoolServiceFeatureActivityModule {}

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -44,7 +44,7 @@ export class AccusationSearchComponent extends KspFormBaseComponent {
     accuserFirstname: [],
     accuserLastname: [],
   });
-
+  @Input() showAddButton = false;
   @Output() submited = new EventEmitter<boolean>();
   dataSource = new MatTableDataSource<AccusationList>();
   displayedColumns: string[] = columns;

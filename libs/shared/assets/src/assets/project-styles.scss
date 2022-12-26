@@ -159,6 +159,10 @@ input[type='radio'] {
   border-radius: 0;
 } */
 
+.form-check-input {
+  margin-top: 0;
+}
+
 .form-check-input:checked[type='radio'] {
   /* background-color: #f68b33;
   border: #f68b33; */

@@ -29,7 +29,15 @@ import {
 import { MatSortModule } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { EQualificationConfirmComponent } from './e-qualification-confirm/e-qualification-confirm.component';
-import { ValidateKspRequestComponent } from '@ksp/e-service/e-license/approve-ksp-request';
+import {
+  ConsiderKspRequestComponent,
+  ValidateKspRequestComponent,
+} from '@ksp/e-service/e-license/approve-ksp-request';
+import { EQualificationConsiderListComponent } from './e-qualification-consider-list/e-qualification-consider-list.component';
+import { EQualificationConsiderDetailComponent } from './e-qualification-consider-detail/e-qualification-consider-detail.component';
+import { EQualificationConsiderMeetingComponent } from './e-qualification-consider-meeting/e-qualification-consider-meeting.component';
+import { PdfRenderComponent } from '@ksp/shared/dialog';
+import { FormMeetingRecordComponent } from '@ksp/shared/form/license';
 
 export const routes: Route[] = [
   {
@@ -49,9 +57,21 @@ export const routes: Route[] = [
         path: 'detail/:id',
         component: EQualificationApproveDetailComponent,
       },
-            {
+      {
         path: 'confirm/:id',
         component: EQualificationConfirmComponent,
+      },
+      {
+        path: 'consider-list',
+        component: EQualificationConsiderListComponent,
+      },
+      {
+        path: 'consider-detail/:id',
+        component: EQualificationConsiderDetailComponent,
+      },
+      {
+        path: 'consider-meeting',
+        component: EQualificationConsiderMeetingComponent,
       },
     ],
   },
@@ -80,16 +100,27 @@ export const routes: Route[] = [
     QualificationApprovePersonComponent,
     QualificationApproveDetailComponent,
     ValidateKspRequestComponent,
+    ConsiderKspRequestComponent,
+    PdfRenderComponent,
+    FormMeetingRecordComponent,
   ],
   declarations: [
     EQualificationApproveListComponent,
     EQualificationApproveDetailComponent,
     EQualificationConfirmComponent,
+    EQualificationConsiderListComponent,
+    EQualificationConsiderDetailComponent,
+    EQualificationConsiderMeetingComponent,
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },
     { provide: MatDialogRef, useValue: {} },
   ],
-  exports: [EQualificationConfirmComponent],
+  exports: [
+    EQualificationConfirmComponent,
+    EQualificationConsiderListComponent,
+    EQualificationConsiderDetailComponent,
+    EQualificationConsiderMeetingComponent,
+  ],
 })
 export class EServiceStandardQualificationApproveModule {}

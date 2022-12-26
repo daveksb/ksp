@@ -98,7 +98,7 @@ export class ActivityAcademicArchivementComponent
           this.form.controls['oldPendingAcademic'].updateValueAndValidity();
           this.form.controls['newPendingAcademic'].updateValueAndValidity();
         }
-        console.log('xxx = ', this.form.controls.isAcademicChecked.value);
+        //console.log('xxx = ', this.form.controls.isAcademicChecked.value);
       });
   }
 

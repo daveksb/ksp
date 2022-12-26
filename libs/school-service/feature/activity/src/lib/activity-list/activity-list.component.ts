@@ -99,20 +99,11 @@ export class ActivityListComponent implements AfterViewInit {
     });
   }
 
-  view(pageType: any, staffId: number, requestid: number) {
-    this.router.navigate(['/activity', 'detail', pageType, staffId], {
+  view(staffId: number, requestid: number) {
+    this.router.navigate(['/activity', 'view-detail', staffId], {
       queryParams: { requestid: requestid },
     });
   }
-}
-
-export interface staffInfo {
-  id: number;
-  idcardno: string;
-  firstnameth: string;
-  lastnameth: string;
-  startdate: string;
-  enddate: string;
 }
 
 enum activityPageMode {

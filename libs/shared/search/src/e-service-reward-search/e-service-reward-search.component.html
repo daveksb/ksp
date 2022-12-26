@@ -41,7 +41,7 @@
     </div>
     <div class="col">
       <label class="form-label">ผลการพิจารณา</label>
-      <select class="form-select">
+      <select class="form-select" formControlName="process">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option value="1">ผ่าน</option>
         <option value="2">ไม่ผ่าน</option>
@@ -59,11 +59,13 @@
           autocomplete="off"
           class="form-control form-date"
           formControlName="declaredatefrom"
-          placeholder="วว/ดด/ปปปป" />
+          placeholder="วว/ดด/ปปปป"
+        />
         <mat-datepicker-toggle
           class="button-date"
           matSuffix
-          [for]="picker3"></mat-datepicker-toggle>
+          [for]="picker3"
+        ></mat-datepicker-toggle>
         <mat-datepicker #picker3></mat-datepicker>
       </div>
     </div>
@@ -77,11 +79,13 @@
           autocomplete="off"
           class="form-control form-date"
           formControlName="declaredateto"
-          placeholder="วว/ดด/ปปปป" />
+          placeholder="วว/ดด/ปปปป"
+        />
         <mat-datepicker-toggle
           class="button-date"
           matSuffix
-          [for]="picker4"></mat-datepicker-toggle>
+          [for]="picker4"
+        ></mat-datepicker-toggle>
         <mat-datepicker #picker4></mat-datepicker>
       </div>
     </div>
@@ -95,11 +99,13 @@
           autocomplete="off"
           class="form-control form-date"
           formControlName="requestdatefrom"
-          placeholder="วว/ดด/ปปปป" />
+          placeholder="วว/ดด/ปปปป"
+        />
         <mat-datepicker-toggle
           class="button-date"
           matSuffix
-          [for]="picker"></mat-datepicker-toggle>
+          [for]="picker"
+        ></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </div>
     </div>
@@ -113,11 +119,13 @@
           autocomplete="off"
           class="form-control form-date"
           formControlName="requestdateto"
-          placeholder="วว/ดด/ปปปป" />
+          placeholder="วว/ดด/ปปปป"
+        />
         <mat-datepicker-toggle
           class="button-date"
           matSuffix
-          [for]="picker2"></mat-datepicker-toggle>
+          [for]="picker2"
+        ></mat-datepicker-toggle>
         <mat-datepicker #picker2></mat-datepicker>
       </div>
     </div>
@@ -127,13 +135,15 @@
     <button
       class="btn border-primary text-primary"
       type="button"
-      (click)="clear.emit()">
+      (click)="clear.emit()"
+    >
       ล้างข้อมูล
     </button>
     <button
       class="btn btn-primary ms-2"
       type="button"
-      (click)="search.emit(form.value)">
+      (click)="search.emit(form.value)"
+    >
       ค้นหา
     </button>
   </div>

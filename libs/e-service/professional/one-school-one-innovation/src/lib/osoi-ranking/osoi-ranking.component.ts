@@ -12,7 +12,7 @@ export class OsoiRankingComponent implements OnInit {
   ngOnInit(): void {}
 
   cancel() {
-    this.router.navigate(['/', 'one-school-one-innovation', 'list']);
+    this.router.navigate(['/', 'one-school-one-innovation', 'ranking-list']);
   }
 
   next() {

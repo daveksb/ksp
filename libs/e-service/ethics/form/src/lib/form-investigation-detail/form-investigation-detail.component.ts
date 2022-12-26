@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { Router } from '@angular/router';
@@ -26,6 +26,8 @@ import {
   KspFormBaseComponent,
 } from '@ksp/shared/interface';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { Observable } from 'rxjs';
+import { GeneralInfoService } from '@ksp/shared/service';
 
 @Component({
   selector: 'e-service-form-investigation-detail',
@@ -48,12 +50,18 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
   ],
   providers: providerFactory(FormInvestigationDetailComponent),
 })
-export class FormInvestigationDetailComponent extends KspFormBaseComponent {
+export class FormInvestigationDetailComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
   @Input() hideAllButtons = false;
   @Input() hideContainer = false;
   @Input() hideTitle = false;
+  prefixList$!: Observable<any>;
   today = thaiDate(new Date());
   requestNumber = '';
+  decisions = decisions;
+
   override form = this.fb.group({
     investigationorderno: [],
     investigationorderdate: [],
@@ -68,9 +76,15 @@ export class FormInvestigationDetailComponent extends KspFormBaseComponent {
     }),
   });
 
-  decisions = decisions;
+  ngOnInit(): void {
+    this.getListData();
+  }
 
-  constructor(private router: Router, private fb: FormBuilder) {
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private generalInfoService: GeneralInfoService
+  ) {
     super();
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
@@ -88,6 +102,7 @@ export class FormInvestigationDetailComponent extends KspFormBaseComponent {
       idcardno: data.idcardno,
       idnumber: data.idnumber,
       positioncommittee: data.positioncommittee,
+      prefix: data.prefix,
       firstname: data.firstname,
       lastname: data.lastname,
       position: data.position,
@@ -97,5 +112,8 @@ export class FormInvestigationDetailComponent extends KspFormBaseComponent {
   }
   deleteRow(index: number) {
     this.members.removeAt(index);
+  }
+  getListData() {
+    this.prefixList$ = this.generalInfoService.getPrefix();
   }
 }
