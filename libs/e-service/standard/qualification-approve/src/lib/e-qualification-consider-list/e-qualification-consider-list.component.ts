@@ -37,7 +37,7 @@ export class EQualificationConsiderListComponent implements AfterViewInit {
   searchNotFound = false;
 
   form = this.fb.group({
-    search: [{ requesttype: '6', process: '2' }],
+    search: [{ requesttype: '6', process: '3', status: '1' }],
   });
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -281,7 +281,11 @@ export class EQualificationConsiderListComponent implements AfterViewInit {
     this.searchNotFound = false;
     this.dataSource.data = [];
     this.form.reset();
-    this.form.controls.search.patchValue({ requesttype: '3', process: '2' });
+    this.form.controls.search.patchValue({
+      requesttype: '6',
+      process: '3',
+      status: '1',
+    });
   }
 
   goToDetail(item: KspRequest) {
