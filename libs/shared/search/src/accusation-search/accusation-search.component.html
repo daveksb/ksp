@@ -144,7 +144,7 @@
       </div>
     </div>
 
-    <div class="d-flex justify-content-end my-3">
+    <div class="d-flex justify-content-end mt-3 mb-2">
       <button
         (click)="submited.emit(false)"
         type="button"
@@ -162,8 +162,7 @@
     </div>
   </div>
 </form>
-<br />
-<div class="bg-white px-3 py-2">
+<div class="bg-white px-3 py-2 mt-3">
   <div class="d-flex justify-content-between">
     <div class="box-header">รายการการกล่าวหา/กล่าวโทษ</div>
     <button
@@ -176,7 +175,7 @@
     </button>
   </div>
   <hr />
-  <div class="table-responsive">
+  <div class="table__scroll">
     <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="order">
         <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
@@ -266,4 +265,5 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
   </div>
+  <mat-paginator [pageSizeOptions]="[25]" showFirstLastButtons></mat-paginator>
 </div>

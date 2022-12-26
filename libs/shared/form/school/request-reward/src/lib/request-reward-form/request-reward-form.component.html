@@ -74,12 +74,12 @@
                   ? 'border-danger'
                   : ''
               "
-              formControlName="personId"
+              formControlName="idcardno"
               maxlength="13"
             />
           </td>
           <td>
-            <select class="form-select" formControlName="prefix">
+            <select class="form-select" formControlName="prefixth">
               <option value="null" selected hidden disabled>เลือก</option>
               <option *ngFor="let prefix of prefixList" [value]="prefix.id">
                 {{ prefix?.name_th }}
@@ -90,7 +90,7 @@
             <input
               type="text"
               class="form-control"
-              formControlName="firstName"
+              formControlName="firstnameth"
               [class]="
                 firstName.invalid &&
                 (firstName.dirty || firstName.touched) &&
@@ -104,7 +104,7 @@
             <input
               type="text"
               class="form-control"
-              formControlName="lastName"
+              formControlName="lastnameth"
               [class]="
                 lastName.invalid &&
                 (lastName.dirty || lastName.touched) &&
@@ -125,7 +125,7 @@
                   ? 'border-danger'
                   : ''
               "
-              formControlName="phone"
+              formControlName="contactphone"
               maxlength="10"
             />
           </td>
@@ -145,7 +145,7 @@
             <input
               type="text"
               class="form-control"
-              formControlName="academicStanding"
+              formControlName="position"
             />
           </td>
         </tr>
