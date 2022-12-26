@@ -79,6 +79,7 @@ export class UserDetailComponent implements OnInit {
   ] as FileGroup[];
 
   requestTypeList = ['', 'ยื่นผู้ประสานงาน', 'ยื่นถอดถอนผู้ประสานงาน'];
+  headerRequest = ['', 'ข้อมูลผู้ขอเข้ารหัสสำหรับเข้าใช้งานระบบ (ผู้ประสานงาน)', 'ข้อมูลผู้ขอถอดถอนสำหรับเข้าใช้งานระบบ'];
   isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   retireReason = SchoolRetireReason;
@@ -137,6 +138,7 @@ export class UserDetailComponent implements OnInit {
       this.requestType = this.requestData.requesttype
         ? parseInt(this.requestData.requesttype)
         : 0;
+      console.log(this.requestType)
 
       res.status === '1' ? (this.mode = 'edit') : (this.mode = 'view');
       const approvedetail = parseJson(res.detail);
@@ -317,14 +319,6 @@ export class UserDetailComponent implements OnInit {
           this.router.navigate(['/uni', 'new-user']);
         }
       }
-    });
-  }
-
-  applyChoice(res: any) {
-    this.verifyForm.controls.result.patchValue({
-      result: res.checkResult[0]?.result,
-      reason: res.checkResult[0]?.reason || '',
-      detail: res.checkResult[0]?.detail || '',
     });
   }
 }

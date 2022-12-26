@@ -405,8 +405,9 @@ export class ImportStudentComponent implements OnInit {
       payload: { ...this.payload },
     };
 
-    localForage.setItem('studentform', datainfo);
-    this.router.navigate(['/degree-cert', 'consider-student']);
+    localForage.setItem('studentform', datainfo).then(()=>{
+      this.router.navigate(['/degree-cert', 'consider-student']);
+    })
   }
 
   checkdisableSave() {

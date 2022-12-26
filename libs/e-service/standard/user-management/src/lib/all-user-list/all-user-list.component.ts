@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { SchoolUserDetailComponent } from '@ksp/e-service/dialog/school-user-detail';
+import { UniUserDetailComponent } from '@ksp/e-service/dialog/uni-user-detail';
 import { KspPaginationComponent } from '@ksp/shared/interface';
 import { EUniService, LoaderService } from '@ksp/shared/service';
 import { stringToThaiDate } from '@ksp/shared/utility';
@@ -65,7 +65,7 @@ export class AllUserListComponent extends KspPaginationComponent implements OnIn
   viewDetail(item: any) {
     this.euniservice.getUserById({ id: item.id }).subscribe( res => {
       if (res) {
-        this.dialog.open(SchoolUserDetailComponent, {
+        this.dialog.open(UniUserDetailComponent, {
           width: '1200px',
           height: '100vh',
           position: {
