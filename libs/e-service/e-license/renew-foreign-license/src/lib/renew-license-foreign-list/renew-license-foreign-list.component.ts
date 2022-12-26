@@ -48,6 +48,7 @@ export class RenewLicenseForeignListComponent implements AfterViewInit {
   requestTypeList = SchoolRequestType.filter((i) => i.id > 2);
   checkProcess = checkProcess;
   checkStatus = checkStatus;
+  searchNotFound = false;
 
   form = this.fb.group({
     search: [{ requesttype: '3' }],
@@ -74,12 +75,12 @@ export class RenewLicenseForeignListComponent implements AfterViewInit {
       systemtype: '1',
       requesttype: SelfServiceRequestType.ขอต่ออายุใบอนุญาตประกอบวิชาชีพ,
       requestno: params.requestno,
-      careertype: params.subtype,
+      careertype: params.careertype,
       name: null,
       idcardno: params.idcardno,
       passportno: null,
-      process: params.currentprocess,
-      status: params.requeststatus,
+      process: params.process,
+      status: params.status,
       schoolid: null,
       schoolname: null,
       bureauid: null,
@@ -93,17 +94,24 @@ export class RenewLicenseForeignListComponent implements AfterViewInit {
     payload = replaceEmptyWithNull(payload);
 
     this.requestService.KspSearchRequest(payload).subscribe((res) => {
-      console.log(res);
-      this.dataSource.data = res;
-      this.dataSource.sort = this.sort;
+      //onsole.log(res);
+      if (res) {
+        this.dataSource.data = res;
+        this.dataSource.sort = this.sort;
 
-      const sortState: Sort = {
-        active: 'requestdate',
-        direction: 'asc',
-      };
-      this.sort.active = sortState.active;
-      this.sort.direction = sortState.direction;
-      this.sort.sortChange.emit(sortState);
+        const sortState: Sort = {
+          active: 'requestdate',
+          direction: 'asc',
+        };
+        this.sort.active = sortState.active;
+        this.sort.direction = sortState.direction;
+        this.sort.sortChange.emit(sortState);
+
+        this.searchNotFound = false;
+      } else {
+        this.clear();
+        this.searchNotFound = true;
+      }
     });
   }
 
@@ -112,6 +120,7 @@ export class RenewLicenseForeignListComponent implements AfterViewInit {
   }
 
   clear() {
+    this.searchNotFound = false;
     this.dataSource.data = [];
   }
 }

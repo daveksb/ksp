@@ -17,7 +17,7 @@
       ประวัติการตรวจสอบคุณสมบัติและเอกสาร
     </div>
 
-    <table class="table w-75 mb-5">
+    <table class="table w-75">
       <thead>
         <tr>
           <th scope="col">ครั้งที่</th>
@@ -27,6 +27,9 @@
         </tr>
       </thead>
       <tbody>
+        <!-- <tr *ngIf="!approveHistory.length">
+          <td scope="col" colspan="4" class="text-center">ไม่พบข้อมูล</td>
+        </tr> -->
         <ng-container *ngFor="let row of approveHistory; let i = index">
           <tr>
             <td scope="col">{{ i + 1 }}</td>
@@ -39,32 +42,38 @@
         </ng-container>
       </tbody>
     </table>
+  </div>
 
-    <div [formGroup]="form">
-      <ng-container
-        *ngIf="
-          (saveData.requestData.requesttype === '3' &&
-            saveData.requestData.process === '5') ||
-            (saveData.requestData.requesttype === '6' &&
-              saveData.requestData.process === '3');
-          else approve
-        "
-      >
-        <ng-container *ngIf="saveData.requestData.status === '1'">
+  <form [formGroup]="form">
+    <ng-container
+      *ngIf="
+        (saveData.requestData.requesttype === '3' &&
+          saveData.requestData.process === '5') ||
+          (saveData.requestData.requesttype === '6' &&
+            saveData.requestData.process === '3');
+        else approve
+      "
+    >
+      <ng-container *ngIf="saveData.requestData.status === '1'">
+        <div class="bg-white p-3 mt-3">
+          <div class="box-header">ผลการยืนยันการตรวจสอบ</div>
+          <hr />
           <ksp-consider-ksp-request
             formControlName="approvement"
           ></ksp-consider-ksp-request>
-        </ng-container>
+        </div>
       </ng-container>
-      <ng-template #approve>
+    </ng-container>
+    <ng-template #approve>
+      <div class="bg-white p-3 pt-0">
         <ksp-validate-ksp-request
           [requestType]="saveData.requestData.requesttype"
           [process]="saveData.requestData.process"
           formControlName="approvement"
         ></ksp-validate-ksp-request>
-      </ng-template>
-    </div>
-  </div>
+      </div>
+    </ng-template>
+  </form>
 </div>
 
 <div class="sticky-bottom border px-2">

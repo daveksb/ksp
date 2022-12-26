@@ -35,6 +35,7 @@ export class EQualificationConsiderListComponent implements AfterViewInit {
   displayedColumns: string[] = column2;
   dataSource = new MatTableDataSource<any>();
   searchNotFound = false;
+
   form = this.fb.group({
     search: [{ requesttype: '6', process: '2' }],
   });

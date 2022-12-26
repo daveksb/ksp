@@ -30,11 +30,11 @@ export class EServiceLicenseSearchComponent extends KspFormBaseComponent {
 
   override form = this.fb.group({
     requestno: [null],
-    subtype: [null],
+    careertype: [null],
     idcardno: [''],
     province: [null],
-    currentprocess: [null],
-    requeststatus: [null],
+    process: [null],
+    status: [null],
     requestdatefrom: [null],
     requestdateto: [null],
   });
@@ -52,7 +52,7 @@ export class EServiceLicenseSearchComponent extends KspFormBaseComponent {
       return `${i.requestType}` === '1' && i.processId > 1;
     });
 
-    this.form.controls.currentprocess.valueChanges.subscribe(
+    this.form.controls.process.valueChanges.subscribe(
       (currentProcess) => {
         this.statusList = this.processList.find(
           (p) => `${p.processId}` === currentProcess

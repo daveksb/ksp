@@ -37,6 +37,7 @@ export class RenewLicenseListComponent implements AfterViewInit {
   requestTypeList = SchoolRequestType.filter((i) => i.id > 2);
   checkProcess = eSelfCheckProcess;
   checkStatus = eSelfCheckStatus;
+  searchNotFound = false;
 
   form = this.fb.group({
     search: [],
@@ -59,16 +60,18 @@ export class RenewLicenseListComponent implements AfterViewInit {
   }
 
   search(params: any) {
+    this.searchNotFound = false;
+
     let payload: EsSearchPayload = {
       systemtype: '1',
       requesttype: SelfServiceRequestType.ขอต่ออายุใบอนุญาตประกอบวิชาชีพ,
       requestno: params.requestno,
-      careertype: params.subtype,
+      careertype: params.careertype,
       name: null,
       idcardno: params.idcardno,
       passportno: null,
-      process: params.currentprocess,
-      status: params.requeststatus,
+      process: params.process,
+      status: params.status,
       schoolid: null,
       schoolname: null,
       bureauid: null,
@@ -81,14 +84,21 @@ export class RenewLicenseListComponent implements AfterViewInit {
     payload = replaceEmptyWithNull(payload);
 
     this.requestService.KspSearchRequest(payload).subscribe((res) => {
-      this.dataSource.data = res;
-      this.dataSource.data = processFilter(res);
-      this.dataSource.sort = this.sort;
+      if (res) {
+        this.dataSource.data = res;
+        this.dataSource.data = processFilter(res);
+        this.dataSource.sort = this.sort;
 
-      const sortState: Sort = { active: 'requestdate', direction: 'asc' };
-      this.sort.active = sortState.active;
-      this.sort.direction = sortState.direction;
-      this.sort.sortChange.emit(sortState);
+        const sortState: Sort = { active: 'requestdate', direction: 'asc' };
+        this.sort.active = sortState.active;
+        this.sort.direction = sortState.direction;
+        this.sort.sortChange.emit(sortState);
+
+        //this.searchNotFound = false;
+      } else {
+        this.clear();
+        this.searchNotFound = true;
+      }
     });
   }
 
@@ -97,6 +107,7 @@ export class RenewLicenseListComponent implements AfterViewInit {
   }
 
   clear() {
+    this.searchNotFound = false;
     this.dataSource.data = [];
   }
 }

@@ -38,6 +38,7 @@ export class ForeignLicenseListComponent implements AfterViewInit {
   checkStatus = checkStatus;
   requestTypeList = SchoolRequestType.filter((i) => i.id > 2);
   SchoolRequestSubType = SchoolRequestSubType;
+  searchNotFound = false;
 
   constructor(
     private router: Router,
@@ -79,13 +80,17 @@ export class ForeignLicenseListComponent implements AfterViewInit {
         this.sort.active = sortState.active;
         this.sort.direction = sortState.direction;
         this.sort.sortChange.emit(sortState);
+
+        this.searchNotFound = false;
       } else {
         this.clear();
+        this.searchNotFound = true;
       }
     });
   }
 
   clear() {
+    this.searchNotFound = false;
     this.dataSource.data = [];
     this.form.reset();
     this.form.controls.search.patchValue({ requesttype: '3' });

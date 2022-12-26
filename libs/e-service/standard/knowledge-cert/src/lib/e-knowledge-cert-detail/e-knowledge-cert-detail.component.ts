@@ -24,6 +24,7 @@ export class EKnowledgeCertDetailComponent
   extends ESelfFormBaseComponent
   implements OnInit
 {
+  selectedTabIndex = 0;
   countries$!: Observable<any>;
   countries2$!: Observable<any>;
   licenses$!: Observable<any>;
@@ -140,6 +141,22 @@ export class EKnowledgeCertDetailComponent
 
   patchWorkPlaceForm(data: any): void {
     this.form.controls.workplace.patchValue(data);
+  }
+
+  nextTab() {
+    if (this.selectedTabIndex < 3) {
+      this.selectedTabIndex++;
+    } else {
+      this.next();
+    }
+  }
+
+  prevTab() {
+    if (this.selectedTabIndex == 0) {
+      this.cancel();
+    } else {
+      this.selectedTabIndex--;
+    }
   }
 
   next() {

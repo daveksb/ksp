@@ -25,7 +25,7 @@ export class ECompareKnowledgeDetailComponent
   implements OnInit
 {
   userInfoType = UserInfoFormType.thai;
-
+  selectedTabIndex = 0;
   countries$!: Observable<any>;
   countries2$!: Observable<any>;
   licenses$!: Observable<any>;
@@ -132,6 +132,22 @@ export class ECompareKnowledgeDetailComponent
 
   patchWorkPlaceForm(data: any): void {
     this.form.controls.workplace.patchValue(data);
+  }
+
+  nextTab() {
+    if (this.selectedTabIndex < 4) {
+      this.selectedTabIndex++;
+    } else {
+      this.next();
+    }
+  }
+
+  prevTab() {
+    if (this.selectedTabIndex == 0) {
+      this.cancel();
+    } else {
+      this.selectedTabIndex--;
+    }
   }
 
   next() {
