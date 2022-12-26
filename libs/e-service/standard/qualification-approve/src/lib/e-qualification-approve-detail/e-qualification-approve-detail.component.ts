@@ -50,6 +50,7 @@ export class EQualificationApproveDetailComponent implements OnInit {
   selectedTab: MatTabChangeEvent = new MatTabChangeEvent();
   refPerson: any;
   otherReason: any;
+  selectedTabIndex = 0;
 
   form = this.fb.group({
     userInfo: [],
@@ -219,6 +220,22 @@ export class EQualificationApproveDetailComponent implements OnInit {
       } else if (addrType === 2) {
         this.tumbols2$ = this.addressService.getTumbols(amphur);
       }
+    }
+  }
+
+  nextTab() {
+    if (this.selectedTabIndex < 4) {
+      this.selectedTabIndex++;
+    } else {
+      this.next();
+    }
+  }
+
+  prevTab() {
+    if (this.selectedTabIndex == 0) {
+      this.navigateBack();
+    } else {
+      this.selectedTabIndex--;
     }
   }
 }

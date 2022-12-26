@@ -3,7 +3,7 @@
   ><span subHeader>ใบคำขอรับรองความรู้ </span></ksp-top-nav
 >
 
-<div class="bg-secondary bg-opacity-10 py-2 px-4 full-height-2">
+<div class="bg-secondary bg-opacity-10 px-4 py-2 full-height-2">
   <div class="box-header">รายละเอียดใบคำขอรับรองความรู้</div>
   <div class="bg-white p-3">
     <div class="d-flex justify-content-between">
@@ -17,7 +17,7 @@
       ประวัติการตรวจสอบคุณสมบัติและเอกสาร
     </div>
 
-    <table class="table w-75 mb-3">
+    <table class="table w-75">
       <thead>
         <tr>
           <th scope="col">ครั้งที่</th>
@@ -27,6 +27,9 @@
         </tr>
       </thead>
       <tbody>
+        <!-- <tr *ngIf="!approveHistory.length">
+          <td scope="col" colspan="4" class="text-center">ไม่พบข้อมูล</td>
+        </tr> -->
         <ng-container *ngFor="let row of approveHistory; let i = index">
           <tr>
             <td scope="col">{{ i + 1 }}</td>
@@ -40,23 +43,23 @@
       </tbody>
     </table>
 
-    <div [formGroup]="form">
-      <ng-container
-        *ngIf="
-          saveData.requestData.process === '2' ||
-          saveData.requestData.process === '3' ||
-          (saveData.requestData.process === '4' &&
-            saveData.requestData.status !== '3')
-        "
-      >
+    <ng-container
+      *ngIf="
+        saveData.requestData.process === '2' ||
+        saveData.requestData.process === '3' ||
+        (saveData.requestData.process === '4' &&
+          saveData.requestData.status !== '3')
+      "
+    >
+      <div [formGroup]="form" class="mt-3">
         <ksp-validate-ksp-request
           [requestType]="saveData.requestData.requesttype"
           [process]="saveData.requestData.process"
           [showUrgent]="saveData.requestData.process === '4'"
           formControlName="approvement"
         ></ksp-validate-ksp-request>
-      </ng-container>
-    </div>
+      </div>
+    </ng-container>
 
     <!-- <div [formGroup]="form">
       <ng-container *ngIf="saveData.requestData.process === '6'; else validate">

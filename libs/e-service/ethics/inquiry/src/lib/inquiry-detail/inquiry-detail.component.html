@@ -1,8 +1,6 @@
 <form [formGroup]="form">
   <ksp-request-header-info
-    [requestLabel1]="'วันที่ทำรายการ'"
     [requestLabel2]="'เลขที่รายการ'"
-    [requestDate]="today"
     [requestNumber]="requestNumber"
   ></ksp-request-header-info>
 
@@ -13,8 +11,8 @@
     จัดทำคำสั่งแต่งตั้งคณะอนุกรรมการสอบสวน เสนอคณะกรรมการ (แบบจบ.1)
   </div>
 
-  <div class="row">
-    <div class="col mb-3">
+  <div class="row mb-3">
+    <div class="col">
       <label class="form-label">คำสั่งคณะกรรมการมาตรฐานวิชาชีพที่ </label>
       <input
         class="form-control"
@@ -22,7 +20,7 @@
         formControlName="inquiryorderno"
       />
     </div>
-    <div class="col mb-3">
+    <div class="col">
       <label class="form-label">ลงวันที่ </label>
       <div class="d-flex align-items-center">
         <input
@@ -204,8 +202,8 @@
   </div>
 
   <div class="form-label">จัดทำรายงานการสอบสวน (จ.บ.6)</div>
-  <div class="row">
-    <div class="col-6 mb-3">
+  <div class="row mb-2">
+    <div class="col-6">
       <label class="form-label">วันที่ </label>
       <div class="d-flex align-items-center">
         <input
@@ -226,8 +224,8 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col mb-3">
+  <div class="row mb-2">
+    <div class="col">
       <label class="form-label">รายงานผลการสืบสวน </label>
       <textarea
         class="form-control"
@@ -238,14 +236,14 @@
     </div>
   </div>
 
-  <div class="bg-light px-3 py-2" formGroupName="inquiryresult">
+  <div class="bg-light px-3 py-2 mt-3" formGroupName="inquiryresult">
     <div class="box-header">การพิจารณาดำเนินการ</div>
     <div class="form-label">
       คณะกรรมการวินิจฉัยระดับความผิดจรรยาบรรณของวิชาชีพ
       ตามมติคณะกรรมการมาตรฐานวิชาชีพในการประชุม
     </div>
-    <div class="row">
-      <div class="col mb-3">
+    <div class="row mb-2">
+      <div class="col">
         <label class="form-label">ครั้งที่ </label>
         <input
           class="form-control"
@@ -253,7 +251,7 @@
           formControlName="considertimes"
         />
       </div>
-      <div class="col mb-3">
+      <div class="col">
         <label class="form-label">วันที่ </label>
         <div class="d-flex align-items-center">
           <input
@@ -274,8 +272,8 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="col mb-3">
+    <div class="row mb-3">
+      <div class="col">
         <label class="form-label">มติที่ประชุม </label>
         <textarea
           class="form-control"
@@ -285,8 +283,8 @@
         >
         </textarea>
       </div>
-      <ksp-file-upload></ksp-file-upload>
     </div>
+    <ksp-file-upload></ksp-file-upload>
 
     <div class="my-3">
       <div class="d-flex align-items-center mb-2">

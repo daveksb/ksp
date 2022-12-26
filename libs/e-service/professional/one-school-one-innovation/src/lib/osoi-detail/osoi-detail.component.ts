@@ -65,10 +65,26 @@ export class OsoiDetailComponent implements OnInit {
   }
 
   patchData(data: any) {
-    const osoiInfo = parseJson(data.osoiinfo);
-    const osoiMember = parseJson(data.osoimember);
+    const osoiinfo = parseJson(data.osoiinfo);
 
-    this.form.controls.rewardInfo.patchValue(osoiInfo);
+    const rewardInfo = {
+      idcardno: data.idcardno,
+      prefixth: data.prefixth,
+      firstnameth: data.firstnameth,
+      lastnameth: data.lasttnameth,
+      contactphone: data.contactphone,
+      email: data.email,
+
+      rewardname: osoiinfo.rewardname,
+      rewardtype: osoiinfo.rewardtype,
+      submitbefore: osoiinfo.submitbefore,
+      vdolink: osoiinfo.vdolink,
+    };
+    console.log('data = ', rewardInfo);
+
+    this.form.controls.rewardInfo.patchValue(<any>rewardInfo);
+
+    const osoiMember = parseJson(data.osoimember);
     this.memberData = osoiMember;
 
     if (data.fileinfo) {
@@ -77,8 +93,8 @@ export class OsoiDetailComponent implements OnInit {
     }
   }
 
-  next() {
-    this.router.navigate(['/one-school-one-innovation', 'confirm']);
+  next(id: number) {
+    this.router.navigate(['/one-school-one-innovation', 'confirm', id]);
   }
 
   cancel() {

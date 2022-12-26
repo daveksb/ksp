@@ -22,6 +22,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import { OsoiRankingListComponent } from './osoi-ranking-list/osoi-ranking-list.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ValidateKspRequestComponent } from '@ksp/e-service/e-license/approve-ksp-request';
 
 const routes: Routes = [
   {
@@ -80,6 +81,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     LicenseCheckComponent,
     MatProgressSpinnerModule,
+    ValidateKspRequestComponent,
   ],
   declarations: [
     OsoiListComponent,

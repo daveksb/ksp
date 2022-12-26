@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'ksp-osoi-confirm',
@@ -7,10 +8,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./osoi-confirm.component.scss'],
 })
 export class OsoiConfirmComponent {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private location: Location) {}
 
   back() {
-    this.router.navigate(['/one-school-one-innovation', 'approve']);
+    this.location.back();
   }
 
   cancel() {

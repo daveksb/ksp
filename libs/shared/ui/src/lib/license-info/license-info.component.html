@@ -32,11 +32,20 @@
 
       <div class="col-6 ps-3 pe-0 text__size">
         <div>{{ license.licenseno }}</div>
-        <div>{{ license.careertype }}</div>
+        <div>{{ SelfServiceRequestSubType[+license.careertype] }}</div>
         <div>{{ license.idcardno }}</div>
-        <div>{{ license.licensetype }}</div>
-        <div>{{ license.firstnameth }} {{ license.lastnameth }}</div>
-        <div>{{ license.firstnameen }} {{ license.firstnameen }}</div>
+        <div>
+          ใบอนุญาตประกอบวิชาชีพ
+          {{ SelfServiceRequestSubType[+license.licensetype] }}
+        </div>
+        <div>
+          {{ SelfPrefixTh[+license.prefixth] }} {{ license.firstnameth }}
+          {{ license.lastnameth }}
+        </div>
+        <div>
+          {{ SelfPrefixEn[+license.prefixen] }} {{ license.firstnameen }}
+          {{ license.firstnameen }}
+        </div>
         <div>{{ license.birthdate | thaiDate }}</div>
         <div>{{ license.licensestartdate | thaiDate }}</div>
         <div>{{ license.licenseenddate | thaiDate }}</div>

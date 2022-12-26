@@ -89,10 +89,10 @@ export class RequestRewardComponent implements OnInit {
           const manager: any = {
             ...res,
             position: res.thposition,
-            firstName: res.thname,
-            lastName: res.thfamilyname,
-            prefix: res.thprefixid,
-            personId: res.thkurusapan,
+            firstnameth: res.thname,
+            lastnameth: res.thfamilyname,
+            prefixth: res.thprefixid,
+            idcardno: res.thkurusapan,
             email: res.schsendemail,
           };
           this.form.controls.reward.patchValue(manager);

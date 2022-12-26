@@ -3,7 +3,7 @@
   ><span subHeader>พิจารณารับรองหนังสือคุณวุฒิ </span></ksp-top-nav
 >
 
-<div class="bg-secondary bg-opacity-10 px-4 py-2">
+<div class="bg-secondary bg-opacity-10 px-4 py-2 full-height-2">
   <div class="box-header">พิจารณารับรอง</div>
   <div class="bg-white p-3">
     <div class="box-header text-primary mb-1">รายการขอหนังสือรับรองคุณวุฒิ</div>
@@ -46,6 +46,7 @@
     [isLastPage]="true"
     [showCenterButtons]="true"
     [showSaveButton]="true"
+    (cancelClicked)="cancel()"
   >
   </ksp-bottom-nav>
 </div>
