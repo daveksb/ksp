@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import {
   AddressService,
@@ -15,7 +16,9 @@ import { Observable } from 'rxjs';
   templateUrl: './accusation-search.component.html',
   styleUrls: ['./accusation-search.component.scss'],
 })
-export class AccusationSearchComponent implements OnInit {
+export class AccusationSearchComponent implements OnInit, AfterViewInit {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   form = this.fb.group({
     idcardno: '',
     prefixth: '',
@@ -47,6 +50,9 @@ export class AccusationSearchComponent implements OnInit {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.bureaus$ = this.generalInfoService.getBureau();
     this.provinces$ = this.addressService.getProvinces();
+  }
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
   }
   search() {
     this.currentPage = 1;
@@ -87,6 +93,7 @@ export class AccusationSearchComponent implements OnInit {
 }
 
 export const column = [
+  'order',
   'select',
   'view',
   'personId',

@@ -1,29 +1,43 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SchoolRequestType } from '@ksp/shared/constant';
 import { EsSearchPayload, SchRequestSearchFilter } from '@ksp/shared/interface';
-import { ERequestService } from '@ksp/shared/service';
-import { replaceEmptyWithNull } from '@ksp/shared/utility';
+import { ERequestService, LoaderService } from '@ksp/shared/service';
+import {
+  checkProcess,
+  checkStatus,
+  replaceEmptyWithNull,
+} from '@ksp/shared/utility';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'ksp-osoi-list',
   templateUrl: './osoi-list.component.html',
   styleUrls: ['./osoi-list.component.scss'],
 })
-export class OsoiListComponent implements OnInit, AfterViewInit {
+export class OsoiListComponent implements AfterViewInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<any>();
+  checkProcess = checkProcess;
+  checkStatus = checkStatus;
+  searchNotFound = false;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+  form = this.fb.group({
+    search: [],
+  });
+
   constructor(
     private router: Router,
-    private requestService: ERequestService
+    private requestService: ERequestService,
+    private loaderService: LoaderService,
+    private fb: FormBuilder
   ) {}
-
-  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -38,7 +52,7 @@ export class OsoiListComponent implements OnInit, AfterViewInit {
       name: params.name,
       idcardno: params.idcardno,
       passportno: null,
-      process: null,
+      process: params.process,
       status: params.status,
       schoolid: null,
       schoolname: null,
@@ -52,10 +66,25 @@ export class OsoiListComponent implements OnInit, AfterViewInit {
     payload = replaceEmptyWithNull(payload);
 
     this.requestService.KspSearchRequest(payload).subscribe((res) => {
-      console.log(res);
-      this.dataSource.data = res;
+      //console.log(res);
+      if (res) {
+        const data = res.map((i) => {
+          const osoiinfo = JSON.parse(i.osoiinfo || '{}');
+          return {
+            ...i,
+            ...{
+              /* workname: JSON.parse(i.rewardname || '{}'), */
+              workname: osoiinfo?.rewardname,
+            },
+          };
+        });
+        this.dataSource.data = data;
+        this.searchNotFound = false;
+      } else {
+        this.clear();
+        this.searchNotFound = true;
+      }
       // this.dataSource.sort = this.sort;
-
       // const sortState: Sort = { active: 'id', direction: 'desc' };
       // this.sort.active = sortState.active;
       // this.sort.direction = sortState.direction;
@@ -63,8 +92,18 @@ export class OsoiListComponent implements OnInit, AfterViewInit {
     });
   }
 
+  isLicenseApproved(req: any) {
+    if (req.process === '1' && req.status === '1') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   clear() {
     this.dataSource.data = [];
+    this.form.reset();
+    this.searchNotFound = false;
   }
 
   cancelRequest() {

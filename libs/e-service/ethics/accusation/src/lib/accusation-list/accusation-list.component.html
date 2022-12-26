@@ -5,6 +5,7 @@
     <div class="box-header">ข้อมูลการกล่าวหา / กล่าวโทษ</div>
 
     <ksp-ethics-accusation-search
+      [showAddButton]="true"
       (submited)="onSubmit($event)"
       formControlName="ethicSearch"
     >

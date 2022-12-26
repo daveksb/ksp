@@ -55,11 +55,12 @@
           <th scope="col">หมายเลขบัตรประชาชน</th>
           <th scope="col">เลขที่ใบอนุญาต</th>
           <th scope="col">ตำแหน่งกรรมการ</th>
+          <th scope="col"></th>
           <th scope="col">ชื่อ</th>
           <th scope="col">นามสกุล</th>
           <th scope="col">ตำแหน่ง</th>
           <th scope="col">สังกัด - หน่วยงาน/สถานศึกษา</th>
-          <th scope="col">แก้ไข</th>
+          <!-- <th scope="col">แก้ไข</th> -->
           <th scope="col">ลบ</th>
         </tr>
       </thead>
@@ -83,11 +84,31 @@
                 />
               </td>
               <td>
-                <input
+                <select class="form-select" formControlName="positioncommittee">
+                  <option disabled selected hidden value="null">
+                    กรุณาเลือก
+                  </option>
+                  <option value="1">ประธานอนุกรรมการ</option>
+                  <option value="2">อนุกรรมการ</option>
+                  <option value="3">อนุกรรมการและเลขานุการ</option>
+                  <option value="4">ผู้ช่วยเลขานุการ</option>
+                </select>
+                <!-- <input
                   type="text"
                   class="form-control"
                   formControlName="positioncommittee"
-                />
+                /> -->
+              </td>
+              <td>
+                <select class="form-select" formControlName="prefix">
+                  <option value="null" selected hidden disabled>เลือก</option>
+                  <option
+                    *ngFor="let prefix of prefixList$ | async"
+                    [value]="prefix.id"
+                  >
+                    {{ prefix?.name_th }}
+                  </option>
+                </select>
               </td>
               <td>
                 <input
@@ -117,12 +138,12 @@
                   formControlName="bureau"
                 />
               </td>
-              <td>
+              <!-- <td>
                 <i
                   role="button"
                   class="bi bi-pencil-square fs-5 text-primary"
                 ></i>
-              </td>
+              </td> -->
               <td>
                 <i
                   (click)="deleteRow(i)"
@@ -195,9 +216,7 @@
     <ksp-file-upload></ksp-file-upload>
   </div>
 
-  <hr />
-
-  <div class="bg-light p-3">
+  <div class="bg-light p-3 mt-3">
     <div class="box-header">การพิจารณาดำเนินการ</div>
 
     <div formGroupName="investigationresult" class="d-flex flex-column">
@@ -205,6 +224,7 @@
         <div class="d-flex flex-row align-items-center mb-2">
           <input
             type="radio"
+            class="form-check-input"
             value="{{ item.value }}"
             formControlName="{{ item.name }}"
           />

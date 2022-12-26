@@ -9,6 +9,7 @@ import {
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SelfRequestProcess, SelfRequestType } from '@ksp/shared/constant';
+import { providerFactory } from '@ksp/shared/utility';
 
 @UntilDestroy()
 @Component({
@@ -17,6 +18,7 @@ import { SelfRequestProcess, SelfRequestType } from '@ksp/shared/constant';
   imports: [CommonModule, MatDatepickerModule, ReactiveFormsModule],
   templateUrl: './e-service-reward-search.component.html',
   styleUrls: ['./e-service-reward-search.component.scss'],
+  providers: providerFactory(EServiceRewardSearchComponent),
 })
 export class EServiceRewardSearchComponent
   extends KspFormBaseComponent

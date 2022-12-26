@@ -47,11 +47,11 @@ const routes: Routes = [
         component: TempLicenseApproveListComponent,
       },
       {
-        path: 'approve-list/:id',
+        path: 'consider-list/:careertype',
         component: TempLicenseApproveListComponent,
       },
       {
-        path: 'approve-detail',
+        path: 'consider-detail',
         component: TempLicenseApproveComponent,
       },
     ],

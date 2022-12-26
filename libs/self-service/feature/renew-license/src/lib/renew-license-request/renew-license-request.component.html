@@ -126,9 +126,13 @@
     >
       บันทึกชั่วคราว
     </button>
-    <button type="button" class="ms-3 btn btn-primary" (click)="onSave(2)">
+    <button
+      (click)="onSave(2)"
+      type="button"
+      class="ms-3 btn btn-primary"
+      [disabled]="!form.valid"
+    >
       บันทึกและยื่น
     </button>
-    <!-- [disabled]="!form.valid" -->
   </div>
 </div>

@@ -17,10 +17,8 @@
 
       <hr />
 
-      <div class="d-flex justify-content-between mb-2">
-        <div class="box-header text-primary">
-          ประวัติผลการตรวจสอบคุณสมบัติและเอกสาร
-        </div>
+      <div class="d-flex justify-content-between align-items-center mb-1">
+        <div class="box-header">ประวัติผลการตรวจสอบคุณสมบัติและเอกสาร</div>
         <button class="btn btn-success">ดูใบคำขอ</button>
       </div>
 
@@ -38,9 +36,9 @@
           <tbody>
             <tr>
               <td class="detail__table">1</td>
-              <td class="detail__table">xxxxxxxxxx yyyyyyyyyy</td>
-              <td class="detail__table">xx/xx/xxxx</td>
-              <td class="detail__table">xxxxxxxxxx</td>
+              <td class="detail__table">x</td>
+              <td class="detail__table">x</td>
+              <td class="detail__table">x</td>
             </tr>
           </tbody>
         </table>
@@ -52,7 +50,6 @@
     <div class="bg-white p-3">
       <div class="box-header">ผลการยืนยันการตรวจสอบ</div>
       <hr />
-
       <ksp-consider-ksp-request></ksp-consider-ksp-request>
     </div>
 
@@ -83,7 +80,6 @@
     [isLastPage]="true"
     [showCenterButtons]="true"
     [showSaveButton]="true"
-    [colorMode]="'green'"
     (cancelClicked)="cancel()"
     (saveClicked)="save()"
   >

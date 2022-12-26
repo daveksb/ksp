@@ -102,11 +102,15 @@ export class AccusationRecordComponent
   addRow(data: EhicsMember = defaultEhicsMember) {
     const rewardForm = this.fb.group({
       idcardno: [data.idcardno],
+      prefix: [data.prefix],
       firstname: [data.firstname],
       lastname: [data.lastname],
       phone: [data.phone],
     });
     this.members.push(rewardForm);
+  }
+  deleteRow(index: number) {
+    this.members.removeAt(index);
   }
   ngOnInit(): void {
     this.route.data.subscribe((res) => {
@@ -123,7 +127,11 @@ export class AccusationRecordComponent
   openSearchDialog() {
     const dialogRef = this.dialog.open(AccusationSearchComponent, {
       height: '100vh',
-      width: '1250px',
+      width: '75vw',
+      position: {
+        top: '0px',
+        right: '0px',
+      },
     });
     dialogRef.afterClosed().subscribe((result) => {
       console.log(result);

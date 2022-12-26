@@ -7,7 +7,7 @@
     <div class="box-header">รายละเอียด</div>
 
     <div class="box__container p-3">
-      <div class="bg-light p-3">
+      <div class="bg-light py-5">
         <ksp-license-info></ksp-license-info>
       </div>
       <br />
@@ -104,9 +104,11 @@
       ></ng-template>
     </div>
     <div class="d-flex justify-content-center mt-3 mb-2">
-      <button type="button" class="btn btn-secondary">ล้างข้อมูล</button>
+      <button type="button" class="btn btn-secondary" (click)="clear()">
+        ล้างข้อมูล
+      </button>
       <button
-        [disabled]="disabledSave || !activityType.value"
+        [disabled]="!form.valid"
         type="button"
         class="ms-3 btn btn-primary"
         (click)="onClickSave()"
