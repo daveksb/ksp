@@ -6,11 +6,11 @@ import { ERequestService, GeneralInfoService } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'ksp-school-user-detail',
-  templateUrl: './school-user-detail.component.html',
-  styleUrls: ['./school-user-detail.component.scss'],
+  selector: 'ksp-uni-user-detail',
+  templateUrl: './uni-user-detail.component.html',
+  styleUrls: ['./uni-user-detail.component.scss'],
 })
-export class SchoolUserDetailComponent implements OnInit {
+export class UniUserDetailComponent implements OnInit {
   requestData = new KspRequest();
   prefixList$!: Observable<Prefix[]>;
 
@@ -28,11 +28,9 @@ export class SchoolUserDetailComponent implements OnInit {
   ngOnInit(): void {
     console.log('data = ', this.data);
     this.prefixList$ = this.generalInfoService.getPrefix();
-
-    const data: any = {
-      ...this.data,
-      ...{ workphone: this.data.telphone, contactphone: this.data.schmobile },
-    };
-    this.form.controls.userInfo.patchValue(data);
+    if (this.data.userinfo) {
+      this.data.userinfo.contactphone = this.data.userinfo.phone;
+      this.form.controls.userInfo.patchValue(this.data?.userinfo);
+    }
   }
 }
