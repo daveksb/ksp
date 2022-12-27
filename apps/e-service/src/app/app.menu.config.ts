@@ -490,6 +490,10 @@ export const professionalMenu: MenuConfig[] = [
         path: '/thai-teacher/account-list',
         label: 'จัดทำบัญชีรายชื่อ',
       },
+      {
+        path: '/thai-teacher/check-list',
+        label: 'เจ้าหน้าที่ส่วนกลางตรวจสอบบันทึกผล',
+      },
     ],
   },
   {
