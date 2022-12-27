@@ -6,8 +6,9 @@
   height: 100vh;
 
   /* Center and scale the image nicely */
-  background-position: top;
   background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 .label__primary {

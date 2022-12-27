@@ -21,6 +21,9 @@
                 <div class="col-md mb-2">
                   <label class="form-label required">Title</label>
                   <select formControlName="prefixen" class="form-select">
+                    <option value="null" selected hidden disabled>
+                      Please Select
+                    </option>
                     <option
                       *ngFor="let prefix of prefixList$ | async"
                       [value]="prefix.id"
