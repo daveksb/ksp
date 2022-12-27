@@ -44,7 +44,13 @@
       <label class="form-label"
         >รหัสไปรษณีย์<span class="text-danger"> *</span>
       </label>
-      <input class="form-control" type="text" formControlName="zipcode" />
+      <input 
+        class="form-control" 
+        type="text" 
+        formControlName="zipcode" 
+        (blur)="onSearchPostcode()"
+        #postcode
+        (keyup.enter)="postcode.blur()" />
     </div>
     <div class="col-sm-4 col-md-4 mb-1">
       <label class="form-label"

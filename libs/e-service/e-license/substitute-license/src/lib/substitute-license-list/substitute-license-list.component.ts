@@ -34,6 +34,7 @@ export class SubstituteLicenseListComponent implements AfterViewInit {
   provinces$!: Observable<Province[]>;
   checkProcess = SelfCheckProcess;
   checkStatus = SelfcheckStatus;
+  searchNotFound = false;
 
   form = this.fb.group({
     search: [],
@@ -56,21 +57,23 @@ export class SubstituteLicenseListComponent implements AfterViewInit {
   }
 
   search(params: any) {
+    this.searchNotFound = false;
+
     let payload: EsSearchPayload = {
       systemtype: '1',
       requesttype: SelfServiceRequestType.ขอใบแทนใบอนุญาตประกอบวิชาชีพ,
-      requestno: null,
-      careertype: null,
+      requestno: params.requestno,
+      careertype: params.careertype,
       name: null,
-      idcardno: null,
+      idcardno: params.idcardno,
       passportno: null,
-      process: null,
-      status: null,
+      process: params.process,
+      status: params.status,
       schoolid: null,
       schoolname: null,
       bureauid: null,
-      requestdatefrom: null,
-      requestdateto: null,
+      requestdatefrom: params.requestdatefrom,
+      requestdateto: params.requestdateto,
       offset: '0',
       row: '1000',
     };
@@ -78,13 +81,20 @@ export class SubstituteLicenseListComponent implements AfterViewInit {
     payload = replaceEmptyWithNull(payload);
 
     this.requestService.KspSearchRequest(payload).subscribe((res) => {
-      this.dataSource.data = res;
-      this.dataSource.sort = this.sort;
+      if (res) {
+        this.dataSource.data = res;
+        this.dataSource.sort = this.sort;
 
-      const sortState: Sort = { active: 'id', direction: 'desc' };
-      this.sort.active = sortState.active;
-      this.sort.direction = sortState.direction;
-      this.sort.sortChange.emit(sortState);
+        const sortState: Sort = { active: 'id', direction: 'desc' };
+        this.sort.active = sortState.active;
+        this.sort.direction = sortState.direction;
+        this.sort.sortChange.emit(sortState);
+
+        //this.searchNotFound = false;
+      } else {
+        this.clear();
+        this.searchNotFound = true;
+      }
     });
   }
 
@@ -93,6 +103,7 @@ export class SubstituteLicenseListComponent implements AfterViewInit {
   }
 
   clear() {
+    this.searchNotFound = false;
     this.dataSource.data = [];
   }
 }

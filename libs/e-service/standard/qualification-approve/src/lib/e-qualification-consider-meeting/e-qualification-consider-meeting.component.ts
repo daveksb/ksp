@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ksp-e-qualification-consider-meeting',
@@ -8,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 export class EQualificationConsiderMeetingComponent implements OnInit {
   verifyChoices = verifyChoices;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
+
+  cancel() {
+    this.router.navigate(['/qualification-approve', 'consider-list']);
+  }
 }
 
 const verifyChoices = [

@@ -51,6 +51,7 @@ export class ETempLicenseListComponent implements AfterViewInit {
   careerTypeList: any[] = [];
   requestLabel = '';
   provinces$!: Observable<Province[]>;
+  searchNotFound = false;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -130,8 +131,11 @@ export class ETempLicenseListComponent implements AfterViewInit {
         this.sort.active = sortState.active;
         this.sort.direction = sortState.direction;
         this.sort.sortChange.emit(sortState);
+
+        this.searchNotFound = false;
       } else {
         this.clearData();
+        this.searchNotFound = true;
       }
     });
   }
@@ -444,6 +448,7 @@ export class ETempLicenseListComponent implements AfterViewInit {
   }
 
   clearData() {
+    this.searchNotFound = false;
     this.dataSource.data = [];
     this.form.reset();
     this.form.controls.search.patchValue(this.defaultForm);

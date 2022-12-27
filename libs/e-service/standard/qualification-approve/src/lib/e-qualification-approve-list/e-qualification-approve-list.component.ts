@@ -270,8 +270,10 @@ export class EQualificationApproveListComponent implements AfterViewInit {
         this.sort.sortChange.emit(sortState);
         this.searchNotFound = false;
       } else {
-        this.clear();
         this.searchNotFound = true;
+
+        this.dataSource.data = [];
+        this.form.controls.search.patchValue({ requesttype: '3' });
       }
     });
   }

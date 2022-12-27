@@ -77,9 +77,9 @@ export class EServiceDegreeCertApprovedListComponent extends KspPaginationCompon
     .getUniuniversity()
     .pipe(
       map((res) => {
-        return res?.datareturn?.map(({ id, name }: any) => ({
+        return res?.datareturn?.map(({ id, name, campusname }: any) => ({
           value: id,
-          label: name,
+          label: name + (campusname ? `, ${campusname}` : ''),
         }));
       })
     )
@@ -123,15 +123,21 @@ export class EServiceDegreeCertApprovedListComponent extends KspPaginationCompon
       graduatestatus
     } = this.form.controls.search.value as any;
     return {
-      requestno: requestno || '',
-      requestdate: requestdate || '',
-      fulldegreename: fulldegreename || '',
-      unicode: unicode || '',
-      uniid: uniid || '',
-      degreeapprovecodeelevel: degreeapprovecode || '',
-      degreelevel: degreelevel || '',
-      admissionstatus: admissionstatus || '',
-      graduatestatus: graduatestatus || '',
+      requestno: requestno || null,
+      requestdate: requestdate || null,
+      fulldegreenameth: fulldegreename || null,
+      unicode: unicode || null,
+      uniid: uniid || null,
+      unitype: null,
+      statusadmission: admissionstatus,
+      statusgraduate: graduatestatus,
+      degreeapprovecode: degreeapprovecode || null,
+      degreelevel: degreelevel || null,
+      courseacademicyear: null,
+      uniprovince: null,
+      coursemajor: null,
+      coursefieldofstudy: null,
+      coursesubjects: null,
       ...this.tableRecord,
     };
   }
@@ -140,28 +146,19 @@ export class EServiceDegreeCertApprovedListComponent extends KspPaginationCompon
     for (let index = 0; index < 10; index++) {
       this.data = [...this.data, data];
     }
-    this.requestService.getDegreeCertList(this.getRequest()).subscribe((res: any) => {
+    this.requestService.searchAdmissionRequest(this.getRequest()).subscribe((res: any) => {
       if (res.returncode != '98') {
-        this.pageEvent.length = res.countnumunidegree;
-        if (res.datareturnadmission) {
-          res.datareturnadmission = res.datareturnadmission.sort((data1:any,data2:any) => data1.unirequestadmissionid - data2.unirequestadmissionid);
-        } else {
-          res.datareturnadmission = [];
-        }
-        if (res.datareturngraduation) {
-          res.datareturngraduation = res.datareturngraduation.sort((data1:any,data2:any) => data1.unirequestadmissionid - data2.unirequestadmissionid);
-        } else {
-          res.datareturngraduation = [];
-        }
+        this.pageEvent.length = res.countnum;
         this.dataSource.data = res.datareturn.map((item: any, index: any) => {
           item.order = index+1;
-          const admission = res.datareturnadmission.filter((data: any) => {
-            return data.unidegreecertid == item.id}).slice(-1).pop() || {};
-          const graduate = res.datareturngraduation.filter((data: any) => {
-            return data.unidegreecertid == item.id}).slice(-1).pop() || {};
-          item.admissionstatus = this.mapStatusProcess(admission.status, admission.process),
-          item.graduatestatus = this.mapStatusProcess(graduate.status, graduate.process),
-          item.requestdate = thaiDate(new Date(item?.requestdate));
+          if (item.requesttype == '05') {
+            item.admissionstatus = this.mapStatusProcess(item.status, item.process);
+            item.graduatestatus = '';
+          } else {
+            item.graduatestatus = this.mapStatusProcess(item.status, item.process);
+            item.admissionstatus = '';
+          }
+          item.requestdate = thaiDate(new Date(item?.requestdateunirequestadmission));
           item.updatedate = item?.updatedate ? thaiDate(new Date(item?.updatedate)) : '';
           const degreeLevel = this._findOptions(
             this.degreeLevelOptions,
@@ -198,11 +195,14 @@ export class EServiceDegreeCertApprovedListComponent extends KspPaginationCompon
 
   viewhistory(item: any){
     const payload = {
-      unidegreecertid: item.id
+      requestid: item.unirequestadmissionid
     };
     this.requestService.uniDegreeGraduateHistory(payload).subscribe((response => {
       if (response.datareturn) {
-        response.datareturn = response.datareturn.sort((data1:any,data2:any) => data1.id - data2.id);
+        response.datareturn = response.datareturn.map((data:any)=>{
+          data.requestdate = data.createdate;
+          return data
+        }).sort((data1:any,data2:any) => data1.id - data2.id);
       }
       this.opendialogHistory(response.datareturn);
     }));
@@ -227,7 +227,7 @@ export class EServiceDegreeCertApprovedListComponent extends KspPaginationCompon
   }
 
   goToDetailPage(requestid: any) {
-    this.router.navigate(['/degree-cert', 'course-detail', requestid]);
+    this.router.navigate(['/degree-cert', 'student-list', requestid]);
   }
 
   lastStep() {

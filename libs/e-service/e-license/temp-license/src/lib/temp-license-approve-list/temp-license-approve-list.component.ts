@@ -76,7 +76,8 @@ export class TempLicenseApproveListComponent implements AfterViewInit {
     this.route.paramMap.subscribe((params) => {
       this.defaultForm = {
         requesttype: '3',
-        process: '4',
+        process: '5',
+        status: '1',
         careertype: params.get('careertype'),
       };
       this.form = this.fb.group({

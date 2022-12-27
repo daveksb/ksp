@@ -1,7 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Router } from '@angular/router';
 import {
@@ -24,9 +32,15 @@ import localForage from 'localforage';
     ReactiveFormsModule,
     MatTableModule,
     MatDatepickerModule,
+    MatPaginatorModule,
   ],
 })
-export class AccusationSearchComponent extends KspFormBaseComponent {
+export class AccusationSearchComponent
+  extends KspFormBaseComponent
+  implements AfterViewInit
+{
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   override form = this.fb.group({
     listNumber: [],
     eraBe: [],
@@ -61,6 +75,9 @@ export class AccusationSearchComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+  }
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
   }
   onClickSearch() {
     const payload = {

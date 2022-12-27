@@ -49,7 +49,7 @@ export class EQualificationConfirmComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private eRequestService: ERequestService,
-    private location: Location,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -305,35 +305,27 @@ export class EQualificationConfirmComponent implements OnInit {
 
   getLabel() {
     const req = this.saveData.requestData;
-    if (req.requesttype === '6') {
-      return `รับรองคุณวุฒิการศึกษาเพื่อใช้ในการขอรับใบอนุญาตประกอบวิชาชีพ `;
+    const message = `รับรองคุณวุฒิการศึกษาเพื่อใช้ในการขอรับใบอนุญาตประกอบวิชาชีพ `;
+    if (req.careertype === '1') {
+      return message + ' (ครู)';
+    } else if (req.careertype === '2') {
+      return message + ' (ผู้บริหารสถานศึกษา)';
+    } else if (req.careertype === '5') {
+      return message + ' (ชาวต่างชาติ)';
     } else {
-      const message = `หนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ`;
-      if (req.careertype === '1') {
-        return message + ' (ครู)';
-      } else if (req.careertype === '2') {
-        return message + ' (ผู้บริหารสถานศึกษา)';
-      } else if (req.careertype === '5') {
-        return message + ' (ชาวต่างชาติ)';
-      } else {
-        return message;
-      }
+      return message;
     }
   }
 
   getHeader() {
     const req = this.saveData.requestData;
-    if (req.requesttype === '6') {
-      return `รับรองคุณวุฒิการศึกษาเพื่อใช้ในการขอรับใบอนุญาตประกอบวิชาชีพ`;
+    const message = `รับรองคุณวุฒิการศึกษาเพื่อใช้ในการขอรับใบอนุญาตประกอบวิชาชีพ`;
+    if (req.careertype === '1' || req.careertype === '2') {
+      return message + ' (ชาวไทย)';
+    } else if (req.careertype === '5') {
+      return message + ' (ชาวต่างชาติ)';
     } else {
-      const message = `หนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ`;
-      if (req.careertype === '1' || req.careertype === '2') {
-        return message + ' (ชาวไทย)';
-      } else if (req.careertype === '5') {
-        return message + ' (ชาวต่างชาติ)';
-      } else {
-        return message;
-      }
+      return message;
     }
   }
 

@@ -28,10 +28,6 @@ export class SchoolUserDetailComponent implements OnInit {
   ngOnInit(): void {
     console.log('data = ', this.data);
     this.prefixList$ = this.generalInfoService.getPrefix();
-    if (this.data.userinfo) {
-      this.data.userinfo.contactphone = this.data.userinfo.phone;
-      this.form.controls.userInfo.patchValue(this.data?.userinfo);
-    }
 
     const data: any = {
       ...this.data,

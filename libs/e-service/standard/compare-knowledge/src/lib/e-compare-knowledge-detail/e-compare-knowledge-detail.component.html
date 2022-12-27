@@ -6,7 +6,7 @@
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
     <div class="box-header">รายละเอียดใบคำขอเทียบเคียงความรู้</div>
-    <div class="bg-white px-4 py-2">
+    <div class="bg-white px-3 py-3">
       <ksp-request-header-info
         [requestDate]="requestData.createdate"
         [requestNumber]="requestData.requestno"
@@ -31,10 +31,11 @@
       </div>
 
       <mat-tab-group
-        class="tab-group mb-3"
+        class="tab-group"
         animationDuration="0ms"
-        (selectedTabChange)="tabChanged($event)"
-        [selectedIndex]="0"
+        (selectedIndexChange)="selectedTabIndex = $event"
+        [selectedIndex]="selectedTabIndex"
+        selectedIndex="0"
       >
         <mat-tab label="ที่อยู่" class="tab-content">
           <div class="mb-3">
@@ -103,7 +104,7 @@
     >
       <div
         class="bg-white px-3 py-2 mt-3"
-        [ngClass]="{ hide: (selectedTab.index || 0) !== i }"
+        [ngClass]="{ hide: (selectedTabIndex || 0) !== i }"
       >
         <e-service-license-check
           [choices]="verifyChoice"
@@ -116,10 +117,11 @@
 
 <div class="sticky-bottom border px-2">
   <ksp-bottom-nav
-    [showCenterButtons]="true"
-    [isFirstPage]="true"
+    [showCenterButtons]="false"
     [disableNext]="false"
-    (nextClicked)="next()"
-    (cancelClicked)="cancel()"
+    (prevClicked)="prevTab()"
+    (nextClicked)="nextTab()"
+    [disableNext]="!checkResultFormArray.valid && selectedTabIndex === 4"
+    [disableNextMessage]="'กรุณาตรวจสอบให้ครบก่อน'"
   ></ksp-bottom-nav>
 </div>

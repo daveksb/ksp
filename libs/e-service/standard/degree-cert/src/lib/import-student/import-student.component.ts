@@ -28,6 +28,7 @@ import {
   idCardPattern,
   nameEnPattern,
   nameThPattern,
+  parseJson,
   phonePattern,
 } from '@ksp/shared/utility';
 import moment from 'moment';
@@ -67,6 +68,7 @@ export class ImportStudentComponent implements OnInit {
   });
   filterColumn = ['idcardno'];
   isLoading: Subject<boolean> = this.loaderService.isLoading;
+  requestid: string = '';
 
   constructor(
     public dialog: MatDialog,
@@ -87,7 +89,7 @@ export class ImportStudentComponent implements OnInit {
       }
     });
     this.route.paramMap.subscribe((res) => {
-      this.pageType = res.get('type') || 'admissionList';
+      this.requestid = res.get('requestid') || '';
     });
     const userId = Number(getCookie('userId'));
     localForage.getItem('courseData').then((res: any) => {
@@ -127,45 +129,29 @@ export class ImportStudentComponent implements OnInit {
 
   getAdmissionList() {
     this.requestService
-      .getAdmissionListById({
-        unidegreecertid: this.courseData?.courseDetail.id,
-        planyear: this.payload.planyear,
-        plancalendaryear: this.payload.plancalendaryear,
-        offset: 0,
-        row: 999,
+      .getRequestAdmissionById({
+        id: this.requestid
       })
       .subscribe((response: any) => {
-        if (response.datareturn) {
-          response.datareturn = response.datareturn.sort(
-            (data1: any, data2: any) => data1.id - data2.id
-          );
-          const findResponse = response.datareturn.find((data: any) => {
-            return (
-              data.unidegreecertid == this.courseData?.courseDetail.id &&
-              data.planyear == this.payload.planyear &&
-              data.plancalendaryear == this.payload.plancalendaryear &&
-              (this.pageType == 'admissionList'
-                ? data.requesttype == '05'
-                : data.requesttype == '06')
-            );
-          });
-          if (findResponse && findResponse.process == '2') {
-            let parseuser: any;
-            if (this.pageType == 'admissionList') {
-              parseuser = JSON.parse(findResponse.admissionlist);
-            } else {
-              parseuser = JSON.parse(findResponse.graduatelist);
-            }
-            parseuser.forEach((user: any, index: any) => {
-              user.index = index;
-              user.subjects = JSON.parse(user.subjects);
-              this.user.push(this.edituser(user));
-            });
-            this.requestNo = findResponse.requestno;
-            this.requestDate = findResponse.requestdate;
-            this.payload.id = findResponse.id;
-            this.payload.requestid = findResponse.requestid;
+        if (response) {
+          let parseuser: any;
+          console.log(response)
+          if (response.requesttype == '05') {
+            parseuser = parseJson(response.admissionlist);
+            this.pageType = 'admissionList';
+          } else {
+            parseuser = parseJson(response.graduatelist);
+            this.pageType = 'graduateList';
           }
+          parseuser.forEach((user: any, index: any) => {
+            user.index = index;
+            user.subjects = JSON.parse(user.subjects);
+            this.user.push(this.edituser(user));
+          });
+          this.requestNo = response.requestno;
+          this.requestDate = response.requestdate;
+          this.payload.id = response.id;
+          this.payload.requestid = response.requestid;
         }
       });
   }
@@ -405,8 +391,9 @@ export class ImportStudentComponent implements OnInit {
       payload: { ...this.payload },
     };
 
-    localForage.setItem('studentform', datainfo);
-    this.router.navigate(['/degree-cert', 'consider-student']);
+    localForage.setItem('studentform', datainfo).then(()=>{
+      this.router.navigate(['/degree-cert', 'consider-student']);
+    })
   }
 
   checkdisableSave() {
@@ -428,10 +415,6 @@ export class ImportStudentComponent implements OnInit {
   }
 
   prev() {
-    this.router.navigate([
-      '/degree-cert',
-      'course-detail',
-      this.payload.unidegreecertid,
-    ]);
+    this.router.navigate(['/degree-cert','list-approved']);
   }
 }

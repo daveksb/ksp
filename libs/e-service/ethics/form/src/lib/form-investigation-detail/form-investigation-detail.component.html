@@ -1,8 +1,6 @@
 <form [formGroup]="form">
   <ksp-request-header-info
-    [requestLabel1]="'วันที่ทำรายการ'"
     [requestLabel2]="'เลขที่รายการ'"
-    [requestDate]="today"
     [requestNumber]="requestNumber"
   ></ksp-request-header-info>
 
@@ -159,8 +157,8 @@
   </div>
 
   <div class="bg-white">
-    <div class="row">
-      <div class="col mb-3">
+    <div class="row mb-2">
+      <div class="col">
         <label class="form-label">วันที่ดำเนินการสืบสวนข้อเท็จจริง </label>
         <div class="d-flex align-items-center">
           <input
@@ -179,7 +177,7 @@
           <mat-datepicker #picker2></mat-datepicker>
         </div>
       </div>
-      <div class="col mb-3">
+      <div class="col">
         <label class="form-label"
           >วันที่จัดทำรายงานสืบสวนข้อเท็จจริงเสนอเลขาธิการคุรุสภา
         </label>
