@@ -13,7 +13,11 @@ import { FileService, FileUploadComponent } from '@ksp/shared/form/file-upload';
 export class FormUploadImageComponent {
   @Input() btnLabel = 'อัพโหลดรูปภาพ';
   @Input() isEditMode = true;
-  @Input() imgSrc = '';
+  @Input() imgSrc?: string | null;
+  /*   @Input() set imgSrc(value: any) {
+    console.log('value xx = ', value);
+  } */
+
   @Input() requestType: any;
   @Input() uniqueTimestamp!: string;
   @Input() isForeignForm = false;
