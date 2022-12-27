@@ -67,7 +67,7 @@ export const routes: Routes = [
         component: CourseDetailComponent
       },
       {
-        path: 'student-list/:type',
+        path: 'student-list/:requestid',
         component: ImportStudentComponent
       },
       {

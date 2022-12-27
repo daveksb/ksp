@@ -62,6 +62,7 @@ export class UniversitySelectComponent extends KspFormBaseComponent {
 
     dialog.afterClosed().subscribe((res: SchInfo) => {
       if (res) {
+        console.log(res)
         this.selectedUniversity.emit(res);
       }
     });

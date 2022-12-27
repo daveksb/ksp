@@ -85,17 +85,17 @@ export class ApproveNewUserListComponent extends KspPaginationComponent {
   override search() {
     this.payload = { ...this.payload, ...this.tableRecord };
     this.eUniService.KspSearchUniRequest(this.payload).subscribe((res: any) => {
-      if (res && res.datareturn.length) {
+      if (res && res.datareturn) {
         this.pageEvent.length = res.countrow;
         this.dataSource.data = res.datareturn.map((data: any) => {
           // data.status = parseInt(data.status);
           data.educationoccupy = JSON.parse(data.educationoccupy);
+          console.log(data.educationoccupy)
           data.coordinatorinfo = JSON.parse(data.coordinatorinfo);
           data.coordinatorname = data.coordinatorinfo?.firstnameth.concat(" ", data.coordinatorinfo?.lastnameth);
           data.requesttype = parseInt(data.requesttype);
           return data;
         });
-        this.dataSource.data = _.orderBy(this.dataSource.data, ['status', 'id'], ['asc', 'asc']);
       } else {
         this.clear();
       }

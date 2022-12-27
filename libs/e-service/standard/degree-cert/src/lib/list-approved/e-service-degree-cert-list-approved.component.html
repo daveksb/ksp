@@ -32,12 +32,12 @@
         <ng-container matColumnDef="requestno">
           <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
           <td
-            (click)="goToDetailPage(element.id)"
+            (click)="goToDetailPage(element.unirequestadmissionid)"
             class="text-primary link"
             mat-cell
             *matCellDef="let element"
           >
-            {{ element.requestno }}
+            {{ element.requestnounirequestadmission }}
           </td>
         </ng-container>
 
@@ -159,6 +159,7 @@
       [length]="pageEvent.length"
       [pageSize]="pageEvent.pageSize"
       [pageIndex]="pageEvent.pageIndex"
+      (page)="onPaginatorEvent($event)"
     >
     </mat-paginator>
   </div>

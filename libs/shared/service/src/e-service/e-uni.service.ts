@@ -42,6 +42,16 @@ export class EUniService {
     );
   }
 
+  getRequestAdmissionById(form: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/unirequestadmissionselectbyid`,
+      {
+        ...form,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
+
   getGraduateListById(form: any): Observable<any> {
     return this.http.post(
       `${environment.shortApiUrl}/unidegreeadmissionsearchall_es.php`,
@@ -101,6 +111,17 @@ export class EUniService {
       }
     );
   }
+
+  searchAdmissionRequest(form: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/unidegreecertjoinunirequestadmission_es.php`,
+      {
+        ...form,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
+
   uniRequestDegreeCertSearchEsUni(params: any): Observable<any> {
     return this.http.post(
       `${environment.shortApiUrl}/unirequestdegreecertsearch_es_uni.php`,
@@ -125,7 +146,7 @@ export class EUniService {
 
   uniDegreeGraduateHistory(params: any): Observable<any> {
     return this.http.post(
-      `${environment.apiUrl}/e-service/unirequestadmissionselectbyunidegreecertid`,
+      `${environment.apiUrl}/e-service/ksprequestprocessselectbyrequestid_requestadmission`,
       {
         ...params,
         tokenkey: getCookie('userToken'),
