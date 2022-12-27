@@ -15,6 +15,7 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SelfServiceFormModule } from '@ksp/self-service/form';
 import {
   EServiceRewardAccountSearchComponent,
+  EServiceRewardRequestSearchComponent,
   EServiceRewardSearchComponent,
 } from '@ksp/shared/search';
 import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
@@ -30,6 +31,7 @@ import { EThaiTeacherRejectComponent } from './e-thai-teacher-reject/e-thai-teac
 import { EServiceUiRewardRejectFormModule } from '@ksp/e-service/ui/reward-reject-form';
 import { EThaiTeacherAccountListComponent } from './e-thai-teacher-account-list/e-thai-teacher-account-list.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { EThaiTeacherCreateAccountComponent } from './e-thai-teacher-create-account/e-thai-teacher-create-account.component';
 
 const routes: Routes = [
   {
@@ -61,6 +63,10 @@ const routes: Routes = [
         path: 'account-list',
         component: EThaiTeacherAccountListComponent,
       },
+      {
+        path: 'create-account',
+        component: EThaiTeacherCreateAccountComponent,
+      },
     ],
   },
 ];
@@ -89,6 +95,7 @@ const routes: Routes = [
     RewardValidateRequestComponent,
     MatProgressSpinnerModule,
     EServiceRewardAccountSearchComponent,
+    EServiceRewardRequestSearchComponent,
   ],
   declarations: [
     EThaiTeacherListComponent,
@@ -96,6 +103,7 @@ const routes: Routes = [
     EThaiTeacherConfirmComponent,
     EThaiTeacherRejectComponent,
     EThaiTeacherAccountListComponent,
+    EThaiTeacherCreateAccountComponent,
   ],
   exports: [EThaiTeacherListComponent, EThaiTeacherDetailComponent],
 })
