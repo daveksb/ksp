@@ -307,8 +307,8 @@ export class ERequestService {
     );
   }
 
-  createMultipleLicense(payload: any): Observable<any> {
-    return this.http.post(
+  createMultipleLicense(payload: any): Observable<KspResponse> {
+    return this.http.post<KspResponse>(
       `${environment.shortApiUrl}/selflicenseinsertarray.php`,
       payload
     );

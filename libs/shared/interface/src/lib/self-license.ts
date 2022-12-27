@@ -30,4 +30,5 @@ export class SelfLicense {
   fileinfo: string | null = null;
   filedata?: string | null = null;
   birthdate: string | null = null;
+  sex: string | null = null;
 }

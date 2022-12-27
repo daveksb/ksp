@@ -27,7 +27,7 @@ export class StatusCheckDetailComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/', 'document-delivery', 'check-list']);
+    this.router.navigate(['/document-delivery', 'check-list']);
   }
 
   addRow(form: FormArray<any>) {

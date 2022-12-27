@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import {
@@ -42,33 +42,13 @@ export class CreateLicenseIdDetailComponent implements OnInit {
   myImage: any = null;
   selectedLicense = new SelfLicense();
 
-  licensetype: any = '';
-  licenseno: string | null = '';
-  prefixth: string | null = '-';
-  firstnameth: string | null = '';
-  lastnameth: string | null = '';
-  prefixen: string | null = '-';
-  firstnameen: string | null = '';
-  lastnameen: string | null = '';
-  kuruspano: string | null = '';
-  licensestartdate: string | null = null;
-  licenseenddate: string | null = null;
-
   form = this.fb.group({
-    licenseno: [null, Validators.required],
-    idcardno: [],
-    careertype: [],
-    prefixth: [],
-    firstnameth: [],
-    lastnameth: [],
-    prefixen: [],
-    firstnameen: [],
-    lastnameen: [],
-    sex: [],
-    birthdate: [],
-    licensestartdate: [],
-    licenseenddate: [],
+    licenseInfo: this.fb.array([]),
   });
+
+  get licenseInfoFormArray() {
+    return this.form.controls.licenseInfo as FormArray;
+  }
 
   constructor(
     private router: Router,
@@ -84,91 +64,39 @@ export class CreateLicenseIdDetailComponent implements OnInit {
     this.prefixList = this.generalInfoService.getPrefix();
   }
 
-  saveLicense() {
-    const payload = formatDatePayload({
-      ...this.form.value,
-      ...{ id: this.selectedLicense.id },
-    });
-    this.requestService.updateLicense(payload).subscribe((res) => {
-      //console.log('update = ', res);
-    });
-  }
-
-  getStoredData() {
-    localForage
-      .getItem<SelfApproveList[]>('selected-for-create-license')
-      .then((res) => {
-        if (res) {
-          this.dataSource1.data = res.map((i) => {
-            return { ...i, count: JSON.parse(i.requestlist || '').length };
-          });
-
-          const listno = res.map((r: any) => r.listno).join(',');
-          if (listno) {
-            const payload = {
-              listno,
-              offset: '0',
-              row: '500',
-            };
-            this.requestService
-              .getRequestListByListNo(payload)
-              .subscribe((res: any) => {
-                if (res?.datareturn) {
-                  this.dataSource2.data = res.datareturn;
-                }
-              });
-          }
-        }
-      });
-  }
-
-  rowSelect(id: any) {
-    this.requestService.getSelfLicense(id).subscribe((data) => {
-      console.log('data = ', data);
-      this.selectedLicense = data;
-      this.form.patchValue(<any>data);
-      this.myImage = atob(data.filedata || '{}');
-      this.licensetype = data.careertype;
-      this.licenseno = data.licenseno;
-      this.prefixth = data.prefixth;
-      this.firstnameth = data.firstnameth;
-      this.lastnameth = data.lastnameth;
-      this.prefixen = data.prefixen;
-      this.firstnameen = data.firstnameen;
-      this.lastnameen = data.lastnameen;
-      this.kuruspano = ''; //data.kuruspano;
-      this.licensestartdate = data.licensestartdate;
-      this.licenseenddate = data.licenseenddate;
-    });
-  }
-
-  confirmDialog(id: string | null = null) {
-    const dialog = this.dialog.open(ConfirmDialogComponent, {
-      data: {
-        title: `คุณต้องการยืนยันข้อมูล
-        และสร้างใบอนุญาต ใช่หรือไม่? `,
-      },
-    });
-
-    dialog.componentInstance.confirmed.subscribe((res) => {
-      if (res) {
-        this.createMultiLicense(id);
-      }
-    });
-  }
-
   completeDialog() {
     const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header: `สร้างใบอนุญาตสำเร็จ`,
       },
     });
+  }
 
-    /* dialog.componentInstance.completed.subscribe((res) => {
-      if (res) {
-        //this.createMultiLicense(id);
-      }
-    }); */
+  sameIdCardDialog() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header: `หมายเลขบัตรประชาชนนี้ได้ถูกใช้ยื่นใบคำขอไปแล้ว`,
+      },
+    });
+  }
+
+  addRow(form: SelfLicense) {
+    const data = this.fb.group({
+      licenseno: [form.licenseno],
+      idcardno: [form.idcardno],
+      careertype: [form.careertype],
+      prefixth: [form.prefixth],
+      firstnameth: [form.firstnameth],
+      lastnameth: [form.lastnameth],
+      prefixen: [form.prefixen],
+      firstnameen: [form.firstnameen],
+      lastnameen: [form.lastnameen],
+      sex: [form.sex],
+      birthdate: [form.birthdate],
+      licensestartdate: [form.licensestartdate],
+      licenseenddate: [form.licenseenddate],
+    });
+    this.licenseInfoFormArray.push(data);
   }
 
   createMultiLicense(id: string | null = null) {
@@ -217,8 +145,77 @@ export class CreateLicenseIdDetailComponent implements OnInit {
     };
     //console.log('payload = ', payload);
     this.requestService.createMultipleLicense(payload).subscribe((res) => {
-      //console.log('result = ', res);
-      this.completeDialog();
+      console.log('create license = ', res.returnmessage);
+      if (res.returnmessage && res.returnmessage.length) {
+        for (let i = 0; i < res.returnmessage.length; i++) {
+          this.addRow(res.returnmessage[i]);
+        }
+        this.completeDialog();
+      } else {
+        this.sameIdCardDialog();
+      }
+    });
+  }
+
+  saveLicense() {
+    const payload = formatDatePayload({
+      ...this.form.value,
+      ...{ id: this.selectedLicense.id },
+    });
+    this.requestService.updateLicense(payload).subscribe((res) => {
+      //console.log('update = ', res);
+    });
+  }
+
+  getStoredData() {
+    localForage
+      .getItem<SelfApproveList[]>('selected-for-create-license')
+      .then((res) => {
+        if (res) {
+          this.dataSource1.data = res.map((i) => {
+            return { ...i, count: JSON.parse(i.requestlist || '').length };
+          });
+
+          const listno = res.map((r: any) => r.listno).join(',');
+          if (listno) {
+            const payload = {
+              listno,
+              offset: '0',
+              row: '500',
+            };
+            this.requestService
+              .getRequestListByListNo(payload)
+              .subscribe((res) => {
+                if (res?.datareturn) {
+                  this.dataSource2.data = res.datareturn;
+                }
+              });
+          }
+        }
+      });
+  }
+
+  rowSelect(id: any) {
+    this.requestService.getSelfLicense(id).subscribe((data) => {
+      //console.log('data = ', data);
+      this.selectedLicense = data;
+      this.form.patchValue(<any>data);
+      this.myImage = atob(data.filedata || '{}');
+    });
+  }
+
+  confirmDialog(id: string | null = null) {
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: `คุณต้องการยืนยันข้อมูล
+        และสร้างใบอนุญาต ใช่หรือไม่? `,
+      },
+    });
+
+    dialog.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.createMultiLicense(id);
+      }
     });
   }
 

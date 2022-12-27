@@ -6,6 +6,7 @@ import {
   SelfPrefixTh,
   SelfServiceRequestSubType,
 } from '@ksp/shared/constant';
+import { SelfLicense } from '@ksp/shared/interface';
 
 @Component({
   selector: 'self-service-slideshow',
@@ -21,7 +22,9 @@ export class SlideshowComponent {
 
   @Input() showButton = true;
   @Input() myImage: any;
-  @Input() licensetype = '-';
+  @Input() license = new SelfLicense();
+
+  /*  @Input() licensetype = '-';
   @Input() licenseno: string | null = '';
   @Input() prefixth = '-';
   @Input() firstnameth: string | null = '';
@@ -31,5 +34,5 @@ export class SlideshowComponent {
   @Input() lastnameen: string | null = '';
   @Input() kuruspano: string | null = '';
   @Input() licensestartdate: string | null = null;
-  @Input() licenseenddate: string | null = null;
+  @Input() licenseenddate: string | null = null; */
 }
