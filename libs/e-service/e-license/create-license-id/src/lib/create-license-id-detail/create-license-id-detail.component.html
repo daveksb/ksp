@@ -405,7 +405,11 @@
         <div
           class="bg-secondary bg-opacity-10 py-5 border d-flex justify-content-center"
         >
-          <self-service-slideshow [showButton]="false" [myImage]="myImage">
+          <self-service-slideshow
+            [license]="c.value"
+            [showButton]="false"
+            [myImage]="myImage"
+          >
             <!--
                     [licensetype]="licensetype || ''"
           [licenseno]="licenseno"
