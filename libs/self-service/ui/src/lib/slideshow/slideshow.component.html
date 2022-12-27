@@ -10,31 +10,31 @@
         ></self-service-form-upload-image> -->
       <div class="d-flex flex-column justify-content-between">
         <div class="title">
-          ใบอนุญาตประกอบวิชาชีพ {{ SchoolRequestSubType[+licensetype] }}
+          <!-- ใบอนุญาตประกอบวิชาชีพ {{ SchoolRequestSubType[+licensetype] }} -->
         </div>
         <div class="fs-6 text-black me-3">
-          <span class="text-secondary">เลขที่</span> {{ licenseno }}
+          <span class="text-secondary">เลขที่</span> {{ license.licenseno }}
         </div>
         <div class="fs-6">
-          {{ SelfPrefixTh[+prefixth] || '-' }} {{ firstnameth }}
-          {{ lastnameth }}
+          <!-- {{ SelfPrefixTh[+license.prefixth] || '-' }} {{ license.firstnameth }} -->
+          {{ license.lastnameth }}
         </div>
         <div class="fs-6">
-          {{ SelfPrefixEn[+prefixen] || '-' }} {{ firstnameen }}
-          {{ lastnameen }}
+          <!-- {{ SelfPrefixEn[+license.prefixen] || '-' }} {{ license.firstnameen }} -->
+          {{ license.lastnameen }}
         </div>
-        <div class="fs-6 text-secondary mt-1">เลขสมาชิก {{ kuruspano }}</div>
+        <div class="fs-6 text-secondary mt-1">เลขสมาชิก</div>
         <div class="d-flex">
           <div class="me-3 text-secondary">
             วันที่ออกบัตร
             <span class="text-black"
-              >{{ (licensestartdate | thaiDate) || 'วว/ดด/ปปปป' }}
+              >{{ (license.licensestartdate | thaiDate) || 'วว/ดด/ปปปป' }}
             </span>
           </div>
           <div class="text-secondary">
             หมดอายุ
             <span class="text-black">{{
-              (licenseenddate | thaiDate) || 'วว/ดด/ปปปป'
+              (license.licenseenddate | thaiDate) || 'วว/ดด/ปปปป'
             }}</span>
           </div>
         </div>

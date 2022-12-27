@@ -72,6 +72,14 @@ export class CreateLicenseIdDetailComponent implements OnInit {
     });
   }
 
+  sameIdCardDialog() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header: `หมายเลขบัตรประชาชนนี้ได้ถูกใช้ยื่นใบคำขอไปแล้ว`,
+      },
+    });
+  }
+
   addRow(form: SelfLicense) {
     const data = this.fb.group({
       licenseno: [form.licenseno],
@@ -143,6 +151,8 @@ export class CreateLicenseIdDetailComponent implements OnInit {
           this.addRow(res.returnmessage[i]);
         }
         this.completeDialog();
+      } else {
+        this.sameIdCardDialog();
       }
     });
   }
