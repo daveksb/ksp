@@ -26,20 +26,27 @@ const detailToState = (res: any) => {
   let newRes = _.filter(res?.datareturn, ({ process }) =>
     ['2', '3'].includes(process)
   ).map((data: any) => {
-    return parseJson(data?.detail);
+    return {
+      ...data,
+      detail: parseJson(data?.detail),
+    };
   });
-  newRes = _.filter(newRes, (data: any) => !data?.considerCourses)?.map(
+  newRes = _.filter(newRes, (data: any) => !data?.detail?.considerCourses)?.map(
     (data: any) => {
       const verifyObject: any = {};
-      verifyObject.isBasicValid = _.get(data, 'verifyStep1.result') === '1';
-      verifyObject.isCourseValid = _.get(data, 'verifyStep2.result') === '1';
+      verifyObject.isBasicValid =
+        _.get(data, 'detail.verifyStep1.result') === '1';
+      verifyObject.isCourseValid =
+        _.get(data, 'detail.verifyStep2.result') === '1';
       verifyObject.isAttachmentValid =
-        _.get(data, 'verifyStep3.result') === '1';
-      verifyObject.isProcessValid = _.get(data, 'verifyStep4.result') === '1';
+        _.get(data, 'detail.verifyStep3.result') === '1';
+      verifyObject.isProcessValid =
+        _.get(data, 'detail.verifyStep4.result') === '1';
+      verifyObject.createDate = data?.createdate;
+      verifyObject.updateBy = data?.fullnameth;
       return verifyObject;
     }
   );
-
   return newRes || [];
 };
 @Component({
@@ -74,6 +81,8 @@ export class CheckComponent implements OnInit, AfterContentChecked {
     isCourseValid: boolean;
     isAttachmentValid: boolean;
     isProcessValid: boolean;
+    createDate: string;
+    updateBy: string;
   }[] = [];
   requestNumber = '';
   degreeType = '';

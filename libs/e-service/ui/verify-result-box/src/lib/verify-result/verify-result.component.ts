@@ -11,4 +11,6 @@ export class VerifyResultComponent {
   @Input() isCourseValid = false;
   @Input() isProcessValid = false;
   @Input() isAttachmentValid = false;
+  @Input() createDate?: any;
+  @Input() updateBy = '';
 }

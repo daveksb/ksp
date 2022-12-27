@@ -46,6 +46,7 @@ import { FormAddressTableComponent } from '@ksp/shared/form/others';
 import { ConsiderStudentComponent } from './import-student/consider-student/consider-student.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ThaiDatePipe } from '@ksp/shared/pipe';
 @NgModule({
   imports: [
     CommonModule,
@@ -78,6 +79,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     FormApproveMeetingRecordComponent,
     DegreeCertStatusComponent,
     MatProgressSpinnerModule,
+    ThaiDatePipe,
   ],
   declarations: [
     EServiceDegreeCertListComponent,
