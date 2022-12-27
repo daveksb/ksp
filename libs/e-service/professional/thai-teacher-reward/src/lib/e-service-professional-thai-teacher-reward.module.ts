@@ -15,6 +15,7 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SelfServiceFormModule } from '@ksp/self-service/form';
 import {
   EServiceRewardAccountSearchComponent,
+  EServiceRewardDeclareSearchComponent,
   EServiceRewardRequestSearchComponent,
   EServiceRewardSearchComponent,
 } from '@ksp/shared/search';
@@ -34,6 +35,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { EThaiTeacherCreateAccountComponent } from './e-thai-teacher-create-account/e-thai-teacher-create-account.component';
 import { EThaiTeacherCheckListComponent } from './e-thai-teacher-check-list/e-thai-teacher-check-list.component';
 import { EThaiTeacherCheckComponent } from './e-thai-teacher-check/e-thai-teacher-check.component';
+import { EThaiTeacherDeclareComponent } from './e-thai-teacher-declare/e-thai-teacher-declare.component';
 
 const routes: Routes = [
   {
@@ -81,6 +83,10 @@ const routes: Routes = [
         path: 'check-confirm/:id',
         component: EThaiTeacherCheckComponent,
       },
+      {
+        path: 'declare',
+        component: EThaiTeacherDeclareComponent,
+      },
     ],
   },
 ];
@@ -110,6 +116,7 @@ const routes: Routes = [
     MatProgressSpinnerModule,
     EServiceRewardAccountSearchComponent,
     EServiceRewardRequestSearchComponent,
+    EServiceRewardDeclareSearchComponent,
   ],
   declarations: [
     EThaiTeacherListComponent,
@@ -120,6 +127,7 @@ const routes: Routes = [
     EThaiTeacherCreateAccountComponent,
     EThaiTeacherCheckListComponent,
     EThaiTeacherCheckComponent,
+    EThaiTeacherDeclareComponent,
   ],
   exports: [EThaiTeacherListComponent, EThaiTeacherDetailComponent],
 })
