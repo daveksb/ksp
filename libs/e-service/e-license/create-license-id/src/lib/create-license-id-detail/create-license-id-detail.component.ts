@@ -146,9 +146,9 @@ export class CreateLicenseIdDetailComponent implements OnInit {
     //console.log('payload = ', payload);
     this.requestService.createMultipleLicense(payload).subscribe((res) => {
       console.log('create license = ', res.returnmessage);
-      if (res.returnmessage && res.returnmessage.length) {
-        for (let i = 0; i < res.returnmessage.length; i++) {
-          this.addRow(res.returnmessage[i]);
+      if (res && res.datareturn) {
+        for (let i = 0; i < res.datareturn.length; i++) {
+          this.addRow(res.datareturn[i]);
         }
         this.completeDialog();
       } else {
