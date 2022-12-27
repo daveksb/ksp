@@ -406,6 +406,10 @@
           class="bg-secondary bg-opacity-10 py-5 border d-flex justify-content-center"
         >
           <self-service-slideshow [license]="c.value" [showButton]="false">
+            <self-service-form-upload-image
+              [isEditMode]="false"
+              [imgSrc]="c.value.imageinfo"
+            ></self-service-form-upload-image>
           </self-service-slideshow>
         </div>
       </ng-container>

@@ -14,10 +14,8 @@ export class FormUploadImageComponent {
   @Input() btnLabel = 'อัพโหลดรูปภาพ';
   @Input() isEditMode = true;
   @Input() imgSrc?: string | null;
-
   /*   @Input() set imgSrc(value: any) {
     console.log('value xx = ', value);
-    //if (value) this.form.patchValue(value);
   } */
 
   @Input() requestType: any;
