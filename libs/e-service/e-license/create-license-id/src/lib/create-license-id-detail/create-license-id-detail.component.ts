@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import {
@@ -39,9 +39,7 @@ export class CreateLicenseIdDetailComponent implements OnInit {
   dataSource2 = new MatTableDataSource<KspRequest>();
   prefixList!: Observable<Prefix[]>;
   licenseTypes = qualificationCareerTypeList;
-  myImage: any = null;
-  selectedLicense = new SelfLicense();
-
+  //selectedLicense = new SelfLicense();
   form = this.fb.group({
     licenseInfo: this.fb.array([]),
   });
@@ -95,6 +93,7 @@ export class CreateLicenseIdDetailComponent implements OnInit {
       birthdate: [form.birthdate],
       licensestartdate: [form.licensestartdate],
       licenseenddate: [form.licenseenddate],
+      imageinfo: [form.imageinfo],
     });
     this.licenseInfoFormArray.push(data);
   }
@@ -145,8 +144,8 @@ export class CreateLicenseIdDetailComponent implements OnInit {
     };
     //console.log('payload = ', payload);
     this.requestService.createMultipleLicense(payload).subscribe((res) => {
-      console.log('create license = ', res.returnmessage);
       if (res && res.datareturn) {
+        //console.log('data return = ', res.datareturn);
         for (let i = 0; i < res.datareturn.length; i++) {
           this.addRow(res.datareturn[i]);
         }
@@ -158,13 +157,13 @@ export class CreateLicenseIdDetailComponent implements OnInit {
   }
 
   saveLicense() {
-    const payload = formatDatePayload({
+    /*     const payload = formatDatePayload({
       ...this.form.value,
       ...{ id: this.selectedLicense.id },
     });
     this.requestService.updateLicense(payload).subscribe((res) => {
       //console.log('update = ', res);
-    });
+    }); */
   }
 
   getStoredData() {
@@ -196,12 +195,12 @@ export class CreateLicenseIdDetailComponent implements OnInit {
   }
 
   rowSelect(id: any) {
-    this.requestService.getSelfLicense(id).subscribe((data) => {
+    /*     this.requestService.getSelfLicense(id).subscribe((data) => {
       //console.log('data = ', data);
       this.selectedLicense = data;
       this.form.patchValue(<any>data);
       this.myImage = atob(data.filedata || '{}');
-    });
+    }); */
   }
 
   confirmDialog(id: string | null = null) {
