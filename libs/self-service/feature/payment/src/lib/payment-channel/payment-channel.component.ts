@@ -48,11 +48,8 @@ export class PaymentChannelComponent implements OnInit {
 
   print() {
     this.dialog.open(PrintReceiptDialogComponent, {
-      width: '1300px',
+      width: '100%',
+      id: 'dialogTrasparent',
     });
-  }
-
-  print2() {
-    this.router.navigate(['/license', 'payment-ktb']);
   }
 }

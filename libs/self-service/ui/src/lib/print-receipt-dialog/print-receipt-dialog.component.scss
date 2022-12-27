@@ -16,9 +16,8 @@ th {
 }
 
 .print {
-  width: 100%;
-  padding: 0;
-  border: none;
+  background-color: #fff;
+  padding: 16px 16px 0 16px;
 }
 
 @media print {
@@ -26,6 +25,12 @@ th {
     display: none;
   }
   .print {
-    display: block;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
   }
 }

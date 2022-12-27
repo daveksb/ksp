@@ -71,18 +71,39 @@
       </tr>
     </tbody>
   </table>
+  
+  <!-- barcode area -->
+  <div class="d-flex justify-content-end mt-1">
+    <ngx-barcode [bc-value]="qrString" [bc-display-value]="true"></ngx-barcode>
+
+    <qrcode
+      [qrdata]="qrString"
+      [allowEmptyString]="true"
+      [ariaLabel]="'QR Code image with the following content...'"
+      [cssClass]="'center'"
+      [colorDark]="'#000000ff'"
+      [colorLight]="'#ffffffff'"
+      [elementType]="'canvas'"
+      [errorCorrectionLevel]="'M'"
+      [imageSrc]="'./assets/angular-logo.png'"
+      [imageHeight]="20"
+      [imageWidth]="20"
+      [margin]="4"
+      [scale]="1"
+      [title]="'A custom title attribute'"
+      [width]="125"
+    ></qrcode>
+  </div>
 </div>
 
-<!-- barcode area -->
-<ng-content></ng-content>
 <div class="no-print">
-  <div class="d-flex justify-content-center mt-3">
+  <div class="d-flex justify-content-center px-3 pb-3 bg-white">
     <button
       type="button"
       class="btn bg-light text-secondary border-secondary"
       matDialogClose
     >
-      กลับ
+      ยกเลิก
     </button>
     <button type="button" class="ms-3 btn btn-primary" onclick="print()">
       พิมพ์แบบชำระเงิน
