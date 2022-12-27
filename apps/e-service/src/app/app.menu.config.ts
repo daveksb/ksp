@@ -487,8 +487,8 @@ export const professionalMenu: MenuConfig[] = [
         label: 'รายการใบคำขอรับรางวัลครูภาษาไทยดีเด่น',
       },
       {
-        path: '/xxx',
-        label: 'พิจารณารางวัลครูภาษาไทยดีเด่น',
+        path: '/thai-teacher/account-list',
+        label: 'จัดทำบัญชีรายชื่อ',
       },
     ],
   },
