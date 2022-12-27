@@ -20,11 +20,13 @@ import {
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'ksp-e-thai-teacher-declare',
-  templateUrl: './e-thai-teacher-declare.component.html',
-  styleUrls: ['./e-thai-teacher-declare.component.scss'],
+  selector: 'ksp-e-thai-teacher-create-declare',
+  templateUrl: './e-thai-teacher-create-declare.component.html',
+  styleUrls: ['./e-thai-teacher-create-declare.component.scss'],
 })
-export class EThaiTeacherDeclareComponent implements OnInit, AfterViewInit {
+export class EThaiTeacherCreateDeclareComponent
+  implements OnInit, AfterViewInit
+{
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfRequest>();
   checkProcess = SelfCheckProcess;
@@ -47,16 +49,17 @@ export class EThaiTeacherDeclareComponent implements OnInit, AfterViewInit {
   }
 
   search(params: Partial<SchRequestSearchFilter>) {
+    console.log(params);
     let payload: EsSearchPayload = {
       systemtype: '1',
       requesttype: SelfServiceRequestType.ขอรับรางวัลคุรุสภา,
       requestno: params.requestno,
-      careertype: null,
-      name: params.name,
-      idcardno: params.idcardno,
+      careertype: params.careertype,
+      name: null,
+      idcardno: null,
       passportno: null,
       process: null,
-      status: params.status,
+      status: null,
       schoolid: null,
       schoolname: null,
       bureauid: null,
@@ -83,17 +86,17 @@ export class EThaiTeacherDeclareComponent implements OnInit, AfterViewInit {
   clear() {
     this.dataSource.data = [];
   }
-
-  create() {
-    this.router.navigate(['/thai-teacher', 'create-declare']);
-  }
 }
 
 export const column = [
+  'select',
   'order',
-  'group',
-  'careertype',
+  'request',
+  'id',
+  'name',
+  'careerType',
+  'result',
   'declaredate',
+  'requestdate',
   'view',
-  'print',
 ];

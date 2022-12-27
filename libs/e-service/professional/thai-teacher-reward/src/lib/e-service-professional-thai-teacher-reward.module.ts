@@ -15,6 +15,7 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SelfServiceFormModule } from '@ksp/self-service/form';
 import {
   EServiceRewardAccountSearchComponent,
+  EServiceRewardCreateDeclareSearchComponent,
   EServiceRewardDeclareSearchComponent,
   EServiceRewardRequestSearchComponent,
   EServiceRewardSearchComponent,
@@ -36,6 +37,7 @@ import { EThaiTeacherCreateAccountComponent } from './e-thai-teacher-create-acco
 import { EThaiTeacherCheckListComponent } from './e-thai-teacher-check-list/e-thai-teacher-check-list.component';
 import { EThaiTeacherCheckComponent } from './e-thai-teacher-check/e-thai-teacher-check.component';
 import { EThaiTeacherDeclareComponent } from './e-thai-teacher-declare/e-thai-teacher-declare.component';
+import { EThaiTeacherCreateDeclareComponent } from './e-thai-teacher-create-declare/e-thai-teacher-create-declare.component';
 
 const routes: Routes = [
   {
@@ -87,6 +89,10 @@ const routes: Routes = [
         path: 'declare',
         component: EThaiTeacherDeclareComponent,
       },
+      {
+        path: 'create-declare',
+        component: EThaiTeacherCreateDeclareComponent,
+      },
     ],
   },
 ];
@@ -117,6 +123,7 @@ const routes: Routes = [
     EServiceRewardAccountSearchComponent,
     EServiceRewardRequestSearchComponent,
     EServiceRewardDeclareSearchComponent,
+    EServiceRewardCreateDeclareSearchComponent,
   ],
   declarations: [
     EThaiTeacherListComponent,
@@ -128,6 +135,7 @@ const routes: Routes = [
     EThaiTeacherCheckListComponent,
     EThaiTeacherCheckComponent,
     EThaiTeacherDeclareComponent,
+    EThaiTeacherCreateDeclareComponent,
   ],
   exports: [EThaiTeacherListComponent, EThaiTeacherDetailComponent],
 })
