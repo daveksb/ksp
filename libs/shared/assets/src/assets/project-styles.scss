@@ -224,3 +224,7 @@ input[type='radio'] {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.mat-paginator-container {
+  min-height: auto;
+}

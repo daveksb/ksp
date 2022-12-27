@@ -108,7 +108,7 @@ export class AccusationDecisionComponent implements OnInit {
         header: `บันทึกข้อมูลสำเร็จ`,
         content: `เลขที่รายการ : ${this.ethicsId}
         วันที่ : ${this.today}`,
-        subContent: 'ผู้บันทึกข้อมูล : นางสาวปาเจรา ไก่คลุก',
+        subContent: 'ผู้บันทึกข้อมูล : นางสาวปาเจรา ไฟลุก',
       },
     });
 
