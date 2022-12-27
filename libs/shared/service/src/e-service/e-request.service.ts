@@ -195,7 +195,10 @@ export class ERequestService {
   ): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/e-service/ksprequestprocessinsert_unirequestdegree`,
-      payload
+      {
+        ...payload,
+        userid: getCookie('userId'),
+      }
     );
   }
 
