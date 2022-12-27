@@ -7,6 +7,7 @@ import {
   SelfServiceRequestSubType,
 } from '@ksp/shared/constant';
 import { SelfLicense } from '@ksp/shared/interface';
+//import { FormUploadImageComponent } from '@ksp/self-service/form';
 
 @Component({
   selector: 'self-service-slideshow',
@@ -21,6 +22,5 @@ export class SlideshowComponent {
   SelfPrefixEn = SelfPrefixEn;
 
   @Input() showButton = true;
-  @Input() myImage: any;
   @Input() license = new SelfLicense();
 }

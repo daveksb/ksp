@@ -216,7 +216,7 @@
           <div class="col-lg-3 my-auto">
             <self-service-form-upload-image
               [isEditMode]="false"
-              [imgSrc]="myImage"
+              [imgSrc]="c.value.imageinfo"
             ></self-service-form-upload-image>
           </div>
           <div class="col-md mt-md-0 mt-2">
@@ -405,30 +405,8 @@
         <div
           class="bg-secondary bg-opacity-10 py-5 border d-flex justify-content-center"
         >
-          <self-service-slideshow
-            [license]="c.value"
-            [showButton]="false"
-            [myImage]="myImage"
-          >
-            <!--
-                    [licensetype]="licensetype || ''"
-          [licenseno]="licenseno"
-          [prefixth]="prefixth || ''"
-          [firstnameth]="firstnameth"
-          [lastnameth]="lastnameth"
-          [prefixen]="prefixen || ''"
-          [firstnameen]="firstnameen"
-          [lastnameen]="lastnameen"
-          [kuruspano]="kuruspano"
-          [licensestartdate]="licensestartdate"
-          [licenseenddate]="licenseenddate"
-
-         -->
-            <self-service-form-upload-image
-              [isEditMode]="false"
-              [imgSrc]="myImage"
-            ></self-service-form-upload-image
-          ></self-service-slideshow>
+          <self-service-slideshow [license]="c.value" [showButton]="false">
+          </self-service-slideshow>
         </div>
       </ng-container>
     </ng-container>
