@@ -1,7 +1,7 @@
 export interface KspResponse {
   id?: string;
   returncode: string;
-  returnmessage: string;
+  returnmessage: string | any[];
 }
 
 export interface KspListResponse<T = any> {

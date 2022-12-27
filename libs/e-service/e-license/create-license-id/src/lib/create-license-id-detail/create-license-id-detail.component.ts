@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import {
@@ -44,23 +44,10 @@ export class CreateLicenseIdDetailComponent implements OnInit {
 
   form = this.fb.group({
     licenseInfo: this.fb.array([]),
-    /* licenseno: [null, Validators.required],
-    idcardno: [],
-    careertype: [],
-    prefixth: [],
-    firstnameth: [],
-    lastnameth: [],
-    prefixen: [],
-    firstnameen: [],
-    lastnameen: [],
-    sex: [],
-    birthdate: [],
-    licensestartdate: [],
-    licenseenddate: [], */
   });
 
   get licenseInfoFormArray() {
-    return this.form.controls.licenseInfo;
+    return this.form.controls.licenseInfo as FormArray;
   }
 
   constructor(
@@ -75,6 +62,89 @@ export class CreateLicenseIdDetailComponent implements OnInit {
   ngOnInit(): void {
     this.getStoredData();
     this.prefixList = this.generalInfoService.getPrefix();
+  }
+
+  completeDialog() {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header: `สร้างใบอนุญาตสำเร็จ`,
+      },
+    });
+  }
+
+  addRow(form: SelfLicense) {
+    const data = this.fb.group({
+      licenseno: [form.licenseno],
+      idcardno: [form.idcardno],
+      careertype: [form.careertype],
+      prefixth: [form.prefixth],
+      firstnameth: [form.firstnameth],
+      lastnameth: [form.lastnameth],
+      prefixen: [form.prefixen],
+      firstnameen: [form.firstnameen],
+      lastnameen: [form.lastnameen],
+      sex: [form.sex],
+      birthdate: [form.birthdate],
+      licensestartdate: [form.licensestartdate],
+      licenseenddate: [form.licenseenddate],
+    });
+    this.licenseInfoFormArray.push(data);
+  }
+
+  createMultiLicense(id: string | null = null) {
+    const data = id
+      ? this.dataSource2.data.filter((i) => i.id === id)
+      : this.dataSource2.data;
+
+    const payload = {
+      data: data.map((ds) => {
+        return formatDatePayload({
+          careertype: ds.careertype,
+          renewtype: '1', // allow only 1 ขอขึ้นทะเบียน and 2 ต่ออายุ
+          isforeign: ds.isforeign,
+          licenseno: null,
+          requestno: ds.id, // store request id instead of no
+          licensestartdate: moment().format('yyyy-MM-DD'),
+          licenseenddate: moment().add(5, 'years').format('yyyy-MM-DD'), // มีอายุ 5 ปี
+          licensestatus: '1',
+          licensetype: '1',
+          teachercouncilidno: ds.kuruspano, // the same as kuruspa no
+          imageid: ds.imagefileid,
+          idcardno: ds.idcardno,
+          prefixth: ds.prefixth,
+          firstnameth: ds.firstnameth,
+          lastnameth: ds.lastnameth,
+          prefixen: ds.prefixen,
+          firstnameen: ds.firstnameen,
+          lastnameen: ds.lastnameen,
+          passportno: ds.passportno,
+          addressinfo: ds.addressinfo,
+          schooladdrinfo: ds.schooladdrinfo,
+          eduinfo: ds.schooladdrinfo,
+          experienceinfo: ds.experienceinfo,
+          competencyinfo: ds.competencyinfo,
+          selfdevelopmentinfo: null,
+          fileinfo: ds.fileinfo,
+          schoolid: ds.schoolid,
+          birthdate: ds.birthdate,
+          sex: ds.sex,
+          contactphone: ds.contactphone,
+          workphone: ds.workphone,
+          email: ds.email,
+          kuruspano: ds.kuruspano,
+        });
+      }),
+    };
+    //console.log('payload = ', payload);
+    this.requestService.createMultipleLicense(payload).subscribe((res) => {
+      console.log('create license = ', res.returnmessage);
+      if (res.returnmessage && res.returnmessage.length) {
+        for (let i = 0; i < res.returnmessage.length; i++) {
+          this.addRow(res.returnmessage[i]);
+        }
+        this.completeDialog();
+      }
+    });
   }
 
   saveLicense() {
@@ -136,68 +206,6 @@ export class CreateLicenseIdDetailComponent implements OnInit {
       if (res) {
         this.createMultiLicense(id);
       }
-    });
-  }
-
-  completeDialog() {
-    const dialog = this.dialog.open(CompleteDialogComponent, {
-      data: {
-        header: `สร้างใบอนุญาตสำเร็จ`,
-      },
-    });
-  }
-
-  createMultiLicense(id: string | null = null) {
-    const data = id
-      ? this.dataSource2.data.filter((i) => i.id === id)
-      : this.dataSource2.data;
-
-    const payload = {
-      data: data.map((ds) => {
-        return formatDatePayload({
-          careertype: ds.careertype,
-          renewtype: '1', // allow only 1 ขอขึ้นทะเบียน and 2 ต่ออายุ
-          isforeign: ds.isforeign,
-          licenseno: null,
-          requestno: ds.id, // store request id instead of no
-          licensestartdate: moment().format('yyyy-MM-DD'),
-          licenseenddate: moment().add(5, 'years').format('yyyy-MM-DD'), // มีอายุ 5 ปี
-          licensestatus: '1',
-          licensetype: '1',
-          teachercouncilidno: ds.kuruspano, // the same as kuruspa no
-          imageid: ds.imagefileid,
-          idcardno: ds.idcardno,
-          prefixth: ds.prefixth,
-          firstnameth: ds.firstnameth,
-          lastnameth: ds.lastnameth,
-          prefixen: ds.prefixen,
-          firstnameen: ds.firstnameen,
-          lastnameen: ds.lastnameen,
-          passportno: ds.passportno,
-          addressinfo: ds.addressinfo,
-          schooladdrinfo: ds.schooladdrinfo,
-          eduinfo: ds.schooladdrinfo,
-          experienceinfo: ds.experienceinfo,
-          competencyinfo: ds.competencyinfo,
-          selfdevelopmentinfo: null,
-          fileinfo: ds.fileinfo,
-          schoolid: ds.schoolid,
-          birthdate: ds.birthdate,
-          sex: ds.sex,
-          contactphone: ds.contactphone,
-          workphone: ds.workphone,
-          email: ds.email,
-          kuruspano: ds.kuruspano,
-        });
-      }),
-    };
-    //console.log('payload = ', payload);
-    this.requestService.createMultipleLicense(payload).subscribe((res) => {
-      console.log('create license = ', res);
-      /* for (let i = 0; i < 5; i++) {
-        this.licenseInfoFormArray.push(this.fb.control(null));
-      } */
-      this.completeDialog();
     });
   }
 
