@@ -66,7 +66,7 @@ export class DegreeCertRequestComponent {
     this.id = this.activatedRoute.snapshot.queryParams['id'];
     let uniRequestDegree;
     const uniData = await lastValueFrom(
-      this.uniInfoService.univerSitySelectById(getCookie('uniType'))
+      this.uniInfoService.univerSitySelectById(getCookie('uniId'))
     );
     if (this.id) {
       uniRequestDegree = await lastValueFrom(
@@ -105,7 +105,7 @@ export class DegreeCertRequestComponent {
     this.router.navigate(['/', 'degree-cert']);
   }
 
-  save(process:string) {
+  save(process: string) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -133,7 +133,7 @@ export class DegreeCertRequestComponent {
       }
     });
   }
-  private _getRequest(process:string): any {
+  private _getRequest(process: string): any {
     const step1: any = this.step1Form.value.step1;
     const step2: any = this.step2Form.value.step2;
     const step3: any = this.step3Form.value.step3;
