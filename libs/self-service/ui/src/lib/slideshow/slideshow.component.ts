@@ -23,16 +23,4 @@ export class SlideshowComponent {
   @Input() showButton = true;
   @Input() myImage: any;
   @Input() license = new SelfLicense();
-
-  /*  @Input() licensetype = '-';
-  @Input() licenseno: string | null = '';
-  @Input() prefixth = '-';
-  @Input() firstnameth: string | null = '';
-  @Input() lastnameth: string | null = '';
-  @Input() prefixen = '-';
-  @Input() firstnameen: string | null = '';
-  @Input() lastnameen: string | null = '';
-  @Input() kuruspano: string | null = '';
-  @Input() licensestartdate: string | null = null;
-  @Input() licenseenddate: string | null = null; */
 }

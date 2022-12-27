@@ -10,17 +10,20 @@
         ></self-service-form-upload-image> -->
       <div class="d-flex flex-column justify-content-between">
         <div class="title">
-          <!-- ใบอนุญาตประกอบวิชาชีพ {{ SchoolRequestSubType[+licensetype] }} -->
+          ใบอนุญาตประกอบวิชาชีพ
+          {{ SchoolRequestSubType[+(license.licensetype || 0)] }}
         </div>
         <div class="fs-6 text-black me-3">
           <span class="text-secondary">เลขที่</span> {{ license.licenseno }}
         </div>
         <div class="fs-6">
-          <!-- {{ SelfPrefixTh[+license.prefixth] || '-' }} {{ license.firstnameth }} -->
+          {{ SelfPrefixTh[+(license.prefixth || 0)] || '-' }}
+          {{ license.firstnameth }}
           {{ license.lastnameth }}
         </div>
         <div class="fs-6">
-          <!-- {{ SelfPrefixEn[+license.prefixen] || '-' }} {{ license.firstnameen }} -->
+          {{ SelfPrefixEn[+(license.prefixen || 0)] || '-' }}
+          {{ license.firstnameen }}
           {{ license.lastnameen }}
         </div>
         <div class="fs-6 text-secondary mt-1">เลขสมาชิก</div>
