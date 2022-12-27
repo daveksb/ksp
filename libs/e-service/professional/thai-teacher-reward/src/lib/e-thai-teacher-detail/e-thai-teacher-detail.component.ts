@@ -78,6 +78,7 @@ export class EThaiTeacherDetailComponent
     this.getListData();
     this.checkRequestId();
     this.addCheckResultArray();
+    this.getMode();
   }
 
   addCheckResultArray() {

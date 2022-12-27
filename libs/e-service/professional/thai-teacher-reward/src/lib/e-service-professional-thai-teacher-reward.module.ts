@@ -33,6 +33,7 @@ import { EThaiTeacherAccountListComponent } from './e-thai-teacher-account-list/
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { EThaiTeacherCreateAccountComponent } from './e-thai-teacher-create-account/e-thai-teacher-create-account.component';
 import { EThaiTeacherCheckListComponent } from './e-thai-teacher-check-list/e-thai-teacher-check-list.component';
+import { EThaiTeacherCheckComponent } from './e-thai-teacher-check/e-thai-teacher-check.component';
 
 const routes: Routes = [
   {
@@ -76,6 +77,10 @@ const routes: Routes = [
         path: 'check/:id',
         component: EThaiTeacherDetailComponent,
       },
+      {
+        path: 'check-confirm/:id',
+        component: EThaiTeacherCheckComponent,
+      },
     ],
   },
 ];
@@ -114,6 +119,7 @@ const routes: Routes = [
     EThaiTeacherAccountListComponent,
     EThaiTeacherCreateAccountComponent,
     EThaiTeacherCheckListComponent,
+    EThaiTeacherCheckComponent,
   ],
   exports: [EThaiTeacherListComponent, EThaiTeacherDetailComponent],
 })
