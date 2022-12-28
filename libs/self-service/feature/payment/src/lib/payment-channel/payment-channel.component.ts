@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { SelfRequestService } from '@ksp/shared/service';
 import { KspRequest } from '@ksp/shared/interface';
+import { MatDialog } from '@angular/material/dialog';
+import { PrintReceiptDialogComponent } from '@ksp/self-service/ui';
 
 @Component({
   templateUrl: './payment-channel.component.html',
@@ -15,7 +17,8 @@ export class PaymentChannelComponent implements OnInit {
     public router: Router,
     private route: ActivatedRoute,
     private location: Location,
-    private reqService: SelfRequestService
+    private reqService: SelfRequestService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -41,5 +44,12 @@ export class PaymentChannelComponent implements OnInit {
       'payment-ktb',
       this.kspRequest.requestid,
     ]);
+  }
+
+  print() {
+    this.dialog.open(PrintReceiptDialogComponent, {
+      width: '100%',
+      id: 'dialogTrasparent',
+    });
   }
 }

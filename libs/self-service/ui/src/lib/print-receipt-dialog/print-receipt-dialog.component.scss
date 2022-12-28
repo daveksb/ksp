@@ -1,0 +1,36 @@
+thead tr {
+  background-color: #fff;
+}
+
+.table {
+  border: 1px solid #000;
+}
+
+thead,
+tbody,
+tfoot,
+tr,
+td,
+th {
+  border-width: unset;
+}
+
+.print {
+  background-color: #fff;
+  padding: 16px 16px 0 16px;
+}
+
+@media print {
+  .no-print {
+    display: none;
+  }
+  .print {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+  }
+}

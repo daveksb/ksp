@@ -1,3 +1,8 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav
   ><span header>ระบบงานจรรยาบรรณ </span
   ><span subHeader>บันทึกการสืบสวนข้อเท็จจริง</span></ksp-top-nav
@@ -5,7 +10,7 @@
 
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 px-3 pt-1 pb-3 full-height">
-    <div class="box-header">ข้อมูลการกล่าวหา / กล่าวโทษ</div>
+    <div class="box-header">ข้อมูลการสืบสวนข้อเท็จจริง</div>
 
     <ksp-ethics-accusation-search
       (submited)="onSubmit($event)"

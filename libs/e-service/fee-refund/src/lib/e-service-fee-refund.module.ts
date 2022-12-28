@@ -17,6 +17,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ValidateKspRequestComponent } from '@ksp/e-service/e-license/approve-ksp-request';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const routes: Routes = [
   {
@@ -65,6 +67,8 @@ const routes: Routes = [
     ThaiDatePipe,
     ReactiveFormsModule,
     ValidateKspRequestComponent,
+    MatPaginatorModule,
+    MatProgressSpinnerModule
   ],
   declarations: [
     RefundListComponent,
