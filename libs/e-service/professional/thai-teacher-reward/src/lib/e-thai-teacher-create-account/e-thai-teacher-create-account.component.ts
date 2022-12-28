@@ -11,11 +11,11 @@ import { eSelfCheckStatus, replaceEmptyWithNull } from '@ksp/shared/utility';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'ksp-e-teacher-council-create-account',
-  templateUrl: './e-teacher-council-create-account.component.html',
-  styleUrls: ['./e-teacher-council-create-account.component.scss'],
+  selector: 'ksp-e-thai-teacher-create-account',
+  templateUrl: './e-thai-teacher-create-account.component.html',
+  styleUrls: ['./e-thai-teacher-create-account.component.scss'],
 })
-export class ETeacherCouncilCreateAccountComponent
+export class EThaiTeacherCreateAccountComponent
   implements OnInit, AfterViewInit
 {
   isLoading: Subject<boolean> = this.loaderService.isLoading;

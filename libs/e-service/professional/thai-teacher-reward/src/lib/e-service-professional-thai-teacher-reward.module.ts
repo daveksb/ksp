@@ -13,7 +13,13 @@ import { SharedFormSelfRewardFormModule } from '@ksp/shared/form/self-reward-for
 import { TopNavComponent, BottomNavComponent } from '@ksp/shared/menu';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SelfServiceFormModule } from '@ksp/self-service/form';
-import { EServiceRewardSearchComponent } from '@ksp/shared/search';
+import {
+  EServiceRewardAccountSearchComponent,
+  EServiceRewardCreateDeclareSearchComponent,
+  EServiceRewardDeclareSearchComponent,
+  EServiceRewardRequestSearchComponent,
+  EServiceRewardSearchComponent,
+} from '@ksp/shared/search';
 import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import {
@@ -25,6 +31,13 @@ import { EThaiTeacherConfirmComponent } from './e-thai-teacher-confirm/e-thai-te
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { EThaiTeacherRejectComponent } from './e-thai-teacher-reject/e-thai-teacher-reject.component';
 import { EServiceUiRewardRejectFormModule } from '@ksp/e-service/ui/reward-reject-form';
+import { EThaiTeacherAccountListComponent } from './e-thai-teacher-account-list/e-thai-teacher-account-list.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { EThaiTeacherCreateAccountComponent } from './e-thai-teacher-create-account/e-thai-teacher-create-account.component';
+import { EThaiTeacherCheckListComponent } from './e-thai-teacher-check-list/e-thai-teacher-check-list.component';
+import { EThaiTeacherCheckComponent } from './e-thai-teacher-check/e-thai-teacher-check.component';
+import { EThaiTeacherDeclareComponent } from './e-thai-teacher-declare/e-thai-teacher-declare.component';
+import { EThaiTeacherCreateDeclareComponent } from './e-thai-teacher-create-declare/e-thai-teacher-create-declare.component';
 
 const routes: Routes = [
   {
@@ -52,6 +65,34 @@ const routes: Routes = [
         path: 'reject/:id',
         component: EThaiTeacherRejectComponent,
       },
+      {
+        path: 'account-list',
+        component: EThaiTeacherAccountListComponent,
+      },
+      {
+        path: 'create-account',
+        component: EThaiTeacherCreateAccountComponent,
+      },
+      {
+        path: 'check-list',
+        component: EThaiTeacherCheckListComponent,
+      },
+      {
+        path: 'check/:id',
+        component: EThaiTeacherDetailComponent,
+      },
+      {
+        path: 'check-confirm/:id',
+        component: EThaiTeacherCheckComponent,
+      },
+      {
+        path: 'declare',
+        component: EThaiTeacherDeclareComponent,
+      },
+      {
+        path: 'create-declare',
+        component: EThaiTeacherCreateDeclareComponent,
+      },
     ],
   },
 ];
@@ -78,12 +119,23 @@ const routes: Routes = [
     RequestNoPipe,
     EServiceUiRewardRejectFormModule,
     RewardValidateRequestComponent,
+    MatProgressSpinnerModule,
+    EServiceRewardAccountSearchComponent,
+    EServiceRewardRequestSearchComponent,
+    EServiceRewardDeclareSearchComponent,
+    EServiceRewardCreateDeclareSearchComponent,
   ],
   declarations: [
     EThaiTeacherListComponent,
     EThaiTeacherDetailComponent,
     EThaiTeacherConfirmComponent,
     EThaiTeacherRejectComponent,
+    EThaiTeacherAccountListComponent,
+    EThaiTeacherCreateAccountComponent,
+    EThaiTeacherCheckListComponent,
+    EThaiTeacherCheckComponent,
+    EThaiTeacherDeclareComponent,
+    EThaiTeacherCreateDeclareComponent,
   ],
   exports: [EThaiTeacherListComponent, EThaiTeacherDetailComponent],
 })

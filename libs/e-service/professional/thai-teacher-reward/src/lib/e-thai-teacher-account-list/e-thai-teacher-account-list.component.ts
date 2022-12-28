@@ -8,13 +8,11 @@ import { ERequestService, LoaderService } from '@ksp/shared/service';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'ksp-e-teacher-council-account-list',
-  templateUrl: './e-teacher-council-account-list.component.html',
-  styleUrls: ['./e-teacher-council-account-list.component.scss'],
+  selector: 'ksp-e-thai-teacher-account-list',
+  templateUrl: './e-thai-teacher-account-list.component.html',
+  styleUrls: ['./e-thai-teacher-account-list.component.scss'],
 })
-export class ETeacherCouncilAccountListComponent
-  implements OnInit, AfterViewInit
-{
+export class EThaiTeacherAccountListComponent implements OnInit, AfterViewInit {
   isLoading: Subject<boolean> = this.loaderService.isLoading;
   SelfServiceRequestSubType = SelfServiceRequestSubType;
   displayedColumns = [
@@ -70,6 +68,6 @@ export class ETeacherCouncilAccountListComponent
   }
 
   createGroup() {
-    this.router.navigate(['/teacher-council', 'create-account']);
+    this.router.navigate(['/thai-teacher', 'create-account']);
   }
 }

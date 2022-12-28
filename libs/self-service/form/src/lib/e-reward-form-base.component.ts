@@ -64,6 +64,7 @@ export abstract class ERewardFormBaseComponent {
   getMode() {
     this.route.url.subscribe((url) => {
       if (url[0].path === 'check') {
+        console.log(this.mode);
         this.mode = 'check';
       }
     });

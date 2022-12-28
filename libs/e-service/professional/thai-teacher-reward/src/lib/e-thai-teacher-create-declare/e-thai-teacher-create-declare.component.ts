@@ -1,46 +1,45 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import {
   SelfServiceRequestSubType,
   SelfServiceRequestType,
 } from '@ksp/shared/constant';
-import { EsSearchPayload, SchRequestSearchFilter } from '@ksp/shared/interface';
+import {
+  EsSearchPayload,
+  SchRequestSearchFilter,
+  SelfRequest,
+} from '@ksp/shared/interface';
 import { ERequestService, LoaderService } from '@ksp/shared/service';
-import { eSelfCheckStatus, replaceEmptyWithNull } from '@ksp/shared/utility';
+import {
+  replaceEmptyWithNull,
+  SelfCheckProcess,
+  eSelfCheckStatus,
+} from '@ksp/shared/utility';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'ksp-e-teacher-council-create-account',
-  templateUrl: './e-teacher-council-create-account.component.html',
-  styleUrls: ['./e-teacher-council-create-account.component.scss'],
+  selector: 'ksp-e-thai-teacher-create-declare',
+  templateUrl: './e-thai-teacher-create-declare.component.html',
+  styleUrls: ['./e-thai-teacher-create-declare.component.scss'],
 })
-export class ETeacherCouncilCreateAccountComponent
+export class EThaiTeacherCreateDeclareComponent
   implements OnInit, AfterViewInit
 {
-  isLoading: Subject<boolean> = this.loaderService.isLoading;
-  displayedColumns = [
-    'select',
-    'order',
-    'requestNo',
-    'id',
-    'name',
-    'careerType',
-    'province',
-    'result',
-    'createDate',
-    'requestDate',
-    'view',
-  ];
-  dataSource = new MatTableDataSource<any>();
-  SelfServiceRequestSubType = SelfServiceRequestSubType;
+  displayedColumns: string[] = column;
+  dataSource = new MatTableDataSource<SelfRequest>();
+  checkProcess = SelfCheckProcess;
   checkStatus = eSelfCheckStatus;
+  SelfServiceRequestSubType = SelfServiceRequestSubType;
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
-    private loaderService: LoaderService,
-    private requestService: ERequestService
+    private router: Router,
+    private requestService: ERequestService,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {}
@@ -66,7 +65,6 @@ export class ETeacherCouncilCreateAccountComponent
       bureauid: null,
       requestdatefrom: params.requestdatefrom,
       requestdateto: params.requestdateto,
-      provinceid: params.provinceid,
       offset: '0',
       row: '1000',
     };
@@ -89,3 +87,16 @@ export class ETeacherCouncilCreateAccountComponent
     this.dataSource.data = [];
   }
 }
+
+export const column = [
+  'select',
+  'order',
+  'request',
+  'id',
+  'name',
+  'careerType',
+  'result',
+  'declaredate',
+  'requestdate',
+  'view',
+];

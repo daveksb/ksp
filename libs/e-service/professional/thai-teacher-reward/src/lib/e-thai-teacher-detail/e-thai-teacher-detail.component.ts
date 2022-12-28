@@ -78,6 +78,7 @@ export class EThaiTeacherDetailComponent
     this.getListData();
     this.checkRequestId();
     this.addCheckResultArray();
+    this.getMode();
   }
 
   addCheckResultArray() {
@@ -194,10 +195,18 @@ export class EThaiTeacherDetailComponent
 
   next() {
     this.persistData(this.form.controls.checkResult.value);
-    this.router.navigate(['/thai-teacher', 'confirm', this.requestId]);
+    if (this.mode === 'check') {
+      this.router.navigate(['/thai-teacher', 'check-confirm', this.requestId]);
+    } else {
+      this.router.navigate(['/thai-teacher', 'confirm', this.requestId]);
+    }
   }
 
   cancel() {
-    this.router.navigate(['/thai-teacher']);
+    if (this.mode === 'check') {
+      this.router.navigate(['/thai-teacher', 'check-list']);
+    } else {
+      this.router.navigate(['/thai-teacher']);
+    }
   }
 }
