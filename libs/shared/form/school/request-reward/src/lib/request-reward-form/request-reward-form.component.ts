@@ -60,9 +60,18 @@ export class RequestRewardFormComponent extends KspFormBaseComponent {
 
     idcardno: [null, [Validators.required, Validators.pattern(idCardPattern)]],
     prefixth: [null, Validators.required],
-    firstnameth: [null, [Validators.required, Validators.pattern(nameThPattern)]],
-    lastnameth: [null, [Validators.required, Validators.pattern(nameThPattern)]],
-    contactphone: [null, [Validators.required, Validators.pattern(phonePattern)]],
+    firstnameth: [
+      null,
+      [Validators.required, Validators.pattern(nameThPattern)],
+    ],
+    lastnameth: [
+      null,
+      [Validators.required, Validators.pattern(nameThPattern)],
+    ],
+    contactphone: [
+      null,
+      [Validators.required, Validators.pattern(phonePattern)],
+    ],
     email: [null, [Validators.required, Validators.email]],
     position: [null, Validators.required],
 
@@ -93,7 +102,7 @@ export class RequestRewardFormComponent extends KspFormBaseComponent {
     return this.form.controls.osoimember as FormArray;
   }
 
-  get personId() {
+  /* get personId() {
     return this.form.controls.idcardno;
   }
 
@@ -111,7 +120,7 @@ export class RequestRewardFormComponent extends KspFormBaseComponent {
 
   get email() {
     return this.form.controls.email;
-  }
+  } */
 
   addRow(data: MemberForm = defaultMember) {
     const rewardForm = this.fb.group({

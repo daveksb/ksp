@@ -38,8 +38,12 @@
           [hidden]="!dataSource.data.length"
         >
           <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
-            <td mat-cell *matCellDef="let element; let i = index">
+            <th mat-header-cell *matHeaderCellDef class="text-center">ลำดับ</th>
+            <td
+              mat-cell
+              *matCellDef="let element; let i = index"
+              class="text-center"
+            >
               {{ i + 1 }}
             </td>
           </ng-container>

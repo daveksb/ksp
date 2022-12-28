@@ -65,22 +65,22 @@ export class OsoiDetailComponent implements OnInit {
   }
 
   patchData(data: any) {
-    const osoiinfo = parseJson(data.osoiinfo);
+    const osoiInfo = parseJson(data.osoiinfo);
 
     const rewardInfo = {
       idcardno: data.idcardno,
       prefixth: data.prefixth,
       firstnameth: data.firstnameth,
-      lastnameth: data.lasttnameth,
+      lastnameth: data.lastnameth,
       contactphone: data.contactphone,
       email: data.email,
 
-      rewardname: osoiinfo.rewardname,
-      rewardtype: osoiinfo.rewardtype,
-      submitbefore: osoiinfo.submitbefore,
-      vdolink: osoiinfo.vdolink,
+      rewardname: osoiInfo.rewardname,
+      rewardtype: osoiInfo.rewardtype,
+      submitbefore: osoiInfo.submitbefore,
+      vdolink: osoiInfo.vdolink,
     };
-    console.log('data = ', rewardInfo);
+    //console.log('data = ', rewardInfo);
 
     this.form.controls.rewardInfo.patchValue(<any>rewardInfo);
 
