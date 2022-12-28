@@ -124,13 +124,6 @@ export class CompareKnowledgeEducationComponent
     form.push(data);
   }
 
-  /* addFormArray2(form: FormArray<any>) {
-    const data = this.fb.group({
-      degreeInfo: [null, Validators.required],
-    });
-    form.push(data);
-  } */
-
   get degreeInfo1() {
     return this.form.controls['degreeInfo1'] as FormArray;
   }

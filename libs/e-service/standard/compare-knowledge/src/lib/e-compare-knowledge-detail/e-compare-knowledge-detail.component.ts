@@ -96,20 +96,21 @@ export class ECompareKnowledgeDetailComponent
 
   override patchData(data: SelfGetRequest): void {
     super.patchData(data);
+
     if (data.eduinfo) {
       const eduInfo = parseJson(data.eduinfo);
       this.form.controls.educationInfo.patchValue({
         ...eduInfo,
       } as any);
-      console.log('eduInfo= ', eduInfo);
     }
 
     if (data.testresultcompareinfo) {
       const testResultCompareInfo = parseJson(data.testresultcompareinfo);
-      console.log(testResultCompareInfo);
+      //console.log(testResultCompareInfo);
       this.form.controls.testResultCompareInfo.patchValue({
         ...testResultCompareInfo,
-      });
+      } as any);
+      console.log('eduInfo= ', testResultCompareInfo);
     }
 
     if (data.fileinfo) {
