@@ -8,8 +8,9 @@ import {
   SchRequestSearchFilter,
   SelfRequest,
 } from '@ksp/shared/interface';
-import { ERequestService } from '@ksp/shared/service';
+import { ERequestService, LoaderService } from '@ksp/shared/service';
 import { eSelfCheckStatus, replaceEmptyWithNull } from '@ksp/shared/utility';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'ksp-e-praise-teacher-list',
@@ -17,6 +18,7 @@ import { eSelfCheckStatus, replaceEmptyWithNull } from '@ksp/shared/utility';
   styleUrls: ['./e-praise-teacher-list.component.scss'],
 })
 export class EPraiseTeacherListComponent implements OnInit, AfterViewInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfRequest>();
   checkStatus = eSelfCheckStatus;
@@ -25,7 +27,8 @@ export class EPraiseTeacherListComponent implements OnInit, AfterViewInit {
 
   constructor(
     private router: Router,
-    private requestService: ERequestService
+    private requestService: ERequestService,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {}
@@ -89,6 +92,7 @@ export const column = [
   'process',
   'processupdatedate',
   'submitDate',
+  'objection',
   'verify',
   'request',
   'edit',

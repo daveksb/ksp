@@ -27,7 +27,6 @@ export class ECompareKnowledgeDetailComponent
   userInfoType = UserInfoFormType.thai;
   selectedTabIndex = 0;
   countries$!: Observable<any>;
-  countries2$!: Observable<any>;
   licenses$!: Observable<any>;
 
   override form = this.fb.group({
@@ -83,6 +82,7 @@ export class ECompareKnowledgeDetailComponent
     this.getListData();
     this.checkRequestId();
     this.addCheckResultArray();
+    this.countries$ = this.addressService.getCountry();
   }
 
   addCheckResultArray() {
@@ -101,6 +101,7 @@ export class ECompareKnowledgeDetailComponent
       this.form.controls.educationInfo.patchValue({
         ...eduInfo,
       } as any);
+      console.log('eduInfo= ', eduInfo);
     }
 
     if (data.testresultcompareinfo) {
