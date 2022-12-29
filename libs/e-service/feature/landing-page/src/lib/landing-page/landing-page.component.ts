@@ -26,7 +26,7 @@ export class LandingPageComponent {
   }
 
   fee() {
-    this.router.navigate(['refund']);
+    this.router.navigate(['payment-fee']);
   }
 
   admin() {

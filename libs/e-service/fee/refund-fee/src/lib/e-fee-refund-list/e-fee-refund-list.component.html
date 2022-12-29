@@ -1,0 +1,253 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
+<ksp-top-nav
+  ><span header>ยื่นใบคำขอ</span
+  ><span subHeader>ขอคืนค่าธรรมเนียม</span></ksp-top-nav
+>
+
+<form [formGroup]="form">
+  <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height full-width-2">
+    <div class="box-header">รายการขอคืนค่าธรรมเนียม</div>
+
+    <div class="bg-white px-3 py-3">
+      <div class="bg-light default-width p-3">
+        <div class="box-header">ค้นหารายการ</div>
+
+        <div class="row mb-2">
+          <div class="col">
+            <label class="form-label">ประเภทค่าธรรมเนียม</label>
+            <select class="form-select">
+              <option value="null" selected hidden disabled>กรุณาเลือก</option>
+              <option value="1">ค่าขึ้นทะเบียนรับใบอนุญาตประกอบวิชาชีพ</option>
+              <option value="2">ค่าต่ออายุใบอนุญาตประกอบวิชาชีพ</option>
+              <option value="3">ค่าใบแทนใบอนุญาต</option>
+              <option value="4">ค่าธรรมเนียมอื่นๆ</option>
+            </select>
+          </div>
+          <div class="col">
+            <label class="form-label">เลขที่ใบเสร็จรับเงิน</label>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="licenseno"
+            />
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col">
+            <label class="form-label">เลขที่ใบคำขอ</label>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="idcardno"
+            />
+          </div>
+          <div class="col">
+            <label class="form-label">หมายเลขบัตรประชาชน</label>
+            <input class="form-control" type="text" formControlName="name" />
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col">
+            <label class="form-label">เหตุผลขอคืนเงินค่าธรรมเนียม</label>
+            <select class="form-select">
+              <option value="null" selected hidden disabled>กรุณาเลือก</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+          <div class="col">
+            <label class="form-label">สถานะการคืนเงินค่าธรรมเนียม</label>
+            <select class="form-select">
+              <option value="null" selected hidden disabled>กรุณาเลือก</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-6">
+            <label class="form-label">วันที่ยื่นใบคำขอ</label>
+            <div class="d-flex align-items-center">
+              <input
+                matInput
+                [matDatepicker]="picker1"
+                autocomplete="off"
+                class="form-control form-date"
+                placeholder="วว/ดด/ปปปป"
+                formControlName="requestdatefrom"
+              />
+              <mat-datepicker-toggle
+                class="button-date"
+                matSuffix
+                [for]="picker1"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </div>
+          </div>
+          <div class="col-6">
+            <label class="form-label">วันเดือนปีที่คืนเงินค่าธรรมเนียม</label>
+            <div class="d-flex align-items-center">
+              <input
+                matInput
+                [matDatepicker]="picker2"
+                autocomplete="off"
+                class="form-control form-date"
+                placeholder="วว/ดด/ปปปป"
+                formControlName="requestdateto"
+              />
+              <mat-datepicker-toggle
+                class="button-date"
+                matSuffix
+                [for]="picker2"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end mt-3">
+          <button
+            type="button"
+            (click)="clear()"
+            class="btn border-primary text-primary bg-white"
+          >
+            ล้างข้อมูล
+          </button>
+          <button type="button" (click)="search()" class="ms-3 btn btn-primary">
+            ค้นหา
+          </button>
+        </div>
+      </div>
+
+      <div class="table__scroll mt-3">
+        <table mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="order">
+            <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              {{
+                paginator.pageIndex === 0
+                  ? i + 1
+                  : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+              }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="licenseno">
+            <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
+            <td mat-cell *matCellDef="let element">{{ element.requestno }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="receiptno">
+            <th mat-header-cell *matHeaderCellDef>เลขที่ใบเสร็จ</th>
+            <td mat-cell *matCellDef="let element">{{ element.receiptNo }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="idcardno">
+            <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
+            <td mat-cell *matCellDef="let element">{{ element.idcardno }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>ชื่อ - นามสกุล</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.firstnameth }} {{ element.lastnameth }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="feeType">
+            <th mat-header-cell *matHeaderCellDef>ประเภทค่าธรรมเนียม</th>
+            <td mat-cell *matCellDef="let element">
+              {{ RefundType[+JSON.parse(element.feerefundinfo)?.licensetype] }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="reason">
+            <th mat-header-cell *matHeaderCellDef>
+              เหตุผลขอคืนเงินค่าธรรมเนียม
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{
+                RefundReason[+JSON.parse(element.feerefundinfo)?.refundreason]
+              }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef>จำนวนเงิน</th>
+            <td mat-cell *matCellDef="let element">{{ element.total }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>
+              สถานะการคืนเงินค่าธรรมเนียม
+            </th>
+            <th></th>
+            <td mat-cell *matCellDef="let element">
+              {{
+                checkStatus(
+                  +element.process,
+                  +element.status,
+                  +element.requesttype
+                )?.ename
+              }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="submitDate">
+            <th mat-header-cell *matHeaderCellDef>วันที่ยื่นใบคำขอ</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.requestdate | thaiDate }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="refundDate">
+            <th mat-header-cell *matHeaderCellDef>วันที่คืนเงิน</th>
+            <td mat-cell *matCellDef="let element">{{ element.refundDate }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="verify">
+            <th mat-header-cell *matHeaderCellDef class="text-center">
+              ตรวจสอบ
+            </th>
+            <td mat-cell *matCellDef="let element" class="text-center">
+              <i
+                role="button"
+                (click)="verify(element.id)"
+                class="bi bi-pencil-square text-primary fs-5"
+              ></i>
+            </td>
+          </ng-container>
+
+          <!-- <ng-container matColumnDef="approve">
+            <th mat-header-cell *matHeaderCellDef class="text-center">
+              อนุมัติ
+            </th>
+            <td mat-cell *matCellDef="let element" class="text-center">
+              <i
+                role="button"
+                class="bi bi-file-earmark-text-fill text-primary fs-5"
+              ></i>
+            </td>
+          </ng-container> -->
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+        <div class="text-center fs-5 mt-3" *ngIf="searchNotFound">
+          ไม่พบข้อมูล
+        </div>
+      </div>
+      <mat-paginator
+        [pageSizeOptions]="[25]"
+        showFirstLastButtons
+        [hidden]="!dataSource.data.length"
+      ></mat-paginator>
+    </div>
+  </div>
+</form>

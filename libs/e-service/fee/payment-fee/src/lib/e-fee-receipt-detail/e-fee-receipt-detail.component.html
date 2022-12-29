@@ -1,0 +1,184 @@
+<ksp-top-nav
+  ><span header>ยื่นใบคำขอ</span
+  ><span subHeader>รายการใบเสร็จรับเงิน</span></ksp-top-nav
+>
+
+<div class="bg-secondary bg-opacity-10 px-4 py-2">
+  <div class="box-header">ยกเลิก - ใบเสร็จรับเงิน</div>
+  <div class="bg-white p-3">
+    <ksp-request-header-info></ksp-request-header-info>
+    <hr />
+    <div class="bg-light p-3">
+      <div class="box-header text-primary">ได้รับเงินจาก</div>
+      <div class="d-flex">
+        <div class="fs-5 text-secondary">หมายเลขบัตรประชาชน :</div>
+        <div class="fs-5 ms-3">xxx</div>
+      </div>
+      <div class="d-flex">
+        <div class="fs-5 text-secondary">ชื่อ-นามสกุลภาษาไทย :</div>
+        <div class="fs-5 ms-3">xxx</div>
+      </div>
+
+      <div class="box-header text-primary mt-2">รายการใบคำขอ</div>
+      <div class="d-flex">
+        <div class="fs-5 text-secondary">เลขที่ใบคำขอ :</div>
+        <div class="fs-5 ms-3">xxx</div>
+      </div>
+      <div class="d-flex">
+        <div class="fs-5 text-secondary">ประเภทใบคำขอ :</div>
+        <div class="fs-5 ms-3">xxx</div>
+      </div>
+      <div class="d-flex">
+        <div class="fs-5 text-secondary">สถานะใบคำขอ :</div>
+        <div class="fs-5 ms-3">xxx</div>
+      </div>
+      <div class="d-flex">
+        <div class="fs-5 text-secondary">วันเดือนปีที่ยื่นใบคำขอ :</div>
+        <div class="fs-5 ms-3">xxx</div>
+      </div>
+      <div class="d-flex">
+        <div class="fs-5 text-secondary">วันเดือนปีที่ใบคำขอเสร็จสิ้น :</div>
+        <div class="fs-5 ms-3">xxx</div>
+      </div>
+    </div>
+
+    <div class="bg-light p-3 mt-3">
+      <div class="box-header text-primary">รายการค่าธรรมเนียม</div>
+
+      <div class="row mb-2">
+        <div class="col-8">
+          <label class="form-label">Ref.ID/Transaction ID</label>
+          <input class="form-control" type="text" disabled />
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col">
+          <label class="form-label">ช่องทางการชำระเงิน</label>
+          <select class="form-select" disabled>
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div class="col">
+          <label class="form-label">สถานะการชำระเงิน</label>
+          <select class="form-select" disabled>
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-6">
+          <label class="form-label">วันเดือนปีที่ชำระเงิน</label>
+          <div class="d-flex align-items-center">
+            <input
+              matInput
+              [matDatepicker]="picker1"
+              autocomplete="off"
+              class="form-control form-date"
+              placeholder="วว/ดด/ปปปป"
+              disabled
+            />
+            <mat-datepicker-toggle
+              class="button-date"
+              matSuffix
+              [for]="picker1"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </div>
+        </div>
+        <div class="col-6">
+          <label class="form-label">วันเดือนปีที่ได้รับเงิน</label>
+          <div class="d-flex align-items-center">
+            <input
+              matInput
+              [matDatepicker]="picker2"
+              autocomplete="off"
+              class="form-control form-date"
+              placeholder="วว/ดด/ปปปป"
+              disabled
+            />
+            <mat-datepicker-toggle
+              class="button-date"
+              matSuffix
+              [for]="picker2"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-responsive mt-5">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">ลำดับ</th>
+              <th scope="col" class="header__container">รายการค่าธรรมเนียม</th>
+              <th scope="col" class="header__container">
+                อัตราค่าธรรมเนียม (บาท)
+              </th>
+              <th scope="col" class="header__container">จำนวน</th>
+              <th scope="col" class="header__container">จำนวนเงิน (บาท)</th>
+            </tr>
+          </thead>
+          <tbody class="body__table">
+            <tr>
+              <th scope="row">1</th>
+              <td class="detail__table">ค่าขึ้นทะเบียนรับใบอนุญาต</td>
+              <td class="detail__table">500.00</td>
+              <td class="detail__table">1</td>
+              <td class="detail__table">500.00</td>
+            </tr>
+            <tr>
+              <th scope="row"></th>
+              <td class="detail__table"></td>
+              <td class="detail__table"></td>
+              <td class="detail__table">รวมทั้งสิ้น</td>
+              <td class="detail__table">500.00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="bg-light mt-3 px-3 pt-1 pb-3">
+      <div class="box-header text-primary">ขอยกเลิกใบเสร็จ</div>
+
+      <div class="row">
+        <div class="col-5">
+          <label class="form-label required">เหตุผลการยกเลิก</label>
+          <select class="form-select">
+            <option value="null" selected disabled hidden>กรุณาเลือก</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mt-2">
+        <textarea
+          class="form-control"
+          rows="3"
+          placeholder="หมายเหตุ/เหตุผล"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sticky-bottom border px-2">
+  <ksp-bottom-nav
+    [showCenterButtons]="true"
+    [showSaveButton]="true"
+    [isFirstPage]="true"
+    [isLastPage]="true"
+    (cancelClicked)="cancel()"
+  >
+  </ksp-bottom-nav>
+</div>

@@ -34,7 +34,6 @@ import { LicenseRequestForeignComponent } from './license-request-foreign/licens
 import { MatStepperModule } from '@angular/material/stepper';
 import { LicenseForeignAgreementComponent } from './license-foreign-agreement/license-foreign-agreement.component';
 import { EditLicenseComponent } from '@ksp/shared/form/license';
-import { LicenseRequestThaiComponent } from './license-request-thai/license-request-thai.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PaymentKtbComponent } from 'libs/self-service/feature/payment/src/lib/payment-ktb/payment-ktb.component';
 
@@ -144,7 +143,6 @@ export const routes: Routes = [
     LicenseRequestStudySupervisionComponent,
     LicenseRequestForeignComponent,
     LicenseForeignAgreementComponent,
-    LicenseRequestThaiComponent,
   ],
   exports: [
     LicenseRequestSchoolManagerComponent,
@@ -152,7 +150,6 @@ export const routes: Routes = [
     LicenseRequestStudySupervisionComponent,
     LicenseRequestForeignComponent,
     LicenseForeignAgreementComponent,
-    LicenseRequestThaiComponent,
   ],
 })
 export class SelfServiceFeatureLicenseModule {}

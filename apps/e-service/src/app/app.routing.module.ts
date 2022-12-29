@@ -387,12 +387,30 @@ const routes: EthicsCustomRoute[] = [
       ),
     canActivate: [AuthGuard],
   },
-  {
+  /* {
     path: 'refund',
     data: { menuConfig: refundFeeMenu, headerLabel: 'ระบบงานค่าธรรมเนียม' },
     loadChildren: () =>
       import('@ksp/e-service/fee-refund').then(
         (m) => m.EServiceFeeRefundModule
+      ),
+    canActivate: [AuthGuard],
+  }, */
+  {
+    path: 'payment-fee',
+    data: { menuConfig: refundFeeMenu, headerLabel: 'ระบบงานค่าธรรมเนียม' },
+    loadChildren: () =>
+      import('@ksp/e-service/fee/payment-fee').then(
+        (m) => m.EServiceFeePaymentFeeModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'refund-fee',
+    data: { menuConfig: refundFeeMenu, headerLabel: 'ระบบงานค่าธรรมเนียม' },
+    loadChildren: () =>
+      import('@ksp/e-service/fee/refund-fee').then(
+        (m) => m.EServiceFeeRefundFeeModule
       ),
     canActivate: [AuthGuard],
   },

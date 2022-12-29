@@ -21,7 +21,7 @@ export class PaymentHistoryItemComponent {
 
   view() {
     this.dialog.open(ReceiptPreviewComponent, {
-      width: '600px',
+      width: '50vw',
     });
   }
 }
