@@ -25,6 +25,7 @@ import { EPraiseTeacherConfirmComponent } from './e-praise-teacher-confirm/e-pra
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { EPraiseTeacherRejectComponent } from './e-praise-teacher-reject/e-praise-teacher-reject.component';
 import { EServiceUiRewardRejectFormModule } from '@ksp/e-service/ui/reward-reject-form';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const routes: Routes = [
   {
@@ -79,6 +80,7 @@ const routes: Routes = [
     RequestNoPipe,
     EServiceUiRewardRejectFormModule,
     RewardValidateRequestComponent,
+    MatProgressSpinnerModule
   ],
   declarations: [
     EPraiseTeacherListComponent,

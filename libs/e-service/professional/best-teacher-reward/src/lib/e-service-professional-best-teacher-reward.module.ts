@@ -25,6 +25,7 @@ import { EBestTeacherConfirmComponent } from './e-best-teacher-confirm/e-best-te
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { EBestTeacherRejectComponent } from './e-best-teacher-reject/e-best-teacher-reject.component';
 import { EServiceUiRewardRejectFormModule } from '@ksp/e-service/ui/reward-reject-form';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const routes: Routes = [
   {
@@ -78,6 +79,7 @@ const routes: Routes = [
     RequestNoPipe,
     EServiceUiRewardRejectFormModule,
     RewardValidateRequestComponent,
+    MatProgressSpinnerModule
   ],
   declarations: [
     EBestTeacherListComponent,

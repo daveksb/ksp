@@ -173,8 +173,23 @@ export class RequestRewardComponent implements OnInit {
 
       const osoiInfo = parseJson(res.osoiinfo);
       const osoiMember = parseJson(res.osoimember);
+
+      const rewardInfo = {
+        idcardno: res.idcardno,
+        prefixth: res.prefixth,
+        firstnameth: res.firstnameth,
+        lastnameth: res.lastnameth,
+        contactphone: res.contactphone,
+        email: res.email,
+
+        rewardname: osoiInfo.rewardname,
+        rewardtype: osoiInfo.rewardtype,
+        submitbefore: osoiInfo.submitbefore,
+        vdolink: osoiInfo.vdolink,
+      };
+
       console.log('osoi member   = ', osoiMember);
-      this.form.controls.reward.patchValue(osoiInfo);
+      this.form.controls.reward.patchValue(<any>rewardInfo);
       this.memberData = osoiMember;
       //console.log('current process = ', this.currentProcess);
       //const file = parseJson(res.fileinfo);

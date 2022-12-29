@@ -125,6 +125,7 @@ export const column = [
   'process',
   'processupdatedate',
   'requestdate',
+  'objection',
   'verify',
   'request',
   'edit',

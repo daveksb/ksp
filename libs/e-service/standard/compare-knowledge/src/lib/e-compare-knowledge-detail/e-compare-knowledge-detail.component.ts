@@ -27,7 +27,6 @@ export class ECompareKnowledgeDetailComponent
   userInfoType = UserInfoFormType.thai;
   selectedTabIndex = 0;
   countries$!: Observable<any>;
-  countries2$!: Observable<any>;
   licenses$!: Observable<any>;
 
   override form = this.fb.group({
@@ -83,6 +82,7 @@ export class ECompareKnowledgeDetailComponent
     this.getListData();
     this.checkRequestId();
     this.addCheckResultArray();
+    this.countries$ = this.addressService.getCountry();
   }
 
   addCheckResultArray() {
@@ -96,6 +96,7 @@ export class ECompareKnowledgeDetailComponent
 
   override patchData(data: SelfGetRequest): void {
     super.patchData(data);
+
     if (data.eduinfo) {
       const eduInfo = parseJson(data.eduinfo);
       this.form.controls.educationInfo.patchValue({
@@ -105,10 +106,11 @@ export class ECompareKnowledgeDetailComponent
 
     if (data.testresultcompareinfo) {
       const testResultCompareInfo = parseJson(data.testresultcompareinfo);
-      console.log(testResultCompareInfo);
+      //console.log(testResultCompareInfo);
       this.form.controls.testResultCompareInfo.patchValue({
         ...testResultCompareInfo,
-      });
+      } as any);
+      console.log('eduInfo= ', testResultCompareInfo);
     }
 
     if (data.fileinfo) {

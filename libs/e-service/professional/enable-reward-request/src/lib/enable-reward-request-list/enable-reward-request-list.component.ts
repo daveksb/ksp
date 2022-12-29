@@ -65,12 +65,4 @@ export const data: userList[] = [
     lastEditDate: '10/10/2565',
     saveDate: '10/10/2565',
   },
-  {
-    order: 2,
-    year: '2565',
-    openRequest: '10/10/2565',
-    closeRequest: '10/10/2565',
-    lastEditDate: '10/10/2565',
-    saveDate: '10/10/2565',
-  },
 ];

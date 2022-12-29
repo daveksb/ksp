@@ -282,7 +282,7 @@ export class EQualificationApproveListComponent implements AfterViewInit {
     this.searchNotFound = false;
     this.dataSource.data = [];
     this.form.reset();
-    this.form.controls.search.patchValue({ requesttype: '3' });
+    this.form.controls.search.patchValue({ requesttype: '6' });
   }
 
   goToDetail(item: KspRequest) {

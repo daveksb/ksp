@@ -74,6 +74,7 @@
 
         <mat-tab label="ข้อมูลทางการศึกษา">
           <self-service-compare-knowledge-education
+            [countries]="countries$ | async"
             [mode]="'view'"
             formControlName="educationInfo"
           >

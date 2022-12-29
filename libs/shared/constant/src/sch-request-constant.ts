@@ -117,8 +117,8 @@ export const SchoolRequestProcess: SchRequestProcess[] = [
     status: [
       { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
-      { id: 2, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
-      { id: 3, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
+      /* { id: 2, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
+      { id: 3, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' }, */
     ],
   },
   {

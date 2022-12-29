@@ -33,7 +33,7 @@
             <th scope="col">ชื่อ-นามสกุล</th>
             <th scope="col">วันที่ออกหนังสือ</th>
             <th scope="col">วันที่สิ้นสุด</th>
-            <th scope="col">ดูเอกสาร</th>
+            <th scope="col" class="text-center">ดูเอกสาร</th>
           </tr>
         </thead>
         <tbody class="body__table">
@@ -42,7 +42,7 @@
             <td>{{ tempLicense?.firstname }} {{ tempLicense?.lastname }}</td>
             <td>{{ tempLicense?.startdate | thaiDate }}</td>
             <td>{{ tempLicense?.enddate | thaiDate }}</td>
-            <td>
+            <td class="text-center">
               <i
                 role="button"
                 class="box-header text-success bi bi-eye"
