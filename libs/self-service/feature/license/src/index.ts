@@ -14,6 +14,4 @@ export * from './lib/license-request-foreign/license-request-foreign.component';
 
 export * from './lib/license-foreign-agreement/license-foreign-agreement.component';
 
-export * from './lib/license-request-thai/license-request-thai.component';
-
 export * from './lib/license-request-foreign/license-request-foreign-files';
