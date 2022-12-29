@@ -220,12 +220,14 @@
 
     <div class="d-flex justify-content-center my-3">
       <button
+        type="button"
         class="btn text-secondary bg-light border-secondary me-2"
         (click)="clearData()"
       >
         ล้างข้อมูล
       </button>
       <button
+        type="button"
         class="btn"
         (click)="onClick()"
         [ngClass]="status === 'edit' ? 'btn-success' : 'btn-primary'"

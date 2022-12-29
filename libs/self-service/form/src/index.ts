@@ -71,3 +71,5 @@ export * from './lib/e-reward-form-base.component';
 export * from './lib/e-reward-confirm-form-base.component';
 
 export * from './lib/e-self-confirm-form-base.component';
+
+export * from './lib/transfer-knowledge-career-cert/transfer-knowledge-career-cert.component';

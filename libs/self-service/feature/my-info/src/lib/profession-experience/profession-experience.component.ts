@@ -17,7 +17,6 @@ import { replaceEmptyWithNull } from '@ksp/shared/utility';
 export class ProfessionExperienceComponent implements OnInit {
   label = 'แก้ไขข้อมูล';
   mode: FormMode = 'view';
-  @Input() showSeeButton = true;
 
   info = [
     { name: 'สำเนาใบรายงานผลการศึกษา (transcript)', fileid: '', filename: '' },
@@ -116,6 +115,11 @@ export class ProfessionExperienceComponent implements OnInit {
   get licenseInfo3() {
     return this.form.controls['licenseInfo3'] as FormArray;
   }
+
+  clear() {
+    this.form.reset();
+  }
+
   onSave() {
     if (this.mode === 'view') {
       this.mode = 'edit';
@@ -125,7 +129,7 @@ export class ProfessionExperienceComponent implements OnInit {
       this.label = 'แก้ไขข้อมูล';
       const formData = this.form.value;
       const fileList = this.mapFileInfo(this.info);
-      console.log(fileList);
+      //console.log(fileList);
       this.baseForm.patchValue({
         experienceinfo: JSON.stringify({ ...formData, fileList: fileList }),
       });

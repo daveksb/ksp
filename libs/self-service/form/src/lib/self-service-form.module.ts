@@ -48,6 +48,7 @@ import { TestResultTableComponent } from '@ksp/self-service/ui';
 import { FormUserTrainingWorkplaceComponent } from './form-user-training-workplace/form-user-training-workplace.component';
 import { ForeignStepTwoTabFourRenewComponent } from './foreign-step-two-tab-four-renew/foreign-step-two-tab-four-renew.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { TransferKnowledgeCareerCertComponent } from './transfer-knowledge-career-cert/transfer-knowledge-career-cert.component';
 
 @NgModule({
   imports: [
@@ -102,6 +103,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     RenewLicenseForeignNonTeacherComponent,
     FormUserTrainingWorkplaceComponent,
     ForeignStepTwoTabFourRenewComponent,
+    TransferKnowledgeCareerCertComponent,
   ],
   exports: [
     FormUserEducationComponent,
@@ -129,6 +131,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     RenewLicenseForeignNonTeacherComponent,
     FormUserTrainingWorkplaceComponent,
     ForeignStepTwoTabFourRenewComponent,
+    TransferKnowledgeCareerCertComponent,
   ],
 })
 export class SelfServiceFormModule {}
