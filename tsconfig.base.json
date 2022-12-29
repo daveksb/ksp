@@ -105,6 +105,15 @@
         "libs/e-service/feature/login/src/index.ts"
       ],
       "@ksp/e-service/fee-refund": ["libs/e-service/fee-refund/src/index.ts"],
+      "@ksp/e-service/fee/import-save-fee": [
+        "libs/e-service/fee/import-save-fee/src/index.ts"
+      ],
+      "@ksp/e-service/fee/payment-fee": [
+        "libs/e-service/fee/payment-fee/src/index.ts"
+      ],
+      "@ksp/e-service/fee/refund-fee": [
+        "libs/e-service/fee/refund-fee/src/index.ts"
+      ],
       "@ksp/e-service/professional/best-teacher-reward": [
         "libs/e-service/professional/best-teacher-reward/src/index.ts"
       ],

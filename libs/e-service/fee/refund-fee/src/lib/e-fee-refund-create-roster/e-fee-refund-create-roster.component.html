@@ -5,7 +5,7 @@
 
 <ksp-top-nav
   ><span header>ยื่นใบคำขอ</span
-  ><span subHeader>ขอคืนค่าธรรมเนียม </span></ksp-top-nav
+  ><span subHeader>บัญชีรายชื่อและอนุมัติการคืนค่าธรรมเนียม</span></ksp-top-nav
 >
 
 <form [formGroup]="form">
@@ -113,7 +113,7 @@
           <button
             type="button"
             class="ms-3 btn border-success text-success"
-            (click)="approve()"
+            (click)="create()"
           >
             จัดทำบัญชีรายชื่อ
           </button>
@@ -217,7 +217,6 @@
             <td mat-cell *matCellDef="let element" class="text-center">
               <i
                 role="button"
-                (click)="verify(element.id)"
                 class="bi bi-pencil-square text-primary fs-5"
               ></i>
             </td>
