@@ -48,7 +48,7 @@ export class PaymentChannelComponent implements OnInit {
 
   print() {
     this.dialog.open(PrintReceiptDialogComponent, {
-      width: '100%',
+      width: '75vw',
       id: 'dialogTrasparent',
     });
   }

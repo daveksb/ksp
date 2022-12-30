@@ -93,6 +93,10 @@ export class AddressInfoComponent implements OnInit {
     }
   }
 
+  clear() {
+    this.form.reset();
+  }
+
   onClickChangeMode() {
     if (this.mode === 'view') {
       this.mode = 'edit';
