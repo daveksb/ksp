@@ -84,6 +84,7 @@
         <label class="form-label">แนบเอกสาร</label>
         <div class="d-flex">
           <ksp-file-upload
+            [mode]="mode"
             [uploadType]="'link'"
             [showDeleteFile]="true"
             [buttonLabel]="'อัพโหลดเอกสาร'"

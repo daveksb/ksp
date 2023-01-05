@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -8,25 +8,25 @@ import {
   SelfServiceRequestSubType,
   SelfServiceRequestType,
 } from '@ksp/shared/constant';
-import { EsSearchPayload, Province, SelfRequest } from '@ksp/shared/interface';
+import { SelfRequest, Province, EsSearchPayload } from '@ksp/shared/interface';
 import {
-  AddressService,
   ERequestService,
   LoaderService,
+  AddressService,
 } from '@ksp/shared/service';
 import {
   checkProcess,
   checkStatus,
   replaceEmptyWithNull,
 } from '@ksp/shared/utility';
-import { Observable, Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 
 @Component({
-  selector: 'ksp-edit-license-approve-list',
-  templateUrl: './edit-license-approve-list.component.html',
-  styleUrls: ['./edit-license-approve-list.component.scss'],
+  selector: 'ksp-edit-license-consider-list',
+  templateUrl: './edit-license-consider-list.component.html',
+  styleUrls: ['./edit-license-consider-list.component.scss'],
 })
-export class EditLicenseApproveListComponent implements AfterViewInit {
+export class EditLicenseConsiderListComponent implements AfterViewInit {
   isLoading: Subject<boolean> = this.loaderService.isLoading;
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfRequest>();
@@ -68,7 +68,7 @@ export class EditLicenseApproveListComponent implements AfterViewInit {
       name: null,
       idcardno: params.idcardno,
       passportno: null,
-      process: params.process,
+      process: '4',
       status: params.status,
       schoolid: null,
       schoolname: null,
@@ -109,7 +109,7 @@ export class EditLicenseApproveListComponent implements AfterViewInit {
   }
 }
 
-const column = [
+export const column = [
   'id',
   'edit',
   'requestno',
