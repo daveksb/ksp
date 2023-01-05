@@ -6,13 +6,9 @@ import {
   SelfServiceRequestType,
 } from '@ksp/shared/constant';
 import { EsSearchPayload, SchRequestSearchFilter } from '@ksp/shared/interface';
-import {
-  AddressService,
-  ERequestService,
-  LoaderService,
-} from '@ksp/shared/service';
+import { ERequestService, LoaderService } from '@ksp/shared/service';
 import { eSelfCheckStatus, replaceEmptyWithNull } from '@ksp/shared/utility';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'ksp-e-teacher-council-create-account',

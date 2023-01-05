@@ -56,7 +56,7 @@ export class RenewLicenseListComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-    this.provinces$ = this.addressService.getProvinces();
+    //this.provinces$ = this.addressService.getProvinces();
   }
 
   search(params: any) {

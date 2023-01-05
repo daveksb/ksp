@@ -137,7 +137,10 @@
       >
         <ng-container [formGroupName]="i">
           <hr />
-          <div class="d-flex justify-content-end" *ngIf="i > 0">
+          <div
+            class="d-flex justify-content-end"
+            *ngIf="i > 0 && mode !== 'view'"
+          >
             <i
               class="bi bi-x-circle-fill text-danger"
               role="button"
@@ -200,7 +203,7 @@
       <ksp-add-row-button
         *ngIf="mode !== 'view'"
         class="text-primary fs-6"
-        (addRowClick)="addFormArray(degreeInfo)"
+        (addRowClick)="addFormArray()"
       >
         เพิ่มข้อมูลวิชาเอก
       </ksp-add-row-button>

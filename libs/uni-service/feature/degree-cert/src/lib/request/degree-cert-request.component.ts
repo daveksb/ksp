@@ -50,6 +50,7 @@ export class DegreeCertRequestComponent {
   step4Form: any = this.fb.group({
     step4: [],
   });
+  uniData: any;
   constructor(
     private router: Router,
     public dialog: MatDialog,
@@ -65,9 +66,10 @@ export class DegreeCertRequestComponent {
   async initForm() {
     this.id = this.activatedRoute.snapshot.queryParams['id'];
     let uniRequestDegree;
-    const uniData = await lastValueFrom(
-      this.uniInfoService.univerSitySelectById(getCookie('uniType'))
+    this.uniData = await lastValueFrom(
+      this.uniInfoService.univerSitySelectById(getCookie('uniId'))
     );
+
     if (this.id) {
       uniRequestDegree = await lastValueFrom(
         this.uniInfoService.uniRequestDegreeCertSelectById(this.id)
@@ -93,10 +95,10 @@ export class DegreeCertRequestComponent {
     } else {
       this.step1Form.setValue({
         step1: {
-          institutionsCode: uniData?.universitycode || '',
+          institutionsCode: this.uniData?.universitycode || '',
           institutionsGroup: getCookie('uniType') || '',
-          institutionsName: uniData?.name || '',
-          provience: uniData?.provinceid || '',
+          institutionsName: this.uniData?.name || '',
+          provience: this.uniData?.provinceid || '',
         },
       });
     }
@@ -105,7 +107,7 @@ export class DegreeCertRequestComponent {
     this.router.navigate(['/', 'degree-cert']);
   }
 
-  save(process:string) {
+  save(process: string) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -133,7 +135,7 @@ export class DegreeCertRequestComponent {
       }
     });
   }
-  private _getRequest(process:string): any {
+  private _getRequest(process: string): any {
     const step1: any = this.step1Form.value.step1;
     const step2: any = this.step2Form.value.step2;
     const step3: any = this.step3Form.value.step3;
@@ -151,7 +153,9 @@ export class DegreeCertRequestComponent {
       subtype: '5',
 
       attachfiles: step4 ? JSON.stringify(step4?.files) : null,
-      uniname: step1?.institutionsName || null,
+      uniname: step1?.institutionsName
+        ? `${step1?.institutionsName}, ${this.uniData?.campusname}`
+        : null,
       unitype: step1?.institutionsGroup || null,
       uniprovince: step1?.provience || null,
       unicode: step1?.institutionsCode || null,

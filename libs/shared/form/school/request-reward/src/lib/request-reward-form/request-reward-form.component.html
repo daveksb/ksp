@@ -57,7 +57,7 @@
           </th>
           <th scope="col">เบอร์โทรศัพท์มือถือ</th>
           <th scope="col">อีเมล</th>
-          <th scope="col">วิทยฐานะ</th>
+          <th scope="col">ตำแหน่ง</th>
         </tr>
       </thead>
       <tbody class="body__table">
@@ -67,13 +67,6 @@
             <input
               type="text"
               class="form-control"
-              [class]="
-                personId.invalid &&
-                (personId.dirty || personId.touched) &&
-                personId.value
-                  ? 'border-danger'
-                  : ''
-              "
               formControlName="idcardno"
               maxlength="13"
             />
@@ -91,13 +84,6 @@
               type="text"
               class="form-control"
               formControlName="firstnameth"
-              [class]="
-                firstName.invalid &&
-                (firstName.dirty || firstName.touched) &&
-                firstName.value
-                  ? 'border-danger'
-                  : ''
-              "
             />
           </td>
           <td>
@@ -105,41 +91,18 @@
               type="text"
               class="form-control"
               formControlName="lastnameth"
-              [class]="
-                lastName.invalid &&
-                (lastName.dirty || lastName.touched) &&
-                lastName.value
-                  ? 'border-danger'
-                  : ''
-              "
             />
           </td>
           <td>
             <input
               type="text"
               class="form-control"
-              [class]="
-                selfPhone.invalid &&
-                (selfPhone.dirty || selfPhone.touched) &&
-                selfPhone.value
-                  ? 'border-danger'
-                  : ''
-              "
               formControlName="contactphone"
               maxlength="10"
             />
           </td>
           <td>
-            <input
-              type="text"
-              class="form-control"
-              formControlName="email"
-              [class]="
-                email.invalid && (email.dirty || email.touched) && email.value
-                  ? 'border-danger'
-                  : ''
-              "
-            />
+            <input type="text" class="form-control" formControlName="email" />
           </td>
           <td>
             <input

@@ -50,12 +50,9 @@ export class FormUserExperienceComponent
     this.form.valueChanges
       .pipe(untilDestroyed(this), pairwise())
       .subscribe(([prev, next]) => {
-        // console.log('prev', prev);
-        // console.log('next', next);
-        //console.log('exp form = ', res);
         if (prev.hasForeignLicense !== next.hasForeignLicense) {
           if (next.hasForeignLicense) {
-            console.log('set validators');
+            //console.log('set validators');
             this.form.controls.foreignLicenseForm.addValidators(
               Validators.required
             );
@@ -68,8 +65,11 @@ export class FormUserExperienceComponent
   }
 
   override set value(value: any) {
-    this.form.patchValue({ TrainingAddressOne: value.TrainingAddressOne });
-    this.form.patchValue({ TrainingAddressTwo: value.TrainingAddressTwo });
+    /* this.form.patchValue({ TrainingAddressOne: value.TrainingAddressOne });
+    this.form.patchValue({ TrainingAddressTwo: value.TrainingAddressTwo }); */
+    /* this.form.patchValue({ hasForeignLicense: value.hasForeignLicense });
+    this.form.patchValue({ foreignLicenseForm: value.foreignLicenseForm }); */
+    this.form.patchValue(value);
 
     if (value.teachingAddressForm?.length) {
       this.form.controls.teachingAddressForm.removeAt(0);
@@ -79,9 +79,6 @@ export class FormUserExperienceComponent
         this.address.at(index).patchValue(item);
       });
     }
-
-    this.form.patchValue({ hasForeignLicense: value.hasForeignLicense });
-    this.form.patchValue({ foreignLicenseForm: value.foreignLicenseForm });
 
     if (this.mode === 'view') {
       this.form.disable();

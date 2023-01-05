@@ -108,4 +108,8 @@ export class AccusationSearchComponent
   onClickRow(row: any) {
     this.submited.emit(row.id);
   }
+  clear() {
+    this.form.reset();
+    this.dataSource.data = [];
+  }
 }

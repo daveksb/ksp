@@ -13,6 +13,13 @@ export class CompareKnowledgeInfoComponent
   extends KspFormBaseComponent
   implements OnInit
 {
+  degreeMajor = this.fb.group({
+    subject: [null, Validators.required],
+    testResult: [null, Validators.required],
+    scoreLevel: [null, Validators.required],
+    scoreValidDate: [null, Validators.required],
+  });
+
   override form = this.fb.group({
     thaiTestScore: [null, Validators.required],
     thaiScoreLevel: [null, Validators.required],
@@ -23,7 +30,7 @@ export class CompareKnowledgeInfoComponent
     techTestScore: [null, Validators.required],
     techScoreLevel: [null, Validators.required],
     techScoreValidDate: [null, Validators.required],
-    degreeInfo: this.fb.array([]),
+    degreeInfo: this.fb.array([this.degreeMajor]),
   });
 
   constructor(private fb: FormBuilder) {
@@ -41,25 +48,49 @@ export class CompareKnowledgeInfoComponent
     this.form.valueChanges.subscribe((res) => {
       //console.log('form value = ', res);
     });
-    this.setDefaulFormValue();
+    /* this.setDefaulFormValue(); */
   }
 
-  setDefaulFormValue() {
-    this.addFormArray(this.degreeInfo);
+  override set value(value: any) {
+    this.form.patchValue(value);
+
+    if (value.degreeInfo?.length) {
+      this.form.controls.degreeInfo.removeAt(0);
+
+      value.degreeInfo.forEach((item: any, index: number) => {
+        this.addFormArray();
+        this.degree.at(index).patchValue(item);
+      });
+    }
+
+    if (this.mode === 'view') {
+      this.form.disable();
+    }
+
+    this.onChange(value);
+    this.onTouched();
   }
+
+  /* setDefaulFormValue() {
+    this.addFormArray();
+  } */
 
   deleteFormArray(form: FormArray<any>, index: number) {
     form.removeAt(index);
   }
 
-  addFormArray(form: FormArray<any>) {
+  addFormArray() {
     const data = this.fb.group({
       subject: [null, Validators.required],
       testResult: [null, Validators.required],
       scoreLevel: [null, Validators.required],
       scoreValidDate: [null, Validators.required],
     });
-    form.push(data);
+    this.degree.push(data);
+  }
+
+  get degree() {
+    return this.form.controls.degreeInfo;
   }
 
   get degreeInfo() {

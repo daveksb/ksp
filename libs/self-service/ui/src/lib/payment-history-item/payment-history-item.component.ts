@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { ReceivePreviewComponent } from '../receive-preview/receive-preview.component';
+import { ReceiptPreviewComponent } from '../receipt-preview/receipt-preview.component';
 
 @Component({
   selector: 'self-service-payment-history-item',
@@ -20,8 +20,8 @@ export class PaymentHistoryItemComponent {
   constructor(public dialog: MatDialog) {}
 
   view() {
-    this.dialog.open(ReceivePreviewComponent, {
-      width: '600px',
+    this.dialog.open(ReceiptPreviewComponent, {
+      width: '50vw',
     });
   }
 }

@@ -487,8 +487,16 @@ export const professionalMenu: MenuConfig[] = [
         label: 'รายการใบคำขอรับรางวัลครูภาษาไทยดีเด่น',
       },
       {
-        path: '/xxx',
-        label: 'พิจารณารางวัลครูภาษาไทยดีเด่น',
+        path: '/thai-teacher/account-list',
+        label: 'จัดทำบัญชีรายชื่อ',
+      },
+      {
+        path: '/thai-teacher/check-list',
+        label: 'เจ้าหน้าที่ส่วนกลางตรวจสอบบันทึกผล',
+      },
+      {
+        path: '/thai-teacher/declare',
+        label: 'ประกาศรายชื่อ',
       },
     ],
   },
@@ -607,6 +615,11 @@ export const professionalMenu: MenuConfig[] = [
 
 export const refundFeeMenu: MenuConfig[] = [
   {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    path: '/payment-fee/all-payment',
+    label: 'รายการชำระเงิน',
+  },
+  {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'รายการชำระเงินค่าธรรมเนียม',
     path: '',
@@ -614,16 +627,16 @@ export const refundFeeMenu: MenuConfig[] = [
     subMenuName: 'pay',
     subMenu: [
       {
-        path: '/xxx',
+        path: '/payment-fee/list',
         label: 'รายการใบเสร็จรับเงิน',
       },
       {
-        path: '/xxx',
-        label: 'รายการใบนำส่งเงิน',
+        path: '/payment-fee/receive',
+        label: 'รายการรับเงินค่าธรรมเนียม',
       },
       {
-        path: '/xxx',
-        label: 'รายการใบประกอบใบนำส่งเงิน',
+        path: '/payment-fee/remittance',
+        label: 'รายการใบนำส่งเงิน',
       },
     ],
   },
@@ -635,11 +648,11 @@ export const refundFeeMenu: MenuConfig[] = [
     subMenuName: 'refund',
     subMenu: [
       {
-        path: '/refund/list',
-        label: 'รายการใบขอคืนค่าธรรมเนียม',
+        path: '/refund-fee/list',
+        label: 'รายการใบคำขอคืนค่าธรรมเนียม',
       },
       {
-        path: '/xxx',
+        path: '/refund-fee/create-roster',
         label: 'บัญชีรายชื่อและอนุมัติการคืนค่าธรรมเนียม',
       },
       {

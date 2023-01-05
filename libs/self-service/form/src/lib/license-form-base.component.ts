@@ -132,8 +132,6 @@ export abstract class LicenseFormBaseComponent {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.nationalitys$ = this.generalInfoService.getNationality();
     this.provinces1$ = this.addressService.getProvinces();
-    //this.provinces2$ = this.provinces1$;
-    //this.provinces3$ = this.provinces1$;
     this.bureau$ = this.educationDetailService.getBureau();
   }
 

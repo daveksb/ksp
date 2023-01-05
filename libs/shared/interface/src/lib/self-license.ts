@@ -1,7 +1,7 @@
 export class SelfLicense {
-  id: string | null = null;
-  createdate: string | null = null;
-  updatedate: string | null = null;
+  id?: string | null = null;
+  createdate?: string | null = null;
+  updatedate?: string | null = null;
   careertype: string | null = null;
   renewtype: string | null = null;
   isforeign: string | null = null;
@@ -30,4 +30,11 @@ export class SelfLicense {
   fileinfo: string | null = null;
   filedata?: string | null = null;
   birthdate: string | null = null;
+  sex: string | null = null;
+  imageinfo?: string | null = null; // add 27-12-2022
+  schoolid?: string | null = null; // add 27-12-2022
+  contactphone?: string | null = null; // add 27-12-2022
+  workphone?: string | null = null; // add 27-12-2022
+  email?: string | null = null; // add 27-12-2022
+  kuruspano?: string | null = null; // add 27-12-2022
 }

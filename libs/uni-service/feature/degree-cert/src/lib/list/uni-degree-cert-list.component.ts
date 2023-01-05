@@ -138,12 +138,15 @@ export class UniDegreeCertListComponent
   }
   async getAll() {
     let resData = await lastValueFrom(
-      this.uniInfoService.univerSitySelectById(getCookie('uniType'))
+      this.uniInfoService.univerSitySelectById(getCookie('uniId'))
     );
     const degreeLevel = await lastValueFrom(
       this.uniInfoService.uniDegreeLevel().pipe(
         map((data) => {
-          return data.map(({ id, name, campusname }: any) => ({ value: id, label: name + (campusname ? `, ${campusname}` : '') }));
+          return data.map(({ id, name, campusname }: any) => ({
+            value: id,
+            label: name + (campusname ? `, ${campusname}` : ''),
+          }));
         })
       )
     );
@@ -155,7 +158,10 @@ export class UniDegreeCertListComponent
     resData = await lastValueFrom(
       this.uniInfoService.searchTypeidUniUniversity(resData.typeid).pipe(
         map((data) => {
-          return data.map(({ id, name, campusname }: any) => ({ value: id, label: name + (campusname ? `, ${campusname}` : '') }));
+          return data.map(({ id, name, campusname }: any) => ({
+            value: id,
+            label: name + (campusname ? `, ${campusname}` : ''),
+          }));
         })
       )
     );

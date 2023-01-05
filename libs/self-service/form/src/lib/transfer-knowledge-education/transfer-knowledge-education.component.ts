@@ -87,6 +87,10 @@ export class TransferKnowledgeEducationComponent
       });
     }
 
+    if (this.mode !== 'edit') {
+      this.form.disable();
+    }
+
     this.onChange(value);
     this.onTouched();
   }

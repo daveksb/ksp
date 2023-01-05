@@ -44,6 +44,13 @@ export class CompareKnowledgeEducationComponent
     degreeInfo4: this.fb.array([]),
     degreeInfo5: this.fb.array([]),
   });
+  mapping: { [key: number]: any } = {
+    1: this.degreeInfo1,
+    2: this.degreeInfo2,
+    3: this.degreeInfo3,
+    4: this.degreeInfo4,
+    5: this.degreeInfo5,
+  };
 
   @Input() countries: any[] = [];
   constructor(private fb: FormBuilder) {
@@ -59,16 +66,15 @@ export class CompareKnowledgeEducationComponent
 
   override set value(value: any) {
     Object.keys(value).forEach((key) => {
-      const control = this.form.get(key) as FormArray;
       if (value[key].length) {
-        // control.removeAt(0);
-        value[key].forEach((item: any, index: number) => {
-          if (index === 0) {
-            this.addFormArray1(control);
-          } else {
-            this.addFormArray2(control);
-          }
-          control.at(index).patchValue(item);
+        const control = this.form.get(key) as FormArray;
+        //control.removeAt(0);
+        value[key].forEach((item: any) => {
+          control.push(
+            this.fb.group({
+              ...item,
+            })
+          );
         });
       }
     });
@@ -90,29 +96,31 @@ export class CompareKnowledgeEducationComponent
   }
 
   setDefaulFormValue() {
-    this.addFormArray1(this.degreeInfo1);
-    this.addFormArray2(this.degreeInfo2);
-    this.addFormArray2(this.degreeInfo3);
-    this.addFormArray2(this.degreeInfo4);
-    this.addFormArray2(this.degreeInfo5);
+    this.addFormArray(1);
+    this.addFormArray(2);
+    this.addFormArray(3);
+    this.addFormArray(4);
+    this.addFormArray(5);
   }
 
   deleteFormArray(form: FormArray<any>, index: number) {
     form.removeAt(index);
   }
 
-  addFormArray1(form: FormArray<any>) {
-    const data = this.fb.group({
-      degreeLevel: [null, Validators.required],
-      institute: [null, Validators.required],
-    });
-    form.push(data);
-  }
+  addFormArray(formNumber: number) {
+    const form = this.mapping[formNumber];
+    let data;
 
-  addFormArray2(form: FormArray<any>) {
-    const data = this.fb.group({
-      degreeInfo: [null, Validators.required],
-    });
+    if (formNumber === 1) {
+      data = this.fb.group({
+        degreeLevel: [null, Validators.required],
+        institute: [null, Validators.required],
+      });
+    } else {
+      data = this.fb.group({
+        degreeInfo: [null, Validators.required],
+      });
+    }
     form.push(data);
   }
 

@@ -26,6 +26,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { SharedFormEducationLevelModule } from '@ksp/shared/form/education-level';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { SchoolServiceFormActivityModule } from '@ksp/school-service/form/activity';
 
 export const routes: Route[] = [
   {
@@ -90,6 +91,7 @@ export const routes: Route[] = [
     SharedFormOthersModule,
     MatDatepickerModule,
     SelfServiceFormModule,
+    SchoolServiceFormActivityModule,
   ],
   declarations: [
     PaymentHistoryComponent,

@@ -195,7 +195,10 @@ export class ERequestService {
   ): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/e-service/ksprequestprocessinsert_unirequestdegree`,
-      payload
+      {
+        ...payload,
+        userid: getCookie('userId'),
+      }
     );
   }
 
@@ -307,8 +310,10 @@ export class ERequestService {
     );
   }
 
-  createMultipleLicense(payload: any): Observable<any> {
-    return this.http.post(
+  createMultipleLicense(
+    payload: any
+  ): Observable<KspListResponse<SelfLicense>> {
+    return this.http.post<KspListResponse<SelfLicense>>(
       `${environment.shortApiUrl}/selflicenseinsertarray.php`,
       payload
     );

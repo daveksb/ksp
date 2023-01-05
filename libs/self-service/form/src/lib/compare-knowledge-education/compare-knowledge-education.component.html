@@ -7,7 +7,7 @@
         <ksp-add-row-button
           *ngIf="mode !== 'view'"
           class="text-primary"
-          (addRowClick)="addFormArray1(degreeInfo1)"
+          (addRowClick)="addFormArray(1)"
         >
           เพิ่มข้อมูลประวัติการศึกษา
         </ksp-add-row-button>
@@ -63,7 +63,7 @@
         <ksp-add-row-button
           *ngIf="mode !== 'view'"
           class="text-primary"
-          (addRowClick)="addFormArray2(degreeInfo2)"
+          (addRowClick)="addFormArray(2)"
         >
           เพิ่มข้อมูลประวัติการศึกษา
         </ksp-add-row-button>
@@ -72,7 +72,7 @@
 
     <ng-container formArrayName="degreeInfo2">
       <ng-container
-        *ngFor="let DegreeForm of degreeInfo2.controls; let i = index"
+        *ngFor="let DegreeForm2 of degreeInfo2.controls; let i = index"
       >
         <ng-container [formGroupName]="i">
           <hr />
@@ -101,7 +101,7 @@
         <ksp-add-row-button
           *ngIf="mode !== 'view'"
           class="text-primary"
-          (addRowClick)="addFormArray2(degreeInfo3)"
+          (addRowClick)="addFormArray(3)"
         >
           เพิ่มข้อมูลประวัติการศึกษา
         </ksp-add-row-button>
@@ -110,7 +110,7 @@
 
     <ng-container formArrayName="degreeInfo3">
       <ng-container
-        *ngFor="let DegreeForm of degreeInfo3.controls; let i = index"
+        *ngFor="let DegreeForm3 of degreeInfo3.controls; let i = index"
       >
         <ng-container [formGroupName]="i">
           <hr />
@@ -139,7 +139,7 @@
         <ksp-add-row-button
           *ngIf="mode !== 'view'"
           class="text-primary"
-          (addRowClick)="addFormArray2(degreeInfo4)"
+          (addRowClick)="addFormArray(4)"
         >
           เพิ่มข้อมูลประวัติการศึกษา
         </ksp-add-row-button>
@@ -148,7 +148,7 @@
 
     <ng-container formArrayName="degreeInfo4">
       <ng-container
-        *ngFor="let DegreeForm of degreeInfo4.controls; let i = index"
+        *ngFor="let DegreeForm4 of degreeInfo4.controls; let i = index"
       >
         <ng-container [formGroupName]="i">
           <hr />
@@ -177,7 +177,7 @@
         <ksp-add-row-button
           class="text-primary"
           *ngIf="mode !== 'view'"
-          (addRowClick)="addFormArray2(degreeInfo5)"
+          (addRowClick)="addFormArray(5)"
         >
           เพิ่มข้อมูลประวัติการศึกษา
         </ksp-add-row-button>
@@ -186,7 +186,7 @@
 
     <ng-container formArrayName="degreeInfo5">
       <ng-container
-        *ngFor="let DegreeForm of degreeInfo5.controls; let i = index"
+        *ngFor="let DegreeForm5 of degreeInfo5.controls; let i = index"
       >
         <ng-container [formGroupName]="i">
           <hr />

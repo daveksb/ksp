@@ -23,6 +23,7 @@ import { Observable } from 'rxjs';
 import localForage from 'localforage';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { Base64 } from 'js-base64';
+import { ESelfFormBaseComponent } from '@ksp/shared/form/others';
 
 @Component({
   selector: 'ksp-e-qualification-approve-detail',
@@ -80,8 +81,11 @@ export class EQualificationApproveDetailComponent implements OnInit {
 
   addCheckResultArray() {
     for (let i = 0; i < 5; i++) {
-      this.checkResultFormArray.push(this.fb.control([]));
+      this.checkResultFormArray.push(this.fb.control(null));
     }
+    this.checkResultFormArray.setValidators(
+      ESelfFormBaseComponent.allFilledValidator()
+    );
   }
 
   tabChanged(e: MatTabChangeEvent) {

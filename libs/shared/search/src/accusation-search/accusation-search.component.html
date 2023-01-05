@@ -146,7 +146,7 @@
 
     <div class="d-flex justify-content-end mt-3 mb-2">
       <button
-        (click)="submited.emit(false)"
+        (click)="clear()"
         type="button"
         class="btn border-primary text-primary"
       >
@@ -162,9 +162,9 @@
     </div>
   </div>
 </form>
-<div class="bg-white px-3 py-2 mt-3">
+<div class="bg-white p-3 mt-3">
   <div class="d-flex justify-content-between">
-    <div class="box-header">รายการการกล่าวหา/กล่าวโทษ</div>
+    <div class="box-header">ผลการค้นหา</div>
     <button
       (click)="createNew()"
       type="button"
@@ -178,9 +178,17 @@
   <div class="table__scroll">
     <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="order">
-        <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.id }}
+        <th mat-header-cell *matHeaderCellDef class="text-center">ลำดับ</th>
+        <td
+          mat-cell
+          *matCellDef="let element; let i = index"
+          class="text-center"
+        >
+          {{
+            paginator.pageIndex === 0
+              ? i + 1
+              : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+          }}
         </td>
       </ng-container>
 
@@ -244,8 +252,8 @@
       </ng-container>
 
       <ng-container matColumnDef="edit">
-        <th mat-header-cell *matHeaderCellDef>ตรวจสอบ</th>
-        <td mat-cell *matCellDef="let row">
+        <th mat-header-cell *matHeaderCellDef class="text-center">ตรวจสอบ</th>
+        <td mat-cell *matCellDef="let row" class="text-center">
           <i
             role="button"
             (click)="onClickRow(row)"
@@ -255,8 +263,8 @@
       </ng-container>
 
       <ng-container matColumnDef="view">
-        <th mat-header-cell *matHeaderCellDef>ดูข้อมูล</th>
-        <td mat-cell *matCellDef="let row">
+        <th mat-header-cell *matHeaderCellDef class="text-center">ดูข้อมูล</th>
+        <td mat-cell *matCellDef="let row" class="text-center">
           <i role="button" class="bi bi-eye fs-5 text-success"></i>
         </td>
       </ng-container>
@@ -265,5 +273,9 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
   </div>
-  <mat-paginator [pageSizeOptions]="[25]" showFirstLastButtons></mat-paginator>
+  <mat-paginator
+    [pageSizeOptions]="[25]"
+    showFirstLastButtons
+    [hidden]="!dataSource.data.length"
+  ></mat-paginator>
 </div>

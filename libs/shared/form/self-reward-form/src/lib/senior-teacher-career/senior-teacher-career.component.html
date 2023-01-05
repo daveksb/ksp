@@ -4,7 +4,10 @@
       *ngFor="let DegreeForm of workingInfo.controls; let i = index"
     >
       <ng-container [formGroupName]="i">
-        <div class="border rounded px-3 py-2">
+        <div
+          class="border rounded px-3 py-2"
+          [ngClass]="i > 0 ? 'mt-3' : 'mt-0'"
+        >
           <div class="d-flex justify-content-end" *ngIf="i > 0">
             <i
               class="bi bi-x-circle-fill text-danger"

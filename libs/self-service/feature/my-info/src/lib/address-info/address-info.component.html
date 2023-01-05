@@ -35,10 +35,15 @@
     </div>
   </form>
   <div class="d-flex justify-content-center my-3">
-    <button class="btn text-secondary bg-light border-secondary me-2">
+    <button
+      type="button"
+      class="btn text-secondary bg-light border-secondary me-2"
+      (click)="clear()"
+    >
       ล้างข้อมูล
     </button>
     <button
+      type="button"
       class="btn"
       (click)="onClickChangeMode()"
       [ngClass]="mode === 'edit' ? 'btn-success' : 'btn-primary'"

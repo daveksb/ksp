@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { FormMode, SelfMyInfo } from '@ksp/shared/interface';
 import { AddressService, MyInfoService } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
@@ -13,10 +13,24 @@ import { TransferKnowledgeEducationComponent } from '@ksp/self-service/form';
 export class EducationInfoComponent implements OnInit {
   label = 'แก้ไขข้อมูล';
   mode: FormMode = 'view';
+  countries$!: Observable<any>;
+  baseForm = this.fb.group(new SelfMyInfo());
 
   form = this.fb.group({
-    eduinfo: [],
+    licenseInfo1: this.fb.array([]),
+    licenseInfo2: this.fb.array([]),
+    licenseInfo3: this.fb.array([]),
+    licenseInfo4: this.fb.array([]),
+    licenseInfo5: this.fb.array([]),
   });
+
+  mapping: { [key: number]: any } = {
+    0: this.licenseInfo1,
+    1: this.licenseInfo2,
+    2: this.licenseInfo3,
+    3: this.licenseInfo4,
+    4: this.licenseInfo5,
+  };
 
   constructor(
     private addressService: AddressService,
@@ -24,27 +38,39 @@ export class EducationInfoComponent implements OnInit {
     private myInfoService: MyInfoService
   ) {}
 
-  countries$!: Observable<any>;
-
-  @ViewChild(TransferKnowledgeEducationComponent)
-  formComponent!: TransferKnowledgeEducationComponent;
-  baseForm = this.fb.group(new SelfMyInfo());
-
   ngOnInit(): void {
     this.countries$ = this.addressService.getCountry();
     this.myInfoService.getMyInfo().subscribe((res) => {
       res = this.myInfoService.formatMyInfo(res);
       this.baseForm.patchValue(res);
       const eduinfo = JSON.parse(res.eduinfo as string);
-      let index = 1;
+      let index = 0;
       for (const key in eduinfo) {
         for (let i = 0; i < eduinfo[key].length; i++) {
-          this.formComponent.addFormArray(index);
+          this.addFormArray(index);
         }
         index++;
       }
-      this.form.patchValue({ eduinfo });
+      this.form.patchValue(eduinfo);
     });
+  }
+
+  addFormArray(formNumber: number) {
+    const form = this.mapping[formNumber];
+
+    const data = this.fb.group({
+      licenseForm: [null, Validators.required],
+    });
+
+    form.push(data);
+  }
+
+  deleteFormArray(form: FormArray<any>, index: number) {
+    form.removeAt(index);
+  }
+
+  clear() {
+    this.form.reset();
   }
 
   onClickSave() {
@@ -54,13 +80,33 @@ export class EducationInfoComponent implements OnInit {
     } else {
       this.mode = 'view';
       this.label = 'แก้ไขข้อมูล';
-      const { eduinfo } = this.form.value;
-      this.baseForm.patchValue({ eduinfo: JSON.stringify(eduinfo) });
+      const formData = this.form.value;
+      this.baseForm.patchValue({ eduinfo: JSON.stringify({ ...formData }) });
       const payload: SelfMyInfo = replaceEmptyWithNull(this.baseForm.value);
       console.log(payload);
       this.myInfoService
         .updateMyInfo(payload)
         .subscribe((res) => console.log(res));
     }
+  }
+
+  get licenseInfo1() {
+    return this.form.controls['licenseInfo1'] as FormArray;
+  }
+
+  get licenseInfo2() {
+    return this.form.controls['licenseInfo2'] as FormArray;
+  }
+
+  get licenseInfo3() {
+    return this.form.controls['licenseInfo3'] as FormArray;
+  }
+
+  get licenseInfo4() {
+    return this.form.controls['licenseInfo4'] as FormArray;
+  }
+
+  get licenseInfo5() {
+    return this.form.controls['licenseInfo5'] as FormArray;
   }
 }
