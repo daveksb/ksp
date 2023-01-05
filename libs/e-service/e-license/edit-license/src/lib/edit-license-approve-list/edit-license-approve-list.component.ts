@@ -109,7 +109,7 @@ export class EditLicenseApproveListComponent implements AfterViewInit {
   }
 }
 
-export const column = [
+const column = [
   'id',
   'edit',
   'requestno',

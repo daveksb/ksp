@@ -20,11 +20,17 @@ import {
   EServiceRequestSearchComponent,
   RequestSearchComponent,
   EServiceLicenseSearchComponent,
+  EServiceLicenseGroupSearchComponent,
 } from '@ksp/shared/search';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { EKnowledgeCertConfirmComponent } from './e-knowledge-cert-confirm/e-knowledge-cert-confirm.component';
 import { ValidateKspRequestComponent } from '@ksp/e-service/e-license/approve-ksp-request';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { EKnowledgeCertRosterSearchComponent } from './e-knowledge-cert-roster-search/e-knowledge-cert-roster-search.component';
+import { EKnowledgeCertCreateRosterComponent } from './e-knowledge-cert-create-roster/e-knowledge-cert-create-roster.component';
+import { EKnowledgeCertConsiderSearchComponent } from './e-knowledge-cert-consider-search/e-knowledge-cert-consider-search.component';
+import { EKnowledgeCertConsiderResultComponent } from './e-knowledge-cert-consider-result/e-knowledge-cert-consider-result.component';
+import { EKnowledgeCertRosterResultComponent } from './e-knowledge-cert-roster-result/e-knowledge-cert-roster-result.component';
 
 export const routes: Routes = [
   {
@@ -52,6 +58,27 @@ export const routes: Routes = [
         path: 'confirm/:id',
         component: EKnowledgeCertConfirmComponent,
       },
+
+      {
+        path: 'create-roster',
+        component: EKnowledgeCertCreateRosterComponent,
+      },
+      {
+        path: 'roster-list',
+        component: EKnowledgeCertRosterSearchComponent,
+      },
+      {
+        path: 'roster-detail',
+        component: EKnowledgeCertRosterResultComponent,
+      },
+      {
+        path: 'consider-list',
+        component: EKnowledgeCertConsiderSearchComponent,
+      },
+      {
+        path: 'consider-detail',
+        component: EKnowledgeCertConsiderResultComponent,
+      },
     ],
   },
 ];
@@ -77,13 +104,27 @@ export const routes: Routes = [
     EServiceLicenseSearchComponent,
     ValidateKspRequestComponent,
     MatProgressSpinnerModule,
-    RequestNoPipe
+    RequestNoPipe,
+    EServiceLicenseGroupSearchComponent,
   ],
   declarations: [
     EKnowledgeCertListComponent,
     EKnowledgeCertDetailComponent,
     EKnowledgeCertConfirmComponent,
+    EKnowledgeCertRosterSearchComponent,
+    EKnowledgeCertCreateRosterComponent,
+    EKnowledgeCertConsiderSearchComponent,
+    EKnowledgeCertConsiderResultComponent,
+    EKnowledgeCertRosterResultComponent,
   ],
-  exports: [EKnowledgeCertListComponent, EKnowledgeCertDetailComponent],
+  exports: [
+    EKnowledgeCertListComponent,
+    EKnowledgeCertDetailComponent,
+    EKnowledgeCertRosterSearchComponent,
+    EKnowledgeCertCreateRosterComponent,
+    EKnowledgeCertConsiderSearchComponent,
+    EKnowledgeCertConsiderResultComponent,
+    EKnowledgeCertRosterResultComponent,
+  ],
 })
 export class EServiceStandardKnowledgeCertModule {}

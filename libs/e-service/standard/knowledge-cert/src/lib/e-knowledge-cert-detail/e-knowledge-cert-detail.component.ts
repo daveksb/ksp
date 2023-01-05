@@ -26,7 +26,6 @@ export class EKnowledgeCertDetailComponent
 {
   selectedTabIndex = 0;
   countries$!: Observable<any>;
-  countries2$!: Observable<any>;
   licenses$!: Observable<any>;
   disableNextButton = false;
   eduFiles: any[] = [];
@@ -91,6 +90,7 @@ export class EKnowledgeCertDetailComponent
     this.getListData();
     this.checkRequestId();
     this.addCheckResultArray();
+    this.countries$ = this.addressService.getCountry();
   }
 
   addCheckResultArray() {

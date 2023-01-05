@@ -8,7 +8,7 @@
   <div class="box-header">
     ข้อมูลกำหนดการยื่นรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม
   </div>
-  <div class="bg-white p-3 mb-3">
+  <div class="bg-white default-width p-3 mb-3">
     <div class="box-header">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
     <hr />
     <div class="row mb-2">
@@ -134,5 +134,10 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
     </div>
+    <mat-paginator
+      [pageSizeOptions]="[25]"
+      showFirstLastButtons
+      [hidden]="!dataSource.data.length"
+    ></mat-paginator>
   </div>
 </div>

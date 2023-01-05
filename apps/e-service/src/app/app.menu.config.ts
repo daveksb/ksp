@@ -137,7 +137,7 @@ export const eLicenseMenu: MenuConfig[] = [
         label: 'รายการใบคำขอแก้ไข/เปลี่ยนแปลงใบอนุญาต',
       },
       {
-        path: '/xxx',
+        path: '/edit-license/consider-list',
         label: 'พิจารณาขอเปลี่ยนแปลง/แก้ใบอนุญาต',
       },
     ],
@@ -385,11 +385,11 @@ export const standardMenu: MenuConfig[] = [
         label: 'รายการใบคำขอรับรองความรู้',
       },
       {
-        path: '/xxx',
+        path: '/knowledge-cert/roster-list',
         label: 'บัญชีรายชื่อและพิมพ์หนังสือรับรองความรู้',
       },
       {
-        path: '/xxx',
+        path: '/knowledge-cert/consider-list',
         label: 'พิจารณารับรองรับรองความรู้',
       },
     ],
@@ -444,7 +444,7 @@ export const standardMenu: MenuConfig[] = [
     subMenuName: 'user-management',
     subMenu: [
       {
-        path: '/bb',
+        path: '/xxx',
         label: 'ผู้ใช้งานระบบบริการสถาบันผลิตครู (Uni Service)',
       },
     ],

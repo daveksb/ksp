@@ -16,6 +16,7 @@
     <div class="mb-3">
       <ksp-e-service-license-group-search
         (search)="searchData($event)"
+        (clear)="clear()"
       ></ksp-e-service-license-group-search>
     </div>
 
@@ -42,7 +43,8 @@
         <button
           type="button"
           class="btn btn-primary ms-2 create-group-btn"
-          (click)="createGroup()">
+          (click)="createGroup()"
+        >
           + สร้างกลุ่มบัญชีรายชื่อ
         </button>
       </ng-container>

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { EnableRewardRequestDialogComponent } from '../enable-reward-request-dialog/enable-reward-request-dialog.component';
@@ -9,13 +10,16 @@ import { EnableRewardRequestDialogComponent } from '../enable-reward-request-dia
   templateUrl: './enable-reward-request-list.component.html',
   styleUrls: ['./enable-reward-request-list.component.scss'],
 })
-export class EnableRewardRequestListComponent implements OnInit {
+export class EnableRewardRequestListComponent implements AfterViewInit {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<userList>();
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private dialog: MatDialog) {}
 
-  ngOnInit(): void {}
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+  }
 
   search() {
     this.dataSource.data = data;

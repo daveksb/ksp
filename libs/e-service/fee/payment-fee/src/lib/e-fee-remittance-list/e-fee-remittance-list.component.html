@@ -1,1 +1,237 @@
-<p>e-fee-remittance-list works!</p>
+<!-- <div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div> -->
+
+<ksp-top-nav><span header>รายการรับเงินค่าธรรมเนียม</span></ksp-top-nav>
+
+<div class="bg-secondary bg-opacity-10 px-4 py-2 full-height full-width-2">
+  <div class="box-header">
+    รายการรับเงินค่าธรรมเนียมการประกอบวิชาชีพทางการศึกษา
+  </div>
+
+  <div class="bg-white px-3 py-3">
+    <div class="bg-light default-width p-3">
+      <div class="box-header">ค้นหารายการ</div>
+
+      <div class="row mb-2">
+        <div class="col">
+          <label class="form-label">ประเภทค่าธรรมเนียม</label>
+          <select class="form-select">
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
+            <option value="1">ค่าขึ้นทะเบียนรับใบอนุญาตประกอบวิชาชีพ</option>
+            <option value="2">ค่าต่ออายุใบอนุญาตประกอบวิชาชีพ</option>
+            <option value="3">ค่าใบแทนใบอนุญาต</option>
+            <option value="4">ค่าธรรมเนียมอื่นๆ</option>
+          </select>
+        </div>
+        <div class="col">
+          <label class="form-label">ช่องทางการชำระเงิน</label>
+          <select class="form-select">
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
+            <option value="1">KTB</option>
+            <option value="2">Promptpay</option>
+            <option value="3">K-Bank Credit Card</option>
+          </select>
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col">
+          <label class="form-label">เลขที่ใบคำขอ</label>
+          <input class="form-control" type="text" />
+        </div>
+        <div class="col">
+          <label class="form-label">หมายเลขบัตรประชาชน</label>
+          <input class="form-control" type="text" />
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-6">
+          <label class="form-label">จาก: วันเดือนปีที่ชำระเงิน</label>
+          <div class="d-flex align-items-center">
+            <input
+              matInput
+              [matDatepicker]="picker1"
+              autocomplete="off"
+              class="form-control form-date"
+              placeholder="วว/ดด/ปปปป"
+            />
+            <mat-datepicker-toggle
+              class="button-date"
+              matSuffix
+              [for]="picker1"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </div>
+        </div>
+        <div class="col-6">
+          <label class="form-label">ถึง: วันเดือนปีที่ชำระเงิน</label>
+          <div class="d-flex align-items-center">
+            <input
+              matInput
+              [matDatepicker]="picker2"
+              autocomplete="off"
+              class="form-control form-date"
+              placeholder="วว/ดด/ปปปป"
+            />
+            <mat-datepicker-toggle
+              class="button-date"
+              matSuffix
+              [for]="picker2"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end mt-3">
+        <button type="button" class="btn border-primary text-primary bg-white">
+          ล้างข้อมูล
+        </button>
+        <button type="button" class="ms-3 btn btn-primary">ค้นหา</button>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end mt-3">
+      <button type="button" class="btn border-success text-success w-auto me-2">
+        <img src="/assets/images/img-uni/microsoft excel.png" />
+        นำข้อมูลออก
+      </button>
+      <button type="button" class="btn border-danger text-danger w-auto">
+        <i class="bi bi-file-earmark-pdf-fill"></i>
+        นำข้อมูลออก
+      </button>
+    </div>
+
+    <div class="border border-dark p-3 mt-3">
+      <div class="box-header text-center">สำนักงานเลขาธิการคุรุสภา</div>
+      <div class="box-header text-center">รายละเอียดประกอบใบนำส่ง</div>
+      <div class="box-header text-center">วันที่ 1 พฤศจิกายน 2565</div>
+
+      <div class="form-label text-black">เจ้าหน้าที่ผู้ปฏิบัติ</div>
+
+      <div class="form-label text-black text-center">เลขที่ใบเสร็จรับเงิน</div>
+      <div class="table__scroll">
+        <table class="table table-bordered border-dark">
+          <thead>
+            <tr>
+              <th>ที่</th>
+              <th>ประเภท</th>
+              <th>รายการ/ได้รับเงินจาก</th>
+              <th>จำนวนเงิน (บาท)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <th>ค่าธรรมเนียมตามพระราชบัญญัตินี้</th>
+              <th>ค่าธรรมเนียมขึ้นทะเบียนรับใบอนุญาตประกอบวิชาชีพ</th>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <th>ค่าธรรมเนียมตามพระราชบัญญัตินี้</th>
+              <th>ค่าธรรมเนียมต่ออายุใบอนุญาตประกอบวิชาชีพ</th>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <th>ค่าธรรมเนียมตามพระราชบัญญัตินี้</th>
+              <th>ค่าธรรมเนียมต่ออายุล่าช้า</th>
+            </tr>
+            <tr>
+              <th scope="row">4</th>
+              <th>ค่าธรรมเนียมตามพระราชบัญญัตินี้</th>
+              <th>ค่าธรรมเนียมใบแทนใบอนุญาต</th>
+            </tr>
+            <tr>
+              <th scope="row" colspan="4">รวม</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="border border-dark p-3 mt-3">
+      <div class="box-header text-center">ใบนำส่ง (คุรุ 11)</div>
+      <div class="form-label text-black">
+        ส่วนงาน: สำนักอำนวยการ กลุ่มการเงินและบัญชี
+      </div>
+      <div class="form-label text-black">วันที่: 2 กุมภาพันธ์ 2565</div>
+
+      <div class="form-label text-black text-center">
+        รายละเอียดการนำส่งเงิน
+      </div>
+      <table class="table table-bordered border-dark">
+        <thead>
+          <tr>
+            <th>ลำดับ</th>
+            <th>ประเภทเงิน</th>
+            <th>รายการ</th>
+            <th>จำนวนเงิน</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <th>ค่าธรรมเนียมตามพระราชบัญญัตินี้</th>
+            <th>ค่าธรรมเนียมขึ้นทะเบียนรับใบอนุญาตประกอบวิชาชีพ</th>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <th>ค่าธรรมเนียมตามพระราชบัญญัตินี้</th>
+            <th>ค่าธรรมเนียมต่ออายุใบอนุญาตประกอบวิชาชีพ</th>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <th>ค่าธรรมเนียมตามพระราชบัญญัตินี้</th>
+            <th>ค่าธรรมเนียมต่ออายุล่าช้า</th>
+          </tr>
+          <tr>
+            <th scope="row">4</th>
+            <th>ค่าธรรมเนียมตามพระราชบัญญัตินี้</th>
+            <th>ค่าธรรมเนียมใบแทนใบอนุญาต</th>
+          </tr>
+          <tr>
+            <th scope="row" colspan="3">รวมเงิน ตัวอักษร</th>
+            <th></th>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="table table-bordered border-dark mt-3">
+        <tbody>
+          <tr>
+            <th class="w-50">
+              รายมือชื่อผู้นำส่ง<br />
+              ชื่อผู้นำส่ง<br />
+              ตำแหน่ง<br />
+              วันที่
+            </th>
+            <th class="w-50">
+              วิธีการชำระเงิน
+              <hr />
+              เงินสด<br />
+              ธนาคาร<br />
+              เลขที่
+            </th>
+          </tr>
+          <tr>
+            <th class="w-50">
+              ลายมือชื่อผู้รับเงิน<br />
+              ชื่อผู้รับเงิน<br />
+              วันที่<br />
+              วันที่ขอการออกใบเสร็จ
+            </th>
+            <th class="w-50">
+              ลายมือชื่อผู้อำนวยการกลุ่มการเงินและบัญชี<br />
+              .<br />
+              ชื่อ<br />
+              ตำแหน่ง<br />
+              วันที่
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
