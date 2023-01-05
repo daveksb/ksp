@@ -67,7 +67,10 @@ export class DegreeListComponent extends KspPaginationComponent implements OnIni
         lastValueFrom(this.uniInfoService.getUniuniversity()),
         lastValueFrom(this.uniInfoService.getUniversityType()),
       ]);
-    this.uniUniversityOption = university.datareturn;
+    this.uniUniversityOption = university.datareturn.map((data: any) => {
+      data.name = data.name + (data.campusname ? `, ${data.campusname}` : '')
+      return data;
+    });
     this.uniUniversityTypeOption = universityTypes;
   }
 

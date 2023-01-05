@@ -68,7 +68,8 @@ export class ImportStudentComponent implements OnInit {
   });
   filterColumn = ['idcardno'];
   isLoading: Subject<boolean> = this.loaderService.isLoading;
-  requestid: string = '';
+  requestid = '';
+  requeststatus = '1';
 
   constructor(
     public dialog: MatDialog,
@@ -91,38 +92,7 @@ export class ImportStudentComponent implements OnInit {
     this.route.paramMap.subscribe((res) => {
       this.requestid = res.get('requestid') || '';
     });
-    const userId = Number(getCookie('userId'));
-    localForage.getItem('courseData').then((res: any) => {
-      if (res) {
-        this.courseData = res;
-        this.payload = {
-          id: null,
-          requestprocess: '1',
-          requeststatus: '1',
-          process: '1',
-          status: '1',
-          requesttype: this.pageType == 'admissionList' ? '05' : '06',
-          uniuserid: userId,
-          systemtype: '3',
-          subtype: '5',
-          unirequestdegreecertid: this.courseData.courseDetail.id,
-          unidegreecertid: this.courseData.courseDetail.id,
-          degreeapprovecode: this.courseData.courseDetail.degreeapprovecode,
-          planyear: this.courseData.courseSelected.indexyear,
-          plancalendaryear: this.courseData.courseSelected.calendaryear,
-          planname: this.courseData.courseSelected.label,
-          plantotalno: this.courseData.courseSelected.student,
-          currentadmissionno: this.courseData.courseSelected.currentadmissionno,
-          currentgraduateno: this.courseData.courseSelected.currentgraduateno,
-          ref1: '3',
-          ref2: this.pageType == 'admissionList' ? '05' : '06',
-          ref3: '5',
-          admissionlist: [],
-          graduatelist: [],
-        };
-        this.getAdmissionList();
-      }
-    });
+    this.getAdmissionList();
     this.getNationality();
     this.getPrefix();
   }
@@ -150,8 +120,36 @@ export class ImportStudentComponent implements OnInit {
           });
           this.requestNo = response.requestno;
           this.requestDate = response.requestdate;
-          this.payload.id = response.id;
-          this.payload.requestid = response.requestid;
+          this.requeststatus = response.requeststatus;
+
+          const userId = Number(getCookie('userId'));
+
+          this.payload = {
+            id: response.id,
+            requestid: response.requestid,
+            requestprocess: response.requestprocess,
+            requeststatus: response.requeststatus,
+            process: response.requestprocess,
+            status: response.requeststatus,
+            requesttype: this.pageType == 'admissionList' ? '05' : '06',
+            uniuserid: userId,
+            systemtype: response.systemtype,
+            subtype: response.subtype,
+            unirequestdegreecertid: response.unirequestdegreecertid,
+            unidegreecertid: response.unidegreecertid,
+            degreeapprovecode: response.degreeapprovecode,
+            planyear: response.planyear,
+            plancalendaryear: response.plancalendaryear,
+            planname: response.planname,
+            plantotalno: response.plantotalno,
+            currentadmissionno: response.currentadmissionno,
+            currentgraduateno: response.currentgraduateno,
+            ref1: '3',
+            ref2: this.pageType == 'admissionList' ? '05' : '06',
+            ref3: '5',
+            admissionlist: response.admissionlist,
+            graduatelist: response.graduatelist,
+          };
         }
       });
   }

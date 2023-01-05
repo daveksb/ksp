@@ -18,7 +18,7 @@
       <th scope="row">{{item?.requestno || "-"}}</th>
       <td>{{item?.statusname}}</td>
       <td>{{toDateTh(item?.requestdate)}}</td>
-      <td>-</td>
+      <td>{{item?.updateby || '-'}}</td>
     </tr>    
     <tr *ngIf="!dataSource.data" colSpan="4" style="width: 100%" class="text-center">ไม่พบข้อมูล</tr>
   </tbody>

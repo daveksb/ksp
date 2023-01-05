@@ -11,6 +11,7 @@ import {
   formatDate,
   getCookie,
   parseJson,
+  replaceEmptyWithNull,
   thaiDate,
 } from '@ksp/shared/utility';
 import localForage from 'localforage';
@@ -204,6 +205,10 @@ export class ConsiderStudentComponent implements OnInit {
         this.requestService
           .requestProcessInsert(realpayload)
           .subscribe((response: any) => {
+            this.payload.studentlist.map((student: any) => {
+              student = replaceEmptyWithNull(student);
+              return student;
+            })
             if (response) {
               if (
                 this.form.value.result == '1' &&

@@ -84,7 +84,7 @@
                {{ row.admissioncount || 0 }} / {{ row.student }}
                 <span
                   role="button"
-                  *ngIf="row.admissioncount < row.student"
+                  *ngIf="checkAdmission(row)"
                   (click)="goToImportStudent('admissionList', row)"
                   class="text-decoration-underline text-primary"
                 >
@@ -100,7 +100,6 @@
                 {{ row.graduatecount || 0 }} / {{ row.student }}
                 <span
                   role="button"
-                  *ngIf="checkGraduate(row)"
                   (click)="goToImportStudent('graduateList', row)"
                   class="text-decoration-underline text-orange"
                 >
