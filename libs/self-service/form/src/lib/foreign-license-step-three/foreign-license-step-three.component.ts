@@ -12,7 +12,6 @@ function checkAllValidator(): any {
     return null;
   };
 }
-
 @Component({
   selector: 'self-service-foreign-license-step-three',
   templateUrl: './foreign-license-step-three.component.html',
@@ -25,7 +24,7 @@ export class ForeignLicenseStepThreeComponent
 {
   @Input() documentTypes: 'request' | 'renew' = 'request';
   @Input() uniqueTimestamp = '';
-  @Input() attachFiles: FileGroup[] = [];
+  @Input() attachFiles: any[] = [];
 
   override form = this.fb.group({
     checkFiles: this.fb.array([], checkAllValidator()),
