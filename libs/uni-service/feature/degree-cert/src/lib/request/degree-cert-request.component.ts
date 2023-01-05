@@ -74,6 +74,7 @@ export class DegreeCertRequestComponent {
       uniRequestDegree = await lastValueFrom(
         this.uniInfoService.uniRequestDegreeCertSelectById(this.id)
       );
+      console.log(uniRequestDegree)
       const { requestNo, step1, step2, step3, step4 } =
         this.uniInfoService.mappingUniverSitySelectByIdWithForm(
           uniRequestDegree
@@ -97,7 +98,7 @@ export class DegreeCertRequestComponent {
         step1: {
           institutionsCode: this.uniData?.universitycode || '',
           institutionsGroup: getCookie('uniType') || '',
-          institutionsName: this.uniData?.name || '',
+          institutionsName: this.uniData?.name + (this.uniData?.campusname ? `, ${this.uniData?.campusname}` : '') || '',
           provience: this.uniData?.provinceid || '',
         },
       });

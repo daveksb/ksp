@@ -195,12 +195,15 @@ export class EServiceDegreeCertApprovedListComponent extends KspPaginationCompon
 
   viewhistory(item: any){
     const payload = {
-      requestid: item.unirequestadmissionid
+      id: item.unirequestadmissionid,
+      offset: 0,
+      row: 100
     };
-    this.requestService.uniDegreeGraduateHistory(payload).subscribe((response => {
+    this.requestService.requestAdmissionHistory(payload).subscribe((response => {
       if (response.datareturn) {
         response.datareturn = response.datareturn.map((data:any)=>{
-          data.requestdate = data.createdate;
+          data.requestdate = data.processupdatedate;
+          data.updateby = data.firstnameth;
           return data
         }).sort((data1:any,data2:any) => data1.id - data2.id);
       }

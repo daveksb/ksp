@@ -32,12 +32,16 @@
         <ng-container matColumnDef="requestno">
           <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
           <td
-            (click)="goToDetailPage(element.unirequestadmissionid)"
-            class="text-primary link"
             mat-cell
             *matCellDef="let element"
           >
-            {{ element.requestnounirequestadmission }}
+            <span
+              class="text-primary link"
+              *ngIf="element.status !== '3'" 
+              (click)="goToDetailPage(element.unirequestadmissionid)">
+              {{ element.requestnounirequestadmission || '-' }}
+            </span>
+            <span *ngIf="element.status === '3'">{{ element.requestnounirequestadmission || '-' }}</span>
           </td>
         </ng-container>
 

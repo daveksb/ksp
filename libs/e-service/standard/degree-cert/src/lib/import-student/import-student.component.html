@@ -631,14 +631,6 @@
         </p-table>
       </div>
     </form>
-    <div
-      class="mt-2"
-      *ngIf="
-        pageType === 'admissionList' &&
-        users.length < courseData?.courseSelected.student
-      "
-    >
-    </div>
   </div>
 </div>
 
@@ -652,6 +644,7 @@
     [disableTempSaveButton]="checkdisableSave()"
     (cancelClicked)="cancel()"
     (nextClicked)="next()"
+    [disableNext]="requeststatus === '3'"
     [disableSaveButton]="checkdisableSave()"
     (prevClicked)="prev()"
     [saveButtonLabel]="'บันทึกและยื่นใบคำขอ'"

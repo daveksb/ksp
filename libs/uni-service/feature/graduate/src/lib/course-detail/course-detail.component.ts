@@ -132,6 +132,7 @@ export class CourseDetailComponent implements OnInit {
       if (response.datareturnadmission) {
         this.courseData.coursestructure.map((course: any, index: any)=>{
           course.indexyear = index+1;
+          course.student = Number(course.student);
           const findDataAdmission = response.datareturnadmission ? response.datareturnadmission.find((data: any) => {
             return data.plancalendaryear == course.year && data.planyear == course.indexyear.toString();
           }) : {};
@@ -140,6 +141,7 @@ export class CourseDetailComponent implements OnInit {
       }
       if (response.datareturngraduate) {
         this.courseData.coursestructure.map((course: any, index: any)=>{
+          course.student = Number(course.student);
           const findDataGraduate = response.datareturngraduate ? response.datareturngraduate.find((data: any) => {
             return data.plancalendaryear == course.year && data.planyear == course.indexyear.toString();
           }) : {};
@@ -172,6 +174,12 @@ export class CourseDetailComponent implements OnInit {
 
   cancel() {
     this.router.navigate(['/', 'student-list']);
+  }
+
+  checkAdmission(row: any) {
+    const yearnow = (new Date().getFullYear() + 543);
+    return (Number(row.year)+3) <= yearnow 
+          && row.admissioncount < row.student;
   }
 
   checkGraduate(row: any) {

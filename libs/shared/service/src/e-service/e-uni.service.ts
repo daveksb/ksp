@@ -154,6 +154,16 @@ export class EUniService {
     );
   }
 
+  requestAdmissionHistory(params: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/unirequestadmissionsearch2_es.php`,
+      {
+        ...params,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
+
   insertUniExamResult(data: any): Observable<any> {
     return this.http.post(
       `${environment.shortApiUrl}/insertuniexamresult.php`,
