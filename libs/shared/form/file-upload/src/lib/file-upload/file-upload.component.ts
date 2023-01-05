@@ -160,8 +160,6 @@ export class FileUploadComponent {
           systemType: this.systemType,
         },
       });
-      console.log('filename ', this.filename);
-      console.log('fileid ', this.fileid);
       dialogRef.afterClosed().subscribe();
     } else {
       this.dialog.open(PdfViewerNoLicenseComponent, {
