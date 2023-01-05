@@ -146,4 +146,8 @@ export class RequestLicenseApproveSearchListComponent
       queryParams: { account },
     });
   }
+
+  clear() {
+    this.dataSource.data = [];
+  }
 }

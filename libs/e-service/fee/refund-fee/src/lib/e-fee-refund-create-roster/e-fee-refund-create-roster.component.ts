@@ -60,7 +60,7 @@ export class EFeeRefundCreateRosterComponent implements AfterViewInit {
       name: this.form.controls.name.value,
       idcardno: this.form.controls.idcardno.value,
       passportno: null,
-      process: '4',
+      process: '3',
       status: null,
       schoolid: null,
       schoolname: null,

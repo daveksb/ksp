@@ -144,4 +144,8 @@ export class RenewLicenseSearchListComponent implements OnInit, AfterViewInit {
       queryParams: { account },
     });
   }
+
+  clear() {
+    this.dataSource.data = [];
+  }
 }

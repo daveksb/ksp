@@ -2,11 +2,18 @@
   <span header>ประวัติการชำระเงินและใบเสร็จรับเงิน</span>
 </ksp-top-nav>
 
-<div class="main__container">
+<div class="main__container full-height">
   <div class="header__container">
-    <div class="d-flex justify-content-end">
-      <i class="bi bi-calendar me-3"></i>
-      <i class="bi bi-search ms-3"></i>
+    <div class="d-flex justify-content-end align-items-center">
+      <input
+        matInput
+        [matDatepicker]="picker"
+        class="me-2 form-control-sm"
+        style="border: 1px solid #ced4da"
+      />
+      <mat-datepicker #picker></mat-datepicker>
+      <i class="bi bi-calendar ms-1" (click)="picker.open()" role="button"></i>
+      <i class="bi bi-search ms-4" role="button" (click)="search()"></i>
     </div>
     <div class="header__content">
       ล่าสุด
@@ -27,7 +34,7 @@
       ></self-service-payment-history-item>
     </div>
   </div>
-  <div>
+  <div *ngIf="!searchFound">
     <div class="header__content">
       05/02/2022
       <hr class="line__container" />
@@ -41,7 +48,7 @@
       ></self-service-payment-history-item>
     </div>
   </div>
-  <div>
+  <div *ngIf="!searchFound">
     <div class="header__content">
       01/01/2022
       <hr class="line__container" />

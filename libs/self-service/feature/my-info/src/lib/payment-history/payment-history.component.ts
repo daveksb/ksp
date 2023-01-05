@@ -5,4 +5,10 @@ import { Component } from '@angular/core';
   templateUrl: './payment-history.component.html',
   styleUrls: ['./payment-history.component.css'],
 })
-export class PaymentHistoryComponent {}
+export class PaymentHistoryComponent {
+  searchFound = false;
+
+  search() {
+    this.searchFound = true;
+  }
+}

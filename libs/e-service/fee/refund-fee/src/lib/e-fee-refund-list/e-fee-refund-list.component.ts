@@ -132,6 +132,7 @@ export const column = [
   'feeType',
   'reason',
   'amount',
+  'process',
   'status',
   'submitDate',
   'refundDate',
