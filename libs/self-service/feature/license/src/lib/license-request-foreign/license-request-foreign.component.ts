@@ -276,7 +276,8 @@ export class LicenseRequestForeignComponent implements OnInit {
         request(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res.returncode === '00') {
-            this.router.navigate(['/license', 'payment-channel']);
+            // this.router.navigate(['/license', 'payment-channel']);
+            this.router.navigate(['/home']);
           }
         });
       }

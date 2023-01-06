@@ -65,11 +65,12 @@ export class FileUploadComponent {
       };
       this.uploadImage(payload);
     } else {
-      const payload: FileUpload = {
+      const payload: FileUpload & { filedata?: string } = {
         pagetype: this.pageType,
         originalname: file.name,
         systemname: this.systemFileName,
         file: btoa(base64),
+        filedata: btoa(base64),
         uniquetimestamp: this.uniqueTimestamp,
         requesttype: this.requestType?.toString() ?? '3',
       };
