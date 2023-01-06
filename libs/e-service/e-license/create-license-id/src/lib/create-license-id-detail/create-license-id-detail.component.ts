@@ -271,5 +271,5 @@ const column2 = [
   'licenseGroup',
   'approveDate',
   'verifyDate',
-  'view',
+  //'view',
 ];
