@@ -63,9 +63,9 @@ export class ERequestService {
     );
   }
 
-  updateLicense(payload: any): Observable<any> {
+  updateBulkLicense(payload: any): Observable<any> {
     return this.http.post(
-      `${environment.apiUrl}/e-service/selflicenseupdate`,
+      `${environment.shortApiUrl}/selflicenseupdatearray.php`,
       payload
     );
   }

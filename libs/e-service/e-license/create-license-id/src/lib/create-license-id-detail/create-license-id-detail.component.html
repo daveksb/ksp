@@ -208,7 +208,7 @@
 
   <div [formGroup]="form" class="bg-white px-3 py-3 mt-3">
     <ng-container
-      formArrayName="licenseInfo"
+      formArrayName="data"
       *ngFor="let c of licenseInfoFormArray.controls; let i = index"
     >
       <ng-container [formGroupName]="i">
@@ -425,6 +425,6 @@
     [showSaveButton]="true"
     [disableSaveButton]="form.invalid"
     (cancelClicked)="back()"
-    (saveClicked)="saveLicense()"
+    (saveClicked)="updateLicense()"
   ></ksp-bottom-nav>
 </div>
