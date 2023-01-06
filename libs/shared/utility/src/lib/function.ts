@@ -106,6 +106,15 @@ export function formatDatePayload(input: any) {
   return input;
 }
 
+export function formatDateTimePayload(input: any) {
+  for (const [key, value] of Object.entries(input)) {
+    if (key.includes('date') && input[key]) {
+      const date = moment(input[key]).format();
+      input[key] = date.split('+')[0];
+    }
+  }
+  return input;
+}
 /**
  *
  * @param input return correct format date to send to API

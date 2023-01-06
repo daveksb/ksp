@@ -15,7 +15,11 @@ import {
   GeneralInfoService,
   LoaderService,
 } from '@ksp/shared/service';
-import { formatDatePayload, replaceEmptyWithNull } from '@ksp/shared/utility';
+import {
+  formatDatePayload,
+  formatDateTimePayload,
+  replaceEmptyWithNull,
+} from '@ksp/shared/utility';
 import localForage from 'localforage';
 import { Observable, Subject } from 'rxjs';
 import moment from 'moment';
@@ -163,14 +167,14 @@ export class CreateLicenseIdDetailComponent implements OnInit {
 
     formArray = formArray?.map((f: any) => {
       const { imageinfo, ...data } = f;
-      return formatDatePayload(data);
+      return formatDateTimePayload(data);
     });
 
     const payload = {
       data: formArray,
     };
     console.log('payload = ', payload);
-    this.requestService.updateLicense(payload).subscribe((res) => {
+    this.requestService.updateBulkLicense(payload).subscribe((res) => {
       //console.log('update = ', res);
     });
   }
