@@ -85,7 +85,6 @@ export class ForeignLicenseStepThreeComponent
     );
     if (changeGroup) {
       changeGroup.files = group.files;
-      console.log(this.attachFiles);
       this.attachFilesChange.emit(this.attachFiles);
     }
   }
