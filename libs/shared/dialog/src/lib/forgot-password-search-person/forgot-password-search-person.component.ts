@@ -1,6 +1,12 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Optional,
+  Output,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ForgotPasswordSetNewPasswordComponent } from '../forgot-password-set-new-password/forgot-password-set-new-password.component';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
@@ -26,7 +32,11 @@ export class ForgotPasswordSearchPersonComponent {
     phone: ['', [Validators.required, Validators.pattern(phonePattern)]],
   });
 
-  constructor(public dialog: MatDialog, private fb: FormBuilder) {}
+  constructor(
+    public dialog: MatDialog,
+    private fb: FormBuilder,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
 
   cancel() {
     this.dialog.closeAll();
@@ -37,7 +47,7 @@ export class ForgotPasswordSearchPersonComponent {
   }
 
   nextStep() {
-    this.dialog.closeAll();
+    //this.dialog.closeAll();
     this.confirmed.emit({ ...this.form.value });
   }
 

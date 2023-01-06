@@ -1,6 +1,12 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Optional,
+  Output,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {
   AbstractControl,
   FormBuilder,
@@ -31,7 +37,11 @@ export class ForgotPasswordSetNewPasswordComponent {
   @Output() confirmed = new EventEmitter<any>();
   validatorMessages = validatorMessages;
 
-  constructor(public dialog: MatDialog, private fb: FormBuilder) {}
+  constructor(
+    public dialog: MatDialog,
+    private fb: FormBuilder,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
 
   cancel() {
     this.dialog.closeAll();

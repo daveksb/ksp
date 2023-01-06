@@ -48,7 +48,6 @@ export class MyInfoService {
   }
 
   forgetPassword(payload: any): Observable<any> {
-    console.log('payload = ', payload);
     return this.http.post(
       `${environment.apiUrl}/kspself/checkphoneandidcardno`,
       payload

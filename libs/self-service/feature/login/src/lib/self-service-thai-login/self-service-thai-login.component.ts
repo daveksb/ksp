@@ -57,41 +57,43 @@ export class SelfServiceThaiLoginComponent {
   }
 
   forgot() {
-    console.log('forgot = ');
-    this.dialog.closeAll();
+    let formData: any = null;
+    //this.dialog.closeAll();
     const dialog = this.dialog.open(ForgotPasswordSearchPersonComponent);
     dialog.componentInstance.confirmed
       .pipe(
-        //tap((i) => console.log('data = ', i)),
-        switchMap((res) => this.myInfoService.forgetPassword(res))
-        //switchMap((res) => this.myInfoService.resetPassword(res))
+        tap((i) => (formData = i)),
+        switchMap((res) => {
+          dialog.componentInstance.data = {
+            notfound: false,
+          };
+          return this.myInfoService.forgetPassword(res);
+        })
       )
       .subscribe((res) => {
-        console.log('res = ', res);
         if (res.returncode === '1') {
-          const dialogRef = this.dialog.open(
-            ForgotPasswordSetNewPasswordComponent
-          );
+          this.showForgetDialog(formData);
         } else {
-          this.dialog.open(ConfirmDialogComponent, {
-            data: {
-              title: `ไม่พบข้อมูลของท่านภายในระบบ`,
-              isDanger: true,
-              btnLabel: 'ตรวจสอบอีกครั้ง',
-            },
-          });
+          dialog.componentInstance.data = {
+            notfound: true,
+          };
         }
       });
   }
 
-  /*     /*     const dialogRef = this.dialog.open(ForgotPasswordSetNewPasswordComponent, {
-      width: '350px',
+  showForgetDialog(formData: any) {
+    const dialogRef = this.dialog.open(ForgotPasswordSetNewPasswordComponent, {
+      data: formData,
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      //console.log(`Dialog result: ${result}`);
-    });
     dialogRef.componentInstance.confirmed.subscribe((password) => {
-      this.confirmed.emit({ ...this.form.value, password });
-    }); */
+      const payload = {
+        ...formData,
+        password,
+      };
+      this.myInfoService.resetPassword(payload).subscribe(() => {
+        //console.log('wet new password = ', res);
+      });
+    });
+  }
 }
