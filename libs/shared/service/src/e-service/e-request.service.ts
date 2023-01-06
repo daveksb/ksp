@@ -70,6 +70,13 @@ export class ERequestService {
     );
   }
 
+  updateBulkLicense(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/selflicenseupdatearray.php`,
+      payload
+    );
+  }
+
   createTempLicense(payload: SchTempLicense): Observable<any> {
     return this.http.post<KspRequest>(
       `${environment.apiUrl}/e-service/schtemplicenseinsert`,

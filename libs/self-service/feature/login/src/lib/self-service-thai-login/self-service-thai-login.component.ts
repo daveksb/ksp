@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
   CompleteDialogComponent,
-  ConfirmDialogComponent,
   ForgotPasswordSearchPersonComponent,
   ForgotPasswordSetNewPasswordComponent,
 } from '@ksp/shared/dialog';
@@ -59,7 +58,6 @@ export class SelfServiceThaiLoginComponent {
 
   forgot() {
     let formData: any = null;
-    //this.dialog.closeAll();
     const dialog = this.dialog.open(ForgotPasswordSearchPersonComponent);
     dialog.componentInstance.confirmed
       .pipe(
