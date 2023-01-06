@@ -2,11 +2,15 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { ForgotPasswordSearchPersonComponent } from '@ksp/shared/dialog';
+import {
+  ConfirmDialogComponent,
+  ForgotPasswordSearchPersonComponent,
+  ForgotPasswordSetNewPasswordComponent,
+} from '@ksp/shared/dialog';
 import { SelfServiceLoginService } from './self-service-login.service';
 import { setCookie } from '@ksp/shared/utility';
 import { MyInfoService } from '@ksp/shared/service';
-import { switchMap } from 'rxjs';
+import { switchMap, tap } from 'rxjs';
 import localForage from 'localforage';
 @Component({
   templateUrl: './self-service-thai-login.component.html',
@@ -53,12 +57,41 @@ export class SelfServiceThaiLoginComponent {
   }
 
   forgot() {
+    console.log('forgot = ');
     this.dialog.closeAll();
-    const dialogRef = this.dialog.open(ForgotPasswordSearchPersonComponent, {
+    const dialog = this.dialog.open(ForgotPasswordSearchPersonComponent);
+    dialog.componentInstance.confirmed
+      .pipe(
+        //tap((i) => console.log('data = ', i)),
+        switchMap((res) => this.myInfoService.forgetPassword(res))
+        //switchMap((res) => this.myInfoService.resetPassword(res))
+      )
+      .subscribe((res) => {
+        console.log('res = ', res);
+        if (res.returncode === '1') {
+          const dialogRef = this.dialog.open(
+            ForgotPasswordSetNewPasswordComponent
+          );
+        } else {
+          this.dialog.open(ConfirmDialogComponent, {
+            data: {
+              title: `ไม่พบข้อมูลของท่านภายในระบบ`,
+              isDanger: true,
+              btnLabel: 'ตรวจสอบอีกครั้ง',
+            },
+          });
+        }
+      });
+  }
+
+  /*     /*     const dialogRef = this.dialog.open(ForgotPasswordSetNewPasswordComponent, {
       width: '350px',
     });
-    dialogRef.componentInstance.confirmed
-      .pipe(switchMap((res) => this.myInfoService.resetPassword(res)))
-      .subscribe((res) => console.log(res));
-  }
+
+    dialogRef.afterClosed().subscribe((result) => {
+      //console.log(`Dialog result: ${result}`);
+    });
+    dialogRef.componentInstance.confirmed.subscribe((password) => {
+      this.confirmed.emit({ ...this.form.value, password });
+    }); */
 }
