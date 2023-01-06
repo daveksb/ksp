@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
+  CompleteDialogComponent,
   ConfirmDialogComponent,
   ForgotPasswordSearchPersonComponent,
   ForgotPasswordSetNewPasswordComponent,
@@ -92,7 +93,14 @@ export class SelfServiceThaiLoginComponent {
         password,
       };
       this.myInfoService.resetPassword(payload).subscribe(() => {
-        //console.log('wet new password = ', res);
+        this.dialog.open(CompleteDialogComponent, {
+          data: {
+            header: `ทำรายการสำเร็จ`,
+            subContent: `ระบบได้ทำการเปลี่ยนรหัสผ่านให้ท่านเรียบร้อยแล้ว
+            กรุณาเข้าสู่ระบบใหม่อีกครั้ง`,
+            btnLabel: 'เข้าสู่ระบบ',
+          },
+        });
       });
     });
   }
