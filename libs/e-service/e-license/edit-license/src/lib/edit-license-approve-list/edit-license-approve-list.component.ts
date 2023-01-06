@@ -17,6 +17,7 @@ import {
 import {
   checkProcess,
   checkStatus,
+  processFilter,
   replaceEmptyWithNull,
 } from '@ksp/shared/utility';
 import { Observable, Subject } from 'rxjs';
@@ -83,7 +84,7 @@ export class EditLicenseApproveListComponent implements AfterViewInit {
 
     this.requestService.KspSearchRequest(payload).subscribe((res) => {
       if (res) {
-        this.dataSource.data = res;
+        this.dataSource.data = processFilter(res);
         this.dataSource.sort = this.sort;
 
         const sortState: Sort = { active: 'id', direction: 'desc' };

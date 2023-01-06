@@ -13,6 +13,7 @@ import { ERequestService, LoaderService } from '@ksp/shared/service';
 import {
   eSelfCheckProcess,
   eSelfCheckStatus,
+  processFilter,
   replaceEmptyWithNull,
   selfMapRequestType,
 } from '@ksp/shared/utility';
@@ -78,7 +79,7 @@ export class EFeeRefundListComponent implements AfterViewInit {
     this.requestService.KspSearchRequest(payload).subscribe((res) => {
       if (res) {
         //console.log(res);
-        this.dataSource.data = res;
+        this.dataSource.data = processFilter(res);
         this.searchNotFound = false;
       } else {
         this.clear();

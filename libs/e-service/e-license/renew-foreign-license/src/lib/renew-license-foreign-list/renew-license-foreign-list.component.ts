@@ -16,7 +16,7 @@ import {
   ERequestService,
   LoaderService,
 } from '@ksp/shared/service';
-import { replaceEmptyWithNull } from '@ksp/shared/utility';
+import { processFilter, replaceEmptyWithNull } from '@ksp/shared/utility';
 import { Observable, Subject } from 'rxjs';
 
 function checkProcess(processId: number, requestType: number) {
@@ -96,7 +96,7 @@ export class RenewLicenseForeignListComponent implements AfterViewInit {
     this.requestService.KspSearchRequest(payload).subscribe((res) => {
       //onsole.log(res);
       if (res) {
-        this.dataSource.data = res;
+        this.dataSource.data = processFilter(res);
         this.dataSource.sort = this.sort;
 
         const sortState: Sort = {
