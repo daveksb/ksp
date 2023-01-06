@@ -30,7 +30,10 @@ import { ForeignStepTwoTabOneComponent } from './foreign-step-two-tab-one/foreig
 import { ForeignStepTwoTabTwoComponent } from './foreign-step-two-tab-two/foreign-step-two-tab-two.component';
 import { ForeignStepTwoTabThreeComponent } from './foreign-step-two-tab-three/foreign-step-two-tab-three.component';
 import { ForeignStepTwoTabFourComponent } from './foreign-step-two-tab-four/foreign-step-two-tab-four.component';
-import { FileUploadComponent } from '@ksp/shared/form/file-upload';
+import {
+  FileMultiUploadComponent,
+  FileUploadComponent,
+} from '@ksp/shared/form/file-upload';
 import { TransferKnowledgeInfoComponent } from './transfer-knowledge-info/transfer-knowledge-info.component';
 import { AddRowButtonComponent } from '@ksp/shared/ui';
 import { TransferKnowledgeEducationComponent } from './transfer-knowledge-education/transfer-knowledge-education.component';
@@ -76,6 +79,7 @@ import { TransferKnowledgeCareerCertComponent } from './transfer-knowledge-caree
     TestResultTableComponent,
     MatDatepickerModule,
     SharedFormOthersModule,
+    FileMultiUploadComponent,
   ],
   declarations: [
     FormUserEducationComponent,

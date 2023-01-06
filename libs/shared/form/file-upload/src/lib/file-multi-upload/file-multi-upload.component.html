@@ -1,0 +1,40 @@
+<ng-container *ngIf="uploadType === 'button' && mode !== 'view'">
+  <button
+    (click)="fileUpload.click()"
+    [disabled]="mode === 'view'"
+    type="button"
+    class="btn btn-sm btn-primary w-auto">
+    + {{ buttonLabel }}
+  </button>
+</ng-container>
+
+<ng-container *ngIf="uploadType === 'link' && mode !== 'view'">
+  <label role="button" class="text-primary" (click)="fileUpload.click()">
+    + upload document
+  </label>
+</ng-container>
+
+<input
+  hidden="true"
+  type="file"
+  (click)="fileUpload.value = ''"
+  (change)="onFileSelected($event)"
+  #fileUpload />
+
+<ng-container *ngIf="mode === 'view'">
+  <label role="button" class="text-orange" (click)="view()">
+    ดูเอกสารแนบ
+  </label>
+</ng-container>
+
+<ng-container *ngFor="let file of groupFiles; index as i">
+  <span
+    *ngIf="showUploadedFileName"
+    class="fs-6 text-secondary text-decoration-underline ms-2">{{ file.filename }}</span>
+
+  <i
+    *ngIf="showDeleteFile && file.filename && !isImage && mode !== 'view'"
+    (click)="deleteFile(file)"
+    class="bi bi-x-circle-fill text-danger fs-6 ms-2"
+    role="button"></i>
+</ng-container>

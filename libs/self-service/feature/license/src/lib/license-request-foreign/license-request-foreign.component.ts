@@ -388,4 +388,9 @@ export class LicenseRequestForeignComponent implements OnInit {
       }
     });
   }
+
+  onAttachFilesChange(event: any) {
+    console.log(event);
+    this.documentFiles = event;
+  }
 }

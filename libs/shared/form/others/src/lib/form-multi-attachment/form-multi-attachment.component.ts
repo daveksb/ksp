@@ -100,6 +100,7 @@ export class FormMultiAttachmentComponent {
   }
 
   updateComplete(file: any, group: any) {
+    console.log(group);
     const { fileid, filename } = file;
     group.files.push({ fileid, filename });
     //console.log(group.files);

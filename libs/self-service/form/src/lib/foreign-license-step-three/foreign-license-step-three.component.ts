@@ -1,4 +1,11 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
 import { FileGroup, KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -24,7 +31,8 @@ export class ForeignLicenseStepThreeComponent
 {
   @Input() documentTypes: 'request' | 'renew' = 'request';
   @Input() uniqueTimestamp = '';
-  @Input() attachFiles: any[] = [];
+  @Input() attachFiles: FileGroup[] = [];
+  @Output() attachFilesChange = new EventEmitter<FileGroup[]>();
 
   override form = this.fb.group({
     checkFiles: this.fb.array([], checkAllValidator()),
@@ -71,9 +79,14 @@ export class ForeignLicenseStepThreeComponent
     }
   }
 
-  updateComplete(file: any, group: any) {
-    const { fileid, filename } = file;
-    group.fileid = fileid;
-    group.filename = filename;
+  updateComplete(group: FileGroup) {
+    const changeGroup = this.attachFiles.find(
+      (file) => file.name === group.name
+    );
+    if (changeGroup) {
+      changeGroup.files = group.files;
+      console.log(this.attachFiles);
+      this.attachFilesChange.emit(this.attachFiles);
+    }
   }
 }
