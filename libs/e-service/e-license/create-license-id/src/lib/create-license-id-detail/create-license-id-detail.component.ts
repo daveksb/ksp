@@ -15,7 +15,11 @@ import {
   GeneralInfoService,
   LoaderService,
 } from '@ksp/shared/service';
-import { formatDatePayload, replaceEmptyWithNull } from '@ksp/shared/utility';
+import {
+  formatDatePayload,
+  formatDateTimePayload,
+  replaceEmptyWithNull,
+} from '@ksp/shared/utility';
 import localForage from 'localforage';
 import { Observable, Subject } from 'rxjs';
 import moment from 'moment';
@@ -25,6 +29,7 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { qualificationCareerTypeList } from '@ksp/shared/constant';
+import { template } from 'lodash';
 
 @Component({
   selector: 'ksp-create-license-id-detail',
@@ -39,13 +44,12 @@ export class CreateLicenseIdDetailComponent implements OnInit {
   dataSource2 = new MatTableDataSource<KspRequest>();
   prefixList!: Observable<Prefix[]>;
   licenseTypes = qualificationCareerTypeList;
-  //selectedLicense = new SelfLicense();
   form = this.fb.group({
-    licenseInfo: this.fb.array([]),
+    data: this.fb.array([]),
   });
 
   get licenseInfoFormArray() {
-    return this.form.controls.licenseInfo as FormArray;
+    return this.form.controls.data as FormArray;
   }
 
   constructor(
@@ -63,7 +67,7 @@ export class CreateLicenseIdDetailComponent implements OnInit {
   }
 
   completeDialog() {
-    const dialog = this.dialog.open(CompleteDialogComponent, {
+    this.dialog.open(CompleteDialogComponent, {
       data: {
         header: `สร้างใบอนุญาตสำเร็จ`,
       },
@@ -71,7 +75,7 @@ export class CreateLicenseIdDetailComponent implements OnInit {
   }
 
   sameIdCardDialog() {
-    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+    this.dialog.open(CompleteDialogComponent, {
       data: {
         header: `หมายเลขบัตรประชาชนนี้ได้ถูกใช้ยื่นใบคำขอไปแล้ว`,
       },
@@ -80,7 +84,11 @@ export class CreateLicenseIdDetailComponent implements OnInit {
 
   addRow(form: SelfLicense) {
     const data = this.fb.group({
+      id: [form.id],
       licenseno: [form.licenseno],
+      licensetype: [form.licensetype],
+      licensestartdate: [form.licensestartdate],
+      licenseenddate: [form.licenseenddate],
       idcardno: [form.idcardno],
       careertype: [form.careertype],
       prefixth: [form.prefixth],
@@ -91,8 +99,6 @@ export class CreateLicenseIdDetailComponent implements OnInit {
       lastnameen: [form.lastnameen],
       sex: [form.sex],
       birthdate: [form.birthdate],
-      licensestartdate: [form.licensestartdate],
-      licenseenddate: [form.licenseenddate],
       imageinfo: [form.imageinfo],
     });
     this.licenseInfoFormArray.push(data);
@@ -156,14 +162,21 @@ export class CreateLicenseIdDetailComponent implements OnInit {
     });
   }
 
-  saveLicense() {
-    /*     const payload = formatDatePayload({
-      ...this.form.value,
-      ...{ id: this.selectedLicense.id },
+  updateLicense() {
+    let formArray = this.form.value.data;
+
+    formArray = formArray?.map((f: any) => {
+      const { imageinfo, ...data } = f;
+      return formatDateTimePayload(data);
     });
-    this.requestService.updateLicense(payload).subscribe((res) => {
+
+    const payload = {
+      data: formArray,
+    };
+    console.log('payload = ', payload);
+    this.requestService.updateBulkLicense(payload).subscribe((res) => {
       //console.log('update = ', res);
-    }); */
+    });
   }
 
   getStoredData() {
@@ -192,15 +205,6 @@ export class CreateLicenseIdDetailComponent implements OnInit {
           }
         }
       });
-  }
-
-  rowSelect(id: any) {
-    /*     this.requestService.getSelfLicense(id).subscribe((data) => {
-      //console.log('data = ', data);
-      this.selectedLicense = data;
-      this.form.patchValue(<any>data);
-      this.myImage = atob(data.filedata || '{}');
-    }); */
   }
 
   confirmDialog(id: string | null = null) {
@@ -271,5 +275,5 @@ const column2 = [
   'licenseGroup',
   'approveDate',
   'verifyDate',
-  'view',
+  //'view',
 ];

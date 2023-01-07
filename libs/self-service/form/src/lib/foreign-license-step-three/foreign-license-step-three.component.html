@@ -16,15 +16,15 @@
           </label>
         </div>
         <div class="mb-3 ms-4">
-          <ksp-file-upload
+          <ksp-file-multi-upload
             [mode]="mode"
             [uploadType]="'link'"
             [showDeleteFile]="true"
-            [systemFileName]="file.filename"
-            [filename]="file.filename"
-            [fileid]="file.fileid"
+            [systemFileName]="file.name"
+            [groupName]="file.name"
+            [groupFiles]="file.files"
             [uniqueTimestamp]="uniqueTimestamp"
-            (uploadComplete)="updateComplete($event, file)"></ksp-file-upload>
+            (uploadComplete)="updateComplete($event)"></ksp-file-multi-upload>
         </div>
       </ng-container>
     </ng-container>

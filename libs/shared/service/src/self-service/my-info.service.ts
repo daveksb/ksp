@@ -47,6 +47,13 @@ export class MyInfoService {
     );
   }
 
+  forgetPassword(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspself/checkphoneandidcardno`,
+      payload
+    );
+  }
+
   formatMyInfo(info: SelfMyInfo) {
     const dateColumn = [
       'lastlogintime',

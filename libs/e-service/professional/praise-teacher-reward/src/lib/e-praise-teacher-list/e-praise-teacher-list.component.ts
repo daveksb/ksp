@@ -9,7 +9,11 @@ import {
   SelfRequest,
 } from '@ksp/shared/interface';
 import { ERequestService, LoaderService } from '@ksp/shared/service';
-import { eSelfCheckStatus, replaceEmptyWithNull } from '@ksp/shared/utility';
+import {
+  eSelfCheckStatus,
+  processFilter,
+  replaceEmptyWithNull,
+} from '@ksp/shared/utility';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -60,7 +64,7 @@ export class EPraiseTeacherListComponent implements OnInit, AfterViewInit {
     payload = replaceEmptyWithNull(payload);
 
     this.requestService.KspSearchRequest(payload).subscribe((res) => {
-      this.dataSource.data = res;
+      this.dataSource.data = processFilter(res);
       // this.dataSource.sort = this.sort;
 
       // const sortState: Sort = { active: 'id', direction: 'desc' };
