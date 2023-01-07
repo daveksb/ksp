@@ -365,8 +365,8 @@ export class LicenseRequestForeignComponent implements OnInit {
 
   cancelRequest() {
     const payload = {
-      id: `${this.requestId}`,
-      requeststatus: '0',
+      requestid: `${this.requestId}`,
+      process: '0',
     };
 
     this.requestService.cancelRequest(payload).subscribe((res) => {
@@ -387,5 +387,9 @@ export class LicenseRequestForeignComponent implements OnInit {
         this.router.navigate(['/home']);
       }
     });
+  }
+
+  onAttachFilesChange(event: any) {
+    this.documentFiles = event;
   }
 }

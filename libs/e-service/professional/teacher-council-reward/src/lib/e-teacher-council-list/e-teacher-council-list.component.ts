@@ -13,6 +13,7 @@ import {
   replaceEmptyWithNull,
   SelfCheckProcess,
   eSelfCheckStatus,
+  processFilter,
 } from '@ksp/shared/utility';
 import { Subject } from 'rxjs';
 
@@ -66,7 +67,7 @@ export class ETeacherCouncilListComponent implements OnInit, AfterViewInit {
 
     this.requestService.KspSearchRequest(payload).subscribe((res) => {
       console.log(res);
-      this.dataSource.data = res;
+      this.dataSource.data = processFilter(res);
       // this.dataSource.sort = this.sort;
 
       // const sortState: Sort = { active: 'id', direction: 'desc' };

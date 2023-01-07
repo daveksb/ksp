@@ -30,7 +30,7 @@ export class SelfRequestService {
 
   cancelRequest(form: any): Observable<any> {
     return this.http.post(
-      `${environment.apiUrl}/kspself/requestupdatestatus`,
+      `${environment.apiUrl}/kspself/ksprequestinsertstatus`,
       form
     );
   }

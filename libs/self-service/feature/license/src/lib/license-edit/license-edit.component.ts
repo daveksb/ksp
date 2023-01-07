@@ -300,8 +300,8 @@ export class LicenseEditComponent implements OnInit {
 
   cancelRequest() {
     const payload = {
-      id: `${this.requestId}`,
-      requeststatus: '0',
+      requestid: `${this.requestId}`,
+      process: '0',
     };
 
     this.requestService.cancelRequest(payload).subscribe((res) => {
