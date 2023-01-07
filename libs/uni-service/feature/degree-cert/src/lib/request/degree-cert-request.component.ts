@@ -149,14 +149,14 @@ export class DegreeCertRequestComponent {
       ref3: '5',
       requestprocess: process,
       requeststatus: '1',
+      process: process,
+      status: '1',
       systemtype: '3',
       requesttype: '3',
       subtype: '5',
 
       attachfiles: step4 ? JSON.stringify(step4?.files) : null,
-      uniname: step1?.institutionsName
-        ? `${step1?.institutionsName}, ${this.uniData?.campusname}`
-        : null,
+      uniname: step1?.institutionsName,
       unitype: step1?.institutionsGroup || null,
       uniprovince: step1?.provience || null,
       unicode: step1?.institutionsCode || null,

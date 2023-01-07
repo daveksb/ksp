@@ -121,6 +121,7 @@ export class CheckComponent implements OnInit, AfterContentChecked {
           })
         )
         .subscribe((res) => {
+          console.log(res)
           if (res?.returncode !== 98) {
             this.requestNumber = res?.requestNo;
             this.form.patchValue({
