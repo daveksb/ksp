@@ -26,7 +26,7 @@ export const EUniApproveProcess: UniApproveProcess[] = [
     requestType: 3,
     processId: 1,
     processName: 'สร้างและส่งใบคำขอ',
-    status: [],
+    status: [{ id: 1, sname: 'สร้างและส่งใบคำขอ', ename: 'สร้างและส่งใบคำขอ' }],
   },
   // ขั้นตอนที่ 1 ตรวจสอบข้อมูลและเอกสาร ลำดับที่ 1
   {

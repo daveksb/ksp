@@ -24,40 +24,51 @@ import {
 import _ from 'lodash';
 import { map } from 'rxjs';
 import moment from 'moment';
+import { EUniApproveProcess } from '@ksp/shared/constant';
 const detailToState = (res: any) => {
-  const dataReturn = _.filter(res?.datareturn, ({ process }: any) =>
-    ['3', '4', '5'].includes(process)
-  ).map((data: any) => {
-    return parseJson(data?.detail);
-  });
-  const verifyItems = _.filter(dataReturn, ({ verify }) => verify);
-  const verify = verifyItems?.map((data: any) => {
-    const verifyObject: any = {};
-    verifyObject.isBasicValid = _.get(data, 'verify.result') === '1';
-    return verifyObject;
-  });
+  const newRes = res?.datareturn
+    .filter(({ process }: any) => ['4', '5'].includes(process))
+    .map((data: any) => {
+      return { ...data, detail: parseJson(data?.detail)};
+    });
+  const verifyItems = _.filter(newRes, ({ detail }) => detail.verify);
+  const verifyResult = verifyItems.map((data) => ({
+    isBasicValid: _.get(data.detail, 'verify.result') === '1',
+    name: mapProcess(data),
+    ...data
+  }));
   const considerCourses = _.reduce(
-    dataReturn,
+    newRes,
     (prev: any, curr) => {
-      if (curr?.considerCourses) {
+      if (curr?.detail.considerCourses) {
         prev.considerCourses = _.concat(
           prev.considerCourses,
-          curr?.considerCourses
+          curr?.detail.considerCourses
         );
       }
 
-      if (curr?.considerCert) {
-        prev.considerCert = _.concat(prev.considerCert, curr?.considerCert);
+      if (curr?.detail.considerCert) {
+        prev.considerCert = _.concat(prev.considerCert, curr?.detail.considerCert);
       }
       return prev;
     },
     { considerCourses: [], considerCert: [] }
   );
   return {
-    verify,
     ...considerCourses,
+    verifyResult: verifyResult,
   };
 };
+const mapProcess = (data: any) => {
+  let status: any = _.find(EUniApproveProcess, {
+    requestType: 3,
+    processId: _.toNumber(data.process),
+  });
+  status = _.find(status?.status, {
+    id: _.toNumber(data.status),
+  });
+  return status.sname;
+}
 @Component({
   selector: 'e-service-approve',
   templateUrl: './approve.component.html',
@@ -143,15 +154,18 @@ export class ApproveComponent implements OnInit {
       .kspUniRequestProcessSelectByRequestId(this.route.snapshot.params['key'])
       .pipe(map(detailToState))
       .subscribe((res) => {
-        this.verifyResult = res?.verify;
+        this.verifyResult = res?.verifyResult;
         this.considerCert = [
-          ...this.newConsiderCert,
           ...(res?.considerCert || []),
+          ...this.newConsiderCert
         ];
         this.considerCourses = [
-          ...this.newConsiderCourses,
           ...(res?.considerCourses || []),
+          ...this.newConsiderCourses
         ];
+        const lastPlan = _.last(res?.verifyResult) as any;
+        this.form.controls.verify.patchValue(lastPlan?.detail?.verify);
+        this.form.controls.approveData.patchValue(lastPlan?.detail?.approveData);
       });
   }
 
@@ -230,7 +244,7 @@ export class ApproveComponent implements OnInit {
         title: e?.file?.filename,
         files: [e?.file],
         checkresult: [],
-        systemType: 'uni',
+        systemType: 'ksp',
       },
     });
     dialogRef.afterClosed().subscribe((result) => {

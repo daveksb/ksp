@@ -20,6 +20,7 @@
         <form [formGroup]="step1Form">
           <ng-template matStepLabel>ข้อมูลพื้นฐาน</ng-template>
           <ksp-degree-cert-step-one
+            [mode]="mode"
             (degreeType)="step1DegreeType = $event"
             formControlName="step1"
             [disabledInstitute]="true"
@@ -32,6 +33,7 @@
         <form [formGroup]="step2Form">
           <ng-template matStepLabel>ด้านหลักสูตร</ng-template>
           <ksp-degree-cert-step-two
+            [mode]="mode"
             [formType]="step1DegreeType"
             formControlName="step2"
           >
@@ -43,15 +45,17 @@
         <form [formGroup]="step3Form">
           <ng-template matStepLabel>ด้านกระบวนการผลิต</ng-template>
           <ksp-degree-cert-step-3
+            [mode]="mode"
             formControlName="step3"
           ></ksp-degree-cert-step-3>
         </form>
       </mat-step>
 
       <mat-step [stepControl]="step4Form">
-        <ng-template matStepLabel>เอกสารแนบ</ng-template>
         <form [formGroup]="step4Form">
+          <ng-template matStepLabel>เอกสารแนบ</ng-template>
           <ksp-degree-cert-step-four
+            [mode]="mode"
             formControlName="step4"
             [formType]="step1DegreeType"
           ></ksp-degree-cert-step-four>
@@ -70,10 +74,10 @@
     [isLastPage]="stepper.selectedIndex === 3"
     [isFirstPage]="stepper.selectedIndex === 0"
     [showCenterButtons]="stepper.selectedIndex === 3"
-    [showSaveButton]="true"
-    [showCancelButton]="true"
-    [showTempSaveButton]="true"
-    [disableTempSaveButton]="false"
+    [showSaveButton]="mode === 'edit'"
+    [showCancelButton]="mode === 'edit'"
+    [showTempSaveButton]="mode === 'edit'"
+    [disableTempSaveButton]="mode !== 'edit'"
     (saveClicked)="save('1')"
     (nextClicked)="goForward()"
     (prevClicked)="goBack()"

@@ -31,9 +31,9 @@
               <e-service-consider-result
                 [number]="index + 1"
                 [isBasicValid]="item.isBasicValid"
-                [name]="
-                  item.isBasicValid ? 'ครบถ้วนถูกต้อง' : 'ขอแก้ไข / เพิ่มเติม'
-                "
+                [name]="item.name"
+                [createby]="item?.fullnameth"
+                [date]="item.createdate"
               ></e-service-consider-result>
             </ng-container>
           </div>

@@ -37,6 +37,7 @@ export class EServiceDegreeCertListComponent
     search: [{}],
   });
   isLoading: Subject<boolean> = this.loaderService.isLoading;
+  header = 'รายการขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา';
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -101,6 +102,8 @@ export class EServiceDegreeCertListComponent
           Number(res.get('type')) == 1 || !res.get('type');
       }
       this.pageType = Number(res.get('processId'));
+      if (this.pageType == 1) this.header = 'ประเมินหลักสูตรและโครงสร้างหลักสูตร';
+      if (this.pageType == 2) this.header = 'พิจารณาและออกใบรับรองปริญญาและประกาศนียบัตร';
 
       console.log('page type = ', this.pageType);
     });

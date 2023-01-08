@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { KspPaginationComponent } from '@ksp/shared/interface';
 import { LoaderService, UniInfoService } from '@ksp/shared/service';
-import { stringToThaiDate, thaiDate } from '@ksp/shared/utility';
+import { checkProcess, checkStatus, getCookie, stringToThaiDate, thaiDate } from '@ksp/shared/utility';
 import moment from 'moment';
 import { map, Subject } from 'rxjs';
 
@@ -18,6 +18,8 @@ export class ForeignStudentListComponent
   extends KspPaginationComponent
   implements OnInit
 {
+  checkProcess = checkProcess;
+  checkStatus = checkStatus;
   dataSource = [];
   uniUniversityOption: any[] = [];
   displayedColumns = displayedColumns;
@@ -37,12 +39,21 @@ export class ForeignStudentListComponent
       .getUniuniversity()
       .pipe(
         map((res) => {
-          return res?.datareturn?.map(({ id, name }: any) => ({ id, name }));
+          return res?.datareturn?.map(({ id, name, campusname }: any) => {
+            return { id: id,
+                     name: name + (campusname ? `, ${campusname}` : '')
+                   }
+          });
         })
       )
       .subscribe((data) => {
         this.uniUniversityOption = data;
       });
+    this.form.setValue({
+      search: {
+        uniid: getCookie('uniId'),
+      },
+    });
   }
   override search() {
     const {
@@ -75,10 +86,10 @@ export class ForeignStudentListComponent
             accountName: [item?.firstnameth, item?.lastnameth]
               .filter((d) => d)
               .join(' '),
-            process: '',
-            status: '',
-            updateData: item?.updatedata
-              ? thaiDate(new Date(item?.updatedata))
+            process: item.process,
+            status: item.status,
+            updateDate: item?.updatedate
+              ? thaiDate(new Date(item?.updatedate))
               : '',
             requestDate: item?.requestdate
               ? thaiDate(new Date(item?.requestdate))

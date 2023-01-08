@@ -69,4 +69,11 @@ export class FileService {
       payload
     );
   }
+
+  downloadKspFile(payload: any) {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/kspfileselectidfile`,
+      payload
+    );
+  }
 }

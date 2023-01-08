@@ -5,6 +5,7 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Router, RouterModule } from '@angular/router';
+import { EUniApproveProcess } from '@ksp/shared/constant';
 import { KspPaginationComponent, ListData } from '@ksp/shared/interface';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
@@ -15,6 +16,7 @@ import {
   UniFormBadgeComponent,
 } from '@ksp/shared/ui';
 import { getCookie, stringToThaiDate, thaiDate } from '@ksp/shared/utility';
+import _ from 'lodash';
 import moment from 'moment';
 import { lastValueFrom, map, Subject } from 'rxjs';
 
@@ -49,6 +51,10 @@ export class UniDegreeCertListComponent
   uniUniversityOption: ListData[] = [];
   degreeLevelOption: ListData[] = [];
   isLoading: Subject<boolean> = this.loaderService.isLoading;
+  verifyStatusOption: ListData[] = EUniApproveProcess.map(
+    ({ processId, processName }) => ({ value: processId, label: processName })
+  );
+  approveStatusOption: ListData[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -60,6 +66,17 @@ export class UniDegreeCertListComponent
   }
   ngOnInit(): void {
     this.getAll();
+  }
+  changeStatus(event: any) {
+    const options = _.find(EUniApproveProcess, {
+      processId: _.toNumber(event),
+    });
+    this.approveStatusOption = (options?.status || []).map(
+      ({ id, sname }) => ({
+        value: id,
+        label: sname,
+      })
+    );
   }
   getRequest() {
     const {
@@ -135,6 +152,11 @@ export class UniDegreeCertListComponent
     this.form.reset();
     this.clearPageEvent();
     this.dataSource.data = [];
+    this.form.setValue({
+      search: {
+        institutionName: getCookie('uniId'),
+      },
+    });
   }
   async getAll() {
     let resData = await lastValueFrom(
@@ -143,9 +165,9 @@ export class UniDegreeCertListComponent
     const degreeLevel = await lastValueFrom(
       this.uniInfoService.uniDegreeLevel().pipe(
         map((data) => {
-          return data.map(({ id, name, campusname }: any) => ({
+          return data.map(({ id, name }: any) => ({
             value: id,
-            label: name + (campusname ? `, ${campusname}` : ''),
+            label: name,
           }));
         })
       )

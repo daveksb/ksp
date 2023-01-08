@@ -23,7 +23,7 @@ import { Location } from '@angular/common';
 
 import { ApproveStepStatusOption } from '@ksp/shared/constant';
 const detailToState = (res: any) => {
-  let newRes = _.filter(res?.datareturn, ({ process }) =>
+  const newRes = _.filter(res?.datareturn, ({ process }) =>
     ['2', '3'].includes(process)
   ).map((data: any) => {
     return {
@@ -31,23 +31,23 @@ const detailToState = (res: any) => {
       detail: parseJson(data?.detail),
     };
   });
-  newRes = _.filter(newRes, (data: any) => !data?.detail?.considerCourses)?.map(
+  const filterRes = _.filter(newRes, (data: any) => !data?.detail?.considerCourses)?.map(
     (data: any) => {
       const verifyObject: any = {};
       verifyObject.isBasicValid =
         _.get(data, 'detail.verifyStep1.result') === '1';
       verifyObject.isCourseValid =
         _.get(data, 'detail.verifyStep2.result') === '1';
-      verifyObject.isAttachmentValid =
-        _.get(data, 'detail.verifyStep3.result') === '1';
       verifyObject.isProcessValid =
+        _.get(data, 'detail.verifyStep3.result') === '1';
+      verifyObject.isAttachmentValid =
         _.get(data, 'detail.verifyStep4.result') === '1';
       verifyObject.createDate = data?.createdate;
       verifyObject.updateBy = data?.fullnameth;
       return verifyObject;
     }
   );
-  return newRes || [];
+  return { newres: filterRes || [], res: newRes };
 };
 @Component({
   selector: 'e-service-check',
@@ -88,6 +88,8 @@ export class CheckComponent implements OnInit, AfterContentChecked {
   degreeType = '';
   choices = ApproveStepStatusOption;
   daftRequest: any;
+  disabledVerifyStep = false;
+
   constructor(
     public dialog: MatDialog,
     private router: Router,
@@ -107,7 +109,14 @@ export class CheckComponent implements OnInit, AfterContentChecked {
       .kspUniRequestProcessSelectByRequestId(this.route.snapshot.params['key'])
       .pipe(map(detailToState))
       .subscribe((res) => {
-        this.verifyResult = res;
+        this.verifyResult = res.newres;
+        const lastPlan = _.last(res?.res) as any;
+        this.form.patchValue({
+          verifyStep1: lastPlan?.detail.verifyStep1,
+          verifyStep2: lastPlan?.detail.verifyStep2,
+          verifyStep3: lastPlan?.detail.verifyStep3,
+          verifyStep4: lastPlan?.detail.verifyStep4,
+        })
       });
   }
   getDegreeCert() {
@@ -121,15 +130,17 @@ export class CheckComponent implements OnInit, AfterContentChecked {
           })
         )
         .subscribe((res) => {
-          console.log(res)
           if (res?.returncode !== 98) {
             this.requestNumber = res?.requestNo;
             this.form.patchValue({
               step1: res.step1,
               step2: res.step2,
               step3: res.step3,
-              step4: res.step4,
+              step4: res.step4
             });
+            if (res?.requestprocess == '3' && res?.requeststatus == '1') {
+              this.disabledVerifyStep = true;
+            }
           }
         });
     }
@@ -235,8 +246,8 @@ export class CheckComponent implements OnInit, AfterContentChecked {
     this.router.navigate(['/', 'degree-cert', 'list', 0]);
   }
   onSubmitKSP() {
-    const status = _.get(this.form, 'value.step5.verify', '');
     const process = _.toNumber(this.daftRequest?.requestprocess) + 1;
+    const status = _.get(this.form, 'value.step5.verify', '');
 
     try {
       const detail: any = _.pick(this.form.value, [
@@ -253,6 +264,8 @@ export class CheckComponent implements OnInit, AfterContentChecked {
       detail.returnDate = _.get(this.form, 'value.step5.returnDate', '');
       payload.status = status;
       payload.process = process;
+      payload.requeststatus = status;
+      payload.requestprocess = process;
       payload.detail = jsonStringify(detail);
       this.eRequestService
         .kspUpdateRequestUniRequestDegree(payload)
