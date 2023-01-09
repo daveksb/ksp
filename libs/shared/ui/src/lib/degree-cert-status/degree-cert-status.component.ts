@@ -35,7 +35,7 @@ export class DegreeCertStatusComponent implements OnInit {
     this.process = status[this.type];
   }
   getConsider() {
-    if (['1', '2', '3'].includes(this.dataSource?.process)) return '';
+    // if (['1', '2', '3'].includes(this.dataSource?.process)) return '';
     let classStatus = 'verify-status';
     let status: any = _.find(EUniApproveProcess, {
       requestType: _.toNumber(this.dataSource?.requestType),

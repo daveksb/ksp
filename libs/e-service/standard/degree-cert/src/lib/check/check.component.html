@@ -25,6 +25,7 @@
 
             <div class="bg-light px-3 py-2 mt-3 border">
               <e-service-license-check
+                [mode]="disabledVerifyStep ? 'view' : 'edit'"
                 formControlName="verifyStep1"
                 [choices]="choices"
               ></e-service-license-check>
@@ -43,6 +44,7 @@
 
             <div class="bg-light px-3 py-2 mt-3 border">
               <e-service-license-check
+                [mode]="disabledVerifyStep ? 'view' : 'edit'"
                 formControlName="verifyStep2"
                 [choices]="choices"
               ></e-service-license-check>
@@ -52,6 +54,7 @@
           <mat-step [completed]="false">
             <ng-template matStepLabel>ด้านกระบวนการผลิต</ng-template>
             <ksp-degree-cert-step-3
+              [mode]="disabledVerifyStep ? 'view' : 'edit'"
               [mode]="'view'"
               formControlName="step3"
             ></ksp-degree-cert-step-3>
@@ -73,6 +76,7 @@
 
             <div class="bg-light px-3 py-2 mt-3 border">
               <e-service-license-check
+                [mode]="disabledVerifyStep ? 'view' : 'edit'"
                 formControlName="verifyStep4"
                 [choices]="choices"
               ></e-service-license-check>

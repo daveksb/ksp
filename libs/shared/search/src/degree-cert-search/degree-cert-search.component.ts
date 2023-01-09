@@ -35,6 +35,7 @@ export class DegreeCertSearchComponent extends KspFormBaseComponent {
 
   @Output() searched = new EventEmitter<boolean>();
   @Output() cleared = new EventEmitter<boolean>();
+  @Output() changeStatus = new EventEmitter<boolean>();
   @Input() uniUniversityOption: ListData[] = [];
   @Input() degreeLevelOption: ListData[] = [];
   @Input() verifyStatusOption: ListData[] = [];
@@ -49,5 +50,10 @@ export class DegreeCertSearchComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+  }
+
+  handleChangeStatus(event: any) {
+    const valueChange = event.target.value;
+    this.changeStatus.emit(valueChange)
   }
 }

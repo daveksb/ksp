@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
 import { DynamicComponentDirective } from '@ksp/shared/directive';
-import { KspFormBaseComponent, ListData } from '@ksp/shared/interface';
+import { FormMode, KspFormBaseComponent, ListData } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import _ from 'lodash';

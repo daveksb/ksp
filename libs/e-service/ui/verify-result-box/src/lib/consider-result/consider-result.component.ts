@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { stringToThaiDate, thaiDate } from '@ksp/shared/utility';
 
 @Component({
   selector: 'e-service-consider-result',
@@ -9,4 +10,10 @@ export class ConsiderResultComponent {
   @Input() number = 1;
   @Input() isBasicValid = false;
   @Input() name = '';
+  @Input() date = '';
+  @Input() createby = '';
+
+  convertDate(date: any) {
+    return thaiDate(new Date(date))
+  }
 }

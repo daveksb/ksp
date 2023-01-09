@@ -23,29 +23,32 @@ import { map } from 'rxjs';
 import { Location } from '@angular/common';
 import moment from 'moment';
 import { FileGroup } from '@ksp/shared/interface';
+import { EUniApproveProcess } from '@ksp/shared/constant';
 
 const detailToState = (res: any) => {
   const newRes = res?.datareturn
-    .filter(({ process }: any) => ['3', '4'].includes(process))
+    .filter(({ process }: any) => ['4', '5'].includes(process))
     .map((data: any) => {
-      return parseJson(data?.detail);
+      return { ...data, detail: parseJson(data?.detail)};
     });
-  const verifyItems = _.filter(newRes, ({ verify }) => verify);
+  const verifyItems = _.filter(newRes, ({ detail }) => detail.verify);
   const verifyResult = verifyItems.map((data) => ({
-    isBasicValid: _.get(data, 'verify.result') === '1',
+    isBasicValid: _.get(data.detail, 'verify.result') === '1',
+    name: mapProcess(data),
+    ...data
   }));
   const considerCourses = _.reduce(
     newRes,
     (prev: any, curr) => {
-      if (curr?.considerCourses) {
+      if (curr?.detail.considerCourses) {
         prev.considerCourses = _.concat(
           prev.considerCourses,
-          curr?.considerCourses
+          curr?.detail.considerCourses
         );
       }
 
-      if (curr?.considerCert) {
-        prev.considerCert = _.concat(prev.considerCert, curr?.considerCert);
+      if (curr?.detail.considerCert) {
+        prev.considerCert = _.concat(prev.considerCert, curr?.detail.considerCert);
       }
       return prev;
     },
@@ -56,6 +59,16 @@ const detailToState = (res: any) => {
     verifyResult: verifyResult,
   };
 };
+const mapProcess = (data: any) => {
+  let status: any = _.find(EUniApproveProcess, {
+    requestType: 3,
+    processId: _.toNumber(data.process),
+  });
+  status = _.find(status?.status, {
+    id: _.toNumber(data.status),
+  });
+  return status.sname;
+}
 @Component({
   selector: 'e-service-consider',
   templateUrl: './consider.component.html',
@@ -88,12 +101,7 @@ export class ConsiderComponent implements OnInit {
       },
     ],
   });
-  verifyResult: {
-    isBasicValid: boolean;
-    isCourseValid: boolean;
-    isAttachmentValid: boolean;
-    isProcessValid: boolean;
-  }[] = [];
+  verifyResult: any[] = [];
   daftRequest: any;
   requestNumber = '';
   requestdate = '';
@@ -140,10 +148,13 @@ export class ConsiderComponent implements OnInit {
           ...(res?.considerCert || []),
           ...this.newConsiderCert,
         ];
-        // this.form.patchValue({
-        //   plan: lastData?.plan || {},
-        //   considerationResult: lastData?.considerationResult || {},
-        // });
+        const lastPlan = _.last(res?.verifyResult) as any;
+        this.form.controls.plan.patchValue({
+          plans: lastPlan?.detail?.plan.plans,
+          plansResult: lastPlan?.detail?.plan.plansResult,
+          subjects: lastPlan?.detail?.plan.subjects
+        });
+        this.form.controls.verify.patchValue(lastPlan?.detail?.verify);
       });
   }
 
@@ -249,7 +260,7 @@ export class ConsiderComponent implements OnInit {
         title: e?.file?.filename,
         files: [e?.file],
         checkresult: [],
-        systemType: 'uni',
+        systemType: 'ksp',
       },
     });
     dialogRef.afterClosed().subscribe((result) => {

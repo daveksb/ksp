@@ -21,6 +21,9 @@
         formControlName="search"
         [uniUniversityOption]="uniUniversityOption"
         [degreeLevelOption]="degreeLevelOption"
+        [verifyStatusOption]="verifyStatusOption"
+        [approveStatusOption]="approveStatusOption"
+        (changeStatus)="changeStatus($event)"
       ></ksp-degree-cert-search>
     </form>
     <br />

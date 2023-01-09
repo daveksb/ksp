@@ -15,7 +15,7 @@ import {
   UniInfoService,
   UniRequestService,
 } from '@ksp/shared/service';
-import { formatDate, getCookie } from '@ksp/shared/utility';
+import { formatDate, getCookie, thaiDate } from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
@@ -29,6 +29,7 @@ export class ForeignStudentIdComponent {
     foreignStudent: [],
     visainfo: [],
   });
+  date = thaiDate(new Date());
   uniqueTimestamp: any;
   prefixList$!: Observable<any>;
   countries$!: Observable<any>;
@@ -65,9 +66,9 @@ export class ForeignStudentIdComponent {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.visaTypeList$ = this.generalInfoService.getVisaType();
     this.uniInfoService
-      .univerSitySelectById(getCookie('uniType'))
+      .univerSitySelectById(this.uniid)
       .subscribe((res) => {
-        this.uniName = res?.name || '-';
+        this.uniName = res?.name + (res?.campusname ? `, ${res?.campusname}` : '') || '-';
         this.universityCode = res?.universitycode || '-';
         this.uniAddress = '-';
       });
@@ -108,7 +109,9 @@ export class ForeignStudentIdComponent {
             studentInfo.requesttype = '4';
             studentInfo.subtype = '5';
             studentInfo.currentprocess = `1`;
-            studentInfo.requestStatus = `1`;
+            studentInfo.requeststatus = `1`;      
+            studentInfo.process = '1';
+            studentInfo.status = '1';
             studentInfo.uniid = this.uniid;
             studentInfo.unitype = this.unitype;
             studentInfo.fileInfo = JSON.stringify(this.foreignInfo);
@@ -118,14 +121,16 @@ export class ForeignStudentIdComponent {
         })
       )
       .subscribe((res) => {
-        this.onConfirmed();
+        this.onConfirmed(res);
       });
   }
-  onConfirmed() {
+  onConfirmed(res: any) {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '350px',
       data: {
         header: 'บันทึกข้อมูลสำเร็จ',
+        content: `วันที่ ${this.date}
+        เลขที่ใบคำขอ : ${res?.requestno || '-'}`
       },
     });
 

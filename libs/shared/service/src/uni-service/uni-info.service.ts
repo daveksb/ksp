@@ -15,6 +15,7 @@ export class UniInfoService {
   constructor(private http: HttpClient) {}
   mappingUniverSitySelectByIdWithForm(res: any): any {
     const formData: any = {};
+    formData.checkresult = parseJson(res.checkresult);
     formData.requestNo = res?.requestno ?? '';
     formData.step1 = {
       institutionsCode: res?.unicode || '',
@@ -65,7 +66,7 @@ export class UniInfoService {
         advisors: res.courseadvisor ? parseJson(res.courseadvisor) : [],
       },
     };
-    if (['a', 'b', 'c'].includes(res?.degreelevel)) {
+    if (['1', '2', '3', '4'].includes(res?.degreelevel)) {
       formData.step2.plan1 = {
         plans: res.coursestructure ? parseJson(res.coursestructure) : [],
         subjects: res.courseplan ? parseJson(res.courseplan) : [],

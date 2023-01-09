@@ -1,11 +1,11 @@
-import { EUniService } from '@ksp/shared/service';
+import { EUniService, LoaderService } from '@ksp/shared/service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { KspPaginationComponent, ListData } from '@ksp/shared/interface';
 import { UniInfoService } from '@ksp/shared/service';
-import { map } from 'rxjs';
+import { map, Subject } from 'rxjs';
 import { FormBuilder } from '@angular/forms';
 import { thaiDate } from '@ksp/shared/utility';
 import { EUniApproveProcess } from '@ksp/shared/constant';
@@ -36,12 +36,15 @@ export class EServiceDegreeCertListComponent
   form = this.fb.group({
     search: [{}],
   });
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
+  header = 'รายการขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา';
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
     private uniInfoService: UniInfoService,
-    private eUiService: EUniService
+    private eUiService: EUniService,
+    private loaderService: LoaderService
   ) {
     super();
     this.getOptions();
@@ -99,6 +102,8 @@ export class EServiceDegreeCertListComponent
           Number(res.get('type')) == 1 || !res.get('type');
       }
       this.pageType = Number(res.get('processId'));
+      if (this.pageType == 1) this.header = 'ประเมินหลักสูตรและโครงสร้างหลักสูตร';
+      if (this.pageType == 2) this.header = 'พิจารณาและออกใบรับรองปริญญาและประกาศนียบัตร';
 
       console.log('page type = ', this.pageType);
     });

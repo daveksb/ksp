@@ -9,6 +9,8 @@ import { providerFactory } from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { UniInfoService } from '@ksp/shared/service';
+import { PdfViewerComponent } from '@ksp/shared/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'e-service-form-approve-meeting-record',
@@ -37,7 +39,7 @@ export class FormApproveMeetingRecordComponent extends KspFormBaseComponent {
   });
   uniqueNo = '';
   boardOption: any = [];
-  constructor(private fb: FormBuilder, private uniInfo: UniInfoService) {
+  constructor(private fb: FormBuilder, private uniInfo: UniInfoService, public dialog: MatDialog) {
     super();
     this.uniqueNo = uuidv4();
     this.subscriptions.push(
@@ -62,5 +64,21 @@ export class FormApproveMeetingRecordComponent extends KspFormBaseComponent {
   }
   onUploadComplete(evt: any) {
     this.form.controls.file.setValue(evt);
+  }
+  view() {
+    const e = this.form.getRawValue() as any;
+    const dialogRef = this.dialog.open(PdfViewerComponent, {
+      width: '1200px',
+      height: '100vh',
+      data: {
+        title: e?.file?.filename,
+        files: [e?.file],
+        checkresult: [],
+        systemType: 'ksp',
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('');
+    });
   }
 }

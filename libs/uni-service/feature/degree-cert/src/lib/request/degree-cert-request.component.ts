@@ -2,6 +2,7 @@ import {
   AfterContentChecked,
   ChangeDetectorRef,
   Component,
+  OnInit,
   ViewChild,
 } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -26,7 +27,7 @@ import { lastValueFrom } from 'rxjs';
   templateUrl: './degree-cert-request.component.html',
   styleUrls: ['./degree-cert-request.component.scss'],
 })
-export class DegreeCertRequestComponent {
+export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
   @ViewChild('stepper') private stepper?: MatStepper;
   id?: string;
   requestNo = '';
@@ -48,9 +49,15 @@ export class DegreeCertRequestComponent {
     step3: [],
   });
   step4Form: any = this.fb.group({
-    step4: [],
+    step4: [
+      {files: []}
+    ],
   });
   uniData: any;
+  mode: any = 'edit';
+  status = '';
+  process = '';
+
   constructor(
     private router: Router,
     public dialog: MatDialog,
@@ -59,7 +66,13 @@ export class DegreeCertRequestComponent {
     private uniRequestService: UniRequestService,
     private activatedRoute: ActivatedRoute,
     private cdref: ChangeDetectorRef
-  ) {
+  ) {}
+
+  ngAfterContentChecked(): void {
+    this.cdref.detectChanges();
+  }
+
+  ngOnInit(): void {
     this.initForm();
   }
 
@@ -74,7 +87,17 @@ export class DegreeCertRequestComponent {
       uniRequestDegree = await lastValueFrom(
         this.uniInfoService.uniRequestDegreeCertSelectById(this.id)
       );
-      console.log(uniRequestDegree)
+      if (uniRequestDegree.requestprocess == '1' ||
+          (uniRequestDegree.requestprocess == '2' && uniRequestDegree.requeststatus == '1') ||
+          (uniRequestDegree.requestprocess == '3' && uniRequestDegree.requeststatus == '1') ||
+          (uniRequestDegree.requestprocess == '4' && uniRequestDegree.requeststatus == '1') ||
+          (uniRequestDegree.requestprocess == '4' && uniRequestDegree.requeststatus == '2') ||
+          (uniRequestDegree.requestprocess == '5' && uniRequestDegree.requeststatus == '1') ||
+          (uniRequestDegree.requestprocess == '5' && uniRequestDegree.requeststatus == '2')) {
+        this.mode = 'view';
+      }
+      this.status = uniRequestDegree.requeststatus;
+      this.process = uniRequestDegree.requestprocess;
       const { requestNo, step1, step2, step3, step4 } =
         this.uniInfoService.mappingUniverSitySelectByIdWithForm(
           uniRequestDegree
@@ -89,10 +112,9 @@ export class DegreeCertRequestComponent {
       this.step3Form.setValue({
         step3,
       });
-      if (step4)
-        this.step4Form.setValue({
-          step4,
-        });
+      this.step4Form.setValue({
+        step4
+      });
     } else {
       this.step1Form.setValue({
         step1: {
@@ -124,10 +146,10 @@ export class DegreeCertRequestComponent {
         const res = await (async () => {
           if (this.id)
             return await lastValueFrom(
-              this.uniRequestService.uniRequestUpdate(this._getRequest(process))
+              this.uniRequestService.uniRequestUpdate(this._getRequest(this.process, this.status))
             );
           return await lastValueFrom(
-            this.uniRequestService.uniRequestInsert(this._getRequest(process))
+            this.uniRequestService.uniRequestInsert(this._getRequest(process, '1'))
           );
         })();
 
@@ -136,27 +158,31 @@ export class DegreeCertRequestComponent {
       }
     });
   }
-  private _getRequest(process: string): any {
+  private _getRequest(process: string, status: string): any {
     const step1: any = this.step1Form.value.step1;
     const step2: any = this.step2Form.value.step2;
     const step3: any = this.step3Form.value.step3;
     const step4: any = this.step4Form.value.step4;
 
+    const dateapprove = new Date(step1?.degreeTypeForm?.courseApproveDate);
+    dateapprove.setHours(dateapprove.getHours() + 7)
+    const dateaccept = new Date(step1?.degreeTypeForm?.courseAcceptDate);
+    dateaccept.setHours(dateaccept.getHours() + 7)
     const reqBody: any = {
       uniid: getCookie('uniId'),
       ref1: '3',
       ref2: '03',
       ref3: '5',
-      requestprocess: process,
+      requestprocess: '1',
       requeststatus: '1',
+      process: '1',
+      status: '1',
       systemtype: '3',
       requesttype: '3',
       subtype: '5',
 
       attachfiles: step4 ? JSON.stringify(step4?.files) : null,
-      uniname: step1?.institutionsName
-        ? `${step1?.institutionsName}, ${this.uniData?.campusname}`
-        : null,
+      uniname: step1?.institutionsName,
       unitype: step1?.institutionsGroup || null,
       uniprovince: step1?.provience || null,
       unicode: step1?.institutionsCode || null,
@@ -172,12 +198,12 @@ export class DegreeCertRequestComponent {
       courseapprovetime: step1?.degreeTypeForm?.courseApproveTime || null,
       courseapprovedate: step1?.degreeTypeForm?.courseApproveDate
         ? formatDate(
-            new Date(step1?.degreeTypeForm?.courseApproveDate).toISOString()
+            dateapprove.toISOString()
           )
         : null,
       courseacceptdate: step1?.degreeTypeForm?.courseAcceptDate
         ? formatDate(
-            new Date(step1?.degreeTypeForm?.courseAcceptDate).toISOString()
+            dateaccept.toISOString()
           )
         : null,
       coursedetailtype: step1?.courseDetailType || null,
@@ -213,7 +239,7 @@ export class DegreeCertRequestComponent {
         : null,
       tokenkey: getCookie('userToken') || null,
     };
-    if (['a', 'b', 'c'].includes(this.step1DegreeType)) {
+    if (['1', '2', '3', '4'].includes(this.step1DegreeType)) {
       reqBody['coursestructure'] = step2?.plan1?.plans
         ? JSON.stringify(step2?.plan1?.plans)
         : null;

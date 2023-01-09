@@ -82,7 +82,7 @@
     <div class="row mb-3">
       <div class="col">
         <label class="form-label">สถานะตรวจสอบ </label>
-        <select class="form-select" formControlName="verifyStatus">
+        <select class="form-select" formControlName="verifyStatus" (change)="handleChangeStatus($event)">
           <option value="null" disabled selected hidden>กรุณาเลือก</option>
           <option *ngFor="let item of verifyStatusOption" [value]="item.value">
             {{ item.label }}
