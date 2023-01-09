@@ -8,6 +8,7 @@ import { EUniService, LoaderService } from '@ksp/shared/service';
 import { stringToThaiDate } from '@ksp/shared/utility';
 import localForage from 'localforage';
 import { Subject } from 'rxjs';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'ksp-all-user-list',
@@ -19,7 +20,8 @@ export class AllUserListComponent extends KspPaginationComponent implements OnIn
     private router: Router, 
     private dialog: MatDialog,
     private euniservice: EUniService,
-    private loaderService: LoaderService) {
+    private loaderService: LoaderService,
+    private location: Location) {
       super();
     }
 
@@ -59,7 +61,8 @@ export class AllUserListComponent extends KspPaginationComponent implements OnIn
   }
 
   back() {
-    this.router.navigate(['/uni', 'new-user']);
+    this.location.back();
+    // this.router.navigate(['/uni', 'new-user']);
   }
 
   viewDetail(item: any) {

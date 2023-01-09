@@ -246,8 +246,27 @@ export class CheckComponent implements OnInit, AfterContentChecked {
     this.router.navigate(['/', 'degree-cert', 'list', 0]);
   }
   onSubmitKSP() {
-    const process = _.toNumber(this.daftRequest?.requestprocess) + 1;
-    const status = _.get(this.form, 'value.step5.verify', '');
+    const verify = _.get(this.form, 'value.step5.verify', '');
+    const forward = _.get(this.form, 'value.step5.forward', '');
+    let process;
+    let status;
+    if (verify == 1 && forward == 1) {
+      process = _.toNumber(this.daftRequest?.requestprocess) + 1;
+      status = 1;
+    } else if (verify == 2) {
+      process = _.toNumber(this.daftRequest?.requestprocess) + 1;
+      status = 2;
+    } else if (verify == 1 && forward == 2) {
+      process = _.toNumber(this.daftRequest?.requestprocess) + 1;
+      status = 3;
+    } else if (verify == 1 && forward == 3) {
+      process = this.daftRequest?.requestprocess == '1' ? 
+                _.toNumber(this.daftRequest?.requestprocess) + 2 : _.toNumber(this.daftRequest?.requestprocess) + 1;
+      status = 1;
+    }  else if (forward == 4) {
+      process = _.toNumber(this.daftRequest?.requestprocess) + 1;
+      status = 4;
+    }
 
     try {
       const detail: any = _.pick(this.form.value, [
