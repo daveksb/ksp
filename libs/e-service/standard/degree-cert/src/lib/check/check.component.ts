@@ -258,7 +258,7 @@ export class CheckComponent implements OnInit, AfterContentChecked {
       status = 2;
     } else if (verify == 1 && forward == 3) {
       process = this.daftRequest?.requestprocess == '1' ? 
-                _.toNumber(this.daftRequest?.requestprocess) + 3 : _.toNumber(this.daftRequest?.requestprocess) + 2;
+                _.toNumber(this.daftRequest?.requestprocess) + 2 : _.toNumber(this.daftRequest?.requestprocess) + 1;
       status = 1;
     }  else if (forward == 4) {
       process = _.toNumber(this.daftRequest?.requestprocess) + 1;

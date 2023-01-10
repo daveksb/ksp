@@ -252,7 +252,7 @@ export class EUniService {
 
   uniRequestDegreeCertUpdate(data: any): Observable<any> {
     return this.http.post(
-      `${environment.apiUrl}/e-service/universityselectbyid`,
+      `${environment.apiUrl}/e-service/unirequestupdate`,
       {
         ...data,
         tokenkey: getCookie('userToken'),
