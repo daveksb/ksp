@@ -18,7 +18,6 @@ export class SchoolRetiredSearchComponent implements OnInit {
   bureauList$!: Observable<Bureau[]>;
   searchEnd = false;
   notFound = false;
-
   schoolName: any;
   bureauName: any;
 
@@ -59,7 +58,6 @@ export class SchoolRetiredSearchComponent implements OnInit {
       .subscribe((res) => {
         this.searchEnd = true;
         this.schoolUsers = res.filter((user) => user.schuseractive === '1');
-
         //console.log('xxx = ', this.schoolUsers);
       });
   }

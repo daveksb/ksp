@@ -18,6 +18,7 @@ import { GeneralInfoService, SchoolRequestService } from '@ksp/shared/service';
 import {
   formatRequestNo,
   getCookie,
+  mapMultiFileInfo,
   replaceEmptyWithNull,
   thaiDate,
 } from '@ksp/shared/utility';
@@ -136,6 +137,9 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
             request.schooladdrinfo = JSON.stringify(this.school.provincename);
             request.reasoninfo = JSON.stringify(this.reasoninfo);
             request.coordinatorinfo = JSON.stringify(coordinatorForm);
+            request.fileinfo = JSON.stringify(
+              mapMultiFileInfo(this.retiredFiles)
+            );
             const payload = replaceEmptyWithNull(request);
             return this.requestService.schCreateRequest(payload);
           }
