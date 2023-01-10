@@ -14,6 +14,7 @@ function toDate(sDate: any) {
 export class UniInfoService {
   constructor(private http: HttpClient) {}
   mappingUniverSitySelectByIdWithForm(res: any): any {
+    console.log(parseJson(res.courseplan))
     const formData: any = {};
     formData.checkresult = parseJson(res.checkresult);
     formData.requestNo = res?.requestno ?? '';

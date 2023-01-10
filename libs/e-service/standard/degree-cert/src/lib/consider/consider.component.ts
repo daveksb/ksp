@@ -13,6 +13,7 @@ import {
   UniInfoService,
 } from '@ksp/shared/service';
 import {
+  formatDate,
   getCookie,
   jsonStringify,
   parseJson,
@@ -27,11 +28,11 @@ import { EUniApproveProcess } from '@ksp/shared/constant';
 
 const detailToState = (res: any) => {
   const newRes = res?.datareturn
-    .filter(({ process }: any) => ['4', '5'].includes(process))
+    .filter(({ process, detail }: any) => ['4', '5'].includes(process) && detail)
     .map((data: any) => {
       return { ...data, detail: parseJson(data?.detail)};
     });
-  const verifyItems = _.filter(newRes, ({ detail }) => detail.verify);
+  const verifyItems = _.filter(newRes, ({ detail }) => detail && detail.verify);
   const verifyResult = verifyItems.map((data) => ({
     isBasicValid: _.get(data.detail, 'verify.result') === '1',
     name: mapProcess(data),
@@ -103,6 +104,7 @@ export class ConsiderComponent implements OnInit {
   });
   verifyResult: any[] = [];
   daftRequest: any;
+  stepData: any;
   requestNumber = '';
   requestdate = '';
   considerCourses: any = [];
@@ -172,6 +174,7 @@ export class ConsiderComponent implements OnInit {
         )
         .subscribe((res) => {
           if (res?.returncode !== 98) {
+            this.stepData = res;
             this.requestNumber = res?.requestNo;
             this.form.patchValue({
               step1: res.step1,
@@ -223,10 +226,26 @@ export class ConsiderComponent implements OnInit {
         this.eRequestService
           .kspUpdateRequestUniRequestDegree(payload)
           .subscribe(() => {
-            this.onConfirmed();
+            this.updatePlan();
+            // this.onConfirmed();
           });
       }
     });
+  }
+
+  updatePlan() {
+    const process = '4';
+    const status = _.get(this.form, 'value.verify.result', '')
+    const payload = this._getRequest('4', status);
+    payload.process = process;
+    payload.status = status;
+    payload.requestprocess = process;
+    payload.requeststatus = status;
+    this.eUniService
+      .uniRequestDegreeCertUpdate(payload)
+      .subscribe(() => {
+        this.onConfirmed();
+      });
   }
 
   toVerifyPage(type: number) {
@@ -280,5 +299,98 @@ export class ConsiderComponent implements OnInit {
         this.router.navigate(['/', 'degree-cert', 'list', 3, 1]);
       }
     });
+  }
+
+  private _getRequest(process: string, status: string): any {
+    const step1: any = this.stepData.step1;
+    const step2: any = this.stepData.step2;
+    const step3: any = this.stepData.step3;
+    const step4: any = this.stepData.step4;
+
+    const dateapprove = new Date(step1?.degreeTypeForm?.courseApproveDate);
+    dateapprove.setHours(dateapprove.getHours() + 7)
+    const dateaccept = new Date(step1?.degreeTypeForm?.courseAcceptDate);
+    dateaccept.setHours(dateaccept.getHours() + 7)
+    const reqBody: any = {
+      uniid: this.daftRequest.uniid,
+      ref1: '3',
+      ref2: '03',
+      ref3: '5',
+      requestprocess: process,
+      requeststatus: status,
+      process: process,
+      status: status,
+      systemtype: this.daftRequest.systemtype,
+      requesttype: this.daftRequest.requesttype,
+      subtype: '5',
+
+      attachfiles: step4 ? JSON.stringify(step4?.files) : null,
+      uniname: step1?.institutionsName,
+      unitype: step1?.institutionsGroup || null,
+      uniprovince: step1?.provience || null,
+      unicode: step1?.institutionsCode || null,
+      degreelevel: step1?.degreeTypeForm?.degreeType || null,
+      courseacademicyear: step1?.degreeTypeForm?.courseYear || null,
+      coursename: step1?.degreeTypeForm?.courseName || null,
+      coursetype: step1?.degreeTypeForm?.courseType || null,
+      coursestatus: step1?.degreeTypeForm?.courseStatus || null,
+      fulldegreenameth: step1?.degreeTypeForm?.degreeNameThFull || null,
+      shortdegreenameth: step1?.degreeTypeForm?.degreeNameThShort || null,
+      fulldegreenameen: step1?.degreeTypeForm?.degreeNameEnFull || null,
+      shortdegreenameen: step1?.degreeTypeForm?.degreeNameEnShort || null,
+      courseapprovetime: step1?.degreeTypeForm?.courseApproveTime || null,
+      courseapprovedate: step1?.degreeTypeForm?.courseApproveDate
+        ? formatDate(
+            dateapprove.toISOString()
+          )
+        : null,
+      courseacceptdate: step1?.degreeTypeForm?.courseAcceptDate
+        ? formatDate(
+            dateaccept.toISOString()
+          )
+        : null,
+      coursedetailtype: step1?.courseDetailType || null,
+      coursedetailinfo: step1?.courseDetail
+        ? JSON.stringify(step1?.courseDetail)
+        : null,
+      teachinglocation: step1?.locations
+        ? JSON.stringify(step1?.locations)
+        : null,
+      responsibleunit: step1?.institutions
+        ? JSON.stringify(step1?.institutions)
+        : null,
+      evaluatelocation: step1?.locations2
+        ? JSON.stringify(step1?.locations2)
+        : null,
+      coordinatorinfo: step1?.coordinator
+        ? JSON.stringify(step1?.coordinator)
+        : null,
+      courseteacher: step2?.teacher?.teachers
+        ? JSON.stringify(step2?.teacher?.teachers)
+        : null,
+      courseinstructor: step2?.nitet?.nitets
+        ? JSON.stringify(step2?.nitet?.nitets)
+        : null,
+      courseadvisor: step2?.advisor?.advisors
+        ? JSON.stringify(step2?.advisor?.advisors)
+        : null,
+      processtrainning: step3?.training?.rows
+        ? JSON.stringify(step3?.training?.rows)
+        : null,
+      processteaching: step3?.teaching?.rows
+        ? JSON.stringify(step3?.teaching?.rows)
+        : null,
+      tokenkey: getCookie('userToken') || null,
+    };
+    const newPlans = this.form.controls.plan.getRawValue();
+    if (['1', '2', '3', '4'].includes(this.daftRequest.degreelevel)) {
+      reqBody['coursestructure'] = JSON.stringify(newPlans?.plansResult);
+      reqBody['courseplan'] = JSON.stringify(newPlans?.subjects);
+    } else {
+      reqBody['coursestructure'] = JSON.stringify(newPlans?.plansResult);
+      reqBody['courseplan'] = JSON.stringify(newPlans?.subjects);
+    }
+    reqBody['id'] = this.daftRequest.id;
+    return reqBody;
   }
 }
