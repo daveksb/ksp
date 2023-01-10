@@ -36,6 +36,7 @@ export const EUniApproveProcess: UniApproveProcess[] = [
     status: [
       { id: 1, sname: 'ครบถ้วน และถูกต้อง', ename: 'ครบถ้วน และถูกต้อง' },
       { id: 2, sname: 'ขอแก้ไข / เพิ่มเติม', ename: 'ขอแก้ไข / เพิ่มเติม' },
+      { id: 4, sname: 'ขอแก้ไข / เพิ่มเติม', ename: 'ขอแก้ไข / เพิ่มเติม' }
     ],
   },
   // ขั้นตอนที่ 2 ตรวจสอบข้อมูลและเอกสาร ลำดับที่ 2
@@ -46,6 +47,7 @@ export const EUniApproveProcess: UniApproveProcess[] = [
     status: [
       { id: 1, sname: 'ครบถ้วน และถูกต้อง', ename: 'ครบถ้วน และถูกต้อง' },
       { id: 2, sname: 'ขอแก้ไข / เพิ่มเติม', ename: 'ขอแก้ไข / เพิ่มเติม' },
+      { id: 4, sname: 'ขอแก้ไข / เพิ่มเติม', ename: 'ขอแก้ไข / เพิ่มเติม' }
     ],
   },
 

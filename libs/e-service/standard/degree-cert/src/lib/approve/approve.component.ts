@@ -329,7 +329,7 @@ export class ApproveComponent implements OnInit {
         : null,
       tokenkey: getCookie('userToken') || null,
     };
-    if (['a', 'b', 'c'].includes(this.daftRequest?.degreelevel)) {
+    if (['1', '2', '3', '4'].includes(this.daftRequest?.degreelevel)) {
       reqBody['coursestructure'] = step2?.plan1?.plans
         ? JSON.stringify(step2?.plan1?.plans)
         : null;

@@ -249,4 +249,14 @@ export class EUniService {
       }
     );
   }
+
+  uniRequestDegreeCertUpdate(data: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/universityselectbyid`,
+      {
+        ...data,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
 }

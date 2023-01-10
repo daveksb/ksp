@@ -246,8 +246,24 @@ export class CheckComponent implements OnInit, AfterContentChecked {
     this.router.navigate(['/', 'degree-cert', 'list', 0]);
   }
   onSubmitKSP() {
-    const process = _.toNumber(this.daftRequest?.requestprocess) + 1;
-    const status = _.get(this.form, 'value.step5.verify', '');
+    const verify = _.get(this.form, 'value.step5.verify', '');
+    const forward = _.get(this.form, 'value.step5.forward', '');
+    let process;
+    let status;
+    if (verify == 1 && forward == 1) {
+      process = _.toNumber(this.daftRequest?.requestprocess) + 1;
+      status = 1;
+    } else if (verify == 2 && !forward || verify == 2 && forward == 2) {
+      process = _.toNumber(this.daftRequest?.requestprocess) + 1;
+      status = 2;
+    } else if (verify == 1 && forward == 3) {
+      process = this.daftRequest?.requestprocess == '1' ? 
+                _.toNumber(this.daftRequest?.requestprocess) + 3 : _.toNumber(this.daftRequest?.requestprocess) + 2;
+      status = 1;
+    }  else if (forward == 4) {
+      process = _.toNumber(this.daftRequest?.requestprocess) + 1;
+      status = 4;
+    }
 
     try {
       const detail: any = _.pick(this.form.value, [
@@ -313,10 +329,10 @@ export class CheckComponent implements OnInit, AfterContentChecked {
   }
   get disableFields(): { forward: any[]; verify: any[] } {
     if (this.form.controls.step5.value.verify == 1) {
-      return { forward: [2, 3, 4], verify: [] };
+      return { forward: [2], verify: [] };
     }
     if (this.form.controls.step5.value.verify == 2) {
-      return { forward: [1], verify: [] };
+      return { forward: [1, 3, 4], verify: [] };
     }
     return { forward: [], verify: [] };
   }
