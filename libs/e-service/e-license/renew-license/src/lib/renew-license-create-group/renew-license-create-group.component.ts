@@ -74,6 +74,7 @@ export class RenewLicenseCreateGroupComponent implements OnInit, AfterViewInit {
     const payload = {
       offset: 0,
       row: 500,
+      requesttype: '2',
     };
 
     this.requestService.getLevel2LicenseList(payload).subscribe((res) => {

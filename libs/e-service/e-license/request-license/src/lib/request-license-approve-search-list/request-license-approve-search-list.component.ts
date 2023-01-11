@@ -103,7 +103,7 @@ export class RequestLicenseApproveSearchListComponent
       createdate: params.createdate,
       offset: '0',
       row: '500',
-      requesttype: '1',
+      requesttype: '01',
     };
     this.requestService.searchSelfApproveList(payload).subscribe((res) => {
       this.dataSource.data = res.map((i) => {

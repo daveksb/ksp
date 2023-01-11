@@ -76,6 +76,7 @@ export class RequestLicenseApproveCreateGroupComponent
     const payload = {
       offset: 0,
       row: 500,
+      requesttype: '1',
     };
 
     this.requestService.getLevel2LicenseList(payload).subscribe((res) => {
