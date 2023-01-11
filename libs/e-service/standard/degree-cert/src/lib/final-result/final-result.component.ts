@@ -17,16 +17,28 @@ import {
   parseJson,
 } from '@ksp/shared/utility';
 import _ from 'lodash';
+import moment from 'moment';
+import { EUniApproveProcess } from '@ksp/shared/constant';
 
 const detailToState = (res: any) => {
   const dataReturn = _.filter(
     res?.datareturn,
-    ({ process }: any) => process === '5'
+    ({ process }: any) => ['6'].includes(process)
   ).map((data: any) => {
-    return parseJson(data?.detail);
+    return { ...data, detail: parseJson(data?.detail)};
   });
-  return _.first(dataReturn);
+  return dataReturn;
 };
+const mapProcess = (data: any) => {
+  let status: any = _.find(EUniApproveProcess, {
+    requestType: 3,
+    processId: _.toNumber(data.process),
+  });
+  status = _.find(status?.status, {
+    id: _.toNumber(data.status),
+  });
+  return status.sname;
+}
 @Component({
   templateUrl: './final-result.component.html',
   styleUrls: ['./final-result.component.scss'],
@@ -47,6 +59,7 @@ export class FinalResultComponent implements OnInit {
   requestNumber = '';
   uniRequestDegreeCert: any = '';
   step1Data: any = {};
+  formData: any;
   constructor(
     public dialog: MatDialog,
     private router: Router,
@@ -59,33 +72,39 @@ export class FinalResultComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.getHistory();
+    this.getDegreeCert();
   }
   getHistory() {
     if (this.route.snapshot.params['key']) {
-      this.eUniService
-        .uniRequestDegreeCertSelectById(this.route.snapshot.params['key'])
-        .subscribe((uniRequestRes) => {
-          if (uniRequestRes?.returncode !== 98) {
-            this.eRequestService
-              .kspUniRequestProcessSelectByRequestId(
-                this.route.snapshot.params['key']
-              )
-              .pipe(map(detailToState))
-              .subscribe((res) => {
-                this.getDegreeCert(res?.uniDegreeCertId, uniRequestRes?.requestprocess);
-              });
-          }
-        });
+      this.eRequestService
+        .kspUniRequestProcessSelectByRequestId(
+          this.route.snapshot.params['key']
+        )
+        .pipe(map(detailToState))
+        .subscribe((res) => {
+          const lastResult = _.last(res?.filter((data: any) => {
+            return data.process == 6 && data.detail && data.detail.finalResult})) as any;
+          const data = lastResult.detail;
+          this.form.patchValue({
+            finalResult: {
+              reasonTimes: data.finalResult.reasonTimes,
+              date: data.finalResult.date,
+              approvedegreeCode: data.degreeApproveCode,
+            },
+          })
+          // this.getDegreeCert(res?.uniDegreeCertId, uniRequestRes?.requestprocess);
+      });
     }
   }
-  getDegreeCert(id: any, process: any) {
+  getDegreeCert() {
+    const id = this.route.snapshot.params['key'];
     if (id) {
       this.eUniService
-        .getUniDegreeCertById(id)
+        .uniRequestDegreeCertSelectById(id)
         .pipe(
           map((res) => {
             this.daftRequest = res;
-            this.allowEdit = process === '5';
+            this.allowEdit = res.requestprocess === '5';
             return this.uniInfoService.mappingUniverSitySelectByIdWithForm(res);
           })
         )
@@ -93,13 +112,9 @@ export class FinalResultComponent implements OnInit {
           if (res?.returncode !== 98) {
             this.requestNumber = res?.requestNo;
             this.step1Data = res?.step1;
+            this.formData = res;
             this.form.patchValue({
-              step1: res.step1,
-              finalResult: {
-                reasonTimes: '',
-                date: '',
-                approvedegreeCode: res?.degreeApproveCode || '',
-              },
+              step1: res.step1
             });
           }
         });
@@ -123,8 +138,17 @@ export class FinalResultComponent implements OnInit {
 
     dialogRef.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.onSubmitKSP();
+        this.onSubmitDegreeCert();
+        // this.onSubmitKSP();
       }
+    });
+  }
+
+  onSubmitDegreeCert() {
+    this.eUniService
+      .uniDegreeCertInsert(this._getRequest())
+      .subscribe((res) => {
+        this.onSubmitKSP(res?.degreeapprovecode, res?.id);
     });
   }
 
@@ -147,61 +171,98 @@ export class FinalResultComponent implements OnInit {
     });
   }
   private _getRequest(): any {
-    const payload: any = {
-      uniname: this.step1Data?.institutionsName || null,
-      unitype: this.step1Data?.institutionsGroup || null,
-      uniprovince: this.step1Data?.provience || null,
-      unicode: this.step1Data?.institutionsCode || null,
-      degreelevel: this.step1Data?.degreeTypeForm?.degreeType || null,
-      courseacademicyear: this.step1Data?.degreeTypeForm?.courseYear || null,
-      coursename: this.step1Data?.degreeTypeForm?.courseName || null,
-      coursetype: this.step1Data?.degreeTypeForm?.courseType || null,
-      coursestatus: this.step1Data?.degreeTypeForm?.courseStatus || null,
-      fulldegreenameth:
-        this.step1Data?.degreeTypeForm?.degreeNameThFull || null,
-      shortdegreenameth:
-        this.step1Data?.degreeTypeForm?.degreeNameThShort || null,
-      fulldegreenameen:
-        this.step1Data?.degreeTypeForm?.degreeNameEnFull || null,
-      shortdegreenameen:
-        this.step1Data?.degreeTypeForm?.degreeNameEnShort || null,
-      courseapprovetime:
-        this.step1Data?.degreeTypeForm?.courseApproveTime || null,
-      courseapprovedate: this.step1Data?.degreeTypeForm?.courseApproveDate
+    const step1: any = this.formData.step1;
+    const step2: any = this.formData.step2;
+    const step3: any = this.formData.step3;
+    const step4: any = this.formData.step4;
+    const reqBody: any = {
+      degreeapprovecode: this.daftRequest?.degreeapprovecode || null,
+      coursesubjects: this.daftRequest?.coursesubjects || null,
+      coursemajor: this.daftRequest?.coursemajor || null,
+      requestno: this.daftRequest?.requestno || null,
+      requestid: this.daftRequest?.requestid || null,
+      requestdate: moment(this.daftRequest?.requestdate).format("YYYY-MM-DD[T]HH:mm:ss"),
+      uniid: this.daftRequest?.uniid || null,
+      attachfiles: step4 ? JSON.stringify(step4?.files) : null,
+      uniname: step1?.institutionsName || null,
+      unitype: step1?.institutionsGroup || null,
+      uniprovince: step1?.provience || null,
+      unicode: step1?.institutionsCode || null,
+      degreelevel: step1?.degreeTypeForm?.degreeType || null,
+      courseacademicyear: step1?.degreeTypeForm?.courseYear || null,
+      coursename: step1?.degreeTypeForm?.courseName || null,
+      coursetype: step1?.degreeTypeForm?.courseType || null,
+      coursestatus: step1?.degreeTypeForm?.courseStatus || null,
+      fulldegreenameth: step1?.degreeTypeForm?.degreeNameThFull || null,
+      shortdegreenameth: step1?.degreeTypeForm?.degreeNameThShort || null,
+      fulldegreenameen: step1?.degreeTypeForm?.degreeNameEnFull || null,
+      shortdegreenameen: step1?.degreeTypeForm?.degreeNameEnShort || null,
+      courseapprovetime: step1?.degreeTypeForm?.courseApproveTime || null,
+      courseapprovedate: step1?.degreeTypeForm?.courseApproveDate
         ? formatDate(
-            new Date(
-              this.step1Data?.degreeTypeForm?.courseApproveDate
-            ).toISOString()
+            new Date(step1?.degreeTypeForm?.courseApproveDate).toISOString()
           )
         : null,
-      courseacceptdate: this.step1Data?.degreeTypeForm?.courseAcceptDate
+      courseacceptdate: step1?.degreeTypeForm?.courseAcceptDate
         ? formatDate(
-            new Date(
-              this.step1Data?.degreeTypeForm?.courseAcceptDate
-            ).toISOString()
+            new Date(step1?.degreeTypeForm?.courseAcceptDate).toISOString()
           )
         : null,
-      coursedetailtype: this.step1Data?.courseDetailType || null,
-      coursedetailinfo: this.step1Data?.courseDetail
-        ? JSON.stringify(this.step1Data?.courseDetail)
+      coursedetailtype: step1?.courseDetailType || null,
+      coursedetailinfo: step1?.courseDetail
+        ? JSON.stringify(step1?.courseDetail)
         : null,
-      teachinglocation: this.step1Data?.locations
-        ? JSON.stringify(this.step1Data?.locations)
+      teachinglocation: step1?.locations
+        ? JSON.stringify(step1?.locations)
         : null,
-      responsibleunit: this.step1Data?.institutions
-        ? JSON.stringify(this.step1Data?.institutions)
+      responsibleunit: step1?.institutions
+        ? JSON.stringify(step1?.institutions)
         : null,
-      evaluatelocation: this.step1Data?.locations2
-        ? JSON.stringify(this.step1Data?.locations2)
+      evaluatelocation: step1?.locations2
+        ? JSON.stringify(step1?.locations2)
         : null,
-      coordinatorinfo: this.step1Data?.coordinator
-        ? JSON.stringify(this.step1Data?.coordinator)
+      coordinatorinfo: step1?.coordinator
+        ? JSON.stringify(step1?.coordinator)
         : null,
+      courseteacher: step2?.teacher?.teachers
+        ? JSON.stringify(step2?.teacher?.teachers)
+        : null,
+      courseinstructor: step2?.nitet?.nitets
+        ? JSON.stringify(step2?.nitet?.nitets)
+        : null,
+      courseadvisor: step2?.advisor?.advisors
+        ? JSON.stringify(step2?.advisor?.advisors)
+        : null,
+      processtrainning: step3?.training?.rows
+        ? JSON.stringify(step3?.training?.rows)
+        : null,
+      processteaching: step3?.teaching?.rows
+        ? JSON.stringify(step3?.teaching?.rows)
+        : null,
+      tokenkey: getCookie('userToken') || null,
     };
-    return payload;
+    if (['1', '2', '3', '4'].includes(this.daftRequest?.degreelevel)) {
+      reqBody['coursestructure'] = step2?.plan1?.plans
+        ? JSON.stringify(step2?.plan1?.plans)
+        : null;
+
+      reqBody['courseplan'] = step2?.plan1?.subjects
+        ? JSON.stringify(step2?.plan1?.subjects)
+        : null;
+    } else {
+      reqBody['coursestructure'] = step2?.plan2?.plans
+        ? JSON.stringify(step2?.plan2?.plans)
+        : null;
+      reqBody['courseplan'] = step2?.plan2?.subjects
+        ? JSON.stringify(step2?.plan2?.subjects)
+        : null;
+    }
+    return reqBody;
   }
 
-  onSubmitKSP() {
+  onSubmitKSP(degreeApproveCode: any, uniDegreeCertId: any) {
+    // if (!degreeApproveCode || !uniDegreeCertId)
+      // return this.onConfirmed('บันทึกข้อมูลไม่สำเร็จ');
     const detail: any = _.pick(this.form.value, ['verify', 'approveData']);
     const payload: any = {
       systemtype: '3',
@@ -212,8 +273,9 @@ export class FinalResultComponent implements OnInit {
     payload.status = '1';
     payload.detail = jsonStringify({
       ...detail,
-      formData: this._getRequest(),
       finalResult: this.form.value.finalResult,
+      degreeApproveCode: degreeApproveCode,
+      uniDegreeCertId: uniDegreeCertId,
     });
     this.eRequestService
       .kspUpdateRequestUniRequestDegree(payload)

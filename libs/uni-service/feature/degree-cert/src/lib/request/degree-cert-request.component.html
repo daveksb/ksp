@@ -58,6 +58,7 @@
             [mode]="mode"
             formControlName="step4"
             [formType]="step1DegreeType"
+            [systemType]="'uni'"
           ></ksp-degree-cert-step-four>
         </form>
       </mat-step>
@@ -77,6 +78,7 @@
     [showSaveButton]="mode === 'edit'"
     [showCancelButton]="mode === 'edit'"
     [showTempSaveButton]="mode === 'edit'"
+    [showAllPageTempsave]="mode === 'edit' && stepper.selectedIndex < 3"
     [disableTempSaveButton]="mode !== 'edit'"
     (saveClicked)="save('1')"
     (nextClicked)="goForward()"
