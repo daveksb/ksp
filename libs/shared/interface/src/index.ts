@@ -35,6 +35,7 @@ export * from './lib/ksp-search';
 export * from './lib/ksp-approve-persist-data';
 export * from './lib/ksp-pdf-mapping';
 export * from './lib/ksp-kuruspa';
+export * from './lib/ksp-payment';
 
 export * from './lib/uni-service-import-type';
 export * from './lib/university-select';
