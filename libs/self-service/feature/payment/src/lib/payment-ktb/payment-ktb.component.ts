@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { KspPayment, KspRequest } from '@ksp/shared/interface';
 import { Location } from '@angular/common';
 import { SelfRequestService } from '@ksp/shared/service';
@@ -15,7 +15,6 @@ export class PaymentKtbComponent implements OnInit {
   kspRequest: KspRequest = new KspRequest();
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private location: Location,
@@ -43,7 +42,7 @@ export class PaymentKtbComponent implements OnInit {
             prefixen: res.prefixen,
             firstnameen: res.firstnameen,
             lastnameen: res.lastnameen,
-            paymentchannel: 'ktb',
+            paymentchannel: '0',
             qrcode: this.qrString,
             paymentstatus: '0',
             errorcode: null,
