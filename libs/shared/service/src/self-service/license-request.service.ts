@@ -52,4 +52,11 @@ export class SelfRequestService {
       }
     );
   }
+
+  createPayment(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspself/ksppaymentinsert`,
+      payload
+    );
+  }
 }
