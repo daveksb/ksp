@@ -235,6 +235,11 @@ export const eLicenseMenu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'ใบคำขอผู้ใช้งานระบบบริการตนเอง (Self Service) สำหรับชาวต่างชาติ',
+    path: '/self-user/new-user-list',
+  },
+  {
+    icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ใบคำขอผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
     path: '/school/new-user',
   },

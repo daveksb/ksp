@@ -8,7 +8,9 @@
 </ksp-top-nav>
 
 <div class="bg-secondary bg-opacity-10 py-2 px-4 full-height full-width-2">
-  <div class="box-header">รายการใบคำขอส่งรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา</div>
+  <div class="box-header">
+    รายการใบคำขอส่งรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา
+  </div>
   <div class="bg-white p-3">
     <form [formGroup]="form">
       <ksp-degree-cert-approved-search
@@ -31,17 +33,17 @@
         </ng-container>
         <ng-container matColumnDef="requestno">
           <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
-          <td
-            mat-cell
-            *matCellDef="let element"
-          >
+          <td mat-cell *matCellDef="let element">
             <span
               class="text-primary link"
-              *ngIf="element.status !== '3'" 
-              (click)="goToDetailPage(element.unirequestadmissionid)">
+              *ngIf="element.status !== '3'"
+              (click)="goToDetailPage(element.unirequestadmissionid)"
+            >
               {{ element.requestnounirequestadmission || '-' }}
             </span>
-            <span *ngIf="element.status === '3'">{{ element.requestnounirequestadmission || '-' }}</span>
+            <span *ngIf="element.status === '3'">{{
+              element.requestnounirequestadmission || '-'
+            }}</span>
           </td>
         </ng-container>
 
@@ -159,7 +161,6 @@
     <mat-paginator
       [pageSizeOptions]="[25]"
       showFirstLastButtons
-      aria-label="Select page of periodic elements"
       [length]="pageEvent.length"
       [pageSize]="pageEvent.pageSize"
       [pageIndex]="pageEvent.pageIndex"

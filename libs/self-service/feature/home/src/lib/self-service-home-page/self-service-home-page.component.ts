@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -13,7 +13,11 @@ import {
   KSPRequestSearchFilter,
   SelfRequest,
 } from '@ksp/shared/interface';
-import { LoaderService, SelfRequestService } from '@ksp/shared/service';
+import {
+  LoaderService,
+  MyInfoService,
+  SelfRequestService,
+} from '@ksp/shared/service';
 import {
   formatDatePayload,
   getCookie,
@@ -31,7 +35,7 @@ import { Subject } from 'rxjs';
   templateUrl: './self-service-home-page.component.html',
   styleUrls: ['./self-service-home-page.component.scss'],
 })
-export class SelfServiceHomePageComponent implements AfterViewInit {
+export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
   /*   badgeTitle = [
     `เลขที่ใบคำขอ : SF_010641000123 รายการขอขึ้นทะเบียนใบอนุญาต ถูกส่งคืน
   “ปรับแก้ไข / เพิ่มเติม” กดเพื่อตรวจสอบ`,
@@ -48,6 +52,7 @@ export class SelfServiceHomePageComponent implements AfterViewInit {
   displayedColumns: string[] = column;
   initialSearch = true;
   rejectedRequests: KspRequest[] = [];
+  userType = '1';
 
   form = this.fb.group({
     requestno: [],
@@ -59,8 +64,19 @@ export class SelfServiceHomePageComponent implements AfterViewInit {
     private router: Router,
     private requestService: SelfRequestService,
     private fb: FormBuilder,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private myInfoService: MyInfoService
   ) {}
+
+  ngOnInit(): void {
+    this.myInfoService.getMyInfo().subscribe((res) => {
+      if (res) {
+        if (res.usertype) {
+          this.userType = res.usertype;
+        }
+      }
+    });
+  }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
