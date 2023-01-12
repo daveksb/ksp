@@ -18,8 +18,6 @@ import { EditLicenseApproveConfirmComponent } from './edit-license-approve-confi
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { ValidateKspRequestComponent } from '@ksp/e-service/e-license/approve-ksp-request';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { EditLicenseConsiderListComponent } from './edit-license-consider-list/edit-license-consider-list.component';
-import { EditLicenseConsiderDetailComponent } from './edit-license-consider-detail/edit-license-consider-detail.component';
 
 export const routes: Routes = [
   {
@@ -47,14 +45,7 @@ export const routes: Routes = [
         path: 'confirm/:id',
         component: EditLicenseApproveConfirmComponent,
       },
-      {
-        path: 'consider-list',
-        component: EditLicenseConsiderListComponent,
-      },
-      {
-        path: 'consider-detail',
-        component: EditLicenseConsiderDetailComponent,
-      },
+
     ],
   },
 ];
@@ -83,14 +74,12 @@ export const routes: Routes = [
     EditLicenseApproveListComponent,
     EditLicenseApproveDetailComponent,
     EditLicenseApproveConfirmComponent,
-    EditLicenseConsiderListComponent,
-    EditLicenseConsiderDetailComponent,
+
   ],
   exports: [
     EditLicenseApproveListComponent,
     EditLicenseApproveDetailComponent,
-    EditLicenseConsiderListComponent,
-    EditLicenseConsiderDetailComponent,
+
   ],
 })
 export class EServiceELicenseEditLicenseModule {}

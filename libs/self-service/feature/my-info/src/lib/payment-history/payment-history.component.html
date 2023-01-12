@@ -10,8 +10,9 @@
         [matDatepicker]="picker"
         class="me-2 form-control-sm"
         style="border: 1px solid #ced4da"
+        disabled
       />
-      <mat-datepicker #picker></mat-datepicker>
+      <mat-datepicker #picker disabled="false"></mat-datepicker>
       <i class="bi bi-calendar ms-1" (click)="picker.open()" role="button"></i>
       <i class="bi bi-search ms-4" role="button" (click)="search()"></i>
     </div>

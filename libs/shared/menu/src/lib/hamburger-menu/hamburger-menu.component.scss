@@ -10,7 +10,7 @@
   background-position: center;
 }
 nav {
-  height: 55px;
+  height: 58px;
   padding: 0 16px;
   display: -ms-flexbox;
   display: -webkit-box;
@@ -57,7 +57,7 @@ nav .m-menu__overlay {
 }
 nav .m-menu__header {
   padding: 0 16px;
-  height: 55px;
+  height: 58px;
   display: -ms-flexbox;
   display: -webkit-box;
   display: -webkit-flex;
@@ -84,7 +84,7 @@ nav .m-menu .m-menu {
   transform: translate3d(480px, 0, 0);
 }
 nav .m-menu ul {
-  height: calc(100% - 55px);
+  height: calc(100% - 58px);
   overflow-y: auto;
 }
 nav .m-menu ul li a,

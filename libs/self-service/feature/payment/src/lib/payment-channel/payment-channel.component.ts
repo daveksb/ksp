@@ -5,6 +5,7 @@ import { SelfRequestService } from '@ksp/shared/service';
 import { KspRequest } from '@ksp/shared/interface';
 import { MatDialog } from '@angular/material/dialog';
 import { PrintReceiptDialogComponent } from '@ksp/self-service/ui';
+import moment from 'moment';
 
 @Component({
   templateUrl: './payment-channel.component.html',
@@ -12,6 +13,8 @@ import { PrintReceiptDialogComponent } from '@ksp/self-service/ui';
 })
 export class PaymentChannelComponent implements OnInit {
   kspRequest = new KspRequest();
+  qrString = '';
+  expireDate: string | null = '';
 
   constructor(
     public router: Router,
@@ -26,6 +29,10 @@ export class PaymentChannelComponent implements OnInit {
       this.reqService.getRequestById(Number(res.get('id'))).subscribe((res) => {
         //console.log('res = ', res);
         this.kspRequest = res;
+        if (res && res.idcardno) {
+          this.qrString = res.idcardno + res.requestno;
+          this.expireDate = moment().add(1, 'months').format('yyyy-MM-DD'); // มีอายุ 1 เดือน
+        }
       });
     });
   }
@@ -50,6 +57,11 @@ export class PaymentChannelComponent implements OnInit {
     this.dialog.open(PrintReceiptDialogComponent, {
       width: '75vw',
       id: 'dialogTrasparent',
+      data: {
+        kspRequest: this.kspRequest,
+        qrString: this.qrString,
+        expireDate: this.expireDate,
+      },
     });
   }
 }

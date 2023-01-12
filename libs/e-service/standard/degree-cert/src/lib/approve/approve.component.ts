@@ -31,7 +31,7 @@ const detailToState = (res: any) => {
     .map((data: any) => {
       return { ...data, detail: parseJson(data?.detail)};
     });
-  const verifyItems = _.filter(newRes, ({ detail }) => detail.verify);
+  const verifyItems = _.filter(newRes, ({ detail }) => detail && detail.verify);
   const verifyResult = verifyItems.map((data) => ({
     isBasicValid: _.get(data.detail, 'verify.result') === '1',
     name: mapProcess(data),
@@ -40,14 +40,14 @@ const detailToState = (res: any) => {
   const considerCourses = _.reduce(
     newRes,
     (prev: any, curr) => {
-      if (curr?.detail.considerCourses) {
+      if (curr?.detail && curr?.detail.considerCourses) {
         prev.considerCourses = _.concat(
           prev.considerCourses,
           curr?.detail.considerCourses
         );
       }
 
-      if (curr?.detail.considerCert) {
+      if (curr?.detail && curr?.detail.considerCert) {
         prev.considerCert = _.concat(prev.considerCert, curr?.detail.considerCert);
       }
       return prev;
@@ -163,7 +163,7 @@ export class ApproveComponent implements OnInit {
           ...(res?.considerCourses || []),
           ...this.newConsiderCourses
         ];
-        const lastPlan = _.last(res?.verifyResult) as any;
+        const lastPlan = res?.verifyResult.find((data: any)=>{return data.process == 5}) as any;
         this.form.controls.verify.patchValue(lastPlan?.detail?.verify);
         this.form.controls.approveData.patchValue(lastPlan?.detail?.approveData);
       });
@@ -189,7 +189,26 @@ export class ApproveComponent implements OnInit {
 
     dialogRef.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.onSubmitDeGreeCert();
+        const detail = jsonStringify({
+          ...this.form.value,
+          considerCourses: this.newConsiderCourses,
+          considerCert: this.newConsiderCert,
+        });
+        const payload: any = {
+          systemtype: '3',
+          process: '5',
+          requestid: this.daftRequest?.requestid,
+          status: _.get(this.form, 'value.verify.result', ''),
+          detail,
+          userid: getCookie('userId'),
+        }
+        this.eRequestService
+          .kspUpdateRequestUniRequestDegree(payload)
+          .subscribe(() => {
+            // this.updatePlan();
+            this.onConfirmed();
+          });
+        // this.onSubmitDeGreeCert();
       }
     });
   }
@@ -352,7 +371,7 @@ export class ApproveComponent implements OnInit {
       .uniDegreeCertInsert(this._getRequest())
       .subscribe((res) => {
         this.onSubmitKSP(res?.degreeapprovecode, res?.id);
-      });
+    });
   }
 
   onConfirmed(header = 'บันทึกข้อมูลสำเร็จ') {

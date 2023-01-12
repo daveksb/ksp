@@ -34,4 +34,5 @@ export class BottomNavComponent {
   @Input() showCancelButton = true;
   @Input() showTempSaveButton = false;
   @Input() showSaveButton = false;
+  @Input() showAllPageTempsave = false;
 }

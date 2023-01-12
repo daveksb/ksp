@@ -23,6 +23,8 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SelfUserListComponent } from './user-list/self-user-list.component';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { NewForeignUserListComponent } from './new-foreign-user-list/new-foreign-user-list.component';
+import { NewForeignUserDetailComponent } from './new-foreign-user-detail/new-foreign-user-detail.component';
 
 export const routes: Routes = [
   {
@@ -40,6 +42,15 @@ export const routes: Routes = [
       {
         path: 'user-detail/:id',
         component: UserDetailComponent,
+      },
+
+      {
+        path: 'new-user-list',
+        component: NewForeignUserListComponent,
+      },
+      {
+        path: 'new-user-detail',
+        component: NewForeignUserDetailComponent,
       },
       {
         path: '',
@@ -70,7 +81,14 @@ export const routes: Routes = [
     RequestHeaderInfoComponent,
     ThaiDatePipe,
     MatDatepickerModule,
+    
   ],
-  declarations: [SelfUserListComponent, UserDetailComponent],
+  declarations: [
+    SelfUserListComponent,
+    UserDetailComponent,
+    NewForeignUserListComponent,
+    NewForeignUserDetailComponent,
+  ],
+  exports: [NewForeignUserListComponent, NewForeignUserDetailComponent],
 })
 export class EServiceELicenseSelfUserModule {}

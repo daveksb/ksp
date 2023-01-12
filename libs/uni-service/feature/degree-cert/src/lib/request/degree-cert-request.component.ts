@@ -112,9 +112,11 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
       this.step3Form.setValue({
         step3,
       });
-      this.step4Form.setValue({
-        step4
-      });
+      setTimeout(() => {
+        this.step4Form.setValue({
+          step4
+        });
+      }, 500);
     } else {
       this.step1Form.setValue({
         step1: {
@@ -131,6 +133,8 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
   }
 
   save(process: string) {
+    console.log(process)
+    console.log(this.id)
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -146,7 +150,7 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
         const res = await (async () => {
           if (this.id)
             return await lastValueFrom(
-              this.uniRequestService.uniRequestUpdate(this._getRequest(this.process, this.status))
+              this.uniRequestService.uniRequestUpdate(this._getRequest(process, '1'))
             );
           return await lastValueFrom(
             this.uniRequestService.uniRequestInsert(this._getRequest(process, '1'))
@@ -173,10 +177,10 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
       ref1: '3',
       ref2: '03',
       ref3: '5',
-      requestprocess: '1',
-      requeststatus: '1',
-      process: '1',
-      status: '1',
+      requestprocess: process,
+      requeststatus: status,
+      process: process,
+      status: status,
       systemtype: '3',
       requesttype: '3',
       subtype: '5',

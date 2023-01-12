@@ -29,7 +29,7 @@ export class FormMultiAttachmentComponent {
   constructor(public dialog: MatDialog, private fileService: FileService) {}
 
   view(group: FileGroup) {
-    if (this.systemType != 'uni') {
+    if (this.systemType != 'uni' && this.systemType != 'e-service-uni') {
       const dialogRef = this.dialog.open(PdfViewerComponent, {
         width: '1200px',
         height: '100vh',
