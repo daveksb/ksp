@@ -12,7 +12,7 @@
     </div>
     <div class="bg-white p-3">
       <ksp-request-header-info
-        [requestNumber]="'112234467876543'"
+        [requestNumber]="kspRequest.requestno"
       ></ksp-request-header-info>
 
       <hr />
@@ -34,12 +34,16 @@
           </thead>
 
           <tbody>
-            <tr>
-              <td class="detail__table">1</td>
-              <td class="detail__table">x</td>
-              <td class="detail__table">x</td>
-              <td class="detail__table">x</td>
-            </tr>
+            <ng-container *ngFor="let row of approveHistory; let i = index">
+              <tr>
+                <td scope="col">{{ i + 1 }}</td>
+                <td scope="col">{{ row.firstnameth }} {{ row.lastnameth }}</td>
+                <td scope="col">{{ row.createdate | thaiDate }}</td>
+                <td scope="col">
+                  {{ mapCheckResult(row?.detail?.checkresult) }}
+                </td>
+              </tr>
+            </ng-container>
           </tbody>
         </table>
       </div>
@@ -50,7 +54,9 @@
     <div class="bg-white p-3">
       <div class="box-header">ผลการยืนยันการตรวจสอบ</div>
       <hr />
-      <ksp-consider-ksp-request></ksp-consider-ksp-request>
+      <ksp-consider-ksp-request
+        formControlName="approvement"
+      ></ksp-consider-ksp-request>
     </div>
 
     <br />

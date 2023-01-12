@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { KspPayment, KspRequest } from '@ksp/shared/interface';
 import { Location } from '@angular/common';
 import { SelfRequestService } from '@ksp/shared/service';
+import { PrintReceiptDialogComponent } from '@ksp/self-service/ui';
+import moment from 'moment';
 
 @Component({
   selector: 'self-service-payment-ktb',
@@ -13,6 +15,7 @@ import { SelfRequestService } from '@ksp/shared/service';
 export class PaymentKtbComponent implements OnInit {
   qrString = '';
   kspRequest: KspRequest = new KspRequest();
+  expireDate = moment().add(1, 'months').format('yyyy-MM-DD'); // มีอายุ 1 เดือน
 
   constructor(
     private route: ActivatedRoute,
@@ -53,6 +56,18 @@ export class PaymentKtbComponent implements OnInit {
           });
         }
       });
+    });
+  }
+
+  print() {
+    this.dialog.open(PrintReceiptDialogComponent, {
+      width: '75vw',
+      id: 'dialogTrasparent',
+      data: {
+        kspRequest: this.kspRequest,
+        qrString: this.qrString,
+        expireDate: this.expireDate,
+      },
     });
   }
 

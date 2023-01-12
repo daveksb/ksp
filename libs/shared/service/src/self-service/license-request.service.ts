@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
 import {
+  KspPayment,
   KSPRequestSearchFilter,
   SelfGetRequest,
   SelfRequest,
@@ -35,6 +36,13 @@ export class SelfRequestService {
     );
   }
 
+  closeRequest(form: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspself/ksprequestupdateisclose`,
+      form
+    );
+  }
+
   searchMyRequests(payload: KSPRequestSearchFilter): Observable<SelfRequest[]> {
     return this.http
       .post<SelfRequest[]>(
@@ -53,7 +61,7 @@ export class SelfRequestService {
     );
   }
 
-  createPayment(payload: any): Observable<any> {
+  createPayment(payload: KspPayment): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspself/ksppaymentinsert`,
       payload
