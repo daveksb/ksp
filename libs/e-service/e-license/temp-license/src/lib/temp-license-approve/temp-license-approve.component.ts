@@ -8,6 +8,7 @@ import {
 } from '@ksp/shared/dialog';
 import { KspApprovePayload, KspRequest } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
+import { getCookie } from '@ksp/shared/utility';
 
 @Component({
   selector: 'e-service-temp-license-approve',
@@ -16,10 +17,12 @@ import { ERequestService } from '@ksp/shared/service';
 })
 export class TempLicenseApproveComponent implements OnInit {
   kspRequest = new KspRequest();
+  approveHistory: any[] = [];
   form = this.fb.group({
-    result: [],
-    licenseNumber: [],
-    licenseDate: [],
+    //result: [],
+    //licenseNumber: [],
+    //licenseDate: [],
+    approvement: [],
   });
 
   constructor(
@@ -34,6 +37,7 @@ export class TempLicenseApproveComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       const id = Number(params.get('id'));
       if (id) {
+        this.getApproveHistory(`${id}`);
         this.requestService.getKspRequestById(id).subscribe((res) => {
           this.kspRequest = res;
         });
@@ -61,14 +65,43 @@ export class TempLicenseApproveComponent implements OnInit {
     });
   }
 
+  getApproveHistory(requestid: string) {
+    this.requestService.getApproveHistory(requestid).subscribe((res) => {
+      this.approveHistory = res;
+      if (res && res.length) {
+        this.approveHistory = this.approveHistory.map((h: any) => {
+          return { ...h, ...{ detail: JSON.parse(h.detail) } };
+        });
+      }
+    });
+  }
+
+  mapCheckResult(result: string) {
+    //console.log('result = ', result);
+    if (result === '1') return 'ครบถ้วน และถูกต้อง';
+    if (result === '2') return 'ขอแก้ไข / เพิ่มเติม';
+    if (result === '3') return 'ขาดคุณสมบัติ';
+    else return '';
+  }
+
   submitApi() {
+    const form: any = this.form.controls.approvement.value;
+    console.log('form  check= ', form);
+    const detail = {
+      checkresult: form.result,
+      checkdetail: {
+        approveNo: form.approveNo,
+        approveDate: form.approveDate,
+      },
+    };
+
     const payload: KspApprovePayload = {
       requestid: this.kspRequest.id,
       process: `5`,
       status: `2`,
-      detail: null,
+      detail: JSON.stringify(detail),
       systemtype: '4', // e-service
-      userid: null,
+      userid: getCookie('userId'),
       paymentstatus: null,
     };
 
