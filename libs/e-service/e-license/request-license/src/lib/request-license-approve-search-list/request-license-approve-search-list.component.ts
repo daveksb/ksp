@@ -75,7 +75,6 @@ export class RequestLicenseApproveSearchListComponent
 
   onSelect(element: any) {
     element.select = !element.select;
-
     const selectedData = this.dataSource.data.filter((item) => item.select);
 
     if (selectedData.length > 0) {
@@ -97,7 +96,7 @@ export class RequestLicenseApproveSearchListComponent
     this.canSave = false;
     const payload = {
       groupno: params.groupno,
-      process: params.process,
+      process: params.process || '6', // แสดงเฉพาะใบที่ผ่านคณะอนุกรรมการ
       status: params.status,
       careertype: params.careertype,
       createdate: params.createdate,
@@ -114,7 +113,6 @@ export class RequestLicenseApproveSearchListComponent
 
   createGroup() {
     this.router.navigate(['/request-license', 'create-group']);
-    //this.router.navigate(['/renew-license', 'create-group-list']);
   }
 
   kmv() {
