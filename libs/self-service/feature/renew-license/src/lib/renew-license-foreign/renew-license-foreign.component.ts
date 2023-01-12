@@ -277,7 +277,7 @@ export class RenewLicenseForeignComponent implements OnInit {
           if (res?.returncode === '00') {
             const requestno = res.requestno;
             localForage.setItem('requestno', requestno);
-            this.router.navigate(['/license', 'payment-channel']);
+            this.router.navigate(['/license', 'payment-channel', res.id]);
           }
         });
       }
