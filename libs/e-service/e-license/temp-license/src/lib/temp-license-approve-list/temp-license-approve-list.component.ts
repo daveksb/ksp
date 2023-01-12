@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -451,8 +451,8 @@ export class TempLicenseApproveListComponent implements AfterViewInit {
     this.form.controls.search.patchValue(this.defaultForm);
   }
 
-  goToDetail() {
-    this.router.navigate(['/temp-license', 'consider-detail']);
+  goToDetail(requestId: string) {
+    this.router.navigate(['/temp-license', 'consider-detail', requestId]);
   }
 }
 

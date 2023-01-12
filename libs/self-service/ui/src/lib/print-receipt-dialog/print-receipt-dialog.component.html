@@ -14,7 +14,8 @@
             </div>
           </div>
           <div class="text-end fs-5 text-danger">
-            ชำระเงินภายในวันที่ xxx เท่านั้น
+            ชำระเงินภายในวันที่
+            {{ data?.expireDate | thaiDate }} เท่านั้น
           </div>
         </th>
       </tr>
@@ -45,9 +46,14 @@
           </div>
         </td>
         <td class="w-50">
-          <div>ชื่อ - นามสกุล :</div>
-          <div>เลขประจำตัวประชาชน (Ref1) :</div>
-          <div>เลขที่อ้างอิง (Ref2) :</div>
+          <div>
+            ชื่อ - นามสกุล : {{ data?.kspRequest?.firstnameth }}
+            {{ data?.kspRequest?.lastnameth }}
+          </div>
+          <div>
+            เลขประจำตัวประชาชน (Ref1) : {{ data?.kspRequest?.idcardno }}
+          </div>
+          <div>เลขที่อ้างอิง (Ref2) : {{ data?.kspRequest?.requestno }}</div>
         </td>
       </tr>
       <tr>
@@ -56,7 +62,7 @@
             <div class="col text-black">จำนวนเงินตัวอักษร</div>
             <div class="col text-black">ห้าร้อยบาทถ้วน</div>
             <div class="col text-black">จำนวนเงินทั้งหมด</div>
-            <div class="col text-black">500</div>
+            <div class="col text-black">500 บาท</div>
           </div>
         </td>
       </tr>
@@ -71,13 +77,16 @@
       </tr>
     </tbody>
   </table>
-  
+
   <!-- barcode area -->
   <div class="d-flex justify-content-end mt-1">
-    <ngx-barcode [bc-value]="qrString" [bc-display-value]="true"></ngx-barcode>
+    <ngx-barcode
+      [bc-value]="data.qrString"
+      [bc-display-value]="true"
+    ></ngx-barcode>
 
     <qrcode
-      [qrdata]="qrString"
+      [qrdata]="data.qrString"
       [allowEmptyString]="true"
       [ariaLabel]="'QR Code image with the following content...'"
       [cssClass]="'center'"
@@ -91,7 +100,7 @@
       [margin]="4"
       [scale]="1"
       [title]="'A custom title attribute'"
-      [width]="125"
+      [width]="120"
     ></qrcode>
   </div>
 </div>

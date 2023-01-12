@@ -69,7 +69,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   getLicenseNo() {
     this.eRequestService.getLicenseNoTh().subscribe((res) => {
       const be = moment().add(543, 'year').year();
-      console.log('call get license no = ', res.runningno);
+      //console.log('call get license no = ', res.runningno);
       this.approveInfo = {
         approveNo: `${res.runningno}/${be}`,
         approveDate: new Date(),
