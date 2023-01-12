@@ -1,5 +1,5 @@
 import { Component, Inject, Optional } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
   MatDialog,
   MatDialogModule,
@@ -24,7 +24,6 @@ import { ThaiDatePipe } from '@ksp/shared/pipe';
 })
 export class PrintReceiptDialogComponent {
   constructor(
-    //private route: ActivatedRoute,
     public dialog: MatDialog,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
