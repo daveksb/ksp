@@ -134,6 +134,7 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
 
   save(process: string) {
     console.log(process)
+    console.log(this.id)
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -149,7 +150,7 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
         const res = await (async () => {
           if (this.id)
             return await lastValueFrom(
-              this.uniRequestService.uniRequestUpdate(this._getRequest(this.process, this.status))
+              this.uniRequestService.uniRequestUpdate(this._getRequest(process, '1'))
             );
           return await lastValueFrom(
             this.uniRequestService.uniRequestInsert(this._getRequest(process, '1'))
