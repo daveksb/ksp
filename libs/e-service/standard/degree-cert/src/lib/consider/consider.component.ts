@@ -27,14 +27,13 @@ import { FileGroup } from '@ksp/shared/interface';
 import { EUniApproveProcess } from '@ksp/shared/constant';
 
 const detailToState = (res: any) => {
-  const newRes = res?.datareturn
-    .filter(({ process, detail }: any) => ['4', '5'].includes(process) && detail)
+  const newRes = _.orderBy(res?.datareturn
+    .filter(({ process, detail }: any) => ['2', '3', '4', '5'].includes(process) && detail)
     .map((data: any) => {
       return { ...data, detail: parseJson(data?.detail)};
-    });
-  const verifyItems = _.filter(newRes, ({ detail }) => detail && detail.verify);
-  const verifyResult = verifyItems.map((data) => ({
-    isBasicValid: _.get(data.detail, 'verify.result') === '1',
+    }), ['id'], ['asc']);
+  const verifyResult = newRes.map((data: any) => ({
+    isBasicValid: checkCondition(data),
     name: mapProcess(data),
     ...data
   }));
@@ -60,6 +59,17 @@ const detailToState = (res: any) => {
     verifyResult: verifyResult,
   };
 };
+const checkCondition = (data: any) => {
+  if (data.process == '2' || data.process == '3') {
+    if (data.status == '1') {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return _.get(data.detail, 'verify.result') === '1'
+  }
+}
 const mapProcess = (data: any) => {
   let status: any = _.find(EUniApproveProcess, {
     requestType: 3,
@@ -92,6 +102,9 @@ export class ConsiderComponent implements OnInit {
         plans: [],
         plansResult: [],
         subjects: [],
+        subject1GroupName: [''],
+        subject2GroupName: [''],
+        subject3GroupName: [''],
       },
     ],
     verify: [
@@ -111,6 +124,7 @@ export class ConsiderComponent implements OnInit {
   considerCert: any = [];
   newConsiderCourses: any = [];
   newConsiderCert: any = [];
+  degreeType = '';
   choices = [
     { name: 'เห็นควรพิจารณาให้การรับรอง', value: 1 },
     { name: 'เห็นควรพิจารณาไม่ให้การรับรอง', value: 2 },
@@ -141,7 +155,7 @@ export class ConsiderComponent implements OnInit {
       .kspUniRequestProcessSelectByRequestId(this.route.snapshot.params['key'])
       .pipe(map(detailToState))
       .subscribe((res: any) => {
-        this.verifyResult = res?.verifyResult;
+        this.verifyResult = res?.verifyResult.filter((data: any) => { return data.process == '2' || data.process == '3'});
         this.considerCourses = [
           ...(res?.considerCourses || []),
           ...this.newConsiderCourses,
@@ -150,13 +164,18 @@ export class ConsiderComponent implements OnInit {
           ...(res?.considerCert || []),
           ...this.newConsiderCert,
         ];
-        console.log(res)
+
         const lastPlan = res?.verifyResult.find((data: any)=>{return data.process == '4'}) as any;
-        this.form.controls.plan.patchValue({
-          plans: lastPlan?.detail?.plan.plans,
-          plansResult: lastPlan?.detail?.plan.plansResult,
-          subjects: lastPlan?.detail?.plan.subjects
-        });
+        if (this.daftRequest.requestprocess >= '4') {
+          this.form.controls.plan.setValue({
+            plans: lastPlan?.detail?.plan.plans || [],
+            plansResult: lastPlan?.detail?.plan.plansResult,
+            subjects: lastPlan?.detail?.plan.subjects,
+            subject1GroupName: lastPlan?.detail?.plan.subject1GroupName ? lastPlan?.detail?.plan.subject1GroupName : '',
+            subject2GroupName: lastPlan?.detail?.plan.subject2GroupName ? lastPlan?.detail?.plan.subject2GroupName : '',
+            subject3GroupName: lastPlan?.detail?.plan.subject3GroupName ? lastPlan?.detail?.plan.subject3GroupName : '',
+          });
+        }
         this.form.controls.verify.patchValue(lastPlan?.detail?.verify);
       });
   }
@@ -168,6 +187,11 @@ export class ConsiderComponent implements OnInit {
         .pipe(
           map((res) => {
             this.daftRequest = res;
+            if (res.degreelevel == '1' || res.degreelevel == '2' || res.degreelevel == '3') {
+              this.degreeType = 'a';
+            } else {
+              this.degreeType = 'b';
+            }
             this.allowEdit =
               res?.requestprocess === '3' && res?.requeststatus === '1';
             return this.uniInfoService.mappingUniverSitySelectByIdWithForm(res);
@@ -177,18 +201,40 @@ export class ConsiderComponent implements OnInit {
           if (res?.returncode !== 98) {
             this.stepData = res;
             this.requestNumber = res?.requestNo;
+            if (this.daftRequest.requestprocess == '3') {
+              if (this.daftRequest.degreelevel == '1' || 
+                this.daftRequest.degreelevel == '2' ||
+                this.daftRequest.degreelevel == '3') {
+                  this.form.controls.plan.patchValue({
+                    plansResult: [],
+                    plans: res?.step2?.plan1.plans || [],
+                    subjects: res?.step2?.plan1.subjects,
+                    subject1GroupName: res?.step2?.plan1.subject1GroupName,
+                    subject2GroupName: res?.step2?.plan1.subject2GroupName,
+                    subject3GroupName: res?.step2?.plan1.subject3GroupName,
+                  });
+              } else {
+                this.form.controls.plan.patchValue({
+                  plansResult: [],
+                  plans: res?.step2?.plan2.plans || [],
+                  subjects: res?.step2?.plan2.subjects,
+                  subject1GroupName: res?.step2?.plan2.subject1GroupName,
+                  subject2GroupName: res?.step2?.plan2.subject2GroupName,
+                  subject3GroupName: res?.step2?.plan2.subject3GroupName,
+                });
+              }
+            }
             this.form.patchValue({
-              step1: res.step1,
-              plan: res?.step2?.plan1 || res?.step2?.plan2,
+              step1: res.step1
             });
           }
+          this.getHistory();
         });
     }
   }
 
   ngOnInit(): void {
     this.getDegreeCert();
-    this.getHistory();
   }
 
   cancel() {
@@ -204,6 +250,7 @@ export class ConsiderComponent implements OnInit {
       ...this.form.value,
       considerCourses: this.newConsiderCourses,
       considerCert: this.newConsiderCert,
+      oldPlan: this.stepData.step2
     });
     const payload: any = {
       systemtype: '3',
@@ -383,14 +430,36 @@ export class ConsiderComponent implements OnInit {
         : null,
       tokenkey: getCookie('userToken') || null,
     };
-    const newPlans = this.form.controls.plan.getRawValue();
+    const newPlans = this.form.controls.plan.getRawValue() as any;
     if (['1', '2', '3', '4'].includes(this.daftRequest.degreelevel)) {
-      reqBody['coursestructure'] = JSON.stringify(newPlans?.plansResult);
+      reqBody['coursestructure'] = JSON.stringify(newPlans?.plans.map((data: any, index: any) => {
+        if (newPlans.plansResult[index]?.consider) {
+          data.year = newPlans.plansResult[index].year;
+          data.student = newPlans.plansResult[index].student;
+        }
+        return data;
+      }));
       reqBody['courseplan'] = JSON.stringify(newPlans?.subjects);
     } else {
-      reqBody['coursestructure'] = JSON.stringify(newPlans?.plansResult);
-      reqBody['courseplan'] = JSON.stringify(newPlans?.subjects);
+      reqBody['coursestructure'] = JSON.stringify(newPlans?.plans.map((data: any, index: any) => {
+        if (newPlans.plansResult[index]?.consider) {
+          data.year = newPlans.plansResult[index].year;
+          data.student1 = newPlans.plansResult[index].student1;
+          data.student2 = newPlans.plansResult[index].student2;
+          data.student3 = newPlans.plansResult[index].student3;
+        }
+        return data;
+      }));
+      reqBody['courseplan'] = JSON.stringify({
+        subjects: newPlans?.subjects, 
+        subjectgroupname: {
+          subject1GroupName: newPlans?.subject1GroupName,
+          subject2GroupName: newPlans?.subject2GroupName,
+          subject3GroupName: newPlans?.subject3GroupName
+        }
+      });
     }
+
     reqBody['id'] = this.daftRequest.id;
     return reqBody;
   }

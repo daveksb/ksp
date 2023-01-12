@@ -15,9 +15,17 @@ export class CourseConsiderComponent extends KspFormBaseComponent implements OnI
   totalCredit = 0;
   totalStudent = 0;
   totalStudentResult = 0;
+  creditSums: number[] = [0, 0, 0];
+  yearSums: number[] = [0, 0, 0, 0, 0, 0];
+  planSums: number[] = [0, 0, 0, 0];
+  newPlanSums: number[] = [0, 0, 0];
   contactForm?: FormGroup;
+  @Input() degreeType = '';
 
   override form = this.fb.group({
+    subject1GroupName: [''],
+    subject2GroupName: [''],
+    subject3GroupName: [''],
     plans: this.fb.array([this.newPlan(1)]),
     plansResult: this.fb.array([this.newPlanResult(1)]),
     subjects: this.fb.array([this.newSubject('วิชาการศึกษาทั่วไป')]),
@@ -34,7 +42,11 @@ export class CourseConsiderComponent extends KspFormBaseComponent implements OnI
     );
   }
   ngOnInit(): void {
-    this.addData();
+    if (this.degreeType == 'a') {
+      this.addData();
+    } else {
+      this.addDataTypeB();
+    }
     this.calculateSum();
   }
 
@@ -44,18 +56,49 @@ export class CourseConsiderComponent extends KspFormBaseComponent implements OnI
 
   calculateSum() {
     this.form.valueChanges.pipe(debounceTime(500)).subscribe((res) => {
-      if (res.subjects) {
-        this.totalCredit = this.sum(res.subjects, 'credit');
-      }
-
-      if (res.plans) {
-        this.totalStudent = this.sum(res.plans, 'student');
-      }
-
-      if (res.plansResult) {
-        this.totalStudentResult = this.sum(res.plansResult, 'student');
+      if (this.degreeType == 'a') {
+        if (res.subjects) {
+          this.totalCredit = this.sum(res.subjects, 'credit');
+        }
+  
+        if (res.plans) {
+          this.totalStudent = this.sum(res.plans, 'student');
+        }
+  
+        if (res.plansResult) {
+          this.totalStudentResult = this.sum(res.plansResult, 'student');
+        }
+      } else {
+        if (res.subjects) {
+          this.creditSums[0] = this.creditSum(res.subjects, 'credit1');
+          this.creditSums[1] = this.creditSum(res.subjects, 'credit2');
+          this.creditSums[2] = this.creditSum(res.subjects, 'credit3');
+        }
+        if (res.plans) {
+          this.planSums[0] = this.creditSum(res.plans, 'student1');
+          this.planSums[1] = this.creditSum(res.plans, 'student2');
+          this.planSums[2] = this.creditSum(res.plans, 'student3');
+          this.planSums[3] =
+            this.planSums[0] + this.planSums[1] + this.planSums[2];
+          const results = this.form.controls.plansResult.getRawValue() as any;
+          this.newPlanSums[0] = results.reduce((p: any, c: any) => p + Number(c['student1']), 0);
+          this.newPlanSums[1] = results.reduce((p: any, c: any) => p + Number(c['student2']), 0);
+          this.newPlanSums[2] = results.reduce((p: any, c: any) => p + Number(c['student3']), 0);
+          res.plans.forEach((i, index) => {
+            const { label, year, ...newData } = i as any;
+            let sum = 0;
+            for (const property in newData) {
+              sum += Number(newData[property]);
+            }
+            this.yearSums[index] = sum;
+          });
+        }
       }
     });
+  }
+
+  creditSum(source: any[], data: string): number {
+    return source.reduce((p, c) => p + Number(c[data]), 0);
   }
 
   get plans() {
@@ -68,6 +111,37 @@ export class CourseConsiderComponent extends KspFormBaseComponent implements OnI
 
   get subjects() {
     return this.form.controls['subjects'];
+  }
+
+  addDataTypeB() {
+    const subjects = [
+      this.newSubject('วิชาชีพครู : ภาคทฤษฎีและปฏิบัติ'),
+      this.newSubject('วิชาชีพครู : ฝึกปฏิบัติวิชาชีพระหว่างเรียน'),
+      this.newSubject(
+        'วิชาชีพครู : ปฏิบัติการสอนในสถานศึกษา / การบริหารสถานศึกษา'
+      ),
+      this.newSubject('วิชาเอกแรก'),
+      this.newSubject('วิชาเอกที่สองหรือวิชาโท'),
+    ];
+
+    const plans = [
+      this.newPlan(2),
+      this.newPlan(3),
+      this.newPlan(4),
+      this.newPlan(5),
+    ];
+
+    const plansResult = [
+      this.newPlanResult(2),
+      this.newPlanResult(3),
+      this.newPlanResult(4),
+      this.newPlanResult(5),
+    ];
+
+    plans.forEach((p) => this.plans.push(p));
+    plansResult.forEach((pr) => this.plansResult.push(pr));
+    subjects.forEach((s) => this.subjects.push(s));
+    if (this.mode === 'view') this.form.disable();
   }
 
   addData() {
@@ -108,6 +182,9 @@ export class CourseConsiderComponent extends KspFormBaseComponent implements OnI
       label: 'แผนฯ ปีที่ ' + year,
       student: [''],
       year: [''],
+      student1: [''],
+      student2: [''],
+      student3: [''],
     });
   }
 
@@ -116,7 +193,10 @@ export class CourseConsiderComponent extends KspFormBaseComponent implements OnI
       label: 'แผนฯ ปีที่ ' + year,
       student: [''],
       year: [''],
-      consider: [false]
+      consider: [false],
+      student1: [''],
+      student2: [''],
+      student3: [''],
     });
   }
 
@@ -124,6 +204,9 @@ export class CourseConsiderComponent extends KspFormBaseComponent implements OnI
     return this.fb.group({
       label: data,
       credit: [''],
+      credit1: [''],
+      credit2: [''],
+      credit3: [''],
     });
   }
 }

@@ -259,4 +259,14 @@ export class EUniService {
       }
     );
   }
+
+  genDegreeApproveCode(data: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/gendegreeapprovecode`,
+      {
+        ...data,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
 }

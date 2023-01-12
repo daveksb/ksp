@@ -2,11 +2,11 @@
   <div class="bg-light px-3 py-2">
     <div class="box-header text-primary">ผลการรับรอง</div>
 
-    <div class="d-flex my-2">
+    <div class="d-flex my-2" *ngIf="form.value.approvedegreeCode">
       <div
         class="border border-success py-1 px-2 w-auto rounded-pill bg-success bg-opacity-10"
       >
-        <div class="d-flex align-items-center" *ngIf="form.value.approvedegreeCode">
+        <div class="d-flex align-items-center">
           <i class="bi bi-check-circle fs-5 text-success me-2"></i>
           <label class="text-success fs-5">ครบถ้วนถูกต้อง</label>
         </div>

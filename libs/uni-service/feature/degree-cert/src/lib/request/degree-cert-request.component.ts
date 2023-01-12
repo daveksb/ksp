@@ -133,8 +133,6 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
   }
 
   save(process: string) {
-    console.log(process)
-    console.log(this.id)
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -256,7 +254,14 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
         ? JSON.stringify(step2?.plan2?.plans)
         : null;
       reqBody['courseplan'] = step2?.plan2?.subjects
-        ? JSON.stringify(step2?.plan2?.subjects)
+        ? JSON.stringify({
+          subjects: step2?.plan2?.subjects, 
+          subjectgroupname: {
+            subject1GroupName: step2?.plan2?.subject1GroupName,
+            subject2GroupName: step2?.plan2?.subject2GroupName,
+            subject3GroupName: step2?.plan2?.subject3GroupName
+          }
+        })
         : null;
     }
     if (this.id) {
