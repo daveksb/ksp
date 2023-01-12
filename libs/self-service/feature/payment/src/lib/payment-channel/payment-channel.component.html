@@ -13,7 +13,9 @@
     <div class="content__container">
       <div class="header__label">รายการค่าธรรมเนียม</div>
       <div class="content__label">
-        กรุณาชำระเงินก่อนวันที่<span class="date__label">25 ต.ค. 2565</span>
+        กรุณาชำระเงินก่อนวันที่<span class="date__label">{{
+          expireDate | thaiDate
+        }}</span>
       </div>
       <div class="table-responsive">
         <table class="table">
@@ -109,7 +111,9 @@
       <div class="header__label">พิมพ์แบบชำระเงิน</div>
       <div class="d-flex justify-content-between align-items-center mb-2">
         <div class="content__label">
-          กรุณาชำระเงินภายในวันที่<span class="date__label">25 ต.ค. 2565</span>
+          กรุณาชำระเงินภายในวันที่<span class="date__label">{{
+            expireDate | thaiDate
+          }}</span>
         </div>
 
         <button type="button" class="btn btn-sm btn-primary" (click)="print()">

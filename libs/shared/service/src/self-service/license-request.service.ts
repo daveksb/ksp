@@ -36,6 +36,13 @@ export class SelfRequestService {
     );
   }
 
+  closeRequest(form: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspself/ksprequestupdateisclose`,
+      form
+    );
+  }
+
   searchMyRequests(payload: KSPRequestSearchFilter): Observable<SelfRequest[]> {
     return this.http
       .post<SelfRequest[]>(
