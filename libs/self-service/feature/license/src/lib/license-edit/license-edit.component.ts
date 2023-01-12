@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -306,7 +306,14 @@ export class LicenseEditComponent implements OnInit {
 
     this.requestService.cancelRequest(payload).subscribe((res) => {
       //console.log('Cancel request  = ', res);
-      this.cancelCompleted();
+      const closePayload = {
+        id: `${this.requestId}`,
+        isclose: '1',
+      };
+      console.log('close request = ');
+      this.requestService.closeRequest(closePayload).subscribe((res) => {
+        this.cancelCompleted();
+      });
     });
   }
 
