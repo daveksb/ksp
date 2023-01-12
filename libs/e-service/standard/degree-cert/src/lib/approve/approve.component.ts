@@ -163,7 +163,7 @@ export class ApproveComponent implements OnInit {
           ...(res?.considerCourses || []),
           ...this.newConsiderCourses
         ];
-        const lastPlan = _.last(res?.verifyResult.filter((data: any)=>{return data.process == 5})) as any;
+        const lastPlan = res?.verifyResult.find((data: any)=>{return data.process == 5}) as any;
         this.form.controls.verify.patchValue(lastPlan?.detail?.verify);
         this.form.controls.approveData.patchValue(lastPlan?.detail?.approveData);
       });
