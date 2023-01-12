@@ -150,7 +150,8 @@ export class ConsiderComponent implements OnInit {
           ...(res?.considerCert || []),
           ...this.newConsiderCert,
         ];
-        const lastPlan = _.last(res?.verifyResult) as any;
+        console.log(res)
+        const lastPlan = res?.verifyResult.find((data: any)=>{return data.process == '4'}) as any;
         this.form.controls.plan.patchValue({
           plans: lastPlan?.detail?.plan.plans,
           plansResult: lastPlan?.detail?.plan.plansResult,
