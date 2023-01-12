@@ -352,6 +352,52 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       schoolid: this.schoolId,
     };
 
+    const fileinfo = JSON.parse(element.fileinfo || '');
+    const tab3 = fileinfo['tab3'];
+    const tab4 = fileinfo['tab4'];
+    const tab5 = fileinfo['tab5'];
+    const tab6 = fileinfo['tab6'];
+
+    //teacher
+    const file1_th = tab6[0];
+
+    const file2_th = tab6[0];
+    const file3_th = tab6[0];
+
+    const file4_th = tab3[2];
+    const file5_th = tab3[0];
+    const file6_th = tab3[1];
+    const file7_1_th = tab3[3];
+    const file7_2_th = tab3[4];
+    const file8_th = tab4[1];
+    const file9_th = tab4[2];
+    const file10_th = tab4[0];
+    const file11_th = tab6[1];
+    const file12_th = tab6[5];
+
+    const file13_th = tab6[0];
+
+    //manager
+    const file7_mgr = tab3[3];
+    const file8_mgr = tab4[1];
+    const file10_mgr = tab4[0];
+    const file11_mgr = tab6[1];
+    const file12_mgr = tab6[5];
+    const file13_mgr = tab6[5];
+    const file14_mgr = tab6[0];
+
+    //foreign
+    const file2_frgn = tab3[3];
+    const file3_frgn = tab4[1];
+    const file4_frgn = tab4[0];
+    const file5_frgn = tab6[1];
+    const file6_frgn = tab6[5];
+    const file7_frgn = tab6[5];
+    const file8_frgn = tab6[0];
+
+    console.log('fileinfo = ', tab6);
+    //console.log('fileid = ', file1[0].fileid);
+
     this.schoolInfoService.getSchoolInfo(payload).subscribe((res: any) => {
       const schoolname = res.schoolname;
       const bureauname = res.bureauname;

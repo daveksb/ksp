@@ -7,6 +7,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -34,6 +35,7 @@ const routes: Routes = [
     TopNavComponent,
     MatTableModule,
     MatPaginatorModule,
+    ReactiveFormsModule,
   ],
   declarations: [TempLicenseReportComponent],
   exports: [TempLicenseReportComponent],
