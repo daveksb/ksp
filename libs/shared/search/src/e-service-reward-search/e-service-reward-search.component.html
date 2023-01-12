@@ -33,7 +33,7 @@
     <div class="col">
       <label class="form-label">สถานะการดำเนินการ</label>
       <select class="form-select" formControlName="status">
-        <option value="" disabled hidden selected>กรุณาเลือก</option>
+        <option value="null" disabled hidden selected>กรุณาเลือก</option>
         <option *ngFor="let s of statusList" [value]="s.id">
           {{ s.sname }}
         </option>

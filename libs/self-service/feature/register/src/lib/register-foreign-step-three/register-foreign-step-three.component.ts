@@ -100,8 +100,8 @@ export class RegisterForeignStepThreeComponent implements OnInit {
       width: '600px',
       data: {
         title: `Success`,
-        subTitle: `Register Successfully`,
-        btnLabel: `Login`,
+        subTitle: `Please check your application status via email`,
+        btnLabel: `Back to homepage`,
       },
     });
   }

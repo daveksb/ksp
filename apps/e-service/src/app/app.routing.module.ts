@@ -137,7 +137,7 @@ const routes: EthicsCustomRoute[] = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'self',
+    path: 'self-user',
     data: {
       menuConfig: eLicenseMenu,
       headerLabel: 'ระบบใบอนุญาตประกอบวิชาชีพทางการศึกษา',

@@ -21,8 +21,6 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SubstitueLicenseConfirmComponent } from './substitue-license-confirm/substitue-license-confirm.component';
 import { ValidateKspRequestComponent } from '@ksp/e-service/e-license/approve-ksp-request';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { SubstituteLicenseConsiderListComponent } from './substitute-license-consider-list/substitute-license-consider-list.component';
-import { SubstituteLicenseConsiderDetailComponent } from './substitute-license-consider-detail/substitute-license-consider-detail.component';
 
 export const routes: Route[] = [
   {
@@ -49,14 +47,6 @@ export const routes: Route[] = [
       {
         path: 'approve-confirm/:id',
         component: SubstitueLicenseConfirmComponent,
-      },
-      {
-        path: 'consider-list',
-        component: SubstituteLicenseConsiderListComponent,
-      },
-      {
-        path: 'consider-detail',
-        component: SubstituteLicenseConsiderDetailComponent,
       },
     ],
   },
@@ -87,14 +77,7 @@ export const routes: Route[] = [
     SubstituteLicenseListComponent,
     SubstituteLicenseDetailComponent,
     SubstitueLicenseConfirmComponent,
-    SubstituteLicenseConsiderListComponent,
-    SubstituteLicenseConsiderDetailComponent,
   ],
-  exports: [
-    SubstituteLicenseListComponent,
-    SubstituteLicenseDetailComponent,
-    SubstituteLicenseConsiderListComponent,
-    SubstituteLicenseConsiderDetailComponent,
-  ],
+  exports: [SubstituteLicenseListComponent, SubstituteLicenseDetailComponent],
 })
 export class EServiceELicenseSubstituteLicenseModule {}
