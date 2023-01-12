@@ -361,7 +361,8 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     //teacher
     const file1_th = tab6[0];
 
-    const file2_th = tab6[0];
+    const file2_th = true;
+    //const file2_th = tab6[0];
     const file3_th = tab6[0];
 
     const file4_th = tab3[2];
@@ -458,6 +459,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
             graduateDate2,
             nameen,
             checkbox1,
+            file2_th
           },
         },
       });

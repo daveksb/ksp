@@ -76,7 +76,7 @@ interface refundConfirmInfo {
 
 const data: refundConfirmInfo[] = [
   {
-    order: '-',
+    order: '',
     receiptno: '-',
     refid: '-',
     idcardno: '-',
