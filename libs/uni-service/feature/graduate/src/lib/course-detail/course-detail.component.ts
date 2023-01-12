@@ -178,7 +178,7 @@ export class CourseDetailComponent implements OnInit {
 
   checkAdmission(row: any) {
     const yearnow = (new Date().getFullYear() + 543);
-    return (Number(row.year)+3) <= yearnow 
+    return (Number(row.year)+3) >= yearnow
           && row.admissioncount < row.student;
   }
 
