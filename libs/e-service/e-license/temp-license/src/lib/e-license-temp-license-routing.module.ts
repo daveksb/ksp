@@ -51,7 +51,7 @@ const routes: Routes = [
         component: TempLicenseApproveListComponent,
       },
       {
-        path: 'consider-detail',
+        path: 'consider-detail/:id',
         component: TempLicenseApproveComponent,
       },
     ],
