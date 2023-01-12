@@ -100,6 +100,29 @@ export const EUniApproveProcess: UniApproveProcess[] = [
       { sname: 'ส่งคืนหลักสูตร', id: 4, ename: 'ส่งคืนหลักสูตร' },
     ],
   },
+  {
+    requestType: 3,
+    processId: 6,
+    processName: 'ออกรหัสรับรอง',
+    status: [
+      {
+        sname: 'เห็นควรพิจารณาให้การรับรอง',
+        id: 1,
+        ename: 'เห็นควรพิจารณาให้การรับรอง',
+      },
+      {
+        sname: 'เห็นควรพิจารณาไม่ให้การรับรอง',
+        id: 2,
+        ename: 'เห็นควรพิจารณาไม่ให้การรับรอง',
+      },
+      {
+        sname: 'ให้สถาบันแก้ไข / เพิ่มเติม',
+        id: 3,
+        ename: 'ให้สถาบันแก้ไข / เพิ่มเติม',
+      },
+      { sname: 'ส่งคืนหลักสูตร', id: 4, ename: 'ส่งคืนหลักสูตร' },
+    ],
+  }
 ];
 export const UniAdmissionStatus: ListData[] = [
   {

@@ -50,6 +50,16 @@
         {{ saveButtonLabel }}
       </button>
     </ng-container>
+    <ng-container *ngIf="showAllPageTempsave">
+      <button
+          [disabled]="disableTempSaveButton"
+          (click)="tempSaveClicked.emit(true)"
+          type="button"
+          class="btn btn-success ms-2"
+        >
+          บันทึกชั่วคราว
+      </button>
+    </ng-container>
   </div>
 
   <div class="g-col-4 d-flex align-items-center justify-content-end">

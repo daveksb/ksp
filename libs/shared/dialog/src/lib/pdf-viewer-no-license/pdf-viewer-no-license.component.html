@@ -76,7 +76,7 @@
       <div class="d-flex justify-content-center">
         <img *ngIf="selected.type !== 'pdf'" [src]="selected.src" />
       </div>
-      <div *ngIf="index !== null" class="bg-white mt-3">
+      <div *ngIf="index !== null && data.systemType !== 'uni'" class="bg-white mt-3">
         <hr />
         <e-service-license-check
           [choices]="verifyChoice"
@@ -86,7 +86,7 @@
     </ng-container>
   </ng-container>
 </ng-container>
-<div class="d-flex justify-content-center mt-3">
+<div class="d-flex justify-content-center mt-3" *ngIf="data.systemType !== 'uni'">
   <button
     *ngIf="selected"
     [mat-dialog-close]="form.value"

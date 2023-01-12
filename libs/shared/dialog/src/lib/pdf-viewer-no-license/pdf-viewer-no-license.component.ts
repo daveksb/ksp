@@ -84,7 +84,7 @@ export class PdfViewerNoLicenseComponent implements OnInit {
         }
       });
     } else {
-      this.fileService.downloadSchoolFile({ id }).subscribe((res: any) => {
+      this.fileService.downloadEUniFile({ id }).subscribe((res: any) => {
         const extension = this.pdfList[index].type;
         const src = atob(res?.filedata ?? '');
         if (extension == 'pdf') {

@@ -35,6 +35,7 @@ export class DegreeCertStepFourComponent
   implements OnInit, OnChanges
 {
   @Input() formType = 'a';
+  @Input() systemType = '';
   step4Incorrect = null;
   // step4Incorrect = [
   //   'ไม่ครบถ้วน และไม่ถูกต้อง',
