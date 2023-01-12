@@ -101,7 +101,16 @@ export const menu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/file-earmark-text-fill.svg',
     label: 'รายงาน',
-    path: '/temp-license/**',
+    path: '',
+    subMenuName: 'report',
+    isExpanded: false,
+    subMenu: [
+      {
+        label:
+          'รายงานสถิติผู้ขอรับหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ',
+        path: '/report/temp-license',
+      },
+    ],
   },
   {
     icon: 'assets/images/icon-sidenav/gear-fill.svg',

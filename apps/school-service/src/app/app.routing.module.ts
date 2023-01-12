@@ -90,7 +90,14 @@ const routes: Routes = [
       ),
     canActivate: [AuthGuard],
   },
-
+  {
+    path: 'report',
+    loadChildren: () =>
+      import('@ksp/school-service/feature/report').then(
+        (m) => m.SchoolServiceFeatureReportModule
+      ),
+    canActivate: [AuthGuard],
+  },
   { path: '**', component: SchoolServiceLoginComponent },
 ];
 
