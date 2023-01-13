@@ -1,16 +1,16 @@
 <div class="container-sm p-0">
   <div class="card justify-content-center">
-    <div class="d-flex flex-row justify-content-between px-2 gap-3">
+    <div class="d-flex flex-row justify-content-between px-2">
       <div class="d-flex flex-column">
         <div class="d-flex flex-row">
           <img
             src="/assets/images/KSP_LOGO.png"
-            style="width: 75px; height: 75px"
-            class="me-2 mt-1"
+            style="width: 3.75rem; height: 3.75rem"
+            class="me-2 mt-2"
           />
           <div class="d-flex flex-column">
-            <div class="blue__text fs-4">คุรุสภา</div>
-            <div class="form-label blue__text">
+            <div class="blue__text fs-5">คุรุสภา</div>
+            <div class="form-label blue__text fs-6">
               The Teachers' Council of Thailand
             </div>
             <div class="blue__text">
@@ -27,26 +27,26 @@
           </div>
         </div>
 
-        <div class="d-flex flex-row align-items-center">
+        <div class="d-flex flex-row align-items-center text__normal">
           <div class="d-flex flex-column me-3">
             <div class="blue__text">เลขที่</div>
             <div class="blue__text">License No.</div>
           </div>
           {{ license.licenseno || '-' }}
         </div>
-        <div class="text-center text-black form-label">
+        <div class="text-center fs-6">
           {{ SelfPrefixTh[+(license.prefixth || 0)] || '-' }}
           {{ license.firstnameth }}
           {{ license.lastnameth }}
         </div>
-        <div class="text-center text-black form-label">
+        <div class="text-center fs-6">
           {{ SelfPrefixEn[+(license.prefixen || 0)] || '-' }}
           {{ license.firstnameen }}
           {{ license.lastnameen }}
         </div>
 
         <div class="d-flex flex-row justify-content-between">
-          <div class="d-flex flex-row align-items-center">
+          <div class="d-flex flex-row align-items-center text__normal">
             <div class="flex-column me-2">
               <div class="blue__text">เลขสมาชิก</div>
               <div class="blue__text">Member No.</div>
@@ -61,19 +61,19 @@
 
         <div class="d-flex flex-row justify-content-evenly">
           <div class="d-flex flex-column">
-            <div class="text-black">
+            <div class="text__normal">
               {{ (license.licensestartdate | engDate) || 'dd/mm/yyyy' }}
             </div>
-            <div class="text-black">
+            <div class="text__normal">
               {{ (license.licensestartdate | thaiDate) || 'วว/ดด/ปปปป' }}
             </div>
           </div>
 
           <div class="d-flex flex-column">
-            <div class="text-black">
+            <div class="text__normal">
               {{ (license.licensestartdate | engDate) || 'dd/mm/yyyy' }}
             </div>
-            <div class="text-black">
+            <div class="text__normal">
               {{ (license.licenseenddate | thaiDate) || 'วว/ดด/ปปปป' }}
             </div>
           </div>
@@ -91,11 +91,11 @@
       <div
         class="d-flex flex-column justify-content-between align-items-center"
       >
-        <div class="d-flex flex-column gap-2 mt-1">
+        <div class="d-flex flex-column gap-1 mt-2">
           <ng-content></ng-content>
 
           <div class="bg-white w-100">
-            <div class="p-2 text-center">barcode</div>
+            <div class="p-2 text-center text__normal">barcode</div>
           </div>
         </div>
 
