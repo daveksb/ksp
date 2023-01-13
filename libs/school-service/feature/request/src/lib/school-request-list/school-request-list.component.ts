@@ -711,7 +711,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       const provincename = res.provincename;
       const zipcode = res.zipcode;
       const telphone = res.telphone;
-      const schoolemail = res.schoolemail;
+      const schoolemail = res.email;
       //console.log(id12);
       this.dialog.open(PdfRenderComponent, {
         width: '1200px',
