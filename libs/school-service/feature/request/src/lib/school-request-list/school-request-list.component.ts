@@ -457,161 +457,141 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     }
 
     const fileinfo = JSON.parse(element.fileinfo || '');
-    /* let file1_thai = false;
+
+    const tab3 = fileinfo['tab3'];
+    const tab4 = fileinfo['tab4'];
+    const tab5 = fileinfo['tab5'];
+    const tab6 = fileinfo['tab6'];
+
+    //teacher
+    const file1_th = tab6[0];
+    let file1_thai = false;
+    if (file1_th.length > 0) {
+      file1_thai = true;
+    }
+
     const file2_thai = true;
+
+    const file3_th = tab6[6];
+
+    const file4_th = tab3[2];
     let file4_thai = false;
+    if (file4_th.length > 0) {
+      file4_thai = true;
+    }
+
+    const file5_th = tab3[0];
     let file5_thai = false;
+    if (file5_th.length > 0) {
+      file5_thai = true;
+    }
+
+    const file6_th = tab3[1];
     let file6_thai = false;
+    if (file6_th.length > 0) {
+      file6_thai = true;
+    }
+
+    const file7_1_th = tab3[3];
     let file7_1_thai = false;
+    if (file7_1_th.length > 0) {
+      file7_1_thai = true;
+    }
+
+    const file7_2_th = tab3[4];
     let file7_2_thai = false;
+    if (file7_2_th.length > 0) {
+      file7_2_thai = true;
+    }
+
+    const file8_th = tab4[1];
     let file8_thai = false;
+    if (file8_th.length > 0) {
+      file8_thai = true;
+    }
+
+    const file9_th = tab4[2];
     let file9_thai = false;
+    if (file9_th.length > 0) {
+      file9_thai = true;
+    }
+
+    const file10_th = tab4[0];
     let file10_thai = false;
+    if (file10_th.length > 0) {
+      file10_thai = true;
+    }
+
+    const file11_th = tab6[1];
     let file11_thai = false;
+    if (file11_th.length > 0) {
+      file11_thai = true;
+    }
+
+    const file12_th = tab6[5];
     let file12_thai = false;
+    if (file12_th.length > 0) {
+      file12_thai = true;
+    }
 
+    const file13_th = tab6[6];
+
+    //manager
+    const file7_mgr = tab6[6];
+
+    const file8_mgr = tab4[1];
     let file8_manager = false;
+    if (file8_mgr.length > 0) {
+      file8_manager = true;
+    }
+
+    const file10_mgr = tab6[6];
+    const file11_mgr = tab6[6];
+    const file12_mgr = tab6[6];
+
+    const file13_mgr = tab6[5];
     let file13_manager = false;
+    if (file13_mgr.length > 0) {
+      file13_manager = true;
+    }
 
+    const file14_mgr = tab6[6];
+
+    //foreign
+    const file2_frgn = tab3[0];
     let file2_foreign = false;
+    if (file2_frgn.length > 0) {
+      file2_foreign = true;
+    }
+
+    const file3_frgn = tab3[1];
     let file3_foreign = false;
+    if (file3_frgn.length > 0) {
+      file3_foreign = true;
+    }
+
+    const file4_frgn = tab6[6];
+
+    const file5_frgn = tab3[4];
     let file5_foreign = false;
+    if (file5_frgn.length > 0) {
+      file5_foreign = true;
+    }
+
+    const file6_frgn = tab6[6];
+
+    const file7_frgn = tab4[1];
     let file7_foreign = false;
-    let file8_foreign = false; */
+    if (file7_frgn.length > 0) {
+      file7_foreign = true;
+    }
 
-    /* if (fileinfo) {
-      const tab3 = fileinfo['tab3'];
-      const tab4 = fileinfo['tab4'];
-      const tab5 = fileinfo['tab5'];
-      const tab6 = fileinfo['tab6'];
+    const file8_frgn = tab6[5];
+    let file8_foreign = false;
+    if (file8_frgn.length > 0) {
+      file8_foreign = true;
+    }
 
-      //teacher
-      const file1_th = tab6[0];
-
-      if (file1_th.length > 0) {
-        file1_thai = true;
-      }
-
-      const file3_th = tab6[6];
-
-      const file4_th = tab3[2];
-
-      if (file4_th.length > 0) {
-        file4_thai = true;
-      }
-
-      const file5_th = tab3[0];
-
-      if (file5_th.length > 0) {
-        file5_thai = true;
-      }
-
-      const file6_th = tab3[1];
-
-      if (file6_th.length > 0) {
-        file6_thai = true;
-      }
-
-      const file7_1_th = tab3[3];
-
-      if (file7_1_th.length > 0) {
-        file7_1_thai = true;
-      }
-
-      const file7_2_th = tab3[4];
-
-      if (file7_2_th.length > 0) {
-        file7_2_thai = true;
-      }
-
-      const file8_th = tab4[1];
-
-      if (file8_th.length > 0) {
-        file8_thai = true;
-      }
-
-      const file9_th = tab4[2];
-
-      if (file9_th.length > 0) {
-        file9_thai = true;
-      }
-
-      const file10_th = tab4[0];
-
-      if (file10_th.length > 0) {
-        file10_thai = true;
-      }
-
-      const file11_th = tab6[1];
-
-      if (file11_th.length > 0) {
-        file11_thai = true;
-      }
-
-      const file12_th = tab6[5];
-
-      if (file12_th.length > 0) {
-        file12_thai = true;
-      }
-
-      const file13_th = tab6[6];
-
-      //manager
-      const file7_mgr = tab6[6];
-
-      const file8_mgr = tab4[1];
-
-      if (file8_mgr.length > 0) {
-        file8_manager = true;
-      }
-
-      const file10_mgr = tab6[6];
-      const file11_mgr = tab6[6];
-      const file12_mgr = tab6[6];
-
-      const file13_mgr = tab6[5];
-
-      if (file13_mgr.length > 0) {
-        file13_manager = true;
-      }
-
-      const file14_mgr = tab6[6];
-
-      //foreign
-      const file2_frgn = tab3[0];
-
-      if (file2_frgn.length > 0) {
-        file2_foreign = true;
-      }
-
-      const file3_frgn = tab3[1];
-
-      if (file3_frgn.length > 0) {
-        file3_foreign = true;
-      }
-
-      const file4_frgn = tab6[6];
-
-      const file5_frgn = tab3[4];
-
-      if (file5_frgn.length > 0) {
-        file5_foreign = true;
-      }
-
-      const file6_frgn = tab6[6];
-
-      const file7_frgn = tab4[1];
-
-      if (file7_frgn.length > 0) {
-        file7_foreign = true;
-      }
-
-      const file8_frgn = tab6[5];
-
-      if (file8_frgn.length > 0) {
-        file8_foreign = true;
-      }
-    } */
     //console.log('fileinfo = ', file1_th);
     //console.log('fileid = ', file1[0].fileid);
 
@@ -758,7 +738,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
             reasonDetail,
             reasonDetail2,
             reasonDetail3,
-            /* file1_thai,
+            file1_thai,
             file2_thai,
             file4_thai,
             file5_thai,
@@ -776,7 +756,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
             file3_foreign,
             file5_foreign,
             file7_foreign,
-            file8_foreign, */
+            file8_foreign,
             forbid1_1,
             forbid2_1,
             forbid3_1,
