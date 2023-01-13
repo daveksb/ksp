@@ -322,7 +322,9 @@
             ></ksp-form-hiring-info>
           </div>
 
-          <ksp-form-temp-license-number></ksp-form-temp-license-number>
+          <ksp-form-temp-license-number
+            [tempLicenseHistory]="tempLicenseHistory"
+          ></ksp-form-temp-license-number>
 
           <ksp-form-multi-attachment
             [uniqueTimestamp]="uniqueNo"

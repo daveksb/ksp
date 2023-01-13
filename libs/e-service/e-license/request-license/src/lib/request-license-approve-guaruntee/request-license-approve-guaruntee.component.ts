@@ -117,7 +117,9 @@ export class RequestLicenseApproveGuarunteeComponent
 
     dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/request-license', 'kmv']);
+        this.router.navigate(['/request-license', 'kmv'], {
+          queryParams: { group: this.groupNo },
+        });
       }
     });
   }
@@ -167,10 +169,10 @@ export class RequestLicenseApproveGuarunteeComponent
       },
     });
 
-    dialog.componentInstance.completed.subscribe((res) => {
+    /* dialog.componentInstance.completed.subscribe((res) => {
       if (res) {
         this.back();
       }
-    });
+    }); */
   }
 }
