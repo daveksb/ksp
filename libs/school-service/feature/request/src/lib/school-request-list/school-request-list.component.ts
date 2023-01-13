@@ -302,12 +302,10 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
 
     const position = element.position;
     const eduinfo = JSON.parse(element.eduinfo || '');
-    const degreelevel = eduinfo[0].degreeLevel;
-
-    let checkbox1 = false;
-    if (degreelevel === 1) {
-      checkbox1 = true;
-    }
+    const email = element.email;
+    const nationality = element.nationality;
+    const birthdate = element.birthdate;
+    const passportno = element.passportno;
 
     const edu1 = eduinfo.find((item: any) => {
       if (item?.degreeLevel) {
@@ -320,6 +318,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     const institution1 = edu1?.institution ?? '';
     const major1 = edu1?.major ?? '';
     const graduateDate1 = edu1?.graduateDate ?? '';
+    const grade1 = edu1?.grade ?? '';
 
     let degree1 = false;
     if (degreename1) {
@@ -337,6 +336,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     const institution2 = edu2?.institution ?? '';
     const major2 = edu2?.major ?? '';
     const graduateDate2 = edu2?.graduateDate ?? '';
+    const grade2 = edu2?.grade ?? '';
 
     let degree2 = false;
     if (degreename2) {
@@ -354,11 +354,15 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     const institution3 = edu3?.institution ?? '';
     const major3 = edu3?.major ?? '';
     const graduateDate3 = edu3?.graduateDate ?? '';
+    const grade3 = edu3?.grade ?? '';
 
     let degree3 = false;
     if (degreename3) {
       degree3 = true;
     }
+
+    const admission1 = edu1?.admissionDate ?? '';
+    const country1 = edu1?.country ?? '';
 
     const teachinginfo = JSON.parse(element.teachinginfo || '');
 
@@ -396,8 +400,9 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
 
     const nameen = element.firstnameen + ' ' + element.lastnameen;
 
-    /* const hiring = JSON.parse(element.hiringinfo || '');
-    const position = hiring.position; */
+    const hiring = JSON.parse(element.hiringinfo || '');
+    const hiringStartDate = hiring.startDate;
+    const hiringEndDate = hiring.endDate;
 
     const payload = {
       schoolid: this.schoolId,
@@ -452,6 +457,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     }
 
     const fileinfo = JSON.parse(element.fileinfo || '');
+
     const tab3 = fileinfo['tab3'];
     const tab4 = fileinfo['tab4'];
     const tab5 = fileinfo['tab5'];
@@ -654,7 +660,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       const provincename = res.provincename;
       const zipcode = res.zipcode;
       const telphone = res.telphone;
-
+      const schoolemail = res.schoolemail;
       //console.log(id12);
       this.dialog.open(PdfRenderComponent, {
         width: '1200px',
@@ -680,7 +686,16 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
             name,
             phone,
             telphone,
+            email,
+            schoolemail,
+            nationality,
+            birthdate,
+            passportno,
             position,
+            hiringStartDate,
+            hiringEndDate,
+            country1,
+            admission1,
             id1,
             id2,
             id3,
@@ -699,18 +714,20 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
             major1,
             degree1,
             graduateDate1,
+            grade1,
             degreename2,
             institution2,
             major2,
             degree2,
             graduateDate2,
+            grade2,
             degreename3,
             institution3,
             major3,
             degree3,
             graduateDate3,
+            grade3,
             nameen,
-            checkbox1,
             lv1,
             lv2,
             lv3,
