@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
 import {
   KspPayment,
+  KspRequest,
   KSPRequestSearchFilter,
   SelfGetRequest,
   SelfRequest,
@@ -19,6 +20,13 @@ export class SelfRequestService {
     return this.http.post(
       `${environment.apiUrl}/kspself/ksprequestinsert`,
       form
+    );
+  }
+
+  createRequestNoToken(payload: Partial<KspRequest>): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspstaff/ksprequestinsert`,
+      payload
     );
   }
 

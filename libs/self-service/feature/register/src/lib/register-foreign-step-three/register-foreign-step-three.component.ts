@@ -12,9 +12,9 @@ import { SelfRequestService } from '@ksp/shared/service';
 import { switchMap, EMPTY } from 'rxjs';
 import { RegisterCompletedComponent } from '../register-completed/register-completed.component';
 import localForage from 'localforage';
-import { SelfMyInfo } from '@ksp/shared/interface';
+import { KspRequest, SelfMyInfo } from '@ksp/shared/interface';
 import { v4 as uuidv4 } from 'uuid';
-import { validatorMessages } from '@ksp/shared/utility';
+import { formatDatePayload, validatorMessages } from '@ksp/shared/utility';
 
 @Component({
   selector: 'self-service-register-foreign-step-three',
@@ -31,10 +31,8 @@ export class RegisterForeignStepThreeComponent implements OnInit {
 
   savingData: any;
   passportNo = '';
-
   passwordEqual = false;
   validatorMessages = validatorMessages;
-
   eyeIconClicked1 = false;
   eyeIconClicked2 = false;
 
@@ -82,8 +80,19 @@ export class RegisterForeignStepThreeComponent implements OnInit {
             payload.isactive = '1';
             payload.uniquetimestamp = uuidv4();
             return this.myInfoService.insertMyInfo(payload); */
+            const req = new KspRequest();
 
-            return this.request.createRequest('');
+            req.ref1 = '2';
+            req.ref2 = '04';
+            req.ref3 = '5';
+            req.isforeign = '1';
+            req.systemtype = '2';
+            req.requesttype = '4';
+            req.careertype = '5';
+            req.process = `2`;
+            req.status = `1`;
+            const { id, requestid, ...payload } = req;
+            return this.request.createRequestNoToken(payload);
           }
           return EMPTY;
         })
