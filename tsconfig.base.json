@@ -195,6 +195,9 @@
       "@ksp/school-service/feature/register": [
         "libs/school-service/feature/register/src/index.ts"
       ],
+      "@ksp/school-service/feature/report": [
+        "libs/school-service/feature/report/src/index.ts"
+      ],
       "@ksp/school-service/feature/request": [
         "libs/school-service/feature/request/src/index.ts"
       ],

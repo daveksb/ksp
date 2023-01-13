@@ -77,7 +77,8 @@ export class CreateLicenseIdDetailComponent implements OnInit {
   sameIdCardDialog() {
     this.dialog.open(CompleteDialogComponent, {
       data: {
-        header: `หมายเลขบัตรประชาชนนี้ได้ถูกใช้ยื่นใบคำขอไปแล้ว`,
+        header: `รายชื่อนี้ได้ถูกใช้สร้างใบอนุญาตไปแล้ว`,
+        btnLabel: 'ตกลง',
       },
     });
   }

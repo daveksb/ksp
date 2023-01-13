@@ -1,68 +1,109 @@
 <div class="container-sm p-0">
   <div class="card justify-content-center">
-    <div class="d-flex justify-content-center px-3 gap-4">
-      <div class="d-flex justify-content-center align-items-center">
-        <ng-content></ng-content>
-      </div>
-      <!--       <self-service-form-upload-image
-        [isEditMode]="false"
-        [imgSrc]="license.imageinfo"
-      ></self-service-form-upload-image> -->
-      <div class="d-flex flex-column justify-content-between">
-        <div class="title">
-          ใบอนุญาตประกอบวิชาชีพ
-          {{ SchoolRequestSubType[+(license.licensetype || 0)] }}
+    <div class="d-flex flex-row justify-content-between px-2 gap-3">
+      <div class="d-flex flex-column">
+        <div class="d-flex flex-row">
+          <img
+            src="/assets/images/KSP_LOGO.png"
+            style="width: 75px; height: 75px"
+            class="me-2 mt-1"
+          />
+          <div class="d-flex flex-column">
+            <div class="blue__text fs-4">คุรุสภา</div>
+            <div class="form-label blue__text">
+              The Teachers' Council of Thailand
+            </div>
+            <div class="blue__text">
+              ใบอนุญาตประกอบวิชาชีพ
+              <span class="text-black">
+                {{ SchoolRequestSubType[+(license.licensetype || 0)] }}</span
+              >
+            </div>
+            <div class="blue__text">
+              <span class="text-black">
+                {{ SchoolRequestSubType[+(license.licensetype || 0)] }} </span
+              >License
+            </div>
+          </div>
         </div>
-        <div class="fs-6 text-black me-3">
-          <span class="text-secondary">เลขที่</span> {{ license.licenseno }}
+
+        <div class="d-flex flex-row align-items-center">
+          <div class="d-flex flex-column me-3">
+            <div class="blue__text">เลขที่</div>
+            <div class="blue__text">License No.</div>
+          </div>
+          {{ license.licenseno || '-' }}
         </div>
-        <div class="fs-6">
+        <div class="text-center text-black form-label">
           {{ SelfPrefixTh[+(license.prefixth || 0)] || '-' }}
           {{ license.firstnameth }}
           {{ license.lastnameth }}
         </div>
-        <div class="fs-6">
+        <div class="text-center text-black form-label">
           {{ SelfPrefixEn[+(license.prefixen || 0)] || '-' }}
           {{ license.firstnameen }}
           {{ license.lastnameen }}
         </div>
-        <div class="fs-6 text-secondary mt-1">เลขสมาชิก</div>
-        <div class="d-flex">
-          <div class="me-3 text-secondary">
-            วันที่ออกบัตร
-            <span class="text-black"
-              >{{ (license.licensestartdate | thaiDate) || 'วว/ดด/ปปปป' }}
-            </span>
+
+        <div class="d-flex flex-row justify-content-between">
+          <div class="d-flex flex-row align-items-center">
+            <div class="flex-column me-2">
+              <div class="blue__text">เลขสมาชิก</div>
+              <div class="blue__text">Member No.</div>
+            </div>
+            {{ license.kuruspano || '-' }}
           </div>
-          <div class="text-secondary">
-            หมดอายุ
-            <span class="text-black">{{
-              (license.licenseenddate | thaiDate) || 'วว/ดด/ปปปป'
-            }}</span>
+          <div class="d-flex flex-column">
+            <div class="blue__text">ประเภทสามัญ</div>
+            <div class="blue__text">Ordinary Member</div>
           </div>
         </div>
 
-        <div class="d-flex justify-content-center mt-2" *ngIf="showButton">
-          <button
-            class="btn btn-sm border-primary text-primary bg-white me-2 w-50"
-          >
-            ต่ออายุ
-          </button>
-          <button class="btn btn-sm btn-primary w-50">ใบอนุญาต</button>
+        <div class="d-flex flex-row justify-content-evenly">
+          <div class="d-flex flex-column">
+            <div class="text-black">
+              {{ license.licensestartdate || 'dd/mm/yyyy' }}
+            </div>
+            <div class="text-black">
+              {{ (license.licensestartdate | thaiDate) || 'วว/ดด/ปปปป' }}
+            </div>
+          </div>
+
+          <div class="d-flex flex-column">
+            <div class="text-black">
+              {{ license.licensestartdate || 'dd/mm/yyyy' }}
+            </div>
+            <div class="text-black">
+              {{ (license.licenseenddate | thaiDate) || 'วว/ดด/ปปปป' }}
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-center mt-2" *ngIf="showButton">
+            <button
+              class="btn btn-sm border-primary blue__text bg-white me-2 w-50"
+            >
+              ต่ออายุ
+            </button>
+            <button class="btn btn-sm btn-primary w-50">ใบอนุญาต</button>
+          </div>
         </div>
       </div>
-      <!-- <div class="d-flex justify-content-center">
-        <img
-          src="/assets/images/img-profile.png"
-          class="ms-2"
-          style="width: 96px; height: 144px"
-        />
-      </div> -->
+      <div
+        class="d-flex flex-column justify-content-between align-items-center"
+      >
+        <div class="d-flex flex-column gap-2 mt-1">
+          <ng-content></ng-content>
+
+          <div class="bg-white w-100">
+            <div class="p-2 text-center">barcode</div>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <div class="blue__text">นายทะเบียน</div>
+          <div class="blue__text">Registrar</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-<!-- <div style="text-align: center">
-  <span class="dot"></span>
-  <span class="dot"></span>
-  <span class="dot"></span>
-</div> -->
