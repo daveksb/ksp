@@ -2,14 +2,15 @@
   border-radius: 16px;
   background-image: url('/assets/images/self-card-bg.png');
   background-size: cover;
-  width: auto;
-  height: 225px;
+  background-position: center;
+  min-height: 20rem;
+  min-width: 480px;
   margin: auto;
+  width: auto;
 }
 
-.title {
-  color: #e06511;
-  font-size: 24px;
+.blue__text {
+  color: #125eaf;
 }
 
 .dot {
@@ -23,6 +24,6 @@
 
 @media (max-width: 768px) {
   .card {
-    width: 500px;
+    width: 480px;
   }
 }

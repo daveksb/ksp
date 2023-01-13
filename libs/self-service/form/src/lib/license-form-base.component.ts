@@ -27,7 +27,6 @@ import {
   SelfRequest,
   Tambol,
 } from '@ksp/shared/interface';
-import localForage from 'localforage';
 
 @Component({
   template: ``,

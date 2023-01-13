@@ -28,41 +28,39 @@
         <ng-container *ngFor="let req of rejectedRequests; let i = index">
           <div class="carousel-item active" *ngIf="i === 0">
             <ksp-uni-form-badge [mainTitle]="genAlertMessage(req)"
-              ><span
-                class="text-primary text-decoration-underline"
-                role="button"
+              ><button
+                class="btn btn-link text-primary p-0 w-auto ms-1"
+                type="button"
                 (click)="viewRequest(req.requesttype, req.careertype, req.id)"
               >
                 กดเพื่อตรวจสอบ
-              </span></ksp-uni-form-badge
-            >
+              </button>
+              <span class="badge bg-danger ms-1">{{
+                rejectedRequests.length
+              }}</span>
+            </ksp-uni-form-badge>
           </div>
         </ng-container>
 
         <ng-container *ngFor="let req of rejectedRequests; let i = index">
           <div class="carousel-item" *ngIf="i > 0">
             <ksp-uni-form-badge [mainTitle]="genAlertMessage(req)">
-              <span
-                class="text-primary text-decoration-underline"
-                role="button"
+              <button
+                type="button"
+                class="btn btn-link text-primary p-0 w-auto ms-1"
                 (click)="viewRequest(req.requesttype, req.careertype, req.id)"
               >
                 กดเพื่อตรวจสอบ
-              </span>
+              </button>
+              <span class="badge bg-danger ms-1">{{
+                rejectedRequests.length
+              }}</span>
             </ksp-uni-form-badge>
           </div>
         </ng-container>
       </div>
+
       <ng-container *ngFor="let req of rejectedRequests; let i = index">
-        <!-- <button
-          *ngIf="i > 0"
-          class="carousel-control-prev"
-          type="button"
-          data-bs-target="#carouselExampleFade"
-          data-bs-slide="prev"
-        >
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        </button> -->
         <button
           *ngIf="i > 0"
           class="carousel-control-next"
@@ -71,10 +69,10 @@
           data-bs-slide="next"
         >
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">ต่อไป</span>
         </button>
       </ng-container>
     </div>
+
     <div class="box-header">
       รายการใบคำขอที่ยื่นผ่านระบบบริการหน่วยงานทางการศึกษา
     </div>
@@ -176,7 +174,7 @@
 
           <ng-container matColumnDef="idcardno">
             <th mat-header-cell *matHeaderCellDef>
-              หมายเลขบัตรประชาชน/เลขคุรุสภาสำหรับชาวต่างชาติ
+              หมายเลขบัตรประชาชน/เลขคุรุสภา
             </th>
             <td mat-cell *matCellDef="let element">
               {{ element.idcardno || element.kuruspano }}
@@ -219,6 +217,7 @@
             <td mat-cell *matCellDef="let element">
               <span
                 class="rounded-pill border w-full d-flex justify-content-center px-1"
+                style="min-width: 140px"
                 [ngClass]="{
                   'border-secondary text-secondary ':
                     +element.status === 0 && +element.process !== 5,

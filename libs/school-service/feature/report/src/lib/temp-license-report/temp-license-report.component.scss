@@ -1,0 +1,25 @@
+tr.mat-header-row {
+  background-color: #fff;
+}
+
+thead,
+tbody,
+tfoot,
+tr,
+td,
+th {
+  border-width: 1px;
+}
+
+mat-row,
+mat-header-row,
+mat-footer-row,
+th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
+  border-bottom-color: black;
+}
+
+thead tr {
+  background-color: #fff;
+}

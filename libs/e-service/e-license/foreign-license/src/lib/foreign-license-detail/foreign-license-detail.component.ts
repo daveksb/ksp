@@ -19,6 +19,7 @@ import { FormBuilder } from '@angular/forms';
 import {
   formatDate,
   formatDatePayload,
+  getCookie,
   parseJson,
   replaceEmptyWithNull,
   thaiDate,
@@ -29,7 +30,7 @@ import {
   ERequestService,
   GeneralInfoService,
 } from '@ksp/shared/service';
-import { EMPTY, Observable, switchMap } from 'rxjs';
+import { EMPTY, Observable, of, switchMap } from 'rxjs';
 import _ from 'lodash';
 import moment from 'moment';
 
@@ -42,7 +43,6 @@ export class ForeignLicenseDetailComponent implements OnInit {
   choices: string[] = ['ครบถ้วน และถูกต้อง', 'ไม่ครบถ้วน และไม่ถูกต้อง'];
   @Input() mode: FormMode = 'view';
   foreignInfo = ['1.สำเนาหนังสือเดินทาง'];
-
   today = thaiDate(new Date());
   prefixList$!: Observable<Prefix[]>;
   countries$!: Observable<Country[]>;
@@ -52,7 +52,6 @@ export class ForeignLicenseDetailComponent implements OnInit {
   requestData = new KspRequest();
   requestSubType = SchoolRequestSubType.ชาวต่างชาติ;
   checkedResult: any;
-
   form = this.fb.group({
     foreignTeacherInfo: [],
     foreignVisaInfo: [],
@@ -87,12 +86,12 @@ export class ForeignLicenseDetailComponent implements OnInit {
     this.eRequestService.getKspRequestById(id).subscribe((res) => {
       this.requestData = res;
       this.pathUserInfo(res);
-
       if (res.status === '2') {
         this.checkedResult = verifyChoices[0].value;
       } else if (res.status === '3') {
         this.checkedResult = verifyChoices[1].value;
       }
+      console.log('checkResult = ', this.checkedResult);
     });
   }
 
@@ -129,7 +128,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
     const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการยืนยันข้อมูล
-        และส่งใบคำขอ ใช่หรือไม่? `,
+        ใช่หรือไม่? `,
       },
     });
 
@@ -141,10 +140,10 @@ export class ForeignLicenseDetailComponent implements OnInit {
             const payload: KspApprovePayload = {
               requestid: this.requestData.requestid,
               process: '2',
-              status: data.result,
-              detail: data.detail,
+              status: data?.result,
+              detail: null, //`${data?.detail}`,
               systemtype: '4', // e-service
-              userid: null,
+              userid: getCookie('userId'),
               paymentstatus: null,
             };
             return this.eRequestService.KspUpdateRequestProcess(payload);
@@ -153,6 +152,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
         }),
         switchMap((res) => {
           const data: any = this.form.controls.verifydetail.value;
+          //console.log('data 2 = ', data);
           if (res && data.result === '2') {
             let payload = new KspKuruspa();
             const countryCode = this.requestData.country ?? 0;
@@ -165,7 +165,6 @@ export class ForeignLicenseDetailComponent implements OnInit {
             payload.expireddate = moment().add(2, 'years').format('yyyy-MM-DD');
             payload.visaclass = this.requestData.visaclass;
             payload.visatype = this.requestData.visatype;
-            //payload.visastartdate = '';
             payload.visaexpireddate = this.requestData.visaexpiredate;
             payload.idcardno = this.requestData.idcardno;
             payload.passportno = this.requestData.passportno;
@@ -196,7 +195,8 @@ export class ForeignLicenseDetailComponent implements OnInit {
               formatDatePayload(payload)
             );
           }
-          return EMPTY;
+
+          return of(false);
         }),
         switchMap((res) => {
           if (res) {
@@ -205,13 +205,11 @@ export class ForeignLicenseDetailComponent implements OnInit {
               res.returnkspid
             );
           }
-          return EMPTY;
+          return of(false);
         })
       )
-      .subscribe((res) => {
-        if (res.returncode === '00') {
-          this.onCompleted();
-        }
+      .subscribe(() => {
+        this.onCompleted();
       });
   }
 
