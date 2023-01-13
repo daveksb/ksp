@@ -343,6 +343,57 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       degree2 = true;
     }
 
+    const edu3 = eduinfo.find((item: any) => {
+      if (item?.degreeLevel) {
+        return item.degreeLevel === '3';
+      }
+      return false;
+    });
+
+    const degreename3 = edu3?.degreeName ?? '';
+    const institution3 = edu3?.institution ?? '';
+    const major3 = edu3?.major ?? '';
+    const graduateDate3 = edu3?.graduateDate ?? '';
+
+    let degree3 = false;
+    if (degreename3) {
+      degree3 = true;
+    }
+
+    const teachinginfo = JSON.parse(element.teachinginfo || '');
+
+    let lv1 = false;
+    let lv2 = false;
+    let lv3 = false;
+    let lv4 = false;
+    let lv5 = false;
+    let lv6 = false;
+    let lv7 = false;
+
+    for (const index in teachinginfo.teachingLevel) {
+      if (teachinginfo.teachingLevel[index] === 'level1') {
+        lv1 = true;
+      }
+      if (teachinginfo.teachingLevel[index] === 'level2') {
+        lv2 = true;
+      }
+      if (teachinginfo.teachingLevel[index] === 'level3') {
+        lv3 = true;
+      }
+      if (teachinginfo.teachingLevel[index] === 'level4') {
+        lv4 = true;
+      }
+      if (teachinginfo.teachingLevel[index] === 'level5') {
+        lv5 = true;
+      }
+      if (teachinginfo.teachingLevel[index] === 'level6') {
+        lv6 = true;
+      }
+      if (teachinginfo.teachingLevel[index] === 'level7') {
+        lv7 = true;
+      }
+    }
+
     const nameen = element.firstnameen + ' ' + element.lastnameen;
 
     /* const hiring = JSON.parse(element.hiringinfo || '');
@@ -351,6 +402,54 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     const payload = {
       schoolid: this.schoolId,
     };
+
+    let label1 = '';
+    let label2 = '';
+    let label3 = '';
+    let label4 = '';
+
+    let reasonDetail = '';
+    let reasonDetail2 = '';
+    let reasonDetail3 = '';
+
+    const reason = JSON.parse(element.reasoninfo || '');
+
+    if (reason) {
+      const schReason = reason.schoolReasons;
+      if (schReason[0] === true) {
+        if (element.careertype === '2') {
+          label1 =
+            'ผู้ขอประกอบวิชาชีพผู้บริหารสถานศึกษา เป็นผู้มีความรู้ ความสามารถในการบริหารสถานศึกษา ';
+        } else {
+          label1 = 'ผู้ขอประกอบวิชาชีพครูเป็นผู้มีความรู้ ความสามารถในการสอน ';
+        }
+      }
+      if (schReason[1] === true) {
+        if (element.careertype === '2') {
+          label2 =
+            'ผู้ขอประกอบวิชาชีพผู้บริหารสถานศึกษา เป็นผู้มีประสบการณ์ในการบริหารสถานศึกษา ';
+        } else {
+          label2 = 'ผู้ขอประกอบวิชาชีพครูเป็นผู้มีประสบการณ์ ในการสอน ';
+        }
+      }
+      if (schReason[2] === true) {
+        if (element.careertype === '2') {
+          label3 = 'ขาดแคลนผู้บริหารสถานศึกษาที่มีใบอนุญาตประกอบวิชาชีพ ';
+        } else {
+          label3 = 'ขาดแคลนครูผู้สอนที่มีใบอนุญาตประกอบวิชาชีพ ';
+        }
+      }
+      if (schReason[3] === true) {
+        label4 = 'และ' + reason.schoolOtherDetail;
+      }
+      reasonDetail = label1;
+      if (element.careertype !== '5') {
+        reasonDetail2 = label2;
+        reasonDetail3 = label3 + label4;
+      } else {
+        reasonDetail2 = label2 + label3 + label4;
+      }
+    }
 
     const fileinfo = JSON.parse(element.fileinfo || '');
     const tab3 = fileinfo['tab3'];
@@ -367,7 +466,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
 
     const file2_thai = true;
 
-    const file3_th = tab6[0];
+    const file3_th = tab6[6];
 
     const file4_th = tab3[2];
     let file4_thai = false;
@@ -429,28 +528,123 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       file12_thai = true;
     }
 
-    const file13_th = tab6[0];
+    const file13_th = tab6[6];
 
     //manager
-    const file7_mgr = tab3[3];
+    const file7_mgr = tab6[6];
+
     const file8_mgr = tab4[1];
-    const file10_mgr = tab4[0];
-    const file11_mgr = tab6[1];
-    const file12_mgr = tab6[5];
+    let file8_manager = false;
+    if (file8_mgr.length > 0) {
+      file8_manager = true;
+    }
+
+    const file10_mgr = tab6[6];
+    const file11_mgr = tab6[6];
+    const file12_mgr = tab6[6];
+
     const file13_mgr = tab6[5];
-    const file14_mgr = tab6[0];
+    let file13_manager = false;
+    if (file13_mgr.length > 0) {
+      file13_manager = true;
+    }
+
+    const file14_mgr = tab6[6];
 
     //foreign
-    const file2_frgn = tab3[3];
-    const file3_frgn = tab4[1];
-    const file4_frgn = tab4[0];
-    const file5_frgn = tab6[1];
-    const file6_frgn = tab6[5];
-    const file7_frgn = tab6[5];
-    const file8_frgn = tab6[0];
+    const file2_frgn = tab3[0];
+    let file2_foreign = false;
+    if (file2_frgn.length > 0) {
+      file2_foreign = true;
+    }
 
-    console.log('fileinfo = ', file1_th);
+    const file3_frgn = tab3[1];
+    let file3_foreign = false;
+    if (file3_frgn.length > 0) {
+      file3_foreign = true;
+    }
+
+    const file4_frgn = tab6[6];
+
+    const file5_frgn = tab3[4];
+    let file5_foreign = false;
+    if (file5_frgn.length > 0) {
+      file5_foreign = true;
+    }
+
+    const file6_frgn = tab6[6];
+
+    const file7_frgn = tab4[1];
+    let file7_foreign = false;
+    if (file7_frgn.length > 0) {
+      file7_foreign = true;
+    }
+
+    const file8_frgn = tab6[5];
+    let file8_foreign = false;
+    if (file8_frgn.length > 0) {
+      file8_foreign = true;
+    }
+
+    //console.log('fileinfo = ', file1_th);
     //console.log('fileid = ', file1[0].fileid);
+
+    const prohibit = JSON.parse(element.prohibitproperty || '');
+
+    const immoral = prohibit.immoral;
+    const incompetent = prohibit.incompetent;
+    const prison = prohibit.prison;
+
+    let forbid1_1 = false;
+    let forbid1_2 = false;
+    if (element.careertype !== '5') {
+      if (immoral === '2') {
+        forbid1_1 = true;
+      } else {
+        forbid1_2 = true;
+      }
+    } else {
+      if (immoral === '2') {
+        forbid1_2 = true;
+      } else {
+        forbid1_1 = true;
+      }
+    }
+
+    let forbid2_1 = false;
+    let forbid2_2 = false;
+    if (element.careertype !== '5') {
+      if (incompetent === '2') {
+        forbid2_1 = true;
+      } else {
+        forbid2_2 = true;
+      }
+    } else {
+      if (immoral === '2') {
+        forbid2_2 = true;
+      } else {
+        forbid2_1 = true;
+      }
+    }
+
+    let forbid3_1 = false;
+    let forbid3_2 = false;
+    let forbid3 = '';
+    let prisonDetail = '';
+    if (element.careertype !== '5') {
+      if (prison === '2') {
+        forbid3_1 = true;
+      } else {
+        forbid3_2 = true;
+        prisonDetail = prohibit.prisonReason;
+      }
+    } else {
+      if (immoral === '2') {
+        forbid3 = 'No';
+      } else {
+        forbid3 = 'Yes' + ' ' + prohibit.prisonReason;
+      }
+    }
 
     this.schoolInfoService.getSchoolInfo(payload).subscribe((res: any) => {
       const schoolname = res.schoolname;
@@ -510,8 +704,23 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
             major2,
             degree2,
             graduateDate2,
+            degreename3,
+            institution3,
+            major3,
+            degree3,
+            graduateDate3,
             nameen,
             checkbox1,
+            lv1,
+            lv2,
+            lv3,
+            lv4,
+            lv5,
+            lv6,
+            lv7,
+            reasonDetail,
+            reasonDetail2,
+            reasonDetail3,
             file1_thai,
             file2_thai,
             file4_thai,
@@ -524,6 +733,21 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
             file10_thai,
             file11_thai,
             file12_thai,
+            file8_manager,
+            file13_manager,
+            file2_foreign,
+            file3_foreign,
+            file5_foreign,
+            file7_foreign,
+            file8_foreign,
+            forbid1_1,
+            forbid2_1,
+            forbid3_1,
+            forbid1_2,
+            forbid2_2,
+            forbid3_2,
+            forbid3,
+            prisonDetail,
           },
         },
       });
