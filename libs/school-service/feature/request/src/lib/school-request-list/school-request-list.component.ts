@@ -280,13 +280,6 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     this.router.navigate(['/request-reward', 'detail', id]);
   }
 
-  /* getTempLicenseHistory(idCardNo: string | null) {
-    this.requestService.getTempLicenseHistory(idCardNo).subscribe((res) => {
-      this.tempLicenseHistory = res.datareturn;
-      console.log('this.tempLicenseHistory = ', this.tempLicenseHistory);
-    });
-  } */
-
   requestPdf(element: KspRequest) {
     const pdfType = element.requesttype;
     const pdfSubType = element.careertype;
@@ -319,8 +312,8 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       .getTempLicenseHistory(element.idcardno)
       .subscribe((res) => {
         this.tempLicenseHistory = res.datareturn;
-        this.tempLicenseRequestTimes = this.tempLicenseHistory?.length || 0 + 1;
-        //console.log('tempLicenseRequestTimes = ', this.tempLicenseRequestTimes);
+        this.tempLicenseRequestTimes =
+          (this.tempLicenseHistory?.length || 0) + 1;
 
         if (Number(this.tempLicenseRequestTimes) === 1) {
           approve1 = true;
@@ -399,10 +392,16 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
 
     let subject: any;
     let subjectName = '';
+    let otherSubject = '';
 
     for (const index in teachinginfo.teachingSubjects) {
       subject = teachingSubjects(teachinginfo.teachingSubjects[index]);
       subjectName += subject + ' ';
+    }
+
+    if (teachinginfo.teachingSubjectOther !== null) {
+      otherSubject = teachinginfo.teachingSubjectOther;
+      subjectName = subjectName + otherSubject;
     }
 
     let lv1 = false;
@@ -439,9 +438,15 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
 
     const nameen = element.firstnameen + ' ' + element.lastnameen;
 
+    let hiringStartDate = '';
+    let hiringEndDate = '';
+
     const hiring = JSON.parse(element.hiringinfo || '');
-    const hiringStartDate = hiring.startDate;
-    const hiringEndDate = hiring.endDate;
+
+    if (hiring) {
+      hiringStartDate = hiring.startDate;
+      hiringEndDate = hiring.endDate;
+    }
 
     const payload = {
       schoolid: this.schoolId,
@@ -631,63 +636,65 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       file8_foreign = true;
     }
 
-    //console.log('fileinfo = ', file1_th);
-    //console.log('fileid = ', file1[0].fileid);
-
-    const prohibit = JSON.parse(element.prohibitproperty || '');
-
-    const immoral = prohibit.immoral;
-    const incompetent = prohibit.incompetent;
-    const prison = prohibit.prison;
-
     let forbid1_1 = false;
     let forbid1_2 = false;
-    if (element.careertype !== '5') {
-      if (immoral === '2') {
-        forbid1_1 = true;
-      } else {
-        forbid1_2 = true;
-      }
-    } else {
-      if (immoral === '2') {
-        forbid1_2 = true;
-      } else {
-        forbid1_1 = true;
-      }
-    }
-
     let forbid2_1 = false;
     let forbid2_2 = false;
-    if (element.careertype !== '5') {
-      if (incompetent === '2') {
-        forbid2_1 = true;
-      } else {
-        forbid2_2 = true;
-      }
-    } else {
-      if (immoral === '2') {
-        forbid2_2 = true;
-      } else {
-        forbid2_1 = true;
-      }
-    }
-
     let forbid3_1 = false;
     let forbid3_2 = false;
     let forbid3 = '';
     let prisonDetail = '';
-    if (element.careertype !== '5') {
-      if (prison === '2') {
-        forbid3_1 = true;
-      } else {
-        forbid3_2 = true;
-        prisonDetail = prohibit.prisonReason;
-      }
-    } else {
-      if (immoral === '2') {
-        forbid3 = 'No';
-      } else {
-        forbid3 = 'Yes' + ' ' + prohibit.prisonReason;
+
+    if (element.prohibitproperty) {
+      const prohibit = JSON.parse(element.prohibitproperty || '');
+
+      if (prohibit) {
+        const immoral = prohibit.immoral;
+        const incompetent = prohibit.incompetent;
+        const prison = prohibit.prison;
+
+        if (element.careertype !== '5') {
+          if (immoral === '2') {
+            forbid1_1 = true;
+          } else {
+            forbid1_2 = true;
+          }
+        } else {
+          if (immoral === '2') {
+            forbid1_2 = true;
+          } else {
+            forbid1_1 = true;
+          }
+        }
+
+        if (element.careertype !== '5') {
+          if (incompetent === '2') {
+            forbid2_1 = true;
+          } else {
+            forbid2_2 = true;
+          }
+        } else {
+          if (immoral === '2') {
+            forbid2_2 = true;
+          } else {
+            forbid2_1 = true;
+          }
+        }
+
+        if (element.careertype !== '5') {
+          if (prison === '2') {
+            forbid3_1 = true;
+          } else {
+            forbid3_2 = true;
+            prisonDetail = prohibit.prisonReason;
+          }
+        } else {
+          if (immoral === '2') {
+            forbid3 = 'No';
+          } else {
+            forbid3 = 'Yes' + ' ' + prohibit.prisonReason;
+          }
+        }
       }
     }
 
