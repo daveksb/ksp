@@ -62,7 +62,7 @@
         <div class="d-flex flex-row justify-content-evenly">
           <div class="d-flex flex-column">
             <div class="text-black">
-              {{ license.licensestartdate || 'dd/mm/yyyy' }}
+              {{ (license.licensestartdate | engDate) || 'dd/mm/yyyy' }}
             </div>
             <div class="text-black">
               {{ (license.licensestartdate | thaiDate) || 'วว/ดด/ปปปป' }}
@@ -71,7 +71,7 @@
 
           <div class="d-flex flex-column">
             <div class="text-black">
-              {{ license.licensestartdate || 'dd/mm/yyyy' }}
+              {{ (license.licensestartdate | engDate) || 'dd/mm/yyyy' }}
             </div>
             <div class="text-black">
               {{ (license.licenseenddate | thaiDate) || 'วว/ดด/ปปปป' }}
