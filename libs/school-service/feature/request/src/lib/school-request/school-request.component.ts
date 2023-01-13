@@ -472,7 +472,7 @@ export class SchoolRequestComponent implements OnInit {
   loadRequestFromId(id: number) {
     this.requestService.schGetRequestById(id).subscribe((res) => {
       if (res) {
-        this.getTempLicenseHistory(res.idcardno);
+        this.getTempLicenseHistory(res.idcardno || res.kuruspano);
         this.requestData = res;
         this.pathUserInfo(res);
         this.patchAddress(parseJson(res.addressinfo));

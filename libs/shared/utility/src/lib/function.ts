@@ -1,6 +1,7 @@
 import { AbstractControl } from '@angular/forms';
 import {
   EnglishMonthMapping,
+  levels,
   SchoolRequestProcess,
   SchoolRequestType,
   SchoolSelfDevelopActivityTies,
@@ -389,4 +390,8 @@ export function isIdCard(idCard: any) {
 
 export function teachingSubjects(id: any) {
   return subjects.find((s) => s.value === id)?.label;
+}
+
+export function teachingLevels(id: any) {
+  return levels.find((s) => s.value === id)?.label;
 }

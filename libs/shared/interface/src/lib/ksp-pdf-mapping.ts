@@ -1793,17 +1793,17 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'subjectName',
             options: {
-              x: 400,
+              x: 385,
               y: 339,
-              size: defaultSize,
+              size: defaultSize - 3,
               color: black,
             },
           },
 
           {
-            key: 'level',
+            key: 'levelName',
             options: {
-              x: 150,
+              x: 135,
               y: 317,
               size: defaultSize,
               color: black,

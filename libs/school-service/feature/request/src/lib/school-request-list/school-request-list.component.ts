@@ -32,6 +32,7 @@ import {
   changeToThaiNumber,
   changeToEnglishMonth,
   teachingSubjects,
+  teachingLevels,
 } from '@ksp/shared/utility';
 import { Subject } from 'rxjs';
 
@@ -411,8 +412,13 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     let lv5 = false;
     let lv6 = false;
     let lv7 = false;
+    let level: any;
+    let levelName = '';
 
     for (const index in teachinginfo.teachingLevel) {
+      level = teachingLevels(teachinginfo.teachingLevel[index]);
+      levelName += level + ' ';
+
       if (teachinginfo.teachingLevel[index] === 'level1') {
         lv1 = true;
       }
@@ -456,7 +462,6 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     let label2 = '';
     let label3 = '';
     let label4 = '';
-
     let reasonDetail = '';
     let reasonDetail2 = '';
     let reasonDetail3 = '';
@@ -785,6 +790,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
             lv5,
             lv6,
             lv7,
+            levelName,
             reasonDetail,
             reasonDetail2,
             reasonDetail3,
