@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormMode } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
@@ -22,7 +22,7 @@ import { v4 as uuidv4 } from 'uuid';
   templateUrl: './foreign-student-id.component.html',
   styleUrls: ['./foreign-student-id.component.scss'],
 })
-export class ForeignStudentIdComponent {
+export class ForeignStudentIdComponent implements OnInit {
   @Input() mode: FormMode = 'edit';
   foreignInfo = [{ name: '1.สำเนาหนังสือเดินทาง',filename: ""  }];
   form = this.fb.group({
@@ -40,6 +40,7 @@ export class ForeignStudentIdComponent {
   uniid = '';
   unitype = '';
   requestNumber = '';
+  requestid = '';
   isLoading: Subject<boolean> = this.loaderService.isLoading;
   constructor(
     public dialog: MatDialog,
@@ -49,15 +50,30 @@ export class ForeignStudentIdComponent {
     private addressService: AddressService,
     private generalInfoService: GeneralInfoService,
     private uniInfoService: UniInfoService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private route: ActivatedRoute,
   ) {
-    this.uniqueTimestamp = uuidv4();
-
-    this.getAll();
   }
   get formValid() {
     return !this.form.get('foreignStudent')?.valid;
   }
+
+  ngOnInit() {
+    this.route.paramMap.subscribe((res) => {
+      this.requestid = res.get('id') || '';
+    });
+    this.uniqueTimestamp = uuidv4();
+    this.getAll();
+    this.getRequest();
+  }
+
+  getRequest() {
+    if (this.requestid) {
+      // this.uniRequestService;
+      console.log('get by id')
+    }
+  }
+
   getAll() {
     this.uniid = getCookie('uniId') || '';
     this.unitype = getCookie('uniType') || '';
@@ -73,6 +89,7 @@ export class ForeignStudentIdComponent {
         this.uniAddress = '-';
       });
   }
+
   cancel() {
     this.router.navigate(['/', 'home']);
   }

@@ -4,6 +4,7 @@ import {
   ChangeDetectorRef,
   Component,
   OnInit,
+  ViewChild,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -22,6 +23,7 @@ import _ from 'lodash';
 import { Location } from '@angular/common';
 
 import { ApproveStepStatusOption } from '@ksp/shared/constant';
+import { MatStepper } from '@angular/material/stepper';
 const detailToState = (res: any) => {
   const newRes = _.filter(res?.datareturn, ({ process }) =>
     ['2', '3'].includes(process)
@@ -55,6 +57,7 @@ const detailToState = (res: any) => {
   styleUrls: ['./check.component.scss'],
 })
 export class CheckComponent implements OnInit, AfterContentChecked {
+  @ViewChild('stepper') private stepper?: MatStepper;
   form: any = this.fb.group<any>({
     step1: [],
     step2: [
@@ -258,7 +261,7 @@ export class CheckComponent implements OnInit, AfterContentChecked {
       status = 2;
     } else if (verify == 1 && forward == 3) {
       process = this.daftRequest?.requestprocess == '1' ? 
-                _.toNumber(this.daftRequest?.requestprocess) + 3 : _.toNumber(this.daftRequest?.requestprocess) + 2;
+                _.toNumber(this.daftRequest?.requestprocess) + 2 : _.toNumber(this.daftRequest?.requestprocess) + 1;
       status = 1;
     }  else if (forward == 4) {
       process = _.toNumber(this.daftRequest?.requestprocess) + 1;
@@ -335,5 +338,12 @@ export class CheckComponent implements OnInit, AfterContentChecked {
       return { forward: [1, 3, 4], verify: [] };
     }
     return { forward: [], verify: [] };
+  }
+  goBack() {
+    this.stepper?.previous();
+  }
+
+  goForward() {
+    this.stepper?.next();
   }
 }

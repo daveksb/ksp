@@ -33,6 +33,10 @@ const routes: Routes = [
         path: 'request',
         component: ForeignStudentIdComponent,
       },
+      {
+        path: 'request/:id',
+        component: ForeignStudentIdComponent,
+      }
     ],
   },
 ];

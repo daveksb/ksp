@@ -3,6 +3,7 @@
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { KspPaginationComponent } from '@ksp/shared/interface';
 import { LoaderService, UniInfoService } from '@ksp/shared/service';
 import { checkProcess, checkStatus, getCookie, stringToThaiDate, thaiDate } from '@ksp/shared/utility';
@@ -30,7 +31,8 @@ export class ForeignStudentListComponent
   constructor(
     private uniInfoService: UniInfoService, 
     private fb: FormBuilder,
-    private loaderService: LoaderService) {
+    private loaderService: LoaderService,
+    private router: Router,) {
     super();
   }
 
@@ -79,6 +81,7 @@ export class ForeignStudentListComponent
         this.pageEvent.length = res.countrow;
         this.dataSource = res?.datareturn?.map((item: any, index: number) => {
           return {
+            requestid: item?.id,
             key: item?.id,
             order: this.pageEvent.pageIndex * this.pageEvent.pageSize + ++index,
             requestNo: item?.requestno,
@@ -102,6 +105,16 @@ export class ForeignStudentListComponent
     this.form.reset();
     this.dataSource = [];
     this.clearPageEvent();
+  }
+
+  viewRequest(element: any) {
+    console.log(element.requestid)
+    this.router.navigate([
+      '/',
+      'foreign-student-id',
+      'request',
+      element.requestid,
+    ]);
   }
 }
 
