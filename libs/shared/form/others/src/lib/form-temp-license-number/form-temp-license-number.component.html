@@ -4,7 +4,12 @@
   <div class="row">
     <div class="col-6">
       <label class="form-label">ขออนุญาตฉบับที่</label>
-      <input class="form-control" type="text" disabled value="1" />
+      <input
+        class="form-control"
+        type="text"
+        disabled
+        value="{{ tempLicenseHistory.length + 1 }}"
+      />
     </div>
     <div class="col-6">
       <label class="form-label"><br /></label>
@@ -22,7 +27,7 @@
   </div>
 
   <ng-container *ngIf="viewHistory">
-    <table class="table w-25 mt-3">
+    <table class="table w-75 mt-3">
       <thead>
         <tr>
           <th scope="col">ลำดับ</th>
@@ -30,11 +35,11 @@
           <th scope="col">วันหมดอายุ</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody *ngFor="let license of tempLicenseHistory; let i = index">
         <tr>
-          <th scope="row">1</th>
-          <td>10 พ.ค. 2564</td>
-          <td>10 พ.ค. 2565</td>
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ license.licensestartdate | thaiDate }}</td>
+          <td>{{ license.licenseenddate | thaiDate }}</td>
         </tr>
       </tbody>
     </table>
