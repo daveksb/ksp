@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
 import {
+  KspListResponse,
   KspRequest,
   KspRequestProcess,
-  KspResponse,
   SchRequestSearchFilter,
   SchTempLicense,
 } from '@ksp/shared/interface';
@@ -21,6 +21,17 @@ export class SchoolRequestService {
       `${environment.apiUrl}/kspstaff/schtemplicenseselectrequestid`,
       {
         requestid,
+      }
+    );
+  }
+
+  getTempLicenseHistory(
+    idcardno: string | null
+  ): Observable<KspListResponse<SchTempLicense>> {
+    return this.http.post<KspListResponse<SchTempLicense>>(
+      `${environment.apiUrl}/kspstaff/schtemplicenseselectidcardno`,
+      {
+        idcardno,
       }
     );
   }

@@ -32,6 +32,7 @@ import {
   SchInfo,
   SchRequestSearchFilter,
   SchStaff,
+  SchTempLicense,
   StaffType,
   Tambol,
   VisaClass,
@@ -100,6 +101,7 @@ export class SchoolRequestComponent implements OnInit {
   eduSelected: number[] = [];
   forbidden: any = null;
   schoolInfo!: SchInfo;
+  tempLicenseHistory: SchTempLicense[] = [];
 
   form = this.fb.group({
     userInfo: [],
@@ -384,8 +386,6 @@ export class SchoolRequestComponent implements OnInit {
   checkButtonsDisableStatus() {
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
       //console.log('userInfo valid = ', this.form.controls.userInfo.valid);
-      //console.log('form valid = ', this.form.valid);
-      //console.log('process = ', this.requestData.process);
       const condition1 =
         this.requestData.requesttype === '3' &&
         this.requestData.process === '3' &&
@@ -403,14 +403,12 @@ export class SchoolRequestComponent implements OnInit {
         this.disableCancel = true;
         return;
       }
-
       // formValid + ไม่มีหมายเลขใบคำขอ ทำได้ทุกอย่าง
       else if (this.form.valid && !this.requestId) {
         this.disableTempSave = false;
         this.disableSave = false;
         return;
       }
-
       // formValid + สถานะเป็นสร้างใบคำขอ, บันทึกชั่วคราวได้ ส่งใบคำขอได้
       else if (this.form.valid && this.requestData.process === '1') {
         //console.log('สถานะเป็นสร้างใบคำขอ ');
@@ -418,7 +416,6 @@ export class SchoolRequestComponent implements OnInit {
         this.disableSave = false;
         return;
       }
-
       // formValid + สถานะเป็นสร้างและส่งใบคำขอ, บันทึกชั่วคราวไม่ได้ ส่งใบคำขอไม่ได้
       else if (this.form.valid && this.requestData.process === '2') {
         //console.log('สถานะเป็นสร้างและส่งใบคำขอ ');
@@ -426,7 +423,6 @@ export class SchoolRequestComponent implements OnInit {
         this.disableSave = true;
         return;
       }
-
       // สถานะ พิจาณาและรับรอง
       else if (this.requestData.process === '5') {
         //console.log('สถานะรับรอง = ');
@@ -435,7 +431,6 @@ export class SchoolRequestComponent implements OnInit {
         this.disableCancel = true;
         return;
       }
-
       // formValid + สถานะเป็นส่งกลับเพื่อแก้ไข, บันทึกชั่วคราวได้ ส่งใบคำขอได้
       else if (condition1 || condition2) {
         this.disableTempSave = false;
@@ -468,9 +463,16 @@ export class SchoolRequestComponent implements OnInit {
     });
   }
 
+  getTempLicenseHistory(idCardNo: string | null) {
+    this.requestService.getTempLicenseHistory(idCardNo).subscribe((res) => {
+      this.tempLicenseHistory = res.datareturn;
+    });
+  }
+
   loadRequestFromId(id: number) {
     this.requestService.schGetRequestById(id).subscribe((res) => {
       if (res) {
+        this.getTempLicenseHistory(res.idcardno);
         this.requestData = res;
         this.pathUserInfo(res);
         this.patchAddress(parseJson(res.addressinfo));

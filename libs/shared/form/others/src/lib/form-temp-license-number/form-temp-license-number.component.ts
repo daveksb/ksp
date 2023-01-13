@@ -1,17 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SchTempLicense } from '@ksp/shared/interface';
+import { ThaiDatePipe } from '@ksp/shared/pipe';
 
 @Component({
   selector: 'ksp-form-temp-license-number',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ThaiDatePipe],
   templateUrl: './form-temp-license-number.component.html',
   styleUrls: ['./form-temp-license-number.component.scss'],
 })
-export class FormTempLicenseNumberComponent implements OnInit {
+export class FormTempLicenseNumberComponent {
   viewHistory = false;
-
-  constructor() {}
-
-  ngOnInit(): void {}
+  @Input() tempLicenseHistory: SchTempLicense[] = [];
 }

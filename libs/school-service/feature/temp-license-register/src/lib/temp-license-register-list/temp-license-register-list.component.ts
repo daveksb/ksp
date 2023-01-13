@@ -1,10 +1,9 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
 import {
   careerTypeList,
   SchoolLangMapping,
@@ -26,7 +25,6 @@ import {
   changeToEnglishMonth,
   changeToThaiNumber,
   getCookie,
-  hasRejectedRequest,
   schoolMapRequestType,
   thaiDate,
 } from '@ksp/shared/utility';
@@ -37,7 +35,7 @@ import { Subject } from 'rxjs';
   templateUrl: './temp-license-register-list.component.html',
   styleUrls: ['./temp-license-register-list.component.scss'],
 })
-export class TempLicenseRegisterListComponent implements OnInit, AfterViewInit {
+export class TempLicenseRegisterListComponent implements AfterViewInit {
   isLoading: Subject<boolean> = this.loaderService.isLoading;
   SchoolRequestSubType = SchoolRequestSubType;
   checkRequestType = schoolMapRequestType;
@@ -66,8 +64,6 @@ export class TempLicenseRegisterListComponent implements OnInit, AfterViewInit {
     public dialog: MatDialog,
     private schoolInfoService: SchoolInfoService
   ) {}
-
-  ngOnInit(): void {}
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;

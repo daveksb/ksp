@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'e-service-request-license-approve-summary-table',
@@ -27,7 +26,7 @@ export class RequestLicenseApproveSummaryTableComponent implements OnInit {
   displayedColumns: string[] = ['result', 'count'];
   dataSource = new MatTableDataSource<any>();
 
-  constructor(private router: Router) {}
+  //constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.dataSource.data = this.data;
