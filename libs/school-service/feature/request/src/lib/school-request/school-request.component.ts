@@ -468,9 +468,16 @@ export class SchoolRequestComponent implements OnInit {
     });
   }
 
+  getTempLicenseHistory(idCardNo: string | null) {
+    this.requestService.getTempLicenseHistory(idCardNo).subscribe((res) => {
+      console.log('temp license history = ', res);
+    });
+  }
+
   loadRequestFromId(id: number) {
     this.requestService.schGetRequestById(id).subscribe((res) => {
       if (res) {
+        this.getTempLicenseHistory(res.idcardno);
         this.requestData = res;
         this.pathUserInfo(res);
         this.patchAddress(parseJson(res.addressinfo));

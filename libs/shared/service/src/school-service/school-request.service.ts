@@ -4,7 +4,6 @@ import { environment } from '@ksp/shared/environment';
 import {
   KspRequest,
   KspRequestProcess,
-  KspResponse,
   SchRequestSearchFilter,
   SchTempLicense,
 } from '@ksp/shared/interface';
@@ -21,6 +20,15 @@ export class SchoolRequestService {
       `${environment.apiUrl}/kspstaff/schtemplicenseselectrequestid`,
       {
         requestid,
+      }
+    );
+  }
+
+  getTempLicenseHistory(idcardno: string | null): Observable<SchTempLicense[]> {
+    return this.http.post<SchTempLicense[]>(
+      `${environment.apiUrl}/kspstaff/xxxxxxxxxxxxxxxxxxx`,
+      {
+        idcardno,
       }
     );
   }
