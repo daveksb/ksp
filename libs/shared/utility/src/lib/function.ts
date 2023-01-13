@@ -6,6 +6,7 @@ import {
   SchoolSelfDevelopActivityTies,
   SelfRequestProcess,
   SelfRequestType,
+  subjects,
   ThaiNumberMapping,
 } from '@ksp/shared/constant';
 import { FileGroup, KspRequest } from '@ksp/shared/interface';
@@ -384,4 +385,8 @@ export function isIdCard(idCard: any) {
   } catch (error) {
     return false;
   }
+}
+
+export function teachingSubjects(id: any) {
+  return subjects.find((s) => s.value === id)?.label;
 }

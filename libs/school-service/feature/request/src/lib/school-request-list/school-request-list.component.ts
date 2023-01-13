@@ -31,6 +31,7 @@ import {
   hasRejectedRequest,
   changeToThaiNumber,
   changeToEnglishMonth,
+  teachingSubjects,
 } from '@ksp/shared/utility';
 import { Subject } from 'rxjs';
 
@@ -52,6 +53,9 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
   careerTypeList = careerTypeList;
   initialSearch = true;
   rejectedRequests: KspRequest[] = [];
+  tempLicenseHistory: SchTempLicense[] = [];
+  tempLicenseRequestTimes: any;
+
   defaultForm = {
     requesttype: '3',
     careertype: '1',
@@ -276,6 +280,13 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     this.router.navigate(['/request-reward', 'detail', id]);
   }
 
+  /* getTempLicenseHistory(idCardNo: string | null) {
+    this.requestService.getTempLicenseHistory(idCardNo).subscribe((res) => {
+      this.tempLicenseHistory = res.datareturn;
+      console.log('this.tempLicenseHistory = ', this.tempLicenseHistory);
+    });
+  } */
+
   requestPdf(element: KspRequest) {
     const pdfType = element.requesttype;
     const pdfSubType = element.careertype;
@@ -299,6 +310,26 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       id12,
       id13,
     ] = element?.idcardno?.split('') ?? [];
+
+    let approve1 = false;
+    let approve2 = false;
+    let approve3 = false;
+
+    this.requestService
+      .getTempLicenseHistory(element.idcardno)
+      .subscribe((res) => {
+        this.tempLicenseHistory = res.datareturn;
+        this.tempLicenseRequestTimes = this.tempLicenseHistory?.length || 0 + 1;
+        //console.log('tempLicenseRequestTimes = ', this.tempLicenseRequestTimes);
+
+        if (Number(this.tempLicenseRequestTimes) === 1) {
+          approve1 = true;
+        } else if (Number(this.tempLicenseRequestTimes) === 2) {
+          approve2 = true;
+        } else if (Number(this.tempLicenseRequestTimes) === 3) {
+          approve3 = true;
+        }
+      });
 
     const position = element.position;
     const eduinfo = JSON.parse(element.eduinfo || '');
@@ -365,6 +396,14 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     const country1 = edu1?.country ?? '';
 
     const teachinginfo = JSON.parse(element.teachinginfo || '');
+
+    let subject: any;
+    let subjectName = '';
+
+    for (const index in teachinginfo.teachingSubjects) {
+      subject = teachingSubjects(teachinginfo.teachingSubjects[index]);
+      subjectName += subject + ' ';
+    }
 
     let lv1 = false;
     let lv2 = false;
@@ -709,6 +748,9 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
             id11,
             id12,
             id13,
+            approve1,
+            approve2,
+            approve3,
             degreename1,
             institution1,
             major1,
@@ -728,6 +770,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
             graduateDate3,
             grade3,
             nameen,
+            subjectName,
             lv1,
             lv2,
             lv3,

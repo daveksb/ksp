@@ -26,7 +26,7 @@ export class SchoolUserDetailComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    console.log('data = ', this.data);
+    //console.log('data = ', this.data);
     this.prefixList$ = this.generalInfoService.getPrefix();
 
     const data: any = {

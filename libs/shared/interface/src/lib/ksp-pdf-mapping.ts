@@ -626,7 +626,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'subjectName',
             options: {
-              x: 275,
+              x: 265,
               y: 770,
               size: defaultSize,
               color: black,
