@@ -14,7 +14,7 @@
 
       <div class="row mb-2">
         <div class="col">
-          <label class="form-label">เลขที่ใบคำขอ</label>
+          <label class="form-label">เลขที่แบบคำขอ</label>
           <input class="form-control" type="text" formControlName="requestno" />
         </div>
         <div class="col">
@@ -67,7 +67,7 @@
 
       <div class="row mb-2">
         <div class="col" *ngIf="isSchoolUser">
-          <label class="form-label">ประเภทใบคำขอ</label>
+          <label class="form-label">ประเภทแบบคำขอ</label>
           <select class="form-select" formControlName="requesttype">
             <option value="null" selected hidden disabled>กรุณาเลือก</option>
             <option value="1">ขอยื่นผู้ประสานงาน</option>
@@ -89,7 +89,7 @@
         </div>
 
         <div class="col">
-          <label class="form-label">สถานะใบคำขอ</label>
+          <label class="form-label">สถานะแบบคำขอ</label>
           <select class="form-select" formControlName="requeststatus">
             <option selected hidden disabled value="null">กรุณาเลือก</option>
             <option *ngFor="let s of statusList" [value]="s?.id">
@@ -100,7 +100,7 @@
       </div>
       <div class="row mb-2">
         <div class="col-6">
-          <label class="form-label">วันที่ยื่นใบคำขอ</label>
+          <label class="form-label">วันที่ยื่นแบบคำขอ</label>
           <div class="d-flex align-items-center">
             <input
               matInput

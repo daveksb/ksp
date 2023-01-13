@@ -51,12 +51,12 @@ export class ImportStudentComponent implements OnInit {
   payload: any;
   exceltoJson: any;
   headerStudent = {
-    h1: 'ยื่นใบคำขอ',
+    h1: 'ยื่นแบบคำขอ',
     h2: 'ขอยื่นรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา',
     h3: 'ขอยื่นรายชื่อผู้เข้าศึกษา',
   };
   headerGraduate = {
-    h1: 'ยื่นใบคำขอ',
+    h1: 'ยื่นแบบคำขอ',
     h2: 'ขอยื่นรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา',
     h3: 'ขอยื่นรายชื่อผู้สำเร็จการศึกษา',
   };
@@ -100,12 +100,12 @@ export class ImportStudentComponent implements OnInit {
   getAdmissionList() {
     this.requestService
       .getRequestAdmissionById({
-        id: this.requestid
+        id: this.requestid,
       })
       .subscribe((response: any) => {
         if (response) {
           let parseuser: any;
-          console.log(response)
+          console.log(response);
           if (response.requesttype == '05') {
             parseuser = parseJson(response.admissionlist);
             this.pageType = 'admissionList';
@@ -389,9 +389,9 @@ export class ImportStudentComponent implements OnInit {
       payload: { ...this.payload },
     };
 
-    localForage.setItem('studentform', datainfo).then(()=>{
+    localForage.setItem('studentform', datainfo).then(() => {
       this.router.navigate(['/degree-cert', 'consider-student']);
-    })
+    });
   }
 
   checkdisableSave() {
@@ -413,6 +413,6 @@ export class ImportStudentComponent implements OnInit {
   }
 
   prev() {
-    this.router.navigate(['/degree-cert','list-approved']);
+    this.router.navigate(['/degree-cert', 'list-approved']);
   }
 }

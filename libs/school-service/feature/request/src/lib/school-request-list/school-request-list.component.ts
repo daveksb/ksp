@@ -90,7 +90,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     )} ถูกส่งคืน "ปรับแก้ไข/เพิ่มเติม"
     กรุณาส่งกลับภายในวันที่ ${thaiDate(
       new Date(detail.returndate)
-    )} มิฉะนั้นใบคำขอจะถูกยกเลิก `;
+    )} มิฉะนั้นแบบคำขอจะถูกยกเลิก `;
   }
 
   search(f: Partial<SchRequestSearchFilter>) {
@@ -459,7 +459,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
             graduateDate2,
             nameen,
             checkbox1,
-            file2_th
+            file2_th,
           },
         },
       });

@@ -2,7 +2,7 @@
   <div class="text-primary box-header">ค้นหารายการ</div>
   <div class="row mb-2">
     <div class="col-6">
-      <label class="form-label required">ประเภทใบคำขอ</label>
+      <label class="form-label required">ประเภทแบบคำขอ</label>
       <select class="form-select" formControlName="requesttype">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option *ngFor="let t of requestTypeList" [value]="t.id">
@@ -11,7 +11,7 @@
       </select>
     </div>
     <div class="col-6" *ngIf="!isNotRequest">
-      <label class="form-label">เลขที่ใบคำขอ </label>
+      <label class="form-label">เลขที่แบบคำขอ </label>
       <input class="form-control" type="text" formControlName="requestno" />
     </div>
   </div>
@@ -82,7 +82,7 @@
     </div>
     <div class="col">
       <label class="form-label" *ngIf="!isNotRequest"
-        >วันเดือนปีที่ยื่นใบคำขอ : จาก</label
+        >วันเดือนปีที่ยื่นแบบคำขอ : จาก</label
       >
       <label class="form-label" *ngIf="isNotRequest"
         >วันที่ได้รับหนังสืออนุญาต : จาก</label
@@ -107,7 +107,7 @@
 
     <div class="col">
       <label class="form-label" *ngIf="!isNotRequest"
-        >วันเดือนปีที่ยื่นใบคำขอ : ถึง</label
+        >วันเดือนปีที่ยื่นแบบคำขอ : ถึง</label
       >
       <label class="form-label" *ngIf="isNotRequest"
         >วันที่ได้รับหนังสืออนุญาต : ถึง</label
@@ -140,7 +140,7 @@
       ล้างข้อมูล
     </button>
 
-    <span [matTooltipDisabled]="form.valid" matTooltip="กรุณาระบุประเภทใบคำขอ">
+    <span [matTooltipDisabled]="form.valid" matTooltip="กรุณาระบุประเภทแบบคำขอ">
       <button
         (click)="search.emit(form.value)"
         [disabled]="form.invalid"

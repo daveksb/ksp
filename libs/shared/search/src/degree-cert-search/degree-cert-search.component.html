@@ -4,7 +4,7 @@
 
     <div class="row mb-2">
       <div class="col-4">
-        <label class="form-label">เลขที่ใบคำขอ </label>
+        <label class="form-label">เลขที่แบบคำขอ </label>
         <input
           class="form-control"
           type="text"
@@ -82,7 +82,11 @@
     <div class="row mb-3">
       <div class="col">
         <label class="form-label">สถานะตรวจสอบ </label>
-        <select class="form-select" formControlName="verifyStatus" (change)="handleChangeStatus($event)">
+        <select
+          class="form-select"
+          formControlName="verifyStatus"
+          (change)="handleChangeStatus($event)"
+        >
           <option value="null" disabled selected hidden>กรุณาเลือก</option>
           <option *ngFor="let item of verifyStatusOption" [value]="item.value">
             {{ item.label }}

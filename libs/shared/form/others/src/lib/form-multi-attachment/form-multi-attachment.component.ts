@@ -15,7 +15,7 @@ import { FileService } from '@ksp/shared/form/file-upload';
 export class FormMultiAttachmentComponent {
   @Input() titleClass = ``;
   @Input() titleNote = '';
-  @Input() pageType!: string; // ใช้ อ้างอิง tab ในหน้าใบคำขอเพื่อระบุรายการไฟล์ ที่เกี่ยวข้อง enum RequestPageType
+  @Input() pageType!: string; // ใช้ อ้างอิง tab ในหน้าแบบคำขอเพื่อระบุรายการไฟล์ ที่เกี่ยวข้อง enum RequestPageType
   @Input() groups: FileGroup[] = [];
   @Input() mode: FormMode = 'edit';
   @Input() title = 'กรุณาแนบหลักฐานประกอบ';

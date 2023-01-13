@@ -184,7 +184,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
     const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการยืนยันข้อมูล
-        และส่งใบคำขอ ใช่หรือไม่? `,
+        และส่งแบบคำขอ ใช่หรือไม่? `,
         btnLabel: 'ยืนยัน',
       },
     });

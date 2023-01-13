@@ -42,7 +42,7 @@ export class PromptpayComponent implements OnInit {
         header: `ทำรายการสำเร็จ`,
         btnLabel: 'กลับสู่หน้าหลัก',
         content: `วันที่ : ${thaiDate(new Date())}
-        เลขที่ใบคำขอ : ${this.kspRequest?.requestno}`,
+        เลขที่แบบคำขอ : ${this.kspRequest?.requestno}`,
         subContent: 'หากมีข้อสงสัย กรุณาโทร 02 304 9899',
         showImg: true,
       },
@@ -66,7 +66,7 @@ export class PromptpayComponent implements OnInit {
         header: `ทำรายการชำระเงินไม่สำเร็จ`,
         btnLabel: 'กลับสู่หน้าหลัก',
         content: `วันที่ : ${thaiDate(new Date())}
-        เลขที่ใบคำขอ : ${this.requestno}`,
+        เลขที่แบบคำขอ : ${this.requestno}`,
         subContent: 'หากมีข้อสงสัย กรุณาโทร 02 304 9899',
         showImg: true,
         isDanger: true,

@@ -2,7 +2,7 @@
   <div class="bg-light px-4 py-2 default-width">
     <div class="row mb-2">
       <div class="col">
-        <label class="form-label">เลขที่ใบคำขอ </label>
+        <label class="form-label">เลขที่แบบคำขอ </label>
         <input class="form-control" type="text" formControlName="requestno" />
       </div>
 
@@ -18,7 +18,6 @@
     </div>
 
     <div class="row mb-2">
-
       <div class="col pe-1">
         <label class="form-label">จาก : วันที่ส่งจัดบัญชีรายชื่อ</label>
         <div class="d-flex align-items-center">
@@ -28,11 +27,13 @@
             autocomplete="off"
             class="form-control form-date"
             placeholder="วว/ดด/ปปปป"
-            formControlName="createFrom" />
+            formControlName="createFrom"
+          />
           <mat-datepicker-toggle
             class="button-date"
             matSuffix
-            [for]="picker1"></mat-datepicker-toggle>
+            [for]="picker1"
+          ></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
         </div>
       </div>
@@ -51,17 +52,19 @@
             autocomplete="off"
             class="form-control form-date"
             placeholder="วว/ดด/ปปปป"
-            formControlName="createTo" />
+            formControlName="createTo"
+          />
           <mat-datepicker-toggle
             class="button-date"
             matSuffix
-            [for]="picker2"></mat-datepicker-toggle>
+            [for]="picker2"
+          ></mat-datepicker-toggle>
           <mat-datepicker #picker2></mat-datepicker>
         </div>
       </div>
 
       <div class="col pe-1">
-        <label class="form-label">จาก : วันที่ยื่นใบคำขอ</label>
+        <label class="form-label">จาก : วันที่ยื่นแบบคำขอ</label>
         <div class="d-flex align-items-center">
           <input
             matInput
@@ -69,11 +72,13 @@
             autocomplete="off"
             class="form-control form-date"
             placeholder="วว/ดด/ปปปป"
-            formControlName="requestdatefrom" />
+            formControlName="requestdatefrom"
+          />
           <mat-datepicker-toggle
             class="button-date"
             matSuffix
-            [for]="picker3"></mat-datepicker-toggle>
+            [for]="picker3"
+          ></mat-datepicker-toggle>
           <mat-datepicker #picker3></mat-datepicker>
         </div>
       </div>
@@ -84,7 +89,7 @@
       </div>
 
       <div class="col ps-1">
-        <label class="form-label">ถึง : วันที่ยื่นใบคำขอ</label>
+        <label class="form-label">ถึง : วันที่ยื่นแบบคำขอ</label>
         <div class="d-flex align-items-center">
           <input
             matInput
@@ -92,25 +97,27 @@
             autocomplete="off"
             class="form-control form-date"
             placeholder="วว/ดด/ปปปป"
-            formControlName="requestdateto" />
+            formControlName="requestdateto"
+          />
           <mat-datepicker-toggle
             class="button-date"
             matSuffix
-            [for]="picker4"></mat-datepicker-toggle>
+            [for]="picker4"
+          ></mat-datepicker-toggle>
           <mat-datepicker #picker4></mat-datepicker>
         </div>
       </div>
     </div>
 
     <div class="row mb-2">
-
       <div class="col-6">
         <label class="form-label">จังหวัดที่ขอยื่น</label>
         <select formControlName="provinceid" class="form-select">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option
-            *ngFor="let province of (provinces$ | async)"
-            [value]="province?.province_id">
+            *ngFor="let province of provinces$ | async"
+            [value]="province?.province_id"
+          >
             {{ province?.province_name }}
           </option>
         </select>
@@ -121,14 +128,16 @@
       <button
         (click)="form.reset(); clear.emit(true)"
         type="button"
-        class="btn border-primary text-primary bg-white">
+        class="btn border-primary text-primary bg-white"
+      >
         ล้างข้อมูล
       </button>
 
       <button
         (click)="search.emit(form.value)"
         type="button"
-        class="btn btn-primary ms-2">
+        class="btn btn-primary ms-2"
+      >
         ค้นหา
       </button>
     </div>

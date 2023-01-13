@@ -1,11 +1,11 @@
 <ksp-top-nav
-  ><span header>ตรวจสอบใบคำขอ</span
+  ><span header>ตรวจสอบแบบคำขอ</span
   ><span subHeader>ขอคืนค่าธรรมเนียม </span></ksp-top-nav
 >
 
 <div class="bg-secondary bg-opacity-10 px-4 py-2">
   <form [formGroup]="form">
-    <div class="box-header">รายละเอียดใบคำขอ</div>
+    <div class="box-header">รายละเอียดแบบคำขอ</div>
     <div class="bg-white p-3">
       <ksp-request-header-info
         [requestDate]="requestData.createdate"
@@ -13,7 +13,7 @@
       ></ksp-request-header-info>
       <hr />
       <div class="bg-light p-3">
-        <div class="box-header">ข้อมูลผู้ยื่นใบคำขอ</div>
+        <div class="box-header">ข้อมูลผู้ยื่นแบบคำขอ</div>
         <ksp-form-user-info
           [isSelfService]="true"
           [mode]="'view'"

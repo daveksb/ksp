@@ -163,7 +163,7 @@ export abstract class LicenseFormBaseComponent {
   public cancel() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
-        title: `คุณต้องการยกเลิกรายการใบคำขอ
+        title: `คุณต้องการยกเลิกรายการแบบคำขอ
         ใช่หรือไม่? `,
       },
     });
@@ -190,7 +190,7 @@ export abstract class LicenseFormBaseComponent {
   sameIdCardDialog() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       data: {
-        header: `หมายเลขบัตรประชาชนนี้ได้ถูกใช้ยื่นใบคำขอไปแล้ว`,
+        header: `หมายเลขบัตรประชาชนนี้ได้ถูกใช้ยื่นแบบคำขอไปแล้ว`,
       },
     });
 
@@ -204,7 +204,7 @@ export abstract class LicenseFormBaseComponent {
   cancelCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       data: {
-        header: `ยกเลิกใบคำขอสำเร็จ`,
+        header: `ยกเลิกแบบคำขอสำเร็จ`,
       },
     });
 
@@ -219,9 +219,11 @@ export abstract class LicenseFormBaseComponent {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         showImg: true,
-        header: `บันทึกใบคำขอสำเร็จ`,
+        header: `บันทึกแบบคำขอสำเร็จ`,
         content: `วันที่ : ${thaiDate(new Date())}
-        เลขที่ใบคำขอ : ${formatRequestNo(request.requestno || this.requestNo)}`,
+        เลขที่แบบคำขอ : ${formatRequestNo(
+          request.requestno || this.requestNo
+        )}`,
         subContent: 'หากมีข้อสงสัย กรุณาโทร 02 304 9899',
       },
     });

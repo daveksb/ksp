@@ -1,11 +1,11 @@
 <ksp-top-nav
-  ><span header>ยื่นใบคำขอ</span
-  ><span subHeader>ใบคำขอรับรองความรู้</span></ksp-top-nav
+  ><span header>ยื่นแบบคำขอ</span
+  ><span subHeader>แบบคำขอรับรองความรู้</span></ksp-top-nav
 >
 
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
-    <div class="box-header">รายละเอียดใบคำขอรับรองความรู้</div>
+    <div class="box-header">รายละเอียดแบบคำขอรับรองความรู้</div>
     <div class="bg-white p-3">
       <ksp-request-header-info
         [requestDate]="requestData.createdate"
@@ -128,6 +128,6 @@
     (prevClicked)="prevTab()"
     (nextClicked)="nextTab()"
     [disableNext]="!checkResultFormArray.valid && selectedTabIndex === 3"
-    [disableNextMessage]="'กรุณาตรวจสอบใบคำขอให้ครบถ้วน'"
+    [disableNextMessage]="'กรุณาตรวจสอบแบบคำขอให้ครบถ้วน'"
   ></ksp-bottom-nav>
 </div>

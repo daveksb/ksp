@@ -15,7 +15,12 @@ import {
   UniInfoService,
   UniRequestService,
 } from '@ksp/shared/service';
-import { formatDate, getCookie, parseJson, thaiDate } from '@ksp/shared/utility';
+import {
+  formatDate,
+  getCookie,
+  parseJson,
+  thaiDate,
+} from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
@@ -26,8 +31,8 @@ export class ForeignStudentIdComponent implements OnInit {
   foreignInfo: FileGroup[] = [
     {
       name: 'สำเนาหนังสือเดินทาง',
-      files: []
-    }
+      files: [],
+    },
   ] as FileGroup[];
   form = this.fb.group({
     foreignStudent: [],
@@ -61,9 +66,8 @@ export class ForeignStudentIdComponent implements OnInit {
     private generalInfoService: GeneralInfoService,
     private uniInfoService: UniInfoService,
     private loaderService: LoaderService,
-    private route: ActivatedRoute,
-  ) {
-  }
+    private route: ActivatedRoute
+  ) {}
   get formValid() {
     return this.form.get('foreignStudent')?.valid;
   }
@@ -82,48 +86,49 @@ export class ForeignStudentIdComponent implements OnInit {
       this.allowSave = false;
       this.mode = 'view';
       // this.uniRequestService;
-      console.log('get by id')
-      this.uniRequestService.getUniRequestById(this.requestid).subscribe((res: any) => {
-        if (res) {
-          console.log(res)
-          this.draftrequest = res;
-          this.uniid = res.uniid;
-          this.unitype = res.unitype; 
-          this.form.patchValue({
-            foreignStudent: res,
-            visainfo: res
-          });
-          const file = res.fileinfo ? parseJson(res.fileinfo) : [];
-          console.log(file)
-          this.foreignInfo = file;
-          this.getUniversityDetail();
-        }
-      })
+      console.log('get by id');
+      this.uniRequestService
+        .getUniRequestById(this.requestid)
+        .subscribe((res: any) => {
+          if (res) {
+            console.log(res);
+            this.draftrequest = res;
+            this.uniid = res.uniid;
+            this.unitype = res.unitype;
+            this.form.patchValue({
+              foreignStudent: res,
+              visainfo: res,
+            });
+            const file = res.fileinfo ? parseJson(res.fileinfo) : [];
+            console.log(file);
+            this.foreignInfo = file;
+            this.getUniversityDetail();
+          }
+        });
     } else {
       this.allowSave = true;
       this.mode = 'edit';
-      console.log('here')
+      console.log('here');
       this.uniid = getCookie('uniId') || '';
       this.unitype = getCookie('uniType') || '';
       this.getUniversityDetail();
     }
-    console.log(this.allowSave)
+    console.log(this.allowSave);
   }
 
   getUniversityDetail() {
-    console.log(this.uniid)
-    this.uniInfoService
-    .univerSitySelectById(this.uniid)
-    .subscribe((res) => {
-      this.uniName = res?.name + (res?.campusname ? `, ${res?.campusname}` : '') || '-';
+    console.log(this.uniid);
+    this.uniInfoService.univerSitySelectById(this.uniid).subscribe((res) => {
+      this.uniName =
+        res?.name + (res?.campusname ? `, ${res?.campusname}` : '') || '-';
       this.universityCode = res?.universitycode || '-';
       this.uniAddress = '-';
     });
-    this.uniInfoService
-    .getUniversityType()
-    .subscribe((res:any) => {
-      const findUnitype = res.find((data:any)=>{return data.id == this.unitype})
-      console.log(findUnitype)
+    this.uniInfoService.getUniversityType().subscribe((res: any) => {
+      const findUnitype = res.find((data: any) => {
+        return data.id == this.unitype;
+      });
+      console.log(findUnitype);
       if (findUnitype) this.universitytypename = findUnitype.name;
     });
   }
@@ -137,21 +142,27 @@ export class ForeignStudentIdComponent implements OnInit {
   cancel() {
     this.router.navigate(['/', 'home']);
   }
-  getDefaultReq(value:any):any{
-    const payload = {...value};
-    payload.birthdate = value?.birthdate ? formatDate(new Date(value?.birthdate).toISOString()) : null
-    payload.passportenddate = value?.passportenddate ? formatDate(new Date(value?.passportenddate).toISOString()) : null
-    payload.passportstartdate = value?.passportstartdate ? formatDate(new Date(value?.passportstartdate).toISOString()) : null
-    payload.careertype = "5"
+  getDefaultReq(value: any): any {
+    const payload = { ...value };
+    payload.birthdate = value?.birthdate
+      ? formatDate(new Date(value?.birthdate).toISOString())
+      : null;
+    payload.passportenddate = value?.passportenddate
+      ? formatDate(new Date(value?.passportenddate).toISOString())
+      : null;
+    payload.passportstartdate = value?.passportstartdate
+      ? formatDate(new Date(value?.passportstartdate).toISOString())
+      : null;
+    payload.careertype = '5';
     return payload;
   }
   save() {
-    console.log(this.form)
+    console.log(this.form);
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูล
-        และส่งใบคำขอ ใช่หรือไม่? `,
+        และส่งแบบคำขอ ใช่หรือไม่? `,
       },
     });
 
@@ -163,7 +174,9 @@ export class ForeignStudentIdComponent implements OnInit {
       .pipe(
         switchMap((res) => {
           if (res) {
-            const studentInfo = this.getDefaultReq(this.form.value.foreignStudent)
+            const studentInfo = this.getDefaultReq(
+              this.form.value.foreignStudent
+            );
             studentInfo.ref1 = '3';
             studentInfo.ref2 = '04';
             studentInfo.ref3 = '5';
@@ -171,7 +184,7 @@ export class ForeignStudentIdComponent implements OnInit {
             studentInfo.requesttype = '4';
             studentInfo.subtype = '5';
             studentInfo.currentprocess = `1`;
-            studentInfo.requeststatus = `1`;      
+            studentInfo.requeststatus = `1`;
             studentInfo.process = '1';
             studentInfo.status = '1';
             studentInfo.uniid = this.uniid;
@@ -192,7 +205,7 @@ export class ForeignStudentIdComponent implements OnInit {
       data: {
         header: 'บันทึกข้อมูลสำเร็จ',
         content: `วันที่ ${this.date}
-        เลขที่ใบคำขอ : ${res?.requestno || '-'}`
+        เลขที่แบบคำขอ : ${res?.requestno || '-'}`,
       },
     });
 

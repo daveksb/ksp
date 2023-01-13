@@ -4,7 +4,7 @@
 </div>
 
 <ksp-top-nav
-  ><span header>ยื่นใบคำขอ</span
+  ><span header>ยื่นแบบคำขอ</span
   ><span subHeader
     >ขอเปลี่ยนแปลงรายละเอียดรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา
   </span></ksp-top-nav
@@ -17,7 +17,7 @@
         <div class="box-header">ค้นหาข้อมูลที่ต้องการค้นหา</div>
         <div class="row mb-2">
           <div class="col">
-            <label class="form-label">เลขที่ใบคำขอ</label>
+            <label class="form-label">เลขที่แบบคำขอ</label>
             <input
               class="form-control"
               type="text"
@@ -97,7 +97,7 @@
 
         <div class="row mb-2">
           <div class="col-6">
-            <label class="form-label">วันเดือนปีที่ยื่นใบคำขอ : จาก</label>
+            <label class="form-label">วันเดือนปีที่ยื่นแบบคำขอ : จาก</label>
             <div class="d-flex align-items-center">
               <input
                 [matDatepicker]="picker1"
@@ -114,7 +114,7 @@
             </div>
           </div>
           <div class="col-6">
-            <label class="form-label">วันเดือนปีที่ยื่นใบคำขอ​ : ถึง</label>
+            <label class="form-label">วันเดือนปีที่ยื่นแบบคำขอ​ : ถึง</label>
             <div class="d-flex align-items-center">
               <input
                 [matDatepicker]="picker2"
@@ -161,7 +161,7 @@
       type="button"
       (click)="create()"
     >
-      + สร้างใบคำขอ
+      + สร้างแบบคำขอ
     </button>
   </div>
   <div class="bg-white p-3">
@@ -279,7 +279,10 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         <tr class="mat-row text-center" *matNoDataRow>
-          <td class="text-center text-danger fs-5" [attr.colspan]="displayedColumns.length">
+          <td
+            class="text-center text-danger fs-5"
+            [attr.colspan]="displayedColumns.length"
+          >
             ไม่พบข้อมูล
           </td>
         </tr>

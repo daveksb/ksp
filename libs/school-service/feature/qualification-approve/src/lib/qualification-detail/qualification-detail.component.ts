@@ -491,7 +491,7 @@ export class QualificationDetailComponent implements OnInit {
   duplicateRequestDialog() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       data: {
-        header: `หมายเลขบัตรประชาชนนี้ได้ถูกใช้ยื่นใบคำขอ
+        header: `หมายเลขบัตรประชาชนนี้ได้ถูกใช้ยื่นแบบคำขอ
         และกำลังอยู่ในระหว่างดำเนินการ !`,
       },
     });

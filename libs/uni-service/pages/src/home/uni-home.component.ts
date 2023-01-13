@@ -8,7 +8,11 @@ import { SelfServiceFormModule } from '@ksp/self-service/form';
 import { ListData, KspPaginationComponent } from '@ksp/shared/interface';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { DegreeHomeSearchComponent } from '@ksp/shared/search';
-import { AddressService, LoaderService, UniInfoService } from '@ksp/shared/service';
+import {
+  AddressService,
+  LoaderService,
+  UniInfoService,
+} from '@ksp/shared/service';
 import { UniFormBadgeComponent } from '@ksp/shared/ui';
 import _ from 'lodash';
 import moment from 'moment';
@@ -36,7 +40,7 @@ const mapOption = () =>
     DegreeHomeSearchComponent,
     UniFormBadgeComponent,
     MatPaginatorModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
   ],
 })
 export class UniHomeComponent extends KspPaginationComponent implements OnInit {
@@ -50,7 +54,7 @@ export class UniHomeComponent extends KspPaginationComponent implements OnInit {
   // ];
 
   // badgeTitle2 = [
-  //   `กรุณาส่งกลับภายในวันที่ DD/MM/YYYY มิฉะนั้นใบคำขอจะถูกยกเลิก`,
+  //   `กรุณาส่งกลับภายในวันที่ DD/MM/YYYY มิฉะนั้นแบบคำขอจะถูกยกเลิก`,
   // ];
 
   form: any = this.fb.group({
@@ -152,12 +156,18 @@ export class UniHomeComponent extends KspPaginationComponent implements OnInit {
   getAll() {
     if (getCookie('uniType')) {
       this.uniInfoService
-        .getUniversity(getCookie('uniType')).subscribe((res) => {
+        .getUniversity(getCookie('uniType'))
+        .subscribe((res) => {
           if (res) {
-            this.universities = res.map((data: any) => ({
-              label: _.get(data, 'name') + (_.get(data, 'campusname') ? `, ${_.get(data, 'campusname')}` : ''),
-              value: _.get(data, 'id'),
-            })) || [];
+            this.universities =
+              res.map((data: any) => ({
+                label:
+                  _.get(data, 'name') +
+                  (_.get(data, 'campusname')
+                    ? `, ${_.get(data, 'campusname')}`
+                    : ''),
+                value: _.get(data, 'id'),
+              })) || [];
           } else {
             this.universities = [];
           }

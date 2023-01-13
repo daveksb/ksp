@@ -6,10 +6,19 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { formatDate, getCookie, parseJson, thaiDate } from '@ksp/shared/utility';
+import {
+  formatDate,
+  getCookie,
+  parseJson,
+  thaiDate,
+} from '@ksp/shared/utility';
 import moment from 'moment';
 import { lastValueFrom, Subject, switchMap } from 'rxjs';
-import { LoaderService, UniInfoService, UniRequestService } from '@ksp/shared/service';
+import {
+  LoaderService,
+  UniInfoService,
+  UniRequestService,
+} from '@ksp/shared/service';
 import { MatStepper } from '@angular/material/stepper';
 import _ from 'lodash';
 
@@ -108,8 +117,8 @@ export class EditDegreeDetailComponent implements OnInit {
       data: {
         header: 'ยืนยันข้อมูลสำเร็จ',
         content: `วันที่ : ${this.date}
-        เลขที่ใบคำขอ : ${requestno || this.requestNo || '-'}`,
-        subContent: `กรุณาตรวจสอบสถานะใบคำขอหรือรหัสเข้าใช้งาน
+        เลขที่แบบคำขอ : ${requestno || this.requestNo || '-'}`,
+        subContent: `กรุณาตรวจสอบสถานะแบบคำขอหรือรหัสเข้าใช้งาน
         ผ่านทางอีเมลผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },
     });
@@ -131,8 +140,8 @@ export class EditDegreeDetailComponent implements OnInit {
         provience: uniData?.provinceid || '',
         courseDetailType: res?.coursedetailtype,
         courseDetail: res?.coursedetailinfo
-        ? parseJson(res?.coursedetailinfo)
-        : null,
+          ? parseJson(res?.coursedetailinfo)
+          : null,
         degreeTypeForm: {
           degreeType: res?.degreelevel,
           courseYear: res?.courseacademicyear,
@@ -208,9 +217,17 @@ export class EditDegreeDetailComponent implements OnInit {
     const returnData: any = {};
     returnData['step1Section1'] = {
       courseacademicyear: step1?.degreeTypeForm?.courseYear || null,
-      courseacceptdate: step1?.degreeTypeForm?.courseAcceptDate ? formatDate(new Date(step1?.degreeTypeForm?.courseAcceptDate).toISOString()) : null,
-      courseapprovedate: step1?.degreeTypeForm?.courseApproveDate ? formatDate( new Date(step1?.degreeTypeForm?.courseApproveDate).toISOString()): null,
-      courseapprovetime:  step1?.degreeTypeForm?.courseApproveTime || null,
+      courseacceptdate: step1?.degreeTypeForm?.courseAcceptDate
+        ? formatDate(
+            new Date(step1?.degreeTypeForm?.courseAcceptDate).toISOString()
+          )
+        : null,
+      courseapprovedate: step1?.degreeTypeForm?.courseApproveDate
+        ? formatDate(
+            new Date(step1?.degreeTypeForm?.courseApproveDate).toISOString()
+          )
+        : null,
+      courseapprovetime: step1?.degreeTypeForm?.courseApproveTime || null,
       coursename: step1?.degreeTypeForm?.courseName || null,
       coursetype: step1?.degreeTypeForm?.courseType || null,
       degreelevel: step1?.degreeTypeForm?.degreeType || null,
@@ -223,8 +240,8 @@ export class EditDegreeDetailComponent implements OnInit {
     returnData['step1Section2'] = {
       coursedetailtype: step1?.courseDetailType || null,
       coursedetailinfo: step1?.courseDetail
-      ? JSON.stringify(step1?.courseDetail)
-      : null,
+        ? JSON.stringify(step1?.courseDetail)
+        : null,
     };
     returnData['step1Section3'] = {
       teachinglocation: step1?.locations
@@ -249,13 +266,13 @@ export class EditDegreeDetailComponent implements OnInit {
     };
 
     returnData['step2Section1'] = {
-      ...(()=>{
-        const reqBody:any = {};
+      ...(() => {
+        const reqBody: any = {};
         if (['a', 'b', 'c'].includes(this.step1DegreeType)) {
           reqBody['coursestructure'] = step2?.plan1?.plans
             ? JSON.stringify(step2?.plan1?.plans)
             : null;
-    
+
           reqBody['courseplan'] = step2?.plan1?.subjects
             ? JSON.stringify(step2?.plan1?.subjects)
             : null;
@@ -268,7 +285,7 @@ export class EditDegreeDetailComponent implements OnInit {
             : null;
         }
         return reqBody;
-      })()
+      })(),
     };
 
     returnData['step2Section2'] = {
@@ -335,23 +352,48 @@ export class EditDegreeDetailComponent implements OnInit {
     reqBody = {
       ...reqBody,
       // form1 section
-      ...form1Section?.section1?newData?.step1Section1:daftData?.step1Section1,
-      ...form1Section?.section2?newData?.step1Section2:daftData?.step1Section2,
-      ...form1Section?.section3?newData?.step1Section3:daftData?.step1Section3,
-      ...form1Section?.section4?newData?.step1Section4:daftData?.step1Section4,
-      ...form1Section?.section5?newData?.step1Section5:daftData?.step1Section5,
-      ...form1Section?.section6?newData?.step1Section6:daftData?.step1Section6,
+      ...(form1Section?.section1
+        ? newData?.step1Section1
+        : daftData?.step1Section1),
+      ...(form1Section?.section2
+        ? newData?.step1Section2
+        : daftData?.step1Section2),
+      ...(form1Section?.section3
+        ? newData?.step1Section3
+        : daftData?.step1Section3),
+      ...(form1Section?.section4
+        ? newData?.step1Section4
+        : daftData?.step1Section4),
+      ...(form1Section?.section5
+        ? newData?.step1Section5
+        : daftData?.step1Section5),
+      ...(form1Section?.section6
+        ? newData?.step1Section6
+        : daftData?.step1Section6),
       //form2 section
-      ...form2Section?.section1?newData?.step2Section1:daftData?.step2Section1,
-      ...form2Section?.section2?newData?.step2Section2:daftData?.step2Section2,
-      ...form2Section?.section3?newData?.step2Section3:daftData?.step2Section3,
-      ...form2Section?.section4?newData?.step2Section4:daftData?.step2Section4,
-      ...form2Section?.section5?newData?.step2Section5:daftData?.step2Section5,
+      ...(form2Section?.section1
+        ? newData?.step2Section1
+        : daftData?.step2Section1),
+      ...(form2Section?.section2
+        ? newData?.step2Section2
+        : daftData?.step2Section2),
+      ...(form2Section?.section3
+        ? newData?.step2Section3
+        : daftData?.step2Section3),
+      ...(form2Section?.section4
+        ? newData?.step2Section4
+        : daftData?.step2Section4),
+      ...(form2Section?.section5
+        ? newData?.step2Section5
+        : daftData?.step2Section5),
       //form2 section
-      ...form3Section?.section1?newData?.step3Section1:daftData?.step3Section1,
-      ...form3Section?.section2?newData?.step3Section2:daftData?.step3Section2,
-
-    }
+      ...(form3Section?.section1
+        ? newData?.step3Section1
+        : daftData?.step3Section1),
+      ...(form3Section?.section2
+        ? newData?.step3Section2
+        : daftData?.step3Section2),
+    };
     return reqBody;
   }
   private toDate(sDate: any) {

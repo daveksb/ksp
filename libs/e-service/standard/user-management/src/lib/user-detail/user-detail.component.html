@@ -10,7 +10,7 @@
 
 <div [formGroup]="form" class="bg-secondary bg-opacity-10 px-4 py-2">
   <div *ngIf="pageType === pageTypeEnum.NewUser" class="box-header">
-    รายละเอียดใบคำขอ
+    รายละเอียดแบบคำขอ
   </div>
   <div *ngIf="pageType === pageTypeEnum.CurrentUser" class="box-header">
     ข้อมูลผู้ใช้งานระบบ
@@ -62,7 +62,7 @@
 
       <div class="row" *ngIf="pageType === pageTypeEnum.NewUser">
         <div class="col-6 mb-2">
-          <label class="form-label">ประเภทใบคำขอ</label>
+          <label class="form-label">ประเภทแบบคำขอ</label>
           <input
             class="form-control"
             type="text"
@@ -87,7 +87,7 @@
 
     <div class="bg-light px-4 py-2">
       <div class="box-header">
-        {{headerRequest[requestType]}}
+        {{ headerRequest[requestType] }}
       </div>
       <ksp-form-coordinator-info
         [mode]="'view'"

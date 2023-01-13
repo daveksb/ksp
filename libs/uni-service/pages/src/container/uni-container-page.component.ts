@@ -28,11 +28,11 @@ export class UniContainerPageComponent implements OnInit {
       icon: 'assets/images/icon-sidenav/home.svg ',
       label: 'หน้าแรก',
       path: '/home',
-      permission: '1'
+      permission: '1',
     },
     {
       icon: 'assets/images/icon-sidenav/paper.svg',
-      label: 'ยื่นใบคำขอ',
+      label: 'ยื่นแบบคำขอ',
       path: '',
       permission: '',
       subMenu: [
@@ -74,22 +74,22 @@ export class UniContainerPageComponent implements OnInit {
         {
           path: '/xxx',
           label: 'ทะเบียนข้อมูลหลักสูตรที่รับรองปริญญาและประกาศนียบัตร',
-          permission: ''
+          permission: '',
         },
         {
           path: '/xxx',
           label: 'ข้อมูลรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา',
-          permission: ''
+          permission: '',
         },
         {
           path: '/xxx',
           label: 'ข้อมูลผลการทดสอบ',
-          permission: ''
+          permission: '',
         },
         {
           path: '/xxx',
           label: 'ข้อมูลผลการประเมินสมรรถนะ',
-          permission: ''
+          permission: '',
         },
       ],
       subMenuName: 'data',
@@ -99,7 +99,7 @@ export class UniContainerPageComponent implements OnInit {
       icon: 'assets/images/icon-sidenav/file-earmark-text-fill.svg',
       label: 'รายงาน',
       path: '',
-      permission: ''
+      permission: '',
     },
     /* {
       icon: 'assets/images/icon-sidenav/gear-fill.svg',
@@ -112,9 +112,11 @@ export class UniContainerPageComponent implements OnInit {
 
   ngOnInit(): void {
     const permissionright = getCookie('permission');
-    this.menuConfig = this.menu.map(data => {
+    this.menuConfig = this.menu.map((data) => {
       if (data.subMenu) {
-        data.subMenu = data.subMenu.filter(data => { return data.permission == permissionright });
+        data.subMenu = data.subMenu.filter((data) => {
+          return data.permission == permissionright;
+        });
       }
       return data;
     });
