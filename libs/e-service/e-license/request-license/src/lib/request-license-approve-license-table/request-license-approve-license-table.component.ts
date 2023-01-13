@@ -26,8 +26,6 @@ export class RequestLicenseApproveLicenseTableComponent
   displayedColumns: string[] = [];
   dataSource = new MatTableDataSource<any>();
 
-  //constructor(private router: Router) {}
-
   ngOnInit(): void {
     this.dataSource.data = this.data;
     this.isKmv
@@ -50,10 +48,7 @@ export class RequestLicenseApproveLicenseTableComponent
   }
 
   viewDetail(item: any) {
-    console.log(item);
+    //console.log(item);
     this.listOpen.emit(item.order);
-    // this.router.navigate(['/request-license', 'guarantee-confirm'], {
-    //   queryParams: { order: item.order, group: item.groupno },
-    // });
   }
 }
