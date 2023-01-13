@@ -360,21 +360,74 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
 
     //teacher
     const file1_th = tab6[0];
+    let file1_thai = false;
+    if (file1_th.length > 0) {
+      file1_thai = true;
+    }
 
-    const file2_th = true;
-    //const file2_th = tab6[0];
+    const file2_thai = true;
+
     const file3_th = tab6[0];
 
     const file4_th = tab3[2];
+    let file4_thai = false;
+    if (file4_th.length > 0) {
+      file4_thai = true;
+    }
+
     const file5_th = tab3[0];
+    let file5_thai = false;
+    if (file5_th.length > 0) {
+      file5_thai = true;
+    }
+
     const file6_th = tab3[1];
+    let file6_thai = false;
+    if (file6_th.length > 0) {
+      file6_thai = true;
+    }
+
     const file7_1_th = tab3[3];
+    let file7_1_thai = false;
+    if (file7_1_th.length > 0) {
+      file7_1_thai = true;
+    }
+
     const file7_2_th = tab3[4];
+    let file7_2_thai = false;
+    if (file7_2_th.length > 0) {
+      file7_2_thai = true;
+    }
+
     const file8_th = tab4[1];
+    let file8_thai = false;
+    if (file8_th.length > 0) {
+      file8_thai = true;
+    }
+
     const file9_th = tab4[2];
+    let file9_thai = false;
+    if (file9_th.length > 0) {
+      file9_thai = true;
+    }
+
     const file10_th = tab4[0];
+    let file10_thai = false;
+    if (file10_th.length > 0) {
+      file10_thai = true;
+    }
+
     const file11_th = tab6[1];
+    let file11_thai = false;
+    if (file11_th.length > 0) {
+      file11_thai = true;
+    }
+
     const file12_th = tab6[5];
+    let file12_thai = false;
+    if (file12_th.length > 0) {
+      file12_thai = true;
+    }
 
     const file13_th = tab6[0];
 
@@ -396,7 +449,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     const file7_frgn = tab6[5];
     const file8_frgn = tab6[0];
 
-    console.log('fileinfo = ', tab6);
+    console.log('fileinfo = ', file1_th);
     //console.log('fileid = ', file1[0].fileid);
 
     this.schoolInfoService.getSchoolInfo(payload).subscribe((res: any) => {
@@ -459,7 +512,18 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
             graduateDate2,
             nameen,
             checkbox1,
-            file2_th
+            file1_thai,
+            file2_thai,
+            file4_thai,
+            file5_thai,
+            file6_thai,
+            file7_1_thai,
+            file7_2_thai,
+            file8_thai,
+            file9_thai,
+            file10_thai,
+            file11_thai,
+            file12_thai,
           },
         },
       });

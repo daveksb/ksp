@@ -722,12 +722,12 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           },
           //evidence file
           {
-            key: 'evidence1',
+            key: 'file1_thai',
             options: { x: 85, y: 442 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'file2_th',
+            key: 'file2_thai',
             options: { x: 85, y: 420 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
@@ -737,52 +737,52 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'evidence4',
+            key: 'file4_thai',
             options: { x: 84, y: 376 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'evidence5',
+            key: 'file5_thai',
             options: { x: 84, y: 354 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'evidence6',
+            key: 'file6_thai',
             options: { x: 84, y: 332 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'evidence7_1',
+            key: 'file7_1_thai',
             options: { x: 118, y: 292 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'evidence7_2',
+            key: 'file7_2_thai',
             options: { x: 118, y: 247 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'evidence8',
+            key: 'file8_thai',
             options: { x: 84, y: 202 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'evidence9',
+            key: 'file9_thai',
             options: { x: 84, y: 180 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'evidence10',
+            key: 'file10_thai',
             options: { x: 84, y: 129 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'evidence11',
+            key: 'file11_thai',
             options: { x: 84, y: 107 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'evidence12',
+            key: 'file12_thai',
             options: { x: 84, y: 86 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
@@ -1361,7 +1361,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'file2_th',
+            key: 'evidence2',
             options: { x: 64, y: 540 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
