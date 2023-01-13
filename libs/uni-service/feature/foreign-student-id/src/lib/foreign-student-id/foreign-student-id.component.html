@@ -28,7 +28,8 @@
               class="form-control"
               type="text"
               disabled
-              [placeholder]="universityCode"
+              [value]="universitytypename"
+              [placeholder]="universitytypename"
             />
           </div>
           <div class="col mb-1">
@@ -37,6 +38,7 @@
               class="form-control"
               type="text"
               disabled
+              [value]="uniName"
               [placeholder]="uniName"
             />
           </div>
@@ -48,6 +50,7 @@
               class="form-control"
               type="text"
               disabled
+              [value]="uniAddress"
               [placeholder]="uniAddress"
             />
           </div>
@@ -62,6 +65,7 @@
         [passportLabel]="'เลขคุรุสภาสำหรับชาวต่างชาติ'"
         [prefixList]="prefixList$ | async"
         [countries]="countries$ | async"
+        [mode]="mode"
       >
         <ksp-form-visa-info
           [mode]="mode"
@@ -70,13 +74,14 @@
         ></ksp-form-visa-info>
       </ksp-form-foreign-id>
       <div class="form__upload mt-3">
-        <ksp-form-attachment
+        <ksp-form-multi-attachment
           [title]="'กรุณาแนบหลักฐานประกอบการปฏิบัติงาน '"
           [groups]="foreignInfo"
           [mode]="mode"
-          [requestType]="1"
+          [requestType]="4"
           [uniqueTimestamp]="uniqueTimestamp"
-        ></ksp-form-attachment>
+          [systemType]="'uni'"
+        ></ksp-form-multi-attachment>
       </div>
     </div>
   </div>
@@ -90,7 +95,8 @@
     [isFirstPage]="true"
     [isLastPage]="true"
     (saveClicked)="save()"
-    [disableSaveButton]="formValid"
+    [showSaveButton]="mode === 'edit'"
+    [disableSaveButton]="!formValid"
     (cancelClicked)="cancel()"
   >
   </ksp-bottom-nav>

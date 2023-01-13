@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormMode } from '@ksp/shared/interface';
+import { FileGroup, FormMode, ListData } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -15,7 +15,7 @@ import {
   UniInfoService,
   UniRequestService,
 } from '@ksp/shared/service';
-import { formatDate, getCookie, thaiDate } from '@ksp/shared/utility';
+import { formatDate, getCookie, parseJson, thaiDate } from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
@@ -23,8 +23,12 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./foreign-student-id.component.scss'],
 })
 export class ForeignStudentIdComponent implements OnInit {
-  @Input() mode: FormMode = 'edit';
-  foreignInfo = [{ name: '1.สำเนาหนังสือเดินทาง',filename: ""  }];
+  foreignInfo: FileGroup[] = [
+    {
+      name: 'สำเนาหนังสือเดินทาง',
+      files: []
+    }
+  ] as FileGroup[];
   form = this.fb.group({
     foreignStudent: [],
     visainfo: [],
@@ -35,13 +39,19 @@ export class ForeignStudentIdComponent implements OnInit {
   countries$!: Observable<any>;
   visaTypeList$!: Observable<any>;
   universityCode = '-';
+  universitytypename = '';
   uniAddress = '-';
   uniName = '-';
   uniid = '';
   unitype = '';
   requestNumber = '';
   requestid = '';
+  draftrequest: any;
   isLoading: Subject<boolean> = this.loaderService.isLoading;
+  universityTypes: any;
+  allowSave = true;
+  mode: FormMode = 'edit';
+
   constructor(
     public dialog: MatDialog,
     private router: Router,
@@ -55,7 +65,7 @@ export class ForeignStudentIdComponent implements OnInit {
   ) {
   }
   get formValid() {
-    return !this.form.get('foreignStudent')?.valid;
+    return this.form.get('foreignStudent')?.valid;
   }
 
   ngOnInit() {
@@ -63,31 +73,65 @@ export class ForeignStudentIdComponent implements OnInit {
       this.requestid = res.get('id') || '';
     });
     this.uniqueTimestamp = uuidv4();
-    this.getAll();
     this.getRequest();
+    this.getAll();
   }
 
   getRequest() {
     if (this.requestid) {
+      this.allowSave = false;
+      this.mode = 'view';
       // this.uniRequestService;
       console.log('get by id')
+      this.uniRequestService.getUniRequestById(this.requestid).subscribe((res: any) => {
+        if (res) {
+          console.log(res)
+          this.draftrequest = res;
+          this.uniid = res.uniid;
+          this.unitype = res.unitype; 
+          this.form.patchValue({
+            foreignStudent: res,
+            visainfo: res
+          });
+          const file = res.fileinfo ? parseJson(res.fileinfo) : [];
+          console.log(file)
+          this.foreignInfo = file;
+          this.getUniversityDetail();
+        }
+      })
+    } else {
+      this.allowSave = true;
+      this.mode = 'edit';
+      console.log('here')
+      this.uniid = getCookie('uniId') || '';
+      this.unitype = getCookie('uniType') || '';
+      this.getUniversityDetail();
     }
+    console.log(this.allowSave)
+  }
+
+  getUniversityDetail() {
+    console.log(this.uniid)
+    this.uniInfoService
+    .univerSitySelectById(this.uniid)
+    .subscribe((res) => {
+      this.uniName = res?.name + (res?.campusname ? `, ${res?.campusname}` : '') || '-';
+      this.universityCode = res?.universitycode || '-';
+      this.uniAddress = '-';
+    });
+    this.uniInfoService
+    .getUniversityType()
+    .subscribe((res:any) => {
+      const findUnitype = res.find((data:any)=>{return data.id == this.unitype})
+      console.log(findUnitype)
+      if (findUnitype) this.universitytypename = findUnitype.name;
+    });
   }
 
   getAll() {
-    this.uniid = getCookie('uniId') || '';
-    this.unitype = getCookie('uniType') || '';
-
     this.countries$ = this.addressService.getCountry();
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.visaTypeList$ = this.generalInfoService.getVisaType();
-    this.uniInfoService
-      .univerSitySelectById(this.uniid)
-      .subscribe((res) => {
-        this.uniName = res?.name + (res?.campusname ? `, ${res?.campusname}` : '') || '-';
-        this.universityCode = res?.universitycode || '-';
-        this.uniAddress = '-';
-      });
   }
 
   cancel() {
@@ -102,6 +146,7 @@ export class ForeignStudentIdComponent implements OnInit {
     return payload;
   }
   save() {
+    console.log(this.form)
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -131,7 +176,7 @@ export class ForeignStudentIdComponent implements OnInit {
             studentInfo.status = '1';
             studentInfo.uniid = this.uniid;
             studentInfo.unitype = this.unitype;
-            studentInfo.fileInfo = JSON.stringify(this.foreignInfo);
+            studentInfo.fileinfo = JSON.stringify(this.foreignInfo);
             return this.uniRequestService.saveRequestInsert(studentInfo);
           }
           return EMPTY;

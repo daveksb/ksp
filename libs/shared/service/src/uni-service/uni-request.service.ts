@@ -52,6 +52,15 @@ export class UniRequestService {
     );
   }
 
+  getUniRequestById(id: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspuni/ksprequestselectbyid`, {
+        id: id,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
+
   searchUniDegreeCert(form: any): Observable<any> {
     return this.http.post(`${environment.shortApiUrl}/unidegreecertsearch.php`, {
       ...form,
