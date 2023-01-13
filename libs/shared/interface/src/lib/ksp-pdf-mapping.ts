@@ -727,7 +727,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'evidence2',
+            key: 'file2_th',
             options: { x: 85, y: 420 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },
@@ -1361,7 +1361,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             svgPath: 'M18 7L9.42857 17L6 13',
           },
           {
-            key: 'evidence2',
+            key: 'file2_th',
             options: { x: 64, y: 540 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },

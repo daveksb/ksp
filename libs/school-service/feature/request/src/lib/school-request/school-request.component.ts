@@ -429,7 +429,7 @@ export class SchoolRequestComponent implements OnInit {
 
       // สถานะ พิจาณาและรับรอง
       else if (this.requestData.process === '5') {
-        console.log('สถานะรับรอง = ');
+        //console.log('สถานะรับรอง = ');
         this.disableTempSave = true;
         this.disableSave = true;
         this.disableCancel = true;

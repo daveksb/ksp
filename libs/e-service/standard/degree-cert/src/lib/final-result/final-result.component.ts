@@ -84,14 +84,16 @@ export class FinalResultComponent implements OnInit {
         .subscribe((res) => {
           const lastResult = _.last(res?.filter((data: any) => {
             return data.process == 6 && data.detail && data.detail.finalResult})) as any;
-          const data = lastResult.detail;
-          this.form.patchValue({
-            finalResult: {
-              reasonTimes: data.finalResult.reasonTimes,
-              date: data.finalResult.date,
-              approvedegreeCode: data.degreeApproveCode,
-            },
-          })
+          const data = lastResult ? lastResult.detail : {};
+          if (data && data.finalResult) {
+            this.form.patchValue({
+              finalResult: {
+                reasonTimes: data.finalResult.reasonTimes,
+                date: data.finalResult.date,
+                approvedegreeCode: data.degreeApproveCode,
+              },
+            })
+          }
           // this.getDegreeCert(res?.uniDegreeCertId, uniRequestRes?.requestprocess);
       });
     }
@@ -116,12 +118,31 @@ export class FinalResultComponent implements OnInit {
             this.form.patchValue({
               step1: res.step1
             });
+            this.generateDegreeApproveCode();
           }
         });
     } else {
       this.allowEdit = false;
     }
   }
+
+  generateDegreeApproveCode() {
+    if (this.daftRequest.requestprocess == '5') {
+      this.eUniService
+      .genDegreeApproveCode({ coursestatus: this.daftRequest.requeststatus })
+      .subscribe((res) => {
+        if (res?.returncode !== 98) {
+          this.daftRequest.degreeapprovecode = res.degreeapprovecode;
+          this.form.controls.finalResult.patchValue({
+            approvedegreeCode: res.degreeapprovecode,
+            reasonTimes: '',
+            date: '',
+          })
+        }
+      });
+    }
+  }
+  
   cancel() {
     this.location.back();
   }
@@ -254,7 +275,15 @@ export class FinalResultComponent implements OnInit {
         ? JSON.stringify(step2?.plan2?.plans)
         : null;
       reqBody['courseplan'] = step2?.plan2?.subjects
-        ? JSON.stringify(step2?.plan2?.subjects)
+        ? JSON.stringify({
+          subjects: step2?.plan2?.subjects, 
+          subjectgroupname: {
+            subject1GroupName: step2?.plan2?.subject1GroupName,
+            subject2GroupName: step2?.plan2?.subject2GroupName,
+            subject3GroupName: step2?.plan2?.subject3GroupName
+          }
+        })
+        // JSON.stringify(step2?.plan2?.subjects)
         : null;
     }
     return reqBody;

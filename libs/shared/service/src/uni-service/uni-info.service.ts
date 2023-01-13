@@ -14,7 +14,6 @@ function toDate(sDate: any) {
 export class UniInfoService {
   constructor(private http: HttpClient) {}
   mappingUniverSitySelectByIdWithForm(res: any): any {
-    console.log(parseJson(res.courseplan))
     const formData: any = {};
     formData.checkresult = parseJson(res.checkresult);
     formData.requestNo = res?.requestno ?? '';
@@ -73,9 +72,13 @@ export class UniInfoService {
         subjects: res.courseplan ? parseJson(res.courseplan) : [],
       };
     } else {
+      const subjectsdata = parseJson(res.courseplan);
       formData.step2.plan2 = {
         plans: res.coursestructure ? parseJson(res.coursestructure) : [],
-        subjects: res.courseplan ? parseJson(res.courseplan) : [],
+        subjects: res.courseplan ? subjectsdata.subjects : [],
+        subject1GroupName: subjectsdata?.subjectgroupname.subject1GroupName,
+        subject2GroupName: subjectsdata?.subjectgroupname.subject2GroupName,
+        subject3GroupName: subjectsdata?.subjectgroupname.subject3GroupName,
       };
     }
     formData.step3 = {
