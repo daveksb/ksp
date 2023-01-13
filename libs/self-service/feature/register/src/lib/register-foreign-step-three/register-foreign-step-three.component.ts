@@ -8,7 +8,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
-import { MyInfoService } from '@ksp/shared/service';
+import { SelfRequestService } from '@ksp/shared/service';
 import { switchMap, EMPTY } from 'rxjs';
 import { RegisterCompletedComponent } from '../register-completed/register-completed.component';
 import localForage from 'localforage';
@@ -26,7 +26,7 @@ export class RegisterForeignStepThreeComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private fb: FormBuilder,
-    private myInfoService: MyInfoService
+    private request: SelfRequestService
   ) {}
 
   savingData: any;
@@ -74,15 +74,16 @@ export class RegisterForeignStepThreeComponent implements OnInit {
       .pipe(
         switchMap((res) => {
           if (res) {
-            const payload: SelfMyInfo = {
+            /* const payload: SelfMyInfo = {
               ...this.savingData,
               ...this.form.value,
             };
             payload.usertype = '2'; // ครูต่างชาติ
             payload.isactive = '1';
             payload.uniquetimestamp = uuidv4();
+            return this.myInfoService.insertMyInfo(payload); */
 
-            return this.myInfoService.insertMyInfo(payload);
+            return this.request.createRequest('');
           }
           return EMPTY;
         })

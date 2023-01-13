@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { VerifyOtpForeignDialogComponent } from '@ksp/self-service/dialog';
 import { GeneralInfoService } from '@ksp/shared/service';
 import localForage from 'localforage';
 import { Observable } from 'rxjs';
@@ -14,7 +13,7 @@ import { Observable } from 'rxjs';
 export class RegisterForeignStepTwoComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
-    private router: Router, //private fb: FormBuilder,
+    private router: Router,
     private fb: FormBuilder,
     private generalInfoService: GeneralInfoService
   ) {}
@@ -34,20 +33,6 @@ export class RegisterForeignStepTwoComponent implements OnInit {
     this.visaClassList$ = this.generalInfoService.getVisaClass();
     this.visaTypeList$ = this.generalInfoService.getVisaType();
   }
-
-  /* openDialog() {
-    const dialogRef = this.dialog.open(VerifyOtpForeignDialogComponent, {
-      width: '600px',
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      localForage.getItem('registerForeigner').then((res: any) => {
-        const data = { ...res, ...this.form.value };
-        localForage.setItem('registerForeigner', data);
-        this.nextStep();
-      });
-    });
-  } */
 
   nextStep() {
     localForage.getItem('registerForeigner').then((res: any) => {
