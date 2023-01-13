@@ -10,12 +10,10 @@ import {
   Province,
   RequestSearchFilter,
   EsSearchPayload,
-  SchoolUserPageType,
 } from '@ksp/shared/interface';
 import {
   ERequestService,
   EducationDetailService,
-  LoaderService,
   AddressService,
 } from '@ksp/shared/service';
 import {
@@ -23,7 +21,7 @@ import {
   schoolMapRequestType,
   replaceEmptyWithNull,
 } from '@ksp/shared/utility';
-import { Subject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ksp-new-foreign-user-list',
@@ -43,7 +41,6 @@ export class NewForeignUserListComponent implements OnInit, AfterViewInit {
   bureau$!: Observable<any>;
   searchNotFound = false;
   provinces$!: Observable<Province[]>;
-
   form = this.fb.group({
     search: [],
   });
@@ -90,6 +87,7 @@ export class NewForeignUserListComponent implements OnInit, AfterViewInit {
       requestdateto: null,
       offset: '0',
       row: '500',
+      isforeign: '1',
     };
 
     payload = replaceEmptyWithNull(payload);
