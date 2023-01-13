@@ -178,3 +178,11 @@ export enum SelfPrefixEn {
   'M.R.' = 7,
   'M.C.' = 8,
 }
+
+export enum SelfProfessionEng {
+  'Teacher' = 1,
+  'School Director' = 2,
+  'Education Director' = 3,
+  'Educational Supervisor' = 4,
+  'Other' = 5,
+}

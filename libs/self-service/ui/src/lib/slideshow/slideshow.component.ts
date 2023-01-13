@@ -4,6 +4,7 @@ import { ThaiDatePipe } from '@ksp/shared/pipe';
 import {
   SelfPrefixEn,
   SelfPrefixTh,
+  SelfProfessionEng,
   SelfServiceRequestSubType,
 } from '@ksp/shared/constant';
 import { SelfLicense } from '@ksp/shared/interface';
@@ -20,6 +21,7 @@ export class SlideshowComponent {
   SchoolRequestSubType = SelfServiceRequestSubType;
   SelfPrefixTh = SelfPrefixTh;
   SelfPrefixEn = SelfPrefixEn;
+  SelfProfessionEng = SelfProfessionEng;
 
   @Input() showButton = true;
   @Input() license = new SelfLicense();
