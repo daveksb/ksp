@@ -8,7 +8,7 @@
         class="form-control"
         type="text"
         disabled
-        value="{{ tempLicenseHistory.length + 1 }}"
+        value="{{ tempLicenseHistory?.length || 0 + 1 }}"
       />
     </div>
     <div class="col-6">
@@ -27,21 +27,28 @@
   </div>
 
   <ng-container *ngIf="viewHistory">
-    <table class="table w-75 mt-3">
-      <thead>
-        <tr>
-          <th scope="col">ลำดับ</th>
-          <th scope="col">วันที่ยื่นคำขอ</th>
-          <th scope="col">วันหมดอายุ</th>
-        </tr>
-      </thead>
-      <tbody *ngFor="let license of tempLicenseHistory; let i = index">
-        <tr>
-          <th scope="row">{{ i + 1 }}</th>
-          <td>{{ license.licensestartdate | thaiDate }}</td>
-          <td>{{ license.licenseenddate | thaiDate }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="me-4">
+      <table class="table w-50 mt-3">
+        <thead>
+          <tr>
+            <th scope="col">ลำดับ</th>
+            <th scope="col">วันที่ยื่นคำขอ</th>
+            <th scope="col">วันหมดอายุ</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let license of tempLicenseHistory; let i = index">
+          <tr>
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ license.licensestartdate | thaiDate }}</td>
+            <td>{{ license.licenseenddate | thaiDate }}</td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="!tempLicenseHistory">
+          <tr>
+            <td colspan="3" class="text-center">ไม่พบข้อมูล</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </ng-container>
 </div>

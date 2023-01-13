@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import { PDFDocument, PDFFont, PDFPage } from 'pdf-lib';
@@ -21,6 +21,9 @@ import _ from 'lodash';
   ],
 })
 export class PdfRenderComponent implements OnInit {
+  @Input() set input(value: any) {
+    if (value) this.data = value;
+  }
   pdfBytes: any;
   constructor(
     @Inject(MAT_DIALOG_DATA)
