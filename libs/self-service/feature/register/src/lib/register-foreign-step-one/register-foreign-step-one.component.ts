@@ -19,6 +19,7 @@ export class RegisterForeignStepOneComponent implements OnInit {
   nationalitys$!: Observable<any>;
   prefixList$!: Observable<any>;
   countries$!: Observable<any>;
+  previousForm!: any;
   form = this.fb.group({
     prefixen: [null, [Validators.required]],
     firstnameen: [null, [Validators.required]],
@@ -35,15 +36,16 @@ export class RegisterForeignStepOneComponent implements OnInit {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.countries$ = this.addressService.getCountry();
     this.nationalitys$ = this.generalInfoService.getNationality();
+    localForage.getItem('registerForeigner').then((res: any) => {
+      this.previousForm = res;
+      //console.log('pv form = ', res);
+    });
   }
 
   next() {
-    localForage.getItem('registerForeign').then((res: any) => {
-      const data = { ...res, ...this.form.value };
-      console.log(data);
-      localForage.setItem('registerForeigner', data);
-      this.router.navigate(['/register', 'en-step-2']);
-    });
+    const data = { ...this.previousForm, ...this.form.value };
+    localForage.setItem('registerForeigner', data);
+    this.router.navigate(['/register', 'en-step-2']);
   }
 
   loginPage() {

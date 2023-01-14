@@ -25,7 +25,7 @@ export class SelfRequestService {
 
   createRequestNoToken(payload: Partial<KspRequest>): Observable<any> {
     return this.http.post(
-      `${environment.apiUrl}/kspstaff/ksprequestinsert`,
+      `${environment.apiUrl}/kspself/ksprequestinsertforisforeign`,
       payload
     );
   }

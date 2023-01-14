@@ -38,7 +38,8 @@ export class RegisterForeignStepThreeComponent implements OnInit {
 
   form = this.fb.group(
     {
-      username: [null, Validators.required],
+      //username: [null, Validators.required],
+      username: [null],
       password: [null, [Validators.required, Validators.minLength(8)]],
       confirmPassword: [null, Validators.required],
     },
@@ -55,6 +56,7 @@ export class RegisterForeignStepThreeComponent implements OnInit {
     localForage.getItem('registerForeigner').then((res: any) => {
       this.savingData = res;
       this.passportNo = res.passportno;
+      //console.log('form = ', res);
     });
   }
 
@@ -72,26 +74,55 @@ export class RegisterForeignStepThreeComponent implements OnInit {
       .pipe(
         switchMap((res) => {
           if (res) {
-            /* const payload: SelfMyInfo = {
+            const form: SelfMyInfo = {
               ...this.savingData,
               ...this.form.value,
             };
+            //console.log('form = ', form);
+            /*
             payload.usertype = '2'; // ครูต่างชาติ
             payload.isactive = '1';
             payload.uniquetimestamp = uuidv4();
             return this.myInfoService.insertMyInfo(payload); */
             const req = new KspRequest();
-
-            req.ref1 = '2';
-            req.ref2 = '04';
-            req.ref3 = '5';
             req.isforeign = '1';
-            req.systemtype = '2';
-            req.requesttype = '4';
+            req.ref1 = '1';
+            req.ref2 = '45';
+            req.ref3 = '5';
+            req.systemtype = '1';
+            req.requesttype = '45';
             req.careertype = '5';
-            req.process = `2`;
+            req.process = `1`;
             req.status = `1`;
-            const { id, requestid, ...payload } = req;
+            req.prefixen = form.prefixen;
+            req.firstnameen = form.firstnameen;
+            req.middlenameen = form.middlenameen;
+            req.lastnameen = form.lastnameen;
+            req.birthdate = form.birthdate;
+            req.country = form.country;
+            req.nationality = form.nationality;
+            req.contactphone = form.phone;
+            req.email = form.email;
+            req.kuruspano = form.kuruspano;
+            req.passportno = form.passportno;
+            req.passportstartdate = form.passportstartdate;
+            req.passportenddate = form.passportenddate;
+            req.visaclass = form.visaclass;
+            req.visatype = form.visatype;
+            req.visaexpiredate = form.visaenddate;
+            req.uniqueno = form.password;
+
+            const {
+              id,
+              requestid,
+              groupno,
+              lastupdatesystemtype,
+              listno,
+              requestdate,
+              requestno,
+              requesttable,
+              ...payload
+            } = req;
             return this.request.createRequestNoToken(payload);
           }
           return EMPTY;

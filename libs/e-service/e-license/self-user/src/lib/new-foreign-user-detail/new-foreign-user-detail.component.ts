@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
-import { FormMode } from '@ksp/shared/interface';
-import { AddressService, GeneralInfoService } from '@ksp/shared/service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormMode, KspRequest } from '@ksp/shared/interface';
+import {
+  AddressService,
+  ERequestService,
+  GeneralInfoService,
+} from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -19,11 +23,10 @@ export class NewForeignUserDetailComponent implements OnInit {
   mode: FormMode = 'view';
   approveChoices = approveChoices;
   checkedResult: any;
+  kspRequest = new KspRequest();
 
   form = this.fb.group({
-    teacherid: [null],
-    passport: [null],
-
+    kuruspano: [null],
     prefixen: [null],
     firstnameen: [null],
     middlenameen: [null],
@@ -31,9 +34,8 @@ export class NewForeignUserDetailComponent implements OnInit {
     birthdate: [null],
     country: [null],
     nationality: [null],
-    phone: [null],
+    contactphone: [null],
     email: [null],
-
     idcardno: [null],
     passportno: [null],
     passportstartdate: [null],
@@ -47,7 +49,9 @@ export class NewForeignUserDetailComponent implements OnInit {
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
+    private eRequestService: ERequestService
   ) {}
 
   ngOnInit(): void {
@@ -56,8 +60,33 @@ export class NewForeignUserDetailComponent implements OnInit {
     this.nationalitys$ = this.generalInfoService.getNationality();
     this.visaClassList$ = this.generalInfoService.getVisaClass();
     this.visaTypeList$ = this.generalInfoService.getVisaType();
-
     this.form.disable();
+    this.checkRequestId();
+  }
+
+  checkRequestId() {
+    this.route.paramMap.subscribe((params) => {
+      const requestId = Number(params.get('id'));
+      console.log('request id = ', requestId);
+      if (requestId) {
+        this.loadRequestFromId(requestId);
+      }
+    });
+  }
+
+  loadRequestFromId(id: number) {
+    this.eRequestService.getKspRequestById(id).subscribe((res) => {
+      console.log('request data = ', res);
+      this.kspRequest = res;
+      this.form.patchValue(<any>res);
+      /*
+      const data: any = res;
+      this.form.controls.userInfo.patchValue(data);
+
+      const coordinator = parseJson(res.coordinatorinfo);
+      //console.log('coordinator = ', res);
+      this.form.controls.coordinatorInfo.patchValue(coordinator.coordinator); */
+    });
   }
 
   cancel() {

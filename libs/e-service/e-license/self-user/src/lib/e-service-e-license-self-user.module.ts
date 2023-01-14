@@ -21,7 +21,7 @@ import {
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SelfUserListComponent } from './user-list/self-user-list.component';
-import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NewForeignUserListComponent } from './new-foreign-user-list/new-foreign-user-list.component';
 import { NewForeignUserDetailComponent } from './new-foreign-user-detail/new-foreign-user-detail.component';
@@ -49,7 +49,7 @@ export const routes: Routes = [
         component: NewForeignUserListComponent,
       },
       {
-        path: 'new-user-detail',
+        path: 'new-user-detail/:id',
         component: NewForeignUserDetailComponent,
       },
       {
@@ -81,7 +81,7 @@ export const routes: Routes = [
     RequestHeaderInfoComponent,
     ThaiDatePipe,
     MatDatepickerModule,
-    
+    RequestNoPipe,
   ],
   declarations: [
     SelfUserListComponent,

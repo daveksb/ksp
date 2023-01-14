@@ -9,7 +9,7 @@ import localForage from 'localforage';
 })
 export class RegisterForeignComponent {
   form = this.fb.group({
-    idcardno: [null, [Validators.required]],
+    kuruspano: [null, [Validators.required]],
     passportno: [null, [Validators.required]],
   });
 
