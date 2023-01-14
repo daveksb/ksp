@@ -38,7 +38,8 @@ export class RegisterForeignStepThreeComponent implements OnInit {
 
   form = this.fb.group(
     {
-      username: [null, Validators.required],
+      //username: [null, Validators.required],
+      username: [null],
       password: [null, [Validators.required, Validators.minLength(8)]],
       confirmPassword: [null, Validators.required],
     },
@@ -85,11 +86,11 @@ export class RegisterForeignStepThreeComponent implements OnInit {
 
             req.isforeign = '1';
 
-            req.ref1 = '30';
-            req.ref2 = '01';
+            req.ref1 = '1';
+            req.ref2 = '45';
             req.ref3 = '5';
             req.systemtype = '1';
-            req.requesttype = '30';
+            req.requesttype = '45';
             req.careertype = '5';
 
             req.process = `1`;
