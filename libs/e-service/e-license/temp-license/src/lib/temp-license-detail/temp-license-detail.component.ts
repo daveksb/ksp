@@ -201,7 +201,7 @@ export class ETempLicenseDetailComponent implements OnInit {
       this.patchSchoolAddrress(parseJson(res.schooladdrinfo));
       this.patchFileInfo(parseJson(res.fileinfo));
       this.patchProhibitProperty(parseJson(res.prohibitproperty));
-      console.log('res = ', res.prohibitproperty);
+      //console.log('res = ', res.prohibitproperty);
     });
   }
 

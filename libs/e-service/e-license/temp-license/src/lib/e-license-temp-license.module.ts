@@ -37,6 +37,7 @@ import {
 } from '@ksp/e-service/e-license/approve-ksp-request';
 import { ETempLicenseListComponent } from './temp-license-list/temp-license-list.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { PdfRenderComponent } from '@ksp/shared/dialog';
 
 @NgModule({
   imports: [
@@ -66,6 +67,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     ForbiddenPropertyFormComponent,
     FormTeachingInfoManagerComponent,
     FormEducationInfoManagerComponent,
+    PdfRenderComponent,
   ],
   declarations: [
     ETempLicenseListComponent,

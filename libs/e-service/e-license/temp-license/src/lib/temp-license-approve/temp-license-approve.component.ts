@@ -9,6 +9,7 @@ import {
 import { KspApprovePayload, KspRequest } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 import { getCookie } from '@ksp/shared/utility';
+import moment from 'moment';
 
 @Component({
   selector: 'e-service-temp-license-approve',
@@ -18,6 +19,8 @@ import { getCookie } from '@ksp/shared/utility';
 export class TempLicenseApproveComponent implements OnInit {
   kspRequest = new KspRequest();
   approveHistory: any[] = [];
+  approveInfo!: any;
+
   form = this.fb.group({
     //result: [],
     //licenseNumber: [],
@@ -42,6 +45,19 @@ export class TempLicenseApproveComponent implements OnInit {
           this.kspRequest = res;
         });
       }
+    });
+    this.getLicenseNo();
+  }
+
+  getLicenseNo() {
+    this.requestService.getLicenseNoTh().subscribe((res) => {
+      const be = moment().add(543, 'year').year();
+      //console.log('call get license no = ', res.runningno);
+      this.approveInfo = {
+        approveNo: `${res.runningno}/${be}`,
+        approveDate: new Date(),
+      };
+      this.form.controls.approvement.patchValue(this.approveInfo);
     });
   }
 
