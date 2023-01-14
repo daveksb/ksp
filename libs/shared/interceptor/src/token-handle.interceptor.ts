@@ -18,6 +18,8 @@ export class TokenHandleInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     const token = getCookie('userToken');
     if (
+      request.url.includes('ksprequestinsertforisforeign') ||
+      request.url.includes('ksprequestinsert') ||
       request.url.includes('kspmasterdata') ||
       request.url.includes('ksplogin') ||
       request.url.includes('ksppublic') ||
@@ -26,8 +28,9 @@ export class TokenHandleInterceptor implements HttpInterceptor {
         (request.body.requesttype == '1' || request.body.requesttype == '2')) ||
       request.url.includes('schschoolsearch.php') ||
       (request.url.includes('schrequestfileinsert') &&
-        (request.body.requesttype == '1' || request.body.requesttype == '2')) ||
-      !token
+        (request.body.requesttype == '1' ||
+          request.body.requesttype == '2')) /*||
+      !token */
     ) {
       return next.handle(request);
     }
@@ -45,7 +48,7 @@ export class TokenHandleInterceptor implements HttpInterceptor {
 
     if (request.method === 'POST') {
       request = request.clone({
-        body: { ...request.body, tokenkey: token },
+        body: { ...request.body, tokenkey: token || 'no-token-in-interceptor' },
       });
       return next.handle(request);
     }

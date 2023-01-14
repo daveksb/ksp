@@ -22,9 +22,6 @@ export class TempLicenseApproveComponent implements OnInit {
   approveInfo!: any;
 
   form = this.fb.group({
-    //result: [],
-    //licenseNumber: [],
-    //licenseDate: [],
     approvement: [],
   });
 
