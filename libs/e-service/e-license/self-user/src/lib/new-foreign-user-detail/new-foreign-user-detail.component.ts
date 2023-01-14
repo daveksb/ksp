@@ -6,14 +6,21 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { FormMode, KspApprovePayload, KspRequest } from '@ksp/shared/interface';
+import {
+  FormMode,
+  KspApprovePayload,
+  KspRequest,
+  SelfMyInfo,
+} from '@ksp/shared/interface';
 import {
   AddressService,
   ERequestService,
   GeneralInfoService,
+  MyInfoService,
 } from '@ksp/shared/service';
 import { getCookie, jsonParse } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'ksp-new-foreign-user-detail',
@@ -31,6 +38,7 @@ export class NewForeignUserDetailComponent implements OnInit {
   checkedResult: any;
   kspRequest = new KspRequest();
   requestId!: number | null;
+  savingData: any;
 
   form = this.fb.group({
     kuruspano: [null],
@@ -63,7 +71,8 @@ export class NewForeignUserDetailComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private eRequestService: ERequestService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private myInfoService: MyInfoService
   ) {}
 
   ngOnInit(): void {
@@ -90,7 +99,21 @@ export class NewForeignUserDetailComponent implements OnInit {
     this.eRequestService.getKspRequestById(id).subscribe((res) => {
       console.log('request data = ', res);
       this.kspRequest = res;
+
+      if (res.birthdate) {
+        res.birthdate = res.birthdate.split('T')[0];
+      }
+
+      if (res.passportstartdate) {
+        res.passportstartdate = res.passportstartdate.split('T')[0];
+      }
+
+      if (res.passportenddate) {
+        res.passportenddate = res.passportenddate.split('T')[0];
+      }
+
       this.form.patchValue(<any>res);
+
       /*
       const data: any = res;
       this.form.controls.userInfo.patchValue(data);
@@ -101,7 +124,24 @@ export class NewForeignUserDetailComponent implements OnInit {
     });
   }
 
-  retireUser() {
+  unApproveUser() {
+    const payload: KspApprovePayload = {
+      requestid: `${this.requestId}`,
+      process: '1',
+      status: '3',
+      detail: null,
+      systemtype: '4', //e-service
+      userid: getCookie('userId'),
+      paymentstatus: null,
+    };
+
+    this.eRequestService.KspUpdateRequestProcess(payload).subscribe(() => {
+      //console.log('un approve result = ', res);
+      this.completeDialog();
+    });
+  }
+
+  approveUser() {
     const payload: KspApprovePayload = {
       requestid: `${this.requestId}`,
       process: '1',
@@ -112,61 +152,18 @@ export class NewForeignUserDetailComponent implements OnInit {
       paymentstatus: null,
     };
 
-    this.eRequestService.KspUpdateRequestProcess(payload).subscribe((res) => {
-      //console.log('update result = ', res);
-      this.completeDialog();
+    this.eRequestService.KspUpdateRequestProcess(payload).subscribe(() => {
+      const user: any = {
+        ...this.kspRequest,
+      };
+      user.usertype = '2'; // ครูต่างชาติ
+      user.isactive = '1';
+      user.uniquetimestamp = uuidv4();
+
+      this.myInfoService.insertMyInfo(user).subscribe(() => {
+        this.completeDialog();
+      });
     });
-
-    const retirePayload = {
-      schmemberid: this.kspRequest.userid,
-      schuseractive: '0',
-    };
-
-    this.eRequestService.retiredUser(retirePayload).subscribe((res) => {
-      console.log('retired result = ', res);
-    });
-  }
-
-  approveUser() {
-    const deActivateAllUser = this.eRequestService.deActivateAllUser(
-      this.kspRequest.schoolid ?? ''
-    );
-
-    const updatePayload: KspApprovePayload = {
-      requestid: `${this.requestId}`,
-      process: '1',
-      status: '2',
-      detail: null,
-      systemtype: '4', //e-service
-      userid: getCookie('userId'),
-      paymentstatus: null,
-    };
-    const updateRequest =
-      this.eRequestService.KspUpdateRequestProcess(updatePayload);
-
-    /* const user = new SchUser();
-    const coordinatorinfo = jsonParse(this.kspRequest.coordinatorinfo || '{}');
-
-    user.idcardno = this.kspRequest.idcardno;
-    user.prefixth = this.kspRequest.prefixth;
-    user.schemail = this.kspRequest.email;
-    user.position = this.kspRequest.position;
-    user.firstnameth = this.kspRequest.firstnameth;
-    user.lastnameth = this.kspRequest.lastnameth;
-    user.schusername = this.kspRequest.schoolid;
-    user.schoolid = this.kspRequest.schoolid;
-    user.schmobile = this.kspRequest.contactphone;
-    user.schpassword = this.setPassword;
-    user.requestid = this.kspRequest.id;
-    user.schuseractive = '1';
-    user.schuserstartdate = moment().format('yyyy-MM-DD');
-    user.coordinatorinfo = JSON.stringify(coordinatorinfo); */
-    //console.log('user = ', user);
-
-    /* payload.usertype = '2'; // ครูต่างชาติ
-    payload.isactive = '1';
-    payload.uniquetimestamp = uuidv4();
-    return this.myInfoService.insertMyInfo(payload); */
   }
 
   confirm() {
@@ -179,13 +176,11 @@ export class NewForeignUserDetailComponent implements OnInit {
 
     confirmDialog.componentInstance.confirmed.subscribe(() => {
       const form: any = this.verifyForm.controls.result.value;
-      const resultOk = +form.result;
-      if (resultOk) {
-        if (this.kspRequest.requesttype === '1') {
-          this.approveUser();
-        } else if (this.kspRequest.requesttype === '2') {
-          this.retireUser();
-        }
+      const result = form.result;
+      if (result === '1') {
+        this.approveUser();
+      } else {
+        this.unApproveUser();
       }
     });
   }
@@ -206,6 +201,7 @@ export class NewForeignUserDetailComponent implements OnInit {
 
   cancel() {
     this.router.navigate(['self-user', 'new-user-list']);
+    console.log('retired result = ', this.kspRequest);
   }
 }
 
