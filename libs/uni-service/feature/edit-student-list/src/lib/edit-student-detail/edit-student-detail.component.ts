@@ -56,15 +56,15 @@ export class EditStudentDetailComponent implements OnInit {
   uploadFileList: FileGroup[] = [
     {
       name: 'สำเนาหนังสือสำคัญการเปลี่ยนชื่อ / ชื่อสกุล / เปลี่ยนหรือเพิ่มคำนำหน้าชื่อ',
-      files: []
+      files: [],
     },
     {
       name: 'สำเนาหลักฐานการสมรส หรือการสิ้นสุดการสมรส (ถ้ามี)',
-      files: []
+      files: [],
     },
     {
       name: 'สำเนาหนังสือรับรองการใช้คำหน้านามหญิง (ถ้ามี)',
-      files: []
+      files: [],
     },
   ] as FileGroup[];
   data = false;
@@ -191,8 +191,8 @@ export class EditStudentDetailComponent implements OnInit {
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,
         content: `วันที่ : ${this.requestDate}
-        เลขที่ใบคำขอ : ${requestno}`,
-        subContent: `กรุณาตรวจสอบสถานะใบคำขอหรือรหัสเข้าใช้งาน
+        เลขที่แบบคำขอ : ${requestno}`,
+        subContent: `กรุณาตรวจสอบสถานะแบบคำขอหรือรหัสเข้าใช้งาน
         ผ่านทางอีเมลผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },
     });

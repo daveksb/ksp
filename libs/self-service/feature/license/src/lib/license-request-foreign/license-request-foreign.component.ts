@@ -351,7 +351,7 @@ export class LicenseRequestForeignComponent implements OnInit {
   onCancelRequest() {
     const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
-        title: `คุณต้องการยกเลิกรายการใบคำขอ
+        title: `คุณต้องการยกเลิกรายการแบบคำขอ
         ใช่หรือไม่? `,
       },
     });
@@ -378,7 +378,7 @@ export class LicenseRequestForeignComponent implements OnInit {
   cancelCompleted() {
     const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
-        header: `ยกเลิกใบคำขอสำเร็จ`,
+        header: `ยกเลิกแบบคำขอสำเร็จ`,
       },
     });
 

@@ -8,13 +8,13 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
-import { MyInfoService } from '@ksp/shared/service';
+import { SelfRequestService } from '@ksp/shared/service';
 import { switchMap, EMPTY } from 'rxjs';
 import { RegisterCompletedComponent } from '../register-completed/register-completed.component';
 import localForage from 'localforage';
-import { SelfMyInfo } from '@ksp/shared/interface';
+import { KspRequest, SelfMyInfo } from '@ksp/shared/interface';
 import { v4 as uuidv4 } from 'uuid';
-import { validatorMessages } from '@ksp/shared/utility';
+import { formatDatePayload, validatorMessages } from '@ksp/shared/utility';
 
 @Component({
   selector: 'self-service-register-foreign-step-three',
@@ -26,15 +26,13 @@ export class RegisterForeignStepThreeComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private fb: FormBuilder,
-    private myInfoService: MyInfoService
+    private request: SelfRequestService
   ) {}
 
   savingData: any;
   passportNo = '';
-
   passwordEqual = false;
   validatorMessages = validatorMessages;
-
   eyeIconClicked1 = false;
   eyeIconClicked2 = false;
 
@@ -74,15 +72,27 @@ export class RegisterForeignStepThreeComponent implements OnInit {
       .pipe(
         switchMap((res) => {
           if (res) {
-            const payload: SelfMyInfo = {
+            /* const payload: SelfMyInfo = {
               ...this.savingData,
               ...this.form.value,
             };
             payload.usertype = '2'; // ครูต่างชาติ
             payload.isactive = '1';
             payload.uniquetimestamp = uuidv4();
+            return this.myInfoService.insertMyInfo(payload); */
+            const req = new KspRequest();
 
-            return this.myInfoService.insertMyInfo(payload);
+            req.ref1 = '2';
+            req.ref2 = '04';
+            req.ref3 = '5';
+            req.isforeign = '1';
+            req.systemtype = '2';
+            req.requesttype = '4';
+            req.careertype = '5';
+            req.process = `2`;
+            req.status = `1`;
+            const { id, requestid, ...payload } = req;
+            return this.request.createRequestNoToken(payload);
           }
           return EMPTY;
         })

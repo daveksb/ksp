@@ -4,11 +4,11 @@
 </div>
 
 <ksp-top-nav>
-  <span header>{{header}}</span>
+  <span header>{{ header }}</span>
 </ksp-top-nav>
 
 <div class="bg-secondary bg-opacity-10 py-2 px-4 full-height full-width-2">
-  <div class="box-header">{{header}}</div>
+  <div class="box-header">{{ header }}</div>
   <div class="bg-white p-3">
     <form [formGroup]="form">
       <ksp-degree-cert-search
@@ -50,7 +50,7 @@
         </ng-container>
 
         <ng-container matColumnDef="requestno">
-          <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
+          <th mat-header-cell *matHeaderCellDef>เลขที่แบบคำขอ</th>
           <td
             class="text-primary link"
             mat-cell
@@ -146,7 +146,7 @@
             <button class="btn btn-sm btn-primary" (click)="lastStep(element)">
               <div class="d-flex justify-content-center">
                 <i role="button" class="bi bi-printer"></i>
-                <span class="ms-1">พิมพ์ใบคำขอ</span>
+                <span class="ms-1">พิมพ์แบบคำขอ</span>
               </div>
             </button>
           </td>

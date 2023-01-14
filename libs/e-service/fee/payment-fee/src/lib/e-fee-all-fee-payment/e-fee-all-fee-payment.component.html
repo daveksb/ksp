@@ -15,7 +15,7 @@
 
         <div class="row mb-2">
           <div class="col-8">
-            <label class="form-label">ประเภทใบคำขอ</label>
+            <label class="form-label">ประเภทแบบคำขอ</label>
             <select class="form-select" formControlName="licensetype">
               <option value="null" selected hidden disabled>กรุณาเลือก</option>
               <option value="1">ขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ</option>
@@ -27,7 +27,7 @@
         </div>
         <div class="row mb-2">
           <div class="col">
-            <label class="form-label">เลขที่ใบคำขอ</label>
+            <label class="form-label">เลขที่แบบคำขอ</label>
             <input
               class="form-control"
               type="text"
@@ -118,7 +118,7 @@
           </ng-container>
 
           <ng-container matColumnDef="requestno">
-            <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
+            <th mat-header-cell *matHeaderCellDef>เลขที่แบบคำขอ</th>
             <td mat-cell *matCellDef="let element">{{ element.requestno }}</td>
           </ng-container>
 
@@ -147,7 +147,7 @@
           </ng-container>
 
           <ng-container matColumnDef="licensetype">
-            <th mat-header-cell *matHeaderCellDef>ประเภทใบคำขอ</th>
+            <th mat-header-cell *matHeaderCellDef>ประเภทแบบคำขอ</th>
             <td mat-cell *matCellDef="let element">
               {{ element.licensetype }}
             </td>
@@ -177,7 +177,7 @@
           </ng-container>
 
           <ng-container matColumnDef="requestdate">
-            <th mat-header-cell *matHeaderCellDef>วันที่ยื่นใบคำขอ</th>
+            <th mat-header-cell *matHeaderCellDef>วันที่ยื่นแบบคำขอ</th>
             <td mat-cell *matCellDef="let element">
               {{ element.requestdate }}
             </td>

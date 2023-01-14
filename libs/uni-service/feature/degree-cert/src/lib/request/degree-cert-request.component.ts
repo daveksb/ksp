@@ -49,9 +49,7 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
     step3: [],
   });
   step4Form: any = this.fb.group({
-    step4: [
-      {files: []}
-    ],
+    step4: [{ files: [] }],
   });
   uniData: any;
   mode: any = 'edit';
@@ -87,13 +85,21 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
       uniRequestDegree = await lastValueFrom(
         this.uniInfoService.uniRequestDegreeCertSelectById(this.id)
       );
-      if (uniRequestDegree.requestprocess == '1' ||
-          (uniRequestDegree.requestprocess == '2' && uniRequestDegree.requeststatus == '1') ||
-          (uniRequestDegree.requestprocess == '3' && uniRequestDegree.requeststatus == '1') ||
-          (uniRequestDegree.requestprocess == '4' && uniRequestDegree.requeststatus == '1') ||
-          (uniRequestDegree.requestprocess == '4' && uniRequestDegree.requeststatus == '2') ||
-          (uniRequestDegree.requestprocess == '5' && uniRequestDegree.requeststatus == '1') ||
-          (uniRequestDegree.requestprocess == '5' && uniRequestDegree.requeststatus == '2')) {
+      if (
+        uniRequestDegree.requestprocess == '1' ||
+        (uniRequestDegree.requestprocess == '2' &&
+          uniRequestDegree.requeststatus == '1') ||
+        (uniRequestDegree.requestprocess == '3' &&
+          uniRequestDegree.requeststatus == '1') ||
+        (uniRequestDegree.requestprocess == '4' &&
+          uniRequestDegree.requeststatus == '1') ||
+        (uniRequestDegree.requestprocess == '4' &&
+          uniRequestDegree.requeststatus == '2') ||
+        (uniRequestDegree.requestprocess == '5' &&
+          uniRequestDegree.requeststatus == '1') ||
+        (uniRequestDegree.requestprocess == '5' &&
+          uniRequestDegree.requeststatus == '2')
+      ) {
         this.mode = 'view';
       }
       this.status = uniRequestDegree.requeststatus;
@@ -114,7 +120,7 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
       });
       setTimeout(() => {
         this.step4Form.setValue({
-          step4
+          step4,
         });
       }, 500);
     } else {
@@ -122,7 +128,11 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
         step1: {
           institutionsCode: this.uniData?.universitycode || '',
           institutionsGroup: getCookie('uniType') || '',
-          institutionsName: this.uniData?.name + (this.uniData?.campusname ? `, ${this.uniData?.campusname}` : '') || '',
+          institutionsName:
+            this.uniData?.name +
+              (this.uniData?.campusname
+                ? `, ${this.uniData?.campusname}`
+                : '') || '',
           provience: this.uniData?.provinceid || '',
         },
       });
@@ -148,10 +158,14 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
         const res = await (async () => {
           if (this.id)
             return await lastValueFrom(
-              this.uniRequestService.uniRequestUpdate(this._getRequest(process, '1'))
+              this.uniRequestService.uniRequestUpdate(
+                this._getRequest(process, '1')
+              )
             );
           return await lastValueFrom(
-            this.uniRequestService.uniRequestInsert(this._getRequest(process, '1'))
+            this.uniRequestService.uniRequestInsert(
+              this._getRequest(process, '1')
+            )
           );
         })();
 
@@ -167,9 +181,9 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
     const step4: any = this.step4Form.value.step4;
 
     const dateapprove = new Date(step1?.degreeTypeForm?.courseApproveDate);
-    dateapprove.setHours(dateapprove.getHours() + 7)
+    dateapprove.setHours(dateapprove.getHours() + 7);
     const dateaccept = new Date(step1?.degreeTypeForm?.courseAcceptDate);
-    dateaccept.setHours(dateaccept.getHours() + 7)
+    dateaccept.setHours(dateaccept.getHours() + 7);
     const reqBody: any = {
       uniid: getCookie('uniId'),
       ref1: '3',
@@ -199,14 +213,10 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
       shortdegreenameen: step1?.degreeTypeForm?.degreeNameEnShort || null,
       courseapprovetime: step1?.degreeTypeForm?.courseApproveTime || null,
       courseapprovedate: step1?.degreeTypeForm?.courseApproveDate
-        ? formatDate(
-            dateapprove.toISOString()
-          )
+        ? formatDate(dateapprove.toISOString())
         : null,
       courseacceptdate: step1?.degreeTypeForm?.courseAcceptDate
-        ? formatDate(
-            dateaccept.toISOString()
-          )
+        ? formatDate(dateaccept.toISOString())
         : null,
       coursedetailtype: step1?.courseDetailType || null,
       coursedetailinfo: step1?.courseDetail
@@ -255,13 +265,13 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
         : null;
       reqBody['courseplan'] = step2?.plan2?.subjects
         ? JSON.stringify({
-          subjects: step2?.plan2?.subjects, 
-          subjectgroupname: {
-            subject1GroupName: step2?.plan2?.subject1GroupName,
-            subject2GroupName: step2?.plan2?.subject2GroupName,
-            subject3GroupName: step2?.plan2?.subject3GroupName
-          }
-        })
+            subjects: step2?.plan2?.subjects,
+            subjectgroupname: {
+              subject1GroupName: step2?.plan2?.subject1GroupName,
+              subject2GroupName: step2?.plan2?.subject2GroupName,
+              subject3GroupName: step2?.plan2?.subject3GroupName,
+            },
+          })
         : null;
     }
     if (this.id) {
@@ -275,8 +285,8 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
       data: {
         header: 'ยืนยันข้อมูลสำเร็จ',
         content: `วันที่ : ${this.date}
-        เลขที่ใบคำขอ : ${requestno || this.requestNo || '-'}`,
-        subContent: `กรุณาตรวจสอบสถานะใบคำขอหรือรหัสเข้าใช้งาน
+        เลขที่แบบคำขอ : ${requestno || this.requestNo || '-'}`,
+        subContent: `กรุณาตรวจสอบสถานะแบบคำขอหรือรหัสเข้าใช้งาน
         ผ่านทางอีเมลผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },
     });

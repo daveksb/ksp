@@ -149,7 +149,7 @@ export class EQualificationConfirmComponent implements OnInit {
         }
       }
     } else if (req.requesttype === '6') {
-      //console.log('condition for  ใบคำขอรับรองคุณวุฒิ ');
+      //console.log('condition for  แบบคำขอรับรองคุณวุฒิ ');
       //ครบถ้วน และถูกต้อง
       if (input.result === '1') {
         if (input.shouldForward === '1') {
@@ -352,7 +352,7 @@ export class EQualificationConfirmComponent implements OnInit {
     dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         if (this.saveData.requestData.requesttype === '3') {
-          //console.log('ใบคำขอชั่วคราว = ');
+          //console.log('แบบคำขอชั่วคราว = ');
           if (this.saveData.requestData.process === '5') {
             this.considerRequest();
           } else {
@@ -360,7 +360,7 @@ export class EQualificationConfirmComponent implements OnInit {
           }
         }
         if (this.saveData.requestData.requesttype === '6') {
-          //console.log('ใบคำขอรับรองคุณวุฒิ = ');
+          //console.log('แบบคำขอรับรองคุณวุฒิ = ');
           if (this.saveData.requestData.process === '3') {
             this.considerRequest();
           } else {

@@ -48,7 +48,7 @@ const ATTACH_FILES: FileGroup[] = [
 export class RefundFeeRequestComponent implements OnInit {
   isLoading: Subject<boolean> = this.loaderService.isLoading;
   files: any[] = [];
-  headerGroup = ['วันที่ทำรายการ', 'เลขใบคำขอ'];
+  headerGroup = ['วันที่ทำรายการ', 'เลขแบบคำขอ'];
   userInfoType = UserInfoFormType.thai;
   today = thaiDate(new Date());
   userInfo!: SelfMyInfo;
@@ -218,7 +218,7 @@ export class RefundFeeRequestComponent implements OnInit {
       width: '375px',
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,
-        subContent: `รายการใบคำขอของท่าน
+        subContent: `รายการแบบคำขอของท่าน
         ระยะเวลาดำเนินการ 30 - 45  วันทำการ`,
       },
     });
@@ -234,7 +234,7 @@ export class RefundFeeRequestComponent implements OnInit {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
-        title: `คุณต้องการยกเลิกรายการใบคำขอ
+        title: `คุณต้องการยกเลิกรายการแบบคำขอ
         ใช่หรือไม่? `,
       },
     });
@@ -262,7 +262,7 @@ export class RefundFeeRequestComponent implements OnInit {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '350px',
       data: {
-        header: `ยกเลิกใบคำขอสำเร็จ`,
+        header: `ยกเลิกแบบคำขอสำเร็จ`,
       },
     });
 

@@ -1,29 +1,32 @@
-<ksp-top-nav><span header>ยื่นใบคำขอ</span></ksp-top-nav>
+<ksp-top-nav><span header>ยื่นแบบคำขอ</span></ksp-top-nav>
 <fieldset [disabled]="!allowEdit">
-
-<form [formGroup]="form">
-  <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
-    <div class="box-header">รายละเอียดใบคำขอ</div>
-    <div class="bg-white py-3 px-3">
-      <ksp-request-header-info
-        [requestNumber]="requestNumber"
-      ></ksp-request-header-info>
-      <hr />
-      <div class="detail__container">
-        <div class="box-header">
-          ข้อมูลรับรองปริญญา และประกาศนียบัตรทางการศึกษา
+  <form [formGroup]="form">
+    <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
+      <div class="box-header">รายละเอียดแบบคำขอ</div>
+      <div class="bg-white py-3 px-3">
+        <ksp-request-header-info
+          [requestNumber]="requestNumber"
+        ></ksp-request-header-info>
+        <hr />
+        <div class="detail__container">
+          <div class="box-header">
+            ข้อมูลรับรองปริญญา และประกาศนียบัตรทางการศึกษา
+          </div>
+          <div class="m-2">
+            <e-service-final-result-info
+              formControlName="finalResult"
+            ></e-service-final-result-info>
+          </div>
+          <ksp-degree-cert-step-one
+            formControlName="step1"
+            [mode]="'view'"
+            [showCoordinatorForm]="false"
+          >
+          </ksp-degree-cert-step-one>
         </div>
-        <div class="m-2">
-          <e-service-final-result-info
-            formControlName="finalResult"
-          ></e-service-final-result-info>
-        </div>
-        <ksp-degree-cert-step-one formControlName="step1" [mode]="'view'" [showCoordinatorForm]="false">
-        </ksp-degree-cert-step-one>
       </div>
     </div>
-  </div>
-</form>
+  </form>
 </fieldset>
 <div class="sticky-bottom border">
   <ksp-bottom-nav

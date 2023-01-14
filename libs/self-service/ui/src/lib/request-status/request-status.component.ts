@@ -13,9 +13,9 @@ import { ThaiDatePipe } from '@ksp/shared/pipe';
 export class RequestStatusComponent {
   changeToEnglishMonth = changeToEnglishMonth;
   today = `${new Date()}`;
-  @Input() title = 'รายละเอียดใบคำขอ';
+  @Input() title = 'รายละเอียดแบบคำขอ';
   @Input() headerLabel1 = 'วันที่ทำรายการ';
-  @Input() headerLabel2 = 'เลขใบคำขอ';
+  @Input() headerLabel2 = 'เลขแบบคำขอ';
 
   @Input() requestDate: string | null = '';
   @Input() requestNo: string | null = '';

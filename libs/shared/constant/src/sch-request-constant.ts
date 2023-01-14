@@ -1,6 +1,6 @@
 import { SchRequestProcess } from '@ksp/shared/interface';
 
-// ใช้ อ้างอิง tab ในหน้าใบคำขอเพื่อระบุรายการไฟล์ ที่เกี่ยวข้อง
+// ใช้ อ้างอิง tab ในหน้าแบบคำขอเพื่อระบุรายการไฟล์ ที่เกี่ยวข้อง
 export enum RequestPageType {
   educationTab = 'educationTab',
   teachingTab = 'teachingTab',
@@ -113,7 +113,7 @@ export const SchoolRequestProcess: SchRequestProcess[] = [
   {
     requestType: 3,
     processId: 1,
-    processName: 'สร้างใบคำขอ',
+    processName: 'สร้างแบบคำขอ',
     status: [
       { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
@@ -124,7 +124,7 @@ export const SchoolRequestProcess: SchRequestProcess[] = [
   {
     requestType: 3,
     processId: 2,
-    processName: 'สร้างและส่งใบคำขอ',
+    processName: 'สร้างและส่งแบบคำขอ',
     status: [
       { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
@@ -175,7 +175,7 @@ export const SchoolRequestProcess: SchRequestProcess[] = [
   {
     requestType: 4,
     processId: 1,
-    processName: 'สร้างและส่งใบคำขอ',
+    processName: 'สร้างและส่งแบบคำขอ',
     status: [
       { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
@@ -197,7 +197,7 @@ export const SchoolRequestProcess: SchRequestProcess[] = [
   {
     requestType: 6,
     processId: 1,
-    processName: 'สร้างและส่งใบคำขอ',
+    processName: 'สร้างและส่งแบบคำขอ',
     status: [
       { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
@@ -234,7 +234,7 @@ export const SchoolRequestProcess: SchRequestProcess[] = [
   {
     requestType: 40,
     processId: 1,
-    processName: 'สร้างใบคำขอ',
+    processName: 'สร้างแบบคำขอ',
     status: [
       { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
@@ -243,7 +243,7 @@ export const SchoolRequestProcess: SchRequestProcess[] = [
   {
     requestType: 40,
     processId: 2,
-    processName: 'สร้างและส่งใบคำขอ',
+    processName: 'สร้างและส่งแบบคำขอ',
     status: [
       { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },

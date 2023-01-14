@@ -37,11 +37,11 @@ export class UniRegisterCoordinatorComponent implements OnInit {
   uploadFileList: FileGroup[] = [
     {
       name: 'หนังสือแต่งตั้งผู้ประสานงาน',
-      files: []
+      files: [],
     },
     {
       name: 'สำเนาบัตรประชาชน',
-      files: []
+      files: [],
     },
   ] as FileGroup[];
   requesttype = 1;
@@ -86,7 +86,7 @@ export class UniRegisterCoordinatorComponent implements OnInit {
         this.form.patchValue({
           coordinator: res.form.coordinator,
         });
-        this.uploadFileList = res.file
+        this.uploadFileList = res.file;
       }
     });
     this.prefixName$ = this.generalInfoService.getPrefix();
@@ -109,7 +109,7 @@ export class UniRegisterCoordinatorComponent implements OnInit {
       form: this.form.getRawValue(),
       file: this.uploadFileList,
     };
-    localForage.setItem('registerCoordinatorForm', form).then(()=>{
+    localForage.setItem('registerCoordinatorForm', form).then(() => {
       this.router.navigate(['/', 'register', 'requester']);
     });
   }
@@ -118,7 +118,7 @@ export class UniRegisterCoordinatorComponent implements OnInit {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
-        title: `คุณต้องการยกเลิกรายการใบคำขอใช่หรือไม่?`,
+        title: `คุณต้องการยกเลิกรายการแบบคำขอใช่หรือไม่?`,
         btnLabel: 'ยืนยัน',
       },
     });
@@ -152,13 +152,16 @@ export class UniRegisterCoordinatorComponent implements OnInit {
     this.submit = true;
     const data = this.form.getRawValue();
     const { coordinator } = data as any;
-    if (this.form.controls.coordinator.valid && coordinator.prefixth == coordinator.prefixen) {
+    if (
+      this.form.controls.coordinator.valid &&
+      coordinator.prefixth == coordinator.prefixen
+    ) {
       const form = {
         form: this.form.getRawValue(),
         file: this.uploadFileList,
       };
       this.submit = false;
-      localForage.setItem('registerCoordinatorForm', form).then(()=>{
+      localForage.setItem('registerCoordinatorForm', form).then(() => {
         this.router.navigate(['/', 'register', 'password']);
       });
     }

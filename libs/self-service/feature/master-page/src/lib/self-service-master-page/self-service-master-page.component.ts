@@ -44,7 +44,7 @@ const getMenu = (userType: string | null) => {
     },
     {
       icon: 'assets/images/icon-sidenav/paper.svg',
-      label: 'ยื่นใบคำขอ',
+      label: 'ยื่นแบบคำขอ',
       path: '',
       subMenuName: 'request',
       subMenu: [
@@ -247,7 +247,7 @@ export const menu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ยื่นใบคำขอ',
+    label: 'ยื่นแบบคำขอ',
     path: '',
     subMenuName: 'request',
     subMenu: [

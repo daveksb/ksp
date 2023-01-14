@@ -43,7 +43,7 @@ export class RequestRewardMainComponent implements OnInit {
 
   headerGroup = [
     'วันที่ทำรายการ',
-    'เลขใบคำขอ',
+    'เลขแบบคำขอ',
     'เลขที่ประจำตัวคุรุสภา',
     'เลขประจำตัวประชาชน',
     'เลขที่ใบอนุญาต',
@@ -461,7 +461,7 @@ export class RequestRewardMainComponent implements OnInit {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
-        title: `คุณต้องการยกเลิกรายการใบคำขอ
+        title: `คุณต้องการยกเลิกรายการแบบคำขอ
         ใช่หรือไม่? `,
       },
     });
@@ -489,7 +489,7 @@ export class RequestRewardMainComponent implements OnInit {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '350px',
       data: {
-        header: `ยกเลิกใบคำขอสำเร็จ`,
+        header: `ยกเลิกแบบคำขอสำเร็จ`,
       },
     });
 
@@ -504,7 +504,7 @@ export class RequestRewardMainComponent implements OnInit {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '350px',
       data: {
-        header: `ทำรายการสร้างใบคำขอสำเร็จ`,
+        header: `ทำรายการสร้างแบบคำขอสำเร็จ`,
       },
     });
 

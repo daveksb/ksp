@@ -4,14 +4,14 @@ import { MenuConfig } from '@ksp/shared/interface';
 export const eLicenseMenu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอรับใบอนุญาตประกอบวิชาชีพ(ชาวไทย)',
+    label: 'แบบคำขอรับใบอนุญาตประกอบวิชาชีพ(ชาวไทย)',
     path: '',
     isExpanded: false,
     subMenuName: 'license',
     subMenu: [
       {
         path: '/request-license/approve-list',
-        label: 'รายการใบคำขอรับใบอนุญาตประกอบวิชาชีพ',
+        label: 'รายการแบบคำขอรับใบอนุญาตประกอบวิชาชีพ',
       },
       {
         path: '/request-license/search-list',
@@ -25,14 +25,14 @@ export const eLicenseMenu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอรับใบอนุญาตประกอบวิชาชีพ(ชาวต่างชาติ)',
+    label: 'แบบคำขอรับใบอนุญาตประกอบวิชาชีพ(ชาวต่างชาติ)',
     path: '',
     isExpanded: false,
     subMenuName: 'request-foreign-license',
     subMenu: [
       {
         path: '/request-foreign-license/list',
-        label: 'รายการใบคำขอรับใบอนุญาตประกอบวิชาชีพ',
+        label: 'รายการแบบคำขอรับใบอนุญาตประกอบวิชาชีพ',
       },
       /* {
         path: '/xxx',
@@ -51,14 +51,14 @@ export const eLicenseMenu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ(ชาวไทย)',
+    label: 'แบบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ(ชาวไทย)',
     path: '',
     isExpanded: false,
     subMenuName: 'renewThai',
     subMenu: [
       {
         path: '/renew-license/approve-list',
-        label: 'รายการใบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
+        label: 'รายการแบบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
       },
       {
         path: '/renew-license/search-list',
@@ -72,14 +72,14 @@ export const eLicenseMenu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ(ชาวต่างชาติ)',
+    label: 'แบบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ(ชาวต่างชาติ)',
     path: '',
     isExpanded: false,
     subMenuName: 'renewForeign',
     subMenu: [
       {
         path: '/renew-foreign-license/list',
-        label: 'รายการใบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
+        label: 'รายการแบบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
       },
       /* {
         path: '/xxx',
@@ -93,14 +93,14 @@ export const eLicenseMenu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต(ชาวไทย)',
+    label: 'แบบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต(ชาวไทย)',
     path: '',
     isExpanded: false,
     subMenuName: 'tempThai',
     subMenu: [
       {
         path: '/temp-license/list/1',
-        label: 'รายการใบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
+        label: 'รายการแบบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
       },
       {
         path: '/temp-license/consider-list/1',
@@ -110,14 +110,14 @@ export const eLicenseMenu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต(ชาวต่างชาติ)',
+    label: 'แบบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต(ชาวต่างชาติ)',
     path: '',
     isExpanded: false,
     subMenuName: 'tempForeign',
     subMenu: [
       {
         path: '/temp-license/list/5',
-        label: 'รายการใบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
+        label: 'รายการแบบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
       },
       {
         path: '/temp-license/consider-list/5',
@@ -127,14 +127,14 @@ export const eLicenseMenu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอเปลี่ยนแปลง/แก้ไขใบอนุญาต',
+    label: 'แบบคำขอเปลี่ยนแปลง/แก้ไขใบอนุญาต',
     path: '',
     isExpanded: false,
     subMenuName: 'edit-thai',
     subMenu: [
       {
         path: '/edit-license/list',
-        label: 'รายการใบคำขอแก้ไข/เปลี่ยนแปลงใบอนุญาต',
+        label: 'รายการแบบคำขอแก้ไข/เปลี่ยนแปลงใบอนุญาต',
       },
       {
         path: '/edit-license/consider-list',
@@ -144,14 +144,14 @@ export const eLicenseMenu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอใบแทนใบอนุญาตประกอบวิชาชีพ',
+    label: 'แบบคำขอใบแทนใบอนุญาตประกอบวิชาชีพ',
     path: '',
     isExpanded: false,
     subMenuName: 'sub-license',
     subMenu: [
       {
         path: '/sub-license/approve-list',
-        label: 'รายการใบคำขอใบแทนใบอนุญาตประกอบวิชาชีพ',
+        label: 'รายการแบบคำขอใบแทนใบอนุญาตประกอบวิชาชีพ',
       },
       {
         path: '/xxx',
@@ -161,7 +161,7 @@ export const eLicenseMenu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
+    label: 'แบบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
     path: '',
     isExpanded: false,
     subMenuName: 'foreign-id',
@@ -181,7 +181,7 @@ export const eLicenseMenu: MenuConfig[] = [
     subMenu: [
       {
         path: '/xxx',
-        label: 'รายการใบคำขอยื่นกรอกกิจกรรมพัฒนาตนเอง',
+        label: 'รายการแบบคำขอยื่นกรอกกิจกรรมพัฒนาตนเอง',
       },
       {
         path: '/xxx',
@@ -235,12 +235,12 @@ export const eLicenseMenu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอผู้ใช้งานระบบบริการตนเอง (Self Service) สำหรับชาวต่างชาติ',
+    label: 'แบบคำขอผู้ใช้งานระบบบริการตนเอง (Self Service) สำหรับชาวต่างชาติ',
     path: '/self-user/new-user-list',
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
+    label: 'แบบคำขอผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
     path: '/school/new-user',
   },
   {
@@ -300,14 +300,14 @@ export const ethicsMenu: MenuConfig[] = [
 export const standardMenu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'ใบคำขอรับรองปริญญาและประกาศนียบัตร',
+    label: 'แบบคำขอรับรองปริญญาและประกาศนียบัตร',
     path: '',
     isExpanded: false,
     subMenuName: 'degree-cert',
     subMenu: [
       {
         path: `/degree-cert/list/1/0`,
-        label: 'รายการใบคำขอรับรองปริญญาและประกาศนียบัตร',
+        label: 'รายการแบบคำขอรับรองปริญญาและประกาศนียบัตร',
       },
       {
         path: `/degree-cert/list/3/1`,
@@ -321,14 +321,14 @@ export const standardMenu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'ใบคำขอส่งรายชื่อผู้เข้าและผู้สำเร็จการศึกษา',
+    label: 'แบบคำขอส่งรายชื่อผู้เข้าและผู้สำเร็จการศึกษา',
     path: '',
     isExpanded: false,
     subMenuName: 'gradute-list',
     subMenu: [
       {
         path: '/degree-cert/list-approved',
-        label: 'รายการใบคำขอส่งรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา',
+        label: 'รายการแบบคำขอส่งรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา',
       },
       // {
       //   path: '/cc',
@@ -338,14 +338,14 @@ export const standardMenu: MenuConfig[] = [
   },
   /* {
     icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'ใบคำขอเทียบโอนความรู้',
+    label: 'แบบคำขอเทียบโอนความรู้',
     path: '',
     isExpanded: false,
     subMenuName: 'transfer-knowledge',
     subMenu: [
       {
         path: '/aa',
-        label: 'รายการใบคำขอเทียบโอนความรู้',
+        label: 'รายการแบบคำขอเทียบโอนความรู้',
       },
       {
         path: '/bb',
@@ -359,14 +359,14 @@ export const standardMenu: MenuConfig[] = [
   }, */
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอเทียบเคียงความรู้',
+    label: 'แบบคำขอเทียบเคียงความรู้',
     path: '',
     isExpanded: false,
     subMenuName: 'compare',
     subMenu: [
       {
         path: '/compare-knowledge/list',
-        label: 'รายการใบคำขอเทียบเคียงความรู้',
+        label: 'รายการแบบคำขอเทียบเคียงความรู้',
       },
       {
         path: '/xxx',
@@ -380,14 +380,14 @@ export const standardMenu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอรับรองความรู้',
+    label: 'แบบคำขอรับรองความรู้',
     path: '',
     isExpanded: false,
     subMenuName: 'knowledge',
     subMenu: [
       {
         path: '/knowledge-cert/list',
-        label: 'รายการใบคำขอรับรองความรู้',
+        label: 'รายการแบบคำขอรับรองความรู้',
       },
       {
         path: '/knowledge-cert/roster-list',
@@ -401,7 +401,7 @@ export const standardMenu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'ใบคำขอรับรองคุณวุฒิทางการศึกษา',
+    label: 'แบบคำขอรับรองคุณวุฒิทางการศึกษา',
     path: '',
     isExpanded: false,
     subMenuName: 'qualification',
@@ -438,7 +438,7 @@ export const standardMenu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'ใบคำขอรหัสเข้าใช้งานระบบบริการสถาบันผลิตครู (Uni Service)',
+    label: 'แบบคำขอรหัสเข้าใช้งานระบบบริการสถาบันผลิตครู (Uni Service)',
     path: '/uni/new-user',
   },
   {
@@ -459,13 +459,13 @@ export const standardMenu: MenuConfig[] = [
 export const professionalMenu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'ใบคำขอรับรางวัลคุรุสภา',
+    label: 'แบบคำขอรับรางวัลคุรุสภา',
     path: '',
     subMenuName: 'reward1',
     subMenu: [
       {
         path: '/teacher-council/list',
-        label: 'รายการใบคำขอรับรางวัลคุรุสภา',
+        label: 'รายการแบบคำขอรับรางวัลคุรุสภา',
       },
       {
         path: '/teacher-council/account-list',
@@ -483,13 +483,13 @@ export const professionalMenu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'ใบคำขอรับรางวัลครูภาษาไทยดีเด่น',
+    label: 'แบบคำขอรับรางวัลครูภาษาไทยดีเด่น',
     path: '',
     subMenuName: 'reward2',
     subMenu: [
       {
         path: '/thai-teacher/list',
-        label: 'รายการใบคำขอรับรางวัลครูภาษาไทยดีเด่น',
+        label: 'รายการแบบคำขอรับรางวัลครูภาษาไทยดีเด่น',
       },
       {
         path: '/thai-teacher/account-list',
@@ -507,13 +507,13 @@ export const professionalMenu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'ใบคำขอรับรางวัลครูผู้สอนดีเด่น',
+    label: 'แบบคำขอรับรางวัลครูผู้สอนดีเด่น',
     path: '',
     subMenuName: 'reward3',
     subMenu: [
       {
         path: '/best-teacher/list',
-        label: 'รายการใบคำขอรับรางวัลครูผู้สอนดีเด่น',
+        label: 'รายการแบบคำขอรับรางวัลครูผู้สอนดีเด่น',
       },
       {
         path: '/xxx',
@@ -523,13 +523,13 @@ export const professionalMenu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'ใบคำขอรับรางวัลคุรุสดุดี',
+    label: 'แบบคำขอรับรางวัลคุรุสดุดี',
     path: '',
     subMenuName: 'reward4',
     subMenu: [
       {
         path: '/praise-teacher/list',
-        label: 'รายการใบคำขอรับรางวัลคุรุสดุดี',
+        label: 'รายการแบบคำขอรับรางวัลคุรุสดุดี',
       },
       {
         path: '/xxx',
@@ -539,13 +539,13 @@ export const professionalMenu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'ใบคำขอรับรางวัลผลงานวิจัยของคุรุสภา',
+    label: 'แบบคำขอรับรางวัลผลงานวิจัยของคุรุสภา',
     path: '',
     subMenuName: 'reward5',
     subMenu: [
       {
         path: '/research-reward/list',
-        label: 'รายการใบคำขอรับรางวัลผลงานวิจัยของคุรุสภา',
+        label: 'รายการแบบคำขอรับรางวัลผลงานวิจัยของคุรุสภา',
       },
       {
         path: '/xxx',
@@ -555,13 +555,13 @@ export const professionalMenu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'ใบคำขอรับรางวัลครูอาวุโส',
+    label: 'แบบคำขอรับรางวัลครูอาวุโส',
     path: '',
     subMenuName: 'reward6',
     subMenu: [
       {
         path: '/senior-teacher/list',
-        label: 'รายการใบคำขอรับรางวัลครูอาวุโส',
+        label: 'รายการแบบคำขอรับรางวัลครูอาวุโส',
       },
       {
         path: '/xxx',
@@ -583,14 +583,14 @@ export const professionalMenu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'ใบคำขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม',
+    label: 'แบบคำขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม',
     path: '',
     isExpanded: false,
     subMenuName: 'osoi',
     subMenu: [
       {
         path: '/one-school-one-innovation/list',
-        label: 'รายการใบคำขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม',
+        label: 'รายการแบบคำขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม',
       },
       {
         path: '/one-school-one-innovation/ranking-list',
@@ -654,7 +654,7 @@ export const refundFeeMenu: MenuConfig[] = [
     subMenu: [
       {
         path: '/refund-fee/list',
-        label: 'รายการใบคำขอคืนค่าธรรมเนียม',
+        label: 'รายการแบบคำขอคืนค่าธรรมเนียม',
       },
       {
         path: '/refund-fee/create-roster',

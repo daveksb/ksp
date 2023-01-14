@@ -3,7 +3,8 @@
   </mat-progress-spinner>
 </div>
 
-<ksp-top-nav><span header>ใบคำขอต่ออนุญาตประกอบวิชาชีพ</span>
+<ksp-top-nav
+  ><span header>แบบคำขอต่ออนุญาตประกอบวิชาชีพ</span>
   <span subHeader>ผลการนำเสนอใบอนุญาตประกอบวิชาชีพ </span>
 </ksp-top-nav>
 
@@ -27,12 +28,14 @@
     </div>
 
     <ksp-request-license-approve-license-table
-      [data]="licenseData"></ksp-request-license-approve-license-table>
+      [data]="licenseData"
+    ></ksp-request-license-approve-license-table>
   </div>
 
   <div class="bg-white px-3 py-3">
     <ksp-e-service-license-save-result
       (save)="save($event)"
-      (cancel)="cancel()"></ksp-e-service-license-save-result>
+      (cancel)="cancel()"
+    ></ksp-e-service-license-save-result>
   </div>
 </div>

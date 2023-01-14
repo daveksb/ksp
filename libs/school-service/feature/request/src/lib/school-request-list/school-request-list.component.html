@@ -74,7 +74,7 @@
     </div>
 
     <div class="box-header">
-      รายการใบคำขอที่ยื่นผ่านระบบบริการหน่วยงานทางการศึกษา
+      รายการแบบคำขอที่ยื่นผ่านระบบบริการหน่วยงานทางการศึกษา
     </div>
     <div class="bg-white px-3 py-3">
       <ksp-school-request-search
@@ -87,14 +87,14 @@
 
       <hr />
       <div class="d-flex justify-content-between align-items-center">
-        <div class="box-header text-primary">รายการยื่นใบคำขอ</div>
+        <div class="box-header text-primary">รายการยื่นแบบคำขอ</div>
 
         <button
           class="btn btn-primary"
           mat-button
           [matMenuTriggerFor]="beforeMenu"
         >
-          ยื่นใบคำขอ
+          ยื่นแบบคำขอ
         </button>
         <mat-menu #beforeMenu="matMenu" xPosition="before">
           <button mat-menu-item (click)="goToRequestPage(1)">
@@ -159,7 +159,7 @@
           </ng-container>
 
           <ng-container matColumnDef="requestno">
-            <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
+            <th mat-header-cell *matHeaderCellDef>เลขที่แบบคำขอ</th>
             <td
               class="text-primary list-link"
               (click)="
@@ -189,7 +189,7 @@
           </ng-container>
 
           <ng-container matColumnDef="requesttype">
-            <th mat-header-cell *matHeaderCellDef>ประเภทใบคำขอ</th>
+            <th mat-header-cell *matHeaderCellDef>ประเภทแบบคำขอ</th>
             <td mat-cell *matCellDef="let element">
               {{ checkRequestType(+element.requesttype) }}
             </td>
@@ -255,7 +255,7 @@
           </ng-container>
 
           <ng-container matColumnDef="requestdate">
-            <th mat-header-cell *matHeaderCellDef>วันที่ยื่นใบคำขอ</th>
+            <th mat-header-cell *matHeaderCellDef>วันที่ยื่นแบบคำขอ</th>
             <td mat-cell *matCellDef="let element">
               {{ element.requestdate | thaiDate }}
             </td>
@@ -263,7 +263,7 @@
 
           <ng-container matColumnDef="requestpdf">
             <th mat-header-cell *matHeaderCellDef class="text-center">
-              ใบคำขอ
+              แบบคำขอ
             </th>
             <td mat-cell *matCellDef="let element" class="text-center">
               <i

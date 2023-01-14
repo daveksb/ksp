@@ -86,7 +86,7 @@ export class CoordinatorInfoComponent implements OnInit {
   cancelConfirmDialog() {
     const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
-        title: `คุณต้องการยกเลิกรายการใบคำขอ
+        title: `คุณต้องการยกเลิกรายการแบบคำขอ
         ใช่หรือไม่?`,
         btnLabel: 'ยืนยัน',
       },

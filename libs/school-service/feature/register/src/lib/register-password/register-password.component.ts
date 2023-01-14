@@ -84,7 +84,7 @@ export class RegisterPasswordComponent implements OnInit {
   confirmCancelDialog() {
     const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
-        title: `คุณต้องการยกเลิกรายการใบคำขอ
+        title: `คุณต้องการยกเลิกรายการแบบคำขอ
         ใช่หรือไม่?`,
         btnLabel: 'ยืนยัน',
       },
@@ -176,8 +176,8 @@ export class RegisterPasswordComponent implements OnInit {
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,
         content: `วันที่ : ${thaiDate(new Date())}
-        เลขที่ใบคำขอ : ${formatRequestNo(requestNo)}`,
-        subContent: `กรุณาตรวจสอบสถานะใบคำขอผ่านทางอีเมล
+        เลขที่แบบคำขอ : ${formatRequestNo(requestNo)}`,
+        subContent: `กรุณาตรวจสอบสถานะแบบคำขอผ่านทางอีเมล
         ผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },
     });

@@ -23,7 +23,7 @@ export const menu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ยื่นใบคำขอ',
+    label: 'ยื่นแบบคำขอ',
     path: '',
     subMenuName: 'license',
     isExpanded: false,
