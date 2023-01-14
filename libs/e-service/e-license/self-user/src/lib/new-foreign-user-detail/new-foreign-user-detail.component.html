@@ -211,13 +211,15 @@
       </div>
     </div>
   </form>
-
-  <div class="bg-white p-3 mt-3">
-    <e-service-license-check
-      [checkedResult]="checkedResult"
-      [choices]="approveChoices"
-    ></e-service-license-check>
-  </div>
+  <form [formGroup]="verifyForm">
+    <div class="bg-white p-3 mt-3">
+      <e-service-license-check
+        formControlName="result"
+        [checkedResult]="checkedResult"
+        [choices]="approveChoices"
+      ></e-service-license-check>
+    </div>
+  </form>
 </div>
 
 <div class="sticky-bottom border">
@@ -227,6 +229,8 @@
     [showCenterButtons]="true"
     [showSaveButton]="true"
     (cancelClicked)="cancel()"
+    (saveClicked)="confirm()"
+    [disableSaveButton]="!verifyForm.valid"
   >
   </ksp-bottom-nav>
 </div>
