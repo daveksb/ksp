@@ -7,7 +7,7 @@
       <thead>
         <tr class="fs-6">
           <th class="ps-3 py-2">รายการเอกสาร</th>
-          <th class="text-center">จำนวนหน้า</th>
+          <!-- <th class="text-center">จำนวนหน้า</th> -->
           <th *ngIf="mode === 'view'" class="text-center">ตรวจสอบ</th>
           <th *ngIf="mode === 'edit'" class="text-center">อัพโหลด</th>
           <th></th>
@@ -40,7 +40,7 @@
                 </div>
               </ng-container>
             </th>
-            <td class="text-center"></td>
+            <!-- <td class="text-center"></td> -->
             <td *ngIf="mode === 'view' && group?.files?.length">
               <div class="mt-4">
                 <div class="d-flex flex-row justify-content-center">

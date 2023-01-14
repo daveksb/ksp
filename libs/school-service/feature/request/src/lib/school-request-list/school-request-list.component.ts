@@ -851,5 +851,5 @@ export const displayedColumns = [
   'updatedate',
   'requestdate',
   'requestpdf',
-  'licensepdf',
+  //'licensepdf',
 ];
