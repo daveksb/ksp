@@ -77,7 +77,7 @@ export class NewForeignUserListComponent implements OnInit, AfterViewInit {
       careertype: null,
       name: params.name,
       idcardno: null,
-      passportno: null,
+      passportno: params.passportno,
       process: null,
       status: params.requeststatus,
       schoolid: params.schoolinfo?.schoolid,
@@ -128,8 +128,8 @@ export class NewForeignUserListComponent implements OnInit, AfterViewInit {
     this.selectedUniversity = universityCode;
   }
 
-  goToDetail() {
-    this.router.navigate(['self-user', 'new-user-detail']);
+  goToDetail(id: string | null) {
+    this.router.navigate(['self-user', 'new-user-detail', id]);
   }
 }
 

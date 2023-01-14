@@ -49,7 +49,7 @@ export const routes: Routes = [
         component: NewForeignUserListComponent,
       },
       {
-        path: 'new-user-detail',
+        path: 'new-user-detail/:id',
         component: NewForeignUserDetailComponent,
       },
       {
