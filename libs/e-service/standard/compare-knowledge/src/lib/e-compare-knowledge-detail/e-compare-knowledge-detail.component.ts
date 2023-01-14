@@ -110,7 +110,7 @@ export class ECompareKnowledgeDetailComponent
       this.form.controls.testResultCompareInfo.patchValue({
         ...testResultCompareInfo,
       } as any);
-      console.log('eduInfo= ', testResultCompareInfo);
+      //console.log('eduInfo= ', testResultCompareInfo);
     }
 
     if (data.fileinfo) {

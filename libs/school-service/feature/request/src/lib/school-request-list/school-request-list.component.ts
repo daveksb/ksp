@@ -31,6 +31,8 @@ import {
   hasRejectedRequest,
   changeToThaiNumber,
   changeToEnglishMonth,
+  teachingSubjects,
+  teachingLevels,
 } from '@ksp/shared/utility';
 import { Subject } from 'rxjs';
 
@@ -52,6 +54,9 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
   careerTypeList = careerTypeList;
   initialSearch = true;
   rejectedRequests: KspRequest[] = [];
+  tempLicenseHistory: SchTempLicense[] = [];
+  tempLicenseRequestTimes: any;
+
   defaultForm = {
     requesttype: '3',
     careertype: '1',
@@ -300,6 +305,26 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       id13,
     ] = element?.idcardno?.split('') ?? [];
 
+    let approve1 = false;
+    let approve2 = false;
+    let approve3 = false;
+
+    this.requestService
+      .getTempLicenseHistory(element.idcardno)
+      .subscribe((res) => {
+        this.tempLicenseHistory = res.datareturn;
+        this.tempLicenseRequestTimes =
+          (this.tempLicenseHistory?.length || 0) + 1;
+
+        if (Number(this.tempLicenseRequestTimes) === 1) {
+          approve1 = true;
+        } else if (Number(this.tempLicenseRequestTimes) === 2) {
+          approve2 = true;
+        } else if (Number(this.tempLicenseRequestTimes) === 3) {
+          approve3 = true;
+        }
+      });
+
     const position = element.position;
     const eduinfo = JSON.parse(element.eduinfo || '');
     const email = element.email;
@@ -366,6 +391,20 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
 
     const teachinginfo = JSON.parse(element.teachinginfo || '');
 
+    let subject: any;
+    let subjectName = '';
+    let otherSubject = '';
+
+    for (const index in teachinginfo.teachingSubjects) {
+      subject = teachingSubjects(teachinginfo.teachingSubjects[index]);
+      subjectName += subject + ' ';
+    }
+
+    if (teachinginfo.teachingSubjectOther !== null) {
+      otherSubject = teachinginfo.teachingSubjectOther;
+      subjectName = subjectName + otherSubject;
+    }
+
     let lv1 = false;
     let lv2 = false;
     let lv3 = false;
@@ -373,8 +412,13 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     let lv5 = false;
     let lv6 = false;
     let lv7 = false;
+    let level: any;
+    let levelName = '';
 
     for (const index in teachinginfo.teachingLevel) {
+      level = teachingLevels(teachinginfo.teachingLevel[index]);
+      levelName += level + ' ';
+
       if (teachinginfo.teachingLevel[index] === 'level1') {
         lv1 = true;
       }
@@ -400,9 +444,15 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
 
     const nameen = element.firstnameen + ' ' + element.lastnameen;
 
+    let hiringStartDate = '';
+    let hiringEndDate = '';
+
     const hiring = JSON.parse(element.hiringinfo || '');
-    const hiringStartDate = hiring.startDate;
-    const hiringEndDate = hiring.endDate;
+
+    if (hiring) {
+      hiringStartDate = hiring.startDate;
+      hiringEndDate = hiring.endDate;
+    }
 
     const payload = {
       schoolid: this.schoolId,
@@ -412,7 +462,6 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     let label2 = '';
     let label3 = '';
     let label4 = '';
-
     let reasonDetail = '';
     let reasonDetail2 = '';
     let reasonDetail3 = '';
@@ -592,63 +641,65 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       file8_foreign = true;
     }
 
-    //console.log('fileinfo = ', file1_th);
-    //console.log('fileid = ', file1[0].fileid);
-
-    const prohibit = JSON.parse(element.prohibitproperty || '');
-
-    const immoral = prohibit.immoral;
-    const incompetent = prohibit.incompetent;
-    const prison = prohibit.prison;
-
     let forbid1_1 = false;
     let forbid1_2 = false;
-    if (element.careertype !== '5') {
-      if (immoral === '2') {
-        forbid1_1 = true;
-      } else {
-        forbid1_2 = true;
-      }
-    } else {
-      if (immoral === '2') {
-        forbid1_2 = true;
-      } else {
-        forbid1_1 = true;
-      }
-    }
-
     let forbid2_1 = false;
     let forbid2_2 = false;
-    if (element.careertype !== '5') {
-      if (incompetent === '2') {
-        forbid2_1 = true;
-      } else {
-        forbid2_2 = true;
-      }
-    } else {
-      if (immoral === '2') {
-        forbid2_2 = true;
-      } else {
-        forbid2_1 = true;
-      }
-    }
-
     let forbid3_1 = false;
     let forbid3_2 = false;
     let forbid3 = '';
     let prisonDetail = '';
-    if (element.careertype !== '5') {
-      if (prison === '2') {
-        forbid3_1 = true;
-      } else {
-        forbid3_2 = true;
-        prisonDetail = prohibit.prisonReason;
-      }
-    } else {
-      if (immoral === '2') {
-        forbid3 = 'No';
-      } else {
-        forbid3 = 'Yes' + ' ' + prohibit.prisonReason;
+
+    if (element.prohibitproperty) {
+      const prohibit = JSON.parse(element.prohibitproperty || '');
+
+      if (prohibit) {
+        const immoral = prohibit.immoral;
+        const incompetent = prohibit.incompetent;
+        const prison = prohibit.prison;
+
+        if (element.careertype !== '5') {
+          if (immoral === '2') {
+            forbid1_1 = true;
+          } else {
+            forbid1_2 = true;
+          }
+        } else {
+          if (immoral === '2') {
+            forbid1_2 = true;
+          } else {
+            forbid1_1 = true;
+          }
+        }
+
+        if (element.careertype !== '5') {
+          if (incompetent === '2') {
+            forbid2_1 = true;
+          } else {
+            forbid2_2 = true;
+          }
+        } else {
+          if (immoral === '2') {
+            forbid2_2 = true;
+          } else {
+            forbid2_1 = true;
+          }
+        }
+
+        if (element.careertype !== '5') {
+          if (prison === '2') {
+            forbid3_1 = true;
+          } else {
+            forbid3_2 = true;
+            prisonDetail = prohibit.prisonReason;
+          }
+        } else {
+          if (immoral === '2') {
+            forbid3 = 'No';
+          } else {
+            forbid3 = 'Yes' + ' ' + prohibit.prisonReason;
+          }
+        }
       }
     }
 
@@ -660,7 +711,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       const provincename = res.provincename;
       const zipcode = res.zipcode;
       const telphone = res.telphone;
-      const schoolemail = res.schoolemail;
+      const schoolemail = res.email;
       //console.log(id12);
       this.dialog.open(PdfRenderComponent, {
         width: '1200px',
@@ -709,6 +760,9 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
             id11,
             id12,
             id13,
+            approve1,
+            approve2,
+            approve3,
             degreename1,
             institution1,
             major1,
@@ -728,6 +782,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
             graduateDate3,
             grade3,
             nameen,
+            subjectName,
             lv1,
             lv2,
             lv3,
@@ -735,6 +790,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
             lv5,
             lv6,
             lv7,
+            levelName,
             reasonDetail,
             reasonDetail2,
             reasonDetail3,
