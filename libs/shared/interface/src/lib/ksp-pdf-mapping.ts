@@ -6,7 +6,9 @@ export const kspPdfMapping: IKspPdfMapping[] = [
   {
     pdfType: 1,
     pdfSubType: 3,
-    pdfSrc: 'assets/pdf/school-temp-approve-license.pdf',
+    //pdfSrc: 'assets/pdf/school-temp-approve-license.pdf',
+    pdfSrc:
+      'https://ksp-eservice.ksp.or.th/pdf/school-temp-approve-license.pdf',
     input: [
       {
         text: [
@@ -163,8 +165,8 @@ export const kspPdfMapping: IKspPdfMapping[] = [
   {
     pdfType: 3,
     pdfSubType: 1,
-    pdfSrc: 'assets/pdf/school-thai-temp-license.pdf',
-
+    //pdfSrc: 'assets/pdf/school-thai-temp-license.pdf',
+    pdfSrc: 'https://ksp-eservice.ksp.or.th/pdf/school-thai-temp-license.pdf',
     input: [
       {
         text: [
@@ -855,7 +857,9 @@ export const kspPdfMapping: IKspPdfMapping[] = [
   {
     pdfType: 3,
     pdfSubType: 2,
-    pdfSrc: 'assets/pdf/school-manager-temp-license.pdf',
+    //pdfSrc: 'assets/pdf/school-manager-temp-license.pdf',
+    pdfSrc:
+      'https://ksp-eservice.ksp.or.th/pdf/school-manager-temp-license.pdf',
     input: [
       {
         text: [
@@ -1535,7 +1539,9 @@ export const kspPdfMapping: IKspPdfMapping[] = [
   {
     pdfType: 3,
     pdfSubType: 5,
-    pdfSrc: 'assets/pdf/school-foreign-temp-license.pdf',
+    //pdfSrc: 'assets/pdf/school-foreign-temp-license.pdf',
+    pdfSrc:
+      'https://ksp-eservice.ksp.or.th/pdf/school-foreign-temp-license.pdf',
     input: [
       { text: [], svg: [] },
       { text: [], svg: [] },
@@ -1947,7 +1953,9 @@ export const kspPdfMapping: IKspPdfMapping[] = [
   {
     pdfType: 6,
     pdfSubType: 1,
-    pdfSrc: 'assets/pdf/school-qualification-approve-teacher.pdf',
+    //pdfSrc: 'assets/pdf/school-qualification-approve-teacher.pdf',
+    pdfSrc:
+      'https://ksp-eservice.ksp.or.th/pdf/school-qualification-approve-teacher.pdf',
     input: [
       {
         text: [
@@ -2452,7 +2460,9 @@ export const kspPdfMapping: IKspPdfMapping[] = [
   {
     pdfType: 6,
     pdfSubType: 2,
-    pdfSrc: 'assets/pdf/school-qualification-approve-manager.pdf',
+    //pdfSrc: 'assets/pdf/school-qualification-approve-manager.pdf',
+    pdfSrc:
+      'https://ksp-eservice.ksp.or.th/pdf/school-qualification-approve-manager.pdf',
     input: [
       {
         text: [
@@ -2986,14 +2996,19 @@ export const kspPdfMapping: IKspPdfMapping[] = [
   {
     pdfType: 6,
     pdfSubType: 3,
-    pdfSrc: 'assets/pdf/school-qualification-approve-manager.pdf',
+    //pdfSrc: 'assets/pdf/school-qualification-approve-manager.pdf',
+    pdfSrc:
+      'https://ksp-eservice.ksp.or.th/pdf/school-qualification-approve-manager.pdf',
+
     input: [],
   },
   //แบบคำขอของ หนังสือรับรองคุณวุฒิ ศึกษานิเทศก์
   {
     pdfType: 6,
     pdfSubType: 4,
-    pdfSrc: 'assets/pdf/school-qualification-approve-education-supervisor.pdf',
+    //pdfSrc: 'assets/pdf/school-qualification-approve-education-supervisor.pdf',
+    pdfSrc:
+      'https://ksp-eservice.ksp.or.th/pdf/school-qualification-approve-education-supervisor.pdf',
     input: [
       {
         text: [
@@ -3527,7 +3542,9 @@ export const kspPdfMapping: IKspPdfMapping[] = [
   {
     pdfType: 99,
     pdfSubType: 6,
-    pdfSrc: 'assets/pdf/school-qualification-approve-temp-license.pdf',
+    //pdfSrc: 'assets/pdf/school-qualification-approve-temp-license.pdf',
+    pdfSrc:
+      'https://ksp-eservice.ksp.or.th/pdf/school-qualification-approve-temp-license.pdf',
     input: [
       {
         text: [
