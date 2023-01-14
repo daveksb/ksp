@@ -56,6 +56,7 @@ export class RegisterForeignStepThreeComponent implements OnInit {
     localForage.getItem('registerForeigner').then((res: any) => {
       this.savingData = res;
       this.passportNo = res.passportno;
+      //console.log('form = ', res);
     });
   }
 
@@ -77,22 +78,20 @@ export class RegisterForeignStepThreeComponent implements OnInit {
               ...this.savingData,
               ...this.form.value,
             };
+            //console.log('form = ', form);
             /*
             payload.usertype = '2'; // ครูต่างชาติ
             payload.isactive = '1';
             payload.uniquetimestamp = uuidv4();
             return this.myInfoService.insertMyInfo(payload); */
             const req = new KspRequest();
-
             req.isforeign = '1';
-
             req.ref1 = '1';
             req.ref2 = '45';
             req.ref3 = '5';
             req.systemtype = '1';
             req.requesttype = '45';
             req.careertype = '5';
-
             req.process = `1`;
             req.status = `1`;
             req.prefixen = form.prefixen;
@@ -112,7 +111,6 @@ export class RegisterForeignStepThreeComponent implements OnInit {
             req.visatype = form.visatype;
             req.visaexpiredate = form.visaenddate;
             req.uniqueno = form.password;
-            //console.log('form = ', form);
 
             const {
               id,
