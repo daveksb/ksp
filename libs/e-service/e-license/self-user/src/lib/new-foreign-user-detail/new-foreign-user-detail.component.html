@@ -230,6 +230,7 @@
     [showSaveButton]="true"
     (cancelClicked)="cancel()"
     (saveClicked)="confirm()"
+    [disableSaveButton]="!verifyForm.valid"
   >
   </ksp-bottom-nav>
 </div>

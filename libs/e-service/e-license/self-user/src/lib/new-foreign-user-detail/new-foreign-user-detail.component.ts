@@ -38,7 +38,11 @@ export class NewForeignUserDetailComponent implements OnInit {
   checkedResult: any;
   kspRequest = new KspRequest();
   requestId!: number | null;
-  savingData: any;
+  userData: any;
+  setPassword = '';
+  birthdate = '';
+  passportstartdate = '';
+  passportenddate = '';
 
   form = this.fb.group({
     kuruspano: [null],
@@ -88,7 +92,7 @@ export class NewForeignUserDetailComponent implements OnInit {
   checkRequestId() {
     this.route.paramMap.subscribe((params) => {
       const requestId = Number(params.get('id'));
-      console.log('request id = ', requestId);
+      //console.log('request id = ', requestId);
       if (requestId) {
         this.loadRequestFromId(requestId);
       }
@@ -97,30 +101,24 @@ export class NewForeignUserDetailComponent implements OnInit {
 
   loadRequestFromId(id: number) {
     this.eRequestService.getKspRequestById(id).subscribe((res) => {
-      console.log('request data = ', res);
       this.kspRequest = res;
+      //console.log('request data1 = ', res);
 
-      if (res.birthdate) {
-        res.birthdate = res.birthdate.split('T')[0];
+      /* if (res.birthdate) {
+        this.kspRequest.birthdate = res.birthdate.split('T')[0];
       }
 
       if (res.passportstartdate) {
-        res.passportstartdate = res.passportstartdate.split('T')[0];
+        this.kspRequest.passportstartdate = res.passportstartdate.split('T')[0];
       }
 
       if (res.passportenddate) {
-        res.passportenddate = res.passportenddate.split('T')[0];
-      }
+        this.kspRequest.passportenddate = res.passportenddate.split('T')[0];
+      } */
 
-      this.form.patchValue(<any>res);
+      this.form.patchValue(<any>this.kspRequest);
 
-      /*
-      const data: any = res;
-      this.form.controls.userInfo.patchValue(data);
-
-      const coordinator = parseJson(res.coordinatorinfo);
-      //console.log('coordinator = ', res);
-      this.form.controls.coordinatorInfo.patchValue(coordinator.coordinator); */
+      this.userData = res;
     });
   }
 
@@ -153,12 +151,15 @@ export class NewForeignUserDetailComponent implements OnInit {
     };
 
     this.eRequestService.KspUpdateRequestProcess(payload).subscribe(() => {
-      const user: any = {
-        ...this.kspRequest,
+      const user: SelfMyInfo = {
+        ...this.userData,
       };
+
       user.usertype = '2'; // ครูต่างชาติ
       user.isactive = '1';
       user.uniquetimestamp = uuidv4();
+      user.username = this.userData.passportno;
+      user.password = this.userData.uniqueno;
 
       this.myInfoService.insertMyInfo(user).subscribe(() => {
         this.completeDialog();
@@ -201,7 +202,6 @@ export class NewForeignUserDetailComponent implements OnInit {
 
   cancel() {
     this.router.navigate(['self-user', 'new-user-list']);
-    console.log('retired result = ', this.kspRequest);
   }
 }
 
