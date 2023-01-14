@@ -268,9 +268,7 @@ export class UserDetailComponent implements OnInit {
 
     dialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        if (this.pageType === SchoolUserPageType.NewUser) {
-          this.router.navigate(['/school', 'new-user']);
-        }
+        this.cancel();
       }
     });
   }
