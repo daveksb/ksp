@@ -91,6 +91,7 @@ export class FormUserInfoComponent
       this.form.controls.passportstartdate.clearValidators();
       this.form.controls.passportenddate.clearValidators();
       this.form.controls.position.clearValidators();
+      this.form.controls.workphone.clearValidators();
     }
 
     // ต่างชาติ ไม่ต้อง validate field เหล่านี้
