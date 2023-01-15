@@ -47,6 +47,7 @@ export class FormMultiAttachmentComponent {
       dialogRef
         .afterClosed()
         .subscribe((result) => (group.checkresult = result.checkResult));
+      //console.log('checkresult = ', group?.checkresult);
     } else {
       const dialogRef = this.dialog.open(PdfViewerNoLicenseComponent, {
         width: '1200px',

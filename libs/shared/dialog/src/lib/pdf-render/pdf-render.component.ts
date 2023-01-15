@@ -21,9 +21,6 @@ import _ from 'lodash';
   ],
 })
 export class PdfRenderComponent implements OnInit {
-  @Input() set input(value: any) {
-    if (value) this.data = value;
-  }
   pdfBytes: any;
   constructor(
     @Inject(MAT_DIALOG_DATA)
