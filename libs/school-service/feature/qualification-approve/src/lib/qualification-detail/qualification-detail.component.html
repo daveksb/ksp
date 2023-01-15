@@ -82,9 +82,9 @@
           </mat-tab>
 
           <mat-tab label="ข้อมูลทางการศึกษา">
-            <div class="d-flex align-items-center">
+            <!-- <div class="d-flex align-items-center">
               <label class="box-header">วุฒิการศึกษาปริญญาตรี</label>
-            </div>
+            </div> -->
 
             <ksp-form-education-info
               [mode]="mode"
@@ -94,9 +94,12 @@
               [showGraduateYearInput]="true"
               [showCheckbox]="false"
               [countries]="countries$ | async"
-            ></ksp-form-education-info>
+              ><label class="box-header"
+                >วุฒิการศึกษาปริญญาตรี</label
+              ></ksp-form-education-info
+            >
 
-            <div class="d-flex align-items-center mt-3">
+            <!-- <div class="d-flex align-items-center mt-3">
               <input
                 *ngIf="mode !== 'view'"
                 type="checkbox"
@@ -105,8 +108,8 @@
                 [checked]="checkbox2"
               />
               <label class="box-header">วุฒิการศึกษาปริญญาโท</label>
-            </div>
-            <ng-container *ngIf="showEdu2">
+            </div> -->
+            <div class="mt-3">
               <ksp-form-education-info
                 [mode]="mode"
                 formControlName="edu2"
@@ -115,10 +118,21 @@
                 [showGraduateYearInput]="true"
                 [showCheckbox]="false"
                 [countries]="countries$ | async"
-              ></ksp-form-education-info>
-            </ng-container>
-
-            <div class="d-flex align-items-center mt-3">
+                [isOptional]="true"
+              >
+                <div class="d-flex align-items-center">
+                  <input
+                    *ngIf="mode !== 'view'"
+                    type="checkbox"
+                    class="me-2"
+                    (change)="eduSelected(2, $event)"
+                    [checked]="showEdu2"
+                  />
+                  <label class="box-header">วุฒิการศึกษาปริญญาโท</label>
+                </div></ksp-form-education-info
+              >
+            </div>
+            <!-- <div class="d-flex align-items-center mt-3">
               <input
                 *ngIf="mode !== 'view'"
                 type="checkbox"
@@ -127,8 +141,8 @@
                 [checked]="checkbox3"
               />
               <label class="box-header">วุฒิการศึกษาปริญญาเอก</label>
-            </div>
-            <ng-container *ngIf="showEdu3">
+            </div> -->
+            <div class="mt-3">
               <ksp-form-education-info
                 [mode]="mode"
                 formControlName="edu3"
@@ -137,10 +151,20 @@
                 [showGraduateYearInput]="true"
                 [showCheckbox]="false"
                 [countries]="countries$ | async"
-              ></ksp-form-education-info>
-            </ng-container>
-
-            <div class="d-flex align-items-center mt-3">
+                [isOptional]="true"
+                ><div class="d-flex align-items-center">
+                  <input
+                    *ngIf="mode !== 'view'"
+                    type="checkbox"
+                    class="me-2"
+                    (change)="eduSelected(3, $event)"
+                    [checked]="showEdu3"
+                  />
+                  <label class="box-header">วุฒิการศึกษาปริญญาเอก</label>
+                </div></ksp-form-education-info
+              >
+            </div>
+            <!-- <div class="d-flex align-items-center mt-3">
               <input
                 *ngIf="mode !== 'view'"
                 type="checkbox"
@@ -152,8 +176,8 @@
                 >วุฒิการศึกษาปริญญาอื่นๆที่เทียบเท่าปริญญาตรี /
                 ปริญญาทางการศึกษา</label
               >
-            </div>
-            <ng-container *ngIf="showEdu4">
+            </div> -->
+            <div class="mt-3">
               <ksp-form-education-info
                 [mode]="mode"
                 formControlName="edu4"
@@ -162,8 +186,22 @@
                 [showGraduateYearInput]="true"
                 [showCheckbox]="false"
                 [countries]="countries$ | async"
-              ></ksp-form-education-info>
-            </ng-container>
+                [isOptional]="true"
+                ><div class="d-flex align-items-center">
+                  <input
+                    *ngIf="mode !== 'view'"
+                    type="checkbox"
+                    class="me-2"
+                    (change)="eduSelected(4, $event)"
+                    [checked]="showEdu4"
+                  />
+                  <label class="box-header"
+                    >วุฒิการศึกษาปริญญาอื่นๆที่เทียบเท่าปริญญาตรี /
+                    ปริญญาทางการศึกษา</label
+                  >
+                </div></ksp-form-education-info
+              >
+            </div>
           </mat-tab>
 
           <mat-tab label="เอกสารหลักฐานประกอบ">
@@ -194,6 +232,6 @@
     (saveClicked)="onSave()"
     (cancelClicked)="cancel()"
     (prevClicked)="onClickPrev()"
-    [disableSaveButton]="form.invalid"
+    [disableSaveButton]="!form.valid"
   ></ksp-bottom-nav>
 </div>
