@@ -12,11 +12,12 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
-import { GeneralInfoService } from '@ksp/shared/service';
+import { GeneralInfoService, SchoolInfoService } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { getCookie } from '@ksp/shared/utility';
 
 @UntilDestroy()
 @Component({
@@ -35,23 +36,25 @@ export class QualificationApprovePersonComponent
     //console.log(value);
     if (value) this.form.patchValue(value);
   }
+  schoolid = getCookie('schoolId');
   @Output() completed = new EventEmitter<boolean>();
   override form = this.fb.group({
-    prefixth1: [],
-    firstnameth1: [],
-    lastnameth1: [],
-    position1: [],
-    prefixth2: [],
-    firstnameth2: [],
-    lastnameth2: [],
-    position2: [],
+    prefixth1: [null],
+    firstnameth1: [null],
+    lastnameth1: [null],
+    position1: [null],
+    prefixth2: [null],
+    firstnameth2: [null],
+    lastnameth2: [null],
+    position2: [null],
   });
 
   constructor(
     public dialogRef: MatDialogRef<QualificationApprovePersonComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private generalInfoService: GeneralInfoService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private schoolInfoService: SchoolInfoService
   ) {
     super();
     this.subscriptions.push(
@@ -71,10 +74,35 @@ export class QualificationApprovePersonComponent
         this.form.disable();
       }, 0);
     this.getList();
+    this.getSchoolManager();
   }
+
+  getSchoolManager() {
+    const payload = {
+      schoolid: this.schoolid,
+    };
+    this.schoolInfoService
+      .getSchoolInfo(payload)
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        //console.log('managerinfo = ', res);
+        if (res) {
+          const manager: any = {
+            ...res,
+            prefixth2: res.thprefixid,
+            position2: res.thposition,
+            firstnameth2: res.thname,
+            lastnameth2: res.thfamilyname,
+          };
+          this.form.patchValue(manager);
+        }
+      });
+  }
+
   getList() {
     this.prefixList$ = this.generalInfoService.getPrefix();
   }
+
   save() {
     this.dialogRef.close({ refperson: this.form.value });
   }
