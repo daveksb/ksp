@@ -1,16 +1,16 @@
 <ksp-top-nav [isSelfService]="true"><span header>ชำระเงิน</span></ksp-top-nav>
-<div class="main__container full-height">
-  <div class="px-3">
+<div class="main__container px-3 pt-2 pb-3">
+  <div class="mb-3">
     <self-service-request-status
       [requestDate]="kspRequest.requestdate"
       [requestNo]="kspRequest.requestno"
     ></self-service-request-status>
   </div>
-  <br />
-  <div class="container">
+
+  <div class="container p-0">
     <div class="content__container">
-      <div class="header__label">รายการค่าธรรมเนียม</div>
-      <div class="content__label">
+      <div class="box-header text-center mb-3">รายการค่าธรรมเนียม</div>
+      <div class="content__label mb-1">
         กรุณาชำระเงินก่อนวันที่<span class="date__label">{{
           kspRequest.requestdate | thaiDate
         }}</span>
@@ -46,9 +46,8 @@
           </tbody>
         </table>
       </div>
-      <br />
 
-      <div class="d-flex justify-content-between align-items-center">
+      <div class="d-flex justify-content-between align-items-center mt-3">
         <div class="content__label">
           วันเดือนปีที่ทำรายการ<span class="date__label">{{
             kspRequest.requestdate | thaiDate
@@ -72,18 +71,18 @@
       </div>
       <div class="row flex-column-reverse flex-md-row">
         <div class="col d-flex flex-column">
-          <div class="qrcode__title">ขั้นตอนการชำระผ่าน คิวอาร์โค้ด</div>
-          <br />
+          <div class="qrcode__title mt-1">ขั้นตอนการชำระผ่าน คิวอาร์โค้ด</div>
+
           <div class="qrcode__label">
             1. เปิดแอป Mobile Banking จากนั้นเลือกเมนู "สแกนจ่าย" หรือ
             บันทึกภาพลงยังโทรศัพท์มือถือ
           </div>
-          <br />
+
           <div class="qrcode__label">
             2. สแกน QR Code หรือ เลือกรูปภาพที่บันทึกในเครื่องโทรศัพท์มือถือ
             ตรวจสอบยอด และกด "ยืนยัน" เพื่อชำระเงิน
           </div>
-          <br />
+
           <div class="qrcode__label">
             <span> 3. พิมพ์แบบชำระเงิน เพื่อนำไปชำระที่ธนาคารกรุงไทย</span>
           </div>
@@ -109,7 +108,7 @@
             [imageSrc]="'./assets/angular-logo.png'"
             [imageHeight]="20"
             [imageWidth]="20"
-            [margin]="4"
+            [margin]="2"
             [scale]="1"
             [title]="'A custom title attribute'"
             [width]="150"
@@ -118,7 +117,7 @@
       </div>
     </div>
   </div>
-  <div class="d-flex justify-content-center py-3">
+  <div class="d-flex justify-content-center mt-3">
     <button type="button" class="btn btn-primary" (click)="cancel()">
       ยกเลิก
     </button>

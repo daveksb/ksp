@@ -2,17 +2,16 @@
   ><span header>ช่องทางการชำระเงิน</span></ksp-top-nav
 >
 
-<div class="main__container">
-  <div class="px-3">
+<div class="main__container px-3 pt-2 pb-3">
+  <div class="mb-3">
     <self-service-request-status
       [requestDate]="kspRequest.requestdate"
       [requestNo]="kspRequest.requestno"
     ></self-service-request-status>
   </div>
-  <br />
-  <div class="container">
+  <div class="container p-0">
     <div class="content__container">
-      <div class="header__label">รายการค่าธรรมเนียม</div>
+      <div class="box-header text-center mb-3">รายการค่าธรรมเนียม</div>
       <div class="content__label">
         กรุณาชำระเงินก่อนวันที่<span class="date__label">{{
           expireDate | thaiDate
@@ -49,8 +48,7 @@
           </tbody>
         </table>
       </div>
-      <br />
-      <div class="label__payment">เลือกช่องทางการชำระเงิน</div>
+      <div class="label__payment mt-3">เลือกช่องทางการชำระเงิน</div>
       <div class="card__container">
         <div class="card__content">
           <div class="card__img">
@@ -108,9 +106,9 @@
           </div>
         </div>
       </div>
-      <br />
-      <div class="header__label">พิมพ์แบบชำระเงิน</div>
-      <div class="d-flex justify-content-between align-items-center mb-2">
+
+      <div class="box-header text-center mt-3 mb-3">พิมพ์แบบชำระเงิน</div>
+      <div class="d-flex justify-content-between align-items-center mb-1">
         <div class="content__label">
           กรุณาชำระเงินภายในวันที่<span class="date__label">{{
             expireDate | thaiDate
@@ -154,7 +152,7 @@
       </div>
     </div>
   </div>
-  <div class="d-flex justify-content-center py-3">
+  <div class="d-flex justify-content-center pt-3">
     <button
       type="button"
       (click)="cancel()"

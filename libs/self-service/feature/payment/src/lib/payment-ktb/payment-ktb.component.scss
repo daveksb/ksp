@@ -3,26 +3,19 @@
   background-attachment: fixed;
   background-size: 100% 100%;
   background-image: url(/assets/images/BG-Information.png);
+  min-height: 100vh;
 }
 
 .content__container {
   background: #ffffff;
   box-shadow: 0px 0px 15px #e2e2e2;
   border-radius: 20px;
-  padding: 32px 24px;
-}
-
-.header__label {
-  font-size: 20px;
-  color: #000000;
-  text-align: center;
-  margin-bottom: 24px;
+  padding: 24px;
 }
 
 .content__label {
   font-size: 18px;
   color: #000000;
-  margin-bottom: 4px;
 }
 
 .date__label {
@@ -52,8 +45,7 @@
 }
 
 .qrcode__title {
-  font-size: 20px;
-  margin-top: 16px;
+  font-size: 22px;
   color: #656565;
   text-decoration: underline;
 }
@@ -61,6 +53,21 @@
 .qrcode__label {
   font-size: 20px;
   color: #656565;
+  margin-top: 16px;
+}
+
+@media only screen and (max-width: 768px) {
+  .container {
+    padding: 0;
+  }
+
+  .qrcode__title {
+    margin-top: 0;
+  }
+
+  .content__label {
+    font-size: 14px;
+  }
 }
 
 ::ng-deep #dialogTrasparent {
@@ -68,28 +75,4 @@
   background: transparent;
   overflow: hidden;
   padding: 0;
-}
-
-@media only screen and (max-width: 768px) {
-  .container {
-    width: 100%;
-    height: auto;
-  }
-
-  .qrcode__container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .qrcode__title {
-    margin-top: 0;
-  }
-
-  .qrcode__content-2 {
-    margin: auto;
-  }
-
-  .content__label {
-    font-size: 14px;
-  }
 }
