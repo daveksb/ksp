@@ -87,10 +87,10 @@ export class RegisterForeignStepThreeComponent implements OnInit {
             const req = new KspRequest();
             req.isforeign = '1';
             req.ref1 = '1';
-            req.ref2 = '45';
+            req.ref2 = '50';
             req.ref3 = '5';
             req.systemtype = '1';
-            req.requesttype = '45';
+            req.requesttype = '50';
             req.careertype = '5';
             req.process = `1`;
             req.status = `1`;

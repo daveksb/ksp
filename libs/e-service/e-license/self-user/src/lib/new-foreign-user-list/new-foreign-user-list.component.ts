@@ -72,7 +72,7 @@ export class NewForeignUserListComponent implements OnInit, AfterViewInit {
 
     let payload: EsSearchPayload = {
       systemtype: '1',
-      requesttype: params.requesttype || '45',
+      requesttype: params.requesttype || '50',
       requestno: params.requestno,
       careertype: null,
       name: params.name,
