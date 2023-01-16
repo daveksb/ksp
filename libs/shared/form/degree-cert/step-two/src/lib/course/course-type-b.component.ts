@@ -57,6 +57,9 @@ export class CourseTypeBComponent
       student1: [''],
       student2: [''],
       student3: [''],
+      planname1: [''],
+      planname2: [''],
+      planname3: ['']
     });
   }
 
@@ -84,12 +87,12 @@ export class CourseTypeBComponent
           this.planSums[0] + this.planSums[1] + this.planSums[2];
 
         res.plans.forEach((i, index) => {
-          const { label, year, ...newData } = i as any;
-          let sum = 0;
-          for (const property in newData) {
-            sum += Number(newData[property]);
-          }
-          this.yearSums[index] = sum;
+          // const { label, year, ...newData } = i as any;
+          // let sum = 0;
+          // for (const property in newData) {
+          //   sum += Number(newData[property]);
+          // }
+          this.yearSums[index] = Number(i.student1) + Number(i.student2) + Number(i.student3);
           //console.log(`res = ${index}`, sum);
         });
       }

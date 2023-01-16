@@ -91,6 +91,7 @@ export class CourseConsiderComponent extends KspFormBaseComponent implements OnI
               sum += Number(newData[property]);
             }
             this.yearSums[index] = sum;
+            // this.yearSums[index] = Number(i.student1) + Number(i.student2) + Number(i.student3);
           });
         }
       }
@@ -182,9 +183,13 @@ export class CourseConsiderComponent extends KspFormBaseComponent implements OnI
       label: 'แผนฯ ปีที่ ' + year,
       student: [''],
       year: [''],
+      planname: [''],
       student1: [''],
       student2: [''],
       student3: [''],
+      planname1: [''],
+      planname2: [''],
+      planname3: ['']
     });
   }
 
@@ -194,9 +199,13 @@ export class CourseConsiderComponent extends KspFormBaseComponent implements OnI
       student: [''],
       year: [''],
       consider: [false],
+      planname: [''],
       student1: [''],
       student2: [''],
       student3: [''],
+      planname1: [''],
+      planname2: [''],
+      planname3: ['']
     });
   }
 

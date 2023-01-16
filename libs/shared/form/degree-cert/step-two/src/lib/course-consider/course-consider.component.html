@@ -178,6 +178,7 @@
                   <thead>
                     <tr>
                       <th scope="col" class="w-50">แผนการรับนักศึกษา (รายปี)</th>
+                      <th scope="col" class="text-center">ชื่อแผน</th>
                       <th scope="col" class="text-center">ปีการศึกษา (พ.ศ)</th>
                       <th scope="col" class="text-center">จำนวนนักศึกษา</th>
                     </tr>
@@ -190,6 +191,16 @@
                           <th scope="row" class="align-middle">
                             {{ item.value.label }}
                           </th>
+                          <td>
+                            <div>
+                              <input
+                                class="form-control text-center"
+                                type="text"
+                                placeholder="กรอกชื่อแผน"
+                                formControlName="planname"
+                              />
+                            </div>
+                          </td>
                           <td>
                             <div>
                               <input
@@ -235,6 +246,7 @@
                   <thead>
                     <tr>
                       <th scope="col" class="text-center">พิจารณา</th>
+                      <th scope="col" class="text-center">ชื่อแผน</th>
                       <th scope="col" class="text-center">ปีการศึกษา (พ.ศ)</th>
                       <th scope="col" class="text-center">จำนวนนักศึกษา</th>
                     </tr>
@@ -252,7 +264,16 @@
                               />
                             </div>
                           </td>
-
+                          <td>
+                            <div>
+                              <input
+                                class="form-control text-center"
+                                type="text"
+                                placeholder="กรอกชื่อแผน"
+                                formControlName="planname"
+                              />
+                            </div>
+                          </td>
                           <td>
                             <div>
                               <input
@@ -310,16 +331,25 @@
                   <thead>
                     <tr>
                       <th scope="col" class="w-25">แผนการรับนักศึกษา (รายปี)</th>
-                      <th scope="col" class="text-center" style="width: 11rem">
+                      <th scope="col" class="text-center" style="min-width: 11rem">
                         ปีการศึกษา (พ.ศ)
                       </th>
-                      <th scope="col" class="text-center" style="width: 11rem">
+                      <th scope="col" class="text-center" style="min-width: 15rem">
+                        ชื่อแผนที่ 1
+                      </th>
+                      <th scope="col" class="text-center" style="min-width: 11rem">
                         แผนที่ 1 (จำนวนคน)
                       </th>
-                      <th scope="col" class="text-center" style="width: 11rem">
+                      <th scope="col" class="text-center" style="min-width: 15rem">
+                        ชื่อแผนที่ 2
+                      </th>
+                      <th scope="col" class="text-center" style="min-width: 11rem">
                         แผนที่ 2 (จำนวนคน)
                       </th>
-                      <th scope="col" class="text-center" style="width: 11rem">
+                      <th scope="col" class="text-center" style="min-width: 15rem">
+                        ชื่อแผนที่ 3
+                      </th>
+                      <th scope="col" class="text-center" style="min-width: 11rem">
                         แผนที่ 3 (จำนวนคน)
                       </th>
                     </tr>
@@ -346,6 +376,16 @@
                               <input
                                 class="form-control text-center"
                                 type="text"
+                                placeholder="ชื่อแผนที่ 1"
+                                formControlName="planname1"
+                              />
+                            </div>
+                          </td>
+                          <td>
+                            <div>
+                              <input
+                                class="form-control text-center"
+                                type="text"
                                 placeholder="จำนวนนักศึกษา"
                                 formControlName="student1"
                               />
@@ -356,8 +396,28 @@
                               <input
                                 class="form-control text-center"
                                 type="text"
+                                placeholder="ชื่อแผนที่ 2"
+                                formControlName="planname2"
+                              />
+                            </div>
+                          </td>
+                          <td>
+                            <div>
+                              <input
+                                class="form-control text-center"
+                                type="text"
                                 placeholder="จำนวนนักศึกษา"
                                 formControlName="student2"
+                              />
+                            </div>
+                          </td>
+                          <td>
+                            <div>
+                              <input
+                                class="form-control text-center"
+                                type="text"
+                                placeholder="ชื่อแผนที่ 3"
+                                formControlName="planname3"
                               />
                             </div>
                           </td>
@@ -377,6 +437,7 @@
           
                     <tr>
                       <th scope="row"></th>
+                      <th scope="row"></th>
                       <td class="text-end fs-5">รวมทั้งหมด</td>
           
                       <td>
@@ -386,6 +447,7 @@
                           value="{{ planSums[0] | number }}"
                         />
                       </td>
+                      <th scope="row"></th>
                       <td>
                         <input
                           class="form-control text-center"
@@ -393,6 +455,7 @@
                           value="{{ planSums[1] | number }}"
                         />
                       </td>
+                      <th scope="row"></th>
                       <td>
                         <input
                           class="form-control text-center"
@@ -409,14 +472,25 @@
                   <thead>
                     <tr>
                       <th scope="col" class="text-center">พิจารณา</th>
-                      <th scope="col" class="text-center">ปีการศึกษา (พ.ศ)</th>
-                      <th scope="col" class="text-center" style="width: 11rem">
+                      <th scope="col" class="text-center" style="min-width: 11rem">
+                        ปีการศึกษา (พ.ศ)
+                      </th>
+                      <th scope="col" class="text-center" style="min-width: 15rem">
+                        ชื่อแผนที่ 1
+                      </th>
+                      <th scope="col" class="text-center" style="min-width: 11rem">
                         แผนที่ 1 (จำนวนคน)
                       </th>
-                      <th scope="col" class="text-center" style="width: 11rem">
+                      <th scope="col" class="text-center" style="min-width: 15rem">
+                        ชื่อแผนที่ 2
+                      </th>
+                      <th scope="col" class="text-center" style="min-width: 11rem">
                         แผนที่ 2 (จำนวนคน)
                       </th>
-                      <th scope="col" class="text-center" style="width: 11rem">
+                      <th scope="col" class="text-center" style="min-width: 15rem">
+                        ชื่อแผนที่ 3
+                      </th>
+                      <th scope="col" class="text-center" style="min-width: 11rem">
                         แผนที่ 3 (จำนวนคน)
                       </th>
                     </tr>
@@ -445,7 +519,16 @@
                               />
                             </div>
                           </td>
-          
+                          <td>
+                            <div>
+                              <input
+                                class="form-control text-center"
+                                type="text"
+                                placeholder="ชื่อแผนที่ 1"
+                                formControlName="planname1"
+                              />
+                            </div>
+                          </td>
                           <td>
                             <div>
                               <input
@@ -453,6 +536,16 @@
                                 type="text"
                                 placeholder="จำนวนนักศึกษา"
                                 formControlName="student1"
+                              />
+                            </div>
+                          </td>
+                          <td>
+                            <div>
+                              <input
+                                class="form-control text-center"
+                                type="text"
+                                placeholder="ชื่อแผนที่ 2"
+                                formControlName="planname2"
                               />
                             </div>
                           </td>
@@ -471,6 +564,16 @@
                               <input
                                 class="form-control text-center"
                                 type="text"
+                                placeholder="ชื่อแผนที่ 3"
+                                formControlName="planname3"
+                              />
+                            </div>
+                          </td>
+                          <td>
+                            <div>
+                              <input
+                                class="form-control text-center"
+                                type="text"
                                 placeholder="จำนวนนักศึกษา"
                                 formControlName="student3"
                               />
@@ -481,6 +584,7 @@
                     </ng-container>
                     <tr>
                       <th scope="row"></th>
+                      <th scope="row"></th>
                       <td class="fs-5 text-end">รวมทั้งหมด</td>
                       <td>
                         <input
@@ -489,6 +593,7 @@
                           value="{{ newPlanSums[0] | number }}"
                         />
                       </td>
+                      <th scope="row"></th>
                       <td>
                         <input
                           class="form-control text-center"
@@ -496,6 +601,7 @@
                           value="{{ newPlanSums[1] | number }}"
                         />
                       </td>
+                      <th scope="row"></th>
                       <td>
                         <input
                           class="form-control text-center"
