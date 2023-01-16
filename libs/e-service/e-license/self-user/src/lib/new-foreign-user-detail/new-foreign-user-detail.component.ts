@@ -1,9 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
-import { FormMode } from '@ksp/shared/interface';
-import { AddressService, GeneralInfoService } from '@ksp/shared/service';
+import { FormBuilder, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
+import {
+  CompleteDialogComponent,
+  ConfirmDialogComponent,
+} from '@ksp/shared/dialog';
+import {
+  FormMode,
+  KspApprovePayload,
+  KspRequest,
+  SelfMyInfo,
+} from '@ksp/shared/interface';
+import {
+  AddressService,
+  ERequestService,
+  GeneralInfoService,
+  MyInfoService,
+} from '@ksp/shared/service';
+import { getCookie, jsonParse } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'ksp-new-foreign-user-detail',
@@ -19,11 +36,16 @@ export class NewForeignUserDetailComponent implements OnInit {
   mode: FormMode = 'view';
   approveChoices = approveChoices;
   checkedResult: any;
+  kspRequest = new KspRequest();
+  requestId!: number | null;
+  userData: any;
+  setPassword = '';
+  birthdate = '';
+  passportstartdate = '';
+  passportenddate = '';
 
   form = this.fb.group({
-    teacherid: [null],
-    passport: [null],
-
+    kuruspano: [null],
     prefixen: [null],
     firstnameen: [null],
     middlenameen: [null],
@@ -31,9 +53,8 @@ export class NewForeignUserDetailComponent implements OnInit {
     birthdate: [null],
     country: [null],
     nationality: [null],
-    phone: [null],
+    contactphone: [null],
     email: [null],
-
     idcardno: [null],
     passportno: [null],
     passportstartdate: [null],
@@ -43,11 +64,19 @@ export class NewForeignUserDetailComponent implements OnInit {
     visaenddate: [null],
   });
 
+  verifyForm = this.fb.group({
+    result: [null, Validators.required],
+  });
+
   constructor(
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
+    private eRequestService: ERequestService,
+    public dialog: MatDialog,
+    private myInfoService: MyInfoService
   ) {}
 
   ngOnInit(): void {
@@ -56,8 +85,119 @@ export class NewForeignUserDetailComponent implements OnInit {
     this.nationalitys$ = this.generalInfoService.getNationality();
     this.visaClassList$ = this.generalInfoService.getVisaClass();
     this.visaTypeList$ = this.generalInfoService.getVisaType();
-
     this.form.disable();
+    this.checkRequestId();
+  }
+
+  checkRequestId() {
+    this.route.paramMap.subscribe((params) => {
+      const requestId = Number(params.get('id'));
+      //console.log('request id = ', requestId);
+      if (requestId) {
+        this.loadRequestFromId(requestId);
+      }
+    });
+  }
+
+  loadRequestFromId(id: number) {
+    this.eRequestService.getKspRequestById(id).subscribe((res) => {
+      this.kspRequest = res;
+      //console.log('request data1 = ', res);
+
+      /* if (res.birthdate) {
+        this.kspRequest.birthdate = res.birthdate.split('T')[0];
+      }
+
+      if (res.passportstartdate) {
+        this.kspRequest.passportstartdate = res.passportstartdate.split('T')[0];
+      }
+
+      if (res.passportenddate) {
+        this.kspRequest.passportenddate = res.passportenddate.split('T')[0];
+      } */
+
+      this.form.patchValue(<any>this.kspRequest);
+
+      this.userData = res;
+    });
+  }
+
+  unApproveUser() {
+    const payload: KspApprovePayload = {
+      requestid: `${this.requestId}`,
+      process: '1',
+      status: '3',
+      detail: null,
+      systemtype: '4', //e-service
+      userid: getCookie('userId'),
+      paymentstatus: null,
+    };
+
+    this.eRequestService.KspUpdateRequestProcess(payload).subscribe(() => {
+      //console.log('un approve result = ', res);
+      this.completeDialog();
+    });
+  }
+
+  approveUser() {
+    const payload: KspApprovePayload = {
+      requestid: `${this.requestId}`,
+      process: '1',
+      status: '2',
+      detail: null,
+      systemtype: '4', //e-service
+      userid: getCookie('userId'),
+      paymentstatus: null,
+    };
+
+    this.eRequestService.KspUpdateRequestProcess(payload).subscribe(() => {
+      const user: SelfMyInfo = {
+        ...this.userData,
+      };
+
+      user.usertype = '2'; // ครูต่างชาติ
+      user.isactive = '1';
+      user.uniquetimestamp = uuidv4();
+      user.username = this.userData.passportno;
+      user.password = this.userData.uniqueno;
+
+      this.myInfoService.insertMyInfo(user).subscribe(() => {
+        this.completeDialog();
+      });
+    });
+  }
+
+  confirm() {
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: `คุณต้องการบันทึกข้อมูล
+        ใช่หรือไม่? `,
+      },
+    });
+
+    confirmDialog.componentInstance.confirmed.subscribe(() => {
+      const form: any = this.verifyForm.controls.result.value;
+      const result = form.result;
+      if (result === '1') {
+        this.approveUser();
+      } else {
+        this.unApproveUser();
+      }
+    });
+  }
+
+  completeDialog() {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header: `บันทึกข้อมูลสำเร็จ`,
+      },
+    });
+
+    dialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.cancel();
+      }
+    });
   }
 
   cancel() {

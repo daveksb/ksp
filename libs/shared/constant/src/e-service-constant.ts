@@ -25,8 +25,10 @@ export const EUniApproveProcess: UniApproveProcess[] = [
   {
     requestType: 3,
     processId: 1,
-    processName: 'สร้างและส่งใบคำขอ',
-    status: [{ id: 1, sname: 'สร้างและส่งใบคำขอ', ename: 'สร้างและส่งใบคำขอ' }],
+    processName: 'สร้างและส่งแบบคำขอ',
+    status: [
+      { id: 1, sname: 'สร้างและส่งแบบคำขอ', ename: 'สร้างและส่งแบบคำขอ' },
+    ],
   },
   // ขั้นตอนที่ 1 ตรวจสอบข้อมูลและเอกสาร ลำดับที่ 1
   {
@@ -36,7 +38,7 @@ export const EUniApproveProcess: UniApproveProcess[] = [
     status: [
       { id: 1, sname: 'ครบถ้วน และถูกต้อง', ename: 'ครบถ้วน และถูกต้อง' },
       { id: 2, sname: 'ขอแก้ไข / เพิ่มเติม', ename: 'ขอแก้ไข / เพิ่มเติม' },
-      { id: 4, sname: 'ขอแก้ไข / เพิ่มเติม', ename: 'ขอแก้ไข / เพิ่มเติม' }
+      { id: 4, sname: 'ขอแก้ไข / เพิ่มเติม', ename: 'ขอแก้ไข / เพิ่มเติม' },
     ],
   },
   // ขั้นตอนที่ 2 ตรวจสอบข้อมูลและเอกสาร ลำดับที่ 2
@@ -47,7 +49,7 @@ export const EUniApproveProcess: UniApproveProcess[] = [
     status: [
       { id: 1, sname: 'ครบถ้วน และถูกต้อง', ename: 'ครบถ้วน และถูกต้อง' },
       { id: 2, sname: 'ขอแก้ไข / เพิ่มเติม', ename: 'ขอแก้ไข / เพิ่มเติม' },
-      { id: 4, sname: 'ขอแก้ไข / เพิ่มเติม', ename: 'ขอแก้ไข / เพิ่มเติม' }
+      { id: 4, sname: 'ขอแก้ไข / เพิ่มเติม', ename: 'ขอแก้ไข / เพิ่มเติม' },
     ],
   },
 
@@ -122,7 +124,7 @@ export const EUniApproveProcess: UniApproveProcess[] = [
       },
       { sname: 'ส่งคืนหลักสูตร', id: 4, ename: 'ส่งคืนหลักสูตร' },
     ],
-  }
+  },
 ];
 export const UniAdmissionStatus: ListData[] = [
   {

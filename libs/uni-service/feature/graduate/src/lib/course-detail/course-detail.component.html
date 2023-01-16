@@ -1,14 +1,13 @@
 <ksp-top-nav
-  ><span header>ยื่นใบคำขอ </span
+  ><span header>ยื่นแบบคำขอ </span
   ><span subHeader>ขอยื่นรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา </span>
   <span detail>{{ headerDetail[processType] }}</span></ksp-top-nav
 >
 
 <div class="bg-secondary bg-opacity-10 px-4 pt-1 pb-3">
-  <div class="box-header">รายละเอียดใบคำขอ</div>
+  <div class="box-header">รายละเอียดแบบคำขอ</div>
   <div class="bg-white p-3">
-    <ksp-request-header-info
-    ></ksp-request-header-info>
+    <ksp-request-header-info></ksp-request-header-info>
 
     <hr />
     <div class="box-header mt-2">
@@ -21,7 +20,8 @@
         formControlName="step1"
         (degreeType)="step1DegreeType = $event"
         [disabledInstitute]="true"
-        [showCoordinatorForm]="false">
+        [showCoordinatorForm]="false"
+      >
       </ksp-degree-cert-step-one>
     </form>
 
@@ -30,8 +30,9 @@
         type="button"
         class="btn btn-primary"
         style="width: auto"
-        (click)="viewCourseDetail()">
-        กดเพื่อดูใบคำขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา
+        (click)="viewCourseDetail()"
+      >
+        กดเพื่อดูแบบคำขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา
       </button>
     </div>
     <hr />
@@ -41,25 +42,27 @@
       <table class="table">
         <thead>
           <tr>
-            <th
-              scope="col"
-              class="text-center"
-              colspan="6"
-            >
+            <th scope="col" class="text-center" colspan="6">
               แผนการรับนิสิต / นักศึกษา (ผ่านการรับรอง)
             </th>
           </tr>
           <tr>
-            <th scope="col" class="text-start" style="min-width: 180px;">แผนการรับนักศึกษา (รายปี)</th>
-            <th scope="col" class="text-center" style="min-width: 120px;">ปีการศึกษา (พ.ศ)</th>
-            <th scope="col" class="text-center" style="min-width: 100px;">ชื่อแผน</th>
-            <th scope="col" class="text-center" style="min-width: 120px;">จำนวนนักศึกษา</th>
-            <th scope="col" class="text-center" style="min-width: 250px;">ยื่นรายชื่อเข้ารับการศึกษา</th>
-            <th
-              scope="col"
-              class="text-center"
-              style="min-width: 250px;"
-            >
+            <th scope="col" class="text-start" style="min-width: 180px">
+              แผนการรับนักศึกษา (รายปี)
+            </th>
+            <th scope="col" class="text-center" style="min-width: 120px">
+              ปีการศึกษา (พ.ศ)
+            </th>
+            <th scope="col" class="text-center" style="min-width: 100px">
+              ชื่อแผน
+            </th>
+            <th scope="col" class="text-center" style="min-width: 120px">
+              จำนวนนักศึกษา
+            </th>
+            <th scope="col" class="text-center" style="min-width: 250px">
+              ยื่นรายชื่อเข้ารับการศึกษา
+            </th>
+            <th scope="col" class="text-center" style="min-width: 250px">
               ยื่นรายชื่อสำเร็จการศึกษา
             </th>
           </tr>
@@ -81,7 +84,7 @@
             </td>
             <td class="text-center form-label vertical-middle">
               <div>
-               {{ row.admissioncount || 0 }} / {{ row.student }}
+                {{ row.admissioncount || 0 }} / {{ row.student }}
                 <span
                   role="button"
                   *ngIf="checkAdmission(row)"
@@ -93,9 +96,7 @@
                 >
               </div>
             </td>
-            <td
-              class="text-center form-label vertical-middle"
-            >
+            <td class="text-center form-label vertical-middle">
               <div>
                 {{ row.graduatecount || 0 }} / {{ row.student }}
                 <span
@@ -125,9 +126,7 @@
               </div>
             </td>
             <td class="text-center form-label vertical-middle"></td>
-            <td
-              class="text-center form-label vertical-middle"
-            ></td>
+            <td class="text-center form-label vertical-middle"></td>
           </tr>
         </tbody>
       </table>

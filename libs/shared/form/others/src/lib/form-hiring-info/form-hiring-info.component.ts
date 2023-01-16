@@ -30,7 +30,7 @@ export class FormHiringInfoComponent
     academicStanding: [null, Validators.required],
     hiringContractNo: [],
     startDate: [null, Validators.required],
-    endDate: [null, Validators.required],
+    endDate: [null],
 
     hiringStatus: [], //radio
     hiringStartDate: [],

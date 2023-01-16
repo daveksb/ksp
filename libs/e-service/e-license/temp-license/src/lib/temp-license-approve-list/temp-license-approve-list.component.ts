@@ -360,7 +360,7 @@ export class TempLicenseApproveListComponent implements AfterViewInit {
       reasonDetail2 = label2 + label3 + label4;
     }
 
-    console.log('res = ', schReason[0]);
+    //console.log('res = ', schReason[0]);
 
     this.dialog.open(PdfRenderComponent, {
       width: '1200px',

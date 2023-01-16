@@ -219,7 +219,7 @@ export class LicenseEditComponent implements OnInit {
       width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่`,
-        subTitle: `คุณต้องการบันทึกข้อมูลและยื่นใบคำขอใช่หรือไม่`,
+        subTitle: `คุณต้องการบันทึกข้อมูลและยื่นแบบคำขอใช่หรือไม่`,
         cancelBtnLabel: 'บันทึก',
         btnLabel: 'ยื่นแบบคำขอ',
       },
@@ -260,10 +260,10 @@ export class LicenseEditComponent implements OnInit {
     const dialog = this.dialog.open(CompleteDialogComponent, {
       width: '375px',
       data: {
-        header: `บันทึกข้อมูลและยื่นใบคำขอสำเร็จเรียบร้อย`,
+        header: `บันทึกข้อมูลและยื่นแบบคำขอสำเร็จเรียบร้อย`,
         content: `วันที่ : 22 พฤศจิกายน 2565
-        เลขที่ใบคำขอ : SF_ED_12234467876543 `,
-        subContent: `กรุณาตรวจสอบสถานะใบคำขอหรือรหัสเข้าใช้งาน
+        เลขที่แบบคำขอ : SF_ED_12234467876543 `,
+        subContent: `กรุณาตรวจสอบสถานะแบบคำขอหรือรหัสเข้าใช้งาน
           ผ่านทางอีเมลผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },
     });
@@ -286,7 +286,7 @@ export class LicenseEditComponent implements OnInit {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
-        title: `คุณต้องการยกเลิกรายการใบคำขอ
+        title: `คุณต้องการยกเลิกรายการแบบคำขอ
         ใช่หรือไม่? `,
       },
     });
@@ -321,7 +321,7 @@ export class LicenseEditComponent implements OnInit {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '350px',
       data: {
-        header: `ยกเลิกใบคำขอสำเร็จ`,
+        header: `ยกเลิกแบบคำขอสำเร็จ`,
       },
     });
 

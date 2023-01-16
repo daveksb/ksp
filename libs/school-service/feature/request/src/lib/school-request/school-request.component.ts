@@ -32,6 +32,7 @@ import {
   SchInfo,
   SchRequestSearchFilter,
   SchStaff,
+  SchTempLicense,
   StaffType,
   Tambol,
   VisaClass,
@@ -100,6 +101,7 @@ export class SchoolRequestComponent implements OnInit {
   eduSelected: number[] = [];
   forbidden: any = null;
   schoolInfo!: SchInfo;
+  tempLicenseHistory: SchTempLicense[] = [];
 
   form = this.fb.group({
     userInfo: [],
@@ -146,7 +148,7 @@ export class SchoolRequestComponent implements OnInit {
   duplicateRequestDialog() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       data: {
-        header: `หมายเลขบัตรประชาชนนี้ได้ถูกใช้ยื่นใบคำขอ
+        header: `หมายเลขบัตรประชาชนนี้ได้ถูกใช้ยื่นแบบคำขอ
         และกำลังอยู่ในระหว่างดำเนินการ !`,
       },
     });
@@ -198,7 +200,7 @@ export class SchoolRequestComponent implements OnInit {
     };
     const closeRequest = this.requestService.schCloseRequest(closePayload);
     forkJoin([updateRequest, closeRequest]).subscribe(() => {
-      this.completeDialog(`ยกเลิกใบคำขอสำเร็จ`);
+      this.completeDialog(`ยกเลิกแบบคำขอสำเร็จ`);
     });
   }
 
@@ -384,8 +386,6 @@ export class SchoolRequestComponent implements OnInit {
   checkButtonsDisableStatus() {
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
       //console.log('userInfo valid = ', this.form.controls.userInfo.valid);
-      //console.log('form valid = ', this.form.valid);
-      //console.log('process = ', this.requestData.process);
       const condition1 =
         this.requestData.requesttype === '3' &&
         this.requestData.process === '3' &&
@@ -403,30 +403,26 @@ export class SchoolRequestComponent implements OnInit {
         this.disableCancel = true;
         return;
       }
-
-      // formValid + ไม่มีหมายเลขใบคำขอ ทำได้ทุกอย่าง
+      // formValid + ไม่มีหมายเลขแบบคำขอ ทำได้ทุกอย่าง
       else if (this.form.valid && !this.requestId) {
         this.disableTempSave = false;
         this.disableSave = false;
         return;
       }
-
-      // formValid + สถานะเป็นสร้างใบคำขอ, บันทึกชั่วคราวได้ ส่งใบคำขอได้
+      // formValid + สถานะเป็นสร้างแบบคำขอ, บันทึกชั่วคราวได้ ส่งแบบคำขอได้
       else if (this.form.valid && this.requestData.process === '1') {
-        //console.log('สถานะเป็นสร้างใบคำขอ ');
+        //console.log('สถานะเป็นสร้างแบบคำขอ ');
         this.disableTempSave = false;
         this.disableSave = false;
         return;
       }
-
-      // formValid + สถานะเป็นสร้างและส่งใบคำขอ, บันทึกชั่วคราวไม่ได้ ส่งใบคำขอไม่ได้
+      // formValid + สถานะเป็นสร้างและส่งแบบคำขอ, บันทึกชั่วคราวไม่ได้ ส่งแบบคำขอไม่ได้
       else if (this.form.valid && this.requestData.process === '2') {
-        //console.log('สถานะเป็นสร้างและส่งใบคำขอ ');
+        //console.log('สถานะเป็นสร้างและส่งแบบคำขอ ');
         this.disableTempSave = true;
         this.disableSave = true;
         return;
       }
-
       // สถานะ พิจาณาและรับรอง
       else if (this.requestData.process === '5') {
         //console.log('สถานะรับรอง = ');
@@ -435,8 +431,7 @@ export class SchoolRequestComponent implements OnInit {
         this.disableCancel = true;
         return;
       }
-
-      // formValid + สถานะเป็นส่งกลับเพื่อแก้ไข, บันทึกชั่วคราวได้ ส่งใบคำขอได้
+      // formValid + สถานะเป็นส่งกลับเพื่อแก้ไข, บันทึกชั่วคราวได้ ส่งแบบคำขอได้
       else if (condition1 || condition2) {
         this.disableTempSave = false;
         this.disableSave = false;
@@ -448,7 +443,7 @@ export class SchoolRequestComponent implements OnInit {
         this.disableSave = true;
       }
 
-      // มีหมายเลขใบคำขอแล้ว enable ปุ่มยกเลิก
+      // มีหมายเลขแบบคำขอแล้ว enable ปุ่มยกเลิก
       if (this.requestId) {
         if (this.requestData.process === '0') {
           this.disableCancel = true;
@@ -468,9 +463,16 @@ export class SchoolRequestComponent implements OnInit {
     });
   }
 
+  getTempLicenseHistory(idCardNo: string | null) {
+    this.requestService.getTempLicenseHistory(idCardNo).subscribe((res) => {
+      this.tempLicenseHistory = res.datareturn;
+    });
+  }
+
   loadRequestFromId(id: number) {
     this.requestService.schGetRequestById(id).subscribe((res) => {
       if (res) {
+        this.getTempLicenseHistory(res.idcardno || res.kuruspano);
         this.requestData = res;
         this.pathUserInfo(res);
         this.patchAddress(parseJson(res.addressinfo));
@@ -718,8 +720,8 @@ export class SchoolRequestComponent implements OnInit {
       }
       /*       if (res && res.length) {
         //console.log('found request for this staff = ', res);
-        this.completeDialog(`บุคคลากรมีใบคำขอที่กำลังดำเนินการในระบบ
-        ไม่สามารถสร้างใบคำขอใหม่ได้ `);
+        this.completeDialog(`บุคคลากรมีแบบคำขอที่กำลังดำเนินการในระบบ
+        ไม่สามารถสร้างแบบคำขอใหม่ได้ `);
       } else {
         //console.log('no request for this staff = ');
         if (saveType === 'submitSave') {
@@ -744,7 +746,7 @@ export class SchoolRequestComponent implements OnInit {
       .subscribe((res) => {
         this.forbidden = res;
         if (res) {
-          // confirm เพื่อ บันทึกและยื่นใบคำขอ
+          // confirm เพื่อ บันทึกและยื่นแบบคำขอ
           this.confirmDialog(2);
         }
       });
@@ -786,7 +788,7 @@ export class SchoolRequestComponent implements OnInit {
   cancelConfirmDialog() {
     const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
-        title: `คุณต้องการยกเลิกรายการใบคำขอ
+        title: `คุณต้องการยกเลิกรายการแบบคำขอ
         ใช่หรือไม่? `,
       },
     });

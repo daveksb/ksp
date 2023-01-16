@@ -37,7 +37,7 @@ import { Subject } from 'rxjs';
 })
 export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
   /*   badgeTitle = [
-    `เลขที่ใบคำขอ : SF_010641000123 รายการขอขึ้นทะเบียนใบอนุญาต ถูกส่งคืน
+    `เลขที่แบบคำขอ : SF_010641000123 รายการขอขึ้นทะเบียนใบอนุญาต ถูกส่งคืน
   “ปรับแก้ไข / เพิ่มเติม” กดเพื่อตรวจสอบ`,
   ]; */
   @ViewChild(MatSort) sort!: MatSort;
@@ -371,7 +371,7 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
     } ถูกส่งคืน "ปรับแก้ไข/เพิ่มเติม"
     กรุณาส่งกลับภายในวันที่ ${thaiDate(
       new Date(detail.returndate)
-    )} มิฉะนั้นใบคำขอจะถูกยกเลิก `;
+    )} มิฉะนั้นแบบคำขอจะถูกยกเลิก `;
   }
 }
 

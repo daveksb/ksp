@@ -124,7 +124,7 @@ export class AddStaffComponent implements OnInit {
         } else {
           this.foundLicenses = [];
           this.notFound = true;
-          console.log('res = ', this.notFound);
+          //console.log('res = ', this.notFound);
         }
       });
   }

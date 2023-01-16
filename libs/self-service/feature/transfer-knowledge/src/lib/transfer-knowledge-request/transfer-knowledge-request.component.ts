@@ -55,7 +55,7 @@ export class TransferKnowledgeRequestComponent
 {
   isLoading: Subject<boolean> = this.loaderService.isLoading;
   userInfoType = UserInfoFormType.thai;
-  headerGroup = ['วันที่ทำรายการ', 'เลขใบคำขอ'];
+  headerGroup = ['วันที่ทำรายการ', 'เลขแบบคำขอ'];
   eduFiles: any[] = [];
   transferFiles: any[] = [];
 

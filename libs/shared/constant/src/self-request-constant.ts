@@ -33,7 +33,7 @@ export const SelfRequestProcess: SchRequestProcess[] = [
   {
     requestType: 1,
     processId: 1,
-    processName: 'สร้างใบคำขอ',
+    processName: 'สร้างแบบคำขอ',
     status: [
       { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
@@ -42,7 +42,7 @@ export const SelfRequestProcess: SchRequestProcess[] = [
   {
     requestType: 1,
     processId: 2,
-    processName: 'สร้างและส่งใบคำขอ',
+    processName: 'สร้างและส่งแบบคำขอ',
     status: [
       { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
@@ -108,7 +108,7 @@ export const SelfRequestProcess: SchRequestProcess[] = [
   {
     requestType: 2,
     processId: 1,
-    processName: 'สร้างใบคำขอ',
+    processName: 'สร้างแบบคำขอ',
     status: [
       { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
@@ -117,7 +117,7 @@ export const SelfRequestProcess: SchRequestProcess[] = [
   {
     requestType: 2,
     processId: 2,
-    processName: 'สร้างและส่งใบคำขอ',
+    processName: 'สร้างและส่งแบบคำขอ',
     status: [
       { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
@@ -177,7 +177,7 @@ export const SelfRequestProcess: SchRequestProcess[] = [
   {
     requestType: 30,
     processId: 1,
-    processName: 'สร้างและส่งใบคำขอ',
+    processName: 'สร้างและส่งแบบคำขอ',
     status: [
       { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
@@ -228,7 +228,7 @@ export const SelfRequestProcess: SchRequestProcess[] = [
   {
     requestType: 40,
     processId: 1,
-    processName: 'สร้างใบคำขอ',
+    processName: 'สร้างแบบคำขอ',
     status: [
       { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
@@ -237,7 +237,7 @@ export const SelfRequestProcess: SchRequestProcess[] = [
   {
     requestType: 40,
     processId: 2,
-    processName: 'สร้างและส่งใบคำขอ',
+    processName: 'สร้างและส่งแบบคำขอ',
     status: [
       { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },

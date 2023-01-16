@@ -33,22 +33,23 @@ const detailToState = (res: any) => {
       detail: parseJson(data?.detail),
     };
   });
-  const filterRes = _.filter(newRes, (data: any) => !data?.detail?.considerCourses)?.map(
-    (data: any) => {
-      const verifyObject: any = {};
-      verifyObject.isBasicValid =
-        _.get(data, 'detail.verifyStep1.result') === '1';
-      verifyObject.isCourseValid =
-        _.get(data, 'detail.verifyStep2.result') === '1';
-      verifyObject.isProcessValid =
-        _.get(data, 'detail.verifyStep3.result') === '1';
-      verifyObject.isAttachmentValid =
-        _.get(data, 'detail.verifyStep4.result') === '1';
-      verifyObject.createDate = data?.createdate;
-      verifyObject.updateBy = data?.fullnameth;
-      return verifyObject;
-    }
-  );
+  const filterRes = _.filter(
+    newRes,
+    (data: any) => !data?.detail?.considerCourses
+  )?.map((data: any) => {
+    const verifyObject: any = {};
+    verifyObject.isBasicValid =
+      _.get(data, 'detail.verifyStep1.result') === '1';
+    verifyObject.isCourseValid =
+      _.get(data, 'detail.verifyStep2.result') === '1';
+    verifyObject.isProcessValid =
+      _.get(data, 'detail.verifyStep3.result') === '1';
+    verifyObject.isAttachmentValid =
+      _.get(data, 'detail.verifyStep4.result') === '1';
+    verifyObject.createDate = data?.createdate;
+    verifyObject.updateBy = data?.fullnameth;
+    return verifyObject;
+  });
   return { newres: filterRes || [], res: newRes };
 };
 @Component({
@@ -113,13 +114,17 @@ export class CheckComponent implements OnInit, AfterContentChecked {
       .pipe(map(detailToState))
       .subscribe((res) => {
         this.verifyResult = res.newres;
-        const lastPlan = _.last(res?.res.filter(data=>{return data.process == 3})) as any;
+        const lastPlan = _.last(
+          res?.res.filter((data) => {
+            return data.process == 3;
+          })
+        ) as any;
         this.form.patchValue({
           verifyStep1: lastPlan?.detail.verifyStep1,
           verifyStep2: lastPlan?.detail.verifyStep2,
           verifyStep3: lastPlan?.detail.verifyStep3,
           verifyStep4: lastPlan?.detail.verifyStep4,
-        })
+        });
       });
   }
   getDegreeCert() {
@@ -139,7 +144,7 @@ export class CheckComponent implements OnInit, AfterContentChecked {
               step1: res.step1,
               step2: res.step2,
               step3: res.step3,
-              step4: res.step4
+              step4: res.step4,
             });
             if (res?.requestprocess == '3' && res?.requeststatus == '1') {
               this.disabledVerifyStep = true;
@@ -256,14 +261,16 @@ export class CheckComponent implements OnInit, AfterContentChecked {
     if (verify == 1 && forward == 1) {
       process = _.toNumber(this.daftRequest?.requestprocess) + 1;
       status = 1;
-    } else if (verify == 2 && !forward || verify == 2 && forward == 2) {
+    } else if ((verify == 2 && !forward) || (verify == 2 && forward == 2)) {
       process = _.toNumber(this.daftRequest?.requestprocess) + 1;
       status = 2;
     } else if (verify == 1 && forward == 3) {
-      process = this.daftRequest?.requestprocess == '1' ? 
-                _.toNumber(this.daftRequest?.requestprocess) + 2 : _.toNumber(this.daftRequest?.requestprocess) + 1;
+      process =
+        this.daftRequest?.requestprocess == '1'
+          ? _.toNumber(this.daftRequest?.requestprocess) + 2
+          : _.toNumber(this.daftRequest?.requestprocess) + 1;
       status = 1;
-    }  else if (forward == 4) {
+    } else if (forward == 4) {
       process = _.toNumber(this.daftRequest?.requestprocess) + 1;
       status = 4;
     }
@@ -317,7 +324,7 @@ export class CheckComponent implements OnInit, AfterContentChecked {
       width: '350px',
       data: {
         header: 'ยืนยันข้อมูลสำเร็จ',
-        subContent: `ระบบส่งใบคำขอเพื่อพิจารณาประเมินหลักสูตร
+        subContent: `ระบบส่งแบบคำขอเพื่อพิจารณาประเมินหลักสูตร
         เรียบร้อย`,
 
         showPrintButton: true,

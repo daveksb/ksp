@@ -9,7 +9,12 @@ import {
 import { FormMode } from '@ksp/shared/interface';
 import { EMPTY, Subject, switchMap } from 'rxjs';
 import localForage from 'localforage';
-import { getCookie, mapMultiFileInfo, replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
+import {
+  getCookie,
+  mapMultiFileInfo,
+  replaceEmptyWithNull,
+  thaiDate,
+} from '@ksp/shared/utility';
 import { LoaderService, UniRequestService } from '@ksp/shared/service';
 import * as CryptoJs from 'crypto-js';
 
@@ -87,7 +92,7 @@ export class UniRegisterPasswordComponent implements OnInit {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
-        title: `คุณต้องการยกเลิกรายการใบคำขอ
+        title: `คุณต้องการยกเลิกรายการแบบคำขอ
         ใช่หรือไม่?`,
         btnLabel: 'ยืนยัน',
       },
@@ -134,7 +139,7 @@ export class UniRegisterPasswordComponent implements OnInit {
         btnLabel: 'บันทึก',
       },
     });
-    
+
     // waiting api for encoding password
     // const password = CryptoJs.SHA256(
     //   `${this.form?.value?.password}`
@@ -147,7 +152,7 @@ export class UniRegisterPasswordComponent implements OnInit {
       .pipe(
         switchMap((res) => {
           if (res) {
-            console.log(this.uniData)
+            console.log(this.uniData);
             this.savingData = replaceEmptyWithNull(this.savingData);
             const educationoccupy = {
               permission: this.savingData.permission,
@@ -195,8 +200,8 @@ export class UniRegisterPasswordComponent implements OnInit {
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,
         content: `วันที่ : ${this.requestDate}
-        เลขที่ใบคำขอ : ${requestNo}`,
-        subContent: `กรุณาตรวจสอบสถานะใบคำขอผ่านทางอีเมล
+        เลขที่แบบคำขอ : ${requestNo}`,
+        subContent: `กรุณาตรวจสอบสถานะแบบคำขอผ่านทางอีเมล
         ผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },
     });

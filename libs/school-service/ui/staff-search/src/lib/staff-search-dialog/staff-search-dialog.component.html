@@ -1,0 +1,122 @@
+<!-- <div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div> -->
+<div class="d-flex justify-content-between align-items-center">
+  <div class="box-header">ทะเบียนบุคลากรภายในหน่วยงาน</div>
+  <button
+    type="button"
+    class="btn-close p-0"
+    aria-label="Close"
+    matDialogClose
+  ></button>
+</div>
+<hr />
+<div [formGroup]="form">
+  <div class="row mb-2">
+    <div class="col-6">
+      <label class="form-label"
+        >หมายเลขบัตรประชาชน/เลขคุรุสภาสำหรับชาวต่างชาติ</label
+      >
+      <input class="form-control" type="text" formControlName="cardno" />
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-6">
+      <label class="form-label">ชื่อ-นามสกุล</label>
+      <input class="form-control" type="text" formControlName="name" />
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end">
+    <button
+      (click)="clear()"
+      type="button"
+      class="btn border-primary text-primary"
+    >
+      ล้างข้อมูล
+    </button>
+    <button
+      (click)="search(form.value)"
+      type="button"
+      class="ms-2 btn btn-primary"
+    >
+      ค้นหา
+    </button>
+  </div>
+
+  <hr />
+
+  <div class="box-header text-primary">ผลการค้นหา</div>
+
+  <div class="table__scroll">
+    <table
+      matSort
+      mat-table
+      [dataSource]="dataSource"
+      [hidden]="!dataSource.data.length"
+    >
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef class="text-center">เลือก</th>
+        <td mat-cell *matCellDef="let element; let i = index">
+          <div class="d-flex align-items-center justify-content-center">
+            <input
+              class="form-check-input"
+              type="radio"
+              (change)="onItemChange(element.idcardno || element.kuruspano)"
+              name="staff"
+            />
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="idcardno">
+        <th mat-header-cell *matHeaderCellDef>
+          หมายเลขบัตรประชาชน/เลขคุรุสภาสำหรับชาวต่างชาติ
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.idcardno || element.kuruspano }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.firstnameth }} {{ element.lastnameth }}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <table>
+      <tr *ngIf="searchNotFound">
+        <td class="text-center fs-5" [attr.colspan]="displayedColumns.length">
+          ไม่พบข้อมูล
+        </td>
+      </tr>
+    </table>
+  </div>
+  <mat-paginator
+    [hidden]="!dataSource.data.length"
+    [length]="dataSource.data.length"
+    [pageSize]="25"
+    [showFirstLastButtons]="true"
+  >
+  </mat-paginator>
+
+  <div
+    class="d-flex justify-content-center mt-2"
+    *ngIf="dataSource && dataSource.data.length"
+  >
+    <button
+      (click)="confirm()"
+      type="button"
+      class="ms-2 btn btn-primary"
+      [disabled]="!selectedStaff"
+    >
+      ยืนยัน
+    </button>
+  </div>
+</div>

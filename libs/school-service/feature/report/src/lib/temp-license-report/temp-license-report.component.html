@@ -23,7 +23,7 @@
 
         <div class="row mb-2">
           <div class="col">
-            <label class="form-label required">ประเภทใบคำขอ</label>
+            <label class="form-label required">ประเภทแบบคำขอ</label>
             <select class="form-select" formControlName="requesttype">
               <option value="null" selected hidden disabled>กรุณาเลือก</option>
               <option *ngFor="let t of requestTypeList" [value]="t.id">
@@ -64,7 +64,7 @@
 
         <div class="row mb-2">
           <div class="col-6">
-            <label class="form-label">จาก: วันเดือนปีที่ยื่นใบคำขอ</label>
+            <label class="form-label">จาก: วันเดือนปีที่ยื่นแบบคำขอ</label>
             <div class="d-flex align-items-center">
               <input
                 matInput
@@ -83,7 +83,7 @@
             </div>
           </div>
           <div class="col-6">
-            <label class="form-label">ถึง: วันเดือนปีที่ยื่นใบคำขอ</label>
+            <label class="form-label">ถึง: วันเดือนปีที่ยื่นแบบคำขอ</label>
             <div class="d-flex align-items-center">
               <input
                 matInput

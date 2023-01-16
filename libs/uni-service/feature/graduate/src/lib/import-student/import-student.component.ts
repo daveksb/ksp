@@ -58,12 +58,12 @@ export class ImportStudentComponent implements OnInit {
   payload: any;
   exceltoJson: any;
   headerStudent = {
-    h1: 'ยื่นใบคำขอ',
+    h1: 'ยื่นแบบคำขอ',
     h2: 'ขอยื่นรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา',
     h3: 'ขอยื่นรายชื่อผู้เข้าศึกษา',
   };
   headerGraduate = {
-    h1: 'ยื่นใบคำขอ',
+    h1: 'ยื่นแบบคำขอ',
     h2: 'ขอยื่นรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา',
     h3: 'ขอยื่นรายชื่อผู้สำเร็จการศึกษา',
   };
@@ -606,7 +606,7 @@ export class ImportStudentComponent implements OnInit {
       width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูล
-        และส่งใบคำขอ ใช่หรือไม่? `,
+        และส่งแบบคำขอ ใช่หรือไม่? `,
       },
     });
 

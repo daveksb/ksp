@@ -358,7 +358,7 @@ export class RenewLicenseForeignComponent implements OnInit {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
-        title: `คุณต้องการยกเลิกรายการใบคำขอ
+        title: `คุณต้องการยกเลิกรายการแบบคำขอ
         ใช่หรือไม่? `,
       },
     });
@@ -386,7 +386,7 @@ export class RenewLicenseForeignComponent implements OnInit {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '350px',
       data: {
-        header: `ยกเลิกใบคำขอสำเร็จ`,
+        header: `ยกเลิกแบบคำขอสำเร็จ`,
       },
     });
 

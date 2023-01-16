@@ -1,14 +1,19 @@
-<ksp-top-nav><span header>ยื่นใบคำขอ</span><span subHeader>ขอรางวัลคุรุสดุดี</span></ksp-top-nav>
-<div class="bg-secondary bg-opacity-10 full-height-2 px-4 py-2" [formGroup]="form">
+<ksp-top-nav
+  ><span header>ยื่นแบบคำขอ</span
+  ><span subHeader>ขอรางวัลคุรุสดุดี</span></ksp-top-nav
+>
+<div
+  class="bg-secondary bg-opacity-10 full-height-2 px-4 py-2"
+  [formGroup]="form"
+>
   <div class="box-header">การคัดค้านและเพิกถอนรางวัลคุรุสดุดี</div>
   <div class="bg-white p-3">
     <ksp-request-header-info
       [requestDate]="requestData.createdate"
-      [requestNumber]="requestData.requestno"></ksp-request-header-info>
+      [requestNumber]="requestData.requestno"
+    ></ksp-request-header-info>
     <hr />
-    <div class="box-header">
-      ประวัติการตรวจสอบคุณสมบัติและเอกสาร
-    </div>
+    <div class="box-header">ประวัติการตรวจสอบคุณสมบัติและเอกสาร</div>
 
     <table class="table w-75 mb-5">
       <thead>
@@ -21,7 +26,9 @@
       </thead>
     </table>
 
-    <ksp-reward-reject-form formControlName="rewardRejectInfo"></ksp-reward-reject-form>
+    <ksp-reward-reject-form
+      formControlName="rewardRejectInfo"
+    ></ksp-reward-reject-form>
   </div>
 </div>
 
@@ -33,5 +40,6 @@
     [showCenterButtons]="true"
     [showSaveButton]="true"
     [showCancelButton]="true"
-    (saveClicked)="save()"></ksp-bottom-nav>
+    (saveClicked)="save()"
+  ></ksp-bottom-nav>
 </div>

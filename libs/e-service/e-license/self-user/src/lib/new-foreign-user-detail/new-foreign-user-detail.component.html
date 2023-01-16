@@ -1,12 +1,12 @@
 <ksp-top-nav>
   <span header
-    >ใบคำขอรหัสเข้าใช้งานระบบบริการตนเอง (Self Service) สำหรับชาวต่างชาติ</span
+    >แบบคำขอรหัสเข้าใช้งานระบบบริการตนเอง (Self Service) สำหรับชาวต่างชาติ</span
   >
-  <span subHeader>ตรวจสอบและอนุมัติใบคำขอรหัสเข้าใช้งาน</span>
+  <span subHeader>ตรวจสอบและอนุมัติแบบคำขอรหัสเข้าใช้งาน</span>
 </ksp-top-nav>
 
 <div class="bg-secondary bg-opacity-10 px-4 py-2">
-  <div class="box-header">รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ</div>
+  <div class="box-header">รายละเอียดแบบคำขอรหัสเข้าใช้งานระบบ</div>
   <form [formGroup]="form">
     <div class="bg-white p-3">
       <ksp-request-header-info></ksp-request-header-info>
@@ -16,7 +16,7 @@
           <label class="form-label required"
             >Teachers Council of Thailand ID number</label
           >
-          <input type="text" class="form-control" formControlName="teacherid" />
+          <input type="text" class="form-control" formControlName="kuruspano" />
         </div>
 
         <div
@@ -28,7 +28,11 @@
 
         <div class="col mb-3">
           <label class="form-label required">Passport No.</label>
-          <input type="text" class="form-control" formControlName="passport" />
+          <input
+            type="text"
+            class="form-control"
+            formControlName="passportno"
+          />
         </div>
       </div>
 
@@ -118,7 +122,11 @@
           </div>
           <div class="col-md mb-2">
             <label class="form-label required">Mobile number</label>
-            <input type="text" formControlName="phone" class="form-control" />
+            <input
+              type="text"
+              formControlName="contactphone"
+              class="form-control"
+            />
           </div>
         </div>
 
@@ -203,13 +211,15 @@
       </div>
     </div>
   </form>
-
-  <div class="bg-white p-3 mt-3">
-    <e-service-license-check
-      [checkedResult]="checkedResult"
-      [choices]="approveChoices"
-    ></e-service-license-check>
-  </div>
+  <form [formGroup]="verifyForm">
+    <div class="bg-white p-3 mt-3">
+      <e-service-license-check
+        formControlName="result"
+        [checkedResult]="checkedResult"
+        [choices]="approveChoices"
+      ></e-service-license-check>
+    </div>
+  </form>
 </div>
 
 <div class="sticky-bottom border">
@@ -219,6 +229,8 @@
     [showCenterButtons]="true"
     [showSaveButton]="true"
     (cancelClicked)="cancel()"
+    (saveClicked)="confirm()"
+    [disableSaveButton]="!verifyForm.valid"
   >
   </ksp-bottom-nav>
 </div>

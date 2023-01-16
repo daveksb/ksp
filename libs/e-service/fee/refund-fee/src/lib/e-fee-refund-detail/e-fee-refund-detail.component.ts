@@ -88,7 +88,7 @@ export class EFeeRefundDetailComponent implements OnInit {
             if (res) {
               this.requestData = res;
               this.patchData(res);
-              console.log(res);
+              //console.log(res);
             }
           });
       }
@@ -96,7 +96,7 @@ export class EFeeRefundDetailComponent implements OnInit {
   }
 
   patchData(data: SelfRequest) {
-    console.log(data);
+    //console.log(data);
     const { fileinfo, feerefundinfo, ...resData } = data;
     this.form.controls.userInfo.patchValue(<any>resData);
 

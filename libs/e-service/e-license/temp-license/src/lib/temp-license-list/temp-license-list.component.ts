@@ -167,6 +167,7 @@ export class ETempLicenseListComponent implements AfterViewInit {
     const nationality = request.nationality;
     const birthdate = request.birthdate;
     const passportno = request.passportno;
+
     const eduinfo = JSON.parse(request.eduinfo || '');
 
     const edu1 = eduinfo.find((item: any) => {
@@ -181,8 +182,6 @@ export class ETempLicenseListComponent implements AfterViewInit {
     const major1 = edu1?.major ?? '';
     const graduate1 = edu1?.graduateDate ?? '';
     const grade1 = edu1?.grade ?? '';
-    const admission1 = edu1?.admissionDate ?? '';
-    const country1 = edu1?.country ?? '';
 
     let degree1 = false;
     if (degreename1) {
@@ -206,6 +205,27 @@ export class ETempLicenseListComponent implements AfterViewInit {
     if (degreename2) {
       degree2 = true;
     }
+
+    const edu3 = eduinfo.find((item: any) => {
+      if (item?.degreeLevel) {
+        return item.degreeLevel === '3';
+      }
+      return false;
+    });
+
+    const degreename3 = edu3?.degreeName ?? '';
+    const institution3 = edu3?.institution ?? '';
+    const major3 = edu3?.major ?? '';
+    const graduate3 = edu3?.graduateDate ?? '';
+    const grade3 = edu3?.grade ?? '';
+
+    let degree3 = false;
+    if (degreename3) {
+      degree3 = true;
+    }
+
+    const admission1 = edu1?.admissionDate ?? '';
+    const country1 = edu1?.country ?? '';
 
     const teachinginfo = JSON.parse(request.teachinginfo || '');
 
@@ -325,44 +345,182 @@ export class ETempLicenseListComponent implements AfterViewInit {
     let reasonDetail3 = '';
 
     const reason = JSON.parse(request.reasoninfo || '');
-    const schReason = reason.schoolReasons;
+    if (reason) {
+      const schReason = reason.schoolReasons;
 
-    if (schReason[0] === true) {
-      if (request.careertype === '2') {
-        label1 =
-          'ผู้ขอประกอบวิชาชีพผู้บริหารสถานศึกษา เป็นผู้มีความรู้ ความสามารถในการบริหารสถานศึกษา ';
+      if (schReason[0] === true) {
+        if (request.careertype === '2') {
+          label1 =
+            'ผู้ขอประกอบวิชาชีพผู้บริหารสถานศึกษา เป็นผู้มีความรู้ ความสามารถในการบริหารสถานศึกษา ';
+        } else {
+          label1 = 'ผู้ขอประกอบวิชาชีพครูเป็นผู้มีความรู้ ความสามารถในการสอน ';
+        }
+      }
+      if (schReason[1] === true) {
+        if (request.careertype === '2') {
+          label2 =
+            'ผู้ขอประกอบวิชาชีพผู้บริหารสถานศึกษา เป็นผู้มีประสบการณ์ในการบริหารสถานศึกษา ';
+        } else {
+          label2 = 'ผู้ขอประกอบวิชาชีพครูเป็นผู้มีประสบการณ์ ในการสอน ';
+        }
+      }
+      if (schReason[2] === true) {
+        if (request.careertype === '2') {
+          label3 = 'ขาดแคลนผู้บริหารสถานศึกษาที่มีใบอนุญาตประกอบวิชาชีพ ';
+        } else {
+          label3 = 'ขาดแคลนครูผู้สอนที่มีใบอนุญาตประกอบวิชาชีพ ';
+        }
+      }
+      if (schReason[3] === true) {
+        label4 = 'และ' + reason.schoolOtherDetail;
+      }
+
+      reasonDetail = label1;
+      if (request.careertype !== '5') {
+        reasonDetail2 = label2;
+        reasonDetail3 = label3 + label4;
       } else {
-        label1 = 'ผู้ขอประกอบวิชาชีพครูเป็นผู้มีความรู้ ความสามารถในการสอน ';
+        reasonDetail2 = label2 + label3 + label4;
       }
     }
-    if (schReason[1] === true) {
-      if (request.careertype === '2') {
-        label2 =
-          'ผู้ขอประกอบวิชาชีพผู้บริหารสถานศึกษา เป็นผู้มีประสบการณ์ในการบริหารสถานศึกษา ';
-      } else {
-        label2 = 'ผู้ขอประกอบวิชาชีพครูเป็นผู้มีประสบการณ์ ในการสอน ';
-      }
-    }
-    if (schReason[2] === true) {
-      if (request.careertype === '2') {
-        label3 = 'ขาดแคลนผู้บริหารสถานศึกษาที่มีใบอนุญาตประกอบวิชาชีพ ';
-      } else {
-        label3 = 'ขาดแคลนครูผู้สอนที่มีใบอนุญาตประกอบวิชาชีพ ';
-      }
-    }
-    if (schReason[3] === true) {
-      label4 = 'และ' + reason.schoolOtherDetail;
+
+    const fileinfo = JSON.parse(request.fileinfo || '');
+
+    const tab3 = fileinfo['tab3'];
+    const tab4 = fileinfo['tab4'];
+    const tab5 = fileinfo['tab5'];
+    const tab6 = fileinfo['tab6'];
+
+    //teacher
+    const file1_th = tab6[0];
+    let file1_thai = false;
+    if (file1_th.length > 0) {
+      file1_thai = true;
     }
 
-    reasonDetail = label1;
-    if (request.careertype !== '5') {
-      reasonDetail2 = label2;
-      reasonDetail3 = label3 + label4;
-    } else {
-      reasonDetail2 = label2 + label3 + label4;
+    const file2_thai = true;
+
+    const file3_th = tab6[6];
+
+    const file4_th = tab3[2];
+    let file4_thai = false;
+    if (file4_th.length > 0) {
+      file4_thai = true;
     }
 
-    console.log('res = ', schReason[0]);
+    const file5_th = tab3[0];
+    let file5_thai = false;
+    if (file5_th.length > 0) {
+      file5_thai = true;
+    }
+
+    const file6_th = tab3[1];
+    let file6_thai = false;
+    if (file6_th.length > 0) {
+      file6_thai = true;
+    }
+
+    const file7_1_th = tab3[3];
+    let file7_1_thai = false;
+    if (file7_1_th.length > 0) {
+      file7_1_thai = true;
+    }
+
+    const file7_2_th = tab3[4];
+    let file7_2_thai = false;
+    if (file7_2_th.length > 0) {
+      file7_2_thai = true;
+    }
+
+    const file8_th = tab4[1];
+    let file8_thai = false;
+    if (file8_th.length > 0) {
+      file8_thai = true;
+    }
+
+    const file9_th = tab4[2];
+    let file9_thai = false;
+    if (file9_th.length > 0) {
+      file9_thai = true;
+    }
+
+    const file10_th = tab4[0];
+    let file10_thai = false;
+    if (file10_th.length > 0) {
+      file10_thai = true;
+    }
+
+    const file11_th = tab6[1];
+    let file11_thai = false;
+    if (file11_th.length > 0) {
+      file11_thai = true;
+    }
+
+    const file12_th = tab6[5];
+    let file12_thai = false;
+    if (file12_th.length > 0) {
+      file12_thai = true;
+    }
+
+    const file13_th = tab6[6];
+
+    //manager
+    const file7_mgr = tab6[6];
+
+    const file8_mgr = tab4[1];
+    let file8_manager = false;
+    if (file8_mgr.length > 0) {
+      file8_manager = true;
+    }
+
+    const file10_mgr = tab6[6];
+    const file11_mgr = tab6[6];
+    const file12_mgr = tab6[6];
+
+    const file13_mgr = tab6[5];
+    let file13_manager = false;
+    if (file13_mgr.length > 0) {
+      file13_manager = true;
+    }
+
+    const file14_mgr = tab6[6];
+
+    //foreign
+    const file2_frgn = tab3[0];
+    let file2_foreign = false;
+    if (file2_frgn.length > 0) {
+      file2_foreign = true;
+    }
+
+    const file3_frgn = tab3[1];
+    let file3_foreign = false;
+    if (file3_frgn.length > 0) {
+      file3_foreign = true;
+    }
+
+    const file4_frgn = tab6[6];
+
+    const file5_frgn = tab3[4];
+    let file5_foreign = false;
+    if (file5_frgn.length > 0) {
+      file5_foreign = true;
+    }
+
+    const file6_frgn = tab6[6];
+
+    const file7_frgn = tab4[1];
+    let file7_foreign = false;
+    if (file7_frgn.length > 0) {
+      file7_foreign = true;
+    }
+
+    const file8_frgn = tab6[5];
+    let file8_foreign = false;
+    if (file8_frgn.length > 0) {
+      file8_foreign = true;
+    }
+
+    //console.log('res = ', schReason[0]);
 
     this.dialog.open(PdfRenderComponent, {
       width: '1200px',
@@ -406,8 +564,6 @@ export class ETempLicenseListComponent implements AfterViewInit {
           id11,
           id12,
           id13,
-          country1,
-          admission1,
           degreename1,
           institution1,
           major1,
@@ -420,6 +576,14 @@ export class ETempLicenseListComponent implements AfterViewInit {
           graduate2,
           grade2,
           degree2,
+          degreename3,
+          institution3,
+          major3,
+          graduate3,
+          grade3,
+          degree3,
+          country1,
+          admission1,
           nameen,
           lv1,
           lv2,
@@ -442,6 +606,25 @@ export class ETempLicenseListComponent implements AfterViewInit {
           reasonDetail3,
           forbid3,
           prisonDetail,
+          file1_thai,
+          file2_thai,
+          file4_thai,
+          file5_thai,
+          file6_thai,
+          file7_1_thai,
+          file7_2_thai,
+          file8_thai,
+          file9_thai,
+          file10_thai,
+          file11_thai,
+          file12_thai,
+          file8_manager,
+          file13_manager,
+          file2_foreign,
+          file3_foreign,
+          file5_foreign,
+          file7_foreign,
+          file8_foreign,
         },
       },
     });

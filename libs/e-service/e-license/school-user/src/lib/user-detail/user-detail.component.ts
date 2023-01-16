@@ -125,6 +125,7 @@ export class UserDetailComponent implements OnInit {
 
       this.form.controls.userInfo.patchValue(<any>res);
       const coordinator = parseJson(res.coordinatorinfo);
+
       this.setPassword = coordinator.password;
       this.form.controls.coordinatorInfo.patchValue(coordinator);
 
@@ -301,8 +302,8 @@ const approveChoices = [
 
 const headers = [
   [
-    'ใบคำขอผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service) ',
-    'ตรวจสอบและอนุมัติใบคำขอรหัสเข้าใช้งาน',
+    'แบบคำขอผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service) ',
+    'ตรวจสอบและอนุมัติแบบคำขอรหัสเข้าใช้งาน',
   ],
   [
     'ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',

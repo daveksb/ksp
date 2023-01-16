@@ -14,7 +14,7 @@
 </ksp-top-nav>
 
 <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height full-width-2">
-  <div class="box-header">รายละเอียดใบคำขอ</div>
+  <div class="box-header">รายละเอียดแบบคำขอ</div>
 
   <div class="bg-white p-3">
     <ksp-request-header-info
@@ -25,7 +25,9 @@
 
     <div class="d-flex justify-content-between mb-1">
       <div class="box-header">
-        {{ pageType === 'admissionList' ? headerStudent.h3 : headerGraduate.h3 }}
+        {{
+          pageType === 'admissionList' ? headerStudent.h3 : headerGraduate.h3
+        }}
       </div>
       <div *ngIf="pageType === 'admissionList'">
         <button
@@ -142,7 +144,9 @@
                       matSuffix
                       [for]="picker_searchadmissiondate"
                     ></mat-datepicker-toggle>
-                    <mat-datepicker #picker_searchadmissiondate></mat-datepicker>
+                    <mat-datepicker
+                      #picker_searchadmissiondate
+                    ></mat-datepicker>
                   </div>
                 </div>
               </th>
@@ -699,6 +703,6 @@
     (tempSaveClicked)="save('temp')"
     [disableSaveButton]="checkdisableSave()"
     (prevClicked)="prev()"
-    [saveButtonLabel]="'บันทึกและยื่นใบคำขอ'"
+    [saveButtonLabel]="'บันทึกและยื่นแบบคำขอ'"
   ></ksp-bottom-nav>
 </div>

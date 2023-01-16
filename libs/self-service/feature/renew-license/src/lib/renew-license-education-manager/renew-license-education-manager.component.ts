@@ -73,7 +73,7 @@ export class RenewLicenseEducationManagerComponent
   userInfoType = UserInfoFormType.thai;
   headerGroup = [
     'วันที่ทำรายการ',
-    'เลขใบคำขอ',
+    'เลขแบบคำขอ',
     'เลขที่ใบอนุญาต',
     'เลขที่ประจำตัวคุรุสภา',
     'เลขประจำตัวประชาชน',

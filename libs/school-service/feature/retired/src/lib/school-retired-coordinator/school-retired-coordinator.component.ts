@@ -89,7 +89,7 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
   confirmCancelDialog() {
     const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
-        title: `คุณต้องการยกเลิกรายการใบคำขอ
+        title: `คุณต้องการยกเลิกรายการแบบคำขอ
         ใช่หรือไม่?`,
         btnLabel: 'ยืนยัน',
       },
@@ -172,8 +172,8 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
       data: {
         header: 'ยืนยันข้อมูลสำเร็จ',
         content: `วันที่ : ${thaiDate(new Date())}
-        เลขที่ใบคำขอ : ${formatRequestNo(requestno)} `,
-        subContent: `กรุณาตรวจสอบสถานะใบคำขอหรือรหัสเข้าใช้งาน
+        เลขที่แบบคำขอ : ${formatRequestNo(requestno)} `,
+        subContent: `กรุณาตรวจสอบสถานะแบบคำขอหรือรหัสเข้าใช้งาน
         ผ่านทางอีเมลผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },
     });

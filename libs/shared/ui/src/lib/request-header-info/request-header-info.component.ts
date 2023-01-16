@@ -11,7 +11,7 @@ import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 })
 export class RequestHeaderInfoComponent {
   @Input() requestLabel1 = 'วันที่ทำรายการ';
-  @Input() requestLabel2 = 'เลขใบคำขอ';
+  @Input() requestLabel2 = 'เลขแบบคำขอ';
 
   @Input() requestNumber: string | null = '';
   @Input() requestDate: string | null = '';

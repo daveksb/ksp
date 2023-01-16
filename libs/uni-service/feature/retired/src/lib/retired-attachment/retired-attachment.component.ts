@@ -7,7 +7,11 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { mapMultiFileInfo, replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
+import {
+  mapMultiFileInfo,
+  replaceEmptyWithNull,
+  thaiDate,
+} from '@ksp/shared/utility';
 import {
   GeneralInfoService,
   LoaderService,
@@ -60,7 +64,7 @@ export class RetiredAttachmentComponent implements OnInit {
     });
     localForage.getItem('userSelectedData').then((res: any) => {
       if (res) {
-        console.log(res)
+        console.log(res);
         this.userInfo = res;
       }
     });
@@ -69,7 +73,7 @@ export class RetiredAttachmentComponent implements OnInit {
         this.form.patchValue({
           coordinator: res.form.coordinator,
         });
-        this.retiredFiles = res.file
+        this.retiredFiles = res.file;
       }
     });
   }
@@ -77,8 +81,8 @@ export class RetiredAttachmentComponent implements OnInit {
   prevPage() {
     const form = {
       form: this.form.getRawValue(),
-      file: this.retiredFiles
-    }
+      file: this.retiredFiles,
+    };
     localForage.setItem('retireCoordinatorInfo', form);
     this.router.navigate(['/', 'retired', 'reason']);
   }
@@ -87,7 +91,7 @@ export class RetiredAttachmentComponent implements OnInit {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
-        title: `คุณต้องการยกเลิกรายการใบคำขอ
+        title: `คุณต้องการยกเลิกรายการแบบคำขอ
         ใช่หรือไม่?`,
         btnLabel: 'ยืนยัน',
       },
@@ -146,8 +150,8 @@ export class RetiredAttachmentComponent implements OnInit {
               uniname: this.userInfo.name,
               unitypename: this.userInfo.unitypename,
               permission: this.userInfo.permissionright,
-              userid: this.userInfo.id
-            }
+              userid: this.userInfo.id,
+            };
             const payload = {
               ...this.userInfo,
               contactphone: this.userInfo.phone,
@@ -186,8 +190,8 @@ export class RetiredAttachmentComponent implements OnInit {
       data: {
         header: 'ยืนยันข้อมูลสำเร็จ',
         content: `วันที่ : ${this.today}
-        เลขที่ใบคำขอ : ${requestno} `,
-        subContent: `กรุณาตรวจสอบสถานะใบคำขอหรือรหัสเข้าใช้งาน
+        เลขที่แบบคำขอ : ${requestno} `,
+        subContent: `กรุณาตรวจสอบสถานะแบบคำขอหรือรหัสเข้าใช้งาน
         ผ่านทางอีเมลผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },
     });

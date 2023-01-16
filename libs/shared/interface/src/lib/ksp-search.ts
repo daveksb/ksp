@@ -5,6 +5,7 @@ export interface RequestSearchFilter {
   requestdatefrom: string | undefined;
   requeststatus: string | undefined;
   requesttype: string | undefined;
+  passportno?: string | undefined;
 }
 
 export interface RequestSchoolInfo {
