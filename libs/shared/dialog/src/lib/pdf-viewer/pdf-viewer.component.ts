@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, Output } from '@angular/core';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PDFDocument } from 'pdf-lib';
 
@@ -52,13 +52,14 @@ export class PdfViewerComponent implements OnInit {
     private fileService: FileService,
     private sanitizer: DomSanitizer
   ) {}
+
   get checkResultFormArray() {
     return this.form.controls.checkResult as FormArray;
   }
   ngOnInit(): void {
     this.addCheckResultArray(this.data.files.length);
     setTimeout(() => {
-      console.log(this.data.checkresult);
+      //console.log(this.data.checkresult);
       this.checkResultFormArray.controls.forEach((form, index) =>
         form.patchValue(this.data.checkresult[index] ?? {})
       );

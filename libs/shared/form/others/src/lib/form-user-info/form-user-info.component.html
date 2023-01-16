@@ -3,7 +3,7 @@
 
   <div class="row">
     <div
-      class="col-6 mb-2"
+      class="col-5 mb-2"
       *ngIf="_displayMode === FormTypeEnum.foreign && !isSelfService"
     >
       <label
@@ -26,11 +26,30 @@
         </span>
       </ng-container>
     </div>
+
+    <div
+      class="col-1 align-items-center ps-0"
+      *ngIf="
+        _displayMode === FormTypeEnum.foreign &&
+        mode === 'edit' &&
+        !isSelfService
+      "
+    >
+      <br />
+      <button
+        type="button"
+        class="btn btn-primary w-100"
+        style="height: 35.6px; margin: 2px 0 2px 0"
+        (click)="searchStaffDialog(FormTypeEnum.foreign)"
+      >
+        <i class="bi bi-search"></i> ค้นหา
+      </button>
+    </div>
   </div>
 
   <div class="row">
     <div
-      class="col-6 mb-2"
+      class="col-5 mb-2"
       *ngIf="_displayMode === FormTypeEnum.thai && !isSelfService"
     >
       <label
@@ -45,6 +64,7 @@
         formControlName="idcardno"
         placeholder="หมายเลขประชาชนจำนวน 13 หลัก"
       />
+
       <ng-container
         *ngIf="idCardNo.invalid && (idCardNo.dirty || idCardNo.touched)"
       >
@@ -57,7 +77,24 @@
       </ng-container>
     </div>
 
-    <div class="col mb-2" *ngIf="isqualification">
+    <div
+      class="col-1 align-items-center ps-0"
+      *ngIf="
+        _displayMode === FormTypeEnum.thai && mode === 'edit' && !isSelfService
+      "
+    >
+      <br />
+      <button
+        type="button"
+        class="btn btn-primary w-100"
+        style="height: 35.6px; margin: 2px 0 2px 0"
+        (click)="searchStaffDialog(FormTypeEnum.thai)"
+      >
+        <i class="bi bi-search"></i> ค้นหา
+      </button>
+    </div>
+
+    <div class="col-6 mb-2" *ngIf="isqualification">
       <label class="form-label required">ประเภทการยื่น</label>
       <select formControlName="isforeign" class="form-select">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>

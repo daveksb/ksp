@@ -149,7 +149,11 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
     </div>
-    <mat-paginator [pageSizeOptions]="[25]" showFirstLastButtons>
+    <mat-paginator
+      [pageSizeOptions]="[25]"
+      showFirstLastButtons
+      [hidden]="!dataSource.data.length"
+    >
     </mat-paginator>
   </div>
 </div>

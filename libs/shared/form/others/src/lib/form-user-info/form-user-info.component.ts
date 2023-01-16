@@ -8,7 +8,13 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { SchoolRequestType, UserInfoFormType } from '@ksp/shared/constant';
+import { MatDialog } from '@angular/material/dialog';
+import { StaffSearchDialogComponent } from '@ksp/school-service/ui/staff-search';
+import {
+  SchoolRequestType,
+  SelfServiceRequestForType,
+  UserInfoFormType,
+} from '@ksp/shared/constant';
 import {
   Country,
   KspFormBaseComponent,
@@ -72,7 +78,7 @@ export class FormUserInfoComponent
 
   override form = createUserInfoForm(this.fb);
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, public dialog: MatDialog) {
     super();
     this.subscriptions.push(
       this.form?.valueChanges.subscribe((value: any) => {
@@ -161,6 +167,26 @@ export class FormUserInfoComponent
     const th = { prefixth: prefix };
     this.form.patchValue(th);
     this.form.patchValue(en);
+  }
+
+  searchStaffDialog(stafftype: any) {
+    const dialogRef = this.dialog.open(StaffSearchDialogComponent, {
+      width: '1200px',
+      height: '100vh',
+      position: {
+        top: '0px',
+        right: '0px',
+      },
+    });
+    dialogRef.afterClosed().subscribe((response: any) => {
+      if (response) {
+        if (stafftype === UserInfoFormType.thai) {
+          this.form.controls.idcardno.patchValue(response);
+        } else {
+          this.form.controls.kuruspano.patchValue(response);
+        }
+      }
+    });
   }
 
   get idCardNo() {

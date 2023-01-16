@@ -2,13 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SchoolRequestSubType, SchoolLangMapping } from '@ksp/shared/constant';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
+  PdfRenderComponent,
 } from '@ksp/shared/dialog';
 import { KspApprovePayload, KspRequest } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
-import { getCookie } from '@ksp/shared/utility';
+import {
+  changeToEnglishMonth,
+  changeToThaiNumber,
+  getCookie,
+  thaiDate,
+} from '@ksp/shared/utility';
 import moment from 'moment';
 
 @Component({
@@ -40,10 +47,80 @@ export class TempLicenseApproveComponent implements OnInit {
         this.getApproveHistory(`${id}`);
         this.requestService.getKspRequestById(id).subscribe((res) => {
           this.kspRequest = res;
+          console.log('element = ', res);
         });
       }
     });
     this.getLicenseNo();
+
+    //this.genPdf(this.kspRequest);
+  }
+
+  genPdf(element: any) {
+    const position = element?.position;
+    const startDate = new Date();
+    const date = new Date();
+    const thai = thaiDate(date);
+    const [day, month, year] = thai.split(' ');
+    const [eday, emonth, eyear] = thai.split(' ');
+    const endDate = eday + ' ' + emonth + ' ' + `${parseInt(eyear) + 2}`;
+    const fulldateth = `${changeToThaiNumber(day)} เดือน ${month} พ.ศ. ${year}`;
+    const fulldateen = `${day} Day of ${changeToEnglishMonth(month)} B.E. ${
+      parseInt(year) - 543
+    }`;
+    const name = element.firstnameth + ' ' + element.lastnameth;
+    const nameen = element.firstnameen + ' ' + element.lastnameen;
+    const start = thaiDate(startDate);
+    const end = endDate;
+    const startth = changeToThaiNumber(start);
+    const endth = changeToThaiNumber(end);
+    const starten = changeToEnglishMonth(start);
+    const enden = changeToEnglishMonth(end);
+    const careertype = SchoolRequestSubType[+(element?.licensetype ?? '1')];
+    const careertypeen = SchoolLangMapping[careertype ?? 'ครู'] ?? '';
+
+    const prefix = element.licensetype == '1' ? 'ท.' : 'อ.';
+    //const schoolid = element.schoolId;
+    const schoolname = element.schoolname;
+    const bureauname = element.bureauname;
+    const schoolapprovename = 'ผู้อํานวยการสถานศึกษา';
+    const schoolapprovenameen = 'director of the educational institution';
+
+    this.requestService.getLicenseNoTh().subscribe((res) => {
+      const be = moment().add(543, 'year').year();
+      const requestno = `${res.runningno}/${be}`;
+
+      this.dialog.open(PdfRenderComponent, {
+        width: '1200px',
+        height: '100vh',
+        data: {
+          pdfType: 1,
+          pdfSubType: 3,
+          input: {
+            prefix,
+            schoolapprovename,
+            schoolapprovenameen,
+            requestno,
+            careertype,
+            careertypeen,
+            name,
+            nameen,
+            startth,
+            endth,
+            starten,
+            enden,
+            schoolname,
+            bureauname,
+            day,
+            month,
+            year,
+            position,
+            fulldateth,
+            fulldateen,
+          },
+        },
+      });
+    });
   }
 
   getLicenseNo() {

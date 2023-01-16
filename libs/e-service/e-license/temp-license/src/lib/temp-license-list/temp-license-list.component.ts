@@ -167,7 +167,7 @@ export class ETempLicenseListComponent implements AfterViewInit {
     const nationality = request.nationality;
     const birthdate = request.birthdate;
     const passportno = request.passportno;
-    
+
     const eduinfo = JSON.parse(request.eduinfo || '');
 
     const edu1 = eduinfo.find((item: any) => {

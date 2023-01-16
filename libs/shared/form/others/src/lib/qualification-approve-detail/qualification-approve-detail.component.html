@@ -67,7 +67,7 @@
     (click)="save()"
     type="button"
     class="btn btn-primary ms-1"
-    [disabled]="form.invalid"
+    [disabled]="!form.valid || !form.controls.degree.value"
   >
     บันทึก
   </button>

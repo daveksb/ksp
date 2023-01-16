@@ -91,15 +91,12 @@ export class QualificationDetailComponent implements OnInit {
   schoolName!: string;
   address!: string;
   requestLabel = '';
-  isOptional2 = false;
-  isOptional3 = false;
-  isOptional4 = false;
+  isOptional2: any;
+  isOptional3: any;
+  isOptional4: any;
   showEdu2 = false;
   showEdu3 = false;
   showEdu4 = false;
-  checkbox2 = false;
-  checkbox3 = false;
-  checkbox4 = false;
 
   constructor(
     public dialog: MatDialog,
@@ -115,13 +112,16 @@ export class QualificationDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.form.valueChanges.subscribe((res) => {
+      console.log('edu1 = ', this.form.controls.edu1.valid);
+      console.log('edu2 = ', this.form.controls.edu2.valid);
+      console.log('edu3 = ', this.form.controls.edu3.valid);
+      console.log('edu4 = ', this.form.controls.edu4.valid);
+    });
     this.uniqueNo = uuidv4();
     this.getListData();
     this.checkRequestId();
     this.checkRequestSubType();
-    /* this.form.valueChanges.subscribe((res) => {
-      console.log('status2 = ', this.form.controls.edu2.valid);
-    }); */
   }
 
   checkRequestId() {
@@ -251,17 +251,14 @@ export class QualificationDetailComponent implements OnInit {
     //console.log('edus = ', edus);
     if (edus && edus.length) {
       edus.map((edu, i) => {
-        if (edu.degreeLevel === '2') {
+        if (edu.degreeLevel === 2) {
           this.showEdu2 = true;
-          this.checkbox2 = true;
         }
-        if (edu.degreeLevel === '3') {
+        if (edu.degreeLevel === 3) {
           this.showEdu3 = true;
-          this.checkbox3 = true;
         }
-        if (edu.degreeLevel === '4') {
+        if (edu.degreeLevel === 4) {
           this.showEdu4 = true;
-          this.checkbox4 = true;
         }
         (this.form.get(`edu${i + 1}`) as AbstractControl<any, any>).patchValue(
           edu
@@ -600,10 +597,10 @@ const files: FileGroup[] = [
     name: 'สำเนาวุฒิการศึกษาและใบรายงานผลการเรียน',
     files: [],
   },
-  {
+  /* {
     name: 'สำเนาทะเบียนบ้าน',
     files: [],
-  },
+  }, */
   {
     name: 'สำเนาหนังสือแจ้งการเทียบคุณวุฒิ (กรณีจบการศึกษาจากต่างประเทศ)',
     files: [],

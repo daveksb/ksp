@@ -9,7 +9,7 @@
       "
     >
       <ng-container *ngFor="let pdf of pdfList; let i = index">
-        <div style="position: relative">
+        <div style="position: relative" role="button">
           <iframe
             style="z-index: 0"
             *ngIf="pdf.type === 'pdf'"

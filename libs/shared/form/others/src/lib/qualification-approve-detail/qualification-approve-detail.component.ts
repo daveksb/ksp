@@ -37,7 +37,7 @@ export class QualificationApproveDetailComponent
   ]);
 
   override form = this.fb.group({
-    degree: ['', Validators.required],
+    degree: [null, Validators.required],
     degreename: [],
     major: [],
     institute: [],

@@ -58,21 +58,17 @@
     </div>
 
     <div class="bg-white p-3 mt-3">
-      <div class="d-flex justify-content-between">
+      <div class="d-flex justify-content-between align-items-center">
         <div class="box-header">
           หนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาต
         </div>
-        <button class="btn btn-success">พิมพ์เอกสาร</button>
+        <button class="btn btn-success" (click)="genPdf(kspRequest)">
+          ดูเอกสาร
+        </button>
       </div>
 
-      <hr />
-      <div class="d-flex justify-content-center bg-light border mx-auto w-75">
-        <div class="h-100 w-50 bg-white" style="padding: 20rem 0">
-          <div class="text-danger text-center box-header">
-            หนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาต
-          </div>
-        </div>
-      </div>
+      <!-- <hr />
+      <ksp-pdf-viewer-preview></ksp-pdf-viewer-preview> -->
     </div>
   </div>
 </form>
