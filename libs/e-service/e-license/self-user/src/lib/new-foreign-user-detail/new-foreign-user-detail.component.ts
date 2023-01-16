@@ -105,7 +105,7 @@ export class NewForeignUserDetailComponent implements OnInit {
       this.userData = res;
       this.kspRequest = res;
       //console.log('request data1 = ', res);
-      this.patchData(this.userData);
+      this.patchData(this.kspRequest);
     });
   }
 
@@ -164,9 +164,7 @@ export class NewForeignUserDetailComponent implements OnInit {
       user.username = this.userData.passportno;
       user.password = this.userData.uniqueno;
 
-      const userPayload = formatDatePayload(user);
-
-      this.myInfoService.insertMyInfo(userPayload).subscribe(() => {
+      this.myInfoService.insertMyInfo(user).subscribe(() => {
         this.completeDialog();
       });
     });
