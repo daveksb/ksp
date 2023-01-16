@@ -1,161 +1,166 @@
 import { MenuConfig } from '@ksp/shared/interface';
 
-//ใบอนุญาตต่างๆ
+//หนังสืออนุญาตต่างๆ
 export const eLicenseMenu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'แบบคำขอรับใบอนุญาตประกอบวิชาชีพ(ชาวไทย)',
+    label: 'แบบคำขอรับหนังสืออนุญาตประกอบวิชาชีพ(ชาวไทย)',
     path: '',
     isExpanded: false,
     subMenuName: 'license',
     subMenu: [
       {
         path: '/request-license/approve-list',
-        label: 'รายการแบบคำขอรับใบอนุญาตประกอบวิชาชีพ',
+        label: 'รายการแบบคำขอรับหนังสืออนุญาตประกอบวิชาชีพ',
       },
       {
         path: '/request-license/search-list',
-        label: 'จัดทำบัญชีรายชื่อและนำเสนอขอใบอนุญาตประกอบวิชาชีพ',
+        label: 'จัดทำบัญชีรายชื่อและนำเสนอขอหนังสืออนุญาตประกอบวิชาชีพ',
       },
       {
         path: '/request-license/guarantee',
-        label: 'รับรองใบอนุญาตประกอบวิชาขีพ',
+        label: 'รับรองหนังสืออนุญาตประกอบวิชาขีพ',
       },
     ],
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'แบบคำขอรับใบอนุญาตประกอบวิชาชีพ(ชาวต่างชาติ)',
+    label: 'แบบคำขอรับหนังสืออนุญาตประกอบวิชาชีพ(ชาวต่างชาติ)',
     path: '',
     isExpanded: false,
     subMenuName: 'request-foreign-license',
     subMenu: [
       {
         path: '/request-foreign-license/list',
-        label: 'รายการแบบคำขอรับใบอนุญาตประกอบวิชาชีพ',
+        label: 'รายการแบบคำขอรับหนังสืออนุญาตประกอบวิชาชีพ',
       },
       /* {
         path: '/xxx',
-        label: 'บัญชีรายชื่อและผลการนำเสนอขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
+        label: 'บัญชีรายชื่อและผลการนำเสนอขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ',
       }, */
       {
         path: '/xxx',
-        label: 'พิจารณารับรองใบอนุญาตประกอบวิชาชีพ',
+        label: 'พิจารณารับรองหนังสืออนุญาตประกอบวิชาชีพ',
       },
     ],
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'สร้างเลขใบอนุญาตประกอบวิชาชีพ',
+    label: 'สร้างเลขหนังสืออนุญาตประกอบวิชาชีพ',
     path: '/create-license-id/list',
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'แบบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ(ชาวไทย)',
+    label: 'แบบคำขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ(ชาวไทย)',
     path: '',
     isExpanded: false,
     subMenuName: 'renewThai',
     subMenu: [
       {
         path: '/renew-license/approve-list',
-        label: 'รายการแบบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
+        label: 'รายการแบบคำขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ',
       },
       {
         path: '/renew-license/search-list',
-        label: 'จัดทำบัญชีรายชื่อและนำเสนอขอใบอนุญาตประกอบวิชาชีพ',
+        label: 'จัดทำบัญชีรายชื่อและนำเสนอขอหนังสืออนุญาตประกอบวิชาชีพ',
       },
       {
         path: '/renew-license/guarantee',
-        label: 'รับรองใบอนุญาตประกอบวิชาขีพ',
+        label: 'รับรองหนังสืออนุญาตประกอบวิชาขีพ',
       },
     ],
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'แบบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ(ชาวต่างชาติ)',
+    label: 'แบบคำขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ(ชาวต่างชาติ)',
     path: '',
     isExpanded: false,
     subMenuName: 'renewForeign',
     subMenu: [
       {
         path: '/renew-foreign-license/list',
-        label: 'รายการแบบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
+        label: 'รายการแบบคำขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ',
       },
       /* {
         path: '/xxx',
-        label: 'บัญชีรายชื่อและผลการนำเสนอขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
+        label: 'บัญชีรายชื่อและผลการนำเสนอขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ',
       }, */
       {
         path: '/xxx',
-        label: 'พิจารณารับรองใบอนุญาตประกอบวิชาชีพ',
+        label: 'พิจารณารับรองหนังสืออนุญาตประกอบวิชาชีพ',
       },
     ],
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'แบบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต(ชาวไทย)',
+    label: 'แบบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีหนังสืออนุญาต(ชาวไทย)',
     path: '',
     isExpanded: false,
     subMenuName: 'tempThai',
     subMenu: [
       {
         path: '/temp-license/list/1',
-        label: 'รายการแบบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
+        label:
+          'รายการแบบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีหนังสืออนุญาต',
       },
       {
         path: '/temp-license/consider-list/1',
-        label: 'พิจารณารับรองหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
+        label:
+          'พิจารณารับรองหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีหนังสืออนุญาต',
       },
     ],
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'แบบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต(ชาวต่างชาติ)',
+    label:
+      'แบบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีหนังสืออนุญาต(ชาวต่างชาติ)',
     path: '',
     isExpanded: false,
     subMenuName: 'tempForeign',
     subMenu: [
       {
         path: '/temp-license/list/5',
-        label: 'รายการแบบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
+        label:
+          'รายการแบบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีหนังสืออนุญาต',
       },
       {
         path: '/temp-license/consider-list/5',
-        label: 'พิจารณารับรองหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
+        label:
+          'พิจารณารับรองหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีหนังสืออนุญาต',
       },
     ],
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'แบบคำขอเปลี่ยนแปลง/แก้ไขใบอนุญาต',
+    label: 'แบบคำขอเปลี่ยนแปลง/แก้ไขหนังสืออนุญาต',
     path: '',
     isExpanded: false,
     subMenuName: 'edit-thai',
     subMenu: [
       {
         path: '/edit-license/list',
-        label: 'รายการแบบคำขอแก้ไข/เปลี่ยนแปลงใบอนุญาต',
+        label: 'รายการแบบคำขอแก้ไข/เปลี่ยนแปลงหนังสืออนุญาต',
       },
       {
         path: '/edit-license/consider-list',
-        label: 'พิจารณาขอเปลี่ยนแปลง/แก้ใบอนุญาต',
+        label: 'พิจารณาขอเปลี่ยนแปลง/แก้หนังสืออนุญาต',
       },
     ],
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'แบบคำขอใบแทนใบอนุญาตประกอบวิชาชีพ',
+    label: 'แบบคำขอใบแทนหนังสืออนุญาตประกอบวิชาชีพ',
     path: '',
     isExpanded: false,
     subMenuName: 'sub-license',
     subMenu: [
       {
         path: '/sub-license/approve-list',
-        label: 'รายการแบบคำขอใบแทนใบอนุญาตประกอบวิชาชีพ',
+        label: 'รายการแบบคำขอใบแทนหนังสืออนุญาตประกอบวิชาชีพ',
       },
       {
         path: '/xxx',
-        label: 'พิจารณาขอใบแทนใบอนุญาตประกอบวิชาชีพ',
+        label: 'พิจารณาขอใบแทนหนังสืออนุญาตประกอบวิชาชีพ',
       },
     ],
   },
@@ -191,18 +196,18 @@ export const eLicenseMenu: MenuConfig[] = [
   }, */
   /* {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ข้อมูลลักษณะต้องห้ามของผู้ขอใบอนุญาตประกอบวิชาชีพ',
+    label: 'ข้อมูลลักษณะต้องห้ามของผู้ขอหนังสืออนุญาตประกอบวิชาชีพ',
     path: '',
     isExpanded: false,
     subMenuName: 'forbidden',
     subMenu: [
       {
         path: '/xxx',
-        label: 'บันทึกข้อมูลลักษณะต้องห้ามของผู้ขอรับใบอนุญาตประกอบวิชาชีพ',
+        label: 'บันทึกข้อมูลลักษณะต้องห้ามของผู้ขอรับหนังสืออนุญาตประกอบวิชาชีพ',
       },
       {
         path: '/xxx',
-        label: 'พิจารณาข้อมูลลักษณะต้องห้ามของผู้ขอรับใบอนุญาตประกอบวิชาชีพ',
+        label: 'พิจารณาข้อมูลลักษณะต้องห้ามของผู้ขอรับหนังสืออนุญาตประกอบวิชาชีพ',
       },
     ],
   }, */
@@ -213,14 +218,14 @@ export const eLicenseMenu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'งานรับ-ส่งเอกสารใบอนุญาต',
+    label: 'งานรับ-ส่งเอกสารหนังสืออนุญาต',
     path: '',
     isExpanded: false,
     subMenuName: 'document',
     subMenu: [
       {
         path: '/document-delivery/receive-list',
-        label: 'รายการรับ-ส่งเอกสารใบอนุญาต',
+        label: 'รายการรับ-ส่งเอกสารหนังสืออนุญาต',
       },
       {
         path: '/document-delivery/check-list',

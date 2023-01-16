@@ -37,7 +37,7 @@ import { Subject } from 'rxjs';
 })
 export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
   /*   badgeTitle = [
-    `เลขที่แบบคำขอ : SF_010641000123 รายการขอขึ้นทะเบียนใบอนุญาต ถูกส่งคืน
+    `เลขที่แบบคำขอ : SF_010641000123 รายการขอขึ้นทะเบียนหนังสืออนุญาต ถูกส่งคืน
   “ปรับแก้ไข / เพิ่มเติม” กดเพื่อตรวจสอบ`,
   ]; */
   @ViewChild(MatSort) sort!: MatSort;
@@ -321,7 +321,7 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
     ]);
   }
 
-  //ขอเปลี่ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ
+  //ขอเปลี่ยนแปลง/แก้ไขหนังสืออนุญาตประกอบวิชาชีพ
   licenseEdit(id?: number) {
     this.router.navigate(['/license', 'edit', ...(id ? [`${id}`] : [])]);
   }
@@ -354,7 +354,7 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
     this.router.navigate(['/refund-fee', 'request', ...(id ? [`${id}`] : [])]);
   }
 
-  //ขอใบแทนใบอนุญาตประกอบวิชาชีพ
+  //ขอใบแทนหนังสืออนุญาตประกอบวิชาชีพ
   substituteLicense(id?: number) {
     this.router.navigate([
       '/substitute-license',

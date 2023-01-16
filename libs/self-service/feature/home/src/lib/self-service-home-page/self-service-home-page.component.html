@@ -46,10 +46,12 @@
         <label class="form-label">ประเภทแบบคำขอ</label>
         <select class="form-select" formControlName="requesttype">
           <option selected hidden disabled value="null">กรุณาเลือก</option>
-          <option value="1">ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ</option>
-          <option value="2">ขอต่ออายุใบอนุญาตประกอบวิชาชีพ</option>
-          <option value="3">ขอเปลี่ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ</option>
-          <option value="4">ขอใบแทนใบอนุญาตประกอบวิชาชีพ</option>
+          <option value="1">ขอขึ้นทะเบียนหนังสืออนุญาตประกอบวิชาชีพ</option>
+          <option value="2">ขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ</option>
+          <option value="3">
+            ขอเปลี่ยนแปลง/แก้ไขหนังสืออนุญาตประกอบวิชาชีพ
+          </option>
+          <option value="4">ขอใบแทนหนังสืออนุญาตประกอบวิชาชีพ</option>
           <option value="5">ขอหนังสือรับรองความรู้</option>
           <option value="6">ขอยื่นเทียบเคียงความรู้</option>
           <option value="30">ขอคืนเงินค่าธรรมเนียม</option>
@@ -126,13 +128,13 @@
     </button>
     <mat-menu #license="matMenu">
       <button mat-menu-item [matMenuTriggerFor]="request">
-        ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ
+        ขอขึ้นทะเบียนหนังสืออนุญาตประกอบวิชาชีพ
       </button>
       <button mat-menu-item [matMenuTriggerFor]="renew">
-        ขอต่ออายุใบอนุญาตประกอบวิชาชีพ
+        ขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ
       </button>
       <button mat-menu-item (click)="substituteLicense()">
-        ขอใบแทนใบอนุญาตประกอบวิชาชีพ
+        ขอใบแทนหนังสืออนุญาตประกอบวิชาชีพ
       </button>
       <button mat-menu-item (click)="transfer()">ขอหนังสือรับรองความรู้</button>
       <button mat-menu-item (click)="compare()">ขอยื่นเทียบเคียงความรู้</button>

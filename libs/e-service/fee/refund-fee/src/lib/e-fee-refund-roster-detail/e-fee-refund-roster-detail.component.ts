@@ -49,7 +49,7 @@ const data: refundConfirmInfo[] = [
     name: 'นายประหยัด จันทร์อังคาร',
     feeType: 'ขึ้นทะเบียน',
     profession: 'ครู',
-    reason: 'ขอยกเลิกการขึ้นทะเบียนรับใบอนุญาต',
+    reason: 'ขอยกเลิกการขึ้นทะเบียนรับหนังสืออนุญาต',
     process: 'ตรวจสอบ',
     status: 'เสร็จสิ้น',
     submitDate: '01 มิ.ย.2564',

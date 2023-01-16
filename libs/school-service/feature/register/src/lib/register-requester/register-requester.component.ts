@@ -91,7 +91,7 @@ export class RegisterRequesterComponent implements OnInit {
 
 /* export const grants = [
   {
-    label: 'ยื่นแบบคำขออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต',
+    label: 'ยื่นแบบคำขออนุญาตให้ประกอบวิชาชีพ โดยไม่มีหนังสืออนุญาต',
     name: 'grant1',
     value: false,
   },
@@ -103,7 +103,7 @@ export class RegisterRequesterComponent implements OnInit {
     value: false,
   },
   {
-    label: 'ทะเบียนหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต',
+    label: 'ทะเบียนหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีหนังสืออนุญาต',
     name: 'grant4',
     value: false,
   },

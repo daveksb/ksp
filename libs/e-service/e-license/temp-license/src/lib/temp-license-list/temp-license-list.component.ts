@@ -366,9 +366,9 @@ export class ETempLicenseListComponent implements AfterViewInit {
       }
       if (schReason[2] === true) {
         if (request.careertype === '2') {
-          label3 = 'ขาดแคลนผู้บริหารสถานศึกษาที่มีใบอนุญาตประกอบวิชาชีพ ';
+          label3 = 'ขาดแคลนผู้บริหารสถานศึกษาที่มีหนังสืออนุญาตประกอบวิชาชีพ ';
         } else {
-          label3 = 'ขาดแคลนครูผู้สอนที่มีใบอนุญาตประกอบวิชาชีพ ';
+          label3 = 'ขาดแคลนครูผู้สอนที่มีหนังสืออนุญาตประกอบวิชาชีพ ';
         }
       }
       if (schReason[3] === true) {

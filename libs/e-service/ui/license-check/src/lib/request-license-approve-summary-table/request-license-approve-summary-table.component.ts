@@ -11,15 +11,15 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 export class RequestLicenseApproveSummaryTableComponent implements OnInit {
   @Input() data = [
     {
-      result: 'อนุมัติออกใบอนุญาต',
+      result: 'อนุมัติออกหนังสืออนุญาต',
       count: 0,
     },
     {
-      result: 'ไม่อนุมัติออกใบอนุญาต',
+      result: 'ไม่อนุมัติออกหนังสืออนุญาต',
       count: 0,
     },
     {
-      result: 'กรณีเร่งด่วนออกใบอนุญาตแล้ว',
+      result: 'กรณีเร่งด่วนออกหนังสืออนุญาตแล้ว',
       count: 0,
     },
   ];

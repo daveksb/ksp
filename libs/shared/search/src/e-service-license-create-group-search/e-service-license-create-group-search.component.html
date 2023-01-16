@@ -91,7 +91,7 @@
 
     <div class="row mb-2">
       <div class="col-6">
-        <label class="form-label">ประเภทใบอนุญาตประกอบวิชาชีพ</label>
+        <label class="form-label">ประเภทหนังสืออนุญาตประกอบวิชาชีพ</label>
         <select class="form-select" formControlName="currentprocess">
           <option value="null" disabled hidden>กรุณาเลือก</option>
           <option *ngFor="let p of processList" [value]="p?.processId">
@@ -101,7 +101,7 @@
       </div>
 
       <div class="col-6">
-        <label class="form-label">กลุ่มผู้ขอใบอนุญาตประกอบวิชาชีพ</label>
+        <label class="form-label">กลุ่มผู้ขอหนังสืออนุญาตประกอบวิชาชีพ</label>
         <select class="form-select" formControlName="requeststatus">
           <option value="null" disabled hidden>กรุณาเลือก</option>
           <option *ngFor="let s of statusList" [value]="s.id">

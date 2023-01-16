@@ -192,7 +192,7 @@ export class LicenseRequestComponent
   createRequest(forbidden: any, currentProcess: number) {
     const self = new SelfRequest(
       '1',
-      SelfServiceRequestType.ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ,
+      SelfServiceRequestType.ขอขึ้นทะเบียนหนังสืออนุญาตประกอบวิชาชีพ,
       `${SelfServiceRequestSubType.ครู}`,
       currentProcess
     );

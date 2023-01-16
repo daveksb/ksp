@@ -5,14 +5,16 @@
 
 <ksp-top-nav
   ><span header>ทะเบียนบุคลากรภายในหน่วยงาน</span
-  ><span subHeader>ค้นหาใบอนุญาต</span></ksp-top-nav
+  ><span subHeader>ค้นหาหนังสืออนุญาต</span></ksp-top-nav
 >
 
 <div
   [formGroup]="form"
   class="bg-secondary bg-opacity-10 px-4 pt-1 pb-3 full-height"
 >
-  <div class="box-header pb-1">ค้นหาข้อมูลใบอนุญาตประกอบวิชาชีพทางการศึกษา</div>
+  <div class="box-header pb-1">
+    ค้นหาข้อมูลหนังสืออนุญาตประกอบวิชาชีพทางการศึกษา
+  </div>
 
   <div class="bg-white p-3 default-width">
     <div class="box-header">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
@@ -27,7 +29,7 @@
       </div>
 
       <div class="col">
-        <label class="form-label">เลขที่ใบอนุญาต</label>
+        <label class="form-label">เลขที่หนังสืออนุญาต</label>
         <input class="form-control" type="text" formControlName="licenseno" />
       </div>
     </div>
@@ -38,7 +40,7 @@
       </div>
 
       <div class="col">
-        <label class="form-label">ประเภทใบอนุญาต </label>
+        <label class="form-label">ประเภทหนังสืออนุญาต </label>
         <select class="form-select" formControlName="licensetype">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let license of licenseTypes" [value]="license?.value">
@@ -67,7 +69,10 @@
     <ng-container *ngIf="notFoundItem">
       <div class="d-flex flex-column align-items-center">
         <div class="mb-2 fs-5">ไม่พบข้อมูล</div>
-        <button class="btn border-primary text-primary mb-2" (click)="addStaff()">
+        <button
+          class="btn border-primary text-primary mb-2"
+          (click)="addStaff()"
+        >
           + เพิ่มบุคลากร
         </button>
       </div></ng-container

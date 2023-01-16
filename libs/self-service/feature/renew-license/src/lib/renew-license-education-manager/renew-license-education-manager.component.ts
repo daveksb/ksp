@@ -74,11 +74,11 @@ export class RenewLicenseEducationManagerComponent
   headerGroup = [
     'วันที่ทำรายการ',
     'เลขแบบคำขอ',
-    'เลขที่ใบอนุญาต',
+    'เลขที่หนังสืออนุญาต',
     'เลขที่ประจำตัวคุรุสภา',
     'เลขประจำตัวประชาชน',
-    'วันที่ออกใบอนุญาต',
-    'วันที่หมดอายุใบอนุญาต',
+    'วันที่ออกหนังสืออนุญาต',
+    'วันที่หมดอายุหนังสืออนุญาต',
   ];
 
   override form = this.fb.group({
@@ -200,7 +200,7 @@ export class RenewLicenseEducationManagerComponent
   createRequest(forbidden: any, currentProcess: number) {
     const self = new SelfRequest(
       '1',
-      SelfServiceRequestType.ขอต่ออายุใบอนุญาตประกอบวิชาชีพ,
+      SelfServiceRequestType.ขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ,
       `${SelfServiceRequestSubType.ผู้บริหารการศึกษา}`,
       currentProcess
     );
