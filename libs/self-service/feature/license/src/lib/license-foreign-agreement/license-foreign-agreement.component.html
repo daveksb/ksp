@@ -2,21 +2,21 @@
   ><span header>TEACHING LICENSE APPLICATION FORM</span>
 </ksp-top-nav>
 
-<div class="main__container full-height py-2 px-4">
-  <!-- <self-service-request-status
+<div class="main__container full-height px-4 py-2">
+  <self-service-request-status
     [headerLabel1]="'Issue Date'"
     [headerLabel2]="'Form ID'"
     [title]="'TEACHING LICENSE APPLICATION FORM'"
     self-service-request-status
   ></self-service-request-status>
-  <br /> -->
-  <div class="box-header text-center mb-1">
+
+  <div class="box-header text-center mb-1 mt-3">
     THE TEACHERS' COUNCIL OF THAILAND TEACHING LICENSE APPLICATION FORM
   </div>
 
-  <div class="detail__container">
+  <div class="container detail__container">
     <ng-container *ngFor="let rule of rules; index as i">
-      <div class="d-flex mb-3">
+      <div class="d-flex my-3">
         <label class="form-label"> {{ rule }} </label>
       </div>
     </ng-container>

@@ -63,6 +63,13 @@
   color: #656565;
 }
 
+::ng-deep #dialogTrasparent {
+  box-shadow: none;
+  background: transparent;
+  overflow: hidden;
+  padding: 0;
+}
+
 @media only screen and (max-width: 768px) {
   .container {
     width: 100%;

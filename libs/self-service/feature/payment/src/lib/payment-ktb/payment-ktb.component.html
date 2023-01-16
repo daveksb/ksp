@@ -1,7 +1,10 @@
 <ksp-top-nav [isSelfService]="true"><span header>ชำระเงิน</span></ksp-top-nav>
-<div class="main__container">
+<div class="main__container full-height">
   <div class="px-3">
-    <self-service-request-status></self-service-request-status>
+    <self-service-request-status
+      [requestDate]="kspRequest.requestdate"
+      [requestNo]="kspRequest.requestno"
+    ></self-service-request-status>
   </div>
   <br />
   <div class="container">
@@ -91,6 +94,7 @@
           <ngx-barcode
             [bc-value]="qrString"
             [bc-display-value]="true"
+            [bc-height]="50"
           ></ngx-barcode>
 
           <qrcode
@@ -108,7 +112,7 @@
             [margin]="4"
             [scale]="1"
             [title]="'A custom title attribute'"
-            [width]="175"
+            [width]="150"
           ></qrcode>
         </div>
       </div>
