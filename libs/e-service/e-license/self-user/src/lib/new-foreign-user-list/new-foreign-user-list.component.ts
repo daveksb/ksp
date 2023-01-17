@@ -15,13 +15,14 @@ import {
   ERequestService,
   EducationDetailService,
   AddressService,
+  LoaderService,
 } from '@ksp/shared/service';
 import {
   checkStatus,
   schoolMapRequestType,
   replaceEmptyWithNull,
 } from '@ksp/shared/utility';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'ksp-new-foreign-user-list',
@@ -29,6 +30,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./new-foreign-user-list.component.scss'],
 })
 export class NewForeignUserListComponent implements OnInit, AfterViewInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -50,7 +52,8 @@ export class NewForeignUserListComponent implements OnInit, AfterViewInit {
     private fb: FormBuilder,
     private eRequestService: ERequestService,
     private educationDetailService: EducationDetailService,
-    private addressService: AddressService
+    private addressService: AddressService,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {

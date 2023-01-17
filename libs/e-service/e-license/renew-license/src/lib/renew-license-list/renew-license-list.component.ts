@@ -70,7 +70,7 @@ export class RenewLicenseListComponent implements AfterViewInit {
       name: null,
       idcardno: params.idcardno,
       passportno: null,
-      process: params.process,
+      process: params.process || '2',
       status: params.status,
       schoolid: null,
       schoolname: null,
