@@ -244,14 +244,6 @@ export class SchoolRequestComponent implements OnInit {
       };
     }
 
-    /*     const visaInfo = {
-      visaclass: userInfo.visaclass,
-      visatype: userInfo.visatype,
-      visaenddate: userInfo.visaenddate,
-    };
- */
-    //console.log('form data = ', formData);
-
     const payload = {
       ...replaceEmptyWithNull(userInfo),
       ...{ addressinfo: JSON.stringify([formData.addr1, formData.addr2]) },
@@ -325,12 +317,6 @@ export class SchoolRequestComponent implements OnInit {
       };
     }
 
-    /*     const visaInfo = {
-      visaclass: userInfo.visaclass,
-      visatype: userInfo.visatype,
-      visaenddate: userInfo.visaenddate,
-    }; */
-
     const tab3 = mapMultiFileInfo(this.eduFiles);
     const tab4 = mapMultiFileInfo(this.teachingFiles);
     const tab5 = mapMultiFileInfo(this.reasonFiles);
@@ -386,6 +372,11 @@ export class SchoolRequestComponent implements OnInit {
   checkButtonsDisableStatus() {
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
       //console.log('userInfo valid = ', this.form.controls.userInfo.valid);
+      //console.log('form value = ', this.form.value);
+      console.log('edu2 valid = ', this.form.controls.edu2.valid);
+      //console.log('edu3 valid = ', this.form.controls.edu3.valid);
+      //console.log('form valid = ', this.form.valid);
+      //4565936226393
       const condition1 =
         this.requestData.requesttype === '3' &&
         this.requestData.process === '3' &&
@@ -411,14 +402,14 @@ export class SchoolRequestComponent implements OnInit {
       }
       // formValid + สถานะเป็นสร้างแบบคำขอ, บันทึกชั่วคราวได้ ส่งแบบคำขอได้
       else if (this.form.valid && this.requestData.process === '1') {
-        //console.log('สถานะเป็นสร้างแบบคำขอ ');
+        console.log('สถานะเป็นสร้างแบบคำขอ ');
         this.disableTempSave = false;
         this.disableSave = false;
         return;
       }
       // formValid + สถานะเป็นสร้างและส่งแบบคำขอ, บันทึกชั่วคราวไม่ได้ ส่งแบบคำขอไม่ได้
       else if (this.form.valid && this.requestData.process === '2') {
-        //console.log('สถานะเป็นสร้างและส่งแบบคำขอ ');
+        console.log('สถานะเป็นสร้างและส่งแบบคำขอ ');
         this.disableTempSave = true;
         this.disableSave = true;
         return;
@@ -437,10 +428,12 @@ export class SchoolRequestComponent implements OnInit {
         this.disableSave = false;
         return;
       }
+
       // form invalid
       else {
         this.disableTempSave = true;
         this.disableSave = true;
+        //console.log('form invalid = ');
       }
 
       // มีหมายเลขแบบคำขอแล้ว enable ปุ่มยกเลิก

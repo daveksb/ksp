@@ -60,7 +60,7 @@ export class FormEducationInfoComponent
   }
 
   optionalEdu() {
-    if (!this.isOptional) {
+    if (this.isOptional) {
       this.clearValidator();
     }
   }
