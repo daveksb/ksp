@@ -19,7 +19,6 @@ export class TokenHandleInterceptor implements HttpInterceptor {
     const token = getCookie('userToken');
     if (
       request.url.includes('ksprequestinsertforisforeign') ||
-      request.url.includes('ksprequestinsert') ||
       request.url.includes('kspmasterdata') ||
       request.url.includes('ksplogin') ||
       request.url.includes('ksppublic') ||
@@ -47,8 +46,9 @@ export class TokenHandleInterceptor implements HttpInterceptor {
     }
 
     if (request.method === 'POST') {
+      //console.log('token url = ', request.url);
       request = request.clone({
-        body: { ...request.body, tokenkey: token || 'no-token-in-interceptor' },
+        body: { ...request.body, tokenkey: token },
       });
       return next.handle(request);
     }
