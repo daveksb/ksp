@@ -19,7 +19,6 @@ import {
   SelfRequestService,
 } from '@ksp/shared/service';
 import {
-  formatDatePayload,
   getCookie,
   hasRejectedRequest,
   replaceEmptyWithNull,
@@ -105,6 +104,7 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
       }
 
       if (res && res.length) {
+        //console.log('res xx = ', res);
         this.searchNotFound = false;
         this.dataSource.data = res.filter((item) => item.process !== '0');
         this.dataSource.sort = this.sort;
@@ -128,7 +128,7 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
     const subType = Number(input.careertype);
     const isForeign = Number(input.isforeign);
     const id = Number(input.id);
-    console.log('subType ', subType);
+    //console.log('subType ', subType);
 
     if (requestType >= 40) {
       this.reward(id);
