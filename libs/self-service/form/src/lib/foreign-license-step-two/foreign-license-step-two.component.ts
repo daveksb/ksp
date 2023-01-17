@@ -94,7 +94,7 @@ export class ForeignLicenseStepTwoComponent
 
   override form = this.fb.group({
     id: [],
-    passportno: [null, [Validators.required]],
+    passportno: [null, Validators.required],
     prefixen: [null, Validators.required],
     firstnameen: [
       null,
@@ -107,7 +107,7 @@ export class ForeignLicenseStepTwoComponent
     ],
     birthdate: [null, Validators.required],
     nationality: [null, Validators.required],
-    foreignpassporttype: ['', Validators.required],
+    foreignpassporttype: [null, Validators.required],
     imagefileid: [''],
     addressForm: [],
     workplaceForm: [],

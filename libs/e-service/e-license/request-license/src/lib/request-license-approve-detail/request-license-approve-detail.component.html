@@ -150,8 +150,10 @@
     <ng-container
       *ngIf="
         !(
+          (requestData.process === '4' && requestData.status === '0') ||
           (requestData.process === '4' && requestData.status === '3') ||
-          (requestData.process === '4' && requestData.status === '4')
+          (requestData.process === '4' && requestData.status === '4') ||
+          (requestData.process === '4' && requestData.status === '5')
         )
       "
     >
