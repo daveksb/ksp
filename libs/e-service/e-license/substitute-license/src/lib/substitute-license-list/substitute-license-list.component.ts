@@ -62,7 +62,7 @@ export class SubstituteLicenseListComponent implements AfterViewInit {
 
     let payload: EsSearchPayload = {
       systemtype: '1',
-      requesttype: SelfServiceRequestType.ขอใบแทนใบอนุญาตประกอบวิชาชีพ,
+      requesttype: SelfServiceRequestType.ขอใบแทนหนังสืออนุญาตประกอบวิชาชีพ,
       requestno: params.requestno,
       careertype: params.careertype,
       name: null,

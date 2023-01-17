@@ -116,10 +116,7 @@ export class LicenseRequestStudySupervisionComponent
     this.getListData();
     this.checkRequestId();
     this.form.valueChanges.subscribe((res) => {
-      console.log(
-        'this.form = ',
-        this.form.controls.workplace.value
-      );
+      console.log('this.form = ', this.form.controls.workplace.value);
     });
   }
 
@@ -193,7 +190,7 @@ export class LicenseRequestStudySupervisionComponent
   createRequest(forbidden: any, currentProcess: number) {
     const self = new SelfRequest(
       '1',
-      SelfServiceRequestType.ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ,
+      SelfServiceRequestType.ขอขึ้นทะเบียนหนังสืออนุญาตประกอบวิชาชีพ,
       `${SelfServiceRequestSubType.ศึกษานิเทศก์}`,
       currentProcess
     );

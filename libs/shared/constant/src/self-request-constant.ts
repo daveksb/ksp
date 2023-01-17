@@ -29,7 +29,7 @@ export const selfOccupyList = [
 ];
 
 export const SelfRequestProcess: SchRequestProcess[] = [
-  //ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ
+  //ขอขึ้นทะเบียนหนังสืออนุญาตประกอบวิชาชีพ
   {
     requestType: 1,
     processId: 1,
@@ -104,7 +104,7 @@ export const SelfRequestProcess: SchRequestProcess[] = [
     ],
   },
 
-  //ขอต่ออายุใบอนุญาตประกอบวิชาชีพ
+  //ขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ
   {
     requestType: 2,
     processId: 1,

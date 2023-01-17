@@ -193,16 +193,16 @@
       animationDuration="0ms"
       dynamicHeight="true"
     >
-      <mat-tab label="ข้อมูลผู้ได้รับใบอนุญาต" class="tab-content">
+      <mat-tab label="ข้อมูลผู้ได้รับหนังสืออนุญาต" class="tab-content">
         <ng-container *ngIf="dataSource.data.length && personSelected">
           <e-service-person-info></e-service-person-info>
         </ng-container>
       </mat-tab>
 
-      <mat-tab label="ข้อมูลใบอนุญาต">
+      <mat-tab label="ข้อมูลหนังสืออนุญาต">
         <ng-container *ngIf="dataSource.data.length && personSelected">
           <div class="box-header">
-            ข้อมูลใบอนุญาตประกอบวิชาชีพทางการศึกษา (ยังไม่หมดอายุ)
+            ข้อมูลหนังสืออนุญาตประกอบวิชาชีพทางการศึกษา (ยังไม่หมดอายุ)
           </div>
           <ksp-license-type-button-group></ksp-license-type-button-group>
           <ksp-license-info></ksp-license-info>

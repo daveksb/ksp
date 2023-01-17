@@ -303,7 +303,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   getLabel() {
     const req = this.saveData.requestData;
 
-    const message = `หนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ`;
+    const message = `หนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีหนังสืออนุญาตประกอบวิชาชีพ`;
     if (req.careertype === '1') {
       return message + ' (ครู)';
     } else if (req.careertype === '2') {
@@ -318,7 +318,7 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   getHeader() {
     const req = this.saveData.requestData;
 
-    const message = `หนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ`;
+    const message = `หนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีหนังสืออนุญาตประกอบวิชาชีพ`;
     if (req.careertype === '1' || req.careertype === '2') {
       return message + ' (ชาวไทย)';
     } else if (req.careertype === '5') {

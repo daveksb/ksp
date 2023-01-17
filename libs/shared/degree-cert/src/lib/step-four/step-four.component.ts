@@ -39,7 +39,7 @@ export class DegreeCertStepFourComponent
   step4Incorrect = null;
   // step4Incorrect = [
   //   'ไม่ครบถ้วน และไม่ถูกต้อง',
-  //   'หมายเหตุ สำเนาใบอนุญาตไม่ถูกต้อง',
+  //   'หมายเหตุ สำเนาหนังสืออนุญาตไม่ถูกต้อง',
   // ];
   uniqueTimestamp = '';
   override form = this.fb.group({

@@ -69,7 +69,7 @@ export class CreateLicenseIdDetailComponent implements OnInit {
   completeDialog() {
     this.dialog.open(CompleteDialogComponent, {
       data: {
-        header: `สร้างใบอนุญาตสำเร็จ`,
+        header: `สร้างหนังสืออนุญาตสำเร็จ`,
       },
     });
   }
@@ -77,7 +77,7 @@ export class CreateLicenseIdDetailComponent implements OnInit {
   sameIdCardDialog() {
     this.dialog.open(CompleteDialogComponent, {
       data: {
-        header: `รายชื่อนี้ได้ถูกใช้สร้างใบอนุญาตไปแล้ว`,
+        header: `รายชื่อนี้ได้ถูกใช้สร้างหนังสืออนุญาตไปแล้ว`,
         btnLabel: 'ตกลง',
       },
     });
@@ -212,7 +212,7 @@ export class CreateLicenseIdDetailComponent implements OnInit {
     const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการยืนยันข้อมูล
-        และสร้างใบอนุญาต ใช่หรือไม่? `,
+        และสร้างหนังสืออนุญาต ใช่หรือไม่? `,
       },
     });
 

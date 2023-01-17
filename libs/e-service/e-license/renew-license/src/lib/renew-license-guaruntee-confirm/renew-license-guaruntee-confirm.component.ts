@@ -109,7 +109,7 @@ export class RenewLicenseGuarunteeConfirmComponent
   confirmDialog() {
     const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
-        title: `คุณยืนยันบัญชีรายชื่อเพื่อออกใบอนุญาตประกอบวิชาชีพใช่หรือไม่? `,
+        title: `คุณยืนยันบัญชีรายชื่อเพื่อออกหนังสืออนุญาตประกอบวิชาชีพใช่หรือไม่? `,
         btnLabel: `ยืนยัน`,
         // cancelBtnLabel: 'ไม่ใช่',
       },

@@ -183,7 +183,7 @@ export class LicenseRequestEducationManagerComponent
   createRequest(forbidden: any, currentProcess: number) {
     const self = new SelfRequest(
       '1',
-      SelfServiceRequestType.ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ,
+      SelfServiceRequestType.ขอขึ้นทะเบียนหนังสืออนุญาตประกอบวิชาชีพ,
       `${SelfServiceRequestSubType.ผู้บริหารการศึกษา}`,
       currentProcess
     );

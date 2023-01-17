@@ -2,7 +2,7 @@
   <div class="bg-light">
     <div class="row mb-2">
       <div class="col">
-        <label class="form-label">ใบอนุญาตของประเทศ</label>
+        <label class="form-label">หนังสืออนุญาตของประเทศ</label>
         <select class="form-select" formControlName="licenseCountry">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let c of countries" [value]="+c.countryNo">
@@ -17,11 +17,11 @@
     </div>
     <div class="row mb-2">
       <div class="col">
-        <label class="form-label">ประเภทใบอนุญาต</label>
+        <label class="form-label">ประเภทหนังสืออนุญาต</label>
         <input class="form-control" type="text" formControlName="licenseType" />
       </div>
       <div class="col">
-        <label class="form-label">ใบอนุญาตเลขที่</label>
+        <label class="form-label">หนังสืออนุญาตเลขที่</label>
         <input class="form-control" type="text" formControlName="licenseNo" />
       </div>
     </div>

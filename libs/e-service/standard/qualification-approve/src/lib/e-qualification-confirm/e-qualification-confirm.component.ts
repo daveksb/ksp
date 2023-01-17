@@ -305,7 +305,7 @@ export class EQualificationConfirmComponent implements OnInit {
 
   getLabel() {
     const req = this.saveData.requestData;
-    const message = `รับรองคุณวุฒิการศึกษาเพื่อใช้ในการขอรับใบอนุญาตประกอบวิชาชีพ `;
+    const message = `รับรองคุณวุฒิการศึกษาเพื่อใช้ในการขอรับหนังสืออนุญาตประกอบวิชาชีพ `;
     if (req.careertype === '1') {
       return message + ' (ครู)';
     } else if (req.careertype === '2') {
@@ -319,7 +319,7 @@ export class EQualificationConfirmComponent implements OnInit {
 
   getHeader() {
     const req = this.saveData.requestData;
-    const message = `รับรองคุณวุฒิการศึกษาเพื่อใช้ในการขอรับใบอนุญาตประกอบวิชาชีพ`;
+    const message = `รับรองคุณวุฒิการศึกษาเพื่อใช้ในการขอรับหนังสืออนุญาตประกอบวิชาชีพ`;
     if (req.careertype === '1' || req.careertype === '2') {
       return message + ' (ชาวไทย)';
     } else if (req.careertype === '5') {

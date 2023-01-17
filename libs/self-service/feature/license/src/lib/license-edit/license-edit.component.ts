@@ -187,7 +187,7 @@ export class LicenseEditComponent implements OnInit {
 
     const self = new SelfRequest(
       '1',
-      SelfServiceRequestType['ขอเปลี่ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ'],
+      SelfServiceRequestType['ขอเปลี่ยนแปลง/แก้ไขหนังสืออนุญาตประกอบวิชาชีพ'],
       `${type}`,
       currentProcess
     );
