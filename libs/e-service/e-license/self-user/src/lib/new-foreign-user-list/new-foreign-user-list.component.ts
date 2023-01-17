@@ -31,16 +31,16 @@ import { Observable } from 'rxjs';
 export class NewForeignUserListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  requestTypeLabel = 'ผู้แต่งตั้ง';
+
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<KspRequest>();
   checkStatus = checkStatus;
   statusList = SchoolRequestProcess.find((i) => i.requestType === 1)?.status;
   mapRequestType = schoolMapRequestType;
-  selectedUniversity = '';
   bureau$!: Observable<any>;
   searchNotFound = false;
   provinces$!: Observable<Province[]>;
+
   form = this.fb.group({
     search: [],
   });
@@ -63,13 +63,6 @@ export class NewForeignUserListComponent implements OnInit, AfterViewInit {
   }
 
   search(params: RequestSearchFilter) {
-    //console.log('params  = ', params);
-    if (params.requesttype === '2') {
-      this.requestTypeLabel = 'ผู้ถอดถอน';
-    } else {
-      this.requestTypeLabel = 'ผู้แต่งตั้ง';
-    }
-
     let payload: EsSearchPayload = {
       systemtype: '1',
       requesttype: params.requesttype || '50',
@@ -94,18 +87,7 @@ export class NewForeignUserListComponent implements OnInit, AfterViewInit {
 
     this.eRequestService.KspSearchRequest(payload).subscribe((res) => {
       if (res && res.length) {
-        const data = res.map((i) => {
-          const coordinator = JSON.parse(i.coordinatorinfo || '{}');
-          return {
-            ...i,
-            ...{
-              province: JSON.parse(i.schooladdrinfo || '{}'),
-              coordinator:
-                coordinator?.firstnameth + ' ' + coordinator?.lastnameth,
-            },
-          };
-        });
-        this.dataSource.data = data;
+        this.dataSource.data = res;
         this.dataSource.sort = this.sort;
         const sortState: Sort = { active: 'requestdate', direction: 'asc' };
         this.sort.active = sortState.active;
@@ -113,7 +95,7 @@ export class NewForeignUserListComponent implements OnInit, AfterViewInit {
         this.sort.sortChange.emit(sortState);
         this.searchNotFound = false;
       } else {
-        this.clear();
+        this.dataSource.data = [];
         this.searchNotFound = true;
       }
     });
@@ -122,10 +104,6 @@ export class NewForeignUserListComponent implements OnInit, AfterViewInit {
   clear() {
     this.dataSource.data = [];
     this.searchNotFound = false;
-  }
-
-  onItemChange(universityCode: string) {
-    this.selectedUniversity = universityCode;
   }
 
   goToDetail(id: string | null) {

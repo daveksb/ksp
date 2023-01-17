@@ -11,7 +11,8 @@
         class="me-1"
         value="1"
         name="hasLicense"
-        formControlName="hasLicense" />
+        formControlName="hasLicense"
+      />
       <label class="form-label">Yes</label>
     </div>
     <div class="d-flex align-items-center">
@@ -20,7 +21,8 @@
         class="me-1"
         value="2"
         name="hasLicense"
-        formControlName="hasLicense" />
+        formControlName="hasLicense"
+      />
       <label class="form-label">No</label>
     </div>
   </div>
@@ -30,7 +32,11 @@
   </div>
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label" [class.required]="form.controls.hasLicense.value === '1'">Country</label>
+      <label
+        class="form-label"
+        [class.required]="form.controls.hasLicense.value === '1'"
+        >Country</label
+      >
       <select class="form-select" formControlName="country">
         <option value="null" selected hidden disabled>Please Choose</option>
         <option *ngFor="let c of countryList" [value]="c.countryNo">
@@ -40,37 +46,47 @@
     </div>
 
     <div class="col-md-6 mb-2">
-      <label class="form-label" [class.required]="form.controls.hasLicense.value === '1'">Issued by</label>
-      <select class="form-select" formControlName="issuedBy">
-        <option selected disabled hidden value="null">Please Choose</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
+      <label
+        class="form-label"
+        [class.required]="form.controls.hasLicense.value === '1'"
+        >Issued by</label
+      >
+      <input type="text" class="form-control" formControlName="issuedBy" />
     </div>
   </div>
   <div class="row">
     <div class="col-md mb-2">
-      <label class="form-label" [class.required]="form.controls.hasLicense.value === '1'">Type of License</label>
-      <select class="form-select" formControlName="licenseType">
-        <option selected disabled hidden value="null">Please Choose</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
+      <label
+        class="form-label"
+        [class.required]="form.controls.hasLicense.value === '1'"
+        >Type of License</label
+      >
+      <input type="text" class="form-control" formControlName="licenseType" />
     </div>
 
     <div class="col-md mb-2">
-      <label class="form-label" [class.required]="form.controls.hasLicense.value === '1'">License Number</label>
+      <label
+        class="form-label"
+        [class.required]="form.controls.hasLicense.value === '1'"
+        >License Number</label
+      >
       <input class="form-control" type="text" formControlName="licenseNo" />
     </div>
     <div class="col-md mb-2">
-      <label class="form-label" [class.required]="form.controls.hasLicense.value === '1'">Date of issue</label>
+      <label
+        class="form-label"
+        [class.required]="form.controls.hasLicense.value === '1'"
+        >Date of issue</label
+      >
       <input class="form-control" type="date" formControlName="issuedDate" />
     </div>
 
     <div class="col-md mb-2">
-      <label class="form-label" [class.required]="form.controls.hasLicense.value === '1'">Valid until</label>
+      <label
+        class="form-label"
+        [class.required]="form.controls.hasLicense.value === '1'"
+        >Valid until</label
+      >
       <input class="form-control" type="date" formControlName="validUntil" />
     </div>
   </div>
