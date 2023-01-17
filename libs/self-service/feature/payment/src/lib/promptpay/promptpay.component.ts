@@ -26,6 +26,7 @@ export class PromptpayComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((res) => {
+      this.pageType = Number(res.get('id'));
       this.reqService.getRequestById(Number(res.get('id'))).subscribe((res) => {
         this.kspRequest = res;
         if (res && res.idcardno) {

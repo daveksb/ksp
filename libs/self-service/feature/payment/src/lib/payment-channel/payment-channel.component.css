@@ -3,20 +3,14 @@
   background-attachment: fixed;
   background-size: 100% 100%;
   background-image: url(/assets/images/BG-Information.png);
+  min-height: 100vh;
 }
 
 .content__container {
   background: #ffffff;
   box-shadow: 0px 0px 15px #e2e2e2;
   border-radius: 20px;
-  padding: 32px 24px;
-}
-
-.header__label {
-  font-size: 20px;
-  color: #000000;
-  text-align: center;
-  margin-bottom: 24px;
+  padding: 24px;
 }
 
 .content__label {
@@ -65,7 +59,7 @@
   background: #edf8ff;
   box-sizing: border-box;
   border-radius: 6px;
-  margin: 24px 0 0 0;
+  margin: 16px 0 0 0;
   height: 66px;
   cursor: pointer;
   align-items: center;
@@ -102,7 +96,7 @@
 
 @media only screen and (max-width: 768px) {
   .container {
-    width: 100%;
+    padding: 0;
   }
 
   .label__box {
@@ -131,15 +125,15 @@
   }
 }
 
+@media only screen and (max-width: 992px) {
+  .title__card {
+    font-size: 16px;
+  }
+}
+
 ::ng-deep #dialogTrasparent {
   box-shadow: none;
   background: transparent;
   overflow: hidden;
   padding: 0;
-}
-
-@media only screen and (max-width: 992px) {
-  .title__card {
-    font-size: 16px;
-  }
 }
