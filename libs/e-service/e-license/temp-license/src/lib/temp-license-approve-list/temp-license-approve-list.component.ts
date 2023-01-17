@@ -77,7 +77,7 @@ export class TempLicenseApproveListComponent implements AfterViewInit {
       this.defaultForm = {
         requesttype: '3',
         process: '5',
-        status: '1',
+        //status: null,
         careertype: params.get('careertype'),
       };
       this.form = this.fb.group({
