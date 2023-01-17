@@ -7,7 +7,12 @@
   <div class="fs-5 text-secondary">{{ data.subTitle }}</div>
 
   <div class="my-4">
-    <button matDialogClose class="btn btn-primary" (click)="loginPage()">
+    <button
+      type="button"
+      matDialogClose
+      class="btn btn-primary w-auto"
+      (click)="loginPage()"
+    >
       {{ data.btnLabel }}
     </button>
   </div>

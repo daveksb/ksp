@@ -51,7 +51,7 @@
             kspRequest.createdate | thaiDate
           }}</span>
         </div>
-        <div *ngIf="pageType === 1 || pageType === 3">
+        <div *ngIf="pageType === 1">
           <button type="button" class="btn btn-sm btn-primary">
             พิมพ์แบบชำระเงิน
           </button>
@@ -62,9 +62,11 @@
         class="d-flex fs-2 justify-content-center justify-content-md-start my-3"
       >
         คิวอาร์โค้ด
-        <span *ngIf="pageType === 1">ชำระผ่านเคาน์เตอร์ เซอร์วิส</span>
-        <span *ngIf="pageType === 2">พร้อมเพย์</span>
-        <span *ngIf="pageType === 3">ธนาคารกรุงไทย</span>
+        <span *ngIf="pageType === 1" class="ms-2"
+          >ชำระผ่านเคาน์เตอร์ เซอร์วิส</span
+        >
+        <span *ngIf="pageType === 2" class="ms-2">พร้อมเพย์</span>
+        <!-- <span *ngIf="pageType === 3">ธนาคารกรุงไทย</span> -->
       </div>
       <div class="row flex-column-reverse flex-md-row">
         <div class="col d-flex flex-column">

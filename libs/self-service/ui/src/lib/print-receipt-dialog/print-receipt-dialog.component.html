@@ -78,11 +78,11 @@
     </tbody>
   </table>
 
-  <!-- barcode area -->
-  <div class="d-flex justify-content-end mt-1">
+  <div class="d-flex justify-content-between mt-1">
     <ngx-barcode
       [bc-value]="data.qrString"
       [bc-display-value]="true"
+      [bc-height]="50"
     ></ngx-barcode>
 
     <qrcode
@@ -97,10 +97,10 @@
       [imageSrc]="'./assets/angular-logo.png'"
       [imageHeight]="20"
       [imageWidth]="20"
-      [margin]="4"
+      [margin]="1"
       [scale]="1"
       [title]="'A custom title attribute'"
-      [width]="120"
+      [width]="100"
     ></qrcode>
   </div>
 </div>

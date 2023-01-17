@@ -91,6 +91,7 @@ export class CourseTypeAComponent
       label: 'แผนฯ ปีที่ ' + year,
       student: [''],
       year: [''],
+      planname: ['']
     });
   }
 

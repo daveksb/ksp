@@ -78,7 +78,7 @@
         <div class="col" *ngIf="!isSchoolUser">
           <label class="form-label">ประเทศ</label>
           <select class="form-select" formControlName="country">
-            <option value="null" selected hidden disabled>Please Select</option>
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
             <option
               *ngFor="let c of countries$ | async"
               [value]="+c?.countryNo"

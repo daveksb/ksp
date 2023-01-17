@@ -16,11 +16,14 @@
       <i class="bi bi-calendar ms-1" (click)="picker.open()" role="button"></i>
       <i class="bi bi-search ms-4" role="button" (click)="search()"></i>
     </div>
-    <div class="header__content">
+    <div class="fs-5 text-center mt-3">ไม่พบข้อมูล</div>
+
+    <!-- <div class="header__content">
       ล่าสุด
       <hr class="line__container" />
-    </div>
-    <div class="content__container">
+    </div> -->
+
+    <!-- <div class="content__container">
       <self-service-payment-history-item
         [name]="'รายการขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ'"
         [date]="'10/02/2022 / 14:00น.'"
@@ -33,52 +36,6 @@
         [amount]="'500 บาท'"
         [order]="'6304255'"
       ></self-service-payment-history-item>
-    </div>
-  </div>
-  <div *ngIf="!searchFound">
-    <div class="header__content">
-      05/02/2022
-      <hr class="line__container" />
-    </div>
-    <div class="content__container">
-      <self-service-payment-history-item
-        [name]="'รายการขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ'"
-        [date]="'05/02/2022 / 14:00น.'"
-        [amount]="'500 บาท'"
-        [order]="'6304255'"
-      ></self-service-payment-history-item>
-    </div>
-  </div>
-  <div *ngIf="!searchFound">
-    <div class="header__content">
-      01/01/2022
-      <hr class="line__container" />
-    </div>
-    <div class="content__container">
-      <self-service-payment-history-item
-        [name]="'รายการขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ'"
-        [date]="'01/01/2022 / 14:00น.'"
-        [amount]="'500 บาท'"
-        [order]="'6304255'"
-      ></self-service-payment-history-item>
-      <self-service-payment-history-item
-        [name]="'รายการขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ'"
-        [date]="'01/01/2022 / 14:00น.'"
-        [amount]="'500 บาท'"
-        [order]="'6304255'"
-      ></self-service-payment-history-item>
-      <self-service-payment-history-item
-        [name]="'รายการขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ'"
-        [date]="'01/01/2022 / 14:00น.'"
-        [amount]="'500 บาท'"
-        [order]="'6304255'"
-      ></self-service-payment-history-item>
-      <self-service-payment-history-item
-        [name]="'รายการขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ'"
-        [date]="'01/01/2022 / 14:00น.'"
-        [amount]="'500 บาท'"
-        [order]="'6304255'"
-      ></self-service-payment-history-item>
-    </div>
+    </div> -->
   </div>
 </div>
