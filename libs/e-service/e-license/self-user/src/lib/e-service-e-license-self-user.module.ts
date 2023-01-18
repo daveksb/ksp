@@ -25,6 +25,7 @@ import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NewForeignUserListComponent } from './new-foreign-user-list/new-foreign-user-list.component';
 import { NewForeignUserDetailComponent } from './new-foreign-user-detail/new-foreign-user-detail.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export const routes: Routes = [
   {
@@ -82,6 +83,7 @@ export const routes: Routes = [
     ThaiDatePipe,
     MatDatepickerModule,
     RequestNoPipe,
+    MatProgressSpinnerModule,
   ],
   declarations: [
     SelfUserListComponent,

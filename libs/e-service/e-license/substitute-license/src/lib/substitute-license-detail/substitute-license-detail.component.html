@@ -90,20 +90,30 @@
         </mat-tab>
       </mat-tab-group>
     </div>
-
     <ng-container
-      formArrayName="checkResult"
-      *ngFor="let c of checkResultFormArray.controls; let i = index"
+      *ngIf="
+        !(
+          (requestData.process === '4' && requestData.status === '0') ||
+          (requestData.process === '4' && requestData.status === '3') ||
+          (requestData.process === '4' && requestData.status === '4') ||
+          (requestData.process === '4' && requestData.status === '5')
+        )
+      "
     >
-      <div
-        class="bg-white px-3 py-2 mt-3"
-        [ngClass]="{ hide: (selectedTab.index || 0) !== i }"
+      <ng-container
+        formArrayName="checkResult"
+        *ngFor="let c of checkResultFormArray.controls; let i = index"
       >
-        <e-service-license-check
-          [choices]="verifyChoice"
-          [formControlName]="i"
-        ></e-service-license-check>
-      </div>
+        <div
+          class="bg-white px-3 py-2 mt-3"
+          [ngClass]="{ hide: (selectedTab.index || 0) !== i }"
+        >
+          <e-service-license-check
+            [choices]="verifyChoice"
+            [formControlName]="i"
+          ></e-service-license-check>
+        </div>
+      </ng-container>
     </ng-container>
   </div>
 </form>

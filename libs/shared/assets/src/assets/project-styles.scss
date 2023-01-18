@@ -176,6 +176,10 @@ input[type='radio'] {
   border-radius: 0.25rem;
 }
 
+.form-check-input:disabled[type='radio'] {
+  background-color: #e9ecef;
+}
+
 .form-check-input:checked:disabled[type='radio'] {
   background-color: gray;
 }

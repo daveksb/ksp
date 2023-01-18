@@ -9,9 +9,10 @@ import {
   EducationDetailService,
   ERequestService,
   GeneralInfoService,
+  LoaderService,
 } from '@ksp/shared/service';
 import { parseJson } from '@ksp/shared/utility';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'ksp-renew-license-detail',

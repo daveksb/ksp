@@ -395,11 +395,11 @@ export const standardMenu: MenuConfig[] = [
         label: 'รายการแบบคำขอรับรองความรู้',
       },
       {
-        path: '/knowledge-cert/roster-list',
+        path: '/xxx',
         label: 'บัญชีรายชื่อและพิมพ์หนังสือรับรองความรู้',
       },
       {
-        path: '/knowledge-cert/consider-list',
+        path: '/xxx',
         label: 'พิจารณารับรองรับรองความรู้',
       },
     ],

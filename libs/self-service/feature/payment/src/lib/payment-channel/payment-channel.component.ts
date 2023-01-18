@@ -52,13 +52,13 @@ export class PaymentChannelComponent implements OnInit {
     });
 
     dialog.componentInstance.completed.subscribe(() => {
-      this.location.back();
+      this.back();
     });
   }
 
-  /* cancel() {
-    this.location.back();
-  } */
+  back() {
+    this.router.navigate(['/home']);
+  }
 
   promptpay(type: any) {
     this.router.navigate(['/license', 'payment-promptpay', type]);
