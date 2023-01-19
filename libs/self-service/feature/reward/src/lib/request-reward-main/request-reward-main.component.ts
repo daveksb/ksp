@@ -171,6 +171,7 @@ export class RequestRewardMainComponent implements OnInit {
       rewardresearchhistory,
       fileinfo,
       careertype,
+      idcardno,
       ...resData
     } = data;
     const rewardType = +(requesttype || 0);
@@ -194,6 +195,7 @@ export class RequestRewardMainComponent implements OnInit {
       contactphone,
       workphone,
       email,
+      idcardno,
     };
     this.addressInfo = parseJson(addressinfo);
     this.workplaceInfo = parseJson(schooladdrinfo);

@@ -61,13 +61,15 @@ export class CouncilWorkingComponent
       position: [null, Validators.required],
       academicStanding: [null, Validators.required],
       status: [null, Validators.required],
-      startYear: [null, Validators.required],
+      // startYear: [null, Validators.required],
       salary: [null, Validators.required],
-      assignment: [null, Validators.required],
-      study: [null, Validators.required],
+      // assignment: [null, Validators.required],
+      // study: [null, Validators.required],
       qualification: [null, Validators.required],
-      creativity: [null, Validators.required],
+      // creativity: [null, Validators.required],
       achievement: [null, Validators.required],
+      startDate: [null, Validators.required],
+      endDate: [null, Validators.required],
     });
     form.push(data);
   }
