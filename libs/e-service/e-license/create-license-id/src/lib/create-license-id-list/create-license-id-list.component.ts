@@ -6,7 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { selfOccupyList } from '@ksp/shared/constant';
-import { SelfApproveList } from '@ksp/shared/interface';
+import { SelfApproveList, SelfApproveListSearch } from '@ksp/shared/interface';
 import { ERequestService, LoaderService } from '@ksp/shared/service';
 import { formatDatePayload } from '@ksp/shared/utility';
 import localForage from 'localforage';
@@ -48,7 +48,7 @@ export class CreateLicenseIdListComponent implements AfterViewInit {
 
   search() {
     const form: any = this.form.value;
-    const payload = formatDatePayload({
+    const payload: SelfApproveListSearch = formatDatePayload({
       groupno: form.groupno,
       process: 7, //พิจารณาและรับรองคณะกรรมการ กมว.
       status: 2, //ผ่านการพิจารณา

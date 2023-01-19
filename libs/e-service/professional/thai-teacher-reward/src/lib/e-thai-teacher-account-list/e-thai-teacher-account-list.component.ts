@@ -1,9 +1,10 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SelfServiceRequestSubType } from '@ksp/shared/constant';
+import { SelfApproveListSearch } from '@ksp/shared/interface';
 import { ERequestService, LoaderService } from '@ksp/shared/service';
 import { Subject } from 'rxjs';
 
@@ -12,7 +13,7 @@ import { Subject } from 'rxjs';
   templateUrl: './e-thai-teacher-account-list.component.html',
   styleUrls: ['./e-thai-teacher-account-list.component.scss'],
 })
-export class EThaiTeacherAccountListComponent implements OnInit, AfterViewInit {
+export class EThaiTeacherAccountListComponent implements AfterViewInit {
   isLoading: Subject<boolean> = this.loaderService.isLoading;
   SelfServiceRequestSubType = SelfServiceRequestSubType;
   displayedColumns = [
@@ -37,20 +38,17 @@ export class EThaiTeacherAccountListComponent implements OnInit, AfterViewInit {
     private loaderService: LoaderService
   ) {}
 
-  ngOnInit(): void {}
-
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
 
   onSelect(element: any) {
     element.select = !element.select;
-
     const selectedData = this.dataSource.data.filter((item) => item.select);
   }
 
   searchData(params: any) {
-    const payload = {
+    const payload: SelfApproveListSearch = {
       groupno: params.groupno,
       process: params.process,
       status: params.status,
