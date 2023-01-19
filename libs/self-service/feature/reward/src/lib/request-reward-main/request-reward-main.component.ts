@@ -63,6 +63,7 @@ export class RequestRewardMainComponent implements OnInit {
   form = this.fb.group({
     rewardType: [0],
     rewardDetail: [],
+    careerType: ['0'],
   });
 
   prefixList$!: Observable<any>;
@@ -169,6 +170,7 @@ export class RequestRewardMainComponent implements OnInit {
       rewardresearchinfo,
       rewardresearchhistory,
       fileinfo,
+      careertype,
       ...resData
     } = data;
     const rewardType = +(requesttype || 0);
@@ -211,6 +213,7 @@ export class RequestRewardMainComponent implements OnInit {
           rewardSuccessInfo,
           rewardDetailInfo,
         });
+        this.form.controls.careerType.patchValue(careertype);
         break;
       }
       case 41: {
@@ -384,7 +387,9 @@ export class RequestRewardMainComponent implements OnInit {
     const self = new SelfRequest(
       '1',
       `${this.form.value.rewardType}`,
-      `${SelfServiceRequestSubType.อื่นๆ}`,
+      `${this.form.value.rewardType}` === '40'
+        ? this.form.value.careerType || '0'
+        : `${SelfServiceRequestSubType.อื่นๆ}`,
       currentProcess
     );
     const allowKey = Object.keys(self);
