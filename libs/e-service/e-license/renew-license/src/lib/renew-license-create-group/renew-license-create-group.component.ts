@@ -155,6 +155,7 @@ export class RenewLicenseCreateGroupComponent implements OnInit, AfterViewInit {
           listno: this.listNo.toString(),
           process: '5',
           careertype: this.maxCareerType.licenseType,
+          requesttype: '2', // ใบคำขอต่ออายุ
           isforeign: '0',
           status: '1',
           forwardtolicensecreate: this.form.controls.createNumber.value

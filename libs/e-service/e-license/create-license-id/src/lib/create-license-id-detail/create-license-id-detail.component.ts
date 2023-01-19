@@ -29,7 +29,6 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { qualificationCareerTypeList } from '@ksp/shared/constant';
-import { template } from 'lodash';
 
 @Component({
   selector: 'ksp-create-license-id-detail',

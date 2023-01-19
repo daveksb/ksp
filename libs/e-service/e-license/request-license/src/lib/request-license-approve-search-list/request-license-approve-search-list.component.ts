@@ -7,6 +7,7 @@ import {
   SelfRequestProcess,
   SelfServiceRequestSubType,
 } from '@ksp/shared/constant';
+import { SelfApproveListSearch } from '@ksp/shared/interface';
 import { ERequestService, LoaderService } from '@ksp/shared/service';
 import { Subject } from 'rxjs';
 
@@ -94,7 +95,7 @@ export class RequestLicenseApproveSearchListComponent
   searchData(params: any) {
     this.canPrint = false;
     this.canSave = false;
-    const payload = {
+    const payload: SelfApproveListSearch = {
       groupno: params.groupno,
       process: params.process || '6', // แสดงเฉพาะใบที่ผ่านคณะอนุกรรมการ
       status: params.status,
