@@ -63,7 +63,7 @@ export class EditLicenseApproveListComponent implements AfterViewInit {
     let payload: EsSearchPayload = {
       systemtype: '1',
       requesttype:
-        SelfServiceRequestType['ขอเปลี่ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ'],
+        SelfServiceRequestType['ขอเปลี่ยนแปลง/แก้ไขหนังสืออนุญาตประกอบวิชาชีพ'],
       requestno: params.requestno,
       careertype: params.careertype,
       name: null,

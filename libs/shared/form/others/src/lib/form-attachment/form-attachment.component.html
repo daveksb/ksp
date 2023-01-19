@@ -1,5 +1,5 @@
 <div class="bg-light px-3 pb-3 pt-3">
-  <div class="fs-5 text-black " [class]="titleClass">
+  <div class="fs-5 text-black" [class]="titleClass">
     {{ title }} <span class="text-danger fs-6">{{ titleNote }}</span>
   </div>
   <div class="table-responsive">
@@ -7,7 +7,6 @@
       <thead>
         <tr class="fs-6">
           <th class="ps-3 py-2">รายการเอกสาร</th>
-          <th class="text-center">จำนวนหน้า</th>
           <th *ngIf="mode === 'view'" class="text-center">ตรวจสอบ</th>
           <th *ngIf="mode === 'edit'" class="text-center">อัพโหลด</th>
           <th></th>
@@ -38,7 +37,6 @@
                 </div> -->
               </div>
             </th>
-            <td class="text-center">-</td>
             <td *ngIf="mode === 'view'" class="text-center">
               <label class="view__label" (click)="view()">ดูเอกสารแนบ</label>
             </td>

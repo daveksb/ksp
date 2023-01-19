@@ -77,7 +77,7 @@ export class TempLicenseApproveListComponent implements AfterViewInit {
       this.defaultForm = {
         requesttype: '3',
         process: '5',
-        status: '1',
+        //status: null,
         careertype: params.get('careertype'),
       };
       this.form = this.fb.group({
@@ -343,9 +343,9 @@ export class TempLicenseApproveListComponent implements AfterViewInit {
     }
     if (schReason[2] === true) {
       if (request.careertype === '2') {
-        label3 = 'ขาดแคลนผู้บริหารสถานศึกษาที่มีใบอนุญาตประกอบวิชาชีพ ';
+        label3 = 'ขาดแคลนผู้บริหารสถานศึกษาที่มีหนังสืออนุญาตประกอบวิชาชีพ ';
       } else {
-        label3 = 'ขาดแคลนครูผู้สอนที่มีใบอนุญาตประกอบวิชาชีพ ';
+        label3 = 'ขาดแคลนครูผู้สอนที่มีหนังสืออนุญาตประกอบวิชาชีพ ';
       }
     }
     if (schReason[3] === true) {

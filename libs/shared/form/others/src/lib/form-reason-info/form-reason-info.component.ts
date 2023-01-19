@@ -99,7 +99,7 @@ export const schoolReasonsList = [
     value: false,
   },
   {
-    label: 'ขาดแคลนครูผู้สอนที่มีใบอนุญาตประกอบวิชาชีพ',
+    label: 'ขาดแคลนครูผู้สอนที่มีหนังสืออนุญาตประกอบวิชาชีพ',
     name: 'school3',
     value: false,
   },
@@ -124,7 +124,7 @@ export const schoolReasonsList2 = [
     value: false,
   },
   {
-    label: 'ขาดแคลนผู้บริหารสถานศึกษาที่มีใบอนุญาตประกอบวิชาชีพ',
+    label: 'ขาดแคลนผู้บริหารสถานศึกษาที่มีหนังสืออนุญาตประกอบวิชาชีพ',
     name: 'school3',
     value: false,
   },

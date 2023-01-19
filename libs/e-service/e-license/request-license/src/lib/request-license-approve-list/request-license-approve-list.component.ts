@@ -63,13 +63,14 @@ export class RequestLicenseApproveListComponent implements AfterViewInit {
     let payload: EsSearchPayload = {
       systemtype: null,
       provinceid: params.province,
-      requesttype: SelfServiceRequestType.ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ,
+      requesttype:
+        SelfServiceRequestType.ขอขึ้นทะเบียนหนังสืออนุญาตประกอบวิชาชีพ,
       requestno: params.requestno,
       careertype: params.careertype,
       name: null,
       idcardno: params.idcardno,
       passportno: null,
-      process: params.process,
+      process: params.process || '2',
       status: params.status,
       schoolid: null,
       schoolname: null,

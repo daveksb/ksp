@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-6 mb-2">
       <label class="form-label required"
-        >ใบอนุญาตประกอบวิชาชีพครูจากต่างประเทศ</label
+        >หนังสืออนุญาตประกอบวิชาชีพครูจากต่างประเทศ</label
       >
       <input
         class="form-control"
@@ -23,7 +23,7 @@
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label required">ประเภทของใบอนุญาต</label>
+      <label class="form-label required">ประเภทของหนังสืออนุญาต</label>
       <select class="form-select" formControlName="licenseType">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option *ngFor="let l of licenses" [value]="l?.id">
@@ -32,14 +32,14 @@
       </select>
     </div>
     <div class="col-md-6 mb-2">
-      <label class="form-label required">เลขที่ใบอนุญาต</label>
+      <label class="form-label required">เลขที่หนังสืออนุญาต</label>
       <input class="form-control" type="text" formControlName="licenseNumber" />
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label required">วันเดือนปีที่ออกใบอนุญาต</label>
+      <label class="form-label required">วันเดือนปีที่ออกหนังสืออนุญาต</label>
       <div class="d-flex align-items-center">
         <input
           matInput
@@ -58,7 +58,9 @@
       </div>
     </div>
     <div class="col-md-6 mb-2">
-      <label class="form-label required">วันเดือนปีที่ใบอนุญาตหมดอายุ</label>
+      <label class="form-label required"
+        >วันเดือนปีที่หนังสืออนุญาตหมดอายุ</label
+      >
       <div class="d-flex align-items-center">
         <input
           matInput

@@ -84,7 +84,7 @@
         <label class="form-label">แนบเอกสาร</label>
         <div class="d-flex">
           <ksp-file-upload
-            [mode]="mode"
+            [mode]="disabled ? 'view' : 'edit'"
             [uploadType]="'link'"
             [showDeleteFile]="true"
             [buttonLabel]="'อัพโหลดเอกสาร'"
@@ -94,8 +94,8 @@
       </div>
     </div>
 
-    <div class="row mb-2">
-      <div class="col mb-3">
+    <div class="row mb-3">
+      <div class="col">
         <label class="form-label">รายละเอียด </label>
         <textarea
           class="form-control"
@@ -107,7 +107,7 @@
       </div>
     </div>
 
-    <div class="d-flex justify-content-center mb-2 mt-3">
+    <div class="d-flex justify-content-center mt-3 mb-2">
       <button
         (click)="cancel.emit(true)"
         type="button"

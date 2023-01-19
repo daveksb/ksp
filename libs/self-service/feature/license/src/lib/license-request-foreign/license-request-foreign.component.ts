@@ -290,7 +290,7 @@ export class LicenseRequestForeignComponent implements OnInit {
       SelfServiceRequestSubType.ครู;
     const self = new SelfRequest(
       '1',
-      SelfServiceRequestType.ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ,
+      SelfServiceRequestType.ขอขึ้นทะเบียนหนังสืออนุญาตประกอบวิชาชีพ,
       `${type}`,
       currentProcess
     );

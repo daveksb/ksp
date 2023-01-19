@@ -64,13 +64,13 @@ export class RenewLicenseListComponent implements AfterViewInit {
 
     let payload: EsSearchPayload = {
       systemtype: '1',
-      requesttype: SelfServiceRequestType.ขอต่ออายุใบอนุญาตประกอบวิชาชีพ,
+      requesttype: SelfServiceRequestType.ขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ,
       requestno: params.requestno,
       careertype: params.careertype,
       name: null,
       idcardno: params.idcardno,
       passportno: null,
-      process: params.process,
+      process: params.process || '2',
       status: params.status,
       schoolid: null,
       schoolname: null,

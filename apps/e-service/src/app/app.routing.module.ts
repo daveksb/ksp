@@ -20,7 +20,7 @@ const routes: EthicsCustomRoute[] = [
     path: 'request-license',
     data: {
       menuConfig: eLicenseMenu,
-      headerLabel: 'ระบบใบอนุญาตประกอบวิชาชีพทางการศึกษา ',
+      headerLabel: 'ระบบหนังสืออนุญาตประกอบวิชาชีพทางการศึกษา ',
     },
     loadChildren: () =>
       import('@ksp/e-service/e-license/request-license').then(
@@ -32,7 +32,7 @@ const routes: EthicsCustomRoute[] = [
     path: 'request-foreign-license',
     data: {
       menuConfig: eLicenseMenu,
-      headerLabel: 'ระบบใบอนุญาตประกอบวิชาชีพทางการศึกษา ',
+      headerLabel: 'ระบบหนังสืออนุญาตประกอบวิชาชีพทางการศึกษา ',
     },
     loadChildren: () =>
       import('@ksp/e-service/e-license/request-foreign-license').then(
@@ -44,7 +44,7 @@ const routes: EthicsCustomRoute[] = [
     path: 'renew-license',
     data: {
       menuConfig: eLicenseMenu,
-      headerLabel: 'ระบบใบอนุญาตประกอบวิชาชีพทางการศึกษา ',
+      headerLabel: 'ระบบหนังสืออนุญาตประกอบวิชาชีพทางการศึกษา ',
     },
     loadChildren: () =>
       import('@ksp/e-service/e-license/renew-license').then(
@@ -56,7 +56,7 @@ const routes: EthicsCustomRoute[] = [
     path: 'renew-foreign-license',
     data: {
       menuConfig: eLicenseMenu,
-      headerLabel: 'ระบบใบอนุญาตประกอบวิชาชีพทางการศึกษา ',
+      headerLabel: 'ระบบหนังสืออนุญาตประกอบวิชาชีพทางการศึกษา ',
     },
     loadChildren: () =>
       import('@ksp/e-service/e-license/renew-foreign-license').then(
@@ -68,7 +68,7 @@ const routes: EthicsCustomRoute[] = [
     path: 'edit-license',
     data: {
       menuConfig: eLicenseMenu,
-      headerLabel: 'ระบบใบอนุญาตประกอบวิชาชีพทางการศึกษา ',
+      headerLabel: 'ระบบหนังสืออนุญาตประกอบวิชาชีพทางการศึกษา ',
     },
     loadChildren: () =>
       import('@ksp/e-service/e-license/edit-license').then(
@@ -80,7 +80,7 @@ const routes: EthicsCustomRoute[] = [
     path: 'document-delivery',
     data: {
       menuConfig: eLicenseMenu,
-      headerLabel: 'ระบบใบอนุญาตประกอบวิชาชีพทางการศึกษา',
+      headerLabel: 'ระบบหนังสืออนุญาตประกอบวิชาชีพทางการศึกษา',
     },
     loadChildren: () =>
       import('@ksp/e-service/e-license/document-delivery').then(
@@ -92,7 +92,7 @@ const routes: EthicsCustomRoute[] = [
     path: 'sub-license',
     data: {
       menuConfig: eLicenseMenu,
-      headerLabel: 'ระบบใบอนุญาตประกอบวิชาชีพทางการศึกษา',
+      headerLabel: 'ระบบหนังสืออนุญาตประกอบวิชาชีพทางการศึกษา',
     },
     loadChildren: () =>
       import('@ksp/e-service/e-license/substitute-license').then(
@@ -104,7 +104,7 @@ const routes: EthicsCustomRoute[] = [
     path: 'temp-license',
     data: {
       menuConfig: eLicenseMenu,
-      headerLabel: 'ระบบใบอนุญาตประกอบวิชาชีพทางการศึกษา',
+      headerLabel: 'ระบบหนังสืออนุญาตประกอบวิชาชีพทางการศึกษา',
     },
     loadChildren: () =>
       import('@ksp/e-service/e-license/temp-license').then(
@@ -116,7 +116,7 @@ const routes: EthicsCustomRoute[] = [
     path: 'foreign-license',
     data: {
       menuConfig: eLicenseMenu,
-      headerLabel: 'ระบบใบอนุญาตประกอบวิชาชีพทางการศึกษา',
+      headerLabel: 'ระบบหนังสืออนุญาตประกอบวิชาชีพทางการศึกษา',
     },
     loadChildren: () =>
       import('@ksp/e-service/e-license/foreign-license').then(
@@ -128,7 +128,7 @@ const routes: EthicsCustomRoute[] = [
     path: 'school',
     data: {
       menuConfig: eLicenseMenu,
-      headerLabel: 'ระบบใบอนุญาตประกอบวิชาชีพทางการศึกษา',
+      headerLabel: 'ระบบหนังสืออนุญาตประกอบวิชาชีพทางการศึกษา',
     },
     loadChildren: () =>
       import('@ksp/e-service/e-license/school-user').then(
@@ -140,7 +140,7 @@ const routes: EthicsCustomRoute[] = [
     path: 'self-user',
     data: {
       menuConfig: eLicenseMenu,
-      headerLabel: 'ระบบใบอนุญาตประกอบวิชาชีพทางการศึกษา',
+      headerLabel: 'ระบบหนังสืออนุญาตประกอบวิชาชีพทางการศึกษา',
     },
     loadChildren: () =>
       import('@ksp/e-service/e-license/self-user').then(
@@ -152,7 +152,7 @@ const routes: EthicsCustomRoute[] = [
     path: 'create-license-id',
     data: {
       menuConfig: eLicenseMenu,
-      headerLabel: 'ระบบใบอนุญาตประกอบวิชาชีพทางการศึกษา',
+      headerLabel: 'ระบบหนังสืออนุญาตประกอบวิชาชีพทางการศึกษา',
     },
     loadChildren: () =>
       import('@ksp/e-service/e-license/create-license-id').then(

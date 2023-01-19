@@ -18,6 +18,7 @@ import {
   SelfApproveGroup,
   SchTempLicense,
   SelfLicense,
+  SelfApproveListSearch,
 } from '@ksp/shared/interface';
 import { getCookie } from '@ksp/shared/utility';
 import { map, Observable, shareReplay } from 'rxjs';
@@ -95,7 +96,9 @@ export class ERequestService {
     );
   }
 
-  searchSelfApproveList(payload: any): Observable<SelfApproveList[]> {
+  searchSelfApproveList(
+    payload: SelfApproveListSearch
+  ): Observable<SelfApproveList[]> {
     return this.http
       .post(`${environment.shortApiUrl}/selfapprovelistsearch.php`, payload)
       .pipe(map((data: any) => data.datareturn));

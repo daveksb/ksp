@@ -1,7 +1,7 @@
 <ksp-top-nav>
   <span header>ยื่นแบบคำขอ</span>
   <span subHeader
-    >ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ ({{
+    >ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีหนังสืออนุญาตประกอบวิชาชีพ ({{
       requestLabel
     }})
   </span>
@@ -10,8 +10,8 @@
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 px-4 py-2 full-width-2">
     <div class="box-header">
-      รายละเอียดแบบคำขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาตประกอบวิชาชีพ
-      ({{ subRequestLabel }})
+      รายละเอียดแบบคำขอหนังสืออนุญาตประกอบวิชาชีพ
+      โดยไม่มีหนังสืออนุญาตประกอบวิชาชีพ ({{ subRequestLabel }})
     </div>
 
     <div class="bg-white px-4 py-2">
@@ -37,7 +37,6 @@
       <mat-tab-group
         class="tab-group mb-3"
         animationDuration="0ms"
-        dynamicHeight="true"
         (selectedIndexChange)="selectedTabIndex = $event"
         [selectedIndex]="selectedTabIndex"
         selectedIndex="0"
@@ -232,7 +231,7 @@
               <div class="d-flex align-items-center mt-2">
                 <input type="checkbox" class="me-2" disabled />
                 <label class="box-header"
-                  >ใบอนุญาตประกอบวิชาชีพครูจากต่างประเทศ
+                  >หนังสืออนุญาตประกอบวิชาชีพครูจากต่างประเทศ
                 </label>
               </div>
               <ng-container *ngIf="eduSelected">

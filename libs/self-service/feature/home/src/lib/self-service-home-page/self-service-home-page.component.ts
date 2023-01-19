@@ -19,7 +19,6 @@ import {
   SelfRequestService,
 } from '@ksp/shared/service';
 import {
-  formatDatePayload,
   getCookie,
   hasRejectedRequest,
   replaceEmptyWithNull,
@@ -37,7 +36,7 @@ import { Subject } from 'rxjs';
 })
 export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
   /*   badgeTitle = [
-    `เลขที่แบบคำขอ : SF_010641000123 รายการขอขึ้นทะเบียนใบอนุญาต ถูกส่งคืน
+    `เลขที่แบบคำขอ : SF_010641000123 รายการขอขึ้นทะเบียนหนังสืออนุญาต ถูกส่งคืน
   “ปรับแก้ไข / เพิ่มเติม” กดเพื่อตรวจสอบ`,
   ]; */
   @ViewChild(MatSort) sort!: MatSort;
@@ -105,6 +104,7 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
       }
 
       if (res && res.length) {
+        //console.log('res xx = ', res);
         this.searchNotFound = false;
         this.dataSource.data = res.filter((item) => item.process !== '0');
         this.dataSource.sort = this.sort;
@@ -128,7 +128,7 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
     const subType = Number(input.careertype);
     const isForeign = Number(input.isforeign);
     const id = Number(input.id);
-    console.log('subType ', subType);
+    //console.log('subType ', subType);
 
     if (requestType >= 40) {
       this.reward(id);
@@ -321,7 +321,7 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
     ]);
   }
 
-  //ขอเปลี่ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ
+  //ขอเปลี่ยนแปลง/แก้ไขหนังสืออนุญาตประกอบวิชาชีพ
   licenseEdit(id?: number) {
     this.router.navigate(['/license', 'edit', ...(id ? [`${id}`] : [])]);
   }
@@ -354,7 +354,7 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
     this.router.navigate(['/refund-fee', 'request', ...(id ? [`${id}`] : [])]);
   }
 
-  //ขอใบแทนใบอนุญาตประกอบวิชาชีพ
+  //ขอใบแทนหนังสืออนุญาตประกอบวิชาชีพ
   substituteLicense(id?: number) {
     this.router.navigate([
       '/substitute-license',

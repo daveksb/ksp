@@ -172,7 +172,7 @@ export class RenewLicenseRequestComponent
   createRequest(forbidden: any, currentProcess: number) {
     const self = new SelfRequest(
       '1',
-      SelfServiceRequestType.ขอต่ออายุใบอนุญาตประกอบวิชาชีพ,
+      SelfServiceRequestType.ขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ,
       `${SelfServiceRequestSubType.ครู}`,
       currentProcess
     );

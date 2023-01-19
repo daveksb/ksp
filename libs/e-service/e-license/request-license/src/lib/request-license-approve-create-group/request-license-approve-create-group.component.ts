@@ -157,6 +157,7 @@ export class RequestLicenseApproveCreateGroupComponent
           listno: this.listNo.toString(),
           process: '5',
           careertype: this.maxCareerType.licenseType,
+          requesttype: '1', // ใบคำขออนุญาต
           isforeign: '0',
           status: '1',
           forwardtolicensecreate: this.form.controls.createNumber.value

@@ -31,9 +31,9 @@ import localForage from 'localforage';
 import { Subject } from 'rxjs';
 
 const OBJECTIVE_FILES: FileGroup[] = [
-  { name: '1. ใบอนุญาตประกอบวิชาชีพที่ชํารุด', files: [] },
+  { name: '1. หนังสืออนุญาตประกอบวิชาชีพที่ชํารุด', files: [] },
   {
-    name: '2. หลักฐานการรับแจ้งความของพนักงานสอบสวน หรือบันทึกถ้อยคํา กรณีใบอนุญาตสูญหาย',
+    name: '2. หลักฐานการรับแจ้งความของพนักงานสอบสวน หรือบันทึกถ้อยคํา กรณีหนังสืออนุญาตสูญหาย',
     files: [],
   },
 ];
@@ -142,7 +142,7 @@ export class SubstituteLicenseDetailComponent
 
     const self = new SelfRequest(
       '1',
-      SelfServiceRequestType.ขอใบแทนใบอนุญาตประกอบวิชาชีพ,
+      SelfServiceRequestType.ขอใบแทนหนังสืออนุญาตประกอบวิชาชีพ,
       `${SelfServiceRequestSubType.อื่นๆ}`,
       currentProcess
     );

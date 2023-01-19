@@ -49,7 +49,7 @@ const getMenu = (userType: string | null) => {
       subMenuName: 'request',
       subMenu: [
         {
-          label: 'ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ',
+          label: 'ขอขึ้นทะเบียนหนังสืออนุญาตประกอบวิชาชีพ',
           path: '',
           subMenuName: 'registerLicense',
           subMenu: [
@@ -104,7 +104,7 @@ const getMenu = (userType: string | null) => {
           ],
         },
         {
-          label: 'ขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
+          label: 'ขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ',
           path: '/renew-license/request',
           subMenuName: 'renewLicense',
           subMenu: [
@@ -159,11 +159,11 @@ const getMenu = (userType: string | null) => {
           ],
         },
         {
-          label: 'ขอเปลี่ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ',
+          label: 'ขอเปลี่ยนแปลง/แก้ไขหนังสืออนุญาตประกอบวิชาชีพ',
           path: '/license/edit',
         },
         {
-          label: 'ขอใบแทนใบอนุญาตประกอบวิชาชีพ',
+          label: 'ขอใบแทนหนังสืออนุญาตประกอบวิชาชีพ',
           path: '/substitute-license/request',
         },
         {
@@ -186,7 +186,7 @@ const getMenu = (userType: string | null) => {
     },
     {
       icon: 'assets/images/icon-sidenav/card.svg',
-      label: 'ใบอนุญาตประกอบวิชาชีพ',
+      label: 'หนังสืออนุญาตประกอบวิชาชีพ',
       path: '/license/*',
     },
     {
@@ -252,7 +252,7 @@ export const menu: MenuConfig[] = [
     subMenuName: 'request',
     subMenu: [
       {
-        label: 'ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ',
+        label: 'ขอขึ้นทะเบียนหนังสืออนุญาตประกอบวิชาชีพ',
         path: '',
         subMenuName: 'registerLicense',
         subMenu: [
@@ -299,7 +299,7 @@ export const menu: MenuConfig[] = [
         ],
       },
       {
-        label: 'ขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
+        label: 'ขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ',
         path: '/renew-license/request',
         subMenuName: 'renewLicense',
         subMenu: [
@@ -346,11 +346,11 @@ export const menu: MenuConfig[] = [
         ],
       },
       {
-        label: 'ขอเปลี่ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ',
+        label: 'ขอเปลี่ยนแปลง/แก้ไขหนังสืออนุญาตประกอบวิชาชีพ',
         path: '/license/edit',
       },
       {
-        label: 'ขอใบแทนใบอนุญาตประกอบวิชาชีพ',
+        label: 'ขอใบแทนหนังสืออนุญาตประกอบวิชาชีพ',
         path: '/substitute-license/request',
       },
       {
@@ -373,7 +373,7 @@ export const menu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'ใบอนุญาตประกอบวิชาชีพ',
+    label: 'หนังสืออนุญาตประกอบวิชาชีพ',
     path: '/license/*',
   },
   {

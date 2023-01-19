@@ -2,6 +2,7 @@ export class SelfApproveList {
   id: string | null = null;
   approvedate: string | null = null;
   careertype: string | null = null;
+  requesttype: string | null = null; // add 18-1-2023
   considerdate: string | null = null;
   createdate: string | null = null;
   forwardtolicensecreate: string | null = null;
@@ -14,6 +15,20 @@ export class SelfApproveList {
   requestlist: string | null = null;
   status: string | null = null;
   userid: string | null = null;
+}
+
+export class SelfApproveListSearch {
+  groupno: string | null = null;
+  createdate: string | null = null;
+  process: string | null = null;
+  status: string | null = null;
+  careertype: string | null = null;
+  requesttype: string | null = null;
+  isforeign?: string | null = null;
+  approvedatefrom?: string | null = null;
+  approvedateto?: string | null = null;
+  offset: string | null = null;
+  row: string | null = null;
 }
 
 export class SelfApproveGroup {

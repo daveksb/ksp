@@ -73,7 +73,7 @@ export class RenewLicenseForeignListComponent implements AfterViewInit {
   search(params: any) {
     let payload: EsSearchPayload = {
       systemtype: '1',
-      requesttype: SelfServiceRequestType.ขอต่ออายุใบอนุญาตประกอบวิชาชีพ,
+      requesttype: SelfServiceRequestType.ขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ,
       requestno: params.requestno,
       careertype: params.careertype,
       name: null,

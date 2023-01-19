@@ -18,7 +18,7 @@ import {
   GeneralInfoService,
   MyInfoService,
 } from '@ksp/shared/service';
-import { getCookie, jsonParse } from '@ksp/shared/utility';
+import { formatDatePayload, getCookie, jsonParse } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -101,25 +101,28 @@ export class NewForeignUserDetailComponent implements OnInit {
 
   loadRequestFromId(id: number) {
     this.eRequestService.getKspRequestById(id).subscribe((res) => {
+      console.log('this.userData = ', res);
+      this.userData = res;
       this.kspRequest = res;
       //console.log('request data1 = ', res);
-
-      /* if (res.birthdate) {
-        this.kspRequest.birthdate = res.birthdate.split('T')[0];
-      }
-
-      if (res.passportstartdate) {
-        this.kspRequest.passportstartdate = res.passportstartdate.split('T')[0];
-      }
-
-      if (res.passportenddate) {
-        this.kspRequest.passportenddate = res.passportenddate.split('T')[0];
-      } */
-
-      this.form.patchValue(<any>this.kspRequest);
-
-      this.userData = res;
+      this.patchData(this.kspRequest);
     });
+  }
+
+  patchData(data: any) {
+    if (data.birthdate) {
+      this.userData.birthdate = data.birthdate.split('T')[0];
+    }
+
+    if (data.passportstartdate) {
+      this.userData.passportstartdate = data.passportstartdate.split('T')[0];
+    }
+
+    if (data.passportenddate) {
+      this.userData.passportenddate = data.passportenddate.split('T')[0];
+    }
+
+    this.form.patchValue(<any>this.userData);
   }
 
   unApproveUser() {

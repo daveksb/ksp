@@ -1,14 +1,14 @@
 <ksp-top-nav
   ><span header>ยื่นแบบคำขอ</span
   ><span subHeader
-    >พิจารณารับรองหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต
+    >พิจารณารับรองหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีหนังสืออนุญาต
   </span></ksp-top-nav
 >
 
 <form [formGroup]="form">
-  <div class="bg-secondary bg-opacity-10 px-4 py-2">
+  <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height-2">
     <div class="box-header">
-      ยืนยันผลการตรวจสอบ และออกหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาต
+      ยืนยันผลการตรวจสอบ และออกหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีหนังสืออนุญาต
     </div>
     <div class="bg-white p-3">
       <ksp-request-header-info
@@ -53,14 +53,20 @@
       <div class="box-header">ผลการยืนยันการตรวจสอบ</div>
       <hr />
       <ksp-consider-ksp-request
+        [mode]="
+          (kspRequest.process === '5' && kspRequest.status === '2') ||
+          (kspRequest.process === '5' && kspRequest.status === '3')
+            ? 'view'
+            : 'edit'
+        "
         formControlName="approvement"
       ></ksp-consider-ksp-request>
     </div>
 
-    <div class="bg-white p-3 mt-3">
+    <div class="bg-white px-3 py-2 mt-3">
       <div class="d-flex justify-content-between align-items-center">
         <div class="box-header">
-          หนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีใบอนุญาต
+          หนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีหนังสืออนุญาต
         </div>
         <button class="btn btn-success" (click)="genPdf(kspRequest)">
           ดูเอกสาร

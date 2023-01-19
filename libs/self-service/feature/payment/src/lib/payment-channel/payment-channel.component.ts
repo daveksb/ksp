@@ -6,6 +6,8 @@ import { KspRequest } from '@ksp/shared/interface';
 import { MatDialog } from '@angular/material/dialog';
 import { PrintReceiptDialogComponent } from '@ksp/self-service/ui';
 import moment from 'moment';
+import { CompleteDialogComponent } from '@ksp/shared/dialog';
+import { formatRequestNo, thaiDate } from '@ksp/shared/utility';
 
 @Component({
   templateUrl: './payment-channel.component.html',
@@ -38,7 +40,24 @@ export class PaymentChannelComponent implements OnInit {
   }
 
   cancel() {
-    this.location.back();
+    const dialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header: `ทำรายการชำระเงินไม่สำเร็จ`,
+        isDanger: true,
+        showImg: true,
+        content: `วันที่ : ${thaiDate(new Date())}
+        เลขที่แบบคำขอ : ${formatRequestNo(String(this.kspRequest.requestno))}`,
+        subContent: 'หากมีข้อสงสัย กรุณาโทร 02 304 9899',
+      },
+    });
+
+    dialog.componentInstance.completed.subscribe(() => {
+      this.back();
+    });
+  }
+
+  back() {
+    this.router.navigate(['/home']);
   }
 
   promptpay(type: any) {

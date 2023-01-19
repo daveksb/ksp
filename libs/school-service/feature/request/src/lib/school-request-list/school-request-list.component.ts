@@ -488,9 +488,9 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       }
       if (schReason[2] === true) {
         if (element.careertype === '2') {
-          label3 = 'ขาดแคลนผู้บริหารสถานศึกษาที่มีใบอนุญาตประกอบวิชาชีพ ';
+          label3 = 'ขาดแคลนผู้บริหารสถานศึกษาที่มีหนังสืออนุญาตประกอบวิชาชีพ ';
         } else {
-          label3 = 'ขาดแคลนครูผู้สอนที่มีใบอนุญาตประกอบวิชาชีพ ';
+          label3 = 'ขาดแคลนครูผู้สอนที่มีหนังสืออนุญาตประกอบวิชาชีพ ';
         }
       }
       if (schReason[3] === true) {
@@ -851,5 +851,5 @@ export const displayedColumns = [
   'updatedate',
   'requestdate',
   'requestpdf',
-  //'licensepdf',
+  'licensepdf',
 ];
