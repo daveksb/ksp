@@ -34,31 +34,44 @@ export class RequestRewardMainService {
       name: '1. รางวัลอื่นและประกาศเกียรติคุณ',
       files: [],
     },
+    {
+      name: '2. แบบรายงานประวัติและผลงาน',
+      files: [],
+    },
+    {
+      name: '3. กพ.7 หรือสมุดประจำตัว',
+      files: [],
+    },
   ];
+
   thaiTeacherRewardFiles: FileGroup[] = [
     {
       name: '1. รางวัลอื่นและประกาศเกียรติคุณ',
       files: [],
     },
   ];
+
   bestTeacherRewardFiles: FileGroup[] = [
     {
       name: '1. รางวัลอื่นและประกาศเกียรติคุณ',
       files: [],
     },
   ];
+
   praiseRewardFiles: FileGroup[] = [
     {
       name: '1. รางวัลอื่นและประกาศเกียรติคุณ',
       files: [],
     },
   ];
+
   seniorTeacherRewardFiles: FileGroup[] = [
     {
       name: '1. รางวัลอื่นและประกาศเกียรติคุณ',
       files: [],
     },
   ];
+
   researchRewardFiles: FileGroup[] = [
     {
       name: '1. รางวัลอื่นและประกาศเกียรติคุณ',
