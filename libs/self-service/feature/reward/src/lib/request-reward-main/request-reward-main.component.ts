@@ -352,6 +352,8 @@ export class RequestRewardMainComponent implements OnInit {
           console.log('request result = ', res);
           if (res?.returncode === '00') {
             this.router.navigate(['/home']);
+          } else if (res.returncode === '409') {
+            this.sameIdCardDialog();
           }
         });
       }
@@ -377,6 +379,8 @@ export class RequestRewardMainComponent implements OnInit {
           console.log('request result = ', res);
           if (res?.returncode === '00') {
             this.completeDialog();
+          } else if (res.returncode === '409') {
+            this.sameIdCardDialog();
           }
         });
       }
@@ -510,6 +514,20 @@ export class RequestRewardMainComponent implements OnInit {
       width: '350px',
       data: {
         header: `ทำรายการสร้างแบบคำขอสำเร็จ`,
+      },
+    });
+
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/home']);
+      }
+    });
+  }
+
+  sameIdCardDialog() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header: `หมายเลขบัตรประชาชนนี้ได้ถูกใช้ยื่นแบบคำขอไปแล้ว`,
       },
     });
 
