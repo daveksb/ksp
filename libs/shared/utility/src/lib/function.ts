@@ -395,3 +395,12 @@ export function teachingSubjects(id: any) {
 export function teachingLevels(id: any) {
   return levels.find((s) => s.value === id)?.label;
 }
+
+export function dateDiff(date1: Date, date2: Date) {
+  if (!date1 || !date2) return 0;
+  const newDate1 = new Date(date1);
+  const newDate2 = new Date(date2);
+  const diffTime = Math.abs(newDate1.getTime() - newDate2.getTime());
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  return diffDays;
+}

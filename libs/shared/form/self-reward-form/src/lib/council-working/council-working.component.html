@@ -104,6 +104,7 @@
                 <input
                   class="form-control"
                   type="text"
+                  [value]="dateDiff(DegreeForm.value.startDate, DegreeForm.value.endDate) | yearMonth: 'year'"
                   disabled />
                 <label class="mx-2">ปี</label>
               </div>
@@ -115,6 +116,7 @@
                 <input
                   class="form-control"
                   type="text"
+                  [value]="dateDiff(DegreeForm.value.startDate, DegreeForm.value.endDate) | yearMonth: 'month'"
                   disabled />
                 <label class="mx-2">เดือน</label>
 

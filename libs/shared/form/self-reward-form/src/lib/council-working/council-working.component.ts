@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
-import { providerFactory } from '@ksp/shared/utility';
+import { dateDiff, providerFactory } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-council-working',
@@ -16,6 +16,7 @@ export class CouncilWorkingComponent
   override form = this.fb.group({
     workInfo: this.fb.array([]),
   });
+  dateDiff = dateDiff;
 
   constructor(private fb: FormBuilder) {
     super();
@@ -61,12 +62,8 @@ export class CouncilWorkingComponent
       position: [null, Validators.required],
       academicStanding: [null, Validators.required],
       status: [null, Validators.required],
-      // startYear: [null, Validators.required],
       salary: [null, Validators.required],
-      // assignment: [null, Validators.required],
-      // study: [null, Validators.required],
       qualification: [null, Validators.required],
-      // creativity: [null, Validators.required],
       achievement: [null, Validators.required],
       startDate: [null, Validators.required],
       endDate: [null, Validators.required],
