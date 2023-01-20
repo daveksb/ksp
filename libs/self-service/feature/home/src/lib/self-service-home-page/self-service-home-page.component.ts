@@ -10,7 +10,7 @@ import {
 } from '@ksp/shared/constant';
 import {
   KspRequest,
-  KSPRequestSearchFilter,
+  KSPRequestSelfSearchFilter,
   SelfRequest,
 } from '@ksp/shared/interface';
 import {
@@ -24,6 +24,7 @@ import {
   replaceEmptyWithNull,
   SelfCheckProcess,
   SelfcheckStatus,
+  SelfHasRejectedRequest,
   selfMapRequestType,
   thaiDate,
 } from '@ksp/shared/utility';
@@ -68,6 +69,8 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.defaultSearch();
+
     this.myInfoService.getMyInfo().subscribe((res) => {
       if (res) {
         if (res.usertype) {
@@ -81,8 +84,19 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
+  defaultSearch() {
+    const payload = new KSPRequestSelfSearchFilter();
+    payload.idcardno = getCookie('idCardNo');
+
+    this.requestService.searchMyRequests(payload).subscribe((res) => {
+      console.log('res  = ', res);
+      this.rejectedRequests = SelfHasRejectedRequest(res);
+      console.log('has reject = ', this.rejectedRequests);
+    });
+  }
+
   search() {
-    let payload: KSPRequestSearchFilter = {
+    let payload: KSPRequestSelfSearchFilter = {
       requesttype: this.form.controls.requesttype.value,
       requestno: this.form.controls.requestno.value,
       requestdate: this.form.controls.requestdate.value,
@@ -100,7 +114,7 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
     this.requestService.searchMyRequests(payload).subscribe((res) => {
       if (this.initialSearch) {
         this.rejectedRequests = hasRejectedRequest(res);
-        //console.log('has reject = ', this.rejectedRequests);
+        console.log('has reject = ', this.rejectedRequests);
       }
 
       if (res && res.length) {
