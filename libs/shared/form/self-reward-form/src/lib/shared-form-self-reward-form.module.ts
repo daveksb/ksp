@@ -30,6 +30,7 @@ import { AddRowButtonComponent } from '@ksp/shared/ui';
 import { SchoolServiceFormActivityModule } from '@ksp/school-service/form/activity';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { YearMonthPipe } from '@ksp/shared/pipe';
 
 @NgModule({
   imports: [
@@ -47,6 +48,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     SharedFormOthersModule,
     ReactiveFormsModule,
     MatDatepickerModule,
+    YearMonthPipe,
   ],
   declarations: [
     CouncilEducationComponent,

@@ -11,7 +11,7 @@
 <form [formGroup]="form">
   <div class="full-height main__container px-4 py-2 full-width-2">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-5">
         <div class="box-header">ประเภทรางวัล</div>
         <select class="form-select" formControlName="rewardType" #rewardType>
           <option value="0" selected hidden disabled>กรุณาเลือก</option>
@@ -20,13 +20,24 @@
           </option>
         </select>
       </div>
+
+      <div class="col-md-5" *ngIf="rewardType.value === '40'">
+        <div class="box-header">ประเภทวิชาชีพ</div>
+        <select class="form-select" formControlName="careerType">
+          <option value="0" selected hidden disabled>กรุณาเลือก</option>
+          <option value="1">ครู</option>
+          <option value="2">ผู้บริหารสถานศึกษา</option>
+          <option value="3">ผู้บริหารการศึกษา</option>
+          <option value="4">ศึกษานิเทศก์</option>
+          <option value="5">อื่นๆ</option>
+        </select>
+      </div>
     </div>
 
     <div *ngIf="rewardType.value !== '0'">
       <div class="my-3">
         <self-service-request-status
-          [idcardNo]="myInfo && myInfo.idcardno"
-        ></self-service-request-status>
+          [idcardNo]="myInfo && myInfo.idcardno"></self-service-request-status>
       </div>
     </div>
     <div *ngIf="rewardType.value === '40'">
@@ -36,8 +47,7 @@
         [addressInfo]="addressInfo"
         [prefixList]="prefixList$ | async"
         [rewardFiles]="rewardFiles"
-        [uniqueTimestamp]="uniqueTimestamp"
-      ></ksp-council-reward>
+        [uniqueTimestamp]="uniqueTimestamp"></ksp-council-reward>
     </div>
 
     <div *ngIf="rewardType.value === '41'">
@@ -49,8 +59,7 @@
         [bureaus]="bureau$ | async"
         [rewardFiles]="rewardFiles"
         [uniqueTimestamp]="uniqueTimestamp"
-        formControlName="rewardDetail"
-      ></ksp-thai-teacher-reward>
+        formControlName="rewardDetail"></ksp-thai-teacher-reward>
     </div>
 
     <div *ngIf="rewardType.value === '42'">
@@ -62,8 +71,7 @@
         [bureaus]="bureau$ | async"
         [rewardFiles]="rewardFiles"
         [uniqueTimestamp]="uniqueTimestamp"
-        [prefixList]="prefixList$ | async"
-      ></ksp-best-teacher-reward>
+        [prefixList]="prefixList$ | async"></ksp-best-teacher-reward>
     </div>
 
     <div *ngIf="rewardType.value === '43'">
@@ -75,8 +83,7 @@
         [bureaus]="bureau$ | async"
         [rewardFiles]="rewardFiles"
         [uniqueTimestamp]="uniqueTimestamp"
-        formControlName="rewardDetail"
-      ></ksp-praise-teacher-reward>
+        formControlName="rewardDetail"></ksp-praise-teacher-reward>
     </div>
 
     <div *ngIf="rewardType.value === '44'">
@@ -88,8 +95,7 @@
         [bureaus]="bureau$ | async"
         [rewardFiles]="rewardFiles"
         [uniqueTimestamp]="uniqueTimestamp"
-        formControlName="rewardDetail"
-      ></ksp-senior-teacher-reward>
+        formControlName="rewardDetail"></ksp-senior-teacher-reward>
     </div>
     <div *ngIf="rewardType.value === '45'">
       <ksp-research-reward
@@ -99,8 +105,7 @@
         [bureaus]="bureau$ | async"
         [rewardFiles]="rewardFiles"
         [uniqueTimestamp]="uniqueTimestamp"
-        formControlName="rewardDetail"
-      ></ksp-research-reward>
+        formControlName="rewardDetail"></ksp-research-reward>
     </div>
 
     <div *ngIf="rewardType.value !== '0'">
@@ -113,24 +118,21 @@
           type="button"
           *ngIf="requestId"
           (click)="cancel()"
-          class="ms-3 btn border-primary text-primary bg-white"
-        >
+          class="ms-3 btn border-primary text-primary bg-white">
           ยกเลิกแบบคำขอ
         </button>
         <button
           (click)="tempSave()"
           type="button"
           class="ms-3 btn btn-success"
-          [disabled]="!form.valid"
-        >
+          [disabled]="!form.valid">
           บันทึกชั่วคราว
         </button>
         <button
           (click)="save()"
           type="button"
           class="ms-3 btn btn-primary"
-          [disabled]="!form.valid"
-        >
+          [disabled]="!form.valid">
           บันทึกและยื่น
         </button>
       </div>

@@ -63,6 +63,7 @@ export class RequestRewardMainComponent implements OnInit {
   form = this.fb.group({
     rewardType: [0],
     rewardDetail: [],
+    careerType: ['0'],
   });
 
   prefixList$!: Observable<any>;
@@ -169,6 +170,8 @@ export class RequestRewardMainComponent implements OnInit {
       rewardresearchinfo,
       rewardresearchhistory,
       fileinfo,
+      careertype,
+      idcardno,
       ...resData
     } = data;
     const rewardType = +(requesttype || 0);
@@ -192,6 +195,7 @@ export class RequestRewardMainComponent implements OnInit {
       contactphone,
       workphone,
       email,
+      idcardno,
     };
     this.addressInfo = parseJson(addressinfo);
     this.workplaceInfo = parseJson(schooladdrinfo);
@@ -211,6 +215,7 @@ export class RequestRewardMainComponent implements OnInit {
           rewardSuccessInfo,
           rewardDetailInfo,
         });
+        this.form.controls.careerType.patchValue(careertype);
         break;
       }
       case 41: {
@@ -349,6 +354,8 @@ export class RequestRewardMainComponent implements OnInit {
           console.log('request result = ', res);
           if (res?.returncode === '00') {
             this.router.navigate(['/home']);
+          } else if (res.returncode === '409') {
+            this.sameIdCardDialog();
           }
         });
       }
@@ -374,6 +381,8 @@ export class RequestRewardMainComponent implements OnInit {
           console.log('request result = ', res);
           if (res?.returncode === '00') {
             this.completeDialog();
+          } else if (res.returncode === '409') {
+            this.sameIdCardDialog();
           }
         });
       }
@@ -384,7 +393,9 @@ export class RequestRewardMainComponent implements OnInit {
     const self = new SelfRequest(
       '1',
       `${this.form.value.rewardType}`,
-      `${SelfServiceRequestSubType.อื่นๆ}`,
+      `${this.form.value.rewardType}` === '40'
+        ? this.form.value.careerType || '0'
+        : `${SelfServiceRequestSubType.อื่นๆ}`,
       currentProcess
     );
     const allowKey = Object.keys(self);
@@ -505,6 +516,20 @@ export class RequestRewardMainComponent implements OnInit {
       width: '350px',
       data: {
         header: `ทำรายการสร้างแบบคำขอสำเร็จ`,
+      },
+    });
+
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/home']);
+      }
+    });
+  }
+
+  sameIdCardDialog() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header: `หมายเลขบัตรประชาชนนี้ได้ถูกใช้ยื่นแบบคำขอไปแล้ว`,
       },
     });
 
