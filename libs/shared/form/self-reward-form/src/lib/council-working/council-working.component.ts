@@ -18,6 +18,16 @@ export class CouncilWorkingComponent
   });
   dateDiff = dateDiff;
 
+  sum: number[][] = [];
+
+  get sumYear() {
+    return this.sum.reduce((a, b) => a + b[0], 0);
+  }
+
+  get sumMonth() {
+    return this.sum.reduce((a, b) => a + b[1], 0);
+  }
+
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
@@ -25,6 +35,20 @@ export class CouncilWorkingComponent
       this.form?.valueChanges.subscribe((value) => {
         this.onChange(value);
         this.onTouched();
+
+        this.sum = this.workInfo.value.map((v: any) => {
+          if (v.startDate && v.endDate) {
+            const start = new Date(v.startDate);
+            const end = new Date(v.endDate);
+            const diff = dateDiff(start, end);
+            const diffMonth = Math.floor(diff / 30);
+            const year = Math.floor(diffMonth / 12);
+            const month = diffMonth % 12;
+            return [year, month];
+          } else {
+            return [0, 0];
+          }
+        });
       })
     );
   }
@@ -54,6 +78,7 @@ export class CouncilWorkingComponent
   }
 
   deleteFormArray(form: FormArray<any>, index: number) {
+    this.sum = [...this.sum.slice(0, index), ...this.sum.slice(index + 1)];
     form.removeAt(index);
   }
 
@@ -69,6 +94,7 @@ export class CouncilWorkingComponent
       endDate: [null, Validators.required],
     });
     form.push(data);
+    this.sum.push([0, 0]);
   }
 
   get workInfo() {
