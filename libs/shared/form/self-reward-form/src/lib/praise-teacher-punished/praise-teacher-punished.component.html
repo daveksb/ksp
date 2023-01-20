@@ -1,4 +1,5 @@
 <form [formGroup]="form">
+  <div class="box-header text-primary mb-2">ข้อมูลการถูกลงโทษทางวินัย</div>
   <div class="row">
     <div class="col-md-6 mb-2">
       <div class="border rounded px-2 py-1 d-flex align-items-center">
@@ -6,8 +7,7 @@
           type="radio"
           class="me-1"
           value="1"
-          formControlName="disciplinaryAction"
-        />
+          formControlName="disciplinaryAction" />
         <label class="form-label">เคยถูกลงโทษทางวินัย</label>
       </div>
     </div>
@@ -17,8 +17,7 @@
           type="radio"
           class="me-1"
           value="2"
-          formControlName="disciplinaryAction"
-        />
+          formControlName="disciplinaryAction" />
         <label class="form-label">ไม่เคยถูกลงโทษทางวินัย</label>
       </div>
     </div>
@@ -31,8 +30,7 @@
           type="radio"
           class="me-1"
           value="3"
-          formControlName="disciplinaryAction"
-        />
+          formControlName="disciplinaryAction" />
         <label class="form-label">อยู่ระหว่างการดำเนินการทางวินัย</label>
       </div>
     </div>
@@ -42,11 +40,8 @@
           type="radio"
           class="me-1"
           value="4"
-          formControlName="disciplinaryAction"
-        />
-        <label class="form-label"
-          >เคยถูกลงโทษทางวินัยและได้รับการล้างมลทิน</label
-        >
+          formControlName="disciplinaryAction" />
+        <label class="form-label">เคยถูกลงโทษทางวินัยและได้รับการล้างมลทิน</label>
       </div>
     </div>
   </div>

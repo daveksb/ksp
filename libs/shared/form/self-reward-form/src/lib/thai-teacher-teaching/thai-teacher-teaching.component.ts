@@ -35,6 +35,12 @@ export class ThaiTeacherTeachingComponent
   schoolName2: any;
 
   override form = this.fb.group({
+    startTeachingDate: [null, Validators.required],
+    position: ['', Validators.required],
+    experienceYear: ['', Validators.required],
+
+    youtubeLink: ['', Validators.required],
+
     affiliation: ['', Validators.required],
     teachingPlace: ['', Validators.required],
     province: ['', Validators.required],
