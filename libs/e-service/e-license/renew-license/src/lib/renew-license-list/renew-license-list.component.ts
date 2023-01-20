@@ -38,7 +38,6 @@ export class RenewLicenseListComponent implements AfterViewInit {
   checkProcess = eSelfCheckProcess;
   checkStatus = eSelfCheckStatus;
   searchNotFound = false;
-
   form = this.fb.group({
     search: [],
   });
@@ -47,8 +46,7 @@ export class RenewLicenseListComponent implements AfterViewInit {
     private router: Router,
     private requestService: ERequestService,
     private fb: FormBuilder,
-    private loaderService: LoaderService,
-    private addressService: AddressService
+    private loaderService: LoaderService
   ) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -56,7 +54,6 @@ export class RenewLicenseListComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-    //this.provinces$ = this.addressService.getProvinces();
   }
 
   search(params: any) {
