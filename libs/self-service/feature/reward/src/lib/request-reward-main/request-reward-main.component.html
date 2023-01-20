@@ -32,6 +32,13 @@
           <option value="5">อื่นๆ</option>
         </select>
       </div>
+
+      <div class="col-md-5" *ngIf="rewardType.value === '41'">
+        <div class="box-header">ประเภทระดับการศึกษา</div>
+        <select class="form-select">
+          <option value="0" selected hidden disabled>กรุณาเลือก</option>
+        </select>
+      </div>
     </div>
 
     <div *ngIf="rewardType.value !== '0'">

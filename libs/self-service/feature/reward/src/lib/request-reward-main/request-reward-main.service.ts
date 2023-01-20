@@ -46,7 +46,11 @@ export class RequestRewardMainService {
 
   thaiTeacherRewardFiles: FileGroup[] = [
     {
-      name: '1. รางวัลอื่นและประกาศเกียรติคุณ',
+      name: '1. แบบรายงานประวัติและผลงาน',
+      files: [],
+    },
+    {
+      name: '2. แผนการจัดการเรียนรู้หรือ มคอ.3 และ มคอ.5',
       files: [],
     },
   ];
