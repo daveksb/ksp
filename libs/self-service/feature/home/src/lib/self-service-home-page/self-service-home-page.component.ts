@@ -36,13 +36,8 @@ import { Subject } from 'rxjs';
   styleUrls: ['./self-service-home-page.component.scss'],
 })
 export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
-  /*   badgeTitle = [
-    `เลขที่แบบคำขอ : SF_010641000123 รายการขอขึ้นทะเบียนหนังสืออนุญาต ถูกส่งคืน
-  “ปรับแก้ไข / เพิ่มเติม” กดเพื่อตรวจสอบ`,
-  ]; */
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-
   isLoading: Subject<boolean> = this.loaderService.isLoading;
   checkStatus = SelfcheckStatus;
   checkProcess = SelfCheckProcess;
@@ -53,7 +48,6 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
   initialSearch = true;
   rejectedRequests: KspRequest[] = [];
   userType = '1';
-
   form = this.fb.group({
     requestno: [],
     requesttype: [],
@@ -87,11 +81,10 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
   defaultSearch() {
     const payload = new KSPRequestSelfSearchFilter();
     payload.idcardno = getCookie('idCardNo');
-
     this.requestService.searchMyRequests(payload).subscribe((res) => {
-      console.log('res  = ', res);
+      //console.log('res  = ', res);
       this.rejectedRequests = SelfHasRejectedRequest(res);
-      console.log('has reject = ', this.rejectedRequests);
+      //console.log('has reject = ', this.rejectedRequests);
     });
   }
 
@@ -379,7 +372,7 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
 
   genAlertMessage(req: KspRequest) {
     const detail: any = JSON.parse(req.detail || '');
-    //console.log('return date = ', detail.returndate);
+    console.log('return date = ', detail.returndate);
     return `แจ้งเตือน เลขที่คำขอ: ${
       req.requestno
     } ถูกส่งคืน "ปรับแก้ไข/เพิ่มเติม"
