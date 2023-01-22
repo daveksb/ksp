@@ -40,7 +40,7 @@ export abstract class ESelfConfirmFormBaseComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    /* this.form.valueChanges.subscribe((res) => {
+    /*     this.form.valueChanges.subscribe((res) => {
       console.log(res.approvement);
     }); */
 
@@ -109,12 +109,19 @@ export abstract class ESelfConfirmFormBaseComponent implements OnInit {
   checkRequest() {
     const form: any = this.form.value.approvement;
     this.checkApproveResult(form);
-    //console.log('save data = ', this.saveData);
+    console.log('save data = ', this.saveData);
+    console.log('form = ', form);
+
+    const detail = {
+      returndate: form.returndate,
+      tabdata: this.saveData.checkDetail,
+    };
+
     const payload: KspApprovePayload = {
       requestid: this.saveData.requestData.id,
       process: `${this.targetProcess}`,
       status: `${this.targetStatus}`,
-      detail: JSON.stringify(this.saveData.checkDetail),
+      detail: JSON.stringify(detail),
       systemtype: '4', // approve by e-service staff
       userid: this.userId,
       paymentstatus: null,
@@ -124,7 +131,7 @@ export abstract class ESelfConfirmFormBaseComponent implements OnInit {
       this.eRequestService
         .setUrgentRequest(this.saveData.requestData.id, form.isurgent)
         .subscribe(() => {
-          this.navigateBack();
+          this.completeDialog();
         });
     });
   }

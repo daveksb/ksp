@@ -36,13 +36,8 @@ import { Subject } from 'rxjs';
   styleUrls: ['./self-service-home-page.component.scss'],
 })
 export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
-  /*   badgeTitle = [
-    `เลขที่แบบคำขอ : SF_010641000123 รายการขอขึ้นทะเบียนหนังสืออนุญาต ถูกส่งคืน
-  “ปรับแก้ไข / เพิ่มเติม” กดเพื่อตรวจสอบ`,
-  ]; */
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-
   isLoading: Subject<boolean> = this.loaderService.isLoading;
   checkStatus = SelfcheckStatus;
   checkProcess = SelfCheckProcess;
@@ -53,7 +48,6 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
   initialSearch = true;
   rejectedRequests: KspRequest[] = [];
   userType = '1';
-
   form = this.fb.group({
     requestno: [],
     requesttype: [],
@@ -70,7 +64,6 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
     this.defaultSearch();
-
     this.myInfoService.getMyInfo().subscribe((res) => {
       if (res) {
         if (res.usertype) {
@@ -87,11 +80,10 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
   defaultSearch() {
     const payload = new KSPRequestSelfSearchFilter();
     payload.idcardno = getCookie('idCardNo');
-
     this.requestService.searchMyRequests(payload).subscribe((res) => {
-      console.log('res  = ', res);
+      //console.log('res  = ', res);
       this.rejectedRequests = SelfHasRejectedRequest(res);
-      console.log('has reject = ', this.rejectedRequests);
+      //console.log('has reject = ', this.rejectedRequests);
     });
   }
 
@@ -234,10 +226,6 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
     this.searchNotFound = false;
   }
 
-  // requestLicense(type: SelfServiceRequestSubType) {
-  //   this.router.navigate(['/license', 'request', type]);
-  // }
-
   // ครูไทย
   thaiTeacher(id?: number) {
     this.router.navigate(['/license', 'teacher', ...(id ? [`${id}`] : [])]);
@@ -285,10 +273,6 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
       ...(id ? [`${id}`] : []),
     ]);
   }
-
-  // renewLicense(type: SelfServiceRequestSubType) {
-  //   this.router.navigate(['/renew-license', 'request', type]);
-  // }
 
   // ครูไทย
   teacherRenew(id?: number) {
