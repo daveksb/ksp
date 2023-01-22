@@ -57,7 +57,10 @@
               "apps/e-service/src/app-styles.scss",
               "libs/shared/assets/src/assets/project-styles.scss"
             ],
-            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.js"]
+            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.js"],
+            "allowedCommonJsDependencies": [
+              "pako","moment","localforage","ngx-barcode","lodash"
+            ]
           },
           "configurations": {
             "production": {
@@ -3015,7 +3018,10 @@
               "apps/school-service/src/app-styles.scss",
               "libs/shared/assets/src/assets/project-styles.scss"
             ],
-            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.js"]
+            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.js"],
+            "allowedCommonJsDependencies": [
+              "pako","moment","localforage","ngx-barcode","lodash","crypto-js"
+            ]
           },
           "configurations": {
             "production": {
@@ -4949,6 +4955,9 @@
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "pako","moment","localforage","ngx-barcode","lodash"
             ]
           },
           "configurations": {
