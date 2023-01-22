@@ -64,7 +64,6 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
     this.defaultSearch();
-
     this.myInfoService.getMyInfo().subscribe((res) => {
       if (res) {
         if (res.usertype) {
@@ -227,10 +226,6 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
     this.searchNotFound = false;
   }
 
-  // requestLicense(type: SelfServiceRequestSubType) {
-  //   this.router.navigate(['/license', 'request', type]);
-  // }
-
   // ครูไทย
   thaiTeacher(id?: number) {
     this.router.navigate(['/license', 'teacher', ...(id ? [`${id}`] : [])]);
@@ -278,10 +273,6 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
       ...(id ? [`${id}`] : []),
     ]);
   }
-
-  // renewLicense(type: SelfServiceRequestSubType) {
-  //   this.router.navigate(['/renew-license', 'request', type]);
-  // }
 
   // ครูไทย
   teacherRenew(id?: number) {
@@ -372,7 +363,7 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
 
   genAlertMessage(req: KspRequest) {
     const detail: any = JSON.parse(req.detail || '');
-    console.log('return date = ', detail.returndate);
+    //console.log('return date = ', detail.returndate);
     return `แจ้งเตือน เลขที่คำขอ: ${
       req.requestno
     } ถูกส่งคืน "ปรับแก้ไข/เพิ่มเติม"
