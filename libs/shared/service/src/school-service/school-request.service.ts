@@ -25,15 +25,24 @@ export class SchoolRequestService {
     );
   }
 
-  getTempLicenseHistory(
-    idcardno: string | null
-  ): Observable<KspListResponse<SchTempLicense>> {
-    return this.http.post<KspListResponse<SchTempLicense>>(
-      `${environment.apiUrl}/kspstaff/schtemplicenseselectidcardno`,
-      {
-        idcardno,
-      }
-    );
+  getTempLicenseHistory(idcardno: string | null): Observable<SchTempLicense[]> {
+    return this.http
+      .post<SchTempLicense[]>(
+        `${environment.apiUrl}/kspstaff/schtemplicenseselectidcardno`,
+        {
+          idcardno,
+        }
+      )
+      .pipe(map((data: any) => data.datareturn));
+  }
+
+  schSearchRequest(payload: SchRequestSearchFilter): Observable<KspRequest[]> {
+    return this.http
+      .post<KspRequest[]>(
+        `${environment.shortApiUrl}/ksprequestsearch_school.php`,
+        payload
+      )
+      .pipe(map((data: any) => data.datareturn));
   }
 
   schCreateRequest(payload: Partial<KspRequest>): Observable<any> {
@@ -72,15 +81,6 @@ export class SchoolRequestService {
       `${environment.apiUrl}/kspstaff/ksprequestupdateisclose`,
       payload
     );
-  }
-
-  schSearchRequest(payload: SchRequestSearchFilter): Observable<KspRequest[]> {
-    return this.http
-      .post<KspRequest[]>(
-        `${environment.shortApiUrl}/ksprequestsearch_school.php`,
-        payload
-      )
-      .pipe(map((data: any) => data.datareturn));
   }
 
   loadFile(payload: any) {

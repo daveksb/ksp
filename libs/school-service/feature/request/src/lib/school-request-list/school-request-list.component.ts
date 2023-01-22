@@ -312,7 +312,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     this.requestService
       .getTempLicenseHistory(element.idcardno)
       .subscribe((res) => {
-        this.tempLicenseHistory = res.datareturn;
+        this.tempLicenseHistory = res;
         this.tempLicenseRequestTimes =
           (this.tempLicenseHistory?.length || 0) + 1;
 

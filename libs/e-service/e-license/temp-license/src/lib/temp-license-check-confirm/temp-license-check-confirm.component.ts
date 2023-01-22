@@ -199,6 +199,8 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
       checkdetail: this.saveData.checkDetail,
     };
 
+    console.log('detail = ', detail);
+
     const payload: KspApprovePayload = {
       requestid: this.saveData.requestData.id,
       process: `${this.targetProcess}`,
