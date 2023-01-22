@@ -43,8 +43,12 @@
       </div>
     </div>
 
-    <!-- (selectedIndexChange)="onTabIndexChanged($event)" -->
     <div class="full-width">
+      <ksp-uni-form-badge
+        [mainTitle]="kspComment.checkdetail[selectedTabIndex].detail"
+      >
+      </ksp-uni-form-badge>
+
       <mat-tab-group
         class="tab-group mt-3"
         animationDuration="0ms"

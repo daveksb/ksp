@@ -23,6 +23,7 @@ import {
   Amphur,
   Country,
   FileGroup,
+  KspComment,
   KspRequest,
   KspRequestProcess,
   Nationality,
@@ -104,6 +105,7 @@ export class SchoolRequestComponent implements OnInit {
   schoolInfo!: SchInfo;
   tempLicenseHistory$ = new Observable<SchTempLicense[]>;
   selectedTabIndex = 0;
+  kspComment = new KspComment()
 
   form = this.fb.group({
     userInfo: [],
@@ -151,8 +153,6 @@ export class SchoolRequestComponent implements OnInit {
   nextTab() {
     if (this.selectedTabIndex < 6) {
       this.selectedTabIndex++;
-    } else {
-      //this.nextPage();
     }
   }
 
@@ -486,7 +486,9 @@ export class SchoolRequestComponent implements OnInit {
         this.patchFileInfo(parseJson(res.fileinfo));
         const schoolAddr = parseJson(res.schooladdrinfo);
         this.form.controls.schoolAddr.patchValue(schoolAddr);
-        console.log('approve detail = ', parseJson(res.detail));
+        //console.log('approve detail = ', parseJson(res.detail));
+        this.kspComment = parseJson(res.detail);
+        console.log('ksp comment = ',this.kspComment)
       }
     });
   }
