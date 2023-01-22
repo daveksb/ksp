@@ -44,10 +44,15 @@
     </div>
 
     <div class="full-width">
-      <ksp-uni-form-badge
-        [mainTitle]="kspComment.checkdetail[selectedTabIndex].detail"
+      <div
+        class="mt-2"
+        *ngIf="kspComment.checkdetail[selectedTabIndex].result === 'incomplete'"
       >
-      </ksp-uni-form-badge>
+        <ksp-uni-form-badge
+          [mainTitle]="kspComment.checkdetail[selectedTabIndex].detail"
+        >
+        </ksp-uni-form-badge>
+      </div>
 
       <mat-tab-group
         class="tab-group mt-3"

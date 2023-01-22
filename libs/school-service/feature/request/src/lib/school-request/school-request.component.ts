@@ -416,14 +416,14 @@ export class SchoolRequestComponent implements OnInit {
       }
       // formValid + สถานะเป็นสร้างแบบคำขอ, บันทึกชั่วคราวได้ ส่งแบบคำขอได้
       else if (this.form.valid && this.kspRequest.process === '1') {
-        console.log('สถานะเป็นสร้างแบบคำขอ ');
+        //console.log('สถานะเป็นสร้างแบบคำขอ ');
         this.disableTempSave = false;
         this.disableSave = false;
         return;
       }
       // formValid + สถานะเป็นสร้างและส่งแบบคำขอ, บันทึกชั่วคราวไม่ได้ ส่งแบบคำขอไม่ได้
       else if (this.form.valid && this.kspRequest.process === '2') {
-        console.log('สถานะเป็นสร้างและส่งแบบคำขอ ');
+        //console.log('สถานะเป็นสร้างและส่งแบบคำขอ ');
         this.disableTempSave = true;
         this.disableSave = true;
         return;
