@@ -10,6 +10,7 @@ import {
 import {
   KspApprovePayload,
   KspApprovePersistData,
+  KspComment,
   SchTempLicense,
 } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
@@ -195,7 +196,7 @@ export class EQualificationConfirmComponent implements OnInit {
     //console.log('save data = ', this.saveData);
     const form: any = this.form.controls.approvement.value;
     //console.log('form  check= ', form);
-    const detail = {
+    const detail: KspComment = {
       returndate: form.returndate,
       reason: form.reason,
       checkresult: form.result,

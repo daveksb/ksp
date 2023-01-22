@@ -12,5 +12,5 @@ import { ThaiDatePipe } from '@ksp/shared/pipe';
 })
 export class FormTempLicenseNumberComponent {
   viewHistory = false;
-  @Input() tempLicenseHistory: SchTempLicense[] = [];
+  @Input() tempLicenseHistory: SchTempLicense[] | null = [];
 }

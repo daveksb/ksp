@@ -7,7 +7,11 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { KspApprovePayload, SchTempLicense } from '@ksp/shared/interface';
+import {
+  KspApprovePayload,
+  KspComment,
+  SchTempLicense,
+} from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import localForage from 'localforage';
@@ -192,12 +196,14 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
     //console.log('save data = ', this.saveData);
     const form: any = this.form.controls.approvement.value;
     //console.log('form  check= ', form);
-    const detail = {
+    const detail: KspComment = {
       returndate: form.returndate,
       reason: form.reason,
       checkresult: form.result,
       checkdetail: this.saveData.checkDetail,
     };
+
+    console.log('detail = ', detail);
 
     const payload: KspApprovePayload = {
       requestid: this.saveData.requestData.id,

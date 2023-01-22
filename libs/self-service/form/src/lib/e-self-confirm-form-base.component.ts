@@ -3,6 +3,7 @@ import localForage from 'localforage';
 import {
   KspApprovePayload,
   KspApprovePersistData,
+  KspComment,
 } from '@ksp/shared/interface';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -109,12 +110,12 @@ export abstract class ESelfConfirmFormBaseComponent implements OnInit {
   checkRequest() {
     const form: any = this.form.value.approvement;
     this.checkApproveResult(form);
-    console.log('save data = ', this.saveData);
-    console.log('form = ', form);
+    /* console.log('save data = ', this.saveData);
+    console.log('form = ', form); */
 
-    const detail = {
+    const detail: KspComment = {
       returndate: form.returndate,
-      tabdata: this.saveData.checkDetail,
+      checkdetail: this.saveData.checkDetail,
     };
 
     const payload: KspApprovePayload = {
