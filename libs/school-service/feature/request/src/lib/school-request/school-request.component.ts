@@ -488,7 +488,7 @@ export class SchoolRequestComponent implements OnInit {
         this.form.controls.schoolAddr.patchValue(schoolAddr);
         //console.log('approve detail = ', parseJson(res.detail));
         this.kspComment = parseJson(res.detail);
-        console.log('ksp comment = ',this.kspComment)
+        //console.log('ksp comment = ',this.kspComment)
       }
     });
   }
@@ -517,7 +517,6 @@ export class SchoolRequestComponent implements OnInit {
       teachingLevel,
       teachingSubjects,
     };
-    //console.log('datax = ', data);
     this.form.controls.teachinginfo.patchValue(data);
   }
 
@@ -723,18 +722,6 @@ export class SchoolRequestComponent implements OnInit {
       } else if (saveType === 'tempSave') {
         this.confirmDialog(1);
       }
-      /*       if (res && res.length) {
-        //console.log('found request for this staff = ', res);
-        this.completeDialog(`บุคคลากรมีแบบคำขอที่กำลังดำเนินการในระบบ
-        ไม่สามารถสร้างแบบคำขอใหม่ได้ `);
-      } else {
-        //console.log('no request for this staff = ');
-        if (saveType === 'submitSave') {
-          this.forbiddenDialog();
-        } else if (saveType === 'tempSave') {
-          this.confirmDialog(1);
-        }
-      } */
     });
   }
 
