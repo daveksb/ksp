@@ -588,6 +588,7 @@
                   role="button"
                   class="text-orange text-decoration-underline whitespace-nowrap"
                   [pRowToggler]="control"
+                  (click)="autoScroll()"
                 >
                   รายละเอียดที่อยู่
                 </div>
@@ -620,6 +621,7 @@
               <td colspan="4">
                 <form [formGroup]="control.controls.address">
                   <ksp-form-address-table
+                    id="address-info"
                     formControlName="addressInfo"
                     [disabledAll]="true"
                   ></ksp-form-address-table>

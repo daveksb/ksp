@@ -68,12 +68,19 @@
         ไฟล์ต่อรายการ
       </div>
     </div>
-    <ksp-file-upload
-      [buttonLabel]="'อัพโหลดไฟล์'"
-      [uniqueTimestamp]="uniqueNo"
-      [showDeleteFile]="true"
-      (uploadComplete)="onUploadComplete($event)"
-    ></ksp-file-upload>
+    <div *ngIf="mode === 'edit'">
+      <ksp-file-upload
+        [buttonLabel]="'อัพโหลดไฟล์'"
+        [uniqueTimestamp]="uniqueNo"
+        [showDeleteFile]="true"
+        (uploadComplete)="onUploadComplete($event)"
+      ></ksp-file-upload>
+    </div>
+    <div class="row" *ngIf="mode === 'view'">
+      <div class="col-8">
+        <label class="view__label" (click)="view()">ดูเอกสารแนบ</label>
+      </div>
+    </div>
     <!-- <ksp-file-upload></ksp-file-upload> -->
   </div>
 </form>

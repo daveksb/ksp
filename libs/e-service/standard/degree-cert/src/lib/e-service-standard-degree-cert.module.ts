@@ -47,6 +47,7 @@ import { ConsiderStudentComponent } from './import-student/consider-student/cons
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { FollowUpComponent } from './follow-up/follow-up.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -92,6 +93,7 @@ import { ThaiDatePipe } from '@ksp/shared/pipe';
     ImportStudentComponent,
     CourseDetailComponent,
     ConsiderStudentComponent,
+    FollowUpComponent
   ],
 })
 export class EServiceStandardDegreeCertModule {}

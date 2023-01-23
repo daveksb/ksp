@@ -6,6 +6,7 @@ import { CheckComponent } from './check/check.component';
 import { ConsiderComponent } from './consider/consider.component';
 import { CourseDetailComponent } from './course-detail/course-detail.component';
 import { FinalResultComponent } from './final-result/final-result.component';
+import { FollowUpComponent } from './follow-up/follow-up.component';
 import { ConsiderStudentComponent } from './import-student/consider-student/consider-student.component';
 import { ImportStudentComponent } from './import-student/import-student.component';
 import { EServiceDegreeCertApprovedListComponent } from './list-approved/e-service-degree-cert-list-approved.component';
@@ -73,6 +74,14 @@ export const routes: Routes = [
       {
         path: 'consider-student',
         component: ConsiderStudentComponent
+      },
+      {
+        path: 'follow-up',
+        component: FollowUpComponent
+      },
+      {
+        path: 'follow-up/:key',
+        component: FollowUpComponent
       }
     ],
   },

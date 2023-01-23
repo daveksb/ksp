@@ -97,13 +97,15 @@ export class EServiceDegreeCertListComponent
         /**
          * show action buttons if process = consider || approve
          */
-        this.showActionButtons = [3, 4, 5].includes(Number(res.get('type')));
+        this.showActionButtons = [3, 4, 5, 6].includes(Number(res.get('type')));
         this.showColumnSelect =
           Number(res.get('type')) == 1 || !res.get('type');
       }
       this.pageType = Number(res.get('processId'));
+      if (this.pageType == 0) this.header = 'รายการขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา';
       if (this.pageType == 1) this.header = 'ประเมินหลักสูตรและโครงสร้างหลักสูตร';
       if (this.pageType == 2) this.header = 'พิจารณาและออกใบรับรองปริญญาและประกาศนียบัตร';
+      if (this.pageType == 3) this.header = 'การติดตามเชิงประจักษ์';
 
       console.log('page type = ', this.pageType);
     });
@@ -205,6 +207,15 @@ export class EServiceDegreeCertListComponent
       },
     });
   }
+
+  followUp() {
+    this.router.navigate(['/degree-cert', 'follow-up'], {
+      state: {
+        dataSource: this.selection.selected,
+      },
+    });
+  }
+
   isSelectConsider() {
     return this.selection.selected.length > 0;
   }
@@ -212,6 +223,11 @@ export class EServiceDegreeCertListComponent
   isSelectApprove() {
     return this.selection.selected.length > 0;
   }
+
+  isSelectResult() {
+    return this.selection.selected.length > 0;
+  }
+
   goToDetailPage(row: any) {
     if (this.pageType === 0) {
       this.router.navigate(['/degree-cert', 'check', row?.key]);
@@ -220,7 +236,11 @@ export class EServiceDegreeCertListComponent
     } else if (this.pageType === 2) {
       this.router.navigate(['/degree-cert', 'approve', row?.key]);
     } else {
-      this.router.navigate(['/degree-cert', 'final-result', row?.key]);
+      this.router.navigate(['/degree-cert', 'follow-up', row?.key], {
+        state: {
+          dataSource: [row],
+        },
+      });
     }
   }
 
@@ -230,6 +250,8 @@ export class EServiceDegreeCertListComponent
   isSelect(row: any) {
     if (this.pageType === 1) {
       return row?.process == '3';
+    } else if (this.pageType === 3) {
+      return row?.process == '6';
     }
     return true;
   }
