@@ -12,6 +12,12 @@
             <form [formGroup]="form">
               <div class="row justify-content-center">
                 <div class="col-md-6 mb-3">
+                  <ng-container *ngIf="searchSubmit">
+                    <ksp-uni-form-badge
+                      [subTitle]="'Not found'"
+                    ></ksp-uni-form-badge>
+                  </ng-container>
+
                   <label class="form-label required"
                     >Teachers Council of Thailand ID number</label
                   >
