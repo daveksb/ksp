@@ -17,7 +17,7 @@
   ></self-service-request-status>
 
   <form [formGroup]="form">
-    <div class="row mx-0 border shadow-sm rounded-4 px-2 py-4 bg-white my-4">
+    <div class="row mx-0 border shadow-sm rounded-4 px-2 py-4 bg-white my-3">
       <div class="col-lg-3 my-auto">
         <self-service-form-upload-image
           [imgSrc]="myImage"
@@ -36,10 +36,22 @@
       </div>
     </div>
 
+    <div
+      class="m-2"
+      *ngIf="kspComment.checkdetail[selectedTabIndex].result === 'incomplete'"
+    >
+      <ksp-uni-form-badge
+        [mainTitle]="kspComment.checkdetail[selectedTabIndex].detail"
+      >
+      </ksp-uni-form-badge>
+    </div>
+
     <mat-tab-group
       class="tab-group"
       animationDuration="0ms"
-      [selectedIndex]="0"
+      (selectedIndexChange)="selectedTabIndex = $event"
+      [selectedIndex]="selectedTabIndex"
+      selectedIndex="0"
     >
       <mat-tab label="ที่อยู่" class="tab-content">
         <ksp-form-address

@@ -19,6 +19,7 @@ import {
   SelfRequestService,
 } from '@ksp/shared/service';
 import {
+  formatRequestNo,
   getCookie,
   hasRejectedRequest,
   replaceEmptyWithNull,
@@ -230,7 +231,6 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
   thaiTeacher(id?: number) {
     this.router.navigate(['/license', 'teacher', ...(id ? [`${id}`] : [])]);
   }
-
   //ครู + ผู้บริหหาร ต่างชาติ
   foreignTeacher(type: SelfServiceRequestSubType, id?: number) {
     if (id) {
@@ -246,7 +246,6 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
       });
     }
   }
-
   // ผู้บริหารสถานศึกษา
   schoolManager(id?: number) {
     this.router.navigate([
@@ -255,7 +254,6 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
       ...(id ? [`${id}`] : []),
     ]);
   }
-
   // ผู้บริหารการศึกษา
   eduManagerRequest(id?: number) {
     this.router.navigate([
@@ -264,7 +262,6 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
       ...(id ? [`${id}`] : []),
     ]);
   }
-
   //ศึกษานิเทศก์
   studySupervision(id?: number) {
     this.router.navigate([
@@ -273,7 +270,6 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
       ...(id ? [`${id}`] : []),
     ]);
   }
-
   // ครูไทย
   teacherRenew(id?: number) {
     this.router.navigate([
@@ -282,7 +278,6 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
       ...(id ? [`${id}`] : []),
     ]);
   }
-
   //ครู + ผู้บริหาร ต่างชาติ
   foreignRenew(type: SelfServiceRequestSubType, id?: number) {
     this.router.navigate(
@@ -300,7 +295,6 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
       ...(id ? [`${id}`] : []),
     ]);
   }
-
   // ผู้บริหารการศึกษา
   eduManagerRenew(id?: number) {
     this.router.navigate([
@@ -309,7 +303,6 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
       ...(id ? [`${id}`] : []),
     ]);
   }
-
   //ศึกษานิเทศก์
   supervisionRenew(id?: number) {
     this.router.navigate([
@@ -364,9 +357,9 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
   genAlertMessage(req: KspRequest) {
     const detail: any = JSON.parse(req.detail || '');
     //console.log('return date = ', detail.returndate);
-    return `แจ้งเตือน เลขที่คำขอ: ${
-      req.requestno
-    } ถูกส่งคืน "ปรับแก้ไข/เพิ่มเติม"
+    return `แจ้งเตือน เลขที่คำขอ: ${formatRequestNo(
+      req.requestno || ''
+    )} ถูกส่งคืน "ปรับแก้ไข/เพิ่มเติม"
     กรุณาส่งกลับภายในวันที่ ${thaiDate(
       new Date(detail.returndate)
     )} มิฉะนั้นแบบคำขอจะถูกยกเลิก `;

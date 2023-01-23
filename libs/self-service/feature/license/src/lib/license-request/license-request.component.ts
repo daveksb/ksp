@@ -41,6 +41,12 @@ export class LicenseRequestComponent
 {
   userInfoType = UserInfoFormType.thai;
   isLoading: Subject<boolean> = this.loaderService.isLoading;
+  countries$!: Observable<Country[]>;
+  licenses$!: Observable<any>;
+  eduFiles: FileGroup[] = [];
+  experienceFiles: FileGroup[] = [];
+  performanceFiles: FileGroup[] = [];
+  selectedTabIndex = 0;
   override form = this.fb.group({
     userInfo: [],
     address1: [],
@@ -49,11 +55,6 @@ export class LicenseRequestComponent
     education: [],
     experience: [],
   });
-  countries$!: Observable<Country[]>;
-  licenses$!: Observable<any>;
-  eduFiles: FileGroup[] = [];
-  experienceFiles: FileGroup[] = [];
-  performanceFiles: FileGroup[] = [];
 
   constructor(
     router: Router,
@@ -131,7 +132,6 @@ export class LicenseRequestComponent
 
   patchAddress2FormWithAddress1(): void {
     this.form.controls.address2.patchValue(this.form.controls.address1.value);
-    //console.log(this.form.controls.address2.value);
   }
 
   override patchData(data: SelfRequest) {

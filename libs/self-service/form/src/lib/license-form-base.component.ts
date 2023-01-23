@@ -19,6 +19,7 @@ import { formatRequestNo, parseJson, thaiDate } from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
 import {
   Amphur,
+  KspComment,
   Nationality,
   Prefix,
   Province,
@@ -54,6 +55,7 @@ export abstract class LicenseFormBaseComponent {
   myImage = '';
   imageId = '';
   myInfo$!: Observable<SelfMyInfo>;
+  kspComment = new KspComment();
 
   constructor(
     protected generalInfoService: GeneralInfoService,
@@ -75,13 +77,13 @@ export abstract class LicenseFormBaseComponent {
         // this.loadRequestFromId(this.requestId);
         this.requestService.getRequestById(this.requestId).subscribe((res) => {
           if (res) {
-            console.log(res);
+            //console.log('res =', parseJson(res.detail));
+            this.kspComment = parseJson(res.detail);
             this.requestData = res;
             this.requestNo = res.requestno;
             this.requestDate = res.requestdate;
             this.currentProcess = Number(res.process);
             this.uniqueTimestamp = res.uniqueno || '';
-            //console.log(this.uniqueTimestamp);
             this.patchData(res);
           }
         });
