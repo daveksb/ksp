@@ -13,8 +13,7 @@ import { switchMap, EMPTY } from 'rxjs';
 import { RegisterCompletedComponent } from '../register-completed/register-completed.component';
 import localForage from 'localforage';
 import { KspRequest, SelfMyInfo } from '@ksp/shared/interface';
-import { v4 as uuidv4 } from 'uuid';
-import { formatDatePayload, validatorMessages } from '@ksp/shared/utility';
+import { validatorMessages } from '@ksp/shared/utility';
 
 @Component({
   selector: 'self-service-register-foreign-step-three',
@@ -30,7 +29,7 @@ export class RegisterForeignStepThreeComponent implements OnInit {
   ) {}
 
   savingData: any;
-  passportNo = '';
+  kurusapano = '';
   passwordEqual = false;
   validatorMessages = validatorMessages;
   eyeIconClicked1 = false;
@@ -38,7 +37,6 @@ export class RegisterForeignStepThreeComponent implements OnInit {
 
   form = this.fb.group(
     {
-      //username: [null, Validators.required],
       username: [null],
       password: [null, [Validators.required, Validators.minLength(8)]],
       confirmPassword: [null, Validators.required],
@@ -55,7 +53,7 @@ export class RegisterForeignStepThreeComponent implements OnInit {
   ngOnInit(): void {
     localForage.getItem('registerForeigner').then((res: any) => {
       this.savingData = res;
-      this.passportNo = res.passportno;
+      this.kurusapano = res.kuruspano;
       //console.log('form = ', res);
     });
   }

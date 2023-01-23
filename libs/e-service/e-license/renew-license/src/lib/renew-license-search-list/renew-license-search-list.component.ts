@@ -74,9 +74,7 @@ export class RenewLicenseSearchListComponent implements OnInit, AfterViewInit {
 
   onSelect(element: any) {
     element.select = !element.select;
-
     const selectedData = this.dataSource.data.filter((item) => item.select);
-
     if (selectedData.length > 0) {
       this.canPrint = selectedData.every((item) => !item.groupno);
       const groupNo = selectedData[0].groupno;
@@ -102,7 +100,7 @@ export class RenewLicenseSearchListComponent implements OnInit, AfterViewInit {
       createdate: params.createdate,
       offset: '0',
       row: '500',
-      requesttype: '02',
+      requesttype: '2',
     };
     this.requestService.searchSelfApproveList(payload).subscribe((res) => {
       this.dataSource.data = res.map((i) => {
@@ -113,7 +111,6 @@ export class RenewLicenseSearchListComponent implements OnInit, AfterViewInit {
 
   createGroup() {
     this.router.navigate(['/renew-license', 'create-group']);
-    //this.router.navigate(['/renew-license', 'create-group-list']);
   }
 
   kmv() {

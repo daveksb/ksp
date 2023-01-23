@@ -108,7 +108,6 @@ export class UserDetailComponent implements OnInit {
       } else if (res.status === '3') {
         this.checkedResult = approveChoices[0][1].value;
       }
-
       //console.log('file = ', parseJson(res.fileinfo));
       const files = parseJson(res.fileinfo);
 

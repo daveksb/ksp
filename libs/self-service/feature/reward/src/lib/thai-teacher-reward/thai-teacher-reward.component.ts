@@ -80,10 +80,11 @@ export class ThaiTeacherRewardComponent
     userInfo: [],
     addressInfo: [],
     workplace: [],
-    rewardTeacherInfo: [],
     eduInfo: [],
     hiringInfo: [],
-    teachingInfo: [],
+    rewardTeacherInfo: [],
+    rewardPunishmentInfo: [],
+
     phone: [],
     fax: [],
     email: [],

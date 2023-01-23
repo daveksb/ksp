@@ -4,7 +4,7 @@ import { environment } from '@ksp/shared/environment';
 import {
   KspPayment,
   KspRequest,
-  KSPRequestSearchFilter,
+  KSPRequestSelfSearchFilter,
   SelfGetRequest,
   SelfRequest,
 } from '@ksp/shared/interface';
@@ -51,7 +51,9 @@ export class SelfRequestService {
     );
   }
 
-  searchMyRequests(payload: KSPRequestSearchFilter): Observable<SelfRequest[]> {
+  searchMyRequests(
+    payload: KSPRequestSelfSearchFilter
+  ): Observable<SelfRequest[]> {
     return this.http
       .post<SelfRequest[]>(
         `${environment.shortApiUrl}/ksprequestsearch_self.php`,

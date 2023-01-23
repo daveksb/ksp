@@ -18,6 +18,7 @@ import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { SelfServiceMasterPageComponent } from '@ksp/self-service/feature/master-page';
 import {
   PaymentChannelComponent,
+  PaymentKtbComponent,
   PromptpayComponent,
 } from '@ksp/self-service/feature/payment';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -25,7 +26,7 @@ import {
   RequestStatusComponent,
   SelfServiceLicenseInfoComponent,
 } from '@ksp/self-service/ui';
-import { PageNotFoundComponent } from '@ksp/shared/ui';
+import { PageNotFoundComponent, UniFormBadgeComponent } from '@ksp/shared/ui';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LicenseRequestSchoolManagerComponent } from './license-request-school-manager/license-request-school-manager.component';
 import { LicenseRequestEducationManagerComponent } from './license-request-education-manager/license-request-education-manager.component';
@@ -35,7 +36,6 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { LicenseForeignAgreementComponent } from './license-foreign-agreement/license-foreign-agreement.component';
 import { EditLicenseComponent } from '@ksp/shared/form/license';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { PaymentKtbComponent } from 'libs/self-service/feature/payment/src/lib/payment-ktb/payment-ktb.component';
 
 export const routes: Routes = [
   {
@@ -134,6 +134,7 @@ export const routes: Routes = [
     RequestStatusComponent,
     EditLicenseComponent,
     MatProgressSpinnerModule,
+    UniFormBadgeComponent,
   ],
   declarations: [
     LicenseRequestComponent,

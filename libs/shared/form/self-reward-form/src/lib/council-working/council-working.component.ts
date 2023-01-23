@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
-import { providerFactory } from '@ksp/shared/utility';
+import { dateDiff, providerFactory } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-council-working',
@@ -16,6 +16,17 @@ export class CouncilWorkingComponent
   override form = this.fb.group({
     workInfo: this.fb.array([]),
   });
+  dateDiff = dateDiff;
+
+  sum: number[][] = [];
+
+  get sumYear() {
+    return this.sum.reduce((a, b) => a + b[0], 0);
+  }
+
+  get sumMonth() {
+    return this.sum.reduce((a, b) => a + b[1], 0);
+  }
 
   constructor(private fb: FormBuilder) {
     super();
@@ -24,6 +35,20 @@ export class CouncilWorkingComponent
       this.form?.valueChanges.subscribe((value) => {
         this.onChange(value);
         this.onTouched();
+
+        this.sum = this.workInfo.value.map((v: any) => {
+          if (v.startDate && v.endDate) {
+            const start = new Date(v.startDate);
+            const end = new Date(v.endDate);
+            const diff = dateDiff(start, end);
+            const diffMonth = Math.floor(diff / 30);
+            const year = Math.floor(diffMonth / 12);
+            const month = diffMonth % 12;
+            return [year, month];
+          } else {
+            return [0, 0];
+          }
+        });
       })
     );
   }
@@ -53,6 +78,7 @@ export class CouncilWorkingComponent
   }
 
   deleteFormArray(form: FormArray<any>, index: number) {
+    this.sum = [...this.sum.slice(0, index), ...this.sum.slice(index + 1)];
     form.removeAt(index);
   }
 
@@ -61,15 +87,14 @@ export class CouncilWorkingComponent
       position: [null, Validators.required],
       academicStanding: [null, Validators.required],
       status: [null, Validators.required],
-      startYear: [null, Validators.required],
       salary: [null, Validators.required],
-      assignment: [null, Validators.required],
-      study: [null, Validators.required],
       qualification: [null, Validators.required],
-      creativity: [null, Validators.required],
       achievement: [null, Validators.required],
+      startDate: [null, Validators.required],
+      endDate: [null, Validators.required],
     });
     form.push(data);
+    this.sum.push([0, 0]);
   }
 
   get workInfo() {

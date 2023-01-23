@@ -1,18 +1,35 @@
 <form [formGroup]="form">
   <div class="box-header text-primary">ประวัติการทำงาน</div>
+  <div class="d-flex justify-content-between mb-2">
+    <div class="fs-6 text-danger mt-1">
+      * กรุณาแยกประเภทวิชาชีพตั้งแต่เริ่มบรรจุจนถึงปัจจุบัน
+    </div>
+    <div class="d-flex">
+      <label class="mx-2">ระยะเวลาการปฏิบัติงานทั้งหมด</label>
+      <input
+        type="text"
+        [value]="sumYear"
+        disabled />
+      <label class="mx-2">ปี</label>
+      <input
+        type="text"
+        [value]="sumMonth"
+        disabled />
+      <label class="mx-2">เดือน</label>
+    </div>
+  </div>
+
   <ng-container formArrayName="workInfo">
     <ng-container *ngFor="let DegreeForm of workInfo.controls; let i = index">
       <ng-container [formGroupName]="i">
         <div
           class="border rounded px-3 py-2"
-          [ngClass]="i > 0 ? 'mt-3' : 'mt-0'"
-        >
+          [ngClass]="i > 0 ? 'mt-3' : 'mt-0'">
           <div class="d-flex justify-content-end" *ngIf="i > 0">
             <i
               class="bi bi-x-circle-fill text-danger"
               (click)="deleteFormArray(workInfo, i)"
-              role="button"
-            ></i>
+              role="button"></i>
           </div>
           <div class="row">
             <div class="col-md-6 mb-2">
@@ -20,16 +37,14 @@
               <input
                 class="form-control"
                 type="text"
-                formControlName="position"
-              />
+                formControlName="position" />
             </div>
             <div class="col-md-6 mb-2">
               <label class="form-label required">วิทยฐานะ</label>
               <input
                 class="form-control"
                 type="text"
-                formControlName="academicStanding"
-              />
+                formControlName="academicStanding" />
             </div>
           </div>
           <div class="row">
@@ -38,77 +53,95 @@
               <input
                 class="form-control"
                 type="text"
-                formControlName="status"
-              />
+                formControlName="status" />
             </div>
-            <div class="col-md-6 mb-2">
-              <label class="form-label required">ปีที่เริ่มเข้า</label>
-              <input
-                class="form-control"
-                type="text"
-                formControlName="startYear"
-              />
-            </div>
-          </div>
-          <div class="row">
             <div class="col-md-6 mb-2">
               <label class="form-label required">เงินเดือน</label>
               <input
                 class="form-control"
                 type="text"
-                formControlName="salary"
-              />
-            </div>
-            <div class="col-md-6 mb-2">
-              <label class="form-label required">งานที่ได้รับมอบหมาย </label>
-              <input
-                class="form-control"
-                type="text"
-                formControlName="assignment"
-              />
+                formControlName="salary" />
             </div>
           </div>
           <div class="row">
-            <div class="col-md-6 mb-2">
-              <label class="form-label required"
-                >การศึกษา/ฝึกอบรม/ประชุมสัมนา</label
-              >
-              <textarea
-                class="form-control"
-                formControlName="study"
-                [rows]="3"
-              ></textarea>
-            </div>
             <div class="col-md-6 mb-2">
               <label class="form-label required">คุณวุฒิ/ใบรับรองผล </label>
               <textarea
                 class="form-control"
                 formControlName="qualification"
-                [rows]="3"
-              ></textarea>
+                [rows]="3"></textarea>
             </div>
+            <div class="col-md-6 mb-2">
+              <label class="form-label required">ความสำเร็จหรือการยกย่องที่ได้รับ</label>
+              <textarea
+                class="form-control"
+                formControlName="achievement"
+                [rows]="3"></textarea>
+            </div>
+
           </div>
           <div class="row">
-            <div class="col-md-6 mb-2">
-              <label class="form-label required"
-                >ความคิดริเริ่มสร้างสรรค์ในการปฏิบัติวิชาชีพ</label
-              >
-              <input
-                class="form-control"
-                type="text"
-                formControlName="creativity"
-              />
+            <div class="col-md-3 mb-2">
+              <label class="form-label required">วันที่เริ่มเข้า</label>
+              <div class="d-flex align-items-center">
+                <input
+                  matInput
+                  [matDatepicker]="picker"
+                  autocomplete="off"
+                  class="form-control form-date"
+                  formControlName="startDate"
+                  placeholder="วว/ดด/ปปปป" />
+                <mat-datepicker-toggle
+                  class="button-date"
+                  matSuffix
+                  [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </div>
             </div>
-            <div class="col-md-6 mb-2">
-              <label class="form-label required"
-                >ความสำเร็จหรือการยกย่องที่ได้รับ</label
-              >
-              <input
-                class="form-control"
-                type="text"
-                formControlName="achievement"
-              />
+
+            <div class="col-md-3 mb-2">
+              <label class="form-label required">วันที่สิ้นสุด</label>
+              <div class="d-flex align-items-center">
+                <input
+                  matInput
+                  [matDatepicker]="picker2"
+                  autocomplete="off"
+                  class="form-control form-date"
+                  formControlName="endDate"
+                  placeholder="วว/ดด/ปปปป" />
+                <mat-datepicker-toggle
+                  class="button-date"
+                  matSuffix
+                  [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+              </div>
             </div>
+
+            <div class="col-md-3 mb-2">
+              <label class="form-label">ระยะเวลาการปฏิบัติงาน</label>
+              <div class="d-flex">
+                <input
+                  class="form-control"
+                  type="text"
+                  [value]="sum[i][0]"
+                  disabled />
+                <label class="mx-2">ปี</label>
+              </div>
+            </div>
+
+            <div class="col-md-3 mb-2">
+              <label class="form-label"></label>
+              <div class="d-flex">
+                <input
+                  class="form-control"
+                  type="text"
+                  [value]="sum[i][1]"
+                  disabled />
+                <label class="mx-2">เดือน</label>
+              </div>
+            </div>
+
+
           </div>
         </div>
       </ng-container>
@@ -117,8 +150,6 @@
   <div class="d-flex justify-content-end mt-3" *ngIf="mode === 'edit'">
     <ksp-add-row-button
       class="text-primary"
-      (addRowClick)="addFormArray(workInfo)"
-      >เพิ่มข้อมูลการทำงาน</ksp-add-row-button
-    >
+      (addRowClick)="addFormArray(workInfo)">เพิ่มข้อมูลการทำงาน</ksp-add-row-button>
   </div>
 </form>

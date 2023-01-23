@@ -23,8 +23,8 @@ export class RegisterForeignStepOneComponent implements OnInit {
   form = this.fb.group({
     prefixen: [null, [Validators.required]],
     firstnameen: [null, [Validators.required]],
-    middlenameen: [null, [Validators.required]],
-    lastnameen: [null, [Validators.required]],
+    middlenameen: [null],
+    lastnameen: [null],
     birthdate: [],
     country: [],
     nationality: [],

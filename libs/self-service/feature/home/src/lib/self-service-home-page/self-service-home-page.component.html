@@ -7,11 +7,15 @@
 
 <div class="full-height full-width-2 main__container py-2 px-4">
   <ng-container *ngFor="let req of rejectedRequests; let i = index">
-    <div role="button">
-      <ksp-uni-form-badge
-        [mainTitle]="genAlertMessage(req)"
-      ></ksp-uni-form-badge>
-    </div>
+    <ksp-uni-form-badge [mainTitle]="genAlertMessage(req)">
+      <button
+        (click)="goToDetail(req)"
+        class="btn btn-link text-primary p-0 w-auto ms-1"
+        type="button"
+      >
+        กดเพื่อตรวจสอบ
+      </button>
+    </ksp-uni-form-badge>
   </ng-container>
 
   <div

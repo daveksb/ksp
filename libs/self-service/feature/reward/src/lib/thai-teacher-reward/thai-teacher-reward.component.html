@@ -7,8 +7,7 @@
         [isSelfService]="true"
         [prefixList]="prefixList"
         [requiredIdCardNo]="false"
-        formControlName="userInfo"
-      ></ksp-form-user-info>
+        formControlName="userInfo"></ksp-form-user-info>
     </mat-tab>
 
     <mat-tab label="ที่อยู่" class="tab-content">
@@ -19,8 +18,7 @@
         [amphurs]="amphurs1$ | async"
         [tumbols]="tumbols1$ | async"
         (provinceChanged)="provinceChanged(1, $event)"
-        (amphurChanged)="amphurChanged(1, $event)"
-      >
+        (amphurChanged)="amphurChanged(1, $event)">
         <span class="text-primary">ที่อยู่ที่สามารถติดต่อได้</span>
       </ksp-form-address>
       <hr />
@@ -33,15 +31,8 @@
         [tumbols]="tumbols2$ | async"
         [bureaus]="bureaus"
         (provinceChanged)="provinceChanged(2, $event)"
-        (amphurChanged)="amphurChanged(2, $event)"
-      >
+        (amphurChanged)="amphurChanged(2, $event)">
       </self-service-form-user-workplace>
-    </mat-tab>
-
-    <mat-tab label="ข้อมูลครูภาษาไทยดีเด่น">
-      <ksp-thai-teacher-info
-        formControlName="rewardTeacherInfo"
-      ></ksp-thai-teacher-info>
     </mat-tab>
 
     <mat-tab label="ข้อมูลการศึกษา">
@@ -52,9 +43,9 @@
       <ksp-council-working formControlName="hiringInfo"></ksp-council-working>
     </mat-tab>
 
-    <mat-tab label="ข้อมูลการสอน">
+    <mat-tab label="ข้อมูลนวัตกรรมและรางวัล">
       <ksp-thai-teacher-teaching
-        formControlName="teachingInfo"
+        formControlName="rewardTeacherInfo"
         [bureaus]="bureaus"
         [provinces]="provinces3$ | async"
         [amphurs]="amphurs3$ | async"
@@ -66,15 +57,24 @@
         (amphurChanged)="amphurChanged(3, $event)"
         (province2Changed)="provinceChanged(4, $event)"
         (amphur2Changed)="amphurChanged(4, $event)"
-        (sameAddress)="onSameAddress()"
-      ></ksp-thai-teacher-teaching>
-      <div class="mt-3">
+        (sameAddress)="onSameAddress()"></ksp-thai-teacher-teaching>
+      <!-- <div class="mt-3">
         <ksp-form-multi-attachment
           [groups]="rewardFiles"
           [mode]="mode"
-          [uniqueTimestamp]="uniqueTimestamp"
-        ></ksp-form-multi-attachment>
-      </div>
+          [uniqueTimestamp]="uniqueTimestamp"></ksp-form-multi-attachment>
+      </div> -->
+    </mat-tab>
+
+    <mat-tab label="ข้อมูลการถูกลงโทษทางวินัย">
+      <ksp-praise-teacher-punished
+        formControlName="rewardPunishmentInfo"></ksp-praise-teacher-punished>
+    </mat-tab>
+
+    <mat-tab label="เอกสารประกอบ">
+      <ksp-form-multi-attachment
+        [groups]="rewardFiles"
+        [uniqueTimestamp]="uniqueTimestamp"></ksp-form-multi-attachment>
     </mat-tab>
   </mat-tab-group>
 </form>

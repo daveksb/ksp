@@ -13,7 +13,7 @@ import { parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 import { ERewardFormBaseComponent } from '@ksp/self-service/form';
 
-const FORM_TAB_COUNT = 7;
+const FORM_TAB_COUNT = 6;
 
 @Component({
   selector: 'ksp-e-teacher-council-detail',

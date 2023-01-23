@@ -18,9 +18,9 @@ import {
   LoaderService,
 } from '@ksp/shared/service';
 import {
-  checkStatus,
   schoolMapRequestType,
   replaceEmptyWithNull,
+  eSelfCheckStatus,
 } from '@ksp/shared/utility';
 import { Observable, Subject } from 'rxjs';
 
@@ -36,13 +36,12 @@ export class NewForeignUserListComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<KspRequest>();
-  checkStatus = checkStatus;
+  checkStatus = eSelfCheckStatus;
   statusList = SchoolRequestProcess.find((i) => i.requestType === 1)?.status;
   mapRequestType = schoolMapRequestType;
   bureau$!: Observable<any>;
   searchNotFound = false;
   provinces$!: Observable<Province[]>;
-
   form = this.fb.group({
     search: [],
   });

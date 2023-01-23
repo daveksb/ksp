@@ -23,6 +23,7 @@ import {
   Amphur,
   Country,
   FileGroup,
+  KspComment,
   KspRequest,
   KspRequestProcess,
   Nationality,
@@ -60,6 +61,7 @@ import {
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { forkJoin, Observable, Subject } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
+import { Location } from '@angular/common';
 
 @UntilDestroy()
 @Component({
@@ -84,7 +86,7 @@ export class SchoolRequestComponent implements OnInit {
   academicTypes$!: Observable<AcademicStanding[]>;
   prefixList$!: Observable<Prefix[]>;
   requestId!: number;
-  requestData = new KspRequest();
+  kspRequest = new KspRequest();
   staffData = new SchStaff();
   careerType = SchoolRequestSubType.ครู; // 1 ไทย 2 ผู้บริหาร 3 ต่างชาติ
   requestLabel = '';
@@ -101,7 +103,9 @@ export class SchoolRequestComponent implements OnInit {
   eduSelected: number[] = [];
   forbidden: any = null;
   schoolInfo!: SchInfo;
-  tempLicenseHistory: SchTempLicense[] = [];
+  tempLicenseHistory$ = new Observable<SchTempLicense[]>;
+  selectedTabIndex = 0;
+  kspComment = new KspComment()
 
   form = this.fb.group({
     userInfo: [],
@@ -129,7 +133,8 @@ export class SchoolRequestComponent implements OnInit {
     private addressService: AddressService,
     private staffService: StaffService,
     private requestService: SchoolRequestService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private location: Location
   ) {}
 
   eduSelect(degreeLevel: number, evt: any) {
@@ -143,6 +148,20 @@ export class SchoolRequestComponent implements OnInit {
     this.checkRequestId();
     this.checkCareerType();
     this.checkButtonsDisableStatus();
+  }
+
+  nextTab() {
+    if (this.selectedTabIndex < 6) {
+      this.selectedTabIndex++;
+    }
+  }
+
+  prevTab() {
+    if (this.selectedTabIndex == 0) {
+      this.location.back();
+    } else {
+      this.selectedTabIndex--;
+    }
   }
 
   duplicateRequestDialog() {
@@ -187,7 +206,7 @@ export class SchoolRequestComponent implements OnInit {
   cancelRequest() {
     const payload: KspRequestProcess = {
       requestid: `${this.requestId}`,
-      process: this.requestData.process,
+      process: this.kspRequest.process,
       status: '0',
       detail: null,
       userid: this.userId,
@@ -215,7 +234,6 @@ export class SchoolRequestComponent implements OnInit {
     formData.addr1.addresstype = 1;
     formData.addr2.addresstype = 2;
 
-    /* let { id, ...userInfo } = formData.userInfo; */
     let { ...userInfo } = formData.userInfo;
     userInfo.schoolid = this.schoolId;
     userInfo.process = `${process}`;
@@ -372,23 +390,19 @@ export class SchoolRequestComponent implements OnInit {
   checkButtonsDisableStatus() {
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
       //console.log('userInfo valid = ', this.form.controls.userInfo.valid);
-      //console.log('form value = ', this.form.value);
-      console.log('edu2 valid = ', this.form.controls.edu2.valid);
-      //console.log('edu3 valid = ', this.form.controls.edu3.valid);
       //console.log('form valid = ', this.form.valid);
-      //4565936226393
       const condition1 =
-        this.requestData.requesttype === '3' &&
-        this.requestData.process === '3' &&
-        this.requestData.status === '2';
+        this.kspRequest.requesttype === '3' &&
+        this.kspRequest.process === '3' &&
+        this.kspRequest.status === '2';
 
       const condition2 =
-        this.requestData.requesttype === '3' &&
-        this.requestData.process === '4' &&
-        this.requestData.status === '2';
+        this.kspRequest.requesttype === '3' &&
+        this.kspRequest.process === '4' &&
+        this.kspRequest.status === '2';
 
       // สถานะ ยกเลิก disable ทุกอย่าง
-      if (this.requestData.status === '0') {
+      if (this.kspRequest.status === '0') {
         this.disableTempSave = true;
         this.disableSave = true;
         this.disableCancel = true;
@@ -401,21 +415,21 @@ export class SchoolRequestComponent implements OnInit {
         return;
       }
       // formValid + สถานะเป็นสร้างแบบคำขอ, บันทึกชั่วคราวได้ ส่งแบบคำขอได้
-      else if (this.form.valid && this.requestData.process === '1') {
-        console.log('สถานะเป็นสร้างแบบคำขอ ');
+      else if (this.form.valid && this.kspRequest.process === '1') {
+        //console.log('สถานะเป็นสร้างแบบคำขอ ');
         this.disableTempSave = false;
         this.disableSave = false;
         return;
       }
       // formValid + สถานะเป็นสร้างและส่งแบบคำขอ, บันทึกชั่วคราวไม่ได้ ส่งแบบคำขอไม่ได้
-      else if (this.form.valid && this.requestData.process === '2') {
-        console.log('สถานะเป็นสร้างและส่งแบบคำขอ ');
+      else if (this.form.valid && this.kspRequest.process === '2') {
+        //console.log('สถานะเป็นสร้างและส่งแบบคำขอ ');
         this.disableTempSave = true;
         this.disableSave = true;
         return;
       }
       // สถานะ พิจาณาและรับรอง
-      else if (this.requestData.process === '5') {
+      else if (this.kspRequest.process === '5') {
         //console.log('สถานะรับรอง = ');
         this.disableTempSave = true;
         this.disableSave = true;
@@ -438,7 +452,7 @@ export class SchoolRequestComponent implements OnInit {
 
       // มีหมายเลขแบบคำขอแล้ว enable ปุ่มยกเลิก
       if (this.requestId) {
-        if (this.requestData.process === '0') {
+        if (this.kspRequest.process === '0') {
           this.disableCancel = true;
         } else {
           this.disableCancel = false;
@@ -456,17 +470,13 @@ export class SchoolRequestComponent implements OnInit {
     });
   }
 
-  getTempLicenseHistory(idCardNo: string | null) {
-    this.requestService.getTempLicenseHistory(idCardNo).subscribe((res) => {
-      this.tempLicenseHistory = res.datareturn;
-    });
-  }
-
   loadRequestFromId(id: number) {
     this.requestService.schGetRequestById(id).subscribe((res) => {
       if (res) {
-        this.getTempLicenseHistory(res.idcardno || res.kuruspano);
-        this.requestData = res;
+        this.tempLicenseHistory$ = this.requestService.getTempLicenseHistory(
+          res.idcardno || res.kuruspano
+        );
+        this.kspRequest = res;
         this.pathUserInfo(res);
         this.patchAddress(parseJson(res.addressinfo));
         this.patchEdu(parseJson(res.eduinfo));
@@ -477,6 +487,8 @@ export class SchoolRequestComponent implements OnInit {
         const schoolAddr = parseJson(res.schooladdrinfo);
         this.form.controls.schoolAddr.patchValue(schoolAddr);
         //console.log('approve detail = ', parseJson(res.detail));
+        this.kspComment = parseJson(res.detail);
+        //console.log('ksp comment = ',this.kspComment)
       }
     });
   }
@@ -505,7 +517,6 @@ export class SchoolRequestComponent implements OnInit {
       teachingLevel,
       teachingSubjects,
     };
-    //console.log('datax = ', data);
     this.form.controls.teachinginfo.patchValue(data);
   }
 
@@ -711,18 +722,6 @@ export class SchoolRequestComponent implements OnInit {
       } else if (saveType === 'tempSave') {
         this.confirmDialog(1);
       }
-      /*       if (res && res.length) {
-        //console.log('found request for this staff = ', res);
-        this.completeDialog(`บุคคลากรมีแบบคำขอที่กำลังดำเนินการในระบบ
-        ไม่สามารถสร้างแบบคำขอใหม่ได้ `);
-      } else {
-        //console.log('no request for this staff = ');
-        if (saveType === 'submitSave') {
-          this.forbiddenDialog();
-        } else if (saveType === 'tempSave') {
-          this.confirmDialog(1);
-        }
-      } */
     });
   }
 

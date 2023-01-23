@@ -10,7 +10,7 @@ import {
 } from '@ksp/shared/constant';
 import {
   KspRequest,
-  KSPRequestSearchFilter,
+  KSPRequestSelfSearchFilter,
   SelfRequest,
 } from '@ksp/shared/interface';
 import {
@@ -19,11 +19,13 @@ import {
   SelfRequestService,
 } from '@ksp/shared/service';
 import {
+  formatRequestNo,
   getCookie,
   hasRejectedRequest,
   replaceEmptyWithNull,
   SelfCheckProcess,
   SelfcheckStatus,
+  SelfHasRejectedRequest,
   selfMapRequestType,
   thaiDate,
 } from '@ksp/shared/utility';
@@ -35,13 +37,8 @@ import { Subject } from 'rxjs';
   styleUrls: ['./self-service-home-page.component.scss'],
 })
 export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
-  /*   badgeTitle = [
-    `เลขที่แบบคำขอ : SF_010641000123 รายการขอขึ้นทะเบียนหนังสืออนุญาต ถูกส่งคืน
-  “ปรับแก้ไข / เพิ่มเติม” กดเพื่อตรวจสอบ`,
-  ]; */
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-
   isLoading: Subject<boolean> = this.loaderService.isLoading;
   checkStatus = SelfcheckStatus;
   checkProcess = SelfCheckProcess;
@@ -52,7 +49,6 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
   initialSearch = true;
   rejectedRequests: KspRequest[] = [];
   userType = '1';
-
   form = this.fb.group({
     requestno: [],
     requesttype: [],
@@ -68,6 +64,7 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.defaultSearch();
     this.myInfoService.getMyInfo().subscribe((res) => {
       if (res) {
         if (res.usertype) {
@@ -81,8 +78,18 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
+  defaultSearch() {
+    const payload = new KSPRequestSelfSearchFilter();
+    payload.idcardno = getCookie('idCardNo');
+    this.requestService.searchMyRequests(payload).subscribe((res) => {
+      //console.log('res  = ', res);
+      this.rejectedRequests = SelfHasRejectedRequest(res);
+      //console.log('has reject = ', this.rejectedRequests);
+    });
+  }
+
   search() {
-    let payload: KSPRequestSearchFilter = {
+    let payload: KSPRequestSelfSearchFilter = {
       requesttype: this.form.controls.requesttype.value,
       requestno: this.form.controls.requestno.value,
       requestdate: this.form.controls.requestdate.value,
@@ -100,7 +107,7 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
     this.requestService.searchMyRequests(payload).subscribe((res) => {
       if (this.initialSearch) {
         this.rejectedRequests = hasRejectedRequest(res);
-        //console.log('has reject = ', this.rejectedRequests);
+        console.log('has reject = ', this.rejectedRequests);
       }
 
       if (res && res.length) {
@@ -220,15 +227,10 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
     this.searchNotFound = false;
   }
 
-  // requestLicense(type: SelfServiceRequestSubType) {
-  //   this.router.navigate(['/license', 'request', type]);
-  // }
-
   // ครูไทย
   thaiTeacher(id?: number) {
     this.router.navigate(['/license', 'teacher', ...(id ? [`${id}`] : [])]);
   }
-
   //ครู + ผู้บริหหาร ต่างชาติ
   foreignTeacher(type: SelfServiceRequestSubType, id?: number) {
     if (id) {
@@ -244,7 +246,6 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
       });
     }
   }
-
   // ผู้บริหารสถานศึกษา
   schoolManager(id?: number) {
     this.router.navigate([
@@ -253,7 +254,6 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
       ...(id ? [`${id}`] : []),
     ]);
   }
-
   // ผู้บริหารการศึกษา
   eduManagerRequest(id?: number) {
     this.router.navigate([
@@ -262,7 +262,6 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
       ...(id ? [`${id}`] : []),
     ]);
   }
-
   //ศึกษานิเทศก์
   studySupervision(id?: number) {
     this.router.navigate([
@@ -271,11 +270,6 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
       ...(id ? [`${id}`] : []),
     ]);
   }
-
-  // renewLicense(type: SelfServiceRequestSubType) {
-  //   this.router.navigate(['/renew-license', 'request', type]);
-  // }
-
   // ครูไทย
   teacherRenew(id?: number) {
     this.router.navigate([
@@ -284,7 +278,6 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
       ...(id ? [`${id}`] : []),
     ]);
   }
-
   //ครู + ผู้บริหาร ต่างชาติ
   foreignRenew(type: SelfServiceRequestSubType, id?: number) {
     this.router.navigate(
@@ -302,7 +295,6 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
       ...(id ? [`${id}`] : []),
     ]);
   }
-
   // ผู้บริหารการศึกษา
   eduManagerRenew(id?: number) {
     this.router.navigate([
@@ -311,7 +303,6 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
       ...(id ? [`${id}`] : []),
     ]);
   }
-
   //ศึกษานิเทศก์
   supervisionRenew(id?: number) {
     this.router.navigate([
@@ -366,9 +357,9 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
   genAlertMessage(req: KspRequest) {
     const detail: any = JSON.parse(req.detail || '');
     //console.log('return date = ', detail.returndate);
-    return `แจ้งเตือน เลขที่คำขอ: ${
-      req.requestno
-    } ถูกส่งคืน "ปรับแก้ไข/เพิ่มเติม"
+    return `แจ้งเตือน เลขที่คำขอ: ${formatRequestNo(
+      req.requestno || ''
+    )} ถูกส่งคืน "ปรับแก้ไข/เพิ่มเติม"
     กรุณาส่งกลับภายในวันที่ ${thaiDate(
       new Date(detail.returndate)
     )} มิฉะนั้นแบบคำขอจะถูกยกเลิก `;

@@ -1,3 +1,4 @@
+// แบบคำขออนุญาตชั่วคราว
 export class SchTempLicense {
   id?: string | null = null;
   licenseno: string | null = null;

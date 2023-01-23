@@ -18,7 +18,7 @@ import {
   LoaderService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { FileGroup, SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
+import { FileGroup, SelfRequest } from '@ksp/shared/interface';
 import {
   getCookie,
   parseJson,
@@ -28,36 +28,6 @@ import {
 import * as _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 import { Subject } from 'rxjs';
-
-const EXPERIENCE_FILES: FileGroup[] = [
-  {
-    name: '1. สำเนาวุฒิทางการศึกษา',
-    files: [],
-  },
-  {
-    name: '2. หนังสือรับรองคุณวุฒิ',
-    files: [],
-  },
-  {
-    name: '3. วุฒิบัตรอบรม',
-    files: [],
-  },
-];
-
-const EDU_FILES: FileGroup[] = [
-  {
-    name: '1. สำเนาวุฒิทางการศึกษา',
-    files: [],
-  },
-  {
-    name: '2. เอกสารผู้สำเร็จการศึกษา (ระบบ KSP BUNDIT)',
-    files: [],
-  },
-  {
-    name: '3. วุฒิบัตรอบรม',
-    files: [],
-  },
-];
 
 @UntilDestroy()
 @Component({
@@ -71,8 +41,9 @@ export class LicenseRequestEducationManagerComponent
 {
   isLoading: Subject<boolean> = this.loaderService.isLoading;
   userInfoType = UserInfoFormType.thai;
-  experienceFiles: any[] = [];
-  eduFiles: any[] = [];
+  experienceFiles: FileGroup[] = [];
+  eduFiles: FileGroup[] = [];
+  selectedTabIndex = 0;
 
   override form = this.fb.group({
     userInfo: [],
@@ -234,3 +205,33 @@ export class LicenseRequestEducationManagerComponent
     return payload;
   }
 }
+
+const EXPERIENCE_FILES: FileGroup[] = [
+  {
+    name: '1. สำเนาวุฒิทางการศึกษา',
+    files: [],
+  },
+  {
+    name: '2. หนังสือรับรองคุณวุฒิ',
+    files: [],
+  },
+  {
+    name: '3. วุฒิบัตรอบรม',
+    files: [],
+  },
+];
+
+const EDU_FILES: FileGroup[] = [
+  {
+    name: '1. สำเนาวุฒิทางการศึกษา',
+    files: [],
+  },
+  {
+    name: '2. เอกสารผู้สำเร็จการศึกษา (ระบบ KSP BUNDIT)',
+    files: [],
+  },
+  {
+    name: '3. วุฒิบัตรอบรม',
+    files: [],
+  },
+];

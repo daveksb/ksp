@@ -31,15 +31,15 @@ export interface SchRequestSearchFilter {
   row: string | undefined | null;
 }
 
-export interface KSPRequestSearchFilter {
-  requesttype: string | null;
-  requestno: string | null;
-  requestdate: string | null;
-  status: string | null;
-  process: string | null;
-  paymentstatus: string | null;
-  idcardno: string | null;
-  kuruspano: string | null;
-  offset: string | undefined | null;
-  row: string | undefined | null;
+export class KSPRequestSelfSearchFilter {
+  requesttype: string | null = null;
+  requestno: string | null = null;
+  requestdate: string | null = null;
+  status: string | null = null;
+  process: string | null = null;
+  paymentstatus: string | null = null;
+  idcardno: string | null = null;
+  kuruspano: string | null = null;
+  offset: string | undefined | null = '0';
+  row: string | undefined | null = '500';
 }
