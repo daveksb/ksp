@@ -21,7 +21,6 @@ import {
 import {
   formatDatePayload,
   getCookie,
-  jsonParse,
   replaceEmptyWithNull,
 } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
@@ -42,7 +41,6 @@ export class NewForeignUserDetailComponent implements OnInit {
   approveChoices = approveChoices;
   checkedResult: any;
   kspRequest = new KspRequest();
-  requestId!: number | null;
   setPassword = '';
   birthdate = '';
   passportstartdate = '';
@@ -65,7 +63,7 @@ export class NewForeignUserDetailComponent implements OnInit {
     passportenddate: [null],
     visaclass: [null],
     visatype: [null],
-    visaenddate: [null],
+    visaexpiredate: [null],
   });
 
   verifyForm = this.fb.group({
@@ -107,30 +105,13 @@ export class NewForeignUserDetailComponent implements OnInit {
     this.eRequestService.getKspRequestById(id).subscribe((res) => {
       //console.log('this.userData = ', res);
       this.kspRequest = res;
-      //console.log('request data1 = ', res);
-      this.patchData(this.kspRequest);
+      this.form.patchValue(formatDatePayload(res));
     });
-  }
-
-  patchData(data: any) {
-    if (data.birthdate) {
-      this.kspRequest.birthdate = data.birthdate.split('T')[0];
-    }
-
-    if (data.passportstartdate) {
-      this.kspRequest.passportstartdate = data.passportstartdate.split('T')[0];
-    }
-
-    if (data.passportenddate) {
-      this.kspRequest.passportenddate = data.passportenddate.split('T')[0];
-    }
-
-    this.form.patchValue(<any>this.kspRequest);
   }
 
   unApproveUser() {
     const payload: KspApprovePayload = {
-      requestid: `${this.requestId}`,
+      requestid: `${this.kspRequest.id}`,
       process: '1',
       status: '3',
       detail: null,
@@ -147,7 +128,7 @@ export class NewForeignUserDetailComponent implements OnInit {
 
   approveUser() {
     const payload: KspApprovePayload = {
-      requestid: `${this.requestId}`,
+      requestid: `${this.kspRequest.id}`,
       process: '1',
       status: '2',
       detail: null,
@@ -210,7 +191,7 @@ export class NewForeignUserDetailComponent implements OnInit {
       this.myInfoService
         .insertMyInfo(replaceEmptyWithNull(payload))
         .subscribe((res) => {
-          console.log('insert myinfo = ', res);
+          //console.log('insert myinfo = ', res);
           this.completeDialog();
         });
     });

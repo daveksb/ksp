@@ -190,10 +190,12 @@ export function eSelfCheckStatus(
   statusId: number,
   requestType: number
 ) {
+  //console.log('p = ', processId, 's = ', statusId, 'type = ', requestType);
   const process = eSelfCheckProcess(processId, requestType);
   const status = process?.status.find((s) => {
     return s.id == statusId;
   });
+  //console.log('status = ', status);
   return status;
 }
 

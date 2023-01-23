@@ -204,7 +204,7 @@
           <div class="col-md-6 mb-2">
             <label class="form-label">Valid Until</label>
             <input
-              formControlName="visaenddate"
+              formControlName="visaexpiredate"
               type="date"
               class="form-control"
             />
@@ -216,6 +216,7 @@
   <form [formGroup]="verifyForm">
     <div class="bg-white p-3 mt-3">
       <e-service-license-check
+        [mode]="kspRequest.status === '1' ? 'edit' : 'view'"
         formControlName="result"
         [checkedResult]="checkedResult"
         [choices]="approveChoices"
