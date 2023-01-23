@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UniserviceImportType } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
-  ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import {
   StudentListSubjectComponent,
@@ -17,12 +16,10 @@ import {
   GeneralInfoService,
   LoaderService,
   UniInfoService,
-  UniRequestService,
 } from '@ksp/shared/service';
 import localForage from 'localforage';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
-import { EMPTY, Subject, switchMap } from 'rxjs';
-import * as XLSX from 'xlsx';
+import { Subject } from 'rxjs';
 import {
   getCookie,
   idCardPattern,
@@ -414,5 +411,14 @@ export class ImportStudentComponent implements OnInit {
 
   prev() {
     this.router.navigate(['/degree-cert', 'list-approved']);
+  }
+
+  autoScroll() {
+    setTimeout(() => {
+      const doc = document.getElementById('address-info');
+      if (doc != null) {
+        doc.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+      }   
+    }, 0);
   }
 }

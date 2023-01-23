@@ -818,4 +818,13 @@ export class ImportStudentComponent implements OnInit {
       return invalidform || empytychecked;
     }
   }
+
+  autoScroll() {
+    setTimeout(() => {
+      const doc = document.getElementById('address-info');
+      if (doc != null) {
+        doc.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+      }   
+    }, 0);
+  }
 }

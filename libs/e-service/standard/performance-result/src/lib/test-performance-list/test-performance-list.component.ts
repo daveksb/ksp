@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router, TitleStrategy } from '@angular/router';
 import { KspPaginationComponent, ListData } from '@ksp/shared/interface';
 import { EUniService, LoaderService, UniInfoService } from '@ksp/shared/service';
-import { parseJson, stringToThaiDate } from '@ksp/shared/utility';
+import { parseJson, stringToThaiDate, thaiDate } from '@ksp/shared/utility';
 import _ from 'lodash';
 import { map, Subject } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
@@ -120,8 +120,9 @@ export class TestPerformanceListComponent extends KspPaginationComponent impleme
           data.unitypename = findType ? findType.label : '';
           data.createdate = data.createdate ? stringToThaiDate(data.createdate) : '';
           data.studentlist = data.studentlist ? JSON.parse(data.studentlist).map((data: any)=>{
-            data.admissiondate = data.admissiondate ? stringToThaiDate(data.admissiondate) : '';
-            data.importdate = data.importdate ? stringToThaiDate(data.importdate) : '';
+            // data.admissiondate = data.admissiondate ? stringToThaiDate(data.admissiondate) : '';
+            // console.log(data.importdate)
+            // data.importdate = data.importdate ? thaiDate() : '';
             return data;
           }) : [];
           return data;
@@ -141,6 +142,7 @@ export class TestPerformanceListComponent extends KspPaginationComponent impleme
   selectRow(row: any) {
     this.rowSelected = row;
     this.dataSource2 = this.rowSelected.studentlist;
+    console.log(this.dataSource2)
   }
 
   getFullName(element: any) {
@@ -155,6 +157,10 @@ export class TestPerformanceListComponent extends KspPaginationComponent impleme
       return search == 'name' ? (data.prefixth+data.firstnameth+data.lastnameth).includes(searchstring) 
       : data[search].includes(searchstring);
     })
+  }
+
+  downloadfile() {
+    window.open('/assets/file/Example_import_performance.xlsx', '_blank');
   }
 }
 
