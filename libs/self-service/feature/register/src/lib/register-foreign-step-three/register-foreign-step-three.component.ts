@@ -30,7 +30,7 @@ export class RegisterForeignStepThreeComponent implements OnInit {
   ) {}
 
   savingData: any;
-  passportNo = '';
+  kurusapano = '';
   passwordEqual = false;
   validatorMessages = validatorMessages;
   eyeIconClicked1 = false;
@@ -55,7 +55,7 @@ export class RegisterForeignStepThreeComponent implements OnInit {
   ngOnInit(): void {
     localForage.getItem('registerForeigner').then((res: any) => {
       this.savingData = res;
-      this.passportNo = res.passportno;
+      this.kurusapano = res.kuruspano;
       //console.log('form = ', res);
     });
   }
