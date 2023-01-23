@@ -18,7 +18,12 @@ import {
   GeneralInfoService,
   MyInfoService,
 } from '@ksp/shared/service';
-import { formatDatePayload, getCookie, jsonParse } from '@ksp/shared/utility';
+import {
+  formatDatePayload,
+  getCookie,
+  jsonParse,
+  replaceEmptyWithNull,
+} from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -38,7 +43,6 @@ export class NewForeignUserDetailComponent implements OnInit {
   checkedResult: any;
   kspRequest = new KspRequest();
   requestId!: number | null;
-  userData: any;
   setPassword = '';
   birthdate = '';
   passportstartdate = '';
@@ -101,8 +105,7 @@ export class NewForeignUserDetailComponent implements OnInit {
 
   loadRequestFromId(id: number) {
     this.eRequestService.getKspRequestById(id).subscribe((res) => {
-      console.log('this.userData = ', res);
-      this.userData = res;
+      //console.log('this.userData = ', res);
       this.kspRequest = res;
       //console.log('request data1 = ', res);
       this.patchData(this.kspRequest);
@@ -111,18 +114,18 @@ export class NewForeignUserDetailComponent implements OnInit {
 
   patchData(data: any) {
     if (data.birthdate) {
-      this.userData.birthdate = data.birthdate.split('T')[0];
+      this.kspRequest.birthdate = data.birthdate.split('T')[0];
     }
 
     if (data.passportstartdate) {
-      this.userData.passportstartdate = data.passportstartdate.split('T')[0];
+      this.kspRequest.passportstartdate = data.passportstartdate.split('T')[0];
     }
 
     if (data.passportenddate) {
-      this.userData.passportenddate = data.passportenddate.split('T')[0];
+      this.kspRequest.passportenddate = data.passportenddate.split('T')[0];
     }
 
-    this.form.patchValue(<any>this.userData);
+    this.form.patchValue(<any>this.kspRequest);
   }
 
   unApproveUser() {
@@ -154,19 +157,62 @@ export class NewForeignUserDetailComponent implements OnInit {
     };
 
     this.eRequestService.KspUpdateRequestProcess(payload).subscribe(() => {
-      const user: SelfMyInfo = {
-        ...this.userData,
+      const myInfo: SelfMyInfo = {
+        //lastlogouttime: '2022-09-06T00:20:13',
+        isactive: '1',
+        username: this.kspRequest.kuruspano,
+        password: this.kspRequest.uniqueno,
+        firstnameth: null,
+        lastnameth: null,
+        firstnameen: this.kspRequest.firstnameen,
+        lastnameen: this.kspRequest.lastnameen,
+        //idcardno: this.kspRequest.idcardno,
+        idcardno: this.kspRequest.kuruspano,
+        kuruspano: this.kspRequest.kuruspano,
+        phone: this.kspRequest.contactphone,
+        email: this.kspRequest.email,
+        birthdate: this.kspRequest.birthdate,
+        province: null,
+        nationality: this.kspRequest.nationality,
+        religion: null,
+        addressinfo: null, //"{'field1':'data1','field2':'data2','field3':'data3'}",
+        schooladdrinfo: null, //"{'field1':'data1','field2':'data2','field3':'data3'}",
+        eduinfo: null, //"{'field1':'data1','field2':'data2','field3':'data3'}",
+        experienceinfo: null, //"{'field1':'data1','field2':'data2','field3':'data3'}",
+        competencyinfo: null, //"{'field1':'data1','field2':'data2','field3':'data3'}",
+        selfdevelopmentinfo: null, //"{'field1':'data1','field2':'data2','field3':'data3'}",
+        paymenthistory: null, //"{'field1':'data1','field2':'data2','field3':'data3'}",
+        usertype: '2', // ครูต่างชาติ
+        prefixth: null,
+        prefixen: this.kspRequest.prefixen,
+        middlenameen: this.kspRequest.middlenameen,
+        idcardbackno: null,
+        idcardimage: null,
+        passportno: this.kspRequest.passportno,
+        passportstartdate: this.kspRequest.passportstartdate,
+        passportenddate: this.kspRequest.passportenddate,
+        visaclass: this.kspRequest.visaclass,
+        visatype: this.kspRequest.visatype,
+        visaenddate: this.kspRequest.visaexpiredate,
+        teachercouncilidno: null, //this.kspRequest.kuruspano,
+        country: this.kspRequest.country,
+        identificationno: null, //'111',
+        approveinfo: null, //"{'field1':'data1','field2':'data2','field3':'data3'}",
+        requestinfo: null, //"{'field1':'data1','field2':'data2','field3':'data3'}",
+        licenseinfo: null, //"{'field1':'data1','field2':'data2','field3':'data3'}",
+        uniquetimestamp: uuidv4(),
+        personimage: null,
+        sex: this.kspRequest.sex,
       };
 
-      user.usertype = '2'; // ครูต่างชาติ
-      user.isactive = '1';
-      user.uniquetimestamp = uuidv4();
-      user.username = this.userData.passportno;
-      user.password = this.userData.uniqueno;
+      const payload = formatDatePayload(myInfo);
 
-      this.myInfoService.insertMyInfo(user).subscribe(() => {
-        this.completeDialog();
-      });
+      this.myInfoService
+        .insertMyInfo(replaceEmptyWithNull(payload))
+        .subscribe((res) => {
+          console.log('insert myinfo = ', res);
+          this.completeDialog();
+        });
     });
   }
 
