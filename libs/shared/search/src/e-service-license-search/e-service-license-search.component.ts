@@ -37,6 +37,7 @@ export class EServiceLicenseSearchComponent extends KspFormBaseComponent {
     status: [null],
     requestdatefrom: [null],
     requestdateto: [null],
+    isurgent: [null],
   });
 
   constructor(private fb: FormBuilder) {
