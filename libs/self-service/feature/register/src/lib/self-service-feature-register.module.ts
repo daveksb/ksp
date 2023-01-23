@@ -18,6 +18,7 @@ import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { UniFormBadgeComponent } from '@ksp/shared/ui';
 
 export const routes: Routes = [
   {
@@ -68,6 +69,7 @@ export const routes: Routes = [
     MatTooltipModule,
     FileUploadComponent,
     MatDatepickerModule,
+    UniFormBadgeComponent,
   ],
   declarations: [
     RegisterUserInfoComponent,

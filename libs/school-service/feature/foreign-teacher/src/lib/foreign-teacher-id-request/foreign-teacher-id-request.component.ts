@@ -103,17 +103,14 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
         this.requestData.requestno = res.requestno ?? '';
         this.requestData.isclose =
           this.requestData.isclose === '1' ? true : false;
-        res.birthdate = formatDate(res.birthdate);
-        res.passportstartdate = formatDate(res.passportstartdate);
-        res.passportenddate = formatDate(res.passportenddate);
-        res.visaexpiredate = formatDate(res.visaexpiredate);
         const fileinfo = parseJson(res?.fileinfo || '');
         if (fileinfo) {
           this.foreignFiles.forEach(
             (group, index) => (group.files = fileinfo[index])
           );
         }
-        this.form.controls.foreignTeacher.patchValue(<any>res);
+        const data: any = { ...res, ...{ country: Number(res.country) } };
+        this.form.controls.foreignTeacher.patchValue(data);
         this.form.controls.visainfo.patchValue(<any>res);
       }
     });

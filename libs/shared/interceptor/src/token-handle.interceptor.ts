@@ -18,11 +18,11 @@ export class TokenHandleInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     const token = getCookie('userToken');
     if (
+      request.url.includes('ksppublic') ||
       request.url.includes('ksprequestinsertforisforeign') ||
       request.url.includes('selfmyinfoinsert') ||
       request.url.includes('kspmasterdata') ||
       request.url.includes('ksplogin') ||
-      request.url.includes('ksppublic') ||
       request.url.includes('schschoolselect') ||
       (request.url.includes('kspfileinsert') &&
         (request.body.requesttype == '1' || request.body.requesttype == '2')) ||

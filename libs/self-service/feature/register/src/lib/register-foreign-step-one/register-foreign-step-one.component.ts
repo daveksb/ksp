@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AddressService, GeneralInfoService } from '@ksp/shared/service';
+import { formatDatePayload } from '@ksp/shared/utility';
 import localForage from 'localforage';
 import { Observable } from 'rxjs';
 @Component({
@@ -19,7 +20,6 @@ export class RegisterForeignStepOneComponent implements OnInit {
   nationalitys$!: Observable<any>;
   prefixList$!: Observable<any>;
   countries$!: Observable<any>;
-  previousForm!: any;
   form = this.fb.group({
     prefixen: [null, [Validators.required]],
     firstnameen: [null, [Validators.required]],
@@ -37,14 +37,19 @@ export class RegisterForeignStepOneComponent implements OnInit {
     this.countries$ = this.addressService.getCountry();
     this.nationalitys$ = this.generalInfoService.getNationality();
     localForage.getItem('registerForeigner').then((res: any) => {
-      this.previousForm = res;
       //console.log('pv form = ', res);
+      const payload = {
+        ...res,
+        ...{ phone: res.contactphone, country: Number(res.country) },
+      };
+      this.form.patchValue(formatDatePayload(payload));
+
+      const data = { ...res, ...this.form.value };
+      localForage.setItem('registerForeigner', data);
     });
   }
 
   next() {
-    const data = { ...this.previousForm, ...this.form.value };
-    localForage.setItem('registerForeigner', data);
     this.router.navigate(['/register', 'en-step-2']);
   }
 
