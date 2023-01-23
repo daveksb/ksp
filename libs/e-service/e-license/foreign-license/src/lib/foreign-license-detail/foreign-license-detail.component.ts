@@ -91,7 +91,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
       } else if (res.status === '3') {
         this.checkedResult = verifyChoices[1].value;
       }
-      console.log('checkResult = ', this.checkedResult);
+      //console.log('checkResult = ', this.checkedResult);
     });
   }
 
@@ -110,6 +110,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
         (group, index) => (group.files = fileinfo[index])
       );
     }
+    data.country = Number(data.country);
     this.form.controls.foreignTeacherInfo.patchValue(data);
     this.form.controls.foreignVisaInfo.patchValue(data);
   }

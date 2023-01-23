@@ -37,7 +37,8 @@ export class RegisterForeignStepTwoComponent implements OnInit {
 
     localForage.getItem('registerForeigner').then((res: any) => {
       //console.log('load data x = ', res);
-      this.form.patchValue(formatDatePayload(res));
+      const form = { ...res, ...{ visaenddate: res.visaexpireddate } };
+      this.form.patchValue(formatDatePayload(form));
       const data = { ...res, ...this.form.value };
       localForage.setItem('registerForeigner', data);
     });

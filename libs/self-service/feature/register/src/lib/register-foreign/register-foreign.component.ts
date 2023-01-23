@@ -4,12 +4,11 @@ import { Router } from '@angular/router';
 import { SelfRequestService } from '@ksp/shared/service';
 import localForage from 'localforage';
 @Component({
-  //selector: 'ksp-register-foreign',
   templateUrl: './register-foreign.component.html',
   styleUrls: ['./register-foreign.component.scss'],
 })
 export class RegisterForeignComponent {
-  searchSubmit = false;
+  searchNotFound = false;
   form = this.fb.group({
     kuruspano: [null, [Validators.required]],
     passportno: [null, [Validators.required]],
@@ -22,17 +21,17 @@ export class RegisterForeignComponent {
   ) {}
 
   submit() {
-    const kspNo = this.form.value.kuruspano;
-    if (kspNo) {
-      this.requestService.searchKuruspano(kspNo).subscribe((res) => {
+    const personId = this.form.value.kuruspano || this.form.value.passportno;
+    if (personId) {
+      this.requestService.searchKuruspano(personId).subscribe((res) => {
         if (res && res.returncode && res.returncode === '98') {
           //not found
-          this.searchSubmit = true;
-          console.log('not found !!');
+          this.searchNotFound = true;
         } else {
-          console.log('res xx = ', res);
           localForage.setItem('registerForeigner', res);
-          this.router.navigate(['/register', 'en-step-1']);
+          setTimeout(() => {
+            this.router.navigate(['/register', 'en-step-1']);
+          }, 500);
         }
       });
     }
