@@ -29,36 +29,6 @@ import * as _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 import { Subject } from 'rxjs';
 
-const EXPERIENCE_FILES: FileGroup[] = [
-  {
-    name: '1. สำเนาวุฒิทางการศึกษา',
-    files: [],
-  },
-  {
-    name: '2. หนังสือรับรองคุณวุฒิ',
-    files: [],
-  },
-  {
-    name: '3. วุฒิบัตรอบรม',
-    files: [],
-  },
-];
-
-const EDU_FILES: FileGroup[] = [
-  {
-    name: '1. สำเนาวุฒิทางการศึกษา',
-    files: [],
-  },
-  {
-    name: '2. เอกสารผู้สำเร็จการศึกษา (ระบบ KSP BUNDIT)',
-    files: [],
-  },
-  {
-    name: '3. วุฒิบัตรอบรม',
-    files: [],
-  },
-];
-
 @UntilDestroy()
 @Component({
   selector: 'self-service-license-request-school-manager',
@@ -71,9 +41,9 @@ export class LicenseRequestSchoolManagerComponent
 {
   isLoading: Subject<boolean> = this.loaderService.isLoading;
   userInfoType = UserInfoFormType.thai;
-  experienceFiles: any[] = [];
-  eduFiles: any[] = [];
-
+  experienceFiles: FileGroup[] = [];
+  eduFiles: FileGroup[] = [];
+  selectedTabIndex = 0;
   override form = this.fb.group({
     userInfo: [],
     address1: [],
@@ -235,3 +205,33 @@ export class LicenseRequestSchoolManagerComponent
     return payload;
   }
 }
+
+const EXPERIENCE_FILES: FileGroup[] = [
+  {
+    name: '1. สำเนาวุฒิทางการศึกษา',
+    files: [],
+  },
+  {
+    name: '2. หนังสือรับรองคุณวุฒิ',
+    files: [],
+  },
+  {
+    name: '3. วุฒิบัตรอบรม',
+    files: [],
+  },
+];
+
+const EDU_FILES: FileGroup[] = [
+  {
+    name: '1. สำเนาวุฒิทางการศึกษา',
+    files: [],
+  },
+  {
+    name: '2. เอกสารผู้สำเร็จการศึกษา (ระบบ KSP BUNDIT)',
+    files: [],
+  },
+  {
+    name: '3. วุฒิบัตรอบรม',
+    files: [],
+  },
+];
