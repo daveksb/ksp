@@ -29,8 +29,7 @@ export class RegisterForeignStepThreeComponent implements OnInit {
   ) {}
 
   savingData: any;
-  //passportNo = '';
-  kuruspaNo = '';
+  kurusapano = '';
   passwordEqual = false;
   validatorMessages = validatorMessages;
   eyeIconClicked1 = false;
@@ -38,7 +37,6 @@ export class RegisterForeignStepThreeComponent implements OnInit {
 
   form = this.fb.group(
     {
-      //username: [null, Validators.required],
       username: [null],
       password: [null, [Validators.required, Validators.minLength(8)]],
       confirmPassword: [null, Validators.required],
@@ -55,7 +53,8 @@ export class RegisterForeignStepThreeComponent implements OnInit {
   ngOnInit(): void {
     localForage.getItem('registerForeigner').then((res: any) => {
       this.savingData = res;
-      this.kuruspaNo = res.kuruspano;
+      this.kurusapano = res.kuruspano;
+      //console.log('form = ', res);
     });
   }
 
