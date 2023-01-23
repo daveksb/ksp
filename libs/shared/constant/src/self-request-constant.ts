@@ -284,4 +284,17 @@ export const SelfRequestProcess: SchRequestProcess[] = [
       { id: 2, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
     ],
   },
+
+  //ขอใช้งาน Self Service ชาวต่างชาติ
+  {
+    requestType: 50,
+    processId: 1,
+    processName: 'สร้างแบบคำขอ',
+    status: [
+      { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
+      { id: 1, sname: 'สร้างและส่งแบบคำขอ', ename: 'สร้างและส่งแบบคำขอ' },
+      { id: 2, sname: 'อนุมัติแบบคำขอ', ename: 'อนุมัติแบบคำขอ' },
+      { id: 3, sname: 'ไม่อนุมัติแบบคำขอ', ename: 'ไม่อนุมัติแบบคำขอ' },
+    ],
+  },
 ];
