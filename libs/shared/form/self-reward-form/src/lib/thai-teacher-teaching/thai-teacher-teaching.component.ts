@@ -87,7 +87,6 @@ export class ThaiTeacherTeachingComponent
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value) => {
-        console.log(value);
         this.onChange(value);
         this.onTouched();
       })
@@ -141,6 +140,10 @@ export class ThaiTeacherTeachingComponent
           value.currentSubDistrict
         );
       });
+    }
+
+    if (this.mode === 'view') {
+      this.form.disable();
     }
 
     this.onChange(value);

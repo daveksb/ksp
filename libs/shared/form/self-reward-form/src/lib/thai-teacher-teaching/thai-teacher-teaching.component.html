@@ -154,7 +154,7 @@
   </div>
   <div class="d-flex align-items-center mt-3">
     <div class="box-header text-primary me-3">การสอนปัจจุบัน</div>
-    <input type="checkbox" class="me-2" (change)="useSameAddress($event)" />
+    <input type="checkbox" class="me-2" (change)="useSameAddress($event)" [disabled]="this.mode === 'view'" />
     <label class="form-label">สอนที่เดิม</label>
   </div>
   <div class="border rounded px-3 py-2">

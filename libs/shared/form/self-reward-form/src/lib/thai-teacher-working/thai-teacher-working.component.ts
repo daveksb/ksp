@@ -43,7 +43,6 @@ export class ThaiTeacherWorkingComponent
         });
       }
     });
-
     if (this.mode === 'view') {
       this.form.disable();
     }
