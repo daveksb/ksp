@@ -277,6 +277,10 @@ export class TestDataDetailComponent implements OnInit {
   get subjectCode() {
     return this.form.controls.subjectname.value;
   }
+
+  downloadfile() {
+    window.open('/assets/file/Example_import_result.xls', '_blank');
+  }
 }
 
 const displayedColumns: string[] = [

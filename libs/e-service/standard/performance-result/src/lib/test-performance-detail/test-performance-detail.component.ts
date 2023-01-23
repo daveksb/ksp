@@ -98,7 +98,7 @@ export class TestPerformanceDetailComponent implements OnInit {
         this.sumalladmission = res.coursestructure.reduce((curr: any, next: any) => {
           return curr + next.student;
         }, 0);
-        this.sumalladmission = this.sumalladmission.toLocaleString();
+        this.sumalladmission = Number(this.sumalladmission).toLocaleString();
         this.degreecertData = res;
       }
     })
@@ -221,7 +221,7 @@ export class TestPerformanceDetailComponent implements OnInit {
       ) {
         console.log('yep')
         newOb.isValid = false;
-        newOb.importstatus = '2'
+        newOb.importstatus = '1'
       }
       return newOb;
     });
