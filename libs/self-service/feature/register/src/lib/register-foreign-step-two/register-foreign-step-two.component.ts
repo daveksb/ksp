@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { VisaClass, VisaType } from '@ksp/shared/interface';
 import { GeneralInfoService } from '@ksp/shared/service';
+import { formatDatePayload } from '@ksp/shared/utility';
 import localForage from 'localforage';
 import { Observable } from 'rxjs';
 @Component({
@@ -17,11 +19,11 @@ export class RegisterForeignStepTwoComponent implements OnInit {
     private fb: FormBuilder,
     private generalInfoService: GeneralInfoService
   ) {}
-  visaClassList$!: Observable<any>;
-  visaTypeList$!: Observable<any>;
+  visaClassList$!: Observable<VisaClass[]>;
+  visaTypeList$!: Observable<VisaType[]>;
   form = this.fb.group({
     idcardno: [],
-    passportno: [null, Validators.required],
+    passportno: [],
     passportstartdate: [],
     passportenddate: [],
     visaclass: [],
@@ -32,14 +34,18 @@ export class RegisterForeignStepTwoComponent implements OnInit {
   ngOnInit() {
     this.visaClassList$ = this.generalInfoService.getVisaClass();
     this.visaTypeList$ = this.generalInfoService.getVisaType();
+
+    localForage.getItem('registerForeigner').then((res: any) => {
+      console.log('load data x = ', res);
+      this.form.patchValue(formatDatePayload(res));
+      const data = { ...res, ...this.form.value };
+      localForage.setItem('registerForeigner', data);
+      console.log('ggg = ');
+    });
   }
 
   nextStep() {
-    localForage.getItem('registerForeigner').then((res: any) => {
-      const data = { ...res, ...this.form.value };
-      localForage.setItem('registerForeigner', data);
-      this.router.navigate(['/register', 'en-step-3']);
-    });
+    this.router.navigate(['/register', 'en-step-3']);
   }
 
   loginPage() {
