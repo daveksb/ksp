@@ -19,6 +19,7 @@ import { formatRequestNo, parseJson, thaiDate } from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
 import {
   Amphur,
+  Bureau,
   KspComment,
   Nationality,
   Prefix,
@@ -39,11 +40,11 @@ export abstract class LicenseFormBaseComponent {
   provinces1$!: Observable<Province[]>;
   amphurs1$!: Observable<Amphur[]>;
   tumbols1$!: Observable<Tambol[]>;
-  amphurs2$!: Observable<any>;
-  tumbols2$!: Observable<any>;
-  amphurs3$!: Observable<any>;
-  tumbols3$!: Observable<any>;
-  bureau$!: Observable<any>;
+  amphurs2$!: Observable<Amphur[]>;
+  tumbols2$!: Observable<Tambol[]>;
+  amphurs3$!: Observable<Amphur[]>;
+  tumbols3$!: Observable<Tambol[]>;
+  bureau$!: Observable<Bureau[]>;
   form!: FormGroup;
   uniqueTimestamp!: string;
   requestId!: number;
