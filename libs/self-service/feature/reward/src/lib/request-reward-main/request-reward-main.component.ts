@@ -220,11 +220,13 @@ export class RequestRewardMainComponent implements OnInit {
       }
       case 41: {
         const rewardTeacherInfo = parseJson(rewardteacherinfo);
+        const rewardPunishmentInfo = parseJson(rewardpunishmentinfo);
         const eduInfo = parseJson(eduinfo);
         const hiringInfo = parseJson(hiringinfo);
         const teachingInfo = parseJson(teachinginfo);
         this.form.controls.rewardDetail.patchValue(<any>{
           rewardTeacherInfo,
+          rewardPunishmentInfo,
           eduInfo,
           hiringInfo,
           teachingInfo,
