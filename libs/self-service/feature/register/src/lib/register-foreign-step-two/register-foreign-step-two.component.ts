@@ -36,11 +36,10 @@ export class RegisterForeignStepTwoComponent implements OnInit {
     this.visaTypeList$ = this.generalInfoService.getVisaType();
 
     localForage.getItem('registerForeigner').then((res: any) => {
-      console.log('load data x = ', res);
+      //console.log('load data x = ', res);
       this.form.patchValue(formatDatePayload(res));
       const data = { ...res, ...this.form.value };
       localForage.setItem('registerForeigner', data);
-      console.log('ggg = ');
     });
   }
 

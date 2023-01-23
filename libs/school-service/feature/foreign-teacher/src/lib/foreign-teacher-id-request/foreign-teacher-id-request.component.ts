@@ -103,10 +103,10 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
         this.requestData.requestno = res.requestno ?? '';
         this.requestData.isclose =
           this.requestData.isclose === '1' ? true : false;
-        res.birthdate = formatDate(res.birthdate);
+        /* res.birthdate = formatDate(res.birthdate);
         res.passportstartdate = formatDate(res.passportstartdate);
         res.passportenddate = formatDate(res.passportenddate);
-        res.visaexpiredate = formatDate(res.visaexpiredate);
+        res.visaexpiredate = formatDate(res.visaexpiredate); */
         const fileinfo = parseJson(res?.fileinfo || '');
         if (fileinfo) {
           this.foreignFiles.forEach(
