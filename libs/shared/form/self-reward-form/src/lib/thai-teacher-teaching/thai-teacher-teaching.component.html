@@ -154,7 +154,7 @@
   </div>
   <div class="d-flex align-items-center mt-3">
     <div class="box-header text-primary me-3">การสอนปัจจุบัน</div>
-    <input type="checkbox" class="me-2" (change)="useSameAddress($event)" />
+    <input type="checkbox" class="me-2" (change)="useSameAddress($event)" [disabled]="this.mode === 'view'" />
     <label class="form-label">สอนที่เดิม</label>
   </div>
   <div class="border rounded px-3 py-2">
@@ -242,10 +242,110 @@
           type="text"
           formControlName="continuousTeachingYear" />
       </div>
-      <div class="col-md-6 mb-2">
+      <!-- <div class="col-md-6 mb-2">
         <label class="form-label required">ชื่อผลงาน</label>
         <input class="form-control" type="text" formControlName="workTitle" />
+      </div> -->
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 mb-2">
+        <label class="form-label">ชื่อผลงานที่ใช้ขอเลื่อนวิทยฐานะ (ปี)
+          <label class="text-danger">
+            * สามารถระบุได้สูงสุด 3 ผลงาน
+          </label>
+        </label>
+        <ng-container formArrayName="promoteWorks">
+          <ng-container *ngFor="let form of promoteWorks.controls; let i = index">
+            <ng-container [formGroupName]="i">
+              <div class="d-flex">
+                <input
+                  class="form-control mb-2"
+                  type="text"
+                  formControlName="work" />
+                <div class="d-flex justify-content-end mx-2" *ngIf=" i> 0">
+                  <i
+                    class="bi bi-x-circle-fill text-danger"
+                    (click)="deleteFormArray(promoteWorks, i)"
+                    role="button"></i>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+        </ng-container>
       </div>
     </div>
+    <div class="d-flex justify-content-end mt-3" *ngIf="mode === 'edit' && promoteWorks.length < 3">
+      <ksp-add-row-button
+        class="text-primary"
+        (addRowClick)="addFormArray(promoteWorks)">เพิ่มชื่อผลงานที่ขอใช้เลื่อนวิทยฐานะ</ksp-add-row-button>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 mb-2">
+        <label class="form-label">ชื่อผลงานที่ใช้ขอตำแหน่งวิชาการ
+          <label class="text-danger">
+            * สามารถระบุได้สูงสุด 3 ผลงาน
+          </label>
+        </label>
+        <ng-container formArrayName="askPositionWorks">
+          <ng-container *ngFor="let form of askPositionWorks.controls; let i = index">
+            <ng-container [formGroupName]="i">
+              <div class="d-flex">
+                <input
+                  class="form-control mb-2"
+                  type="text"
+                  formControlName="work" />
+                <div class="d-flex justify-content-end mx-2" *ngIf=" i> 0">
+                  <i
+                    class="bi bi-x-circle-fill text-danger"
+                    (click)="deleteFormArray(askPositionWorks, i)"
+                    role="button"></i>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="d-flex justify-content-end mt-3" *ngIf="mode === 'edit' && askPositionWorks.length < 3">
+      <ksp-add-row-button
+        class="text-primary"
+        (addRowClick)="addFormArray(askPositionWorks)">เพิ่มชื่อผลงานที่ขอใช้ตำแหน่งวิชาการ</ksp-add-row-button>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 mb-2">
+        <label class="form-label">ชื่องานวิจัยที่เป็นส่วนหนึ่งของการสำเร็จการศึกษาระดับปริญญา
+          <label class="text-danger">
+            * สามารถระบุได้สูงสุด 3 ผลงาน
+          </label>
+        </label>
+        <ng-container formArrayName="graduateWorks">
+          <ng-container *ngFor="let form of graduateWorks.controls; let i = index">
+            <ng-container [formGroupName]="i">
+              <div class="d-flex">
+                <input
+                  class="form-control mb-2"
+                  type="text"
+                  formControlName="work" />
+                <div class="d-flex justify-content-end mx-2" *ngIf=" i> 0">
+                  <i
+                    class="bi bi-x-circle-fill text-danger"
+                    (click)="deleteFormArray(graduateWorks, i)"
+                    role="button"></i>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="d-flex justify-content-end mt-3" *ngIf="mode === 'edit' && graduateWorks.length < 3">
+      <ksp-add-row-button
+        class="text-primary"
+        (addRowClick)="addFormArray(graduateWorks)">เพิ่มชื่องานวิจัยที่เป็นส่วนหนึ่งของการสำเร็จการศึกษาระดับปริญญา</ksp-add-row-button>
+    </div>
+
   </div>
 </form>
