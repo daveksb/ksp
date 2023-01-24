@@ -206,7 +206,6 @@ export class FormUserWorkplaceComponent
       const postCode: any = this.tumbols.find(
         (t) => t.tambolCode === tumbolCode
       );
-
       this.form.controls.postcode.patchValue(postCode.tambolPostcode);
     }
   }
