@@ -57,7 +57,11 @@ export class RequestRewardMainService {
 
   bestTeacherRewardFiles: FileGroup[] = [
     {
-      name: '1. รางวัลอื่นและประกาศเกียรติคุณ',
+      name: '1. แบบรายงานประวัติและผลงานนวัตกรรม',
+      files: [],
+    },
+    {
+      name: '2. แผนการจัดการเรียนรู้หรือแผนการจัดประสบการณ์',
       files: [],
     },
   ];

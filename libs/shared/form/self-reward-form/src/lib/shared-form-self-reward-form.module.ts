@@ -10,6 +10,7 @@ import { ThaiTeacherTeachingComponent } from './thai-teacher-teaching/thai-teach
 import { ThaiTeacherWorkingComponent } from './thai-teacher-working/thai-teacher-working.component';
 import { BestTeacherInfoComponent } from './best-teacher-info/best-teacher-info.component';
 import { BestTeacherInnovationComponent } from './best-teacher-innovation/best-teacher-innovation.component';
+import { BestTeacherWorkingComponent } from './best-teacher-working/best-teacher-working.component';
 import { PraiseTeacherWorkingComponent } from './praise-teacher-working/praise-teacher-working.component';
 import { PraiseTeacherPunishedComponent } from './praise-teacher-punished/praise-teacher-punished.component';
 import { SeniorTeacherInfoComponent } from './senior-teacher-info/senior-teacher-info.component';
@@ -61,6 +62,7 @@ import { YearMonthPipe } from '@ksp/shared/pipe';
     ThaiTeacherTeachingComponent,
     BestTeacherInfoComponent,
     BestTeacherInnovationComponent,
+    BestTeacherWorkingComponent,
     PraiseTeacherWorkingComponent,
     PraiseTeacherPunishedComponent,
     SeniorTeacherInfoComponent,
@@ -82,6 +84,7 @@ import { YearMonthPipe } from '@ksp/shared/pipe';
     ThaiTeacherTeachingComponent,
     BestTeacherInfoComponent,
     BestTeacherInnovationComponent,
+    BestTeacherWorkingComponent,
     PraiseTeacherWorkingComponent,
     PraiseTeacherPunishedComponent,
     SeniorTeacherInfoComponent,
