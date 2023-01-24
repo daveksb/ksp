@@ -93,6 +93,16 @@ export class RenewLicenseRequestComponent
         this.myLicense = res[0];
       }
     });
+
+    this.form.controls.workplace.valueChanges.subscribe((res: any) => {
+      if (res.notRequired) {
+        const payload: any = { educationType: '1' };
+        this.form.controls.standardWorking.patchValue(payload);
+      } else {
+        const payload: any = { educationType: '0' };
+        this.form.controls.standardWorking.patchValue(payload);
+      }
+    });
   }
 
   get userInfoForm() {
