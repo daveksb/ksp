@@ -1,18 +1,17 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { changeToEnglishMonth, thaiDate } from '@ksp/shared/utility';
-import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { EngDatePipe, ThaiDatePipe } from '@ksp/shared/pipe';
 
 @Component({
   selector: 'self-service-request-status',
   standalone: true,
-  imports: [CommonModule, ThaiDatePipe],
+  imports: [CommonModule, ThaiDatePipe, EngDatePipe],
   templateUrl: './request-status.component.html',
   styleUrls: ['./request-status.component.scss'],
 })
 export class RequestStatusComponent {
-  changeToEnglishMonth = changeToEnglishMonth;
   today = `${new Date()}`;
+  @Input() isForeign = false;
   @Input() title = 'รายละเอียดแบบคำขอ';
   @Input() headerLabel1 = 'วันที่ทำรายการ';
   @Input() headerLabel2 = 'เลขแบบคำขอ';
@@ -24,5 +23,4 @@ export class RequestStatusComponent {
   @Input() idcardNo: string | null = '';
   @Input() licenseStartDate: string | null = '';
   @Input() licenseEndDate: string | null = '';
-  @Input() isForeign = false;
 }

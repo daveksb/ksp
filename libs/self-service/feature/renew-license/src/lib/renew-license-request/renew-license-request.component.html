@@ -11,8 +11,10 @@
 <div class="main__container px-4 py-2">
   <self-service-request-status
     [requestDate]="requestDate"
+    [licenseNo]="myLicense.licenseno"
+    [licenseStartDate]="myLicense.licensestartdate"
+    [licenseEndDate]="myLicense.licenseenddate"
     [idcardNo]="(myInfo$ | async)?.idcardno || ''"
-    [kurusapaNo]="(myInfo$ | async)?.kuruspano || ''"
     [requestNo]="requestNo"
   ></self-service-request-status>
 

@@ -18,7 +18,7 @@ import {
   LoaderService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { FileGroup, SelfRequest } from '@ksp/shared/interface';
+import { FileGroup, SelfLicense, SelfRequest } from '@ksp/shared/interface';
 import {
   getCookie,
   parseJson,
@@ -55,6 +55,7 @@ export class RenewLicenseRequestComponent
   disableNextButton = false;
   workingInfoFiles: FileGroup[] = [];
   workingInfoFiles2: FileGroup[] = [];
+  myLicense = new SelfLicense();
 
   constructor(
     router: Router,
@@ -88,7 +89,10 @@ export class RenewLicenseRequestComponent
 
     const idcardno = getCookie('idCardNo');
     this.myInfoService.getMyLicense(idcardno).subscribe((res) => {
-      console.log('my license = ', res);
+      //console.log('my license = ', res);
+      if (res) {
+        this.myLicense = res[0];
+      }
     });
   }
 
