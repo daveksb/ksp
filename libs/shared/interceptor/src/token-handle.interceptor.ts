@@ -16,9 +16,10 @@ export class TokenHandleInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const token = getCookie('userToken') || null;
+    const token = getCookie('userToken');
     if (
       request.url.includes('ksppublic') ||
+      request.url.includes('checkphoneandidcardno') ||
       request.url.includes('ksprequestinsertforisforeign') ||
       request.url.includes('selfmyinfoinsert') ||
       request.url.includes('kspmasterdata') ||
@@ -47,7 +48,7 @@ export class TokenHandleInterceptor implements HttpInterceptor {
     }
 
     if (request.method === 'POST') {
-      //console.log('token url = ', request.url);
+      console.log('token url = ', request.url);
       request = request.clone({
         body: { ...request.body, tokenkey: token },
       });

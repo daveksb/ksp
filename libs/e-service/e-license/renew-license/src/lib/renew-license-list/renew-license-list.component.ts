@@ -66,6 +66,7 @@ export class RenewLicenseListComponent implements AfterViewInit {
       careertype: params.careertype,
       name: null,
       idcardno: params.idcardno,
+      isurgent: params.isurgent ? '1' : null,
       passportno: null,
       process: params.process || '2',
       status: params.status,
