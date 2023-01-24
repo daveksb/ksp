@@ -89,7 +89,6 @@ export class RenewLicenseRequestComponent
 
     const idcardno = getCookie('idCardNo');
     this.myInfoService.getMyLicense(idcardno).subscribe((res) => {
-      //console.log('my license = ', res);
       if (res) {
         this.myLicense = res[0];
       }
