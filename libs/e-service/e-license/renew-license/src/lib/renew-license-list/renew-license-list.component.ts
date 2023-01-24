@@ -113,6 +113,7 @@ export class RenewLicenseListComponent implements AfterViewInit {
 export const column = [
   'id',
   'edit',
+  'isurgent',
   'requestno',
   'idcardno',
   'name',

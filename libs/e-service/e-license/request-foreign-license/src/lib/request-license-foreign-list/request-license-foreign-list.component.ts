@@ -23,7 +23,6 @@ function checkProcess(processId: number, requestType: number) {
   const process = SelfRequestProcess.find((p) => {
     return p.processId === processId && p.requestType === requestType;
   });
-  //console.log('process = ', process);
   return process;
 }
 
@@ -80,6 +79,7 @@ export class RequestLicenseForeignListComponent implements AfterViewInit {
       careertype: params.careertype,
       name: null,
       idcardno: params.idcardno,
+      isurgent: params.isurgent ? '1' : null,
       passportno: null,
       process: params.process,
       status: params.status,
@@ -130,6 +130,7 @@ export class RequestLicenseForeignListComponent implements AfterViewInit {
 export const column = [
   'id',
   'edit',
+  'isurgent',
   'requestno',
   'idcardno',
   'name',
