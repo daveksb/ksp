@@ -17,4 +17,5 @@ export interface EsSearchPayload {
   offset: string | null | undefined;
   row: string | null | undefined;
   isforeign?: string | null | undefined;
+  isurgent?: string | null | undefined; // add on 23-1-2023
 }

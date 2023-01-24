@@ -23,6 +23,13 @@ export class SelfRequestService {
     );
   }
 
+  searchKuruspano(personid: string): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/ksppublic/schkuruspanoselectbypersonid`,
+      { personid: personid }
+    );
+  }
+
   createRequestNoToken(payload: Partial<KspRequest>): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspself/ksprequestinsertforisforeign`,

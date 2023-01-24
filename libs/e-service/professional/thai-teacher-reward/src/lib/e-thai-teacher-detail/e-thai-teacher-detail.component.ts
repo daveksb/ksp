@@ -7,13 +7,14 @@ import { UserInfoFormType } from '@ksp/shared/constant';
 import { KspRequest, SelfRequest } from '@ksp/shared/interface';
 import {
   AddressService,
+  EducationDetailService,
   ERequestService,
   GeneralInfoService,
 } from '@ksp/shared/service';
 import { parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
-const FORM_TAB_COUNT = 6;
+const FORM_TAB_COUNT = 7;
 
 @Component({
   selector: 'ksp-e-thai-teacher-detail',
@@ -47,10 +48,11 @@ export class EThaiTeacherDetailComponent
     userInfo: [],
     addressInfo: [],
     workplace: [],
-    rewardTeacherInfo: [],
     eduInfo: [],
     hiringInfo: [],
-    teachingInfo: [],
+    rewardTeacherInfo: [],
+    rewardPunishmentInfo: [],
+
     phone: [],
     fax: [],
     email: [],
@@ -68,7 +70,8 @@ export class EThaiTeacherDetailComponent
     route: ActivatedRoute,
     requestService: ERequestService,
     private addressService: AddressService,
-    private router: Router
+    private router: Router,
+    private educationDetailService: EducationDetailService
   ) {
     super(route, requestService);
   }
@@ -93,6 +96,7 @@ export class EThaiTeacherDetailComponent
     this.provinces2$ = this.provinces1$;
     this.provinces3$ = this.provinces1$;
     this.provinces4$ = this.provinces1$;
+    this.bureau$ = this.educationDetailService.getBureau();
   }
 
   patchData(data: SelfRequest) {
@@ -111,6 +115,7 @@ export class EThaiTeacherDetailComponent
       addressinfo,
       schooladdrinfo,
       rewardteacherinfo,
+      rewardpunishmentinfo,
       eduinfo,
       hiringinfo,
       teachinginfo,
@@ -139,6 +144,7 @@ export class EThaiTeacherDetailComponent
     this.patchWorkplaceInfo(workplaceInfo);
 
     const rewardTeacherInfo = parseJson(rewardteacherinfo);
+    const rewardPunishmentInfo = parseJson(rewardpunishmentinfo);
     const eduInfo = parseJson(eduinfo);
     const hiringInfo = parseJson(hiringinfo);
     const teachingInfo = parseJson(teachinginfo);
@@ -154,6 +160,7 @@ export class EThaiTeacherDetailComponent
     }
     this.form.patchValue(<any>{
       rewardTeacherInfo,
+      rewardPunishmentInfo,
       eduInfo,
       hiringInfo,
       teachingInfo,

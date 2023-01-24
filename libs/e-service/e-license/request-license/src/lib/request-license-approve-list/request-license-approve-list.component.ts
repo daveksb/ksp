@@ -38,10 +38,12 @@ export class RequestLicenseApproveListComponent implements AfterViewInit {
   checkStatus = eSelfCheckStatus;
   provinces$!: Observable<Province[]>;
   searchNotFound = false;
-
   form = this.fb.group({
     search: [{ requesttype: '3' }],
   });
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     private router: Router,
@@ -50,9 +52,6 @@ export class RequestLicenseApproveListComponent implements AfterViewInit {
     private loaderService: LoaderService,
     private addressService: AddressService
   ) {}
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -77,6 +76,7 @@ export class RequestLicenseApproveListComponent implements AfterViewInit {
       bureauid: null,
       requestdatefrom: params.requestdatefrom,
       requestdateto: params.requestdateto,
+      isurgent: params.isurgent ?? null,
       offset: '0',
       row: '1000',
     };
@@ -88,7 +88,6 @@ export class RequestLicenseApproveListComponent implements AfterViewInit {
         this.dataSource.data = res;
         this.dataSource.data = processFilter(res);
         this.dataSource.sort = this.sort;
-
         const sortState: Sort = {
           active: 'requestdate',
           direction: 'asc',
@@ -122,6 +121,7 @@ export class RequestLicenseApproveListComponent implements AfterViewInit {
 export const column = [
   'id',
   'edit',
+  'isurgent',
   'requestno',
   'idcardno',
   'name',
