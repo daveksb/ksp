@@ -81,10 +81,14 @@ export class BestTeacherRewardComponent
     userInfo: [],
     addressInfo: [],
     workplace: [],
-    rewardTeacherInfo: [],
+
     eduInfo: [],
-    teachingInfo: [],
+    hiringInfo: [],
+    // rewardTeacherInfo: [],
+    // teachingInfo: [],
     rewardDetailInfo: [],
+    rewardPunishmentInfo: [],
+
     phone: [],
     fax: [],
     email: [],
