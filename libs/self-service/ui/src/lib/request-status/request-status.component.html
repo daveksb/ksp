@@ -7,8 +7,15 @@
 
       <div
         class="form-label border border-white rounded-5 content__box box__primary"
+        *ngIf="!isForeign"
       >
         {{ (requestDate | thaiDate) || (today | thaiDate) }}
+      </div>
+      <div
+        class="form-label border border-white rounded-5 content__box box__primary"
+        *ngIf="isForeign"
+      >
+        {{ (requestDate | engDate) || (today | engDate) }}
       </div>
     </div>
 
@@ -42,7 +49,10 @@
       class="d-flex flex-column align-items-center col-xs-auto mb-1"
       *ngIf="kurusapaNo"
     >
-      <div class="text-black form-label">เลขที่ประจำตัวคุรุสภา</div>
+      <!-- <div class="text-black form-label">เลขที่ประจำตัวคุรุสภา</div> -->
+      <div class="text-black form-label">
+        Teachers Council of Thailand ID number
+      </div>
 
       <div
         class="form-label border border-white rounded-5 content__box box__fourth"
@@ -73,7 +83,7 @@
       <div
         class="form-label border border-white rounded-5 content__box box__second"
       >
-        {{ licenseStartDate }}
+        {{ licenseStartDate | thaiDate }}
       </div>
     </div>
 
@@ -81,12 +91,12 @@
       class="d-flex flex-column align-items-center col-xs-auto mb-1"
       *ngIf="licenseEndDate"
     >
-      <div class="text-black form-label">วันที่หมดอายุหนังสืออนุญาต</div>
+      <div class="text-black form-label">วันที่หนังสืออนุญาตหมดอายุ</div>
 
       <div
         class="form-label border border-white rounded-5 content__box box__third"
       >
-        {{ licenseEndDate }}
+        {{ licenseEndDate | thaiDate }}
       </div>
     </div>
   </div>

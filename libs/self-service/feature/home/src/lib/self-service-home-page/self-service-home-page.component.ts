@@ -66,10 +66,8 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
   ngOnInit(): void {
     this.defaultSearch();
     this.myInfoService.getMyInfo().subscribe((res) => {
-      if (res) {
-        if (res.usertype) {
-          this.userType = res.usertype;
-        }
+      if (res && res.usertype) {
+        this.userType = res.usertype;
       }
     });
   }
@@ -107,7 +105,6 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
     this.requestService.searchMyRequests(payload).subscribe((res) => {
       if (this.initialSearch) {
         this.rejectedRequests = hasRejectedRequest(res);
-        console.log('has reject = ', this.rejectedRequests);
       }
 
       if (res && res.length) {
