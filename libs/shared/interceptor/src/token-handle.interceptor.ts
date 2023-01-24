@@ -48,7 +48,7 @@ export class TokenHandleInterceptor implements HttpInterceptor {
     }
 
     if (request.method === 'POST') {
-      console.log('token url = ', request.url);
+      //console.log('token url = ', request.url);
       request = request.clone({
         body: { ...request.body, tokenkey: token },
       });

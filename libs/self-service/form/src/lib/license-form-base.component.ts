@@ -74,11 +74,9 @@ export abstract class LicenseFormBaseComponent {
     this.route.paramMap.subscribe((params) => {
       this.requestId = Number(params.get('id'));
       if (this.requestId) {
-        //console.log(this.requestId);
         // this.loadRequestFromId(this.requestId);
         this.requestService.getRequestById(this.requestId).subscribe((res) => {
           if (res) {
-            //console.log('res =', parseJson(res.detail));
             this.kspComment = parseJson(res.detail);
             this.requestData = res;
             this.requestNo = res.requestno;
