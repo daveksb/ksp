@@ -51,6 +51,7 @@
           [ngClass]="i > 0 ? 'mt-3' : 'mt-0'">
           <div class="d-flex justify-content-end" *ngIf="i > 0">
             <i
+              *ngIf="mode !== 'view'"
               class="bi bi-x-circle-fill text-danger"
               (click)="deleteFormArray(workInfo, i)"
               role="button"></i>

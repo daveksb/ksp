@@ -84,8 +84,6 @@ export class BestTeacherRewardComponent
 
     eduInfo: [],
     hiringInfo: [],
-    // rewardTeacherInfo: [],
-    // teachingInfo: [],
     rewardDetailInfo: [],
     rewardPunishmentInfo: [],
 
