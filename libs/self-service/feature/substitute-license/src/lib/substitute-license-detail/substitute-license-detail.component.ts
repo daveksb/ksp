@@ -24,19 +24,11 @@ import {
   replaceEmptyWithNull,
   toLowercaseProp,
 } from '@ksp/shared/utility';
-import { FileGroup, SelfRequest } from '@ksp/shared/interface';
+import { FileGroup, SelfLicense, SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 import localForage from 'localforage';
 import { Subject } from 'rxjs';
-
-const OBJECTIVE_FILES: FileGroup[] = [
-  { name: '1. หนังสืออนุญาตประกอบวิชาชีพที่ชํารุด', files: [] },
-  {
-    name: '2. หลักฐานการรับแจ้งความของพนักงานสอบสวน หรือบันทึกถ้อยคํา กรณีหนังสืออนุญาตสูญหาย',
-    files: [],
-  },
-];
 
 @Component({
   selector: 'ksp-substitute-license-detail',
@@ -50,7 +42,7 @@ export class SubstituteLicenseDetailComponent
   isLoading: Subject<boolean> = this.loaderService.isLoading;
   userInfoType = UserInfoFormType.thai;
   objectiveFiles: FileGroup[] = [];
-
+  myLicense = new SelfLicense();
   override form = this.fb.group({
     userInfo: [],
     address1: [],
@@ -87,6 +79,13 @@ export class SubstituteLicenseDetailComponent
   ngOnInit(): void {
     this.getListData();
     this.checkRequestId();
+
+    const idcardno = getCookie('idCardNo');
+    this.myInfoService.getMyLicense(idcardno).subscribe((res) => {
+      if (res) {
+        this.myLicense = res[0];
+      }
+    });
   }
 
   override initializeFiles() {
@@ -97,7 +96,6 @@ export class SubstituteLicenseDetailComponent
 
   override patchData(data: SelfRequest) {
     super.patchData(data);
-    console.log(data);
 
     if (data.replacereasoninfo) {
       const replaceReasonInfo = parseJson(data.replacereasoninfo);
@@ -106,7 +104,6 @@ export class SubstituteLicenseDetailComponent
 
     if (data.fileinfo) {
       const fileInfo = parseJson(data.fileinfo);
-      console.log(fileInfo);
       const { replacereasoninfofiles } = fileInfo;
       this.objectiveFiles = replacereasoninfofiles;
     }
@@ -222,3 +219,11 @@ export class SubstituteLicenseDetailComponent
     this.router.navigate(['/home']);
   }
 }
+
+const OBJECTIVE_FILES: FileGroup[] = [
+  { name: '1. หนังสืออนุญาตประกอบวิชาชีพที่ชํารุด', files: [] },
+  {
+    name: '2. หลักฐานการรับแจ้งความของพนักงานสอบสวน หรือบันทึกถ้อยคํา กรณีหนังสืออนุญาตสูญหาย',
+    files: [],
+  },
+];
