@@ -11,9 +11,13 @@
   <self-service-request-status
     [requestDate]="requestDate"
     [idcardNo]="(myInfo$ | async)?.idcardno || ''"
-    [kurusapaNo]="(myInfo$ | async)?.kuruspano || ''"
     [requestNo]="requestNo"
+    [licenseNo]="myLicense.licenseno"
+    [licenseStartDate]="myLicense.licensestartdate"
+    [licenseEndDate]="myLicense.licenseenddate"
   ></self-service-request-status>
+
+  <!-- [kurusapaNo]="(myInfo$ | async)?.kuruspano || ''" -->
 
   <form [formGroup]="form">
     <div class="row mx-0 border shadow-sm rounded-4 px-2 py-4 bg-white my-4">

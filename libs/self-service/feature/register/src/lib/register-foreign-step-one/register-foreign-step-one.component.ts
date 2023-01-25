@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Nationality, Prefix } from '@ksp/shared/interface';
 import { AddressService, GeneralInfoService } from '@ksp/shared/service';
 import { formatDatePayload } from '@ksp/shared/utility';
 import localForage from 'localforage';
@@ -17,8 +18,8 @@ export class RegisterForeignStepOneComponent implements OnInit {
     private addressService: AddressService
   ) {}
 
-  nationalitys$!: Observable<any>;
-  prefixList$!: Observable<any>;
+  nationalitys$!: Observable<Nationality[]>;
+  prefixList$!: Observable<Prefix[]>;
   countries$!: Observable<any>;
   form = this.fb.group({
     prefixen: [null, [Validators.required]],
@@ -27,7 +28,7 @@ export class RegisterForeignStepOneComponent implements OnInit {
     lastnameen: [null],
     birthdate: [],
     country: [],
-    nationality: [],
+    nationality: [null, [Validators.required]],
     phone: [null, [Validators.required]],
     email: [],
   });

@@ -6,11 +6,13 @@
 
 <div class="main__container full-height px-4 py-2">
   <self-service-request-status
+    [isForeign]="true"
     [headerLabel1]="'Issue Date'"
     [headerLabel2]="'Form ID'"
     [title]="'TEACHING LICENSE RENEW APPLICATION FORM'"
-    [requestNo]="requestNo"
-    [requestDate]="requestDate"
+    [requestNo]="requestData.requestno"
+    [requestDate]="requestData.requestdate"
+    [kurusapaNo]="'12345'"
   ></self-service-request-status>
 
   <br />

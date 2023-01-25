@@ -11,8 +11,10 @@
 <div class="main__container px-4 py-2">
   <self-service-request-status
     [requestDate]="requestDate"
+    [licenseNo]="myLicense.licenseno"
+    [licenseStartDate]="myLicense.licensestartdate"
+    [licenseEndDate]="myLicense.licenseenddate"
     [idcardNo]="(myInfo$ | async)?.idcardno || ''"
-    [kurusapaNo]="(myInfo$ | async)?.kuruspano || ''"
     [requestNo]="requestNo"
   ></self-service-request-status>
 
@@ -95,7 +97,7 @@
       <mat-tab label="ผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน">
         <self-service-standard-working
           formControlName="standardWorking"
-          [educationType]="'teacher'"
+          [educationType]="'ครู'"
           [uniqueTimestamp]="uniqueTimestamp"
           [workingInfo]="workingInfoFiles"
           [workingInfo2]="workingInfoFiles2"

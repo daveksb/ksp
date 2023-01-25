@@ -13,7 +13,7 @@ import { switchMap, EMPTY } from 'rxjs';
 import { RegisterCompletedComponent } from '../register-completed/register-completed.component';
 import localForage from 'localforage';
 import { KspRequest, SelfMyInfo } from '@ksp/shared/interface';
-import { validatorMessages } from '@ksp/shared/utility';
+import { replaceEmptyWithNull, validatorMessages } from '@ksp/shared/utility';
 
 @Component({
   selector: 'self-service-register-foreign-step-three',
@@ -76,12 +76,6 @@ export class RegisterForeignStepThreeComponent implements OnInit {
               ...this.savingData,
               ...this.form.value,
             };
-            //console.log('form = ', form);
-            /*
-            payload.usertype = '2'; // ครูต่างชาติ
-            payload.isactive = '1';
-            payload.uniquetimestamp = uuidv4();
-            return this.myInfoService.insertMyInfo(payload); */
             const req = new KspRequest();
             req.isforeign = '1';
             req.ref1 = '1';
@@ -97,7 +91,7 @@ export class RegisterForeignStepThreeComponent implements OnInit {
             req.middlenameen = form.middlenameen;
             req.lastnameen = form.lastnameen;
             req.birthdate = form.birthdate;
-            req.country = form.country;
+            req.country = `${form.country}`;
             req.nationality = form.nationality;
             req.contactphone = form.phone;
             req.email = form.email;
@@ -121,7 +115,9 @@ export class RegisterForeignStepThreeComponent implements OnInit {
               requesttable,
               ...payload
             } = req;
-            return this.request.createRequestNoToken(payload);
+            return this.request.createRequestNoToken(
+              replaceEmptyWithNull(payload)
+            );
           }
           return EMPTY;
         })

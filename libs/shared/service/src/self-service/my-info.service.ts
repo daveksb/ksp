@@ -3,7 +3,12 @@ import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
 import { EMPTY, map, Observable, shareReplay } from 'rxjs';
 import { getCookie } from '@ksp/shared/utility';
-import { SelfMyInfo, SelfMyInfoKey } from '@ksp/shared/interface';
+import {
+  KspListResponse,
+  SelfLicense,
+  SelfMyInfo,
+  SelfMyInfoKey,
+} from '@ksp/shared/interface';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +29,15 @@ export class MyInfoService {
         );
     }
     return EMPTY;
+  }
+
+  getMyLicense(idcardno: string): Observable<SelfLicense[]> {
+    return this.http
+      .post<KspListResponse<SelfLicense>>(
+        `${environment.apiUrl}/kspself/selflicenseselectidcardno`,
+        { idcardno }
+      )
+      .pipe(map((data) => data.datareturn));
   }
 
   insertMyInfo(payload: SelfMyInfo): Observable<any> {

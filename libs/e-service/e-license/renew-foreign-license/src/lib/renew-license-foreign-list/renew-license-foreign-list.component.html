@@ -52,6 +52,17 @@
             </td>
           </ng-container>
 
+          <ng-container matColumnDef="isurgent">
+            <th mat-header-cell *matHeaderCellDef>เร่งด่วน</th>
+            <td mat-cell *matCellDef="let element">
+              <i
+                *ngIf="element.isurgent === '1'"
+                role="button"
+                class="bi bi-exclamation-triangle text-danger fs-6"
+              ></i>
+            </td>
+          </ng-container>
+
           <ng-container matColumnDef="requestno">
             <th mat-header-cell *matHeaderCellDef>เลขที่แบบคำขอ</th>
             <td mat-cell *matCellDef="let element">

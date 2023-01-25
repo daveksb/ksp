@@ -18,32 +18,16 @@ import {
   LoaderService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { FileGroup, SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
+import { FileGroup, SelfLicense, SelfRequest } from '@ksp/shared/interface';
 import {
   getCookie,
   parseJson,
   replaceEmptyWithNull,
-  thaiDate,
   toLowercaseProp,
 } from '@ksp/shared/utility';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import * as _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
-import localForage from 'localforage';
-
-const WORKING_INFO_FILES: FileGroup[] = [
-  {
-    name: '1.สำเนาผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน (3 กิจกรรม)',
-    files: [],
-  },
-];
-
-const WORKING_INFO_FILES_2: FileGroup[] = [
-  {
-    name: '1.สำเนาผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน',
-    files: [],
-  },
-];
 
 @UntilDestroy()
 @Component({
@@ -55,9 +39,6 @@ export class RenewLicenseRequestComponent
   extends LicenseFormBaseComponent
   implements OnInit
 {
-  isLoading: Subject<boolean> = this.loaderService.isLoading;
-  userInfoType = UserInfoFormType.thai;
-
   override form = this.fb.group({
     userInfo: [],
     address1: [],
@@ -69,12 +50,12 @@ export class RenewLicenseRequestComponent
     website: [],
     workEmail: [],
   });
-
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
+  userInfoType = UserInfoFormType.thai;
   disableNextButton = false;
-  today = new Date();
-
-  workingInfoFiles: any[] = [];
-  workingInfoFiles2: any[] = [];
+  workingInfoFiles: FileGroup[] = [];
+  workingInfoFiles2: FileGroup[] = [];
+  myLicense = new SelfLicense();
 
   constructor(
     router: Router,
@@ -105,6 +86,23 @@ export class RenewLicenseRequestComponent
     this.getListData();
     this.checkButtonsDisableStatus();
     this.checkRequestId();
+
+    const idcardno = getCookie('idCardNo');
+    this.myInfoService.getMyLicense(idcardno).subscribe((res) => {
+      if (res) {
+        this.myLicense = res[0];
+      }
+    });
+
+    this.form.controls.workplace.valueChanges.subscribe((res: any) => {
+      if (res.notRequired) {
+        const payload: any = { educationType: '1' };
+        this.form.controls.standardWorking.patchValue(payload);
+      } else {
+        const payload: any = { educationType: '0' };
+        this.form.controls.standardWorking.patchValue(payload);
+      }
+    });
   }
 
   get userInfoForm() {
@@ -164,9 +162,7 @@ export class RenewLicenseRequestComponent
   }
 
   patchAddress2FormWithAddress1(): void {
-    console.log(this.form.controls.address1.value);
     this.form.controls.address2.patchValue(this.form.controls.address1.value);
-    console.log(this.form.controls.address2.value);
   }
 
   createRequest(forbidden: any, currentProcess: number) {
@@ -223,7 +219,7 @@ export class RenewLicenseRequestComponent
       ...{ prohibitproperty: JSON.stringify(forbidden) },
       ...{ fileinfo: JSON.stringify({ performancefiles, performancefiles2 }) },
     };
-    console.log(payload);
+    //console.log(payload);
     return payload;
   }
 
@@ -258,3 +254,17 @@ export class RenewLicenseRequestComponent
   //   });
   // }
 }
+
+const WORKING_INFO_FILES: FileGroup[] = [
+  {
+    name: '1.สำเนาผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน (3 กิจกรรม)',
+    files: [],
+  },
+];
+
+const WORKING_INFO_FILES_2: FileGroup[] = [
+  {
+    name: '1.สำเนาผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน',
+    files: [],
+  },
+];

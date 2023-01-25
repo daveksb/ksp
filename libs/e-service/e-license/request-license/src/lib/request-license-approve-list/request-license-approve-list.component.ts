@@ -76,7 +76,7 @@ export class RequestLicenseApproveListComponent implements AfterViewInit {
       bureauid: null,
       requestdatefrom: params.requestdatefrom,
       requestdateto: params.requestdateto,
-      isurgent: params.isurgent ?? null,
+      isurgent: params.isurgent ? '1' : null,
       offset: '0',
       row: '1000',
     };

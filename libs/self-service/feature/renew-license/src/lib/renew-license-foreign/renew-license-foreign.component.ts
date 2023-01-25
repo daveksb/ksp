@@ -12,7 +12,6 @@ import {
   SelfServiceRequestForType,
 } from '@ksp/shared/constant';
 import {
-  changeToEnglishMonth,
   getCookie,
   parseJson,
   replaceEmptyWithNull,
@@ -36,8 +35,6 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   styleUrls: ['./renew-license-foreign.component.scss'],
 })
 export class RenewLicenseForeignComponent implements OnInit {
-  changeToEnglishMonth = changeToEnglishMonth;
-
   form = this.fb.group({
     personalDetail: [],
     personalDeclaration: [],
@@ -47,9 +44,7 @@ export class RenewLicenseForeignComponent implements OnInit {
 
   uniqueNo!: string;
   requestId!: number;
-  requestData!: SelfRequest;
-  requestNo: string | null = '';
-  currentProcess!: number;
+  requestData = new SelfRequest('1', '02', '5');
   userInfo: any;
   addressInfo: any;
   workplaceInfo: any;
@@ -61,7 +56,6 @@ export class RenewLicenseForeignComponent implements OnInit {
   myImage = '';
   requestType: any;
   requestLabel = '';
-  requestDate: any;
 
   constructor(
     private router: Router,
@@ -100,11 +94,8 @@ export class RenewLicenseForeignComponent implements OnInit {
       if (this.requestId) {
         this.requestService.getRequestById(this.requestId).subscribe((res) => {
           if (res) {
-            console.log(res);
+            //console.log(res);
             this.requestData = res;
-            this.requestDate = changeToEnglishMonth(res.requestdate || '');
-            this.requestNo = res.requestno;
-            this.currentProcess = Number(res.process);
             this.uniqueNo = res.uniqueno || '';
             //console.log(this.uniqueNo);
             this.patchData(res);
@@ -243,7 +234,6 @@ export class RenewLicenseForeignComponent implements OnInit {
   save() {
     console.log(this.form.getRawValue());
     const completeDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
       data: {
         title: `Do you want to save and proceed?`,
         btnLabel: 'Save & Proceed',
@@ -258,7 +248,7 @@ export class RenewLicenseForeignComponent implements OnInit {
           ? this.requestService.updateRequest.bind(this.requestService)
           : this.requestService.createRequest.bind(this.requestService);
         request(payload).subscribe((res) => {
-          console.log('request result = ', res);
+          //console.log('request result = ', res);
           if (res?.returncode === '00') {
             this.router.navigate(['/home']);
           }
@@ -273,7 +263,7 @@ export class RenewLicenseForeignComponent implements OnInit {
           ? this.requestService.updateRequest.bind(this.requestService)
           : this.requestService.createRequest.bind(this.requestService);
         request(payload).subscribe((res) => {
-          console.log('request result = ', res);
+          //console.log('request result = ', res);
           if (res?.returncode === '00') {
             const requestno = res.requestno;
             localForage.setItem('requestno', requestno);
@@ -356,7 +346,6 @@ export class RenewLicenseForeignComponent implements OnInit {
 
   onCancelRequest() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
       data: {
         title: `คุณต้องการยกเลิกรายการแบบคำขอ
         ใช่หรือไม่? `,
@@ -384,7 +373,6 @@ export class RenewLicenseForeignComponent implements OnInit {
 
   cancelCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
       data: {
         header: `ยกเลิกแบบคำขอสำเร็จ`,
       },

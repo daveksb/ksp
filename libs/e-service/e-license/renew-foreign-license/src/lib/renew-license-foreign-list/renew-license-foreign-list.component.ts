@@ -89,6 +89,7 @@ export class RenewLicenseForeignListComponent implements AfterViewInit {
       offset: '0',
       row: '1000',
       isforeign: '1',
+      isurgent: params.isurgent ? '1' : null,
     };
 
     payload = replaceEmptyWithNull(payload);
@@ -128,6 +129,7 @@ export class RenewLicenseForeignListComponent implements AfterViewInit {
 export const column = [
   'id',
   'edit',
+  'isurgent',
   'requestno',
   'idcardno',
   'name',
