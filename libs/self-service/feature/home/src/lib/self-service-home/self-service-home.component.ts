@@ -13,8 +13,4 @@ export class SelfServiceHomeComponent {
       queryParams: { type: requestType },
     });
   }
-
-  /* login() {
-    this.router.navigate(['/', 'register', 'policy']);
-  } */
 }

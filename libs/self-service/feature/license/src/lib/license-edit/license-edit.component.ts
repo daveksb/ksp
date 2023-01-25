@@ -43,6 +43,7 @@ export class LicenseEditComponent implements OnInit {
   uniqueTimestamp!: string;
   requestId!: number;
   requestData!: SelfRequest;
+  myImage!: any;
   myLicense = new SelfLicense();
   form1 = this.fb.group({
     userInfo: [],
@@ -73,6 +74,11 @@ export class LicenseEditComponent implements OnInit {
     this.myInfoService.getMyLicense(idcardno).subscribe((res) => {
       if (res) {
         this.myLicense = res[0];
+
+        if (this.myLicense.fileinfo) {
+          this.myImage = atob(this.myLicense.fileinfo);
+        }
+
         this.form1.controls.userInfo.patchValue(<any>this.myLicense);
         this.oldValue = this.myLicense;
         //console.log('my license = ', this.myLicense);
@@ -131,66 +137,7 @@ export class LicenseEditComponent implements OnInit {
 
   createRequest(currentProcess: number) {
     const form: any = this.form2.controls.editData.getRawValue();
-    /*   const {
-      //id,
-      // updatedate,
-      // addressinfo,
-      // schooladdrinfo,
-      birthdate,
-      ...rawData
-    } = this.oldValue || {
-      //id: null,
-      updatedate: null,
-      addressinfo: null,
-      schooladdrinfo: null,
-      birthdate: null,
-    };
-    const data = toLowercaseProp(rawData);
-    const type = SelfServiceRequestSubType.อื่นๆ;
-    const self = new SelfRequest(
-      '1',
-      SelfServiceRequestType['ขอเปลี่ยนแปลง/แก้ไขหนังสืออนุญาตประกอบวิชาชีพ'],
-      '1', //`${type}`,
-      currentProcess
-    );
-    const allowKey = Object.keys(self);
-    self.isforeign = `${SelfServiceRequestForType.ชาวไทย}`;
-    self.uniqueno = this.uniqueTimestamp;
-    self.userid = getCookie('userId');
     const attachfiles = this.uploadFileList;
-    const initialPayload = {
-      ...replaceEmptyWithNull(data),
-      ...(this.requestId && { id: `${this.requestId}` }),
-      ...{
-        replacereasoninfo: JSON.stringify({ ...formData.editData }),
-      },
-      ...{ fileinfo: JSON.stringify({ attachfiles }) },
-    };
-    const payload = _.pick({ ...self, ...initialPayload }, allowKey);
-    const {
-      id,
-      updatedate,
-      requestid,
-      lastupdatesystemtype,
-      processupdatedate,
-      createdate,
-      requesttable,
-      requestdate,
-      isurgent,
-      listno,
-      groupno,
-      isclose,
-      detail,
-      requestno,
-      paymentstatus,
-      ...temp
-    } = payload;
-    console.log('current payload =', temp); */
-
-    console.log('form data = ', form);
-
-    const attachfiles = this.uploadFileList;
-
     const test: Partial<KspRequest> = {
       licenseid: this.myLicense.id,
       systemtype: '1',
@@ -201,11 +148,11 @@ export class LicenseEditComponent implements OnInit {
       passportstartdate: null,
       passportenddate: null,
       prefixth: form.prefixTh,
-      firstnameth: this.myLicense.firstnameth, //form.firstnameTh,
-      lastnameth: this.myLicense.lastnameth, //form.lastnameTh,
-      prefixen: this.myLicense.prefixen, //form.prefixEn,
-      firstnameen: this.myLicense.firstnameen, //form.firstnameEn,
-      lastnameen: this.myLicense.lastnameen, //form.lastnameEn,
+      firstnameth: this.myLicense.firstnameth,
+      lastnameth: this.myLicense.lastnameth,
+      prefixen: this.myLicense.prefixen,
+      firstnameen: this.myLicense.firstnameen,
+      lastnameen: this.myLicense.lastnameen,
       sex: this.myLicense.sex,
       birthdate: this.myLicense.birthdate,
       email: this.myLicense.email,

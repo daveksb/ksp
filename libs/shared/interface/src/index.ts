@@ -26,6 +26,7 @@ export * from './lib/ksp-form-base.component';
 export * from './lib/ksp-pagination.component';
 export * from './lib/ksp-response';
 export * from './lib/ksp-request';
+export * from './lib/ksp-request-cancel-payload';
 export * from './lib/ksp-request-process';
 export * from './lib/ksp-file';
 export * from './lib/ksp-approve';
