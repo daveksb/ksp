@@ -243,7 +243,7 @@ export class LicenseRequestComponent
         }),
       },
     };
-    console.log('payload = ', payload);
+    //console.log('payload = ', payload);
     return payload;
   }
 }

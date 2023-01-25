@@ -15,12 +15,18 @@ import {
   CompleteDialogComponent,
 } from '@ksp/shared/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { formatRequestNo, parseJson, thaiDate } from '@ksp/shared/utility';
+import {
+  formatRequestNo,
+  getCookie,
+  parseJson,
+  thaiDate,
+} from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
 import {
   Amphur,
   Bureau,
   KspComment,
+  KspRequestCancelPayload,
   Nationality,
   Prefix,
   Province,
@@ -77,7 +83,10 @@ export abstract class LicenseFormBaseComponent {
         // this.loadRequestFromId(this.requestId);
         this.requestService.getRequestById(this.requestId).subscribe((res) => {
           if (res) {
-            this.kspComment = parseJson(res.detail);
+            if (res.detail) {
+              // in case of having commentss
+              this.kspComment = parseJson(res.detail);
+            }
             this.requestData = res;
             this.requestNo = res.requestno;
             this.requestDate = res.requestdate;
@@ -177,9 +186,11 @@ export abstract class LicenseFormBaseComponent {
   }
 
   cancelRequest() {
-    const payload = {
+    const payload: KspRequestCancelPayload = {
       requestid: `${this.requestId}`,
-      process: '0',
+      process: `${this.currentProcess}`,
+      status: '0',
+      userid: getCookie('userId'),
     };
 
     this.requestService.cancelRequest(payload).subscribe((res) => {

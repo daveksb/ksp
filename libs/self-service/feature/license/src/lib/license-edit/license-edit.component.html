@@ -7,6 +7,12 @@
   <div class="box-header">รายละเอียดแบบคำขอเปลี่ยนแปลง/แก้ไขหนังสืออนุญาต</div>
 
   <div [formGroup]="form1" class="p-3">
+    <self-service-form-upload-image
+      [isEditMode]="false"
+      [imgSrc]="myImage"
+      [uniqueTimestamp]="uniqueTimestamp"
+    ></self-service-form-upload-image>
+
     <ksp-form-user-info
       formControlName="userInfo"
       [mode]="'view'"
