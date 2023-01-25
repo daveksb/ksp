@@ -38,7 +38,7 @@
 
     <div
       class="m-2"
-      *ngIf="kspComment.checkdetail[selectedTabIndex].result === 'incomplete'"
+      *ngIf="kspComment.checkdetail[selectedTabIndex]?.result === 'incomplete'"
     >
       <ksp-uni-form-badge
         [mainTitle]="kspComment.checkdetail[selectedTabIndex].detail"

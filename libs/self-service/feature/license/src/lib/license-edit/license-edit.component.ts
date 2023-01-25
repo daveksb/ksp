@@ -14,6 +14,8 @@ import {
   SelfRequestService,
 } from '@ksp/shared/service';
 import {
+  formatDatePayload,
+  formatRequestNo,
   getCookie,
   parseJson,
   replaceEmptyWithNull,
@@ -22,6 +24,7 @@ import {
 } from '@ksp/shared/utility';
 import {
   FileGroup,
+  KspRequest,
   Prefix,
   SelfLicense,
   SelfRequest,
@@ -47,11 +50,11 @@ export class LicenseEditComponent implements OnInit {
   uniqueTimestamp!: string;
   requestId!: number;
   requestData!: SelfRequest;
-  requestNo: string | null = '';
-  currentProcess!: number;
   myLicense = new SelfLicense();
-  form = this.fb.group({
+  form1 = this.fb.group({
     userInfo: [],
+  });
+  form2 = this.fb.group({
     editData: [],
   });
 
@@ -77,7 +80,7 @@ export class LicenseEditComponent implements OnInit {
     this.myInfoService.getMyLicense(idcardno).subscribe((res) => {
       if (res) {
         this.myLicense = res[0];
-        this.form.controls.userInfo.patchValue(<any>this.myLicense);
+        this.form1.controls.userInfo.patchValue(<any>this.myLicense);
         this.oldValue = this.myLicense;
         //console.log('my license = ', this.myLicense);
       }
@@ -93,8 +96,6 @@ export class LicenseEditComponent implements OnInit {
           if (res) {
             //console.log(res);
             this.requestData = res;
-            this.requestNo = res.requestno;
-            this.currentProcess = Number(res.process);
             this.uniqueTimestamp = res.uniqueno || '';
             this.patchData(res);
           }
@@ -111,7 +112,7 @@ export class LicenseEditComponent implements OnInit {
     if (data.replacereasoninfo) {
       const replaceReasonInfo = parseJson(data.replacereasoninfo);
       //console.log(replaceReasonInfo);
-      this.form.controls.editData.patchValue(replaceReasonInfo);
+      this.form2.controls.editData.patchValue(replaceReasonInfo);
     }
 
     if (data.fileinfo) {
@@ -136,16 +137,16 @@ export class LicenseEditComponent implements OnInit {
   }
 
   createRequest(currentProcess: number) {
-    const formData: any = this.form.getRawValue();
-    const {
-      id,
-      updatedate,
-      addressinfo,
-      schooladdrinfo,
+    const formData: any = this.form2.getRawValue();
+    /*   const {
+      //id,
+      // updatedate,
+      // addressinfo,
+      // schooladdrinfo,
       birthdate,
       ...rawData
     } = this.oldValue || {
-      id: null,
+      //id: null,
       updatedate: null,
       addressinfo: null,
       schooladdrinfo: null,
@@ -153,21 +154,17 @@ export class LicenseEditComponent implements OnInit {
     };
     const data = toLowercaseProp(rawData);
     const type = SelfServiceRequestSubType.อื่นๆ;
-
     const self = new SelfRequest(
       '1',
       SelfServiceRequestType['ขอเปลี่ยนแปลง/แก้ไขหนังสืออนุญาตประกอบวิชาชีพ'],
-      `${type}`,
+      '1', //`${type}`,
       currentProcess
     );
     const allowKey = Object.keys(self);
     self.isforeign = `${SelfServiceRequestForType.ชาวไทย}`;
     self.uniqueno = this.uniqueTimestamp;
     self.userid = getCookie('userId');
-    self.birthdate = birthdate?.split('T')[0];
-
     const attachfiles = this.uploadFileList;
-
     const initialPayload = {
       ...replaceEmptyWithNull(data),
       ...(this.requestId && { id: `${this.requestId}` }),
@@ -177,9 +174,131 @@ export class LicenseEditComponent implements OnInit {
       ...{ fileinfo: JSON.stringify({ attachfiles }) },
     };
     const payload = _.pick({ ...self, ...initialPayload }, allowKey);
-    console.log(payload);
+    const {
+      id,
+      updatedate,
+      requestid,
+      lastupdatesystemtype,
+      processupdatedate,
+      createdate,
+      requesttable,
+      requestdate,
+      isurgent,
+      listno,
+      groupno,
+      isclose,
+      detail,
+      requestno,
+      paymentstatus,
+      ...temp
+    } = payload;
+    console.log('current payload =', temp); */
 
-    return payload;
+    const test: Partial<KspRequest> = {
+      licenseid: this.myLicense.id,
+      systemtype: '1',
+      requesttype: '3',
+      schoolid: null,
+      idcardno: getCookie('idCardNo'),
+      passportno: null,
+      passportstartdate: null,
+      passportenddate: null,
+      prefixth: '7',
+      firstnameth: '8',
+      lastnameth: '9',
+      prefixen: '10',
+      firstnameen: '11',
+      lastnameen: '12',
+      sex: null,
+      birthdate: '2022-09-06T00:20:13',
+      email: '14',
+      position: '15',
+      educationoccupy: null,
+      contactphone: null,
+      workphone: null,
+      nationality: null,
+      country: null,
+      coordinatorinfo: null,
+      userpermission: null,
+      addressinfo: null,
+      schooladdrinfo: null,
+      eduinfo: null,
+      teachinginfo: null,
+      reasoninfo: null,
+      fileinfo: "{'field1':'data1','field2':'data2','field3':'data3'}",
+      otherreason: null,
+      refperson: null,
+      prohibitproperty: null,
+      checkprohibitproperty: null,
+      middlenameen: '20',
+      middlenameth: '21',
+      submissiondocno: null,
+      submissiondocdate: null,
+      hiringinfo: null,
+      imagefileid: null,
+      experienceinfo: null,
+      competencyinfo: null,
+      performanceinfo: null,
+      replacereasoninfo: "{'field1':'data1','field2':'data2','field3':'data3'}",
+      transferknowledgeinfo: null,
+      testresultcompareinfo: null,
+      feerefundinfo: null,
+      grantionteachinglicenseinfo: null,
+      rewardtype: '24',
+      osoiinfo: null,
+      osoimember: null,
+      osoicheck: null,
+      osoiresult: null,
+      osoireject: null,
+      osoiwithdraw: null,
+      rewardethicinfo: null,
+      rewardsuccessinfo: null,
+      rewarddetailinfo: null,
+      rewardpunishmentinfo: null,
+      rewardteacherinfo: "{'field1':'data1','field2':'data2','field3':'data3'}",
+      rewardretiredate: '2022-09-06T00:20:13',
+      rewardcareerinfo: "{'field1':'data1','field2':'data2','field3':'data3'}",
+      rewardmoneysupportinfo:
+        "{'field1':'data1','field2':'data2','field3':'data3'}",
+      rewardresearcherinfo:
+        "{'field1':'data1','field2':'data2','field3':'data3'}",
+      rewardresearchinfo:
+        "{'field1':'data1','field2':'data2','field3':'data3'}",
+      rewardresearchhistory:
+        "{'field1':'data1','field2':'data2','field3':'data3'}",
+      careertype: '25',
+      isforeign: '26',
+      kuruspano: '27',
+      schooladdress: '28',
+      schoolname: '29',
+      bureauid: '30',
+      uniqueno: '31',
+      foreigncheckdocument:
+        "{'field1':'data1','field2':'data2','field3':'data3'}",
+      foreignpassporttype: '32',
+      foreignperformanceresult:
+        "{'field1':'data1','field2':'data2','field3':'data3'}",
+      foreignlicensureinfo:
+        "{'field1':'data1','field2':'data2','field3':'data3'}",
+      visaclass: '33',
+      visatype: '34',
+      visaexpiredate: '2022-09-06T00:20:13',
+      prohibitpropertyfile:
+        "{'field1':'data1','field2':'data2','field3':'data3'}",
+      foreignselectupload:
+        "{'field1':'data1','field2':'data2','field3':'data3'}",
+      uniid: '777',
+      unitype: '888',
+      bureauname: '999',
+      ref1: '1',
+      ref2: '03',
+      ref3: '1',
+      process: '1',
+      status: '1',
+      userid: getCookie('userId'),
+    };
+    console.log('correct payliad = ', test);
+    return formatDatePayload(test);
   }
 
   onConfirm() {
@@ -200,7 +319,7 @@ export class LicenseEditComponent implements OnInit {
           ? this.requestService.updateRequest.bind(this.requestService)
           : this.requestService.createRequest.bind(this.requestService);
         request(payload).subscribe((res) => {
-          console.log('request result = ', res);
+          //console.log('request result = ', res);
           if (res?.returncode === '00') {
             this.router.navigate(['/home']);
           }
@@ -231,7 +350,7 @@ export class LicenseEditComponent implements OnInit {
       data: {
         header: `บันทึกข้อมูลและยื่นแบบคำขอสำเร็จเรียบร้อย`,
         content: `วันที่ : ${thaiDate(today)}
-        เลขที่แบบคำขอ : SF_ED_12234467876543 `, // res.requestno
+        เลขที่แบบคำขอ : ${formatRequestNo(res.requestno)}`,
         subContent: `กรุณาตรวจสอบสถานะแบบคำขอหรือรหัสเข้าใช้งาน
           ผ่านทางอีเมลผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },

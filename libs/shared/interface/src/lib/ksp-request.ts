@@ -1,5 +1,4 @@
 export class KspRequest {
-  id: string | null = null;
   ref1?: string | null = null;
   ref2?: string | null = null;
   ref3?: string | null = null;
@@ -13,8 +12,8 @@ export class KspRequest {
   contactphone: string | null = null;
   coordinatorinfo: string | null = null;
   country: string | null = null;
-  createdate: string | null = null;
-  detail: string | null = null;
+  createdate?: string | null = null;
+  detail?: string | null = null;
   educationoccupy: string | null = null;
   eduinfo: string | null = null;
   email: string | null = null;
@@ -32,11 +31,7 @@ export class KspRequest {
   hiringinfo: string | null = null;
   idcardno: string | null = null;
   imagefileid: string | null = null;
-  isforeign: string | null = null; // add on 14/11/2022
-  isurgent?: string | null = null;
-  isclose?: string | null | boolean = null; // add on 28/11/2022
   kuruspano: string | null = null;
-  lastupdatesystemtype?: string | null = null; // add on 8/12/2022  ระบบที่อัพเดตข้อมูลล่าสุด เช่น e-service, school-service
   lastnameen: string | null = null;
   lastnameth: string | null = null;
   licenseid: string | null = null;
@@ -53,7 +48,7 @@ export class KspRequest {
   passportenddate: string | null = null;
   passportno: string | null = null;
   passportstartdate: string | null = null;
-  paymentstatus: string | null = null;
+  paymentstatus?: string | null = null;
   performanceinfo: string | null = null;
   position: string | null = null;
   prefixen: string | null = null;
@@ -68,7 +63,7 @@ export class KspRequest {
   requestdate: string | null = null;
   requestid: string | null = null;
   requestno: string | null = null;
-  requesttable: string | null = null;
+  requesttable?: string | null = null;
   requesttype: string | null = null;
   rewardcareerinfo: string | null = null;
   rewarddetailinfo: string | null = null;
@@ -104,6 +99,11 @@ export class KspRequest {
   visatype: string | null = null;
   workphone: string | null = null;
 
+  isforeign: string | null = null; // add on 14/11/2022
+  id: string | null = null;
   listno?: string | null = null; //add on 19/12/2022
   groupno?: string | null = null; //add on 19/12/2022
+  lastupdatesystemtype?: string | null = null; // add on 8/12/2022  ระบบที่อัพเดตข้อมูลล่าสุด เช่น e-service, school-service
+  isurgent?: string | null = null;
+  isclose?: string | null | boolean = null; // add on 28/11/2022
 }
