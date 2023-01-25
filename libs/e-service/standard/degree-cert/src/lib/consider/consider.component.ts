@@ -436,6 +436,7 @@ export class ConsiderComponent implements OnInit {
         if (newPlans.plansResult[index]?.consider) {
           data.year = newPlans.plansResult[index].year;
           data.student = newPlans.plansResult[index].student;
+          data.planname = newPlans.plansResult[index].planname;
         }
         return data;
       }));
@@ -447,6 +448,9 @@ export class ConsiderComponent implements OnInit {
           data.student1 = newPlans.plansResult[index].student1;
           data.student2 = newPlans.plansResult[index].student2;
           data.student3 = newPlans.plansResult[index].student3;
+          data.planname1 = newPlans.plansResult[index].planname1;
+          data.planname2 = newPlans.plansResult[index].planname2;
+          data.planname3 = newPlans.plansResult[index].planname3;
         }
         return data;
       }));

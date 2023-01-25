@@ -186,7 +186,7 @@
         (click)="consider()"
         class="fs-6 btn btn-sm bg-orange"
         style="width: 300px"
-        *ngIf="pageType === 1"
+        *ngIf="pageType !== 3"
         [disabled]="!isSelectConsider()"
       >
         พิจารณาประเมินหลักสูตร (หลายรายการ)
@@ -197,7 +197,7 @@
         (click)="approve()"
         class="fs-6 ms-3 btn btn-sm btn-primary"
         style="width: 300px"
-        *ngIf="pageType === 2"
+        *ngIf="pageType !== 3"
         [disabled]="!isSelectApprove()"
       >
         พิจารณารับรอง (หลายรายการ)
