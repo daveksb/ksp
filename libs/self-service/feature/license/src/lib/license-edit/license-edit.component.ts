@@ -18,9 +18,7 @@ import {
   formatRequestNo,
   getCookie,
   parseJson,
-  replaceEmptyWithNull,
   thaiDate,
-  toLowercaseProp,
 } from '@ksp/shared/utility';
 import {
   FileGroup,
@@ -29,11 +27,6 @@ import {
   SelfLicense,
   SelfRequest,
 } from '@ksp/shared/interface';
-import {
-  SelfServiceRequestForType,
-  SelfServiceRequestSubType,
-  SelfServiceRequestType,
-} from '@ksp/shared/constant';
 import * as _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -137,7 +130,7 @@ export class LicenseEditComponent implements OnInit {
   }
 
   createRequest(currentProcess: number) {
-    const formData: any = this.form2.getRawValue();
+    const form: any = this.form2.controls.editData.getRawValue();
     /*   const {
       //id,
       // updatedate,
@@ -194,6 +187,10 @@ export class LicenseEditComponent implements OnInit {
     } = payload;
     console.log('current payload =', temp); */
 
+    console.log('form data = ', form);
+
+    const attachfiles = this.uploadFileList;
+
     const test: Partial<KspRequest> = {
       licenseid: this.myLicense.id,
       systemtype: '1',
@@ -203,18 +200,18 @@ export class LicenseEditComponent implements OnInit {
       passportno: null,
       passportstartdate: null,
       passportenddate: null,
-      prefixth: '7',
-      firstnameth: '8',
-      lastnameth: '9',
-      prefixen: '10',
-      firstnameen: '11',
-      lastnameen: '12',
-      sex: null,
-      birthdate: '2022-09-06T00:20:13',
-      email: '14',
-      position: '15',
+      prefixth: form.prefixTh,
+      firstnameth: this.myLicense.firstnameth, //form.firstnameTh,
+      lastnameth: this.myLicense.lastnameth, //form.lastnameTh,
+      prefixen: this.myLicense.prefixen, //form.prefixEn,
+      firstnameen: this.myLicense.firstnameen, //form.firstnameEn,
+      lastnameen: this.myLicense.lastnameen, //form.lastnameEn,
+      sex: this.myLicense.sex,
+      birthdate: this.myLicense.birthdate,
+      email: this.myLicense.email,
+      position: null,
       educationoccupy: null,
-      contactphone: null,
+      contactphone: this.myLicense.contactphone,
       workphone: null,
       nationality: null,
       country: null,
@@ -225,13 +222,13 @@ export class LicenseEditComponent implements OnInit {
       eduinfo: null,
       teachinginfo: null,
       reasoninfo: null,
-      fileinfo: "{'field1':'data1','field2':'data2','field3':'data3'}",
+      fileinfo: JSON.stringify({ attachfiles }),
       otherreason: null,
       refperson: null,
       prohibitproperty: null,
       checkprohibitproperty: null,
-      middlenameen: '20',
-      middlenameth: '21',
+      middlenameen: null,
+      middlenameth: null,
       submissiondocno: null,
       submissiondocdate: null,
       hiringinfo: null,
@@ -239,12 +236,12 @@ export class LicenseEditComponent implements OnInit {
       experienceinfo: null,
       competencyinfo: null,
       performanceinfo: null,
-      replacereasoninfo: "{'field1':'data1','field2':'data2','field3':'data3'}",
+      replacereasoninfo: JSON.stringify(form),
       transferknowledgeinfo: null,
       testresultcompareinfo: null,
       feerefundinfo: null,
       grantionteachinglicenseinfo: null,
-      rewardtype: '24',
+      rewardtype: null,
       osoiinfo: null,
       osoimember: null,
       osoicheck: null,
@@ -255,49 +252,40 @@ export class LicenseEditComponent implements OnInit {
       rewardsuccessinfo: null,
       rewarddetailinfo: null,
       rewardpunishmentinfo: null,
-      rewardteacherinfo: "{'field1':'data1','field2':'data2','field3':'data3'}",
-      rewardretiredate: '2022-09-06T00:20:13',
-      rewardcareerinfo: "{'field1':'data1','field2':'data2','field3':'data3'}",
-      rewardmoneysupportinfo:
-        "{'field1':'data1','field2':'data2','field3':'data3'}",
-      rewardresearcherinfo:
-        "{'field1':'data1','field2':'data2','field3':'data3'}",
-      rewardresearchinfo:
-        "{'field1':'data1','field2':'data2','field3':'data3'}",
-      rewardresearchhistory:
-        "{'field1':'data1','field2':'data2','field3':'data3'}",
-      careertype: '25',
-      isforeign: '26',
-      kuruspano: '27',
-      schooladdress: '28',
-      schoolname: '29',
-      bureauid: '30',
-      uniqueno: '31',
-      foreigncheckdocument:
-        "{'field1':'data1','field2':'data2','field3':'data3'}",
-      foreignpassporttype: '32',
-      foreignperformanceresult:
-        "{'field1':'data1','field2':'data2','field3':'data3'}",
-      foreignlicensureinfo:
-        "{'field1':'data1','field2':'data2','field3':'data3'}",
-      visaclass: '33',
-      visatype: '34',
-      visaexpiredate: '2022-09-06T00:20:13',
-      prohibitpropertyfile:
-        "{'field1':'data1','field2':'data2','field3':'data3'}",
-      foreignselectupload:
-        "{'field1':'data1','field2':'data2','field3':'data3'}",
-      uniid: '777',
-      unitype: '888',
-      bureauname: '999',
+      rewardteacherinfo: null,
+      rewardretiredate: null,
+      rewardcareerinfo: null,
+      rewardmoneysupportinfo: null,
+      rewardresearcherinfo: null,
+      rewardresearchinfo: null,
+      rewardresearchhistory: null,
+      careertype: '1',
+      isforeign: '0',
+      kuruspano: null,
+      schooladdress: null,
+      schoolname: null,
+      bureauid: null,
+      uniqueno: this.uniqueTimestamp,
+      foreigncheckdocument: null,
+      foreignpassporttype: null,
+      foreignperformanceresult: null,
+      foreignlicensureinfo: null,
+      visaclass: null,
+      visatype: null,
+      visaexpiredate: null,
+      prohibitpropertyfile: null,
+      foreignselectupload: null,
+      uniid: null,
+      unitype: null,
+      bureauname: null,
       ref1: '1',
       ref2: '03',
       ref3: '1',
-      process: '1',
+      process: '2',
       status: '1',
       userid: getCookie('userId'),
     };
-    console.log('correct payliad = ', test);
+    //console.log('correct payliad = ', test);
     return formatDatePayload(test);
   }
 
