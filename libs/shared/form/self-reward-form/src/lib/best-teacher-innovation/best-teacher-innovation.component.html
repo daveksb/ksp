@@ -1,103 +1,78 @@
 <form [formGroup]="form">
-  <ng-container formArrayName="innovationInfo">
-    <ng-container
-      *ngFor="let DegreeForm of innovationInfo.controls; let i = index"
-    >
-      <ng-container [formGroupName]="i">
-        <div
-          class="border rounded px-3 py-2"
-          [ngClass]="i > 0 ? 'mt-3' : 'mt-0'"
-        >
-          <div class="d-flex justify-content-end" *ngIf="i > 0">
-            <i
-              class="bi bi-x-circle-fill text-danger"
-              (click)="deleteFormArray(innovationInfo, i)"
-              role="button"
-            ></i>
-          </div>
-          <div class="box-header text-primary">ข้อมูลนวัตกรรมและรางวัล</div>
+  <div
+    class="border rounded px-3 py-2 mt-3">
+    <div class="box-header">ข้อมูลนวัตกรรมและรางวัล</div>
 
-          <div class="row">
-            <div class="col-md-6 mb-2">
-              <label class="form-label required">ประเภทรางวัล</label>
-              <select class="form-select" formControlName="rewardType">
-                <option value="null" selected hidden disabled>
-                  กรุณาเลือก
-                </option>
-                <option value="1">ระดับเขต</option>
-                <option value="2">ระดับจังหวัด</option>
-                <option value="3">ระดับประเทศ</option>
-              </select>
-            </div>
-            <div class="col-md-6 mb-2">
-              <label class="form-label required">ชื่อนวัตกรรม</label>
-              <input
-                class="form-control"
-                type="text"
-                formControlName="innovationName"
-              />
-            </div>
-          </div>
-          <div class="box-header text-primary mt-2">
-            การได้รับรางวัลครูผู้สอนดีเด่นตามกลุ่มสาระ
-          </div>
-          <div class="row">
-            <div class="col-md-6 mb-2">
-              <label class="form-label required">กลุ่มสาระ</label>
-              <select class="form-select" formControlName="subjectGroup">
-                <option value="null" selected hidden disabled>
-                  กรุณาเลือก
-                </option>
-                <option value="1">ภาษาไทย</option>
-                <option value="2">คณิตศาสตร์</option>
-                <option value="3">วิทยาศาสตร์และเทคโนโลยี</option>
-                <option value="4">สังคมศึกษา ศาสนาและวัฒนธรรม</option>
-                <option value="5">ศิลปศึกษา</option>
-                <option value="6">สุขศึกษาและพลศึกษา</option>
-                <option value="7">การงานอาชีพ</option>
-                <option value="8">ภาษาต่างประเทศ</option>
-                <option value="9">กิจกรรมพัฒนาผู้เรียน</option>
-                <option value="10">ด้านการศึกษาปฐมวัย</option>
-                <option value="11">ด้านการศึกษาพิเศษ</option>
-                <option value="12">ด้านการอาชีวศึกษา</option>
-              </select>
-            </div>
-            <div class="col-md-6 mb-2">
-              <label class="form-label required">ปี พ.ศ.</label>
-              <div class="d-flex align-items-center">
-                <input
-                  matInput
-                  [matDatepicker]="picker"
-                  autocomplete="off"
-                  class="form-control form-date"
-                  formControlName="year"
-                  placeholder="วว/ดด/ปปปป"
-                />
-                <mat-datepicker-toggle
-                  class="button-date"
-                  matSuffix
-                  [for]="picker"
-                ></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-              </div>
-            </div>
-          </div>
-          <div class="mt-2 mb-2">
-            <ksp-form-multi-attachment
-              [groups]="rewardFiles"
-              [mode]="mode"
-              [uniqueTimestamp]="uniqueTimestamp"
-            ></ksp-form-multi-attachment>
-          </div>
-        </div>
+    <div class="row">
+      <div class="col-md-12 mb-2">
+        <label class="form-label required">ประเภทรางวัล</label>
+        <textarea
+          class="form-control"
+          formControlName="rewardName"
+          [rows]="3"></textarea>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="box-header">วีดิทัศน์การสอนจริง</div>
+    <div class="row">
+      <div class="col-md-12 mb-2">
+        <label class="form-label required">ลิงก์ (youtube)</label>
+        <input class="form-control" type="text" formControlName="youtubeUrl" />
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="box-header">ข้อมูลรางวัลครูผู้สอนดีเด่นที่เคยได้รับ</div>
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      class="mt-2">
+      <ng-container matColumnDef="order">
+        <th mat-header-cell *matHeaderCellDef class="text-center">ลำดับ</th>
+        <td
+          mat-cell
+          *matCellDef="let element; let i = index"
+          class="text-center">
+          {{
+          i + 1
+          }}
+        </td>
       </ng-container>
-    </ng-container>
-  </ng-container>
-  <div class="d-flex justify-content-end mt-3" *ngIf="mode === 'edit'">
-    <ksp-add-row-button
-      class="text-primary"
-      (addRowClick)="addFormArray(innovationInfo)"
-      >เพิ่มรางวัล</ksp-add-row-button
-    >
+
+      <ng-container matColumnDef="group">
+        <th mat-header-cell *matHeaderCellDef>กลุ่มสาระ</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.group }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef>ประเภทรางวัล</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.type }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="reward">
+        <th mat-header-cell *matHeaderCellDef>รางวัล</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.reward }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="year">
+        <th mat-header-cell *matHeaderCellDef>ปีที่ได้รับรางวัล</th>
+        <td mat-cell *matCellDef="let element">
+          {{element.year}}
+        </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
   </div>
 </form>

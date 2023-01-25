@@ -39,6 +39,34 @@
           <option value="0" selected hidden disabled>กรุณาเลือก</option>
         </select>
       </div>
+
+      <div class="col-md-5" *ngIf="rewardType.value === '42'">
+        <div class="box-header">ประเภท/กลุ่มสาระการเรียนรู้</div>
+        <select class="form-select">
+          <option value="0" selected hidden disabled>กรุณาเลือก</option>
+          <option value="1">
+            ครูผู้สอนกลุ่มสาระการเรียนรู้การงานอาชีพและเทคโนโลยีดีเด่น
+          </option>
+          <option value="2">ครูผู้สอนกลุ่มสาระการเรียนรู้คณิตศาสตร์ดีเด่น</option>
+          <option value="3">
+            ครูผู้สอนกลุ่มสาระการเรียนรู้ภาษาต่างประเทศดีเด่น (ภาษาอังกฤษ)
+          </option>
+          <option value="4">ครูผู้สอนกลุ่มสาระการเรียนรู้ภาษาไทยดีเด่น</option>
+          <option value="5">
+            ครูผู้สอนกลุ่มสาระการเรียนรู้วิทยาศาสตร์ดีเด่น
+          </option>
+          <option value="6">ครูผู้สอนกลุ่มสาระการเรียนรู้ศิลปะดีเด่น</option>
+          <option value="7">
+            ครูผู้สอนกลุ่มสาระการเรียนรู้สังคมศึกษา ศาสนา และวัฒนธรรมดีเด่น
+          </option>
+          <option value="8">
+            ครูผู้สอนกลุ่มสาระการเรียนรู้สุขศึกษา และพลศึกษาดีเด่น
+          </option>
+          <option value="9">ครูผู้สอนกิจกรรมพัฒนาผู้เรียนดีเด่น</option>
+          <option value="10">ครูผู้สอนปฐมศึกษาดีเด่น</option>
+          <option value="11">ครูผู้สอนปฐมวัยดีเด่น</option>
+        </select>
+      </div>
     </div>
 
     <div *ngIf="rewardType.value !== '0'">

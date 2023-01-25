@@ -12,7 +12,7 @@ import {
 import { parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
-const FORM_TAB_COUNT = 6;
+const FORM_TAB_COUNT = 7;
 
 @Component({
   selector: 'ksp-e-best-teacher-detail',
@@ -44,10 +44,12 @@ export class EBestTeacherDetailComponent
     userInfo: [],
     addressInfo: [],
     workplace: [],
-    rewardTeacherInfo: [],
+
     eduInfo: [],
-    teachingInfo: [],
+    hiringInfo: [],
     rewardDetailInfo: [],
+    rewardPunishmentInfo: [],
+
     phone: [],
     fax: [],
     email: [],
@@ -108,10 +110,10 @@ export class EBestTeacherDetailComponent
       email,
       addressinfo,
       schooladdrinfo,
-      rewardteacherinfo,
       eduinfo,
       rewarddetailinfo,
-      teachinginfo,
+      hiringinfo,
+      rewardpunishmentinfo,
       fileinfo,
     } = data;
     const myInfo = <any>{
@@ -136,25 +138,16 @@ export class EBestTeacherDetailComponent
     const workplaceInfo = parseJson(schooladdrinfo);
     this.patchWorkplaceInfo(workplaceInfo);
 
-    const rewardTeacherInfo = parseJson(rewardteacherinfo);
     const eduInfo = parseJson(eduinfo);
-    const teachingInfo = parseJson(teachinginfo);
+    const hiringInfo = parseJson(hiringinfo);
     const rewardDetailInfo = parseJson(rewarddetailinfo);
-    if (teachingInfo) {
-      this.amphurs3$ = this.addressService.getAmphurs(teachingInfo.province);
-      this.tumbols3$ = this.addressService.getTumbols(teachingInfo.district);
-      this.amphurs4$ = this.addressService.getAmphurs(
-        teachingInfo.currentProvince
-      );
-      this.tumbols4$ = this.addressService.getTumbols(
-        teachingInfo.currentDistrict
-      );
-    }
+    const rewardPunishmentInfo = parseJson(rewardpunishmentinfo);
+
     this.form.patchValue(<any>{
-      rewardTeacherInfo,
       eduInfo,
+      hiringInfo,
       rewardDetailInfo,
-      teachingInfo,
+      rewardPunishmentInfo,
     });
 
     if (fileinfo) {
