@@ -3,54 +3,61 @@
   <span subHeader>ขอเปลี่ยนแปลง/แก้ไขหนังสืออนุญาตประกอบวิชาชีพ</span>
 </ksp-top-nav>
 
-<form [formGroup]="form">
-  <div class="main__container px-4 py-2">
-    <div class="box-header">
-      รายละเอียดแบบคำขอเปลี่ยนแปลง/แก้ไขหนังสืออนุญาต
-    </div>
+<div class="main__container px-4 py-2">
+  <div class="box-header">รายละเอียดแบบคำขอเปลี่ยนแปลง/แก้ไขหนังสืออนุญาต</div>
 
-    <div class="detail__container p-3">
-      <ksp-edit-license
-        formControlName="userInfo"
-        [oldValue]="oldValue"
-        [prefixList]="prefixList$ | async"
-        [showDistributeData]="true"
-      ></ksp-edit-license>
-
-      <ksp-form-multi-attachment
-        [groups]="uploadFileList"
-        [uniqueTimestamp]="uniqueTimestamp"
-      ></ksp-form-multi-attachment>
-    </div>
-    <div class="text-danger fs-6 mt-1">
-      *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
-      โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
-    </div>
-    <div class="d-flex justify-content-center mb-2 mt-3">
-      <button
-        *ngIf="requestId"
-        type="button"
-        class="ms-3 btn border-primary text-primary"
-        (click)="onCancel()"
-      >
-        ยกเลิกแบบคำขอ
-      </button>
-      <button
-        *ngIf="!requestId"
-        (click)="onCancel()"
-        type="button"
-        class="ms-3 btn border-primary bg-white text-primary"
-      >
-        ยกเลิก
-      </button>
-      <button
-        (click)="onConfirm()"
-        type="button"
-        class="ms-3 btn btn-primary"
-        [disabled]="!form.valid"
-      >
-        บันทึก
-      </button>
-    </div>
+  <div [formGroup]="form1" class="p-3">
+    <ksp-form-user-info
+      formControlName="userInfo"
+      [mode]="'view'"
+      [isDarkMode]="true"
+      [prefixList]="prefixList$ | async"
+      [isSelfService]="true"
+    >
+    </ksp-form-user-info>
   </div>
-</form>
+
+  <div [formGroup]="form2" class="detail__container p-3">
+    <ksp-edit-license
+      formControlName="editData"
+      [oldValue]="oldValue"
+      [prefixList]="prefixList$ | async"
+      [showDistributeData]="true"
+    ></ksp-edit-license>
+
+    <ksp-form-multi-attachment
+      [groups]="uploadFileList"
+      [uniqueTimestamp]="uniqueTimestamp"
+    ></ksp-form-multi-attachment>
+  </div>
+  <div class="text-danger fs-6 mt-1">
+    *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
+    โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
+  </div>
+  <div class="d-flex justify-content-center mb-2 mt-3">
+    <button
+      *ngIf="requestId"
+      type="button"
+      class="ms-3 btn border-primary text-primary"
+      (click)="onCancel()"
+    >
+      ยกเลิกแบบคำขอ
+    </button>
+    <button
+      *ngIf="!requestId"
+      (click)="onCancel()"
+      type="button"
+      class="ms-3 btn border-primary bg-white text-primary"
+    >
+      ยกเลิก
+    </button>
+    <button
+      (click)="onConfirm()"
+      type="button"
+      class="ms-3 btn btn-primary"
+      [disabled]="form2.invalid"
+    >
+      บันทึก
+    </button>
+  </div>
+</div>

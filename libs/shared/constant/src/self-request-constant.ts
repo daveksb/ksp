@@ -173,6 +173,26 @@ export const SelfRequestProcess: SchRequestProcess[] = [
     ],
   },
 
+  //ขอเปลี่ยนแปลง/แก้ไขหนังสืออนุญาตประกอบวิชาชีพ
+  {
+    requestType: 3,
+    processId: 1,
+    processName: 'สร้างแบบคำขอ',
+    status: [
+      { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
+    ],
+  },
+  {
+    requestType: 3,
+    processId: 2,
+    processName: 'สร้างและส่งแบบคำขอ',
+    status: [
+      { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
+    ],
+  },
+
   //ขอคืนเงินค่าธรรมเนียม
   {
     requestType: 30,

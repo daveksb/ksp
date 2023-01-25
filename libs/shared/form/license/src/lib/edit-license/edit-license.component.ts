@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { KspFormBaseComponent, Prefix } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { pairwise } from 'rxjs';
@@ -16,9 +16,7 @@ function checkboxValidator(): any {
     const changePrefix: boolean = form.get('changePrefix')?.value;
     const changeLastname: boolean = form.get('changeLastname')?.value;
     const isDistributed: boolean = form.get('isDistributed')?.value;
-
     const changeFirstname: boolean = form.get('changeFirstname')?.value;
-
     if (
       !changePrefix &&
       !changeFirstname &&
@@ -27,7 +25,6 @@ function checkboxValidator(): any {
     ) {
       return { checkbox: true };
     }
-
     return null;
   };
 }
@@ -70,7 +67,7 @@ export class EditLicenseComponent
 
   @Input() showEditPassport = false;
   @Input() showDistributeData = false;
-  @Input() prefixList: any[] = [];
+  @Input() prefixList: Prefix[] | null = [];
   @Input()
   set oldValue(value: any) {
     setTimeout(() => {
@@ -92,7 +89,7 @@ export class EditLicenseComponent
     super();
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
-      this.form?.valueChanges.subscribe((value) => {
+      this.form?.valueChanges.subscribe(() => {
         const changeValue = this.form.getRawValue();
         this.onChange(changeValue);
         this.onTouched();
