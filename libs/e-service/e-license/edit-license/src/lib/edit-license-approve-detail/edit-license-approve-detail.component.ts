@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   ESelfFormBaseComponent,
   VERIFY_CHOICES,
 } from '@ksp/shared/form/others';
-import { KspRequest, SelfRequest } from '@ksp/shared/interface';
+import {
+  FileGroup,
+  KspRequest,
+  Prefix,
+  SelfRequest,
+} from '@ksp/shared/interface';
 import { ERequestService, GeneralInfoService } from '@ksp/shared/service';
 import { parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
@@ -18,7 +23,15 @@ const FORM_TAB_COUNT = 1;
   styleUrls: ['./edit-license-approve-detail.component.scss'],
 })
 export class EditLicenseApproveDetailComponent implements OnInit {
-  prefixList$!: Observable<any>;
+  prefixList$!: Observable<Prefix[]>;
+  requestId!: number;
+  requestData = new KspRequest();
+  verifyChoice: any[] = VERIFY_CHOICES;
+  uploadFileList: FileGroup[] = [];
+  form = this.fb.group({
+    userInfo: [],
+    checkResult: this.fb.array([]),
+  });
   choices = [
     {
       name: 'ครบถ้วน และถูกต้อง',
@@ -29,16 +42,6 @@ export class EditLicenseApproveDetailComponent implements OnInit {
       value: 3,
     },
   ];
-  requestId!: number;
-
-  form = this.fb.group({
-    userInfo: [],
-    checkResult: this.fb.array([]),
-  });
-
-  requestData = new KspRequest();
-  verifyChoice: any[] = VERIFY_CHOICES;
-  uploadFileList: any[] = [];
 
   get checkResultFormArray() {
     return this.form.controls.checkResult as FormArray;
