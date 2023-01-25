@@ -9,9 +9,20 @@
       รายละเอียดแบบคำขอเปลี่ยนแปลง/แก้ไขหนังสืออนุญาต
     </div>
 
+    <div class="p-3">
+      <ksp-form-user-info
+        formControlName="userInfo"
+        [mode]="'view'"
+        [isDarkMode]="true"
+        [prefixList]="prefixList$ | async"
+        [isSelfService]="true"
+      >
+      </ksp-form-user-info>
+    </div>
+
     <div class="detail__container p-3">
       <ksp-edit-license
-        formControlName="userInfo"
+        formControlName="editData"
         [oldValue]="oldValue"
         [prefixList]="prefixList$ | async"
         [showDistributeData]="true"
