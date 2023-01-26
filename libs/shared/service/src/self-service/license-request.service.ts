@@ -4,6 +4,7 @@ import { environment } from '@ksp/shared/environment';
 import {
   KspPayment,
   KspRequest,
+  KspRequestCancelPayload,
   KSPRequestSelfSearchFilter,
   SelfGetRequest,
   SelfRequest,
@@ -44,17 +45,17 @@ export class SelfRequestService {
     );
   }
 
-  cancelRequest(form: any): Observable<any> {
+  cancelRequest(form: KspRequestCancelPayload): Observable<any> {
     return this.http.post(
-      `${environment.apiUrl}/kspself/ksprequestinsertstatus`,
+      `${environment.shortApiUrl}/ksprequest_updaterequest_status_self.php`,
       form
     );
   }
 
-  closeRequest(form: any): Observable<any> {
+  closeRequest(payload: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspself/ksprequestupdateisclose`,
-      form
+      payload
     );
   }
 

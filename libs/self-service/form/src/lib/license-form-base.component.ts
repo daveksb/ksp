@@ -189,8 +189,9 @@ export abstract class LicenseFormBaseComponent {
     const payload: KspRequestCancelPayload = {
       requestid: `${this.requestId}`,
       process: `${this.currentProcess}`,
-      status: '0',
+      //detail: "",
       userid: getCookie('userId'),
+      //paymentstatus: '1',
     };
 
     this.requestService.cancelRequest(payload).subscribe((res) => {

@@ -326,7 +326,7 @@ export class LicenseEditComponent implements OnInit {
       process: '0',
     };
 
-    this.requestService.cancelRequest(payload).subscribe((res) => {
+    /*     this.requestService.cancelRequest(payload).subscribe((res) => {
       //console.log('Cancel request  = ', res);
       const closePayload = {
         id: `${this.requestId}`,
@@ -336,7 +336,7 @@ export class LicenseEditComponent implements OnInit {
       this.requestService.closeRequest(closePayload).subscribe((res) => {
         this.cancelCompleted();
       });
-    });
+    }); */
   }
 
   cancelCompleted() {

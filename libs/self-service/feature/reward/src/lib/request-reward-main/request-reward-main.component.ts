@@ -497,10 +497,10 @@ export class RequestRewardMainComponent implements OnInit {
       process: '0',
     };
 
-    this.requestService.cancelRequest(payload).subscribe((res) => {
+    /*     this.requestService.cancelRequest(payload).subscribe((res) => {
       //console.log('Cancel request  = ', res);
       this.cancelCompleted();
-    });
+    }); */
   }
 
   cancelCompleted() {
