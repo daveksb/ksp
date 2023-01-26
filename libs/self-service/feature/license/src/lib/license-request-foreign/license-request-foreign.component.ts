@@ -6,7 +6,12 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { FormBuilder } from '@angular/forms';
-import { FileGroup, SelfGetRequest, SelfRequest } from '@ksp/shared/interface';
+import {
+  FileGroup,
+  KspRequestCancelPayload,
+  SelfGetRequest,
+  SelfRequest,
+} from '@ksp/shared/interface';
 import {
   parseJson,
   replaceEmptyWithNull,
@@ -364,13 +369,13 @@ export class LicenseRequestForeignComponent implements OnInit {
   }
 
   cancelRequest() {
-    const payload = {
+    const payload: KspRequestCancelPayload = {
       requestid: `${this.requestId}`,
-      process: '0',
+      process: `${this.requestData.process}`,
+      userid: getCookie('userId'),
     };
 
-    this.requestService.cancelRequest(payload).subscribe((res) => {
-      //console.log('Cancel request  = ', res);
+    this.requestService.cancelRequest(payload).subscribe(() => {
       this.cancelCompleted();
     });
   }

@@ -110,7 +110,8 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
       if (res && res.length) {
         //console.log('res xx = ', res);
         this.searchNotFound = false;
-        this.dataSource.data = res.filter((item) => item.isclose !== '1');
+        //this.dataSource.data = res.filter((item) => item.isclose !== '1');
+        this.dataSource.data = res;
         this.dataSource.sort = this.sort;
 
         const sortState: Sort = { active: 'id', direction: 'desc' };

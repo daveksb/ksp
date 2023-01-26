@@ -18,7 +18,12 @@ import {
   toLowercaseProp,
 } from '@ksp/shared/utility';
 import { SelfRequestService, MyInfoService } from '@ksp/shared/service';
-import { FileGroup, SelfGetRequest, SelfRequest } from '@ksp/shared/interface';
+import {
+  FileGroup,
+  KspRequestCancelPayload,
+  SelfGetRequest,
+  SelfRequest,
+} from '@ksp/shared/interface';
 import * as _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 import {
@@ -339,7 +344,7 @@ export class RenewLicenseForeignComponent implements OnInit {
     };
     console.log(initialPayload);
     const payload = _.pick({ ...self, ...initialPayload }, allowKey);
-    console.log(payload);
+    //console.log(payload);
 
     return payload;
   }
@@ -360,13 +365,13 @@ export class RenewLicenseForeignComponent implements OnInit {
   }
 
   cancelRequest() {
-    const payload = {
+    const payload: KspRequestCancelPayload = {
       requestid: `${this.requestId}`,
-      process: '0',
+      process: `${this.requestData.process}`,
+      userid: getCookie('userId'),
     };
 
-    this.requestService.cancelRequest(payload).subscribe((res) => {
-      //console.log('Cancel request  = ', res);
+    this.requestService.cancelRequest(payload).subscribe(() => {
       this.cancelCompleted();
     });
   }

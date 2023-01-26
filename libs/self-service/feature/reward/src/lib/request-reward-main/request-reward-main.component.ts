@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ListData, SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
+import {
+  KspRequestCancelPayload,
+  ListData,
+  SelfMyInfo,
+  SelfRequest,
+} from '@ksp/shared/interface';
 import {
   MyInfoService,
   SelfRequestService,
@@ -492,13 +497,13 @@ export class RequestRewardMainComponent implements OnInit {
   }
 
   cancelRequest() {
-    const payload = {
+    const payload: KspRequestCancelPayload = {
       requestid: `${this.requestId}`,
-      process: '0',
+      process: `${this.requestData.process}`,
+      userid: getCookie('userId'),
     };
 
-    this.requestService.cancelRequest(payload).subscribe((res) => {
-      //console.log('Cancel request  = ', res);
+    this.requestService.cancelRequest(payload).subscribe(() => {
       this.cancelCompleted();
     });
   }

@@ -323,19 +323,12 @@ export class LicenseEditComponent implements OnInit {
   cancelRequest() {
     const payload = {
       requestid: `${this.requestId}`,
-      process: '0',
+      process: `${this.requestData.process}`,
+      userid: getCookie('userId'),
     };
 
     this.requestService.cancelRequest(payload).subscribe((res) => {
-      //console.log('Cancel request  = ', res);
-      const closePayload = {
-        id: `${this.requestId}`,
-        isclose: '1',
-      };
-      //console.log('close request = ');
-      this.requestService.closeRequest(closePayload).subscribe((res) => {
-        this.cancelCompleted();
-      });
+      this.cancelCompleted();
     });
   }
 
