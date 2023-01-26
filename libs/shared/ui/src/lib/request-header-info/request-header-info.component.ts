@@ -14,7 +14,7 @@ export class RequestHeaderInfoComponent {
   @Input() requestLabel2 = 'เลขแบบคำขอ';
 
   @Input() requestNumber: string | null = '';
-  @Input() requestDate: string | null = '';
+  @Input() requestDate: string | null | undefined = '';
 
   @Input() showCurrentDate = false;
 

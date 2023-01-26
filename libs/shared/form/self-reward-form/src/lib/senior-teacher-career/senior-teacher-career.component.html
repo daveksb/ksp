@@ -1,19 +1,83 @@
 <form [formGroup]="form">
+  <div class="box-header text-primary">การทำงาน</div>
+  <div class="row">
+    <div class="col-md-6 mb-2">
+      <label class="form-label required">ตำแหน่งทางวิชาการ</label>
+      <select class="form-select" formControlName="position">
+        <option value="null" selected hidden disabled>
+          กรุณาเลือก
+        </option>
+        <option value="1">ศาสตราจารย์</option>
+        <option value="2">รองศาสตราจารย์</option>
+        <option value="3">ผู้ช่วยศาสตราจารย์</option>
+      </select>
+    </div>
+    <div class="col-md-6 mb-2">
+      <label class="form-label required">ประเภทวิชาชีพ</label>
+      <select class="form-select" formControlName="professionalType">
+        <option value="null" selected hidden disabled>
+          กรุณาเลือก
+        </option>
+        <option value="1">ครู</option>
+        <option value="2">ผู้บริหารสถานศึกษา</option>
+        <option value="3">ผู้บริหารการศึกษา</option>
+        <option value="4">ศึกษานิเทศก์</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 mb-2">
+      <label class="form-label required">วันเดือนปี ลาออกจากการปฏิบัติงาน</label>
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker1"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="resignDate"
+          placeholder="วว/ดด/ปปปป" />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </div>
+    </div>
+    <div class="col-md-6 mb-2">
+      <label class="form-label required">วันเดือนปี ออกก่อนอายุครบ 60 ปี</label>
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker2"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="earlyRetireDate"
+          placeholder="วว/ดด/ปปปป" />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="box-header text-primary">ประวัติการประกอบวิชาชีพ</div>
+
   <ng-container formArrayName="workingInfo">
     <ng-container
-      *ngFor="let DegreeForm of workingInfo.controls; let i = index"
-    >
+      *ngFor="let DegreeForm of workingInfo.controls; let i = index">
       <ng-container [formGroupName]="i">
         <div
           class="border rounded px-3 py-2"
-          [ngClass]="i > 0 ? 'mt-3' : 'mt-0'"
-        >
+          [ngClass]="i > 0 ? 'mt-3' : 'mt-0'">
           <div class="d-flex justify-content-end" *ngIf="i > 0">
             <i
               class="bi bi-x-circle-fill text-danger"
               (click)="deleteFormArray(workingInfo, i)"
-              role="button"
-            ></i>
+              role="button"></i>
           </div>
           <div class="row">
             <div class="col-md-6 mb-2">
@@ -33,8 +97,7 @@
               <input
                 class="form-control"
                 type="text"
-                formControlName="position"
-              />
+                formControlName="position" />
             </div>
           </div>
           <div class="row">
@@ -43,18 +106,16 @@
               <div class="d-flex align-items-center">
                 <input
                   matInput
-                  [matDatepicker]="picker1"
+                  [matDatepicker]="picker3"
                   autocomplete="off"
                   class="form-control form-date"
                   formControlName="startDate"
-                  placeholder="วว/ดด/ปปปป"
-                />
+                  placeholder="วว/ดด/ปปปป" />
                 <mat-datepicker-toggle
                   class="button-date"
                   matSuffix
-                  [for]="picker1"
-                ></mat-datepicker-toggle>
-                <mat-datepicker #picker1></mat-datepicker>
+                  [for]="picker3"></mat-datepicker-toggle>
+                <mat-datepicker #picker3></mat-datepicker>
               </div>
             </div>
             <div class="col-md-3 mb-2">
@@ -62,36 +123,51 @@
               <div class="d-flex align-items-center">
                 <input
                   matInput
-                  [matDatepicker]="picker2"
+                  [matDatepicker]="picker4"
                   autocomplete="off"
                   class="form-control form-date"
                   formControlName="endDate"
-                  placeholder="วว/ดด/ปปปป"
-                />
+                  placeholder="วว/ดด/ปปปป" />
                 <mat-datepicker-toggle
                   class="button-date"
                   matSuffix
-                  [for]="picker2"
-                ></mat-datepicker-toggle>
-                <mat-datepicker #picker2></mat-datepicker>
+                  [for]="picker4"></mat-datepicker-toggle>
+                <mat-datepicker #picker4></mat-datepicker>
               </div>
             </div>
 
-            <div class="col-md-3 mb-2">
-              <label class="form-label required">ระยะเวลา (ปี)</label>
-              <input
-                class="form-control"
-                type="text"
-                formControlName="durationYear"
-              />
+            <div class="col-md-2 mb-2">
+              <label class="form-label ">ระยะเวลาการปฏิบัติงาน</label>
+              <div class="d-flex">
+                <input
+                  class="form-control"
+                  type="text"
+                  [value]="sum[i][2]"
+                  disabled />
+                <label class="mx-2">วัน</label>
+              </div>
             </div>
-            <div class="col-md-3 mb-2">
-              <label class="form-label required">ระยะเวลา (เดือน)</label>
-              <input
-                class="form-control"
-                type="text"
-                formControlName="durationMonth"
-              />
+            <div class="col-md-2 mb-2">
+              <label class="form-label "></label>
+              <div class="d-flex">
+                <input
+                  class="form-control"
+                  type="text"
+                  [value]="sum[i][1]"
+                  disabled />
+                <label class="mx-2">เดือน</label>
+              </div>
+            </div>
+            <div class="col-md-2 mb-2">
+              <label class="form-label "></label>
+              <div class="d-flex">
+                <input
+                  class="form-control"
+                  type="text"
+                  [value]="sum[i][0]"
+                  disabled />
+                <label class="mx-2">ปี</label>
+              </div>
             </div>
           </div>
         </div>
@@ -101,8 +177,6 @@
   <div class="d-flex justify-content-end mt-3" *ngIf="mode === 'edit'">
     <ksp-add-row-button
       class="text-primary"
-      (addRowClick)="addFormArray(workingInfo)"
-      >{{ btnLabel }}</ksp-add-row-button
-    >
+      (addRowClick)="addFormArray(workingInfo)">{{ btnLabel }}</ksp-add-row-button>
   </div>
 </form>
