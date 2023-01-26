@@ -150,9 +150,6 @@ export class LicenseRequestComponent
       this.form.controls.experience.patchValue({
         ...experienceInfo,
       } as any);
-      //console.log('exp = ', experienceInfo);
-      /* const experienceInfo = parseJson(data.experienceinfo);
-      this.form.controls.experience.patchValue({ ...experienceInfo } as any); */
     }
 
     if (data.fileinfo) {
