@@ -79,7 +79,19 @@ export class RequestRewardMainService {
 
   seniorTeacherRewardFiles: FileGroup[] = [
     {
-      name: '1. รางวัลอื่นและประกาศเกียรติคุณ',
+      name: '1. สำเนาบัตรประชาชน',
+      files: [],
+    },
+    {
+      name: '2. กพ.7',
+      files: [],
+    },
+    {
+      name: '3. แบบคำขอที่ผู้บังคับบัญชาลงนาม (มอ.1)',
+      files: [],
+    },
+    {
+      name: '4. แบบคำขอที่ผู้บังคับบัญชาลงนาม (มอ.2)',
       files: [],
     },
   ];

@@ -73,9 +73,10 @@ export class SeniorTeacherRewardComponent
     userInfo: [],
     addressInfo: [],
     workplace: [],
-    rewardTeacherInfo: [],
+    // rewardTeacherInfo: [],
     rewardCareerInfo: [],
-    rewardMoneySupportInfo: [],
+    // rewardMoneySupportInfo: [],
+    rewardPunishmentInfo: [],
 
     phone: [],
     fax: [],
