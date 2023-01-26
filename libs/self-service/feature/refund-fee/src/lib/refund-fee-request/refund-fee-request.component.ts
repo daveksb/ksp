@@ -12,7 +12,13 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { FileGroup, SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
+import {
+  FileGroup,
+  KspRequestCancelPayload,
+  Prefix,
+  SelfMyInfo,
+  SelfRequest,
+} from '@ksp/shared/interface';
 import {
   MyInfoService,
   SelfRequestService,
@@ -29,17 +35,6 @@ import * as _ from 'lodash';
 import { Observable, Subject } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
-/* const ATTACH_FILES = [
-  { name: '1.สำเนาหน้าแรกสมุดเงินฝาก', fileid: '', filename: '' },
-]; */
-
-const ATTACH_FILES: FileGroup[] = [
-  {
-    name: '1. สำเนาหน้าแรกสมุดเงินฝาก',
-    files: [],
-  },
-];
-
 @Component({
   selector: 'ksp-refund-fee-request',
   templateUrl: './refund-fee-request.component.html',
@@ -47,19 +42,18 @@ const ATTACH_FILES: FileGroup[] = [
 })
 export class RefundFeeRequestComponent implements OnInit {
   isLoading: Subject<boolean> = this.loaderService.isLoading;
-  files: any[] = [];
+  files: FileGroup[] = [];
   headerGroup = ['วันที่ทำรายการ', 'เลขแบบคำขอ'];
   userInfoType = UserInfoFormType.thai;
   today = thaiDate(new Date());
   userInfo!: SelfMyInfo;
-  prefixList$!: Observable<any>;
+  prefixList$!: Observable<Prefix[]>;
   uniqueTimestamp!: string;
   requestId!: number;
   requestData!: SelfRequest;
   requestNo: string | null = '';
   currentProcess!: number;
   myInfo$!: Observable<SelfMyInfo>;
-
   form = this.fb.group({
     userInfo: [],
     refundInfo: [],
@@ -88,7 +82,7 @@ export class RefundFeeRequestComponent implements OnInit {
       if (this.requestId) {
         this.requestService.getRequestById(this.requestId).subscribe((res) => {
           if (res) {
-            console.log(res);
+            //console.log(res);
             this.requestData = res;
             this.requestNo = res.requestno;
             this.currentProcess = Number(res.process);
@@ -188,7 +182,6 @@ export class RefundFeeRequestComponent implements OnInit {
 
   submit() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
         subTitle: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขอนุมัติ
@@ -232,7 +225,6 @@ export class RefundFeeRequestComponent implements OnInit {
 
   cancel() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
       data: {
         title: `คุณต้องการยกเลิกรายการแบบคำขอ
         ใช่หรือไม่? `,
@@ -247,20 +239,19 @@ export class RefundFeeRequestComponent implements OnInit {
   }
 
   cancelRequest() {
-    const payload = {
+    const payload: KspRequestCancelPayload = {
       requestid: `${this.requestId}`,
-      process: '0',
+      process: `${this.requestData.process}`,
+      userid: getCookie('userId'),
     };
 
-    /*     this.requestService.cancelRequest(payload).subscribe((res) => {
-      //console.log('Cancel request  = ', res);
+    this.requestService.cancelRequest(payload).subscribe(() => {
       this.cancelCompleted();
-    }); */
+    });
   }
 
   cancelCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
       data: {
         header: `ยกเลิกแบบคำขอสำเร็จ`,
       },
@@ -273,3 +264,10 @@ export class RefundFeeRequestComponent implements OnInit {
     });
   }
 }
+
+const ATTACH_FILES: FileGroup[] = [
+  {
+    name: '1. สำเนาหน้าแรกสมุดเงินฝาก',
+    files: [],
+  },
+];
