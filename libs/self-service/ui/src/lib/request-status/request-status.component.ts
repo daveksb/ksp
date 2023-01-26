@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EngDatePipe, ThaiDatePipe } from '@ksp/shared/pipe';
+import { EngDatePipe, RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 
 @Component({
   selector: 'self-service-request-status',
   standalone: true,
-  imports: [CommonModule, ThaiDatePipe, EngDatePipe],
+  imports: [CommonModule, ThaiDatePipe, EngDatePipe, RequestNoPipe],
   templateUrl: './request-status.component.html',
   styleUrls: ['./request-status.component.scss'],
 })

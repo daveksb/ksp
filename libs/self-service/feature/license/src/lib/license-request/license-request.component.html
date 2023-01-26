@@ -12,7 +12,6 @@
   <self-service-request-status
     [requestDate]="requestDate"
     [idcardNo]="(myInfo$ | async)?.idcardno || ''"
-    [kurusapaNo]="(myInfo$ | async)?.kuruspano || ''"
     [requestNo]="requestNo"
   ></self-service-request-status>
 
@@ -41,7 +40,7 @@
       *ngIf="kspComment.checkdetail[selectedTabIndex]?.result === 'incomplete'"
     >
       <ksp-uni-form-badge
-        [mainTitle]="kspComment.checkdetail[selectedTabIndex]?.detail"
+        [mainTitle]="kspComment.checkdetail[selectedTabIndex].detail"
       >
       </ksp-uni-form-badge>
     </div>
