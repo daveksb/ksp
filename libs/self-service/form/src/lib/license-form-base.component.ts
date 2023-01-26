@@ -54,7 +54,8 @@ export abstract class LicenseFormBaseComponent {
   form!: FormGroup;
   uniqueTimestamp!: string;
   requestId!: number;
-  requestData!: SelfRequest;
+  //requestData!: SelfRequest;
+  requestData = new SelfRequest('1', '01', '1');
   requestNo: string | null = '';
   requestDate: string | null = '';
   currentProcess!: number;
