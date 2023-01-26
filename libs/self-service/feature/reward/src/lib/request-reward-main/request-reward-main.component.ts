@@ -7,6 +7,7 @@ import {
   GeneralInfoService,
   EducationDetailService,
   LoaderService,
+  AddressService,
 } from '@ksp/shared/service';
 import {
   getCookie,
@@ -64,12 +65,14 @@ export class RequestRewardMainComponent implements OnInit {
     rewardType: [0],
     rewardDetail: [],
     careerType: ['0'],
+    province: [null],
   });
 
   prefixList$!: Observable<any>;
   bureau$!: Observable<any>;
   uniqueTimestamp!: string;
   rewardFiles: any[] = [];
+  provinces$!: Observable<any>;
 
   constructor(
     private requestService: SelfRequestService,
@@ -81,12 +84,14 @@ export class RequestRewardMainComponent implements OnInit {
     private router: Router,
     private service: RequestRewardMainService,
     private route: ActivatedRoute,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private addressService: AddressService
   ) {}
 
   ngOnInit(): void {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.bureau$ = this.educationDetailService.getBureau();
+    this.provinces$ = this.addressService.getProvinces();
     this.checkRequestId();
   }
 

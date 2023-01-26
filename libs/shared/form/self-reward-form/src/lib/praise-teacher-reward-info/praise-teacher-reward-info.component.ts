@@ -14,7 +14,7 @@ export class PraiseTeacherRewardInfoComponent
   implements OnInit
 {
   override form = this.fb.group({
-    receivedReward: [],
+    receivedReward: ['', Validators.required],
     rewardInfo: this.fb.array([]),
   });
 
@@ -23,6 +23,19 @@ export class PraiseTeacherRewardInfoComponent
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value) => {
+        if (
+          value.receivedReward === 'hasReward' &&
+          value.rewardInfo?.length === 0
+        ) {
+          this.addFormArray(this.rewardInfo);
+        } else if (
+          value.receivedReward === 'noReward' &&
+          value.rewardInfo &&
+          value.receivedReward?.length > 0
+        ) {
+          this.rewardInfo.clear();
+        }
+
         this.onChange(value);
         this.onTouched();
       })
@@ -30,7 +43,7 @@ export class PraiseTeacherRewardInfoComponent
   }
 
   ngOnInit(): void {
-    this.addFormArray(this.rewardInfo);
+    // this.addFormArray(this.rewardInfo);
   }
 
   override set value(value: any) {

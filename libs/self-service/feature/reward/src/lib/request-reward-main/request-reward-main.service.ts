@@ -68,7 +68,11 @@ export class RequestRewardMainService {
 
   praiseRewardFiles: FileGroup[] = [
     {
-      name: '1. รางวัลอื่นและประกาศเกียรติคุณ',
+      name: '1. แบบรายงานประวัติและผลงาน',
+      files: [],
+    },
+    {
+      name: '2. กพ7 หรือ สมุดประจำตัวครู',
       files: [],
     },
   ];
