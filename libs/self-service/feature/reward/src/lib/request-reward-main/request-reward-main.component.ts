@@ -71,6 +71,7 @@ export class RequestRewardMainComponent implements OnInit {
     rewardDetail: [],
     careerType: ['0'],
     province: [null],
+    researchSubmissionType: [null],
   });
 
   prefixList$!: Observable<any>;
@@ -282,10 +283,12 @@ export class RequestRewardMainComponent implements OnInit {
         const rewardResearcherInfo = parseJson(rewardresearcherinfo);
         const rewardResearchInfo = parseJson(rewardresearchinfo);
         const rewardResearchHistory = parseJson(rewardresearchhistory);
+        const rewardPunishmentInfo = parseJson(rewardpunishmentinfo);
         this.form.controls.rewardDetail.patchValue(<any>{
           rewardResearcherInfo,
           rewardResearchInfo,
           rewardResearchHistory,
+          rewardPunishmentInfo,
         });
         break;
       }

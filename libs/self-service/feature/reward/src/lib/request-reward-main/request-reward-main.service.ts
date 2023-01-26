@@ -98,7 +98,19 @@ export class RequestRewardMainService {
 
   researchRewardFiles: FileGroup[] = [
     {
-      name: '1. รางวัลอื่นและประกาศเกียรติคุณ',
+      name: '1. เล่มรายงานการวิจัย',
+      files: [],
+    },
+    {
+      name: '2. แบบแสดงความจำนงค์',
+      files: [],
+    },
+    {
+      name: '3. แบบ วจ2 (กรณีประเภททีม) ',
+      files: [],
+    },
+    {
+      name: '4. การตรวจการคัดลอกงานวิชาการ',
       files: [],
     },
   ];
