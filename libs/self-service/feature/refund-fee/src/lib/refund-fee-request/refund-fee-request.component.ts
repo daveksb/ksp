@@ -15,6 +15,7 @@ import {
 import {
   FileGroup,
   KspRequestCancelPayload,
+  KSPRequestSelfSearchFilter,
   Prefix,
   SelfMyInfo,
   SelfRequest,
@@ -87,8 +88,6 @@ export class RefundFeeRequestComponent implements OnInit {
             this.requestNo = res.requestno;
             this.currentProcess = Number(res.process);
             this.uniqueTimestamp = res.uniqueno || '';
-            console.log(this.uniqueTimestamp);
-
             this.patchData(res);
           }
         });
@@ -100,7 +99,7 @@ export class RefundFeeRequestComponent implements OnInit {
   }
 
   patchData(data: SelfRequest) {
-    console.log(data);
+    //console.log(data);
     const { fileinfo, feerefundinfo, ...resData } = data;
     this.form.controls.userInfo.patchValue(<any>resData);
 
@@ -111,7 +110,6 @@ export class RefundFeeRequestComponent implements OnInit {
 
     if (fileinfo) {
       const fileInfo = parseJson(data.fileinfo);
-      console.log(fileInfo);
       const { attachfiles } = fileInfo;
       this.files = attachfiles;
     }
@@ -150,9 +148,7 @@ export class RefundFeeRequestComponent implements OnInit {
     self.isforeign = `${SelfServiceRequestForType.ชาวไทย}`;
     self.uniqueno = this.uniqueTimestamp;
     self.userid = getCookie('userId');
-
     const attachfiles = this.files;
-
     const selectData: any = _.pick(userInfo, allowKey);
     const filledData = {
       ...self,

@@ -8,7 +8,6 @@
         <option value="1">ค่าขึ้นทะเบียนหนังสืออนุญาตประกอบวิชาชีพ</option>
         <option value="2">ค่าต่ออายุหนังสืออนุญาตประกอบวิชาชีพ</option>
         <option value="3">ค่าใบแทนหนังสืออนุญาต</option>
-        <!-- <option value="4">ค่าหนังสือรับรองการขึ้นทะเบียน</option> -->
         <option value="4">ค่าธรรมเนียมอื่นๆ</option>
       </select>
     </div>
@@ -26,7 +25,15 @@
   <div class="row">
     <div class="col-md-6 mb-2">
       <label class="form-label required">เลขแบบคำขอ</label>
-      <input formControlName="requestno" class="form-control" type="text" />
+      <select class="form-select" formControlName="requestno">
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        <ng-container *ngFor="let r of myRequests">
+          <option [value]="r.requestno">
+            {{ r.requestno || '' | reqNoFormat }}
+          </option>
+        </ng-container>
+      </select>
+      <!-- <input formControlName="requestno" class="form-control" type="text" /> -->
     </div>
     <div class="col-md-6 mb-2">
       <label class="form-label required">เหตุผลขอคืนเงินค่าธรรมเนียม</label>
