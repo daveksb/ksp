@@ -6,10 +6,6 @@
 <div class="bg-secondary bg-opacity-10 py-2 px-4 full-height-2">
   <div class="box-header">รายละเอียดแบบคำขอ{{ getLabel() }}</div>
 
-  <!-- <div class="box-header" *ngIf="saveData.requestData.status !== '1'">
-    ยืนยันผลการตรวจสอบ และออกหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีหนังสืออนุญาต
-  </div> -->
-
   <div class="bg-white p-3">
     <div class="d-flex justify-content-between">
       <ksp-request-header-info
@@ -83,7 +79,7 @@
     (cancelClicked)="navigateBack()"
     (prevClicked)="prevPage()"
     (saveClicked)="confirmDialog()"
-    [disableSaveButton]="formInValid"
+    [disableSaveButton]="form.invalid"
     [showCenterButtons]="true"
     [isLastPage]="true"
     [showSaveButton]="true"

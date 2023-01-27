@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { approveResult } from '@ksp/e-service/e-license/approve-ksp-request';
+import { ApproveResult } from '@ksp/e-service/e-license/approve-ksp-request';
 import {
   ConfirmDialogComponent,
   CompleteDialogComponent,
@@ -100,7 +100,7 @@ export class EQualificationConfirmComponent implements OnInit {
     });
   }
 
-  checkApproveResult(input: approveResult) {
+  checkApproveResult(input: ApproveResult) {
     const req = this.saveData.requestData;
     //console.log('check approve = ');
     if (req.requesttype === '3') {

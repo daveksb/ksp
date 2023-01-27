@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { approveResult } from '@ksp/e-service/e-license/approve-ksp-request';
+import { ApproveResult } from '@ksp/e-service/e-license/approve-ksp-request';
 import { ESelfConfirmFormBaseComponent } from '@ksp/self-service/form';
 import { ERequestService } from '@ksp/shared/service';
 import { Location } from '@angular/common';
@@ -35,7 +35,7 @@ export class EFeeRefundConfirmComponent
     this.router.navigate(['/refund-fee', 'list']);
   }
 
-  override checkApproveResult(input: approveResult) {
+  override checkApproveResult(input: ApproveResult) {
     //console.log('check aa = ');
     const req = this.saveData.requestData;
     if (input.result === '1') {
