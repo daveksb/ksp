@@ -12,7 +12,7 @@ import {
 import { parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
-const FORM_TAB_COUNT = 6;
+const FORM_TAB_COUNT = 7;
 
 @Component({
   selector: 'ksp-e-research-reward-detail',
@@ -38,6 +38,7 @@ export class EResearchRewardDetailComponent
     rewardResearcherInfo: [],
     rewardResearchInfo: [],
     rewardResearchHistory: [],
+    rewardPunishmentInfo: [],
 
     phone: [],
     fax: [],
@@ -96,6 +97,7 @@ export class EResearchRewardDetailComponent
       rewardresearcherinfo,
       rewardresearchinfo,
       rewardresearchhistory,
+      rewardpunishmentinfo,
       fileinfo,
     } = data;
     const myInfo = <any>{
@@ -118,10 +120,12 @@ export class EResearchRewardDetailComponent
     const rewardResearcherInfo = parseJson(rewardresearcherinfo);
     const rewardResearchInfo = parseJson(rewardresearchinfo);
     const rewardResearchHistory = parseJson(rewardresearchhistory);
+    const rewardPunishmentInfo = parseJson(rewardpunishmentinfo);
     this.form.patchValue(<any>{
       rewardResearcherInfo,
       rewardResearchInfo,
       rewardResearchHistory,
+      rewardPunishmentInfo,
     });
 
     if (fileinfo) {

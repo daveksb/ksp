@@ -61,6 +61,7 @@ export class ResearchRewardComponent
     rewardResearcherInfo: [],
     rewardResearchInfo: [],
     rewardResearchHistory: [],
+    rewardPunishmentInfo: [],
 
     phone: [],
     fax: [],

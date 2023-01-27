@@ -96,6 +96,18 @@
         </div>
       </ng-container>
 
+      <div class="col-md-5" *ngIf="rewardType.value === '45'">
+        <div class="box-header">ประเภทที่ส่งผลงานวิจัย</div>
+        <select class="form-select" formControlName="researchSubmissionType">
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option value="1">ครู</option>
+          <option value="2">ผู้บริหารสถานศึกษา</option>
+          <option value="3">ผู้บริหารการศึกษา</option>
+          <option value="4">ศึกษานิเทศก์</option>
+          <option value="5">นักศึกษา</option>
+        </select>
+      </div>
+
     </div>
 
     <div *ngIf="rewardType.value !== '0'">
