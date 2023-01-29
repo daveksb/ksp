@@ -620,7 +620,7 @@ export class SchoolRequestComponent implements OnInit {
         } else {
           // search not found reset form and set idcard again
           this.searchIdCardNotFound(`ไม่พบข้อมูลบุคลากรภายในหน่วยงาน
-          จากหมายเลขคุรุสภาสำหรับชาวต่างชาติที่ระบุ`);
+          จากหมายเลขคุรุสภาที่ระบุ`);
           // this.form.reset();
           // const temp: any = { idcardno: idCard };
           // this.form.controls.userInfo.patchValue(temp);
