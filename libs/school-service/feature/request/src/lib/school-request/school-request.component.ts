@@ -290,12 +290,14 @@ export class SchoolRequestComponent implements OnInit {
       }
 
       if (process === 2) {
-        this.completeDialog(`ระบบทำการบันทึกเรียบร้อยแล้ว
-        เลขที่รายการ : ${formatRequestNo(res.requestno)}
+        this.completeDialog2(
+        `บันทึกข้อมูลสำเร็จ`,
+        `เลขที่รายการ : ${formatRequestNo(res.requestno)}
         วันที่ : ${thaiDate(new Date())}`);
         /* this.completeDialog(`ระบบทำการบันทึกเรียบร้อยแล้ว
         สามารถตรวจสอบสถานะภายใน
         3 - 15 วันทำการ`); */
+
       } else if (process === 1) {
         // บันทึกชั่วคราว
         this.completeDialog(`ระบบทำการบันทึกชั่วคราวเรียบร้อยแล้ว`);
@@ -798,6 +800,23 @@ export class SchoolRequestComponent implements OnInit {
     const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header,
+      },
+    });
+
+    dialog.componentInstance.completed
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        if (res) {
+          this.backToListPage();
+        }
+      });
+  }
+
+  completeDialog2(header: string, content: string) {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header,
+        content
       },
     });
 

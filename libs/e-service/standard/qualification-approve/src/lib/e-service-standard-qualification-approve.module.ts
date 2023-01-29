@@ -38,6 +38,7 @@ import { EQualificationConsiderDetailComponent } from './e-qualification-conside
 import { EQualificationConsiderMeetingComponent } from './e-qualification-consider-meeting/e-qualification-consider-meeting.component';
 import { PdfRenderComponent } from '@ksp/shared/dialog';
 import { FormMeetingRecordComponent } from '@ksp/shared/form/license';
+import { EQulificationRosterCreateComponent } from './e-qulification-roster-create/e-qulification-roster-create.component';
 
 export const routes: Route[] = [
   {
@@ -111,6 +112,7 @@ export const routes: Route[] = [
     EQualificationConsiderListComponent,
     EQualificationConsiderDetailComponent,
     EQualificationConsiderMeetingComponent,
+    EQulificationRosterCreateComponent,
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },
@@ -121,6 +123,7 @@ export const routes: Route[] = [
     EQualificationConsiderListComponent,
     EQualificationConsiderDetailComponent,
     EQualificationConsiderMeetingComponent,
+    EQulificationRosterCreateComponent,
   ],
 })
 export class EServiceStandardQualificationApproveModule {}
