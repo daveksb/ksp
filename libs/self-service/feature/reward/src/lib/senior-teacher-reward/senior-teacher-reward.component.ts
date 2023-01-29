@@ -75,7 +75,7 @@ export class SeniorTeacherRewardComponent
     workplace: [],
     // rewardTeacherInfo: [],
     rewardCareerInfo: [],
-    // rewardMoneySupportInfo: [],
+    rewardMoneySupportInfo: [],
     rewardPunishmentInfo: [],
 
     phone: [],
