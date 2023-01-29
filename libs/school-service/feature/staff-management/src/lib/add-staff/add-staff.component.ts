@@ -72,6 +72,7 @@ export class AddStaffComponent implements OnInit {
   eduSelected: number[] = [];
   foundLicenses: SelfLicense[] = [];
   notFound = false;
+  selectedTabIndex = 0;
 
   form = this.fb.group({
     userInfo: [],
@@ -565,5 +566,19 @@ export class AddStaffComponent implements OnInit {
 
   get addr2() {
     return this.form.controls.addr2;
+  }
+
+  nextTab() {
+    if (this.selectedTabIndex < 2) {
+      this.selectedTabIndex++;
+    }
+  }
+
+  prevTab() {
+    if (this.selectedTabIndex == 0) {
+      this.navigateBack();
+    } else {
+      this.selectedTabIndex--;
+    }
   }
 }

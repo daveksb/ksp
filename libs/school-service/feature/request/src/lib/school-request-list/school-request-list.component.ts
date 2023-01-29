@@ -50,12 +50,14 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
   checkProcess = checkProcess;
   checkRequestType = schoolMapRequestType;
   checkStatus = checkStatus;
-  requestTypeList = SchoolRequestType.filter((i) => i.id > 2);
+  requestTypeList = SchoolRequestType.filter((i) => i.id > 2 && i.id !== 5);
   careerTypeList = careerTypeList;
   initialSearch = true;
   rejectedRequests: KspRequest[] = [];
   tempLicenseHistory: SchTempLicense[] = [];
   tempLicenseRequestTimes: any;
+
+  reqTypeStatus = false;
 
   defaultForm = {
     requesttype: '3',
@@ -142,13 +144,19 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
   }
 
   isLicenseApproved(req: KspRequest) {
+    if (req.requesttype === '3') {
+      this.reqTypeStatus = true;
+    } else {
+      this.reqTypeStatus = false;
+    }
+
     const tempRequestApproved =
       req.requesttype === '3' && req.process === '5' && req.status === '2';
-    const kuruNoApproved =
-      req.requesttype === '4' && req.process === '2' && req.status === '2';
     const qualificationApproved =
       req.requesttype === '6' && req.process === '3' && req.status === '2';
-    if (tempRequestApproved || kuruNoApproved || qualificationApproved) {
+    const rewardApprove =
+      req.requesttype === '40' && req.process === '4' && req.status === '2';
+    if (tempRequestApproved || rewardApprove || qualificationApproved) {
       return true;
     } else {
       return false;
