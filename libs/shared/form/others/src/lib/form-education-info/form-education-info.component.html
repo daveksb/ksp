@@ -7,7 +7,11 @@
     <div class="row" *ngIf="showSelectDegree">
       <div class="col-6 mb-2">
         <label class="form-label required">ระดับวุฒิทางการศึกษา</label>
-        <select class="form-select" formControlName="degreeLevel">
+        <select
+          class="form-select"
+          formControlName="degreeLevel"
+          [attr.disabled]="readonly ? true : null"
+        >
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option value="1">ปริญญาตรี</option>
           <option value="2">ปริญญาโท</option>
@@ -22,6 +26,7 @@
           type="checkbox"
           class="me-2"
           formControlName="isEducationDegree"
+          [attr.disabled]="readonly ? true : null"
         />
         <label class="form-label">ปริญญาทางการศึกษา</label>
       </div>
@@ -32,13 +37,23 @@
         <label class="form-label" [class.required]="!isOptional"
           >ชื่อปริญญา/หลักสูตร</label
         >
-        <input class="form-control" type="text" formControlName="degreeName" />
+        <input
+          class="form-control"
+          type="text"
+          formControlName="degreeName"
+          [attr.disabled]="readonly ? true : null"
+        />
       </div>
       <div class="col mb-2">
         <label class="form-label" [class.required]="!isOptional"
           >สาขา/วิชาเอก</label
         >
-        <input class="form-control" type="text" formControlName="major" />
+        <input
+          class="form-control"
+          type="text"
+          formControlName="major"
+          [attr.disabled]="readonly ? true : null"
+        />
       </div>
     </div>
 
@@ -47,11 +62,20 @@
         <label class="form-label" [class.required]="!isOptional"
           >สถาบันการศึกษา</label
         >
-        <input class="form-control" type="text" formControlName="institution" />
+        <input
+          class="form-control"
+          type="text"
+          formControlName="institution"
+          [attr.disabled]="readonly ? true : null"
+        />
       </div>
       <div class="col mb-2">
         <label class="form-label">ประเทศ</label>
-        <select class="form-select" formControlName="country">
+        <select
+          class="form-select"
+          formControlName="country"
+          [attr.disabled]="readonly ? true : null"
+        >
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let c of countries" [value]="+c.countryNo">
             {{ c?.countryN }}
@@ -71,6 +95,7 @@
             class="form-control form-date"
             formControlName="admissionDate"
             placeholder="วว/ดด/ปปปป"
+            [disabled]="readonly ? true : false"
           />
           <mat-datepicker-toggle
             class="button-date"
@@ -90,6 +115,7 @@
             class="form-control form-date"
             formControlName="graduateDate"
             placeholder="วว/ดด/ปปปป"
+            [disabled]="readonly ? true : false"
           />
           <mat-datepicker-toggle
             class="button-date"
@@ -104,7 +130,12 @@
     <div class="row">
       <div class="col-6 mb-2" *ngIf="showGradeInput">
         <label class="form-label">เกรดเฉลี่ย</label>
-        <input class="form-control" type="text" formControlName="grade" />
+        <input
+          class="form-control"
+          type="text"
+          formControlName="grade"
+          [attr.disabled]="readonly ? true : null"
+        />
       </div>
       <div class="col-6 mb-2" *ngIf="showGraduateYearInput">
         <label class="form-label">ปีการศึกษาที่เข้าศึกษา</label>

@@ -10,29 +10,54 @@
     <div class="row">
       <div class="col-md-6 mb-2">
         <label class="form-label">อาคาร/สถานที่</label>
-        <input class="form-control" type="text" formControlName="location" />
+        <input
+          class="form-control"
+          type="text"
+          formControlName="location"
+          [attr.disabled]="readonly ? true : null"
+        />
       </div>
       <div class="col-md-6 mb-2">
         <label class="form-label required">บ้านเลขที่ </label>
-        <input class="form-control" type="text" formControlName="houseNo" />
+        <input
+          class="form-control"
+          type="text"
+          formControlName="houseNo"
+          [attr.disabled]="readonly ? true : null"
+        />
       </div>
     </div>
 
     <div class="row">
       <div class="col-md-6 mb-2">
         <label class="form-label">หมู่ที่</label>
-        <input class="form-control" type="text" formControlName="moo" />
+        <input
+          class="form-control"
+          type="text"
+          formControlName="moo"
+          [attr.disabled]="readonly ? true : null"
+        />
       </div>
       <div class="col-md-6 mb-2">
         <label class="form-label">ซอย</label>
-        <input class="form-control" type="text" formControlName="alley" />
+        <input
+          class="form-control"
+          type="text"
+          formControlName="alley"
+          [attr.disabled]="readonly ? true : null"
+        />
       </div>
     </div>
 
     <div class="row">
       <div class="col-md-6 mb-2">
         <label class="form-label">ถนน</label>
-        <input class="form-control" type="text" formControlName="road" />
+        <input
+          class="form-control"
+          type="text"
+          formControlName="road"
+          [attr.disabled]="readonly ? true : null"
+        />
       </div>
     </div>
 
@@ -43,6 +68,7 @@
           class="form-select"
           formControlName="province"
           (change)="provinceChanged.emit($event)"
+          [attr.disabled]="readonly ? true : null"
         >
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option
@@ -59,6 +85,7 @@
           class="form-select"
           formControlName="amphur"
           (change)="amphurChanged.emit($event)"
+          [attr.disabled]="readonly ? true : null"
         >
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let a of amphurs" [value]="a?.amphurCode">
@@ -75,6 +102,7 @@
           class="form-select"
           formControlName="tumbol"
           (change)="updatePostcode($event)"
+          [attr.disabled]="readonly ? true : null"
         >
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let t of tumbols" [value]="t?.tambolCode">
@@ -84,7 +112,12 @@
       </div>
       <div class="col-md-6 mb-2">
         <label class="form-label required">รหัสไปรษณีย์</label>
-        <input class="form-control" type="text" formControlName="postcode" />
+        <input
+          class="form-control"
+          type="text"
+          formControlName="postcode"
+          [attr.disabled]="readonly ? true : null"
+        />
       </div>
     </div>
   </div>

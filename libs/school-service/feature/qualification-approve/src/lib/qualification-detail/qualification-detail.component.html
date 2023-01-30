@@ -35,7 +35,7 @@
             [prefixList]="prefixList$ | async"
             [nationList]="nationalitys$ | async"
             [displayMode]="userInfoFormdisplayMode"
-            [showSearchBtn]="true"
+            [showSearchBtn]="!requestId"
             [readonly]="true"
           ></ksp-form-user-info>
         </div>
