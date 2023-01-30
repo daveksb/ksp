@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -13,6 +13,9 @@ export class SeniorTeacherSubsidyComponent
   extends KspFormBaseComponent
   implements OnInit
 {
+  @Input() moneyAssistanceFiles!: any[];
+  @Input() uniqueTimestamp!: string;
+
   typesOfSubject: string[] = [
     'สถานภาพ',
     'คู่สมรส',
