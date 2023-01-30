@@ -57,6 +57,8 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
   tempLicenseHistory: SchTempLicense[] = [];
   tempLicenseRequestTimes: any;
   reqTypeStatus = false;
+  viewMoreClicked = false
+
   defaultForm = {
     requesttype: '3',
     careertype: '1',
