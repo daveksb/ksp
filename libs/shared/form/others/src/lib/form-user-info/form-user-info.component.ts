@@ -48,6 +48,7 @@ export class FormUserInfoComponent
   @Input() requiredIdCardNo = true;
   @Input() isHasSixtiesDate = false;
   @Input() showSearchBtn = false;
+
   public _displayMode = UserInfoFormType.thai;
   @Input()
   set displayMode(mode: number) {
@@ -58,14 +59,13 @@ export class FormUserInfoComponent
     return this._displayMode;
   }
 
-  today = new Date();
   @Output() idCardChange = new EventEmitter<string>();
   @Output() kuruspaNoChange = new EventEmitter<string>();
 
+  today = new Date();
   RequestTypeEnum = SchoolRequestType;
   validatorMessages = validatorMessages;
   FormTypeEnum = UserInfoFormType;
-
   override form = createUserInfoForm(this.fb);
 
   constructor(private fb: FormBuilder, public dialog: MatDialog) {
@@ -87,21 +87,22 @@ export class FormUserInfoComponent
       this.form.controls.passportenddate.clearValidators();
       this.form.controls.position.clearValidators();
       this.form.controls.workphone.clearValidators();
+      this.form.controls.nationality.clearValidators();
     }
 
     // ต่างชาติ ไม่ต้อง validate field เหล่านี้
     if (mode === UserInfoFormType.foreign) {
-      //console.log('bb = ');
-      this.form.controls.idcardno.clearValidators();
-      this.form.controls.workphone.clearValidators();
-      this.form.controls.contactphone.clearValidators();
+      this.idCardNo.clearValidators();
+      this.workPhone.clearValidators();
+      this.contactPhone.clearValidators();
       this.form.controls.position.clearValidators();
       this.form.controls.sex.clearValidators();
       this.form.controls.email.clearValidators();
+      this.form.controls.isforeign.clearValidators();
     }
 
     if (this.isSelfService) {
-      this.form.controls.idcardno.clearValidators();
+      this.idCardNo.clearValidators();
     }
   }
 
@@ -129,8 +130,8 @@ export class FormUserInfoComponent
   override ngOnChanges(changes: SimpleChanges): void {
     if (changes['requiredIdCardNo']) {
       if (this.requiredIdCardNo === false) {
-        this.form.controls.idcardno.clearValidators();
-        this.form.controls.idcardno.updateValueAndValidity();
+        this.idCardNo.clearValidators();
+        this.idCardNo.updateValueAndValidity();
       }
     }
 
@@ -169,9 +170,9 @@ export class FormUserInfoComponent
     dialogRef.afterClosed().subscribe((response: any) => {
       if (response) {
         if (stafftype === UserInfoFormType.thai) {
-          this.form.controls.idcardno.patchValue(response);
+          this.idCardNo.patchValue(response);
         } else {
-          this.form.controls.kuruspano.patchValue(response);
+          this.kuruspaNo.patchValue(response);
         }
       }
     });
