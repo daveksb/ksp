@@ -45,7 +45,6 @@ import {
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { EMPTY, Observable, Subject, switchMap } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
-import { Base64 } from 'js-base64';
 
 @UntilDestroy()
 @Component({
@@ -112,12 +111,12 @@ export class QualificationDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.form.valueChanges.subscribe((res) => {
+    /*     this.form.valueChanges.subscribe((res) => {
       console.log('edu1 = ', this.form.controls.edu1.valid);
       console.log('edu2 = ', this.form.controls.edu2.valid);
       console.log('edu3 = ', this.form.controls.edu3.valid);
       console.log('edu4 = ', this.form.controls.edu4.valid);
-    });
+    }); */
     this.uniqueNo = uuidv4();
     this.getListData();
     this.checkRequestId();
@@ -238,11 +237,11 @@ export class QualificationDetailComponent implements OnInit {
 
         this.refperson = req.refperson;
         this.otherreason = req.otherreason;
-        if (req.process === '3') {
+        /*         if (req.process === '3') {
           this.mode = 'view';
         } else if (req.process === '2' && req.status === '2') {
           this.mode = 'edit';
-        }
+        } */
       }
     });
   }
@@ -293,6 +292,8 @@ export class QualificationDetailComponent implements OnInit {
     this.staffService.getPositionTypes().subscribe((res) => {
       this.positions = res;
       //console.log('position = ', res);
+
+      //7396307202241
     });
     this.schoolInfoService
       .getSchoolInfo({

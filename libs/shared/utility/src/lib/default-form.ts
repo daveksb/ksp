@@ -54,7 +54,7 @@ export function createUserInfoForm(fb: FormBuilder) {
       [Validators.required, Validators.pattern(phonePattern)],
     ],
     workphone: [null, [Validators.required, Validators.pattern(phonePattern)]],
-    nationality: [null],
+    nationality: ['TH'],
     country: [null],
     visaclass: [null],
     visatype: [null],

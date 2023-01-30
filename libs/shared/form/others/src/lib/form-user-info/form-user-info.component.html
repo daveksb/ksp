@@ -81,9 +81,7 @@
 
     <div
       class="col-1 align-items-center ps-0"
-      *ngIf="
-        _displayMode === FormTypeEnum.thai && mode === 'edit' && showSearchBtn
-      "
+      *ngIf="_displayMode === FormTypeEnum.thai && showSearchBtn"
     >
       <br />
       <button
@@ -357,7 +355,8 @@
       </select>
     </div>
 
-    <div class="col mb-2" *ngIf="_displayMode === FormTypeEnum.foreign">
+    <!-- <div class="col mb-2" *ngIf="_displayMode === FormTypeEnum.foreign"> -->
+    <div class="col mb-2">
       <label class="form-label">สัญชาติ</label>
       <select class="form-select" formControlName="nationality">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>

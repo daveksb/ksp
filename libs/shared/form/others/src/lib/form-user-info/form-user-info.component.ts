@@ -10,11 +10,7 @@ import {
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { StaffSearchDialogComponent } from '@ksp/school-service/ui/staff-search';
-import {
-  SchoolRequestType,
-  SelfServiceRequestForType,
-  UserInfoFormType,
-} from '@ksp/shared/constant';
+import { SchoolRequestType, UserInfoFormType } from '@ksp/shared/constant';
 import {
   Country,
   KspFormBaseComponent,
@@ -85,7 +81,6 @@ export class FormUserInfoComponent
   checkValidators(mode: number) {
     // คนไทยไม่ต้อง validate field เหล่านี้
     if (mode === UserInfoFormType.thai) {
-      //console.log('aa = ');
       this.form.controls.passportno.clearValidators();
       this.form.controls.kuruspano.clearValidators();
       this.form.controls.passportstartdate.clearValidators();
@@ -140,7 +135,6 @@ export class FormUserInfoComponent
     }
 
     if (this.mode === 'view') {
-      //console.log('xx clear validator = ');
       this.form.clearValidators();
     }
   }
