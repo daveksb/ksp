@@ -96,6 +96,7 @@ export class QualificationDetailComponent implements OnInit {
   showEdu2 = false;
   showEdu3 = false;
   showEdu4 = false;
+  formData: any = null;
 
   constructor(
     public dialog: MatDialog,
@@ -111,12 +112,12 @@ export class QualificationDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    /*     this.form.valueChanges.subscribe((res) => {
-      console.log('edu1 = ', this.form.controls.edu1.valid);
-      console.log('edu2 = ', this.form.controls.edu2.valid);
-      console.log('edu3 = ', this.form.controls.edu3.valid);
-      console.log('edu4 = ', this.form.controls.edu4.valid);
-    }); */
+    //7396307202241
+    this.form.valueChanges.subscribe((res) => {
+      //console.log('formData', this.form.getRawValue());
+      //console.log('edu1 = ', this.form.controls.edu1.valid);
+      //console.log('user info  = ', this.form.controls.userInfo.getRawValue());
+    });
     this.uniqueNo = uuidv4();
     this.getListData();
     this.checkRequestId();
@@ -137,7 +138,6 @@ export class QualificationDetailComponent implements OnInit {
       if (Number(params['subtype'])) {
         this.careerType = params['subtype'];
       }
-
       if (Number(this.careerType) == SchoolRequestSubType.ครู) {
         this.requestLabel = SchoolRequestSubType[SchoolRequestSubType.ครู];
       } else if (
@@ -174,11 +174,11 @@ export class QualificationDetailComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
         if (res && res.returncode !== '98') {
-          //console.log('res = ', parseJson(res.hiringinfo));
+          console.log('res xx = ', res);
+          this.formData = res;
           const position = this.positions.find(
             (p) => p.id == parseJson(res.hiringinfo).position
           );
-
           const userInfo = {
             ...res,
             position: position?.name,
@@ -215,7 +215,6 @@ export class QualificationDetailComponent implements OnInit {
         req.isforeign = req.isforeign ? '1' : '0';
 
         //console.log('xx = ', req);
-        //this.form.controls.userInfo.patchValue(<any>req);
         this.patchUserInfo(req);
         this.patchAddress(parseJson(req.addressinfo));
         this.patchEdu(parseJson(req.eduinfo));
@@ -237,11 +236,6 @@ export class QualificationDetailComponent implements OnInit {
 
         this.refperson = req.refperson;
         this.otherreason = req.otherreason;
-        /*         if (req.process === '3') {
-          this.mode = 'view';
-        } else if (req.process === '2' && req.status === '2') {
-          this.mode = 'edit';
-        } */
       }
     });
   }
@@ -262,7 +256,6 @@ export class QualificationDetailComponent implements OnInit {
         (this.form.get(`edu${i + 1}`) as AbstractControl<any, any>).patchValue(
           edu
         );
-        //console.log('edu1 = ', edu.degreeLevel);
       });
     }
   }
@@ -291,9 +284,6 @@ export class QualificationDetailComponent implements OnInit {
     this.nationalitys$ = this.generalInfoService.getNationality();
     this.staffService.getPositionTypes().subscribe((res) => {
       this.positions = res;
-      //console.log('position = ', res);
-
-      //7396307202241
     });
     this.schoolInfoService
       .getSchoolInfo({
@@ -390,7 +380,7 @@ export class QualificationDetailComponent implements OnInit {
         switchMap((res) => {
           if (res) {
             const formData: any = this.form.getRawValue();
-            //console.log('formData', formData);
+
             if (formData?.addr1?.addressType) formData.addr1.addressType = 1;
             if (formData?.addr2?.addressType) formData.addr2.addressType = 2;
             const { refperson } = refPersonForm;
@@ -456,7 +446,7 @@ export class QualificationDetailComponent implements OnInit {
         }
 
         if (res) {
-          this.onCompleted();
+          this.onCompleted(res);
         }
       });
   }
@@ -516,13 +506,11 @@ export class QualificationDetailComponent implements OnInit {
     });
   }
 
-  onCompleted() {
+  onCompleted(res: any) {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header: `บันทึกข้อมูลสำเร็จ`,
-        content: `เลขที่รายการ : ${formatRequestNo(
-          this.requestData.requestno || ''
-        )}
+        content: `เลขที่รายการ : ${formatRequestNo(res.requestno || '')}
         วันที่ : ${thaiDate(new Date())}`,
       },
     });
@@ -600,10 +588,6 @@ const files: FileGroup[] = [
     name: 'สำเนาวุฒิการศึกษาและใบรายงานผลการเรียน',
     files: [],
   },
-  /* {
-    name: 'สำเนาทะเบียนบ้าน',
-    files: [],
-  }, */
   {
     name: 'สำเนาหนังสือแจ้งการเทียบคุณวุฒิ (กรณีจบการศึกษาจากต่างประเทศ)',
     files: [],

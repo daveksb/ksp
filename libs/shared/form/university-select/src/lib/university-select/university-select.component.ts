@@ -24,7 +24,6 @@ export class UniversitySelectComponent extends KspFormBaseComponent {
   @Input() bureauName: string | null = '';
   @Input() address = '';
   @Input() searchType = '';
-  @Input() readonly = false;
   @Input() showAddress = false;
   @Input() bureauList: Bureau[] | null = [];
   @Output() selectedUniversity = new EventEmitter<SchInfo>();
@@ -62,7 +61,7 @@ export class UniversitySelectComponent extends KspFormBaseComponent {
 
     dialog.afterClosed().subscribe((res: SchInfo) => {
       if (res) {
-        console.log(res)
+        console.log(res);
         this.selectedUniversity.emit(res);
       }
     });

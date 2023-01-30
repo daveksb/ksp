@@ -40,7 +40,7 @@
           [displayMode]="userInfoFormType"
           formControlName="userInfo"
           [showSearchBtn]="true"
-          mode="view"
+          [readonly]="true"
         ></ksp-form-user-info>
       </div>
     </div>
@@ -75,7 +75,7 @@
             (provinceChanged)="provinceChanged(1, $event)"
             (amphurChanged)="amphurChanged(1, $event)"
             formControlName="addr1"
-            [mode]="'view'"
+            [readonly]="true"
             >ที่อยู่ทะเบียนบ้าน</ksp-form-address
           >
           <div class="mt-3">
@@ -86,7 +86,7 @@
               (provinceChanged)="provinceChanged(2, $event)"
               (amphurChanged)="amphurChanged(2, $event)"
               formControlName="addr2"
-              [mode]="'view'"
+              [readonly]="true"
               >ที่อยู่ที่ติดต่อได้สะดวก
               <div class="d-flex align-items-center">
                 <input
@@ -118,7 +118,7 @@
               [showPropertyInput]="false"
               [showSelectDegree]="false"
               [countries]="countries$ | async"
-              [mode]="'view'"
+              [readonly]="true"
             >
               <div class="box-header">วุฒิการศึกษาปริญญาตรี</div>
             </ksp-form-education-info>
@@ -173,7 +173,7 @@
                 [showPropertyInput]="false"
                 [countries]="countries$ | async"
                 [userEducationType]="userInfoFormType"
-                [mode]="'view'"
+                [readonly]="true"
               >
               </ksp-form-education-info>
             </ng-container>
@@ -332,14 +332,14 @@
           <ng-container *ngIf="careerType === 1 || careerType === 5">
             <ksp-form-teaching-info
               formControlName="teachinginfo"
-              [mode]="'view'"
+              [readonly]="true"
             ></ksp-form-teaching-info>
           </ng-container>
 
           <ng-container *ngIf="careerType === 2">
             <ksp-form-teaching-info-manager
               formControlName="teachinginfo"
-              [mode]="'view'"
+              [readonly]="true"
             ></ksp-form-teaching-info-manager
           ></ng-container>
 
@@ -347,7 +347,7 @@
             <ksp-form-hiring-info
               [displayMode]="'request'"
               formControlName="hiringinfo"
-              [mode]="'view'"
+              [readonly]="true"
               [staffTypes]="staffTypes$ | async"
               [positionTypes]="positionTypes$ | async"
               [academicStandingList]="academicTypes$ | async"
@@ -414,4 +414,5 @@
     [disableSaveButton]="disableSave"
     [disableCancelButton]="disableCancel"
   ></ksp-bottom-nav>
+  <!-- [disableSaveButton]="disableSave" -->
 </div>

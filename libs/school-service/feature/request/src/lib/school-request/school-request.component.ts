@@ -391,8 +391,8 @@ export class SchoolRequestComponent implements OnInit {
 
   checkButtonsDisableStatus() {
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-      //console.log('userInfo valid = ', this.form.controls.userInfo.valid);
-      //console.log('form valid = ', this.form.valid);
+      console.log('userInfo valid = ', this.form.controls.userInfo.valid);
+      console.log('form valid = ', this.form.valid);
       const condition1 =
         this.kspRequest.requesttype === '3' &&
         this.kspRequest.process === '3' &&
@@ -412,6 +412,7 @@ export class SchoolRequestComponent implements OnInit {
       }
       // formValid + ไม่มีหมายเลขแบบคำขอ ทำได้ทุกอย่าง
       else if (this.form.valid && !this.requestId) {
+        //console.log('form valid = ',this.form.valid)
         this.disableTempSave = false;
         this.disableSave = false;
         return;
