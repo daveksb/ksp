@@ -36,7 +36,6 @@ export class FormUserInfoComponent
   extends KspFormBaseComponent
   implements OnInit, OnChanges
 {
-  @Input() readonly = false;
   @Input() prefixList: Prefix[] | null = [];
   @Input() countryList: Country[] | null = [];
   @Input() nationList: Nationality[] | null = [];
@@ -49,6 +48,7 @@ export class FormUserInfoComponent
   @Input() requiredIdCardNo = true;
   @Input() isHasSixtiesDate = false;
   @Input() showSearchBtn = false;
+
   public _displayMode = UserInfoFormType.thai;
   @Input()
   set displayMode(mode: number) {

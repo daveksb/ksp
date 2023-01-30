@@ -13,14 +13,13 @@ export abstract class KspFormBaseComponent
 {
   _mode: FormMode = 'edit';
 
+  @Input() readonly = false;
   @Input()
   set mode(value: FormMode) {
     this._mode = value;
     if (value === 'view') {
       setTimeout(() => {
         this.form.disable();
-        this.form.controls['idcardno'].enable();
-        this.form.controls['isforeign'].enable();
       }, 0);
     } else {
       setTimeout(() => {

@@ -375,8 +375,6 @@ export class QualificationDetailComponent implements OnInit {
       },
     });
 
-    //6663553086525
-
     confirmDialog.componentInstance.confirmed
       .pipe(
         switchMap((res) => {

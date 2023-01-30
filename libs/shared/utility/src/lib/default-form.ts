@@ -24,7 +24,7 @@ export function createUserInfoForm(fb: FormBuilder) {
       [validateIdCard, Validators.required, Validators.pattern(idCardPattern)],
     ],
     kuruspano: ['', [Validators.required, Validators.pattern(idCardPattern)]],
-    isforeign: [null, Validators.required],
+    isforeign: [null],
     passportno: [null],
     passportstartdate: [],
     passportenddate: [],
