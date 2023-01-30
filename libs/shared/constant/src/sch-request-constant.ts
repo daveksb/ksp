@@ -174,7 +174,7 @@ export const SchoolRequestProcess: SchRequestProcess[] = [
     ],
   },
 
-  //   ขอสร้างเลขคุรุสภาสำหรับครูชาวต่างชาติ
+  //   ขอสร้างเลขคุรุสภาสำหรับครูชาวต่างชาติ *
   {
     requestType: 4,
     processId: 1,
@@ -196,7 +196,7 @@ export const SchoolRequestProcess: SchRequestProcess[] = [
     ],
   },
 
-  //ขอหนังสือรับรองคุณวุฒิการศึกษา
+  //ขอหนังสือรับรองคุณวุฒิการศึกษา *
   {
     requestType: 6,
     processId: 1,
@@ -233,7 +233,7 @@ export const SchoolRequestProcess: SchRequestProcess[] = [
     ],
   },
 
-  //ขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม
+  //ขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม *
   {
     requestType: 40,
     processId: 1,

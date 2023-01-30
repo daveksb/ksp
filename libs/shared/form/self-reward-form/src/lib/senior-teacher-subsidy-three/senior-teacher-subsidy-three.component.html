@@ -1,94 +1,125 @@
 <form [formGroup]="form">
-  <div class="mx-3 box__full">
-    <div class="row mb-2">
-      <div class="col-6">
-        <label class="form-label">จำนวนบุตร (คน)</label>
-        <input
-          class="form-control"
-          type="number"
-          formControlName="childrenCount"
-        />
+  <div class="box-header text-primary mb-3">
+    บุตร
+  </div>
+
+  <div class="row mb-2">
+    <div class="d-flex align-items-center w-25">
+      <div class="col-4 d-flex">
+        <div class="form-label" style="width: 8rem">
+          จำนวนบุตร (คน)
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div class="d-flex align-items-center">
+          <input class="form-control" type="text" formControlName="childrenCount" />
+        </div>
       </div>
     </div>
-    <hr />
-    <div class="row mb-2">
-      <div class="col d-flex align-items-center mb-2">
-        <input type="checkbox" class="me-1" formControlName="study" />
-        <label class="form-label">กำลังศึกษา</label>
+  </div>
+
+  <div class="d-flex align-items-center mb-2">
+    <div class="d-flex align-items-center">
+      <input type="checkbox" class="me-1" formControlName="study" />
+      <label class="form-label" style="width: 16rem">กำลังศึกษา</label>
+    </div>
+
+    <div class="d-flex align-items-center w-25">
+      <div class="col-4 d-flex justify-content-center">
+        <div class="form-label text-center" style="width: 12.5rem">
+          จำนวน (คน)
+        </div>
       </div>
-      <div class="col d-flex align-items-center">
-        <label class="form-label w-auto me-5" style="white-space: nowrap"
-          >จำนวน (คน)</label
-        >
-        <input class="form-control" type="text" formControlName="studyCount" />
+
+      <div class="col-4">
+        <div class="d-flex align-items-center">
+          <input class="form-control" type="text" formControlName="studyCount" />
+        </div>
       </div>
     </div>
-    <div class="row mb-2">
-      <div class="col d-flex align-items-center mb-2">
-        <input type="checkbox" class="me-1" formControlName="graduate" />
-        <label class="form-label">จบการศึกษาแล้วยังต้องอุปการะ</label>
+  </div>
+
+  <div class="d-flex align-items-center mb-2">
+    <div class="d-flex align-items-center">
+      <input type="checkbox" class="me-1" formControlName="graduate" />
+      <label class="form-label" style="width: 16rem">จบการศึกษาแล้วยังต้องอุปการะ</label>
+    </div>
+
+    <div class="d-flex align-items-center w-25">
+      <div class="col-4 d-flex justify-content-center">
+        <div class="form-label text-center" style="width: 12.5rem">
+          จำนวน (คน)
+        </div>
       </div>
-      <div class="col d-flex align-items-center">
-        <label class="form-label w-auto me-5" style="white-space: nowrap"
-          >จำนวน (คน)</label
-        >
-        <input
-          class="form-control"
-          type="text"
-          formControlName="graduateCount"
-        />
+
+      <div class="col-4">
+        <div class="d-flex align-items-center">
+          <input class="form-control" type="text" formControlName="graduateCount" />
+        </div>
       </div>
     </div>
-    <div class="row mb-2">
-      <div class="col d-flex align-items-center mb-2">
-        <input type="checkbox" class="me-1" formControlName="disabled" />
-        <label class="form-label">พิการ (ด้านจิตเวช/สมอง/ร่างกาย)</label>
+  </div>
+
+  <div class="d-flex align-items-center mb-2">
+    <div class="d-flex align-items-center">
+      <input type="checkbox" class="me-1" formControlName="disabled" />
+      <label class="form-label" style="width: 16rem">พิการ (ด้านจิตเวช/สมอง/ร่างกาย)</label>
+    </div>
+
+    <div class="d-flex align-items-center w-25">
+      <div class="col-4 d-flex justify-content-center">
+        <div class="form-label text-center" style="width: 12.5rem">
+          จำนวน (คน)
+        </div>
       </div>
-      <div class="col d-flex align-items-center">
-        <label class="form-label w-auto me-5" style="white-space: nowrap"
-          >จำนวน (คน)</label
-        >
-        <input
-          class="form-control"
-          type="text"
-          formControlName="disabledCount"
-        />
+
+      <div class="col-4">
+        <div class="d-flex align-items-center">
+          <input class="form-control" type="text" formControlName="disabledCount" />
+        </div>
       </div>
     </div>
-    <div class="row mb-2">
-      <div class="col d-flex align-items-center mb-2">
-        <input
-          type="checkbox"
-          class="me-1"
-          formControlName="congenitalDisease"
-        />
-        <label class="form-label">มีโรคประจำตัว</label>
+  </div>
+
+  <div class="d-flex align-items-center mb-2">
+    <div class="d-flex align-items-center">
+      <input type="checkbox" class="me-1" formControlName="congenitalDisease" />
+      <label class="form-label" style="width: 16rem">มีโรคประจำตัว</label>
+    </div>
+
+    <div class="d-flex align-items-center w-25">
+      <div class="col-4 d-flex justify-content-center">
+        <div class="form-label text-center" style="width: 12.5rem">
+          จำนวน (คน)
+        </div>
       </div>
-      <div class="col d-flex align-items-center">
-        <label class="form-label w-auto me-5" style="white-space: nowrap"
-          >จำนวน (คน)</label
-        >
-        <input
-          class="form-control"
-          type="text"
-          formControlName="congenitalDiseaseCount"
-        />
+
+      <div class="col-4">
+        <div class="d-flex align-items-center">
+          <input class="form-control" type="text" formControlName="congenitalDiseaseCount" />
+        </div>
       </div>
     </div>
-    <div class="row mb-2">
-      <div class="col d-flex align-items-center mb-2">
-        <input type="checkbox" class="me-1" formControlName="working" />
-        <label class="form-label">ประกอบอาชีพแล้ว</label>
+  </div>
+
+  <div class="d-flex align-items-center mb-2">
+    <div class="d-flex align-items-center">
+      <input type="checkbox" class="me-1" formControlName="working" />
+      <label class="form-label" style="width: 16rem">ประกอบอาชีพแล้ว</label>
+    </div>
+
+    <div class="d-flex align-items-center w-25">
+      <div class="col-4 d-flex justify-content-center">
+        <div class="form-label text-center" style="width: 12.5rem">
+          จำนวน (คน)
+        </div>
       </div>
-      <div class="col d-flex align-items-center">
-        <label class="form-label w-auto me-5" style="white-space: nowrap"
-          >จำนวน (คน)</label
-        >
-        <input
-          class="form-control"
-          type="text"
-          formControlName="workingCount"
-        />
+
+      <div class="col-4">
+        <div class="d-flex align-items-center">
+          <input class="form-control" type="text" formControlName="workingCount" />
+        </div>
       </div>
     </div>
   </div>

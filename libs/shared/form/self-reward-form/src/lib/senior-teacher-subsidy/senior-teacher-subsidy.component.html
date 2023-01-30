@@ -1,95 +1,75 @@
 <form [formGroup]="form">
-  <div class="box-header text-primary required">
-    ผ่านการคัดเลือกให้เป็นผู้ได้รับเงินช่วยเหลือทางการเงิน
+  <div class="box-header required mb-3">
+    การคัดเลือกให้เป็นผู้ได้รับเงินช่วยเหลือทางการเงิน
   </div>
 
-  <div class="d-flex flex-row">
-    <div class="d-flex align-items-center me-5">
-      <input
-        type="radio"
-        class="me-1"
-        value="hasSubsidy"
-        formControlName="subsidy"
-      />
-      <label class="form-label">เคย</label>
-    </div>
+  <div class="row mb-3">
     <div class="d-flex align-items-center">
       <input
+        class="form-check-input my-0 radio"
         type="radio"
-        class="me-1"
-        value="noSubsidy"
-        formControlName="subsidy"
-      />
-      <label class="form-label">ไม่เคย</label>
+        value="hasSubsidy"
+        formControlName="subsidy" />
+      <div class="form-control" style="width: 12.5rem">
+        <label class="ms-4"> เคย </label>
+      </div>
     </div>
   </div>
 
-  <ng-template [ngIf]="form.controls.subsidy.value === 'hasSubsidy'">
-    <div class="d-flex flex-row mt-3">
-      <div class="menu__container w-md-auto">
-        <mat-selection-list #cost [multiple]="false">
-          <mat-list-option
-            *ngFor="let subject of typesOfSubject"
-            [value]="subject"
-          >
-            <div>{{ subject }} <span style="color: red">*</span></div>
-          </mat-list-option>
-        </mat-selection-list>
-      </div>
-
-      <div class="h-auto rounded box__full">
-        <ng-container
-          *ngIf="cost.selectedOptions.selected[0]?.value === 'สถานภาพ'"
-        >
-          <ksp-senior-teacher-subsidy-one
-            [mode]="mode"
-            formControlName="status"
-          ></ksp-senior-teacher-subsidy-one>
-        </ng-container>
-        <ng-container
-          *ngIf="cost.selectedOptions.selected[0]?.value === 'คู่สมรส'"
-        >
-          <ksp-senior-teacher-subsidy-two
-            [mode]="mode"
-            formControlName="spouse"
-          ></ksp-senior-teacher-subsidy-two>
-        </ng-container>
-        <ng-container
-          *ngIf="cost.selectedOptions.selected[0]?.value === 'บุตร'"
-        >
-          <ksp-senior-teacher-subsidy-three
-            [mode]="mode"
-            formControlName="children"
-          ></ksp-senior-teacher-subsidy-three>
-        </ng-container>
-        <ng-container
-          *ngIf="cost.selectedOptions.selected[0]?.value === 'ค่าใช้จ่าย'"
-        >
-          <ksp-senior-teacher-subsidy-four
-            [mode]="mode"
-            formControlName="expense"
-          ></ksp-senior-teacher-subsidy-four>
-        </ng-container>
-        <ng-container
-          *ngIf="cost.selectedOptions.selected[0]?.value === 'รายได้ก่อนเกษียณ'"
-        >
-          <ksp-senior-teacher-subsidy-five
-            [mode]="mode"
-            formControlName="income"
-          ></ksp-senior-teacher-subsidy-five>
-        </ng-container>
-        <ng-container
-          *ngIf="
-            cost.selectedOptions.selected[0]?.value ===
-            'ทรัพย์สินของตนเองและคู่สมรส'
-          "
-        >
-          <ksp-senior-teacher-subsidy-six
-            [mode]="mode"
-            formControlName="property"
-          ></ksp-senior-teacher-subsidy-six>
-        </ng-container>
+  <div class="row mb-3">
+    <div class="d-flex align-items-center">
+      <input
+        class="form-check-input my-0 radio"
+        type="radio"
+        value="noSubsidy"
+        formControlName="subsidy" />
+      <div class="form-control" style="width: 12.5rem">
+        <label class="ms-4"> ไม่เคย </label>
       </div>
     </div>
-  </ng-template>
+  </div>
+
+  <hr />
+
+  <div class="box-header mb-3">
+    ข้อมูลขอรับเงินช่วยเหลือ
+  </div>
+
+  <div class="bg-white border py-3 px-3 mb-3">
+    <ksp-senior-teacher-subsidy-one
+      [mode]="mode"
+      formControlName="status"></ksp-senior-teacher-subsidy-one>
+  </div>
+
+  <div class="bg-white border py-3 px-3 mb-3">
+    <ksp-senior-teacher-subsidy-two
+      [mode]="mode"
+      formControlName="spouse"></ksp-senior-teacher-subsidy-two>
+  </div>
+
+  <div class="bg-white border py-3 px-3 mb-3">
+    <ksp-senior-teacher-subsidy-three
+      [mode]="mode"
+      formControlName="children"></ksp-senior-teacher-subsidy-three>
+  </div>
+
+  <div class="bg-white border py-3 px-3 mb-3">
+    <ksp-senior-teacher-subsidy-four
+      [mode]="mode"
+      formControlName="expense"></ksp-senior-teacher-subsidy-four>
+  </div>
+
+  <div class="bg-white border py-3 px-3 mb-3">
+    <ksp-senior-teacher-subsidy-five
+      [mode]="mode"
+      formControlName="income"></ksp-senior-teacher-subsidy-five>
+  </div>
+
+  <div class="bg-white border py-3 px-3 mb-3">
+    <ksp-senior-teacher-subsidy-six
+      [mode]="mode"
+      formControlName="property"></ksp-senior-teacher-subsidy-six>
+  </div>
+
+
 </form>

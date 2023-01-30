@@ -11,7 +11,7 @@
 <form [formGroup]="form">
   <div class="full-height main__container px-4 py-2 full-width-2">
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-6 mb-2">
         <div class="box-header">ประเภทรางวัล</div>
         <select class="form-select" formControlName="rewardType" #rewardType>
           <option value="0" selected hidden disabled>กรุณาเลือก</option>
@@ -21,7 +21,7 @@
         </select>
       </div>
 
-      <div class="col-md-5" *ngIf="rewardType.value === '40'">
+      <div class="col-md-6 mb-2" *ngIf="rewardType.value === '40'">
         <div class="box-header">ประเภทวิชาชีพ</div>
         <select class="form-select" formControlName="careerType">
           <option value="0" selected hidden disabled>กรุณาเลือก</option>
@@ -33,14 +33,14 @@
         </select>
       </div>
 
-      <div class="col-md-5" *ngIf="rewardType.value === '41'">
+      <div class="col-md-6 mb-2" *ngIf="rewardType.value === '41'">
         <div class="box-header">ประเภทระดับการศึกษา</div>
         <select class="form-select">
           <option value="0" selected hidden disabled>กรุณาเลือก</option>
         </select>
       </div>
 
-      <div class="col-md-5" *ngIf="rewardType.value === '42'">
+      <div class="col-md-6 mb-2" *ngIf="rewardType.value === '42'">
         <div class="box-header">ประเภท/กลุ่มสาระการเรียนรู้</div>
         <select class="form-select">
           <option value="0" selected hidden disabled>กรุณาเลือก</option>
@@ -69,7 +69,7 @@
       </div>
 
       <ng-container *ngIf="rewardType.value === '43'">
-        <div class="col-md-3">
+        <div class="col-md-3 mb-2">
           <div class="box-header">ประเภทวิชาชีพ</div>
           <select class="form-select" formControlName="careerType">
             <option value="0" selected hidden disabled>กรุณาเลือก</option>
@@ -81,7 +81,7 @@
           </select>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-3 mb-2">
           <div class="box-header">จังหวัดที่ยื่นขอรางวัล</div>
           <select
             class="form-select"
@@ -96,7 +96,7 @@
         </div>
       </ng-container>
 
-      <div class="col-md-5" *ngIf="rewardType.value === '45'">
+      <div class="col-md-6 mb-2" *ngIf="rewardType.value === '45'">
         <div class="box-header">ประเภทที่ส่งผลงานวิจัย</div>
         <select class="form-select" formControlName="researchSubmissionType">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
@@ -111,7 +111,7 @@
     </div>
 
     <div *ngIf="rewardType.value !== '0'">
-      <div class="my-3">
+      <div class="mb-3 mt-1">
         <self-service-request-status
           [idcardNo]="myInfo && myInfo.idcardno"></self-service-request-status>
       </div>

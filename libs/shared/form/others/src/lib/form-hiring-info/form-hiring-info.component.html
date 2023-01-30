@@ -5,7 +5,15 @@
     <div class="row mb-2" *ngIf="displayMode === 'staff'">
       <div class="col-6">
         <label class="form-label required">ประเภทบุคลากร</label>
-        <select class="form-select" formControlName="psersonType">
+        <select
+          class="form-select"
+          formControlName="psersonType"
+          [class.form-control-danger]="
+            this.form.controls.psersonType.invalid &&
+            (this.form.controls.psersonType.dirty ||
+              this.form.controls.psersonType.touched)
+          "
+        >
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let t of staffTypes" [value]="t?.id">
             {{ t?.name }}
@@ -17,7 +25,15 @@
     <div class="row mb-2">
       <div class="col">
         <label class="form-label required">ตำแหน่ง</label>
-        <select class="form-select" formControlName="position">
+        <select
+          class="form-select"
+          formControlName="position"
+          [class.form-control-danger]="
+            this.form.controls.position.invalid &&
+            (this.form.controls.position.dirty ||
+              this.form.controls.position.touched)
+          "
+        >
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let p of positionTypes" [value]="p?.id">
             {{ p?.name }}
@@ -26,7 +42,15 @@
       </div>
       <div class="col" *ngIf="displayMode === 'staff'">
         <label class="form-label required">วิทยฐานะ</label>
-        <select class="form-select" formControlName="academicStanding">
+        <select
+          class="form-select"
+          formControlName="academicStanding"
+          [class.form-control-danger]="
+            this.form.controls.academicStanding.invalid &&
+            (this.form.controls.academicStanding.dirty ||
+              this.form.controls.academicStanding.touched)
+          "
+        >
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let p of academicStandingList" [value]="p?.id">
             {{ p?.name }}
@@ -54,6 +78,11 @@
             class="form-control form-date"
             formControlName="startDate"
             placeholder="วว/ดด/ปปปป"
+            [class.form-control-danger]="
+              this.form.controls.startDate.invalid &&
+              (this.form.controls.startDate.dirty ||
+                this.form.controls.startDate.touched)
+            "
           />
           <mat-datepicker-toggle
             class="button-date"
@@ -134,7 +163,6 @@
                 class="form-control form-date"
                 [formControlName]="item.formDataName"
                 placeholder="วว/ดด/ปปปป"
-                [attr.disabled]="true"
               />
               <mat-datepicker-toggle
                 class="button-date"

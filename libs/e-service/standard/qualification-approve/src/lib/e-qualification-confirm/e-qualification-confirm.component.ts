@@ -65,8 +65,9 @@ export class EQualificationConfirmComponent implements OnInit {
       //console.log(res);
       this.saveData = res;
       //console.log('save data = ', this.saveData);
-      if (this.saveData.requestData.id)
+      if (this.saveData.requestData.id) {
         this.getApproveHistory(this.saveData.requestData.id);
+      }
     });
   }
 

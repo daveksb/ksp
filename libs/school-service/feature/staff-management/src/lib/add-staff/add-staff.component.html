@@ -134,6 +134,8 @@
           class="tab-group"
           animationDuration="0ms"
           selectedIndex="0"
+          (selectedIndexChange)="selectedTabIndex = $event"
+          [selectedIndex]="selectedTabIndex"
         >
           <mat-tab label="ที่อยู่" class="tab-content">
             <ksp-form-address
@@ -221,14 +223,16 @@
   </div>
 </div>
 
-<div *ngIf="searchStaffDone" class="sticky-bottom border">
+<div *ngIf="searchStaffDone" class="sticky-bottom border px-2">
   <ksp-bottom-nav
-    [isLastPage]="true"
-    [isFirstPage]="true"
+    [isLastPage]="selectedTabIndex === 2"
+    [isFirstPage]="selectedTabIndex === 0"
     [showSaveButton]="mode !== 'view'"
     [disableSaveButton]="form.invalid"
     [showCenterButtons]="true"
     (saveClicked)="onConfirmed()"
     (cancelClicked)="navigateBack()"
+    (nextClicked)="nextTab()"
+    (prevClicked)="prevTab()"
   ></ksp-bottom-nav>
 </div>

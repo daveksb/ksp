@@ -22,3 +22,16 @@
     width: 100%;
   }
 }
+
+.radio {
+  position: absolute;
+  margin-left: 12px;
+}
+
+.radio:checked ~ .form-control {
+  border-color: #0056ff;
+}
+
+.radio:checked:disabled ~ .form-control {
+  border-color: #ced4da;
+}

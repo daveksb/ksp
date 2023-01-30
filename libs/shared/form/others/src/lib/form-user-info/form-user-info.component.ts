@@ -30,13 +30,6 @@ import {
 } from '@ksp/shared/utility';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 
-/**
- * Dark Mode : all inputs will have gray background and form container will have white background
- * Use in Self-Service
- *
- * Normal Mode : all inputs will have white background and form container will have gray background
- * Use in E-service, School-Service
- */
 @Component({
   selector: 'ksp-form-user-info',
   templateUrl: './form-user-info.component.html',
@@ -58,6 +51,7 @@ export class FormUserInfoComponent
   @Input() isAddStaff = false;
   @Input() requiredIdCardNo = true;
   @Input() isHasSixtiesDate = false;
+  @Input() showSearchBtn = false;
   public _displayMode = UserInfoFormType.thai;
   @Input()
   set displayMode(mode: number) {

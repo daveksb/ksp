@@ -49,6 +49,7 @@ export class FormHiringInfoComponent
     );
   }
   ngOnInit(): void {
+    setTimeout(() => this.disableStatusForm(), 1000);
     if (this.displayMode === 'request') {
       this.form.controls.psersonType.clearValidators();
       this.form.controls.academicStanding.clearValidators();
@@ -56,9 +57,7 @@ export class FormHiringInfoComponent
 
     this.hiringStatus.valueChanges.pipe(skip(3)).subscribe(() => {
       this.disableStatusForm();
-      this.form.controls.hiringStartDate.reset();
-      this.form.controls.hiringEndDate.reset();
-      this.form.controls.hiringCancelDate.reset();
+      this.resetFormValue();
       if (this.mode !== 'view') {
         this.enableStatusForm();
       }
@@ -82,24 +81,6 @@ export class FormHiringInfoComponent
     this.hiringMonths = eDate.diff(sDate, 'months');
   }
 
-  get startDate() {
-    return this.form.controls.startDate;
-  }
-
-  get endDate() {
-    return this.form.controls.endDate;
-  }
-
-  get hiringStatus() {
-    return this.form.controls.hiringStatus;
-  }
-
-  disableStatusForm() {
-    this.form.controls.hiringStartDate.disable();
-    this.form.controls.hiringEndDate.disable();
-    this.form.controls.hiringCancelDate.disable();
-  }
-
   enableStatusForm() {
     if (this.hiringStatus.value === '1') {
       this.form.controls.hiringStartDate.enable();
@@ -111,6 +92,30 @@ export class FormHiringInfoComponent
       this.form.controls.hiringCancelDate.enable();
       this.form.controls.hiringCancelDate.setValidators([Validators.required]);
     }
+  }
+
+  disableStatusForm() {
+    this.form.controls.hiringStartDate.disable();
+    this.form.controls.hiringEndDate.disable();
+    this.form.controls.hiringCancelDate.disable();
+  }
+
+  resetFormValue() {
+    this.form.controls.hiringStartDate.reset();
+    this.form.controls.hiringEndDate.reset();
+    this.form.controls.hiringCancelDate.reset();
+  }
+
+  get startDate() {
+    return this.form.controls.startDate;
+  }
+
+  get endDate() {
+    return this.form.controls.endDate;
+  }
+
+  get hiringStatus() {
+    return this.form.controls.hiringStatus;
   }
 }
 

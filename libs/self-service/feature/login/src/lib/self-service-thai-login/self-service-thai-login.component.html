@@ -1,10 +1,22 @@
 <section class="bg-image">
   <div class="container min-vh-100 d-flex flex-column justify-content-center">
+    <div class="d-flex justify-content-start">
+      <mat-button-toggle-group name="lang" aria-label="Font Style">
+        <mat-button-toggle value="th" checked="true" class="w-50"
+          ><img src="/assets/images/thai-flag.png" style="width: 25px" />
+          Th</mat-button-toggle
+        >
+        <mat-button-toggle value="th" class="w-50"
+          ><img src="/assets/images/eng-flag.png" style="width: 20px" />
+          En</mat-button-toggle
+        >
+      </mat-button-toggle-group>
+    </div>
     <div
       class="row gx-lg-6 offset-lg-6 offset-md-12 align-items-center justify-content-center px-md-5 w-sm-50"
     >
       <div class="col-lg-10 mb-3 mb-lg-0 px-5 px-md-0">
-        <div class="d-flex justify-content-end mb-3 mb-lg-0">
+        <!-- <div class="d-flex justify-content-end mb-3 mb-lg-0">
           <mat-button-toggle-group name="lang" aria-label="Font Style">
             <mat-button-toggle value="th" checked="true" class="w-50"
               ><img src="/assets/images/thai-flag.png" style="width: 25px" />
@@ -15,7 +27,7 @@
               En</mat-button-toggle
             >
           </mat-button-toggle-group>
-        </div>
+        </div> -->
 
         <form [formGroup]="form">
           <div class="d-flex flex-column align-items-center">

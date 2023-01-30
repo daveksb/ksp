@@ -36,6 +36,7 @@
             [prefixList]="prefixList$ | async"
             [nationList]="nationalitys$ | async"
             [displayMode]="userInfoFormdisplayMode"
+            [showSearchBtn]="true"
           ></ksp-form-user-info>
         </div>
       </div>
@@ -50,7 +51,7 @@
             <ksp-form-address
               formControlName="addr1"
               [isDarkMode]="false"
-              [mode]="mode"
+              [mode]="'view'"
               [provinces]="provinces1$ | async"
               [amphurs]="amphurs1$ | async"
               [tumbols]="tumbols1$ | async"
@@ -61,7 +62,7 @@
             <div class="mt-3">
               <ksp-form-address
                 formControlName="addr2"
-                [mode]="mode"
+                [mode]="'view'"
                 [provinces]="provinces2$ | async"
                 [amphurs]="amphurs2$ | async"
                 [tumbols]="tumbols2$ | async"
@@ -87,7 +88,7 @@
             </div> -->
 
             <ksp-form-education-info
-              [mode]="mode"
+              [mode]="'view'"
               formControlName="edu1"
               [showSelectDegree]="false"
               [showGradeInput]="true"
@@ -111,7 +112,7 @@
             </div> -->
             <div class="mt-3">
               <ksp-form-education-info
-                [mode]="mode"
+                [mode]="showEdu2 ? 'edit' : 'view' || mode"
                 formControlName="edu2"
                 [showSelectDegree]="false"
                 [showGradeInput]="false"
@@ -144,7 +145,7 @@
             </div> -->
             <div class="mt-3">
               <ksp-form-education-info
-                [mode]="mode"
+                [mode]="showEdu3 ? 'edit' : 'view' || mode"
                 formControlName="edu3"
                 [showSelectDegree]="false"
                 [showGradeInput]="false"
@@ -179,7 +180,7 @@
             </div> -->
             <div class="mt-3">
               <ksp-form-education-info
-                [mode]="mode"
+                [mode]="showEdu4 ? 'edit' : 'view' || mode"
                 formControlName="edu4"
                 [showSelectDegree]="false"
                 [showGradeInput]="false"

@@ -39,14 +39,17 @@
           [visaTypeList]="visaTypeList | async"
           [displayMode]="userInfoFormType"
           formControlName="userInfo"
+          [showSearchBtn]="true"
         ></ksp-form-user-info>
       </div>
     </div>
 
     <div class="full-width">
       <div
-        class="mt-2"
-        *ngIf="kspComment.checkdetail[selectedTabIndex].result === 'incomplete'"
+        class="mt-3"
+        *ngIf="
+          kspComment.checkdetail[selectedTabIndex]?.result === 'incomplete'
+        "
       >
         <ksp-uni-form-badge
           [mainTitle]="kspComment.checkdetail[selectedTabIndex].detail"
@@ -69,6 +72,7 @@
             (provinceChanged)="provinceChanged(1, $event)"
             (amphurChanged)="amphurChanged(1, $event)"
             formControlName="addr1"
+            [mode]="'view'"
             >ที่อยู่ทะเบียนบ้าน</ksp-form-address
           >
           <div class="mt-3">
@@ -79,6 +83,7 @@
               (provinceChanged)="provinceChanged(2, $event)"
               (amphurChanged)="amphurChanged(2, $event)"
               formControlName="addr2"
+              [mode]="'view'"
               >ที่อยู่ที่ติดต่อได้สะดวก
               <div class="d-flex align-items-center">
                 <input
@@ -110,6 +115,7 @@
               [showPropertyInput]="false"
               [showSelectDegree]="false"
               [countries]="countries$ | async"
+              [mode]="'view'"
             >
               <div class="box-header">วุฒิการศึกษาปริญญาตรี</div>
             </ksp-form-education-info>
@@ -133,14 +139,14 @@
           >
             <ng-container *ngIf="careerType === 2 || careerType === 5">
               <div class="d-flex align-items-center mb-2">
-                <input
+                <!-- <input
                   (change)="eduSelect(1, $event)"
                   type="checkbox"
                   class="me-2"
-                />
+                /> -->
                 <label class="box-header">วุฒิการศึกษาปริญญาตรี</label>
               </div>
-              <ng-container *ngIf="eduSelected[1]">
+              <!-- <ng-container *ngIf="eduSelected[1]">
                 <ksp-form-education-info
                   [isDarkMode]="false"
                   [showCheckbox]="false"
@@ -151,9 +157,23 @@
                   [countries]="countries$ | async"
                   [isOptional]="!eduSelected[1]"
                   [userEducationType]="userInfoFormType"
+                  [mode]="'view'"
                 >
                 </ksp-form-education-info></ng-container
-            ></ng-container>
+            > -->
+              <ksp-form-education-info
+                [isDarkMode]="false"
+                [showCheckbox]="false"
+                [showSelectDegree]="false"
+                formControlName="edu1"
+                [showGradeInput]="careerType === 2 ? true : false"
+                [showPropertyInput]="false"
+                [countries]="countries$ | async"
+                [userEducationType]="userInfoFormType"
+                [mode]="'view'"
+              >
+              </ksp-form-education-info>
+            </ng-container>
 
             <ng-container *ngIf="careerType === 2 || careerType === 5">
               <div class="d-flex align-items-center my-2">
@@ -309,12 +329,14 @@
           <ng-container *ngIf="careerType === 1 || careerType === 5">
             <ksp-form-teaching-info
               formControlName="teachinginfo"
+              [mode]="'view'"
             ></ksp-form-teaching-info>
           </ng-container>
 
           <ng-container *ngIf="careerType === 2">
             <ksp-form-teaching-info-manager
               formControlName="teachinginfo"
+              [mode]="'view'"
             ></ksp-form-teaching-info-manager
           ></ng-container>
 
@@ -322,6 +344,7 @@
             <ksp-form-hiring-info
               [displayMode]="'request'"
               formControlName="hiringinfo"
+              [mode]="'view'"
               [staffTypes]="staffTypes$ | async"
               [positionTypes]="positionTypes$ | async"
               [academicStandingList]="academicTypes$ | async"
@@ -374,7 +397,7 @@
   <ksp-bottom-nav
     (prevClicked)="prevTab()"
     (nextClicked)="nextTab()"
-    [disableNext]="selectedTabIndex === 5"
+    [isLastPage]="selectedTabIndex === 5"
     (cancelClicked)="cancelConfirmDialog()"
     (tempSaveClicked)="checkStaffAnotherRequest('tempSave')"
     (saveClicked)="checkStaffAnotherRequest('submitSave')"

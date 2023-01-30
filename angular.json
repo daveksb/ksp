@@ -59,7 +59,11 @@
             ],
             "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.js"],
             "allowedCommonJsDependencies": [
-              "pako","moment","localforage","ngx-barcode","lodash"
+              "pako",
+              "moment",
+              "localforage",
+              "ngx-barcode",
+              "lodash"
             ]
           },
           "configurations": {
@@ -3020,7 +3024,12 @@
             ],
             "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.js"],
             "allowedCommonJsDependencies": [
-              "pako","moment","localforage","ngx-barcode","lodash","crypto-js"
+              "pako",
+              "moment",
+              "localforage",
+              "ngx-barcode",
+              "lodash",
+              "crypto-js"
             ]
           },
           "configurations": {
@@ -4957,7 +4966,11 @@
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ],
             "allowedCommonJsDependencies": [
-              "pako","moment","localforage","ngx-barcode","lodash"
+              "pako",
+              "moment",
+              "localforage",
+              "ngx-barcode",
+              "lodash"
             ]
           },
           "configurations": {
