@@ -4,9 +4,9 @@
 </ksp-top-nav>
 
 <div class="main__container px-4 py-2">
-  <div class="box-header">รายละเอียดแบบคำขอเปลี่ยนแปลง/แก้ไขหนังสืออนุญาต</div>
+  <self-service-request-status></self-service-request-status>
 
-  <div [formGroup]="form1" class="p-3">
+  <div [formGroup]="form1" class="detail__container p-3 my-3">
     <self-service-form-upload-image
       [isEditMode]="false"
       [imgSrc]="myImage"
@@ -23,6 +23,7 @@
     </ksp-form-user-info>
   </div>
 
+  <div class="box-header">รายละเอียดแบบคำขอเปลี่ยนแปลง/แก้ไขหนังสืออนุญาต</div>
   <div [formGroup]="form2" class="detail__container p-3">
     <ksp-edit-license
       formControlName="editData"

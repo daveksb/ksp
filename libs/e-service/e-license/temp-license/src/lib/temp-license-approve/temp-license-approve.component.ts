@@ -17,6 +17,7 @@ import {
   thaiDate,
 } from '@ksp/shared/utility';
 import moment from 'moment';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'e-service-temp-license-approve',
@@ -37,7 +38,8 @@ export class TempLicenseApproveComponent implements OnInit {
     public dialog: MatDialog,
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private requestService: ERequestService
+    private requestService: ERequestService,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -136,7 +138,7 @@ export class TempLicenseApproveComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/temp-license', 'list']);
+    this.location.back();
   }
 
   save() {

@@ -11,3 +11,5 @@ export * from './lib/e-qualification-consider-list/e-qualification-consider-list
 export * from './lib/e-qualification-consider-detail/e-qualification-consider-detail.component';
 
 export * from './lib/e-qualification-consider-meeting/e-qualification-consider-meeting.component';
+
+export * from './lib/e-qulification-roster-create/e-qulification-roster-create.component';

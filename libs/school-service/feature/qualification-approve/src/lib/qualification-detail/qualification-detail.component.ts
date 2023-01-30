@@ -518,9 +518,11 @@ export class QualificationDetailComponent implements OnInit {
   onCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       data: {
-        header: `ระบบทำการบันทึกเรียบร้อยแล้ว
-        สามารถตรวจสอบสถานะภายใน
-        3 - 15 วันทำการ`,
+        header: `บันทึกข้อมูลสำเร็จ`,
+        content: `เลขที่รายการ : ${formatRequestNo(
+          this.requestData.requestno || ''
+        )}
+        วันที่ : ${thaiDate(new Date())}`,
       },
     });
 

@@ -3,7 +3,8 @@
 
   <div class="row">
     <div
-      class="col-5 mb-2"
+      class="mb-2"
+      [ngClass]="showSearchBtn ? 'col-5' : 'col-6'"
       *ngIf="_displayMode === FormTypeEnum.foreign && !isSelfService"
     >
       <label
@@ -32,7 +33,7 @@
       *ngIf="
         _displayMode === FormTypeEnum.foreign &&
         mode === 'edit' &&
-        !isSelfService
+        showSearchBtn
       "
     >
       <br />
@@ -49,7 +50,8 @@
 
   <div class="row">
     <div
-      class="col-5 mb-2"
+      class="mb-2"
+      [ngClass]="showSearchBtn ? 'col-5' : 'col-6'"
       *ngIf="_displayMode === FormTypeEnum.thai && !isSelfService"
     >
       <label
@@ -80,7 +82,7 @@
     <div
       class="col-1 align-items-center ps-0"
       *ngIf="
-        _displayMode === FormTypeEnum.thai && mode === 'edit' && !isSelfService
+        _displayMode === FormTypeEnum.thai && mode === 'edit' && showSearchBtn
       "
     >
       <br />
