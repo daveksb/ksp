@@ -14,7 +14,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { approveResult } from '@ksp/e-service/e-license/approve-ksp-request';
+import { ApproveResult } from '@ksp/e-service/e-license/approve-ksp-request';
 import { getCookie } from '@ksp/shared/utility';
 
 @UntilDestroy()
@@ -55,7 +55,7 @@ export abstract class ESelfConfirmFormBaseComponent implements OnInit {
     this.checkRequestId();
   }
 
-  checkApproveResult(input: approveResult) {
+  checkApproveResult(input: ApproveResult) {
     //console.log('check aa = ');
     const req = this.saveData.requestData;
     console.log(req.process);

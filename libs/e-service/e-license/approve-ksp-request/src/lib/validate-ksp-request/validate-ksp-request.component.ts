@@ -5,12 +5,13 @@ import { KspFormBaseComponent, SchRequestProcess } from '@ksp/shared/interface';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { providerFactory } from '@ksp/shared/utility';
 
-export interface approveResult {
+export interface ApproveResult {
   result: string;
   shouldForward: string;
   returnDate: string;
   reason: string;
 }
+
 @Component({
   selector: 'ksp-validate-ksp-request',
   standalone: true,
@@ -31,12 +32,12 @@ export class ValidateKspRequestComponent
   processTable!: SchRequestProcess | undefined;
 
   override form = this.fb.group({
-    isurgent: [],
     result: [null, Validators.required],
-    shouldForward: [null, Validators.required],
     returndate: [null],
     reason: [null],
     otherDetail: [null],
+    isurgent: [],
+    //shouldForward: [null, Validators.required],
   });
 
   constructor(private fb: FormBuilder) {
@@ -53,9 +54,9 @@ export class ValidateKspRequestComponent
     return this.form.controls.result.value;
   }
 
-  get shouldForward() {
+  /*   get shouldForward() {
     return this.form.controls.shouldForward;
-  }
+  } */
 
   get reason() {
     return this.form.controls.reason.value;
@@ -66,17 +67,17 @@ export class ValidateKspRequestComponent
 
     this.form.controls.result.valueChanges.subscribe(() => {
       if (this.result === '2') {
-        this.shouldForward.clearValidators();
+        //this.shouldForward.clearValidators();
         this.form.controls.returndate.setValidators([Validators.required]);
         this.form.controls.returndate.enable();
         this.form.controls.reason.disable();
       } else if (this.result === '3') {
-        this.shouldForward.setValidators([Validators.required]);
+        //this.shouldForward.setValidators([Validators.required]);
         this.form.controls.reason.setValidators([Validators.required]);
         this.form.controls.reason.enable();
         this.form.controls.returndate.disable();
       } else {
-        this.shouldForward.addValidators(Validators.required);
+        //this.shouldForward.addValidators(Validators.required);
         this.disabledForm();
       }
       this.resetForm();
@@ -89,7 +90,7 @@ export class ValidateKspRequestComponent
   }
 
   resetForm() {
-    this.shouldForward.reset();
+    //this.shouldForward.reset();
     this.form.controls.returndate.reset();
     this.form.controls.reason.reset();
     this.form.controls.otherDetail.reset();
