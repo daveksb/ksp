@@ -22,7 +22,6 @@ import { formatDate, parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 import localForage from 'localforage';
 import { MatTabChangeEvent } from '@angular/material/tabs';
-import { Base64 } from 'js-base64';
 import { ESelfFormBaseComponent } from '@ksp/shared/form/others';
 
 @Component({

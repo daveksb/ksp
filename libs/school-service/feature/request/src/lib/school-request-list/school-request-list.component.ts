@@ -56,9 +56,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
   rejectedRequests: KspRequest[] = [];
   tempLicenseHistory: SchTempLicense[] = [];
   tempLicenseRequestTimes: any;
-
   reqTypeStatus = false;
-
   defaultForm = {
     requesttype: '3',
     careertype: '1',
@@ -78,6 +76,12 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     private schoolInfoService: SchoolInfoService,
     private loaderService: LoaderService
   ) {}
+
+  getColumnLabel() {
+    if (this.form.controls.licenseSearch.value?.requesttype === '6') {
+      return 'หนังสือแจ้งผล';
+    } else return 'หนังสืออนุญาตฯ';
+  }
 
   ngOnInit(): void {
     const filters: Partial<SchRequestSearchFilter> = {
