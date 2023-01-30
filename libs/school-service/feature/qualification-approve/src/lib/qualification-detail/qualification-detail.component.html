@@ -32,11 +32,11 @@
             [isqualification]="true"
             formControlName="userInfo"
             [isDarkMode]="false"
-            mode="view"
             [prefixList]="prefixList$ | async"
             [nationList]="nationalitys$ | async"
             [displayMode]="userInfoFormdisplayMode"
             [showSearchBtn]="true"
+            [readonly]="true"
           ></ksp-form-user-info>
         </div>
       </div>
@@ -88,7 +88,7 @@
             </div> -->
 
             <ksp-form-education-info
-              [mode]="'view'"
+              mode="view"
               formControlName="edu1"
               [showSelectDegree]="false"
               [showGradeInput]="true"
@@ -230,9 +230,10 @@
     [showCenterButtons]="true"
     [showCancelButton]="requestData.status !== '0'"
     [showSaveButton]="mode === 'edit'"
+    [disableSaveButton]="form.controls.userInfo.invalid"
     (saveClicked)="onSave()"
     (cancelClicked)="cancel()"
     (prevClicked)="onClickPrev()"
-    [disableSaveButton]="!form.valid"
   ></ksp-bottom-nav>
+  <!-- [disableSaveButton]="form.invalid" -->
 </div>

@@ -174,6 +174,7 @@
         >คำนำหน้าชื่อภาษาไทย</label
       >
       <select
+        [attr.disabled]="readonly ? true : null"
         class="form-select"
         formControlName="prefixth"
         (change)="prefixChanged($event)"
@@ -189,7 +190,8 @@
         >ชื่อภาษาไทย</label
       >
       <input
-        class="form-control"
+        [attr.disabled]="readonly ? true : null"
+        class="form-control test-xx"
         type="text"
         placeholder="กรุณากรอกชื่อภาษาไทย"
         formControlName="firstnameth"
@@ -208,6 +210,7 @@
     <div class="col-md mb-2" *ngIf="_displayMode === FormTypeEnum.foreign">
       <label class="form-label">ชื่อกลาง</label>
       <input
+        [attr.disabled]="readonly ? true : null"
         class="form-control"
         type="text"
         placeholder="กรุณากรอกชื่อภาษาไทย"
@@ -220,6 +223,7 @@
         >นามสกุลภาษาไทย</label
       >
       <input
+        [attr.disabled]="readonly ? true : null"
         class="form-control"
         type="text"
         placeholder="กรุณากรอกนามสกุลภาษาไทย"
@@ -240,6 +244,7 @@
       <label class="form-label required">คำนำหน้าชื่อภาษาอังกฤษ</label>
       <select
         class="form-select"
+        [attr.disabled]="readonly ? true : null"
         formControlName="prefixen"
         (change)="prefixChanged($event)"
       >
@@ -252,6 +257,7 @@
     <div class="col-md mb-2">
       <label class="form-label required">ชื่อภาษาอังกฤษ</label>
       <input
+        [attr.disabled]="readonly ? true : null"
         class="form-control"
         type="text"
         placeholder="กรุณากรอกชื่อภาษาอังกฤษ"
@@ -270,6 +276,7 @@
     <div class="col-md mb-2" *ngIf="_displayMode === FormTypeEnum.foreign">
       <label class="form-label">ชื่อกลาง</label>
       <input
+        [attr.disabled]="readonly ? true : null"
         class="form-control"
         type="text"
         placeholder="กรุณากรอกชื่อกลางภาษาอังกฤษ"
@@ -279,6 +286,7 @@
     <div class="col-md mb-2">
       <label class="form-label required">นามสกุลภาษาอังกฤษ</label>
       <input
+        [attr.disabled]="readonly ? true : null"
         class="form-control"
         type="text"
         placeholder="กรุณากรอกนามสกุลภาษาอังกฤษ"
@@ -297,7 +305,11 @@
   <div class="row">
     <div class="col-md mb-2" *ngIf="_displayMode === FormTypeEnum.thai">
       <label class="form-label required">เพศ</label>
-      <select class="form-select" formControlName="sex">
+      <select
+        [attr.disabled]="readonly ? true : null"
+        class="form-select"
+        formControlName="sex"
+      >
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option value="1">ชาย</option>
         <option value="2">หญิง</option>
@@ -308,6 +320,7 @@
       <label class="form-label required">วันเดือนปีเกิด</label>
       <div class="d-flex align-items-center">
         <input
+          [disabled]="readonly"
           [max]="today"
           matInput
           [matDatepicker]="picker3"
@@ -347,7 +360,11 @@
 
     <div class="col mb-2" *ngIf="_displayMode === FormTypeEnum.foreign">
       <label class="form-label">ประเทศ</label>
-      <select class="form-select" formControlName="country">
+      <select
+        [attr.disabled]="readonly ? true : null"
+        class="form-select"
+        formControlName="country"
+      >
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option *ngFor="let c of countryList" [value]="c.countryNo">
           {{ c?.countryN }}
@@ -358,7 +375,11 @@
     <!-- <div class="col mb-2" *ngIf="_displayMode === FormTypeEnum.foreign"> -->
     <div class="col mb-2">
       <label class="form-label">สัญชาติ</label>
-      <select class="form-select" formControlName="nationality">
+      <select
+        [attr.disabled]="readonly ? true : null"
+        class="form-select"
+        formControlName="nationality"
+      >
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option *ngFor="let n of nationList" [value]="n.nationId">
           {{ n.nationName }}
@@ -371,6 +392,7 @@
     <div class="col-md-6 mb-2">
       <label class="form-label required">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
       <input
+        [attr.disabled]="readonly ? true : null"
         class="form-control"
         type="tel"
         formControlName="contactphone"
@@ -389,6 +411,7 @@
     <div class="col-md-6 mb-2">
       <label class="form-label">เบอร์โทรศัพท์ (ที่ทำงาน)</label>
       <input
+        [attr.disabled]="readonly ? true : null"
         class="form-control"
         type="tel"
         formControlName="workphone"
@@ -407,7 +430,12 @@
   <div class="row">
     <div class="col-md-6 mb-2" *ngIf="_displayMode === FormTypeEnum.thai">
       <label class="form-label required">อีเมล</label>
-      <input class="form-control" type="email" formControlName="email" />
+      <input
+        [attr.disabled]="readonly ? true : null"
+        class="form-control"
+        type="email"
+        formControlName="email"
+      />
       <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
         <span class="text-danger" *ngIf="email.errors?.['email']">{{
           validatorMessages.email
@@ -416,7 +444,12 @@
     </div>
     <div class="col-md-6 mb-2" *ngIf="isqualification">
       <label class="form-label required">ตำแหน่ง</label>
-      <input class="form-control" type="text" formControlName="position" />
+      <input
+        [attr.disabled]="readonly ? true : null"
+        class="form-control"
+        type="text"
+        formControlName="position"
+      />
     </div>
   </div>
 
