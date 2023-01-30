@@ -16,6 +16,8 @@ import { Subject } from 'rxjs';
 export class LicenseSearchComponent {
   isLoading: Subject<boolean> = this.loaderService.isLoading;
   licenseTypes: ListData[] = staffLicenseTypes;
+  currentPage!: any;
+  payload: any;
 
   form = this.fb.group({
     cardno: [],
@@ -23,8 +25,8 @@ export class LicenseSearchComponent {
     name: [],
     licensetype: [],
     licensestatus: [],
-    offset: ['0'],
-    row: ['100'],
+    offset: '0',
+    row: '10',
     //schoolid: [],
   });
 
@@ -43,21 +45,30 @@ export class LicenseSearchComponent {
   }
 
   clear() {
-    this.form.reset();
     this.foundLicenses = [];
     this.notFoundItem = false;
+    this.form.reset();
+    this.form.patchValue({
+      offset: '0',
+      row: '10',
+    });
   }
 
   search() {
+    const data = this.form.getRawValue() as any;
+    const { offset, row } = data;
+    this.currentPage = 1;
     this.notFoundItem = false;
-    const payload = {
+    let payload = {};
+
+    payload = {
       cardno: this.form.controls.cardno.value,
       licenseno: this.form.controls.licenseno.value,
       name: this.form.controls.name.value,
       licensetype: this.form.controls.licensetype.value,
       licensestatus: null,
-      offset: '0',
-      row: '100',
+      offset,
+      row,
     };
 
     this.licenseService
@@ -66,6 +77,8 @@ export class LicenseSearchComponent {
       .subscribe((res) => {
         if (res) {
           this.foundLicenses = res;
+          this.payload = payload;
+          this.notFoundItem = false;
         } else {
           this.foundLicenses = [];
           this.notFoundItem = true;
@@ -94,7 +107,32 @@ export class LicenseSearchComponent {
       });
   }
 
-  goToDetail() {
-    this.router.navigate(['./staff-management', 'license-search']);
+  goBack() {
+    this.router.navigate(['./staff-management', 'list']);
+  }
+
+  goPrevious() {
+    if (this.currentPage == 1) return;
+    const { offset, ...payload } = this.payload || '';
+    payload.offset = parseInt(offset) - parseInt(payload.row);
+    payload.offset = payload.offset.toString();
+
+    this.licenseService.getStaffLicenses(payload).subscribe((res) => {
+      this.currentPage -= 1;
+      this.payload = payload;
+      this.foundLicenses = res;
+    });
+  }
+
+  goNext() {
+    const { offset, ...payload } = this.payload || '';
+    payload.offset = parseInt(offset) + parseInt(payload.row);
+    payload.offset = payload.offset.toString();
+
+    this.licenseService.getStaffLicenses(payload).subscribe((res) => {
+      this.currentPage += 1;
+      this.payload = payload;
+      this.foundLicenses = res;
+    });
   }
 }

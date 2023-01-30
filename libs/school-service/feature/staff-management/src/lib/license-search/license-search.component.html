@@ -80,7 +80,13 @@
 
     <ng-container *ngIf="foundLicenses.length">
       <div class="d-flex flex-column">
-        <ng-container *ngFor="let license of foundLicenses">
+        <ng-container
+          *ngFor="
+            let license of foundLicenses;
+            let first = first;
+            let last = last
+          "
+        >
           <ksp-license-info
             [license]="license"
             [isLicenseRevoked]="true"
@@ -89,22 +95,31 @@
           <hr />
         </ng-container>
       </div>
-      <nav aria-label="Page navigation example ">
-        <ul class="pagination justify-content-end my-1">
-          <li class="page-item">
-            <a class="page-link" role="button"
-              ><i class="bi bi-chevron-left"></i
-            ></a>
-          </li>
-          <li class="page-item disabled">
-            <a class="page-link">หน้าที่ 1</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" role="button"
-              ><i class="bi bi-chevron-right"></i
-            ></a>
-          </li>
-        </ul></nav
+      <div class="d-flex flex-row justify-content-between align-items-center">
+        <button
+          type="button"
+          class="btn border-orange text-orange"
+          (click)="goBack()"
+        >
+          ย้อนกลับ
+        </button>
+        <nav aria-label="Page navigation example ">
+          <ul class="pagination justify-content-end my-1">
+            <li class="page-item">
+              <a class="page-link" role="button" (click)="goPrevious()"
+                ><i class="bi bi-chevron-left"></i
+              ></a>
+            </li>
+            <li class="page-item disabled">
+              <a class="page-link">หน้าที่ {{ currentPage }}</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" role="button" (click)="goNext()"
+                ><i class="bi bi-chevron-right"></i
+              ></a>
+            </li>
+          </ul>
+        </nav></div
     ></ng-container>
   </div>
 </div>
