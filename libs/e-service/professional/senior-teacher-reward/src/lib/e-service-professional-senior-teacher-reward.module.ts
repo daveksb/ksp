@@ -15,6 +15,7 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SelfServiceFormModule } from '@ksp/self-service/form';
 import {
   EServiceRewardAccountSearchComponent,
+  EServiceRewardRequestSearchComponent,
   EServiceRewardSearchComponent,
 } from '@ksp/shared/search';
 import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
@@ -30,6 +31,7 @@ import { ESeniorTeacherRejectComponent } from './e-senior-teacher-reject/e-senio
 import { EServiceUiRewardRejectFormModule } from '@ksp/e-service/ui/reward-reject-form';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ESeniorTeacherAccountListComponent } from './e-senior-teacher-account-list/e-senior-teacher-account-list.component';
+import { ESeniorTeacherCreateAccountComponent } from './e-senior-teacher-create-account/e-senior-teacher-create-account.component';
 
 const routes: Routes = [
   {
@@ -61,6 +63,10 @@ const routes: Routes = [
         path: 'account-list',
         component: ESeniorTeacherAccountListComponent,
       },
+      {
+        path: 'create-account',
+        component: ESeniorTeacherCreateAccountComponent,
+      },
     ],
   },
 ];
@@ -89,6 +95,7 @@ const routes: Routes = [
     RewardValidateRequestComponent,
     MatProgressSpinnerModule,
     EServiceRewardAccountSearchComponent,
+    EServiceRewardRequestSearchComponent,
   ],
   declarations: [
     ESeniorTeacherListComponent,
@@ -96,6 +103,7 @@ const routes: Routes = [
     ESeniorTeacherConfirmComponent,
     ESeniorTeacherRejectComponent,
     ESeniorTeacherAccountListComponent,
+    ESeniorTeacherCreateAccountComponent,
   ],
   exports: [ESeniorTeacherListComponent, ESeniorTeacherDetailComponent],
 })
