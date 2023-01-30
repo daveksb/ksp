@@ -2,18 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { approveResult } from '@ksp/e-service/e-license/approve-ksp-request';
-import { SchoolRequestSubType } from '@ksp/shared/constant';
+import { ApproveResult } from '@ksp/e-service/e-license/approve-ksp-request';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
-  PdfRenderComponent,
 } from '@ksp/shared/dialog';
 import {
   KspApprovePayload,
   KspApprovePersistData,
   KspComment,
-  KspRequest,
   SchTempLicense,
 } from '@ksp/shared/interface';
 import { ERequestService } from '@ksp/shared/service';
@@ -23,7 +20,6 @@ import {
   replaceEmptyWithNull,
 } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import localForage from 'localforage';
 import moment from 'moment';
 
 @UntilDestroy()
@@ -108,7 +104,7 @@ export class EQualificationConsiderDetailComponent implements OnInit {
     });
   }
 
-  checkApproveResult(input: approveResult) {
+  checkApproveResult(input: ApproveResult) {
     const req = this.saveData.requestData;
     //console.log('check approve = ');
     if (req.requesttype === '3') {
@@ -236,8 +232,6 @@ export class EQualificationConsiderDetailComponent implements OnInit {
     } else if (req.requesttype === '6') {
       considerProcess = '3';
     }
-
-    console.log('this.saveData.checkDetail = ', this.saveData.checkDetail);
 
     const detail = {
       ...this.saveData.checkDetail,
