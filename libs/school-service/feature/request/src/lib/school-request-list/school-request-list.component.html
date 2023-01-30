@@ -38,6 +38,7 @@
                   'bi bi-chevron-up': viewMoreClicked,
                   'bi bi-chevron-down': !viewMoreClicked
                 }"
+                [matTooltip]="viewMoreClicked ? 'ดูน้อยลง' : 'ดูเพิ่มเติม'"
               ></i>
             </span></div
         ></ksp-uni-form-badge>
@@ -202,41 +203,11 @@
                 class="rounded-pill border w-full d-flex justify-content-center px-1"
                 style="min-width: 140px"
                 [ngClass]="
-                  reqTypeStatus
-                    ? {
-                        'border-secondary text-secondary ':
-                          +element.status === 0 && +element.process !== 5,
-                        'border-orange text-orange ': +element.status === 1,
-                        'border-success text-success ':
-                          (+element.status === 3 && +element.process === 3) ||
-                          (+element.status === 3 && +element.process === 4) ||
-                          (+element.status === 2 && +element.process === 5),
-                        'border-danger text-danger ':
-                          (+element.status === 2 && +element.process === 3) ||
-                          (+element.status === 4 && +element.process === 3) ||
-                          (+element.status === 5 && +element.process === 3) ||
-                          (+element.status === 2 && +element.process === 4) ||
-                          (+element.status === 4 && +element.process === 4) ||
-                          (+element.status === 5 && +element.process === 4) ||
-                          (+element.status === 3 && +element.process === 5)
-                      }
-                    : {
-                        'border-secondary text-secondary ':
-                          +element.status === 0,
-                        'border-orange text-orange ': +element.status === 1,
-                        'border-success text-success ':
-                          (+element.status === 2 && +element.process === 2) ||
-                          (+element.status === 3 && +element.process === 2) ||
-                          (+element.status === 2 && +element.process === 3) ||
-                          (+element.status === 5 && +element.process === 3),
-                        'border-danger text-danger ':
-                          (+element.status === 2 && +element.process === 2) ||
-                          (+element.status === 3 && +element.process === 2) ||
-                          (+element.status === 4 && +element.process === 2) ||
-                          (+element.status === 3 && +element.process === 3) ||
-                          (+element.status === 4 && +element.process === 3) ||
-                          (+element.status === 6 && +element.process === 3)
-                      }
+                  getStatusColor(
+                    +element.status,
+                    +element.process,
+                    +element.requesttype
+                  )
                 "
               >
                 {{
@@ -275,6 +246,7 @@
                 role="button"
                 class="bi bi-file-earmark-text text-primary fs-5"
               ></i>
+              <div *ngIf="!reqTypeStatus" class="form-label">-</div>
             </td>
           </ng-container>
 
@@ -289,6 +261,7 @@
                 role="button"
                 class="bi bi-file-earmark-text text-primary fs-5"
               ></i>
+              <div *ngIf="!reqTypeStatus" class="form-label">-</div>
             </td>
           </ng-container>
 

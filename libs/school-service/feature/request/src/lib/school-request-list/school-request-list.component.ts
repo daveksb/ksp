@@ -57,7 +57,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
   tempLicenseHistory: SchTempLicense[] = [];
   tempLicenseRequestTimes: any;
   reqTypeStatus = false;
-  viewMoreClicked = false
+  viewMoreClicked = false;
 
   defaultForm = {
     requesttype: '3',
@@ -79,12 +79,6 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     private loaderService: LoaderService
   ) {}
 
-  getColumnLabel() {
-    if (this.form.controls.licenseSearch.value?.requesttype === '6') {
-      return 'หนังสือแจ้งผล';
-    } else return 'หนังสืออนุญาตฯ';
-  }
-
   ngOnInit(): void {
     const filters: Partial<SchRequestSearchFilter> = {
       requesttype: '3',
@@ -94,6 +88,12 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+  }
+
+  getColumnLabel() {
+    if (this.form.controls.licenseSearch.value?.requesttype !== '3') {
+      return 'หนังสือแจ้งผล';
+    } else return 'หนังสืออนุญาตฯ';
   }
 
   genAlertMessage(req: KspRequest) {
@@ -150,7 +150,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
   }
 
   isLicenseApproved(req: KspRequest) {
-    if (req.requesttype === '3') {
+    if (req.requesttype !== '4') {
       this.reqTypeStatus = true;
     } else {
       this.reqTypeStatus = false;
@@ -293,6 +293,101 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
 
   rewardPage(id = '') {
     this.router.navigate(['/request-reward', 'detail', id]);
+  }
+
+  getStatusColor(status: number, process: number, requestType: number) {
+    console.log(process, status, requestType);
+    if (requestType === 3) {
+      if (status === 0 && process !== 5) {
+        return 'border-secondary text-secondary';
+      }
+      if (status === 1) {
+        return 'border-orange text-orange';
+      }
+      if (
+        (status === 3 && process === 3) ||
+        (status === 3 && process === 4) ||
+        (status === 2 && process === 5)
+      ) {
+        return 'border-success text-success';
+      }
+      if (
+        (status === 2 && process === 3) ||
+        (status === 4 && process === 3) ||
+        (status === 5 && process === 3) ||
+        (status === 2 && process === 4) ||
+        (status === 4 && process === 4) ||
+        (status === 5 && process === 4) ||
+        (status === 3 && process === 5)
+      ) {
+        return 'border-danger text-danger';
+      } else {
+        return '';
+      }
+    } else if (requestType === 4) {
+      if (status === 0) {
+        return 'border-secondary text-secondary';
+      }
+      if (status === 1) {
+        return 'border-orange text-orange';
+      }
+      if (status === 2 && process === 2) {
+        return 'border-success text-success';
+      }
+      if (status === 3 && process === 2) {
+        return 'border-danger text-danger';
+      } else {
+        return '';
+      }
+    } else if (requestType === 6) {
+      if (status === 0 || (status === 5 && process === 2)) {
+        return 'border-secondary text-secondary';
+      }
+      if (status === 1) {
+        return 'border-orange text-orange';
+      }
+      if (
+        (status === 3 && process === 2) ||
+        (status === 3 && process === 3) ||
+        (status === 5 && process === 3)
+      ) {
+        return 'border-success text-success';
+      }
+      if (
+        (status === 2 && process === 2) ||
+        (status === 4 && process === 2) ||
+        (status === 3 && process === 3) ||
+        (status === 4 && process === 3) ||
+        (status === 6 && process === 3)
+      ) {
+        return 'border-danger text-danger';
+      } else {
+        return '';
+      }
+    } else if (requestType === 40) {
+      if (status === 0 || (status === 5 && process === 2)) {
+        return 'border-secondary text-secondary';
+      }
+      if (status === 1) {
+        return 'border-orange text-orange';
+      }
+      if ((status === 3 && process === 3) || (status === 2 && process === 4)) {
+        return 'border-success text-success';
+      }
+      if (
+        (status === 2 && process === 3) ||
+        (status === 4 && process === 3) ||
+        (status === 6 && process === 3) ||
+        (status === 3 && process === 4) ||
+        (status === 4 && process === 4)
+      ) {
+        return 'border-danger text-danger';
+      } else {
+        return '';
+      }
+    } else {
+      return '';
+    }
   }
 
   requestPdf(element: KspRequest) {

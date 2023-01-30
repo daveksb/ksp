@@ -26,6 +26,7 @@ import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { SchoolRequestListComponent } from './school-request-list/school-request-list.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   imports: [
@@ -51,6 +52,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     UniFormBadgeComponent,
     MatProgressSpinnerModule,
     SharedFormOthersModule,
+    MatTooltipModule
   ],
   declarations: [SchoolRequestListComponent, SchoolRequestComponent],
 })
