@@ -1,11 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { Component, Input, OnChanges } from '@angular/core';
-import {
-  ControlValueAccessor,
-  FormArray,
-  FormControl,
-  FormGroup,
-} from '@angular/forms';
+import { ControlValueAccessor, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { FormMode } from './form-mode';
 
@@ -24,6 +19,8 @@ export abstract class KspFormBaseComponent
     if (value === 'view') {
       setTimeout(() => {
         this.form.disable();
+        this.form.controls['idcardno'].enable();
+        this.form.controls['isforeign'].enable();
       }, 0);
     } else {
       setTimeout(() => {
@@ -114,6 +111,7 @@ export abstract class KspFormBaseComponent
   ngOnDestroy() {
     this.subscriptions.forEach((s) => s.unsubscribe());
   }
+
   ngOnChanges(event: any) {
     if (event?.mode) {
       this.mode = event.mode.currentValue;
