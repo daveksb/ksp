@@ -114,4 +114,11 @@ export class RequestRewardMainService {
       files: [],
     },
   ];
+
+  moneyAssistanceFiles: FileGroup[] = [
+    {
+      name: '1. เอกสารประกอบการขอรับเงินช่วยเหลือทางการเงิน',
+      files: [],
+    },
+  ];
 }

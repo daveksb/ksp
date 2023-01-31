@@ -60,6 +60,7 @@ export class SeniorTeacherRewardComponent
   @Input() prefixList: any[] = [];
   @Input() bureaus: any[] = [];
   @Input() rewardFiles!: any[];
+  @Input() moneyAssistanceFiles!: any[];
   @Input() uniqueTimestamp!: string;
 
   provinces1$!: Observable<any>;

@@ -13,7 +13,7 @@ import {
 import { parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
-const FORM_TAB_COUNT = 5;
+const FORM_TAB_COUNT = 6;
 
 @Component({
   selector: 'ksp-e-senior-teacher-detail',
@@ -41,6 +41,7 @@ export class ESeniorTeacherDetailComponent
     workplace: [],
     rewardCareerInfo: [],
     rewardPunishmentInfo: [],
+    rewardMoneySupportInfo: [],
 
     phone: [],
     fax: [],
@@ -50,6 +51,7 @@ export class ESeniorTeacherDetailComponent
   });
 
   rewardFiles: any[] = [];
+  moneyAssistanceFiles: any[] = [];
 
   get checkResultFormArray() {
     return this.form.controls.checkResult as FormArray;
@@ -104,6 +106,7 @@ export class ESeniorTeacherDetailComponent
       schooladdrinfo,
       rewardcareerinfo,
       rewardpunishmentinfo,
+      rewardmoneysupportinfo,
       fileinfo,
     } = data;
     const myInfo = <any>{
@@ -129,14 +132,17 @@ export class ESeniorTeacherDetailComponent
 
     const rewardCareerInfo = parseJson(rewardcareerinfo);
     const rewardPunishmentInfo = parseJson(rewardpunishmentinfo);
+    const rewardMoneySupportInfo = parseJson(rewardmoneysupportinfo);
     this.form.patchValue(<any>{
       rewardCareerInfo,
       rewardPunishmentInfo,
+      rewardMoneySupportInfo,
     });
 
     if (fileinfo) {
-      const { rewardfiles } = parseJson(fileinfo);
+      const { rewardfiles, moneyassistancefiles } = parseJson(fileinfo);
       this.rewardFiles = rewardfiles;
+      this.moneyAssistanceFiles = moneyassistancefiles;
     }
   }
 
