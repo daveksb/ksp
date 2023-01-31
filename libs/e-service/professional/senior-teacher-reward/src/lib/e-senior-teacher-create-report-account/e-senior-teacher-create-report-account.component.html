@@ -1,0 +1,116 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
+<ksp-top-nav><span header>ย่ืนแบบคำขอรางวัล</span>
+  <span subHeader>ขอรางวัลครูอาวุโส </span>
+</ksp-top-nav>
+
+<div class="bg-secondary bg-opacity-10 px-4 py-2 full-height full-width-2">
+  <div class="box-header">สร้างข้อมูลบัญชีผู้เข้ารายงานตัว</div>
+  <div class="bg-white px-3 py-3">
+    <div class="box-header">ค้นหา</div>
+
+    <hr />
+
+    <div class="mb-3">
+      <ksp-e-service-reward-request-search
+        (search)="search($event)"
+        (clear)="clear()"></ksp-e-service-reward-request-search>
+    </div>
+
+    <hr />
+
+    <div class="box-header">รายการขอรางวัลครูอาวุโส (ผ่านการพิจารณารางวัล)</div>
+
+    <div class="table__scroll">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef>เลือก</th>
+          <td mat-cell *matCellDef="let element; let i = index">
+            <input type="checkbox" class="me-2" [checked]="element.select" />
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="order">
+          <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+          <td mat-cell *matCellDef="let element; let i = index">
+            {{
+            paginator.pageIndex === 0
+            ? i + 1
+            : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+            }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="requestNo">
+          <th mat-header-cell *matHeaderCellDef>เลขที่แบบคำขอ</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.requestno | reqNoFormat }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.idcardno }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>ชื่อ - นามสกุล</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.firstnameth }} {{ element.lastnameth }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="careerType">
+          <th mat-header-cell *matHeaderCellDef>ประเภทวิชาชีพ</th>
+          <td mat-cell *matCellDef="let element">
+            {{ SelfServiceRequestSubType[+element.careertype] }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="province">
+          <th mat-header-cell *matHeaderCellDef>จังหวัดที่ขอยื่น</th>
+          <td mat-cell *matCellDef="let element">{{ element.province }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="result">
+          <th mat-header-cell *matHeaderCellDef>ผลการพิจารณา</th>
+          <td mat-cell *matCellDef="let element">
+            {{ checkStatus(+element.process, +element.status, 40)?.ename }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="createDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่ส่งข้อมูลจัดทำบัญชีผู้เข้ารายงานตัว</th>
+          <td mat-cell *matCellDef="let element">{{ element.createDate }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="requestDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่ยื่นแบบคำขอ</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.requestdate | thaiDate }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="view">
+          <th mat-header-cell *matHeaderCellDef>ดูข้อมูล</th>
+          <td mat-cell *matCellDef="let element">
+            <i
+              role="button"
+              class="bi bi-file-earmark-check text-primary fs-5"></i>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+
+    <mat-paginator [pageSizeOptions]="[25]" showFirstLastButtons>
+    </mat-paginator>
+  </div>
+</div>

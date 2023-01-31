@@ -68,6 +68,6 @@ export class ESeniorTeacherReportAccountListComponent implements AfterViewInit {
   }
 
   createGroup() {
-    this.router.navigate(['/senior-teacher', 'create-account']);
+    this.router.navigate(['/senior-teacher', 'create-report-account']);
   }
 }
