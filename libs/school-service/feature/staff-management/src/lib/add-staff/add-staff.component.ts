@@ -193,7 +193,8 @@ export class AddStaffComponent implements OnInit {
         if (kuruspano) {
           this.searchStaffDone = true;
           localForage.getItem('sch-kuruspa-no').then((res: any) => {
-            console.log('res = ', res);
+            //console.log('res = ', res);
+            res.country = res.country.toString().padStart(3, '0'); // country need to re-format
             this.form.controls.userInfo.patchValue(res);
           });
         }
