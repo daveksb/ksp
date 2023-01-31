@@ -580,6 +580,10 @@ export const professionalMenu: MenuConfig[] = [
         path: '/senior-teacher/check-list',
         label: 'เจ้าหน้าที่ส่วนกลางตรวจสอบบันทึกผล',
       },
+      {
+        path: '/senior-teacher/report-account-list',
+        label: 'เจ้าหน้าที่ส่วนกลางจัดทำบัญชีผู้เข้ารายงานตัว',
+      },
     ],
   },
   {
