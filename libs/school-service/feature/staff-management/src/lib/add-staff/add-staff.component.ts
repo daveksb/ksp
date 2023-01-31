@@ -355,14 +355,12 @@ export class AddStaffComponent implements OnInit {
   }
 
   patchAll(res: any) {
-    console.log('patchAll = ', res);
+    //console.log('patchAll = ', res);
     this.pathUserInfo(res);
     this.patchAddress(parseJson(res.addresses));
     this.patchEdu(parseJson(res.educations));
     this.pathTeachingInfo(parseJson(res.teachinginfo));
-    //console.log('hiring = ', parseJson(res.hiringinfo));
     this.form.controls.hiringInfo.patchValue(parseJson(res.hiringinfo));
-    //console.log('hiring = ', parseJson(res.hiringinfo));
   }
 
   insertStaff() {
@@ -522,7 +520,7 @@ export class AddStaffComponent implements OnInit {
   }
 
   patchAddress(addrs: any[]) {
-    console.log('add data = ', addrs);
+    //console.log('add data = ', addrs);
     if (addrs && addrs.length) {
       addrs.map((addr: any, i: number) => {
         if (i === 0) {
