@@ -25,7 +25,6 @@ import {
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import {
-  formatDate,
   formatDatePayload,
   formatRequestNo,
   getCookie,
@@ -189,8 +188,9 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
       .pipe(
         switchMap((res) => {
           if (res && this.form.value.foreignTeacher) {
-            const userInfo: Partial<KspRequest> = this.form.value
-              .foreignTeacher as any;
+            const userInfo: Partial<KspRequest> =
+              this.form.value.foreignTeacher;
+
             const countryCode = userInfo.country ?? 0;
             const countryCode3digits = countryCode.toString().padStart(3, '0');
             userInfo.country = countryCode3digits;
@@ -216,7 +216,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
               mapMultiFileInfo(this.foreignFiles)
             );
             const payload = formatDatePayload(userInfo);
-            //console.log('payload = ', payload);
+            console.log('payload = ', payload);
             return this.requestService.schCreateRequest(payload);
           }
           return EMPTY;

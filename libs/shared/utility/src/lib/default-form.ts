@@ -58,7 +58,8 @@ export function createUserInfoForm(fb: FormBuilder) {
     country: [null],
     visaclass: [null],
     visatype: [null],
-    visaexpireddate: [null],
+    //visaexpireddate: [null],
+    visaexpiredate: [null], //31-1-2023
     educationOccupy: [null],
     permisson: [null],
     other: [null],
