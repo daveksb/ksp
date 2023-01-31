@@ -9,7 +9,12 @@
           formArrayName="teachingLevel"
           *ngFor="let order of teachingLevels.controls; let i = index"
         >
-          <input type="checkbox" class="me-2" [formControlName]="i" />
+          <input
+            type="checkbox"
+            class="me-2"
+            [formControlName]="i"
+            [attr.disabled]="readonly ? true : null"
+          />
           <label class="text-secondary">{{ levels[i].label }} </label>
         </label>
       </div>
@@ -24,7 +29,12 @@
           formArrayName="teachingSubjects"
           *ngFor="let order of teachingSubjects.controls; let i = index"
         >
-          <input type="checkbox" class="me-2" [formControlName]="i" />
+          <input
+            type="checkbox"
+            class="me-2"
+            [formControlName]="i"
+            [attr.disabled]="readonly ? true : null"
+          />
           <label class="text-secondary">{{ subjects[i].label }} </label>
         </label>
       </div>
@@ -34,6 +44,7 @@
             class="form-control check-other"
             type="text"
             formControlName="teachingSubjectOther"
+            [attr.disabled]="readonly ? true : null"
           />
         </div>
       </div>

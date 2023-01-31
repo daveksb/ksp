@@ -1,21 +1,13 @@
 <form [formGroup]="form">
-  <div class="box-header text-primary mb-3">
-    รายได้ก่อนเกษียณ
-  </div>
+  <div class="box-header text-primary mb-3">รายได้ก่อนเกษียณ</div>
 
   <div class="row mb-3">
-    <div class="d-flex align-items-center w-25">
-      <div class="col-4 d-flex">
-        <div class="form-label" style="width: 8rem">
-          เงินเดือน (บาท)
-        </div>
+    <div class="col-md-4 d-flex align-items-center">
+      <div class="col-auto d-flex">
+        <div class="form-label me-2">เงินเดือน (บาท)</div>
       </div>
 
-      <div class="col-4">
-        <div class="d-flex align-items-center">
-          <input class="form-control" type="text" formControlName="salary" />
-        </div>
-      </div>
+      <input class="form-control" type="text" formControlName="salary" />
     </div>
   </div>
 </form>

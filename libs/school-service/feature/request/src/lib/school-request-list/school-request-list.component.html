@@ -8,70 +8,53 @@
 </ksp-top-nav>
 
 <form [formGroup]="form">
-  <!-- <ng-container *ngFor="let req of rejectedRequests; let i = index">
-    <div
-      role="button"
-      (click)="viewRequest(req.requesttype, req.careertype, req.id)"
-    >
-      <ksp-uni-form-badge
-        [mainTitle]="genAlertMessage(req)"
-      ></ksp-uni-form-badge>
-    </div>
-  </ng-container> -->
   <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height full-width-2">
-    <div
-      id="carouselExampleFade"
-      class="carousel slide carousel-dark carousel-fade"
-      data-bs-ride="carousel"
-    >
-      <div class="carousel-inner">
-        <ng-container *ngFor="let req of rejectedRequests; let i = index">
-          <div class="carousel-item active" *ngIf="i === 0">
-            <ksp-uni-form-badge [mainTitle]="genAlertMessage(req)"
-              ><button
-                class="btn btn-link text-primary p-0 w-auto ms-1"
-                type="button"
-                (click)="viewRequest(req.requesttype, req.careertype, req.id)"
-              >
-                กดเพื่อตรวจสอบ
-              </button>
-              <!-- <span class="badge bg-danger ms-1">{{
-                rejectedRequests.length
-              }}</span> -->
-            </ksp-uni-form-badge>
-          </div>
-        </ng-container>
-
-        <ng-container *ngFor="let req of rejectedRequests; let i = index">
-          <div class="carousel-item" *ngIf="i > 0">
-            <ksp-uni-form-badge [mainTitle]="genAlertMessage(req)">
-              <button
-                type="button"
-                class="btn btn-link text-primary p-0 w-auto ms-1"
-                (click)="viewRequest(req.requesttype, req.careertype, req.id)"
-              >
-                กดเพื่อตรวจสอบ
-              </button>
-              <!-- <span class="badge bg-danger ms-1">{{
-                rejectedRequests.length
-              }}</span> -->
-            </ksp-uni-form-badge>
-          </div>
-        </ng-container>
+    <ng-container *ngFor="let req of rejectedRequests; let i = index">
+      <div *ngIf="i === 0">
+        <ksp-uni-form-badge [mainTitle]="genAlertMessage(req)"
+          ><button
+            class="btn btn-link text-primary p-0 w-auto ms-1"
+            type="button"
+            (click)="viewRequest(req.requesttype, req.careertype, req.id)"
+          >
+            กดเพื่อตรวจสอบ
+          </button>
+          <div
+            class="d-flex align-items-center"
+            button
+            *ngIf="rejectedRequests.length > 1"
+          >
+            <span
+              class="text-secondary ms-1"
+              role="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseExample"
+              aria-expanded="false"
+              aria-controls="collapseExample"
+            >
+              <i
+                (click)="viewMoreClicked = !viewMoreClicked"
+                [ngClass]="{
+                  'bi bi-chevron-up': viewMoreClicked,
+                  'bi bi-chevron-down': !viewMoreClicked
+                }"
+                [matTooltip]="viewMoreClicked ? 'ดูน้อยลง' : 'ดูเพิ่มเติม'"
+              ></i>
+            </span></div
+        ></ksp-uni-form-badge>
       </div>
-
-      <ng-container *ngFor="let req of rejectedRequests; let i = index">
-        <button
-          *ngIf="i > 0"
-          class="carousel-control-next"
-          type="button"
-          data-bs-target="#carouselExampleFade"
-          data-bs-slide="next"
-        >
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        </button>
-      </ng-container>
-    </div>
+      <div class="mt-1 collapse" id="collapseExample" *ngIf="i > 0">
+        <ksp-uni-form-badge [mainTitle]="genAlertMessage(req)"
+          ><button
+            class="btn btn-link text-primary p-0 w-auto ms-1"
+            type="button"
+            (click)="viewRequest(req.requesttype, req.careertype, req.id)"
+          >
+            กดเพื่อตรวจสอบ
+          </button>
+        </ksp-uni-form-badge>
+      </div>
+    </ng-container>
 
     <div class="box-header">
       รายการแบบคำขอที่ยื่นผ่านระบบบริการหน่วยงานทางการศึกษา
@@ -220,41 +203,11 @@
                 class="rounded-pill border w-full d-flex justify-content-center px-1"
                 style="min-width: 140px"
                 [ngClass]="
-                  reqTypeStatus
-                    ? {
-                        'border-secondary text-secondary ':
-                          +element.status === 0 && +element.process !== 5,
-                        'border-orange text-orange ': +element.status === 1,
-                        'border-success text-success ':
-                          (+element.status === 3 && +element.process === 3) ||
-                          (+element.status === 3 && +element.process === 4) ||
-                          (+element.status === 2 && +element.process === 5),
-                        'border-danger text-danger ':
-                          (+element.status === 2 && +element.process === 3) ||
-                          (+element.status === 4 && +element.process === 3) ||
-                          (+element.status === 5 && +element.process === 3) ||
-                          (+element.status === 2 && +element.process === 4) ||
-                          (+element.status === 4 && +element.process === 4) ||
-                          (+element.status === 5 && +element.process === 4) ||
-                          (+element.status === 3 && +element.process === 5)
-                      }
-                    : {
-                        'border-secondary text-secondary ':
-                          +element.status === 0,
-                        'border-orange text-orange ': +element.status === 1,
-                        'border-success text-success ':
-                          (+element.status === 2 && +element.process === 2) ||
-                          (+element.status === 3 && +element.process === 2) ||
-                          (+element.status === 2 && +element.process === 3) ||
-                          (+element.status === 5 && +element.process === 3),
-                        'border-danger text-danger ':
-                          (+element.status === 2 && +element.process === 2) ||
-                          (+element.status === 3 && +element.process === 2) ||
-                          (+element.status === 4 && +element.process === 2) ||
-                          (+element.status === 3 && +element.process === 3) ||
-                          (+element.status === 4 && +element.process === 3) ||
-                          (+element.status === 6 && +element.process === 3)
-                      }
+                  getStatusColor(
+                    +element.status,
+                    +element.process,
+                    +element.requesttype
+                  )
                 "
               >
                 {{
@@ -293,6 +246,7 @@
                 role="button"
                 class="bi bi-file-earmark-text text-primary fs-5"
               ></i>
+              <div *ngIf="!reqTypeStatus" class="form-label">-</div>
             </td>
           </ng-container>
 
@@ -307,6 +261,7 @@
                 role="button"
                 class="bi bi-file-earmark-text text-primary fs-5"
               ></i>
+              <div *ngIf="!reqTypeStatus" class="form-label">-</div>
             </td>
           </ng-container>
 

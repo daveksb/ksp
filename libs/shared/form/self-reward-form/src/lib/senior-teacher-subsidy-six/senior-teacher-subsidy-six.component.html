@@ -1,16 +1,15 @@
 <form [formGroup]="form">
-  <div class="box-header text-primary mb-3">
-    ทรัพย์สินของตนเองและคู่สมรส
-  </div>
+  <div class="box-header text-primary mb-3">ทรัพย์สินของตนเองและคู่สมรส</div>
 
   <div class="row mb-3">
-    <div class="d-flex align-items-center">
+    <div class="col-md-3 d-flex align-items-center">
       <input
         class="form-check-input my-0 radio"
         type="radio"
         value="1"
-        formControlName="haveAsset" />
-      <div class="form-control" style="width: 16rem">
+        formControlName="haveAsset"
+      />
+      <div class="form-control">
         <label class="ms-4"> มีทรัพย์สิน </label>
       </div>
     </div>
@@ -20,17 +19,12 @@
     <div class="row mb-2">
       <div class="col-md-4 mb-2">
         <label class="form-label">เนื้อที่ บ้านและที่ดินเป็นของตนเอง </label>
-        <input
-          class="form-control"
-          type="text"
-          formControlName="homeSpace" />
+        <input class="form-control" type="text" formControlName="homeSpace" />
       </div>
       <div class="col-md-4 mb-2">
         <label class="form-label">หน่วย</label>
         <select class="form-select" formControlName="homeSpaceUnit">
-          <option value="null" selected hidden disabled>
-            กรุณาเลือก
-          </option>
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option value="1">ตารางวา</option>
           <option value="2">ไร่</option>
         </select>
@@ -40,24 +34,20 @@
         <input
           class="form-control"
           type="text"
-          formControlName="homeSpacePrice" />
+          formControlName="homeSpacePrice"
+        />
       </div>
     </div>
 
     <div class="row mb-2">
       <div class="col-md-4 mb-2">
         <label class="form-label">มีที่ดินจำนวน</label>
-        <input
-          class="form-control"
-          type="text"
-          formControlName="landSpace" />
+        <input class="form-control" type="text" formControlName="landSpace" />
       </div>
       <div class="col-md-4 mb-2">
         <label class="form-label">หน่วย</label>
         <select class="form-select" formControlName="landSpaceUnit">
-          <option value="null" selected hidden disabled>
-            กรุณาเลือก
-          </option>
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option value="1">ตารางวา</option>
           <option value="2">ไร่</option>
         </select>
@@ -67,7 +57,8 @@
         <input
           class="form-control"
           type="text"
-          formControlName="landSpacePrice" />
+          formControlName="landSpacePrice"
+        />
       </div>
     </div>
 
@@ -82,9 +73,7 @@
       <div class="col-md-4 mb-2">
         <label class="form-label">หน่วย</label>
         <select class="form-select" formControlName="cultivateUnit">
-          <option value="null" selected hidden disabled>
-            กรุณาเลือก
-          </option>
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option value="1">เดือนละ</option>
           <option value="2">ปีละ</option>
         </select>
@@ -94,7 +83,8 @@
         <input
           class="form-control"
           type="text"
-          formControlName="cultivatePrice" />
+          formControlName="cultivatePrice"
+        />
       </div>
     </div>
 
@@ -109,19 +99,14 @@
       <div class="col-md-4 mb-2">
         <label class="form-label">หน่วย</label>
         <select class="form-select" formControlName="rentalUnit">
-          <option value="null" selected hidden disabled>
-            กรุณาเลือก
-          </option>
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option value="1">เดือนละ</option>
           <option value="2">ปีละ</option>
         </select>
       </div>
       <div class="col-md-4 mb-2">
         <label class="form-label">จำนวน (บาท)</label>
-        <input
-          class="form-control"
-          type="text"
-          formControlName="rentalPrice" />
+        <input class="form-control" type="text" formControlName="rentalPrice" />
       </div>
     </div>
 
@@ -138,13 +123,14 @@
   </ng-container>
 
   <div class="row mb-3">
-    <div class="d-flex align-items-center">
+    <div class="col-md-3 d-flex align-items-center">
       <input
         class="form-check-input my-0 radio"
         type="radio"
         value="2"
-        formControlName="haveAsset" />
-      <div class="form-control" style="width: 16rem">
+        formControlName="haveAsset"
+      />
+      <div class="form-control">
         <label class="ms-4"> ไม่มีทรัพย์สิน </label>
       </div>
     </div>
@@ -158,11 +144,19 @@
       </div>
       <div class="col-md-4 mb-2">
         <label class="form-label">รายได้คู่สมรส (บาท/เดือน)</label>
-        <input class="form-control" type="text" formControlName="spouseIncome" />
+        <input
+          class="form-control"
+          type="text"
+          formControlName="spouseIncome"
+        />
       </div>
       <div class="col-md-4 mb-2">
         <label class="form-label">รายได้พิเศษ (บาท/เดือน)</label>
-        <input class="form-control" type="text" formControlName="specialIncome" />
+        <input
+          class="form-control"
+          type="text"
+          formControlName="specialIncome"
+        />
       </div>
     </div>
 
@@ -172,30 +166,34 @@
         <input class="form-control" type="text" formControlName="otherIncome" />
       </div>
       <div class="col-md-4 mb-2">
-        <label class="form-label">รวม (บาท/เดือน)</label>
+        <label class="form-label">รวมรายได้ (บาท/เดือน)</label>
         <input class="form-control" type="text" formControlName="totalIncome" />
       </div>
     </div>
 
     <div class="row mb-2">
       <div class="col-md-4 mb-2">
-        <label class="form-label">รายได้กองทุนเลี้ยงชีพ (บาท/เดือน)
+        <label class="form-label"
+          >รายได้กองทุนเลี้ยงชีพ (บาท/เดือน)
           <span class="text-danger">สำหรับสังกัด สช.</span>
         </label>
-        <input class="form-control" type="text" formControlName="providentFund" />
+        <input
+          class="form-control"
+          type="text"
+          formControlName="providentFund"
+        />
       </div>
     </div>
 
     <div class="row mb-2">
-      <div class="col-md-4 mb-2">
+      <div class="col-md-12 mb-2">
         <label class="form-label">เหตุผลที่ได้รับการคัดเลือก</label>
         <textarea
           class="form-control"
           rows="3"
-          formControlName="selectionReason"></textarea>
+          formControlName="selectionReason"
+        ></textarea>
       </div>
     </div>
   </ng-container>
-
-
 </form>

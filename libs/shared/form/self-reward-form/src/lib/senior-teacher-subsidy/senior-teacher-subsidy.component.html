@@ -3,27 +3,27 @@
     การคัดเลือกให้เป็นผู้ได้รับเงินช่วยเหลือทางการเงิน
   </div>
 
-  <div class="row mb-3">
-    <div class="d-flex align-items-center">
+  <div class="row-cols-2">
+    <div class="col-md-3 col-12 mb-3 d-flex align-items-center">
       <input
         class="form-check-input my-0 radio"
         type="radio"
         value="hasSubsidy"
-        formControlName="subsidy" />
-      <div class="form-control" style="width: 12.5rem">
+        formControlName="subsidy"
+      />
+      <div class="form-control">
         <label class="ms-4"> เคย </label>
       </div>
     </div>
-  </div>
 
-  <div class="row mb-3">
-    <div class="d-flex align-items-center">
+    <div class="col-md-3 col-12 mb-3 d-flex align-items-center">
       <input
         class="form-check-input my-0 radio"
         type="radio"
         value="noSubsidy"
-        formControlName="subsidy" />
-      <div class="form-control" style="width: 12.5rem">
+        formControlName="subsidy"
+      />
+      <div class="form-control">
         <label class="ms-4"> ไม่เคย </label>
       </div>
     </div>
@@ -31,49 +31,54 @@
 
   <hr />
 
-  <div class="box-header mb-3">
-    ข้อมูลขอรับเงินช่วยเหลือ
-  </div>
+  <div class="box-header mb-3">ข้อมูลขอรับเงินช่วยเหลือ</div>
 
-  <div class="bg-white border py-3 px-3 mb-3">
+  <div class="bg-white border rounded py-3 px-3 mb-3">
     <ksp-senior-teacher-subsidy-one
       [mode]="mode"
-      formControlName="status"></ksp-senior-teacher-subsidy-one>
+      formControlName="status"
+    ></ksp-senior-teacher-subsidy-one>
   </div>
 
-  <div class="bg-white border py-3 px-3 mb-3">
+  <div class="bg-white border rounded py-3 px-3 mb-3">
     <ksp-senior-teacher-subsidy-two
       [mode]="mode"
-      formControlName="spouse"></ksp-senior-teacher-subsidy-two>
+      formControlName="spouse"
+    ></ksp-senior-teacher-subsidy-two>
   </div>
 
-  <div class="bg-white border py-3 px-3 mb-3">
+  <div class="bg-white border rounded py-3 px-3 mb-3">
     <ksp-senior-teacher-subsidy-three
       [mode]="mode"
-      formControlName="children"></ksp-senior-teacher-subsidy-three>
+      formControlName="children"
+    ></ksp-senior-teacher-subsidy-three>
   </div>
 
-  <div class="bg-white border py-3 px-3 mb-3">
+  <div class="bg-white border rounded py-3 px-3 mb-3">
     <ksp-senior-teacher-subsidy-four
       [mode]="mode"
-      formControlName="expense"></ksp-senior-teacher-subsidy-four>
+      formControlName="expense"
+    ></ksp-senior-teacher-subsidy-four>
   </div>
 
-  <div class="bg-white border py-3 px-3 mb-3">
+  <div class="bg-white border rounded py-3 px-3 mb-3">
     <ksp-senior-teacher-subsidy-five
       [mode]="mode"
-      formControlName="income"></ksp-senior-teacher-subsidy-five>
+      formControlName="income"
+    ></ksp-senior-teacher-subsidy-five>
   </div>
 
-  <div class="bg-white border py-3 px-3 mb-3">
+  <div class="bg-white border rounded py-3 px-3 mb-3">
     <ksp-senior-teacher-subsidy-six
       [mode]="mode"
-      formControlName="property"></ksp-senior-teacher-subsidy-six>
+      formControlName="property"
+    ></ksp-senior-teacher-subsidy-six>
   </div>
 
   <hr />
   <ksp-form-multi-attachment
     [mode]="mode"
     [groups]="moneyAssistanceFiles"
-    [uniqueTimestamp]="uniqueTimestamp"></ksp-form-multi-attachment>
+    [uniqueTimestamp]="uniqueTimestamp"
+  ></ksp-form-multi-attachment>
 </form>

@@ -39,7 +39,7 @@
           [visaTypeList]="visaTypeList | async"
           [displayMode]="userInfoFormType"
           formControlName="userInfo"
-          [showSearchBtn]="true"
+          [showSearchBtn]="!requestId"
           [readonly]="true"
         ></ksp-form-user-info>
       </div>
@@ -141,14 +141,15 @@
             *ngIf="careerType === 2 || careerType === 5"
           >
             <ng-container *ngIf="careerType === 2 || careerType === 5">
-              <div class="d-flex align-items-center mb-2">
-                <!-- <input
+              <!-- <div class="d-flex align-items-center mb-2">
+                <input
                   (change)="eduSelect(1, $event)"
                   type="checkbox"
                   class="me-2"
-                /> -->
+                />
                 <label class="box-header">วุฒิการศึกษาปริญญาตรี</label>
-              </div>
+              </div> -->
+              <label class="box-header">วุฒิการศึกษาปริญญาตรี</label>
               <!-- <ng-container *ngIf="eduSelected[1]">
                 <ksp-form-education-info
                   [isDarkMode]="false"
