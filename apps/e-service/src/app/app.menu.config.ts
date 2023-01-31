@@ -573,6 +573,10 @@ export const professionalMenu: MenuConfig[] = [
         label: 'รายการแบบคำขอรับรางวัลครูอาวุโส',
       },
       {
+        path: '/senior-teacher/account-list',
+        label: 'สร้างบัญชีรายชื่อนำเสนอส่วนกลาง (มอ.5)',
+      },
+      {
         path: '/xxx',
         label: 'พิจารณารางวัลครูอาวุโส',
       },

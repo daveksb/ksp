@@ -58,6 +58,8 @@
 
     <mat-tab label="ข้อมูลผู้ขอรับเงินช่วยเหลือ">
       <ksp-senior-teacher-subsidy
+        [moneyAssistanceFiles]="moneyAssistanceFiles"
+        [uniqueTimestamp]="uniqueTimestamp"
         formControlName="rewardMoneySupportInfo"></ksp-senior-teacher-subsidy>
     </mat-tab>
   </mat-tab-group>

@@ -78,6 +78,7 @@ export class RequestRewardMainComponent implements OnInit {
   bureau$!: Observable<any>;
   uniqueTimestamp!: string;
   rewardFiles: any[] = [];
+  moneyAssistanceFiles: any[] = [];
   provinces$!: Observable<any>;
 
   constructor(
@@ -186,8 +187,9 @@ export class RequestRewardMainComponent implements OnInit {
       ...resData
     } = data;
     const rewardType = +(requesttype || 0);
-    const { rewardfiles } = parseJson(fileinfo);
+    const { rewardfiles, moneyassistancefiles } = parseJson(fileinfo);
     this.rewardFiles = rewardfiles;
+    this.moneyAssistanceFiles = moneyassistancefiles;
     console.log(rewardfiles);
 
     this.form.patchValue({
@@ -273,9 +275,12 @@ export class RequestRewardMainComponent implements OnInit {
       case 44: {
         const rewardCareerInfo = parseJson(rewardcareerinfo);
         const rewardPunishmentInfo = parseJson(rewardpunishmentinfo);
+        const rewardMoneySupportInfo = parseJson(rewardmoneysupportinfo);
+
         this.form.controls.rewardDetail.patchValue(<any>{
           rewardCareerInfo,
           rewardPunishmentInfo,
+          rewardMoneySupportInfo,
         });
         break;
       }
@@ -322,6 +327,9 @@ export class RequestRewardMainComponent implements OnInit {
 
   initializeFiles(formType: number) {
     this.uniqueTimestamp = uuidv4();
+    this.moneyAssistanceFiles = structuredClone(
+      this.service.moneyAssistanceFiles
+    );
 
     switch (formType) {
       case 40:
@@ -421,6 +429,7 @@ export class RequestRewardMainComponent implements OnInit {
     userInfo.addressinfo = null;
     const selectData = _.pick(userInfo, allowKey);
     const rewardfiles = this.rewardFiles;
+    const moneyassistancefiles = this.moneyAssistanceFiles;
     console.log(rewardfiles);
 
     const filledData = {
@@ -471,7 +480,7 @@ export class RequestRewardMainComponent implements OnInit {
       ...(form.rewardResearchHistory && {
         rewardresearchhistory: JSON.stringify(form.rewardResearchHistory),
       }),
-      ...{ fileinfo: JSON.stringify({ rewardfiles }) },
+      ...{ fileinfo: JSON.stringify({ rewardfiles, moneyassistancefiles }) },
     };
     const { id, requestdate, ...payload } = replaceEmptyWithNull(filledData);
     console.log('payload = ', payload);
