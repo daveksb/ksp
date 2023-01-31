@@ -36,7 +36,7 @@ export class ETeacherCouncilDetailComponent
   bureau$!: Observable<any>;
   uniqueTimestamp!: string;
   rewardFiles: any[] = [];
-  selectedTabIndex = 0;
+  formTabCount = FORM_TAB_COUNT;
 
   form = this.fb.group({
     userInfo: [],
@@ -158,14 +158,6 @@ export class ETeacherCouncilDetailComponent
           this.form.controls.address2.patchValue(addr);
         }
       });
-    }
-  }
-
-  nextTab() {
-    if (this.selectedTabIndex < FORM_TAB_COUNT - 1) {
-      this.selectedTabIndex++;
-    } else {
-      this.next();
     }
   }
 
