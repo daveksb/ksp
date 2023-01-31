@@ -592,6 +592,10 @@ export const professionalMenu: MenuConfig[] = [
         path: '/senior-teacher/print-list',
         label: 'พิมพ์ป้ายติดหน้าอก',
       },
+      {
+        path: '/senior-teacher/visit-list',
+        label: 'ลงทะเบียนวันเข้าเฝ้าฯ',
+      },
     ],
   },
   {

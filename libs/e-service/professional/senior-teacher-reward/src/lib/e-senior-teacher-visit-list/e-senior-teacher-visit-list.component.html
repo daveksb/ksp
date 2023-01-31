@@ -1,0 +1,144 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
+<ksp-top-nav><span header>ยื่นแบบคำขอรางวัล</span><span subHeader>ขอรางวัลครูอาวุโส</span></ksp-top-nav>
+
+<div class="bg-secondary full-height full-width-2 bg-opacity-10 px-4 py-2">
+  <div class="box-header">ข้อมูลลงทะเบียนวันเข้าเฝ้าฯ</div>
+  <div class="bg-white p-3">
+    <div class="box-header">ค้นหา</div>
+    <hr />
+
+    <ksp-e-service-reward-search
+      [showDeclareDate]="true"
+      (search)="search($event)"
+      (clear)="clear()"></ksp-e-service-reward-search>
+  </div>
+
+  <div class="d-flex justify-content-end mb-3 mt-4">
+    <button
+      type="button"
+      class="btn border-primary text-primary ms-2 create-group-btn">
+      Export รายชื่อ
+    </button>
+  </div>
+
+  <br />
+  <div class="bg-white p-3">
+    <div class="box-header">รายชื่อผู้ได้รับรางวัลครูอาวุโสฯ</div>
+    <div class="table__scroll">
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="order">
+          <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+          <td mat-cell *matCellDef="let element; let i = index">
+            {{
+            paginator.pageIndex === 0
+            ? i + 1
+            : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+            }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="requestno">
+          <th mat-header-cell *matHeaderCellDef>เลขที่แบบคำขอ</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.requestno | reqNoFormat }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="idcardno">
+          <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.idcardno }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.firstnameth }} {{ element.lastnameth }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="careertype">
+          <th mat-header-cell *matHeaderCellDef>ประเภทวิชาชีพ</th>
+          <td mat-cell *matCellDef="let element">
+            {{ SelfServiceRequestSubType[+element.careertype] }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="process">
+          <th mat-header-cell *matHeaderCellDef>ผลการพิจารณา</th>
+          <td mat-cell *matCellDef="let element">ผ่าน</td>
+        </ng-container>
+
+        <ng-container matColumnDef="reject">
+          <th mat-header-cell *matHeaderCellDef>คัดค้าน/เพิกถอน</th>
+          <td mat-cell *matCellDef="let element">-</td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>สถานะลงทะเบียน</th>
+          <td mat-cell *matCellDef="let element">
+            {{ checkStatus(+element.process, +element.status, 40)?.ename }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="numberOrder">
+          <th mat-header-cell *matHeaderCellDef>หมายเลขลำดับรายชื่อ</th>
+          <td mat-cell *matCellDef="let element">-</td>
+        </ng-container>
+
+        <ng-container matColumnDef="considerdate">
+          <th mat-header-cell *matHeaderCellDef>วันที่ผ่านการพิจารณา</th>
+          <td mat-cell *matCellDef="let element">-</td>
+        </ng-container>
+
+        <ng-container matColumnDef="processupdatedate">
+          <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.processupdatedate | thaiDate }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="createVisitListDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่ี่ลงทะเบียนวันเข้าเฝ้าฯ</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.requestdate | thaiDate }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="createListDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่ี่ลงทะเบียนรายงานตัว</th>
+          <td mat-cell *matCellDef="let element">-</td>
+        </ng-container>
+
+        <ng-container matColumnDef="view">
+          <th mat-header-cell *matHeaderCellDef>ดูข้อมูล</th>
+          <td mat-cell *matCellDef="let element">
+            <i
+              role="button"
+              class="bi bi-file-text fs-5 text-primary"></i>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="report">
+          <th mat-header-cell *matHeaderCellDef>รายงานตัว</th>
+          <td mat-cell *matCellDef="let element">
+            <i
+              role="button"
+              class="bi bi-pencil-square fs-5 text-primary"></i>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[25]" showFirstLastButtons>
+      </mat-paginator>
+    </div>
+  </div>
+</div>

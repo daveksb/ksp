@@ -20,11 +20,11 @@ import {
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'ksp-e-senior-teacher-print-list',
-  templateUrl: './e-senior-teacher-print-list.component.html',
-  styleUrls: ['./e-senior-teacher-print-list.component.scss'],
+  selector: 'ksp-e-senior-teacher-visit-list',
+  templateUrl: './e-senior-teacher-visit-list.component.html',
+  styleUrls: ['./e-senior-teacher-visit-list.component.scss'],
 })
-export class ESeniorTeacherPrintListComponent implements OnInit, AfterViewInit {
+export class ESeniorTeacherVisitListComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfRequest>();
   checkProcess = SelfCheckProcess;
@@ -90,7 +90,6 @@ export class ESeniorTeacherPrintListComponent implements OnInit, AfterViewInit {
 }
 
 export const column = [
-  'select',
   'order',
   'requestno',
   'idcardno',
@@ -102,7 +101,7 @@ export const column = [
   // 'reject',
   // 'considerdate',
   // 'processupdatedate',
-  'submitDate',
+  'createVisitListDate',
   'createListDate',
   'view',
   // 'report',
