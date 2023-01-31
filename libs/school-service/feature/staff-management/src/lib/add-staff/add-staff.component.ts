@@ -73,7 +73,6 @@ export class AddStaffComponent implements OnInit {
   foundLicenses: SelfLicense[] = [];
   notFound = false;
   selectedTabIndex = 0;
-
   form = this.fb.group({
     userInfo: [],
     addr1: [],
@@ -100,7 +99,10 @@ export class AddStaffComponent implements OnInit {
     this.checkMode();
     this.getList();
     this.checkStaffId();
-    //this.form.valueChanges.subscribe((res) => console.log(this.form.value));
+    this.form.valueChanges.subscribe((res) => {
+      //console.log('form = ', this.form.controls.userInfo.value);
+      //console.log('form valid = ', this.form.controls.userInfo);
+    });
   }
 
   searchLicense(staffId: any) {
@@ -174,7 +176,9 @@ export class AddStaffComponent implements OnInit {
       .subscribe((params) => {
         //console.log('param = ', params);
         this.staffId = Number(params.get('id'));
+        //console.log('staff id = ', this.staffId);
         if (this.staffId) {
+          this.searchStaffDone = true;
           this.loadStaffData(this.staffId);
         } else {
           this.addEdu({ degreeLevel: '1' });
@@ -232,20 +236,17 @@ export class AddStaffComponent implements OnInit {
       });
   }
 
-  searchKuruspaNo(kuruspaNo: string) {
+  searchKuruspaNo(kspno: string) {
     if (this.mode === 'view') {
       return;
     }
-
-    this.licenseService.searchKuruspaNo(kuruspaNo).subscribe((res) => {
-      console.log('res = ', res);
-      if (res && res.kuruspano) {
+    this.licenseService.searchKuruspaNo(kspno).subscribe((res) => {
+      //console.log('mode x = ', this.mode);
+      if (this.mode === 'edit' && res && res.kuruspano) {
         localForage.setItem('sch-kuruspa-no', res);
-        this.router.navigate([
-          '/staff-management',
-          'add-staff-foreign',
-          kuruspaNo,
-        ]);
+      } else if (res && res.kuruspano) {
+        localForage.setItem('sch-kuruspa-no', res);
+        this.router.navigate(['/staff-management', 'add-staff-foreign', kspno]);
       } else {
         const dialog = this.dialog.open(CompleteDialogComponent, {
           data: {
@@ -333,13 +334,12 @@ export class AddStaffComponent implements OnInit {
       .loadStaffFromId(staffId)
       .pipe(untilDestroyed(this))
       .subscribe((res) => {
+        this.patchAll(res);
         if (res && res.kuruspano) {
           this.userInfoType = UserInfoFormType.foreign;
         }
-        this.patchAll(res);
         if (res.idcardno) {
           this.searchLicense(res.idcardno);
-          //console.log('res = ', res);
         }
       });
   }
@@ -355,6 +355,7 @@ export class AddStaffComponent implements OnInit {
   }
 
   patchAll(res: any) {
+    console.log('patchAll = ', res);
     this.pathUserInfo(res);
     this.patchAddress(parseJson(res.addresses));
     this.patchEdu(parseJson(res.educations));
@@ -521,7 +522,7 @@ export class AddStaffComponent implements OnInit {
   }
 
   patchAddress(addrs: any[]) {
-    //console.log('add data = ', addrs);
+    console.log('add data = ', addrs);
     if (addrs && addrs.length) {
       addrs.map((addr: any, i: number) => {
         if (i === 0) {

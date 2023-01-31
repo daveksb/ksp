@@ -176,9 +176,6 @@ export class AddStaffTeachingInfoComponent implements OnInit {
       hiringStatus: this.form.controls.hiringStatus.value,
       hiringStatusDate: this.form.controls.hiringStatusDate.value,
       hiringStatusReason: this.form.controls.hiringStatusReason.value,
-      /*  hiringContractNo: '8',
-      hiringPeriodYear: '9',
-      hiringPeriodMonth: '10', */
     };
 
     this.teachingInfoService.addHiringInfo(payload).subscribe((res) => {
@@ -188,13 +185,11 @@ export class AddStaffTeachingInfoComponent implements OnInit {
 
   onConfirmed() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
         btnLabel: 'บันทึก',
       },
     });
-
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         this.save();
@@ -205,12 +200,10 @@ export class AddStaffTeachingInfoComponent implements OnInit {
 
   onCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
       data: {
         header: `บันทึกข้อมูลสำเร็จ`,
       },
     });
-
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
         this.cancel();
