@@ -584,6 +584,10 @@ export const professionalMenu: MenuConfig[] = [
         path: '/senior-teacher/report-account-list',
         label: 'เจ้าหน้าที่ส่วนกลางจัดทำบัญชีผู้เข้ารายงานตัว',
       },
+      {
+        path: '/senior-teacher/report-list',
+        label: 'ลงทะเบียนรายงานตัว',
+      },
     ],
   },
   {
