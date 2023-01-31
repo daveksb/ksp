@@ -237,7 +237,7 @@ export class AddStaffComponent implements OnInit {
     }
 
     this.licenseService.searchKuruspaNo(kuruspaNo).subscribe((res) => {
-      //console.log('res = ', res);
+      console.log('res = ', res);
       if (res && res.kuruspano) {
         localForage.setItem('sch-kuruspa-no', res);
         this.router.navigate([
@@ -260,29 +260,6 @@ export class AddStaffComponent implements OnInit {
         });
       }
     });
-
-    /* const payload = {
-      kuruspaNo,
-      schoolid: this.schoolId,
-    }; */
-
-    /*     this.staffService
-      .searchStaffFromKuruspaNo(payload)
-      .pipe(untilDestroyed(this))
-      .subscribe((res) => {
-        if (res && res.returncode !== '98') {
-          // found staff
-          this.router.navigate(['/staff-management', 'edit-staff', res.id]);
-        } else {
-          // not found then reset form and set kuruspano again
-          this.router.navigate([
-            '/staff-management',
-            'add-staff-foreign',
-            kuruspano,
-          ]);
-        }
-        this.searchStaffDone = true;
-      }); */
   }
 
   save() {
