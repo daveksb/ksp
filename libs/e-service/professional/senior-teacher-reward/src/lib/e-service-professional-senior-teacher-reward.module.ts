@@ -37,6 +37,7 @@ import { ESeniorTeacherCheckComponent } from './e-senior-teacher-check/e-senior-
 import { ESeniorTeacherReportAccountListComponent } from './e-senior-teacher-report-account-list/e-senior-teacher-report-account-list.component';
 import { ESeniorTeacherCreateReportAccountComponent } from './e-senior-teacher-create-report-account/e-senior-teacher-create-report-account.component';
 import { ESeniorTeacherReportListComponent } from './e-senior-teacher-report-list/e-senior-teacher-report-list.component';
+import { ESeniorTeacherPrintListComponent } from './e-senior-teacher-print-list/e-senior-teacher-print-list.component';
 
 const routes: Routes = [
   {
@@ -96,6 +97,10 @@ const routes: Routes = [
         path: 'report-list',
         component: ESeniorTeacherReportListComponent,
       },
+      {
+        path: 'print-list',
+        component: ESeniorTeacherPrintListComponent,
+      },
     ],
   },
 ];
@@ -138,6 +143,7 @@ const routes: Routes = [
     ESeniorTeacherReportAccountListComponent,
     ESeniorTeacherCreateReportAccountComponent,
     ESeniorTeacherReportListComponent,
+    ESeniorTeacherPrintListComponent,
   ],
   exports: [ESeniorTeacherListComponent, ESeniorTeacherDetailComponent],
 })

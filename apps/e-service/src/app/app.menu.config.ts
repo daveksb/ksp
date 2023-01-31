@@ -588,6 +588,10 @@ export const professionalMenu: MenuConfig[] = [
         path: '/senior-teacher/report-list',
         label: 'ลงทะเบียนรายงานตัว',
       },
+      {
+        path: '/senior-teacher/print-list',
+        label: 'พิมพ์ป้ายติดหน้าอก',
+      },
     ],
   },
   {
