@@ -81,6 +81,7 @@ export class FormUserInfoComponent
   checkValidators(mode: number) {
     // คนไทยไม่ต้อง validate field เหล่านี้
     if (mode === UserInfoFormType.thai) {
+      //console.log('aaa = ');
       this.form.controls.passportno.clearValidators();
       this.form.controls.kuruspano.clearValidators();
       this.form.controls.passportstartdate.clearValidators();
@@ -92,13 +93,15 @@ export class FormUserInfoComponent
 
     // ต่างชาติ ไม่ต้อง validate field เหล่านี้
     if (mode === UserInfoFormType.foreign) {
-      this.idCardNo.clearValidators();
       this.workPhone.clearValidators();
       this.contactPhone.clearValidators();
       this.form.controls.position.clearValidators();
       this.form.controls.sex.clearValidators();
       this.form.controls.email.clearValidators();
       this.form.controls.isforeign.clearValidators();
+      this.idCardNo.clearValidators();
+      this.idCardNo.updateValueAndValidity();
+      //console.log('ccc = ', this.idCardNo.valid);
     }
 
     if (this.isSelfService) {

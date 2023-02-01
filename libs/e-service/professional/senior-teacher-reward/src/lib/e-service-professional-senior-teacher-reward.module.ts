@@ -32,6 +32,13 @@ import { EServiceUiRewardRejectFormModule } from '@ksp/e-service/ui/reward-rejec
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ESeniorTeacherAccountListComponent } from './e-senior-teacher-account-list/e-senior-teacher-account-list.component';
 import { ESeniorTeacherCreateAccountComponent } from './e-senior-teacher-create-account/e-senior-teacher-create-account.component';
+import { ESeniorTeacherCheckListComponent } from './e-senior-teacher-check-list/e-senior-teacher-check-list.component';
+import { ESeniorTeacherCheckComponent } from './e-senior-teacher-check/e-senior-teacher-check.component';
+import { ESeniorTeacherReportAccountListComponent } from './e-senior-teacher-report-account-list/e-senior-teacher-report-account-list.component';
+import { ESeniorTeacherCreateReportAccountComponent } from './e-senior-teacher-create-report-account/e-senior-teacher-create-report-account.component';
+import { ESeniorTeacherReportListComponent } from './e-senior-teacher-report-list/e-senior-teacher-report-list.component';
+import { ESeniorTeacherPrintListComponent } from './e-senior-teacher-print-list/e-senior-teacher-print-list.component';
+import { ESeniorTeacherVisitListComponent } from './e-senior-teacher-visit-list/e-senior-teacher-visit-list.component';
 
 const routes: Routes = [
   {
@@ -66,6 +73,38 @@ const routes: Routes = [
       {
         path: 'create-account',
         component: ESeniorTeacherCreateAccountComponent,
+      },
+      {
+        path: 'check-list',
+        component: ESeniorTeacherCheckListComponent,
+      },
+      {
+        path: 'check/:id',
+        component: ESeniorTeacherDetailComponent,
+      },
+      {
+        path: 'check-confirm/:id',
+        component: ESeniorTeacherCheckComponent,
+      },
+      {
+        path: 'report-account-list',
+        component: ESeniorTeacherReportAccountListComponent,
+      },
+      {
+        path: 'create-report-account',
+        component: ESeniorTeacherCreateReportAccountComponent,
+      },
+      {
+        path: 'report-list',
+        component: ESeniorTeacherReportListComponent,
+      },
+      {
+        path: 'print-list',
+        component: ESeniorTeacherPrintListComponent,
+      },
+      {
+        path: 'visit-list',
+        component: ESeniorTeacherVisitListComponent,
       },
     ],
   },
@@ -104,6 +143,13 @@ const routes: Routes = [
     ESeniorTeacherRejectComponent,
     ESeniorTeacherAccountListComponent,
     ESeniorTeacherCreateAccountComponent,
+    ESeniorTeacherCheckListComponent,
+    ESeniorTeacherCheckComponent,
+    ESeniorTeacherReportAccountListComponent,
+    ESeniorTeacherCreateReportAccountComponent,
+    ESeniorTeacherReportListComponent,
+    ESeniorTeacherPrintListComponent,
+    ESeniorTeacherVisitListComponent,
   ],
   exports: [ESeniorTeacherListComponent, ESeniorTeacherDetailComponent],
 })

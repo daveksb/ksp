@@ -15,13 +15,11 @@
           autocomplete="off"
           class="form-control form-date"
           formControlName="startTeachingDate"
-          placeholder="วว/ดด/ปปปป"
-        />
+          placeholder="วว/ดด/ปปปป" />
         <mat-datepicker-toggle
           class="button-date"
           matSuffix
-          [for]="picker"
-        ></mat-datepicker-toggle>
+          [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </div>
     </div>
@@ -31,8 +29,7 @@
       <input
         class="form-control"
         type="text"
-        formControlName="experienceYear"
-      />
+        formControlName="experienceYear" />
     </div>
   </div>
 
@@ -69,8 +66,7 @@
           type="text"
           formControlName="teachingPlace"
           placeholder="ค้นหาสถานที่สอน"
-          (click)="openSearchDialog1()"
-        />
+          (click)="openSearchDialog1()" />
       </div>
     </div>
     <div class="row">
@@ -79,13 +75,11 @@
         <select
           class="form-select"
           formControlName="province"
-          (change)="provinceChanged.emit($event)"
-        >
+          (change)="provinceChanged.emit($event)">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option
             *ngFor="let province of provinces"
-            [value]="province?.province_id"
-          >
+            [value]="province?.province_id">
             {{ province?.province_name }}
           </option>
         </select>
@@ -106,8 +100,7 @@
         <select
           class="form-select"
           formControlName="district"
-          (change)="amphurChanged.emit($event)"
-        >
+          (change)="amphurChanged.emit($event)">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let a of amphurs" [value]="a?.amphurCode">
             {{ a?.amphurName }}
@@ -119,8 +112,7 @@
         <input
           class="form-control"
           type="text"
-          formControlName="teachingLevel"
-        />
+          formControlName="teachingLevel" />
       </div>
     </div>
     <div class="row">
@@ -133,13 +125,11 @@
             autocomplete="off"
             class="form-control form-date"
             formControlName="startDate"
-            placeholder="วว/ดด/ปปปป"
-          />
+            placeholder="วว/ดด/ปปปป" />
           <mat-datepicker-toggle
             class="button-date"
             matSuffix
-            [for]="picker1"
-          ></mat-datepicker-toggle>
+            [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
         </div>
       </div>
@@ -152,13 +142,11 @@
             autocomplete="off"
             class="form-control form-date"
             formControlName="endDate"
-            placeholder="วว/ดด/ปปปป"
-          />
+            placeholder="วว/ดด/ปปปป" />
           <mat-datepicker-toggle
             class="button-date"
             matSuffix
-            [for]="picker2"
-          ></mat-datepicker-toggle>
+            [for]="picker2"></mat-datepicker-toggle>
           <mat-datepicker #picker2></mat-datepicker>
         </div>
       </div>
@@ -170,8 +158,7 @@
       type="checkbox"
       class="me-2"
       (change)="useSameAddress($event)"
-      [disabled]="this.mode === 'view'"
-    />
+      [disabled]="this.mode === 'view'" />
     <label class="form-label">สอนที่เดิม</label>
   </div>
   <div class="border rounded px-3 py-2">
@@ -192,8 +179,7 @@
           type="text"
           formControlName="currentTeachingPlace"
           placeholder="ค้นหาสถานที่สอน"
-          (click)="openSearchDialog2()"
-        />
+          (click)="openSearchDialog2()" />
       </div>
     </div>
     <div class="row">
@@ -202,13 +188,11 @@
         <select
           class="form-select"
           formControlName="currentProvince"
-          (change)="province2Changed.emit($event)"
-        >
+          (change)="province2Changed.emit($event)">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option
             *ngFor="let province of provinces2"
-            [value]="province?.province_id"
-          >
+            [value]="province?.province_id">
             {{ province?.province_name }}
           </option>
         </select>
@@ -229,8 +213,7 @@
         <select
           class="form-select"
           formControlName="currentDistrict"
-          (change)="amphur2Changed.emit($event)"
-        >
+          (change)="amphur2Changed.emit($event)">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let a of amphurs2" [value]="a?.amphurCode">
             {{ a?.amphurName }}
@@ -242,8 +225,7 @@
         <input
           class="form-control"
           type="text"
-          formControlName="currentTeachingLevel"
-        />
+          formControlName="currentTeachingLevel" />
       </div>
     </div>
     <div class="row">
@@ -258,15 +240,11 @@
     </div>
     <div class="row">
       <div class="col-md-6 mb-2">
-        <label class="form-label required"
-          >สอนภาษาไทยต่อเนื่องกันเป็นเวลา (ปี)</label
-        >
+        <label class="form-label required">สอนภาษาไทยต่อเนื่องกันเป็นเวลา (ปี)</label>
         <input
           class="form-control"
           type="text"
-          formControlName="continuousTeachingYear"
-          [attr.disabled]="true"
-        />
+          formControlName="continuousTeachingYear" />
       </div>
       <!-- <div class="col-md-6 mb-2">
         <label class="form-label required">ชื่อผลงาน</label>
@@ -276,29 +254,25 @@
 
     <div class="row">
       <div class="col-md-12">
-        <label class="form-label"
-          >ชื่อผลงานที่ใช้ขอเลื่อนวิทยฐานะ (ปี)
+        <label class="form-label">ชื่อผลงานที่ใช้ขอเลื่อนวิทยฐานะ (ปี)
           <label class="text-danger fs-6">
             * สามารถระบุได้สูงสุด 3 ผลงาน
           </label>
         </label>
         <ng-container formArrayName="promoteWorks">
           <ng-container
-            *ngFor="let form of promoteWorks.controls; let i = index"
-          >
+            *ngFor="let form of promoteWorks.controls; let i = index">
             <ng-container [formGroupName]="i">
               <div class="d-flex">
                 <input
                   class="form-control mb-2"
                   type="text"
-                  formControlName="work"
-                />
+                  formControlName="work" />
                 <div class="d-flex justify-content-end mx-2" *ngIf="i > 0">
                   <i
                     class="bi bi-x-circle-fill text-danger"
                     (click)="deleteFormArray(promoteWorks, i)"
-                    role="button"
-                  ></i>
+                    role="button"></i>
                 </div>
               </div>
             </ng-container>
@@ -308,40 +282,33 @@
     </div>
     <div
       class="d-flex justify-content-end"
-      *ngIf="mode === 'edit' && promoteWorks.length < 3"
-    >
+      *ngIf="mode === 'edit' && promoteWorks.length < 3">
       <ksp-add-row-button
         class="text-primary"
-        (addRowClick)="addFormArray(promoteWorks)"
-        >เพิ่มชื่อผลงานที่ขอใช้เลื่อนวิทยฐานะ</ksp-add-row-button
-      >
+        (addRowClick)="addFormArray(promoteWorks)">เพิ่มชื่อผลงานที่ขอใช้เลื่อนวิทยฐานะ</ksp-add-row-button>
     </div>
 
     <div class="row">
       <div class="col-md-12">
-        <label class="form-label"
-          >ชื่อผลงานที่ใช้ขอตำแหน่งวิชาการ
+        <label class="form-label">ชื่อผลงานที่ใช้ขอตำแหน่งวิชาการ
           <label class="text-danger fs-6">
             * สามารถระบุได้สูงสุด 3 ผลงาน
           </label>
         </label>
         <ng-container formArrayName="askPositionWorks">
           <ng-container
-            *ngFor="let form of askPositionWorks.controls; let i = index"
-          >
+            *ngFor="let form of askPositionWorks.controls; let i = index">
             <ng-container [formGroupName]="i">
               <div class="d-flex">
                 <input
                   class="form-control mb-2"
                   type="text"
-                  formControlName="work"
-                />
+                  formControlName="work" />
                 <div class="d-flex justify-content-end mx-2" *ngIf="i > 0">
                   <i
                     class="bi bi-x-circle-fill text-danger"
                     (click)="deleteFormArray(askPositionWorks, i)"
-                    role="button"
-                  ></i>
+                    role="button"></i>
                 </div>
               </div>
             </ng-container>
@@ -351,40 +318,33 @@
     </div>
     <div
       class="d-flex justify-content-end"
-      *ngIf="mode === 'edit' && askPositionWorks.length < 3"
-    >
+      *ngIf="mode === 'edit' && askPositionWorks.length < 3">
       <ksp-add-row-button
         class="text-primary"
-        (addRowClick)="addFormArray(askPositionWorks)"
-        >เพิ่มชื่อผลงานที่ขอใช้ตำแหน่งวิชาการ</ksp-add-row-button
-      >
+        (addRowClick)="addFormArray(askPositionWorks)">เพิ่มชื่อผลงานที่ขอใช้ตำแหน่งวิชาการ</ksp-add-row-button>
     </div>
 
     <div class="row">
       <div class="col-md-12">
-        <label class="form-label"
-          >ชื่องานวิจัยที่เป็นส่วนหนึ่งของการสำเร็จการศึกษาระดับปริญญา
+        <label class="form-label">ชื่องานวิจัยที่เป็นส่วนหนึ่งของการสำเร็จการศึกษาระดับปริญญา
           <label class="text-danger fs-6">
             * สามารถระบุได้สูงสุด 3 ผลงาน
           </label>
         </label>
         <ng-container formArrayName="graduateWorks">
           <ng-container
-            *ngFor="let form of graduateWorks.controls; let i = index"
-          >
+            *ngFor="let form of graduateWorks.controls; let i = index">
             <ng-container [formGroupName]="i">
               <div class="d-flex">
                 <input
                   class="form-control mb-2"
                   type="text"
-                  formControlName="work"
-                />
+                  formControlName="work" />
                 <div class="d-flex justify-content-end mx-2" *ngIf="i > 0">
                   <i
                     class="bi bi-x-circle-fill text-danger"
                     (click)="deleteFormArray(graduateWorks, i)"
-                    role="button"
-                  ></i>
+                    role="button"></i>
                 </div>
               </div>
             </ng-container>
@@ -394,15 +354,11 @@
     </div>
     <div
       class="d-flex justify-content-end"
-      *ngIf="mode === 'edit' && graduateWorks.length < 3"
-    >
+      *ngIf="mode === 'edit' && graduateWorks.length < 3">
       <ksp-add-row-button
         class="text-primary"
-        (addRowClick)="addFormArray(graduateWorks)"
-        ><span style="white-space: normal"
-          >เพิ่มชื่องานวิจัยที่เป็นส่วนหนึ่งของการสำเร็จการศึกษาระดับปริญญา</span
-        ></ksp-add-row-button
-      >
+        (addRowClick)="addFormArray(graduateWorks)"><span
+          style="white-space: normal">เพิ่มชื่องานวิจัยที่เป็นส่วนหนึ่งของการสำเร็จการศึกษาระดับปริญญา</span></ksp-add-row-button>
     </div>
   </div>
 </form>

@@ -41,9 +41,15 @@ export function createUserInfoForm(fb: FormBuilder) {
     ],
 
     prefixen: [null],
-    firstnameen: [null, [Validators.pattern(nameEnPattern)]],
+    firstnameen: [
+      null,
+      [Validators.required, Validators.pattern(nameEnPattern)],
+    ],
     middlenameen: [null],
-    lastnameen: [null, [Validators.pattern(nameEnPattern)]],
+    lastnameen: [
+      null,
+      [Validators.required, Validators.pattern(nameEnPattern)],
+    ],
 
     sex: [null, Validators.required],
     birthdate: [null, Validators.required],
@@ -58,7 +64,7 @@ export function createUserInfoForm(fb: FormBuilder) {
     country: [null],
     visaclass: [null],
     visatype: [null],
-    visaexpireddate: [null],
+    visaexpiredate: [null], //31-1-2023
     educationOccupy: [null],
     permisson: [null],
     other: [null],

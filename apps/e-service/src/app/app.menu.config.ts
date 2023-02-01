@@ -577,20 +577,24 @@ export const professionalMenu: MenuConfig[] = [
         label: 'สร้างบัญชีรายชื่อนำเสนอส่วนกลาง (มอ.5)',
       },
       {
-        path: '/xxx',
-        label: 'พิจารณารางวัลครูอาวุโส',
+        path: '/senior-teacher/check-list',
+        label: 'เจ้าหน้าที่ส่วนกลางตรวจสอบบันทึกผล',
       },
       {
-        path: '/xxx',
-        label: 'ลงทะเบียนรายงานตัวรับรางวัลครูอาวุโส',
+        path: '/senior-teacher/report-account-list',
+        label: 'เจ้าหน้าที่ส่วนกลางจัดทำบัญชีผู้เข้ารายงานตัว',
       },
       {
-        path: '/xxx',
-        label: 'ลงทะเบียนรายงานตัววันเข้าเฝ้า',
+        path: '/senior-teacher/report-list',
+        label: 'ลงทะเบียนรายงานตัว',
       },
       {
-        path: '/xxx',
-        label: 'เอกสารและหนังสือผู้ได้รับรางวัลครูอาวุโส',
+        path: '/senior-teacher/print-list',
+        label: 'พิมพ์ป้ายติดหน้าอก',
+      },
+      {
+        path: '/senior-teacher/visit-list',
+        label: 'ลงทะเบียนวันเข้าเฝ้าฯ',
       },
     ],
   },
