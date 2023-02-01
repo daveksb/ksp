@@ -35,6 +35,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { EPraiseTeacherAccountListComponent } from './e-praise-teacher-account-list/e-praise-teacher-account-list.component';
 import { EPraiseTeacherCreateAccountComponent } from './e-praise-teacher-create-account/e-praise-teacher-create-account.component';
 import { EPraiseTeacherCheckListComponent } from './e-praise-teacher-check-list/e-praise-teacher-check-list.component';
+import { EPraiseTeacherCheckComponent } from './e-praise-teacher-check/e-praise-teacher-check.component';
 
 const routes: Routes = [
   {
@@ -79,6 +80,10 @@ const routes: Routes = [
         path: 'check-list',
         component: EPraiseTeacherCheckListComponent,
       },
+      {
+        path: 'check-confirm/:id',
+        component: EPraiseTeacherCheckComponent,
+      },
     ],
   },
 ];
@@ -119,6 +124,7 @@ const routes: Routes = [
     EPraiseTeacherAccountListComponent,
     EPraiseTeacherCreateAccountComponent,
     EPraiseTeacherCheckListComponent,
+    EPraiseTeacherCheckComponent,
   ],
   exports: [EPraiseTeacherListComponent, EPraiseTeacherDetailComponent],
 })
