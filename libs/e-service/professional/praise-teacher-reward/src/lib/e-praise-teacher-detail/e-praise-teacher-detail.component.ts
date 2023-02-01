@@ -33,6 +33,7 @@ export class EPraiseTeacherDetailComponent
   tumbols2$!: Observable<any>;
   bureaus$!: Observable<any>;
   prefixList$!: Observable<any>;
+  formTabCount = FORM_TAB_COUNT;
 
   form = this.fb.group({
     userInfo: [],
@@ -71,6 +72,7 @@ export class EPraiseTeacherDetailComponent
     this.getListData();
     this.checkRequestId();
     this.addCheckResultArray();
+    this.getMode();
   }
 
   addCheckResultArray() {
@@ -174,10 +176,22 @@ export class EPraiseTeacherDetailComponent
 
   next() {
     this.persistData(this.form.controls.checkResult.value);
-    this.router.navigate(['/praise-teacher', 'confirm', this.requestId]);
+    if (this.mode === 'check') {
+      this.router.navigate([
+        '/praise-teacher',
+        'check-confirm',
+        this.requestId,
+      ]);
+    } else {
+      this.router.navigate(['/praise-teacher', 'confirm', this.requestId]);
+    }
   }
 
   cancel() {
-    this.router.navigate(['/praise-teacher']);
+    if (this.mode === 'check') {
+      this.router.navigate(['/praise-teacher', 'check-list']);
+    } else {
+      this.router.navigate(['/praise-teacher']);
+    }
   }
 }
