@@ -4,7 +4,7 @@ import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PDFDocument } from 'pdf-lib';
 
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
-import { KspCheckResult, KspFile } from '@ksp/shared/interface';
+import { FormMode, KspCheckResult, KspFile } from '@ksp/shared/interface';
 import { FileService } from '@ksp/shared/form/file-upload';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import { FormArray, FormBuilder, ReactiveFormsModule } from '@angular/forms';
@@ -48,6 +48,7 @@ export class PdfViewerNoLicenseComponent implements OnInit {
       files: KspFile[];
       checkresult: KspCheckResult[];
       systemType: string;
+      mode: FormMode;
     },
     private fb: FormBuilder,
     private fileService: FileService,

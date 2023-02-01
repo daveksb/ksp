@@ -24,10 +24,8 @@ export class RetiredSearchComponent
     permissionright: [],
     searchType: [],
     name: [],
-    phone: [],
     offset: [0],
-    row: [10],
-    requestno: [],
+    row: [10]
   });
   bureaus$!: Observable<any>;
   uniType$!: Observable<any>;

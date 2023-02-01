@@ -10,7 +10,7 @@
           <!-- <th class="text-center">จำนวนหน้า</th> -->
           <th *ngIf="mode === 'view'" class="text-center">ตรวจสอบ</th>
           <th *ngIf="mode === 'edit'" class="text-center">อัพโหลด</th>
-          <th></th>
+          <th *ngIf="systemType === 'e-service-uni'">ผลการตรวจสอบ</th>
         </tr>
       </thead>
       <tbody class="text-secondary">
@@ -61,7 +61,16 @@
               >
               </ksp-file-upload>
             </td>
-            <td></td>
+            <td *ngIf="systemType === 'e-service-uni'">
+              <div class="mt-4">
+                <ng-container *ngFor="let result of group.checkresult; index as j">
+                  <div class="d-flex align-items-center flex-row mb-4" *ngIf="!result?.result"></div>
+                  <div class="d-flex align-items-center flex-row">
+                    {{ mapDisplay(result?.result) }}
+                  </div>
+                </ng-container>
+              </div>
+            </td>
             <!-- (uploadComplete)="updateComplete($event, group)" -->
             <!-- <td>
               <div

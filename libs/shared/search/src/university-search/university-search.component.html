@@ -20,10 +20,11 @@
         [bureaus]="data.bureauList"
         [universityType]="universityType$! | async"
         [searchType]="data.searchType"
+        [subSearchType]="'uni_search'"
       ></ksp-basic-institute-search>
 
       <div class="row mb-2">
-        <div class="col-md">
+        <div class="col-md-6">
           <label class="form-label required">จังหวัด </label>
           <select
             formControlName="provinceid"
@@ -36,15 +37,6 @@
               [value]="province?.province_id"
             >
               {{ province?.province_name }}
-            </option>
-          </select>
-        </div>
-        <div class="col-md">
-          <label class="form-label required">อำเภอ </label>
-          <select formControlName="amphurid" class="form-select">
-            <option value="null" selected hidden disabled>กรุณาเลือก</option>
-            <option *ngFor="let a of amphurs$ | async" [value]="a?.amphurCode">
-              {{ a?.amphurName }}
             </option>
           </select>
         </div>

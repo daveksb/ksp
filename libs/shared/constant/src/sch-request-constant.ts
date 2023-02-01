@@ -385,7 +385,7 @@ export const SchoolSelfDevelopActivityTies = [
 export const uniPermissionList = [
   {
     value: 1,
-    label: 'เจ้าหน้าที่ประสานงาน (รับรองปริญญาและประกาศนียบัตรทางการศึกษา',
+    label: 'เจ้าหน้าที่ประสานงาน (รับรองปริญญาและประกาศนียบัตรทางการศึกษา)',
   },
   {
     value: 2,

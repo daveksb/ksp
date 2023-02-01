@@ -14,6 +14,7 @@
       (clear)="handleClear($event)"
       (search)="handleSearch($event)"
       [searchType]="'uni'"
+      [subsearchType]="'uni_searchretire'"
     ></ksp-retired-search>
 
     <ng-container *ngIf="data.length">
@@ -25,7 +26,6 @@
             <th>เลือก</th>
             <th>สิทธิ์สำหรับการเข้าใช้งาน</th>
             <th>ชื่อ-นามสกุล</th>
-            <th>เบอร์โทรศัพท์</th>
           </tr>
         </thead>
         <tbody class="body__table">
@@ -36,7 +36,6 @@
             </td>
             <td>{{ item.permissionname }}</td>
             <td>{{ item.firstnameth + ' ' + item.lastnameth }}</td>
-            <td>{{ item.phone }}</td>
           </tr>
         </tbody>
       </table>

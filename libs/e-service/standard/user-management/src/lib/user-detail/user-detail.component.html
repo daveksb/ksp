@@ -19,8 +19,8 @@
   <div class="bg-white p-3">
     <ng-container *ngIf="pageType === pageTypeEnum.NewUser">
       <ksp-request-header-info
-        [requestDate]="requestData.requestdate"
-        [requestNumber]="requestData.requestno"
+        [requestDate]="requestData?.requestdate"
+        [requestNumber]="requestData?.requestno"
       ></ksp-request-header-info>
       <hr />
     </ng-container>
@@ -30,7 +30,7 @@
         <div class="col mb-2">
           <label class="form-label">สังกัด</label>
           <input
-            [value]="requestData.bureauname"
+            [value]="requestData?.bureauname"
             class="form-control"
             type="text"
             disabled
@@ -40,7 +40,7 @@
         <div class="col mb-2">
           <label class="form-label">หน่วยงาน / สถานศึกษา</label>
           <input
-            [value]="requestData.schoolname"
+            [value]="requestData?.schoolname"
             class="form-control"
             type="text"
             disabled
@@ -53,7 +53,7 @@
           <label class="form-label">ที่อยู่</label>
           <input
             class="form-control"
-            [value]="requestData.schooladdress"
+            [value]="requestData?.schooladdress"
             type="text"
             disabled
           />
@@ -155,7 +155,9 @@
       [groups]="uploadFileList"
       title="หลักฐานเพื่อพิจารณา"
       [mode]="'view'"
-      [systemType]="'uni'"
+      [viewFileMode]="mode"
+      [systemType]="'e-service-uni'"
+      *ngIf="pageType === 0"
     ></ksp-form-multi-attachment>
   </div>
   <br />

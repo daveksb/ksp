@@ -42,7 +42,7 @@ export class UniversitySearchComponent implements OnInit {
   form = this.fb.group({
     institution: null,
     provinceid: [null],
-    amphurid: [null],
+    amphurcode: [null],
     offset: '0',
     row: '25',
   });
@@ -69,11 +69,10 @@ export class UniversitySearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.getList();
-    // if (this.data.searchType == 'uni') {
-    //   this.form.controls.provinceid.setValidators([Validators.required]);
-    //   this.form.controls.amphurid.setValidators([Validators.required]);
-    //   this.form.updateValueAndValidity();
-    // }
+    if (this.data.searchType == 'uni') {
+      this.form.controls.provinceid.setValidators([Validators.required]);
+      this.form.updateValueAndValidity();
+    }
   }
 
   getList() {
@@ -98,7 +97,7 @@ export class UniversitySearchComponent implements OnInit {
 
   search() {
     const data = this.form.getRawValue() as any;
-    const { provinceid, amphurid, offset, row } = data;
+    const { provinceid, amphurcode, offset, row } = data;
     let payload = {};
     this.currentPage = 1;
     this.searchStatus = 'searching';
@@ -109,7 +108,7 @@ export class UniversitySearchComponent implements OnInit {
         schoolid: data?.institution?.schoolid,
         schoolname: data?.institution?.schoolname,
         provinceid,
-        amphurid,
+        amphurcode,
         offset,
         row,
       };
@@ -136,7 +135,7 @@ export class UniversitySearchComponent implements OnInit {
           unicode: data?.institution?.schoolid,
           uniname: data?.institution?.schoolname,
           provinceid: provinceid,
-          amphur_id: amphurid,
+          amphurcode: amphurcode,
           offset,
           row,
         };
@@ -191,7 +190,7 @@ export class UniversitySearchComponent implements OnInit {
   provinceChange(evt: any) {
     const province = evt.target?.value;
     this.amphurs$ = this.addressService.getAmphurs(province);
-    this.form.controls.amphurid.reset();
+    this.form.controls.amphurcode.reset();
   }
 
   goPrevious() {

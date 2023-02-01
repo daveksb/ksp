@@ -269,4 +269,24 @@ export class EUniService {
       }
     );
   }
+
+  searchUniUser(data: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/uniusersearch_es.php`,
+      {
+        ...data,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
+
+  updateActiveUser(data: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/uniuseractiveupdate`,
+      {
+        ...data,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
 }

@@ -6,7 +6,9 @@
       <ng-container *ngIf="showInstitution">
         <ksp-basic-institute-search
           [bureaus]="bureaus"
+          [universityType]="universityType"
           formControlName="institution"
+          [searchType]="systemtype"
         ></ksp-basic-institute-search
       ></ng-container>
 

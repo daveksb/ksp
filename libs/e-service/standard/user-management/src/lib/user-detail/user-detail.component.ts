@@ -16,6 +16,7 @@ import {
 } from '@ksp/shared/dialog';
 import {
   ERequestService,
+  EUniService,
   GeneralInfoService,
   LoaderService,
   UniInfoService,
@@ -39,10 +40,10 @@ export class UserDetailComponent implements OnInit {
   approveChoices = approveChoices;
   headers = headers;
   requestId!: number | null;
-  requestData = new KspRequest();
+  requestData: any;
   prefixList$!: Observable<Prefix[]>;
   occupyList$!: Observable<Prefix[]>;
-  pageType: SchoolUserPageType = SchoolUserPageType.CurrentUser;
+  pageType: any;
   pageTypeEnum = SchoolUserPageType;
   setPassword = '';
   mode: FormMode = 'view';
@@ -94,6 +95,7 @@ export class UserDetailComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private eRequestService: ERequestService,
+    private eUniService: EUniService,
     private generalInfoService: GeneralInfoService,
     private uniInfoService: UniInfoService,
     private loaderService: LoaderService
@@ -111,41 +113,88 @@ export class UserDetailComponent implements OnInit {
   }
 
   checkRequestId() {
+    this.route.queryParams.subscribe((res) => {
+      this.pageType = Number(res['type']);
+    });
     this.route.paramMap.subscribe((params) => {
       this.requestId = Number(params.get('id'));
-      if (this.requestId) {
+      if (this.pageType == 0) {
         this.loadRequestFromId(this.requestId);
+      } else {
+        this.loadUniUserFromId(this.requestId);
       }
     });
   }
 
+  loadUniUserFromId(id: number) {
+    this.eUniService.getUserById({id: id}).subscribe((res) => {
+      this.requestData = res as any;
+      this.mode = 'edit';
+      this.requestData.userid = this.requestData?.userid || null;
+      this.requestData.uniid = this.requestData?.uniid || null;
+      this.requestData.bureauname = this.requestData?.unitypename || '';
+      this.requestData.schoolname = this.requestData?.uniname || '';
+      this.requestData.schooladdress = `${this.requestData?.address ? this.requestData?.address + ' ' : ''}` +
+                                      `หมู่ ${this.requestData.moo} ` +
+                                      `${this.requestData.road ? 'ถนน' + this.requestData.road + ' ' : ''}` +
+                                      `ตำบล${this.requestData.tumbon} อำเภอ${this.requestData.amphur} ` +
+                                      `จังหวัด${this.requestData.province} ${this.requestData.zipcode}`
+      this.form.controls.userInfo.patchValue(<any>res);
+      const coordinator = parseJson(res.coordinatorinfo);
+      this.form.controls.coordinatorInfo.patchValue(coordinator);
+      this.verifyForm.controls.result.patchValue({
+        result: this.requestData?.isuseractive === '1' ? '1' : '2',
+        reason: '',
+        detail: '',
+      });
+    })
+  }
+
   loadRequestFromId(id: number) {
-    this.eRequestService.getKspRequestById(id).subscribe((res) => {
-      this.requestData = res;
+    console.log(id)
+    this.eRequestService.getKspRequestByIdUni(id).subscribe((res) => {
+      this.requestData = res as any;
       const fileInfo = parseJson(res.fileinfo);
+      const approvedetail = res.detail ? parseJson(res.detail) : null;
       if (
         fileInfo &&
         fileInfo.fileUpload &&
         Array.isArray(fileInfo.fileUpload)
       ) {
-        this.uploadFileList.forEach(
-          (group, index) => (group.files = fileInfo.fileUpload[index])
-        );
+        if (res.status != '1') {
+          if (approvedetail && approvedetail.file) {
+            this.uploadFileList.forEach(
+              (group, index) => (group.files = approvedetail.file[index].files,
+                group.checkresult = approvedetail.file[index].checkresult)
+            );
+          } else {
+            this.uploadFileList.forEach(
+              (group, index) => (group.files = fileInfo.fileUpload[index])
+            ); 
+          }
+        } else {
+          this.uploadFileList.forEach(
+            (group, index) => (group.files = fileInfo.fileUpload[index])
+          );
+        }
       }
       const education = parseJson(res.educationoccupy);
       this.requestData.userid = education?.userid || null;
       this.requestData.uniid = education?.uniid || null;
       this.requestData.bureauname = education?.affiliation || '';
       this.requestData.schoolname = education?.uniname || '';
+      this.requestData.schooladdress = `${this.requestData?.address} ` +
+                                      `หมู่ ${this.requestData.moo} ` +
+                                      `${this.requestData.road ? 'ถนน' + this.requestData.road + ' ' : ''}` +
+                                      `ตำบล${this.requestData.tumbon} อำเภอ${this.requestData.amphur} ` +
+                                      `จังหวัด${this.requestData.province} ${this.requestData.zipcode}`
       // this.requestData.schooladdress = education;
       this.permissionRight = education?.permission || null;
       this.requestType = this.requestData.requesttype
         ? parseInt(this.requestData.requesttype)
         : 0;
-      console.log(this.requestType);
 
       res.status === '1' ? (this.mode = 'edit') : (this.mode = 'view');
-      const approvedetail = parseJson(res.detail);
       this.verifyForm.controls.result.patchValue({
         result: res?.status === '1' ? '' : res?.status === '2' ? '1' : '0',
         reason: approvedetail?.reason || '',
@@ -176,7 +225,7 @@ export class UserDetailComponent implements OnInit {
       requestid: `${this.requestId}`,
       process: '1',
       status: '2',
-      detail: JSON.stringify({ reason: form.detail }),
+      detail: JSON.stringify({ reason: form.detail, file: this.uploadFileList }),
       systemtype: '3', // uni
       userid: null,
       paymentstatus: null,
@@ -225,7 +274,7 @@ export class UserDetailComponent implements OnInit {
     newUser.prefixen = this.requestData.prefixen;
     newUser.firstnameen = this.requestData.firstnameen;
     newUser.lastnameen = this.requestData.lastnameen;
-    // newUser.coordinatorinfo = this.requestData.coordinatorinfo;
+    newUser.coordinatorinfo = this.requestData.coordinatorinfo;
     newUser.unitype = this.requestData.unitype;
     newUser.requestno = this.requestData.requestno;
     newUser.permissionright = this.permissionRight;
@@ -235,7 +284,7 @@ export class UserDetailComponent implements OnInit {
       requestid: `${this.requestId}`,
       process: '1',
       status: '2',
-      detail: JSON.stringify({ reason: form.detail }),
+      detail: JSON.stringify({ reason: form.detail, file: this.uploadFileList }),
       systemtype: '3', // uni
       userid: getCookie('userId'),
       paymentstatus: null,
@@ -258,7 +307,7 @@ export class UserDetailComponent implements OnInit {
       requestid: `${this.requestId}`,
       process: '1',
       status: '3',
-      detail: JSON.stringify({ reason: form.detail }),
+      detail: JSON.stringify({ reason: form.detail, file: this.uploadFileList }),
       systemtype: '3', // uni
       userid: getCookie('userId'),
       paymentstatus: null,
@@ -287,7 +336,6 @@ export class UserDetailComponent implements OnInit {
   }
 
   confirm() {
-    console.log(this.verifyForm.controls.result.value);
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการบันทึกข้อมูล
@@ -298,15 +346,30 @@ export class UserDetailComponent implements OnInit {
     confirmDialog.componentInstance.confirmed.subscribe(() => {
       const form: any = this.verifyForm.controls.result.value;
       const result = +form.result;
-      if (result) {
-        if (this.requestData.requesttype === '1') {
-          this.approveUser();
-        } else if (this.requestData.requesttype === '2') {
-          this.retireUser();
+      if (this.pageType == 0) {
+        if (result) {
+          if (this.requestData.requesttype === '1') {
+            this.approveUser();
+          } else if (this.requestData.requesttype === '2') {
+            this.retireUser();
+          }
+        } else {
+          this.unApproveUser();
         }
       } else {
-        this.unApproveUser();
+        this.setActiveUser(form);
       }
+    });
+  }
+
+  setActiveUser(form: any) {
+    const payload = {
+      id: this.requestData.id,
+      isuseractive: (+form.result) - 1,
+      approvestatus: JSON.stringify({ detail: form })
+    }
+    this.eUniService.updateActiveUser(payload).subscribe(() => {
+      this.completeDialog();
     });
   }
 
@@ -321,6 +384,8 @@ export class UserDetailComponent implements OnInit {
       if (res) {
         if (this.pageType === SchoolUserPageType.NewUser) {
           this.router.navigate(['/uni', 'new-user']);
+        } else {
+          this.router.navigate(['/uni', 'current-user']);
         }
       }
     });

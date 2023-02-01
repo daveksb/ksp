@@ -45,7 +45,7 @@ export const EUniApproveProcess: UniApproveProcess[] = [
   {
     requestType: 3,
     processId: 3,
-    processName: 'ตรวจสอบเอกสาร ลำดับที่ 2',
+    processName: 'ตรวจสอบเอกสาร ลำดับที่ 1',
     status: [
       { id: 1, sname: 'ครบถ้วน และถูกต้อง', ename: 'ครบถ้วน และถูกต้อง' },
       { id: 2, sname: 'ขอแก้ไข / เพิ่มเติม', ename: 'ขอแก้ไข / เพิ่มเติม' },
