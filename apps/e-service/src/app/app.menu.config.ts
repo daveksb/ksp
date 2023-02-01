@@ -549,8 +549,16 @@ export const professionalMenu: MenuConfig[] = [
         label: 'รายการแบบคำขอรับรางวัลคุรุสดุดี',
       },
       {
-        path: '/xxx',
-        label: 'พิจารณารางวัลคุรุสดุดี',
+        path: '/praise-teacher/account-list',
+        label: 'จัดทำบัญชีรายชื่อ',
+      },
+      {
+        path: '/praise-teacher/check-list',
+        label: 'เจ้าหน้าที่ส่วนกลางตรวจสอบบันทึกผล',
+      },
+      {
+        path: '/praise-teacher/declare',
+        label: 'ประกาศรายชื่อ',
       },
     ],
   },

@@ -13,7 +13,13 @@ import { TopNavComponent, BottomNavComponent } from '@ksp/shared/menu';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SharedFormSelfRewardFormModule } from '@ksp/shared/form/self-reward-form';
 import { SelfServiceFormModule } from '@ksp/self-service/form';
-import { EServiceRewardSearchComponent } from '@ksp/shared/search';
+import {
+  EServiceRewardAccountSearchComponent,
+  EServiceRewardCreateDeclareSearchComponent,
+  EServiceRewardDeclareSearchComponent,
+  EServiceRewardRequestSearchComponent,
+  EServiceRewardSearchComponent,
+} from '@ksp/shared/search';
 import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import {
@@ -26,6 +32,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { EPraiseTeacherRejectComponent } from './e-praise-teacher-reject/e-praise-teacher-reject.component';
 import { EServiceUiRewardRejectFormModule } from '@ksp/e-service/ui/reward-reject-form';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { EPraiseTeacherAccountListComponent } from './e-praise-teacher-account-list/e-praise-teacher-account-list.component';
 
 const routes: Routes = [
   {
@@ -54,6 +61,10 @@ const routes: Routes = [
         path: 'reject/:id',
         component: EPraiseTeacherRejectComponent,
       },
+      {
+        path: 'account-list',
+        component: EPraiseTeacherAccountListComponent,
+      },
     ],
   },
 ];
@@ -80,13 +91,18 @@ const routes: Routes = [
     RequestNoPipe,
     EServiceUiRewardRejectFormModule,
     RewardValidateRequestComponent,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    EServiceRewardAccountSearchComponent,
+    EServiceRewardRequestSearchComponent,
+    EServiceRewardDeclareSearchComponent,
+    EServiceRewardCreateDeclareSearchComponent,
   ],
   declarations: [
     EPraiseTeacherListComponent,
     EPraiseTeacherDetailComponent,
     EPraiseTeacherConfirmComponent,
     EPraiseTeacherRejectComponent,
+    EPraiseTeacherAccountListComponent,
   ],
   exports: [EPraiseTeacherListComponent, EPraiseTeacherDetailComponent],
 })
