@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { RequestRewardMainService } from '@ksp/self-service/feature/reward';
 import { ERewardFormBaseComponent } from '@ksp/self-service/form';
 import { UserInfoFormType } from '@ksp/shared/constant';
 import { SelfRequest } from '@ksp/shared/interface';
@@ -13,7 +14,7 @@ import {
 import { parseJson } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
-const FORM_TAB_COUNT = 6;
+const FORM_TAB_COUNT = 5;
 
 @Component({
   selector: 'ksp-e-senior-teacher-detail',
@@ -53,6 +54,7 @@ export class ESeniorTeacherDetailComponent
 
   rewardFiles: any[] = [];
   moneyAssistanceFiles: any[] = [];
+  uniqueTimestamp!: string;
 
   get checkResultFormArray() {
     return this.form.controls.checkResult as FormArray;
@@ -65,13 +67,17 @@ export class ESeniorTeacherDetailComponent
     private educationDetailService: EducationDetailService,
     route: ActivatedRoute,
     requestService: ERequestService,
-    private router: Router
+    private router: Router,
+    private service: RequestRewardMainService
   ) {
     super(route, requestService);
   }
 
   ngOnInit(): void {
     this.verifyChoice = this.VERIFY_CHOICES;
+    this.moneyAssistanceFiles = structuredClone(
+      this.service.moneyAssistanceFiles
+    );
     this.getListData();
     this.checkRequestId();
     this.addCheckResultArray();
@@ -110,6 +116,7 @@ export class ESeniorTeacherDetailComponent
       rewardpunishmentinfo,
       rewardmoneysupportinfo,
       fileinfo,
+      uniqueno,
     } = data;
     const myInfo = <any>{
       prefixth,
@@ -142,10 +149,11 @@ export class ESeniorTeacherDetailComponent
     });
 
     if (fileinfo) {
-      const { rewardfiles, moneyassistancefiles } = parseJson(fileinfo);
+      const { rewardfiles } = parseJson(fileinfo);
       this.rewardFiles = rewardfiles;
-      this.moneyAssistanceFiles = moneyassistancefiles;
     }
+
+    this.uniqueTimestamp = uniqueno || '';
   }
 
   patchAddressInfo(value: any) {
