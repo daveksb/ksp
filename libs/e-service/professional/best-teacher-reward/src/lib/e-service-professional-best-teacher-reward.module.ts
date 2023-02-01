@@ -32,6 +32,7 @@ import { EServiceUiRewardRejectFormModule } from '@ksp/e-service/ui/reward-rejec
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { EBestTeacherAccountListComponent } from './e-best-teacher-account-list/e-best-teacher-account-list.component';
 import { EBestTeacherCreateAccountComponent } from './e-best-teacher-create-account/e-best-teacher-create-account.component';
+import { EBestTeacherCheckListComponent } from './e-best-teacher-check-list/e-best-teacher-check-list.component';
 
 const routes: Routes = [
   {
@@ -66,6 +67,10 @@ const routes: Routes = [
       {
         path: 'create-account',
         component: EBestTeacherCreateAccountComponent,
+      },
+      {
+        path: 'check-list',
+        component: EBestTeacherCheckListComponent,
       },
     ],
   },
@@ -104,6 +109,7 @@ const routes: Routes = [
     EBestTeacherRejectComponent,
     EBestTeacherAccountListComponent,
     EBestTeacherCreateAccountComponent,
+    EBestTeacherCheckListComponent,
   ],
   exports: [EBestTeacherListComponent, EBestTeacherDetailComponent],
 })
