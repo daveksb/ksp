@@ -20,11 +20,13 @@ import {
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'ksp-e-best-teacher-declare',
-  templateUrl: './e-best-teacher-declare.component.html',
-  styleUrls: ['./e-best-teacher-declare.component.scss'],
+  selector: 'ksp-e-best-teacher-create-declare',
+  templateUrl: './e-best-teacher-create-declare.component.html',
+  styleUrls: ['./e-best-teacher-create-declare.component.scss'],
 })
-export class EBestTeacherDeclareComponent implements OnInit {
+export class EBestTeacherCreateDeclareComponent
+  implements OnInit, AfterViewInit
+{
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfRequest>();
   checkProcess = SelfCheckProcess;
@@ -47,17 +49,17 @@ export class EBestTeacherDeclareComponent implements OnInit {
   }
 
   search(params: Partial<SchRequestSearchFilter>) {
+    console.log(params);
     let payload: EsSearchPayload = {
       systemtype: '1',
-      requesttype:
-        SelfServiceRequestType.ขอรับรางวัลครูผู้สอนดีเด่นตามกลุ่มสาระการเรียนรู้,
+      requesttype: SelfServiceRequestType.ขอรับรางวัลคุรุสภา,
       requestno: params.requestno,
-      careertype: null,
-      name: params.name,
-      idcardno: params.idcardno,
+      careertype: params.careertype,
+      name: null,
+      idcardno: null,
       passportno: null,
       process: null,
-      status: params.status,
+      status: null,
       schoolid: null,
       schoolname: null,
       bureauid: null,
@@ -84,17 +86,17 @@ export class EBestTeacherDeclareComponent implements OnInit {
   clear() {
     this.dataSource.data = [];
   }
-
-  create() {
-    this.router.navigate(['/best-teacher', 'create-declare']);
-  }
 }
 
 export const column = [
+  'select',
   'order',
-  'group',
-  'careertype',
+  'request',
+  'id',
+  'name',
+  'careerType',
+  'result',
   'declaredate',
+  'requestdate',
   'view',
-  'print',
 ];

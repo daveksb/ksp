@@ -15,6 +15,7 @@ import { SelfServiceFormModule } from '@ksp/self-service/form';
 import { SharedFormSelfRewardFormModule } from '@ksp/shared/form/self-reward-form';
 import {
   EServiceRewardAccountSearchComponent,
+  EServiceRewardCreateDeclareSearchComponent,
   EServiceRewardDeclareSearchComponent,
   EServiceRewardRequestSearchComponent,
   EServiceRewardSearchComponent,
@@ -36,6 +37,7 @@ import { EBestTeacherCreateAccountComponent } from './e-best-teacher-create-acco
 import { EBestTeacherCheckListComponent } from './e-best-teacher-check-list/e-best-teacher-check-list.component';
 import { EBestTeacherCheckComponent } from './e-best-teacher-check/e-best-teacher-check.component';
 import { EBestTeacherDeclareComponent } from './e-best-teacher-declare/e-best-teacher-declare.component';
+import { EBestTeacherCreateDeclareComponent } from './e-best-teacher-create-declare/e-best-teacher-create-declare.component';
 
 const routes: Routes = [
   {
@@ -87,6 +89,10 @@ const routes: Routes = [
         path: 'declare',
         component: EBestTeacherDeclareComponent,
       },
+      {
+        path: 'create-declare',
+        component: EBestTeacherCreateDeclareComponent,
+      },
     ],
   },
 ];
@@ -117,6 +123,7 @@ const routes: Routes = [
     EServiceRewardAccountSearchComponent,
     EServiceRewardRequestSearchComponent,
     EServiceRewardDeclareSearchComponent,
+    EServiceRewardCreateDeclareSearchComponent,
   ],
   declarations: [
     EBestTeacherListComponent,
@@ -128,6 +135,7 @@ const routes: Routes = [
     EBestTeacherCheckListComponent,
     EBestTeacherCheckComponent,
     EBestTeacherDeclareComponent,
+    EBestTeacherCreateDeclareComponent,
   ],
   exports: [EBestTeacherListComponent, EBestTeacherDetailComponent],
 })
