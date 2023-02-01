@@ -26,6 +26,7 @@ export abstract class ERewardFormBaseComponent {
   requestData = new KspRequest();
   requestId!: number;
   mode: 'confirm' | 'check' = 'confirm';
+  selectedTabIndex = 0;
 
   constructor(
     protected route: ActivatedRoute,
@@ -33,7 +34,17 @@ export abstract class ERewardFormBaseComponent {
   ) {}
 
   tabChanged(e: MatTabChangeEvent) {
+    console.log(e);
     this.selectedTab = e;
+    this.selectedTabIndex = e.index;
+  }
+
+  nextTab(formTabCount: number) {
+    if (this.selectedTabIndex < formTabCount - 1) {
+      this.selectedTabIndex++;
+    } else {
+      this.next();
+    }
   }
 
   // save data to indexed db
@@ -71,4 +82,5 @@ export abstract class ERewardFormBaseComponent {
   }
 
   abstract patchData(data: SelfRequest): void;
+  abstract next(): void;
 }
