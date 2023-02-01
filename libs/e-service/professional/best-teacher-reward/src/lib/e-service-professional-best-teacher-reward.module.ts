@@ -15,6 +15,7 @@ import { SelfServiceFormModule } from '@ksp/self-service/form';
 import { SharedFormSelfRewardFormModule } from '@ksp/shared/form/self-reward-form';
 import {
   EServiceRewardAccountSearchComponent,
+  EServiceRewardRequestSearchComponent,
   EServiceRewardSearchComponent,
 } from '@ksp/shared/search';
 import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
@@ -30,6 +31,7 @@ import { EBestTeacherRejectComponent } from './e-best-teacher-reject/e-best-teac
 import { EServiceUiRewardRejectFormModule } from '@ksp/e-service/ui/reward-reject-form';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { EBestTeacherAccountListComponent } from './e-best-teacher-account-list/e-best-teacher-account-list.component';
+import { EBestTeacherCreateAccountComponent } from './e-best-teacher-create-account/e-best-teacher-create-account.component';
 
 const routes: Routes = [
   {
@@ -61,6 +63,10 @@ const routes: Routes = [
         path: 'account-list',
         component: EBestTeacherAccountListComponent,
       },
+      {
+        path: 'create-account',
+        component: EBestTeacherCreateAccountComponent,
+      },
     ],
   },
 ];
@@ -89,6 +95,7 @@ const routes: Routes = [
     RewardValidateRequestComponent,
     MatProgressSpinnerModule,
     EServiceRewardAccountSearchComponent,
+    EServiceRewardRequestSearchComponent,
   ],
   declarations: [
     EBestTeacherListComponent,
@@ -96,6 +103,7 @@ const routes: Routes = [
     EBestTeacherConfirmComponent,
     EBestTeacherRejectComponent,
     EBestTeacherAccountListComponent,
+    EBestTeacherCreateAccountComponent,
   ],
   exports: [EBestTeacherListComponent, EBestTeacherDetailComponent],
 })
