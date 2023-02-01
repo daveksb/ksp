@@ -36,6 +36,7 @@ import { EPraiseTeacherAccountListComponent } from './e-praise-teacher-account-l
 import { EPraiseTeacherCreateAccountComponent } from './e-praise-teacher-create-account/e-praise-teacher-create-account.component';
 import { EPraiseTeacherCheckListComponent } from './e-praise-teacher-check-list/e-praise-teacher-check-list.component';
 import { EPraiseTeacherCheckComponent } from './e-praise-teacher-check/e-praise-teacher-check.component';
+import { EPraiseTeacherDeclareComponent } from './e-praise-teacher-declare/e-praise-teacher-declare.component';
 
 const routes: Routes = [
   {
@@ -84,6 +85,10 @@ const routes: Routes = [
         path: 'check-confirm/:id',
         component: EPraiseTeacherCheckComponent,
       },
+      {
+        path: 'declare',
+        component: EPraiseTeacherDeclareComponent,
+      },
     ],
   },
 ];
@@ -125,6 +130,7 @@ const routes: Routes = [
     EPraiseTeacherCreateAccountComponent,
     EPraiseTeacherCheckListComponent,
     EPraiseTeacherCheckComponent,
+    EPraiseTeacherDeclareComponent,
   ],
   exports: [EPraiseTeacherListComponent, EPraiseTeacherDetailComponent],
 })
