@@ -4,6 +4,7 @@ import { environment } from '@ksp/shared/environment';
 import { EMPTY, map, Observable, shareReplay } from 'rxjs';
 import { getCookie } from '@ksp/shared/utility';
 import {
+  EmailPayload,
   KspListResponse,
   SelfLicense,
   SelfMyInfo,
@@ -15,6 +16,13 @@ import {
 })
 export class MyInfoService {
   constructor(private http: HttpClient) {}
+
+  sendMail(payload: EmailPayload): Observable<any> {
+    return this.http.post(
+      `https://ksp-selfservice.ksp.or.th/mail/kspsendemail_self.php`,
+      payload
+    );
+  }
 
   getMyInfo(): Observable<SelfMyInfo> {
     const id = getCookie('userId');

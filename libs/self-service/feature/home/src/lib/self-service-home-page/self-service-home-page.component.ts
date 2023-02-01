@@ -9,6 +9,7 @@ import {
   SelfServiceRequestForType,
 } from '@ksp/shared/constant';
 import {
+  EmailPayload,
   KspRequest,
   KSPRequestSelfSearchFilter,
   SelfRequest,
@@ -69,6 +70,11 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
       if (res && res.usertype) {
         this.userType = res.usertype;
       }
+    });
+
+    const mail = new EmailPayload('flying.geez@gmail.com', 'test email 2');
+    this.myInfoService.sendMail(mail).subscribe((res) => {
+      console.log('send email = ', res);
     });
   }
 
