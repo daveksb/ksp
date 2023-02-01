@@ -13,7 +13,10 @@ import { TopNavComponent, BottomNavComponent } from '@ksp/shared/menu';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SelfServiceFormModule } from '@ksp/self-service/form';
 import { SharedFormSelfRewardFormModule } from '@ksp/shared/form/self-reward-form';
-import { EServiceRewardSearchComponent } from '@ksp/shared/search';
+import {
+  EServiceRewardAccountSearchComponent,
+  EServiceRewardSearchComponent,
+} from '@ksp/shared/search';
 import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import {
@@ -26,6 +29,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { EBestTeacherRejectComponent } from './e-best-teacher-reject/e-best-teacher-reject.component';
 import { EServiceUiRewardRejectFormModule } from '@ksp/e-service/ui/reward-reject-form';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { EBestTeacherAccountListComponent } from './e-best-teacher-account-list/e-best-teacher-account-list.component';
 
 const routes: Routes = [
   {
@@ -53,6 +57,10 @@ const routes: Routes = [
         path: 'reject/:id',
         component: EBestTeacherRejectComponent,
       },
+      {
+        path: 'account-list',
+        component: EBestTeacherAccountListComponent,
+      },
     ],
   },
 ];
@@ -79,13 +87,15 @@ const routes: Routes = [
     RequestNoPipe,
     EServiceUiRewardRejectFormModule,
     RewardValidateRequestComponent,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    EServiceRewardAccountSearchComponent,
   ],
   declarations: [
     EBestTeacherListComponent,
     EBestTeacherDetailComponent,
     EBestTeacherConfirmComponent,
     EBestTeacherRejectComponent,
+    EBestTeacherAccountListComponent,
   ],
   exports: [EBestTeacherListComponent, EBestTeacherDetailComponent],
 })

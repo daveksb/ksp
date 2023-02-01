@@ -525,8 +525,16 @@ export const professionalMenu: MenuConfig[] = [
         label: 'รายการแบบคำขอรับรางวัลครูผู้สอนดีเด่น',
       },
       {
-        path: '/xxx',
-        label: 'พิจารณารางวัลครูผู้สอนดีเด่น',
+        path: '/best-teacher/account-list',
+        label: 'จัดทำบัญชีรายชื่อ',
+      },
+      {
+        path: '/best-teacher/check-list',
+        label: 'เจ้าหน้าที่ส่วนกลางตรวจสอบบันทึกผล',
+      },
+      {
+        path: '/best-teacher/declare',
+        label: 'ประกาศรายชื่อ',
       },
     ],
   },
