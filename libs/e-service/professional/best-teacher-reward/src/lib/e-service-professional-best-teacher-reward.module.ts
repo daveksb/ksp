@@ -33,6 +33,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { EBestTeacherAccountListComponent } from './e-best-teacher-account-list/e-best-teacher-account-list.component';
 import { EBestTeacherCreateAccountComponent } from './e-best-teacher-create-account/e-best-teacher-create-account.component';
 import { EBestTeacherCheckListComponent } from './e-best-teacher-check-list/e-best-teacher-check-list.component';
+import { EBestTeacherCheckComponent } from './e-best-teacher-check/e-best-teacher-check.component';
 
 const routes: Routes = [
   {
@@ -72,6 +73,14 @@ const routes: Routes = [
         path: 'check-list',
         component: EBestTeacherCheckListComponent,
       },
+      {
+        path: 'check/:id',
+        component: EBestTeacherDetailComponent,
+      },
+      {
+        path: 'check-confirm/:id',
+        component: EBestTeacherCheckComponent,
+      },
     ],
   },
 ];
@@ -110,6 +119,7 @@ const routes: Routes = [
     EBestTeacherAccountListComponent,
     EBestTeacherCreateAccountComponent,
     EBestTeacherCheckListComponent,
+    EBestTeacherCheckComponent,
   ],
   exports: [EBestTeacherListComponent, EBestTeacherDetailComponent],
 })

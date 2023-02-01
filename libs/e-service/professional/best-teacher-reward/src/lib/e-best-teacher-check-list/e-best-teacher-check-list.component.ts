@@ -49,7 +49,8 @@ export class EBestTeacherCheckListComponent implements OnInit, AfterViewInit {
   search(params: Partial<SchRequestSearchFilter>) {
     let payload: EsSearchPayload = {
       systemtype: '1',
-      requesttype: SelfServiceRequestType.ขอรับรางวัลคุรุสภา,
+      requesttype:
+        SelfServiceRequestType.ขอรับรางวัลครูผู้สอนดีเด่นตามกลุ่มสาระการเรียนรู้,
       requestno: params.requestno,
       careertype: null,
       name: params.name,
@@ -85,7 +86,7 @@ export class EBestTeacherCheckListComponent implements OnInit, AfterViewInit {
   }
 
   view(id: number) {
-    this.router.navigate(['/teacher-council', 'check', id]);
+    this.router.navigate(['/best-teacher', 'check', id]);
   }
 }
 
