@@ -81,6 +81,7 @@
         <e-service-license-check
           [choices]="verifyChoice"
           [formControlName]="index"
+          [mode]="data.mode"
         ></e-service-license-check>
       </div>
     </ng-container>
@@ -88,12 +89,21 @@
 </ng-container>
 <div class="d-flex justify-content-center mt-3" *ngIf="data.systemType !== 'uni'">
   <button
-    *ngIf="selected"
+    *ngIf="selected && data.mode !== 'view'"
     [mat-dialog-close]="form.value"
     cdkFocusInitial
     type="button"
     class="btn btn-primary"
   >
     บันทึก
+  </button>
+  <button
+    *ngIf="selected && data.mode === 'view'"
+    [mat-dialog-close]="form.value"
+    cdkFocusInitial
+    type="button"
+    class="btn btn-primary"
+  >
+    ปิด
   </button>
 </div>

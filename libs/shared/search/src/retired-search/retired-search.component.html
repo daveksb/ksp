@@ -21,25 +21,15 @@
       <ksp-basic-institute-search
         formControlName="searchType"
         [searchType]="searchType"
+        [subSearchType]="subsearchType"
         [bureaus]="bureaus$ | async"
         [universityType]="uniType$ | async"
       ></ksp-basic-institute-search>
 
       <div class="row mb-2">
-        <div class="col-sm-6" *ngIf="subsearchType === 'all'">
-          <label class="form-label">เลขที่แบบคำขอ</label>
-          <input class="form-control" type="text" formControlName="requestno" />
-        </div>
         <div class="col-sm-6">
           <label class="form-label">ชื่อ-นามสกุล</label>
           <input class="form-control" type="text" formControlName="name" />
-        </div>
-      </div>
-
-      <div class="row" *ngIf="subsearchType === 'all'">
-        <div class="col-sm-6">
-          <label class="form-label">เบอร์โทรศัพท์</label>
-          <input class="form-control" type="text" formControlName="phone" />
         </div>
       </div>
     </div>
@@ -48,7 +38,7 @@
       <button (click)="handleClear()" class="btn text-primary border-primary">
         ล้างข้อมูล
       </button>
-      <button (click)="search.emit(form.value)" class="ms-2 btn btn-primary">
+      <button (click)="search.emit(form.value)" [disabled]="form.invalid" class="ms-2 btn btn-primary">
         ค้นหา
       </button>
     </div>

@@ -255,24 +255,14 @@ export class CheckComponent implements OnInit, AfterContentChecked {
   }
   onSubmitKSP() {
     const verify = _.get(this.form, 'value.step5.verify', '');
-    const forward = _.get(this.form, 'value.step5.forward', '');
     let process;
     let status;
-    if (verify == 1 && forward == 1) {
-      process = _.toNumber(this.daftRequest?.requestprocess) + 1;
+    if (verify == 1) {
+      process = _.toNumber(this.daftRequest?.requestprocess) + 2;
       status = 1;
-    } else if ((verify == 2 && !forward) || (verify == 2 && forward == 2)) {
-      process = _.toNumber(this.daftRequest?.requestprocess) + 1;
+    } else if (verify == 2) {
+      process = _.toNumber(this.daftRequest?.requestprocess) + 2;
       status = 2;
-    } else if (verify == 1 && forward == 3) {
-      process =
-        this.daftRequest?.requestprocess == '1'
-          ? _.toNumber(this.daftRequest?.requestprocess) + 2
-          : _.toNumber(this.daftRequest?.requestprocess) + 1;
-      status = 1;
-    } else if (forward == 4) {
-      process = _.toNumber(this.daftRequest?.requestprocess) + 1;
-      status = 4;
     }
 
     try {

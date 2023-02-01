@@ -458,7 +458,7 @@ export const standardMenu: MenuConfig[] = [
     subMenuName: 'user-management',
     subMenu: [
       {
-        path: '/xxx',
+        path: '/uni/current-user',
         label: 'ผู้ใช้งานระบบบริการสถาบันผลิตครู (Uni Service)',
       },
     ],

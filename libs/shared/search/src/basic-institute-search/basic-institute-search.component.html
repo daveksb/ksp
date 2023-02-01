@@ -1,7 +1,8 @@
 <form [formGroup]="form">
   <div class="row mb-2">
     <div class="col-md-8">
-      <label class="form-label">
+      <label class="form-label" [ngClass]="{ 'required' : subSearchType === 'uni_searchstatus' || 
+                                                          subSearchType === 'uni_searchretire' }">
         {{ searchType === 'uni' ? 'กลุ่มสถาบัน' : 'สังกัด' }}</label
       >
       <select
@@ -38,7 +39,8 @@
       <input class="form-control" type="text" formControlName="schoolid" />
     </div>
     <div class="col-md-8">
-      <label class="form-label">
+      <label class="form-label" [ngClass]="{ 'required' : subSearchType === 'uni_searchstatus' || 
+                                                          subSearchType === 'uni_searchretire' }">
         {{
           searchType === 'uni' ? 'ชื่อมหาวิทยาลัย' : 'ชื่อโรงเรียน/สถานศึกษา'
         }}

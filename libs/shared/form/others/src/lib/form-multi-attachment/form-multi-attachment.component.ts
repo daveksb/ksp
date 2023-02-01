@@ -18,6 +18,7 @@ export class FormMultiAttachmentComponent {
   @Input() pageType!: string; // ใช้ อ้างอิง tab ในหน้าแบบคำขอเพื่อระบุรายการไฟล์ ที่เกี่ยวข้อง enum RequestPageType
   @Input() groups: FileGroup[] = [];
   @Input() mode: FormMode = 'edit';
+  @Input() viewFileMode: FormMode = 'edit';
   @Input() title = 'กรุณาแนบหลักฐานประกอบ';
   @Input() uniqueTimestamp = '';
   @Input() requestType: number | null = null;
@@ -61,12 +62,20 @@ export class FormMultiAttachmentComponent {
           files: group.files,
           checkresult: group?.checkresult ?? [],
           systemType: this.systemType,
+          mode: this.viewFileMode
         },
       });
       dialogRef
         .afterClosed()
         .subscribe((result) => (group.checkresult = result.checkResult));
     }
+  }
+
+  mapDisplay(result: any) {
+    if (result) {
+      return result == 'complete' ? 'รับเอกสารแล้ว' : 'ขอเอกสารเพิ่มเติม'
+    }
+    return '';
   }
 
   deleteFile(file: KspFile) {

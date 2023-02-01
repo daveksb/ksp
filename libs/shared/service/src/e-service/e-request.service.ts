@@ -51,6 +51,15 @@ export class ERequestService {
     );
   }
 
+  getKspRequestByIdUni(id: number): Observable<KspRequest> {
+    return this.http.post<KspRequest>(
+      `${environment.apiUrl}/e-service/ksprequestselectbyid_university`,
+      {
+        id,
+      }
+    );
+  }
+
   getLicenseNoTh(): Observable<any> {
     return this.http.get(
       `${environment.apiUrl}/e-service/genrunningtemplicensenumberth`,

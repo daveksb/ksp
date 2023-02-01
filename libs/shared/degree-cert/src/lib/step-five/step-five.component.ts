@@ -17,8 +17,7 @@ export class DegreeCertStepFiveComponent extends KspFormBaseComponent {
   };
   override form = this.fb.group({
     verify: [],
-    returnDate: [],
-    forward: [],
+    returnDate: []
   });
   constructor(private fb: FormBuilder) {
     super();
@@ -30,7 +29,7 @@ export class DegreeCertStepFiveComponent extends KspFormBaseComponent {
       })
     );
   }
-  isDisable(key: 'verify' | 'forward', option: any):boolean {
+  isDisable(key: 'verify', option: any):boolean {
     return _.includes(_.get(this.disableFields, `${key}`), option);
   }
 }

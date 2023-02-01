@@ -1,5 +1,5 @@
 <form [formGroup]="form">
-  <div class="mt-4 px-3 py-2 border">
+  <div class="mt-4 px-3 py-2 border full-height2 ">
     <div class="d-flex align-items-center mb-3">
       <div class="box-header text-primary">ยืนยันผลการตรวจสอบ</div>
       <div class="text-danger">* กรุณาเลือกอย่างใดอย่างหนึ่งเท่านั้น</div>
@@ -49,56 +49,5 @@
         </div>
       </div>
     </div>
-
-    <hr />
-
-    <div class="d-flex align-items-center mb-3">
-      <div class="box-header text-primary">
-        ต้องการส่งตรวจสอบลำดับต่อไป หรือส่งเพื่อพิจารณา
-      </div>
-      <div class="text-danger">* กรุณาเลือกอย่างใดอย่างหนึ่งเท่านั้น</div>
-    </div>
-    <fieldset [disabled]="isDisable('forward', 1)">
-      <div class="d-flex align-items-center mb-3">
-        <div class="form-control" style="width: 22rem">
-          <div class="d-flex align-items-center">
-            <input type="radio" value="1" formControlName="forward" />
-            <label class="form-label ms-2"> ส่งตรวจสอบลำดับต่อไป </label>
-          </div>
-        </div>
-      </div>
-    </fieldset>
-    <fieldset [disabled]="isDisable('forward', 2)">
-      <div class="d-flex align-items-center mb-3">
-        <div class="form-control" style="width: 22rem">
-          <div class="d-flex align-items-center">
-            <input type="radio" value="2" formControlName="forward" />
-            <label class="form-label ms-2">
-              ไม่ผ่านการตรวจสอบ เนื่องจากไม่ครบถ้วน / ไม่ถูกต้อง
-            </label>
-          </div>
-        </div>
-      </div>
-    </fieldset>
-    <fieldset [disabled]="isDisable('forward', 3)">
-      <div class="d-flex align-items-center mb-3">
-        <div class="form-control" style="width: 22rem">
-          <div class="d-flex align-items-center">
-            <input type="radio" value="3" formControlName="forward" />
-            <label class="form-label ms-2"> ส่งเรื่องพิจารณา </label>
-          </div>
-        </div>
-      </div>
-    </fieldset>
-    <fieldset [disabled]="isDisable('forward', 4)">
-      <div class="d-flex align-items-center mb-3">
-        <div class="form-control" style="width: 22rem">
-          <div class="d-flex align-items-center">
-            <input type="radio" value="4" formControlName="forward" />
-            <label class="form-label ms-2"> ยกเลิก </label>
-          </div>
-        </div>
-      </div>
-    </fieldset>
   </div>
 </form>

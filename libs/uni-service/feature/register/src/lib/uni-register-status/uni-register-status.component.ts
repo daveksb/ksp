@@ -34,6 +34,7 @@ export class UniRegisterStatusComponent extends KspPaginationComponent {
   }
 
   handleSearch(form: any) {
+    console.log(form)
     if (form) {
       let nameData = {};
       if (form.name) {
@@ -54,9 +55,9 @@ export class UniRegisterStatusComponent extends KspPaginationComponent {
         ...nameData,
         contactphone: form.phone,
         permission: form.permissionright,
-        unitype: form.searchType?.organization,
+        unitype: form.searchType?.bureauid,
         unicode: form.searchType?.schoolid,
-        uniname: form.searchType?.instituteName,
+        uniname: form.searchType?.schoolname,
         ...this.tableRecord
       }
       delete this.payload.searchType;
