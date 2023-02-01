@@ -15,6 +15,7 @@ import { SelfServiceFormModule } from '@ksp/self-service/form';
 import { SharedFormSelfRewardFormModule } from '@ksp/shared/form/self-reward-form';
 import {
   EServiceRewardAccountSearchComponent,
+  EServiceRewardDeclareSearchComponent,
   EServiceRewardRequestSearchComponent,
   EServiceRewardSearchComponent,
 } from '@ksp/shared/search';
@@ -34,6 +35,7 @@ import { EBestTeacherAccountListComponent } from './e-best-teacher-account-list/
 import { EBestTeacherCreateAccountComponent } from './e-best-teacher-create-account/e-best-teacher-create-account.component';
 import { EBestTeacherCheckListComponent } from './e-best-teacher-check-list/e-best-teacher-check-list.component';
 import { EBestTeacherCheckComponent } from './e-best-teacher-check/e-best-teacher-check.component';
+import { EBestTeacherDeclareComponent } from './e-best-teacher-declare/e-best-teacher-declare.component';
 
 const routes: Routes = [
   {
@@ -81,6 +83,10 @@ const routes: Routes = [
         path: 'check-confirm/:id',
         component: EBestTeacherCheckComponent,
       },
+      {
+        path: 'declare',
+        component: EBestTeacherDeclareComponent,
+      },
     ],
   },
 ];
@@ -110,6 +116,7 @@ const routes: Routes = [
     MatProgressSpinnerModule,
     EServiceRewardAccountSearchComponent,
     EServiceRewardRequestSearchComponent,
+    EServiceRewardDeclareSearchComponent,
   ],
   declarations: [
     EBestTeacherListComponent,
@@ -120,6 +127,7 @@ const routes: Routes = [
     EBestTeacherCreateAccountComponent,
     EBestTeacherCheckListComponent,
     EBestTeacherCheckComponent,
+    EBestTeacherDeclareComponent,
   ],
   exports: [EBestTeacherListComponent, EBestTeacherDetailComponent],
 })
