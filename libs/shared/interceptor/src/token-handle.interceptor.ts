@@ -19,7 +19,6 @@ export class TokenHandleInterceptor implements HttpInterceptor {
     const token = getCookie('userToken') || null;
     if (
       request.url.includes('ksppublic') ||
-      //request.url.includes('sendemail') ||
       request.url.includes('checkphoneandidcardno') ||
       request.url.includes('ksprequestinsertforisforeign') ||
       request.url.includes('selfmyinfoinsert') ||
