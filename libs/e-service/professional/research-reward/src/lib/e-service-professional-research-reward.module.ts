@@ -13,7 +13,11 @@ import { SharedFormSelfRewardFormModule } from '@ksp/shared/form/self-reward-for
 import { TopNavComponent, BottomNavComponent } from '@ksp/shared/menu';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SelfServiceFormModule } from '@ksp/self-service/form';
-import { EServiceRewardSearchComponent } from '@ksp/shared/search';
+import {
+  EServiceRewardCreateDeclareSearchComponent,
+  EServiceRewardDeclareSearchComponent,
+  EServiceRewardSearchComponent,
+} from '@ksp/shared/search';
 import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import {
@@ -27,6 +31,7 @@ import { EResearchRewardRejectComponent } from './e-research-reward-reject/e-res
 import { EServiceUiRewardRejectFormModule } from '@ksp/e-service/ui/reward-reject-form';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { EResearchRewardCheckComponent } from './e-research-reward-check/e-research-reward-check.component';
+import { EResearchRewardDeclareComponent } from './e-research-reward-declare/e-research-reward-declare.component';
 
 const routes: Routes = [
   {
@@ -66,6 +71,10 @@ const routes: Routes = [
         path: 'check-confirm/:id',
         component: EResearchRewardCheckComponent,
       },
+      {
+        path: 'declare',
+        component: EResearchRewardDeclareComponent,
+      },
     ],
   },
 ];
@@ -93,6 +102,8 @@ const routes: Routes = [
     EServiceUiRewardRejectFormModule,
     RewardValidateRequestComponent,
     MatProgressSpinnerModule,
+    EServiceRewardDeclareSearchComponent,
+    EServiceRewardCreateDeclareSearchComponent,
   ],
   declarations: [
     EResearchRewardListComponent,
@@ -100,6 +111,7 @@ const routes: Routes = [
     EResearchRewardConfirmComponent,
     EResearchRewardRejectComponent,
     EResearchRewardCheckComponent,
+    EResearchRewardDeclareComponent,
   ],
   exports: [EResearchRewardListComponent, EResearchRewardDetailComponent],
 })

@@ -576,6 +576,10 @@ export const professionalMenu: MenuConfig[] = [
         path: '/research-reward/check-list',
         label: 'เจ้าหน้าที่ส่วนกลางบันทึกผล',
       },
+      {
+        path: '/research-reward/declare',
+        label: 'ประกาศรายชื่อ',
+      },
     ],
   },
   {
