@@ -26,6 +26,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { EResearchRewardRejectComponent } from './e-research-reward-reject/e-research-reward-reject.component';
 import { EServiceUiRewardRejectFormModule } from '@ksp/e-service/ui/reward-reject-form';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { EResearchRewardCheckComponent } from './e-research-reward-check/e-research-reward-check.component';
 
 const routes: Routes = [
   {
@@ -61,6 +62,10 @@ const routes: Routes = [
         path: 'check/:id',
         component: EResearchRewardDetailComponent,
       },
+      {
+        path: 'check-confirm/:id',
+        component: EResearchRewardCheckComponent,
+      },
     ],
   },
 ];
@@ -94,6 +99,7 @@ const routes: Routes = [
     EResearchRewardDetailComponent,
     EResearchRewardConfirmComponent,
     EResearchRewardRejectComponent,
+    EResearchRewardCheckComponent,
   ],
   exports: [EResearchRewardListComponent, EResearchRewardDetailComponent],
 })
