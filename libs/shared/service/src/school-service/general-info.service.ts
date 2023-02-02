@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
+import { EmailPayload } from '@ksp/shared/interface';
 import { map, Observable, shareReplay } from 'rxjs';
 
 @Injectable({
@@ -8,6 +9,13 @@ import { map, Observable, shareReplay } from 'rxjs';
 })
 export class GeneralInfoService {
   constructor(private http: HttpClient) {}
+
+  sendMail(payload: EmailPayload): Observable<any> {
+    return this.http.post(
+      `https://ksp-school.ksp.or.th/mail/kspsendemail_school.php`,
+      payload
+    );
+  }
 
   getPrefix(): Observable<any> {
     return this.http.get(`${environment.apiUrl}/kspmasterdata/nameprefix`).pipe(

@@ -6,6 +6,7 @@ export * from './lib/e-self-search-request';
 export * from './lib/ethics';
 export * from './lib/user-info-form';
 export * from './lib/e-sch-user-search';
+export * from './lib/email';
 
 export * from './lib/self-license';
 export * from './lib/self-request';

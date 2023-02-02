@@ -19,6 +19,7 @@ import {
   SchTempLicense,
   SelfLicense,
   SelfApproveListSearch,
+  EmailPayload,
 } from '@ksp/shared/interface';
 import { getCookie } from '@ksp/shared/utility';
 import { map, Observable, shareReplay } from 'rxjs';
@@ -28,6 +29,13 @@ import { map, Observable, shareReplay } from 'rxjs';
 })
 export class ERequestService {
   constructor(private http: HttpClient) {}
+
+  sendMail(payload: EmailPayload): Observable<any> {
+    return this.http.post(
+      `https://ksp-eservice.ksp.or.th/mail/kspsendemail_es.php`,
+      payload
+    );
+  }
 
   KspSearchRequest(payload: EsSearchPayload): Observable<KspRequest[]> {
     return this.http
