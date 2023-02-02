@@ -31,6 +31,7 @@ export class EResearchRewardDetailComponent
   bureaus$!: Observable<any>;
   prefixList$!: Observable<any>;
   rewardFiles: any[] = [];
+  formTabCount = FORM_TAB_COUNT;
 
   form = this.fb.group({
     userInfo: [],

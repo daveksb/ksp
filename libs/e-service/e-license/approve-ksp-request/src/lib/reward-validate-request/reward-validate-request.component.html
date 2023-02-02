@@ -1,5 +1,32 @@
 <form [formGroup]="form">
   <div class="bg-white border py-3 px-4">
+    <ng-container *ngIf="requestType === '45'">
+      <div class="d-flex justify-content-between mb-3">
+        <div class="d-flex align-items-center">
+          <div class="box-header text-primary me-1">ผลงาน</div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6 mb-2">
+          <label class="form-label required">ชื่อผลงาน </label>
+          <input
+            class="form-control"
+            type="text"
+            disabled />
+        </div>
+        <div class="col-md-6 mb-2">
+          <label class="form-label required">รหัสผลงาน </label>
+          <input
+            class="form-control"
+            type="text"
+            disabled />
+        </div>
+      </div>
+
+      <hr />
+    </ng-container>
+
     <div class="d-flex justify-content-between mb-3">
       <div class="d-flex align-items-center">
         <div class="box-header text-primary me-1">ยืนยันผลการตรวจสอบ</div>
@@ -197,8 +224,11 @@
       <div class="form-control" style="width: 25rem">
         <label class="ms-4" *ngIf="checkMode"> ส่งข้อมูลประกาศรายชื่อ </label>
         <label class="ms-4" *ngIf="!checkMode">
-          <ng-container *ngIf="requestType === '44'; else declareBlock"> ส่งข้อมูลจัดบัญชีรายชื่อ (มอ.5) </ng-container>
-          <ng-template #declareBlock> ส่งข้อมูลประกาศรายชื่อ </ng-template>
+          <ng-container [ngSwitch]="requestType">
+            <ng-container *ngSwitchCase="'44'"> ส่งข้อมูลจัดบัญชีรายชื่อ (มอ.5) </ng-container>
+            <ng-container *ngSwitchCase="'45'"> ส่งตรวจสอบลำดับต่อไป </ng-container>
+            <ng-container *ngSwitchDefault> ส่งข้อมูลจัดบัญชีรายชื่อ </ng-container>
+          </ng-container>
         </label>
       </div>
     </div>
