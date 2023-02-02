@@ -573,8 +573,8 @@ export const professionalMenu: MenuConfig[] = [
         label: 'รายการแบบคำขอรับรางวัลผลงานวิจัยของคุรุสภา',
       },
       {
-        path: '/xxx',
-        label: 'พิจารณารางวัลผลงานวิจัยของคุรุสภา',
+        path: '/research-reward/check-list',
+        label: 'เจ้าหน้าที่ส่วนกลางบันทึกผล',
       },
     ],
   },

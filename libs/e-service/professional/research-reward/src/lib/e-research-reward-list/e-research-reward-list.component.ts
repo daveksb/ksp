@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SelfServiceRequestType } from '@ksp/shared/constant';
 import {
   EsSearchPayload,
@@ -26,16 +26,24 @@ export class EResearchRewardListComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfRequest>();
   checkStatus = eSelfCheckStatus;
+  checkMode = false;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private router: Router,
     private requestService: ERequestService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private route: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.url.subscribe((url) => {
+      if (url[0].path === 'check-list') {
+        this.checkMode = true;
+      }
+    });
+  }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -79,7 +87,11 @@ export class EResearchRewardListComponent implements OnInit, AfterViewInit {
   }
 
   view(id: number) {
-    this.router.navigate(['/research-reward', 'detail', id]);
+    if (this.checkMode) {
+      this.router.navigate(['/research-reward', 'check', id]);
+    } else {
+      this.router.navigate(['/research-reward', 'detail', id]);
+    }
   }
 
   reject(id: number) {
@@ -96,8 +108,8 @@ export const column = [
   'process',
   'processupdatedate',
   'submitDate',
-  'objection',
+  // 'objection',
   'verify',
   'request',
-  'edit',
+  // 'edit',
 ];

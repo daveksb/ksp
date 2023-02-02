@@ -53,6 +53,14 @@ const routes: Routes = [
         path: 'reject/:id',
         component: EResearchRewardRejectComponent,
       },
+      {
+        path: 'check-list',
+        component: EResearchRewardListComponent,
+      },
+      {
+        path: 'check/:id',
+        component: EResearchRewardDetailComponent,
+      },
     ],
   },
 ];
