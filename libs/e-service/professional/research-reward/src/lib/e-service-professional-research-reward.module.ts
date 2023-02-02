@@ -32,6 +32,7 @@ import { EServiceUiRewardRejectFormModule } from '@ksp/e-service/ui/reward-rejec
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { EResearchRewardCheckComponent } from './e-research-reward-check/e-research-reward-check.component';
 import { EResearchRewardDeclareComponent } from './e-research-reward-declare/e-research-reward-declare.component';
+import { EResearchRewardCreateDeclareComponent } from './e-research-reward-create-declare/e-research-reward-create-declare.component';
 
 const routes: Routes = [
   {
@@ -75,6 +76,10 @@ const routes: Routes = [
         path: 'declare',
         component: EResearchRewardDeclareComponent,
       },
+      {
+        path: 'create-declare',
+        component: EResearchRewardCreateDeclareComponent,
+      },
     ],
   },
 ];
@@ -112,6 +117,7 @@ const routes: Routes = [
     EResearchRewardRejectComponent,
     EResearchRewardCheckComponent,
     EResearchRewardDeclareComponent,
+    EResearchRewardCreateDeclareComponent,
   ],
   exports: [EResearchRewardListComponent, EResearchRewardDetailComponent],
 })

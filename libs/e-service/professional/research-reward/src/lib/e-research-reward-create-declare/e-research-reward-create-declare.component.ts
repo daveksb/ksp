@@ -20,11 +20,13 @@ import {
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'ksp-e-research-reward-declare',
-  templateUrl: './e-research-reward-declare.component.html',
-  styleUrls: ['./e-research-reward-declare.component.scss'],
+  selector: 'ksp-e-research-reward-create-declare',
+  templateUrl: './e-research-reward-create-declare.component.html',
+  styleUrls: ['./e-research-reward-create-declare.component.scss'],
 })
-export class EResearchRewardDeclareComponent implements OnInit, AfterViewInit {
+export class EResearchRewardCreateDeclareComponent
+  implements OnInit, AfterViewInit
+{
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfRequest>();
   checkProcess = SelfCheckProcess;
@@ -47,16 +49,17 @@ export class EResearchRewardDeclareComponent implements OnInit, AfterViewInit {
   }
 
   search(params: Partial<SchRequestSearchFilter>) {
+    console.log(params);
     let payload: EsSearchPayload = {
       systemtype: '1',
       requesttype: SelfServiceRequestType.ขอรับรางวัลผลงานวิจัยของคุรุสภา,
       requestno: params.requestno,
-      careertype: null,
-      name: params.name,
-      idcardno: params.idcardno,
+      careertype: params.careertype,
+      name: null,
+      idcardno: null,
       passportno: null,
       process: null,
-      status: params.status,
+      status: null,
       schoolid: null,
       schoolname: null,
       bureauid: null,
@@ -83,17 +86,17 @@ export class EResearchRewardDeclareComponent implements OnInit, AfterViewInit {
   clear() {
     this.dataSource.data = [];
   }
-
-  create() {
-    this.router.navigate(['/research-reward', 'create-declare']);
-  }
 }
 
 export const column = [
+  'select',
   'order',
-  'group',
-  'careertype',
+  'request',
+  'id',
+  'name',
+  'careerType',
+  'result',
   'declaredate',
+  'requestdate',
   'view',
-  'print',
 ];
