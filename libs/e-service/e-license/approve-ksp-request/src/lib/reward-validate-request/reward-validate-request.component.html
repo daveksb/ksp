@@ -155,7 +155,9 @@
             value="1"
             formControlName="reward" />
           <div class="form-control" style="width: 12.5rem">
-            <label class="ms-4"> ได้รับรางวัล</label>
+            <label class="ms-4" *ngIf="requestType === '42'; else rewardBlock"> ระดับจังหวัด</label>
+            <ng-template #rewardBlock><label class="ms-4"> ได้รับรางวัล</label></ng-template>
+
           </div>
         </div>
       </div>
@@ -168,7 +170,10 @@
             value="2"
             formControlName="reward" />
           <div class="form-control" style="width: 12.5rem">
-            <label class="ms-4"> ไม่ได้รับรางวัล </label>
+            <label class="ms-4" *ngIf="requestType === '42'; else noRewardBlock"> ระดับประเทศ </label>
+            <ng-template #noRewardBlock>
+              <label class="ms-4"> ไม่ได้รับรางวัล </label>
+            </ng-template>
           </div>
         </div>
       </div>
@@ -192,8 +197,8 @@
       <div class="form-control" style="width: 25rem">
         <label class="ms-4" *ngIf="checkMode"> ส่งข้อมูลประกาศรายชื่อ </label>
         <label class="ms-4" *ngIf="!checkMode">
-          <ng-container *ngIf="requestType === '44'"> ส่งข้อมูลจัดบัญชีรายชื่อ (มอ.5) </ng-container>
-          <ng-container *ngIf="requestType !== '44'"> ส่งข้อมูลประกาศรายชื่อ </ng-container>
+          <ng-container *ngIf="requestType === '44'; else declareBlock"> ส่งข้อมูลจัดบัญชีรายชื่อ (มอ.5) </ng-container>
+          <ng-template #declareBlock> ส่งข้อมูลประกาศรายชื่อ </ng-template>
         </label>
       </div>
     </div>

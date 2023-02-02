@@ -19,3 +19,5 @@ export * from './lib/my-reward-detail/my-reward-detail.component';
 export * from './lib/my-reward-list/my-reward-list.component';
 
 export * from './lib/honor-pin-request/honor-pin-request.component';
+
+export * from './lib/request-reward-main/request-reward-main.service';
