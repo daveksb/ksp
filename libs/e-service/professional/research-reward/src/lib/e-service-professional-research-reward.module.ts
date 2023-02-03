@@ -13,7 +13,11 @@ import { SharedFormSelfRewardFormModule } from '@ksp/shared/form/self-reward-for
 import { TopNavComponent, BottomNavComponent } from '@ksp/shared/menu';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SelfServiceFormModule } from '@ksp/self-service/form';
-import { EServiceRewardSearchComponent } from '@ksp/shared/search';
+import {
+  EServiceRewardCreateDeclareSearchComponent,
+  EServiceRewardDeclareSearchComponent,
+  EServiceRewardSearchComponent,
+} from '@ksp/shared/search';
 import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import {
@@ -26,6 +30,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { EResearchRewardRejectComponent } from './e-research-reward-reject/e-research-reward-reject.component';
 import { EServiceUiRewardRejectFormModule } from '@ksp/e-service/ui/reward-reject-form';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { EResearchRewardCheckComponent } from './e-research-reward-check/e-research-reward-check.component';
+import { EResearchRewardDeclareComponent } from './e-research-reward-declare/e-research-reward-declare.component';
+import { EResearchRewardCreateDeclareComponent } from './e-research-reward-create-declare/e-research-reward-create-declare.component';
 
 const routes: Routes = [
   {
@@ -52,6 +59,26 @@ const routes: Routes = [
       {
         path: 'reject/:id',
         component: EResearchRewardRejectComponent,
+      },
+      {
+        path: 'check-list',
+        component: EResearchRewardListComponent,
+      },
+      {
+        path: 'check/:id',
+        component: EResearchRewardDetailComponent,
+      },
+      {
+        path: 'check-confirm/:id',
+        component: EResearchRewardCheckComponent,
+      },
+      {
+        path: 'declare',
+        component: EResearchRewardDeclareComponent,
+      },
+      {
+        path: 'create-declare',
+        component: EResearchRewardCreateDeclareComponent,
       },
     ],
   },
@@ -80,12 +107,17 @@ const routes: Routes = [
     EServiceUiRewardRejectFormModule,
     RewardValidateRequestComponent,
     MatProgressSpinnerModule,
+    EServiceRewardDeclareSearchComponent,
+    EServiceRewardCreateDeclareSearchComponent,
   ],
   declarations: [
     EResearchRewardListComponent,
     EResearchRewardDetailComponent,
     EResearchRewardConfirmComponent,
     EResearchRewardRejectComponent,
+    EResearchRewardCheckComponent,
+    EResearchRewardDeclareComponent,
+    EResearchRewardCreateDeclareComponent,
   ],
   exports: [EResearchRewardListComponent, EResearchRewardDetailComponent],
 })

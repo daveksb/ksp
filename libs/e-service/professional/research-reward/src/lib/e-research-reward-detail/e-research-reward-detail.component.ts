@@ -31,6 +31,7 @@ export class EResearchRewardDetailComponent
   bureaus$!: Observable<any>;
   prefixList$!: Observable<any>;
   rewardFiles: any[] = [];
+  formTabCount = FORM_TAB_COUNT;
 
   form = this.fb.group({
     userInfo: [],
@@ -67,6 +68,7 @@ export class EResearchRewardDetailComponent
     this.getListData();
     this.checkRequestId();
     this.addCheckResultArray();
+    this.getMode();
   }
 
   addCheckResultArray() {
@@ -156,10 +158,22 @@ export class EResearchRewardDetailComponent
 
   next() {
     this.persistData(this.form.controls.checkResult.value);
-    this.router.navigate(['/research-reward', 'confirm', this.requestId]);
+    if (this.mode === 'check') {
+      this.router.navigate([
+        '/research-reward',
+        'check-confirm',
+        this.requestId,
+      ]);
+    } else {
+      this.router.navigate(['/research-reward', 'confirm', this.requestId]);
+    }
   }
 
   cancel() {
-    this.router.navigate(['/research-reward']);
+    if (this.mode === 'check') {
+      this.router.navigate(['/research-reward', 'check-list']);
+    } else {
+      this.router.navigate(['/research-reward']);
+    }
   }
 }

@@ -67,7 +67,6 @@ export class RewardValidateRequestComponent
   }
 
   ngOnInit(): void {
-    console.log(this.requestType);
     this.disabledForm();
     this.getMode();
 
