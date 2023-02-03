@@ -29,6 +29,11 @@ i {
   position: fixed;
 }
 
+.mat-button-toggle-group {
+  height: 32px;
+  align-items: center;
+}
+
 /* tablet */
 @media only screen and (max-width: 992px) {
   .bg-image {
