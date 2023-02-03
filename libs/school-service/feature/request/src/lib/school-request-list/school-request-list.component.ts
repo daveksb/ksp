@@ -58,7 +58,6 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
   tempLicenseRequestTimes: any;
   reqTypeStatus = false;
   viewMoreClicked = false;
-
   defaultForm = {
     requesttype: '3',
     careertype: '1',
@@ -84,6 +83,15 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       requesttype: '3',
     };
     this.search(filters);
+
+    /* this.form.controls.licenseSearch.valueChanges.subscribe((res) => {
+      console.log('res = ', res);
+      if (res?.requesttype === '4') {
+        this.displayedColumns = displayedColumnsKSP;
+      } else {
+        this.displayedColumns;
+      }
+    }); */
   }
 
   ngAfterViewInit() {
@@ -128,7 +136,13 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       // search without showing result do automatically after load
       if (this.initialSearch) {
         this.rejectedRequests = hasRejectedRequest(res);
-        //console.log('has reject = ', this.rejectedRequests);
+      }
+
+      // กรณีเลือกใบคำขอ 4 displayColumn จะไม่แสดง column สุดท้าย
+      if (payload.requesttype === '4' || payload.requesttype === '40') {
+        this.displayedColumns = displayedColumnsKSP;
+      } else {
+        this.displayedColumns = displayedColumns;
       }
 
       if (res && res.length && !this.initialSearch) {
@@ -296,7 +310,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
   }
 
   getStatusColor(status: number, process: number, requestType: number) {
-    console.log(process, status, requestType);
+    //console.log(process, status, requestType);
     if (requestType === 3) {
       if (status === 0 && process !== 5) {
         return 'border-secondary text-secondary';
@@ -961,4 +975,18 @@ export const displayedColumns = [
   'requestdate',
   'requestpdf',
   'licensepdf',
+];
+
+export const displayedColumnsKSP = [
+  'order',
+  'requestno',
+  'idcardno',
+  'name',
+  'requesttype',
+  'careertype',
+  'process',
+  'status',
+  'updatedate',
+  'requestdate',
+  'requestpdf',
 ];
