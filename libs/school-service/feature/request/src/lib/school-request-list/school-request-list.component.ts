@@ -83,15 +83,6 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       requesttype: '3',
     };
     this.search(filters);
-
-    /* this.form.controls.licenseSearch.valueChanges.subscribe((res) => {
-      console.log('res = ', res);
-      if (res?.requesttype === '4') {
-        this.displayedColumns = displayedColumnsKSP;
-      } else {
-        this.displayedColumns;
-      }
-    }); */
   }
 
   ngAfterViewInit() {

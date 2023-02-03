@@ -230,7 +230,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   onCompleted(requestNo: string) {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       data: {
-        header: `บึนทึกข้อมูลสำเร็จ`,
+        header: `บันทึกข้อมูลสำเร็จ`,
         content: `เลขที่รายการ : ${formatRequestNo(requestNo)}
         วันที่ : ${thaiDate(new Date())}`,
       },
