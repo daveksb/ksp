@@ -35,7 +35,7 @@ import { lastValueFrom, map, Subject } from 'rxjs';
     MatPaginatorModule,
     ThaiDatePipe,
     DegreeCertStatusComponent,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
   ],
 })
 export class UniDegreeCertListComponent
@@ -71,12 +71,10 @@ export class UniDegreeCertListComponent
     const options = _.find(EUniApproveProcess, {
       processId: _.toNumber(event),
     });
-    this.approveStatusOption = (options?.status || []).map(
-      ({ id, sname }) => ({
-        value: id,
-        label: sname,
-      })
-    );
+    this.approveStatusOption = (options?.status || []).map(({ id, sname }) => ({
+      value: id,
+      label: sname,
+    }));
   }
   getRequest() {
     const {
@@ -223,48 +221,3 @@ export interface DegreeCertInfo {
   verify: string;
   consider: string;
 }
-
-/* export const data: DegreeCertInfo[] = [
-  {
-    order: 1,
-    degreeId: 'UNI_VC_64120009',
-    date: '10 ธ.ค. 2564',
-    uni: 'มหาวิทยาลัยภูเก็ต',
-    major: 'คุรุศาสตร์',
-    verifyStatus: 'รับข้อมูล',
-    considerStatus: 'พิจารณา',
-    approveStatus: 'พิจารณา',
-    approveDate: '30 ส.ค. 2564',
-    editDate: '30 ส.ค. 2564',
-    verify: 'แก้ไข',
-    consider: 'แก้ไข',
-  },
-  {
-    order: 2,
-    degreeId: 'UNI_VC_64120009',
-    date: '10 ธ.ค. 2564',
-    uni: 'มหาวิทยาลัยภูเก็ต',
-    major: 'คุรุศาสตร์',
-    verifyStatus: 'รับข้อมูล',
-    considerStatus: 'พิจารณา',
-    approveStatus: 'พิจารณา',
-    approveDate: '30 ส.ค. 2564',
-    editDate: '30 ส.ค. 2564',
-    verify: 'ตรวจสอบแล้ว',
-    consider: 'แก้ไข',
-  },
-  {
-    order: 3,
-    degreeId: 'UNI_VC_64120009',
-    date: '10 ธ.ค. 2564',
-    uni: 'มหาวิทยาลัยภูเก็ต',
-    major: 'คุรุศาสตร์',
-    verifyStatus: 'รับข้อมูล',
-    considerStatus: 'พิจารณา',
-    approveStatus: 'พิจารณา',
-    approveDate: '30 ส.ค. 2564',
-    editDate: '30 ส.ค. 2564',
-    verify: 'ปรับแก้ไข/เพิ่มเติม',
-    consider: 'ตรวจสอบแล้ว',
-  },
-]; */

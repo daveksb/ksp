@@ -38,6 +38,7 @@ import {
   SelfLicense,
   StaffType,
   Tambol,
+  University,
   VisaClass,
   VisaType,
 } from '@ksp/shared/interface';
@@ -64,6 +65,7 @@ export class AddStaffComponent implements OnInit {
   staffTypes$!: Observable<StaffType[]>;
   positionTypes$!: Observable<PositionType[]>;
   academicTypes$!: Observable<AcademicStanding[]>;
+  universityList$!: Observable<University[]>;
   schoolId = getCookie('schoolId');
   mode: FormMode = 'add';
   userInfoType = UserInfoFormType.thai;
@@ -99,10 +101,10 @@ export class AddStaffComponent implements OnInit {
     this.checkMode();
     this.getList();
     this.checkStaffId();
-    this.form.valueChanges.subscribe((res) => {
+    /*     this.form.valueChanges.subscribe((res) => {
       //console.log('form = ', this.form.controls.userInfo.value);
       //console.log('form valid = ', this.form.controls.userInfo);
-    });
+    }); */
   }
 
   searchLicense(staffId: any) {
@@ -483,6 +485,7 @@ export class AddStaffComponent implements OnInit {
     this.staffTypes$ = this.staffService.getStaffTypes();
     this.positionTypes$ = this.staffService.getPositionTypes();
     this.academicTypes$ = this.staffService.getAcademicStandingTypes();
+    this.universityList$ = this.licenseService.getUniversityList();
   }
 
   navigateBack() {
