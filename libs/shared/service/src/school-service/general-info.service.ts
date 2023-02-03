@@ -32,10 +32,9 @@ export class GeneralInfoService {
   }
 
   getVisaClass(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/kspmasterdata/visaclass`).pipe(
-      map((data: any) => data.datareturn),
-      shareReplay()
-    );
+    return this.http
+      .get(`${environment.apiUrl}/kspmasterdata/visaclass`)
+      .pipe(map((data: any) => data.datareturn));
   }
 
   getNationality(): Observable<any> {

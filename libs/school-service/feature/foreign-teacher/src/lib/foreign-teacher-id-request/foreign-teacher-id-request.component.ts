@@ -8,6 +8,7 @@ import {
   KspRequest,
   KspRequestProcess,
   Prefix,
+  VisaClass,
   VisaType,
 } from '@ksp/shared/interface';
 import {
@@ -51,6 +52,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   prefixList$!: Observable<Prefix[]>;
   countries$!: Observable<Country[]>;
   visaTypeList$!: Observable<VisaType[]>;
+  visaClassList$!: Observable<VisaClass[]>;
   requestId!: number;
   requestData: KspRequest = new KspRequest();
   foreignFiles: FileGroup[] = [{ name: '1.สำเนาหนังสือเดินทาง', files: [] }];
@@ -216,7 +218,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
               mapMultiFileInfo(this.foreignFiles)
             );
             const payload = formatDatePayload(userInfo);
-            console.log('payload = ', payload);
+            //console.log('payload = ', payload);
             return this.requestService.schCreateRequest(payload);
           }
           return EMPTY;
@@ -230,7 +232,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   onCompleted(requestNo: string) {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       data: {
-        header: `บึนทึกข้อมูลสำเร็จ`,
+        header: `บันทึกข้อมูลสำเร็จ`,
         content: `เลขที่รายการ : ${formatRequestNo(requestNo)}
         วันที่ : ${thaiDate(new Date())}`,
       },
@@ -244,6 +246,11 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   }
 
   getList() {
+    this.countries$ = this.addressService.getCountry();
+    this.prefixList$ = this.generalInfoService.getPrefix();
+    this.visaTypeList$ = this.generalInfoService.getVisaType();
+    this.visaClassList$ = this.generalInfoService.getVisaClass();
+
     const payload = {
       schoolid: this.schoolId,
     };
@@ -260,8 +267,5 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
           res.amphurname
         } จังหวัด ${res.provincename} รหัสไปรษณีย์ ${res.zipcode}`;
       });
-    this.countries$ = this.addressService.getCountry();
-    this.prefixList$ = this.generalInfoService.getPrefix();
-    this.visaTypeList$ = this.generalInfoService.getVisaType();
   }
 }

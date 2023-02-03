@@ -76,8 +76,7 @@ export class RequestSearchComponent
       this.form?.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
         if (value.requesttype === '6') {
           this.careerList = qualificationCareerTypeList;
-        }
-        if (value.requesttype === '4') {
+        } else if (value.requesttype === '4') {
           this.careerList = this.careerTypeList.filter((i) => i.id === 5);
         } else {
           this.careerList = this.careerTypeList;
@@ -107,7 +106,6 @@ export class RequestSearchComponent
       this.statusList = this.processList.find(
         (p) => `${p.processId}` === currentProcess
       )?.status;
-      //console.log('status list = ', this.statusList);
     });
   }
 
