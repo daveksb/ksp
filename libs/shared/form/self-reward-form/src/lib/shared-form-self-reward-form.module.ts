@@ -7,8 +7,10 @@ import { CouncilSuccessComponent } from './council-success/council-success.compo
 import { CouncilEvidenceComponent } from './council-evidence/council-evidence.component';
 import { ThaiTeacherInfoComponent } from './thai-teacher-info/thai-teacher-info.component';
 import { ThaiTeacherTeachingComponent } from './thai-teacher-teaching/thai-teacher-teaching.component';
+import { ThaiTeacherWorkingComponent } from './thai-teacher-working/thai-teacher-working.component';
 import { BestTeacherInfoComponent } from './best-teacher-info/best-teacher-info.component';
 import { BestTeacherInnovationComponent } from './best-teacher-innovation/best-teacher-innovation.component';
+import { BestTeacherWorkingComponent } from './best-teacher-working/best-teacher-working.component';
 import { PraiseTeacherWorkingComponent } from './praise-teacher-working/praise-teacher-working.component';
 import { PraiseTeacherPunishedComponent } from './praise-teacher-punished/praise-teacher-punished.component';
 import { SeniorTeacherInfoComponent } from './senior-teacher-info/senior-teacher-info.component';
@@ -29,6 +31,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AddRowButtonComponent } from '@ksp/shared/ui';
 import { SchoolServiceFormActivityModule } from '@ksp/school-service/form/activity';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { YearMonthPipe } from '@ksp/shared/pipe';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   imports: [
@@ -45,6 +50,9 @@ import { SharedFormOthersModule } from '@ksp/shared/form/others';
     SchoolServiceFormActivityModule,
     SharedFormOthersModule,
     ReactiveFormsModule,
+    MatDatepickerModule,
+    YearMonthPipe,
+    MatTableModule,
   ],
   declarations: [
     CouncilEducationComponent,
@@ -56,6 +64,7 @@ import { SharedFormOthersModule } from '@ksp/shared/form/others';
     ThaiTeacherTeachingComponent,
     BestTeacherInfoComponent,
     BestTeacherInnovationComponent,
+    BestTeacherWorkingComponent,
     PraiseTeacherWorkingComponent,
     PraiseTeacherPunishedComponent,
     SeniorTeacherInfoComponent,
@@ -65,6 +74,7 @@ import { SharedFormOthersModule } from '@ksp/shared/form/others';
     ResearchInfoComponent,
     ResearchSubmitComponent,
     PraiseTeacherRewardInfoComponent,
+    ThaiTeacherWorkingComponent,
   ],
   exports: [
     CouncilEducationComponent,
@@ -76,6 +86,7 @@ import { SharedFormOthersModule } from '@ksp/shared/form/others';
     ThaiTeacherTeachingComponent,
     BestTeacherInfoComponent,
     BestTeacherInnovationComponent,
+    BestTeacherWorkingComponent,
     PraiseTeacherWorkingComponent,
     PraiseTeacherPunishedComponent,
     SeniorTeacherInfoComponent,
@@ -85,6 +96,7 @@ import { SharedFormOthersModule } from '@ksp/shared/form/others';
     ResearchInfoComponent,
     ResearchSubmitComponent,
     PraiseTeacherRewardInfoComponent,
+    ThaiTeacherWorkingComponent,
   ],
 })
 export class SharedFormSelfRewardFormModule {}

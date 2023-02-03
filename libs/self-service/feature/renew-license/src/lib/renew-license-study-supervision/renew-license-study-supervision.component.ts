@@ -15,9 +15,10 @@ import {
   EducationDetailService,
   MyInfoService,
   SelfRequestService,
+  LoaderService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { SelfRequest } from '@ksp/shared/interface';
+import { FileGroup, KspRequest, SelfRequest } from '@ksp/shared/interface';
 import {
   getCookie,
   parseJson,
@@ -25,12 +26,36 @@ import {
   toLowercaseProp,
 } from '@ksp/shared/utility';
 import * as _ from 'lodash';
+import { v4 as uuidv4 } from 'uuid';
+import localForage from 'localforage';
+import { Subject } from 'rxjs';
 
-const WORKING_INFO_FILES = [
+const WORKING_INFO_FILES: FileGroup[] = [
   {
-    name: '1.รางวัลอื่นและประกาศเกียรติคุณ',
-    fileId: '',
-    fileName: '',
+    name: '1.สำเนาผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน (3 กิจกรรม)',
+    files: [],
+  },
+];
+
+const WORKING_INFO_FILES_2: FileGroup[] = [
+  {
+    name: '1.สำเนาผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน',
+    files: [],
+  },
+];
+
+const STANDARD_INFO_FILES: FileGroup[] = [
+  {
+    name: '1. สำเนาวุฒิทางการศึกษา',
+    files: [],
+  },
+  {
+    name: '2. หนังสือรับรองคุณวุมิ',
+    files: [],
+  },
+  {
+    name: '3. วุฒิบัตรอบรม',
+    files: [],
   },
 ];
 
@@ -44,15 +69,16 @@ export class RenewLicenseStudySupervisionComponent
   extends LicenseFormBaseComponent
   implements OnInit
 {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   userInfoType = UserInfoFormType.thai;
   headerGroup = [
     'วันที่ทำรายการ',
-    'เลขใบคำขอ',
-    'เลขที่ใบอนุญาต',
+    'เลขแบบคำขอ',
+    'เลขที่หนังสืออนุญาต',
     'เลขที่ประจำตัวคุรุสภา',
     'เลขประจำตัวประชาชน',
-    'วันที่ออกใบอนุญาต',
-    'วันที่หมดอายุใบอนุญาต',
+    'วันที่ออกหนังสืออนุญาต',
+    'วันที่หมดอายุหนังสืออนุญาต',
   ];
 
   override form = this.fb.group({
@@ -69,8 +95,9 @@ export class RenewLicenseStudySupervisionComponent
   });
 
   disableNextButton = false;
-
-  workingInfoFiles: any[] = [];
+  workingInfoFiles: FileGroup[] = [];
+  workingInfoFiles2: FileGroup[] = [];
+  licenseFiles: FileGroup[] = [];
 
   constructor(
     router: Router,
@@ -81,7 +108,8 @@ export class RenewLicenseStudySupervisionComponent
     educationDetailService: EducationDetailService,
     requestService: SelfRequestService,
     myInfoService: MyInfoService,
-    route: ActivatedRoute
+    route: ActivatedRoute,
+    private loaderService: LoaderService
   ) {
     super(
       generalInfoService,
@@ -105,6 +133,9 @@ export class RenewLicenseStudySupervisionComponent
   override initializeFiles() {
     super.initializeFiles();
     this.workingInfoFiles = structuredClone(WORKING_INFO_FILES);
+    this.workingInfoFiles2 = structuredClone(WORKING_INFO_FILES_2);
+    this.licenseFiles = structuredClone(STANDARD_INFO_FILES);
+    this.uniqueTimestamp = uuidv4();
   }
 
   override patchData(data: SelfRequest) {
@@ -139,8 +170,10 @@ export class RenewLicenseStudySupervisionComponent
 
     if (data.fileinfo) {
       const fileInfo = parseJson(data.fileinfo);
-      const { performancefiles } = fileInfo;
+      const { performancefiles, licensefiles, performancefiles2 } = fileInfo;
       this.workingInfoFiles = performancefiles;
+      this.workingInfoFiles2 = performancefiles2;
+      this.licenseFiles = licensefiles;
     }
   }
 
@@ -164,10 +197,10 @@ export class RenewLicenseStudySupervisionComponent
     this.form.controls.address2.patchValue(this.form.controls.address1.value);
   }
 
-  createRequest(forbidden: any, currentProcess: number) {
+  createRequest(forbidden: any, currentProcess: number): KspRequest {
     const self = new SelfRequest(
       '1',
-      SelfServiceRequestType.ขอต่ออายุใบอนุญาตประกอบวิชาชีพ,
+      SelfServiceRequestType.ขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ,
       `${SelfServiceRequestSubType.ศึกษานิเทศก์}`,
       currentProcess
     );
@@ -178,9 +211,9 @@ export class RenewLicenseStudySupervisionComponent
 
     const { id, ...rawUserInfo } = formData.userInfo;
     const userInfo = toLowercaseProp(rawUserInfo);
-    userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
-    userInfo.uniquetimestamp = this.uniqueTimestamp;
-    userInfo.staffid = getCookie('userId');
+    self.isforeign = `${SelfServiceRequestForType.ชาวไทย}`;
+    self.uniqueno = this.uniqueTimestamp;
+    self.userid = getCookie('userId');
     const selectData = _.pick(userInfo, allowKey);
 
     const { educationType, educationLevelForm } = formData.educationForm || {
@@ -196,11 +229,14 @@ export class RenewLicenseStudySupervisionComponent
     };
 
     const performancefiles = this.workingInfoFiles;
+    const performancefiles2 = this.workingInfoFiles2;
+    const licensefiles = this.licenseFiles;
 
-    const payload = {
+    const payload: KspRequest = {
       ...self,
       ...replaceEmptyWithNull(selectData),
       ...(this.requestId && { id: `${this.requestId}` }),
+      ...(this.imageId && { imagefileid: `${this.imageId}` }),
       ...{
         addressinfo: JSON.stringify([formData.address1, formData.address2]),
       },
@@ -226,7 +262,13 @@ export class RenewLicenseStudySupervisionComponent
         }),
       },
       ...{ prohibitproperty: JSON.stringify(forbidden) },
-      ...{ fileinfo: JSON.stringify({ performancefiles }) },
+      ...{
+        fileinfo: JSON.stringify({
+          performancefiles,
+          performancefiles2,
+          licensefiles,
+        }),
+      },
     };
     console.log(payload);
     return payload;
@@ -237,4 +279,28 @@ export class RenewLicenseStudySupervisionComponent
       this.disableNextButton = false; //!this.form.valid;
     });
   }
+
+  onSave(currentProcess: number) {
+    this.currentProcess = currentProcess;
+    this.save();
+  }
+
+  // override onCompleted(forbidden: any) {
+  //   const payload = this.createRequest(forbidden, this.currentProcess);
+  //   const request = this.requestId
+  //     ? this.requestService.updateRequest.bind(this.requestService)
+  //     : this.requestService.createRequest.bind(this.requestService);
+  //   request(payload).subscribe((res) => {
+  //     console.log('request result = ', res);
+  //     if (res.returncode === '00') {
+  //       if (this.currentProcess === 2) {
+  //         const requestno = res.requestno;
+  //         localForage.setItem('requestno', requestno);
+  //         this.router.navigate(['/license', 'payment-channel']);
+  //       } else {
+  //         this.router.navigate(['/home']);
+  //       }
+  //     }
+  //   });
+  // }
 }

@@ -1,20 +1,48 @@
 <form [formGroup]="form">
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">ชื่อรางวัล</label>
+      <label class="form-label required"
+        ><span *ngIf="!isForeignForm">ชื่อรางวัล</span>
+        <span *ngIf="isForeignForm">Award's Name</span></label
+      >
       <input class="form-control" type="text" formControlName="name" />
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">หน่วยงาน</label>
+      <label class="form-label required"
+        ><span *ngIf="!isForeignForm">หน่วยงาน</span>
+        <span *ngIf="isForeignForm">Agency/Institution</span></label
+      >
       <input class="form-control" type="text" formControlName="agency" />
     </div>
 
     <div class="col-md-6 mb-2">
-      <label class="form-label">วัน/เดือน/ปี</label>
-      <input class="form-control" type="date" formControlName="date" />
+      <label class="form-label required"
+        ><span *ngIf="!isForeignForm">วัน/เดือน/ปี</span>
+        <span *ngIf="isForeignForm">Date</span></label
+      >
+      <div class="d-flex align-items-center" *ngIf="!isForeignForm">
+        <input
+          matInput
+          [matDatepicker]="picker"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="date"
+          placeholder="วว/ดด/ปปปป"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="picker"
+          class="button-date"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </div>
+
+      <div *ngIf="isForeignForm">
+        <input type="date" class="form-control" formControlName="date" />
+      </div>
     </div>
   </div>
 </form>

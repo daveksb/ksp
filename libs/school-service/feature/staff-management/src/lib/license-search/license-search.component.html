@@ -1,13 +1,20 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav
   ><span header>ทะเบียนบุคลากรภายในหน่วยงาน</span
-  ><span subHeader>ค้นหาใบอนุญาต</span></ksp-top-nav
+  ><span subHeader>ค้นหาหนังสืออนุญาต</span></ksp-top-nav
 >
 
 <div
   [formGroup]="form"
   class="bg-secondary bg-opacity-10 px-4 pt-1 pb-3 full-height"
 >
-  <div class="box-header pb-1">ค้นหาข้อมูลใบอนุญาตประกอบวิชาชีพทางการศึกษา</div>
+  <div class="box-header pb-1">
+    ค้นหาข้อมูลหนังสืออนุญาตประกอบวิชาชีพทางการศึกษา
+  </div>
 
   <div class="bg-white p-3 default-width">
     <div class="box-header">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
@@ -15,17 +22,15 @@
 
     <div class="row mb-2">
       <div class="col">
-        <label class="form-label">หมายเลขบัตรประชาชน</label>
-        <input class="form-control" type="text" formControlName="personId" />
+        <label class="form-label"
+          >หมายเลขบัตรประชาชน/เลขที่หนังสือเดินทาง</label
+        >
+        <input class="form-control" type="text" formControlName="cardno" />
       </div>
 
       <div class="col">
-        <label class="form-label">เลขที่ใบอนุญาต</label>
-        <input
-          class="form-control"
-          type="text"
-          formControlName="licenseNumber"
-        />
+        <label class="form-label">เลขที่หนังสืออนุญาต</label>
+        <input class="form-control" type="text" formControlName="licenseno" />
       </div>
     </div>
     <div class="row">
@@ -35,12 +40,12 @@
       </div>
 
       <div class="col">
-        <label class="form-label">ประเภทใบอนุญาต </label>
-        <select class="form-select" formControlName="licenseType">
+        <label class="form-label">ประเภทหนังสืออนุญาต </label>
+        <select class="form-select" formControlName="licensetype">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option *ngFor="let license of licenseTypes" [value]="license?.value">
+            {{ license?.label }}
+          </option>
         </select>
       </div>
     </div>
@@ -58,27 +63,63 @@
     </div>
   </div>
 
-  <div class="bg-white p-3 mt-3 default-width">
+  <div class="bg-white px-3 py-2 mt-3">
     <div class="box-header">ผลการค้นหา</div>
     <hr />
+    <ng-container *ngIf="notFoundItem">
+      <div class="d-flex flex-column align-items-center">
+        <div class="mb-2 fs-5">ไม่พบข้อมูล</div>
+        <button
+          class="btn border-primary text-primary mb-2"
+          (click)="addStaff()"
+        >
+          + เพิ่มบุคลากร
+        </button>
+      </div></ng-container
+    >
 
-    <div class="d-flex flex-column align-items-center" *ngIf="!foundItem">
-      <div class="mb-2 fs-5">ไม่พบข้อมูล</div>
-      <button class="btn border-primary text-primary" (click)="addStaff()">+ เพิ่มบุคลากร</button>
-    </div>
-
-    <div *ngIf="foundItem">
-      <div style="margin-left: 5rem">
-        <ksp-license-info [isLicenseRevoked]="true"></ksp-license-info>
+    <ng-container *ngIf="foundLicenses.length">
+      <div class="d-flex flex-column">
+        <ng-container
+          *ngFor="
+            let license of foundLicenses;
+            let first = first;
+            let last = last
+          "
+        >
+          <ksp-license-info
+            [license]="license"
+            [isLicenseRevoked]="true"
+            (selected)="onSelect($event)"
+          ></ksp-license-info>
+          <hr />
+        </ng-container>
       </div>
-      <hr />
-      <div style="margin-left: 5rem">
-        <ksp-license-info [isLicenseRevoked]="true"></ksp-license-info>
-      </div>
-      <hr />
-      <div style="margin-left: 5rem">
-        <ksp-license-info [isLicenseRevoked]="true"></ksp-license-info>
-      </div>
-    </div>
+      <div class="d-flex flex-row justify-content-between align-items-center">
+        <button
+          type="button"
+          class="btn border-orange text-orange"
+          (click)="goBack()"
+        >
+          ย้อนกลับ
+        </button>
+        <nav aria-label="Page navigation example ">
+          <ul class="pagination justify-content-end my-1">
+            <li class="page-item">
+              <a class="page-link" role="button" (click)="goPrevious()"
+                ><i class="bi bi-chevron-left"></i
+              ></a>
+            </li>
+            <li class="page-item disabled">
+              <a class="page-link">หน้าที่ {{ currentPage }}</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" role="button" (click)="goNext()"
+                ><i class="bi bi-chevron-right"></i
+              ></a>
+            </li>
+          </ul>
+        </nav></div
+    ></ng-container>
   </div>
 </div>

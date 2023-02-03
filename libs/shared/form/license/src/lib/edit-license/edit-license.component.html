@@ -8,8 +8,8 @@
     <label class="form-label ms-1">เปลี่ยน / เพิ่มเติม คำนำหน้าชื่อ</label>
   </div>
 
-  <div class="row align-items-center ms-2 mb-2">
-    <div class="col-md-5 col-md-5">
+  <div class="row align-items-center mx-2">
+    <div class="col-md-5 mb-3">
       <label class="form-label">คำนำหน้าชื่อภาษาไทย</label>
       <select class="form-select" formControlName="oldPrefixTh">
         <option value="null">กรุณาเลือก</option>
@@ -19,15 +19,15 @@
       </select>
     </div>
 
-    <div class="col-2 text-center">
+    <div class="col-2 text-center hide__content">
       <br />
       <label class="form-label">เปลี่ยน เป็น</label>
     </div>
 
-    <div class="col-md-5 col-md-5">
-      <label class="form-label">คำนำหน้าชื่อภาษาไทย</label>
+    <div class="col-md-5 mb-3">
+      <label class="form-label" [class.required]="form.controls.changePrefix.value">คำนำหน้าชื่อภาษาไทย</label>
       <select class="form-select" formControlName="prefixTh">
-        <option value="null" selected>กรุณาเลือก</option>
+        <option value="null" selected disabled hidden>กรุณาเลือก</option>
         <option *ngFor="let prefix of prefixList" [value]="prefix.id">
           {{ prefix?.name_th }}
         </option>
@@ -35,8 +35,8 @@
     </div>
   </div>
 
-  <div class="row align-items-center ms-2">
-    <div class="col-md-5 col-md-5 mb-3">
+  <div class="row align-items-center mx-2">
+    <div class="col-md-5 mb-3">
       <label class="form-label">คำนำหน้าชื่อภาษาอังกฤษ</label>
       <select class="form-select" formControlName="oldPrefixEn">
         <option value="null">กรุณาเลือก</option>
@@ -46,12 +46,12 @@
       </select>
     </div>
 
-    <div class="col-2 text-center">
+    <div class="col-2 text-center hide__content">
       <label class="form-label">เปลี่ยน เป็น</label>
     </div>
 
-    <div class="col-md-5 col-md-5 mb-3">
-      <label class="form-label">คำนำหน้าชื่อภาษาอังกฤษ</label>
+    <div class="col-md-5 mb-3">
+      <label class="form-label" [class.required]="form.controls.changePrefix.value">คำนำหน้าชื่อภาษาอังกฤษ</label>
       <select class="form-select" formControlName="prefixEn">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option *ngFor="let prefix of prefixList" [value]="prefix.id">
@@ -70,35 +70,41 @@
     <label class="form-label ms-1">เปลี่ยนชื่อ</label>
   </div>
 
-  <div class="row align-items-center ms-2 mb-2">
-    <div class="col-md-5 col-md-5">
+  <div class="row align-items-center mx-2">
+    <div class="col-md-5 mb-3">
       <label class="form-label">ชื่อภาษาไทย</label>
-      <input type="text" class="form-control" formControlName="oldFirstnameTh" />
+      <input
+        type="text"
+        class="form-control"
+        formControlName="oldFirstnameTh" />
     </div>
 
-    <div class="col-2 text-center">
+    <div class="col-2 text-center hide__content">
       <br />
       <label class="form-label">เปลี่ยน เป็น</label>
     </div>
 
-    <div class="col-md-5 col-md-5">
-      <label class="form-label">ชื่อภาษาไทย</label>
+    <div class="col-md-5 mb-3">
+      <label class="form-label" [class.required]="form.controls.changeFirstname.value">ชื่อภาษาไทย</label>
       <input type="text" class="form-control" formControlName="firstnameTh" />
     </div>
   </div>
 
-  <div class="row align-items-center ms-2">
-    <div class="col-md-5 col-md-5 mb-3">
+  <div class="row align-items-center mx-2">
+    <div class="col-md-5 mb-3">
       <label class="form-label">ชื่อภาษาอังกฤษ</label>
-      <input type="text" class="form-control" formControlName="oldFirstnameEn" />
+      <input
+        type="text"
+        class="form-control"
+        formControlName="oldFirstnameEn" />
     </div>
 
-    <div class="col-2 text-center">
+    <div class="col-2 text-center hide__content">
       <label class="form-label">เปลี่ยน เป็น</label>
     </div>
 
-    <div class="col-md-5 col-md-5 mb-3">
-      <label class="form-label">ชื่อภาษาอังกฤษ</label>
+    <div class="col-md-5 mb-3">
+      <label class="form-label" [class.required]="form.controls.changeFirstname.value">ชื่อภาษาอังกฤษ</label>
       <input type="text" class="form-control" formControlName="firstnameEn" />
     </div>
   </div>
@@ -112,35 +118,35 @@
     <label class="form-label ms-1">เปลี่ยนนามสกุล</label>
   </div>
 
-  <div class="row align-items-center ms-2 mb-2">
-    <div class="col-md-5 col-md-5">
+  <div class="row align-items-center mx-2">
+    <div class="col-md-5 mb-3">
       <label class="form-label">นามสกุลภาษาไทย</label>
       <input type="text" class="form-control" formControlName="oldLastnameTh" />
     </div>
 
-    <div class="col-2 text-center">
+    <div class="col-2 text-center hide__content">
       <br />
       <label class="form-label">เปลี่ยน เป็น</label>
     </div>
 
-    <div class="col-md-5 col-md-5">
-      <label class="form-label">นามสกุลภาษาไทย</label>
+    <div class="col-md-5 mb-3">
+      <label class="form-label" [class.required]="form.controls.changeLastname.value">นามสกุลภาษาไทย</label>
       <input type="text" class="form-control" formControlName="lastnameTh" />
     </div>
   </div>
 
-  <div class="row align-items-center ms-2">
-    <div class="col-md-5 col-md-5 mb-3">
+  <div class="row align-items-center mx-2">
+    <div class="col-md-5 mb-3">
       <label class="form-label">นามสกุลภาษาอังกฤษ</label>
       <input type="text" class="form-control" formControlName="oldLastnameEn" />
     </div>
 
-    <div class="col-2 text-center">
+    <div class="col-2 text-center hide__content">
       <label class="form-label">เปลี่ยน เป็น</label>
     </div>
 
-    <div class="col-md-5 col-md-5 mb-3">
-      <label class="form-label">นามสกุลภาษาอังกฤษ</label>
+    <div class="col-md-5 mb-3">
+      <label class="form-label" [class.required]="form.controls.changeLastname.value">นามสกุลภาษาอังกฤษ</label>
       <input type="text" class="form-control" formControlName="lastnameEn" />
     </div>
   </div>
@@ -155,16 +161,19 @@
       <label class="form-label ms-1">เปลี่ยนหมายเลขหนังสือเดินทาง</label>
     </div>
 
-    <div class="row align-items-center ms-2 mb-2">
-      <div class="col-md-5 col-md-5">
-        <input type="text" class="form-control" formControlName="oldPassportNo" />
+    <div class="row align-items-center mx-2 mb-2">
+      <div class="col-md-5">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="oldPassportNo" />
       </div>
 
-      <div class="col-2 text-center">
+      <div class="col-2 text-center hide__content">
         <label class="form-label">เปลี่ยน เป็น</label>
       </div>
 
-      <div class="col-md-5 col-md-5">
+      <div class="col-md-5">
         <input type="text" class="form-control" formControlName="passportNo" />
       </div>
     </div>
@@ -177,17 +186,16 @@
         class="me-1"
         formControlName="isDistributed"
         (change)="disableControl($event, ['distributeData'])" />
-      <label class="form-label">จำหน่ายข้อมูล</label>
+      <label class="form-label" [class.required]="form.controls.isDistributed.value">จำหน่ายข้อมูล</label>
     </div>
-    <div class="row ms-2 mb-2">
+    <div class="row mx-2">
       <div class="col-md-5 mb-3">
         <select
           class="search__content form-select"
           formControlName="distributeData">
-          <option selected>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option value="null" selected disabled hidden>กรุณาระบุ</option>
+          <option value="1">จำหน่าย</option>
+          <option value="2">ห้ามจำหน่าย</option>
         </select>
       </div>
     </div>

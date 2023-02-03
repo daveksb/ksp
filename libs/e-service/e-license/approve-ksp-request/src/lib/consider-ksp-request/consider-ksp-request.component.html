@@ -1,0 +1,51 @@
+<form [formGroup]="form">
+  <div class="d-flex mt-3">
+    <input
+      type="radio"
+      class="form-check-input radio"
+      value="2"
+      style="margin-top: 10px"
+      formControlName="result"
+    />
+    <div class="form-control w-50">
+      <label class="ms-4"> ยืนยันผลการตรวจสอบ และออกหนังสือรับรอง </label>
+      <div class="row" style="margin: 0 12px">
+        <div class="col mb-3">
+          <label class="form-label">เลขที่หนังสือรับรอง</label>
+          <input class="form-control" type="text" formControlName="approveNo" />
+        </div>
+        <div class="col mb-3">
+          <label class="form-label">วันเดือนปีที่ออกหนังสือรับรอง</label>
+          <div class="d-flex align-items-center">
+            <input
+              matInput
+              [matDatepicker]="picker"
+              autocomplete="off"
+              class="form-control form-date"
+              formControlName="approveDate"
+              placeholder="วว/ดด/ปปปป"
+            />
+            <mat-datepicker-toggle
+              class="button-date"
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex align-items-center mt-3">
+    <input
+      type="radio"
+      class="form-check-input my-0 radio"
+      value="3"
+      formControlName="result"
+    />
+    <div class="form-control w-50">
+      <label class="ms-4"> ไม่ยืนยันผลการตรวจสอบ </label>
+    </div>
+  </div>
+</form>

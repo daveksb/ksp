@@ -15,26 +15,19 @@ import {
   EducationDetailService,
   MyInfoService,
   SelfRequestService,
+  LoaderService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
+import { FileGroup, SelfLicense, SelfRequest } from '@ksp/shared/interface';
 import {
   getCookie,
   parseJson,
   replaceEmptyWithNull,
-  thaiDate,
   toLowercaseProp,
 } from '@ksp/shared/utility';
-import { Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 import * as _ from 'lodash';
-
-const WORKING_INFO_FILES = [
-  {
-    name: '1.รางวัลอื่นและประกาศเกียรติคุณ',
-    fileId: '',
-    fileName: '',
-  },
-];
+import { v4 as uuidv4 } from 'uuid';
 
 @UntilDestroy()
 @Component({
@@ -46,8 +39,6 @@ export class RenewLicenseRequestComponent
   extends LicenseFormBaseComponent
   implements OnInit
 {
-  userInfoType = UserInfoFormType.thai;
-
   override form = this.fb.group({
     userInfo: [],
     address1: [],
@@ -59,12 +50,12 @@ export class RenewLicenseRequestComponent
     website: [],
     workEmail: [],
   });
-
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
+  userInfoType = UserInfoFormType.thai;
   disableNextButton = false;
-  myInfo$!: Observable<SelfMyInfo>;
-  today = thaiDate(new Date());
-
-  workingInfoFiles: any[] = [];
+  workingInfoFiles: FileGroup[] = [];
+  workingInfoFiles2: FileGroup[] = [];
+  myLicense = new SelfLicense();
 
   constructor(
     router: Router,
@@ -75,7 +66,8 @@ export class RenewLicenseRequestComponent
     educationDetailService: EducationDetailService,
     requestService: SelfRequestService,
     myInfoService: MyInfoService,
-    route: ActivatedRoute
+    route: ActivatedRoute,
+    private loaderService: LoaderService
   ) {
     super(
       generalInfoService,
@@ -91,15 +83,37 @@ export class RenewLicenseRequestComponent
   }
 
   ngOnInit(): void {
-    this.myInfo$ = this.myInfoService.getMyInfo();
     this.getListData();
     this.checkButtonsDisableStatus();
     this.checkRequestId();
+
+    const idcardno = getCookie('idCardNo');
+    this.myInfoService.getMyLicense(idcardno).subscribe((res) => {
+      if (res) {
+        this.myLicense = res[0];
+      }
+    });
+
+    this.form.controls.workplace.valueChanges.subscribe((res: any) => {
+      if (res.notRequired) {
+        const payload: any = { educationType: '1' };
+        this.form.controls.standardWorking.patchValue(payload);
+      } else {
+        const payload: any = { educationType: '0' };
+        this.form.controls.standardWorking.patchValue(payload);
+      }
+    });
+  }
+
+  get userInfoForm() {
+    return this.form.controls.userInfo;
   }
 
   override initializeFiles() {
     super.initializeFiles();
     this.workingInfoFiles = structuredClone(WORKING_INFO_FILES);
+    this.workingInfoFiles2 = structuredClone(WORKING_INFO_FILES_2);
+    this.uniqueTimestamp = uuidv4();
   }
 
   override patchData(data: SelfRequest) {
@@ -125,8 +139,9 @@ export class RenewLicenseRequestComponent
 
     if (data.fileinfo) {
       const fileInfo = parseJson(data.fileinfo);
-      const { performancefiles } = fileInfo;
+      const { performancefiles, performancefiles2 } = fileInfo;
       this.workingInfoFiles = performancefiles;
+      this.workingInfoFiles2 = performancefiles2;
     }
   }
 
@@ -147,15 +162,13 @@ export class RenewLicenseRequestComponent
   }
 
   patchAddress2FormWithAddress1(): void {
-    console.log(this.form.controls.address1.value);
     this.form.controls.address2.patchValue(this.form.controls.address1.value);
-    console.log(this.form.controls.address2.value);
   }
 
   createRequest(forbidden: any, currentProcess: number) {
     const self = new SelfRequest(
       '1',
-      SelfServiceRequestType.ขอต่ออายุใบอนุญาตประกอบวิชาชีพ,
+      SelfServiceRequestType.ขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ,
       `${SelfServiceRequestSubType.ครู}`,
       currentProcess
     );
@@ -166,9 +179,10 @@ export class RenewLicenseRequestComponent
 
     const { id, ...rawUserInfo } = formData.userInfo;
     const userInfo = toLowercaseProp(rawUserInfo);
-    userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
-    userInfo.uniquetimestamp = this.uniqueTimestamp;
-    userInfo.staffid = getCookie('userId');
+
+    self.isforeign = `${SelfServiceRequestForType.ชาวไทย}`;
+    self.uniqueno = this.uniqueTimestamp;
+    self.userid = getCookie('userId');
     const selectData = _.pick(userInfo, allowKey);
 
     const { educationType, educationLevelForm } = formData.standardWorking || {
@@ -177,11 +191,13 @@ export class RenewLicenseRequestComponent
     };
 
     const performancefiles = this.workingInfoFiles;
+    const performancefiles2 = this.workingInfoFiles2;
 
     const payload = {
       ...self,
       ...replaceEmptyWithNull(selectData),
       ...(this.requestId && { id: `${this.requestId}` }),
+      ...(this.imageId && { imagefileid: `${this.imageId}` }),
       ...{
         addressinfo: JSON.stringify([formData.address1, formData.address2]),
       },
@@ -201,9 +217,9 @@ export class RenewLicenseRequestComponent
         }),
       },
       ...{ prohibitproperty: JSON.stringify(forbidden) },
-      ...{ fileinfo: JSON.stringify({ performancefiles }) },
+      ...{ fileinfo: JSON.stringify({ performancefiles, performancefiles2 }) },
     };
-    console.log(payload);
+    //console.log(payload);
     return payload;
   }
 
@@ -212,4 +228,43 @@ export class RenewLicenseRequestComponent
       this.disableNextButton = false; //!this.form.valid;
     });
   }
+
+  onSave(currentProcess: number) {
+    this.currentProcess = currentProcess;
+    this.save();
+  }
+
+  // override onCompleted(forbidden: any) {
+  //   const payload = this.createRequest(forbidden, this.currentProcess);
+  //   const request = this.requestId
+  //     ? this.requestService.updateRequest.bind(this.requestService)
+  //     : this.requestService.createRequest.bind(this.requestService);
+  //   request(payload).subscribe((res) => {
+  //     console.log('request result = ', res);
+  //     this.router.navigate(['/license', 'payment-channel', 102541254]);
+
+  //     if (res.returncode === '00') {
+  //       if (this.currentProcess === 2) {
+  //         const requestno = res.requestno;
+  //         localForage.setItem('requestno', requestno);
+  //       } else {
+  //         this.router.navigate(['/home']);
+  //       }
+  //     }
+  //   });
+  // }
 }
+
+const WORKING_INFO_FILES: FileGroup[] = [
+  {
+    name: '1.สำเนาผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน (3 กิจกรรม)',
+    files: [],
+  },
+];
+
+const WORKING_INFO_FILES_2: FileGroup[] = [
+  {
+    name: '1.สำเนาผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน',
+    files: [],
+  },
+];

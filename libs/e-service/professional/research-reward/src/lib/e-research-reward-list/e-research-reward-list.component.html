@@ -1,0 +1,135 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
+<ksp-top-nav
+  ><span header>ยื่นแบบคำขอรางวัล</span
+  ><span subHeader>ขอรางวัลผลงานวิจัยของคุรุสภา</span></ksp-top-nav
+>
+
+<div class="bg-secondary full-height full-width-2 bg-opacity-10 px-4 py-2">
+  <div class="box-header">รายการขอรางวัลผลงานวิจัยของคุรุสภาา</div>
+  <div class="bg-white default-width p-3">
+    <div class="box-header">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
+    <hr />
+
+    <ksp-e-service-reward-search
+      (search)="search($event)"
+      (clear)="clear()"
+    ></ksp-e-service-reward-search>
+  </div>
+  <div class="bg-white mt-3 p-3">
+    <div class="box-header">ผลการค้นหา</div>
+    <div class="table__scroll">
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="order">
+          <th mat-header-cell *matHeaderCellDef class="text-center">ลำดับ</th>
+          <td
+            mat-cell
+            *matCellDef="let element; let i = index"
+            class="text-center"
+          >
+            {{
+              paginator.pageIndex === 0
+                ? i + 1
+                : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+            }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="requestno">
+          <th mat-header-cell *matHeaderCellDef>เลขที่แบบคำขอ</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.requestno | reqNoFormat }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="idcardno">
+          <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.idcardno }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.firstnameth }} {{ element.lastnameth }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="process">
+          <th mat-header-cell *matHeaderCellDef>ผลการพิจารณา</th>
+          <td mat-cell *matCellDef="let element">{{ element.process }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>สถานะการดำเนินการ</th>
+          <td mat-cell *matCellDef="let element">
+            {{ checkStatus(1, +element.status, 40)?.ename }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="processupdatedate">
+          <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.processupdatedate | thaiDate }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="submitDate">
+          <th mat-header-cell *matHeaderCellDef>วันที่ยื่นแบบคำขอ</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.requestdate | thaiDate }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="objection">
+          <th mat-header-cell *matHeaderCellDef>การคัดค้าน/เพิกถอน</th>
+          <td mat-cell *matCellDef="let element">-</td>
+        </ng-container>
+
+        <ng-container matColumnDef="verify">
+          <th mat-header-cell *matHeaderCellDef class="text-center">ตรวจสอบ</th>
+          <td mat-cell *matCellDef="let element" class="text-center">
+            <i
+              role="button"
+              class="bi bi-pencil-square fs-5 text-primary"
+              (click)="view(element.id)"
+            ></i>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="request">
+          <th mat-header-cell *matHeaderCellDef class="text-center">แบบคำขอ</th>
+          <td mat-cell *matCellDef="let row" class="text-center">
+            <i role="button" class="bi bi-file-text fs-5 text-primary"></i>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef class="text-center">
+            คัดค้าน/เพิกถอน
+          </th>
+          <td mat-cell *matCellDef="let element" class="text-center">
+            <i
+              role="button"
+              class="bi bi-file-x fs-5 text-danger"
+              (click)="reject(element.id)"
+            ></i>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+    <mat-paginator
+      [pageSizeOptions]="[25]"
+      showFirstLastButtons
+      [hidden]="!dataSource.data.length"
+    >
+    </mat-paginator>
+  </div>
+</div>

@@ -10,6 +10,10 @@ import { EditDegreeDetailComponent } from './edit-degree-detail/edit-degree-deta
 import { MatStepperModule } from '@angular/material/stepper';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SharedDegreeCertModule } from '@ksp/shared/degree-cert';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const routes: Routes = [
   {
@@ -43,7 +47,11 @@ const routes: Routes = [
     BottomNavComponent,
     RequestHeaderInfoComponent,
     SharedDegreeCertModule,
+    ReactiveFormsModule,
+    MatPaginatorModule,
     RouterModule.forChild(routes),
+    ThaiDatePipe,
+    MatProgressSpinnerModule,
   ],
   declarations: [EditDegreeListComponent, EditDegreeDetailComponent],
   exports: [EditDegreeListComponent, EditDegreeDetailComponent],

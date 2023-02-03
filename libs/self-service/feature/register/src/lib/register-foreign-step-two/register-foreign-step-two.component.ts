@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { VerifyOtpForeignDialogComponent } from '@ksp/self-service/dialog';
+import { VisaClass, VisaType } from '@ksp/shared/interface';
 import { GeneralInfoService } from '@ksp/shared/service';
+import { formatDatePayload } from '@ksp/shared/utility';
 import localForage from 'localforage';
 import { Observable } from 'rxjs';
 @Component({
@@ -14,12 +15,12 @@ import { Observable } from 'rxjs';
 export class RegisterForeignStepTwoComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
-    private router: Router, //private fb: FormBuilder,
+    private router: Router,
     private fb: FormBuilder,
     private generalInfoService: GeneralInfoService
   ) {}
-  visaClassList$!: Observable<any>;
-  visaTypeList$!: Observable<any>;
+  visaClassList$!: Observable<VisaClass[]>;
+  visaTypeList$!: Observable<VisaType[]>;
   form = this.fb.group({
     idcardno: [],
     passportno: [],
@@ -33,23 +34,20 @@ export class RegisterForeignStepTwoComponent implements OnInit {
   ngOnInit() {
     this.visaClassList$ = this.generalInfoService.getVisaClass();
     this.visaTypeList$ = this.generalInfoService.getVisaType();
-  }
-  openDialog() {
-    const dialogRef = this.dialog.open(VerifyOtpForeignDialogComponent, {
-      width: '600px',
-    });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      localForage.getItem('registerForeigner').then((res: any) => {
-        const data = { ...res, ...this.form.value };
-        localForage.setItem('registerForeigner', data);
-        this.nextStep();
-      });
+    localForage.getItem('registerForeigner').then((res: any) => {
+      //console.log('load data x = ', res);
+      const form = { ...res, ...{ visaenddate: res.visaexpireddate } };
+      this.form.patchValue(formatDatePayload(form));
+      const data = { ...res, ...this.form.value };
+      localForage.setItem('registerForeigner', data);
     });
   }
+
   nextStep() {
-    this.router.navigate(['/', 'register', 'en-step-3']);
+    this.router.navigate(['/register', 'en-step-3']);
   }
+
   loginPage() {
     this.router.navigate(['/login']);
   }

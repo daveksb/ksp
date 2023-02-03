@@ -74,7 +74,30 @@ const routes: Routes = [
       ),
     canActivate: [AuthGuard],
   },
-
+  {
+    path: 'school-info',
+    loadChildren: () =>
+      import('@ksp/school-service/feature/school-info').then(
+        (m) => m.SchoolServiceFeatureSchoolInfoModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'temp-license-register',
+    loadChildren: () =>
+      import('@ksp/school-service/feature/temp-license-register').then(
+        (m) => m.SchoolServiceFeatureTempLicenseRegisterModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'report',
+    loadChildren: () =>
+      import('@ksp/school-service/feature/report').then(
+        (m) => m.SchoolServiceFeatureReportModule
+      ),
+    canActivate: [AuthGuard],
+  },
   { path: '**', component: SchoolServiceLoginComponent },
 ];
 

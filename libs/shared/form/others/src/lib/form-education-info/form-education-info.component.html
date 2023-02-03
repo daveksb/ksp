@@ -1,15 +1,17 @@
 <form [formGroup]="form">
-  <div class="ps-3 pe-3 pt-3 pb-3 bg-light">
+  <div [class]="isDarkMode ? 'p-3 bg-light' : 'p-0 bg-light'">
     <div class="box-header">
       <ng-content></ng-content>
     </div>
 
-    <!-- <input type="hidden" formControlName="id" /> -->
-
     <div class="row" *ngIf="showSelectDegree">
-      <div class="col-6 mb-3">
+      <div class="col-6 mb-2">
         <label class="form-label required">ระดับวุฒิทางการศึกษา</label>
-        <select class="form-select" formControlName="degreeLevel">
+        <select
+          class="form-select"
+          formControlName="degreeLevel"
+          [attr.disabled]="readonly ? true : null"
+        >
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option value="1">ปริญญาตรี</option>
           <option value="2">ปริญญาโท</option>
@@ -24,32 +26,58 @@
           type="checkbox"
           class="me-2"
           formControlName="isEducationDegree"
+          [attr.disabled]="readonly ? true : null"
         />
         <label class="form-label">ปริญญาทางการศึกษา</label>
       </div>
     </div>
 
     <div class="row">
-      <div class="col mb-3">
-        <label class="form-label required">ชื่อปริญญา/หลักสูตร</label>
-        <input class="form-control" type="text" formControlName="degreeName" />
+      <div class="col mb-2">
+        <label class="form-label" [class.required]="!isOptional"
+          >ชื่อปริญญา/หลักสูตร</label
+        >
+        <input
+          class="form-control"
+          type="text"
+          formControlName="degreeName"
+          [attr.disabled]="readonly ? true : null"
+        />
       </div>
-      <div class="col mb-3">
-        <label class="form-label required">สาขา/วิชาเอก</label>
-        <input class="form-control" type="text" formControlName="major" />
+      <div class="col mb-2">
+        <label class="form-label" [class.required]="!isOptional"
+          >สาขา/วิชาเอก</label
+        >
+        <input
+          class="form-control"
+          type="text"
+          formControlName="major"
+          [attr.disabled]="readonly ? true : null"
+        />
       </div>
     </div>
 
     <div class="row">
-      <div class="col mb-3">
-        <label class="form-label required">สถาบันการศึกษา</label>
-        <input class="form-control" type="text" formControlName="institution" />
+      <div class="col mb-2">
+        <label class="form-label" [class.required]="!isOptional"
+          >สถาบันการศึกษา</label
+        >
+        <input
+          class="form-control"
+          type="text"
+          formControlName="institution"
+          [attr.disabled]="readonly ? true : null"
+        />
       </div>
-      <div class="col mb-3">
+      <div class="col mb-2">
         <label class="form-label">ประเทศ</label>
-        <select class="form-select" formControlName="country">
+        <select
+          class="form-select"
+          formControlName="country"
+          [attr.disabled]="readonly ? true : null"
+        >
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option *ngFor="let c of countries" [value]="+c?.countryNo">
+          <option *ngFor="let c of countries" [value]="+c.countryNo">
             {{ c?.countryN }}
           </option>
         </select>
@@ -57,35 +85,83 @@
     </div>
 
     <div class="row">
-      <div class="col mb-3">
+      <div class="col mb-2">
         <label class="form-label">วันเดือนปี เข้าศึกษา</label>
-        <input
-          class="form-control"
-          type="date"
-          formControlName="admissionDate"
-        />
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker1"
+            autocomplete="off"
+            class="form-control form-date"
+            formControlName="admissionDate"
+            placeholder="วว/ดด/ปปปป"
+            [disabled]="readonly ? true : false"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker1"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </div>
       </div>
-      <div class="col mb-3">
+      <div class="col mb-2">
         <label class="form-label">วันเดือนปี สำเร็จการศึกษา</label>
-        <input
-          class="form-control"
-          type="date"
-          formControlName="graduateDate"
-        />
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker2"
+            autocomplete="off"
+            class="form-control form-date"
+            formControlName="graduateDate"
+            placeholder="วว/ดด/ปปปป"
+            [disabled]="readonly ? true : false"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker2"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </div>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-6 mb-3" *ngIf="showGradeInput">
+      <div class="col-6 mb-2" *ngIf="showGradeInput">
         <label class="form-label">เกรดเฉลี่ย</label>
-        <input class="form-control" type="text" formControlName="grade" />
+        <input
+          class="form-control"
+          type="text"
+          formControlName="grade"
+          [attr.disabled]="readonly ? true : null"
+        />
       </div>
-      <div class="col-6 mb-3" *ngIf="showGraduateYearInput">
+      <div class="col-6 mb-2" *ngIf="showGraduateYearInput">
         <label class="form-label">ปีการศึกษาที่เข้าศึกษา</label>
         <input
           class="form-control"
           type="text"
           formControlName="academicYear"
+        />
+      </div>
+    </div>
+
+    <div class="row" *ngIf="userEducationType === FormTypeEnum.foreign">
+      <div class="col-6 mb-2">
+        <label class="form-label">หน่วยงานที่รับรองวิทยฐานะมหาวิทยาลัย</label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="institutionApprove"
+        />
+      </div>
+      <div class="col-6 mb-2">
+        <label class="form-label">เว็บไซต์ของหน่วยงาน</label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="institutionWebsite"
         />
       </div>
     </div>

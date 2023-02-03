@@ -1,13 +1,16 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Optional,
+  Output,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
-import { Title } from '@angular/platform-browser';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {
   AbstractControl,
   FormBuilder,
   ReactiveFormsModule,
-  ValidationErrors,
   ValidatorFn,
   Validators,
 } from '@angular/forms';
@@ -21,10 +24,9 @@ import { validatorMessages } from '@ksp/shared/utility';
   styleUrls: ['./forgot-password-set-new-password.component.scss'],
 })
 export class ForgotPasswordSetNewPasswordComponent {
-  @Output() confirmed = new EventEmitter<any>();
   form = this.fb.group(
     {
-      newPassword: ['', Validators.required],
+      newPassword: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
     },
     {
@@ -32,7 +34,14 @@ export class ForgotPasswordSetNewPasswordComponent {
     }
   );
 
-  constructor(public dialog: MatDialog, private fb: FormBuilder) {}
+  @Output() confirmed = new EventEmitter<any>();
+  validatorMessages = validatorMessages;
+
+  constructor(
+    public dialog: MatDialog,
+    private fb: FormBuilder,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
 
   cancel() {
     this.dialog.closeAll();
@@ -53,10 +62,16 @@ export class ForgotPasswordSetNewPasswordComponent {
       return validatorMessages.passwordNotMatching;
     return null;
   }
+
   get disabledSubmit() {
     return (
-      !this.form.controls.confirmPassword.valid || !this.form.controls.newPassword.valid
+      !this.form.controls.confirmPassword.valid ||
+      !this.form.controls.newPassword.valid
     );
+  }
+
+  get password() {
+    return this.form.controls.newPassword;
   }
 }
 

@@ -1,16 +1,22 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 
 @Component({
   selector: 'ksp-request-header-info',
   templateUrl: './request-header-info.component.html',
   styleUrls: ['./request-header-info.component.scss'],
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ThaiDatePipe, RequestNoPipe],
 })
 export class RequestHeaderInfoComponent {
-  @Input() requestDate: string | null = '';
-  @Input() requestNumber: string | null = '';
   @Input() requestLabel1 = 'วันที่ทำรายการ';
-  @Input() requestLabel2 = 'เลขใบคำขอ';
+  @Input() requestLabel2 = 'เลขแบบคำขอ';
+
+  @Input() requestNumber: string | null = '';
+  @Input() requestDate: string | null | undefined = '';
+
+  @Input() showCurrentDate = false;
+
+  today = `${new Date()}`;
 }

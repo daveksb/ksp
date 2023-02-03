@@ -1,0 +1,246 @@
+<form [formGroup]="form">
+  <ksp-request-header-info
+    [requestLabel2]="'เลขที่รายการ'"
+    [requestNumber]="requestNumber"
+  ></ksp-request-header-info>
+
+  <hr />
+
+  <div class="box-header">บันทึกการสืบสวนข้อเท็จจริง</div>
+  <div class="bg-white">
+    <div class="row">
+      <div class="col mb-3">
+        <label class="form-label">คำสั่งสำนักงานเลขาธิการคุรุสภาที่ </label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="investigationorderno"
+        />
+      </div>
+      <div class="col mb-3">
+        <label class="form-label">ลงวันที่ </label>
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker"
+            autocomplete="off"
+            class="form-control form-date"
+            formControlName="investigationorderdate"
+            placeholder="วว/ดด/ปปปป"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between">
+    <div class="form-label">คณะอนุกรรมการสืบสวนข้อเท็จจริง</div>
+    <div role="button" class="text-primary" (click)="addRow()">
+      + เพิ่มรายการ
+    </div>
+  </div>
+  <div class="table-responsive mb-3">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ลำดับ</th>
+          <th scope="col">หมายเลขบัตรประชาชน</th>
+          <th scope="col">เลขที่หนังสืออนุญาต</th>
+          <th scope="col">ตำแหน่งกรรมการ</th>
+          <th scope="col"></th>
+          <th scope="col">ชื่อ</th>
+          <th scope="col">นามสกุล</th>
+          <th scope="col">ตำแหน่ง</th>
+          <th scope="col">สังกัด - หน่วยงาน/สถานศึกษา</th>
+          <!-- <th scope="col">แก้ไข</th> -->
+          <th scope="col">ลบ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container formArrayName="investigationsubcommittee">
+          <ng-container *ngFor="let row of members.controls; let i = index">
+            <tr [formGroupName]="i">
+              <td class="text-center">{{ i + 1 }}</td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="idcardno"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="idnumber"
+                />
+              </td>
+              <td>
+                <select class="form-select" formControlName="positioncommittee">
+                  <option disabled selected hidden value="null">
+                    กรุณาเลือก
+                  </option>
+                  <option value="1">ประธานอนุกรรมการ</option>
+                  <option value="2">อนุกรรมการ</option>
+                  <option value="3">อนุกรรมการและเลขานุการ</option>
+                  <option value="4">ผู้ช่วยเลขานุการ</option>
+                </select>
+                <!-- <input
+                  type="text"
+                  class="form-control"
+                  formControlName="positioncommittee"
+                /> -->
+              </td>
+              <td>
+                <select class="form-select" formControlName="prefix">
+                  <option value="null" selected hidden disabled>เลือก</option>
+                  <option
+                    *ngFor="let prefix of prefixList$ | async"
+                    [value]="prefix.id"
+                  >
+                    {{ prefix?.name_th }}
+                  </option>
+                </select>
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="firstname"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="lastname"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="position"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="bureau"
+                />
+              </td>
+              <!-- <td>
+                <i
+                  role="button"
+                  class="bi bi-pencil-square fs-5 text-primary"
+                ></i>
+              </td> -->
+              <td>
+                <i
+                  (click)="deleteRow(i)"
+                  role="button"
+                  class="bi bi-trash fs-5 text-danger"
+                ></i>
+              </td>
+            </tr>
+          </ng-container>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="bg-white">
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">วันที่ดำเนินการสืบสวนข้อเท็จจริง </label>
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker2"
+            autocomplete="off"
+            class="form-control form-date"
+            formControlName="investigationdate"
+            placeholder="วว/ดด/ปปปป"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker2"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </div>
+      </div>
+      <div class="col">
+        <label class="form-label"
+          >วันที่จัดทำรายงานสืบสวนข้อเท็จจริงเสนอเลขาธิการคุรุสภา
+        </label>
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker3"
+            autocomplete="off"
+            class="form-control form-date"
+            formControlName="investigationreportdate"
+            placeholder="วว/ดด/ปปปป"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker3"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker3></mat-datepicker>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col">
+        <label class="form-label">รายงานผลการสืบสวน </label>
+        <textarea
+          class="form-control"
+          type="text"
+          rows="3"
+          formControlName="investigationreport"
+        ></textarea>
+      </div>
+    </div>
+    <ksp-file-upload></ksp-file-upload>
+  </div>
+
+  <div class="bg-light p-3 mt-3">
+    <div class="box-header">การพิจารณาดำเนินการ</div>
+
+    <div formGroupName="investigationresult" class="d-flex flex-column">
+      <ng-container *ngFor="let item of decisions">
+        <div class="d-flex flex-row align-items-center mb-2">
+          <input
+            type="radio"
+            class="form-check-input"
+            value="{{ item.value }}"
+            formControlName="{{ item.name }}"
+          />
+          <label class="form-label ms-2">{{ item.label }}</label>
+        </div>
+      </ng-container>
+
+      <div class="row">
+        <div class="col">
+          <label class="form-label">สาเหตุเนื่องจาก </label>
+          <textarea
+            class="form-control"
+            type="text"
+            rows="3"
+            formControlName="causedetail"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -39,15 +39,6 @@
     overflow: initial !important;
     font-size: 14px !important;
   }
-
-  /* .mat-step-text-label {
-    text-overflow: clip;
-    overflow: initial;
-  } */
-
-  /* .mat-horizontal-content-container {
-    padding: 0 !important;
-  } */
 }
 
 .mat-tab-label-active {
@@ -71,7 +62,6 @@
   visibility: hidden !important;
 }
 
-/*  Mat stepper */
 .mat-stepper-label-position-bottom .mat-horizontal-stepper-header-container {
   width: auto;
   align-self: center;
@@ -133,6 +123,11 @@ tr[class^='mat'] {
   font-family: var(--bs-body-font-family);
 }
 
+button.mat-menu-item {
+  font-family: 'ksp bold';
+  font-size: 18px;
+}
+
 .mat-menu-panel {
   max-width: none !important;
 }
@@ -147,15 +142,49 @@ tr[class^='mat'] {
 }
 
 .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
-  line-height: 36px;
-  width: 16.25rem;
+  line-height: 2.5rem;
+  width: auto;
 }
 
-//mat-list
 .mat-list-text {
   padding-right: 0 !important;
 }
 
 .mat-list-base {
   padding-top: 0 !important;
+}
+
+.mat-tab-label.mat-tab-label-active {
+  color: #0056ff;
+}
+
+.mat-input-element {
+  border: 1px solid #ced4da;
+  background-color: #fff;
+}
+
+.mat-input-element:disabled {
+  background-color: #e9ecef;
+}
+
+.mat-icon-button {
+  color: #3f89fe;
+}
+
+.mat-calendar-table-header th {
+  padding: 0 !important;
+}
+
+.mat-calendar-table-header th {
+  font-size: 14px !important;
+}
+
+input.mat-input-element {
+  margin: 0 !important;
+}
+
+th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
+  padding: 0 8px !important;
 }

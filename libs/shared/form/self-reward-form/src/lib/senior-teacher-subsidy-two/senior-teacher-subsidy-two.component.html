@@ -1,25 +1,56 @@
 <form [formGroup]="form">
-  <div class="mx-3 box__full">
-    <div class="d-flex align-items-center mb-2">
-      <div class="d-flex me-3 align-items-center">
-        <input type="radio" class="me-2" value="1" formControlName="incomeStatus" />
-        <label class="form-label">มีรายได้</label>
+  <div class="box-header text-primary mb-3">คู่สมรส</div>
+
+  <div class="row-cols-3">
+    <div class="row col-12 m-0">
+      <div class="col-md-3 mb-3 p-0">
+        <div class="d-flex align-items-center">
+          <input
+            class="form-check-input my-0 radio"
+            type="radio"
+            value="1"
+            formControlName="incomeStatus"
+          />
+          <div class="form-control">
+            <label class="ms-4"> มีรายได้ </label>
+          </div>
+        </div>
       </div>
 
-      <div class="d-flex">
-        <input class="form-control" type="text" formControlName="income" />
+      <div class="col-md-5 p-0 mb-3">
+        <div class="d-flex align-items-center">
+          <div class="form-label text-center w-100">จำนวนเงิน (บาท)</div>
+          <input class="form-control" type="text" formControlName="income" />
+        </div>
       </div>
-      <label class="ms-3 form-label">จำนวน (บาท)</label>
     </div>
 
-    <div class="d-flex align-items-center mb-2">
-      <input type="radio" class="me-2" value="2" formControlName="incomeStatus" />
-      <label class="form-label">ไม่มีรายได้</label>
+    <div class="col-md-3 col-12 mb-3">
+      <div class="d-flex align-items-center">
+        <input
+          class="form-check-input my-0 radio"
+          type="radio"
+          value="2"
+          formControlName="incomeStatus"
+        />
+        <div class="form-control">
+          <label class="ms-4"> ไม่มีรายได้ </label>
+        </div>
+      </div>
     </div>
 
-    <div class="d-flex align-items-center mb-2">
-      <input type="radio" class="me-2" value="3" formControlName="incomeStatus" />
-      <label class="form-label">พิการ (ด้านจิตเวช/สมอง/ร่างกาย)</label>
+    <div class="col-md-3 col-12 mb-3">
+      <div class="d-flex align-items-center">
+        <input
+          class="form-check-input my-0 radio"
+          type="radio"
+          value="3"
+          formControlName="incomeStatus"
+        />
+        <div class="form-control">
+          <label class="ms-4"> พิการ (ด้านจิตเวช/สมอง/ร่างกาย) </label>
+        </div>
+      </div>
     </div>
   </div>
 </form>

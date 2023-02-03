@@ -6,7 +6,13 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { SchForgetPassword } from '@ksp/shared/interface';
+import { LoaderService, SchoolUserService } from '@ksp/shared/service';
+import { passwordPattern, validatorMessages } from '@ksp/shared/utility';
+import { UntilDestroy } from '@ngneat/until-destroy';
+import localForage from 'localforage';
+import * as CryptoJs from 'crypto-js';
+import { Subject } from 'rxjs';
 
 @UntilDestroy()
 @Component({
@@ -14,20 +20,50 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   styleUrls: ['./set-new-password.component.scss'],
 })
 export class SetNewPasswordComponent implements OnInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
+  eyeIconClicked = false;
+  eyeIconClickedSecond = false;
+  validatorMessages = validatorMessages;
+  payload!: SchForgetPassword;
+  username = '';
+
   form = this.fb.group({
-    password: ['', Validators.required],
-    rePassword: ['', Validators.required],
+    password: [
+      null,
+      [Validators.required, Validators.pattern(passwordPattern)],
+    ],
+    rePassword: [null, Validators.required],
   });
 
   constructor(
     private router: Router,
     public dialog: MatDialog,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private userService: SchoolUserService,
+    private loaderService: LoaderService
   ) {}
 
+  get disableBtn() {
+    const { password, rePassword } = this.form.getRawValue();
+    this.validatorMessages.passwordNotMatching;
+    return password !== rePassword || !password || !rePassword;
+  }
+
+  get passwordNotMatching() {
+    const { password, rePassword } = this.form.getRawValue();
+    this.validatorMessages.passwordNotMatching;
+    return password !== rePassword && rePassword;
+  }
+
+  get password() {
+    return this.form.controls.password;
+  }
+
   ngOnInit(): void {
-    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-      //console.log('form value = ', res);
+    localForage.getItem('schSetNewPassword').then((res: any) => {
+      this.payload = res;
+      this.username = res.schoolid;
+      console.log('res = ', res);
     });
   }
 
@@ -37,7 +73,6 @@ export class SetNewPasswordComponent implements OnInit {
 
   accept() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
         subTitle: `คุณยืนยันข้อมูลใช่หรือไม่? `,
@@ -48,24 +83,33 @@ export class SetNewPasswordComponent implements OnInit {
 
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.onCompleted();
+        this.setNewPassword();
       }
+    });
+  }
+
+  setNewPassword() {
+    const form = this.form.value;
+    const password = CryptoJs.SHA256(`${form.password}`).toString();
+    this.payload = { ...this.payload, ...{ schpassword: password } };
+    this.userService.setForgetPassword(this.payload).subscribe(() => {
+      this.onCompleted();
     });
   }
 
   onCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
       data: {
         header: `ทำรายการสำเร็จ`,
         subContent: `ระบบได้ทำการเปลี่ยนรหัสผ่านให้ท่านเรียบร้อยแล้ว
         กรุณาเข้าสู่ระบบใหม่อีกครั้ง`,
-        buttonLabel: 'เข้าสู่ระบบ',
+        btnLabel: 'เข้าสู่ระบบ',
       },
     });
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
+        localForage.removeItem('schSetNewPassword');
         this.navigateBack();
       }
     });

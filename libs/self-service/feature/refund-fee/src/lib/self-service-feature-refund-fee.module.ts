@@ -8,6 +8,7 @@ import { RequestStatusComponent } from '@ksp/self-service/ui';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { FormRefundFeeDetailComponent } from '@ksp/shared/form/license';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export const routes: Routes = [
   {
@@ -16,6 +17,10 @@ export const routes: Routes = [
     children: [
       {
         path: 'request',
+        component: RefundFeeRequestComponent,
+      },
+      {
+        path: 'request/:id',
         component: RefundFeeRequestComponent,
       },
     ],
@@ -31,6 +36,7 @@ export const routes: Routes = [
     FormRefundFeeDetailComponent,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
+    MatProgressSpinnerModule
   ],
   declarations: [RefundFeeRequestComponent],
   exports: [RefundFeeRequestComponent],

@@ -1,3 +1,8 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav-2>ตรวจสอบยื่นผู้ประสานงาน</ksp-top-nav-2>
 
 <div class="bg-secondary bg-opacity-10 py-4 full-height">
@@ -9,35 +14,43 @@
       (clear)="handleClear($event)"
       (search)="handleSearch($event)"
       [searchType]="'uni'"
+      [subsearchType]="'uni_searchstatus'"
     ></ksp-retired-search>
 
     <ng-container *ngIf="data.length">
       <hr />
       <div class="text-primary box-header">ผลการค้นหา</div>
-      <table class="table">
+      <table class="table table-responsive">
         <thead style="background-color: #edf6ff">
           <tr>
-            <th>สิทธิ์สำหรับการเข้าใช้งาน</th>
-            <th>ชื่อ-นามสกุล</th>
-            <th>เบอร์โทรศัพท์</th>
-            <th>สถานะ</th>
+            <!-- <th style="width: 30%; min-width: 300px;">สิทธิ์สำหรับการเข้าใช้งาน</th> -->
+            <th style="width: 30%; min-width: 150px;">ชื่อ-นามสกุล</th>
+            <!-- <th style="width: 20%; min-width: 100px;">เบอร์โทรศัพท์</th> -->
+            <th style="width: 20%; min-width: 100px;">สถานะ</th>
           </tr>
         </thead>
         <tbody class="body__table">
           <tr class="text-secondary" *ngFor="let item of data">
-            <td>{{ item.permissonright }}</td>
+            <!-- <td>{{ item.educationoccupy.permissionname }}</td> -->
             <td>{{ item.firstnameth + ' ' + item.lastnameth }}</td>
-            <td>{{ item.phone }}</td>
-            <td>{{ item.isuseractive == '1' ? 'อนุมัติเข้าใช้งาน': 'ไม่อนุมัติเข้าใช้งาน' }}</td>
+            <!-- <td>{{ item.contactphone }}</td> -->
+            <td>{{ item.requeststatusname }}</td>
           </tr>
         </tbody>
       </table>
-
+      <mat-paginator
+        [length]="pageEvent.length"
+        [pageSize]="pageEvent.pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        (page)="onPaginatorEvent($event)"
+        [pageIndex]="pageEvent.pageIndex"
+      >
+    </mat-paginator>
       <div class="py-2 d-flex justify-content-center">
         <a
           class="btn btn-primary"
           type="buton"
-          href="/login"
+          (click)="goLogin()"
           >เข้าสู่ระบบ</a
         >
       </div>

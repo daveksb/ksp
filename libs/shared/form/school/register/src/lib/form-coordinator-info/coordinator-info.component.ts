@@ -2,9 +2,16 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { SchoolRequestType, UserInfoFormType } from '@ksp/shared/constant';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
 import {
-  createDefaultUserInfoForm,
+  Country,
+  KspFormBaseComponent,
+  Nationality,
+  Prefix,
+  VisaClass,
+  VisaType,
+} from '@ksp/shared/interface';
+import {
+  createUserInfoForm,
   providerFactory,
   validatorMessages,
 } from '@ksp/shared/utility';
@@ -21,18 +28,23 @@ export class FormCoordinatorInfoComponent
   extends KspFormBaseComponent
   implements OnInit
 {
-  @Input() isDarkMode = false;
-  @Input() prefixList: any[] = [];
-  @Input() countryList: any[] = [];
-  @Input() nationList: any[] = [];
-  @Input() visaClassList: any[] = [];
-  @Input() visaTypeList: any[] = [];
+  @Input() positionLabel = 'ตำแหน่ง';
+  @Input() hideForm1 = false;
+  @Input() hideForm2 = false;
   @Input() isSchoolService = true;
   @Input() displayMode!: number[];
-
+  @Input() systemform = 'default';
+  @Input() prefixList: Prefix[] | null = [];
+  @Input() countryList: Country[] | null = [];
+  @Input() nationList: Nationality[] | null = [];
+  @Input() visaClassList: VisaClass[] | null = [];
+  @Input() visaTypeList: VisaType[] | null = [];
+  @Input() occupyList: Array<any> | null = [];
+  @Input() hideIdcard = false;
   RequestTypeEnum = SchoolRequestType;
   validatorMessages = validatorMessages;
   FormTypeEnum = UserInfoFormType;
+  validprefix = true;
 
   /**
    * Dark Mode : all inputs will have gray background and form container will have white background
@@ -42,12 +54,11 @@ export class FormCoordinatorInfoComponent
    * Use in E-service, School-Service
    */
 
-  override form = createDefaultUserInfoForm(this.fb);
+  override form = createUserInfoForm(this.fb);
 
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value: any) => {
         this.onChange(value);
         this.onTouched();
@@ -57,25 +68,59 @@ export class FormCoordinatorInfoComponent
   ngOnInit(): void {
     // ถ้าเป็น form คนไทยไม่ต้อง validate field เหล่านี้
     //console.log('display mode = ', this.displayMode);
+
     this.form.controls.sex.clearValidators();
-    this.form.controls.idcardno.clearValidators();
     this.form.controls.birthdate.clearValidators();
+
     if (this.displayMode.includes(UserInfoFormType.thai)) {
       this.form.controls.passportno.clearValidators();
       this.form.controls.passportstartdate.clearValidators();
       this.form.controls.passportenddate.clearValidators();
       this.form.controls.position.clearValidators();
-    }
-
-    if (this.displayMode.includes(UserInfoFormType.foreign)) {
-      this.form.controls.idcardno.clearValidators();
-      this.form.controls.workphone.clearValidators();
-      this.form.controls.contactphone.clearValidators();
-      this.form.controls.position.clearValidators();
-      this.form.controls.sex.clearValidators();
-      this.form.controls.email.clearValidators();
+      this.form.controls.kuruspano.clearValidators();
     }
   }
+
+  prefixChanged(evt: any) {
+    const prefix = evt.target?.value;
+
+    if (prefix === '1') {
+      const temp: any = { sex: '1' };
+      this.form.patchValue(temp);
+    } else if (['2', '3', '4', '5'].includes(prefix)) {
+      const temp: any = { sex: '2' };
+      this.form.patchValue(temp);
+    } else {
+      const temp: any = { sex: '3' };
+      this.form.patchValue(temp);
+    }
+
+    const en = { prefixen: prefix };
+    const th = { prefixth: prefix };
+    this.form.patchValue(th);
+    this.form.patchValue(en);
+  }
+
+  changePrefix(evt: any) {
+    if (
+      this.form.controls.prefixth &&
+      this.form.controls.prefixen &&
+      this.form.controls.prefixth.value != this.form.controls.prefixen.value
+    ) {
+      this.validprefix = false;
+    } else {
+      this.validprefix = true;
+    }
+  }
+
+  get prefixth() {
+    return this.form.controls.prefixth;
+  }
+
+  get prefixen() {
+    return this.form.controls.prefixen;
+  }
+
   get idCardNo() {
     return this.form.controls.idcardno;
   }

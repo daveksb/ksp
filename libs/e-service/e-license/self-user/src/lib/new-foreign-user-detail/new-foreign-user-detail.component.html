@@ -1,0 +1,239 @@
+<ksp-top-nav>
+  <span header
+    >แบบคำขอรหัสเข้าใช้งานระบบบริการตนเอง (Self Service) สำหรับชาวต่างชาติ</span
+  >
+  <span subHeader>ตรวจสอบและอนุมัติแบบคำขอรหัสเข้าใช้งาน</span>
+</ksp-top-nav>
+
+<div class="bg-secondary bg-opacity-10 px-4 py-2">
+  <div class="box-header">รายละเอียดแบบคำขอรหัสเข้าใช้งานระบบ</div>
+  <form [formGroup]="form">
+    <div class="bg-white p-3">
+      <ksp-request-header-info
+        [requestDate]="kspRequest.requestdate"
+      ></ksp-request-header-info>
+      <hr />
+      <div class="row justify-content-center">
+        <div class="col mb-3">
+          <label class="form-label required"
+            >Teachers Council of Thailand ID number</label
+          >
+          <input type="text" class="form-control" formControlName="kuruspano" />
+        </div>
+
+        <div
+          class="col-auto d-flex justify-content-center align-items-center mb-3"
+        >
+          <br />
+          Or
+        </div>
+
+        <div class="col mb-3">
+          <label class="form-label required">Passport No.</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="passportno"
+          />
+        </div>
+      </div>
+
+      <div class="bg-light p-3 mb-3">
+        <div class="row">
+          <div class="col-md mb-2">
+            <label class="form-label required">Title</label>
+            <select formControlName="prefixen" class="form-select">
+              <option value="null" selected hidden disabled>
+                Please Select
+              </option>
+              <option
+                *ngFor="let prefix of prefixList$ | async"
+                [value]="prefix.id"
+              >
+                {{ prefix?.name_en }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md mb-2">
+            <label class="form-label required">First name</label>
+            <input
+              type="text"
+              formControlName="firstnameen"
+              class="form-control"
+            />
+          </div>
+          <div class="col-md mb-2">
+            <label class="form-label required">Middle name</label>
+            <input
+              type="text"
+              formControlName="middlenameen"
+              class="form-control"
+            />
+          </div>
+          <div class="col-md mb-2">
+            <div class="form-group">
+              <label class="form-label required">Last Name</label>
+              <input
+                type="text"
+                formControlName="lastnameen"
+                class="form-control"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md mb-2">
+            <label class="form-label">Date of Birth</label>
+            <input
+              type="date"
+              formControlName="birthdate"
+              class="form-control"
+            />
+          </div>
+          <div class="col-md mb-2">
+            <label class="form-label">Country</label>
+            <select class="form-select" formControlName="country">
+              <option value="null" selected hidden disabled>
+                Please Select
+              </option>
+              <option
+                *ngFor="let c of countries$ | async"
+                [value]="+c?.countryNo"
+              >
+                {{ c?.countryEn }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md mb-2">
+            <label class="form-label">Nationality</label>
+            <select class="form-select" formControlName="nationality">
+              <option value="null" selected hidden disabled>
+                Please Select
+              </option>
+              <option
+                *ngFor="let n of nationalitys$ | async"
+                [value]="n.nationId"
+              >
+                {{ n.nationNameEn }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md mb-2">
+            <label class="form-label required">Mobile number</label>
+            <input
+              type="text"
+              formControlName="contactphone"
+              class="form-control"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-2">
+            <label class="form-label">E-mail</label>
+            <input type="text" formControlName="email" class="form-control" />
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-light p-3">
+        <div class="row">
+          <div class="col-md mb-2">
+            <label class="form-label">Identification Number</label>
+            <input
+              type="text"
+              formControlName="idcardno"
+              class="form-control"
+            />
+          </div>
+          <div class="col-md mb-2">
+            <label class="form-label required">Passport Number</label>
+            <input
+              type="text"
+              formControlName="passportno"
+              class="form-control"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md mb-2">
+            <label class="form-label">Date of issue</label>
+            <input
+              type="date"
+              formControlName="passportstartdate"
+              class="form-control"
+            />
+          </div>
+          <div class="col-md mb-2">
+            <label class="form-label">Date of Expiry</label>
+            <input
+              type="date"
+              formControlName="passportenddate"
+              class="form-control"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md mb-2">
+            <label class="form-label">Visa Class</label>
+            <select formControlName="visaclass" class="form-select">
+              <option value="null" selected disabled hidden>กรุณาเลือก</option>
+              <option *ngFor="let v of visaClassList$ | async" [value]="v.id">
+                {{ v.name }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md mb-2">
+            <label class="form-label">Type Visa</label>
+            <select formControlName="visatype" class="form-select">
+              <option value="null" selected hidden disabled>กรุณาเลือก</option>
+              <option *ngFor="let v of visaTypeList$ | async" [value]="v.id">
+                {{ v.nameTh }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-2">
+            <label class="form-label">Valid Until</label>
+            <input
+              formControlName="visaexpiredate"
+              type="date"
+              class="form-control"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <form [formGroup]="verifyForm">
+    <div class="bg-white p-3 mt-3">
+      <e-service-license-check
+        [mode]="kspRequest.status === '1' ? 'edit' : 'view'"
+        formControlName="result"
+        [checkedResult]="checkedResult"
+        [choices]="approveChoices"
+      ></e-service-license-check>
+    </div>
+  </form>
+</div>
+
+<div class="sticky-bottom border">
+  <ksp-bottom-nav
+    [isFirstPage]="true"
+    [isLastPage]="true"
+    [showCenterButtons]="true"
+    [showSaveButton]="true"
+    (cancelClicked)="cancel()"
+    (saveClicked)="confirm()"
+    [disableSaveButton]="!verifyForm.valid"
+  >
+  </ksp-bottom-nav>
+</div>

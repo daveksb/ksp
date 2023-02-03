@@ -1,6 +1,11 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav>
   <span header>
-    กิจกรรมพัฒนาตนเอง (หนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต)
+    กิจกรรมพัฒนาตนเอง (หนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีหนังสืออนุญาต)
   </span>
   <span subHeader>เพิ่มกิจกรรมการพัฒนาตนเอง</span>
 </ksp-top-nav>
@@ -8,97 +13,56 @@
 <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height-2">
   <div class="box-header">รายละเอียดเพิ่มกิจกรรมพัฒนาตนเอง</div>
 
-  <div class="bg-white p-2">
-    <div class="px-3">
-      <ksp-request-header-info [requestDate]="today"></ksp-request-header-info>
-      <hr />
-    </div>
+  <div class="bg-white p-3">
+    <ksp-request-header-info></ksp-request-header-info>
+    <hr />
 
-    <div class="bg-light p-4 mx-3">
+    <!-- <div class="bg-light py-5 mb-3">
       <ksp-license-info></ksp-license-info>
-    </div>
+    </div> -->
 
-    <div class="bg-light py-2 px-4 mx-3 mt-3">
+    <div class="bg-light px-3 py-3 mb-3">
       <div class="box-header">
-        ข้อมูลหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต
+        ข้อมูลหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีหนังสืออนุญาต
       </div>
 
-      <table class="table">
+      <table class="table" *ngIf="requestId">
         <thead class="header__table">
           <tr>
-            <th scope="col">ลำดับ</th>
             <th scope="col">เลขที่หนังสืออนุญาต</th>
             <th scope="col">ชื่อ-นามสกุล</th>
             <th scope="col">วันที่ออกหนังสือ</th>
             <th scope="col">วันที่สิ้นสุด</th>
-            <th scope="col">ดูเอกสาร</th>
+            <th scope="col" class="text-center">ดูเอกสาร</th>
           </tr>
         </thead>
         <tbody class="body__table">
           <tr>
-            <td>1</td>
-            <td>123xxx</td>
-            <td>นายประวิทย์ มาสถาพร</td>
-            <td>12/สิงหาคม/2565</td>
-            <td>12/สิงหาคม/2565</td>
-            <td>
-              <i role="button" class="box-header text-success bi bi-eye"></i>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div
-      class="bg-light py-2 px-4 mx-3 mt-3"
-      *ngIf="pageType === activityPageMode.view"
-    >
-      <div class="box-header">ข้อมูลกิจกรรมพัฒนาตนเอง</div>
-
-      <table class="table">
-        <thead class="header__table">
-          <tr>
-            <th scope="col">ลำดับ</th>
-            <th scope="col">กิจกรรมพัฒนาตนเอง</th>
-            <th scope="col">วันที่แก้ไขล่าสุด</th>
-            <th scope="col">วันที่บันทึก</th>
-            <th scope="col">แก้ไขข้อมูล</th>
-            <th scope="col">ดูเข้อมูล</th>
-          </tr>
-        </thead>
-        <tbody class="body__table">
-          <tr>
-            <td>1</td>
-            <td>
-              มีวุฒิเพิ่มขึ้นในสาขาที่เกี่ยวข้องกับการประกอบวิชาชีพทางการศึกษา
-            </td>
-            <td>12/สิงหาคม/2565</td>
-            <td>12/สิงหาคม/2565</td>
-            <td>
-              <i
-                role="button"
-                class="box-header text-primary bi bi-pencil-square"
-                (click)="edit(activityPageMode.edit, staffId)"
-              ></i>
-            </td>
-            <td>
+            <td>{{ tempLicense?.licenseno }}</td>
+            <td>{{ tempLicense?.firstname }} {{ tempLicense?.lastname }}</td>
+            <td>{{ tempLicense?.startdate | thaiDate }}</td>
+            <td>{{ tempLicense?.enddate | thaiDate }}</td>
+            <td class="text-center">
               <i
                 role="button"
                 class="box-header text-success bi bi-eye"
-                (click)="view(activityPageMode.edit, staffId)"
+                (click)="genPdf(pdfTempLicense)"
               ></i>
             </td>
           </tr>
         </tbody>
       </table>
+      <ng-container *ngIf="!requestId">
+        <div class="text-center fs-5 py-5">ไม่พบข้อมูล</div></ng-container
+      >
     </div>
 
-    <ng-container *ngIf="pageType === activityPageMode.edit">
-      <div class="bg-light py-2 px-4 m-3">
+    <ng-container>
+      <div class="bg-light px-3 py-3">
         <form [formGroup]="form">
-          <div class="box-header required mb-2">กิจกรรมการพัฒนาตนเอง</div>
+          <div class="box-header mb-2">กิจกรรมการพัฒนาตนเอง</div>
           <div class="row">
-            <div class="col-8 mb-3">
+            <div class="col-8 mb-2">
               <select
                 formControlName="type"
                 class="form-select"
@@ -118,89 +82,102 @@
               </select>
             </div>
           </div>
-          <!-- <ng-template kspDynamicComponent formControlName="test"></ng-template> -->
+
           <ksp-activity-add-degree
+            [mode]="mode"
             *ngIf="selector.value === '0'"
             formControlName="detail"
           ></ksp-activity-add-degree>
 
           <ksp-activity-diploma-receive
+            [mode]="mode"
             *ngIf="selector.value === '1'"
             formControlName="detail"
           ></ksp-activity-diploma-receive>
 
           <ksp-activity-seminar
+            [mode]="mode"
             *ngIf="selector.value === '2'"
             formControlName="detail"
           ></ksp-activity-seminar>
 
           <ksp-activity-academic-archivement
+            [mode]="mode"
             *ngIf="selector.value === '3'"
             formControlName="detail"
           ></ksp-activity-academic-archivement>
 
           <ksp-activity-lecturer
+            [mode]="mode"
             *ngIf="selector.value === '4'"
             formControlName="detail"
           ></ksp-activity-lecturer>
 
           <ksp-activity-write-book
+            [mode]="mode"
             *ngIf="selector.value === '5'"
             formControlName="detail"
           ></ksp-activity-write-book>
 
           <ksp-activity-innovation
+            [mode]="mode"
             *ngIf="selector.value === '6'"
             formControlName="detail"
           ></ksp-activity-innovation>
 
           <ksp-activity-research
+            [mode]="mode"
             *ngIf="selector.value === '7'"
             formControlName="detail"
           ></ksp-activity-research>
 
           <ksp-activity-reward
+            [mode]="mode"
             *ngIf="selector.value === '8'"
             formControlName="detail"
           ></ksp-activity-reward>
 
           <ksp-activity-lecture-register
+            [mode]="mode"
             *ngIf="selector.value === '9'"
             formControlName="detail"
           ></ksp-activity-lecture-register>
 
           <ksp-activity-study-tour
+            [mode]="mode"
             *ngIf="selector.value === '10'"
             formControlName="detail"
           ></ksp-activity-study-tour>
 
           <ksp-activity-learning-material
+            [mode]="mode"
             *ngIf="selector.value === '11'"
             formControlName="detail"
           ></ksp-activity-learning-material>
         </form>
       </div>
 
-      <div class="mx-3">
-        <ng-container *ngIf="selector.value !== ''">
-          <ksp-form-attachment
+      <ng-container *ngIf="selector.value !== 'null'">
+        <div class="mt-3">
+          <ksp-form-multi-attachment
+            [mode]="mode"
+            [uniqueTimestamp]="uniqueNo"
             title="กรุณาแนบหลักฐานประกอบการปฏิบัติงาน"
             [groups]="attachFiles"
-          ></ksp-form-attachment
-        ></ng-container></div
+          ></ksp-form-multi-attachment></div></ng-container
     ></ng-container>
   </div>
 </div>
 
-<div class="sticky-bottom border">
+<div class="sticky-bottom border px-2">
   <ksp-bottom-nav
     [isFirstPage]="true"
     [isLastPage]="true"
     [showCenterButtons]="true"
     [showCancelButton]="true"
-    [showSaveButton]="true"
-    [disableSaveButton]="form.invalid"
-    (saveClicked)="submit()"
-    (cancelClicked)="cancel()"
+    [showSaveButton]="pageType === 1"
+    [disableSaveButton]="!form.valid"
+    (saveClicked)="confirmDialog()"
+    (cancelClicked)="pageType === 1 ? cancel() : back()"
   ></ksp-bottom-nav>
 </div>

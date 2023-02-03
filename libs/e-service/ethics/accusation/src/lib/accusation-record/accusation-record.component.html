@@ -1,14 +1,18 @@
 <form [formGroup]="form">
   <ksp-request-header-info
-    [requestLabel1]="'วันที่ทำรายการ'"
     [requestLabel2]="'เลขที่รายการ'"
-    [requestDate]="'10 ตุลาคม 2565'"
-    [requestNumber]="'112234467876543'"
+    [requestNumber]="requestNumber"
   ></ksp-request-header-info>
   <hr />
   <div class="box-header">ข้อมูลผู้กล่าวหา/กล่าวโทษ</div>
   <div class="d-flex justify-content-end">
-    <label class="text-primary" role="button">+ เพิ่มรายการ</label>
+    <label
+      class="text-primary"
+      role="button"
+      (click)="addRow()"
+      *ngIf="members.length < 5"
+      >+ เพิ่มรายการ</label
+    >
   </div>
 
   <div class="table-responsive mb-3">
@@ -17,50 +21,99 @@
         <tr>
           <th scope="col">ลำดับ</th>
           <th scope="col">หมายเลขบัตรประชาชน</th>
+          <th scope="col"></th>
           <th scope="col">ชื่อ</th>
           <th scope="col">นามสกุล</th>
           <th scope="col">เบอร์โทรศัพท์</th>
-          <th scope="col">แก้ไข</th>
+          <!-- <th scope="col">แก้ไข</th> -->
           <th scope="col">ลบ</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th>1</th>
-          <th>x-xxxx-xxxx-xx-x</th>
-          <th>xxxxxx</th>
-          <th>yyyyyy</th>
-          <th>098-xxx-xxxx</th>
-          <th>
-            <i role="button" class="bi bi-pencil-square fs-5 text-primary"></i>
-          </th>
-          <th>
-            <i role="button" class="bi bi-trash fs-5 text-danger"></i>
-          </th>
-        </tr>
+        <ng-container formArrayName="accuserinfo">
+          <ng-container *ngFor="let row of members.controls; let i = index">
+            <tr [formGroupName]="i">
+              <th class="text-center">{{ i + 1 }}</th>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="idcardno"
+                />
+              </td>
+              <td>
+                <select class="form-select" formControlName="prefix">
+                  <option value="null" selected hidden disabled>เลือก</option>
+                  <option
+                    *ngFor="let prefix of prefixList$ | async"
+                    [value]="prefix.id"
+                  >
+                    {{ prefix?.name_th }}
+                  </option>
+                </select>
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="firstname"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="lastname"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="phone"
+                />
+              </td>
+              <!-- <td>
+                <i
+                  role="button"
+                  class="bi bi-pencil-square fs-5 text-primary"
+                ></i>
+              </td> -->
+              <td>
+                <i
+                  role="button"
+                  class="bi bi-trash fs-5 text-danger"
+                  (click)="deleteRow(i)"
+                ></i>
+              </td>
+            </tr>
+          </ng-container>
+        </ng-container>
       </tbody>
     </table>
   </div>
-  <hr />
+  <br />
 
-  <div class="box-header">ข้อมูลผู้ถูกกล่าวหา/กล่าวโทษ</div>
-  <button
-    (click)="openSearchDialog()"
-    type="button"
-    class="btn btn-primary w-auto ms-4 my-2"
-  >
-    ค้นหา/เปลี่ยนแปลงข้อมูลผู้มีใบอนุญาต
-  </button>
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="box-header">ข้อมูลผู้ถูกกล่าวหา/กล่าวโทษ</div>
+    <button
+      (click)="openSearchDialog()"
+      type="button"
+      class="btn btn-primary w-auto"
+    >
+      ค้นหา/เปลี่ยนแปลงข้อมูลผู้มีหนังสืออนุญาต
+    </button>
+  </div>
 
-  <div class="my-3">
-    <mat-tab-group class="tab-group">
-      <mat-tab label="ข้อมูลผู้ได้รับใบอนุญาต" class="tab-content"
+  <div class="mb-3">
+    <mat-tab-group class="tab-group" animationDuration="0ms">
+      <mat-tab label="ข้อมูลผู้ได้รับหนังสืออนุญาต" class="tab-content"
         ><e-service-person-info></e-service-person-info>
       </mat-tab>
 
-      <mat-tab label="ข้อมูลใบอนุญาต">
+      <mat-tab label="ข้อมูลหนังสืออนุญาต">
         <div class="box-header">
-          ข้อมูลใบอนุญาตประกอบวิชาชีพทางการศึกษา (ยังไม่หมดอายุ)
+          ข้อมูลหนังสืออนุญาตประกอบวิชาชีพทางการศึกษา (ยังไม่หมดอายุ)
         </div>
         <ksp-license-type-button-group></ksp-license-type-button-group>
         <ksp-license-info></ksp-license-info>
@@ -76,21 +129,18 @@
     </mat-tab-group>
   </div>
 
-  <hr />
-
   <div class="box-header">รายละเอียดการกล่าวหา/กล่าวโทษ</div>
-
-  <div class="row">
-    <div class="col mb-3">
-      <label class="form-label">หมายเลขคดีดำ</label>
+  <div class="row mb-2">
+    <div class="col">
+      <label class="form-label required">หมายเลขคดีดำ</label>
       <input
         class="form-control"
         type="text"
         formControlName="accusationblackno"
       />
     </div>
-    <div class="col mb-3">
-      <label class="form-label">ประพฤติผิดจรรยาบรรณต่อ</label>
+    <div class="col">
+      <label class="form-label required">ประพฤติผิดจรรยาบรรณต่อ</label>
       <select class="form-select" formControlName="accusationtype">
         <option value="null" disabled hidden selected>กรุณาเลือก</option>
         <option value="1">One</option>
@@ -100,20 +150,31 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-6 mb-3">
-      <label class="form-label">วันที่เกิดเหตุ</label>
-      <input
-        class="form-control"
-        type="date"
-        formControlName="accusationincidentdate"
-      />
+  <div class="row mb-2">
+    <div class="col-6">
+      <label class="form-label required">วันที่เกิดเหตุ</label>
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker1"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="accusationincidentdate"
+          placeholder="วว/ดด/ปปปป"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker1"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </div>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col mb-3">
-      <label class="form-label">สถานที่เกิดเหตุ </label>
+  <div class="row mb-2">
+    <div class="col">
+      <label class="form-label required">สถานที่เกิดเหตุ </label>
       <textarea
         class="form-control"
         type="text"
@@ -124,9 +185,11 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-6 mb-3">
-      <label class="form-label">ประเภทของการกล่าวโทษ/ข้อกล่าวโทษ</label>
+  <div class="row mb-2">
+    <div class="col-6">
+      <label class="form-label required"
+        >ประเภทของการกล่าวโทษ/ข้อกล่าวโทษ</label
+      >
       <select class="form-select" formControlName="accusationcondemnationtype">
         <option value="null" disabled hidden selected>กรุณาเลือก</option>
         <option value="1">One</option>
@@ -136,9 +199,9 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col mb-3">
-      <label class="form-label">ประเด็นตั้งข้อกล่าวหา/กล่าวโทษ</label>
+  <div class="row mb-2">
+    <div class="col">
+      <label class="form-label required">ประเด็นตั้งข้อกล่าวหา/กล่าวโทษ</label>
       <textarea
         class="form-control"
         type="text"
@@ -149,19 +212,30 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-6 mb-3">
+  <div class="row mb-2">
+    <div class="col-6">
       <label class="form-label">วันที่วินิจฉัยชี้ขาด/วันที่ออกคำสั่ง</label>
-      <input
-        class="form-control"
-        type="date"
-        formControlName="accusationissuedate"
-      />
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker2"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="accusationissuedate"
+          placeholder="วว/ดด/ปปปป"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker2"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </div>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col mb-3">
+  <div class="row mb-2">
+    <div class="col">
       <label class="form-label">รายละเอียด/หมายเหตุ</label>
       <textarea
         class="form-control"
@@ -173,8 +247,8 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col mb-3">
+  <div class="row mb-2">
+    <div class="col">
       <label class="form-label">ลักษณะการลงโทษ</label>
       <textarea
         class="form-control"
@@ -186,8 +260,8 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col mb-3">
+  <div class="row mb-2">
+    <div class="col">
       <label class="form-label">เนื่องจากกระทำความผิด</label>
       <textarea
         class="form-control"
@@ -199,8 +273,8 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col mb-3">
+  <div class="row mb-2">
+    <div class="col">
       <label class="form-label">เจ้าหน้าที่ได้รับมอบงาน</label>
       <select class="form-select" formControlName="accusationassignofficer">
         <option value="null" disabled hidden selected>กรุณาเลือก</option>
@@ -210,18 +284,34 @@
       </select>
     </div>
 
-    <div class="col mb-3">
+    <div class="col">
       <label class="form-label">วันที่รับมอบ</label>
-      <input
-        class="form-control"
-        type="date"
-        formControlName="accusationassigndate"
-      />
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker3"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="accusationassigndate"
+          placeholder="วว/ดด/ปปปป"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker3"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker3></mat-datepicker>
+      </div>
     </div>
   </div>
 
-  <ksp-form-attachment
-    [title]="'กรุณาแนบหลักฐาน'"
-    [groups]="accusationFiles"
-  ></ksp-form-attachment>
+  <div class="mt-3">
+    <ksp-form-attachment
+      [title]="'กรุณาแนบหลักฐาน'"
+      [groups]="accusationFiles"
+      [requestType]="3"
+      [uniqueTimestamp]="uniqueTimestamp"
+      [pageType]="'accusationFiles'"
+    ></ksp-form-attachment>
+  </div>
 </form>

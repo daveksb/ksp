@@ -1,30 +1,83 @@
 <form [formGroup]="form">
-  <div class="row">
-    <div class="col-md-6 mb-2">
-      <div class="d-flex align-items-center">
-        <input type="checkbox" class="me-2" formControlName="hasEducationCertificate" />
-        <label class="form-label">วุฒิที่ใช้ในการตรวจสอบขอรับใบอนุญาต</label>
-      </div>
-    </div>
+  <ng-container formArrayName="degreeInfo">
+    <ng-container *ngFor="let DegreeForm of degreeInfo.controls; let i = index">
+      <ng-container [formGroupName]="i">
+        <div class="d-flex justify-content-end" *ngIf="i > 0">
+          <i
+            class="bi bi-x-circle-fill text-danger"
+            (click)="deleteFormArray(degreeInfo, i)"
+            role="button"
+          ></i>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-2">
+            <div class="d-flex align-items-center">
+              <input
+                type="checkbox"
+                class="me-2"
+                formControlName="hasEducationCertificate"
+              />
+              <label class="form-label"
+                >วุฒิที่ใช้ในการตรวจสอบขอรับหนังสืออนุญาต</label
+              >
+            </div>
+          </div>
 
-    <div class="col-md-3 mb-2">
-      <div class="d-flex align-items-center">
-        <input type="checkbox" class="me-2" formControlName="hasDegreeLevel" />
-        <label class="form-label">ระดับวุฒิปริญญา</label>
-      </div>
-      <select class="form-select" formControlName="level">
-        <option value="null" selected hidden disabled>กรุณาเลือก</option>
-        <option value="1">ปริญญาตรี</option>
-        <option value="2">ปริญญาโท</option>
-        <option value="3">ปริญญาเอก</option>
-        <option value="4">
-          วุฒิการศึกษาปริญญาอื่นๆที่เทียบเท่าปริญญาตรี / ปริญญาทางการศึกษา
-        </option>
-      </select>
-    </div>
-  </div>
+          <div class="col-md-6 mb-2">
+            <div class="d-flex align-items-center">
+              <input
+                type="checkbox"
+                class="me-2"
+                formControlName="hasDegreeLevel"
+              />
+              <label class="form-label">ระดับวุฒิปริญญา</label>
+            </div>
 
-  <div class="border rounded px-3 py-2 mb-3">
-    <ksp-renew-license-property-degree-form formControlName="degree"></ksp-renew-license-property-degree-form>
+            <!-- manager -->
+            <select
+              class="form-select"
+              formControlName="level"
+              *ngIf="!isSupervision"
+            >
+              <option value="null" selected hidden disabled>กรุณาเลือก</option>
+              <option value="1">ปริญญาตรี</option>
+              <option value="2">ปริญญาโท</option>
+              <option value="3">ปริญญาเอก</option>
+              <option value="4">
+                วุฒิการศึกษาปริญญาอื่นๆที่เทียบเท่าปริญญาตรี / ปริญญาทางการศึกษา
+              </option>
+            </select>
+
+            <!-- supervision -->
+            <select
+              class="form-select"
+              formControlName="level"
+              *ngIf="isSupervision"
+            >
+              <option value="null" selected hidden disabled>กรุณาเลือก</option>
+              <option value="1">ปริญญาโท</option>
+              <option value="2">ปริญญาเอก</option>
+              <option value="3">
+                วุฒิการศึกษาปริญญาอื่นๆที่เทียบเท่าปริญญาโท / ปริญญาทางการศึกษา
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="border rounded px-3 py-2 mb-2">
+          <ksp-renew-license-property-degree-form
+            [mode]="mode"
+            formControlName="degree"
+          ></ksp-renew-license-property-degree-form>
+        </div>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+  <div class="d-flex justify-content-end" *ngIf="mode === 'edit'">
+    <ksp-add-row-button
+      class="text-primary"
+      (addRowClick)="addFormArray(degreeInfo)"
+      >เพิ่มวุฒิการศึกษา</ksp-add-row-button
+    >
   </div>
 </form>

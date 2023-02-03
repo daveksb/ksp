@@ -9,14 +9,8 @@ import { Component, Input } from '@angular/core';
   standalone: true,
 })
 export class SelfServiceLicenseInfoComponent {
-  @Input() date = '';
-  @Input() requestNo = '';
-  @Input() KuruspaId = '';
-  @Input() personId = '';
-
-  @Input() header = '';
-  @Input() subheader1 = '';
-  @Input() subheader2 = '';
-  @Input() subheader3 = '';
-  @Input() subheader4 = '';
+  @Input() pay: any;
+  @Input() all: any;
+  @Input() approve: any;
+  @Input() edit: any;
 }

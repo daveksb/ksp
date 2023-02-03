@@ -14,6 +14,11 @@ import {
 import { MatMenuModule } from '@angular/material/menu';
 import { UniFormBadgeComponent } from '@ksp/shared/ui';
 import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export const routes: Routes = [
   {
@@ -34,12 +39,18 @@ export const routes: Routes = [
     TopNavComponent,
     MatTableModule,
     SlideshowComponent,
+    ReactiveFormsModule,
     SelfServiceLicenseInfoComponent,
     MatMenuModule,
     SlideshowSecondComponent,
     UniFormBadgeComponent,
     MatSortModule,
+    MatPaginatorModule,
     RouterModule.forChild(routes),
+    MatDatepickerModule,
+    RequestNoPipe,
+    ThaiDatePipe,
+    MatProgressSpinnerModule,
   ],
   declarations: [SelfServiceHomeComponent, SelfServiceHomePageComponent],
   exports: [SelfServiceHomePageComponent],

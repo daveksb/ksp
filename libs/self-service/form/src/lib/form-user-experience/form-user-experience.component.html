@@ -1,19 +1,25 @@
 <form [formGroup]="form">
   <div class="row">
-    <div class="col-md-6 mb-3">
-      <label class="form-label">สถานศึกษาฝึกประสบการณ์วิชาชีพ ครั้งที่ 1</label>
+    <div class="col-md-6 mb-2">
+      <label class="form-label required"
+        >สถานศึกษาฝึกประสบการณ์วิชาชีพ ครั้งที่ 1</label
+      >
       <input
         class="form-control"
         type="text"
-        formControlName="TrainingAddressOne" />
+        formControlName="TrainingAddressOne"
+      />
     </div>
 
-    <div class="col-md-6 mb-3">
-      <label class="form-label">สถานศึกษาฝึกประสบการณ์วิชาชีพ ครั้งที่ 2</label>
+    <div class="col-md-6 mb-2">
+      <label class="form-label required"
+        >สถานศึกษาฝึกประสบการณ์วิชาชีพ ครั้งที่ 2</label
+      >
       <input
         class="form-control"
         type="text"
-        formControlName="TrainingAddressTwo" />
+        formControlName="TrainingAddressTwo"
+      />
     </div>
   </div>
 
@@ -22,49 +28,71 @@
     <span class="hr-text">หรือ</span>
   </div>
 
-  <div class="row">
-    <div class="col-md-6 mb-3">
-      <label class="form-label">สถานศึกษาที่ปฏิบัติการสอน</label>
-      <!-- <select
-        class="search__content form-select"
-        formControlName="teachingAddress"
-      >
-        <option selected>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select> -->
-      <input
-        class="form-control"
-        type="text"
-        formControlName="teachingAddress" />
-    </div>
+  <ng-container formArrayName="teachingAddressForm">
+    <ng-container *ngFor="let course of address.controls; let i = index">
+      <ng-container [formGroupName]="i">
+        <div class="row">
+          <div class="col-md-6 col mb-2">
+            <label class="form-label required"
+              >สถานศึกษาที่ปฏิบัติการสอน ครั้งที่ {{ i + 1 }}</label
+            >
+            <input
+              class="form-control"
+              type="text"
+              formControlName="teachingAddress"
+            />
+          </div>
 
-    <div id="upload__button-container" class="col-md-6 mb-3">
-      <td class="upload__detail">
-        <button type="button" class="btn btn-primary" id="btn-address">
-          + เพิ่มสถานศึกษาที่ปฏิบัติการสอน
-        </button>
-      </td>
-    </div>
+          <ng-container *ngIf="mode !== 'view'">
+            <div class="col-md-auto col-auto ps-0" *ngIf="i >= 1">
+              <br />
+              <i
+                class="bi bi-trash-fill text-danger fs-6"
+                (click)="deleteAddress(i)"
+                role="button"
+              ></i>
+            </div>
+
+            <div class="col-md-6 mb-1" *ngIf="i <= 0">
+              <label class="d-md-inline-block d-none"><br /></label>
+              <div
+                class="d-flex justify-content-center justify-content-md-start"
+              >
+                <button
+                  (click)="addAddress()"
+                  type="button"
+                  class="btn btn-primary w-auto"
+                  style="height: 36px"
+                >
+                  + เพิ่มสถานศึกษาที่ปฏิบัติการสอน
+                </button>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+
+  <div class="d-flex align-items-center">
+    <input
+      formControlName="hasForeignLicense"
+      type="checkbox"
+      (change)="resetForeignLicenseForm($event)"
+    />
+    <label class="form-label ms-2">
+      หนังสืออนุญาตประกอบวิชาชีพครูจากต่างประเทศ</label
+    >
   </div>
 
-  <div class="col">
-    <div class="checkbox__content">
-      <input
-        formControlName="hasForeignLicense"
-        type="checkbox"
-        class="checkbox"
-        (change)="resetForeignLicenseForm($event)" />
-      <label class="form-label checkbox-label">
-        ใบอนุญาตประกอบวิชาชีพครูจากต่างประเทศ</label>
-    </div>
-
-    <ng-template [ngIf]="hasForeignLicense">
+  <ng-template [ngIf]="hasForeignLicense">
+    <div class="mt-2">
       <ksp-experience-form
+        [mode]="mode"
         [countries]="countries"
         [licenses]="licenses"
-        formControlName="foreignLicenseForm"></ksp-experience-form>
-    </ng-template>
-  </div>
+        formControlName="foreignLicenseForm"
+      ></ksp-experience-form>
+    </div>
+  </ng-template>
 </form>

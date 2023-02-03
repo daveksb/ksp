@@ -1,0 +1,89 @@
+<form [formGroup]="form">
+  <div class="bg-light px-4 py-2 default-width">
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">กลุ่มบัญชีรายชื่อ </label>
+        <input class="form-control" type="text" formControlName="groupno" />
+      </div>
+
+      <div class="col">
+        <label class="form-label">ประเภทวิชาชีพ</label>
+        <select formControlName="careertype" class="form-select">
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option *ngFor="let l of licenseTypes" [value]="l.id">
+            {{ l.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+
+      <div class="col-6">
+        <label class="form-label">ผลการพิจารณา</label>
+        <select formControlName="result" class="form-select">
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option value="1">ผ่าน</option>
+          <option value="2">ไม่ผ่าน</option>
+        </select>
+      </div>
+
+      <div class="col pe-1">
+        <label class="form-label">จาก : วันที่จัดทำบัญชีรายชื่อ</label>
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker1"
+            autocomplete="off"
+            class="form-control form-date"
+            placeholder="วว/ดด/ปปปป"
+            formControlName="createFrom" />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </div>
+      </div>
+
+      <div class="col-auto px-1">
+        <br />
+        <span class="fs-4">-</span>
+      </div>
+
+      <div class="col ps-1">
+        <label class="form-label">ถึง : วันที่จัดทำบัญชีรายชื่อ</label>
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker2"
+            autocomplete="off"
+            class="form-control form-date"
+            placeholder="วว/ดด/ปปปป"
+            formControlName="createTo" />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end mb-2 mt-4">
+      <button
+        (click)="form.reset(); clear.emit(true)"
+        type="button"
+        class="btn border-primary text-primary bg-white">
+        ล้างข้อมูล
+      </button>
+
+      <button
+        (click)="search.emit(form.value)"
+        type="button"
+        class="btn btn-primary ms-2">
+        ค้นหา
+      </button>
+    </div>
+  </div>
+</form>

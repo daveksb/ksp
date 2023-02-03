@@ -23,11 +23,19 @@ export const routes: Routes = [
         component: AccusationMainComponent,
       },
       {
+        path: 'detail/:id',
+        component: AccusationMainComponent,
+      },
+      {
         path: 'test',
         component: AccusationSearchComponent,
       },
       {
         path: 'decision',
+        component: AccusationDecisionComponent,
+      },
+      {
+        path: 'decision/:id',
         component: AccusationDecisionComponent,
       },
       {

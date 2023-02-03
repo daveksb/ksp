@@ -1,57 +1,68 @@
 <form [formGroup]="form">
   <div class="bg-light px-3 py-3">
-    <div class="box-header">ที่อยู่ของสถานศึกษาที่ขออนุญาต</div>
-    <!--     <div class="row">
-      <div class="col-6 col-6 mb-3">
+    <div class="box-header">{{ title }}</div>
+    <div class="row" *ngIf="showLicenseInfo">
+      <div class="col-6 col-6 mb-2">
         <label class="form-label">เลขที่หนังสือนำส่ง</label>
         <input
           class="form-control"
           type="text"
-          formControlName="letterNumber"
+          formControlName="letternumber"
         />
       </div>
-      <div class="col-6 mb-3">
+      <div class="col-6 mb-2">
         <label class="form-label">วันที่ออกหนังสือนำส่ง</label>
-        <input
-          class="form-control"
-          type="date"
-          formControlName="letterRelease"
-        />
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker"
+            autocomplete="off"
+            class="form-control form-date"
+            formControlName="letterrelease"
+            placeholder="วว/ดด/ปปปป"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </div>
       </div>
-    </div> -->
+    </div>
 
-    <div class="row">
-      <div class="col-6 mb-3">
+    <div class="row" *ngIf="!schoolEngInfo">
+      <div class="col-6 mb-2">
         <label class="form-label">รหัสหน่วยงาน/สถานศึกษา</label>
         <input
           [attr.disabled]="true"
           class="form-control"
           type="text"
-          formControlName="schoolId"
+          formControlName="schoolid"
         />
       </div>
-      <div class="col-6 mb-3">
+      <div class="col-6 mb-2">
         <label class="form-label">สังกัด</label>
         <input
           [attr.disabled]="true"
           class="form-control"
           type="text"
-          formControlName="bureauName"
+          formControlName="bureauname"
         />
       </div>
     </div>
 
     <div class="row">
-      <div class="col-6 mb-3">
+      <div class="col-6 mb-2">
         <label class="form-label">หน่วยงาน/สถานศึกษา</label>
         <input
           class="form-control"
           [attr.disabled]="true"
           type="text"
-          formControlName="schoolName"
+          formControlName="schoolname"
         />
       </div>
-      <div class="col-6 mb-3">
+      <div class="col-6 mb-2">
         <label class="form-label">เลขที่</label>
         <input
           [attr.disabled]="true"
@@ -63,7 +74,7 @@
     </div>
 
     <div class="row">
-      <div class="col-6 mb-3">
+      <div class="col-6 mb-2">
         <label class="form-label">หมู่ที่</label>
         <input
           [attr.disabled]="true"
@@ -72,7 +83,7 @@
           formControlName="moo"
         />
       </div>
-      <div class="col-6 mb-3">
+      <div class="col-6 mb-2">
         <label class="form-label">ซอย</label>
         <input
           [attr.disabled]="true"
@@ -84,7 +95,7 @@
     </div>
 
     <div class="row">
-      <div class="col-6 mb-3">
+      <div class="col-6 mb-2">
         <label class="form-label">ถนน</label>
         <input
           [attr.disabled]="true"
@@ -93,28 +104,28 @@
           formControlName="road"
         />
       </div>
-      <div class="col-6 mb-3">
+      <div class="col-6 mb-2">
         <label class="form-label">รหัสไปรษณีย์</label>
         <input
           [attr.disabled]="true"
           class="form-control"
           type="text"
-          formControlName="zipCode"
+          formControlName="zipcode"
         />
       </div>
     </div>
 
     <div class="row">
-      <div class="col-6 mb-3">
+      <div class="col-6 mb-2">
         <label class="form-label">จังหวัด</label>
         <input
           [attr.disabled]="true"
           class="form-control"
           type="text"
-          formControlName="provinceName"
+          formControlName="provincename"
         />
       </div>
-      <div class="col-6 mb-3">
+      <div class="col-6 mb-2">
         <label class="form-label">ตำบล</label>
         <input
           [attr.disabled]="true"
@@ -126,16 +137,16 @@
     </div>
 
     <div class="row">
-      <div class="col-6 mb-3">
+      <div class="col-6 mb-2">
         <label class="form-label">อำเภอ</label>
         <input
           [attr.disabled]="true"
           class="form-control"
           type="text"
-          formControlName="amphurName"
+          formControlName="amphurname"
         />
       </div>
-      <div class="col-6 mb-3">
+      <div class="col-6 mb-2">
         <label class="form-label">โทรศัพท์</label>
         <input
           [attr.disabled]="true"
@@ -147,7 +158,7 @@
     </div>
 
     <div class="row">
-      <div class="col-6 mb-3">
+      <div class="col-6 mb-2">
         <label class="form-label">โทรสาร</label>
         <input
           [attr.disabled]="true"
@@ -156,19 +167,19 @@
           formControlName="fax"
         />
       </div>
-      <div class="col-6 mb-3">
+      <div class="col-6 mb-2">
         <label class="form-label">อีเมล</label>
         <input
           [attr.disabled]="true"
           class="form-control"
           type="text"
-          formControlName="eMail"
+          formControlName="email"
         />
       </div>
     </div>
 
     <div class="row">
-      <div class="col-6 mb-3">
+      <div class="col-6 mb-2">
         <label class="form-label">เว็บไซต์</label>
         <input
           [attr.disabled]="true"

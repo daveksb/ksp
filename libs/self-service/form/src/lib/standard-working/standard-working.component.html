@@ -2,59 +2,44 @@
   <div class="box-header">ผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน</div>
   <div class="row">
     <div class="col-md-6 mb-3">
-      <label class="form-label">สถานะปัจจุบัน</label>
+      <label class="form-label required">สถานะปัจจุบัน</label>
 
-      <ng-container *ngIf="educationType === 'teacher'">
-        <select formControlName="educationType" class="form-select">
-          <option selected hidden disabled value="null">กรุณาเลือก</option>
-          <option *ngFor="let edu of educationTypes1" [value]="edu.value">
-            {{ edu.label }}
-          </option>
-        </select>
-      </ng-container>
-
-      <ng-container *ngIf="educationType === 'schManager'">
-        <select formControlName="educationType" class="form-select">
-          <option selected hidden disabled value="null">กรุณาเลือก</option>
-          <option *ngFor="let edu of educationTypes2" [value]="edu.value">
-            {{ edu.label }}
-          </option>
-        </select>
-      </ng-container>
-
-      <ng-container *ngIf="educationType === 'eduManager'">
-        <select formControlName="educationType" class="form-select">
-          <option selected hidden disabled value="null">กรุณาเลือก</option>
-          <option *ngFor="let edu of educationTypes3" [value]="edu.value">
-            {{ edu.label }}
-          </option>
-        </select>
-      </ng-container>
-
-      <ng-container *ngIf="educationType === 'supervision'">
-        <select formControlName="educationType" class="form-select">
-          <option selected hidden disabled value="null">กรุณาเลือก</option>
-          <option *ngFor="let edu of educationTypes4" [value]="edu.value">
-            {{ edu.label }}
-          </option>
-        </select>
-      </ng-container>
+      <select formControlName="educationType" class="form-select">
+        <option selected hidden disabled value="null">กรุณาเลือก</option>
+        <option *ngFor="let edu of educationTypes" [value]="edu.value">
+          {{ edu.label }}{{ educationType }}
+        </option>
+      </select>
     </div>
 
     <ng-container *ngIf="selectedEducationType === 0">
-      <self-service-standard-working-teacher formControlName="educationLevelForm">
+      <self-service-standard-working-teacher
+        formControlName="educationLevelForm"
+        [mode]="mode"
+      >
       </self-service-standard-working-teacher>
       <div class="mt-3">
-        <ksp-form-attachment
+        <ksp-form-multi-attachment
           [groups]="workingInfo"
           [uniqueTimestamp]="uniqueTimestamp"
-          [mode]="'edit'"></ksp-form-attachment>
+          [mode]="mode"
+        ></ksp-form-multi-attachment>
       </div>
     </ng-container>
   </div>
 
   <ng-container *ngIf="selectedEducationType === 1">
-    <self-service-standard-working-non-teacher formControlName="educationLevelForm">
+    <self-service-standard-working-non-teacher
+      formControlName="educationLevelForm"
+      [mode]="mode"
+    >
     </self-service-standard-working-non-teacher>
+    <div class="mt-3">
+      <ksp-form-multi-attachment
+        [groups]="workingInfo2"
+        [uniqueTimestamp]="uniqueTimestamp"
+        [mode]="mode"
+      ></ksp-form-multi-attachment>
+    </div>
   </ng-container>
 </form>

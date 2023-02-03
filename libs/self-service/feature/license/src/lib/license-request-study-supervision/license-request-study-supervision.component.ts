@@ -16,6 +16,7 @@ import {
   EducationDetailService,
   MyInfoService,
   SelfRequestService,
+  LoaderService,
 } from '@ksp/shared/service';
 import {
   getCookie,
@@ -23,24 +24,38 @@ import {
   replaceEmptyWithNull,
   toLowercaseProp,
 } from '@ksp/shared/utility';
-import { SelfRequest } from '@ksp/shared/interface';
+import { FileGroup, SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
+import { v4 as uuidv4 } from 'uuid';
+import { Subject } from 'rxjs';
 
-const EXPERIENCE_FILES = [
+const EXPERIENCE_FILES: FileGroup[] = [
   {
     name: '1. สำเนาวุฒิทางการศึกษา',
-    fileId: '',
-    fileName: '',
+    files: [],
   },
   {
-    name: '2. เอกสารผู้สำเร็จการศึกษา ( ระบบ KSP BUNDIT)',
-    fileId: '',
-    fileName: '',
+    name: '2. หนังสือรับรองคุณวุฒิ',
+    files: [],
   },
   {
     name: '3. วุฒิบัตรอบรม',
-    fileId: '',
-    fileName: '',
+    files: [],
+  },
+];
+
+const EDU_FILES: FileGroup[] = [
+  {
+    name: '1. สำเนาวุฒิทางการศึกษา',
+    files: [],
+  },
+  {
+    name: '2. เอกสารผู้สำเร็จการศึกษา (ระบบ KSP BUNDIT)',
+    files: [],
+  },
+  {
+    name: '3. วุฒิบัตรอบรม',
+    files: [],
   },
 ];
 
@@ -54,9 +69,10 @@ export class LicenseRequestStudySupervisionComponent
   extends LicenseFormBaseComponent
   implements OnInit
 {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   userInfoType = UserInfoFormType.thai;
-
   experienceFiles: any[] = [];
+  eduFiles: any[] = [];
 
   override form = this.fb.group({
     userInfo: [],
@@ -80,7 +96,8 @@ export class LicenseRequestStudySupervisionComponent
     educationDetailService: EducationDetailService,
     myInfoService: MyInfoService,
     requestService: SelfRequestService,
-    route: ActivatedRoute
+    route: ActivatedRoute,
+    private loaderService: LoaderService
   ) {
     super(
       generalInfoService,
@@ -97,13 +114,23 @@ export class LicenseRequestStudySupervisionComponent
 
   ngOnInit(): void {
     this.getListData();
-    this.checkButtonsDisableStatus();
     this.checkRequestId();
+    this.form.valueChanges.subscribe((res) => {
+      console.log('this.form = ', this.form.controls.workplace.value);
+    });
+  }
+
+  override resetForm() {
+    super.resetForm();
+    this.eduFiles = structuredClone(EDU_FILES);
+    this.experienceFiles = structuredClone(EXPERIENCE_FILES);
   }
 
   override initializeFiles() {
     super.initializeFiles();
     this.experienceFiles = structuredClone(EXPERIENCE_FILES);
+    this.eduFiles = structuredClone(EDU_FILES);
+    this.uniqueTimestamp = uuidv4();
   }
 
   override patchData(data: SelfRequest) {
@@ -134,7 +161,8 @@ export class LicenseRequestStudySupervisionComponent
 
     if (data.fileinfo) {
       const fileInfo = parseJson(data.fileinfo);
-      const { experiencefiles } = fileInfo;
+      const { edufiles, experiencefiles } = fileInfo;
+      this.eduFiles = edufiles;
       this.experienceFiles = experiencefiles;
     }
   }
@@ -162,7 +190,7 @@ export class LicenseRequestStudySupervisionComponent
   createRequest(forbidden: any, currentProcess: number) {
     const self = new SelfRequest(
       '1',
-      SelfServiceRequestType.ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ,
+      SelfServiceRequestType.ขอขึ้นทะเบียนหนังสืออนุญาตประกอบวิชาชีพ,
       `${SelfServiceRequestSubType.ศึกษานิเทศก์}`,
       currentProcess
     );
@@ -173,9 +201,9 @@ export class LicenseRequestStudySupervisionComponent
 
     const { id, ...rawUserInfo } = formData.userInfo;
     const userInfo = toLowercaseProp(rawUserInfo);
-    userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
-    userInfo.uniquetimestamp = this.uniqueTimestamp;
-    userInfo.staffid = getCookie('userId');
+    self.isforeign = `${SelfServiceRequestForType.ชาวไทย}`;
+    self.uniqueno = this.uniqueTimestamp;
+    self.userid = getCookie('userId');
 
     const selectData = _.pick(userInfo, allowKey);
     const { educationType, educationLevelForm } = formData.education || {
@@ -183,11 +211,13 @@ export class LicenseRequestStudySupervisionComponent
       educationLevelForm: null,
     };
     const experiencefiles = this.experienceFiles;
+    const edufiles = this.eduFiles;
 
     const payload = {
       ...self,
       ...replaceEmptyWithNull(selectData),
       ...(this.requestId && { id: `${this.requestId}` }),
+      ...(this.imageId && { imagefileid: `${this.imageId}` }),
       ...{
         addressinfo: JSON.stringify([formData.address1, formData.address2]),
       },
@@ -203,15 +233,9 @@ export class LicenseRequestStudySupervisionComponent
         experienceinfo: JSON.stringify(formData.experience),
       },
       ...{ prohibitproperty: JSON.stringify(forbidden) },
-      ...{ fileinfo: JSON.stringify({ experiencefiles }) },
+      ...{ fileinfo: JSON.stringify({ experiencefiles, edufiles }) },
     };
     console.log(payload);
     return payload;
-  }
-
-  checkButtonsDisableStatus() {
-    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-      this.disableNextButton = false; //!this.form.valid;
-    });
   }
 }

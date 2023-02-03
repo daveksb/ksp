@@ -3,7 +3,7 @@
     <div class="col-6">
       <label class="form-label">จังหวัด</label>
       <select class="form-select">
-        <option selected>กรุณาเลือก</option>
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option value="1">One</option>
         <option value="2">Two</option>
         <option value="3">Three</option>
@@ -12,7 +12,7 @@
     <div class="col">
       <label class="form-label">ประเภทหนังสือ</label>
       <select class="form-select">
-        <option selected>กรุณาเลือก</option>
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option value="1">One</option>
         <option value="2">Two</option>
         <option value="3">Three</option>
@@ -27,7 +27,21 @@
     </div>
     <div class="col">
       <label class="form-label">เรื่อง</label>
-      <input type="date" class="form-control" />
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker1"
+          autocomplete="off"
+          class="form-control form-date"
+          placeholder="วว/ดด/ปปปป"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker1"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </div>
     </div>
   </div>
 
@@ -38,7 +52,21 @@
     </div>
     <div class="col">
       <label class="form-label">สิ่งที่ส่งมาด้วย</label>
-      <input type="date" class="form-control" />
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker2"
+          autocomplete="off"
+          class="form-control form-date"
+          placeholder="วว/ดด/ปปปป"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker2"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </div>
     </div>
   </div>
 
@@ -53,7 +81,7 @@
     <div class="col-6">
       <label class="form-label">หน่วยงานที่รับ</label>
       <select class="form-select">
-        <option selected>กรุณาเลือก</option>
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option value="1">One</option>
         <option value="2">Two</option>
         <option value="3">Three</option>

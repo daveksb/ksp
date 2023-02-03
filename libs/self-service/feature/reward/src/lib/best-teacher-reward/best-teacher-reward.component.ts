@@ -35,13 +35,26 @@ export class BestTeacherRewardComponent
       }
     }, 0);
   }
+
   @Input()
   set workplaceInfo(value: any) {
     setTimeout(() => {
       if (value) {
         this.amphurs2$ = this.addressService.getAmphurs(value.province);
-        this.tumbols2$ = this.addressService.getTumbols(value.district);
+        this.tumbols2$ = this.addressService.getTumbols(value.amphur);
+        const { phone, fax, email, website } = value || {
+          phone: '',
+          fax: '',
+          email: '',
+          website: '',
+        };
         this.form.controls.workplace.patchValue(value);
+        this.form.patchValue({
+          phone,
+          fax,
+          email,
+          website,
+        });
       }
     }, 0);
   }
@@ -68,10 +81,12 @@ export class BestTeacherRewardComponent
     userInfo: [],
     addressInfo: [],
     workplace: [],
-    rewardTeacherInfo: [],
+
     eduInfo: [],
-    teachingInfo: [],
+    hiringInfo: [],
     rewardDetailInfo: [],
+    rewardPunishmentInfo: [],
+
     phone: [],
     fax: [],
     email: [],
@@ -107,6 +122,23 @@ export class BestTeacherRewardComponent
     this.provinces2$ = this.provinces1$;
     this.provinces3$ = this.provinces1$;
     this.provinces4$ = this.provinces1$;
+  }
+
+  override set value(value: any) {
+    const { teachingInfo } = value;
+    if (teachingInfo) {
+      this.amphurs3$ = this.addressService.getAmphurs(teachingInfo.province);
+      this.tumbols3$ = this.addressService.getTumbols(teachingInfo.district);
+      this.amphurs4$ = this.addressService.getAmphurs(
+        teachingInfo.currentProvince
+      );
+      this.tumbols4$ = this.addressService.getTumbols(
+        teachingInfo.currentDistrict
+      );
+    }
+    this.form.patchValue(value);
+    this.onChange(value);
+    this.onTouched();
   }
 
   provinceChanged(addrType: number, evt: any) {

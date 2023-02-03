@@ -3,6 +3,7 @@
   background-attachment: fixed;
   background-size: 100% 100%;
   background-image: url(/assets/images/BG-Information.png);
+  min-height: 100vh;
 }
 
 .content__container {
@@ -17,13 +18,6 @@
   color: #000000;
   text-align: center;
   margin-bottom: 24px;
-}
-
-.header__label-2 {
-  font-size: 20px;
-  color: #000000;
-  text-align: center;
-  margin: 24px 0;
 }
 
 .content__label {
@@ -81,7 +75,7 @@
 }
 
 .qrcode__label {
-  font-size: 18px;
+  font-size: 20px;
   color: #656565;
 }
 
@@ -102,5 +96,9 @@
 
   .qrcode__content-2 {
     margin: auto;
+  }
+
+  .content__label {
+    font-size: 14px;
   }
 }

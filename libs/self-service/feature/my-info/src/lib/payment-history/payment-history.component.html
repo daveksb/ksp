@@ -1,77 +1,41 @@
 <ksp-top-nav [isSelfService]="true">
-  <span header>ข้อมูลของฉัน</span>
-  <span subHeader>ประวัติการชำระเงินและใบเสร็จรับเงิน</span>
+  <span header>ประวัติการชำระเงินและใบเสร็จรับเงิน</span>
 </ksp-top-nav>
 
-<div class="main__container">
+<div class="main__container full-height">
   <div class="header__container">
-    <div class="d-flex justify-content-end">
-      <i class="bi bi-calendar me-3"></i>
-      <i class="bi bi-search ms-3"></i>
+    <div class="d-flex justify-content-end align-items-center">
+      <input
+        matInput
+        [matDatepicker]="picker"
+        class="me-2 form-control-sm"
+        style="border: 1px solid #ced4da"
+        disabled
+      />
+      <mat-datepicker #picker disabled="false"></mat-datepicker>
+      <i class="bi bi-calendar ms-1" (click)="picker.open()" role="button"></i>
+      <i class="bi bi-search ms-4" role="button" (click)="search()"></i>
     </div>
-    <div class="header__content">
+    <div class="fs-5 text-center mt-3">ไม่พบข้อมูล</div>
+
+    <!-- <div class="header__content">
       ล่าสุด
       <hr class="line__container" />
-    </div>
-    <div class="content__container">
+    </div> -->
+
+    <!-- <div class="content__container">
       <self-service-payment-history-item
-        [name]="'รายการขอต่ออายุใบอนุญาตประกอบวิชาชีพ'"
-        [date]="'10-02-2022 / 14:00น.'"
+        [name]="'รายการขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ'"
+        [date]="'10/02/2022 / 14:00น.'"
         [amount]="'500 บาท'"
         [order]="'6304255'"
       ></self-service-payment-history-item>
       <self-service-payment-history-item
-        [name]="'รายการขอต่ออายุใบอนุญาตประกอบวิชาชีพ'"
-        [date]="'10-02-2022 / 16:00น.'"
+        [name]="'รายการขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ'"
+        [date]="'10/02/2022 / 16:00น.'"
         [amount]="'500 บาท'"
         [order]="'6304255'"
       ></self-service-payment-history-item>
-    </div>
-  </div>
-  <div>
-    <div class="header__content">
-      05-02-2022
-      <hr class="line__container" />
-    </div>
-    <div class="content__container">
-      <self-service-payment-history-item
-        [name]="'รายการขอต่ออายุใบอนุญาตประกอบวิชาชีพ'"
-        [date]="'05-02-2022 / 14:00น.'"
-        [amount]="'500 บาท'"
-        [order]="'6304255'"
-      ></self-service-payment-history-item>
-    </div>
-  </div>
-  <div>
-    <div class="header__content">
-      01-01-2022
-      <hr class="line__container" />
-    </div>
-    <div class="content__container">
-      <self-service-payment-history-item
-        [name]="'รายการขอต่ออายุใบอนุญาตประกอบวิชาชีพ'"
-        [date]="'01-01-2022 / 14:00น.'"
-        [amount]="'500 บาท'"
-        [order]="'6304255'"
-      ></self-service-payment-history-item>
-      <self-service-payment-history-item
-        [name]="'รายการขอต่ออายุใบอนุญาตประกอบวิชาชีพ'"
-        [date]="'01-01-2022 / 14:00น.'"
-        [amount]="'500 บาท'"
-        [order]="'6304255'"
-      ></self-service-payment-history-item>
-      <self-service-payment-history-item
-        [name]="'รายการขอต่ออายุใบอนุญาตประกอบวิชาชีพ'"
-        [date]="'01-01-2022 / 14:00น.'"
-        [amount]="'500 บาท'"
-        [order]="'6304255'"
-      ></self-service-payment-history-item>
-      <self-service-payment-history-item
-        [name]="'รายการขอต่ออายุใบอนุญาตประกอบวิชาชีพ'"
-        [date]="'01-01-2022 / 14:00น.'"
-        [amount]="'500 บาท'"
-        [order]="'6304255'"
-      ></self-service-payment-history-item>
-    </div>
+    </div> -->
   </div>
 </div>

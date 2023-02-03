@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Nationality, Prefix } from '@ksp/shared/interface';
 import { AddressService, GeneralInfoService } from '@ksp/shared/service';
+import { formatDatePayload } from '@ksp/shared/utility';
 import localForage from 'localforage';
 import { Observable } from 'rxjs';
 @Component({
@@ -16,17 +18,17 @@ export class RegisterForeignStepOneComponent implements OnInit {
     private addressService: AddressService
   ) {}
 
-  nationalitys$!: Observable<any>;
-  prefixList$!: Observable<any>;
+  nationalitys$!: Observable<Nationality[]>;
+  prefixList$!: Observable<Prefix[]>;
   countries$!: Observable<any>;
   form = this.fb.group({
     prefixen: [null, [Validators.required]],
     firstnameen: [null, [Validators.required]],
-    middlenameen: [null, [Validators.required]],
-    lastnameen: [null, [Validators.required]],
+    middlenameen: [null],
+    lastnameen: [null],
     birthdate: [],
     country: [],
-    nationality: [],
+    nationality: [null, [Validators.required]],
     phone: [null, [Validators.required]],
     email: [],
   });
@@ -35,15 +37,21 @@ export class RegisterForeignStepOneComponent implements OnInit {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.countries$ = this.addressService.getCountry();
     this.nationalitys$ = this.generalInfoService.getNationality();
+    localForage.getItem('registerForeigner').then((res: any) => {
+      //console.log('pv form = ', res);
+      const payload = {
+        ...res,
+        ...{ phone: res.contactphone, country: Number(res.country) },
+      };
+      this.form.patchValue(formatDatePayload(payload));
+
+      const data = { ...res, ...this.form.value };
+      localForage.setItem('registerForeigner', data);
+    });
   }
 
   next() {
-    localForage.getItem('registerForeign').then((res: any) => {
-      const data = { ...res, ...this.form.value };
-      console.log(data);
-      localForage.setItem('registerForeigner', data);
-      this.router.navigate(['/register', 'en-step-2']);
-    });
+    this.router.navigate(['/register', 'en-step-2']);
   }
 
   loginPage() {

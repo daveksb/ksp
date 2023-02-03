@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, Input, OnDestroy } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -9,14 +9,18 @@ import { providerFactory } from '@ksp/shared/utility';
   styleUrls: ['./activity-learning-material.component.scss'],
   providers: providerFactory(ActivityLearningMaterialComponent),
 })
-export class ActivityLearningMaterialComponent extends KspFormBaseComponent {
+export class ActivityLearningMaterialComponent
+  extends KspFormBaseComponent
+  implements OnDestroy
+{
   @Input() data: any;
+  @Input() isForeignForm = false;
 
   //`การสร้างสื่อการศึกษา พร้อมแบบทดสอบเพื่อการศึกษาหรือเรียนรู้ด้วยตนเอง ทั้งในรูปแบบเอกสาร และสื่ออิเล็กทรอนิกส์ เช่ย บทความ online , e-learning , E-book เป็นต้น`,
 
   override form = this.fb.group({
-    name: [],
-    date: [],
+    name: [null, Validators.required],
+    date: [null, Validators.required],
   });
 
   constructor(private fb: FormBuilder) {
@@ -27,5 +31,10 @@ export class ActivityLearningMaterialComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+  }
+
+  override ngOnDestroy(): void {
+    this.onChange(null);
+    this.onTouched();
   }
 }

@@ -1,24 +1,17 @@
 <form [formGroup]="form">
   <div class="row">
-    <div class="col-md-6 mb-3">
-      <label class="form-label">สถาบันการศึกษา</label>
-      <!-- <select
-        class="search__content form-select"
+    <div class="col-md-6 mb-2">
+      <label class="form-label required">สถาบันการศึกษา</label>
+      <input
+        class="form-control"
+        type="text"
         formControlName="educationInstitution"
-      >
-        <option selected hidden disabled value="null">กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select> -->
-      <input class="form-control" type="text" formControlName="educationInstitution" />
+      />
     </div>
 
-    <div class="col-md-6 mb-3">
-      <label class="form-label">วุฒิปริญญาที่จบ</label>
-      <select
-        class="form-select"
-        formControlName="graduateDegree">
+    <div class="col-md-6 mb-2">
+      <label class="form-label required">วุฒิปริญญาที่จบ</label>
+      <select class="form-select" formControlName="graduateDegree">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option value="1">ปริญญาตรี</option>
         <option value="2">ปริญญาโท</option>
@@ -31,28 +24,60 @@
   </div>
 
   <div class="row">
-    <div class="col-md-6 mb-3">
-      <label class="form-label">สาขา/วิชาเอก</label>
+    <div class="col-md-6 mb-2">
+      <label class="form-label required">สาขา/วิชาเอก</label>
       <input class="form-control" type="text" formControlName="branch" />
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-6 mb-3">
-      <label class="form-label">วันเดือนปี เข้าศึกษา</label>
-      <input class="form-control" type="date" formControlName="admissionDate" />
+    <div class="col-md-6 mb-2">
+      <label class="form-label required">วันเดือนปี เข้าศึกษา</label>
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker1"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="admissionDate"
+          placeholder="วว/ดด/ปปปป"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker1"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </div>
     </div>
-    <div class="col-md-6 mb-3">
-      <label class="form-label">วันเดือนปี สำเร็จการศึกษา</label>
-      <input class="form-control" type="date" formControlName="graduateDate" />
+    <div class="col-md-6 mb-2">
+      <label class="form-label required">วันเดือนปี สำเร็จการศึกษา</label>
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker2"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="graduateDate"
+          placeholder="วว/ดด/ปปปป"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker2"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </div>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-6 mb-3">
-      <label class="form-label">วุฒิปริญญาก่อนเข้าศึกษาประกาศนียบัตรบัณฑิตวิชาชีพครู</label>
+    <div class="col-md-6 mb-2">
+      <label class="form-label required"
+        >วุฒิปริญญาก่อนเข้าศึกษาประกาศนียบัตรบัณฑิตวิชาชีพครู</label
+      >
       <select class="form-select" formControlName="beforeDegree">
-        <option selected hidden disabled value="null">กรุณาเลือก</option>
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option value="1">ภาษาฝรั่งเศษ</option>
         <option value="2">ภาษาจีน</option>
         <option value="3">นิเทศก์ศาสตร์</option>

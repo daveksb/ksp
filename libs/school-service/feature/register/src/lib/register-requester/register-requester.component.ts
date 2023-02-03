@@ -1,16 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UserInfoFormType } from '@ksp/shared/constant';
-import { FormMode } from '@ksp/shared/interface';
-import {
-  GeneralInfoService,
-  RequestService,
-  SchoolInfoService,
-} from '@ksp/shared/service';
-import { thaiDate } from '@ksp/shared/utility';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Observable, switchMap } from 'rxjs';
+import { FormMode, Nationality, Prefix } from '@ksp/shared/interface';
+import { GeneralInfoService } from '@ksp/shared/service';
+import { UntilDestroy } from '@ngneat/until-destroy';
+import { Observable } from 'rxjs';
 import localForage from 'localforage';
 
 @UntilDestroy()
@@ -19,14 +14,14 @@ import localForage from 'localforage';
   styleUrls: ['./register-requester.component.scss'],
 })
 export class RegisterRequesterComponent implements OnInit {
-  grant = grants;
   requestNumber = '';
-  requestDate = thaiDate(new Date());
-  prefixList$!: Observable<any>;
-  nationalitys$!: Observable<any>;
+  prefixList$!: Observable<Prefix[]>;
+  nationalitys$!: Observable<Nationality[]>;
   mode: FormMode = 'edit';
   userInfoFormdisplayMode: number = UserInfoFormType.thai;
   school!: any;
+  address!: any;
+
   private _form = this.fb.group({
     grant1: [false],
     grant2: [false],
@@ -35,48 +30,49 @@ export class RegisterRequesterComponent implements OnInit {
     grant5: [false],
     requester: [],
   });
+
   public get form() {
     return this._form;
   }
   public set form(value) {
     this._form = value;
   }
+
   constructor(
     private fb: FormBuilder,
     public router: Router,
-    private generalInfoService: GeneralInfoService,
-    private schoolInfoService: SchoolInfoService,
-    private route: ActivatedRoute
+    private generalInfoService: GeneralInfoService
   ) {}
+
   ngOnInit(): void {
-    //this.school = history?.state?.data ?? null;
-    localForage.getItem('registerSelectedSchool').then((res) => {
+    this.getListData();
+    this.getStoredData();
+  }
+
+  getStoredData() {
+    localForage.getItem('registerSelectedSchool').then((res: any) => {
+      console.log('school data = ', res);
       this.school = res;
+      this.address = `เลขที่ ${res.address} ซอย ${res?.street ?? '-'} หมู่ ${
+        res?.moo ?? '-'
+      } ถนน ${res?.road ?? '-'} ตำบล ${res.tumbon} อำเภอ ${
+        res.amphurname
+      } จังหวัด ${res.provincename} รหัสไปรษณีย์ ${res.zipcode}`;
     });
 
-    this.getListData();
-    this.checkRequestId();
+    localForage.getItem('registerUserInfo').then((res: any) => {
+      if (res) this.form.controls.requester.patchValue(res);
+    });
   }
+
   getListData() {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.nationalitys$ = this.generalInfoService.getNationality();
   }
 
-  checkRequestId() {
-    this.route.paramMap
-      .pipe(
-        switchMap((params: any) => {
-          const schoolid = params.get('id');
-          return this.schoolInfoService
-            .getSchoolInfo(schoolid)
-            .pipe(untilDestroyed(this));
-        })
-      )
-      .subscribe((res) => console.log(res));
-  }
   next() {
-    const data = this.form.getRawValue();
-    const { requester, ...all } = data as any;
+    const data: any = this.form.getRawValue();
+    const { requester, ...all } = data;
     const userpermission = JSON.stringify(all);
     const userInfo = {
       ...requester,
@@ -84,20 +80,18 @@ export class RegisterRequesterComponent implements OnInit {
       schoolid: this.school.schoolId,
     };
 
-    localForage.setItem('registerUserInfoFormValue', userInfo);
+    localForage.setItem('registerUserInfo', userInfo);
     this.router.navigate(['/register', 'coordinator']);
-    /*  this.router.navigate(['/register', 'coordinator'], {
-      state: { data: userInfo },
-    }); */
   }
 
   prevPage() {
-    this.router.navigate(['/', 'register', 'current-user']);
+    this.router.navigate(['/register', 'current-user']);
   }
 }
-export const grants = [
+
+/* export const grants = [
   {
-    label: 'ยื่นแบบคำขออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต',
+    label: 'ยื่นแบบคำขออนุญาตให้ประกอบวิชาชีพ โดยไม่มีหนังสืออนุญาต',
     name: 'grant1',
     value: false,
   },
@@ -109,7 +103,7 @@ export const grants = [
     value: false,
   },
   {
-    label: 'ทะเบียนหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต',
+    label: 'ทะเบียนหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีหนังสืออนุญาต',
     name: 'grant4',
     value: false,
   },
@@ -118,4 +112,4 @@ export const grants = [
     name: 'grant5',
     value: false,
   },
-];
+]; */

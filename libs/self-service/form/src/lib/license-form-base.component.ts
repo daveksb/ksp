@@ -10,37 +10,60 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { ForbiddenPropertyFormComponent } from '@ksp/shared/form/others';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ConfirmDialogComponent } from '@ksp/shared/dialog';
+import {
+  ConfirmDialogComponent,
+  CompleteDialogComponent,
+} from '@ksp/shared/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { parseJson } from '@ksp/shared/utility';
+import {
+  formatRequestNo,
+  getCookie,
+  parseJson,
+  thaiDate,
+} from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
-import { SelfRequest } from '@ksp/shared/interface';
+import {
+  Amphur,
+  Bureau,
+  KspComment,
+  KspRequestCancelPayload,
+  Nationality,
+  Prefix,
+  Province,
+  SelfGetRequest,
+  SelfMyInfo,
+  SelfRequest,
+  Tambol,
+} from '@ksp/shared/interface';
 
 @Component({
   template: ``,
   standalone: true,
 })
 export abstract class LicenseFormBaseComponent {
-  prefixList$!: Observable<any>;
-  nationalitys$!: Observable<any>;
-  provinces1$!: Observable<any>;
-  provinces2$!: Observable<any>;
-  provinces3$!: Observable<any>;
-  amphurs1$!: Observable<any>;
-  tumbols1$!: Observable<any>;
-  amphurs2$!: Observable<any>;
-  tumbols2$!: Observable<any>;
-  amphurs3$!: Observable<any>;
-  tumbols3$!: Observable<any>;
-  bureau$!: Observable<any>;
+  prefixList$!: Observable<Prefix[]>;
+  nationalitys$!: Observable<Nationality[]>;
+  provinces1$!: Observable<Province[]>;
+  amphurs1$!: Observable<Amphur[]>;
+  tumbols1$!: Observable<Tambol[]>;
+  amphurs2$!: Observable<Amphur[]>;
+  tumbols2$!: Observable<Tambol[]>;
+  amphurs3$!: Observable<Amphur[]>;
+  tumbols3$!: Observable<Tambol[]>;
+  bureau$!: Observable<Bureau[]>;
   form!: FormGroup;
   uniqueTimestamp!: string;
   requestId!: number;
-  requestData!: SelfRequest;
+  //requestData!: SelfRequest;
+  requestData = new SelfRequest('1', '01', '1');
   requestNo: string | null = '';
+  requestDate: string | null = '';
   currentProcess!: number;
   prohibitProperty: any;
   myImage = '';
+  imageId = '';
+  myInfo$!: Observable<SelfMyInfo>;
+  kspComment = new KspComment();
 
   constructor(
     protected generalInfoService: GeneralInfoService,
@@ -58,17 +81,18 @@ export abstract class LicenseFormBaseComponent {
     this.route.paramMap.subscribe((params) => {
       this.requestId = Number(params.get('id'));
       if (this.requestId) {
-        console.log(this.requestId);
         // this.loadRequestFromId(this.requestId);
         this.requestService.getRequestById(this.requestId).subscribe((res) => {
           if (res) {
-            console.log(res);
+            if (res.detail) {
+              // in case of having commentss
+              this.kspComment = parseJson(res.detail);
+            }
             this.requestData = res;
             this.requestNo = res.requestno;
-            this.currentProcess = Number(res.currentprocess);
-            this.uniqueTimestamp = res.uniquetimestamp || '';
-            console.log(this.uniqueTimestamp);
-
+            this.requestDate = res.requestdate;
+            this.currentProcess = Number(res.process);
+            this.uniqueTimestamp = res.uniqueno || '';
             this.patchData(res);
           }
         });
@@ -77,9 +101,10 @@ export abstract class LicenseFormBaseComponent {
         this.getMyInfo();
       }
     });
+    this.myInfo$ = this.myInfoService.getMyInfo();
   }
 
-  patchData(data: SelfRequest) {
+  patchData(data: SelfGetRequest) {
     this.patchUserInfo(data);
     this.patchAddress(parseJson(data.addressinfo));
     if (data.schooladdrinfo) {
@@ -87,6 +112,9 @@ export abstract class LicenseFormBaseComponent {
     }
     if (data.prohibitproperty) {
       this.prohibitProperty = parseJson(data.prohibitproperty);
+    }
+    if (data.filedata) {
+      this.myImage = atob(data.filedata);
     }
   }
 
@@ -97,10 +125,10 @@ export abstract class LicenseFormBaseComponent {
   public getMyInfo() {
     this.myInfoService.getMyInfo().subscribe((res) => {
       if (res) {
-        //this.myInfo = res;
         if (res && res.filedata) {
           this.myImage = atob(res.filedata);
         }
+
         this.patchUserInfo(res);
         this.patchAddress(parseJson(res.addressinfo));
         if (res.schooladdrinfo) {
@@ -114,8 +142,6 @@ export abstract class LicenseFormBaseComponent {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.nationalitys$ = this.generalInfoService.getNationality();
     this.provinces1$ = this.addressService.getProvinces();
-    this.provinces2$ = this.provinces1$;
-    this.provinces3$ = this.provinces1$;
     this.bureau$ = this.educationDetailService.getBureau();
   }
 
@@ -145,12 +171,91 @@ export abstract class LicenseFormBaseComponent {
     }
   }
 
+  public cancel() {
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: `คุณต้องการยกเลิกรายการแบบคำขอ
+        ใช่หรือไม่? `,
+      },
+    });
+
+    confirmDialog.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.cancelRequest();
+      }
+    });
+  }
+
+  cancelRequest() {
+    const payload: KspRequestCancelPayload = {
+      requestid: `${this.requestId}`,
+      process: `${this.currentProcess}`,
+      userid: getCookie('userId'),
+    };
+
+    this.requestService.cancelRequest(payload).subscribe((res) => {
+      this.cancelCompleted();
+    });
+  }
+
+  sameIdCardDialog() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header: `หมายเลขบัตรประชาชนนี้ได้ถูกใช้ยื่นแบบคำขอไปแล้ว`,
+      },
+    });
+
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/home']);
+      }
+    });
+  }
+
+  cancelCompleted() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header: `ยกเลิกแบบคำขอสำเร็จ`,
+      },
+    });
+
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/home']);
+      }
+    });
+  }
+
+  saveCompleted(request: any) {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        showImg: true,
+        header: `บันทึกแบบคำขอสำเร็จ`,
+        content: `วันที่ : ${thaiDate(new Date())}
+        เลขที่แบบคำขอ : ${formatRequestNo(
+          request.requestno || this.requestNo
+        )}`,
+        subContent: 'หากมีข้อสงสัย กรุณาโทร 02 304 9899',
+      },
+    });
+
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/home']);
+      }
+    });
+  }
+
   public save() {
-    console.log(this.form.value);
+    //console.log(this.form.value);
     const confirmDialog = this.dialog.open(ForbiddenPropertyFormComponent, {
       width: '900px',
       data: {
+        title: `ขอรับรองว่าข้าพเจ้ามีคุณสมบัติครบถ้วนตามที่พระราชบัญญัติสภาครูและบุคลากรทางการศึกษา
+        พ.ศ. 2546 ข้อบังคับคุรุสภาว่าด้วยหนังสืออนุญาตประกอบวิชาชีพ พ.ศ. 2547 กำหนดไว้ทุกประการ
+        และขอแจ้งประวัติ ดังนี้ `,
         prohibitProperty: this.prohibitProperty,
+        uniqueTimeStamp: this.uniqueTimestamp,
       },
     });
 
@@ -163,10 +268,10 @@ export abstract class LicenseFormBaseComponent {
 
   onCompleted(forbidden: any) {
     const completeDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
       data: {
-        title: `คุณต้องการบันทึกข้อมูลใช่หรือไม่?`,
-        btnLabel: 'ยื่นแบบคำขอ',
+        title: `คุณต้องการบันทึกข้อมูลและยื่นคำขอ
+        ใช่หรือไม่?`,
+        btnLabel: 'บันทึกและยื่นคำขอ',
         cancelBtnLabel: 'บันทึก',
       },
     });
@@ -178,9 +283,11 @@ export abstract class LicenseFormBaseComponent {
           ? this.requestService.updateRequest.bind(this.requestService)
           : this.requestService.createRequest.bind(this.requestService);
         request(payload).subscribe((res) => {
-          console.log('request result = ', res);
+          console.log('request = ', res);
           if (res.returncode === '00') {
-            this.router.navigate(['/home']);
+            this.saveCompleted(res);
+          } else if (res.returncode === '409') {
+            this.sameIdCardDialog();
           }
         });
       }
@@ -193,9 +300,11 @@ export abstract class LicenseFormBaseComponent {
           ? this.requestService.updateRequest.bind(this.requestService)
           : this.requestService.createRequest.bind(this.requestService);
         request(payload).subscribe((res) => {
-          console.log('request result = ', res);
+          //console.log('request confirm = ', res);
           if (res.returncode === '00') {
-            this.router.navigate(['/license', 'payment-channel']);
+            this.router.navigate(['/license', 'payment-channel', res.id]);
+          } else if (res.returncode === '409') {
+            this.sameIdCardDialog();
           }
         });
       }
@@ -256,7 +365,7 @@ export abstract class LicenseFormBaseComponent {
 
   patchWorkplace(data: any) {
     this.amphurs3$ = this.addressService.getAmphurs(data.province);
-    this.tumbols3$ = this.addressService.getTumbols(data.district);
+    this.tumbols3$ = this.addressService.getTumbols(data.amphur);
     this.patchWorkPlaceForm(data);
   }
 
@@ -265,9 +374,16 @@ export abstract class LicenseFormBaseComponent {
     if (checked) {
       this.amphurs2$ = this.amphurs1$;
       this.tumbols2$ = this.tumbols1$;
-      this.provinces2$ = this.provinces1$;
       this.patchAddress2FormWithAddress1();
     }
+  }
+
+  public resetForm() {
+    this.form.reset();
+  }
+
+  public uploadImageComplete(imageId: string) {
+    this.imageId = imageId;
   }
 
   abstract createRequest(forbidden: any, currentProcess: number): void;

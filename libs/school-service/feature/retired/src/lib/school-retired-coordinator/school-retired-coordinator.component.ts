@@ -7,84 +7,103 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { GeneralInfoService, RequestService } from '@ksp/shared/service';
-import { thaiDate } from '@ksp/shared/utility';
+import {
+  FileGroup,
+  KspRequest,
+  Prefix,
+  SchInfo,
+  SchUser,
+} from '@ksp/shared/interface';
+import { GeneralInfoService, SchoolRequestService } from '@ksp/shared/service';
+import {
+  formatRequestNo,
+  getCookie,
+  mapMultiFileInfo,
+  replaceEmptyWithNull,
+  thaiDate,
+} from '@ksp/shared/utility';
 import localForage from 'localforage';
 import { EMPTY, Observable, switchMap } from 'rxjs';
+import { v4 as uuidv4 } from 'uuid';
 @Component({
   selector: 'ksp-school-retired-coordinator',
   templateUrl: './school-retired-coordinator.component.html',
   styleUrls: ['./school-retired-coordinator.component.scss'],
 })
 export class SchoolRetiredCoordinatorComponent implements OnInit {
-  form = this.fb.group({
-    retiredTnfo: [],
-  });
   reasoninfo: any;
-  requestNo = '';
-  today = thaiDate(new Date());
-  schoolId = '0010201056';
+  schoolId = getCookie('schoolId');
+  school = new SchInfo();
+  selectUser!: SchUser;
+  userInfoFormType: number = UserInfoFormType.thai;
+  prefixList$!: Observable<Prefix[]>;
+  uniqueNo!: string;
+  fileId!: number;
+
+  retiredFiles: FileGroup[] = [
+    { name: 'หนังสือถอดถอนผู้ประสานงาน', files: [] },
+  ];
+  form = this.fb.group({
+    coordinatorTnfo: [],
+  });
+
   constructor(
     private router: Router,
     public dialog: MatDialog,
     private fb: FormBuilder,
     private generalInfoService: GeneralInfoService,
-    private requestService: RequestService
+    private requestService: SchoolRequestService
   ) {}
-  userInfoFormType: number = UserInfoFormType.thai;
-  retiredFiles = [{ name: 'หนังสือแต่งตั้งผู้ประสานงาน', fileId: '' }];
-  prefixList$!: Observable<any>;
 
   ngOnInit() {
-    localForage.getItem('registerUserInfoFormValue').then((res) => {
-      this.reasoninfo = res;
-    });
+    this.uniqueNo = uuidv4();
     this.getList();
+    this.getStoreData();
+  }
+
+  onUploadComplete(evt: any) {
+    this.fileId = evt.length;
+    //console.log('evt = ', evt);
   }
 
   prevPage() {
     this.router.navigate(['/retired-user', 'requester']);
   }
+
   getList() {
-    this.form.valueChanges.subscribe((res) => console.log(res));
     this.prefixList$ = this.generalInfoService.getPrefix();
   }
 
-  cancel() {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
+  getStoreData() {
+    localForage.getItem('retireReasonInfoFormValue').then((res) => {
+      this.reasoninfo = res;
+    });
+    localForage.getItem('retiredSelectedSchool').then((res: any) => {
+      this.school = res;
+    });
+    localForage.getItem('retiredSelectedUser').then((res: any) => {
+      this.selectUser = res;
+    });
+  }
+
+  confirmCancelDialog() {
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
-        title: `คุณต้องการยกเลิกรายการใบคำขอ
+        title: `คุณต้องการยกเลิกรายการแบบคำขอ
         ใช่หรือไม่?`,
         btnLabel: 'ยืนยัน',
       },
     });
 
-    dialogRef.componentInstance.confirmed.subscribe((res) => {
+    dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.onConfirmed1();
+        this.cancelDialog();
       }
     });
   }
 
-  onConfirmed1() {
-    const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
-      data: {
-        header: 'ยกเลิกรายการสำเร็จ',
-      },
-    });
-
-    completeDialog.componentInstance.completed.subscribe((res) => {
-      if (res) {
-        this.router.navigate(['/login']);
-      }
-    });
-  }
-
-  save() {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
+  confirmSubmitDialog() {
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่?`,
         subTitle: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติ
@@ -93,46 +112,73 @@ export class SchoolRetiredCoordinatorComponent implements OnInit {
       },
     });
 
-    dialogRef.componentInstance.confirmed
+    dialog.componentInstance.confirmed
       .pipe(
         switchMap((res) => {
+          //console.log('user = ', this.selectUser);
           if (res) {
-            const { retiredTnfo } = this.form.value as any;
-            retiredTnfo.ref1 = '2';
-            retiredTnfo.ref2 = '02';
-            retiredTnfo.ref3 = '5';
-            retiredTnfo.systemtype = '2';
-            retiredTnfo.requesttype = '2';
-            retiredTnfo.subtype = '5';
-            retiredTnfo.currentprocess = `1`;
-            retiredTnfo.requeststatus = `1`;
-            retiredTnfo.schoolid = this.schoolId;
-            retiredTnfo.reasoninfo = JSON.stringify(this.reasoninfo);
-            return this.requestService.createRequest(retiredTnfo);
+            const coordinatorForm: any =
+              this.form.controls.coordinatorTnfo.value;
+            const request: KspRequest = new KspRequest();
+            request.ref1 = '2';
+            request.ref2 = '02';
+            request.ref3 = '5';
+            request.systemtype = '2';
+            request.requesttype = '2';
+            request.careertype = '5';
+            request.process = `1`;
+            request.status = `1`;
+            request.firstnameth = this.selectUser.firstnameth;
+            request.lastnameth = this.selectUser.lastnameth;
+            request.contactphone = this.selectUser.schmobile;
+            request.userid = this.selectUser.schmemberid;
+            request.schoolid = this.schoolId;
+            request.schoolname = this.school.schoolname;
+            request.schooladdrinfo = JSON.stringify(this.school.provincename);
+            request.reasoninfo = JSON.stringify(this.reasoninfo);
+            request.coordinatorinfo = JSON.stringify(coordinatorForm);
+            request.fileinfo = JSON.stringify(
+              mapMultiFileInfo(this.retiredFiles)
+            );
+            const payload = replaceEmptyWithNull(request);
+            return this.requestService.schCreateRequest(payload);
           }
           return EMPTY;
         })
       )
       .subscribe((res) => {
         if (res) {
-          this.onConfirmed2(res?.requestno);
+          this.completeDialog(res?.requestno);
         }
       });
   }
 
-  onConfirmed2(requestno: any) {
-    const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
+  cancelDialog() {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header: 'ยกเลิกรายการสำเร็จ',
+      },
+    });
+
+    dialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/login']);
+      }
+    });
+  }
+
+  completeDialog(requestno: string) {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header: 'ยืนยันข้อมูลสำเร็จ',
-        content: `วันที่ : ${this.today}
-        เลขที่ใบคำขอ : ${requestno} `,
-        subContent: `กรุณาตรวจสอบสถานะใบคำขอหรือรหัสเข้าใช้งาน
+        content: `วันที่ : ${thaiDate(new Date())}
+        เลขที่แบบคำขอ : ${formatRequestNo(requestno)} `,
+        subContent: `กรุณาตรวจสอบสถานะแบบคำขอหรือรหัสเข้าใช้งาน
         ผ่านทางอีเมลผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },
     });
 
-    completeDialog.componentInstance.completed.subscribe((res) => {
+    dialog.componentInstance.completed.subscribe((res) => {
       if (res) {
         this.router.navigate(['/login']);
       }

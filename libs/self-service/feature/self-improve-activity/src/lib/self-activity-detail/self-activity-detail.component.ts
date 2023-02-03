@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { SelfServiceSelfDevelopActivityTiess } from '@ksp/shared/constant';
-import { ListData, SelfDevelop } from '@ksp/shared/interface';
+import { FileGroup, ListData, SelfDevelop } from '@ksp/shared/interface';
 import { MyInfoService, SelfDevelopmentService } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { debounceTime, switchMap } from 'rxjs';
@@ -22,15 +22,9 @@ export class SelfActivityDetailComponent implements OnInit {
   disabledSave = false;
   activityTypes: ListData[] = SelfServiceSelfDevelopActivityTiess;
   uniqueTimestamp: any;
-  attachFiles = [
-    {
-      name: '1.วุฒิบัตร',
-      fileId: '',
-      fileName: '',
-    },
-  ];
+
+  attachFiles = attachFiles;
   constructor(
-    //private router: Router,
     private fb: FormBuilder,
     public dialog: MatDialog,
     private selfDevelopmentService: SelfDevelopmentService,
@@ -84,23 +78,10 @@ export class SelfActivityDetailComponent implements OnInit {
       console.log(res);
     });
   }
+
+  clear() {
+    this.form.reset();
+  }
 }
 
-/* const componentList = [
-  ActivityAddDegreeComponent,
-  ActivitySeminarComponent,
-  SelfActivitySelfLearningComponent,
-  ActivityStudyTourComponent,
-  ActivityResearchComponent,
-  SelfActivityMediaCreateComponent,
-  ActivityStudyTourComponent,
-  SelfActivityArticleWritingComponent,
-  SelfActivityBookWritingComponent,
-  SelfActivityAcademicWorkComponent,
-  ActivityLecturerComponent,
-  SelfActivityMenterComponent,
-  SelfActivityAssessmentComponent,
-  ActivityRewardComponent,
-  SelfActivityMoreComponent,
-];
- */
+const attachFiles: FileGroup[] = [{ name: '1. วุฒิบัตร', files: [] }];

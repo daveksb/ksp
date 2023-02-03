@@ -39,8 +39,20 @@ export class PraiseTeacherRewardComponent
     setTimeout(() => {
       if (value) {
         this.amphurs2$ = this.addressService.getAmphurs(value.province);
-        this.tumbols2$ = this.addressService.getTumbols(value.district);
+        this.tumbols2$ = this.addressService.getTumbols(value.amphur);
+        const { phone, fax, email, website } = value || {
+          phone: '',
+          fax: '',
+          email: '',
+          website: '',
+        };
         this.form.controls.workplace.patchValue(value);
+        this.form.patchValue({
+          phone,
+          fax,
+          email,
+          website,
+        });
       }
     }, 0);
   }

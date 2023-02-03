@@ -4,38 +4,106 @@
   </div>
   <ng-container formArrayName="standardInfo">
     <ng-container
-      *ngFor="let DegreeForm of standardInfo.controls; let i = index">
+      *ngFor="let DegreeForm of standardInfo.controls; let i = index"
+    >
       <ng-container [formGroupName]="i">
-        <div class="border rounded px-3 py-2">
-          <div class="d-flex justify-content-end">
+        <div
+          class="border rounded px-3 py-2"
+          [ngClass]="i > 0 ? 'mt-3' : 'mt-0'"
+        >
+          <div
+            class="d-flex justify-content-end"
+            *ngIf="i > 0 && mode !== 'view'"
+          >
             <i
               class="bi bi-x-circle-fill text-danger"
               (click)="deleteFormArray(standardInfo, i)"
-              role="button"></i>
+              role="button"
+            ></i>
           </div>
           <div class="row">
             <div class="col-md-6 mb-2">
-              <label class="form-label">มาตรฐาน</label>
+              <label class="form-label required">มาตรฐาน</label>
               <select class="form-select" formControlName="standard">
-                <option selected>กรุณาเลือก</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option value="null" selected hidden disabled>
+                  กรุณาเลือก
+                </option>
+                <option value="1">
+                  มุ่งมั่นพัฒนาผู้เรียน ด้วยจิตวิญญาณความเป็นครู
+                </option>
+                <option value="2">
+                  ประพฤตตนเป็นแบบอย่างที่ดี มีคุณธรรม จริยธรรม
+                  และมีความเป็นพลเมืองที่เข้มแข็ง
+                </option>
+                <option value="3">
+                  ส่งเสริมการเรียนรู้ เอาใจใส่
+                  และยอมรับความแตกต่างของผู้เรียนแต่ละบุคคล
+                </option>
+                <option value="4">
+                  สร้างแรงบันดาลใจผู้เรียนให้เป็นผู้ใฝ่เรียนรู้
+                  และผู้สร้างนวัตกรรม
+                </option>
+                <option value="5">
+                  พัฒนาตนเองให้มีความรอบรู้ ทันสมัย และทันต่อการเปลี่ยนแปลง
+                </option>
+                <option value="6">
+                  พัฒนาหลักสูตรสถานศึกษา การจัดการเรียนรู้ สื่อ
+                  การวัดและประเมินผลการเรียนรู้
+                </option>
+                <option value="7">
+                  บูรณาการความรู้ และศาสตร์การสอน
+                  ในการวางแผนและจัดการเรียนรู้ที่สามารถพัฒนาผู้เรียนให้มีปัญญารู้คิด
+                  และมีความเป็นนวัตกร
+                </option>
+                <option value="8">
+                  ดูแล ช่วยเหลือ และพัฒนาผู้เรียนเป็นรายบุคคลตามศักยภาพ
+                  สามารถรายงานผลการพัฒนาคุณภาพผู้เรียนได้อย่างเป็นระบบ
+                </option>
+                <option value="9">
+                  จัดกิจกรรมและสร้างบรรยากาศการเรียนรู้
+                  ให้ผู้เรียนมีความสุขในการเรียน โดยตระหนักถึงสุขภาวะของผู้เรียน
+                </option>
+                <option value="10">
+                  วิจัย สร้างนวัตกรรม และประยุกต์ใช้เทคโนโลยี
+                  ดิจิทัลให้เกิดประโยชน์ต่อการเรียนรู้ของผู้เรียน
+                </option>
+                <option value="11">
+                  ปฏิบัติงานร่วมกับผู้อื่นอย่างสร้างสรรค์และมีส่วนร่วมในกิจกรรมการพัฒนาวิชาชีพ
+                </option>
+                <option value="12">
+                  ร่วมมือกับผู้ปกครองในการพัฒนาและแก้ปัญหาผู้เรียนให้มีคุณลักษณะที่พึงประสงค์
+                </option>
+                <option value="13">
+                  สร้างเครือข่ายความร่วมมือกับผู้ปกครองและชุมชน
+                  เพื่อสนับสนุนการเรียนรู้ที่มีคุณภาพของผู้เรียน
+                </option>
+                <option value="14">
+                  ศึกษา เข้าถึงบริบทของชุมชน
+                  และสามารถอยู่ร่วมกันบนพื้นฐานความแตกต่างทางวัฒนธรรม
+                </option>
+                <option value="15">
+                  ส่งเสริม อนุรักษ์วัฒนธรรม และภูมิปัญญาท้องถิ่น
+                </option>
               </select>
             </div>
             <div class="col-md-6 mb-2">
-              <label class="form-label">รายละเอียด</label>
-              <input class="form-control" type="text" formControlName="details" />
+              <label class="form-label required">รายละเอียด</label>
+              <input
+                class="form-control"
+                type="text"
+                formControlName="details"
+              />
             </div>
           </div>
         </div>
-        <br />
       </ng-container>
     </ng-container>
   </ng-container>
-  <div class="d-flex justify-content-end">
+  <div class="d-flex justify-content-end mt-3" *ngIf="mode === 'edit'">
     <ksp-add-row-button
       class="text-primary"
-      (addRowClick)="addFormArray(standardInfo)">เพิ่มข้อมูลรายงานผลสำเร็จ</ksp-add-row-button>
+      (addRowClick)="addFormArray(standardInfo)"
+      >เพิ่มข้อมูลรายงานผลสำเร็จ</ksp-add-row-button
+    >
   </div>
 </form>

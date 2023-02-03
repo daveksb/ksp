@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -9,16 +9,20 @@ import { providerFactory } from '@ksp/shared/utility';
   styleUrls: ['./activity-add-degree.component.scss'],
   providers: providerFactory(ActivityAddDegreeComponent),
 })
-export class ActivityAddDegreeComponent extends KspFormBaseComponent {
+export class ActivityAddDegreeComponent
+  extends KspFormBaseComponent
+  implements OnDestroy
+{
   @Input() countries: any[] = [];
+  @Input() isForeignForm = false;
 
   //การศึกษาให้มีวุฒิเพิ่มขึ้นในสาขาเกี่ยวข้องกับการประกอบวิชาชีพทางการศึกษา ทั้งในระดับปริญญา และระดับบัณฑิตศึกษา
   override form = this.fb.group({
     educationInstitution: [null, Validators.required],
-    graduateDegree: [],
-    branch: [],
-    admissionDate: [],
-    graduateDate: [],
+    graduateDegree: [null, Validators.required],
+    branch: [null, Validators.required],
+    admissionDate: [null, Validators.required],
+    graduateDate: [null, Validators.required],
     country: [],
   });
 
@@ -31,5 +35,10 @@ export class ActivityAddDegreeComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+  }
+
+  override ngOnDestroy(): void {
+    this.onChange(null);
+    this.onTouched();
   }
 }

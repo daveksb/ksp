@@ -1,21 +1,38 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormMode } from '@ksp/shared/interface';
+import {
+  Country,
+  FileGroup,
+  FormMode,
+  KspRequest,
+  KspRequestProcess,
+  Prefix,
+  VisaType,
+} from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { FormBuilder } from '@angular/forms';
-import { EMPTY, Observable, switchMap } from 'rxjs';
+import { EMPTY, Observable, Subject, switchMap } from 'rxjs';
 import {
   AddressService,
   GeneralInfoService,
-  RequestService,
+  LoaderService,
   SchoolInfoService,
+  SchoolRequestService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { thaiDate } from '@ksp/shared/utility';
+import {
+  formatDatePayload,
+  formatRequestNo,
+  getCookie,
+  mapMultiFileInfo,
+  parseJson,
+  thaiDate,
+} from '@ksp/shared/utility';
+import { v4 as uuidv4 } from 'uuid';
 
 @UntilDestroy()
 @Component({
@@ -23,42 +40,43 @@ import { thaiDate } from '@ksp/shared/utility';
   styleUrls: ['./foreign-teacher-id-request.component.scss'],
 })
 export class ForeignTeacherIdRequestComponent implements OnInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
+  uniqueNo!: string;
+  bureauName = '';
+  schoolId = getCookie('schoolId');
+  schoolName = '';
+  address = '';
+  showCancelButton!: boolean;
+  mode: FormMode = 'edit';
+  prefixList$!: Observable<Prefix[]>;
+  countries$!: Observable<Country[]>;
+  visaTypeList$!: Observable<VisaType[]>;
+  requestId!: number;
+  requestData: KspRequest = new KspRequest();
+  foreignFiles: FileGroup[] = [{ name: '1.สำเนาหนังสือเดินทาง', files: [] }];
   form = this.fb.group({
     foreignTeacher: [],
     visainfo: [],
   });
-  bureauName = '';
-  schoolId = '0010201056';
-  schoolName = '';
-  address = '';
-  requestDate = thaiDate(new Date());
-  mode: FormMode = 'edit';
-  prefixList$!: Observable<any>;
-  countries$!: Observable<any>;
-  visaTypeList$!: Observable<any>;
-  foreignInfo = [{ name: '1.สำเนาหนังสือเดินทาง', fileId: '' }];
-  requestNumber = '';
-  requestId!: number;
+
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     public dialog: MatDialog,
     private fb: FormBuilder,
     private generalInfoService: GeneralInfoService,
     private addressService: AddressService,
-    private requestService: RequestService,
+    private requestService: SchoolRequestService,
     private schoolInfoService: SchoolInfoService,
-    private route: ActivatedRoute
+    private loaderService: LoaderService
   ) {}
-  get formValid() {
-    return (
-      !this.form.get('foreignTeacher')?.valid ||
-      !this.form.get('visainfo')?.valid
-    );
-  }
+
   ngOnInit(): void {
+    this.uniqueNo = uuidv4();
     this.getList();
     this.checkRequestId();
   }
+
   checkRequestId() {
     this.route.paramMap.subscribe((params) => {
       this.requestId = Number(params.get('id'));
@@ -67,18 +85,32 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
       }
     });
   }
+
+  get formValid() {
+    return (
+      !this.form.get('foreignTeacher')?.valid ||
+      !this.form.get('visainfo')?.valid
+    );
+  }
+
   loadRequestData(id: number) {
-    this.requestService.getRequestById(id).subscribe((res: any) => {
+    this.requestService.schGetRequestById(id).subscribe((res) => {
       if (res) {
         this.mode = 'view';
-        this.requestNumber = res.requestno;
-        res.birthdate = res.birthdate?.split('T')[0];
-        res.passportstartdate = res.passportstartdate?.split('T')[0];
-        res.passportenddate = res.passportenddate?.split('T')[0];
-        const visainfo = JSON.parse(atob(res.visainfo));
-        visainfo.passportenddate = visainfo.passportenddate?.split('T')[0];
-        this.form.get('foreignTeacher')?.patchValue(res);
-        this.form.controls['visainfo'].patchValue(visainfo);
+        this.showCancelButton = Boolean(res.status);
+        this.requestData.requestdate = res.requestdate ?? '';
+        this.requestData.requestno = res.requestno ?? '';
+        this.requestData.isclose =
+          this.requestData.isclose === '1' ? true : false;
+        const fileinfo = parseJson(res?.fileinfo || '');
+        if (fileinfo) {
+          this.foreignFiles.forEach(
+            (group, index) => (group.files = fileinfo[index])
+          );
+        }
+        const data: any = { ...res, ...{ country: Number(res.country) } };
+        this.form.controls.foreignTeacher.patchValue(data);
+        this.form.controls.visainfo.patchValue(<any>res);
       }
     });
   }
@@ -86,7 +118,6 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   cancel() {
     if (this.mode == 'view') {
       const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-        width: '350px',
         data: {
           title: `คุณต้องการยกเลิกการยื่นคำขอ
           ใช่หรือไม่? `,
@@ -98,91 +129,110 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
         .pipe(
           switchMap((res) => {
             if (res) {
-              const payload = {
-                id: `${this.requestId}`,
-                requeststatus: '0',
+              const payload: KspRequestProcess = {
+                requestid: `${this.requestId}`,
+                process: `${this.requestData.process}`,
+                status: '0',
+                detail: null,
+                userid: getCookie('userId'),
+                paymentstatus: null,
               };
-              return this.requestService.cancelRequest(payload);
+
+              return this.requestService.schUpdateRequestProcess(payload);
             }
             return EMPTY;
           })
         )
-        .subscribe((res) => {
+        .subscribe(() => {
           this.onCancelCompleted();
         });
     } else {
       this.router.navigate(['/temp-license']);
     }
   }
+
   onCancelCompleted() {
-    const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
+    const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header: 'ระบบทำการยกเลิกเรียบร้อย',
-        content: `วันที่ : ${this.requestDate}
-        เลขที่คำขอ : ${this.requestNumber}`,
+        content: `วันที่ : ${thaiDate(new Date())}
+        เลขที่คำขอ : ${this.requestData.requestno}`,
       },
     });
 
-    completeDialog.componentInstance.completed.subscribe((res) => {
+    dialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/temp-license', 'list']);
+        this.goToListPage();
       }
     });
   }
-  onClickPrev() {
-    if (this.mode == 'view') {
-      this.router.navigate(['/temp-license']);
-    }
+
+  goToListPage() {
+    this.router.navigate(['/temp-license', 'list']);
   }
 
-  onConfirmed() {
-    if (
+  confirmDialog() {
+    /*  if (
       !this.form.get('foreignTeacher')?.valid ||
       !this.form.get('visainfo')?.valid
     )
-      return;
-    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
+      return; */
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการยืนยันข้อมูล
-        และส่งใบคำขอ ใช่หรือไม่? `,
+        และส่งแบบคำขอ ใช่หรือไม่? `,
         btnLabel: 'ยืนยัน',
       },
     });
-    confirmDialog.componentInstance.confirmed
+    dialog.componentInstance.confirmed
       .pipe(
         switchMap((res) => {
-          if (res) {
-            // call API
-            const userInfo = this.form.value.foreignTeacher as any;
+          if (res && this.form.value.foreignTeacher) {
+            const userInfo: Partial<KspRequest> =
+              this.form.value.foreignTeacher;
+
+            const countryCode = userInfo.country ?? 0;
+            const countryCode3digits = countryCode.toString().padStart(3, '0');
+            userInfo.country = countryCode3digits;
             userInfo.ref1 = '2';
             userInfo.ref2 = '04';
             userInfo.ref3 = '5';
+            userInfo.isforeign = '1';
             userInfo.systemtype = '2';
             userInfo.requesttype = '4';
-            userInfo.subtype = '5';
+            userInfo.careertype = '5';
             userInfo.schoolid = this.schoolId;
-            userInfo.currentprocess = `1`;
-            userInfo.requestStatus = `1`;
-            userInfo.visainfo = JSON.stringify(this.form.value.visainfo);
-            return this.requestService.createRequest(userInfo);
+            userInfo.process = `2`;
+            userInfo.status = `1`;
+            const visaform: any = this.form.value.visainfo;
+            userInfo.visaclass = visaform?.visaclass;
+            userInfo.visatype = visaform?.visatype;
+            userInfo.visaexpiredate = visaform.visaexpiredate;
+            userInfo.bureauname = this.bureauName;
+            userInfo.schoolid = this.schoolId;
+            userInfo.schoolname = this.schoolName;
+            userInfo.schooladdress = this.address;
+            userInfo.fileinfo = JSON.stringify(
+              mapMultiFileInfo(this.foreignFiles)
+            );
+            const payload = formatDatePayload(userInfo);
+            console.log('payload = ', payload);
+            return this.requestService.schCreateRequest(payload);
           }
           return EMPTY;
         })
       )
       .subscribe((res) => {
-        this.onCompleted();
-        console.log(res);
+        this.onCompleted(res.requestno);
       });
   }
 
-  onCompleted() {
+  onCompleted(requestNo: string) {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '375px',
       data: {
-        header: `ยืนยันข้อมูลสำเร็จ`,
-        buttonLabel: 'กลับสู่หน้าหลัก',
+        header: `บึนทึกข้อมูลสำเร็จ`,
+        content: `เลขที่รายการ : ${formatRequestNo(requestNo)}
+        วันที่ : ${thaiDate(new Date())}`,
       },
     });
 
@@ -192,18 +242,23 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
       }
     });
   }
+
   getList() {
+    const payload = {
+      schoolid: this.schoolId,
+    };
+
     this.schoolInfoService
-      .getSchoolInfo(this.schoolId)
+      .getSchoolInfo(payload)
       .pipe(untilDestroyed(this))
-      .subscribe((res: any) => {
-        this.schoolName = res.schoolName;
-        this.bureauName = res.bureauName;
-        this.address = `บ้านเลขที่ ${res.address} ซอย ${
-          res?.street ?? ''
-        } หมู่ ${res?.moo ?? ''} ถนน ${res?.road ?? ''} ตำบล ${
-          res.tumbon
-        } อำเภอ ${res.amphurName} จังหวัด ${res.provinceName}`;
+      .subscribe((res) => {
+        this.schoolName = res.schoolname;
+        this.bureauName = res.bureauname;
+        this.address = `เลขที่ ${res.address} ซอย ${res?.street ?? ''} หมู่ ${
+          res?.moo ?? ''
+        } ถนน ${res?.road ?? ''} ตำบล ${res.tumbon} อำเภอ ${
+          res.amphurname
+        } จังหวัด ${res.provincename} รหัสไปรษณีย์ ${res.zipcode}`;
       });
     this.countries$ = this.addressService.getCountry();
     this.prefixList$ = this.generalInfoService.getPrefix();

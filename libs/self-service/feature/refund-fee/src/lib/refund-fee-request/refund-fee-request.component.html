@@ -1,28 +1,60 @@
-<ksp-top-nav [isSelfService]="true"><span header>ขอคืนเงินค่าธรรมเนียม</span></ksp-top-nav>
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
+<ksp-top-nav [isSelfService]="true"
+  ><span header>ยื่นแบบคำขอ</span
+  ><span subHeader>ขอคืนเงินค่าธรรมเนียม</span></ksp-top-nav
+>
 
 <div [formGroup]="form" class="main__container px-4 py-2">
   <self-service-request-status
-    [requestDate]="today"
-    [idcardNo]="userInfo && userInfo.idcardno"></self-service-request-status>
-  <br />
-  <div class="border shadow-sm rounded-4 px-3 py-4 bg-white">
+    [idcardNo]="(myInfo$ | async)?.idcardno || null"
+  ></self-service-request-status>
+  <div class="border shadow-sm rounded-4 px-3 py-4 bg-white mt-3">
     <ksp-form-user-info
-      [displayMode]="[userInfoType]"
-      [isSchoolService]="false"
+      [isSelfService]="true"
       [prefixList]="prefixList$ | async"
-      formControlName="userInfo"></ksp-form-user-info>
+      formControlName="userInfo"
+    ></ksp-form-user-info>
   </div>
-  <br />
-  <div class="border shadow-sm rounded-4 px-3 py-4 bg-white">
+  <div class="border shadow-sm rounded-4 px-3 py-4 bg-white mt-3">
     <ksp-form-refund-fee-detail
-      formControlName="refundInfo"></ksp-form-refund-fee-detail>
+      formControlName="refundInfo"
+    ></ksp-form-refund-fee-detail>
+
+    <div class="mt-3">
+      <ksp-form-multi-attachment
+        [groups]="files"
+        [mode]="'edit'"
+        [uniqueTimestamp]="uniqueTimestamp"
+      ></ksp-form-multi-attachment>
+    </div>
   </div>
-  <br />
-  <ksp-form-attachment [groups]="files" [mode]="'edit'" [uniqueTimestamp]="uniqueTimestamp"></ksp-form-attachment>
 
   <div class="d-flex justify-content-center my-3">
-    <button type="button" class="btn btn-secondary">ล้างข้อมูล</button>
-    <button type="button" (click)="submit()" class="ms-3 btn btn-primary">
+    <button
+      type="button"
+      class="btn border-secondary text-secondary bg-light"
+      (click)="resetForm()"
+    >
+      ล้างข้อมูล
+    </button>
+    <button
+      type="button"
+      *ngIf="requestId"
+      (click)="cancel()"
+      class="ms-3 btn border-primary text-primary"
+    >
+      ยกเลิกแบบคำขอ
+    </button>
+    <button
+      type="button"
+      (click)="submit()"
+      class="ms-3 btn btn-primary"
+      [disabled]="!form.valid"
+    >
       บันทึก
     </button>
   </div>

@@ -23,43 +23,59 @@ export const menu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ยื่นใบคำขอ',
-    path: '/',
+    label: 'ยื่นแบบคำขอ',
+    path: '',
     subMenuName: 'license',
     isExpanded: false,
     subMenu: [
       {
-        label: 'ขอใบอนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวไทย)',
+        label:
+          'ขอหนังสืออนุญาตประกอบวิชาชีพโดยไม่มีหนังสืออนุญาตประกอบวิชาชีพ (ชาวไทย)',
         path: '/temp-license/request',
         params: { subtype: SchoolRequestSubType.ครู },
       },
       {
         label:
-          'ขออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ (ผู้บริหารสถานศึกษา)',
+          'ขออนุญาตประกอบวิชาชีพโดยไม่มีหนังสืออนุญาตประกอบวิชาชีพ (ผู้บริหารสถานศึกษา)',
         path: '/temp-license/request',
         params: { subtype: SchoolRequestSubType.ผู้บริหารสถานศึกษา },
       },
       {
         label:
-          'ขออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)',
+          'ขออนุญาตประกอบวิชาชีพโดยไม่มีหนังสืออนุญาตประกอบวิชาชีพ (ชาวต่างชาติ)',
         path: '/temp-license/request',
-        params: { subtype: SchoolRequestSubType.อื่นๆ },
+        params: { subtype: SchoolRequestSubType.ชาวต่างชาติ },
       },
-      /* {
-        label: 'ขอเพิกถอนใบอนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาต',
-        path: 'xxx',
-      },
-      {
-        label: 'ขอเปลี่ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ ไม่มีใบอนุญาต',
-        path: 'xxx',
-      }, */
       {
         label: 'ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ',
         path: '/foreign-teacher/id-request',
       },
       {
         label: 'ขอหนังสือรับรองคุณวุฒิ',
-        path: '/qualification-approve/detail',
+        path: '',
+        subMenuName: 'qualificationRequest',
+        subMenu: [
+          {
+            label: 'ครู',
+            path: '/qualification-approve/detail',
+            params: { subtype: 1 },
+          },
+          {
+            label: 'ผู้บริหารสถานศึกษา',
+            path: '/qualification-approve/detail',
+            params: { subtype: 2 },
+          },
+          {
+            label: 'ผู้บริหารการศึกษา',
+            path: '/qualification-approve/detail',
+            params: { subtype: 3 },
+          },
+          {
+            label: 'ศึกษานิเทศก์',
+            path: '/qualification-approve/detail',
+            params: { subtype: 4 },
+          },
+        ],
       },
       {
         label:
@@ -75,22 +91,32 @@ export const menu: MenuConfig[] = [
   },
   {
     icon: 'assets/images/icon-sidenav/display.svg',
-    label: 'ทะเบียนหนังสืออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาต',
-    path: '/',
+    label: 'ทะเบียนหนังสืออนุญาตประกอบวิชาชีพโดยไม่มีหนังสืออนุญาต',
+    path: '/temp-license-register/list',
   },
   {
     icon: 'assets/images/icon-sidenav/display.svg',
-    label: 'กิจกกรมพัฒนาตนเอง (หนังสืออนุญาตประกอบวิชาชีพโดยไม่มีใบอนุญาต)',
-    path: '/activity',
+    label:
+      'กิจกกรมพัฒนาตนเอง (หนังสืออนุญาตประกอบวิชาชีพโดยไม่มีหนังสืออนุญาต)',
+    path: '/activity/list',
   },
   {
     icon: 'assets/images/icon-sidenav/file-earmark-text-fill.svg',
     label: 'รายงาน',
-    path: '/',
+    path: '',
+    subMenuName: 'report',
+    isExpanded: false,
+    subMenu: [
+      {
+        label:
+          'รายงานสถิติผู้ขอรับหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีหนังสืออนุญาตประกอบวิชาชีพ',
+        path: '/report/temp-license',
+      },
+    ],
   },
-  /* {
+  {
     icon: 'assets/images/icon-sidenav/gear-fill.svg',
-    label: 'รายชื่อเจ้าหน้าที่ใช้งาน',
-    path: '/',
-  }, */
+    label: 'ข้อมูลโรงเรียน/สถานศึกษา',
+    path: '/school-info/detail',
+  },
 ];

@@ -1,20 +1,15 @@
-
-.box__header {
-  font-size: 20px;
-}
-
 .box__container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-column-gap: 24px;
   background: #f6f6f6;
-  border-radius: 20px;
-  padding: 24px 60px;
+  border-radius: 16px;
+  padding: 24px 48px;
 }
 
 .box {
   text-align: center;
-  border-radius: 20px;
+  border-radius: 16px;
   padding: 12px;
 }
 
@@ -44,10 +39,11 @@
 }
 
 .box__detail {
-  border-radius: 20px;
-  font-size: 22px;
-  margin-top: 18px;
-  padding: 8px 0px;
+  border-radius: 24px;
+  font-size: 24px;
+  margin-top: 12px;
+  padding: 0 36px;
+  width: fit-content;
 }
 
 .label--primary {
@@ -78,7 +74,7 @@
     grid-row-gap: 24px;
     background: #f6f6f6;
     border-radius: 20px;
-    padding: 24px 60px;
+    padding: 24px 48px;
   }
 }
 
@@ -89,8 +85,8 @@
     grid-column-gap: 24px;
     grid-row-gap: 24px;
     background: #f6f6f6;
-    border-radius: 20px;
-    padding: 24px 60px;
+    border-radius: 16px;
+    padding: 24px 48px;
   }
 }
 
@@ -101,19 +97,8 @@
     grid-column-gap: 12px;
     grid-row-gap: 12px;
     background: #f6f6f6;
-    border-radius: 20px;
+    border-radius: 16px;
     padding: 12px;
-  }
-
-  .title__content {
-    color: #f68b33;
-    background: #ffffff;
-    padding: 14px 20px;
-    margin: 0;
-  }
-
-  .content__detail {
-    margin: 0px;
   }
 
   .box__title {
@@ -121,22 +106,18 @@
   }
 
   .label--primary {
-    font-size: 14px;
+    font-size: 24px;
   }
 
   .label--secondary {
-    font-size: 14px;
+    font-size: 24px;
   }
 
   .label--third {
-    font-size: 14px;
+    font-size: 24px;
   }
 
   .label--fourth {
-    font-size: 14px;
-  }
-
-  .box__header {
-    margin: 5px 16px;
+    font-size: 24px;
   }
 }

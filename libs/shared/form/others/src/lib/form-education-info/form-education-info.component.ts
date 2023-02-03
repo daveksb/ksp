@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { UserInfoFormType } from '@ksp/shared/constant';
+import { Country, KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
 @Component({
@@ -13,9 +14,19 @@ export class FormEducationInfoComponent
   extends KspFormBaseComponent
   implements OnInit
 {
+  @Input() showGradeInput = false;
+  @Input() showPropertyInput = false;
+  @Input() showSelectDegree = false;
+  @Input() showGraduateYearInput = false;
+  @Input() countries: Country[] | null = [];
+  @Input() showCheckbox = true;
+  @Input() isOptional = false;
+  @Input() isDarkMode = true;
+  @Input() userEducationType: any;
+  FormTypeEnum = UserInfoFormType;
+
   override form = this.fb.group({
-    //id: [],
-    degreeLevel: [null, Validators.required],
+    degreeLevel: [],
     degreeName: [null, Validators.required],
     isEducationDegree: [],
     major: [null, Validators.required],
@@ -26,29 +37,13 @@ export class FormEducationInfoComponent
     grade: [],
     otherProperty: [],
     academicYear: [],
+    institutionApprove: [],
+    institutionWebsite: [],
   });
-
-  @Input() showGradeInput = false;
-  @Input() showPropertyInput = false;
-  @Input() showSelectDegree = false;
-  @Input() showGraduateYearInput = false;
-  @Input() countries: any[] = [];
-  @Input() showCheckbox = true;
-  @Input() option = false;
-
-  /*   _defualtDegree = 0;
-  @Input()
-  set defualtDegree(value: any) {
-    this._defualtDegree = value;
-  }
-  get defualtDegree(): any {
-    return this._defualtDegree;
-  } */
 
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value) => {
         this.onChange(value);
         this.onTouched();
@@ -57,21 +52,22 @@ export class FormEducationInfoComponent
   }
 
   ngOnInit(): void {
-    /* if (this.defualtDegree) {
-      setTimeout(() => {
-        this.degreeLevel.setValue(this.defualtDegree);
-        this.degreeLevel.disable();
-      }, 0);
-    } */
-    if (this.option) {
-      this.form.clearValidators();
-    }
-    this.form.valueChanges.subscribe((res) => {
-      //console.log('res = ', res);
-    });
+    this.optionalEdu();
   }
 
   get degreeLevel() {
     return this.form.controls.degreeLevel;
+  }
+
+  optionalEdu() {
+    if (this.isOptional) {
+      this.clearValidator();
+    }
+  }
+
+  clearValidator() {
+    this.form.controls.degreeName.clearValidators();
+    this.form.controls.major.clearValidators();
+    this.form.controls.institution.clearValidators();
   }
 }

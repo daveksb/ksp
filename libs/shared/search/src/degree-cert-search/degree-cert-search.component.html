@@ -1,10 +1,10 @@
 <form [formGroup]="form">
-  <div class="bg-light px-3 pt-1 pb-2 default-width">
-    <div class="fs-5">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
+  <div class="bg-light p-3 default-width">
+    <div class="box-header">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
 
-    <div class="row">
+    <div class="row mb-2">
       <div class="col-4">
-        <label class="form-label">เลขที่ใบคำขอ </label>
+        <label class="form-label">เลขที่แบบคำขอ </label>
         <input
           class="form-control"
           type="text"
@@ -13,7 +13,22 @@
       </div>
       <div class="col-4">
         <label class="form-label">ช่วงวันที่ </label>
-        <input class="form-control" type="date" formControlName="date" />
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker"
+            autocomplete="off"
+            class="form-control form-date"
+            formControlName="date"
+            placeholder="วว/ดด/ปปปป"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </div>
       </div>
     </div>
 
@@ -36,8 +51,10 @@
       <div class="col">
         <label class="form-label">สถาบัน / มหาวิทยาลัย </label>
         <select class="form-select" formControlName="institutionName">
-          <option value="null"disabled selected hidden>กรุณาเลือก</option>
-          <option *ngFor="let item of uniUniversityOption" [value]="item.value">{{item.label}}</option>
+          <option value="null" disabled selected hidden>กรุณาเลือก</option>
+          <option *ngFor="let item of uniUniversityOption" [value]="item.value">
+            {{ item.label }}
+          </option>
         </select>
       </div>
     </div>
@@ -45,42 +62,49 @@
     <div class="row mb-2">
       <div class="col">
         <label class="form-label">ระดับปริญญาที่เสนอขอรับรอง </label>
-        <input
-          class="form-control"
-          type="text"
-          formControlName="submitDegreeLevel"
-        />
+        <select class="form-select" formControlName="submitDegreeLevel">
+          <option value="null" disabled selected hidden>กรุณาเลือก</option>
+          <option *ngFor="let item of degreeLevelOption" [value]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
       </div>
       <div class="col">
         <label class="form-label">สถานะหลักสูตร </label>
-        <input
-          class="form-control"
-          type="text"
-          formControlName="courseStatus"
-        />
+        <select class="form-select" formControlName="courseStatus">
+          <option value="null" disabled selected hidden>กรุณาเลือก</option>
+          <option value="1">ใหม่</option>
+          <option value="2">ปรับปรุง</option>
+        </select>
       </div>
     </div>
 
     <div class="row mb-3">
       <div class="col">
         <label class="form-label">สถานะตรวจสอบ </label>
-        <input
-          class="form-control"
-          type="text"
+        <select
+          class="form-select"
           formControlName="verifyStatus"
-        />
+          (change)="handleChangeStatus($event)"
+        >
+          <option value="null" disabled selected hidden>กรุณาเลือก</option>
+          <option *ngFor="let item of verifyStatusOption" [value]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
       </div>
       <div class="col">
         <label class="form-label">สถานะรับรอง </label>
-        <input
-          class="form-control"
-          type="text"
-          formControlName="approveStatus"
-        />
+        <select class="form-select" formControlName="approveStatus">
+          <option value="null" disabled selected hidden>กรุณาเลือก</option>
+          <option *ngFor="let item of approveStatusOption" [value]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
       </div>
     </div>
 
-    <div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-end mt-3">
       <button
         (click)="cleared.emit(true)"
         type="button"

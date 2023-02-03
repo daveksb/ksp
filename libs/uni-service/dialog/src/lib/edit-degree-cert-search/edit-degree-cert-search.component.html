@@ -1,129 +1,166 @@
-<div class="bg-white">
-  <div class="d-flex justify-content-between align-items-center">
-    <div class="box-header">
-      ค้นหาข้อมูลปริญญา และประกาศนียบัตรทางการศึกษาที่ต้องการ
+<form [formGroup]="form">
+  <div class="bg-white">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="box-header">
+        ค้นหาข้อมูลปริญญา และประกาศนียบัตรทางการศึกษาที่ต้องการ
+      </div>
+      <i class="bi bi-x-lg text-primary" role="button" matDialogClose></i>
     </div>
-    <i class="bi bi-x-lg text-primary" role="button" matDialogClose></i>
-  </div>
-  <hr />
-  <div class="row">
-    <div class="col">
-      <label class="form-label">รหัสรับรองปริญญา</label
-      ><input class="form-control" type="text" />
+    <hr />
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">รหัสรับรองปริญญา</label
+        ><input class="form-control" formControlName="degreeCode" type="text" />
+      </div>
+      <div class="col">
+        <label class="form-label">ชื่อปริญญา และประกาศนียบัตรทางการศึกษา</label
+        ><input class="form-control" formControlName="degreeName" type="text" />
+      </div>
     </div>
-    <div class="col">
-      <label class="form-label">ชื่อปริญญา และประกาศนียบัตรทางการศึกษา</label
-      ><input class="form-control" type="text" />
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col">
-      <label class="form-label">ระดับปริญญาทางการศึกษา</label
-      ><select class="form-select">
-        <option value="null" disabled selected hidden>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">ระดับปริญญาทางการศึกษา</label
+        ><select class="form-select" formControlName="degreeLevel">
+          <option value="null" disabled selected hidden>กรุณาเลือก</option>
+          <option *ngFor="let item of degreeLevelOptions" [value]="item?.value">
+            {{ item.label }}
+          </option>
+        </select>
+      </div>
+      <div class="col">
+        <label class="form-label">สาขาวิชา</label
+        ><select
+          class="form-select"
+          formControlName="fieldOfStudy"
+          (change)="onSelectChange($event, 'fieldOfStudy')"
+        >
+          <option value="null" disabled selected hidden>กรุณาเลือก</option>
+          <option
+            *ngFor="let item of fieldOfStudyOptions"
+            [value]="item?.value"
+          >
+            {{ item.label }}
+          </option>
+        </select>
+      </div>
     </div>
-    <div class="col">
-      <label class="form-label">สาขาวิชา</label
-      ><select class="form-select">
-        <option value="null" disabled selected hidden>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col">
-      <label class="form-label">วิชาเอก</label
-      ><select class="form-select">
-        <option value="null" disabled selected hidden>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">วิชาเอก</label
+        ><select
+          class="form-select"
+          formControlName="major"
+          (change)="onSelectChange($event, 'major')"
+        >
+          <option value="null" disabled selected hidden>กรุณาเลือก</option>
+          <option *ngFor="let item of majorOptions" [value]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
+      </div>
+      <div class="col">
+        <label class="form-label">แขนงวิชา</label
+        ><select class="form-select" formControlName="subject">
+          <option value="null" disabled selected hidden>กรุณาเลือก</option>
+          <option *ngFor="let item of subjectOptions" [value]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
+      </div>
     </div>
-    <div class="col">
-      <label class="form-label">แขนงวิชา</label
-      ><select class="form-select">
-        <option value="null" disabled selected hidden>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col">
-      <label class="form-label">ปีการศึกษา</label
-      ><select class="form-select">
-        <option value="null" disabled selected hidden>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">ปีการศึกษา</label
+        ><select class="form-select" formControlName="year">
+          <option value="null" disabled selected hidden>กรุณาเลือก</option>
+          <option *ngFor="let item of academicYearOptions" [value]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
+      </div>
+      <div class="col">
+        <label class="form-label">จังหวัดที่จัดการเรียนการสอน</label
+        ><select class="form-select" formControlName="province">
+          <option value="null" disabled selected hidden>กรุณาเลือก</option>
+          <option *ngFor="let item of provinces" [value]="item.value">
+            {{ item.label }}
+          </option>
+        </select>
+      </div>
     </div>
-    <div class="col">
-      <label class="form-label">จังหวัดที่จัดการเรียนการสอน</label
-      ><select class="form-select">
-        <option value="null" disabled selected hidden>กรุณาเลือก</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-  </div>
 
-  <div class="d-flex justify-content-end mt-2">
-    <button class="btn border-primary text-primary bg-white" (click)="clear()">
-      ล้างข้อมูล
-    </button>
-    <button class="btn btn-primary ms-2" (click)="search()">ค้นหา</button>
-  </div>
-  <hr />
-  <div class="box-header text-primary">ผลการค้นหา</div>
-  <table class="table">
-    <thead style="white-space: nowrap">
-      <tr>
-        <th scope="col">เลือก</th>
-        <th scope="col">รหัสการรับรอง</th>
-        <th scope="col">ระดับปริญญา</th>
-        <th scope="col">มหาวิทยาลัย/สถาบัน</th>
-        <th scope="col">ชื่อปริญญาและประกาศนียบัตรทางการศึกษา</th>
-        <th scope="col">วิชาเอก</th>
-        <th scope="col">แขนงวิชา</th>
+    <div class="d-flex justify-content-end my-3">
+      <button
+        class="btn border-primary text-primary bg-white"
+        (click)="clear()"
+      >
+        ล้างข้อมูล
+      </button>
+      <button class="btn btn-primary ms-2" (click)="search()">ค้นหา</button>
+    </div>
+    <hr />
+    <div class="box-header text-primary">ผลการค้นหา</div>
+    <table class="table">
+      <thead style="white-space: nowrap">
+        <tr>
+          <th scope="col" hidden>key</th>
+          <th scope="col">เลือก</th>
+          <th scope="col">รหัสการรับรอง</th>
+          <th scope="col">ระดับปริญญา</th>
+          <th scope="col">มหาวิทยาลัย/สถาบัน</th>
+          <th scope="col">ชื่อปริญญาและประกาศนียบัตรทางการศึกษา</th>
+          <th scope="col">วิชาเอก</th>
+          <th scope="col">แขนงวิชา</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of dataSource">
+          <th scope="col" hidden>key</th>
+          <th scope="row mb-2" class="body__detail">
+            <div>
+              <input
+                type="radio"
+                (change)="onItemChange(item.key)"
+                name="university"
+                class="form-check-input"
+              />
+            </div>
+          </th>
+          <td class="detail__table">{{ item.approveCode }}</td>
+          <td class="detail__table">{{ item.degreeLevel }}</td>
+          <td class="detail__table">{{ item.university }}</td>
+          <td class="detail__table">{{ item.degreeName }}</td>
+          <td class="detail__table">{{ item.major }}</td>
+          <td class="detail__table">{{ item.branch }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <table>
+      <tr *ngIf="!dataSource?.length">
+        <td class="text-center text-danger fs-5" [attr.colspan]="8">
+          ไม่พบข้อมูล
+        </td>
       </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of Data">
-        <th scope="row" class="body__detail">
-          <div>
-            <input
-              type="radio"
-              (change)="onItemChange(item.approveCode)"
-              name="university"
-            />
-          </div>
-        </th>
-        <td class="detail__table">{{ item.approveCode }}</td>
-        <td class="detail__table">{{ item.degreeLevel }}</td>
-        <td class="detail__table">{{ item.university }}</td>
-        <td class="detail__table">{{ item.degreeName }}</td>
-        <td class="detail__table">{{ item.major }}</td>
-        <td class="detail__table">{{ item.branch }}</td>
-      </tr>
-    </tbody>
-  </table>
-  <br />
-  <div class="d-flex justify-content-center">
-    <button matDialogClose class="btn btn-primary" (click)="confirm()">
-      ยืนยัน
-    </button>
+    </table>
+    <mat-paginator
+      [length]="pageEvent.length"
+      [pageSize]="25"
+      (page)="onPaginatorEvent($event)"
+      [pageIndex]="pageEvent.pageIndex"
+    >
+    </mat-paginator>
+    <div class="d-flex justify-content-center mt-3">
+      <button
+        matDialogClose
+        class="btn btn-primary"
+        [disabled]="!selectedUniversity"
+        (click)="confirm()"
+      >
+        ยืนยัน
+      </button>
+    </div>
   </div>
-</div>
+</form>

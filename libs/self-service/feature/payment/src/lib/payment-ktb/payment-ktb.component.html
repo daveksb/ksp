@@ -1,0 +1,125 @@
+<ksp-top-nav [isSelfService]="true"><span header>ชำระเงิน</span></ksp-top-nav>
+<div class="main__container px-3 pt-2 pb-3">
+  <div class="mb-3">
+    <self-service-request-status
+      [requestDate]="kspRequest.requestdate"
+      [requestNo]="kspRequest.requestno"
+    ></self-service-request-status>
+  </div>
+
+  <div class="container p-0">
+    <div class="content__container">
+      <div class="box-header text-center mb-3">รายการค่าธรรมเนียม</div>
+      <div class="content__label mb-1">
+        กรุณาชำระเงินก่อนวันที่<span class="date__label">{{
+          expireDate | thaiDate
+        }}</span>
+      </div>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">ลำดับ</th>
+              <th scope="col" class="header__container">รายการค่าธรรมเนียม</th>
+              <th scope="col" class="header__container">
+                อัตราค่าธรรมเนียม (บาท)
+              </th>
+              <th scope="col" class="header__container">จำนวน</th>
+              <th scope="col" class="header__container">จำนวนเงิน (บาท)</th>
+            </tr>
+          </thead>
+          <tbody class="body__table">
+            <tr>
+              <th scope="row">1</th>
+              <td class="detail__table">ค่าขึ้นทะเบียนรับหนังสืออนุญาต</td>
+              <td class="detail__table">500.00</td>
+              <td class="detail__table">1</td>
+              <td class="detail__table">500.00</td>
+            </tr>
+            <tr>
+              <th scope="row"></th>
+              <td class="detail__table"></td>
+              <td class="detail__table"></td>
+              <td class="detail__table">รวมทั้งสิ้น</td>
+              <td class="detail__table">500.00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center mt-3">
+        <div class="content__label">
+          วันเดือนปีที่ทำรายการ<span class="date__label">{{
+            kspRequest.requestdate | thaiDate
+          }}</span>
+        </div>
+        <div>
+          <button
+            type="button"
+            class="btn btn-sm btn-primary"
+            (click)="print()"
+          >
+            พิมพ์แบบชำระเงิน
+          </button>
+        </div>
+      </div>
+
+      <div
+        class="d-flex fs-2 justify-content-center justify-content-md-start mt-3"
+      >
+        คิวอาร์โค้ด ธนาคารกรุงไทย
+      </div>
+      <div class="row flex-column-reverse flex-md-row">
+        <div class="col d-flex flex-column">
+          <div class="qrcode__title mt-1">ขั้นตอนการชำระผ่าน คิวอาร์โค้ด</div>
+
+          <div class="qrcode__label">
+            1. เปิดแอป Mobile Banking จากนั้นเลือกเมนู "สแกนจ่าย" หรือ
+            บันทึกภาพลงยังโทรศัพท์มือถือ
+          </div>
+
+          <div class="qrcode__label">
+            2. สแกน QR Code หรือ เลือกรูปภาพที่บันทึกในเครื่องโทรศัพท์มือถือ
+            ตรวจสอบยอด และกด "ยืนยัน" เพื่อชำระเงิน
+          </div>
+
+          <div class="qrcode__label">
+            <span> 3. พิมพ์แบบชำระเงิน เพื่อนำไปชำระที่ธนาคารกรุงไทย</span>
+          </div>
+        </div>
+        <div
+          class="col d-flex flex-column justify-content-center align-items-center"
+        >
+          <ngx-barcode
+            [bc-value]="qrString"
+            [bc-display-value]="true"
+            [bc-height]="50"
+          ></ngx-barcode>
+
+          <qrcode
+            [qrdata]="qrString"
+            [allowEmptyString]="true"
+            [ariaLabel]="'QR Code image with the following content...'"
+            [cssClass]="'center'"
+            [colorDark]="'#000000ff'"
+            [colorLight]="'#ffffffff'"
+            [elementType]="'canvas'"
+            [errorCorrectionLevel]="'M'"
+            [imageSrc]="'./assets/angular-logo.png'"
+            [imageHeight]="20"
+            [imageWidth]="20"
+            [margin]="2"
+            [scale]="1"
+            [title]="'A custom title attribute'"
+            [width]="150"
+          ></qrcode>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center mt-3">
+    <button type="button" class="btn btn-primary" (click)="cancel()">
+      ยกเลิก
+    </button>
+  </div>
+</div>

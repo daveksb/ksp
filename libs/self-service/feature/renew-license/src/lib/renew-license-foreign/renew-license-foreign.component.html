@@ -1,16 +1,23 @@
 <ksp-top-nav [isSelfService]="true"
-  ><span header>TEACHING LICENSE APPLICATION FORM</span>
+  ><span header
+    >TEACHING LICENSE RENEW APPLICATION FORM ({{ requestLabel }})</span
+  >
 </ksp-top-nav>
 
 <div class="main__container full-height px-4 py-2">
   <self-service-request-status
+    [isForeign]="true"
     [headerLabel1]="'Issue Date'"
     [headerLabel2]="'Form ID'"
+    [title]="'TEACHING LICENSE RENEW APPLICATION FORM'"
+    [requestNo]="requestData.requestno"
+    [requestDate]="requestData.requestdate"
+    [kurusapaNo]="'12345'"
   ></self-service-request-status>
 
   <br />
   <div class="box-header text-center">
-    THE TEACHERS' COUNCIL OF THAILAND TEACHING LICENSE APPLICATION FORM
+    THE TEACHERS' COUNCIL OF THAILAND TEACHING LICENSE RENEW APPLICATION FORM
   </div>
 
   <form [formGroup]="form">
@@ -24,26 +31,40 @@
         <ng-template matStepLabel>Personal Details</ng-template>
         <self-service-foreign-license-step-two
           formControlName="personalDetail"
+          [isRenewLicense]="true"
+          [userInfo]="userInfo"
+          [addressInfo]="addressInfo"
+          [workplaceInfo]="workplaceInfo"
+          [licensureInfo]="licensureInfo"
+          [academicFiles]="academicFiles"
+          [uniqueTimestamp]="uniqueNo"
+          [eduInfo]="eduInfo"
+          [myImage]="myImage"
         ></self-service-foreign-license-step-two>
       </mat-step>
 
       <mat-step [completed]="false">
         <ng-template matStepLabel>Renewal Requirements</ng-template>
-        <self-service-renew-license-foreign-step-two></self-service-renew-license-foreign-step-two>
+        <self-service-renew-license-foreign-step-two
+          formControlName="renewalRequirements"
+        >
+        </self-service-renew-license-foreign-step-two>
       </mat-step>
 
       <mat-step [completed]="false">
         <ng-template matStepLabel>Documents and evidence required</ng-template>
         <self-service-foreign-license-step-three
+          formControlName="foreignSelectUpload"
           [documentTypes]="'renew'"
-          [uniqueTimestamp]="uniqueTimestamp"
-          (fileUpdate)="onFileUpdate($event)"
+          [attachFiles]="documentFiles"
+          [uniqueTimestamp]="uniqueNo"
         ></self-service-foreign-license-step-three>
       </mat-step>
 
       <mat-step [completed]="false">
         <ng-template matStepLabel>Personal Declaration</ng-template>
         <self-service-foreign-license-step-four
+          [personalDeclaration]="personalDeclaration"
           formControlName="personalDeclaration"
         >
         </self-service-foreign-license-step-four>
@@ -55,7 +76,20 @@
     <button type="button" class="btn btn-secondary" (click)="cancel()">
       Cancel
     </button>
-    <button type="button" class="ms-3 btn btn-primary" (click)="save()">
+    <button
+      type="button"
+      *ngIf="requestId"
+      (click)="onCancelRequest()"
+      class="ms-3 btn border-primary text-primary"
+    >
+      Cancel Request
+    </button>
+    <button
+      type="button"
+      class="ms-3 btn btn-primary"
+      (click)="save()"
+      [disabled]="personalDetail.invalid"
+    >
       Save (Draft)
     </button>
   </div>

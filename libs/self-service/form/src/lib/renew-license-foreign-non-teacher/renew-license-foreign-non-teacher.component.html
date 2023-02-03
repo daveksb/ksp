@@ -1,36 +1,65 @@
 <form [formGroup]="form">
-  <!-- <ng-container formArrayName="teacherInfo">
-      <ng-container
-        *ngFor="let nonTeacherForm of nonTeacherInfo.controls; let i = index"
-      >
-        <ng-container [formGroupName]="i"> -->
-  <div class="px-3 py-2 border rounded mb-3">
-    <div class="d-flex justify-content-end">
-      <i class="bi bi-x-circle-fill text-danger" role="button"></i>
-    </div>
-    <select
-      formControlName="activityType2"
-      class="form-select mb-3"
-      style="white-space: break-spaces"
-    >
-      <option selected hidden disabled value="null">กรุณาเลือก</option>
-      <option
-        *ngFor="let atv of activityTypes2"
-        [value]="atv.value"
-        class="form-label text-black text-break"
-      >
-        {{ atv.label }}
-      </option>
-    </select>
-
-    <ng-container *ngIf="selectedActivityType2 === 0">
-      <ksp-standard-train-pass></ksp-standard-train-pass
-    ></ng-container>
-    <ng-container *ngIf="selectedActivityType2 === 1">
-      <ksp-standard-test-pass></ksp-standard-test-pass
-    ></ng-container>
+  <div class="fs-6 text-danger">
+    * please select only 1 activity done pursuant to the standard of performance
+    since issued date of license until present.
   </div>
-  <div class="d-flex justify-content-start">
-    <ksp-add-row-button class="text-primary">Add Activity</ksp-add-row-button>
+  <div class="d-flex mt-2">
+    <input
+      type="checkbox"
+      class="me-2 mt-1"
+      formControlName="activity13"
+      [attr.disabled]="activity2 || activity3 === true ? true : null"
+    />
+    <label class="form-label"
+      >Having taken a training course in knowledge of professional standard and
+      code of ethics as stipulated by the Teachers' Council of Thailand Board
+    </label>
+  </div>
+
+  <ng-container *ngIf="activity1">
+    <div class="bg-light px-3 py-2 my-2">
+      <ksp-standard-train-pass
+        [isForeignForm]="true"
+        formControlName="trainInfo"
+        [mode]="mode"
+      ></ksp-standard-train-pass>
+    </div>
+  </ng-container>
+
+  <div class="d-flex mt-2">
+    <input
+      type="checkbox"
+      class="me-2 mt-1"
+      formControlName="activity14"
+      [attr.disabled]="activity1 || activity3 === true ? true : null"
+    />
+    <label class="form-label"
+      >Having passed the test of knowledge on professional standard and code of
+      ethics as stipulated by the Teachers' Council of Thailand Board
+    </label>
+  </div>
+
+  <ng-container *ngIf="activity2">
+    <div class="bg-light px-3 py-2 my-2">
+      <ksp-standard-test-pass
+        [isForeignForm]="true"
+        formControlName="testInfo"
+        [mode]="mode"
+      ></ksp-standard-test-pass>
+    </div>
+  </ng-container>
+
+  <div class="d-flex mt-2">
+    <input
+      type="checkbox"
+      class="me-2 mt-1"
+      formControlName="activity15"
+      [attr.disabled]="activity1 || activity2 === true ? true : null"
+    />
+    <label class="form-label"
+      >Being in the process of training or testing knowledge of professional
+      standard and code of ethics as stipulated by the Teachers' Council of
+      Thailand Board (must be finished within six months)
+    </label>
   </div>
 </form>

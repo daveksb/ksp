@@ -1,0 +1,139 @@
+<section class="bg-image">
+  <div class="container min-vh-100 d-flex flex-column justify-content-center">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-12 col-lg-9 col-xl-9 py-3">
+        <div
+          class="card shadow-2-strong card-registration"
+          style="border-radius: 15px"
+        >
+          <div class="card-body p-3 p-md-4">
+            <h3 class="mb-3 pb-2 pb-md-0 mb-md-4 text-center">สมัครสมาชิก</h3>
+
+            <div class="d-flex justify-content-center mb-3">
+              <img
+                src="/assets/images/register-1.png"
+                width="200px"
+                height="40px"
+              />
+            </div>
+
+            <form [formGroup]="form">
+              <div class="row justify-content-center">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">เลขที่บัตรประชาชน</label>
+                  <i
+                    class="bi bi-question-circle fs-6 ms-1"
+                    (click)="tooltip.show()"
+                  >
+                    <span
+                      #tooltip="matTooltip"
+                      matTooltip="ตัวอย่าง : 0000000000000
+                      กรอกเลข 13 หลัก ไม่ต้องใส่ -"
+                      matTooltipClass="tooltip"
+                      matTooltipPosition="above"
+                    ></span
+                  ></i>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="idcardno"
+                    maxlength="13"
+                  />
+                  <ng-container
+                    *ngIf="
+                      idCardNo.invalid && (idCardNo.dirty || idCardNo.touched)
+                    "
+                  >
+                    <span
+                      class="text-danger"
+                      *ngIf="idCardNo.errors?.['pattern']"
+                    >
+                      {{ validatorMessages.idCardNo }}
+                    </span>
+                  </ng-container>
+                </div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">เลขที่หลังบัตรประชาชน </label>
+                  <i
+                    class="bi bi-question-circle fs-6 ms-1"
+                    (click)="tooltip1()"
+                  ></i>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="idcardbackno"
+                    maxlength="12"
+                  />
+                  <ng-container
+                    *ngIf="
+                      idCardBack.invalid &&
+                      (idCardBack.dirty || idCardBack.touched)
+                    "
+                  >
+                    <span
+                      class="text-danger"
+                      *ngIf="idCardBack.errors?.['pattern']"
+                    >
+                      {{ validatorMessages.idCardBack }}
+                    </span>
+                  </ng-container>
+                </div>
+              </div>
+
+              <div class="row justify-content-center">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">รูปถ่ายบัตรประชาชน</label>
+                  <i
+                    class="bi bi-question-circle fs-6 ms-1"
+                    (click)="tooltip2()"
+                  ></i>
+
+                  <div class="box__container">
+                    <img class="file__image" [src]="imgSrc" *ngIf="imgSrc" />
+                    <div class="d-flex flex-column">
+                      <div class="fs-6 text-secondary mb-3" *ngIf="!imgSrc">
+                        รองรับไฟล์ .jpg หรือ .jpeg เท่านั้น, ขนาดไม่เกิน 1 MB
+                      </div>
+                      <ksp-file-upload
+                        [buttonLabel]="'อัพโหลดรูปภาพ'"
+                        [requestType]="1"
+                        [isImage]="true"
+                        [uniqueTimestamp]="uniqueNo"
+                        [showUploadedFileName]="false"
+                        (uploadComplete)="onUploadComplete($event)"
+                      ></ksp-file-upload>
+                      <!-- <div class="fs-6 text-secondary" *ngIf="!imgSrc">
+                        Choose image . jpg only, max size 1 MB
+                      </div> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- [disabled]="form.invalid || !imgId" -->
+              <div class="gap-2 col-md-6 d-flex mx-auto my-2">
+                <button
+                  (click)="nextPage()"
+                  [disabled]="form.invalid"
+                  type="submit"
+                  class="btn btn-primary w-100"
+                >
+                  ยืนยันตัวตน
+                </button>
+              </div>
+              <div
+                role="button"
+                (click)="loginPage()"
+                class="form-label text-decoration-underline text-center"
+              >
+                เข้าสู่ระบบ
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

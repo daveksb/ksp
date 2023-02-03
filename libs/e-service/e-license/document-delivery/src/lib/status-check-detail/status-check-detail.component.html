@@ -1,4 +1,4 @@
-<ksp-top-nav><span header> รับ-ส่งเอกสารงานใบอนุญาต </span></ksp-top-nav>
+<ksp-top-nav><span header> รับ-ส่งเอกสารงานหนังสืออนุญาต </span></ksp-top-nav>
 
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height-2">
@@ -17,7 +17,7 @@
         <div class="col">
           <label class="form-label">หน่วยงานที่ส่ง</label>
           <select class="form-select">
-            <option selected>กรุณาเลือก</option>
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
             <option value="1">One</option>
             <option value="2">Two</option>
             <option value="3">Three</option>
@@ -28,7 +28,7 @@
         <div class="col">
           <label class="form-label">ประเภทหนังสือ</label>
           <select class="form-select">
-            <option selected>กรุณาเลือก</option>
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
             <option value="1">One</option>
             <option value="2">Two</option>
             <option value="3">Three</option>
@@ -37,7 +37,7 @@
         <div class="col">
           <label class="form-label">ประเภทไปรษณีย์</label>
           <select class="form-select">
-            <option selected>กรุณาเลือก</option>
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
             <option value="1">One</option>
             <option value="2">Two</option>
             <option value="3">Three</option>
@@ -47,7 +47,21 @@
       <div class="row mb-2">
         <div class="col">
           <label class="form-label">วันที่จัดส่ง</label>
-          <input type="date" class="form-control" />
+          <div class="d-flex align-items-center">
+            <input
+              matInput
+              [matDatepicker]="picker1"
+              autocomplete="off"
+              class="form-control form-date"
+              placeholder="วว/ดด/ปปปป"
+            />
+            <mat-datepicker-toggle
+              class="button-date"
+              matSuffix
+              [for]="picker1"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </div>
         </div>
         <div class="col">
           <label class="form-label">จำนวนรายการที่บันทึกข้อมูล</label>
@@ -65,7 +79,7 @@
               <th scope="col">ย้ายรายการ</th>
               <th scope="col">เลือก</th>
               <th scope="col">ลำดับ</th>
-              <th scope="col">เลขที่ใบคำขอ</th>
+              <th scope="col">เลขที่แบบคำขอ</th>
               <th scope="col">เลขบัตรประจำตัวประชาชน</th>
               <th scope="col">ชื่อ-นามสกุล ผู้รับ</th>
               <th scope="col">ปณ. ปลายทาง</th>

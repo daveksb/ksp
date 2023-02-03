@@ -21,11 +21,15 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./person-info.component.scss'],
 })
 export class PersonInfoComponent implements OnInit {
-  status = 'edit';
+  status = 'view';
   label = 'แก้ไขข้อมูล';
   imgSrc = '';
+  today = new Date();
+  eyeIconClicked = false;
 
   form = this.fb.group({
+    prefixth: ['', Validators.required],
+    prefixen: ['', Validators.required],
     firstnameth: ['', [Validators.required, Validators.pattern(nameThPattern)]],
     lastnameth: ['', [Validators.required, Validators.pattern(nameThPattern)]],
     firstnameen: ['', [Validators.required, Validators.pattern(nameEnPattern)]],
@@ -36,15 +40,18 @@ export class PersonInfoComponent implements OnInit {
     nationality: [''],
     religion: [''],
     idcardno: [''],
-    province: [''],
-    email: ['', [Validators.required, Validators.email]],
+    sex: [''],
+    email: [''],
     personimage: [''],
   });
+
   baseForm = this.fb.group(new SelfMyInfo());
-  provinces$!: Observable<any>;
+  prefixList$!: Observable<any>;
+  //provinces$!: Observable<any>;
   nationalitys$!: Observable<any>;
   uniqueTimestamp!: string;
   validatorMessages = validatorMessages;
+
   constructor(
     private fb: FormBuilder,
     private myInfoService: MyInfoService,
@@ -54,7 +61,8 @@ export class PersonInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.uniqueTimestamp = uuidv4();
-    this.provinces$ = this.addressService.getProvinces();
+    this.prefixList$ = this.generalInfoService.getPrefix();
+    //this.provinces$ = this.addressService.getProvinces();
     this.nationalitys$ = this.generalInfoService.getNationality();
     this.myInfoService.getMyInfo().subscribe((res) => {
       res = this.myInfoService.formatMyInfo(res);
@@ -64,7 +72,7 @@ export class PersonInfoComponent implements OnInit {
         this.imgSrc = atob(res.filedata);
       }
     });
-    //this.form.disable();
+    this.form.disable();
   }
 
   clearData() {
@@ -89,20 +97,21 @@ export class PersonInfoComponent implements OnInit {
     return this.form.controls.email;
   }
   onClick() {
-    if (this.status == 'edit') {
-      this.status = 'save';
+    if (this.status === 'view') {
+      this.status = 'edit';
       this.label = 'บันทึกข้อมูล';
       this.form.enable();
     } else {
-      if (!this.form.valid) return;
-      this.baseForm.patchValue(this.form.getRawValue());
-      const payload: SelfMyInfo = replaceEmptyWithNull(this.baseForm.value);
-      this.myInfoService
-        .updateMyInfo(payload)
-        .subscribe((res) => console.log(res));
-      this.status = 'edit';
+      this.status = 'view';
       this.label = 'แก้ไขข้อมูล';
       this.form.disable();
+      if (!this.form.valid) {
+        this.baseForm.patchValue(this.form.getRawValue());
+        const payload: SelfMyInfo = replaceEmptyWithNull(this.baseForm.value);
+        this.myInfoService
+          .updateMyInfo(payload)
+          .subscribe((res) => console.log(res));
+      }
     }
   }
 

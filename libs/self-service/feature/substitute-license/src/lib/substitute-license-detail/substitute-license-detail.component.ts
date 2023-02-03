@@ -16,10 +16,19 @@ import {
   EducationDetailService,
   MyInfoService,
   SelfRequestService,
+  LoaderService,
 } from '@ksp/shared/service';
-import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
-import { SelfRequest } from '@ksp/shared/interface';
+import {
+  getCookie,
+  parseJson,
+  replaceEmptyWithNull,
+  toLowercaseProp,
+} from '@ksp/shared/utility';
+import { FileGroup, SelfLicense, SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
+import { v4 as uuidv4 } from 'uuid';
+import localForage from 'localforage';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'ksp-substitute-license-detail',
@@ -30,16 +39,10 @@ export class SubstituteLicenseDetailComponent
   extends LicenseFormBaseComponent
   implements OnInit
 {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   userInfoType = UserInfoFormType.thai;
-  objectiveFiles = [
-    { name: '1.ใบอนุญาตประกอบวิชาชีพที่ชํารุด', fileId: '', fileName: '' },
-    {
-      name: '2.หลักฐานการรับแจงความของพนักงานสอบสวน หรือบันทึกถอยคํา กรณีใบอนุญาตสูญหาย',
-      fileId: '',
-      fileName: '',
-    },
-  ];
-
+  objectiveFiles: FileGroup[] = [];
+  myLicense = new SelfLicense();
   override form = this.fb.group({
     userInfo: [],
     address1: [],
@@ -57,7 +60,8 @@ export class SubstituteLicenseDetailComponent
     educationDetailService: EducationDetailService,
     myInfoService: MyInfoService,
     requestService: SelfRequestService,
-    route: ActivatedRoute
+    route: ActivatedRoute,
+    private loaderService: LoaderService
   ) {
     super(
       generalInfoService,
@@ -74,9 +78,35 @@ export class SubstituteLicenseDetailComponent
 
   ngOnInit(): void {
     this.getListData();
-    this.getMyInfo();
-    // this.checkButtonsDisableStatus();
-    this.initializeFiles();
+    this.checkRequestId();
+
+    const idcardno = getCookie('idCardNo');
+    this.myInfoService.getMyLicense(idcardno).subscribe((res) => {
+      if (res) {
+        this.myLicense = res[0];
+      }
+    });
+  }
+
+  override initializeFiles() {
+    super.initializeFiles();
+    this.objectiveFiles = structuredClone(OBJECTIVE_FILES);
+    this.uniqueTimestamp = uuidv4();
+  }
+
+  override patchData(data: SelfRequest) {
+    super.patchData(data);
+
+    if (data.replacereasoninfo) {
+      const replaceReasonInfo = parseJson(data.replacereasoninfo);
+      this.form.controls.replaceReasonInfo.patchValue(replaceReasonInfo);
+    }
+
+    if (data.fileinfo) {
+      const fileInfo = parseJson(data.fileinfo);
+      const { replacereasoninfofiles } = fileInfo;
+      this.objectiveFiles = replacereasoninfofiles;
+    }
   }
 
   patchUserInfoForm(data: any): void {
@@ -106,21 +136,24 @@ export class SubstituteLicenseDetailComponent
 
     const { id, ...rawUserInfo } = formData.userInfo;
     const userInfo = toLowercaseProp(rawUserInfo);
-    userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
-    userInfo.uniquetimestamp = this.uniqueTimestamp;
 
     const self = new SelfRequest(
       '1',
-      SelfServiceRequestType.ขอใบแทนใบอนุญาตประกอบวิชาชีพ,
+      SelfServiceRequestType.ขอใบแทนหนังสืออนุญาตประกอบวิชาชีพ,
       `${SelfServiceRequestSubType.อื่นๆ}`,
       currentProcess
     );
+    self.isforeign = `${SelfServiceRequestForType.ชาวไทย}`;
+    self.uniqueno = this.uniqueTimestamp;
+    self.userid = getCookie('userId');
     const allowKey = Object.keys(self);
 
     const replacereasoninfofiles = this.objectiveFiles;
 
     const initialPayload = {
       ...replaceEmptyWithNull(userInfo),
+      ...(this.requestId && { id: `${this.requestId}` }),
+      ...(this.imageId && { imagefileid: `${this.imageId}` }),
       ...{
         addressinfo: JSON.stringify([formData.address1, formData.address2]),
       },
@@ -139,9 +172,8 @@ export class SubstituteLicenseDetailComponent
   }
 
   next() {
-    console.log(this.form.value);
+    //console.log(this.form.value);
     const completeDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
       data: {
         title: `คุณต้องการบันทึกข้อมูล
         ใช่หรือไม่?`,
@@ -153,7 +185,10 @@ export class SubstituteLicenseDetailComponent
     completeDialog.componentInstance.saved.subscribe((res) => {
       if (res) {
         const payload = this.createRequest(1);
-        this.requestService.createRequest(payload).subscribe((res) => {
+        const request = this.requestId
+          ? this.requestService.updateRequest.bind(this.requestService)
+          : this.requestService.createRequest.bind(this.requestService);
+        request(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res?.returncode === '00') {
             this.router.navigate(['/home']);
@@ -165,13 +200,30 @@ export class SubstituteLicenseDetailComponent
     completeDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         const payload = this.createRequest(2);
-        this.requestService.createRequest(payload).subscribe((res) => {
+        const request = this.requestId
+          ? this.requestService.updateRequest.bind(this.requestService)
+          : this.requestService.createRequest.bind(this.requestService);
+        request(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res?.returncode === '00') {
-            this.router.navigate(['/license', 'payment-channel']);
+            const requestno = res.requestno;
+            localForage.setItem('requestno', requestno);
+            this.router.navigate(['/license', 'payment-channel', res.id]);
           }
         });
       }
     });
   }
+
+  back() {
+    this.router.navigate(['/home']);
+  }
 }
+
+const OBJECTIVE_FILES: FileGroup[] = [
+  { name: '1. หนังสืออนุญาตประกอบวิชาชีพที่ชํารุด', files: [] },
+  {
+    name: '2. หลักฐานการรับแจ้งความของพนักงานสอบสวน หรือบันทึกถ้อยคํา กรณีหนังสืออนุญาตสูญหาย',
+    files: [],
+  },
+];

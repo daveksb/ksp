@@ -13,14 +13,36 @@ import {
   EducationDetailService,
   MyInfoService,
   SelfRequestService,
+  LoaderService,
 } from '@ksp/shared/service';
-import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
-import { SelfRequest } from '@ksp/shared/interface';
+import {
+  getCookie,
+  parseJson,
+  replaceEmptyWithNull,
+  toLowercaseProp,
+} from '@ksp/shared/utility';
+import { FileGroup, SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmDialogComponent } from '@ksp/shared/dialog';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { v4 as uuidv4 } from 'uuid';
+import localForage from 'localforage';
+
+const EDU_FILES: FileGroup[] = [
+  {
+    name: '1. สำเนาใบรายงานผลการศึกษา (transcript)',
+    files: [],
+  },
+];
+
+const OBJECTIVE_FILES: FileGroup[] = [
+  {
+    name: '1. สำเนาคำอธิบายรายวิชาที่ขอเทียบโอนความรู้ฯตามหลักสูตรที่สำเร็จการศึกษาที่มีตราประทับของทางสถาบันที่สำเร็จการศึกษาและมีเจ้าหน้าที่ของสถาบันลงนามรับรองสำเนาถูกต้อง',
+    files: [],
+  },
+];
 
 @Component({
   selector: 'ksp-transfer-knowledge-request',
@@ -31,15 +53,9 @@ export class TransferKnowledgeRequestComponent
   extends LicenseFormBaseComponent
   implements OnInit
 {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   userInfoType = UserInfoFormType.thai;
-  headerGroup = ['วันที่ทำรายการ', 'เลขใบคำขอ'];
-  objectiveFiles = [
-    {
-      name: 'สำเนาคำอธิบายรายวิชาที่ขอเทียบโอนความรู้ฯตามหลักสูตรที่สำเร็จการศึกษษที่มีตราประทับของทางสถาบันที่สำเร็จการศึกษาและมีเจ้าหน้าที่ของสถาบันลงนามรับรองสำเนาถูกต้อง',
-      fileId: '',
-      fileName: '',
-    },
-  ];
+  headerGroup = ['วันที่ทำรายการ', 'เลขแบบคำขอ'];
   eduFiles: any[] = [];
   transferFiles: any[] = [];
 
@@ -63,7 +79,8 @@ export class TransferKnowledgeRequestComponent
     educationDetailService: EducationDetailService,
     myInfoService: MyInfoService,
     requestService: SelfRequestService,
-    route: ActivatedRoute
+    route: ActivatedRoute,
+    private loaderService: LoaderService
   ) {
     super(
       generalInfoService,
@@ -80,15 +97,42 @@ export class TransferKnowledgeRequestComponent
 
   ngOnInit(): void {
     this.getListData();
-    this.getMyInfo();
+    // this.getMyInfo();
     // this.checkButtonsDisableStatus();
-    this.initializeFiles();
+    // this.initializeFiles();
+    this.checkRequestId();
   }
 
   override initializeFiles(): void {
     super.initializeFiles();
-    this.eduFiles = structuredClone(this.objectiveFiles);
-    this.transferFiles = structuredClone(this.objectiveFiles);
+    this.eduFiles = structuredClone(EDU_FILES);
+    this.transferFiles = structuredClone(OBJECTIVE_FILES);
+    this.uniqueTimestamp = uuidv4();
+  }
+
+  override patchData(data: SelfRequest) {
+    super.patchData(data);
+    if (data.eduinfo) {
+      const eduInfo = parseJson(data.eduinfo);
+      this.form.controls.educationInfo.patchValue({
+        ...eduInfo,
+      } as any);
+    }
+
+    if (data.transferknowledgeinfo) {
+      const transferKnowledgeInfo = parseJson(data.transferknowledgeinfo);
+      console.log(transferKnowledgeInfo);
+      this.form.controls.transferKnowledgeInfo.patchValue({
+        ...transferKnowledgeInfo,
+      });
+    }
+
+    if (data.fileinfo) {
+      const fileInfo = parseJson(data.fileinfo);
+      const { edufiles, transferknowledgeinfofiles } = fileInfo;
+      this.eduFiles = edufiles;
+      this.transferFiles = transferknowledgeinfofiles;
+    }
   }
 
   override getListData(): void {
@@ -123,8 +167,6 @@ export class TransferKnowledgeRequestComponent
 
     const { id, ...rawUserInfo } = formData.userInfo;
     const userInfo = toLowercaseProp(rawUserInfo);
-    userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
-    userInfo.uniquetimestamp = this.uniqueTimestamp;
 
     const self = new SelfRequest(
       '1',
@@ -132,6 +174,9 @@ export class TransferKnowledgeRequestComponent
       `${SelfServiceRequestSubType.อื่นๆ}`,
       currentProcess
     );
+    self.isforeign = `${SelfServiceRequestForType.ชาวไทย}`;
+    self.uniqueno = this.uniqueTimestamp;
+    self.userid = getCookie('userId');
     const allowKey = Object.keys(self);
 
     const edufiles = this.eduFiles;
@@ -139,6 +184,8 @@ export class TransferKnowledgeRequestComponent
 
     const initialPayload = {
       ...replaceEmptyWithNull(userInfo),
+      ...(this.requestId && { id: `${this.requestId}` }),
+      ...(this.imageId && { imagefileid: `${this.imageId}` }),
       ...{
         addressinfo: JSON.stringify([formData.address1, formData.address2]),
       },
@@ -159,40 +206,39 @@ export class TransferKnowledgeRequestComponent
     return payload;
   }
 
-  next() {
+  onSave(currentProcess: number) {
     console.log(this.form.value);
-    const completeDialog = this.dialog.open(ConfirmDialogComponent, {
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
-        title: `คุณต้องการบันทึกข้อมูล
-        ใช่หรือไม่?`,
-        btnLabel: 'ยื่นแบบคำขอ',
-        cancelBtnLabel: 'บันทึก',
+        title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่? `,
+        btnLabel: 'บันทึก',
       },
     });
 
-    completeDialog.componentInstance.saved.subscribe((res) => {
+    confirmDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        const payload = this.createRequest(1);
-        this.requestService.createRequest(payload).subscribe((res) => {
+        const payload = this.createRequest(currentProcess);
+        const request = this.requestId
+          ? this.requestService.updateRequest.bind(this.requestService)
+          : this.requestService.createRequest.bind(this.requestService);
+        request(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res?.returncode === '00') {
-            this.router.navigate(['/home']);
+            if (currentProcess === 1) {
+              this.router.navigate(['/home']);
+            } else {
+              const requestno = res.requestno;
+              localForage.setItem('requestno', requestno);
+              this.router.navigate(['/license', 'payment-channel', res.id]);
+            }
           }
         });
       }
     });
+  }
 
-    completeDialog.componentInstance.confirmed.subscribe((res) => {
-      if (res) {
-        const payload = this.createRequest(2);
-        this.requestService.createRequest(payload).subscribe((res) => {
-          console.log('request result = ', res);
-          if (res?.returncode === '00') {
-            this.router.navigate(['/license', 'payment-channel']);
-          }
-        });
-      }
-    });
+  back() {
+    this.router.navigate(['/home']);
   }
 }

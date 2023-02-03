@@ -7,18 +7,24 @@
           style="border-radius: 15px"
         >
           <div class="card-body p-3 p-md-4">
-            <h3 class="mb-3 pb-2 pb-md-0 mb-md-5 text-center">Register</h3>
+            <h3 class="mb-3 pb-2 pb-md-0 mb-md-4 text-center">Register</h3>
 
             <form [formGroup]="form">
               <div class="row justify-content-center">
                 <div class="col-md-6 mb-3">
+                  <ng-container *ngIf="searchNotFound">
+                    <ksp-uni-form-badge
+                      [subTitle]="'Not found'"
+                    ></ksp-uni-form-badge>
+                  </ng-container>
+
                   <label class="form-label required"
                     >Teachers Council of Thailand ID number</label
                   >
                   <input
                     type="text"
                     class="form-control"
-                    formControlName="idcardno"
+                    formControlName="kuruspano"
                   />
                 </div>
               </div>
@@ -30,11 +36,7 @@
               </div>
               <div class="row justify-content-center">
                 <div class="col-md-6 mb-3">
-                  <label
-                    for="lastnameFormControlInput"
-                    class="form-label required"
-                    >Passport No.</label
-                  >
+                  <label class="form-label required">Passport No.</label>
                   <input
                     type="text"
                     class="form-control"
@@ -46,7 +48,10 @@
               <div class="d-flex align-items-center flex-column mt-3">
                 <button
                   id="btn-confirm"
-                  [disabled]="form.invalid"
+                  [disabled]="
+                    !form.controls.kuruspano.valid &&
+                    !form.controls.passportno.valid
+                  "
                   (click)="submit()"
                   type="submit"
                   class="btn btn-primary"

@@ -1,0 +1,94 @@
+<ksp-top-nav
+  ><span header>ยื่นแบบคำขอ</span
+  ><span subHeader>พิจารณารับรองหนังสือคุณวุฒิ</span></ksp-top-nav
+>
+
+<div class="bg-secondary bg-opacity-10 py-2 px-4 full-height-2">
+  <div class="box-header">ยืนยันผลการตรวจสอบ และออกหนังสือรับรองคุณวุฒิ</div>
+  <div class="bg-white p-3">
+    <div class="d-flex justify-content-between">
+      <ksp-request-header-info
+        [requestDate]="requestData?.requestdate"
+        [requestNumber]="requestData?.requestno"
+      ></ksp-request-header-info>
+    </div>
+    <hr />
+    <div class="box-header text-primary">
+      ประวัติการตรวจสอบคุณสมบัติและเอกสาร
+    </div>
+
+    <table class="table w-75">
+      <thead>
+        <tr>
+          <th scope="col">ครั้งที่</th>
+          <th scope="col">ชื่อ-นามสกุล เจ้าหน้าที่</th>
+          <th scope="col">วันที่ตรวจสอบ</th>
+          <th scope="col">ผลการตรวจสอบ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let row of approveHistory; let i = index">
+          <tr>
+            <td scope="col">{{ i + 1 }}</td>
+            <td scope="col">{{ row.firstnameth }} {{ row.lastnameth }}</td>
+            <td scope="col">{{ row.createdate | thaiDate }}</td>
+            <td scope="col">
+              {{ mapCheckResult(row.detail.checkresult) }}
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+
+  <form [formGroup]="form">
+    <ng-container
+      *ngIf="
+        (requestData?.requesttype === '3' && requestData?.process === '5') ||
+          (requestData?.requesttype === '6' && requestData?.process === '3');
+        else approve
+      "
+    >
+      <ng-container *ngIf="requestData.status === '1'">
+        <div class="bg-white p-3 mt-3">
+          <div class="box-header">ผลการยืนยันการตรวจสอบ</div>
+          <hr />
+          <ksp-consider-ksp-request
+            formControlName="approvement"
+          ></ksp-consider-ksp-request>
+        </div>
+      </ng-container>
+    </ng-container>
+    <ng-template #approve>
+      <div class="bg-white p-3 pt-0">
+        <ksp-validate-ksp-request
+          [requestType]="requestData?.requesttype"
+          [process]="requestData?.process"
+          formControlName="approvement"
+        ></ksp-validate-ksp-request>
+      </div>
+    </ng-template>
+  </form>
+  <div class="bg-white px-3 py-2 mt-3">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="box-header">หนังสือแจ้งผลรับรองคุณวุฒิ</div>
+      <button type="button" class="btn btn-success">ดูเอกสาร</button>
+    </div>
+
+    <!-- <hr />
+    <ksp-pdf-viewer-preview></ksp-pdf-viewer-preview> -->
+  </div>
+</div>
+
+<div class="sticky-bottom border px-2">
+  <ksp-bottom-nav
+    (cancelClicked)="navigateBack()"
+    (saveClicked)="confirmDialog()"
+    [disableSaveButton]="formInValid"
+    [showCenterButtons]="true"
+    [isLastPage]="true"
+    [isFirstPage]="true"
+    [showSaveButton]="true"
+    [showCancelButton]="true"
+  ></ksp-bottom-nav>
+</div>

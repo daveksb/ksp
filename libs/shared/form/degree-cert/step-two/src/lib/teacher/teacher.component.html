@@ -19,11 +19,12 @@
             formControlName="generalInfo"
           ></ksp-teacher-general-info>
 
+          <hr />
           <div class="d-flex align-items-center">
             <input type="checkbox" formControlName="hasMoreCourses" />
             <label class="form-label text-black ms-2"
               >ทำเครื่องหมาย (<i class="bi bi-check"></i>)
-              กรณีประจำหลักสูตรมากกว่า ๑ หลักสูตร
+              กรณีประจำหลักสูตรมากกว่า 1 หลักสูตร
             </label>
           </div>
 
@@ -44,13 +45,13 @@
                         formControlName="courseName"
                       />
                     </div>
-                    <div class="col-auto">
+                    <div class="col-auto d-flex ps-0">
                       <br />
                       <i
                         role="button"
                         *ngIf="j > 0"
                         (click)="deleteCourse(i, j)"
-                        class="bi bi-trash text-danger fs-5"
+                        class="bi bi-trash text-danger fs-6"
                       ></i>
                     </div>
                   </div>

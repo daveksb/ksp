@@ -2,43 +2,46 @@
   <div class="text-black fs-5">ข้อมูลขอคืนเงินค่าธรรมเนียม</div>
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">ประเภทใบประกอบวิชาชีพ</label>
+      <label class="form-label required">ประเภทใบประกอบวิชาชีพ</label>
       <select formControlName="licensetype" class="form-select">
-        <option selected>กรุณาเลือก</option>
-        <option value="1">ค่าขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ</option>
-        <option value="2">ค่าต่ออายุใบอนุญาตประกอบวิชาชีพ</option>
-        <option value="3">ค่าใบแทน</option>
-        <option value="4">ค่าหนังสือรับรองการขึ้นทะเบียน</option>
-        <option value="5">อื่นๆ</option>
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        <option value="1">ค่าขึ้นทะเบียนหนังสืออนุญาตประกอบวิชาชีพ</option>
+        <option value="2">ค่าต่ออายุหนังสืออนุญาตประกอบวิชาชีพ</option>
+        <option value="3">ค่าใบแทนหนังสืออนุญาต</option>
+        <option value="4">ค่าธรรมเนียมอื่นๆ</option>
       </select>
     </div>
     <div class="col-md-6 mb-2">
-      <label class="form-label">ประเภทวิชาชีพ</label>
+      <label class="form-label required">ประเภทวิชาชีพ</label>
       <select class="form-select" formControlName="eduoccupytype">
-        <option selected>กรุณาเลือก</option>
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option value="1">ครู</option>
         <option value="2">ผู้บริหารสถานศึกษา</option>
         <option value="3">ผู้บริหารการศึกษา</option>
-        <option value="3">ศึกษานิเทศก์</option>
+        <option value="4">ศึกษานิเทศก์</option>
       </select>
     </div>
   </div>
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">เลขใบคำขอ</label>
-      <input formControlName="requestno" class="form-control" type="text" />
+      <label class="form-label required">เลขแบบคำขอ</label>
+      <select class="form-select" formControlName="requestno">
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        <ng-container *ngFor="let r of myRequests">
+          <option [value]="r.requestno">
+            {{ r.requestno || '' | reqNoFormat }}
+          </option>
+        </ng-container>
+      </select>
+      <!-- <input formControlName="requestno" class="form-control" type="text" /> -->
     </div>
     <div class="col-md-6 mb-2">
-      <label class="form-label">เหตุผลขอคืนเงินค่าธรรมเนียม</label>
+      <label class="form-label required">เหตุผลขอคืนเงินค่าธรรมเนียม</label>
       <select class="form-select" formControlName="refundreason">
-        <option selected>กรุณาเลือก</option>
-        <option value="1">ขาดคุณสมบัติตามมาตรฐานวิชาชีพ</option>
-        <option value="2">ได้รับการยกเว้นค่าธรรมเนียม</option>
-        <option value="3">ชำระเงินซ้ำ</option>
-        <option value="4">ชำระเงินผิดประเภท</option>
-        <option value="5">ขอยกเลิกกการขึ้นทะเบียนรับใบอนุญาต</option>
-        <option value="6">ขอยกเลิกการต่ออายุใบอนุญาต</option>
-        <option value="7">อื่นๆ</option>
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        <ng-container *ngFor="let item of keys">
+          <option [value]="item">{{ RefundReason[+item] }}</option>
+        </ng-container>
       </select>
     </div>
   </div>
@@ -49,7 +52,8 @@
         class="form-control"
         type="text"
         placeholder="เหตุผลขอคืนเงินค่าธรรมเนียม"
-        formControlName="otherreason" />
+        formControlName="otherreason"
+      />
     </div>
   </div>
   <div class="row">
@@ -68,21 +72,38 @@
   <div class="row mb-2">
     <span class="col-md-3 d-flex align-items-center">
       <input type="checkbox" class="me-2" formControlName="smsAlert" />
-      <label class="form-label">ข้อความแจ้งเตือนผ่านโทรศัพท์มือถือ (SMS)
+      <label class="form-label" [class.required]="form.controls.smsAlert.value"
+        >ข้อความแจ้งเตือนผ่านโทรศัพท์มือถือ (SMS)
       </label>
     </span>
     <span class="col-md-3">
       <input class="form-control" type="text" formControlName="smsDetail" />
+      <ng-container
+        *ngIf="smsPhone.invalid && (smsPhone.dirty || smsPhone.touched)"
+      >
+        <span class="text-danger" *ngIf="smsPhone.errors?.['pattern']"
+          >{{ validatorMessages.phone }}
+        </span>
+      </ng-container>
     </span>
   </div>
 
   <div class="row mb-2">
     <span class="col-md-3 d-flex align-items-center">
       <input type="checkbox" class="me-2" formControlName="emailAlert" />
-      <label class="form-label">จดหมายอิเล็กทรอนิกส์ (E-Mail) </label>
+      <label
+        class="form-label"
+        [class.required]="form.controls.emailAlert.value"
+        >จดหมายอิเล็กทรอนิกส์ (E-Mail)
+      </label>
     </span>
     <span class="col-md-3">
       <input class="form-control" type="text" formControlName="emailDetail" />
+      <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
+        <span class="text-danger" *ngIf="email.errors?.['email']">{{
+          validatorMessages.email
+        }}</span>
+      </ng-container>
     </span>
   </div>
 
@@ -95,9 +116,9 @@
   <div class="text-black fs-5">ขอรับเงินผ่านระบบ KTB Corporate Online</div>
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">บัญชีธนาคาร</label>
+      <label class="form-label required">บัญชีธนาคาร</label>
       <select class="form-select" formControlName="bankName">
-        <option selected>กรุณาเลือก</option>
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option value="1">ธนาคารกรุงเทพ</option>
         <option value="2">ธนาคารกสิกรไทย</option>
         <option value="3">ธนาคารกรุงไทย</option>
@@ -117,8 +138,17 @@
       </select>
     </div>
     <div class="col-md-6 mb-2">
-      <label class="form-label">เลขที่บัญชี</label>
+      <label class="form-label required">เลขที่บัญชี</label>
       <input class="form-control" type="text" formControlName="bankAccount" />
+      <ng-container
+        *ngIf="
+          bankAccount.invalid && (bankAccount.dirty || bankAccount.touched)
+        "
+      >
+        <span class="text-danger" *ngIf="bankAccount.errors?.['pattern']"
+          >{{ validatorMessages.bankAccount }}
+        </span>
+      </ng-container>
     </div>
   </div>
 </div>

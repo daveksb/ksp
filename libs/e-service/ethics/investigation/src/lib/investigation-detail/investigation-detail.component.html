@@ -1,5 +1,6 @@
 <ksp-top-nav>
-  <span subHeader>ระบบงานจรรยาบรรณ </span>
+  <span header>ระบบงานจรรยาบรรณ </span
+  ><span subHeader>บันทึกการสืบสวนข้อเท็จจริง</span>
 </ksp-top-nav>
 
 <form [formGroup]="form">
@@ -7,7 +8,7 @@
     <div class="box-header">บันทึกข้อมูลการสืบสวนข้อเท็จจริง</div>
 
     <div class="bg-white">
-      <mat-tab-group class="tab-group">
+      <mat-tab-group class="tab-group" animationDuration="0ms">
         <mat-tab label="บันทึกการกล่าวหา/กล่าวโทษ" class="tab-content">
           <e-service-ethic-accusation-record formControlName="accusation">
           </e-service-ethic-accusation-record>
@@ -15,7 +16,7 @@
 
         <mat-tab label="สืบสวนข้อเท็จจริง">
           <e-service-form-investigation-detail
-            formControlName="invsetigation"
+            formControlName="investigation"
           ></e-service-form-investigation-detail>
         </mat-tab>
       </mat-tab-group>

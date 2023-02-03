@@ -4,35 +4,32 @@
 
 <div class="main__container px-4 py-2 full-height">
   <self-service-request-status></self-service-request-status>
-  <br />
-  <div class="box-header">
+
+  <div class="box-header mt-3">
     ลงทะเบียนรายงานตัวเพื่อยืนยันเข้าเฝ้ารับเข็มเชิดชูเกียรติ
   </div>
-  <div class="bg-white px-3 py-2">
+  <div class="bg-white p-2 border">
     <div
-      class="border border-dark bg-light d-flex flex-column align-items-center py-3"
+      class="border border-secondary bg-light d-flex flex-column align-items-center py-3"
     >
       <div class="text-black fs-5">ครูอาวุโส ประจำปี 2564 (กลุ่มที่ 1)</div>
-      <br />
-      <div class="text-black text-center fs-5">
+
+      <div class="text-black text-center fs-5 mt-3">
         วันที่ 23 และ 24 มิถุนายน 2564 ณ สำนักงานเลขาธิการคุรุสภา
       </div>
       <div class="text-black fs-5">โต๊ะรับรายงานตัวหลายเลข 15</div>
-      <br />
-      <div class="text-black text-center">
+
+      <div class="text-black text-center mt-3">
         กรุณานำบัตรประจำตัวประชาชนหรือบัตรประจำตัวที่ส่วนข้าราชการออกให้และสำเนาบัตรประจำตัว
         พร้อมลงลายมือชื่อรับรองสำเนาถูกต้องไปแสดงต่อเจ้าหน้าที่รับรายงานตัว
       </div>
     </div>
   </div>
-  <br />
-  <div class="box-header">ข้อมูลครูอาวุโส</div>
-  <div class="bg-white px-3 py-2">
+
+  <div class="box-header mt-3">ข้อมูลครูอาวุโส</div>
+  <div class="bg-white p-3 border">
     <div class="bg-light px-3 py-2">
-      <ksp-form-user-info
-        [displayMode]="[userInfoType]"
-        [isSchoolService]="false"
-      ></ksp-form-user-info>
+      <ksp-form-user-info [isSelfService]="true"></ksp-form-user-info>
       <div class="row">
         <div class="col-md-6 mb-2">
           <label class="form-label">อายุ</label>
@@ -40,17 +37,30 @@
         </div>
         <div class="col-md-6 mb-2">
           <label class="form-label">วันเดือนปี อายุครบ 60 ปี</label>
-          <input class="form-control" type="date" />
+          <div class="d-flex align-items-center">
+            <input
+              matInput
+              [matDatepicker]="picker"
+              autocomplete="off"
+              class="form-control form-date"
+              placeholder="วว/ดด/ปปปป"
+            />
+            <mat-datepicker-toggle
+              class="button-date"
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </div>
         </div>
       </div>
     </div>
-    <div class="fs-6 text-danger mt-3">
-      *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
-      โปรดตรวจสอบอีกครั้งก่อนทำการกดยืนยัน
-    </div>
   </div>
-  <br />
-  <div class="d-flex justify-content-center">
+  <div class="fs-6 text-danger mt-1">
+    *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
+    โปรดตรวจสอบอีกครั้งก่อนทำการกดยืนยัน
+  </div>
+  <div class="d-flex justify-content-center my-3">
     <button
       type="button"
       class="btn btn-primary w-auto"

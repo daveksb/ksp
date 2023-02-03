@@ -1,0 +1,57 @@
+<div class="box-header text-primary mb-1">{{ showBoxHeader }}</div>
+
+<form [formGroup]="form">
+  <div class="bg-light p-3">
+    <div class="row mb-2">
+      <div class="col-2">
+        <label class="form-label">มติครั้งที่</label>
+        <input class="form-control" type="text" formControlName="reasonTimes" />
+      </div>
+      <div class="col-4">
+        <label class="form-label">ปี</label>
+        <input class="form-control" type="text" formControlName="year" />
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-6">
+        <label class="form-label">ประเภทกรรมการ</label>
+        <select class="search__content form-select" formControlName="boardType">
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col">
+        <label class="form-label">ชื่อกรรมการ</label>
+        <input class="form-control" type="text" formControlName="boardName" />
+      </div>
+      <div class="col">
+        <label class="form-label">ชื่อประธาน</label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="chairmanName"
+        />
+      </div>
+    </div>
+
+    <div class="d-flex mt-3">
+      <div class="form-label">เอกสารแนบ</div>
+      <div class="ms-2 text-danger">
+        *กรุณาอัพโหลดไฟล์ .pdf และขนาดไม่เกิน 2 MB สามารถอัพโหลดไฟล์ได้มากกว่า 1
+        ไฟล์ต่อรายการ
+      </div>
+    </div>
+    <ksp-file-upload
+      [buttonLabel]="'อัพโหลดไฟล์'"
+      [uniqueTimestamp]="uniqueNo"
+      [showDeleteFile]="true"
+      (uploadComplete)="onUploadComplete($event)"
+    ></ksp-file-upload>
+  </div>
+</form>

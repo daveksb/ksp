@@ -1,5 +1,5 @@
 <form [formGroup]="form">
-  <div class="mt-4 px-3 py-2 border">
+  <div class="mt-4 px-3 py-2 border full-height2 ">
     <div class="d-flex align-items-center mb-3">
       <div class="box-header text-primary">ยืนยันผลการตรวจสอบ</div>
       <div class="text-danger">* กรุณาเลือกอย่างใดอย่างหนึ่งเท่านั้น</div>
@@ -7,78 +7,45 @@
 
     <div class="d-flex align-items-center mb-3">
       <div class="form-control" style="width: 22rem">
-        <div class="d-flex align-items-center">
-          <input type="radio" value="1" formControlName="verify" />
-          <label class="form-label ms-2"> ครบถ้วน และถูกต้อง </label>
-        </div>
+        <fieldset [disabled]="isDisable('verify', 1)">
+          <div class="d-flex align-items-center">
+            <input type="radio" value="1" formControlName="verify" />
+            <label class="form-label ms-2"> ครบถ้วน และถูกต้อง </label>
+          </div>
+        </fieldset>
       </div>
     </div>
 
     <div class="d-flex align-items-center mb-3">
-      <div class="form-control" style="width: 22rem">
-        <div class="d-flex align-items-center">
-          <input type="radio" value="2" formControlName="verify" />
-          <label class="form-label ms-2"> ขอแก้ไข / เพิ่มเติม </label>
+      <fieldset [disabled]="isDisable('verify', 2)">
+        <div class="form-control" style="width: 22rem">
+          <div class="d-flex align-items-center">
+            <input type="radio" value="2" formControlName="verify" />
+            <label class="form-label ms-2"> ขอแก้ไข / เพิ่มเติม </label>
+          </div>
         </div>
-      </div>
-
+      </fieldset>
       <div class="row mx-2 align-items-center">
         <div class="col">
-          <div class="form-label">วันที่ต้องการใบคำขอส่งกลับ</div>
+          <div class="form-label">วันที่ต้องการแบบคำขอส่งกลับ</div>
         </div>
         <div class="col">
-          <input
-            class="form-control"
-            type="date"
-            formControlName="returnDate"
-          />
-        </div>
-      </div>
-    </div>
-
-    <hr />
-
-    <div class="d-flex align-items-center mb-3">
-      <div class="box-header text-primary">
-        ต้องการส่งตรวจสอบลำดับต่อไป หรือส่งเพื่อพิจารณา
-      </div>
-      <div class="text-danger">* กรุณาเลือกอย่างใดอย่างหนึ่งเท่านั้น</div>
-    </div>
-
-    <div class="d-flex align-items-center mb-3">
-      <div class="form-control" style="width: 22rem">
-        <div class="d-flex align-items-center">
-          <input type="radio" value="1" formControlName="forward" />
-          <label class="form-label ms-2"> ส่งตรวจสอบลำดับต่อไป </label>
-        </div>
-      </div>
-    </div>
-
-    <div class="d-flex align-items-center mb-3">
-      <div class="form-control" style="width: 22rem">
-        <div class="d-flex align-items-center">
-          <input type="radio" value="2" formControlName="forward" />
-          <label class="form-label ms-2">
-            ไม่ผ่านการตรวจสอบ เนื่องจากไม่ครบถ้วน / ไม่ถูกต้อง
-          </label>
-        </div>
-      </div>
-    </div>
-
-    <div class="d-flex align-items-center mb-3">
-      <div class="form-control" style="width: 22rem">
-        <div class="d-flex align-items-center">
-          <input type="radio" value="3" formControlName="forward" />
-          <label class="form-label ms-2"> ส่งเรื่องพิจารณา </label>
-        </div>
-      </div>
-    </div>
-
-    <div class="d-flex align-items-center mb-3">
-      <div class="form-control" style="width: 22rem">
-        <div class="d-flex align-items-center">
-          <input type="radio" value="4" formControlName="forward" />
-          <label class="form-label ms-2"> ยกเลิก </label>
+          <div class="d-flex align-items-center">
+            <input
+              matInput
+              [matDatepicker]="picker"
+              autocomplete="off"
+              class="form-control form-date"
+              formControlName="returnDate"
+              placeholder="วว/ดด/ปปปป"
+            />
+            <mat-datepicker-toggle
+              class="button-date"
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </div>
         </div>
       </div>
     </div>

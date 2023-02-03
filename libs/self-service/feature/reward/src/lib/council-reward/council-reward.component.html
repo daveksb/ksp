@@ -6,9 +6,10 @@
   [selectedIndex]="0">
   <mat-tab label="ข้อมูลส่วนตัว">
     <ksp-form-user-info
-      [displayMode]="[userInfoType]"
-      [isSchoolService]="false"
+      [isHasSixtiesDate]="true"
+      [isSelfService]="true"
       [prefixList]="prefixList"
+      [requiredIdCardNo]="false"
       formControlName="userInfo"></ksp-form-user-info>
   </mat-tab>
 
@@ -33,6 +34,10 @@
       (provinceChanged)="provinceChanged(2, $event)"
       (amphurChanged)="amphurChanged(2, $event)">
       <span class="text-primary">ที่อยู่ที่ติดต่อได้สะดวก</span>
+      <div class="d-flex align-items-center">
+        <input type="checkbox" class="me-2" (change)="useSameAddress($event)" />
+        <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
+      </div>
     </ksp-form-address>
   </mat-tab>
 
@@ -44,12 +49,13 @@
     <ksp-council-working formControlName="hiringInfo"></ksp-council-working>
   </mat-tab>
 
-  <mat-tab label="ข้อมูลการปฏิบัติตนตามจรรยาบรรณ">
+  <!-- <mat-tab label="ข้อมูลการปฏิบัติตนตามจรรยาบรรณ">
     <ksp-council-ethic formControlName="rewardEthicInfo"></ksp-council-ethic>
-  </mat-tab>
+  </mat-tab> -->
 
   <mat-tab label="รายงานผลสำเร็จจากการปฏิบัติงาน">
-    <ksp-council-success formControlName="rewardSuccessInfo"></ksp-council-success>
+    <ksp-council-success
+      formControlName="rewardSuccessInfo"></ksp-council-success>
   </mat-tab>
 
   <mat-tab label="ข้อมูลรางวัลและหลักฐานประกอบ">
@@ -59,10 +65,3 @@
       [uniqueTimestamp]="uniqueTimestamp"></ksp-council-evidence>
   </mat-tab>
 </mat-tab-group>
-
-<!-- <div class="d-flex justify-content-center my-3">
-  <button type="button" class="btn border-primary text-primary bg-white">
-    บันทึกชั่วคราว
-  </button>
-  <button type="button" class="ms-3 btn btn-primary">บันทึกและยื่น</button>
-</div> -->

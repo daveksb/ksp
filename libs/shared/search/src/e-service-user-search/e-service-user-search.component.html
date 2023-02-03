@@ -3,9 +3,14 @@
     <div class="box-header">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
     <hr />
     <div class="bg-light p-3">
-      <ksp-basic-institute-search
-        formControlName="institution"
-      ></ksp-basic-institute-search>
+      <ng-container *ngIf="showInstitution">
+        <ksp-basic-institute-search
+          [bureaus]="bureaus"
+          [universityType]="universityType"
+          formControlName="institution"
+          [searchType]="systemtype"
+        ></ksp-basic-institute-search
+      ></ng-container>
 
       <div class="row mb-2">
         <div class="col">
@@ -32,10 +37,10 @@
         <div class="col-6">
           <label class="form-label">สถานะการใช้งาน </label>
           <select class="form-select" formControlName="status">
-            <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
+            <option *ngFor="let s of activeStatusList" [value]="s.id">
+              {{ s.label }}
+            </option>
           </select>
         </div>
       </div>
@@ -45,7 +50,7 @@
       <button
         type="button"
         class="btn border-primary text-primary"
-        (click)="clear.emit(true)"
+        (click)="form.reset(); clear.emit(true)"
       >
         ล้างข้อมูล
       </button>

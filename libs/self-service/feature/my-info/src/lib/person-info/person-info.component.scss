@@ -14,17 +14,11 @@
   background-image: url(/assets/images/BG-Information.png);
 }
 
-.button__container {
-  display: flex;
-  justify-content: center;
-}
-
-#btn-edit {
-  margin-left: 10px;
-}
-
-@media only screen and (max-width: 768px) {
-  .container {
-    padding: 12px 24px;
-  }
+i {
+  float: right;
+  margin-top: -28px;
+  position: relative;
+  height: 20px;
+  cursor: pointer;
+  margin-right: 8px;
 }

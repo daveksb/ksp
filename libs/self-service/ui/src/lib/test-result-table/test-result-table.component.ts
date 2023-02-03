@@ -37,21 +37,14 @@ export interface performanceInfo {
 export const data: performanceInfo[] = [
   {
     id: 1,
-    score: '89/100',
+    score: '100/100',
     result: 'ผ่าน',
     announceDate: '12 มกราคม 2565',
     endDate: '31 มกราคม 2565',
   },
-  /* {
-    id: 2,
-    score: '96/100',
-    result: 'ผ่าน',
-    announceDate: '12 มกราคม 2565',
-    endDate: '31 มกราคม 2565',
-  }, */
   {
     id: 2,
-    score: '100/100',
+    score: '0/100',
     result: 'ไม่ผ่าน',
     announceDate: '12 มกราคม 2565',
     endDate: '31 มกราคม 2565',

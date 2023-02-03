@@ -6,16 +6,9 @@
   height: 100vh;
 
   /* Center and scale the image nicely */
-  background-position: center;
   background-repeat: no-repeat;
-}
-
-.label__login {
-  font-size: 20px;
-  color: #666666;
-  text-decoration: underline;
-  margin-top: 24px;
-  cursor: pointer;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 #btn-next {
@@ -43,5 +36,4 @@
   #btn-next {
     width: 100%;
   }
-
 }

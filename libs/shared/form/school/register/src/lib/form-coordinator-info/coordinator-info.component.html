@@ -1,176 +1,239 @@
 <form [formGroup]="form">
-  <div class="px-4 py-3">
-    <div class="row mb-3">
-      <div class="col-2">
-        <label class="form-label" [ngClass]="{ required: mode === 'edit' }"
-          >คำนำหน้าชื่อไทย</label
+  <div class="row mb-2" *ngIf="hideForm2 === false && !hideIdcard">
+    <div class="col-4">
+      <label class="form-label" [ngClass]="{ required: mode === 'edit' }"
+        >หมายเลขบัตรประชาชน</label
+      >
+      <input
+        maxlength="13"
+        formControlName="idcardno"
+        class="form-control"
+        type="text"
+      />
+      <ng-container
+        *ngIf="idCardNo.invalid && (idCardNo.dirty || idCardNo.touched)"
+      >
+        <span
+          class="text-danger"
+          *ngIf="idCardNo.errors?.['pattern'] || idCardNo.errors?.['idCardInvalid']"
         >
-        <select
-          [class.bg-white]="!isDarkMode && mode === 'edit'"
-          class="form-select"
-          formControlName="prefixth"
-        >
-          <option value="null">กรุณาเลือก</option>
-          <option *ngFor="let prefix of prefixList" [value]="prefix.id">
-            {{ prefix?.name_th }}
-          </option>
-        </select>
-      </div>
-      <div class="col-5">
-        <label class="form-label" [ngClass]="{ required: mode === 'edit' }"
-          >ชื่อภาษาไทย</label
-        >
-        <input
-          [class.bg-light]="isDarkMode"
-          class="form-control"
-          type="text"
-          formControlName="firstnameth"
-          placeholder="กรุณากรอกชื่อภาษาไทย"
-        />
-        <ng-container
-          *ngIf="
-            firstNameTh.invalid && (firstNameTh.dirty || firstNameTh.touched)
-          "
-        >
-          <span class="text-danger" *ngIf="firstNameTh.errors?.['pattern']">
-            {{ validatorMessages.th }}
-          </span>
-        </ng-container>
-      </div>
-      <div class="col-5">
-        <label class="form-label" [ngClass]="{ required: mode === 'edit' }"
-          >นามสกุลภาษาไทย</label
-        >
-        <input
-          [class.bg-light]="isDarkMode"
-          class="form-control"
-          type="text"
-          formControlName="lastnameth"
-          placeholder="กรุณากรอกนามสกุลภาษาไทย"
-        />
-        <ng-container
-          *ngIf="lastNameTh.invalid && (lastNameTh.dirty || lastNameTh.touched)"
-        >
-          <span class="text-danger" *ngIf="lastNameTh.errors?.['pattern']">
-            {{ validatorMessages.th }}
-          </span>
-        </ng-container>
-      </div>
+          {{ validatorMessages.idCardNo }}
+        </span>
+      </ng-container>
     </div>
-
-    <div class="row mb-3">
-      <div class="col-2">
-        <label class="form-label required">คำนำหน้าชื่ออังกฤษ</label>
-        <select
-          [class.bg-white]="!isDarkMode && mode === 'edit'"
-          class="form-select"
-          formControlName="prefixen"
-        >
-          <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option *ngFor="let prefix of prefixList" [value]="prefix.id">
-            {{ prefix?.name_en }}
-          </option>
-        </select>
-      </div>
-      <div class="col-5">
-        <label class="form-label required">ชื่อภาษาอังกฤษ</label>
-        <input
-          class="form-control"
-          type="text"
-          [class.bg-light]="isDarkMode"
-          placeholder="กรุณากรอกชื่อภาษาอังกฤษ"
-          formControlName="firstnameen"
-        />
-        <ng-container
-          *ngIf="
-            firstNameEn.invalid && (firstNameEn.dirty || firstNameEn.touched)
-          "
-        >
-          <span class="text-danger" *ngIf="firstNameEn.errors?.['pattern']">
-            {{ validatorMessages.en }}
-          </span>
-        </ng-container>
-      </div>
-      <div class="col-5">
-        <label class="form-label required">นามสกุลภาษาอังกฤษ</label>
-        <input
-          class="form-control"
-          type="text"
-          [class.bg-light]="isDarkMode"
-          placeholder="กรุณากรอกนามสกุลภาษาอังกฤษ"
-          formControlName="lastnameen"
-        />
-        <ng-container
-          *ngIf="lastNameEn.invalid && (lastNameEn.dirty || lastNameEn.touched)"
-        >
-          <span class="text-danger" *ngIf="lastNameEn.errors?.['pattern']">
-            {{ validatorMessages.en }}
-          </span>
-        </ng-container>
-      </div>
+  </div>
+  <div class="row mb-2">
+    <div class="col-2">
+      <label class="form-label" [ngClass]="{ required: mode === 'edit' }"
+        >คำนำหน้าชื่อไทย</label
+      >
+      <select
+        class="form-select"
+        formControlName="prefixth"
+        (change)="changePrefix($event)"
+      >
+        <option value="null" disable hidden selected>กรุณาเลือก</option>
+        <option *ngFor="let prefix of prefixList" [value]="prefix.id">
+          {{ prefix?.name_th }}
+        </option>
+      </select>
+      <ng-container
+        *ngIf="
+          !validprefix &&
+          prefixth.value && prefixen.value &&
+          (prefixth.dirty || prefixth.touched)
+        "
+      >
+        <span class="text-danger">
+          {{ validatorMessages.prefixNotMatching }}
+        </span>
+      </ng-container>
     </div>
-
-    <div class="row mb-3">
-      <div class="col">
-        <label class="form-label required">ตำแหน่ง</label>
-        <input
-          class="form-control"
-          type="text"
-          formControlName="position"
-          [class.bg-light]="isDarkMode"
-        />
-      </div>
-
-      <div class="col">
-        <label class="form-label required">เบอร์โทรศัพท์ (ที่ทำงาน)</label>
-        <input
-          class="form-control"
-          type="tel"
-          [class.bg-light]="isDarkMode"
-          formControlName="workphone"
-        />
-        <ng-container
-          *ngIf="workPhone.invalid && (workPhone.dirty || workPhone.touched)"
-        >
-          <span class="text-danger" *ngIf="workPhone.errors?.['pattern']"
-            >{{ validatorMessages.phone }}
-          </span>
-        </ng-container>
-      </div>
+    <div class="col-5">
+      <label class="form-label" [ngClass]="{ required: mode === 'edit' }"
+        >ชื่อภาษาไทย</label
+      >
+      <input
+        class="form-control"
+        type="text"
+        formControlName="firstnameth"
+        placeholder="กรุณากรอกชื่อภาษาไทย"
+      />
+      <ng-container
+        *ngIf="
+          firstNameTh.invalid && (firstNameTh.dirty || firstNameTh.touched)
+        "
+      >
+        <span class="text-danger" *ngIf="firstNameTh.errors?.['pattern']">
+          {{ validatorMessages.th }}
+        </span>
+      </ng-container>
     </div>
-    <div class="row">
-      <div class="col">
-        <label class="form-label required">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
-        <input
-          class="form-control"
-          type="tel"
-          [class.bg-light]="isDarkMode"
-          formControlName="contactphone"
-        />
-        <ng-container
-          *ngIf="
-            contactPhone.invalid && (contactPhone.dirty || contactPhone.touched)
-          "
+    <div class="col-5">
+      <label
+        class="form-label required"
+        [ngClass]="{ required: mode === 'edit' }"
+        >นามสกุลภาษาไทย</label
+      >
+      <input
+        class="form-control"
+        type="text"
+        formControlName="lastnameth"
+        placeholder="กรุณากรอกนามสกุลภาษาไทย"
+      />
+      <ng-container
+        *ngIf="lastNameTh.invalid && (lastNameTh.dirty || lastNameTh.touched)"
+      >
+        <span class="text-danger" *ngIf="lastNameTh.errors?.['pattern']">
+          {{ validatorMessages.th }}
+        </span>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="row mb-2" *ngIf="hideForm2 === false && hideForm1 === false">
+    <div class="col-2">
+      <label class="form-label">คำนำหน้าชื่ออังกฤษ</label>
+      <select
+        class="form-select"
+        formControlName="prefixen"
+        (change)="changePrefix($event)"
+      >
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        <option *ngFor="let prefix of prefixList" [value]="prefix.id">
+          {{ prefix?.name_en }}
+        </option>
+      </select>
+      <ng-container
+        *ngIf="
+          !validprefix &&
+          prefixth.value && prefixen.value &&
+          (prefixth.dirty || prefixth.touched)
+        "
+      >
+        <span class="text-danger">
+          {{ validatorMessages.prefixNotMatching }}
+        </span>
+      </ng-container>
+    </div>
+    <div class="col-5">
+      <label class="form-label">ชื่อภาษาอังกฤษ</label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="กรุณากรอกชื่อภาษาอังกฤษ"
+        formControlName="firstnameen"
+      />
+      <ng-container
+        *ngIf="
+          firstNameEn.invalid && (firstNameEn.dirty || firstNameEn.touched)
+        "
+      >
+        <span class="text-danger" *ngIf="firstNameEn.errors?.['pattern']">
+          {{ validatorMessages.en }}
+        </span>
+      </ng-container>
+    </div>
+    <div class="col-5">
+      <label class="form-label">นามสกุลภาษาอังกฤษ</label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="กรุณากรอกนามสกุลภาษาอังกฤษ"
+        formControlName="lastnameen"
+      />
+      <ng-container
+        *ngIf="lastNameEn.invalid && (lastNameEn.dirty || lastNameEn.touched)"
+      >
+        <span class="text-danger" *ngIf="lastNameEn.errors?.['pattern']">
+          {{ validatorMessages.en }}
+        </span>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-6" *ngIf="systemform === 'default'">
+      <label
+        class="form-label required"
+        [ngClass]="{ required: mode === 'edit' }"
+        >{{ positionLabel }}</label
+      >
+      <input class="form-control" type="text" formControlName="position" />
+    </div>
+    <div class="col-6" *ngIf="systemform !== 'default'">
+      <label
+        class="form-label required"
+        [ngClass]="{ required: mode === 'edit' }"
+        >{{ positionLabel }}</label
+      >
+      <select class="form-select" formControlName="position">
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        <option
+          *ngFor="let position of occupyList"
+          [value]="position.eduoccupytype"
         >
-          <span class="text-danger" *ngIf="contactPhone.errors?.['pattern']"
-            >{{ validatorMessages.phone }}
-          </span>
-        </ng-container>
-      </div>
-      <div class="col">
-        <label class="form-label required">อีเมล</label>
-        <input
-          class="form-control"
-          type="email"
-          [class.bg-light]="isDarkMode"
-          formControlName="email"
-        />
-        <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
-          <span class="text-danger" *ngIf="email.errors?.['email']">{{
-            validatorMessages.email
-          }}</span>
-        </ng-container>
-      </div>
+          {{ position?.eduoccupyname }}
+        </option>
+      </select>
+    </div>
+    <div class="col-6">
+      <label
+        class="form-label required"
+        [ngClass]="{ required: mode === 'edit' }"
+        >เบอร์โทรศัพท์ (ที่ติดต่อได้)</label
+      >
+      <input
+        class="form-control"
+        type="tel"
+        formControlName="contactphone"
+        maxlength="10"
+      />
+      <ng-container
+        *ngIf="
+          contactPhone.invalid && (contactPhone.dirty || contactPhone.touched)
+        "
+      >
+        <span class="text-danger" *ngIf="contactPhone.errors?.['pattern']"
+          >{{ validatorMessages.phone }}
+        </span>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-6" *ngIf="hideForm2 === false && hideForm1 === false">
+      <label
+        class="form-label required"
+        [ngClass]="{ required: mode === 'edit' }"
+        >เบอร์โทรศัพท์ (ที่ทำงาน)</label
+      >
+      <input
+        class="form-control"
+        type="tel"
+        formControlName="workphone"
+        maxlength="10"
+      />
+      <ng-container
+        *ngIf="workPhone.invalid && (workPhone.dirty || workPhone.touched)"
+      >
+        <span class="text-danger" *ngIf="workPhone.errors?.['pattern']"
+          >{{ validatorMessages.phone }}
+        </span>
+      </ng-container>
+    </div>
+    <div class="col-6" *ngIf="hideForm2 === false">
+      <label
+        class="form-label required"
+        [ngClass]="{ required: mode === 'edit' }"
+        >อีเมล</label
+      >
+      <input class="form-control" type="email" formControlName="email" />
+      <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
+        <span class="text-danger" *ngIf="email.errors?.['email']">{{
+          validatorMessages.email
+        }}</span>
+      </ng-container>
     </div>
   </div>
 </form>

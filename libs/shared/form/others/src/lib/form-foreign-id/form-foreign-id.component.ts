@@ -1,8 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
 import {
-  createDefaultUserInfoForm,
+  Country,
+  FileGroup,
+  KspFormBaseComponent,
+  Prefix,
+} from '@ksp/shared/interface';
+import {
+  createUserInfoForm,
   providerFactory,
   validatorMessages,
 } from '@ksp/shared/utility';
@@ -19,19 +24,19 @@ export class FormForeignIdComponent
   extends KspFormBaseComponent
   implements OnInit
 {
-  override form = createDefaultUserInfoForm(this.fb);
-  validatorMessages = validatorMessages;
-
+  override form = createUserInfoForm(this.fb);
   @Input() formHeader = 'ข้อมูลครูชาวต่างชาติ';
-  @Input() prefixList: any;
-  @Input() countries: any;
+  @Input() passportLabel = 'หมายเลขหนังสือเดินทาง (Passport Number)';
+  @Input() prefixList: Prefix[] | null = [];
+  @Input() countries: Country[] | null = [];
 
-  foreignInfo = ['1.สำเนาหนังสือเดินทาง'];
+  validatorMessages = validatorMessages;
+  today = new Date();
+  files: FileGroup[] = [{ name: '1.สำเนาหนังสือเดินทาง', files: [] }];
 
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
       this.form?.valueChanges
         .pipe(untilDestroyed(this))
         .subscribe((value: any) => {
@@ -40,12 +45,35 @@ export class FormForeignIdComponent
         })
     );
   }
+
   ngOnInit(): void {
     this.form.controls['idcardno'].clearValidators();
     this.form.controls['workphone'].clearValidators();
     this.form.controls['position'].clearValidators();
     this.form.controls['nationality'].clearValidators();
+    this.form.controls['kuruspano'].clearValidators();
   }
+
+  prefixChanged(evt: any) {
+    const prefix = evt.target?.value;
+
+    if (prefix === '1') {
+      const temp: any = { sex: '1' };
+      this.form.patchValue(temp);
+    } else if (['2', '3', '4', '5'].includes(prefix)) {
+      const temp: any = { sex: '2' };
+      this.form.patchValue(temp);
+    } else {
+      const temp: any = { sex: '3' };
+      this.form.patchValue(temp);
+    }
+
+    const en = { prefixen: prefix };
+    const th = { prefixth: prefix };
+    this.form.patchValue(th);
+    this.form.patchValue(en);
+  }
+
   get idCardNo() {
     return this.form.controls.idcardno;
   }

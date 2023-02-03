@@ -1,0 +1,90 @@
+<ksp-top-nav
+  ><span header>ยื่นแบบคำขอ</span
+  ><span subHeader>ขอ{{ getHeader() }} </span></ksp-top-nav
+>
+
+<div class="bg-secondary bg-opacity-10 py-2 px-4 full-height-2">
+  <div class="box-header">รายละเอียดแบบคำขอ{{ getLabel() }}</div>
+  <div class="bg-white p-3">
+    <div class="d-flex justify-content-between">
+      <ksp-request-header-info
+        [requestDate]="saveData.requestData.requestdate"
+        [requestNumber]="saveData.requestData.requestno"
+      ></ksp-request-header-info>
+    </div>
+    <hr />
+    <div class="box-header text-primary">
+      ประวัติการตรวจสอบคุณสมบัติและเอกสาร
+    </div>
+
+    <table class="table w-75">
+      <thead>
+        <tr>
+          <th scope="col">ครั้งที่</th>
+          <th scope="col">ชื่อ-นามสกุล เจ้าหน้าที่</th>
+          <th scope="col">วันที่ตรวจสอบ</th>
+          <th scope="col">ผลการตรวจสอบ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- <tr *ngIf="!approveHistory.length">
+          <td scope="col" colspan="4" class="text-center">ไม่พบข้อมูล</td>
+        </tr> -->
+        <ng-container *ngFor="let row of approveHistory; let i = index">
+          <tr>
+            <td scope="col">{{ i + 1 }}</td>
+            <td scope="col">{{ row.firstnameth }} {{ row.lastnameth }}</td>
+            <td scope="col">{{ row.createdate | thaiDate }}</td>
+            <td scope="col">
+              {{ mapCheckResult(row.detail.checkresult) }}
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+
+  <form [formGroup]="form">
+    <ng-container
+      *ngIf="
+        (saveData.requestData.requesttype === '3' &&
+          saveData.requestData.process === '5') ||
+          (saveData.requestData.requesttype === '6' &&
+            saveData.requestData.process === '3');
+        else approve
+      "
+    >
+      <ng-container *ngIf="saveData.requestData.status === '1'">
+        <div class="bg-white p-3 mt-3">
+          <div class="box-header">ผลการยืนยันการตรวจสอบ</div>
+          <hr />
+          <ksp-consider-ksp-request
+            formControlName="approvement"
+          ></ksp-consider-ksp-request>
+        </div>
+      </ng-container>
+    </ng-container>
+    <ng-template #approve>
+      <div class="bg-white p-3 pt-0">
+        <ksp-validate-ksp-request
+          [requestType]="saveData.requestData.requesttype"
+          [process]="saveData.requestData.process"
+          formControlName="approvement"
+        ></ksp-validate-ksp-request>
+      </div>
+    </ng-template>
+  </form>
+</div>
+
+<div class="sticky-bottom border px-2">
+  <ksp-bottom-nav
+    (cancelClicked)="navigateBack()"
+    (prevClicked)="prevPage()"
+    (saveClicked)="confirmDialog()"
+    [disableSaveButton]="formInValid"
+    [showCenterButtons]="true"
+    [isLastPage]="true"
+    [showSaveButton]="true"
+    [showCancelButton]="true"
+  ></ksp-bottom-nav>
+</div>

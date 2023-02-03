@@ -1,5 +1,5 @@
 <form [formGroup]="form">
-  <div class="bg-light mb-4">
+  <div class="bg-light mb-3">
     <div class="row">
       <div class="col-2 mb-3">
         <label class="form-label">คำนำหน้าชื่อ</label>
@@ -86,14 +86,14 @@
                 formControlName="year"
               />
             </div>
-            <div class="col-auto">
+            <div class="col-auto d-flex ps-0">
               <ng-container *hideInViewMode>
                 <br />
                 <i
                   role="button"
                   *ngIf="j > 0"
                   (click)="deleteDegree(j)"
-                  class="bi bi-trash text-danger fs-5"
+                  class="bi bi-trash text-danger fs-6"
                 ></i>
               </ng-container>
             </div>
@@ -108,6 +108,5 @@
         เพิ่มคุณวุฒิการศึกษา
       </ksp-add-row-button>
     </div>
-    <hr />
   </div>
 </form>

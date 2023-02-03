@@ -1,0 +1,64 @@
+<ksp-top-nav
+  ><span header>ยื่นแบบคำขอ</span
+  ><span subHeader>ขอรางวัลครูภาษาไทยดีเด่น</span></ksp-top-nav
+>
+
+<div class="bg-secondary bg-opacity-10 py-2 px-4 full-height-2">
+  <div class="box-header">รายละเอียดแบบคำขอรางวัลครูภาษาไทยดีเด่น</div>
+  <div class="bg-white p-3">
+    <div class="d-flex justify-content-between">
+      <ksp-request-header-info
+        [requestDate]="saveData.requestData.requestdate"
+        [requestNumber]="saveData.requestData.requestno"
+      ></ksp-request-header-info>
+    </div>
+    <hr />
+    <div class="box-header text-primary">
+      ประวัติการตรวจสอบคุณสมบัติและเอกสาร
+    </div>
+
+    <table class="table w-75 mb-5">
+      <thead>
+        <tr>
+          <th scope="col">ครั้งที่</th>
+          <th scope="col">ชื่อ-นามสกุล เจ้าหน้าที่</th>
+          <th scope="col">วันที่ตรวจสอบ</th>
+          <th scope="col">ผลการตรวจสอบ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let row of approveHistory; let i = index">
+          <tr>
+            <td scope="col">{{ i + 1 }}</td>
+            <td scope="col">{{ row.firstnameth }} {{ row.lastnameth }}</td>
+            <td scope="col">{{ row.createdate | thaiDate }}</td>
+            <td scope="col">
+              {{ mapCheckResult(row.detail.checkresult) }}
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+
+    <div [formGroup]="form">
+      <ksp-reward-validate-request
+        [requestType]="saveData.requestData.requesttype"
+        [process]="saveData.requestData.process"
+        formControlName="approvement"
+      ></ksp-reward-validate-request>
+    </div>
+  </div>
+</div>
+
+<div class="sticky-bottom border">
+  <ksp-bottom-nav
+    (cancelClicked)="navigateBack()"
+    (prevClicked)="prevPage()"
+    (saveClicked)="confirmDialog()"
+    [disableSaveButton]="form.invalid"
+    [showCenterButtons]="true"
+    [isLastPage]="true"
+    [showSaveButton]="true"
+    [showCancelButton]="true"
+  ></ksp-bottom-nav>
+</div>

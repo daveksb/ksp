@@ -1,0 +1,59 @@
+<ksp-top-nav
+  ><span header>ยื่นแบบคำขอ</span>
+  <span subHeader>ขอเปลี่ยนแปลง/แก้ไขหนังสืออนุญาต</span>
+</ksp-top-nav>
+
+<div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
+  <form [formGroup]="form">
+    <div class="box-header">
+      รายละเอียดแบบคำขอเปลี่ยนแปลง/แก้ไขหนังสืออนุญาต
+    </div>
+    <div class="bg-white p-3">
+      <ksp-edit-license
+        [showDistributeData]="true"
+        [mode]="'view'"
+        [prefixList]="prefixList$ | async"
+        formControlName="userInfo"
+      ></ksp-edit-license>
+
+      <div class="mt-3">
+        <ksp-form-multi-attachment
+          [groups]="uploadFileList"
+          [mode]="'view'"
+        ></ksp-form-multi-attachment>
+      </div>
+    </div>
+    <ng-container
+      *ngIf="
+        !(
+          (requestData.process === '4' && requestData.status === '0') ||
+          (requestData.process === '4' && requestData.status === '3') ||
+          (requestData.process === '4' && requestData.status === '4') ||
+          (requestData.process === '4' && requestData.status === '5')
+        )
+      "
+    >
+      <ng-container
+        formArrayName="checkResult"
+        *ngFor="let c of checkResultFormArray.controls; let i = index"
+      >
+        <div class="bg-white px-3 py-2 mt-3">
+          <e-service-license-check
+            [choices]="verifyChoice"
+            [formControlName]="i"
+          ></e-service-license-check>
+        </div>
+      </ng-container>
+    </ng-container>
+  </form>
+</div>
+
+<div class="sticky-bottom border px-2">
+  <ksp-bottom-nav
+    [showCenterButtons]="true"
+    [isFirstPage]="true"
+    [disableNext]="false"
+    (nextClicked)="next()"
+    (cancelClicked)="cancel()"
+  ></ksp-bottom-nav>
+</div>

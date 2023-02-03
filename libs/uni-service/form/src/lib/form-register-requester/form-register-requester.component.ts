@@ -1,15 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { uniPermissionList, UserInfoFormType } from '@ksp/shared/constant';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
-import { GeneralInfoService } from '@ksp/shared/service';
 import {
   createUniUserInfoForm,
   providerFactory,
   validatorMessages,
 } from '@ksp/shared/utility';
-import { uniPermissionList, UserInfoFormType } from 'libs/shared/constant/src/school-request-constant';
-import { Observable } from 'rxjs';
-
 
 @Component({
   selector: 'uni-form-register-requester',
@@ -17,27 +14,28 @@ import { Observable } from 'rxjs';
   styleUrls: ['./form-register-requester.component.scss'],
   providers: providerFactory(FormRegisterRequesterInfoComponent),
 })
-export class FormRegisterRequesterInfoComponent 
-  extends KspFormBaseComponent 
-  implements OnInit 
+export class FormRegisterRequesterInfoComponent
+  extends KspFormBaseComponent
 {
   @Input() uniType: Array<any> = [];
   @Input() prefixName: Array<any> = [];
   @Input() occupyList: Array<any> = [];
   @Input() displayMode!: number[];
+  @Input() isSubmit = false;
   validatorMessages = validatorMessages;
   educationOccupy: any = {
     permission: '',
     other: '',
-    affiliation: ''
+    affiliation: '',
   };
   permissionList: Array<any> = uniPermissionList;
+  validIdcard = true;
+  validprefix = true;
 
   override form = createUniUserInfoForm(this.fb);
 
   constructor(private fb: FormBuilder) {
     super();
-    console.log(this.form)
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value: any) => {
@@ -47,32 +45,39 @@ export class FormRegisterRequesterInfoComponent
     );
   }
 
-  ngOnInit(): void {
-    // ถ้าเป็น form คนไทยไม่ต้อง validate field เหล่านี้
-    //console.log('display mode = ', this.displayMode);
-    if (this.displayMode.includes(UserInfoFormType.thai)) {
-      this.form.controls.position.clearValidators();
+  checkID(event: any) {
+    const id = event?.target.value;
+    if (id.length != 13) {
+      this.validIdcard = false;
+      return;
     }
-
-    if (this.displayMode.includes(UserInfoFormType.foreign)) {
-      this.form.controls.idcardno.clearValidators();
-      this.form.controls.workphone.clearValidators();
-      this.form.controls.contactphone.clearValidators();
-      this.form.controls.position.clearValidators();
-      this.form.controls.email.clearValidators();
+    let sum = 0;
+    for (let i = 0; i < 12; i++) {
+      sum += parseInt(id.charAt(i)) * (13 - i);
+    }
+    const mod = sum % 11;
+    const check = (11 - mod) % 10;
+    if (check == parseInt(id.charAt(12))) {
+      this.validIdcard = true;
+    } else {
+      this.validIdcard = false;
     }
   }
 
-  chageposition(event: any) {
-    if (event.target.value == '0') {
-      this.form.controls['other'].setValidators([Validators.required]);
+  changePrefixTH(event: any) {
+    this.form.patchValue({
+      prefixen: event.target.value
+    });
+  }
+
+  changePrefix(event: any) {
+    if ((this.form.controls.prefixth && this.form.controls.prefixen) &&
+      (this.form.controls.prefixth.value != this.form.controls.prefixen.value) &&
+      (this.form.controls.prefixth.value != '0' && this.form.controls.prefixen.value != '0')) {
+      this.validprefix = false;
     } else {
-      this.form.controls['other'].clearValidators();
-      this.form.patchValue({
-        other: null
-      })
+      this.validprefix = true;
     }
-    this.form.controls['other'].updateValueAndValidity();
   }
 
   get idCardNo() {
@@ -105,5 +110,21 @@ export class FormRegisterRequesterInfoComponent
 
   get email() {
     return this.form.controls.email;
+  }
+
+  get position() {
+    return this.form.controls.position;
+  }
+
+  get prefixth() {
+    return this.form.controls.prefixth;
+  }
+
+  get prefixen() {
+    return this.form.controls.prefixen;
+  }
+
+  get permission() {
+    return this.form.controls.permission;
   }
 }

@@ -1,26 +1,121 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav [isSelfService]="true">
-  <span header>ขอรับรางวัลการยกย่องเชิดชูเกียรติ</span>
+  <span header>ยื่นแบบคำขอ</span>
+  <span subHeader>ขอรับรางวัลการยกย่องเชิดชูเกียรติ</span>
 </ksp-top-nav>
 
 <form [formGroup]="form">
-  <div class="full-height main__container px-4 py-2">
+  <div class="full-height main__container px-4 py-2 full-width-2">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 mb-2">
         <div class="box-header">ประเภทรางวัล</div>
         <select class="form-select" formControlName="rewardType" #rewardType>
-          <option selected hidden disabled value="null">กรุณาเลือก</option>
+          <option value="0" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let reward of rewardTypes" [value]="reward.value">
             {{ reward.label }}
           </option>
         </select>
       </div>
+
+      <div class="col-md-6 mb-2" *ngIf="rewardType.value === '40'">
+        <div class="box-header">ประเภทวิชาชีพ</div>
+        <select class="form-select" formControlName="careerType">
+          <option value="0" selected hidden disabled>กรุณาเลือก</option>
+          <option value="1">ครู</option>
+          <option value="2">ผู้บริหารสถานศึกษา</option>
+          <option value="3">ผู้บริหารการศึกษา</option>
+          <option value="4">ศึกษานิเทศก์</option>
+          <option value="5">อื่นๆ</option>
+        </select>
+      </div>
+
+      <div class="col-md-6 mb-2" *ngIf="rewardType.value === '41'">
+        <div class="box-header">ประเภทระดับการศึกษา</div>
+        <select class="form-select">
+          <option value="0" selected hidden disabled>กรุณาเลือก</option>
+        </select>
+      </div>
+
+      <div class="col-md-6 mb-2" *ngIf="rewardType.value === '42'">
+        <div class="box-header">ประเภท/กลุ่มสาระการเรียนรู้</div>
+        <select class="form-select">
+          <option value="0" selected hidden disabled>กรุณาเลือก</option>
+          <option value="1">
+            ครูผู้สอนกลุ่มสาระการเรียนรู้การงานอาชีพและเทคโนโลยีดีเด่น
+          </option>
+          <option value="2">ครูผู้สอนกลุ่มสาระการเรียนรู้คณิตศาสตร์ดีเด่น</option>
+          <option value="3">
+            ครูผู้สอนกลุ่มสาระการเรียนรู้ภาษาต่างประเทศดีเด่น (ภาษาอังกฤษ)
+          </option>
+          <option value="4">ครูผู้สอนกลุ่มสาระการเรียนรู้ภาษาไทยดีเด่น</option>
+          <option value="5">
+            ครูผู้สอนกลุ่มสาระการเรียนรู้วิทยาศาสตร์ดีเด่น
+          </option>
+          <option value="6">ครูผู้สอนกลุ่มสาระการเรียนรู้ศิลปะดีเด่น</option>
+          <option value="7">
+            ครูผู้สอนกลุ่มสาระการเรียนรู้สังคมศึกษา ศาสนา และวัฒนธรรมดีเด่น
+          </option>
+          <option value="8">
+            ครูผู้สอนกลุ่มสาระการเรียนรู้สุขศึกษา และพลศึกษาดีเด่น
+          </option>
+          <option value="9">ครูผู้สอนกิจกรรมพัฒนาผู้เรียนดีเด่น</option>
+          <option value="10">ครูผู้สอนปฐมศึกษาดีเด่น</option>
+          <option value="11">ครูผู้สอนปฐมวัยดีเด่น</option>
+        </select>
+      </div>
+
+      <ng-container *ngIf="rewardType.value === '43'">
+        <div class="col-md-3 mb-2">
+          <div class="box-header">ประเภทวิชาชีพ</div>
+          <select class="form-select" formControlName="careerType">
+            <option value="0" selected hidden disabled>กรุณาเลือก</option>
+            <option value="1">ครู</option>
+            <option value="2">ผู้บริหารสถานศึกษา</option>
+            <option value="3">ผู้บริหารการศึกษา</option>
+            <option value="4">ศึกษานิเทศก์</option>
+            <option value="5">อื่นๆ</option>
+          </select>
+        </div>
+
+        <div class="col-md-3 mb-2">
+          <div class="box-header">จังหวัดที่ยื่นขอรางวัล</div>
+          <select
+            class="form-select"
+            formControlName="province">
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
+            <option
+              *ngFor="let province of provinces$ | async"
+              [value]="province?.province_id">
+              {{ province?.province_name }}
+            </option>
+          </select>
+        </div>
+      </ng-container>
+
+      <div class="col-md-6 mb-2" *ngIf="rewardType.value === '45'">
+        <div class="box-header">ประเภทที่ส่งผลงานวิจัย</div>
+        <select class="form-select" formControlName="researchSubmissionType">
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option value="1">ครู</option>
+          <option value="2">ผู้บริหารสถานศึกษา</option>
+          <option value="3">ผู้บริหารการศึกษา</option>
+          <option value="4">ศึกษานิเทศก์</option>
+          <option value="5">นักศึกษา</option>
+        </select>
+      </div>
+
     </div>
 
-    <div *ngIf="rewardType.value">
-      <br />
-      <self-service-request-status></self-service-request-status>
+    <div *ngIf="rewardType.value !== '0'">
+      <div class="mb-3 mt-1">
+        <self-service-request-status
+          [idcardNo]="myInfo && myInfo.idcardno"></self-service-request-status>
+      </div>
     </div>
-    <br />
     <div *ngIf="rewardType.value === '40'">
       <ksp-council-reward
         formControlName="rewardDetail"
@@ -75,6 +170,7 @@
         [prefixList]="prefixList$ | async"
         [bureaus]="bureau$ | async"
         [rewardFiles]="rewardFiles"
+        [moneyAssistanceFiles]="moneyAssistanceFiles"
         [uniqueTimestamp]="uniqueTimestamp"
         formControlName="rewardDetail"></ksp-senior-teacher-reward>
     </div>
@@ -89,16 +185,31 @@
         formControlName="rewardDetail"></ksp-research-reward>
     </div>
 
-    <div *ngIf="rewardType.value">
+    <div *ngIf="rewardType.value !== '0'">
+      <div class="fs-6 text-danger mt-1">
+        *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
+        โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
+      </div>
       <div class="d-flex justify-content-center my-3">
+        <button
+          type="button"
+          *ngIf="requestId"
+          (click)="cancel()"
+          class="ms-3 btn border-primary text-primary bg-white">
+          ยกเลิกแบบคำขอ
+        </button>
         <button
           (click)="tempSave()"
           type="button"
-          class="btn border-primary text-primary bg-white"
-        >
+          class="ms-3 btn btn-success"
+          [disabled]="!form.valid">
           บันทึกชั่วคราว
         </button>
-        <button (click)="save()" type="button" class="ms-3 btn btn-primary">
+        <button
+          (click)="save()"
+          type="button"
+          class="ms-3 btn btn-primary"
+          [disabled]="!form.valid">
           บันทึกและยื่น
         </button>
       </div>

@@ -25,6 +25,9 @@ import { MyRewardDetailComponent } from './my-reward-detail/my-reward-detail.com
 import { MyRewardListComponent } from './my-reward-list/my-reward-list.component';
 import { MatTableModule } from '@angular/material/table';
 import { HonorPinRequestComponent } from './honor-pin-request/honor-pin-request.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 export const routes: Routes = [
   {
@@ -40,7 +43,15 @@ export const routes: Routes = [
         component: RequestRewardMainComponent,
       },
       {
+        path: 'request/:id',
+        component: RequestRewardMainComponent,
+      },
+      {
         path: 'detail',
+        component: MyRewardDetailComponent,
+      },
+      {
+        path: 'detail/:id',
         component: MyRewardDetailComponent,
       },
       {
@@ -66,6 +77,9 @@ export const routes: Routes = [
     LicenseInfoComponent,
     MatTableModule,
     UniFormBadgeComponent,
+    MatDatepickerModule,
+    MatProgressSpinnerModule,
+    MatPaginatorModule,
   ],
   declarations: [
     ThaiTeacherRewardComponent,

@@ -9,16 +9,25 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {
   CacheInterceptor,
+  LoadingInterceptor,
+  TokenFailInterceptor,
   TokenHandleInterceptor,
 } from '@ksp/shared/interceptor';
 import { MatMenuModule } from '@angular/material/menu';
 import { FileUploadUrls, File_UPLOAD_URLS } from '@ksp/shared/form/file-upload';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import {
+  MatDialogConfig,
+  MatDialogModule,
+  MAT_DIALOG_DEFAULT_OPTIONS,
+} from '@angular/material/dialog';
 
 const fileUrls: FileUploadUrls = {
-  uploadFile: '',
+  uploadFile: '/e-service/kspfileinsert',
   uploadImage: '',
-  download: '/kspuni/unirequestfileselectfile',
-  delete: '',
+  download: '/e-service/kspfileselectidfile',
+  delete: '/e-service/kspfiledelete',
 };
 
 @NgModule({
@@ -32,11 +41,24 @@ const fileUrls: FileUploadUrls = {
     ReactiveFormsModule,
     HttpClientModule,
     MatMenuModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatDialogModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
       useClass: TokenHandleInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenFailInterceptor,
       multi: true,
     },
     {
@@ -47,6 +69,14 @@ const fileUrls: FileUploadUrls = {
     {
       provide: File_UPLOAD_URLS,
       useValue: fileUrls,
+    },
+    { provide: MAT_DATE_LOCALE, useValue: 'th-TH' },
+    {
+      provide: MAT_DIALOG_DEFAULT_OPTIONS,
+      useValue: {
+        ...new MatDialogConfig(),
+        width: '350px',
+      } as MatDialogConfig,
     },
   ],
   bootstrap: [AppComponent],

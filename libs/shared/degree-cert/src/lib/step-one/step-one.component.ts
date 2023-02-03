@@ -6,17 +6,13 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder } from '@angular/forms';
 import { DynamicComponentDirective } from '@ksp/shared/directive';
-import {
-  DynamicComponent,
-  KspFormBaseComponent,
-  ListData,
-} from '@ksp/shared/interface';
+import { FormMode, KspFormBaseComponent, ListData } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import _ from 'lodash';
-import { debounceTime, lastValueFrom, skip } from 'rxjs';
+import { debounceTime, lastValueFrom } from 'rxjs';
 import { DegreeCertStepOneService } from './step-one.service';
 
 @UntilDestroy()
@@ -34,9 +30,8 @@ export class DegreeCertStepOneComponent
   degreeTypes: ListData[] = [];
   universityTypes: ListData[] = [];
   provinces: ListData[] = [];
-
   @Input() showEditCheckbox = false;
-  @Input() disabledInputs: Record<string, any> = {};
+  @Input() disabledInstitute = false;
 
   @Input() showCoordinatorForm = true;
   @Output() degreeType = new EventEmitter<string>();
@@ -57,12 +52,19 @@ export class DegreeCertStepOneComponent
     locations2: this.fb.array([]),
     coordinator: [],
     courseDetailType: [],
+    courseDetail: [],
+    section1: [false],
+    section2: [false],
+    section3: [false],
+    section4: [false],
+    section5: [false],
+    section6: [false],
   });
-
-  step1Incorrect = [
-    'ไม่ครบถ้วน และไม่ถูกต้อง',
-    'หมายเหตุ ข้อมูลมคอ. 2 ไม่ถูกต้อง',
-  ];
+  step1Incorrect = null;
+  // step1Incorrect = [
+  //   'ไม่ครบถ้วน และไม่ถูกต้อง',
+  //   'หมายเหตุ ข้อมูลมคอ. 2 ไม่ถูกต้อง',
+  // ];
 
   constructor(
     private fb: FormBuilder,
@@ -96,6 +98,7 @@ export class DegreeCertStepOneComponent
       this.form.reset();
     }
   }
+
   loadData(form: any, value: any) {
     _.forEach(value, (value: any, index: any) => {
       if (form?.controls[index]) {
@@ -136,14 +139,10 @@ export class DegreeCertStepOneComponent
       .subscribe((res) => {
         //console.log('form value = ', res);
       });
-
-    this.form.controls['courseType'].valueChanges
-      .pipe(skip(1), untilDestroyed(this))
-      .subscribe((res) => {
-        this.loadComponent(Number(res));
-      });
   }
-
+  get courseDetailType() {
+    return this.form.controls.courseDetailType.value;
+  }
   onDegreeTypeChanged(degreeType: string) {
     this.degreeType.emit(degreeType);
   }
@@ -157,14 +156,6 @@ export class DegreeCertStepOneComponent
     form.removeAt(index);
   }
 
-  loadComponent(index: number) {
-    const viewContainerRef = this.myHost.viewContainerRef;
-    viewContainerRef.clear();
-    viewContainerRef.createComponent<DynamicComponent>(
-      this.service.componentList[--index]
-    );
-  }
-
   get locations() {
     return this.form.controls['locations'] as FormArray;
   }
@@ -175,5 +166,41 @@ export class DegreeCertStepOneComponent
 
   get locations2() {
     return this.form.controls['locations2'] as FormArray;
+  }
+  get section1() {
+    return (
+      !!(!this.form.controls?.section1?.value && this.showEditCheckbox) ||
+      this.mode === 'view'
+    );
+  }
+  get section2() {
+    return (
+      !!(!this.form.controls?.section2?.value && this.showEditCheckbox) ||
+      this.mode === 'view'
+    );
+  }
+  get section3() {
+    return (
+      !!(!this.form.controls?.section3?.value && this.showEditCheckbox) ||
+      this.mode === 'view'
+    );
+  }
+  get section4() {
+    return (
+      !!(!this.form.controls?.section4?.value && this.showEditCheckbox) ||
+      this.mode === 'view'
+    );
+  }
+  get section5() {
+    return (
+      !!(!this.form.controls?.section5?.value && this.showEditCheckbox) ||
+      this.mode === 'view'
+    );
+  }
+  get section6() {
+    return (
+      !!(!this.form.controls?.section6?.value && this.showEditCheckbox) ||
+      this.mode === 'view'
+    );
   }
 }

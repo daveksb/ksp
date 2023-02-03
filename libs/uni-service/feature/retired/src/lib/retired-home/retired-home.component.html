@@ -1,3 +1,8 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav-2>ขอถอดถอนผู้ประสานงาน</ksp-top-nav-2>
 
 <div class="bg-secondary bg-opacity-10 py-4 full-height">
@@ -9,6 +14,7 @@
       (clear)="handleClear($event)"
       (search)="handleSearch($event)"
       [searchType]="'uni'"
+      [subsearchType]="'uni_searchretire'"
     ></ksp-retired-search>
 
     <ng-container *ngIf="data.length">
@@ -20,7 +26,6 @@
             <th>เลือก</th>
             <th>สิทธิ์สำหรับการเข้าใช้งาน</th>
             <th>ชื่อ-นามสกุล</th>
-            <th>เบอร์โทรศัพท์</th>
           </tr>
         </thead>
         <tbody class="body__table">
@@ -29,20 +34,28 @@
               <input type="radio" class="form-check-input" name="userData"
               (change)="onItemChange(item)" />
             </td>
-            <td>{{ item.permissonright }}</td>
+            <td>{{ item.permissionname }}</td>
             <td>{{ item.firstnameth + ' ' + item.lastnameth }}</td>
-            <td>{{ item.phone }}</td>
           </tr>
         </tbody>
       </table>
-
+      <mat-paginator
+        [length]="pageEvent.length"
+        [pageSize]="pageEvent.pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        (page)="onPaginatorEvent($event)"
+        [pageIndex]="pageEvent.pageIndex"
+      >
+    </mat-paginator>
       <div class="py-2 d-flex justify-content-center">
-        <a
-          class="btn btn-primary"
-          type="buton"
+        <button
+          type="button"
           (click)="next()"
-          >ยืนยัน</a
+          [disabled]="!selectedUser"
+          class="btn btn-primary"
         >
+        ยืนยัน
+        </button>
       </div>
     </ng-container>
   </div>

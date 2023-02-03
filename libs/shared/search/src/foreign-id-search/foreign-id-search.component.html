@@ -1,0 +1,92 @@
+<div [formGroup]="form" class="bg-light p-3 default-width">
+  <div class="box-header">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
+
+  <div class="row mb-2">
+    <div class="col">
+      <label class="form-label">สถาบัน / มหาวิทยาลัย</label>
+      <select class="form-select" formControlName="uniid">
+        <option value="null" selected disabled hidden>กรุณาเลือก</option>
+        <option
+          *ngFor="let university of uniUniversityOption"
+          [value]="university.id"
+        >
+          {{ university.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col">
+      <label class="form-label">เลขที่แบบคำขอ </label>
+      <input class="form-control" type="text" formControlName="requestno" />
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col">
+      <label class="form-label">ชื่อ-นามสกุล </label>
+      <input class="form-control" type="text" formControlName="name" />
+    </div>
+
+    <div class="col">
+      <label class="form-label">หมายเลขหนังสือเดินทาง (Passport Number) </label>
+      <input class="form-control" type="text" formControlName="passportno" />
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col">
+      <label class="form-label">วันเดือนปีที่ยื่นแบบคำขอ : จาก</label>
+      <div class="d-flex align-items-center">
+        <input
+          [matDatepicker]="picker1"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="requestdatefrom"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker1"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </div>
+    </div>
+
+    <div class="col">
+      <label class="form-label">วันเดือนปีที่ยื่นแบบคำขอ : ถึง</label>
+      <div class="d-flex align-items-center">
+        <input
+          [matDatepicker]="picker2"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="requestdateto"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker2"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end mb-2 mt-4">
+    <button
+      (click)="clear.emit(true)"
+      type="button"
+      class="btn border-primary text-primary bg-white"
+    >
+      ล้างข้อมูล
+    </button>
+
+    <button
+      (click)="search.emit(form.value)"
+      [disabled]="form.invalid"
+      type="button"
+      class="btn btn-primary ms-2"
+    >
+      ค้นหา
+    </button>
+  </div>
+</div>

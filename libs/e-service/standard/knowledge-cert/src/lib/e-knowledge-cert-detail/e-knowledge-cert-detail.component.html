@@ -1,0 +1,144 @@
+<ksp-top-nav
+  ><span header>ยื่นแบบคำขอ</span
+  ><span subHeader>แบบคำขอรับรองความรู้</span></ksp-top-nav
+>
+
+<form [formGroup]="form">
+  <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
+    <div class="box-header">รายละเอียดแบบคำขอรับรองความรู้</div>
+    <div class="bg-white p-3">
+      <ksp-request-header-info
+        [requestDate]="requestData.createdate"
+        [requestNumber]="requestData.requestno"
+      ></ksp-request-header-info>
+      <hr />
+      <div class="row align-items-center bg-light py-2 mx-0 mb-3">
+        <div class="col-lg-3 my-auto">
+          <self-service-form-upload-image
+            [imgSrc]="myImage"
+            [isEditMode]="false"
+          ></self-service-form-upload-image>
+        </div>
+        <div class="col-md mt-md-0 mt-2">
+          <ksp-form-user-info
+            formControlName="userInfo"
+            [mode]="'view'"
+            [isDarkMode]="true"
+            [prefixList]="prefixList$ | async"
+            [nationList]="nationalitys$ | async"
+            [isSelfService]="true"
+          >
+          </ksp-form-user-info>
+        </div>
+      </div>
+
+      <mat-tab-group
+        class="tab-group"
+        animationDuration="0ms"
+        (selectedIndexChange)="selectedTabIndex = $event"
+        [selectedIndex]="selectedTabIndex"
+        selectedIndex="0"
+      >
+        <mat-tab label="ที่อยู่" class="tab-content">
+          <ksp-form-address
+            formControlName="address1"
+            [mode]="'view'"
+            [isDarkMode]="true"
+            [provinces]="provinces1$ | async"
+            [amphurs]="amphurs1$ | async"
+            [tumbols]="tumbols1$ | async"
+          >
+            <span>ที่อยู่ทะเบียนบ้าน</span>
+          </ksp-form-address>
+          <hr />
+          <ksp-form-address
+            formControlName="address2"
+            [mode]="'view'"
+            [isDarkMode]="true"
+            [provinces]="provinces2$ | async"
+            [amphurs]="amphurs2$ | async"
+            [tumbols]="tumbols2$ | async"
+          >
+            <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
+          </ksp-form-address>
+        </mat-tab>
+
+        <mat-tab label="สถานที่ทำงาน">
+          <self-service-form-user-workplace
+            formControlName="workplace"
+            [mode]="'view'"
+            [provinces]="provinces3$ | async"
+            [amphurs]="amphurs3$ | async"
+            [tumbols]="tumbols3$ | async"
+            [bureaus]="bureau$ | async"
+          >
+          </self-service-form-user-workplace>
+        </mat-tab>
+
+        <mat-tab label="ข้อมูลทางการศึกษา">
+          <self-service-transfer-knowledge-education
+            formControlName="educationInfo"
+            [mode]="'view'"
+            [countries]="countries$ | async"
+          >
+          </self-service-transfer-knowledge-education>
+          <div class="mt-3">
+            <ksp-form-multi-attachment
+              [title]="'กรุณาแนบหลักฐานประกอบ'"
+              [groups]="eduFiles"
+              [mode]="'view'"
+            ></ksp-form-multi-attachment>
+          </div>
+        </mat-tab>
+
+        <mat-tab label="ข้อมูลขอรับรองความรู้วิชาชีพครู">
+          <self-service-transfer-knowledge-info
+            formControlName="transferKnowledgeInfo"
+            [mode]="'view'"
+          >
+          </self-service-transfer-knowledge-info>
+          <ksp-form-multi-attachment
+            [title]="'กรุณาแนบหลักฐานประกอบ'"
+            [groups]="transferFiles"
+            [mode]="'view'"
+          ></ksp-form-multi-attachment>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+    <ng-container
+      *ngIf="
+        !(
+          (requestData.process === '4' && requestData.status === '0') ||
+          (requestData.process === '4' && requestData.status === '3') ||
+          (requestData.process === '4' && requestData.status === '4') ||
+          (requestData.process === '4' && requestData.status === '5')
+        )
+      "
+    >
+      <ng-container
+        formArrayName="checkResult"
+        *ngFor="let c of checkResultFormArray.controls; let i = index"
+      >
+        <div
+          class="bg-white px-3 py-2 mt-3"
+          [ngClass]="{ hide: (selectedTabIndex || 0) !== i }"
+        >
+          <e-service-license-check
+            [choices]="verifyChoice"
+            [formControlName]="i"
+          ></e-service-license-check>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+</form>
+
+<div class="sticky-bottom border px-2">
+  <ksp-bottom-nav
+    [showCenterButtons]="false"
+    (prevClicked)="prevTab()"
+    (nextClicked)="nextTab()"
+    [disableNext]="!checkResultFormArray.valid && selectedTabIndex === 3"
+    [disableNextMessage]="'กรุณาตรวจสอบแบบคำขอให้ครบถ้วน'"
+  ></ksp-bottom-nav>
+</div>

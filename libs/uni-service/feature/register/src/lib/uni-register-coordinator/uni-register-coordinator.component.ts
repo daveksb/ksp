@@ -9,9 +9,15 @@ import {
 } from '@ksp/shared/dialog';
 import { UniversitySearchComponent } from '@ksp/shared/search';
 import { EMPTY, Observable, switchMap } from 'rxjs';
-import { GeneralInfoService, UniInfoService, UniRequestService } from '@ksp/shared/service';
+import {
+  GeneralInfoService,
+  UniInfoService,
+  UniRequestService,
+} from '@ksp/shared/service';
 import { thaiDate } from '@ksp/shared/utility';
 import { RequestPageType } from '@ksp/shared/constant';
+import { v4 as uuidv4 } from 'uuid';
+import { FileGroup } from '@ksp/shared/interface';
 
 @Component({
   templateUrl: './uni-register-coordinator.component.html',
@@ -21,31 +27,30 @@ export class UniRegisterCoordinatorComponent implements OnInit {
   requestDate = thaiDate(new Date());
   form = this.fb.group({
     universityInfo: [{}],
-    coordinator: []
+    coordinator: [],
   });
   saveData: any;
   prefixName$!: Observable<any>;
   uniType$!: Observable<any>;
   occupyList$!: Observable<any>;
-  requestNo: string = '';
-  uploadFileList = [
+  requestNo = '';
+  uploadFileList: FileGroup[] = [
     {
       name: 'หนังสือแต่งตั้งผู้ประสานงาน',
-      fileId: '',
-      fileName: ''
+      files: [],
     },
     {
       name: 'สำเนาบัตรประชาชน',
-      fileId: '',
-      fileName: ''
+      files: [],
     },
-  ];
+  ] as FileGroup[];
   requesttype = 1;
   systemtype = 3;
   currentprocess = 1;
   uniqueTimestamp: any = '';
   pageType = RequestPageType;
   uniData: any;
+  submit = false;
 
   constructor(
     private router: Router,
@@ -57,21 +62,21 @@ export class UniRegisterCoordinatorComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.uniqueTimestamp = `${new Date().getTime()}`;
+    this.uniqueTimestamp = uuidv4();
     localForage.getItem('registerSelectedUniversity').then((res: any) => {
       if (res) {
-        this.uniData = res.universityInfo;
+        this.uniData = res;
       }
     });
-    localForage.getItem('registerUserForm').then((res:any) => {
+    localForage.getItem('registerUserForm').then((res: any) => {
       if (res) {
         this.form.patchValue({
           universityInfo: {
             schoolid: res.schoolid,
             unitype: res.unitype,
             institution: res.institution,
-            affiliation: res.affiliation
-          }
+            affiliation: res.affiliation,
+          },
         });
         this.saveData = res;
       }
@@ -79,8 +84,9 @@ export class UniRegisterCoordinatorComponent implements OnInit {
     localForage.getItem('registerCoordinatorForm').then((res: any) => {
       if (res) {
         this.form.patchValue({
-          coordinator: res.form.coordinator
+          coordinator: res.form.coordinator,
         });
+        this.uploadFileList = res.file;
       }
     });
     this.prefixName$ = this.generalInfoService.getPrefix();
@@ -98,27 +104,28 @@ export class UniRegisterCoordinatorComponent implements OnInit {
     });
   }
 
-  prevPage() {   
-  let form = {
-    form: this.form.getRawValue(),
-    file: this.uploadFileList
-  }
-  localForage.setItem('registerCoordinatorForm', form);
-    this.router.navigate(['/', 'register', 'requester']);
+  prevPage() {
+    const form = {
+      form: this.form.getRawValue(),
+      file: this.uploadFileList,
+    };
+    localForage.setItem('registerCoordinatorForm', form).then(() => {
+      this.router.navigate(['/', 'register', 'requester']);
+    });
   }
 
   cancel() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
-        title: `คุณต้องการยกเลิกรายการใบคำขอใช่หรือไม่?`,
+        title: `คุณต้องการยกเลิกรายการแบบคำขอใช่หรือไม่?`,
         btnLabel: 'ยืนยัน',
       },
     });
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
-        if (res) {
-          this.showCompleteDialog();
-        }
+      if (res) {
+        this.showCompleteDialog();
+      }
     });
   }
 
@@ -127,7 +134,7 @@ export class UniRegisterCoordinatorComponent implements OnInit {
       width: '375px',
       data: {
         header: `ยกเลิกรายการสำเร็จ`,
-        btnLabel: 'กลับสู่หน้าหลัก'
+        btnLabel: 'กลับสู่หน้าหลัก',
       },
     });
 
@@ -142,11 +149,21 @@ export class UniRegisterCoordinatorComponent implements OnInit {
   }
 
   next() {
-    let form = {
-      form: this.form.getRawValue(),
-      file: this.uploadFileList
+    this.submit = true;
+    const data = this.form.getRawValue();
+    const { coordinator } = data as any;
+    if (
+      this.form.controls.coordinator.valid &&
+      coordinator.prefixth == coordinator.prefixen
+    ) {
+      const form = {
+        form: this.form.getRawValue(),
+        file: this.uploadFileList,
+      };
+      this.submit = false;
+      localForage.setItem('registerCoordinatorForm', form).then(() => {
+        this.router.navigate(['/', 'register', 'password']);
+      });
     }
-    localForage.setItem('registerCoordinatorForm', form);
-    this.router.navigate(['/', 'register', 'password']);
   }
 }

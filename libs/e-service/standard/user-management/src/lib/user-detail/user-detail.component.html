@@ -1,0 +1,185 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
+<ksp-top-nav>
+  <span header>{{ headers[pageType][0] }}</span>
+  <span subHeader>{{ headers[pageType][1] }}</span>
+</ksp-top-nav>
+
+<div [formGroup]="form" class="bg-secondary bg-opacity-10 px-4 py-2">
+  <div *ngIf="pageType === pageTypeEnum.NewUser" class="box-header">
+    รายละเอียดแบบคำขอ
+  </div>
+  <div *ngIf="pageType === pageTypeEnum.CurrentUser" class="box-header">
+    ข้อมูลผู้ใช้งานระบบ
+  </div>
+
+  <div class="bg-white p-3">
+    <ng-container *ngIf="pageType === pageTypeEnum.NewUser">
+      <ksp-request-header-info
+        [requestDate]="requestData?.requestdate"
+        [requestNumber]="requestData?.requestno"
+      ></ksp-request-header-info>
+      <hr />
+    </ng-container>
+
+    <div class="px-4 py-2">
+      <div class="row">
+        <div class="col mb-2">
+          <label class="form-label">สังกัด</label>
+          <input
+            [value]="requestData?.bureauname"
+            class="form-control"
+            type="text"
+            disabled
+          />
+        </div>
+
+        <div class="col mb-2">
+          <label class="form-label">หน่วยงาน / สถานศึกษา</label>
+          <input
+            [value]="requestData?.schoolname"
+            class="form-control"
+            type="text"
+            disabled
+          />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col mb-2">
+          <label class="form-label">ที่อยู่</label>
+          <input
+            class="form-control"
+            [value]="requestData?.schooladdress"
+            type="text"
+            disabled
+          />
+        </div>
+      </div>
+
+      <div class="row" *ngIf="pageType === pageTypeEnum.NewUser">
+        <div class="col-6 mb-2">
+          <label class="form-label">ประเภทแบบคำขอ</label>
+          <input
+            class="form-control"
+            type="text"
+            disabled
+            [value]="requestTypeList[requestType]"
+          />
+        </div>
+      </div>
+
+      <div
+        class="d-flex justify-content-end"
+        *ngIf="pageType === pageTypeEnum.NewUser"
+      >
+        <label
+          class="text-primary form-label text-decoration-underline"
+          role="button"
+          (click)="viewUser()"
+          >ดูรายชื่อผู้เข้าใช้งานระบบของหน่วยงาน/สถานศึกษานี้</label
+        >
+      </div>
+    </div>
+
+    <div class="bg-light px-4 py-2">
+      <div class="box-header">
+        {{ headerRequest[requestType] }}
+      </div>
+      <ksp-form-coordinator-info
+        [mode]="'view'"
+        [displayMode]="[0]"
+        [prefixList]="prefixList$ | async"
+        formControlName="userInfo"
+      ></ksp-form-coordinator-info>
+      <!--
+        [nationalitys]="nationalitys$ | async" -->
+      <!-- <ksp-form-requester-info [mode]="'view'"></ksp-form-requester-info> -->
+    </div>
+    <br />
+    <div class="bg-light px-4 py-2">
+      <div class="box-header">
+        ข้อมูลผู้มีอำนาจแต่งตั้ง (ที่ระบุไว้ในเอกสารแนบ)
+      </div>
+      <ksp-form-coordinator-info
+        [positionLabel]="'ตำแหน่งทางการบริหาร'"
+        [mode]="'view'"
+        [displayMode]="[0]"
+        [prefixList]="prefixList$ | async"
+        [occupyList]="occupyList$ | async"
+        formControlName="coordinatorInfo"
+        [hideIdcard]="true"
+        [systemform]="'uni'"
+      ></ksp-form-coordinator-info>
+    </div>
+    <!-- <ksp-form-attachment
+      [title]="'หลักฐานเพื่อพิจารณา'"
+      [mode]="'view'"
+      [groups]="uploadFileList"
+    ></ksp-form-attachment> -->
+    <br />
+    <div class="bg-light px-4 py-2" *ngIf="requestData?.requesttype === '2'">
+      <div class="box-header">เหตุผลการถอดถอน</div>
+
+      <div class="row mb-2">
+        <div class="col-5">
+          <label class="form-label required">เหตุผลการถอดถอน</label>
+          <select
+            class="form-select"
+            formControlName="retiredReason"
+            [attr.disabled]="true"
+          >
+            <option value="null" selected disabled hidden>กรุณาเลือก</option>
+            <ng-container *ngFor="let reason of retireReason">
+              <option [value]="reason.id">{{ reason.name }}</option>
+            </ng-container>
+          </select>
+        </div>
+      </div>
+
+      <div class="mb-2">
+        <textarea
+          class="form-control"
+          rows="3"
+          placeholder="กรุณาระบุ"
+          formControlName="retiredDetail"
+          [attr.disabled]="true"
+        ></textarea>
+      </div>
+    </div>
+    <br />
+    <ksp-form-multi-attachment
+      [groups]="uploadFileList"
+      title="หลักฐานเพื่อพิจารณา"
+      [mode]="'view'"
+      [viewFileMode]="mode"
+      [systemType]="'e-service-uni'"
+      *ngIf="pageType === 0"
+    ></ksp-form-multi-attachment>
+  </div>
+  <br />
+  <div [formGroup]="verifyForm" class="bg-white p-3">
+    <e-service-license-check
+      [mode]="mode"
+      formControlName="result"
+      [headerTitle]="approveTitles[pageType]"
+      [choices]="approveChoices[pageType]"
+    ></e-service-license-check>
+  </div>
+</div>
+
+<div class="sticky-bottom border">
+  <ksp-bottom-nav
+    [isFirstPage]="true"
+    [isLastPage]="true"
+    [showCenterButtons]="true"
+    [showSaveButton]="true"
+    (cancelClicked)="cancel()"
+    (saveClicked)="confirm()"
+    [disableSaveButton]="verifyForm.invalid"
+  >
+  </ksp-bottom-nav>
+</div>

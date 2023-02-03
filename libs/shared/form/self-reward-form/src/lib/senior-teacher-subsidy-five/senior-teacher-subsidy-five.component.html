@@ -1,10 +1,13 @@
 <form [formGroup]="form">
-  <div class="mx-3 box__full">
-    <div class="row mb-2">
-      <div class="col-md-6">
-        <label class="form-label">เงินเดือน (บาท)</label>
-        <input class="form-control" type="text" formControlName="salary" />
+  <div class="box-header text-primary mb-3">รายได้ก่อนเกษียณ</div>
+
+  <div class="row mb-3">
+    <div class="col-md-4 d-flex align-items-center">
+      <div class="col-auto d-flex">
+        <div class="form-label me-2">เงินเดือน (บาท)</div>
       </div>
+
+      <input class="form-control" type="text" formControlName="salary" />
     </div>
   </div>
 </form>

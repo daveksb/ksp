@@ -1,28 +1,150 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { HistoryRequestDialogComponent } from '@ksp/uni-service/dialog';
-
+import { requestStatus } from '@ksp/shared/constant';
+import { LoaderService, UniInfoService, UniRequestService } from '@ksp/shared/service';
+import { providerFactory, replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
+import { HistoryRequestDialogComponent, PrintRequestDialogComponent } from '@ksp/uni-service/dialog';
+import { KspPaginationComponent, ListData } from '@ksp/shared/interface';
+import _ from 'lodash';
+import { map, Subject } from 'rxjs';
+import { MatPaginator } from '@angular/material/paginator';
+const mapOption = () =>
+  map((data: any) => {
+    return (
+      data?.map((data: any) => ({
+        label: _.get(data, 'name'),
+        value: _.get(data, 'id'),
+      })) || []
+    );
+  });
 @Component({
   selector: 'ksp-edit-student-list',
   templateUrl: './edit-student-list.component.html',
   styleUrls: ['./edit-student-list.component.scss'],
+  providers: providerFactory(EditStudentListComponent),
 })
-export class EditStudentListComponent {
+export class EditStudentListComponent extends KspPaginationComponent implements OnInit {
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   displayedColumns: string[] = column;
+  degreeLevelOptions: ListData[] = [];
+  requestStatusOptions: ListData[] = requestStatus;
   dataSource = new MatTableDataSource<studentList>();
+  // '3-08-5-651004-00005'
+  form = this.fb.group({
+    requestno: [],
+    degreelevel: [],
+    fulldegreename: [],
+    coursemajor: [],
+    plancalendaryear: [],
+    courseacademicyear: [],
+    status: [],
+    cardno: [],
+    name: [],
+    requestdatefrom: [],
+    requestdateto: [],
+    process: [],
+    offset: [0],
+    row: [10]
+  })
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
 
-  constructor(private router: Router, public dialog: MatDialog) {}
+  constructor(
+    private router: Router, 
+    public dialog: MatDialog,
+    private fb: FormBuilder,
+    private uniInfoService: UniInfoService,
+    private uniRequestService: UniRequestService,
+    private loaderService: LoaderService) {
+      super();
+    }
 
-  history() {
-    this.dialog.open(HistoryRequestDialogComponent, {
-      width: '400px',
+  ngOnInit(): void {
+    this.getAll();     
+    this.searchdata(); 
+  }
+
+  print(row: any) {
+    const payload = {
+      unirequestadmissionid: row.id
+    };
+    this.uniInfoService.uniRequestEditHistory(payload).subscribe((response => {
+      if (response) {
+        this.dialog.open(PrintRequestDialogComponent, {
+          width: '600px',
+          data: response.datareturn
+        });
+      }
+    }));
+  }
+
+  private _findOptions(dataSource: any, key: any) {
+    return _.find(dataSource, { value: key })?.label || '-';
+  }
+
+  history(row: any) {
+    const payload = {
+      unirequestadmissionid: row.id
+    };
+    this.uniInfoService.uniRequestEditHistory(payload).subscribe((response => {
+      if (response) {
+        this.dialog.open(HistoryRequestDialogComponent, {
+          width: '600px',
+          data: response.datareturn.map((data: any) => {
+            data.requestprocess = data.process;
+            return data;
+          })
+        });
+      }
+    }));
+  }
+
+  getAll() {
+    this.uniInfoService
+    .uniDegreeLevel()
+    .pipe(mapOption())
+    .subscribe((res) => {
+      this.degreeLevelOptions = res;
     });
   }
 
-  search() {
-    this.dataSource.data = data;
+  searchdata() {
+    const form = this.form.value as any;
+    if (form.requestdatefrom) {
+      form.requestdatefrom = new Date(form.requestdatefrom)
+      form.requestdatefrom.setHours(form.requestdatefrom.getHours() + 7)
+    }
+    if (form.requestdateto) {
+      form.requestdateto = new Date(form.requestdateto)
+      form.requestdateto.setHours(form.requestdateto.getHours() + 7)
+    }
+    this.uniRequestService.getEditRequestAdmision(replaceEmptyWithNull(form))
+    .subscribe((response: any) => {
+      if (response.datareturn) {
+        this.pageEvent.length = response.countrow;
+        this.dataSource.data = response.datareturn.map(((data: any)=>{
+          const parsedata = JSON.parse(data.admissionlist);
+          data.studentdetail = parsedata[0];
+          data.nameshow = `${data.studentdetail.firstnameth ? data.studentdetail.firstnameth : ''}`+
+                          ` ${data.studentdetail.lastnameth ? data.studentdetail.lastnameth : ''}`;
+          data.requestdate = thaiDate(new Date(data?.requestdate));
+          if (data.updatedate) data.updatedate = thaiDate(new Date(data?.updatedate));
+          const finddegreelevel = this.degreeLevelOptions.find((level=>{
+            return data.degreelevel == level.value;
+          }))
+          data.degreelevelname = finddegreelevel?.label || '';
+          data.requeststatusname = data.status == '1' ? 'สร้าง' :
+                               data.status == '2' ? 'ยื่นเรียบร้อย' :
+                               data.status == '3' ? 'รับข้อมูล' : '';
+          return data;
+        }));
+      } else {
+        this.dataSource.data = [];
+      }
+    })
   }
 
   clear() {

@@ -1,127 +1,91 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
+import { FormArray, FormBuilder } from '@angular/forms';
+import { FileGroup, KspFormBaseComponent } from '@ksp/shared/interface';
+import { providerFactory } from '@ksp/shared/utility';
 
+function checkAllValidator(): any {
+  return (form: FormArray) => {
+    const checkAll = form.controls.every((item) => !!item.value);
+    if (!checkAll) {
+      return { checkall: true };
+    }
+    return null;
+  };
+}
 @Component({
   selector: 'self-service-foreign-license-step-three',
   templateUrl: './foreign-license-step-three.component.html',
   styleUrls: ['./foreign-license-step-three.component.scss'],
+  providers: providerFactory(ForeignLicenseStepThreeComponent),
 })
-export class ForeignLicenseStepThreeComponent implements OnInit {
+export class ForeignLicenseStepThreeComponent
+  extends KspFormBaseComponent
+  implements OnChanges
+{
   @Input() documentTypes: 'request' | 'renew' = 'request';
   @Input() uniqueTimestamp = '';
-  @Output() fileUpdate = new EventEmitter();
-  attachFiles: any[] = [];
+  @Input() attachFiles: FileGroup[] = [];
+  @Output() attachFilesChange = new EventEmitter<FileGroup[]>();
 
-  rules = [
-    {
-      name: `Copy of educational certificate along with official transcripts`,
-      fileId: '',
-      fileName: '',
-    },
-    {
-      name: `Copy of teaching license/ certificate from abroad (If any)`,
-      fileId: '',
-      fileName: '',
-    },
-    {
-      name: `Original official degree confirmation letter for graduates of institution or an original official Transcript or
-    original of statement of professional standing (as the case may be)`,
-      fileId: '',
-      fileName: '',
-    },
-    {
-      name: `Copy of Translation of non-English or Thai documents`,
-      fileId: '',
-      fileName: '',
-    },
-    {
-      name: `Copy of documentary evidence related to your professional certification (if any)`,
-      fileId: '',
-      fileName: '',
-    },
-    {
-      name: `Original of Professional Experience Evaluation Form (this form must be completed and signed by all evaluators
-      and enclosed with a copy of their current professional licenses)`,
-      fileId: '',
-      fileName: '',
-    },
-    {
-      name: `Copy of all the used pages of the teacher's passport; preferably the photo page and present Non-B Visa page`,
-      fileId: '',
-      fileName: '',
-    },
-    {
-      name: `Copy of all the used pages of the teacher's work permit`,
-      fileId: '',
-      fileName: '',
-    },
-    {
-      name: `Other relevant documents (if any)
-      e.g. Certificate of Name/Surname Change, Certificate of Marriage/Divorce, or related document, in case of name, or
-      surname discrepancy between that appears on the degree certificate and that appears on the passport`,
-      fileId: '',
-      fileName: '',
-    },
-    {
-      name: `Two 1 x 1.25 inch half-length, full face photograph; wearing formal clothing without hat and sunglasses; taken
-      within 6 months before application submission (Do not wear a t-shirt or tank top, no smile; taken against plain,
-      blue or white background)`,
-      fileId: '',
-      fileName: '',
-    },
-    {
-      name: `Payment receipt for registration fee: 500 Baht`,
-      fileId: '',
-      fileName: '',
-    },
-  ];
+  override form = this.fb.group({
+    checkFiles: this.fb.array([], checkAllValidator()),
+  });
 
-  files = [
-    {
-      name: `An applicant's Qualification Identification Form`,
-      fileId: '',
-      fileName: '',
-    },
-    {
-      name: `Copy of all the used pages of the teacher's passport; preferaly the photo page and present  Non-B Visa page`,
-      fileId: '',
-      fileName: '',
-    },
-    {
-      name: `Copy of all the used pages of the teacher's work permit`,
-      fileId: '',
-      fileName: '',
-    },
-    {
-      name: `Copy of the current teaching license`,
-      fileId: '',
-      fileName: '',
-    },
-    {
-      name: `Copy of documents or evidence of the performance results of professional practice as specified`,
-      fileId: '',
-      fileName: '',
-    },
-    {
-      name: `Copy of educational certificate along with official transcripts`,
-      fileId: '',
-      fileName: '',
-    },
-  ];
+  override set value(value: any) {
+    Object.keys(value).forEach((key) => {
+      const control = this.form.get(key) as FormArray;
+      if (value[key]?.length) {
+        if (!this.form.controls.checkFiles.value?.length) {
+          value[key].forEach((value: any) => {
+            control.push(this.fb.control(value));
+          });
+          console.log(control.value);
+        } else {
+          value[key].forEach((value: any, index: any) => {
+            control.at(index)?.patchValue(value);
+          });
+        }
+      }
+    });
+    this.form.controls.checkFiles.updateValueAndValidity();
+    this.onChange(value);
+    this.onTouched();
+  }
 
-  constructor() {}
+  constructor(private fb: FormBuilder) {
+    super();
+    this.subscriptions.push(
+      this.form?.valueChanges.subscribe((value) => {
+        this.onChange(value);
+        this.onTouched();
+      })
+    );
+  }
 
-  ngOnInit(): void {
-    if (this.documentTypes === 'request') {
-      this.attachFiles = structuredClone(this.rules);
-    } else {
-      this.attachFiles = structuredClone(this.files);
+  override ngOnChanges(changes: SimpleChanges): void {
+    if (changes['attachFiles'] && this.attachFiles?.length) {
+      if (!this.form.controls.checkFiles.value?.length) {
+        this.attachFiles.forEach((file) =>
+          this.form.controls.checkFiles.push(this.fb.control(false))
+        );
+      }
     }
   }
 
-  updateComplete(file: any, group: any) {
-    const { fileId, fileName } = file;
-    group.fileId = fileId;
-    group.fileName = fileName;
-    this.fileUpdate.emit(this.attachFiles);
+  updateComplete(group: FileGroup) {
+    const changeGroup = this.attachFiles.find(
+      (file) => file.name === group.name
+    );
+    if (changeGroup) {
+      changeGroup.files = group.files;
+      this.attachFilesChange.emit(this.attachFiles);
+    }
   }
 }

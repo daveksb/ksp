@@ -10,15 +10,19 @@ import { replaceEmptyWithNull } from '@ksp/shared/utility';
   styleUrls: ['./address-info.component.scss'],
 })
 export class AddressInfoComponent implements OnInit {
+  label = 'แก้ไขข้อมูล';
+
+  form = this.fb.group({
+    addr1: [],
+    addr2: [],
+  });
+
   constructor(
     private myInfoService: MyInfoService,
     private addressService: AddressService,
     private fb: FormBuilder
   ) {}
-  form = this.fb.group({
-    addr1: [],
-    addr2: [],
-  });
+
   mode: FormMode = 'view';
   provinces1$!: Observable<any>;
   provinces2$!: Observable<any>;
@@ -36,15 +40,20 @@ export class AddressInfoComponent implements OnInit {
       this.patchAddressForm(res);
     });
   }
+
   patchAddressForm(res: SelfMyInfo) {
-    const addressList = JSON.parse(res?.addressinfo as string) || null;
-    for (let i = 0; i < addressList.length; i++) {
-      const form = this.form.get(`addr${i + 1}`) as AbstractControl<any, any>;
-      this.getAmphurChanged(i + 1, addressList[i].province);
-      this.getTumbon(i + 1, addressList[i].amphur);
-      form?.patchValue(addressList[i]);
+    //console.log('res  = ', res);
+    if (res && res.addressinfo) {
+      const addressList = JSON.parse(res.addressinfo) || null;
+      for (let i = 0; i < addressList.length; i++) {
+        const form = this.form.get(`addr${i + 1}`) as AbstractControl<any, any>;
+        this.getAmphurChanged(i + 1, addressList[i].province);
+        this.getTumbon(i + 1, addressList[i].amphur);
+        form?.patchValue(addressList[i]);
+      }
     }
   }
+
   provinceChanged(addrType: number, evt: any) {
     const province = evt.target?.value;
     if (province) {
@@ -83,12 +92,19 @@ export class AddressInfoComponent implements OnInit {
       }
     }
   }
+
+  clear() {
+    this.form.reset();
+  }
+
   onClickChangeMode() {
-    if (this.mode == 'view') {
+    if (this.mode === 'view') {
       this.mode = 'edit';
+      this.label = 'บันทึกข้อมูล';
     } else {
       this.savingData();
       this.mode = 'view';
+      this.label = 'แก้ไขข้อมูล';
     }
   }
 

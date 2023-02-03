@@ -1,7 +1,31 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
+
+function atLeastOneFormValidator(): any {
+  return (form: FormGroup) => {
+    const licenseInfo1: any[] = form.get('licenseInfo1')?.value;
+    const licenseInfo2: any[] = form.get('licenseInfo2')?.value;
+    const licenseInfo3: any[] = form.get('licenseInfo3')?.value;
+    const licenseInfo4: any[] = form.get('licenseInfo4')?.value;
+    const licenseInfo5: any[] = form.get('licenseInfo5')?.value;
+
+    if (
+      !(
+        licenseInfo1.length ||
+        licenseInfo2.length ||
+        licenseInfo3.length ||
+        licenseInfo4.length ||
+        licenseInfo5.length
+      )
+    ) {
+      return { oneform: true };
+    }
+
+    return null;
+  };
+}
 
 @Component({
   selector: 'self-service-transfer-knowledge-education',
@@ -13,6 +37,7 @@ export class TransferKnowledgeEducationComponent
   extends KspFormBaseComponent
   implements OnInit
 {
+  @Input() showSeeButton = false;
   @Input() countries: any[] = [];
   override form = this.fb.group({
     licenseInfo1: this.fb.array([]),
@@ -41,9 +66,33 @@ export class TransferKnowledgeEducationComponent
 
   ngOnInit(): void {
     // this.setDefaulFormValue();
+    // this.form.setValidators(atLeastOneFormValidator());
     this.form.valueChanges.subscribe((res) => {
       // console.log('form value = ', res);
     });
+  }
+
+  override set value(value: any) {
+    // this.form.patchValue(value);
+    if (value) {
+      Object.keys(value).forEach((key) => {
+        const control = this.form.get(key) as FormArray;
+        value[key].forEach((item: any) =>
+          control.push(
+            this.fb.group({
+              ...item,
+            })
+          )
+        );
+      });
+    }
+
+    if (this.mode !== 'edit') {
+      this.form.disable();
+    }
+
+    this.onChange(value);
+    this.onTouched();
   }
 
   setDefaulFormValue() {
@@ -63,14 +112,14 @@ export class TransferKnowledgeEducationComponent
     let data;
     if (formNumber === 5) {
       data = this.fb.group({
-        certificationType: [],
-        recognizedOrganization: [],
-        certificateNo: [],
-        issueDate: [],
+        certificationType: [null, Validators.required],
+        recognizedOrganization: [null, Validators.required],
+        certificateNo: [null, Validators.required],
+        issueDate: [null, Validators.required],
       });
     } else {
       data = this.fb.group({
-        licenseForm: [],
+        licenseForm: [null, Validators.required],
       });
     }
 

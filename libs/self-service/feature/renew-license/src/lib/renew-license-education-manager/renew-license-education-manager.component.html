@@ -1,21 +1,40 @@
-<ksp-top-nav [isSelfService]="true"><span header>ใบคำขอต่ออายุใบประกอบวิชาชีพ</span></ksp-top-nav>
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
+<ksp-top-nav [isSelfService]="true"
+  ><span header>ยื่นแบบคำขอ</span
+  ><span subHeader
+    >ขอต่ออายุใบประกอบวิชาชีพ (ผู้บริหารการศึกษา)</span
+  ></ksp-top-nav
+>
 
 <div class="main__container px-4 py-2">
-  <self-service-request-status></self-service-request-status>
+  <self-service-request-status
+    [requestDate]="requestDate"
+    [idcardNo]="(myInfo$ | async)?.idcardno || ''"
+    [kurusapaNo]="(myInfo$ | async)?.kuruspano || ''"
+    [requestNo]="requestNo"
+  ></self-service-request-status>
 
   <form [formGroup]="form">
-    <div class="row mx-0 border shadow rounded-4 px-2 py-4 bg-white my-4">
-      <div class="col-lg-2">
-        <self-service-form-upload-image></self-service-form-upload-image>
+    <div class="row mx-0 border shadow-sm rounded-4 px-2 py-4 bg-white my-4">
+      <div class="col-lg-3 my-auto">
+        <self-service-form-upload-image
+          [imgSrc]="myImage"
+          [uniqueTimestamp]="uniqueTimestamp"
+          (uploadImageComplete)="uploadImageComplete($event)"
+        ></self-service-form-upload-image>
       </div>
-      <div class="col-md">
+      <div class="col-md mt-md-0 mt-2">
         <ksp-form-user-info
           formControlName="userInfo"
           [isDarkMode]="true"
           [prefixList]="prefixList$ | async"
-          [displayMode]="[userInfoType]"
           [nationList]="nationalitys$ | async"
-          [isSchoolService]="false">
+          [isSelfService]="true"
+        >
         </ksp-form-user-info>
       </div>
     </div>
@@ -23,7 +42,8 @@
     <mat-tab-group
       class="tab-group"
       animationDuration="0ms"
-      [selectedIndex]="0">
+      [selectedIndex]="0"
+    >
       <mat-tab label="ที่อยู่" class="tab-content">
         <ksp-form-address
           formControlName="address1"
@@ -32,74 +52,65 @@
           [amphurs]="amphurs1$ | async"
           [tumbols]="tumbols1$ | async"
           (provinceChanged)="provinceChanged(1, $event)"
-          (amphurChanged)="amphurChanged(1, $event)">
+          (amphurChanged)="amphurChanged(1, $event)"
+        >
           <span>ที่อยู่ทะเบียนบ้าน</span>
         </ksp-form-address>
         <hr />
         <ksp-form-address
           formControlName="address2"
           [isDarkMode]="true"
-          [provinces]="provinces2$ | async"
+          [provinces]="provinces1$ | async"
           [amphurs]="amphurs2$ | async"
           [tumbols]="tumbols2$ | async"
           (provinceChanged)="provinceChanged(2, $event)"
-          (amphurChanged)="amphurChanged(2, $event)">
+          (amphurChanged)="amphurChanged(2, $event)"
+        >
           <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
+          <div class="d-flex align-items-center">
+            <input
+              type="checkbox"
+              class="me-2"
+              (change)="useSameAddress($event)"
+            />
+            <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
+          </div>
         </ksp-form-address>
       </mat-tab>
 
       <mat-tab label="สถานที่ทำงาน">
         <self-service-form-user-workplace
           formControlName="workplace"
-          [provinces]="provinces3$ | async"
+          [showOnlineForm]="true"
+          [showNotRequire]="true"
+          [showContactForm]="true"
+          [provinces]="provinces1$ | async"
           [amphurs]="amphurs3$ | async"
           [tumbols]="tumbols3$ | async"
           [bureaus]="bureau$ | async"
           (provinceChanged)="provinceChanged(3, $event)"
-          (amphurChanged)="amphurChanged(3, $event)">
+          (amphurChanged)="amphurChanged(3, $event)"
+        >
         </self-service-form-user-workplace>
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label class="form-label">โทรศัพท์</label>
-            <input
-              class="form-control"
-              type="text"
-              formControlName="workPhone" />
-          </div>
-
-          <div class="col-md-6 mb-3">
-            <label class="form-label">โทรสาร</label>
-            <input class="form-control" type="text" formControlName="fax" />
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label class="form-label">อีเมล</label>
-            <input
-              class="form-control"
-              type="text"
-              formControlName="workEmail" />
-          </div>
-
-          <div class="col-md-6 mb-3">
-            <label class="form-label">เว็บไซต์</label>
-            <input class="form-control" type="text" formControlName="website" />
-          </div>
-        </div>
       </mat-tab>
 
-      <mat-tab label="ข้อมูลคุณสมบัติของผู้ขอต่ออายุใบอนุญาต">
+      <mat-tab label="ข้อมูลคุณสมบัติของผู้ขอต่ออายุหนังสืออนุญาต">
         <self-service-renew-license-property
           formControlName="educationForm"
-          [renewLicenseTypes]="'eduManager'"></self-service-renew-license-property>
+          [renewLicenseTypes]="'eduManager'"
+          [workingInfo]="licenseFiles"
+          [uniqueTimestamp]="uniqueTimestamp"
+        ></self-service-renew-license-property>
       </mat-tab>
 
       <mat-tab label="ผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน">
         <self-service-standard-working
           formControlName="standardWorking"
-          [educationType]="'eduManager'"
+          [educationType]="'ผู้บริหารการศึกษา'"
           [uniqueTimestamp]="uniqueTimestamp"
-          [workingInfo]="workingInfoFiles"></self-service-standard-working>
+          [workingInfo]="workingInfoFiles"
+          [workingInfo2]="workingInfoFiles2"
+        ></self-service-standard-working>
       </mat-tab>
     </mat-tab-group>
   </form>
@@ -110,14 +121,28 @@
   </div>
 
   <div class="d-flex justify-content-center my-3">
-    <button type="button" class="btn border-primary text-primary bg-white">
+    <button
+      *ngIf="requestId"
+      (click)="cancel()"
+      type="button"
+      class="ms-3 btn border-primary text-primary"
+    >
+      ยกเลิกแบบคำขอ
+    </button>
+    <button
+      type="button"
+      (click)="onSave(1)"
+      [disabled]="!form.valid"
+      class="ms-3 btn border-primary text-primary bg-white"
+    >
       บันทึกชั่วคราว
     </button>
     <button
       type="button"
       class="ms-3 btn btn-primary"
-      [disabled]="disableNextButton"
-      (click)="save()">
+      [disabled]="!form.valid"
+      (click)="onSave(2)"
+    >
       บันทึกและยื่น
     </button>
   </div>

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, Input } from '@angular/core';
+import { FormArray, FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -9,34 +9,24 @@ import { providerFactory } from '@ksp/shared/utility';
   styleUrls: ['./form-reason-info.component.scss'],
   providers: providerFactory(FormReasonInfoComponent),
 })
-export class FormReasonInfoComponent
-  extends KspFormBaseComponent
-  implements OnInit
-{
-  teacherReason = teacherReasons;
-  schoolReason = schoolReasons;
+export class FormReasonInfoComponent extends KspFormBaseComponent {
+  @Input() careerType!: number;
+
+  teacherReasonList = teacherReasonList;
+  schoolReasonList = schoolReasonsList;
+  schoolReasonList2 = schoolReasonsList2;
 
   override form = this.fb.group({
-    schoolReasonInfo: [],
-    school1: [false],
-    school2: [false],
-    school3: [false],
-    school4: [false],
+    schoolReasons: this.fb.array([]),
+    teacherReasons: this.fb.array([]),
     schoolOtherDetail: [],
-    teacherReasonInfo: [],
-    teacher1: [false],
-    teacher2: [false],
-    teacher3: [false],
-    teacher4: [false],
-    teacher5: [false],
-    teacher6: [false],
     teacherOtherDetail: [],
   });
 
   constructor(private fb: FormBuilder) {
     super();
+    this.addCheckboxes();
     this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value) => {
         this.onChange(value);
         this.onTouched();
@@ -44,14 +34,26 @@ export class FormReasonInfoComponent
     );
   }
 
-  ngOnInit(): void {
-    this.form.valueChanges.subscribe((res) => {
-      //console.log('res = ', res);
-    });
+  private addCheckboxes() {
+    this.schoolReasonList.forEach(() =>
+      this.schoolReasons.push(this.fb.control([null]))
+    );
+
+    this.teacherReasonList.forEach(() =>
+      this.teacherReasons.push(this.fb.control([null]))
+    );
+  }
+
+  get schoolReasons() {
+    return this.form.controls.schoolReasons as FormArray;
+  }
+
+  get teacherReasons() {
+    return this.form.controls.teacherReasons as FormArray;
   }
 }
 
-export const teacherReasons = [
+export const teacherReasonList = [
   {
     label:
       'สถาบันการศึกษาที่เปิดสอนในหลักสูตรที่ คุรุสภารับรองอยู่ห่างไกลที่พักไม่สะดวกต่อการเดินทาง',
@@ -85,7 +87,7 @@ export const teacherReasons = [
   { label: 'อื่นๆ', name: 'teacher6', value: false },
 ];
 
-export const schoolReasons = [
+export const schoolReasonsList = [
   {
     label: 'ผู้ขอประกอบวิชาชีพครูเป็นผู้มีความรู้ ความสามารถในการสอน',
     name: 'school1',
@@ -97,7 +99,32 @@ export const schoolReasons = [
     value: false,
   },
   {
-    label: 'ขาดแคลนครูผู้สอนที่มีใบอนุญาตประกอบวิชาชีพ',
+    label: 'ขาดแคลนครูผู้สอนที่มีหนังสืออนุญาตประกอบวิชาชีพ',
+    name: 'school3',
+    value: false,
+  },
+  {
+    label: 'อื่นๆ',
+    name: 'school4',
+    value: false,
+  },
+];
+
+export const schoolReasonsList2 = [
+  {
+    label:
+      'ผู้ขอประกอบวิชาชีพผู้บริหารสถานศึกษา เป็นผู้มีความรู้ ความสามารถในการบริหารสถานศึกษา',
+    name: 'school1',
+    value: false,
+  },
+  {
+    label:
+      'ผู้ขอประกอบวิชาชีพผู้บริหารสถานศึกษา เป็นผู้มีประสบการณ์ในการบริหารสถานศึกษา',
+    name: 'school2',
+    value: false,
+  },
+  {
+    label: 'ขาดแคลนผู้บริหารสถานศึกษาที่มีหนังสืออนุญาตประกอบวิชาชีพ',
     name: 'school3',
     value: false,
   },

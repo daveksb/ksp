@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Observable } from 'rxjs';
+import { UntilDestroy } from '@ngneat/until-destroy';
+import { Observable, Subject } from 'rxjs';
 import { LicenseRequestService } from './license-request.service';
 import {
   AddressService,
@@ -11,8 +11,9 @@ import {
   EducationDetailService,
   MyInfoService,
   SelfRequestService,
+  LoaderService,
 } from '@ksp/shared/service';
-import { SelfRequest } from '@ksp/shared/interface';
+import { Country, FileGroup, SelfRequest } from '@ksp/shared/interface';
 import {
   getCookie,
   parseJson,
@@ -29,30 +30,6 @@ import { LicenseFormBaseComponent } from '@ksp/self-service/form';
 import * as _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 
-const mockPerformances = [
-  {
-    id: 1,
-    score: '89',
-    result: 'ผ่าน',
-    announceDate: '12/มกราคม/2565',
-    endDate: '31/มกราคม/2565',
-  },
-  {
-    id: 2,
-    score: '96',
-    result: 'ผ่าน',
-    announceDate: '12/มกราคม/2565',
-    endDate: '31/มกราคม/2565',
-  },
-  {
-    id: 3,
-    score: '96',
-    result: 'ไม่พบข้อมูล',
-    announceDate: '12/มกราคม/2565',
-    endDate: '31/มกราคม/2565',
-  },
-];
-
 @UntilDestroy()
 @Component({
   templateUrl: './license-request.component.html',
@@ -63,6 +40,13 @@ export class LicenseRequestComponent
   implements OnInit
 {
   userInfoType = UserInfoFormType.thai;
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
+  countries$!: Observable<Country[]>;
+  licenses$!: Observable<any>;
+  eduFiles: FileGroup[] = [];
+  experienceFiles: FileGroup[] = [];
+  performanceFiles: FileGroup[] = [];
+  selectedTabIndex = 0;
   override form = this.fb.group({
     userInfo: [],
     address1: [],
@@ -71,12 +55,6 @@ export class LicenseRequestComponent
     education: [],
     experience: [],
   });
-  countries$!: Observable<any>;
-  countries2$!: Observable<any>;
-  licenses$!: Observable<any>;
-  disableNextButton = false;
-  eduFiles: any[] = [];
-  experienceFiles: any[] = [];
 
   constructor(
     router: Router,
@@ -88,7 +66,8 @@ export class LicenseRequestComponent
     educationDetailService: EducationDetailService,
     requestService: SelfRequestService,
     myInfoService: MyInfoService,
-    route: ActivatedRoute
+    route: ActivatedRoute,
+    private loaderService: LoaderService
   ) {
     super(
       generalInfoService,
@@ -105,20 +84,33 @@ export class LicenseRequestComponent
 
   ngOnInit(): void {
     this.getListData();
-    this.checkButtonsDisableStatus();
     this.checkRequestId();
+    /*     this.form.valueChanges.subscribe((res) => {
+      //console.log('1 = ', this.userInfoForm.valid);
+    }); */
+  }
+
+  get userInfoForm() {
+    return this.form.controls.userInfo;
+  }
+
+  override resetForm() {
+    super.resetForm();
+    this.eduFiles = structuredClone(this.service.educationFiles);
+    this.experienceFiles = structuredClone(this.service.experienceFiles);
+    this.performanceFiles = structuredClone(this.service.performanceFiles);
   }
 
   override initializeFiles() {
     this.uniqueTimestamp = uuidv4();
     this.eduFiles = structuredClone(this.service.educationFiles);
     this.experienceFiles = structuredClone(this.service.experienceFiles);
+    this.performanceFiles = structuredClone(this.service.performanceFiles);
   }
 
   override getListData() {
     super.getListData();
     this.countries$ = this.addressService.getCountry();
-    this.countries2$ = this.countries$;
     this.licenses$ = this.educationDetailService.getLicenseType();
   }
 
@@ -139,9 +131,7 @@ export class LicenseRequestComponent
   }
 
   patchAddress2FormWithAddress1(): void {
-    console.log(this.form.controls.address1.value);
     this.form.controls.address2.patchValue(this.form.controls.address1.value);
-    console.log(this.form.controls.address2.value);
   }
 
   override patchData(data: SelfRequest) {
@@ -157,14 +147,18 @@ export class LicenseRequestComponent
 
     if (data.experienceinfo) {
       const experienceInfo = parseJson(data.experienceinfo);
-      this.form.controls.experience.patchValue({ ...experienceInfo });
+      this.form.controls.experience.patchValue({
+        ...experienceInfo,
+      } as any);
     }
 
     if (data.fileinfo) {
       const fileInfo = parseJson(data.fileinfo);
-      const { edufiles, experiencefiles } = fileInfo;
+      //console.log(fileInfo);
+      const { edufiles, experiencefiles, performancefiles } = fileInfo;
       this.eduFiles = edufiles;
       this.experienceFiles = experiencefiles;
+      this.performanceFiles = performancefiles;
     }
   }
 
@@ -195,7 +189,7 @@ export class LicenseRequestComponent
   createRequest(forbidden: any, currentProcess: number) {
     const self = new SelfRequest(
       '1',
-      SelfServiceRequestType.ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ,
+      SelfServiceRequestType.ขอขึ้นทะเบียนหนังสืออนุญาตประกอบวิชาชีพ,
       `${SelfServiceRequestSubType.ครู}`,
       currentProcess
     );
@@ -205,12 +199,12 @@ export class LicenseRequestComponent
     if (formData?.address2?.addressType) formData.address2.addresstype = 2;
 
     const { id, ...rawUserInfo } = formData.userInfo;
-    console.log('id ', id);
-    console.log('requestId ', this.requestId);
+    //console.log('requestId ', this.requestId);
     const userInfo = toLowercaseProp(rawUserInfo);
-    userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
-    userInfo.uniquetimestamp = this.uniqueTimestamp;
-    userInfo.staffid = getCookie('userId');
+    self.isforeign = `${SelfServiceRequestForType.ชาวไทย}`;
+    self.uniqueno = this.uniqueTimestamp;
+    self.userid = getCookie('userId');
+    //console.log('user info = ', userInfo);
 
     const selectData = _.pick(userInfo, allowKey);
 
@@ -219,13 +213,15 @@ export class LicenseRequestComponent
       educationLevelForm: null,
     };
 
-    const edufiles = this.eduFiles; //this.mapFileInfo(this.eduFiles);
-    const experiencefiles = this.experienceFiles; //this.mapFileInfo(this.experienceFiles);
+    const edufiles = this.eduFiles;
+    const experiencefiles = this.experienceFiles;
+    const performancefiles = this.performanceFiles;
 
-    const payload = {
+    const payload: SelfRequest = {
       ...self,
       ...replaceEmptyWithNull(selectData),
       ...(this.requestId && { id: `${this.requestId}` }),
+      ...(this.imageId && { imagefileid: `${this.imageId}` }),
       ...{
         addressinfo: JSON.stringify([formData.address1, formData.address2]),
       },
@@ -236,15 +232,39 @@ export class LicenseRequestComponent
       },
       ...{ competencyinfo: JSON.stringify(mockPerformances) },
       ...{ prohibitproperty: JSON.stringify(forbidden) },
-      ...{ fileinfo: JSON.stringify({ edufiles, experiencefiles }) },
+      ...{
+        fileinfo: JSON.stringify({
+          edufiles,
+          experiencefiles,
+          performancefiles,
+        }),
+      },
     };
-    console.log(payload);
+    //console.log('payload = ', payload);
     return payload;
   }
-
-  checkButtonsDisableStatus() {
-    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-      this.disableNextButton = false; // !this.form.valid;
-    });
-  }
 }
+
+const mockPerformances = [
+  {
+    id: 1,
+    score: '89',
+    result: 'ผ่าน',
+    announceDate: '12/มกราคม/2565',
+    endDate: '31/มกราคม/2565',
+  },
+  {
+    id: 2,
+    score: '96',
+    result: 'ผ่าน',
+    announceDate: '12/มกราคม/2565',
+    endDate: '31/มกราคม/2565',
+  },
+  {
+    id: 3,
+    score: '96',
+    result: 'ไม่พบข้อมูล',
+    announceDate: '12/มกราคม/2565',
+    endDate: '31/มกราคม/2565',
+  },
+];

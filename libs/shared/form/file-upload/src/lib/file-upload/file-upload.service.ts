@@ -55,4 +55,32 @@ export class FileService {
       }
     );
   }
+
+  downloadSchoolFile(payload: any) {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/schrequestfileselectbyid`,
+      payload
+    );
+  }
+
+  downloadEUniFile(payload: any) {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/unirequestfileselectbyid`,
+      payload
+    );
+  }
+
+  downloadUniFile(payload: any) {
+    return this.http.post(
+      `${environment.apiUrl}/kspuni/unirequestfileselectfile`,
+      payload
+    );
+  }
+
+  downloadKspFile(payload: any) {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/kspfileselectidfile`,
+      payload
+    );
+  }
 }

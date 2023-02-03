@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -35,15 +35,35 @@ export class CouncilEvidenceComponent
     this.addFormArray(this.evidenceInfo);
   }
 
+  override set value(value: any) {
+    Object.keys(value).forEach((key) => {
+      const control = this.form.get(key) as FormArray;
+      if (value[key].length) {
+        control.removeAt(0);
+        value[key].forEach((item: any, index: number) => {
+          this.addFormArray(control);
+          control.at(index).patchValue(item);
+        });
+      }
+    });
+
+    if (this.mode === 'view') {
+      this.form.disable();
+    }
+
+    this.onChange(value);
+    this.onTouched();
+  }
+
   deleteFormArray(form: FormArray<any>, index: number) {
     form.removeAt(index);
   }
 
   addFormArray(form: FormArray<any>) {
     const data = this.fb.group({
-      rewardYear: [],
-      rewardName: [],
-      rewardDetail: [],
+      rewardYear: [null, Validators.required],
+      rewardName: [null, Validators.required],
+      rewardDetail: [null, Validators.required],
     });
     form.push(data);
   }

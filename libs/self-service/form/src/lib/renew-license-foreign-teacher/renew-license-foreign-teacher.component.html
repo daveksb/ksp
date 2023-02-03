@@ -4,110 +4,193 @@
     performance since issued date of license until present. All three activities
     must not be the same
   </div>
-  <ng-container formArrayName="foreigns">
-    <ng-container *ngFor="let foreignForm of foreigns.controls; let i = index">
-      <ng-container [formGroupName]="i">
-        <div class="px-3 py-2 border rounded mb-3">
-          <div class="d-flex justify-content-end">
-            <i
-              class="bi bi-x-circle-fill text-danger"
-              role="button"
-              (click)="deleteForm(i)"
-            ></i>
-          </div>
 
-          <select
-            formControlName="activityType"
-            class="form-select mb-3"
-            style="white-space: break-spaces"
-          >
-            <option selected hidden disabled value="null">กรุณาเลือก</option>
-            <option
-              *ngFor="let atv of activityTypes"
-              [value]="atv.value"
-              class="form-label text-black"
-            >
-              {{ atv.label }}
-            </option>
-          </select>
+  <div class="d-flex mt-2">
+    <input type="checkbox" class="me-2 mt-1" formControlName="activity1" />
+    <label class="form-label">Attending an educational profession course to obtain an additional
+      qualification</label>
+  </div>
 
-          <ng-container formArrayName="activityName">
-            <ng-container
-              *ngFor="let foreigns of getActivity(i).controls; let j = index"
-            >
-              <ng-container [formGroupName]="j">
-                <ng-container *ngIf="selectedActivityType === 0">
-                  <ksp-activity-add-degree
-                    formControlName="activityDetail"
-                  ></ksp-activity-add-degree
-                ></ng-container>
+  <ng-container *ngIf="activity1">
+    <div class="bg-light px-3 py-2 my-2">
+      <ksp-activity-add-degree
+        [isForeignForm]="true"
+        formControlName="activity1Form"
+        [mode]="mode"></ksp-activity-add-degree>
+    </div>
+  </ng-container>
 
-                <ng-container *ngIf="selectedActivityType === 1">
-                  <ksp-activity-diploma-receive
-                    formControlName="activityDetail"
-                  ></ksp-activity-diploma-receive
-                ></ng-container>
+  <div class="d-flex mt-2">
+    <input type="checkbox" class="me-2 mt-1" formControlName="activity2" />
+    <label class="form-label">Having participated in a training course and received certificate that
+      accrediting expertise in professional practice from the Teachers' Council
+      of Thailand
+    </label>
+  </div>
 
-                <ng-container *ngIf="selectedActivityType === 2">
-                  <ksp-activity-seminar
-                    formControlName="activityDetail"
-                  ></ksp-activity-seminar
-                ></ng-container>
-                <ng-container *ngIf="selectedActivityType === 3">
-                  <ksp-activity-academic-archivement
-                    formControlName="activityDetail"
-                  ></ksp-activity-academic-archivement
-                ></ng-container>
-                <ng-container *ngIf="selectedActivityType === 4">
-                  <ksp-activity-lecturer
-                    formControlName="activityDetail"
-                  ></ksp-activity-lecturer
-                ></ng-container>
-                <ng-container *ngIf="selectedActivityType === 5">
-                  <ksp-activity-write-book
-                    formControlName="activityDetail"
-                  ></ksp-activity-write-book
-                ></ng-container>
-                <ng-container *ngIf="selectedActivityType === 6">
-                  <ksp-activity-innovation
-                    formControlName="activityDetail"
-                  ></ksp-activity-innovation
-                ></ng-container>
-                <ng-container *ngIf="selectedActivityType === 7">
-                  <ksp-activity-research
-                    formControlName="activityDetail"
-                  ></ksp-activity-research
-                ></ng-container>
-                <ng-container *ngIf="selectedActivityType === 8">
-                  <ksp-activity-reward
-                    formControlName="activityDetail"
-                  ></ksp-activity-reward
-                ></ng-container>
-                <ng-container *ngIf="selectedActivityType === 9">
-                  <ksp-activity-lecture-register
-                    formControlName="activityDetail"
-                  ></ksp-activity-lecture-register
-                ></ng-container>
-                <ng-container *ngIf="selectedActivityType === 10">
-                  <ksp-activity-study-tour
-                    formControlName="activityDetail"
-                  ></ksp-activity-study-tour
-                ></ng-container>
-                <ng-container *ngIf="selectedActivityType === 11">
-                  <ksp-activity-learning-material
-                    formControlName="activityDetail"
-                  ></ksp-activity-learning-material
-                ></ng-container>
-              </ng-container> </ng-container
-          ></ng-container>
-        </div>
+  <ng-container *ngIf="activity2">
+    <div class="bg-light px-3 py-2 my-2">
+      <ksp-activity-diploma-receive
+        [isForeignForm]="true"
+        formControlName="activity2Form"
+        [mode]="mode"></ksp-activity-diploma-receive>
+    </div>
+  </ng-container>
 
-        <div class="d-flex justify-content-start">
-          <ksp-add-row-button class="text-primary" (addRowClick)="addForm()"
-            >Add Activity</ksp-add-row-button
-          >
-        </div>
-      </ng-container></ng-container
-    ></ng-container
-  >
+  <div class="d-flex mt-2">
+    <input type="checkbox" class="me-2 mt-1" formControlName="activity3" />
+    <label class="form-label">Having taken training course relevant to the performance of duty
+    </label>
+  </div>
+
+  <ng-container *ngIf="activity3">
+    <div class="bg-light px-3 py-2 my-2">
+      <ksp-activity-seminar
+        [isForeignForm]="true"
+        formControlName="activity3Form"
+        [mode]="mode"></ksp-activity-seminar>
+    </div>
+  </ng-container>
+
+  <div class="d-flex mt-2">
+    <input type="checkbox" class="me-2 mt-1" formControlName="activity4" />
+    <label class="form-label">Having obtained an academic standing promotion
+    </label>
+  </div>
+
+  <ng-container *ngIf="activity4">
+    <div class="bg-light px-3 py-2 my-2">
+      <ksp-activity-academic-archivement
+        [isForeignForm]="true"
+        formControlName="activity4Form"
+        [mode]="mode"></ksp-activity-academic-archivement>
+    </div>
+  </ng-container>
+
+  <div class="d-flex mt-2">
+    <input type="checkbox" class="me-2 mt-1" formControlName="activity5" />
+    <label class="form-label">Being a resource training person on a useful topics about learning
+      management or educational management
+    </label>
+  </div>
+
+  <ng-container *ngIf="activity5">
+    <div class="bg-light px-3 py-2 my-2">
+      <ksp-activity-lecturer
+        [isForeignForm]="true"
+        formControlName="activity5Form"
+        [mode]="mode"></ksp-activity-lecturer>
+    </div>
+  </ng-container>
+
+  <div class="d-flex mt-2">
+    <input type="checkbox" class="me-2 mt-1" formControlName="activity6" />
+    <label class="form-label">Writing the textbooks, articles or academic reports which are beneficial
+      to learning management or educational management
+    </label>
+  </div>
+
+  <ng-container *ngIf="activity6">
+    <div class="bg-light px-3 py-2 my-2">
+      <ksp-activity-write-book
+        [isForeignForm]="true"
+        formControlName="activity6Form"
+        [mode]="mode"></ksp-activity-write-book>
+    </div>
+  </ng-container>
+
+  <div class="d-flex mt-2">
+    <input type="checkbox" class="me-2 mt-1" formControlName="activity7" />
+    <label class="form-label">Creating innovation used in learning management or educational management
+    </label>
+  </div>
+
+  <ng-container *ngIf="activity7">
+    <div class="bg-light px-3 py-2 my-2">
+      <ksp-activity-innovation
+        [isForeignForm]="true"
+        formControlName="activity7Form"
+        [mode]="mode"></ksp-activity-innovation>
+    </div>
+  </ng-container>
+
+  <div class="d-flex mt-2">
+    <input type="checkbox" class="me-2 mt-1" formControlName="activity8" />
+    <label class="form-label">Doing research studies on useful issues for learning management or
+      educational management
+    </label>
+  </div>
+
+  <ng-container *ngIf="activity8">
+    <div class="bg-light px-3 py-2 my-2">
+      <ksp-activity-research
+        [isForeignForm]="true"
+        formControlName="activity8Form"
+        [mode]="mode"></ksp-activity-research>
+    </div>
+  </ng-container>
+
+  <div class="d-flex mt-2">
+    <input type="checkbox" class="me-2 mt-1" formControlName="activity9" />
+    <label class="form-label">Having been awarded by the Teachers' Council of Thailand or other
+      educational agency
+    </label>
+  </div>
+
+  <ng-container *ngIf="activity9">
+    <div class="bg-light px-3 py-2 my-2">
+      <ksp-activity-reward
+        [isForeignForm]="true"
+        formControlName="activity9Form"
+        [mode]="mode"></ksp-activity-reward>
+    </div>
+  </ng-container>
+
+  <div class="d-flex mt-2">
+    <input type="checkbox" class="me-2 mt-1" formControlName="activity10" />
+    <label class="form-label">Having attended the lecture, discussion, conference, workshop, seminar or
+      any meeting which the registration of attendance can be shown
+    </label>
+  </div>
+
+  <ng-container *ngIf="activity10">
+    <div class="bg-light px-3 py-2 my-2">
+      <ksp-activity-lecture-register
+        [isForeignForm]="true"
+        formControlName="activity10Form"
+        [mode]="mode"></ksp-activity-lecture-register>
+    </div>
+  </ng-container>
+
+  <div class="d-flex mt-2">
+    <input type="checkbox" class="me-2 mt-1" formControlName="activity11" />
+    <label class="form-label">Having completed a study tour or training course on the topics of the
+      professional practices
+    </label>
+  </div>
+
+  <ng-container *ngIf="activity11">
+    <div class="bg-light px-3 py-2 my-2">
+      <ksp-activity-study-tour
+        [isForeignForm]="true"
+        formControlName="activity11Form"
+        [mode]="mode"></ksp-activity-study-tour>
+    </div>
+  </ng-container>
+
+  <div class="d-flex mt-2">
+    <input type="checkbox" class="me-2 mt-1" formControlName="activity12" />
+    <label class="form-label">Completing academic works or other activities which are beneficial to
+      learning management or educational management
+    </label>
+  </div>
+
+  <ng-container *ngIf="activity12">
+    <div class="bg-light px-3 py-2 my-2">
+      <ksp-activity-learning-material
+        [isForeignForm]="true"
+        formControlName="activity12Form"
+        [mode]="mode"></ksp-activity-learning-material>
+    </div>
+  </ng-container>
 </form>

@@ -8,6 +8,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const routes: Routes = [
   {
@@ -24,7 +28,7 @@ const routes: Routes = [
         component: TestPerformanceListComponent,
       },
       {
-        path: 'detail',
+        path: 'detail/:id',
         component: TestPerformanceDetailComponent,
       },
     ],
@@ -39,7 +43,11 @@ const routes: Routes = [
     MatTableModule,
     BottomNavComponent,
     MatDialogModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
+    MatPaginatorModule,
+    MatSortModule,
+    MatProgressSpinnerModule,
   ],
   declarations: [TestPerformanceListComponent, TestPerformanceDetailComponent],
   exports: [TestPerformanceListComponent, TestPerformanceDetailComponent],

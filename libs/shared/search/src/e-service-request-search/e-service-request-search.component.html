@@ -3,14 +3,18 @@
     <div class="box-header">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
     <hr />
     <div class="bg-light p-3">
-      <ksp-basic-institute-search
-        formControlName="institution"
-        [searchType]="searchType"
-      ></ksp-basic-institute-search>
+      <ng-container *ngIf="isSchoolUser">
+        <ksp-basic-institute-search
+          [bureaus]="bureaus"
+          formControlName="schoolinfo"
+          [searchType]="searchType"
+          [universityType]="universityType"
+        ></ksp-basic-institute-search
+      ></ng-container>
 
       <div class="row mb-2">
         <div class="col">
-          <label class="form-label">เลขที่ใบคำขอ</label>
+          <label class="form-label">เลขที่แบบคำขอ</label>
           <input class="form-control" type="text" formControlName="requestno" />
         </div>
         <div class="col">
@@ -19,22 +23,111 @@
         </div>
       </div>
 
-      <div class="row mb-2">
-        <div class="col">
-          <label class="form-label">วันที่ยื่นใบคำขอ</label>
-          <input
-            class="form-control"
-            type="date"
-            formControlName="requestdatefrom"
-          />
+      <ng-container *ngIf="!isSchoolUser">
+        <div class="row mb-2">
+          <div class="col">
+            <label class="form-label">หมายเลขหนังสือเดินทาง</label>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="passportno"
+            />
+          </div>
+          <div class="col">
+            <label class="form-label">เลขคุรุสภาสำหรับชาวต่างชาติ</label>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="kurusapano"
+            />
+          </div>
         </div>
+
+        <div class="row mb-2">
+          <div class="col">
+            <label class="form-label">Visa Class</label>
+            <select formControlName="visaclass" class="form-select">
+              <option value="null" selected disabled hidden>กรุณาเลือก</option>
+              <option *ngFor="let v of visaClassList$ | async" [value]="v.id">
+                {{ v.name }}
+              </option>
+            </select>
+          </div>
+          <div class="col">
+            <label class="form-label">Type Visa</label>
+            <select formControlName="visatype" class="form-select">
+              <option value="null" selected hidden disabled>กรุณาเลือก</option>
+              <option *ngFor="let v of visaTypeList$ | async" [value]="v.id">
+                {{ v.nameTh }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </ng-container>
+
+      <div class="row mb-2">
+        <div class="col" *ngIf="isSchoolUser">
+          <label class="form-label">ประเภทแบบคำขอ</label>
+          <select class="form-select" formControlName="requesttype">
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
+            <option value="1">ขอยื่นผู้ประสานงาน</option>
+            <option value="2">ขอยื่นถอดถอนผู้ประสานงาน</option>
+          </select>
+        </div>
+
+        <div class="col" *ngIf="!isSchoolUser">
+          <label class="form-label">ประเทศ</label>
+          <select class="form-select" formControlName="country">
+            <option value="null" selected hidden disabled>กรุณาเลือก</option>
+            <option
+              *ngFor="let c of countries$ | async"
+              [value]="+c?.countryNo"
+            >
+              {{ c?.countryN }}
+            </option>
+          </select>
+        </div>
+
         <div class="col">
-          <label class="form-label">สถานะ</label>
+          <label class="form-label">สถานะแบบคำขอ</label>
           <select class="form-select" formControlName="requeststatus">
-            <option selected>กรุณาเลือก</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option selected hidden disabled value="null">กรุณาเลือก</option>
+            <option *ngFor="let s of statusList" [value]="s?.id">
+              {{ s?.ename }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-6">
+          <label class="form-label">วันที่ยื่นแบบคำขอ</label>
+          <div class="d-flex align-items-center">
+            <input
+              matInput
+              [matDatepicker]="picker"
+              autocomplete="off"
+              class="form-control form-date"
+              formControlName="requestdatefrom"
+              placeholder="วว/ดด/ปปปป"
+            />
+            <mat-datepicker-toggle
+              class="button-date"
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </div>
+        </div>
+        <div class="col" *ngIf="showProvince">
+          <label class="form-label">จังหวัด</label>
+          <select class="form-select" formControlName="province">
+            <option selected hidden disabled value="null">กรุณาเลือก</option>
+            <option
+              *ngFor="let province of provinces"
+              [value]="province?.province_id"
+            >
+              {{ province?.province_name }}
+            </option>
           </select>
         </div>
       </div>

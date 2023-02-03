@@ -3,10 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { UserInfoFormType } from '@ksp/shared/constant';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { AddressService } from '@ksp/shared/service';
-import {
-  createDefaultUserInfoForm,
-  providerFactory,
-} from '@ksp/shared/utility';
+import { createUserInfoForm, providerFactory } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -42,8 +39,20 @@ export class ThaiTeacherRewardComponent
     setTimeout(() => {
       if (value) {
         this.amphurs2$ = this.addressService.getAmphurs(value.province);
-        this.tumbols2$ = this.addressService.getTumbols(value.district);
+        this.tumbols2$ = this.addressService.getTumbols(value.amphur);
+        const { phone, fax, email, website } = value || {
+          phone: '',
+          fax: '',
+          email: '',
+          website: '',
+        };
         this.form.controls.workplace.patchValue(value);
+        this.form.patchValue({
+          phone,
+          fax,
+          email,
+          website,
+        });
       }
     }, 0);
   }
@@ -71,10 +80,11 @@ export class ThaiTeacherRewardComponent
     userInfo: [],
     addressInfo: [],
     workplace: [],
-    rewardTeacherInfo: [],
     eduInfo: [],
     hiringInfo: [],
-    teachingInfo: [],
+    rewardTeacherInfo: [],
+    rewardPunishmentInfo: [],
+
     phone: [],
     fax: [],
     email: [],
@@ -106,6 +116,23 @@ export class ThaiTeacherRewardComponent
     this.provinces2$ = this.provinces1$;
     this.provinces3$ = this.provinces1$;
     this.provinces4$ = this.provinces1$;
+  }
+
+  override set value(value: any) {
+    const { teachingInfo } = value;
+    if (teachingInfo) {
+      this.amphurs3$ = this.addressService.getAmphurs(teachingInfo.province);
+      this.tumbols3$ = this.addressService.getTumbols(teachingInfo.district);
+      this.amphurs4$ = this.addressService.getAmphurs(
+        teachingInfo.currentProvince
+      );
+      this.tumbols4$ = this.addressService.getTumbols(
+        teachingInfo.currentDistrict
+      );
+    }
+    this.form.patchValue(value);
+    this.onChange(value);
+    this.onTouched();
   }
 
   provinceChanged(addrType: number, evt: any) {

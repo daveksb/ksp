@@ -39,14 +39,28 @@ export class SeniorTeacherRewardComponent
     setTimeout(() => {
       if (value) {
         this.amphurs2$ = this.addressService.getAmphurs(value.province);
-        this.tumbols2$ = this.addressService.getTumbols(value.district);
+        this.tumbols2$ = this.addressService.getTumbols(value.amphur);
+        const { phone, fax, email, website } = value || {
+          phone: '',
+          fax: '',
+          email: '',
+          website: '',
+        };
         this.form.controls.workplace.patchValue(value);
+        this.form.patchValue({
+          phone,
+          fax,
+          email,
+          website,
+        });
       }
     }, 0);
   }
+
   @Input() prefixList: any[] = [];
   @Input() bureaus: any[] = [];
   @Input() rewardFiles!: any[];
+  @Input() moneyAssistanceFiles!: any[];
   @Input() uniqueTimestamp!: string;
 
   provinces1$!: Observable<any>;
@@ -60,9 +74,10 @@ export class SeniorTeacherRewardComponent
     userInfo: [],
     addressInfo: [],
     workplace: [],
-    rewardTeacherInfo: [],
+    // rewardTeacherInfo: [],
     rewardCareerInfo: [],
     rewardMoneySupportInfo: [],
+    rewardPunishmentInfo: [],
 
     phone: [],
     fax: [],

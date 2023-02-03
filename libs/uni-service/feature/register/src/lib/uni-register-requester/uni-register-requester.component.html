@@ -3,12 +3,11 @@
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 pt-1 pb-3">
     <div class="container-xl p-0 fs-4">
-      รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ (ผู้ประสานงาน / ผู้รับผิดชอบ)
+      รายละเอียดแบบคำขอรหัสเข้าใช้งานระบบ (ผู้ประสานงาน / ผู้รับผิดชอบ)
     </div>
     <div class="bg-white container-xl">
       <div class="py-2">
         <ksp-request-header-info
-          [requestDate]="requestDate"
           [requestNumber]="requestNo"
         ></ksp-request-header-info>
       </div>
@@ -34,11 +33,11 @@
           [uniType]="uniType$ | async"
           [prefixName]="prefixName$ | async"
           [occupyList]="occupyList$ | async"
+          [isSubmit]="submit"
         ></uni-form-register-requester>
 
         <div class="my-2">
           <ksp-bottom-nav
-            [disableNext]="form.invalid"
             [isFirstPage]="false"
             [disableNextMessage]="'กรุณากรอกข้อมูลให้ครบถ้วน'"
             [showCenterButtons]="false"

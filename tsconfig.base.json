@@ -19,17 +19,50 @@
       "@ksp/e-service/dialog/accusation-search": [
         "libs/e-service/dialog/accusation-search/src/index.ts"
       ],
+      "@ksp/e-service/dialog/school-user-detail": [
+        "libs/e-service/dialog/school-user-detail/src/index.ts"
+      ],
+      "@ksp/e-service/dialog/uni-user-detail": [
+        "libs/e-service/dialog/uni-user-detail/src/index.ts"
+      ],
+      "@ksp/e-service/e-license/approve-ksp-request": [
+        "libs/e-service/e-license/approve-ksp-request/src/index.ts"
+      ],
+      "@ksp/e-service/e-license/certificate-knowledge": [
+        "libs/e-service/e-license/certificate-knowledge/src/index.ts"
+      ],
+      "@ksp/e-service/e-license/create-license-id": [
+        "libs/e-service/e-license/create-license-id/src/index.ts"
+      ],
       "@ksp/e-service/e-license/document-delivery": [
         "libs/e-service/e-license/document-delivery/src/index.ts"
+      ],
+      "@ksp/e-service/e-license/edit-license": [
+        "libs/e-service/e-license/edit-license/src/index.ts"
       ],
       "@ksp/e-service/e-license/foreign-license": [
         "libs/e-service/e-license/foreign-license/src/index.ts"
       ],
+      "@ksp/e-service/e-license/knowledge-cert": [
+        "libs/e-service/e-license/knowledge-cert/src/index.ts"
+      ],
       "@ksp/e-service/e-license/license-approve": [
         "libs/e-service/e-license/license-approve/src/index.ts"
       ],
+      "@ksp/e-service/e-license/license-editing": [
+        "libs/e-service/e-license/license-editing/src/index.ts"
+      ],
+      "@ksp/e-service/e-license/qualification-approve": [
+        "libs/e-service/e-license/qualification-approve/src/index.ts"
+      ],
+      "@ksp/e-service/e-license/renew-foreign-license": [
+        "libs/e-service/e-license/renew-foreign-license/src/index.ts"
+      ],
       "@ksp/e-service/e-license/renew-license": [
         "libs/e-service/e-license/renew-license/src/index.ts"
+      ],
+      "@ksp/e-service/e-license/request-foreign-license": [
+        "libs/e-service/e-license/request-foreign-license/src/index.ts"
       ],
       "@ksp/e-service/e-license/request-license": [
         "libs/e-service/e-license/request-license/src/index.ts"
@@ -40,12 +73,19 @@
       "@ksp/e-service/e-license/self-user": [
         "libs/e-service/e-license/self-user/src/index.ts"
       ],
+      "@ksp/e-service/e-license/substitute-license": [
+        "libs/e-service/e-license/substitute-license/src/index.ts"
+      ],
+      "@ksp/e-service/e-license/substitute-license-approve": [
+        "libs/e-service/e-license/substitute-license-approve/src/index.ts"
+      ],
       "@ksp/e-service/e-license/temp-license": [
         "libs/e-service/e-license/temp-license/src/index.ts"
       ],
       "@ksp/e-service/ethics/accusation": [
         "libs/e-service/ethics/accusation/src/index.ts"
       ],
+      "@ksp/e-service/ethics/form": ["libs/e-service/ethics/form/src/index.ts"],
       "@ksp/e-service/ethics/inquiry": [
         "libs/e-service/ethics/inquiry/src/index.ts"
       ],
@@ -64,30 +104,72 @@
       "@ksp/e-service/feature/login": [
         "libs/e-service/feature/login/src/index.ts"
       ],
+      "@ksp/e-service/fee-refund": ["libs/e-service/fee-refund/src/index.ts"],
+      "@ksp/e-service/fee/import-save-fee": [
+        "libs/e-service/fee/import-save-fee/src/index.ts"
+      ],
+      "@ksp/e-service/fee/payment-fee": [
+        "libs/e-service/fee/payment-fee/src/index.ts"
+      ],
       "@ksp/e-service/fee/refund-fee": [
         "libs/e-service/fee/refund-fee/src/index.ts"
       ],
-      "@ksp/e-service/form": ["libs/e-service/form/src/index.ts"],
+      "@ksp/e-service/professional/best-teacher-reward": [
+        "libs/e-service/professional/best-teacher-reward/src/index.ts"
+      ],
+      "@ksp/e-service/professional/enable-reward-request": [
+        "libs/e-service/professional/enable-reward-request/src/index.ts"
+      ],
       "@ksp/e-service/professional/one-school-one-innovation": [
         "libs/e-service/professional/one-school-one-innovation/src/index.ts"
+      ],
+      "@ksp/e-service/professional/praise-teacher-reward": [
+        "libs/e-service/professional/praise-teacher-reward/src/index.ts"
       ],
       "@ksp/e-service/professional/professional": [
         "libs/e-service/professional/professional/src/index.ts"
       ],
+      "@ksp/e-service/professional/research-reward": [
+        "libs/e-service/professional/research-reward/src/index.ts"
+      ],
+      "@ksp/e-service/professional/senior-teacher-reward": [
+        "libs/e-service/professional/senior-teacher-reward/src/index.ts"
+      ],
+      "@ksp/e-service/professional/teacher-council-reward": [
+        "libs/e-service/professional/teacher-council-reward/src/index.ts"
+      ],
+      "@ksp/e-service/professional/thai-teacher-reward": [
+        "libs/e-service/professional/thai-teacher-reward/src/index.ts"
+      ],
+      "@ksp/e-service/standard/compare-knowledge": [
+        "libs/e-service/standard/compare-knowledge/src/index.ts"
+      ],
       "@ksp/e-service/standard/degree-cert": [
         "libs/e-service/standard/degree-cert/src/index.ts"
+      ],
+      "@ksp/e-service/standard/knowledge-cert": [
+        "libs/e-service/standard/knowledge-cert/src/index.ts"
       ],
       "@ksp/e-service/standard/performance-result": [
         "libs/e-service/standard/performance-result/src/index.ts"
       ],
+      "@ksp/e-service/standard/qualification-approve": [
+        "libs/e-service/standard/qualification-approve/src/index.ts"
+      ],
       "@ksp/e-service/standard/test-result": [
         "libs/e-service/standard/test-result/src/index.ts"
+      ],
+      "@ksp/e-service/standard/user-management": [
+        "libs/e-service/standard/user-management/src/index.ts"
       ],
       "@ksp/e-service/ui/accusation-info": [
         "libs/e-service/ui/accusation-info/src/index.ts"
       ],
       "@ksp/e-service/ui/license-check": [
         "libs/e-service/ui/license-check/src/index.ts"
+      ],
+      "@ksp/e-service/ui/reward-reject-form": [
+        "libs/e-service/ui/reward-reject-form/src/index.ts"
       ],
       "@ksp/e-service/ui/verify-result-box": [
         "libs/e-service/ui/verify-result-box/src/index.ts"
@@ -113,6 +195,9 @@
       "@ksp/school-service/feature/register": [
         "libs/school-service/feature/register/src/index.ts"
       ],
+      "@ksp/school-service/feature/report": [
+        "libs/school-service/feature/report/src/index.ts"
+      ],
       "@ksp/school-service/feature/request": [
         "libs/school-service/feature/request/src/index.ts"
       ],
@@ -122,8 +207,14 @@
       "@ksp/school-service/feature/retired": [
         "libs/school-service/feature/retired/src/index.ts"
       ],
+      "@ksp/school-service/feature/school-info": [
+        "libs/school-service/feature/school-info/src/index.ts"
+      ],
       "@ksp/school-service/feature/staff-management": [
         "libs/school-service/feature/staff-management/src/index.ts"
+      ],
+      "@ksp/school-service/feature/temp-license-register": [
+        "libs/school-service/feature/temp-license-register/src/index.ts"
       ],
       "@ksp/school-service/form/activity": [
         "libs/school-service/form/activity/src/index.ts"
@@ -227,6 +318,7 @@
       "@ksp/shared/interceptor": ["libs/shared/interceptor/src/index.ts"],
       "@ksp/shared/interface": ["libs/shared/interface/src/index.ts"],
       "@ksp/shared/menu": ["libs/shared/menu/src/index.ts"],
+      "@ksp/shared/pipe": ["libs/shared/pipe/src/index.ts"],
       "@ksp/shared/search": ["libs/shared/search/src/index.ts"],
       "@ksp/shared/service": ["libs/shared/service/src/index.ts"],
       "@ksp/shared/ui": ["libs/shared/ui/src/index.ts"],

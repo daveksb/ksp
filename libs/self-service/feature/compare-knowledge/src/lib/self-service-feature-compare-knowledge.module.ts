@@ -15,6 +15,7 @@ import {
 import { MatTabsModule } from '@angular/material/tabs';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export const routes: Routes = [
   {
@@ -23,6 +24,10 @@ export const routes: Routes = [
     children: [
       {
         path: 'request',
+        component: CompareKnowledgeRequestComponent,
+      },
+      {
+        path: 'request/:id',
         component: CompareKnowledgeRequestComponent,
       },
     ],
@@ -41,6 +46,7 @@ export const routes: Routes = [
     SharedFormOthersModule,
     SelfServiceFormModule,
     RequestStatusComponent,
+    MatProgressSpinnerModule,
   ],
   declarations: [CompareKnowledgeRequestComponent],
   exports: [CompareKnowledgeRequestComponent],

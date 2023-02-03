@@ -8,6 +8,10 @@ import { BottomNavComponent, TopNavComponent } from '@ksp/shared/menu';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const routes: Routes = [
   {
@@ -39,7 +43,12 @@ const routes: Routes = [
     MatCheckboxModule,
     BottomNavComponent,
     MatDialogModule,
+    MatPaginatorModule,
+    ReactiveFormsModule,
+    FormsModule,
+    ThaiDatePipe,
     RouterModule.forChild(routes),
+    MatProgressSpinnerModule,
   ],
   declarations: [TestDataListComponent, TestDataDetailComponent],
   exports: [TestDataListComponent, TestDataDetailComponent],

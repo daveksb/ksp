@@ -29,6 +29,8 @@ import { TopNavComponent } from '@ksp/shared/menu';
 import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 import { DegreeSearchComponent } from '@ksp/shared/search';
 import { DropdownModule } from 'primeng/dropdown';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   imports: [
@@ -56,6 +58,8 @@ import { DropdownModule } from 'primeng/dropdown';
     AddRowButtonComponent,
     DropdownModule,
     FormAddressTableComponent,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
   ],
   declarations: [
     DegreeListComponent,

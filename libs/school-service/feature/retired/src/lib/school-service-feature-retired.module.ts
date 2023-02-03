@@ -11,6 +11,8 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { UniServiceFormModule } from '@ksp/uni-service/form';
 import { FormCoordinatorInfoComponent } from '@ksp/shared/form/school/register';
+import { UniversitySelectComponent } from '@ksp/shared/form/university-select';
+import { RequestNoPipe } from '@ksp/shared/pipe';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -31,16 +33,18 @@ const routes: Routes = [
     UniServiceFormModule,
     RouterModule.forChild(routes),
     FormCoordinatorInfoComponent,
+    UniversitySelectComponent,
+    RequestNoPipe,
   ],
   declarations: [
     SchoolRetiredSearchComponent,
     SchoolRetiredRequesterComponent,
     SchoolRetiredCoordinatorComponent,
   ],
-  exports: [
+  /* exports: [
     SchoolRetiredSearchComponent,
     SchoolRetiredRequesterComponent,
     SchoolRetiredCoordinatorComponent,
-  ],
+  ], */
 })
 export class SchoolServiceFeatureRetiredModule {}

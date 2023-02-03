@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -11,7 +11,7 @@ import { providerFactory } from '@ksp/shared/utility';
 })
 export class RenewLicensePropertySixComponent extends KspFormBaseComponent {
   override form = this.fb.group({
-    degree: [],
+    degree: [null, Validators.required],
   });
 
   constructor(private fb: FormBuilder) {

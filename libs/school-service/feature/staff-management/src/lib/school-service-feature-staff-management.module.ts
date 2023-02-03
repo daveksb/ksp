@@ -8,7 +8,6 @@ import { LicenseSearchComponent } from './license-search/license-search.componen
 import { AddStaffComponent } from './add-staff/add-staff.component';
 import { AddStaffTeachingInfoComponent } from './add-staff-teaching-info/add-staff-teaching-info.component';
 import { MatTabsModule } from '@angular/material/tabs';
-import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { BottomNavComponent } from '@ksp/shared/menu';
 import { SchoolServiceUiStaffSearchModule } from '@ksp/school-service/ui/staff-search';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -24,6 +23,11 @@ import { TopNavComponent } from '@ksp/shared/menu';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { SharedFormOthersModule } from '@ksp/shared/form/others';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export const routes: Routes = [
   {
@@ -34,6 +38,9 @@ export const routes: Routes = [
       { path: 'list', component: StaffListComponent },
       { path: 'license-search', component: LicenseSearchComponent },
       { path: 'add-staff', component: AddStaffComponent },
+      { path: 'add-staff-thai/:idcardno', component: AddStaffComponent },
+      { path: 'add-staff-foreign/:kuruspano', component: AddStaffComponent },
+      { path: 'add-staff-has-license', component: AddStaffComponent },
       { path: 'edit-staff/:id', component: AddStaffComponent },
       { path: 'view-staff/:id', component: AddStaffComponent },
       {
@@ -63,6 +70,11 @@ export const routes: Routes = [
     LicenseTypeButtonGroupComponent,
     LicenseInfoComponent,
     MatPaginatorModule,
+    MatSortModule,
+    ThaiDatePipe,
+    MatDatepickerModule,
+    MatProgressSpinnerModule,
+    MatProgressSpinnerModule,
   ],
   declarations: [
     StaffListComponent,

@@ -1,24 +1,37 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import {
+  KspFormBaseComponent,
+  Province,
+  SchRequestProcess,
+  SchRequestSearchFilter,
+  SchRequestStatus,
+} from '@ksp/shared/interface';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { providerFactory } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import {
-  EduOccupyList,
-  RequestProcess,
-  RequestProcessList,
-  RequestStatus,
+  qualificationCareerTypeList,
+  SchoolRequestProcess,
   SchoolRequestType,
 } from '@ksp/shared/constant';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @UntilDestroy()
 @Component({
   selector: 'ksp-school-request-search',
   standalone: true,
-  imports: [CommonModule, MatIconModule, ReactiveFormsModule, MatTooltipModule],
+  imports: [
+    CommonModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    MatTooltipModule,
+    MatDatepickerModule,
+    MatInputModule,
+  ],
   templateUrl: './request-search.component.html',
   styleUrls: ['./request-search.component.scss'],
   providers: providerFactory(RequestSearchComponent),
@@ -28,32 +41,47 @@ export class RequestSearchComponent
   implements OnInit
 {
   override form = this.fb.group({
-    requesttype: ['3', Validators.required],
-    requestno: [null],
-    subtype: [null],
-    firstnameth: [''],
+    requesttype: ['', Validators.required],
+    requestno: [''],
+    careertype: [],
+    name: [''],
     idcardno: [''],
-    passportno: [null],
-    currentprocess: [null],
-    requeststatus: [null],
-    requestdatefrom: [null],
-    requestdateto: [null],
+    passportno: [''],
+    provinceid: [null],
+    process: [''],
+    status: [''],
+    requestdatefrom: [''],
+    requestdateto: [''],
+    schoolid: [''],
+    offset: [''],
+    row: [''],
   });
 
   @Output() clear = new EventEmitter<boolean>(false);
-  @Output() search = new EventEmitter<any>();
+  @Output() search = new EventEmitter<Partial<SchRequestSearchFilter>>();
   @Input() disableRequestType = false;
+  @Input() isNotRequest = false;
+  @Input() showProvince = false;
   @Input() requestTypeList = SchoolRequestType;
-  //@Input() processTypeList: RequestProcess[] = [];
+  @Input() careerTypeList: any[] = [];
+  @Input() provinces: Province[] | null = [];
 
-  eduOccupyList = EduOccupyList;
-  processList: RequestProcess[] = [];
-  statusList?: RequestStatus[] = [];
+  careerList!: any[];
+  processList: SchRequestProcess[] = [];
+  statusList?: SchRequestStatus[] = [];
 
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
       this.form?.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
+        if (value.requesttype === '6') {
+          this.careerList = qualificationCareerTypeList;
+        }
+        if (value.requesttype === '4') {
+          this.careerList = this.careerTypeList.filter((i) => i.id === 5);
+        } else {
+          this.careerList = this.careerTypeList;
+        }
         this.onChange(value);
         this.onTouched();
       })
@@ -62,27 +90,25 @@ export class RequestSearchComponent
     this.form.controls.requesttype.valueChanges
       .pipe(untilDestroyed(this))
       .subscribe((requestType) => {
-        // update subtype list
-        if (requestType !== '3') {
-          this.form.controls.subtype.disable();
+        // update career_type list
+        if (requestType === '3' || requestType === '6') {
+          this.form.controls.careertype.enable();
         } else {
-          this.form.controls.subtype.enable();
+          this.form.controls.careertype.disable();
         }
 
         // update process list
-        this.processList = RequestProcessList.filter((i) => {
+        this.processList = SchoolRequestProcess.filter((i) => {
           return `${i.requestType}` === requestType;
         });
       });
 
-    this.form.controls.currentprocess.valueChanges.subscribe(
-      (currentProcess) => {
-        this.statusList = this.processList.find(
-          (p) => `${p.processId}` === currentProcess
-        )?.status;
-        //console.log('status list = ', this.statusList);
-      }
-    );
+    this.form.controls.process.valueChanges.subscribe((currentProcess) => {
+      this.statusList = this.processList.find(
+        (p) => `${p.processId}` === currentProcess
+      )?.status;
+      //console.log('status list = ', this.statusList);
+    });
   }
 
   ngOnInit(): void {

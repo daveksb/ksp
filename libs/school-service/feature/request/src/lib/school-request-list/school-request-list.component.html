@@ -1,0 +1,292 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
+<ksp-top-nav>
+  <span header>หน้าแรก</span>
+</ksp-top-nav>
+
+<form [formGroup]="form">
+  <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height full-width-2">
+    <ng-container *ngFor="let req of rejectedRequests; let i = index">
+      <div *ngIf="i === 0">
+        <ksp-uni-form-badge [mainTitle]="genAlertMessage(req)"
+          ><button
+            class="btn btn-link text-primary p-0 w-auto ms-1"
+            type="button"
+            (click)="viewRequest(req.requesttype, req.careertype, req.id)"
+          >
+            กดเพื่อตรวจสอบ
+          </button>
+          <div
+            class="d-flex align-items-center"
+            button
+            *ngIf="rejectedRequests.length > 1"
+          >
+            <span
+              class="text-secondary ms-1"
+              role="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseExample"
+              aria-expanded="false"
+              aria-controls="collapseExample"
+            >
+              <i
+                (click)="viewMoreClicked = !viewMoreClicked"
+                [ngClass]="{
+                  'bi bi-chevron-up': viewMoreClicked,
+                  'bi bi-chevron-down': !viewMoreClicked
+                }"
+                [matTooltip]="viewMoreClicked ? 'ดูน้อยลง' : 'ดูเพิ่มเติม'"
+              ></i>
+            </span></div
+        ></ksp-uni-form-badge>
+      </div>
+      <div class="mt-1 collapse" id="collapseExample" *ngIf="i > 0">
+        <ksp-uni-form-badge [mainTitle]="genAlertMessage(req)"
+          ><button
+            class="btn btn-link text-primary p-0 w-auto ms-1"
+            type="button"
+            (click)="viewRequest(req.requesttype, req.careertype, req.id)"
+          >
+            กดเพื่อตรวจสอบ
+          </button>
+        </ksp-uni-form-badge>
+      </div>
+    </ng-container>
+
+    <div class="box-header">
+      รายการแบบคำขอที่ยื่นผ่านระบบบริการหน่วยงานทางการศึกษา
+    </div>
+    <div class="bg-white px-3 py-3">
+      <ksp-school-request-search
+        formControlName="licenseSearch"
+        (clear)="clear()"
+        (search)="search($event)"
+        [requestTypeList]="requestTypeList"
+        [careerTypeList]="careerTypeList"
+      ></ksp-school-request-search>
+
+      <hr />
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="box-header text-primary">รายการยื่นแบบคำขอ</div>
+
+        <button
+          class="btn btn-primary"
+          mat-button
+          [matMenuTriggerFor]="beforeMenu"
+        >
+          ยื่นแบบคำขอ
+        </button>
+        <mat-menu #beforeMenu="matMenu" xPosition="before">
+          <button mat-menu-item (click)="goToRequestPage(1)">
+            ขออนุญาตประกอบวิชาชีพโดยไม่มีหนังสืออนุญาตประกอบวิชาชีพ (ชาวไทย)
+          </button>
+          <button mat-menu-item (click)="goToRequestPage(2)">
+            ขออนุญาตประกอบวิชาชีพโดยไม่มีหนังสืออนุญาตประกอบวิชาชีพ
+            (ผู้บริหารสถานศึกษา)
+          </button>
+          <button mat-menu-item (click)="goToRequestPage(5)">
+            ขออนุญาตประกอบวิชาชีพโดยไม่มีหนังสืออนุญาตประกอบวิชาชีพ
+            (ชาวต่างชาติ)
+          </button>
+          <button mat-menu-item (click)="foreignPage()">
+            ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ
+          </button>
+          <button mat-menu-item [matMenuTriggerFor]="qualificationChoices">
+            ขอหนังสือรับรองคุณวุฒิ
+          </button>
+          <button mat-menu-item (click)="rewardPage()">
+            ขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม (One School One Innovation :
+            OSOI)
+          </button>
+        </mat-menu>
+
+        <mat-menu #qualificationChoices="matMenu">
+          <button (click)="qualificationPage(null, 1)" mat-menu-item>
+            ครู
+          </button>
+          <button (click)="qualificationPage(null, 2)" mat-menu-item>
+            ผู้บริหารสถานศึกษา
+          </button>
+          <button (click)="qualificationPage(null, 3)" mat-menu-item>
+            ผู้บริหารการศึกษา
+          </button>
+          <button (click)="qualificationPage(null, 4)" mat-menu-item>
+            ศึกษานิเทศก์
+          </button>
+        </mat-menu>
+      </div>
+
+      <div class="table__scroll">
+        <table
+          class="mt-2"
+          [hidden]="!dataSource.data.length"
+          matSort
+          mat-table
+          [dataSource]="dataSource"
+        >
+          <ng-container matColumnDef="order">
+            <th mat-header-cell *matHeaderCellDef class="text-center">ลำดับ</th>
+            <td
+              class="text-center"
+              mat-cell
+              *matCellDef="let element; let i = index"
+            >
+              {{
+                paginator.pageIndex === 0
+                  ? i + 1
+                  : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+              }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="requestno">
+            <th mat-header-cell *matHeaderCellDef>เลขที่แบบคำขอ</th>
+            <td
+              class="text-primary list-link"
+              (click)="
+                viewRequest(element.requesttype, element.careertype, element.id)
+              "
+              mat-cell
+              *matCellDef="let element"
+            >
+              {{ element.requestno | reqNoFormat }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="idcardno">
+            <th mat-header-cell *matHeaderCellDef>
+              หมายเลขบัตรประชาชน/เลขคุรุสภาสำหรับชาวต่างชาติ
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.idcardno || element.kuruspano }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.firstnameth }} {{ element.lastnameth }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="requesttype">
+            <th mat-header-cell *matHeaderCellDef>ประเภทแบบคำขอ</th>
+            <td mat-cell *matCellDef="let element">
+              {{ checkRequestType(+element.requesttype) }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="careertype">
+            <th mat-header-cell *matHeaderCellDef>ประเภทวิชาชีพ</th>
+            <td mat-cell *matCellDef="let element">
+              {{ SchoolRequestSubType[+element.careertype] }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="process">
+            <th mat-header-cell *matHeaderCellDef>ขั้นตอนการดำเนินการ</th>
+            <td mat-cell *matCellDef="let element">
+              {{
+                checkProcess(+element.process, +element.requesttype)
+                  ?.processName
+              }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef class="text-center">สถานะ</th>
+            <td mat-cell *matCellDef="let element">
+              <span
+                class="rounded-pill border w-full d-flex justify-content-center px-1"
+                style="min-width: 140px"
+                [ngClass]="
+                  getStatusColor(
+                    +element.status,
+                    +element.process,
+                    +element.requesttype
+                  )
+                "
+              >
+                {{
+                  checkStatus(
+                    +element.process,
+                    +element.status,
+                    +element.requesttype
+                  )?.sname
+                }}
+              </span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="updatedate">
+            <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.processupdatedate | thaiDate }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="requestdate">
+            <th mat-header-cell *matHeaderCellDef>วันที่ยื่นแบบคำขอ</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.requestdate | thaiDate }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="requestpdf">
+            <th mat-header-cell *matHeaderCellDef class="text-center">
+              แบบคำขอ
+            </th>
+            <td mat-cell *matCellDef="let element" class="text-center">
+              <i
+                *ngIf="element.requesttype !== '4'"
+                (click)="requestPdf(element)"
+                role="button"
+                class="bi bi-file-earmark-text text-primary fs-5"
+              ></i>
+              <div *ngIf="!reqTypeStatus" class="form-label">-</div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="licensepdf">
+            <th mat-header-cell *matHeaderCellDef class="text-center">
+              {{ getColumnLabel() }}
+            </th>
+            <td mat-cell *matCellDef="let element" class="text-center">
+              <i
+                *ngIf="isLicenseApproved(element)"
+                (click)="getTempLicense(element)"
+                role="button"
+                class="bi bi-file-earmark-text text-primary fs-5"
+              ></i>
+              <div *ngIf="!reqTypeStatus" class="form-label">-</div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+        <table>
+          <tr *ngIf="searchNotFound">
+            <td
+              class="text-center fs-5"
+              [attr.colspan]="displayedColumns.length"
+            >
+              ไม่พบข้อมูล
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <mat-paginator
+        [hidden]="!dataSource.data.length"
+        [length]="dataSource.data.length"
+        [pageSize]="25"
+        [showFirstLastButtons]="true"
+      >
+      </mat-paginator>
+    </div>
+  </div>
+</form>

@@ -1,7 +1,12 @@
-import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { FormArray, FormBuilder } from '@angular/forms';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { UniversitySearchComponent } from '@ksp/shared/search';
+import { GeneralInfoService } from '@ksp/shared/service';
 
 @Component({
   selector: 'uni-service-training-address',
@@ -10,40 +15,94 @@ import { UniversitySearchComponent } from '@ksp/shared/search';
 })
 export class TrainingAddressComponent {
   teachingAddressForm = this.fb.group({
-    addressCode: [],
-    addressName: [],
+    schoolid: [],
+    schoolname: [],
+    bureauid: [],
+    bureauname: []
   });
 
   form = this.fb.group({
-    addresses: this.fb.array([this.teachingAddressForm]),
+    addresses: this.fb.array([]),
   });
 
-  constructor(public dialog: MatDialog, private fb: FormBuilder) {}
+  constructor(
+    public dialog: MatDialog,
+    private fb: FormBuilder,
+    public dialogRef: MatDialogRef<TrainingAddressComponent>,
+    private generalInfoService: GeneralInfoService,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+    console.log(this.data);
+    if (this.data.teachingpracticeschool.length) {
+      this.setData(this.data.teachingpracticeschool);
+    } else {
+      this.addresses.push(this.teachingAddressForm);
+    }
+    if (this.data.disableAll) {
+      console.log('true')
+      this.addresses.controls
+      .forEach(control => {
+        control.disable();
+      })
+    }
+  }
 
-  searchAddress() {
-    this.dialog.open(UniversitySearchComponent, {
-      height: '900px',
-      width: '1200px',
+  setData(data: any) {
+    data.forEach((address: any) => {
+      const teachingAddressForm = this.fb.group({
+        schoolid: address.schoolid,
+        schoolname: address.schoolname,
+        bureauid: address.bureauid,
+        bureauname: address.bureauname
+      });
+      this.addresses.push(teachingAddressForm);
+    });
+  }
+
+  searchAddress(index: any) {
+    const dialogRef = this.dialog.open(UniversitySearchComponent, {
+      height: '100vh',
+      width: '75vw',
+      position: {
+        top: '0px',
+        right: '0px',
+      },
       data: {
         subHeader: 'กรุณาเลือกหน่วยงาน / สถานศึกษา',
-        searchType: 'uni',
+        searchType: 'school'
       },
+    });
+    dialogRef.afterClosed().subscribe((response: any) => {
+      if (response) {
+        this.form.controls.addresses.at(index).patchValue({
+          schoolid: response.schoolid,
+          schoolname: response.schoolname,
+          bureauid: response.bureauid,
+          bureauname: response.bureauname
+        });
+      }
     });
   }
 
   addAddress() {
     const teachingAddressForm = this.fb.group({
-      addressCode: [],
-      addressName: [],
+      schoolid: [],
+      schoolname: [],
+      bureauid: [],
+      bureauname: []
     });
     this.addresses.push(teachingAddressForm);
   }
 
   get addresses() {
-    return this.form.controls.addresses;
+    return this.form.controls.addresses as FormArray;
   }
 
   deleteAddress(index: number) {
     this.addresses.removeAt(index);
+  }
+
+  save() {
+    this.dialogRef.close(this.form.controls.addresses.value);
   }
 }

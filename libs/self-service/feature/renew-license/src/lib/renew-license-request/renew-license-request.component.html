@@ -1,25 +1,39 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav [isSelfService]="true"
-  ><span header>ใบคำขอต่ออายุใบประกอบวิชาชีพ</span></ksp-top-nav
+  ><span header>ยื่นแบบคำขอ</span
+  ><span subHeader>ขอต่ออายุใบประกอบวิชาชีพ (ครู)</span></ksp-top-nav
 >
 
 <div class="main__container px-4 py-2">
   <self-service-request-status
-    [idcardNo]="(myInfo$ | async)?.idcardno || null"
+    [requestDate]="requestDate"
+    [licenseNo]="myLicense.licenseno"
+    [licenseStartDate]="myLicense.licensestartdate"
+    [licenseEndDate]="myLicense.licenseenddate"
+    [idcardNo]="(myInfo$ | async)?.idcardno || ''"
+    [requestNo]="requestNo"
   ></self-service-request-status>
 
   <form [formGroup]="form">
-    <div class="row mx-0 border shadow rounded-4 px-2 py-4 bg-white my-4">
-      <div class="col-lg-2">
-        <self-service-form-upload-image></self-service-form-upload-image>
+    <div class="row mx-0 border shadow-sm rounded-4 px-2 py-4 bg-white my-4">
+      <div class="col-lg-3 my-auto">
+        <self-service-form-upload-image
+          [imgSrc]="myImage"
+          [uniqueTimestamp]="uniqueTimestamp"
+          (uploadImageComplete)="uploadImageComplete($event)"
+        ></self-service-form-upload-image>
       </div>
-      <div class="col-md">
+      <div class="col-md mt-md-0 mt-2">
         <ksp-form-user-info
           formControlName="userInfo"
           [isDarkMode]="true"
           [prefixList]="prefixList$ | async"
-          [displayMode]="[userInfoType]"
           [nationList]="nationalitys$ | async"
-          [isSchoolService]="false"
+          [isSelfService]="true"
         >
         </ksp-form-user-info>
       </div>
@@ -46,20 +60,31 @@
         <ksp-form-address
           formControlName="address2"
           [isDarkMode]="true"
-          [provinces]="provinces2$ | async"
+          [provinces]="provinces1$ | async"
           [amphurs]="amphurs2$ | async"
           [tumbols]="tumbols2$ | async"
           (provinceChanged)="provinceChanged(2, $event)"
           (amphurChanged)="amphurChanged(2, $event)"
         >
           <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
+          <div class="d-flex align-items-center">
+            <input
+              type="checkbox"
+              class="me-2"
+              (change)="useSameAddress($event)"
+            />
+            <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
+          </div>
         </ksp-form-address>
       </mat-tab>
 
       <mat-tab label="สถานที่ทำงาน">
         <self-service-form-user-workplace
           formControlName="workplace"
-          [provinces]="provinces3$ | async"
+          [showOnlineForm]="true"
+          [showNotRequire]="true"
+          [showContactForm]="true"
+          [provinces]="provinces1$ | async"
           [amphurs]="amphurs3$ | async"
           [tumbols]="tumbols3$ | async"
           [bureaus]="bureau$ | async"
@@ -67,44 +92,15 @@
           (amphurChanged)="amphurChanged(3, $event)"
         >
         </self-service-form-user-workplace>
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label class="form-label">โทรศัพท์</label>
-            <input
-              class="form-control"
-              type="text"
-              formControlName="workPhone"
-            />
-          </div>
-
-          <div class="col-md-6 mb-3">
-            <label class="form-label">โทรสาร</label>
-            <input class="form-control" type="text" formControlName="fax" />
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label class="form-label">อีเมล</label>
-            <input
-              class="form-control"
-              type="text"
-              formControlName="workEmail"
-            />
-          </div>
-
-          <div class="col-md-6 mb-3">
-            <label class="form-label">เว็บไซต์</label>
-            <input class="form-control" type="text" formControlName="website" />
-          </div>
-        </div>
       </mat-tab>
 
       <mat-tab label="ผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน">
         <self-service-standard-working
           formControlName="standardWorking"
-          [educationType]="'teacher'"
+          [educationType]="'ครู'"
           [uniqueTimestamp]="uniqueTimestamp"
           [workingInfo]="workingInfoFiles"
+          [workingInfo2]="workingInfoFiles2"
         ></self-service-standard-working>
       </mat-tab>
     </mat-tab-group>
@@ -116,16 +112,29 @@
   </div>
 
   <div class="d-flex justify-content-center my-3">
-    <button type="button" class="btn border-primary text-primary bg-white">
+    <button
+      *ngIf="requestId"
+      (click)="cancel()"
+      type="button"
+      class="ms-3 btn border-primary text-primary bg-white"
+    >
+      ยกเลิกแบบคำขอ
+    </button>
+    <button
+      (click)="onSave(1)"
+      [disabled]="!form.valid"
+      type="button"
+      class="ms-3 btn border-primary text-primary bg-white"
+    >
       บันทึกชั่วคราว
     </button>
-    <!-- <button
+    <button
+      (click)="onSave(2)"
       type="button"
       class="ms-3 btn btn-primary"
-      [disabled]="disableNextButton"
-      (click)="save()"
+      [disabled]="!form.valid"
     >
       บันทึกและยื่น
-    </button> -->
+    </button>
   </div>
 </div>

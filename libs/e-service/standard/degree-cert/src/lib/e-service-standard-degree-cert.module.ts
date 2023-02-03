@@ -16,7 +16,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatStepperModule } from '@angular/material/stepper';
 import { SharedFormDegreeCertStepOneModule } from '@ksp/shared/form/degree-cert/step-one';
 import { MatIconModule } from '@angular/material/icon';
-import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
+import {
+  DegreeCertStatusComponent,
+  RequestHeaderInfoComponent,
+} from '@ksp/shared/ui';
 import { SharedFormDegreeCertStepTwoModule } from '@ksp/shared/form/degree-cert/step-two';
 import { FinalResultComponent } from './final-result/final-result.component';
 import { TopNavComponent } from '@ksp/shared/menu';
@@ -25,10 +28,26 @@ import {
   LicenseCheckComponent,
 } from '@ksp/e-service/ui/license-check';
 import { ReactiveFormsModule } from '@angular/forms';
-import { DegreeCertSearchComponent } from '@ksp/shared/search';
+import {
+  DegreeCertApprovedSearchComponent,
+  DegreeCertSearchComponent,
+} from '@ksp/shared/search';
 import { RouterModule } from '@angular/router';
-import { FormMeetingRecordComponent } from '@ksp/e-service/form';
-
+import {
+  FormApproveMeetingRecordComponent,
+  FormMeetingRecordComponent,
+} from '@ksp/e-service/ethics/form';
+import { EServiceDegreeCertApprovedListComponent } from './list-approved/e-service-degree-cert-list-approved.component';
+import { ImportStudentComponent } from './import-student/import-student.component';
+import { CourseDetailComponent } from './course-detail/course-detail.component';
+import { TableModule } from 'primeng/table';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { FormAddressTableComponent } from '@ksp/shared/form/others';
+import { ConsiderStudentComponent } from './import-student/consider-student/consider-student.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { FollowUpComponent } from './follow-up/follow-up.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -45,6 +64,7 @@ import { FormMeetingRecordComponent } from '@ksp/e-service/form';
     MatStepperModule,
     MatTabsModule,
     MatIconModule,
+    TableModule,
     SharedFormDegreeCertStepTwoModule,
     RequestHeaderInfoComponent,
     TopNavComponent,
@@ -53,14 +73,27 @@ import { FormMeetingRecordComponent } from '@ksp/e-service/form';
     ReactiveFormsModule,
     FormMeetingRecordComponent,
     DegreeCertSearchComponent,
+    DegreeCertApprovedSearchComponent,
+    MatDatepickerModule,
+    FormAddressTableComponent,
+    MatPaginatorModule,
+    FormApproveMeetingRecordComponent,
+    DegreeCertStatusComponent,
+    MatProgressSpinnerModule,
+    ThaiDatePipe,
   ],
   declarations: [
     EServiceDegreeCertListComponent,
+    EServiceDegreeCertApprovedListComponent,
     VerifyComponent,
     ConsiderComponent,
     ApproveComponent,
     CheckComponent,
     FinalResultComponent,
+    ImportStudentComponent,
+    CourseDetailComponent,
+    ConsiderStudentComponent,
+    FollowUpComponent
   ],
 })
 export class EServiceStandardDegreeCertModule {}

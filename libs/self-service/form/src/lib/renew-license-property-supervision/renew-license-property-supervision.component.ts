@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ListData } from '@ksp/shared/interface';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
+import { skip } from 'rxjs';
 
 @Component({
   selector: 'self-service-renew-license-property-supervision',
@@ -16,11 +17,21 @@ export class RenewLicensePropertySupervisionComponent
 {
   standardKnowledges: ListData[] = [];
   selectedstandardKnowledgeType!: number;
+  @Input() uniqueTimestamp = '';
+  @Input() workingInfo: any[] = [];
 
   override form = this.fb.group({
-    standardKnowledgeType: [],
-    educationDetails: [],
+    standardKnowledgeType: [null, Validators.required],
+    educationDetails: [null, Validators.required],
   });
+
+  /* const WORKING_INFO_FILES = [
+  {
+    name: '1.รางวัลอื่นและประกาศเกียรติคุณ',
+    fileid: '',
+    filename: '',
+  },
+]; */
 
   constructor(private fb: FormBuilder) {
     super();
@@ -36,12 +47,21 @@ export class RenewLicensePropertySupervisionComponent
   ngOnInit(): void {
     this.standardKnowledges = standardKnowledges;
 
-    this.form.controls['standardKnowledgeType'].valueChanges.subscribe(
-      (res) => {
+    this.form.controls['standardKnowledgeType'].valueChanges
+      .pipe(skip(3))
+      .subscribe((res) => {
         this.selectedstandardKnowledgeType = Number(res);
         //this.form.controls.educationLevelForm.reset();
-      }
-    );
+      });
+  }
+
+  override set value(value: any) {
+    if (value.standardKnowledgeType) {
+      this.selectedstandardKnowledgeType = Number(value.standardKnowledgeType);
+    }
+    this.form.patchValue(value);
+    this.onChange(value);
+    this.onTouched();
   }
 }
 

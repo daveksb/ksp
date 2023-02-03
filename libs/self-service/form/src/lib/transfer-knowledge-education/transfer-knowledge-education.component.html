@@ -1,24 +1,25 @@
 <form [formGroup]="form">
-  <div class="d-flex justify-content-between">
-    <div class="fs-5">ปริญญาตรี</div>
-
-    <div class="text-primary fs-5" role="button">
-      <ksp-add-row-button
-        class="text-primary fs-6"
-        (addRowClick)="addFormArray(1)"
-      >
-        เพิ่ม
-      </ksp-add-row-button>
+  <div class="border rounded px-3 py-2 mb-3">
+    <div class="d-flex justify-content-between align-items-start">
+      <div class="fs-5 text-dark">ปริญญาตรี</div>
+      <div class="d-flex align-items-center">
+        <ksp-add-row-button
+          [class]="'text-primary'"
+          *ngIf="mode !== 'view'"
+          (addRowClick)="addFormArray(1)"
+        >
+          เพิ่ม
+        </ksp-add-row-button>
+      </div>
     </div>
-  </div>
 
-  <ng-container formArrayName="licenseInfo1">
-    <ng-container
-      *ngFor="let DegreeForm of licenseInfo1.controls; let i = index"
-    >
-      <ng-container [formGroupName]="i">
-        <div class="border rounded p-3 mb-3">
-          <div class="d-flex justify-content-end">
+    <ng-container formArrayName="licenseInfo1">
+      <ng-container
+        *ngFor="let DegreeForm of licenseInfo1.controls; let i = index"
+      >
+        <ng-container [formGroupName]="i">
+          <hr />
+          <div class="d-flex justify-content-end" *ngIf="mode === 'edit'">
             <i
               class="bi bi-x-circle-fill text-danger"
               role="button"
@@ -26,33 +27,37 @@
             ></i>
           </div>
           <ksp-activity-add-degree
+            [mode]="mode"
             formControlName="licenseForm"
             [countries]="countries"
           >
           </ksp-activity-add-degree>
-        </div>
+        </ng-container>
       </ng-container>
     </ng-container>
-  </ng-container>
-  <hr />
-
-  <div class="d-flex justify-content-between">
-    <div class="fs-5">ปริญญาโท</div>
-
-    <div class="text-primary fs-5" role="button">
-      <ksp-add-row-button class="text-primary" (addRowClick)="addFormArray(2)">
-        เพิ่ม
-      </ksp-add-row-button>
-    </div>
   </div>
 
-  <ng-container formArrayName="licenseInfo2">
-    <ng-container
-      *ngFor="let DegreeForm of licenseInfo2.controls; let i = index"
-    >
-      <ng-container [formGroupName]="i">
-        <div class="border rounded p-3 mb-3">
-          <div class="d-flex justify-content-end">
+  <div class="border rounded px-3 py-2 mb-3">
+    <div class="d-flex justify-content-between align-items-start">
+      <div class="fs-5 text-dark">ปริญญาโท</div>
+      <div class="d-flex align-items-center">
+        <ksp-add-row-button
+          [class]="'text-primary'"
+          *ngIf="mode !== 'view'"
+          (addRowClick)="addFormArray(2)"
+        >
+          เพิ่ม
+        </ksp-add-row-button>
+      </div>
+    </div>
+
+    <ng-container formArrayName="licenseInfo2">
+      <ng-container
+        *ngFor="let DegreeForm of licenseInfo2.controls; let i = index"
+      >
+        <ng-container [formGroupName]="i">
+          <hr />
+          <div class="d-flex justify-content-end" *ngIf="mode === 'edit'">
             <i
               class="bi bi-x-circle-fill text-danger"
               role="button"
@@ -60,33 +65,37 @@
             ></i>
           </div>
           <ksp-activity-add-degree
+            [mode]="mode"
             formControlName="licenseForm"
             [countries]="countries"
           >
           </ksp-activity-add-degree>
-        </div>
+        </ng-container>
       </ng-container>
     </ng-container>
-  </ng-container>
-  <hr />
-
-  <div class="d-flex justify-content-between">
-    <div class="fs-5">ปริญญาเอก</div>
-
-    <div class="text-primary fs-5" role="button">
-      <ksp-add-row-button class="text-primary" (addRowClick)="addFormArray(3)">
-        เพิ่ม
-      </ksp-add-row-button>
-    </div>
   </div>
 
-  <ng-container formArrayName="licenseInfo3">
-    <ng-container
-      *ngFor="let DegreeForm of licenseInfo3.controls; let i = index"
-    >
-      <ng-container [formGroupName]="i">
-        <div class="border rounded p-3 mb-3">
-          <div class="d-flex justify-content-end">
+  <div class="border rounded px-3 py-2 mb-3">
+    <div class="d-flex justify-content-between align-items-start">
+      <div class="fs-5 text-dark">ปริญญาเอก</div>
+      <div class="d-flex align-items-center">
+        <ksp-add-row-button
+          [class]="'text-primary'"
+          *ngIf="mode !== 'view'"
+          (addRowClick)="addFormArray(3)"
+        >
+          เพิ่ม
+        </ksp-add-row-button>
+      </div>
+    </div>
+
+    <ng-container formArrayName="licenseInfo3">
+      <ng-container
+        *ngFor="let DegreeForm of licenseInfo3.controls; let i = index"
+      >
+        <ng-container [formGroupName]="i">
+          <hr />
+          <div class="d-flex justify-content-end" *ngIf="mode === 'edit'">
             <i
               class="bi bi-x-circle-fill text-danger"
               role="button"
@@ -94,33 +103,37 @@
             ></i>
           </div>
           <ksp-activity-add-degree
+            [mode]="mode"
             formControlName="licenseForm"
             [countries]="countries"
           >
           </ksp-activity-add-degree>
-        </div>
+        </ng-container>
       </ng-container>
     </ng-container>
-  </ng-container>
-  <hr />
-
-  <div class="d-flex justify-content-between">
-    <div class="fs-5">ปริญญาอื่นๆ</div>
-
-    <div class="text-primary fs-5" role="button">
-      <ksp-add-row-button class="text-primary" (addRowClick)="addFormArray(4)">
-        เพิ่ม
-      </ksp-add-row-button>
-    </div>
   </div>
 
-  <ng-container formArrayName="licenseInfo4">
-    <ng-container
-      *ngFor="let DegreeForm of licenseInfo4.controls; let i = index"
-    >
-      <ng-container [formGroupName]="i">
-        <div class="border rounded p-3 mb-3">
-          <div class="d-flex justify-content-end">
+  <div class="border rounded px-3 py-2 mb-3">
+    <div class="d-flex justify-content-between align-items-start">
+      <div class="fs-5 text-dark">ปริญญาอื่นๆ</div>
+      <div class="d-flex align-items-center">
+        <ksp-add-row-button
+          [class]="'text-primary'"
+          *ngIf="mode !== 'view'"
+          (addRowClick)="addFormArray(4)"
+        >
+          เพิ่ม
+        </ksp-add-row-button>
+      </div>
+    </div>
+
+    <ng-container formArrayName="licenseInfo4">
+      <ng-container
+        *ngFor="let DegreeForm of licenseInfo4.controls; let i = index"
+      >
+        <ng-container [formGroupName]="i">
+          <hr />
+          <div class="d-flex justify-content-end" *ngIf="mode === 'edit'">
             <i
               class="bi bi-x-circle-fill text-danger"
               role="button"
@@ -128,33 +141,37 @@
             ></i>
           </div>
           <ksp-activity-add-degree
+            [mode]="mode"
             formControlName="licenseForm"
             [countries]="countries"
           >
           </ksp-activity-add-degree>
-        </div>
+        </ng-container>
       </ng-container>
     </ng-container>
-  </ng-container>
-  <hr />
-
-  <div class="d-flex justify-content-between">
-    <div class="fs-5">ใบรับรองฝึกอาชีพ</div>
-
-    <div class="text-primary fs-5" role="button">
-      <ksp-add-row-button class="text-primary" (addRowClick)="addFormArray(5)">
-        เพิ่ม
-      </ksp-add-row-button>
-    </div>
   </div>
+  <div class="border rounded px-3 py-2">
+    <div class="d-flex justify-content-between align-items-start">
+      <div class="fs-5 text-dark">ใบรับรองฝึกอาชีพ</div>
+      <div class="d-flex align-items-center">
+        <ksp-add-row-button
+          [class]="'text-primary'"
+          *ngIf="mode !== 'view'"
+          (addRowClick)="addFormArray(5)"
+        >
+          เพิ่ม
+        </ksp-add-row-button>
+      </div>
+    </div>
 
-  <ng-container formArrayName="licenseInfo5">
-    <ng-container
-      *ngFor="let DegreeForm of licenseInfo5.controls; let i = index"
-    >
-      <ng-container [formGroupName]="i">
-        <div class="border rounded p-3 mb-3">
-          <div class="d-flex justify-content-end">
+    <ng-container formArrayName="licenseInfo5">
+      <ng-container
+        *ngFor="let DegreeForm of licenseInfo5.controls; let i = index"
+      >
+        <ng-container [formGroupName]="i">
+          <hr />
+
+          <div class="d-flex justify-content-end" *ngIf="mode === 'edit'">
             <i
               class="bi bi-x-circle-fill text-danger"
               role="button"
@@ -162,7 +179,7 @@
             ></i>
           </div>
           <div class="row">
-            <div class="col-md-6 mb-2">
+            <div class="col-md mb-2">
               <label class="form-label">ประเภทการรับรองการฝึกอกรม</label>
               <input
                 class="form-control"
@@ -170,7 +187,9 @@
                 formControlName="certificationType"
               />
             </div>
-            <div class="col-md-6">
+          </div>
+          <div class="row">
+            <div class="col-md mb-2">
               <label class="form-label">จากสถาบัน</label>
               <input
                 class="form-control"
@@ -187,25 +206,29 @@
                 type="text"
                 formControlName="certificateNo"
               />
-              <!-- <select class="form-select">
-                <option selected>กรุณาเลือก</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select> -->
             </div>
             <div class="col-md-6">
               <label class="form-label">วันที่ออกใบประกาศ</label>
-              <input
-                class="form-control"
-                type="date"
-                formControlName="issueDate"
-              />
+              <div class="d-flex align-items-center">
+                <input
+                  matInput
+                  [matDatepicker]="picker"
+                  autocomplete="off"
+                  class="form-control form-date"
+                  formControlName="issueDate"
+                  placeholder="วว/ดด/ปปปป"
+                />
+                <mat-datepicker-toggle
+                  class="button-date"
+                  matSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </div>
             </div>
           </div>
-        </div>
+        </ng-container>
       </ng-container>
     </ng-container>
-  </ng-container>
-  <hr />
+  </div>
 </form>

@@ -1,9 +1,9 @@
 <form [formGroup]="form">
-  <div class="box-header">ข้อมูลคุณสมบัติของผู้ขอต่ออายุใบอนุญาต</div>
+  <div class="box-header">ข้อมูลคุณสมบัติของผู้ขอต่ออายุหนังสืออนุญาต</div>
 
   <div class="row mb-3">
     <div class="col-md-6">
-      <label class="form-label">สถานะปัจจุบัน</label>
+      <label class="form-label required">สถานะปัจจุบัน</label>
 
       <ng-container *ngIf="renewLicenseTypes === 'schManager'">
         <select formControlName="educationType" class="form-select">
@@ -35,20 +35,41 @@
   </div>
 
   <ng-container
-    *ngIf="selectedEducationType === 0 || selectedEducationType === 1">
-    <div class="form-label text-black">
+    *ngIf="selectedEducationType === 0 || selectedEducationType === 1"
+  >
+    <div class="form-label text-black required">
       มาตรฐานความรู้และประสบการณ์วิชาชีพ
       <span class="text-danger fs-6">
-        * กรอกรายละเอียดให้ครบถ้วนเพียง 1 ข้อเท่านั้น</span>
+        * กรอกรายละเอียดให้ครบถ้วนเพียง 1 ข้อเท่านั้น</span
+      >
     </div>
     <self-service-renew-license-property-manager
+      [managerType]="'sch'"
       formControlName="educationLevelForm"
-      *ngIf="renewLicenseTypes === 'schManager' || renewLicenseTypes === 'eduManager'">
+      [uniqueTimestamp]="uniqueTimestamp"
+      [workingInfo]="workingInfo"
+      [mode]="mode"
+      *ngIf="renewLicenseTypes === 'schManager'"
+    >
+    </self-service-renew-license-property-manager>
+
+    <self-service-renew-license-property-manager
+      [managerType]="'edu'"
+      formControlName="educationLevelForm"
+      [uniqueTimestamp]="uniqueTimestamp"
+      [workingInfo]="workingInfo"
+      [mode]="mode"
+      *ngIf="renewLicenseTypes === 'eduManager'"
+    >
     </self-service-renew-license-property-manager>
 
     <self-service-renew-license-property-supervision
       formControlName="educationLevelForm"
-      *ngIf="renewLicenseTypes === 'supervision'">
+      [uniqueTimestamp]="uniqueTimestamp"
+      [workingInfo]="workingInfo"
+      [mode]="mode"
+      *ngIf="renewLicenseTypes === 'supervision'"
+    >
     </self-service-renew-license-property-supervision>
   </ng-container>
 </form>

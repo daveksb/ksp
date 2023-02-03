@@ -1,21 +1,21 @@
 <ksp-top-nav>
-  <span header>ยื่นใบคำขอ</span>
+  <span header>ยื่นแบบคำขอ</span>
   <span subHeader>ขอสร้างเลขประจำตัวคุรุสภาสำหรับครูชาวต่างชาติ </span>
 </ksp-top-nav>
 
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 px-4 py-2">
     <div class="box-header">
-      รายละเอียดใบคำขอสร้างเลขคุรุสภาสำหรับครูชาวต่างชาติ
+      รายละเอียดแบบคำขอสร้างเลขคุรุสภาสำหรับครูชาวต่างชาติ
     </div>
     <div class="bg-white p-3">
       <ksp-request-header-info
-        [requestDate]="today"
-        [requestNumber]="requestNo"
+        [requestDate]="requestData.requestdate"
+        [requestNumber]="requestData.requestno"
       ></ksp-request-header-info>
       <hr />
 
-      <div class="px-3 pt-1 pb-2 mb-3">
+      <div class="px-3 pt-1 pb-2">
         <div class="row mb-2">
           <div class="col-6">
             <label class="form-label">สังกัด</label>
@@ -23,7 +23,7 @@
               class="form-control"
               type="text"
               disabled
-              placeholder="xxxxx"
+              [value]="requestData.bureauname"
             />
           </div>
         </div>
@@ -35,7 +35,7 @@
               class="form-control"
               type="text"
               disabled
-              placeholder="xxxxx"
+              [value]="requestData.schoolid"
             />
           </div>
           <div class="col">
@@ -44,7 +44,7 @@
               class="form-control"
               type="text"
               disabled
-              placeholder="xxxxx"
+              [value]="requestData.schoolname"
             />
           </div>
         </div>
@@ -56,35 +56,43 @@
               class="form-control"
               type="text"
               disabled
-              placeholder="xxxxx"
+              [value]="requestData.schooladdress"
             />
           </div>
         </div>
       </div>
-
-      <ksp-form-foreign-id
-        [mode]="'view'"
-        [prefixList]="prefixList$ | async"
-        [countries]="countries$ | async"
-        formControlName="foreignTeacherInfo"
-      >
-        <ksp-form-visa-info
+      <hr />
+      <div class="my-3">
+        <ksp-form-foreign-id
           [mode]="'view'"
-          formControlName="foreignVisaInfo"
-        ></ksp-form-visa-info>
-      </ksp-form-foreign-id>
-      <br />
+          [prefixList]="prefixList$ | async"
+          [countries]="countries$ | async"
+          formControlName="foreignTeacherInfo"
+        >
+          <ksp-form-visa-info
+            [mode]="'view'"
+            [visaTypeList]="visaTypeList$ | async"
+            formControlName="foreignVisaInfo"
+          ></ksp-form-visa-info>
+        </ksp-form-foreign-id>
+      </div>
 
-      <ksp-form-attachment
+      <ksp-form-multi-attachment
         [groups]="evidenceFile"
         [mode]="mode"
-      ></ksp-form-attachment>
+      ></ksp-form-multi-attachment>
     </div>
-    <br />
 
-    <div class="bg-white px-3 py-2">
+    <div class="bg-white px-3 py-2 mt-3">
       <e-service-license-check
+        [checkedResult]="checkedResult"
         [choices]="verifyChoice"
+        formControlName="verifydetail"
+        [mode]="
+          requestData.status === '2' || requestData.status === '3'
+            ? 'view'
+            : 'edit'
+        "
       ></e-service-license-check>
     </div>
   </div>
@@ -96,6 +104,9 @@
     [isFirstPage]="true"
     [showCenterButtons]="true"
     [showSaveButton]="true"
-    (saveClicked)="onConfirmed()"
+    (saveClicked)="confirm()"
+    [disableSaveButton]="
+      requestData.status === '2' || requestData.status === '3'
+    "
   ></ksp-bottom-nav>
 </div>

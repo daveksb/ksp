@@ -14,7 +14,7 @@ export class FormAttachmentComponent {
   @Input() title = `กรุณาแนบหลักฐานประกอบ`;
   @Input() titleClass = ``;
   @Input() titleNote = '';
-  @Input() pageType!: RequestPageType; // ใช้ อ้างอิง tab ในหน้าใบคำขอเพื่อระบุรายการไฟล์ ที่เกี่ยวข้อง enum RequestPageType
+  @Input() pageType!: string; // ใช้ อ้างอิง tab ในหน้าแบบคำขอเพื่อระบุรายการไฟล์ ที่เกี่ยวข้อง enum RequestPageType
   @Input() groups: any[] = [];
   @Input() mode: FormMode = 'edit';
   @Input() uniqueTimestamp: string | null = null;
@@ -35,36 +35,39 @@ export class FormAttachmentComponent {
       }
     });
   }
+
   deleteFile(group: any) {
     const payload = {
-      id: group.fileId,
+      id: group.fileid,
       requesttype: this.requestType,
-      uniquetmestamp: this.uniqueTimestamp ?? group?.uniqueTimestamp,
+      uniquetimestamp: this.uniqueTimestamp ?? group?.uniqueTimestamp,
     };
 
     this.fileService.deleteFile(payload).subscribe((res: any) => {
       if (res?.returnmessage == 'success') {
-        group.fileId = '';
-        group.fileName = '';
+        group.fileid = '';
+        group.filename = '';
       }
     });
   }
+
   downloadFile(group: any) {
-    const id = group.fileId;
-    console.log(group);
+    const id = group.fileid;
+    //console.log(group);
     this.fileService.downloadFile({ id }).subscribe((res: any) => {
       const a = document.createElement('a');
       a.style.display = 'none';
-      a.href = atob(res.filedata);
-      a.download = group.fileName;
+      a.href = atob(res.file);
+      a.download = group.filename;
       document.body.appendChild(a);
       a.click();
     });
   }
+
   updateComplete(file: any, group: any) {
-    const { fileId, fileName } = file;
-    group.fileId = fileId;
-    group.fileName = fileName;
+    const { fileid, filename } = file;
+    group.fileid = fileid;
+    group.filename = filename;
     this.uploadComplete.emit(this.groups);
   }
 }

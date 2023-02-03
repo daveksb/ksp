@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
@@ -11,7 +11,7 @@ import {
 import { LoginFormComponent } from '@ksp/shared/form/login';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UniLoginService } from './uni-login.service';
-import {lastValueFrom} from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 import { setCookie } from '@ksp/shared/utility';
 
 @Component({
@@ -22,16 +22,20 @@ import { setCookie } from '@ksp/shared/utility';
   imports: [CommonModule, LoginFormComponent, ReactiveFormsModule],
 })
 export class UniLoginComponent {
+  loginFail = false;
+
   form = this.fb.group({
     user: {},
   });
+
   constructor(
     private router: Router,
     public dialog: MatDialog,
     private fb: FormBuilder,
     private uniLoginService: UniLoginService
   ) {}
-  showWarningDialog(title: string) {
+
+  /* showWarningDialog(title: string) {
     this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -39,25 +43,30 @@ export class UniLoginComponent {
         isDanger: true,
       },
     });
-  }
+  } */
   async login() {
+    this.loginFail = false;
     try {
       const res = await lastValueFrom<any>(
         this.uniLoginService.validateLogin(this.form?.value?.user)
       );
-      if (res?.returncode == 99)
-        return this.showWarningDialog(
-          res?.returnmessage || 'เข้าสู่ระบบไม่สำเร็จ'
-        );
+      if (res?.returncode == 99) {
+        this.form.reset();
+        this.loginFail = true;
+        return;
+      }
       setCookie('userToken', res?.usertoken || '', 1);
+      setCookie('systemName', 'uni-service' || '', 1);
       setCookie('firstNameTh', res?.firstnameth || '', 1);
       setCookie('lastNameTh', res?.lastnameth || '', 1);
       setCookie('uniId', res?.uniid || '', 1);
       setCookie('uniType', res?.unitype || '', 1);
+      setCookie('userId', res?.id, 1);
+      setCookie('permission', res?.permissionright, 1)
 
       this.router.navigate(['/home']);
     } catch (error: any) {
-      this.showWarningDialog(error?.message);
+      this.loginFail = true;
     }
   }
 

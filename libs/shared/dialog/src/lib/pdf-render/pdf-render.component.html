@@ -1,0 +1,23 @@
+<ngx-extended-pdf-viewer
+  [src]="this.pdfBytes"
+  [height]="'90vh'"
+  [useBrowserLocale]="true"
+  [customToolbar]="additionalButtons"
+></ngx-extended-pdf-viewer>
+<ng-template #additionalButtons>
+  <div id="toolbarViewer">
+    <div id="toolbarViewerLeft">
+      <pdf-toggle-sidebar></pdf-toggle-sidebar>
+      <div class="toolbarButtonSpacer"></div>
+      <pdf-find-button
+        [showFindButton]="true"
+        [textLayer]="true"
+      ></pdf-find-button>
+      <pdf-paging-area></pdf-paging-area>
+    </div>
+    <div id="toolbarViewerRight">
+      <pdf-print></pdf-print>
+      <pdf-download></pdf-download>
+    </div>
+  </div>
+</ng-template>

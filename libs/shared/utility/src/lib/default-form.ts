@@ -3,31 +3,44 @@ import {
   idCardPattern,
   nameEnPattern,
   nameThPattern,
-  passportPattern,
   phonePattern,
 } from './form-validators';
+import { validateIdCard } from './function';
 
-export function createDefaultUserInfoForm(fb: FormBuilder) {
+export function createDefaultVisaInfo(fb: FormBuilder) {
+  return fb.group({
+    visatype: [],
+    visaclass: [],
+    visaexpiredate: [],
+    kuruspano: [],
+  });
+}
+
+export function createUserInfoForm(fb: FormBuilder) {
   return fb.group({
     id: [],
-    idcardno: [null, [Validators.required, Validators.pattern(idCardPattern)]],
-    passportno: [
-      null,
-      [Validators.required, Validators.pattern(passportPattern)],
+    idcardno: [
+      '',
+      [validateIdCard, Validators.required, Validators.pattern(idCardPattern)],
     ],
+    kuruspano: ['', [Validators.required, Validators.pattern(idCardPattern)]],
+    isforeign: [null],
+    passportno: [null],
     passportstartdate: [],
     passportenddate: [],
+
     prefixth: [null, Validators.required],
     firstnameth: [
       null,
       [Validators.required, Validators.pattern(nameThPattern)],
     ],
-    middlenameth: [],
+    middlenameth: [null],
     lastnameth: [
       null,
       [Validators.required, Validators.pattern(nameThPattern)],
     ],
-    prefixen: [null, Validators.required],
+
+    prefixen: [null],
     firstnameen: [
       null,
       [Validators.required, Validators.pattern(nameEnPattern)],
@@ -37,9 +50,10 @@ export function createDefaultUserInfoForm(fb: FormBuilder) {
       null,
       [Validators.required, Validators.pattern(nameEnPattern)],
     ],
+
     sex: [null, Validators.required],
     birthdate: [null, Validators.required],
-    position: [null, Validators.required],
+    position: [null],
     email: [null, [Validators.required, Validators.email]],
     contactphone: [
       null,
@@ -50,20 +64,12 @@ export function createDefaultUserInfoForm(fb: FormBuilder) {
     country: [null],
     visaclass: [null],
     visatype: [null],
-    visaenddate: [null],
+    visaexpiredate: [null], //31-1-2023
     educationOccupy: [null],
     permisson: [null],
     other: [null],
     affiliation: [null],
-  });
-}
-
-export function createDefaultVisaInfo(FormBuilder: any) {
-  return FormBuilder.group({
-    visatype: [],
-    visaclass: [],
-    visaenddate: [],
-    licenseid: [],
+    birthdateSixty: [null],
   });
 }
 
@@ -89,16 +95,15 @@ export function createUniUserInfoForm(fb: FormBuilder) {
       null,
       [Validators.required, Validators.pattern(phonePattern)],
     ],
-    workphone: [null, [Validators.required, Validators.pattern(phonePattern)]],
+    workphone: [null, Validators.pattern(phonePattern)],
     nationality: [null],
     country: [null],
     visaclass: [null],
     visatype: [null],
     visaenddate: [null],
     educationoccupy: [null],
-    permission: [null],
+    permission: [null, Validators.required],
     other: [null],
-    unitype: [null, [Validators.required]],
   });
 }
 

@@ -1,12 +1,11 @@
 <ksp-top-nav
-  ><span header>ยื่นใบคำขอ </span>
+  ><span header>ยื่นแบบคำขอ </span>
   <span subHeader>ขอรับรองปริญญาและประกาศนียบัตร</span></ksp-top-nav
 >
-<div class="bg-secondary bg-opacity-10 px-4 py-2 full-height-2">
-  <div class="box-header">รายละเอียดใบคำขอรับรองปริญญาและประกาศนียบัตร</div>
-  <div class="bg-white px-3 pt-2 pb-1">
+<div class="bg-secondary bg-opacity-10 px-4 py-2 full-height-2 full-width-2">
+  <div class="box-header">รายละเอียดแบบคำขอรับรองปริญญาและประกาศนียบัตร</div>
+  <div class="bg-white px-3 py-2">
     <ksp-request-header-info
-      [requestDate]="date"
       [requestNumber]="requestNo"
     ></ksp-request-header-info>
 
@@ -21,9 +20,10 @@
         <form [formGroup]="step1Form">
           <ng-template matStepLabel>ข้อมูลพื้นฐาน</ng-template>
           <ksp-degree-cert-step-one
+            [mode]="mode"
             (degreeType)="step1DegreeType = $event"
             formControlName="step1"
-            [disabledInputs]="disabledInputsStep1"
+            [disabledInstitute]="true"
           >
           </ksp-degree-cert-step-one>
         </form>
@@ -33,6 +33,7 @@
         <form [formGroup]="step2Form">
           <ng-template matStepLabel>ด้านหลักสูตร</ng-template>
           <ksp-degree-cert-step-two
+            [mode]="mode"
             [formType]="step1DegreeType"
             formControlName="step2"
           >
@@ -44,17 +45,20 @@
         <form [formGroup]="step3Form">
           <ng-template matStepLabel>ด้านกระบวนการผลิต</ng-template>
           <ksp-degree-cert-step-3
+            [mode]="mode"
             formControlName="step3"
           ></ksp-degree-cert-step-3>
         </form>
       </mat-step>
 
       <mat-step [stepControl]="step4Form">
-        <ng-template matStepLabel>เอกสารแนบ</ng-template>
         <form [formGroup]="step4Form">
+          <ng-template matStepLabel>เอกสารแนบ</ng-template>
           <ksp-degree-cert-step-four
+            [mode]="mode"
             formControlName="step4"
             [formType]="step1DegreeType"
+            [systemType]="'uni'"
           ></ksp-degree-cert-step-four>
         </form>
       </mat-step>
@@ -66,16 +70,20 @@
   </div>
 </div>
 
-<div class="sticky-bottom border">
+<div class="sticky-bottom border px-2">
   <ksp-bottom-nav
     [isLastPage]="stepper.selectedIndex === 3"
     [isFirstPage]="stepper.selectedIndex === 0"
     [showCenterButtons]="stepper.selectedIndex === 3"
-    [showSaveButton]="true"
-    [showCancelButton]="true"
-    (saveClicked)="save()"
+    [showSaveButton]="mode === 'edit'"
+    [showCancelButton]="mode === 'edit'"
+    [showTempSaveButton]="mode === 'edit'"
+    [showAllPageTempsave]="mode === 'edit' && stepper.selectedIndex < 3"
+    [disableTempSaveButton]="mode !== 'edit'"
+    (saveClicked)="save('1')"
     (nextClicked)="goForward()"
     (prevClicked)="goBack()"
     (cancelClicked)="navigateBack()"
+    (tempSaveClicked)="save('99')"
   ></ksp-bottom-nav>
 </div>

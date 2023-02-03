@@ -6,8 +6,8 @@
   height: 100vh;
 
   /* Center and scale the image nicely */
-  background-position: top;
   background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .logo__container {
@@ -23,21 +23,44 @@
   content: url('/assets/images/line.png');
 }
 
+.support__label {
+  bottom: 0;
+  position: fixed;
+}
+
 /* device  responsive*/
 @media only screen and (max-width: 992px) {
   .bg-image {
-    background-image: url('/assets/images/BG-mobile.png');
+    background-image: url('/assets/images/BG-secondary.png');
     background-size: cover;
+    background-position: center;
+    height: 100%;
   }
 
   .line__content {
     content: url('/assets/images/line.png');
     padding: 2rem 0;
   }
+
+  .img__content {
+    width: 225px;
+  }
+
+  .support__label {
+    bottom: 0;
+    position: relative;
+  }
 }
 
 /* mobile */
 @media only screen and (max-width: 768px) {
+  .bg-image {
+    background-image: url('/assets/images/BG-secondary.png');
+    background-size: cover;
+    background-position: top;
+    height: 100%;
+  }
+
   .logo__container {
     width: 200px;
   }
@@ -49,5 +72,23 @@
 
   .img__content {
     width: 175px;
+  }
+
+  .support__label {
+    bottom: 0;
+    position: relative;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .bg-image {
+    background-image: url('/assets/images/BG-mobile.png');
+    background-size: cover;
+    height: 100%;
+  }
+
+  .support__label {
+    bottom: 0;
+    position: fixed;
   }
 }

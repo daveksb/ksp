@@ -2,10 +2,18 @@
   <div class="bg-light px-3 py-3 mb-3">
     <div class="box-header">ข้อมูลการจ้าง</div>
 
-    <div class="row mb-3" [ngClass]="{ hide: displayMode === 'request' }">
+    <div class="row mb-2" *ngIf="displayMode === 'staff'">
       <div class="col-6">
         <label class="form-label required">ประเภทบุคลากร</label>
-        <select class="form-select" formControlName="psersonType">
+        <select
+          class="form-select"
+          formControlName="psersonType"
+          [class.form-control-danger]="
+            this.form.controls.psersonType.invalid &&
+            (this.form.controls.psersonType.dirty ||
+              this.form.controls.psersonType.touched)
+          "
+        >
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let t of staffTypes" [value]="t?.id">
             {{ t?.name }}
@@ -14,53 +22,109 @@
       </div>
     </div>
 
-    <div class="row mb-3">
+    <div class="row mb-2">
       <div class="col">
         <label class="form-label required">ตำแหน่ง</label>
-        <select class="form-select" formControlName="position">
+        <select
+          class="form-select"
+          formControlName="position"
+          [class.form-control-danger]="
+            this.form.controls.position.invalid &&
+            (this.form.controls.position.dirty ||
+              this.form.controls.position.touched)
+          "
+          [attr.disabled]="readonly ? true : null"
+        >
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let p of positionTypes" [value]="p?.id">
             {{ p?.name }}
           </option>
         </select>
       </div>
-      <div class="col" [ngClass]="{ hide: displayMode === 'request' }">
+      <div class="col" *ngIf="displayMode === 'staff'">
         <label class="form-label required">วิทยฐานะ</label>
-        <select class="form-select" formControlName="academicStanding">
+        <select
+          class="form-select"
+          formControlName="academicStanding"
+          [class.form-control-danger]="
+            this.form.controls.academicStanding.invalid &&
+            (this.form.controls.academicStanding.dirty ||
+              this.form.controls.academicStanding.touched)
+          "
+        >
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option *ngFor="let p of academicStandingList" [value]="p?.id">
             {{ p?.name }}
           </option>
         </select>
       </div>
-      <div class="col" [ngClass]="{ hide: displayMode === 'staff' }">
+      <div class="col" *ngIf="displayMode === 'request'">
         <label class="form-label">สัญญาจ้างเลขที่</label>
         <input
           class="form-control"
           type="text"
           formControlName="hiringContractNo"
+          [attr.disabled]="readonly ? true : null"
         />
       </div>
     </div>
 
-    <div class="row mb-3">
+    <div class="row mb-2">
       <div class="col-6">
         <label class="form-label required">วันที่เริ่มปฏิบัติงาน</label>
-        <input class="form-control" type="date" formControlName="startDate" />
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker1"
+            autocomplete="off"
+            class="form-control form-date"
+            formControlName="startDate"
+            placeholder="วว/ดด/ปปปป"
+            [class.form-control-danger]="
+              this.form.controls.startDate.invalid &&
+              (this.form.controls.startDate.dirty ||
+                this.form.controls.startDate.touched)
+            "
+            [disabled]="readonly ? true : false"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker1"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </div>
       </div>
       <div class="col-6">
-        <label class="form-label required">วันที่สิ้นสุดการปฏิบัติงาน</label>
-        <input class="form-control" type="date" formControlName="endDate" />
+        <label class="form-label">วันที่สิ้นสุดการปฏิบัติงาน</label>
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker2"
+            autocomplete="off"
+            class="form-control form-date"
+            formControlName="endDate"
+            placeholder="วว/ดด/ปปปป"
+            [disabled]="readonly ? true : false"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker2"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </div>
       </div>
     </div>
 
-    <div class="row" [ngClass]="{ hide: displayMode === 'staff' }">
+    <div class="row" *ngIf="displayMode === 'request'">
       <div class="col-6">
         <label class="form-label">ระยะเวลาที่จ้าง (ปี)</label>
         <input
           class="form-control"
           type="text"
-          formControlName="hiringPeriodYear"
+          disabled
+          [value]="hiringYears || 0"
         />
       </div>
       <div class="col-6">
@@ -68,43 +132,69 @@
         <input
           class="form-control"
           type="text"
-          formControlName="hiringPeriodMonth"
+          disabled
+          [value]="hiringMonths || 0"
         />
       </div>
     </div>
 
-    <div [ngClass]="{ hide: displayMode === 'request' }">
-      <div class="form-label text-secondary ps-3">สถานะบุคลากร</div>
+    <div *ngIf="displayMode === 'staff'">
+      <div class="form-label">สถานะบุคลากร</div>
 
       <ng-container *ngFor="let item of status">
-        <div class="row mb-2">
-          <span class="col-1 d-flex justify-content-end align-self-center">
+        <div class="row row-cols-3 my-2 align-items-center">
+          <div class="col-1 d-flex align-items-center justify-content-end">
             <input
               formControlName="hiringStatus"
               type="radio"
+              class="form-check-input radio my-0"
               value="{{ item.value }}"
             />
-          </span>
-          <span class="col-1 px-0 d-flex align-self-center">
-            <label class="form-label text-secondary">{{ item.label }}</label>
-          </span>
-          <span class="col-2">
-            <input
-              class="form-control"
-              type="date"
-              formControlName="hiringStatusDate"
-            />
-          </span>
+          </div>
+          <div class="col-2">
+            <label
+              class="form-label"
+              [class.required]="hiringStatus.value === item.value"
+              >{{ item.label }}</label
+            >
+          </div>
+          <div class="col-3">
+            <div class="d-flex align-items-center">
+              <input
+                matInput
+                [matDatepicker]="picker3"
+                autocomplete="off"
+                class="form-control form-date"
+                [formControlName]="item.formDataName"
+                placeholder="วว/ดด/ปปปป"
+              />
+              <mat-datepicker-toggle
+                class="button-date"
+                matSuffix
+                [for]="picker3"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker3></mat-datepicker>
+            </div>
+          </div>
         </div>
       </ng-container>
 
-      <div class="mx-3 mb-2">
-        <div class="form-label text-secondary">ระบุสาเหตุ</div>
-        <textarea
-          class="form-control"
-          rows="3"
-          formControlName="hiringStatusReason"
-        ></textarea>
+      <div class="row mb-2 justify-content-center">
+        <div class="col-10">
+          <div class="form-label" [class.required]="hiringStatus.value === '2'">
+            ระบุสาเหตุ
+          </div>
+          <textarea
+            class="form-control"
+            rows="3"
+            formControlName="hiringStatusReason"
+            [placeholder]="
+              hiringStatus.value === '2'
+                ? 'กรุณาแจ้งสาเหตุการออก (หมดสัญญา | ลาออก | รร.ให้ออกเพราะทำพฤติกรรมไม่เหมาะสม)'
+                : ''
+            "
+          ></textarea>
+        </div>
       </div>
     </div>
   </div>

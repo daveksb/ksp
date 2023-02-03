@@ -3,10 +3,56 @@
 
   <div class="row">
     <div
-      class="col-6 mb-2"
+      class="mb-2"
+      [ngClass]="showSearchBtn ? 'col-5' : 'col-6'"
+      *ngIf="_displayMode === FormTypeEnum.foreign && !isSelfService"
+    >
+      <label
+        class="form-label required"
+        [ngClass]="{ required: mode === 'edit' }"
+        >หมายเลขคุรุสภาสำหรับชาวต่างชาติ
+      </label>
+      <input
+        maxlength="13"
+        class="form-control"
+        type="text"
+        formControlName="kuruspano"
+        placeholder="หมายเลขคุรุสภาจำนวน 13 หลัก"
+      />
+      <ng-container
+        *ngIf="kuruspaNo.invalid && (kuruspaNo.dirty || kuruspaNo.touched)"
+      >
+        <span class="text-danger">
+          {{ validatorMessages.KuruspaNo }}
+        </span>
+      </ng-container>
+    </div>
+
+    <div
+      class="col-1 align-items-center ps-0"
       *ngIf="
-        displayMode.includes(FormTypeEnum.thai) && isSchoolService === true
+        _displayMode === FormTypeEnum.foreign &&
+        mode === 'edit' &&
+        showSearchBtn
       "
+    >
+      <br />
+      <button
+        type="button"
+        class="btn btn-primary w-100"
+        style="height: 35.6px; margin: 2px 0 2px 0"
+        (click)="searchStaffDialog(FormTypeEnum.foreign)"
+      >
+        <i class="bi bi-search"></i> ค้นหา
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div
+      class="mb-2"
+      [ngClass]="showSearchBtn ? 'col-5' : 'col-6'"
+      *ngIf="_displayMode === FormTypeEnum.thai && !isSelfService"
     >
       <label
         class="form-label required"
@@ -18,33 +64,60 @@
         class="form-control"
         type="text"
         formControlName="idcardno"
+        placeholder="หมายเลขประชาชนจำนวน 13 หลัก"
       />
+
       <ng-container
         *ngIf="idCardNo.invalid && (idCardNo.dirty || idCardNo.touched)"
       >
-        <span class="text-danger" *ngIf="idCardNo.errors?.['pattern']">
-          {{ validatorMessages.ssn }}
+        <span
+          class="text-danger"
+          *ngIf="idCardNo.errors?.['pattern'] || idCardNo.errors?.['idCardInvalid']"
+        >
+          {{ validatorMessages.idCardNo }}
         </span>
       </ng-container>
     </div>
 
-    <div class="col mb-2" *ngIf="false">
-      <label class="form-label">ประเภทการยื่น</label>
-      <select
-        class="form-select"
-        [class.bg-white]="!isDarkMode && mode === 'edit'"
+    <div
+      class="col-1 align-items-center ps-0"
+      *ngIf="_displayMode === FormTypeEnum.thai && showSearchBtn"
+    >
+      <br />
+      <button
+        type="button"
+        class="btn btn-primary w-100"
+        style="height: 35.6px; margin: 2px 0 2px 0"
+        (click)="searchStaffDialog(FormTypeEnum.thai)"
       >
+        <i class="bi bi-search"></i> ค้นหา
+      </button>
+    </div>
+
+    <div class="col-6 mb-2" *ngIf="isqualification">
+      <label class="form-label required">ประเภทการยื่น</label>
+      <select formControlName="isforeign" class="form-select">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
-        <option value="1">ชาวไทย</option>
-        <option value="2">ชาวต่างชาติ</option>
+        <option value="0">ชาวไทย</option>
+        <option value="1">ชาวต่างชาติ</option>
       </select>
     </div>
 
-    <div class="col mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
-      <label class="form-label required"
+    <div
+      class="col mb-2"
+      *ngIf="_displayMode === FormTypeEnum.foreign || isAddStaff === true"
+    >
+      <label
+        class="form-label required"
+        [ngClass]="{ required: _displayMode === FormTypeEnum.foreign }"
         >หมายเลขหนังสือเดินทาง (Passport Number)
       </label>
-      <input class="form-control" type="text" formControlName="passportno" />
+      <input
+        class="form-control"
+        type="text"
+        formControlName="passportno"
+        [attr.disabled]="readonly ? true : null"
+      />
       <ng-container
         *ngIf="passportNo.invalid && (passportNo.dirty || passportNo.touched)"
       >
@@ -54,38 +127,61 @@
       </ng-container>
     </div>
 
-    <div class="col mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
-      <label class="form-label required">วันที่ออก</label>
-      <input
-        class="form-control"
-        type="date"
-        [class.bg-light]="isDarkMode"
-        formControlName="passportstartdate"
-      />
+    <div class="col mb-2" *ngIf="_displayMode === FormTypeEnum.foreign">
+      <label class="form-label">วันที่ออก</label>
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker1"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="passportstartdate"
+          placeholder="วว/ดด/ปปปป"
+          [disabled]="readonly ? true : false"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker1"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </div>
     </div>
 
-    <div class="col mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
-      <label class="form-label required">วันที่หมดอายุ</label>
-      <input
-        class="form-control"
-        type="date"
-        [class.bg-light]="isDarkMode"
-        formControlName="passportenddate"
-      />
+    <div class="col mb-2" *ngIf="_displayMode === FormTypeEnum.foreign">
+      <label class="form-label">วันที่หมดอายุ</label>
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker2"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="passportenddate"
+          placeholder="วว/ดด/ปปปป"
+          [disabled]="readonly ? true : false"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker2"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </div>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-3 mb-2">
       <label class="form-label" [ngClass]="{ required: mode === 'edit' }"
-        >คำนำหน้าชื่อไทย</label
+        >คำนำหน้าชื่อภาษาไทย</label
       >
       <select
-        [class.bg-white]="!isDarkMode && mode === 'edit'"
+        [attr.disabled]="readonly ? true : null"
         class="form-select"
         formControlName="prefixth"
+        (change)="prefixChanged($event)"
       >
-        <option value="null">กรุณาเลือก</option>
+        <option disabled hidden selected value="null">กรุณาเลือก</option>
         <option *ngFor="let prefix of prefixList" [value]="prefix.id">
           {{ prefix?.name_th }}
         </option>
@@ -96,8 +192,8 @@
         >ชื่อภาษาไทย</label
       >
       <input
-        [class.bg-light]="isDarkMode"
-        class="form-control"
+        [attr.disabled]="readonly ? true : null"
+        class="form-control test-xx"
         type="text"
         placeholder="กรุณากรอกชื่อภาษาไทย"
         formControlName="firstnameth"
@@ -113,10 +209,10 @@
       </ng-container>
     </div>
 
-    <div class="col-md mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
+    <div class="col-md mb-2" *ngIf="_displayMode === FormTypeEnum.foreign">
       <label class="form-label">ชื่อกลาง</label>
       <input
-        [class.bg-light]="isDarkMode"
+        [attr.disabled]="readonly ? true : null"
         class="form-control"
         type="text"
         placeholder="กรุณากรอกชื่อภาษาไทย"
@@ -129,7 +225,7 @@
         >นามสกุลภาษาไทย</label
       >
       <input
-        [class.bg-light]="isDarkMode"
+        [attr.disabled]="readonly ? true : null"
         class="form-control"
         type="text"
         placeholder="กรุณากรอกนามสกุลภาษาไทย"
@@ -147,11 +243,12 @@
 
   <div class="row">
     <div class="col-md-3 mb-2">
-      <label class="form-label required">คำนำหน้าชื่ออังกฤษ</label>
+      <label class="form-label required">คำนำหน้าชื่อภาษาอังกฤษ</label>
       <select
-        [class.bg-white]="!isDarkMode && mode === 'edit'"
         class="form-select"
+        [attr.disabled]="readonly ? true : null"
         formControlName="prefixen"
+        (change)="prefixChanged($event)"
       >
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option *ngFor="let prefix of prefixList" [value]="prefix.id">
@@ -162,9 +259,9 @@
     <div class="col-md mb-2">
       <label class="form-label required">ชื่อภาษาอังกฤษ</label>
       <input
+        [attr.disabled]="readonly ? true : null"
         class="form-control"
         type="text"
-        [class.bg-light]="isDarkMode"
         placeholder="กรุณากรอกชื่อภาษาอังกฤษ"
         formControlName="firstnameen"
       />
@@ -178,10 +275,10 @@
         </span>
       </ng-container>
     </div>
-    <div class="col-md mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
+    <div class="col-md mb-2" *ngIf="_displayMode === FormTypeEnum.foreign">
       <label class="form-label">ชื่อกลาง</label>
       <input
-        [class.bg-light]="isDarkMode"
+        [attr.disabled]="readonly ? true : null"
         class="form-control"
         type="text"
         placeholder="กรุณากรอกชื่อกลางภาษาอังกฤษ"
@@ -191,9 +288,9 @@
     <div class="col-md mb-2">
       <label class="form-label required">นามสกุลภาษาอังกฤษ</label>
       <input
+        [attr.disabled]="readonly ? true : null"
         class="form-control"
         type="text"
-        [class.bg-light]="isDarkMode"
         placeholder="กรุณากรอกนามสกุลภาษาอังกฤษ"
         formControlName="lastnameen"
       />
@@ -208,10 +305,10 @@
   </div>
 
   <div class="row">
-    <div class="col-md mb-2" *ngIf="displayMode.includes(FormTypeEnum.thai)">
+    <div class="col-md mb-2" *ngIf="_displayMode === FormTypeEnum.thai">
       <label class="form-label required">เพศ</label>
       <select
-        [class.bg-white]="!isDarkMode && mode === 'edit'"
+        [attr.disabled]="readonly ? true : null"
         class="form-select"
         formControlName="sex"
       >
@@ -223,18 +320,50 @@
     </div>
     <div class="col-md mb-2">
       <label class="form-label required">วันเดือนปีเกิด</label>
-      <input
-        class="form-control"
-        type="date"
-        [class.bg-light]="isDarkMode"
-        formControlName="birthdate"
-      />
+      <div class="d-flex align-items-center">
+        <input
+          [disabled]="readonly"
+          [max]="today"
+          matInput
+          [matDatepicker]="picker3"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="birthdate"
+          placeholder="วว/ดด/ปปปป"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker3"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker3></mat-datepicker>
+      </div>
     </div>
 
-    <div class="col mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
-      <label class="form-label required">ประเทศ</label>
+    <div class="col-md mb-2" *ngIf="isHasSixtiesDate">
+      <label class="form-label required">วันเดือนปี อายุครบ 60 ปี</label>
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker4"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="birthdateSixty"
+          placeholder="วว/ดด/ปปปป"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker4"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker4></mat-datepicker>
+      </div>
+    </div>
+
+    <div class="col mb-2" *ngIf="_displayMode === FormTypeEnum.foreign">
+      <label class="form-label">ประเทศ</label>
       <select
-        [class.bg-white]="!isDarkMode && mode === 'edit'"
+        [attr.disabled]="readonly ? true : null"
         class="form-select"
         formControlName="country"
       >
@@ -245,10 +374,11 @@
       </select>
     </div>
 
-    <div class="col mb-2" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
+    <!-- <div class="col mb-2" *ngIf="_displayMode === FormTypeEnum.foreign"> -->
+    <div class="col mb-2">
       <label class="form-label">สัญชาติ</label>
       <select
-        [class.bg-white]="!isDarkMode && mode === 'edit'"
+        [attr.disabled]="readonly ? true : null"
         class="form-select"
         formControlName="nationality"
       >
@@ -260,14 +390,15 @@
     </div>
   </div>
 
-  <div class="row" *ngIf="displayMode.includes(FormTypeEnum.thai)">
+  <div class="row" *ngIf="_displayMode === FormTypeEnum.thai">
     <div class="col-md-6 mb-2">
       <label class="form-label required">เบอร์โทรศัพท์ (ที่ติดต่อได้)</label>
       <input
+        [attr.disabled]="readonly ? true : null"
         class="form-control"
         type="tel"
-        [class.bg-light]="isDarkMode"
         formControlName="contactphone"
+        maxlength="10"
       />
       <ng-container
         *ngIf="
@@ -280,12 +411,13 @@
       </ng-container>
     </div>
     <div class="col-md-6 mb-2">
-      <label class="form-label required">เบอร์โทรศัพท์ (ที่ทำงาน)</label>
+      <label class="form-label">เบอร์โทรศัพท์ (ที่ทำงาน)</label>
       <input
+        [attr.disabled]="readonly ? true : null"
         class="form-control"
         type="tel"
-        [class.bg-light]="isDarkMode"
         formControlName="workphone"
+        maxlength="10"
       />
       <ng-container
         *ngIf="workPhone.invalid && (workPhone.dirty || workPhone.touched)"
@@ -298,12 +430,12 @@
   </div>
 
   <div class="row">
-    <div class="col-md-6 mb-2" *ngIf="displayMode.includes(FormTypeEnum.thai)">
+    <div class="col-md-6 mb-2" *ngIf="_displayMode === FormTypeEnum.thai">
       <label class="form-label required">อีเมล</label>
       <input
+        [attr.disabled]="readonly ? true : null"
         class="form-control"
         type="email"
-        [class.bg-light]="isDarkMode"
         formControlName="email"
       />
       <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
@@ -312,26 +444,26 @@
         }}</span>
       </ng-container>
     </div>
-    <div class="col-md-6 mb-2" *ngIf="false">
+    <div class="col-md-6 mb-2" *ngIf="isqualification">
       <label class="form-label required">ตำแหน่ง</label>
       <input
+        [attr.disabled]="readonly ? true : null"
         class="form-control"
         type="text"
         formControlName="position"
-        [class.bg-light]="isDarkMode"
       />
     </div>
   </div>
 
-  <div class="row" *ngIf="displayMode.includes(FormTypeEnum.foreign)">
+  <div class="row" *ngIf="_displayMode === FormTypeEnum.foreign">
     <div class="col mb-2">
       <label class="form-label">Visa Class </label>
       <select
         class="form-select"
-        [class.bg-white]="!isDarkMode && mode === 'edit'"
         formControlName="visaclass"
+        [attr.disabled]="readonly ? true : null"
       >
-        <option value="null" selected disabled>กรุณาเลือก</option>
+        <option value="null" hidden selected disabled>กรุณาเลือก</option>
         <option *ngFor="let v of visaClassList" [value]="v.id">
           {{ v.name }}
         </option>
@@ -342,8 +474,8 @@
       <label class="form-label">ประเภทวีซ่า </label>
       <select
         class="form-select"
-        [class.bg-white]="!isDarkMode && mode === 'edit'"
         formControlName="visatype"
+        [attr.disabled]="readonly ? true : null"
       >
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option *ngFor="let v of visaTypeList" [value]="v.id">
@@ -354,26 +486,38 @@
 
     <div class="col mb-2">
       <label class="form-label">อนุญาตถึงวันที่ </label>
-      <input formControlName="visaenddate" class="form-control" type="date" />
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker5"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="visaexpiredate"
+          placeholder="วว/ดด/ปปปป"
+          [disabled]="readonly ? true : false"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker5"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker5></mat-datepicker>
+      </div>
     </div>
   </div>
 
-  <div class="row" *ngIf="false">
+  <!-- <div class="row" *ngIf="isqualification">
     <div class="col-6 mb-2">
       <label class="form-label required">สัญชาติ</label>
-      <select
-        [class.bg-white]="!isDarkMode && mode === 'edit'"
-        class="form-select"
-        formControlName="nationality"
-      >
+      <select class="form-select" formControlName="nationality">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option
           *ngFor="let nationality of nationList"
-          [value]="nationality.nationid"
+          [value]="nationality.nationId"
         >
           {{ nationality.nationName }}
         </option>
       </select>
     </div>
-  </div>
+  </div> -->
 </form>

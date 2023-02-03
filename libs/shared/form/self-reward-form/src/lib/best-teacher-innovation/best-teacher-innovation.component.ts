@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -13,12 +14,13 @@ export class BestTeacherInnovationComponent
   extends KspFormBaseComponent
   implements OnInit
 {
-  @Input() rewardFiles!: any[];
-  @Input() uniqueTimestamp!: string;
-
   override form = this.fb.group({
-    innovationInfo: this.fb.array([]),
+    rewardName: [null, Validators.required],
+    youtubeUrl: [null, Validators.required],
   });
+
+  dataSource = new MatTableDataSource<any>();
+  displayedColumns: string[] = column;
 
   constructor(private fb: FormBuilder) {
     super();
@@ -32,24 +34,21 @@ export class BestTeacherInnovationComponent
   }
 
   ngOnInit(): void {
-    this.addFormArray(this.innovationInfo);
-  }
-
-  deleteFormArray(form: FormArray<any>, index: number) {
-    form.removeAt(index);
-  }
-
-  addFormArray(form: FormArray<any>) {
-    const data = this.fb.group({
-      rewardType: [],
-      innovationName: [],
-      subjectGroup: [],
-      year: [],
-    });
-    form.push(data);
-  }
-
-  get innovationInfo() {
-    return this.form.controls['innovationInfo'] as FormArray;
+    this.dataSource.data = [
+      {
+        group: 'การเรียนรู้การงานอาชีพและเทคโนโลยีดีเด่น',
+        type: 'ระดับจังหวัด',
+        reward: '-',
+        year: '2564',
+      },
+      {
+        group: 'การเรียนรู้คณิตศาสตร์ดีเด่น',
+        type: 'ระดับประเทศ',
+        reward: 'ดีเด่น',
+        year: '2563',
+      },
+    ];
   }
 }
+
+export const column = ['order', 'group', 'type', 'reward', 'year'];

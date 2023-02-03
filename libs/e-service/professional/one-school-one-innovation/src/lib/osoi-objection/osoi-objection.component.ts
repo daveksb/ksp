@@ -6,16 +6,14 @@ import { Router } from '@angular/router';
   templateUrl: './osoi-objection.component.html',
   styleUrls: ['./osoi-objection.component.scss'],
 })
-export class OsoiObjectionComponent implements OnInit {
+export class OsoiObjectionComponent {
   constructor(private router: Router) {}
 
-  ngOnInit(): void {}
-
   cancel() {
-    this.router.navigate(['/', 'one-school-one-innovation', 'list']);
+    this.router.navigate(['/one-school-one-innovation', 'list']);
   }
 
   next() {
-    this.router.navigate(['/', 'one-school-one-innovation', 'list']);
+    this.router.navigate(['/one-school-one-innovation', 'list']);
   }
 }

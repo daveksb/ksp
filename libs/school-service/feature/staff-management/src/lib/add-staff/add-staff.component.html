@@ -1,113 +1,238 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav>
   <span header>ทะเบียนบุคลากรภายในหน่วยงาน</span>
   <span subHeader>เพิ่มบุคลากร</span>
 </ksp-top-nav>
 
-<div [formGroup]="form" class="bg-secondary bg-opacity-10 px-4 py-2">
+<div
+  [formGroup]="form"
+  class="bg-secondary bg-opacity-10 px-4 py-2 full-height"
+>
   <div class="box-header">รายละเอียดเพิ่มบุคลากรภายในหน่วยงาน</div>
 
   <div class="bg-white p-3">
-    <ksp-request-header-info [requestDate]="today"></ksp-request-header-info>
+    <div class="d-flex justify-content-between">
+      <ksp-request-header-info></ksp-request-header-info>
+      <div class="d-flex align-items-center" *ngIf="mode === 'add'">
+        <input
+          (change)="isForeignSelect($event)"
+          type="checkbox"
+          class="me-2"
+        />
+        <label class="form-label">บุคลากรชาวต่างชาติ</label>
+      </div>
+    </div>
 
-    <div class="bg-light p-3 m-3">
+    <hr />
+    <div class="bg-light p-3 default-width">
       <ksp-form-user-info
         formControlName="userInfo"
+        [isAddStaff]="true"
         [isDarkMode]="false"
         [prefixList]="prefixList$ | async"
-        [displayMode]="[userInfoType]"
+        [displayMode]="userInfoType"
+        [nationList]="nationList$ | async"
+        [countryList]="countries$ | async"
+        [visaClassList]="visaClassList | async"
+        [visaTypeList]="visaTypeList | async"
+        [mode]="mode"
+        (idCardChange)="searchIdCard($event)"
+        (kuruspaNoChange)="searchKuruspaNo($event)"
       ></ksp-form-user-info>
     </div>
 
-    <div class="bg-light p-3 m-3" style="height: 240px">
-      <div class="box-header">ข้อมูลใบอนุญาตประกอบวิชาชีพ</div>
-      <!--  <div class="d-flex align-items-center">
-        <div class="form-label text-secondary ms-5">หมายเลขสมาชิกคุรุสภา</div>
-        <div class="form-label text-black ms-3">1234567890</div>
+    <ng-container *ngIf="searchStaffDone">
+      <div class="box-header mt-3">ข้อมูลหนังสืออนุญาตประกอบวิชาชีพ</div>
+      <div class="form-label text-secondary" style="margin-left: 16px">
+        หมายเลขสมาชิกคุรุสภา
+        <span class="form-label text-black ms-2">
+          {{ kuruspaNo || '-' }}
+        </span>
+      </div>
+      <div
+        class="bg-light d-flex flex-column justify-content-center p-3"
+        style="height: auto"
+      >
+        <ng-container *ngIf="foundLicenses && foundLicenses.length">
+          <div
+            id="carouselExampleControls"
+            class="carousel carousel-dark slide"
+            data-bs-ride="carousel"
+          >
+            <div class="carousel-inner">
+              <ng-container
+                *ngFor="
+                  let license of foundLicenses;
+                  let first = first;
+                  let last = last;
+                  let i = index
+                "
+              >
+                <div class="carousel-item active" *ngIf="first">
+                  <div class="d-flex flex-column">
+                    <ksp-license-info [license]="license"></ksp-license-info>
+                  </div>
+                </div>
+                <div class="carousel-item" *ngIf="!first">
+                  <div class="d-flex flex-column">
+                    <ksp-license-info [license]="license"></ksp-license-info>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+            <ng-container
+              *ngFor="
+                let license of foundLicenses;
+                let first = first;
+                let last = last
+              "
+            >
+              <div *ngIf="!first">
+                <button
+                  class="carousel-control-prev"
+                  type="button"
+                  data-bs-target="#carouselExampleControls"
+                  data-bs-slide="prev"
+                >
+                  <span
+                    class="carousel-control-prev-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <!-- <span class="visually-hidden">Previous</span> -->
+                </button>
+              </div>
+              <div *ngIf="!last">
+                <button
+                  class="carousel-control-next"
+                  type="button"
+                  data-bs-target="#carouselExampleControls"
+                  data-bs-slide="next"
+                >
+                  <span
+                    class="carousel-control-next-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <!-- <span class="visually-hidden">Next</span> -->
+                </button>
+              </div></ng-container
+            >
+          </div>
+        </ng-container>
+        <ng-container *ngIf="!foundLicenses.length">
+          <div class="fs-5 text-center py-5 my-5">
+            ไม่พบข้อมูล
+          </div></ng-container
+        >
       </div>
 
-      <ksp-license-type-button-group></ksp-license-type-button-group>
-      <div class="ms-5">
-        <ksp-license-info></ksp-license-info>
-      </div> -->
-    </div>
-
-    <div class="m-3">
-      <mat-tab-group
-        class="tab-group"
-        animationDuration="0ms"
-        dynamicHeight="true"
-        selectedIndex="0"
-      >
-        <mat-tab label="ที่อยู่" class="tab-content">
-          <ksp-form-address
-            [provinces]="provinces$ | async"
-            [amphurs]="amphurs1$ | async"
-            [tumbols]="tumbols1$ | async"
-            (provinceChanged)="provinceChanged(1, $event)"
-            (amphurChanged)="amphurChanged(1, $event)"
-            formControlName="addr1"
-          >
-            ที่อยู่ทะเบียนบ้าน
-          </ksp-form-address>
-
-          <ksp-form-address
-            [provinces]="provinces$ | async"
-            [amphurs]="amphurs2$ | async"
-            [tumbols]="tumbols2$ | async"
-            (provinceChanged)="provinceChanged(2, $event)"
-            (amphurChanged)="amphurChanged(2, $event)"
-            formControlName="addr2"
-          >
-            <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
-            <div class="d-flex align-items-center">
-              <input
-                (change)="useSameAddress($event)"
-                type="checkbox"
-                class="address__checkbox"
-              />
-              <label class="form-label ms-1">ที่อยู่ตามทะเบียนบ้าน</label>
+      <div class="mt-3">
+        <mat-tab-group
+          class="tab-group"
+          animationDuration="0ms"
+          selectedIndex="0"
+          (selectedIndexChange)="selectedTabIndex = $event"
+          [selectedIndex]="selectedTabIndex"
+        >
+          <mat-tab label="ที่อยู่" class="tab-content">
+            <ksp-form-address
+              [mode]="mode"
+              [provinces]="provinces$ | async"
+              [amphurs]="amphurs1$ | async"
+              [tumbols]="tumbols1$ | async"
+              (provinceChanged)="provinceChanged(1, $event)"
+              (amphurChanged)="amphurChanged(1, $event)"
+              formControlName="addr1"
+            >
+              ที่อยู่ทะเบียนบ้าน
+            </ksp-form-address>
+            <div class="mt-3">
+              <ksp-form-address
+                [mode]="mode"
+                [provinces]="provinces$ | async"
+                [amphurs]="amphurs2$ | async"
+                [tumbols]="tumbols2$ | async"
+                (provinceChanged)="provinceChanged(2, $event)"
+                (amphurChanged)="amphurChanged(2, $event)"
+                formControlName="addr2"
+              >
+                <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
+                <div class="d-flex align-items-center">
+                  <input
+                    (change)="useSameAddress($event)"
+                    type="checkbox"
+                    class="address__checkbox"
+                    [disabled]="mode === 'view'"
+                  />
+                  <label class="form-label ms-1">ที่อยู่ตามทะเบียนบ้าน</label>
+                </div>
+              </ksp-form-address>
             </div>
-          </ksp-form-address>
-        </mat-tab>
+          </mat-tab>
 
-        <mat-tab label="วุฒิทางการศึกษา">
-          <ksp-form-education-info
-            formControlName="edu1"
-            [showSelectDegree]="true"
-            [countries]="countries$ | async"
-          ></ksp-form-education-info
-          ><br />
-          <ksp-form-education-info
-            formControlName="edu2"
-            [showSelectDegree]="true"
-            [countries]="countries$ | async"
-          ></ksp-form-education-info>
-        </mat-tab>
+          <mat-tab label="วุฒิทางการศึกษา">
+            <div class="d-flex align-items-center">
+              <label class="box-header">วุฒิการศึกษาปริญญาตรี</label>
+            </div>
 
-        <mat-tab label="ข้อมูลการสอนและการจ้าง">
-          <ksp-form-teaching-info
-            formControlName="teachingInfo"
-          ></ksp-form-teaching-info>
-          <ksp-form-hiring-info
-            formControlName="hiringInfo"
-            [staffTypes]="staffTypes$ | async"
-            [positionTypes]="positionTypes$ | async"
-            [academicStandingList]="academicTypes$ | async"
-          ></ksp-form-hiring-info>
-        </mat-tab>
-      </mat-tab-group>
-    </div>
+            <ng-container
+              formArrayName="edu"
+              *ngFor="let row of edu.controls; let i = index"
+            >
+              <ksp-form-education-info
+                [mode]="mode"
+                [showGradeInput]="true"
+                [formControlName]="i"
+                [showSelectDegree]="true"
+                [countries]="countries$ | async"
+              ></ksp-form-education-info>
+
+              <div *ngIf="!i" class="d-flex align-items-center mt-3">
+                <input
+                  (change)="eduSelect(1, $event)"
+                  [checked]="edu.length === 2"
+                  [disabled]="mode === 'view'"
+                  type="checkbox"
+                  class="me-2"
+                />
+                <label class="box-header">วุฒิการศึกษาอื่นๆ</label>
+              </div>
+            </ng-container>
+          </mat-tab>
+
+          <mat-tab label="ข้อมูลการสอนและการจ้าง">
+            <ksp-form-hiring-info
+              [mode]="mode"
+              formControlName="hiringInfo"
+              [staffTypes]="staffTypes$ | async"
+              [positionTypes]="positionTypes$ | async"
+              [academicStandingList]="academicTypes$ | async"
+            ></ksp-form-hiring-info>
+
+            <ksp-form-teaching-info
+              [mode]="mode"
+              formControlName="teachingInfo"
+            ></ksp-form-teaching-info>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </ng-container>
   </div>
 </div>
 
-<div class="sticky-bottom border">
+<div *ngIf="searchStaffDone" class="sticky-bottom border px-2">
   <ksp-bottom-nav
-    [isLastPage]="true"
-    [isFirstPage]="true"
-    [showSaveButton]="true"
+    [isLastPage]="selectedTabIndex === 2"
+    [isFirstPage]="selectedTabIndex === 0"
+    [showSaveButton]="mode !== 'view'"
     [disableSaveButton]="form.invalid"
     [showCenterButtons]="true"
     (saveClicked)="onConfirmed()"
-    (cancelClicked)="cancel()"
+    (cancelClicked)="navigateBack()"
+    (nextClicked)="nextTab()"
+    (prevClicked)="prevTab()"
   ></ksp-bottom-nav>
 </div>

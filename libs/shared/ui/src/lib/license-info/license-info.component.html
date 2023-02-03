@@ -1,22 +1,28 @@
-<div class="row">
+<div class="row justify-content-center">
   <div class="d-flex flex-column align-items-center mb-2" *ngIf="isHasTitle">
     <div class="fs-4 text-warning">ยกย่องเชิดชูเกียรติ</div>
-    <div class="fs-5">รางวัลครูภาษาไทยดีเด่น</div>
+    <div class="fs-5">{{ rewardTitleName }}</div>
   </div>
-  <div class="col-md-3 d-flex justify-content-center mb-md-0 mb-2">
-    <img src="assets/images/img-profile.png" />
+  <div
+    *ngIf="license"
+    class="col-md-2 d-flex justify-content-center align-items-center mb-md-0 mb-2"
+  >
+    <img
+      src="assets/images/img-profile.png"
+      style="width: 96px; height: 144px"
+    />
   </div>
 
-  <div
-    class="col-md-6"
-    style="white-space: nowrap"
-  >
-    <div class="row">
+  <div class="col-md-6" style="white-space: nowrap">
+    <div *ngIf="!license" class="row justify-content-center fs-5 py-5">
+      ไม่พบข้อมูล
+    </div>
+    <div *ngIf="license" class="row">
       <div class="col-6 text-secondary ps-0 pe-3 text__size">
-        <div class="text-end">เลขที่ใบอนุญาตประกอบวิชาชีพ</div>
+        <div class="text-end">เลขที่หนังสืออนุญาตประกอบวิชาชีพ</div>
         <div class="text-end">ประกอบวิชาชีพ</div>
         <div class="text-end">หมายเลขบัตรประชาชน</div>
-        <div class="text-end">ประเภทใบอนุญาตประกอบวิชาชีพ</div>
+        <div class="text-end">ประเภทหนังสืออนุญาตประกอบวิชาชีพ</div>
         <div class="text-end">ชื่อ-นามสกุล (ภาษาไทย)</div>
         <div class="text-end">ชื่อ-นามสกุล (ภาษาอังกฤษ)</div>
         <div class="text-end">วันเดือนปีเกิด</div>
@@ -25,15 +31,24 @@
       </div>
 
       <div class="col-6 ps-3 pe-0 text__size">
-        <div>644015713xxxxx</div>
-        <div>ครู</div>
-        <div>1-1020-00545-78-9</div>
-        <div>ใบอนุญาตประกอบวิชาชีพครู</div>
-        <div>ธนานุรักษ์ ใจสะอาด</div>
-        <div>Thananurak Jaisa-ard</div>
-        <div>26 มิถุนายน 2526</div>
-        <div>10 มิถุนายน 2564</div>
-        <div>10 มิถุนายน 2569</div>
+        <div>{{ license.licenseno }}</div>
+        <div>{{ SelfServiceRequestSubType[+license.careertype] }}</div>
+        <div>{{ license.idcardno }}</div>
+        <div>
+          หนังสืออนุญาตประกอบวิชาชีพ
+          {{ SelfServiceRequestSubType[+license.licensetype] }}
+        </div>
+        <div>
+          {{ SelfPrefixTh[+license.prefixth] }} {{ license.firstnameth }}
+          {{ license.lastnameth }}
+        </div>
+        <div>
+          {{ SelfPrefixEn[+license.prefixen] }} {{ license.firstnameen }}
+          {{ license.firstnameen }}
+        </div>
+        <div>{{ license.birthdate | thaiDate }}</div>
+        <div>{{ license.licensestartdate | thaiDate }}</div>
+        <div>{{ license.licenseenddate | thaiDate }}</div>
       </div>
     </div>
   </div>
@@ -45,7 +60,7 @@
     <button
       type="button"
       class="btn border-success text-success"
-      (click)="select()"
+      (click)="select(license?.licenseno)"
     >
       เลือก
     </button>

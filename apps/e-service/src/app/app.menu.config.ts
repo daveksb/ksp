@@ -1,209 +1,183 @@
 import { MenuConfig } from '@ksp/shared/interface';
 
-//ใบอนุญาตต่างๆ
+//หนังสืออนุญาตต่างๆ
 export const eLicenseMenu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอรับใบอนุญาตประกอบวิชาชีพ(ชาวไทย)',
+    label: 'แบบคำขอรับหนังสืออนุญาตประกอบวิชาชีพ(ชาวไทย)',
     path: '',
     isExpanded: false,
     subMenuName: 'license',
     subMenu: [
       {
         path: '/request-license/approve-list',
-        label: 'รายการใบคำขอรับใบอนุญาตประกอบวิชาชีพ',
+        label: 'รายการแบบคำขอรับหนังสืออนุญาตประกอบวิชาชีพ',
       },
       {
-        path: '/request-license/approve-detail',
-        label: 'บัญชีรายชื่อและผลการนำเสนอขอใบอนุญาตประกอบวิชาชีพ',
+        path: '/request-license/search-list',
+        label: 'จัดทำบัญชีรายชื่อและนำเสนอขอหนังสืออนุญาตประกอบวิชาชีพ',
       },
       {
-        path: '/request-license/approve-detail',
-        label: 'พิจารณารับรองใบอนุญาตประกอบวิชาชีพ',
+        path: '/request-license/guarantee',
+        label: 'รับรองหนังสืออนุญาตประกอบวิชาขีพ',
       },
     ],
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอรับใบอนุญาตประกอบวิชาชีพ(ชาวต่างชาติ)',
+    label: 'แบบคำขอรับหนังสืออนุญาตประกอบวิชาชีพ(ชาวต่างชาติ)',
     path: '',
     isExpanded: false,
-    subMenuName: 'license-foreign',
+    subMenuName: 'request-foreign-license',
     subMenu: [
       {
-        path: '/license/list',
-        label: 'รายการใบคำขอรับใบอนุญาตประกอบวิชาชีพ',
+        path: '/request-foreign-license/list',
+        label: 'รายการแบบคำขอรับหนังสืออนุญาตประกอบวิชาชีพ',
       },
+      /* {
+        path: '/xxx',
+        label: 'บัญชีรายชื่อและผลการนำเสนอขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ',
+      }, */
       {
-        path: '/license/list',
-        label: 'บัญชีรายชื่อและผลการนำเสนอขอใบอนุญาตประกอบวิชาชีพ',
-      },
-      {
-        path: '/license/approve-list',
-        label: 'พิจารณารับรองใบอนุญาตประกอบวิชาชีพ',
+        path: '/xxx',
+        label: 'พิจารณารับรองหนังสืออนุญาตประกอบวิชาชีพ',
       },
     ],
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'สร้างเลขใบอนุญาตประกอบวิชาชีพ',
-    path: '/xxx',
+    label: 'สร้างเลขหนังสืออนุญาตประกอบวิชาชีพ',
+    path: '/create-license-id/list',
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ(ชาวไทย)',
+    label: 'แบบคำขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ(ชาวไทย)',
     path: '',
     isExpanded: false,
     subMenuName: 'renewThai',
     subMenu: [
       {
         path: '/renew-license/approve-list',
-        label: 'รายการใบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
+        label: 'รายการแบบคำขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ',
       },
       {
-        path: '/renew-license/approve-list',
-        label: 'บัญชีรายชื่อและผลการนำเสนอขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
+        path: '/renew-license/search-list',
+        label: 'จัดทำบัญชีรายชื่อและนำเสนอขอหนังสืออนุญาตประกอบวิชาชีพ',
       },
       {
-        path: '/renew-license/approve-detail',
-        label: 'พิจารณารับรองใบอนุญาตประกอบวิชาชีพ',
+        path: '/renew-license/guarantee',
+        label: 'รับรองหนังสืออนุญาตประกอบวิชาขีพ',
       },
     ],
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ(ชาวต่างชาติ)',
+    label: 'แบบคำขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ(ชาวต่างชาติ)',
     path: '',
     isExpanded: false,
     subMenuName: 'renewForeign',
     subMenu: [
       {
-        path: '/renew-license/approve-list',
-        label: 'รายการใบคำขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
+        path: '/renew-foreign-license/list',
+        label: 'รายการแบบคำขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ',
       },
+      /* {
+        path: '/xxx',
+        label: 'บัญชีรายชื่อและผลการนำเสนอขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ',
+      }, */
       {
-        path: '/renew-license/approve-list',
-        label: 'บัญชีรายชื่อและผลการนำเสนอขอต่ออายุใบอนุญาตประกอบวิชาชีพ',
-      },
-      {
-        path: '/renew-license/approve-detail',
-        label: 'พิจารณารับรองใบอนุญาตประกอบวิชาชีพ',
+        path: '/xxx',
+        label: 'พิจารณารับรองหนังสืออนุญาตประกอบวิชาชีพ',
       },
     ],
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต(ชาวไทย)',
+    label: 'แบบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีหนังสืออนุญาต(ชาวไทย)',
     path: '',
     isExpanded: false,
     subMenuName: 'tempThai',
     subMenu: [
       {
-        path: '/temp-license/list',
-        label: 'รายการใบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
-      },
-      {
-        path: '/temp-license/list',
+        path: '/temp-license/list/1',
         label:
-          'บัญชีรายชื่อและผลการนำเสนอขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
+          'รายการแบบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีหนังสืออนุญาต',
       },
       {
-        path: '/temp-license/approve-list',
-        label: 'พิจารณารับรองหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
+        path: '/temp-license/consider-list/1',
+        label:
+          'พิจารณารับรองหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีหนังสืออนุญาต',
       },
     ],
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต(ชาวต่างชาติ)',
+    label:
+      'แบบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีหนังสืออนุญาต(ชาวต่างชาติ)',
     path: '',
     isExpanded: false,
     subMenuName: 'tempForeign',
     subMenu: [
       {
-        path: '/temp-license/list',
-        label: 'รายการใบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
-      },
-      {
-        path: '/temp-license/list',
+        path: '/temp-license/list/5',
         label:
-          'บัญชีรายชื่อและผลการนำเสนอขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
+          'รายการแบบคำขอหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีหนังสืออนุญาต',
       },
       {
-        path: '/temp-license/approve-list',
-        label: 'พิจารณารับรองหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีใบอนุญาต',
+        path: '/temp-license/consider-list/5',
+        label:
+          'พิจารณารับรองหนังสืออนุญาตให้ประกอบวิชาชีพโดยไม่มีหนังสืออนุญาต',
       },
     ],
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอเปลี่ยนแปลง/แก้ไขใบอนุญาต(ชาวไทย)',
+    label: 'แบบคำขอเปลี่ยนแปลง/แก้ไขหนังสืออนุญาต',
     path: '',
     isExpanded: false,
     subMenuName: 'edit-thai',
     subMenu: [
       {
-        path: '/foreign-license/list',
-        label: 'ตรวจสอบใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
+        path: '/edit-license/list',
+        label: 'รายการแบบคำขอแก้ไข/เปลี่ยนแปลงหนังสืออนุญาต',
       },
       {
-        path: '/temp-license/approve-detail',
-        label: 'พิจารณารับรองเลขคุรุสภาสำหรับชาวต่างชาติ',
+        path: '/edit-license/consider-list',
+        label: 'พิจารณาขอเปลี่ยนแปลง/แก้หนังสืออนุญาต',
       },
     ],
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอเปลี่ยนแปลง/แก้ไขใบอนุญาต(ชาวต่างชาติ)',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'edit-foreign',
-    subMenu: [
-      {
-        path: '/foreign-license/list',
-        label: 'ตรวจสอบใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
-      },
-      {
-        path: '/xxx',
-        label: 'พิจารณารับรองเลขคุรุสภาสำหรับชาวต่างชาติ',
-      },
-    ],
-  },
-  {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอใบแทนใบอนุญาตประกอบวิชาชีพ',
+    label: 'แบบคำขอใบแทนหนังสืออนุญาตประกอบวิชาชีพ',
     path: '',
     isExpanded: false,
     subMenuName: 'sub-license',
     subMenu: [
       {
-        path: '/xxx',
-        label: 'รายการใบคำขอ',
+        path: '/sub-license/approve-list',
+        label: 'รายการแบบคำขอใบแทนหนังสืออนุญาตประกอบวิชาชีพ',
       },
       {
-        path: '/temp-license/approve-detail',
-        label: 'พิจารณา',
+        path: '/xxx',
+        label: 'พิจารณาขอใบแทนหนังสืออนุญาตประกอบวิชาชีพ',
       },
     ],
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
+    label: 'แบบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
     path: '',
     isExpanded: false,
     subMenuName: 'foreign-id',
     subMenu: [
       {
         path: '/foreign-license/list',
-        label: 'ตรวจสอบใบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
-      },
-      {
-        path: '/temp-license/approve-detail',
-        label: 'พิจารณารับรองเลขคุรุสภาสำหรับชาวต่างชาติ',
+        label: 'รายการใบคำเลขคุรุสภาสำหรับชาวต่างชาติ',
       },
     ],
   },
-  {
+  /* {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'กิจกรรมพัฒนาตนเอง',
     path: '',
@@ -212,46 +186,46 @@ export const eLicenseMenu: MenuConfig[] = [
     subMenu: [
       {
         path: '/xxx',
-        label: 'รายการ',
+        label: 'รายการแบบคำขอยื่นกรอกกิจกรรมพัฒนาตนเอง',
       },
       {
-        path: '/temp-license/approve-detail',
-        label: 'พิจารณา',
+        path: '/xxx',
+        label: 'พิจารณากิจกรรมพัฒนาตนเอง',
       },
     ],
-  },
-  {
+  }, */
+  /* {
     icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ข้อมูลลักษณะต้องห้ามของผู้ขอใบอนุญาตประกอบวิชาชีพ',
+    label: 'ข้อมูลลักษณะต้องห้ามของผู้ขอหนังสืออนุญาตประกอบวิชาชีพ',
     path: '',
     isExpanded: false,
     subMenuName: 'forbidden',
     subMenu: [
       {
         path: '/xxx',
-        label: 'บันทึก',
+        label: 'บันทึกข้อมูลลักษณะต้องห้ามของผู้ขอรับหนังสืออนุญาตประกอบวิชาชีพ',
       },
       {
         path: '/xxx',
-        label: 'พิจารณา',
+        label: 'พิจารณาข้อมูลลักษณะต้องห้ามของผู้ขอรับหนังสืออนุญาตประกอบวิชาชีพ',
       },
     ],
-  },
+  }, */
   {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'ทะเบียนข้อมูล',
-    path: '',
+    path: '/xxx',
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'งานรับ-ส่งเอกสารใบอนุญาต',
+    label: 'งานรับ-ส่งเอกสารหนังสืออนุญาต',
     path: '',
     isExpanded: false,
     subMenuName: 'document',
     subMenu: [
       {
         path: '/document-delivery/receive-list',
-        label: 'รายการรับ-ส่งเอกสารใบอนุญาต',
+        label: 'รายการรับ-ส่งเอกสารหนังสืออนุญาต',
       },
       {
         path: '/document-delivery/check-list',
@@ -262,17 +236,27 @@ export const eLicenseMenu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'รายงาน',
-    path: '',
+    path: '/xxx',
+  },
+  {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'แบบคำขอผู้ใช้งานระบบบริการตนเอง (Self Service) สำหรับชาวต่างชาติ',
+    path: '/self-user/new-user-list',
+  },
+  {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'แบบคำขอผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
+    path: '/school/new-user',
   },
   {
     icon: 'assets/images/icon-sidenav/people.svg',
-    label: 'ระบบบริหารจัดการผู้ใช้งาน',
+    label: 'บริหารจัดการผู้ใช้งาน',
     path: '',
     isExpanded: false,
     subMenuName: 'user-management',
     subMenu: [
       {
-        path: '/self/current-user',
+        path: '/xxx',
         label: 'ผู้ใช้งานระบบบริการด้วยตนเอง (self Service)',
       },
       {
@@ -281,58 +265,6 @@ export const eLicenseMenu: MenuConfig[] = [
       },
     ],
   },
-  /*   {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอหนังสือรับรองความรู้',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'confirm',
-    subMenu: [
-      {
-        path: '/xxx',
-        label: 'รายการใบคำขอ',
-      },
-      {
-        path: '/temp-license/approve-detail',
-        label: 'พิจารณา',
-      },
-    ],
-  }, */
-  /* {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอเทียบเคียงความรู้',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'xxx',
-    subMenu: [
-      {
-        path: '/xxx',
-        label: 'รายการใบคำขอ',
-      },
-      {
-        path: '/xxx',
-        label: 'พิจารณา',
-      },
-    ],
-  }, */
-
-  /*   {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอรหัสเข้าใช้งานระบบ',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'user-approvement',
-    subMenu: [
-      {
-        path: '/self/new-user',
-        label: 'ระบบบริการด้วยตนเอง (self Service)',
-      },
-      {
-        path: '/school/new-user',
-        label: 'ระบบบริการหน่วยงานทางการศึกษา (School Service)',
-      },
-    ],
-  }, */
 ];
 
 export const ethicsMenu: MenuConfig[] = [
@@ -366,63 +298,63 @@ export const ethicsMenu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'รายงาน',
-    path: '',
+    path: '/xxx',
   },
 ];
 
 export const standardMenu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'ใบคำขอรับรองปริญญาและประกาศนียบัตร',
+    label: 'แบบคำขอรับรองปริญญาและประกาศนียบัตร',
     path: '',
     isExpanded: false,
     subMenuName: 'degree-cert',
     subMenu: [
       {
-        path: `/degree-cert/list/1`,
-        label: 'รายการใบคำขอรับรองปริญญาและประกาศนียบัตร',
+        path: `/degree-cert/list/1/0`,
+        label: 'รายการแบบคำขอรับรองปริญญาและประกาศนียบัตร',
       },
       {
-        path: `/degree-cert/list/2`,
+        path: `/degree-cert/list/3/1`,
         label: 'ประเมินหลักสูตรและโครงสร้างหลักสูตร',
       },
       {
-        path: `/degree-cert/list/3`,
+        path: `/degree-cert/list/4/2`,
         label: 'พิจารณาและออกใบรับรองปริญญาและประกาศนียบัตร',
+      },
+      {
+        path: `/degree-cert/list/6/3`,
+        label: 'ติดตามผลเชิงประจักษ์',
       },
     ],
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'ใบคำขอส่งรายชื่อผู้เข้าและผู้สำเร็จการศึกษา',
+    label: 'แบบคำขอส่งรายชื่อผู้เข้าและผู้สำเร็จการศึกษา',
     path: '',
     isExpanded: false,
     subMenuName: 'gradute-list',
     subMenu: [
       {
-        path: '/aa',
-        label: 'รายการใบคำขอส่งรายชื่อผู้เข้าศึกษา',
+        path: '/degree-cert/list-approved',
+        label: 'รายการแบบคำขอส่งรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา',
       },
-      {
-        path: '/bb',
-        label: 'รายการใบคำขอส่งรายชื่อผู้สำเร็จการศึกษา',
-      },
-      {
-        path: '/cc',
-        label: 'พิจารณารับข้อมูลผู้เข้าและผู้สำเร็จการศึกษา',
-      },
+      // {
+      //   path: '/cc',
+      //   label: 'พิจารณารับข้อมูลผู้เข้าและผู้สำเร็จการศึกษา',
+      // },
     ],
   },
-  {
+  /* {
     icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'ใบคำขอเทียบโอนความรู้',
+    label: 'แบบคำขอเทียบโอนความรู้',
     path: '',
     isExpanded: false,
-    subMenuName: 'request-knowledge',
+    subMenuName: 'transfer-knowledge',
     subMenu: [
       {
         path: '/aa',
-        label: 'รายการใบคำขอเทียบโอนความรู้',
+        label: 'รายการแบบคำขอเทียบโอนความรู้',
       },
       {
         path: '/bb',
@@ -433,102 +365,100 @@ export const standardMenu: MenuConfig[] = [
         label: 'พิจารณารับรองและพิมพ์วุฒิบัตร',
       },
     ],
+  }, */
+  {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'แบบคำขอเทียบเคียงความรู้',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'compare',
+    subMenu: [
+      {
+        path: '/compare-knowledge/list',
+        label: 'รายการแบบคำขอเทียบเคียงความรู้',
+      },
+      {
+        path: '/xxx',
+        label: 'บัญชีรายชื่อและพิมพ์หนังสือเทียบเคียงความรู้',
+      },
+      {
+        path: '/xxx',
+        label: 'พิจารณารับรองเทียบเคียงความรู้',
+      },
+    ],
+  },
+  {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    label: 'แบบคำขอรับรองความรู้',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'knowledge',
+    subMenu: [
+      {
+        path: '/knowledge-cert/list',
+        label: 'รายการแบบคำขอรับรองความรู้',
+      },
+      {
+        path: '/xxx',
+        label: 'บัญชีรายชื่อและพิมพ์หนังสือรับรองความรู้',
+      },
+      {
+        path: '/xxx',
+        label: 'พิจารณารับรองรับรองความรู้',
+      },
+    ],
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'ใบคำขอรับรองคุณวุฒิทางการศึกษา',
+    label: 'แบบคำขอรับรองคุณวุฒิทางการศึกษา',
     path: '',
     isExpanded: false,
-    subMenuName: 'request-degree',
+    subMenuName: 'qualification',
     subMenu: [
       {
-        path: '/aa',
+        path: '/qualification-approve/list',
         label: 'รายการใบคำรับรองคุณวุฒิทางการศึกษา',
       },
       {
-        path: '/bb',
+        path: '/qualification-approve/consider-list',
         label: 'พิจารณารับรองคุณวุฒิทางการศึกษา',
-      },
-      {
-        path: '/cc',
-        label: 'บัญชีรายชื่อและพิมพ์หนังสือคุณวุฒิทางการศึกษา',
       },
     ],
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'นำเข้าและบันทึกผลการทดสอบ',
-    path: '/import-test',
+    path: '/import-test/list',
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'นำเข้าและบันทึกผลการประเมินสมรรถนะทางวิชาชีพครู',
-    path: '/import-performance',
+    path: '/import-performance/list',
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'ทะเบียนข้อมูล',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'data',
-    subMenu: [
-      {
-        path: '/aa',
-        label: 'ทะเบียนรหัสรับรองปริญญาและประกาศนียบัตร',
-      },
-      {
-        path: '/bb',
-        label: 'ทะเบียนรายชื่อนักศึกษาเข้าเรียนและจบการศึกษา',
-      },
-      {
-        path: '/cc',
-        label: 'ทะเบียนผู้ผ่านการทดสอบ',
-      },
-      {
-        path: '/cc',
-        label: 'ทะเบียนผู้ผ่านการประเมินสมรรถนะทางวิชาชีพครู',
-      },
-    ],
+    path: '/xxx',
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'รายงาน',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'report',
-    subMenu: [
-      {
-        path: '/aa',
-        label: 'รายงานยื่นใบคำขอ(แยกตามประเภท)',
-      },
-      {
-        path: '/bb',
-        label: ' รายงานรายชื่อปริญญาและประกาศนียบัตรที่ได้รับการรับรอง',
-      },
-    ],
+    path: '/xxx',
   },
   {
-    icon: 'assets/images/icon-sidenav/paper.svg',
-    label: 'ใบคำขอรหัสเข้าใช้งานระบบ',
-    path: '',
-    isExpanded: false,
-    subMenuName: 'user-approvement',
-    subMenu: [
-      {
-        path: 'xxx',
-        label: 'ระบบบริการสถาบันผลิตครู (Uni Service)',
-      },
-    ],
+    icon: 'assets/images/icon-sidenav/card.svg',
+    label: 'แบบคำขอรหัสเข้าใช้งานระบบบริการสถาบันผลิตครู (Uni Service)',
+    path: '/uni/new-user',
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'ระบบบริหารจัดการผู้ใช้งาน',
     path: '',
     isExpanded: false,
-    subMenuName: 'user-manage',
+    subMenuName: 'user-management',
     subMenu: [
       {
-        path: '/aa',
+        path: '/uni/current-user',
         label: 'ผู้ใช้งานระบบบริการสถาบันผลิตครู (Uni Service)',
       },
     ],
@@ -538,113 +468,169 @@ export const standardMenu: MenuConfig[] = [
 export const professionalMenu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'ใบคำขอรับรางวัลคุรุสภา',
+    label: 'แบบคำขอรับรางวัลคุรุสภา',
     path: '',
     subMenuName: 'reward1',
     subMenu: [
       {
-        path: '/xxx',
-        label: 'รายการ',
+        path: '/teacher-council/list',
+        label: 'รายการแบบคำขอรับรางวัลคุรุสภา',
       },
       {
-        path: '/xxx',
-        label: 'พิจารณา',
+        path: '/teacher-council/account-list',
+        label: 'จัดทำบัญชีรายชื่อ',
+      },
+      {
+        path: '/teacher-council/check-list',
+        label: 'เจ้าหน้าที่ส่วนกลางตรวจสอบบันทึกผล',
+      },
+      {
+        path: '/teacher-council/declare',
+        label: 'ประกาศรายชื่อ',
       },
     ],
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'ใบคำขอรับรางวัลครูภาษาไทยดีเด่น',
+    label: 'แบบคำขอรับรางวัลครูภาษาไทยดีเด่น',
     path: '',
     subMenuName: 'reward2',
     subMenu: [
       {
-        path: '/xxx',
-        label: 'รายการ',
+        path: '/thai-teacher/list',
+        label: 'รายการแบบคำขอรับรางวัลครูภาษาไทยดีเด่น',
       },
       {
-        path: '/xxx',
-        label: 'พิจารณา',
+        path: '/thai-teacher/account-list',
+        label: 'จัดทำบัญชีรายชื่อ',
+      },
+      {
+        path: '/thai-teacher/check-list',
+        label: 'เจ้าหน้าที่ส่วนกลางตรวจสอบบันทึกผล',
+      },
+      {
+        path: '/thai-teacher/declare',
+        label: 'ประกาศรายชื่อ',
       },
     ],
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'ใบคำขอรับรางวัลครูผู้สอนดีเด่น',
+    label: 'แบบคำขอรับรางวัลครูผู้สอนดีเด่น',
     path: '',
     subMenuName: 'reward3',
     subMenu: [
       {
-        path: '/xxx',
-        label: 'รายการ',
+        path: '/best-teacher/list',
+        label: 'รายการแบบคำขอรับรางวัลครูผู้สอนดีเด่น',
       },
       {
-        path: '/xxx',
-        label: 'พิจารณา',
+        path: '/best-teacher/account-list',
+        label: 'จัดทำบัญชีรายชื่อ',
+      },
+      {
+        path: '/best-teacher/check-list',
+        label: 'เจ้าหน้าที่ส่วนกลางตรวจสอบบันทึกผล',
+      },
+      {
+        path: '/best-teacher/declare',
+        label: 'ประกาศรายชื่อ',
       },
     ],
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'ใบคำขอรับรางวัลคุรุสดุดี',
+    label: 'แบบคำขอรับรางวัลคุรุสดุดี',
     path: '',
     subMenuName: 'reward4',
     subMenu: [
       {
-        path: '/xxx',
-        label: 'รายการ',
+        path: '/praise-teacher/list',
+        label: 'รายการแบบคำขอรับรางวัลคุรุสดุดี',
       },
       {
-        path: '/xxx',
-        label: 'พิจารณา',
+        path: '/praise-teacher/account-list',
+        label: 'จัดทำบัญชีรายชื่อ',
+      },
+      {
+        path: '/praise-teacher/check-list',
+        label: 'เจ้าหน้าที่ส่วนกลางตรวจสอบบันทึกผล',
+      },
+      {
+        path: '/praise-teacher/declare',
+        label: 'ประกาศรายชื่อ',
       },
     ],
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'ใบคำขอรับรางวัลผลงานวิจัยของคุรุสภา',
+    label: 'แบบคำขอรับรางวัลผลงานวิจัยของคุรุสภา',
     path: '',
     subMenuName: 'reward5',
     subMenu: [
       {
-        path: '/xxx',
-        label: 'รายการ',
+        path: '/research-reward/list',
+        label: 'รายการแบบคำขอรับรางวัลผลงานวิจัยของคุรุสภา',
       },
       {
-        path: '/xxx',
-        label: 'พิจารณา',
+        path: '/research-reward/check-list',
+        label: 'เจ้าหน้าที่ส่วนกลางบันทึกผล',
+      },
+      {
+        path: '/research-reward/declare',
+        label: 'ประกาศรายชื่อ',
       },
     ],
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'ใบคำขอรับรางวัลครูอาวุโส',
+    label: 'แบบคำขอรับรางวัลครูอาวุโส',
     path: '',
     subMenuName: 'reward6',
     subMenu: [
       {
-        path: '/xxx',
-        label: 'รายการ',
+        path: '/senior-teacher/list',
+        label: 'รายการแบบคำขอรับรางวัลครูอาวุโส',
       },
       {
-        path: '/xxx',
-        label: 'พิจารณา',
+        path: '/senior-teacher/account-list',
+        label: 'สร้างบัญชีรายชื่อนำเสนอส่วนกลาง (มอ.5)',
+      },
+      {
+        path: '/senior-teacher/check-list',
+        label: 'เจ้าหน้าที่ส่วนกลางตรวจสอบบันทึกผล',
+      },
+      {
+        path: '/senior-teacher/report-account-list',
+        label: 'เจ้าหน้าที่ส่วนกลางจัดทำบัญชีผู้เข้ารายงานตัว',
+      },
+      {
+        path: '/senior-teacher/report-list',
+        label: 'ลงทะเบียนรายงานตัว',
+      },
+      {
+        path: '/senior-teacher/print-list',
+        label: 'พิมพ์ป้ายติดหน้าอก',
+      },
+      {
+        path: '/senior-teacher/visit-list',
+        label: 'ลงทะเบียนวันเข้าเฝ้าฯ',
       },
     ],
   },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
-    label: 'ใบคำขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม',
+    label: 'แบบคำขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม',
     path: '',
     isExpanded: false,
     subMenuName: 'osoi',
     subMenu: [
       {
         path: '/one-school-one-innovation/list',
-        label: 'รายการใบคำขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม',
+        label: 'รายการแบบคำขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม',
       },
       {
-        path: '/one-school-one-innovation/approve',
+        path: '/one-school-one-innovation/ranking-list',
         label: 'พิจารณารางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม',
       },
     ],
@@ -652,16 +638,29 @@ export const professionalMenu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'รายงาน',
-    path: '',
+    path: '/xxx',
   },
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'ตั้งค่า',
     path: '',
+    isExpanded: false,
+    subMenuName: 'enable-reward',
+    subMenu: [
+      {
+        path: '/enable-reward/list',
+        label: 'ตั้งค่าเปิด-ปิดยื่นขอรับรางวัล',
+      },
+    ],
   },
 ];
 
 export const refundFeeMenu: MenuConfig[] = [
+  {
+    icon: 'assets/images/icon-sidenav/paper.svg',
+    path: '/payment-fee/all-payment',
+    label: 'รายการชำระเงิน',
+  },
   {
     icon: 'assets/images/icon-sidenav/card.svg',
     label: 'รายการชำระเงินค่าธรรมเนียม',
@@ -670,16 +669,16 @@ export const refundFeeMenu: MenuConfig[] = [
     subMenuName: 'pay',
     subMenu: [
       {
-        path: '/xxx',
+        path: '/payment-fee/list',
         label: 'รายการใบเสร็จรับเงิน',
       },
       {
-        path: '/xxx',
-        label: 'รายการใบนำส่งเงิน',
+        path: '/payment-fee/receive',
+        label: 'รายการรับเงินค่าธรรมเนียม',
       },
       {
-        path: '/xxx',
-        label: 'รายการใบประกอบใบนำส่งเงิน',
+        path: '/payment-fee/remittance',
+        label: 'รายการใบนำส่งเงิน',
       },
     ],
   },
@@ -691,15 +690,15 @@ export const refundFeeMenu: MenuConfig[] = [
     subMenuName: 'refund',
     subMenu: [
       {
-        path: '/refund/list',
-        label: 'รายการใบขอคืนค่าธรรมเนียม',
+        path: '/refund-fee/list',
+        label: 'รายการแบบคำขอคืนค่าธรรมเนียม',
       },
       {
-        path: '/refund/detail',
+        path: '/refund-fee/create-roster',
         label: 'บัญชีรายชื่อและอนุมัติการคืนค่าธรรมเนียม',
       },
       {
-        path: '/refund/approve',
+        path: '/xxx',
         label: 'ตรวจสอบและบันทึกสถานะการคืนค่าธรรมเนียม',
       },
     ],
@@ -728,6 +727,6 @@ export const refundFeeMenu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'รายงาน',
-    path: '',
+    path: '/xxx',
   },
 ];

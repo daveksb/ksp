@@ -1,0 +1,62 @@
+<ksp-top-nav
+  ><span header>ตรวจสอบแบบคำขอ</span
+  ><span subHeader>ขอคืนค่าธรรมเนียม </span></ksp-top-nav
+>
+
+<div class="bg-secondary bg-opacity-10 px-4 py-2">
+  <form [formGroup]="form">
+    <div class="box-header">รายละเอียดแบบคำขอ</div>
+    <div class="bg-white p-3">
+      <ksp-request-header-info
+        [requestDate]="requestData.createdate"
+        [requestNumber]="requestData.requestno"
+      ></ksp-request-header-info>
+      <hr />
+      <div class="bg-light p-3">
+        <div class="box-header">ข้อมูลผู้ยื่นแบบคำขอ</div>
+        <ksp-form-user-info
+          [isSelfService]="true"
+          [mode]="'view'"
+          [prefixList]="prefixList$ | async"
+          formControlName="userInfo"
+        ></ksp-form-user-info>
+      </div>
+      <br />
+      <div class="bg-light p-3">
+        <ksp-form-refund-fee-detail
+          formControlName="refundInfo"
+          [mode]="'view'"
+        ></ksp-form-refund-fee-detail>
+      </div>
+      <br />
+      <ksp-form-multi-attachment
+        [groups]="files"
+        [mode]="'view'"
+      ></ksp-form-multi-attachment>
+    </div>
+    <div class="bg-white p-3 mt-3">
+      <ng-container
+        formArrayName="checkResult"
+        *ngFor="let c of checkResultFormArray.controls; let i = index"
+      >
+        <div class="bg-white">
+          <e-service-license-check
+            [choices]="verifyChoice"
+            [formControlName]="i"
+          ></e-service-license-check>
+        </div>
+      </ng-container>
+    </div>
+  </form>
+</div>
+
+<div class="sticky-bottom border px-2">
+  <ksp-bottom-nav
+    [showCenterButtons]="true"
+    [isFirstPage]="true"
+    [disableNext]="false"
+    (nextClicked)="nextPage()"
+    (cancelClicked)="cancel()"
+  >
+  </ksp-bottom-nav>
+</div>

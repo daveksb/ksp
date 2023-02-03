@@ -1,0 +1,121 @@
+<div class="print">
+  <table class="table">
+    <thead>
+      <tr>
+        <th colspan="2">
+          <div class="d-flex flex-row">
+            <img
+              src="/assets/images/kuru-logo.png"
+              style="width: 75px; height: 75px"
+            />
+            <div class="fs-4 text-black ms-2">
+              สำนักงานเลขาธิการคุรุสภา <br />
+              ใบแจ้งการชำระเงิน (เพื่อนำเข้าบัญชี)
+            </div>
+          </div>
+          <div class="text-end fs-5 text-danger">
+            ชำระเงินภายในวันที่
+            {{ data?.expireDate | thaiDate }} เท่านั้น
+          </div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="w-50">
+          <div class="d-flex flex-row align-items-center">
+            <input type="radio" disabled /><img
+              src="/assets/images/kuru-logo.png"
+              class="mx-2"
+              style="width: 25px; height: 25px"
+            /><label>Counter สำนักงานเลขาธิการคุรุสภา</label>
+          </div>
+          <div class="d-flex flex-row align-items-center">
+            <input type="radio" disabled /><img
+              src="/assets/images/pay-chanel/krungthai.png"
+              class="mx-2"
+              style="width: 20px; height: 20px"
+            /><label>ธนาคารกรุงไทย 10 บาท/ครั้ง Com. code 9430</label>
+          </div>
+          <div class="d-flex flex-row align-items-center">
+            <input type="radio" disabled /><img
+              src="/assets/images/pay-chanel/post.png"
+              class="mx-2"
+              style="width: 25px; height: 25px"
+            /><label>ไปรษณีย์ไทย 10 บาท/ครั้ง รหัสบริการ 1121 ph</label>
+          </div>
+        </td>
+        <td class="w-50">
+          <div>
+            ชื่อ - นามสกุล : {{ data?.kspRequest?.firstnameth }}
+            {{ data?.kspRequest?.lastnameth }}
+          </div>
+          <div>
+            เลขประจำตัวประชาชน (Ref1) : {{ data?.kspRequest?.idcardno }}
+          </div>
+          <div>เลขที่อ้างอิง (Ref2) : {{ data?.kspRequest?.requestno }}</div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <div class="row">
+            <div class="col text-black">จำนวนเงินตัวอักษร</div>
+            <div class="col text-black">ห้าร้อยบาทถ้วน</div>
+            <div class="col text-black">จำนวนเงินทั้งหมด</div>
+            <div class="col text-black">500 บาท</div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <div class="row">
+            <div class="col text-black">สำหรับเจ้าหน้าที่รับชำระเงิน</div>
+            <div class="col text-black">ผู้รับเงิน</div>
+            <div class="col text-black">ผู้รับมอบอำนาจ</div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-between mt-1">
+    <ngx-barcode
+      [bc-value]="data.qrString"
+      [bc-display-value]="true"
+      [bc-height]="50"
+    ></ngx-barcode>
+
+    <qrcode
+      [qrdata]="data.qrString"
+      [allowEmptyString]="true"
+      [ariaLabel]="'QR Code image with the following content...'"
+      [cssClass]="'center'"
+      [colorDark]="'#000000ff'"
+      [colorLight]="'#ffffffff'"
+      [elementType]="'canvas'"
+      [errorCorrectionLevel]="'M'"
+      [imageSrc]="'./assets/angular-logo.png'"
+      [imageHeight]="20"
+      [imageWidth]="20"
+      [margin]="1"
+      [scale]="1"
+      [title]="'A custom title attribute'"
+      [width]="100"
+    ></qrcode>
+  </div>
+</div>
+
+<div class="no-print">
+  <div class="d-flex justify-content-center px-3 pb-3 bg-white">
+    <button
+      type="button"
+      class="btn bg-light text-secondary border-secondary"
+      matDialogClose
+    >
+      ยกเลิก
+    </button>
+    <button type="button" class="ms-3 btn btn-primary" onclick="print()">
+      พิมพ์แบบชำระเงิน
+    </button>
+  </div>
+</div>

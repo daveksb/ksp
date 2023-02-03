@@ -10,51 +10,20 @@
             <h3 class="mb-3 pb-2 pb-md-0 mb-md-4 text-center">Register</h3>
 
             <div class="d-flex justify-content-center mb-3">
-              <div class="position-relative m-4 w-md-25 w-50">
-                <div class="progress" style="height: 1px">
-                  <div
-                    class="progress-bar"
-                    role="progressbar"
-                    style="width: 50%"
-                    aria-valuenow="50"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                  ></div>
-                </div>
-                <button
-                  type="button"
-                  class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-outline-primary text-primary rounded-pill"
-                  style="
-                    width: 3rem;
-                    height: 3rem;
-                    pointer-events: none;
-                    background: #fff;
-                  "
-                >
-                  1
-                </button>
-                <button
-                  type="button"
-                  class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-secondary rounded-pill"
-                  style="width: 3rem; height: 3rem; pointer-events: none"
-                >
-                  2
-                </button>
-                <button
-                  type="button"
-                  class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill"
-                  style="width: 3rem; height: 3rem; pointer-events: none"
-                >
-                  3
-                </button>
-              </div>
+              <img
+                src="/assets/images/register-1.png"
+                width="200px"
+                height="40px"
+              />
             </div>
-
             <form [formGroup]="form">
               <div class="row">
                 <div class="col-md mb-2">
                   <label class="form-label required">Title</label>
                   <select formControlName="prefixen" class="form-select">
+                    <option value="null" selected hidden disabled>
+                      Please Select
+                    </option>
                     <option
                       *ngFor="let prefix of prefixList$ | async"
                       [value]="prefix.id"
@@ -72,7 +41,7 @@
                   />
                 </div>
                 <div class="col-md mb-2">
-                  <label class="form-label required">Middle name</label>
+                  <label class="form-label">Middle name</label>
                   <input
                     type="text"
                     formControlName="middlenameen"
@@ -81,7 +50,7 @@
                 </div>
                 <div class="col-md mb-2">
                   <div class="form-group">
-                    <label class="form-label required">Last Name</label>
+                    <label class="form-label">Last Name</label>
                     <input
                       type="text"
                       formControlName="lastnameen"
@@ -98,7 +67,6 @@
                     type="date"
                     formControlName="birthdate"
                     class="form-control"
-                    placeholder=""
                   />
                 </div>
                 <div class="col-md mb-2">
@@ -119,7 +87,7 @@
 
               <div class="row">
                 <div class="col-md mb-2">
-                  <label class="form-label">Nationality</label>
+                  <label class="form-label required">Nationality</label>
                   <select class="form-select" formControlName="nationality">
                     <option value="null" selected hidden disabled>
                       Please Select
@@ -149,7 +117,6 @@
                     type="text"
                     formControlName="email"
                     class="form-control"
-                    placeholder=""
                   />
                 </div>
               </div>
@@ -164,7 +131,12 @@
                 >
                   Next
                 </button>
-                <div class="label__login" (click)="loginPage()">Login</div>
+                <div
+                  class="fs-5 text-decoration-underline text-secondary mt-3"
+                  (click)="loginPage()"
+                >
+                  Login
+                </div>
               </div>
             </form>
           </div>

@@ -19,10 +19,29 @@ import {
   EducationDetailService,
   MyInfoService,
   SelfRequestService,
+  LoaderService,
 } from '@ksp/shared/service';
-import { replaceEmptyWithNull, toLowercaseProp } from '@ksp/shared/utility';
-import { SelfRequest } from '@ksp/shared/interface';
+import {
+  getCookie,
+  parseJson,
+  replaceEmptyWithNull,
+  toLowercaseProp,
+} from '@ksp/shared/utility';
+import { FileGroup, SelfRequest } from '@ksp/shared/interface';
 import * as _ from 'lodash';
+import { Observable, Subject } from 'rxjs';
+import { v4 as uuidv4 } from 'uuid';
+
+const OBJECTIVE_FILES: FileGroup[] = [
+  {
+    name: '1. สำเนาหลักฐานแสดงวุฒิการศึกษา',
+    files: [],
+  },
+  {
+    name: '2. รูปภาพถ่ายหน้าตรง ขนาด 1.5 x 2 นิ้ว',
+    files: [],
+  },
+];
 
 @Component({
   selector: 'ksp-compare-knowledge-request',
@@ -33,15 +52,10 @@ export class CompareKnowledgeRequestComponent
   extends LicenseFormBaseComponent
   implements OnInit
 {
-  objectiveFiles = [
-    { name: '1. สำเนาหลักฐานแสดงวุฒิการศึกษา', fileId: '', fileName: '' },
-    {
-      name: '2. รูปภาพถ่ายหน้าตรง ขนาด 1.5 x 2   นิ้ว',
-      fileId: '',
-      fileName: '',
-    },
-  ];
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
+  objectiveFiles: any[] = [];
   userInfoType = UserInfoFormType.thai;
+  countries$!: Observable<any>;
 
   override form = this.fb.group({
     userInfo: [],
@@ -61,7 +75,8 @@ export class CompareKnowledgeRequestComponent
     educationDetailService: EducationDetailService,
     myInfoService: MyInfoService,
     requestService: SelfRequestService,
-    route: ActivatedRoute
+    route: ActivatedRoute,
+    private loaderService: LoaderService
   ) {
     super(
       generalInfoService,
@@ -78,9 +93,47 @@ export class CompareKnowledgeRequestComponent
 
   ngOnInit(): void {
     this.getListData();
-    this.getMyInfo();
-    // this.checkButtonsDisableStatus();
-    this.initializeFiles();
+    this.checkRequestId();
+    this.countries$ = this.addressService.getCountry();
+  }
+
+  get userInfoForm() {
+    return this.form.controls.userInfo;
+  }
+
+  override resetForm() {
+    super.resetForm();
+    this.objectiveFiles = structuredClone(OBJECTIVE_FILES);
+  }
+
+  override initializeFiles(): void {
+    super.initializeFiles();
+    this.objectiveFiles = structuredClone(OBJECTIVE_FILES);
+    this.uniqueTimestamp = uuidv4();
+  }
+
+  override patchData(data: SelfRequest) {
+    super.patchData(data);
+    if (data.eduinfo) {
+      const eduInfo = parseJson(data.eduinfo);
+      this.form.controls.educationInfo.patchValue({
+        ...eduInfo,
+      } as any);
+    }
+
+    if (data.testresultcompareinfo) {
+      const testResultCompareInfo = parseJson(data.testresultcompareinfo);
+      console.log(testResultCompareInfo);
+      this.form.controls.testResultCompareInfo.patchValue({
+        ...testResultCompareInfo,
+      });
+    }
+
+    if (data.fileinfo) {
+      const fileInfo = parseJson(data.fileinfo);
+      const { attachfiles } = fileInfo;
+      this.objectiveFiles = attachfiles;
+    }
   }
 
   patchUserInfoForm(data: any): void {
@@ -110,8 +163,6 @@ export class CompareKnowledgeRequestComponent
 
     const { id, ...rawUserInfo } = formData.userInfo;
     const userInfo = toLowercaseProp(rawUserInfo);
-    userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
-    userInfo.uniquetimestamp = this.uniqueTimestamp;
 
     const self = new SelfRequest(
       '1',
@@ -119,12 +170,17 @@ export class CompareKnowledgeRequestComponent
       `${SelfServiceRequestSubType.อื่นๆ}`,
       currentProcess
     );
+    self.isforeign = `${SelfServiceRequestForType.ชาวไทย}`;
+    self.uniqueno = this.uniqueTimestamp;
+    self.userid = getCookie('userId');
     const allowKey = Object.keys(self);
 
     const attachfiles = this.objectiveFiles;
 
     const initialPayload = {
       ...replaceEmptyWithNull(userInfo),
+      ...(this.requestId && { id: `${this.requestId}` }),
+      ...(this.imageId && { imagefileid: `${this.imageId}` }),
       ...{
         addressinfo: JSON.stringify([formData.address1, formData.address2]),
       },
@@ -158,7 +214,10 @@ export class CompareKnowledgeRequestComponent
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         const payload = this.createRequest(type);
-        this.requestService.createRequest(payload).subscribe((res) => {
+        const request = this.requestId
+          ? this.requestService.updateRequest.bind(this.requestService)
+          : this.requestService.createRequest.bind(this.requestService);
+        request(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res?.returncode === '00') {
             this.onCompleted();

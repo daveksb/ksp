@@ -13,8 +13,14 @@ import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import { ReactiveFormsModule } from '@angular/forms';
-import { EServiceRequestSearchComponent } from '@ksp/shared/search';
+import {
+  EServiceRequestSearchComponent,
+  RequestSearchComponent,
+} from '@ksp/shared/search';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
+import { MatSortModule } from '@angular/material/sort';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export const routes: Routes = [
   {
@@ -58,6 +64,11 @@ export const routes: Routes = [
     ReactiveFormsModule,
     EServiceRequestSearchComponent,
     MatPaginatorModule,
+    ThaiDatePipe,
+    RequestNoPipe,
+    RequestSearchComponent,
+    MatSortModule,
+    MatProgressSpinnerModule,
   ],
   declarations: [ForeignLicenseDetailComponent, ForeignLicenseListComponent],
 })

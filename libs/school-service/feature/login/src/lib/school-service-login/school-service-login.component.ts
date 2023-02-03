@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { setCookie } from '@ksp/shared/utility';
 import { SchoolServiceFeatureLoginService } from '../school-service-feature-login.service';
+import * as CryptoJs from 'crypto-js';
 
 @Component({
   selector: 'school-service-login',
@@ -10,8 +11,10 @@ import { SchoolServiceFeatureLoginService } from '../school-service-feature-logi
   styleUrls: ['./school-service-login.component.scss'],
 })
 export class SchoolServiceLoginComponent {
+  loginFail = false;
+
   form = this.fb.group({
-    user: [],
+    login: [],
   });
 
   constructor(
@@ -21,16 +24,27 @@ export class SchoolServiceLoginComponent {
   ) {}
 
   login() {
+    this.loginFail = false;
+    const payload: any = this.form.controls.login.value;
+    payload.password = CryptoJs.SHA256(`${payload.password}`).toString();
+
     this.schoolServiceFeatureLoginService
-      .validateLogin(this.form.value.user)
+      .validateLogin(payload)
       .subscribe((res) => {
-        if (res.returnCode == 99) return;
+        if (res.returnCode == 99) {
+          this.loginFail = true;
+          this.form.reset();
+          return;
+        }
+
         this.schoolServiceFeatureLoginService.config = res;
         setCookie('userToken', res.schUserToken, 1);
         setCookie('firstNameTh', res.firstNameTh, 1);
         setCookie('lastNameTh', res.lastNameTh, 1);
+        setCookie('schoolId', res.schoolId, 1);
         this.router.navigate(['/temp-license', 'list']);
       });
+    this.loginFail = false;
   }
 
   register() {

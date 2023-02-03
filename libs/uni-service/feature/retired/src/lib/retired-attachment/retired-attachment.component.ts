@@ -7,10 +7,21 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { thaiDate } from '@ksp/shared/utility';
-import { GeneralInfoService, UniInfoService, UniRequestService } from '@ksp/shared/service';
-import { EMPTY, Observable, switchMap } from 'rxjs';
+import {
+  mapMultiFileInfo,
+  replaceEmptyWithNull,
+  thaiDate,
+} from '@ksp/shared/utility';
+import {
+  GeneralInfoService,
+  LoaderService,
+  UniInfoService,
+  UniRequestService,
+} from '@ksp/shared/service';
+import { EMPTY, Observable, Subject, switchMap } from 'rxjs';
 import localForage from 'localforage';
+import { v4 as uuidv4 } from 'uuid';
+import { FileGroup } from '@ksp/shared/interface';
 
 @Component({
   selector: 'uni-service-retired-attachment',
@@ -39,36 +50,76 @@ export class RetiredAttachmentComponent implements OnInit {
     private uniinfoService: UniInfoService
   ) {}
 
-  retiredFiles = [{ name: 'หนังสือแต่งตั้งผู้ประสานงาน', fileId: '', fileName: '' }];
+  retiredFiles: FileGroup[] = [
+    { name: 'หนังสือแต่งตั้งผู้ประสานงาน', files: [] },
+    { name: 'สำเนาบัตรประชาชน', files: [] },
+  ] as FileGroup[];
 
   ngOnInit() {
-    this.uniqueTimestamp = `${new Date().getTime()}`;
+    this.uniqueTimestamp = uuidv4();
     this.prefixName$ = this.generalInfoService.getPrefix();
     this.occupyList$ = this.uniinfoService.getOccupy();
     localForage.getItem('retireReasonData').then((res) => {
       this.reasoninfo = res;
     });
-    localForage.getItem('userSelectedData').then((res:any) => {
+    localForage.getItem('userSelectedData').then((res: any) => {
       if (res) {
+        console.log(res);
         this.userInfo = res;
       }
     });
-    localForage.getItem('retireCoordinatorInfo').then((res:any) => {
+    localForage.getItem('retireCoordinatorInfo').then((res: any) => {
       if (res) {
         this.form.patchValue({
-          coordinator: res.coordinator
-        })
+          coordinator: res.form.coordinator,
+        });
+        this.retiredFiles = res.file;
       }
     });
   }
 
   prevPage() {
-    localForage.setItem('retireCoordinatorInfo', this.form.getRawValue());
+    const form = {
+      form: this.form.getRawValue(),
+      file: this.retiredFiles,
+    };
+    localForage.setItem('retireCoordinatorInfo', form);
     this.router.navigate(['/', 'retired', 'reason']);
   }
 
   cancel() {
-    this.router.navigate(['/', 'login']);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: `คุณต้องการยกเลิกรายการแบบคำขอ
+        ใช่หรือไม่?`,
+        btnLabel: 'ยืนยัน',
+      },
+    });
+
+    dialogRef.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.onCancel();
+      }
+    });
+  }
+
+  onCancel() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      width: '350px',
+      data: {
+        header: 'ยกเลิกรายการสำเร็จ',
+      },
+    });
+
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        localForage.removeItem('retireReasonData');
+        localForage.removeItem('userSelectedData');
+        localForage.removeItem('retireCoordinatorInfo');
+        this.router.navigate(['/login']);
+      }
+    });
   }
 
   save() {
@@ -87,23 +138,41 @@ export class RetiredAttachmentComponent implements OnInit {
       .pipe(
         switchMap((res) => {
           if (res) {
-            const fileUpload = this.retiredFiles.map((file) => file.fileId || null);
-            let payload = {
+            this.userInfo = replaceEmptyWithNull(this.userInfo);
+            const fileUpload = mapMultiFileInfo(this.retiredFiles);
+            const educationoccupy = {
+              schoolid: this.userInfo.uniid,
+              uniid: this.userInfo.uniid,
+              unitype: this.userInfo.unitype,
+              institution: this.userInfo.name,
+              affiliation: this.userInfo.unitypename,
+              unicode: this.userInfo.unicode,
+              uniname: this.userInfo.name,
+              unitypename: this.userInfo.unitypename,
+              permission: this.userInfo.permissionright,
+              userid: this.userInfo.id,
+            };
+            const payload = {
               ...this.userInfo,
+              contactphone: this.userInfo.phone,
+              educationoccupy: JSON.stringify(educationoccupy),
               coordinatorinfo: JSON.stringify(this.form.value.coordinator),
               fileinfo: JSON.stringify({ fileUpload }),
-              reasoninfo: JSON.stringify(this.reasoninfo)
-            }
+              reasoninfo: JSON.stringify(this.reasoninfo),
+            };
             payload.ref1 = '3';
             payload.ref2 = '02';
             payload.ref3 = '5';
             payload.systemtype = '3';
             payload.requesttype = '2';
             payload.subtype = '5';
+            payload.careertype = '5';
             payload.currentprocess = `1`;
-            payload.requeststatus = `1`;
+            payload.status = `1`;
+            payload.process = '1';
             payload.schoolid = this.userInfo.uniid;
-            return this.requestService.createRequest(payload);
+            payload.uniquetimestamp = this.uniqueTimestamp;
+            return this.requestService.createRequestKsp(payload);
           }
           return EMPTY;
         })
@@ -121,8 +190,8 @@ export class RetiredAttachmentComponent implements OnInit {
       data: {
         header: 'ยืนยันข้อมูลสำเร็จ',
         content: `วันที่ : ${this.today}
-        เลขที่ใบคำขอ : ${requestno} `,
-        subContent: `กรุณาตรวจสอบสถานะใบคำขอหรือรหัสเข้าใช้งาน
+        เลขที่แบบคำขอ : ${requestno} `,
+        subContent: `กรุณาตรวจสอบสถานะแบบคำขอหรือรหัสเข้าใช้งาน
         ผ่านทางอีเมลผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },
     });

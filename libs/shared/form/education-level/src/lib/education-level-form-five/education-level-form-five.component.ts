@@ -9,7 +9,12 @@ import { providerFactory } from '@ksp/shared/utility';
   styleUrls: ['./education-level-form-five.component.scss'],
   providers: providerFactory(EducationLevelFormFiveComponent),
 })
-export class EducationLevelFormFiveComponent extends KspFormBaseComponent {
+export class EducationLevelFormFiveComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
+  totalStandard: any;
+
   override form = this.fb.group({
     levelOneForm: [],
     isTransfer: [],
@@ -24,12 +29,19 @@ export class EducationLevelFormFiveComponent extends KspFormBaseComponent {
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value) => {
-        const { levelOneForm, ...resForm } = value as Partial<{
-          levelOneForm: any;
-        }>;
-        this.onChange({ ...levelOneForm, ...resForm });
+        this.onChange(value);
         this.onTouched();
       })
     );
+  }
+
+  ngOnInit(): void {
+    this.calTotalSum();
+  }
+
+  calTotalSum() {
+    this.form.valueChanges.subscribe((res) => {
+      this.totalStandard = Number(res.transferCount) + Number(res.testCount);
+    });
   }
 }

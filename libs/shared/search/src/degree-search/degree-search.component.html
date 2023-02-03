@@ -1,58 +1,76 @@
 <form [formGroup]="form">
-  <div class="bg-light px-3 pt-1 pb-2">
+  <div class="bg-light p-3">
     <ng-content></ng-content>
 
     <div class="row mb-2">
-      <div class="col">
+      <div class="col-md-6">
         <label class="form-label">สถาบัน / มหาวิทยาลัย</label>
-        <select class="form-select" formControlName="institution">
+        <select
+          class="form-select"
+          formControlName="institution"
+          [attr.disabled]="true"
+        >
           <option value="null" selected disabled hidden>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option
+            *ngFor="let university of uniUniversityOption"
+            [value]="university.id"
+          >
+            {{ university.name }}
+          </option>
         </select>
       </div>
-      <div class="col">
+      <div class="col-md-6">
         <label class="form-label">สังกัด / คณะหน่วยงาน </label>
-        <select class="form-select" formControlName="affiliation">
+        <select
+          class="form-select"
+          formControlName="affiliation"
+          (change)="handleGetUniByType()"
+          [attr.disabled]="true"
+        >
           <option value="null" selected disabled hidden>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option
+            *ngFor="let universityType of uniUniversityTypeOption"
+            [value]="universityType.id"
+          >
+            {{ universityType.name }}
+          </option>
         </select>
       </div>
     </div>
 
     <div class="row mb-2">
-      <div class="col">
+      <div class="col-md-6">
         <label class="form-label">รหัสรับรองปริญญา</label>
         <input class="form-control" type="text" formControlName="degreeCode" />
       </div>
-      <div class="col">
+      <div class="col-md-6">
         <label class="form-label">ชื่อปริญญา และประกาศนียบัตรทางการศึกษา</label>
         <input class="form-control" type="text" formControlName="degreeName" />
       </div>
     </div>
 
     <div class="row mb-2">
-      <div class="col">
+      <div class="col-md-6">
         <label class="form-label">ระดับปริญญาทางการศึกษา</label>
         <select class="form-select" formControlName="degreeLevel">
           <option value="null" selected disabled hidden>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option
+            *ngFor="let degreeLevel of degreeLevelList"
+            [value]="degreeLevel.id"
+          >
+            {{ degreeLevel.name }}
+          </option>
         </select>
       </div>
-      <div class="col">
+      <div class="col-md-6">
         <label class="form-label">ปีการศึกษาที่เปิด</label>
         <input class="form-control" type="text" formControlName="openYear" />
       </div>
     </div>
 
     <div class="row mb-2">
-      <div class="col">
-        <label class="form-label">เลขที่ใบคำขอ</label>
+      <div class="col-md-6">
+        <label class="form-label">เลขที่แบบคำขอ</label>
         <input
           class="form-control"
           type="text"
@@ -60,17 +78,26 @@
         />
       </div>
 
-      <div class="col">
-        <label class="form-label">วันที่ยื่นใบคำขอ</label>
-        <input
-          class="form-control"
-          type="text"
-          formControlName="requestsubmitDate"
-        />
+      <div class="col-md-6">
+        <label class="form-label">วันที่ยื่นแบบคำขอ</label>
+        <div class="d-flex align-items-center">
+          <input
+            [matDatepicker]="picker"
+            autocomplete="off"
+            class="form-control form-date"
+            formControlName="requestsubmitDate"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </div>
       </div>
     </div>
 
-    <div class="d-flex justify-content-end mt-2">
+    <div class="d-flex justify-content-end mt-3">
       <button
         (click)="clear.emit(true)"
         type="button"

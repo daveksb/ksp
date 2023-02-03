@@ -7,72 +7,112 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { SchoolRequest } from '@ksp/shared/interface';
+import {
+  FileGroup,
+  KspRequest,
+  KspRequestProcess,
+  PersonType,
+  Prefix,
+} from '@ksp/shared/interface';
 import {
   GeneralInfoService,
-  RequestService,
+  LoaderService,
   SchoolInfoService,
+  SchoolRequestService,
 } from '@ksp/shared/service';
-import { parseJson } from '@ksp/shared/utility';
-import { Observable } from 'rxjs';
+import { getCookie, mapFileInfo, parseJson } from '@ksp/shared/utility';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { Observable, Subject } from 'rxjs';
+import { v4 as uuidv4 } from 'uuid';
 
+@UntilDestroy()
 @Component({
   selector: 'ksp-request-reward-detail',
   templateUrl: './request-reward.component.html',
   styleUrls: ['./request-reward.component.scss'],
 })
 export class RequestRewardComponent implements OnInit {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
+
   form = this.fb.group({
     reward: [],
   });
 
+  uniqueNo = '';
+  requestData = new KspRequest();
   rewards = rewards;
-  schoolId = '0010201056';
+  schoolId = getCookie('schoolId');
   osoiTypes$!: Observable<any>;
-  personTypes$!: Observable<any>;
-  prefixList$!: Observable<any>;
+  personTypes$!: Observable<PersonType[]>;
+  prefixList$!: Observable<Prefix[]>;
   requestId = 0;
-  requestNo!: string | null;
-  currentProcess!: string | null;
-  requestStatus!: string | null;
   memberData!: any;
   disableTempSave = true;
   disablePermanentSave = true;
   disableCancel = false;
+  uniqueTimeStamp!: string;
+  showCancelButton = true;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private fb: FormBuilder,
-    private requestService: RequestService,
+    private requestService: SchoolRequestService,
     private schoolInfoService: SchoolInfoService,
-    private generalInfoService: GeneralInfoService
+    private generalInfoService: GeneralInfoService,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {
+    this.uniqueNo = uuidv4();
     this.getListData();
     this.checkRequestId();
     this.checkButtonDisableStatus();
+    this.getSchoolManager();
 
-    this.form.valueChanges.subscribe((res) => {
+    this.form.valueChanges.subscribe(() => {
       this.checkButtonDisableStatus();
     });
   }
 
+  getSchoolManager() {
+    const payload = {
+      schoolid: this.schoolId,
+    };
+    this.schoolInfoService
+      .getSchoolInfo(payload)
+      .pipe(untilDestroyed(this))
+      .subscribe((res) => {
+        console.log('managerinfo = ', res);
+        if (res) {
+          const manager: any = {
+            ...res,
+            position: res.thposition,
+            firstnameth: res.thname,
+            lastnameth: res.thfamilyname,
+            prefixth: res.thprefixid,
+            idcardno: res.thkurusapan,
+            email: res.schsendemail,
+          };
+          this.form.controls.reward.patchValue(manager);
+        }
+      });
+  }
+
   checkButtonDisableStatus() {
-    console.log('this.currentprocess = ', this.currentProcess);
+    //console.log('this.currentprocess = ', this.currentProcess);
     if (!this.form.valid) {
       this.disableTempSave = true;
       this.disablePermanentSave = true;
       return;
-    } else if (this.currentProcess === '2') {
+    } else if (this.requestData.process === '2') {
       this.disableTempSave = true;
       this.disablePermanentSave = true;
-    } else if (this.currentProcess === '1') {
+    } else if (this.requestData.process === '1') {
       this.disableTempSave = false;
       this.disablePermanentSave = false;
-    } else if (this.currentProcess === '0') {
+    } else if (this.requestData.process === '0') {
       this.disableTempSave = true;
       this.disablePermanentSave = true;
       this.disableCancel = true;
@@ -84,6 +124,8 @@ export class RequestRewardComponent implements OnInit {
       this.requestId = Number(params.get('id'));
       if (this.requestId) {
         this.loadRequestFromId(this.requestId);
+      } else {
+        this.uniqueTimeStamp = uuidv4();
       }
     });
   }
@@ -109,44 +151,69 @@ export class RequestRewardComponent implements OnInit {
   }
 
   cancelRequest() {
-    // may need to update status also
-    const payload = {
-      id: `${this.requestId}`,
-      requeststatus: '0',
+    const payload: KspRequestProcess = {
+      requestid: `${this.requestId}`,
+      process: `${this.requestData.process}`,
+      status: '0',
+      detail: null,
+      userid: null,
+      paymentstatus: null,
     };
-    this.requestService.cancelRequest(payload).subscribe((res) => {
+    this.requestService.schUpdateRequestProcess(payload).subscribe(() => {
       //
     });
   }
 
   loadRequestFromId(id: number) {
-    this.requestService.getRequestById(id).subscribe((res) => {
+    this.requestService.schGetRequestById(id).subscribe((res) => {
       //console.log('res = ', res);
-      this.requestNo = res.requestno;
-      this.requestStatus = res.requeststatus;
-      this.currentProcess = res.currentprocess;
+      this.requestData = res;
+      this.uniqueTimeStamp = res.uniqueno || 'default-unique-timestamp';
+      this.showCancelButton = res.status !== '0';
 
       const osoiInfo = parseJson(res.osoiinfo);
       const osoiMember = parseJson(res.osoimember);
-      //console.log('osoi info = ', osoiInfo);
-      //console.log('osoi member = ', osoiMember);
-      this.form.controls.reward.patchValue(osoiInfo);
+
+      const rewardInfo = {
+        idcardno: res.idcardno,
+        prefixth: res.prefixth,
+        firstnameth: res.firstnameth,
+        lastnameth: res.lastnameth,
+        contactphone: res.contactphone,
+        email: res.email,
+
+        rewardname: osoiInfo.rewardname,
+        rewardtype: osoiInfo.rewardtype,
+        submitbefore: osoiInfo.submitbefore,
+        vdolink: osoiInfo.vdolink,
+      };
+
+      console.log('osoi member   = ', osoiMember);
+      this.form.controls.reward.patchValue(<any>rewardInfo);
       this.memberData = osoiMember;
       //console.log('current process = ', this.currentProcess);
+      //const file = parseJson(res.fileinfo);
+      //console.log('get file = ', file);
     });
   }
 
-  updateRequest(currentProcess: string, requestStatus: string, form: any) {
-    //console.log('form  = ', form);
-    const baseForm = this.fb.group(new SchoolRequest());
-    form.id = this.requestId;
+  updateRequest(process: string, status: string, form: any) {
+    console.log('form osoimember = ', form.osoimember);
+    const baseForm = this.fb.group(new KspRequest());
+
+    form.id = `${this.requestId}`;
     form.schoolid = this.schoolId;
     form.systemtype = `2`;
     form.requesttype = `40`;
-    form.subtype = `5`;
-    form.currentprocess = currentProcess;
-    form.requeststatus = requestStatus;
+    form.careertype = `5`;
+    form.process = process;
+    form.status = status;
     form.osoimember = JSON.stringify(form.osoimember);
+
+    const file = structuredClone(rewardFiles);
+    //console.log('file = ', file);
+    const files = mapFileInfo(file);
+    form.fileinfo = JSON.stringify({ files });
 
     const osoiInfo = {
       rewardname: form.rewardname,
@@ -159,24 +226,27 @@ export class RequestRewardComponent implements OnInit {
     baseForm.patchValue(form);
 
     const { ref1, ref2, ref3, ...payload } = baseForm.value;
-    console.log('payload = ', payload);
-    this.requestService.updateRequest(payload).subscribe((res) => {
+    //console.log('payload = ', payload);
+    this.requestService.schUpdateRequest(<any>payload).subscribe(() => {
       //console.log('request result = ', res);
+      this.completeDialog();
     });
   }
 
   createRequest(currentProcess: string, requestStatus: string, form: any) {
     //console.log('form  = ', form);
-    const baseForm = this.fb.group(new SchoolRequest());
+    const baseForm = this.fb.group(new KspRequest());
     form.schoolid = this.schoolId;
-    form.ref1 = `2`;
+    form.ref1 = '2';
     form.ref2 = '40';
     form.ref3 = '5';
-    form.systemtype = `2`;
+    form.systemtype = '2';
     form.requesttype = `40`;
     form.subtype = `5`;
-    form.currentprocess = currentProcess;
-    form.requeststatus = requestStatus;
+    form.process = currentProcess;
+    form.status = requestStatus;
+    form.careertype = '5';
+    form.uniquetimestamp = this.uniqueTimeStamp;
     form.osoimember = JSON.stringify(form.osoimember);
 
     const osoiInfo = {
@@ -188,9 +258,12 @@ export class RequestRewardComponent implements OnInit {
     form.osoiinfo = JSON.stringify(osoiInfo);
 
     baseForm.patchValue(form);
+
+    const { id, ...payload } = baseForm.value;
     //console.log('current form = ', baseForm.value);
-    this.requestService.createRequest(baseForm.value).subscribe((res) => {
+    this.requestService.schCreateRequest(payload).subscribe(() => {
       //console.log('request result = ', res);
+      this.completeDialog();
     });
   }
 
@@ -204,31 +277,33 @@ export class RequestRewardComponent implements OnInit {
     this.router.navigate(['/temp-license', 'list']);
   }
 
-  save(form: any) {
-    /*     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
+  confirmDialog(type: number) {
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่?`,
       },
     });
 
-    dialogRef.componentInstance.confirmed.subscribe((res) => {
+    dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.onConfirmed();
+        if (type === 1) {
+          this.onTempSave();
+        } else if (type === 2) {
+          this.onPermanentSave();
+        }
       }
-    }); */
+    });
   }
 
-  onConfirmed() {
-    const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
+  completeDialog() {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header: `ระบบทำการบันทึก
-        และส่งเรื่องให้เเจ้าหน้าที่เรียบร้อยแล้ว`,
+        เรียบร้อยแล้ว`,
       },
     });
 
-    completeDialog.componentInstance.completed.subscribe((res) => {
+    dialog.componentInstance.completed.subscribe((res) => {
       if (res) {
         this.previousPage();
       }
@@ -246,4 +321,11 @@ export const rewards = [
     label: 'ได้รับรางวัลของคุรุสภา แต่มีการพัฒนาต่อยอดนวัตกรรม',
     value: 3,
   },
+];
+
+const rewardFiles: FileGroup[] = [
+  { name: 'แบบ นร. 1', files: [] },
+  { name: 'แบบ นร.2', files: [] },
+  { name: 'เอกสารอื่นๆ', files: [] },
+  { name: 'บันทึกนำส่งจากสถานศึกษา', files: [] },
 ];

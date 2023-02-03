@@ -1,4 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
+import {
+  AfterContentChecked,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
@@ -9,20 +15,25 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { UniInfoService, UniRequestService } from '@ksp/shared/service';
-import { getCookie, thaiDate, parseJson } from '@ksp/shared/utility';
+import {
+  getCookie,
+  thaiDate,
+  parseJson,
+  formatDate,
+} from '@ksp/shared/utility';
 import moment from 'moment';
 import { lastValueFrom } from 'rxjs';
 @Component({
   templateUrl: './degree-cert-request.component.html',
   styleUrls: ['./degree-cert-request.component.scss'],
 })
-export class DegreeCertRequestComponent {
+export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
   @ViewChild('stepper') private stepper?: MatStepper;
   id?: string;
   requestNo = '';
   date = thaiDate(new Date());
 
-  step1DegreeType = '';
+  step1DegreeType!: string;
 
   step1Form: any = this.fb.group({
     step1: [],
@@ -38,42 +49,91 @@ export class DegreeCertRequestComponent {
     step3: [],
   });
   step4Form: any = this.fb.group({
-    step4: [],
+    step4: [{ files: [] }],
   });
-  disabledInputsStep1: any = {
-    institutionsGroup: true,
-    institutionsCode: true,
-    institutionsName: true,
-    provience: true,
-  };
+  uniData: any;
+  mode: any = 'edit';
+  status = '';
+  process = '';
+
   constructor(
     private router: Router,
     public dialog: MatDialog,
     private fb: FormBuilder,
     private uniInfoService: UniInfoService,
     private uniRequestService: UniRequestService,
-    private activatedRoute: ActivatedRoute
-  ) {
+    private activatedRoute: ActivatedRoute,
+    private cdref: ChangeDetectorRef
+  ) {}
+
+  ngAfterContentChecked(): void {
+    this.cdref.detectChanges();
+  }
+
+  ngOnInit(): void {
     this.initForm();
   }
+
   async initForm() {
     this.id = this.activatedRoute.snapshot.queryParams['id'];
     let uniRequestDegree;
-    const uniData = await lastValueFrom(
-      this.uniInfoService.univerSitySelectById(getCookie('uniType'))
+    this.uniData = await lastValueFrom(
+      this.uniInfoService.univerSitySelectById(getCookie('uniId'))
     );
+
     if (this.id) {
       uniRequestDegree = await lastValueFrom(
         this.uniInfoService.uniRequestDegreeCertSelectById(this.id)
       );
-      this._mappingResponseWithForm(uniRequestDegree, uniData);
+      if (
+        uniRequestDegree.requestprocess == '1' ||
+        (uniRequestDegree.requestprocess == '2' &&
+          uniRequestDegree.requeststatus == '1') ||
+        (uniRequestDegree.requestprocess == '3' &&
+          uniRequestDegree.requeststatus == '1') ||
+        (uniRequestDegree.requestprocess == '4' &&
+          uniRequestDegree.requeststatus == '1') ||
+        (uniRequestDegree.requestprocess == '4' &&
+          uniRequestDegree.requeststatus == '2') ||
+        (uniRequestDegree.requestprocess == '5' &&
+          uniRequestDegree.requeststatus == '1') ||
+        (uniRequestDegree.requestprocess == '5' &&
+          uniRequestDegree.requeststatus == '2')
+      ) {
+        this.mode = 'view';
+      }
+      this.status = uniRequestDegree.requeststatus;
+      this.process = uniRequestDegree.requestprocess;
+      const { requestNo, step1, step2, step3, step4 } =
+        this.uniInfoService.mappingUniverSitySelectByIdWithForm(
+          uniRequestDegree
+        );
+      this.requestNo = requestNo;
+      this.step1Form.setValue({
+        step1,
+      });
+      this.step2Form.setValue({
+        step2,
+      });
+      this.step3Form.setValue({
+        step3,
+      });
+      setTimeout(() => {
+        this.step4Form.setValue({
+          step4,
+        });
+      }, 500);
     } else {
       this.step1Form.setValue({
         step1: {
-          institutionsCode: uniData?.universitycode || '',
+          institutionsCode: this.uniData?.universitycode || '',
           institutionsGroup: getCookie('uniType') || '',
-          institutionsName: uniData?.name || '',
-          provience: uniData?.provinceid || '',
+          institutionsName:
+            this.uniData?.name +
+              (this.uniData?.campusname
+                ? `, ${this.uniData?.campusname}`
+                : '') || '',
+          provience: this.uniData?.provinceid || '',
         },
       });
     }
@@ -82,7 +142,7 @@ export class DegreeCertRequestComponent {
     this.router.navigate(['/', 'degree-cert']);
   }
 
-  save() {
+  save(process: string) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -98,10 +158,14 @@ export class DegreeCertRequestComponent {
         const res = await (async () => {
           if (this.id)
             return await lastValueFrom(
-              this.uniRequestService.uniRequestUpdate(this._getRequest())
+              this.uniRequestService.uniRequestUpdate(
+                this._getRequest(process, '1')
+              )
             );
           return await lastValueFrom(
-            this.uniRequestService.uniRequestInsert(this._getRequest())
+            this.uniRequestService.uniRequestInsert(
+              this._getRequest(process, '1')
+            )
           );
         })();
 
@@ -110,102 +174,31 @@ export class DegreeCertRequestComponent {
       }
     });
   }
-  private toDate(sDate: any) {
-    return sDate ? moment(sDate).format('yyyy-MM-DD') : '';
-  }
-  private _mappingResponseWithForm(res: any, uniData: any): any {
-    this.requestNo = res?.requestno ?? '';
-    this.step1Form.setValue({
-      step1: {
-        institutionsCode: uniData?.universitycode || '',
-        institutionsGroup: getCookie('uniType') || '',
-        institutionsName: uniData?.name || '',
-        provience: uniData?.provinceid || '',
-        courseDetailType: res?.coursedetailtype,
-        degreeTypeForm: {
-          degreeType: res?.degreelevel,
-          courseYear: res?.courseacademicyear,
-          courseName: res?.coursename,
-          courseType: res?.coursetype,
-          courseStatus: res?.coursestatus,
-          degreeNameThFull: res?.fulldegreenameth,
-          degreeNameThShort: res?.shortdegreenameth,
-          degreeNameEnFull: res?.fulldegreenameen,
-          degreeNameEnShort: res?.shortdegreenameen,
-          courseApproveTime: res?.courseapprovetime,
-          courseApproveDate: this.toDate(res?.courseapprovedate),
-          courseAcceptDate: this.toDate(res?.courseacceptdate),
-        },
-        //type json
-        locations: res?.teachinglocation
-          ? parseJson(res?.teachinglocation)
-          : null,
-        institutions: res?.responsibleunit
-          ? parseJson(res?.responsibleunit)
-          : null,
-        locations2: res?.evaluatelocation
-          ? parseJson(res?.evaluatelocation)
-          : null,
-        coordinator: res?.coordinatorinfo
-          ? parseJson(res?.coordinatorinfo)
-          : null,
-      },
-    });
-    this.step2Form.setValue({
-      step2: {
-        plan1: {
-          plans: res.coursestructure ? parseJson(res.coursestructure) : [],
-          subjects: res.courseplan ? parseJson(res.courseplan) : [],
-        },
-        teacher: {
-          teachers: res.courseteacher ? parseJson(res.courseteacher) : [],
-        },
-
-        nitet: {
-          nitets: res.courseinstructor ? parseJson(res.courseinstructor) : [],
-        },
-        advisor: {
-          advisors: res.courseadvisor ? parseJson(res.courseadvisor) : [],
-        },
-      },
-    });
-
-    this.step3Form.setValue({
-      step3: {
-        training: {
-          rows: res.processtrainning ? parseJson(res.processtrainning) : [],
-        },
-        teaching: {
-          rows: res.processteaching ? parseJson(res.processteaching) : [],
-        },
-      },
-    });
-    if (res?.attachfiles)
-      this.step4Form.setValue({
-        step4: {
-          files: parseJson(res?.attachfiles),
-        },
-      });
-  }
-  private _getRequest(): any {
+  private _getRequest(process: string, status: string): any {
     const step1: any = this.step1Form.value.step1;
     const step2: any = this.step2Form.value.step2;
     const step3: any = this.step3Form.value.step3;
     const step4: any = this.step4Form.value.step4;
 
+    const dateapprove = new Date(step1?.degreeTypeForm?.courseApproveDate);
+    dateapprove.setHours(dateapprove.getHours() + 7);
+    const dateaccept = new Date(step1?.degreeTypeForm?.courseAcceptDate);
+    dateaccept.setHours(dateaccept.getHours() + 7);
     const reqBody: any = {
       uniid: getCookie('uniId'),
       ref1: '3',
       ref2: '03',
       ref3: '5',
-      requestprocess: '1',
-      requeststatus: '1',
+      requestprocess: process,
+      requeststatus: status,
+      process: process,
+      status: status,
       systemtype: '3',
       requesttype: '3',
       subtype: '5',
 
       attachfiles: step4 ? JSON.stringify(step4?.files) : null,
-      uniname: step1?.institutionsName || null,
+      uniname: step1?.institutionsName,
       unitype: step1?.institutionsGroup || null,
       uniprovince: step1?.provience || null,
       unicode: step1?.institutionsCode || null,
@@ -219,9 +212,16 @@ export class DegreeCertRequestComponent {
       fulldegreenameen: step1?.degreeTypeForm?.degreeNameEnFull || null,
       shortdegreenameen: step1?.degreeTypeForm?.degreeNameEnShort || null,
       courseapprovetime: step1?.degreeTypeForm?.courseApproveTime || null,
-      courseapprovedate: step1?.degreeTypeForm?.courseApproveDate || null,
-      courseacceptdate: step1?.degreeTypeForm?.courseAcceptDate || null,
+      courseapprovedate: step1?.degreeTypeForm?.courseApproveDate
+        ? formatDate(dateapprove.toISOString())
+        : null,
+      courseacceptdate: step1?.degreeTypeForm?.courseAcceptDate
+        ? formatDate(dateaccept.toISOString())
+        : null,
       coursedetailtype: step1?.courseDetailType || null,
+      coursedetailinfo: step1?.courseDetail
+        ? JSON.stringify(step1?.courseDetail)
+        : null,
       teachinglocation: step1?.locations
         ? JSON.stringify(step1?.locations)
         : null,
@@ -233,12 +233,6 @@ export class DegreeCertRequestComponent {
         : null,
       coordinatorinfo: step1?.coordinator
         ? JSON.stringify(step1?.coordinator)
-        : null,
-      coursestructure: step2?.plan1?.plans
-        ? JSON.stringify(step2?.plan1?.plans)
-        : null,
-      courseplan: step2?.plan1?.subjects
-        ? JSON.stringify(step2?.plan1?.subjects)
         : null,
       courseteacher: step2?.teacher?.teachers
         ? JSON.stringify(step2?.teacher?.teachers)
@@ -257,10 +251,32 @@ export class DegreeCertRequestComponent {
         : null,
       tokenkey: getCookie('userToken') || null,
     };
+    if (['a', 'b', 'c'].includes(this.step1DegreeType)) {
+      reqBody['coursestructure'] = step2?.plan1?.plans
+        ? JSON.stringify(step2?.plan1?.plans)
+        : null;
+
+      reqBody['courseplan'] = step2?.plan1?.subjects
+        ? JSON.stringify(step2?.plan1?.subjects)
+        : null;
+    } else {
+      reqBody['coursestructure'] = step2?.plan2?.plans
+        ? JSON.stringify(step2?.plan2?.plans)
+        : null;
+      reqBody['courseplan'] = step2?.plan2?.subjects
+        ? JSON.stringify({
+            subjects: step2?.plan2?.subjects,
+            subjectgroupname: {
+              subject1GroupName: step2?.plan2?.subject1GroupName,
+              subject2GroupName: step2?.plan2?.subject2GroupName,
+              subject3GroupName: step2?.plan2?.subject3GroupName,
+            },
+          })
+        : null;
+    }
     if (this.id) {
       reqBody['id'] = this.id;
     }
-
     return reqBody;
   }
   showConfirmDialog(requestno?: string) {
@@ -269,8 +285,8 @@ export class DegreeCertRequestComponent {
       data: {
         header: 'ยืนยันข้อมูลสำเร็จ',
         content: `วันที่ : ${this.date}
-        เลขที่ใบคำขอ : ${requestno || this.requestNo || '-'}`,
-        subContent: `กรุณาตรวจสอบสถานะใบคำขอหรือรหัสเข้าใช้งาน
+        เลขที่แบบคำขอ : ${requestno || this.requestNo || '-'}`,
+        subContent: `กรุณาตรวจสอบสถานะแบบคำขอหรือรหัสเข้าใช้งาน
         ผ่านทางอีเมลผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },
     });

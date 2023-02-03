@@ -6,45 +6,65 @@
   height: 100vh;
 
   /* Center and scale the image nicely */
-  background-position: top;
   background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 .label__primary {
   color: #f68b33;
 }
 
-.eye__icon {
+i {
   float: right;
-  margin-top: -35px;
+  margin-top: -36px;
   position: relative;
   height: 22px;
   cursor: pointer;
-  margin-right: 5px;
+  margin-right: 8px;
 }
 
-.eye__icon--open {
-  content: url('/assets/images/eye_open.png');
-}
-
-.eye__icon--close {
-  content: url('/assets/images/eye_close.png');
+.support__label {
+  bottom: 0;
+  position: fixed;
 }
 
 /* tablet */
 @media only screen and (max-width: 992px) {
   .bg-image {
-    background-image: url('/assets/images/BG-mobile.png');
+    background-image: url('/assets/images/BG-secondary.png');
     background-size: cover;
+    background-position: center;
     height: 100%;
+  }
+
+  .support__label {
+    display: none;
   }
 }
 
 /* mobile */
 @media only screen and (max-width: 768px) {
   .bg-image {
-    background-image: url('/assets/images/BG-mobile.png');
+    background-image: url('/assets/images/BG-secondary.png');
+    background-size: cover;
     background-position: top;
     height: 100%;
+  }
+
+  .support__label {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .bg-image {
+    background-image: url('/assets/images/BG-mobile.png');
+    background-size: cover;
+    height: 100%;
+  }
+
+  .support__label {
+    display: none;
   }
 }

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { stringToThaiDate, thaiDate } from '@ksp/shared/utility';
 
 @Component({
   selector: 'uni-service-print-request-dialog',
@@ -10,7 +11,17 @@ import { MatDialogModule } from '@angular/material/dialog';
   styleUrls: ['./print-request-dialog.component.scss'],
 })
 export class PrintRequestDialogComponent implements OnInit {
-  constructor() {}
+  constructor(@Inject(MAT_DIALOG_DATA) public dataSource: any) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.dataSource);
+  }
+
+  toDateTh(date: any) {
+    try {
+      return thaiDate(new Date(date));
+    } catch (error) {
+      return "-"
+    }
+  }
 }

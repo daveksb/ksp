@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, Input, OnDestroy } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -9,13 +9,17 @@ import { providerFactory } from '@ksp/shared/utility';
   styleUrls: ['./activity-innovation.component.scss'],
   providers: providerFactory(ActivityInnovationComponent),
 })
-export class ActivityInnovationComponent extends KspFormBaseComponent {
+export class ActivityInnovationComponent
+  extends KspFormBaseComponent
+  implements OnDestroy
+{
   @Input() data: any;
+  @Input() isForeignForm = false;
 
   override form = this.fb.group({
-    name: [],
-    addressUse: [],
-    useDate: [],
+    name: [null, Validators.required],
+    addressUse: [null, Validators.required],
+    useDate: [null, Validators.required],
   });
 
   constructor(private fb: FormBuilder) {
@@ -27,5 +31,10 @@ export class ActivityInnovationComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+  }
+
+  override ngOnDestroy(): void {
+    this.onChange(null);
+    this.onTouched();
   }
 }

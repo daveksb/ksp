@@ -1,0 +1,151 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
+<ksp-top-nav
+  ><span header>ยื่นแบบคำขอ </span
+  ><span subHeader>ขอยื่นรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา </span>
+  <span detail>{{ headerDetail[processType] }}</span></ksp-top-nav
+>
+
+<div class="bg-secondary bg-opacity-10 px-4 pt-1 pb-3 full-height">
+  <div class="box-header">รายละเอียดแบบคำขอ</div>
+  <div class="bg-white p-3">
+    <ksp-request-header-info></ksp-request-header-info>
+
+    <hr />
+    <div class="box-header mt-2">
+      ข้อมูลขอรับรองปริญญา และประกาศนียบัตรทางการศึกษา
+    </div>
+
+    <form [formGroup]="step1Form">
+      <ksp-degree-cert-step-one
+        [mode]="'view'"
+        formControlName="step1"
+        (degreeType)="step1DegreeType = $event"
+        [disabledInstitute]="true"
+        [showCoordinatorForm]="false"
+      >
+      </ksp-degree-cert-step-one>
+    </form>
+
+    <div class="mt-3">
+      <button
+        type="button"
+        class="btn btn-primary"
+        style="width: auto"
+        (click)="viewCourseDetail()"
+      >
+        กดเพื่อดูแบบคำขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา
+      </button>
+    </div>
+    <hr />
+
+    <div class="box-header text-primary">แผนการรับนิสิต / นักศึกษา</div>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" class="text-center" colspan="6">
+              แผนการรับนิสิต / นักศึกษา (ผ่านการรับรอง)
+            </th>
+          </tr>
+          <tr>
+            <th scope="col" class="text-start" style="min-width: 180px">
+              แผนการรับนักศึกษา (รายปี)
+            </th>
+            <th scope="col" class="text-center" style="min-width: 120px">
+              ปีการศึกษา (พ.ศ)
+            </th>
+            <th scope="col" class="text-center" style="min-width: 100px">
+              ชื่อแผน
+            </th>
+            <th scope="col" class="text-center" style="min-width: 120px">
+              จำนวนนักศึกษา
+            </th>
+            <th scope="col" class="text-center" style="min-width: 250px">
+              ยื่นรายชื่อเข้ารับการศึกษา
+            </th>
+            <th scope="col" class="text-center" style="min-width: 250px">
+              ยื่นรายชื่อสำเร็จการศึกษา
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of courseData.coursestructure">
+            <th scope="row" class="text-start form-label vertical-middle">
+              {{ row.label }}
+            </th>
+
+            <td class="text-center form-label vertical-middle">
+              <div>{{ row.year }}</div>
+            </td>
+            <td class="text-center form-label vertical-middle">
+              <div>{{ row.name || '-' }}</div>
+            </td>
+            <td class="text-center form-label vertical-middle">
+              <div>{{ row.student }}</div>
+            </td>
+            <td class="text-center form-label vertical-middle">
+              <div>
+                {{ row.admissioncount }} / {{ row.student }}
+                <span
+                  role="button"
+                  *ngIf="row.admissioncount > 0"
+                  (click)="goToImportStudent('admissionList', row)"
+                  class="text-decoration-underline text-primary"
+                >
+                  <i role="button" class="bi bi-pencil-fill fs-6"></i>
+                  รายชื่อนักศึกษา</span
+                >
+              </div>
+            </td>
+            <td class="text-center form-label vertical-middle">
+              <div>
+                {{ row.graduatecount }} / {{ row.student }}
+                <span
+                  role="button"
+                  *ngIf="checkGraduate(row)"
+                  (click)="goToImportStudent('graduateList', row)"
+                  class="text-decoration-underline text-orange"
+                >
+                  <i role="button" class="bi bi-pencil-fill fs-6"></i>
+                  รายชื่อนักศึกษา</span
+                >
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <th scope="row"></th>
+            <td class="text-center form-label vertical-middle"></td>
+            <td class="text-center form-label vertical-middle">
+              <div>รวมทั้งหมด</div>
+            </td>
+            <td class="text-center form-label vertical-middle">
+              <div
+                class="form-control bg-secondary bg-opacity-25 text-center"
+                disabled
+              >
+                {{ courseData.totalStudent }}
+              </div>
+            </td>
+            <td class="text-center form-label vertical-middle"></td>
+            <td class="text-center form-label vertical-middle"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="sticky-bottom border">
+  <ksp-bottom-nav
+    [isLastPage]="true"
+    [isFirstPage]="true"
+    [showCenterButtons]="true"
+    (cancelClicked)="cancel()"
+    [cancelButtonLabel]="'ปิด'"
+  ></ksp-bottom-nav>
+</div>

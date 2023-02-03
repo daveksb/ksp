@@ -2,9 +2,9 @@
   <div class="box-header text-primary">ข้อมูลครูอาวุโส</div>
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">ตำแหน่งทางวิชาการ</label>
+      <label class="form-label required">ตำแหน่งทางวิชาการ</label>
       <select class="form-select" formControlName="position">
-        <option selected>กรุณาเลือก</option>
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option value="1">นักวิชาการ</option>
         <option value="2">เจ้าหน้าที่นโยบายและแผน</option>
         <option value="3">เจ้าหน้าที่ทรัพยากรบุคคล</option>
@@ -13,9 +13,9 @@
       </select>
     </div>
     <div class="col-md-6 mb-2">
-      <label class="form-label">ประเภทวิชาชีพ</label>
+      <label class="form-label required">ประเภทวิชาชีพ</label>
       <select class="form-select" formControlName="professionalType">
-        <option selected>กรุณาเลือก</option>
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option value="1">ครู</option>
         <option value="2">ผู้บริหารสถานศึกษา</option>
         <option value="3">ผู้บริหารการศึกษา</option>
@@ -26,15 +26,25 @@
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">ข้อมูลการลาออกจากการปฏิบัติงาน</label>
-      <input class="form-control" type="text" formControlName="resignationDetail" />
+      <label class="form-label required">ข้อมูลการลาออกจากการปฏิบัติงาน</label>
+      <input
+        class="form-control"
+        type="text"
+        formControlName="resignationDetail"
+      />
     </div>
     <div class="col-md-6 mb-2">
-      <label class="form-label">ข้อมูลออกก่อนอายุครบ 60 ปี</label>
-      <input class="form-control" type="text" formControlName="earlyRetireDetail" />
+      <label class="form-label required">ข้อมูลออกก่อนอายุครบ 60 ปี</label>
+      <input
+        class="form-control"
+        type="text"
+        formControlName="earlyRetireDetail"
+      />
     </div>
   </div>
-  <br />
-  <div class="box-header text-primary">ประวัติการถูกลงโทษทางวินัย</div>
-  <ksp-praise-teacher-punished formControlName="disciplineDetail"></ksp-praise-teacher-punished>
+  <div class="box-header text-primary mt-2 required">ประวัติการถูกลงโทษทางวินัย</div>
+  <ksp-praise-teacher-punished
+    formControlName="disciplineDetail"
+    [mode]="mode"
+  ></ksp-praise-teacher-punished>
 </form>

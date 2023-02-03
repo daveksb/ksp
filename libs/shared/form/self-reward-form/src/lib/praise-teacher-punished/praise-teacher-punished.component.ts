@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'ksp-praise-teacher-punished',
@@ -14,10 +14,7 @@ export class PraiseTeacherPunishedComponent
   implements OnInit
 {
   override form = this.fb.group({
-    hasDisciplinaryAction: [],
-    noDisciplinaryAction: [],
-    pendingDisciplinaryAction: [],
-    hasDisciplinaryActionAndCleansed: [],
+    disciplinaryAction: [null, Validators.required],
   });
 
   constructor(private fb: FormBuilder) {

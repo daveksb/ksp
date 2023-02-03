@@ -1,10 +1,18 @@
-<div class="d-flex">
-  <div class="form-label text-secondary">
-    {{ requestLabel1 }} :
-    <span class="text-orange">{{ requestDate }}</span>
+<div class="d-flex justify-content-between">
+  <div class="d-flex flex-row">
+    <div class="form-label text-secondary">
+      {{ requestLabel1 }} :
+      <span class="text-orange">{{
+        (requestDate | thaiDate) || (today | thaiDate)
+      }}</span>
+    </div>
+    <div *ngIf="requestNumber" class="form-label text-secondary ms-4">
+      {{ requestLabel2 }} :
+      <span class="text-primary">{{ requestNumber | reqNoFormat }}</span>
+    </div>
   </div>
-  <div *ngIf="requestNumber" class="form-label text-secondary ms-4">
-    {{ requestLabel2 }} :
-    <span class="text-primary">{{ requestNumber }}</span>
+  <div class="form-label text-secondary" *ngIf="showCurrentDate">
+    วันที่ตรวจสอบ :
+    <span class="text-orange">{{ today | thaiDate }}</span>
   </div>
 </div>

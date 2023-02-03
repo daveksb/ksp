@@ -1,0 +1,205 @@
+<ksp-top-nav>
+  <span header>ยื่นแบบคำขอ</span>
+  <span subHeader
+    >ขอรับรองคุณวุฒิทางการศึกษาเพื่อใช้ในการขอรับหนังสืออนุญาตประกอบวิชาชีพ</span
+  >
+</ksp-top-nav>
+
+<form [formGroup]="form">
+  <div class="bg-secondary bg-opacity-10 px-4 py-2">
+    <div class="box-header">
+      รายละเอียดแบบคำขอรับรองคุณวุฒิทางการศึกษาเพื่อใช้ในการขอรับหนังสืออนุญาตประกอบวิชาชีพ
+    </div>
+    <div class="bg-white py-3 px-4">
+      <div>
+        <ksp-request-header-info
+          [requestDate]="requestData.requestdate"
+          [requestNumber]="requestData.requestno"
+        ></ksp-request-header-info>
+        <hr />
+
+        <div class="bg-light px-3 py-2 default-width">
+          <div class="box-header text-primary">ข้อมูลผู้ขอยื่น</div>
+          <div class="row mb-2">
+            <div class="col-6">
+              <label class="form-label">สังกัด</label>
+              <input
+                class="form-control"
+                type="text"
+                [value]="bureauname"
+                disabled
+              />
+            </div>
+            <div class="col-6">
+              <label class="form-label">สถานศึกษา</label>
+              <input
+                class="form-control"
+                type="text"
+                [value]="schoolname"
+                disabled
+              />
+            </div>
+          </div>
+          <ksp-form-user-info
+            [isqualification]="true"
+            formControlName="userInfo"
+            [isDarkMode]="false"
+            [mode]="'view'"
+            [prefixList]="prefixList$ | async"
+            [nationList]="nationalitys$ | async"
+          ></ksp-form-user-info>
+        </div>
+      </div>
+
+      <div class="full-width pb-2">
+        <mat-tab-group
+          class="tab-group mt-3"
+          animationDuration="0ms"
+          (selectedIndexChange)="selectedTabIndex = $event"
+          [selectedIndex]="selectedTabIndex"
+          selectedIndex="0"
+        >
+          <mat-tab label="ที่อยู่" class="tab-content">
+            <ksp-form-address
+              formControlName="addr1"
+              [isDarkMode]="false"
+              [mode]="'view'"
+              [provinces]="provinces1$ | async"
+              [amphurs]="amphurs1$ | async"
+              [tumbols]="tumbols1$ | async"
+              >ที่อยู่ทะเบียนบ้าน</ksp-form-address
+            ><br />
+            <ksp-form-address
+              formControlName="addr2"
+              [mode]="'view'"
+              [provinces]="provinces1$ | async"
+              [amphurs]="amphurs2$ | async"
+              [tumbols]="tumbols2$ | async"
+              >ที่อยู่ที่ติดต่อได้สะดวก
+            </ksp-form-address>
+          </mat-tab>
+
+          <mat-tab label="ข้อมูลทางการศึกษา">
+            <div class="d-flex align-items-center">
+              <label class="fs-5">วุฒิการศึกษาปริญญาตรี</label>
+            </div>
+
+            <ksp-form-education-info
+              [mode]="'view'"
+              formControlName="edu1"
+              [showSelectDegree]="false"
+              [showGradeInput]="true"
+              [showGraduateYearInput]="true"
+              [showCheckbox]="false"
+              [countries]="countries$ | async"
+            ></ksp-form-education-info>
+            <br />
+            <div class="d-flex align-items-center">
+              <input type="checkbox" class="me-2" disabled />
+              <label class="fs-5">วุฒิการศึกษาปริญญาโท</label>
+            </div>
+            <ng-container>
+              <ksp-form-education-info
+                [mode]="'view'"
+                formControlName="edu2"
+                [showSelectDegree]="false"
+                [showGradeInput]="false"
+                [showGraduateYearInput]="true"
+                [showCheckbox]="false"
+                [countries]="countries$ | async"
+              ></ksp-form-education-info>
+            </ng-container>
+
+            <div class="d-flex align-items-center mt-2">
+              <input type="checkbox" class="me-2" disabled />
+              <label class="fs-5">วุฒิการศึกษาปริญญาเอก</label>
+            </div>
+            <ng-container>
+              <ksp-form-education-info
+                [mode]="'view'"
+                formControlName="edu3"
+                [showSelectDegree]="false"
+                [showGradeInput]="false"
+                [showGraduateYearInput]="true"
+                [showCheckbox]="false"
+                [countries]="countries$ | async"
+              ></ksp-form-education-info>
+            </ng-container>
+
+            <div class="d-flex align-items-center mt-2">
+              <input type="checkbox" class="me-2" disabled />
+              <label class="fs-5"
+                >วุฒิการศึกษาปริญญาอื่นๆที่เทียบเท่าปริญญาตรี /
+                ปริญญาทางการศึกษา</label
+              >
+            </div>
+            <ng-container>
+              <ksp-form-education-info
+                [mode]="'view'"
+                formControlName="edu4"
+                [showSelectDegree]="false"
+                [showGradeInput]="false"
+                [showGraduateYearInput]="true"
+                [showCheckbox]="false"
+                [countries]="countries$ | async"
+              ></ksp-form-education-info>
+            </ng-container>
+          </mat-tab>
+
+          <mat-tab label="เอกสารหลักฐานประกอบ">
+            <ksp-form-multi-attachment
+              [mode]="'view'"
+              [groups]="file"
+            ></ksp-form-multi-attachment>
+          </mat-tab>
+
+          <mat-tab label="ข้อมูลขอรับรองคุณวุฒิการศึกษา">
+            <div class="bg-light p-3">
+              <ksp-qualification-approve-detail
+                [otherReason]="otherReason"
+                [mode]="'view'"
+              ></ksp-qualification-approve-detail>
+            </div>
+          </mat-tab>
+
+          <mat-tab label="ข้อมูลผู้รับรองข้อมูล">
+            <div class="bg-light p-3">
+              <ksp-qualification-approve-person
+                [input]="refPerson"
+                [mode]="'view'"
+              ></ksp-qualification-approve-person>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+
+    <ng-container
+      *ngIf="!(requestData.process === '3' && requestData.status !== '1')"
+    >
+      <ng-container
+        formArrayName="checkResult"
+        *ngFor="let c of checkResultFormArray.controls; let i = index"
+      >
+        <div
+          class="bg-white px-3 py-2 mt-3"
+          [ngClass]="{ hide: (selectedTabIndex || 0) !== i }"
+        >
+          <e-service-license-check
+            [choices]="choice"
+            [formControlName]="i"
+          ></e-service-license-check>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+</form>
+<div class="sticky-bottom border px-2">
+  <ksp-bottom-nav
+    [showCenterButtons]="false"
+    (prevClicked)="prevTab()"
+    (nextClicked)="nextTab()"
+    [disableNext]="!checkResultFormArray.valid && selectedTabIndex === 4"
+    [disableNextMessage]="'กรุณาตรวจสอบแบบคำขอให้ครบถ้วน'"
+  ></ksp-bottom-nav>
+</div>

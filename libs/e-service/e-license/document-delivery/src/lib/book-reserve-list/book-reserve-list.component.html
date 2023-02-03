@@ -1,4 +1,4 @@
-<ksp-top-nav><span header> รับ-ส่งเอกสารงานใบอนุญาต </span></ksp-top-nav>
+<ksp-top-nav><span header> รับ-ส่งเอกสารงานหนังสืออนุญาต </span></ksp-top-nav>
 
 <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
   <div class="box-header">ค้นหารายการจองเลขหนังสือ</div>
@@ -10,11 +10,39 @@
       </div>
       <div class="col">
         <label class="form-label">วันที่จอง : จาก</label>
-        <input type="date" class="form-control" />
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker1"
+            autocomplete="off"
+            class="form-control form-date"
+            placeholder="วว/ดด/ปปปป"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker1"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </div>
       </div>
       <div class="col">
         <label class="form-label">วันที่จอง : ถึง</label>
-        <input type="date" class="form-control" />
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker2"
+            autocomplete="off"
+            class="form-control form-date"
+            placeholder="วว/ดด/ปปปป"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker2"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </div>
       </div>
     </div>
 
@@ -25,11 +53,39 @@
       </div>
       <div class="col">
         <label class="form-label">เลขที่สิ้นสุด</label>
-        <input type="date" class="form-control" />
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker3"
+            autocomplete="off"
+            class="form-control form-date"
+            placeholder="วว/ดด/ปปปป"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker3"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker3></mat-datepicker>
+        </div>
       </div>
       <div class="col-6">
         <label class="form-label">ผู้จอง</label>
-        <input type="date" class="form-control" />
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker4"
+            autocomplete="off"
+            class="form-control form-date"
+            placeholder="วว/ดด/ปปปป"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker4"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker4></mat-datepicker>
+        </div>
       </div>
     </div>
 
@@ -41,7 +97,7 @@
       <div class="col">
         <label class="form-label">สถานะดำเนินการ</label>
         <select class="form-select">
-          <option selected>กรุณาเลือก</option>
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
@@ -150,7 +206,7 @@
     <!-- <mat-paginator
       [pageSizeOptions]="[10]"
       showFirstLastButtons
-      aria-label="Select page of periodic elements"
+
     >
     </mat-paginator> -->
   </div>

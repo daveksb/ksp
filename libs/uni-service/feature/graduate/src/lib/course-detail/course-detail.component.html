@@ -1,26 +1,38 @@
 <ksp-top-nav
-  ><span header>ยื่นใบคำขอ </span
+  ><span header>ยื่นแบบคำขอ </span
   ><span subHeader>ขอยื่นรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา </span>
   <span detail>{{ headerDetail[processType] }}</span></ksp-top-nav
 >
 
 <div class="bg-secondary bg-opacity-10 px-4 pt-1 pb-3">
-  <div class="box-header">รายละเอียดใบคำขอ</div>
+  <div class="box-header">รายละเอียดแบบคำขอ</div>
   <div class="bg-white p-3">
-    <ksp-request-header-info
-      [requestDate]="'10 ตุลาคม 2565'"
-    ></ksp-request-header-info>
+    <ksp-request-header-info></ksp-request-header-info>
 
     <hr />
     <div class="box-header mt-2">
       ข้อมูลขอรับรองปริญญา และประกาศนียบัตรทางการศึกษา
     </div>
 
-    <ksp-degree-cert-step-one [mode]="'view'"></ksp-degree-cert-step-one>
+    <form [formGroup]="step1Form">
+      <ksp-degree-cert-step-one
+        [mode]="'view'"
+        formControlName="step1"
+        (degreeType)="step1DegreeType = $event"
+        [disabledInstitute]="true"
+        [showCoordinatorForm]="false"
+      >
+      </ksp-degree-cert-step-one>
+    </form>
 
-    <div class="mt-3">
-      <button type="button" class="btn btn-primary" style="width: auto">
-        กดเพื่อดูใบคำขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา
+    <div class="mb-3">
+      <button
+        type="button"
+        class="btn btn-primary"
+        style="width: auto"
+        (click)="viewCourseDetail()"
+      >
+        กดเพื่อดูแบบคำขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา
       </button>
     </div>
     <hr />
@@ -30,59 +42,53 @@
       <table class="table">
         <thead>
           <tr>
-            <th
-              scope="col"
-              class="text-center"
-              colspan="5"
-              *ngIf="processType === importType.studentList"
-            >
-              แผนการรับนิสิต / นักศึกษา (ผ่านการรับรอง)
-            </th>
-            <th
-              scope="col"
-              class="text-center"
-              colspan="6"
-              *ngIf="processType === importType.graduateList"
-            >
+            <th scope="col" class="text-center" colspan="6">
               แผนการรับนิสิต / นักศึกษา (ผ่านการรับรอง)
             </th>
           </tr>
           <tr>
-            <th scope="col" class="text-start">แผนการรับนักศึกษา (รายปี)</th>
-            <th scope="col" class="text-center">ปีการศึกษา (พ.ศ)</th>
-            <th scope="col" class="text-center">ชื่อแผน</th>
-            <th scope="col" class="text-center">จำนวนนักศึกษา</th>
-            <th scope="col" class="text-center">ยื่นรายชื่อเข้ารับการศึกษา</th>
-            <th
-              scope="col"
-              class="text-center"
-              *ngIf="processType === importType.graduateList"
-            >
+            <th scope="col" class="text-start" style="min-width: 180px">
+              แผนการรับนักศึกษา (รายปี)
+            </th>
+            <th scope="col" class="text-center" style="min-width: 120px">
+              ปีการศึกษา (พ.ศ)
+            </th>
+            <th scope="col" class="text-center" style="min-width: 100px">
+              ชื่อแผน
+            </th>
+            <th scope="col" class="text-center" style="min-width: 120px">
+              จำนวนนักศึกษา
+            </th>
+            <th scope="col" class="text-center" style="min-width: 250px">
+              ยื่นรายชื่อเข้ารับการศึกษา
+            </th>
+            <th scope="col" class="text-center" style="min-width: 250px">
               ยื่นรายชื่อสำเร็จการศึกษา
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let row of planRows">
+          <tr *ngFor="let row of courseData.coursestructure">
             <th scope="row" class="text-start form-label vertical-middle">
-              แผนฯ ปีที่ {{ row }}
+              {{ row.label }}
             </th>
 
             <td class="text-center form-label vertical-middle">
-              <div>2564</div>
+              <div>{{ row.year }}</div>
             </td>
             <td class="text-center form-label vertical-middle">
-              <div>แผน ก</div>
+              <div>{{ row.name || '-' }}</div>
             </td>
             <td class="text-center form-label vertical-middle">
-              <div>150</div>
+              <div>{{ row.student }}</div>
             </td>
             <td class="text-center form-label vertical-middle">
               <div>
-                150 / 150
+                {{ row.admissioncount || 0 }} / {{ row.student }}
                 <span
                   role="button"
-                  (click)="goToImportStudent(importType.studentList)"
+                  *ngIf="checkAdmission(row)"
+                  (click)="goToImportStudent('admissionList', row)"
                   class="text-decoration-underline text-primary"
                 >
                   <i role="button" class="bi bi-pencil-fill fs-6"></i>
@@ -90,15 +96,12 @@
                 >
               </div>
             </td>
-            <td
-              class="text-center form-label vertical-middle"
-              *ngIf="processType === importType.graduateList"
-            >
+            <td class="text-center form-label vertical-middle">
               <div>
-                100 / 150
+                {{ row.graduatecount || 0 }} / {{ row.student }}
                 <span
                   role="button"
-                  (click)="goToImportStudent(importType.graduateList)"
+                  (click)="goToImportStudent('graduateList', row)"
                   class="text-decoration-underline text-orange"
                 >
                   <i role="button" class="bi bi-pencil-fill fs-6"></i>
@@ -119,14 +122,11 @@
                 class="form-control bg-secondary bg-opacity-25 text-center"
                 disabled
               >
-                600
+                {{ courseData.totalStudent }}
               </div>
             </td>
             <td class="text-center form-label vertical-middle"></td>
-            <td
-              class="text-center form-label vertical-middle"
-              *ngIf="processType === importType.graduateList"
-            ></td>
+            <td class="text-center form-label vertical-middle"></td>
           </tr>
         </tbody>
       </table>

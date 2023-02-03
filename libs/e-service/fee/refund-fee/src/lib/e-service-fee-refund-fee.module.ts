@@ -1,18 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RefundListComponent } from './refund-list/refund-list.component';
-import { RefundApproveComponent } from './refund-approve/refund-approve.component';
-import { RouterModule, Routes } from '@angular/router';
-import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
-import { RefundDetailComponent } from './refund-detail/refund-detail.component';
-import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
-import { SharedFormOthersModule } from '@ksp/shared/form/others';
-import { BottomNavComponent, TopNavComponent } from '@ksp/shared/menu';
-import { FormRefundFeeDetailComponent } from '@ksp/shared/form/license';
+import { EFeeRefundListComponent } from './e-fee-refund-list/e-fee-refund-list.component';
+import { EFeeRefundDetailComponent } from './e-fee-refund-detail/e-fee-refund-detail.component';
+import { EFeeRefundCreateRosterComponent } from './e-fee-refund-create-roster/e-fee-refund-create-roster.component';
+import { EFeeRefundConfirmComponent } from './e-fee-refund-confirm/e-fee-refund-confirm.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
-import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
-import { RefundConfirmComponent } from './refund-confirm/refund-confirm.component';
+import { RouterModule, Routes } from '@angular/router';
+import { ValidateKspRequestComponent } from '@ksp/e-service/e-license/approve-ksp-request';
+import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
+import { FormRefundFeeDetailComponent } from '@ksp/shared/form/license';
+import { SharedFormOthersModule } from '@ksp/shared/form/others';
+import { TopNavComponent, BottomNavComponent } from '@ksp/shared/menu';
+import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
+import { EServiceContainerPageComponent } from '@ksp/e-service/feature/container-page';
+import { EFeeRefundRosterDetailComponent } from './e-fee-refund-roster-detail/e-fee-refund-roster-detail.component';
 
 const routes: Routes = [
   {
@@ -26,20 +33,23 @@ const routes: Routes = [
       },
       {
         path: 'list',
-        component: RefundListComponent,
-      },
-
-      {
-        path: 'approve',
-        component: RefundApproveComponent,
+        component: EFeeRefundListComponent,
       },
       {
-        path: 'detail',
-        component: RefundDetailComponent,
+        path: 'detail/:id',
+        component: EFeeRefundDetailComponent,
       },
       {
         path: 'confirm',
-        component: RefundConfirmComponent,
+        component: EFeeRefundConfirmComponent,
+      },
+      {
+        path: 'create-roster',
+        component: EFeeRefundCreateRosterComponent,
+      },
+      {
+        path: 'roster-detail',
+        component: EFeeRefundRosterDetailComponent,
       },
     ],
   },
@@ -57,18 +67,26 @@ const routes: Routes = [
     BottomNavComponent,
     MatTableModule,
     RouterModule.forChild(routes),
+    MatDatepickerModule,
+    ThaiDatePipe,
+    ReactiveFormsModule,
+    ValidateKspRequestComponent,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
   ],
   declarations: [
-    RefundListComponent,
-    RefundDetailComponent,
-    RefundApproveComponent,
-    RefundConfirmComponent,
+    EFeeRefundListComponent,
+    EFeeRefundDetailComponent,
+    EFeeRefundCreateRosterComponent,
+    EFeeRefundConfirmComponent,
+    EFeeRefundRosterDetailComponent,
   ],
   exports: [
-    RefundListComponent,
-    RefundDetailComponent,
-    RefundApproveComponent,
-    RefundConfirmComponent,
+    EFeeRefundListComponent,
+    EFeeRefundDetailComponent,
+    EFeeRefundCreateRosterComponent,
+    EFeeRefundConfirmComponent,
+    EFeeRefundRosterDetailComponent,
   ],
 })
 export class EServiceFeeRefundFeeModule {}

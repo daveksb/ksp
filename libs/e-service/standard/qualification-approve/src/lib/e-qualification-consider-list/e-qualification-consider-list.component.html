@@ -1,0 +1,169 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
+<ksp-top-nav>
+  <span header>ยื่นแบบคำขอ</span>
+  <span subHeader>พิจารณารับรองหนังสือคุณวุฒิ</span>
+</ksp-top-nav>
+
+<form [formGroup]="form">
+  <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height full-width-2">
+    <div class="box-header">รายการแบบคำขอหนังสือรับรองคุณวุฒิ</div>
+
+    <div class="bg-white px-3 py-3">
+      <div class="mb-3">
+        <ksp-school-request-search
+          formControlName="search"
+          [disableRequestType]="true"
+          [careerTypeList]="careerTypeList"
+          [requestTypeList]="requestTypeList"
+          (clear)="clear()"
+          (search)="search($event)"
+        ></ksp-school-request-search>
+      </div>
+      <hr />
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <div class="box-header">รายการยื่นแบบคำขอ</div>
+        <div class="d-flex flex-row">
+          <button
+            type="button"
+            class="btn bg-primary bg-opacity-10 text-primary me-2"
+          >
+            จัดทำบัญชีรายชื่อ
+          </button>
+          <button
+            type="button"
+            class="btn bg-orange bg-opacity-25 text-orange"
+            (click)="createGroup()"
+          >
+            บันทึกมติที่ประชุม
+          </button>
+        </div>
+      </div>
+
+      <div class="table__scroll">
+        <table mat-table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef class="text-center">ลำดับ</th>
+            <td
+              mat-cell
+              *matCellDef="let element; let i = index"
+              class="text-center"
+            >
+              {{
+                paginator.pageIndex === 0
+                  ? i + 1
+                  : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+              }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef class="text-center">
+              ตรวจสอบ
+            </th>
+            <td mat-cell *matCellDef="let element" class="text-center">
+              <i
+                role="button"
+                class="bi bi-file-earmark-check text-primary fs-5"
+                (click)="goToDetail(element)"
+              ></i>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="requestno">
+            <th mat-header-cell *matHeaderCellDef>เลขที่แบบคำขอ</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.requestno | reqNoFormat }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="idcardno">
+            <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
+            <td mat-cell *matCellDef="let element">{{ element.idcardno }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.firstnameth }} {{ element.lastnameth }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="careertype">
+            <th mat-header-cell *matHeaderCellDef>ประเภทวิชาชีพ</th>
+            <td mat-cell *matCellDef="let element">
+              {{ SchoolRequestSubType[+element.careertype] }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="process">
+            <th mat-header-cell *matHeaderCellDef>ขั้นตอนการดำเนินการ</th>
+            <td mat-cell *matCellDef="let element">
+              {{ checkProcess(+element.process, 6)?.processName }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>สถานะ</th>
+            <td mat-cell *matCellDef="let element">
+              {{ checkStatus(+element.process, +element.status, 6)?.ename }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="updatedate">
+            <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
+            <th></th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.processupdatedate | thaiDate }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="requestdate">
+            <th mat-header-cell *matHeaderCellDef>วันที่ยื่นแบบคำขอ</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.requestdate | thaiDate }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="reqDoc">
+            <th mat-header-cell *matHeaderCellDef>แบบคำขอ</th>
+            <td mat-cell *matCellDef="let element" class="text-center">
+              <i
+                (click)="requestPdf(element)"
+                role="button"
+                class="bi bi-file-earmark-text-fill text-primary fs-5"
+              ></i>
+            </td>
+          </ng-container>
+
+          <!-- <ng-container matColumnDef="license">
+            <th mat-header-cell *matHeaderCellDef>หนังสืออนุญาต</th>
+            <td mat-cell *matCellDef="let element">
+              <i
+                (click)="renderLicense(element)"
+                *ngIf="element.process === '3' && element.status === '2'"
+                role="button"
+                class="bi bi-file-earmark-text-fill text-primary fs-5"
+              ></i>
+            </td>
+          </ng-container> -->
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+        <div class="text-center fs-5 mt-3" *ngIf="searchNotFound">
+          ไม่พบข้อมูล
+        </div>
+      </div>
+      <mat-paginator
+        [pageSizeOptions]="[25]"
+        [hidden]="!dataSource.data.length"
+        showFirstLastButtons
+      >
+      </mat-paginator>
+    </div>
+  </div>
+</form>

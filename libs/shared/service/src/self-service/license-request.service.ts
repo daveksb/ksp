@@ -1,7 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
-import { SelfRequest } from '@ksp/shared/interface';
+import {
+  KspPayment,
+  KspRequest,
+  KspRequestCancelPayload,
+  KSPRequestSelfSearchFilter,
+  SelfGetRequest,
+  SelfRequest,
+} from '@ksp/shared/interface';
 import { map, Observable } from 'rxjs';
 
 @Injectable({
@@ -11,28 +18,71 @@ export class SelfRequestService {
   constructor(private http: HttpClient) {}
 
   createRequest(form: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/kspself/requestinsert`, form);
+    return this.http.post(
+      `${environment.apiUrl}/kspself/ksprequestinsert`,
+      form
+    );
+  }
+
+  searchKuruspano(personid: string): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/ksppublic/schkuruspanoselectbypersonid`,
+      { personid: personid }
+    );
+  }
+
+  createRequestNoToken(payload: Partial<KspRequest>): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspself/ksprequestinsertforisforeign`,
+      payload
+    );
   }
 
   updateRequest(form: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/kspself/requestupdate`, form);
+    return this.http.post(
+      `${environment.apiUrl}/kspself/ksprequestupdate`,
+      form
+    );
   }
 
-  searchMyRequests(payload: any): Observable<SelfRequest[]> {
+  cancelRequest(form: KspRequestCancelPayload): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/ksprequest_updaterequest_status_self.php`,
+      form
+    );
+  }
+
+  closeRequest(payload: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspself/ksprequestupdateisclose`,
+      payload
+    );
+  }
+
+  searchMyRequests(
+    payload: KSPRequestSelfSearchFilter
+  ): Observable<SelfRequest[]> {
     return this.http
       .post<SelfRequest[]>(
-        `${environment.shortApiUrl}/selfschrequestsearch.php`,
+        `${environment.shortApiUrl}/ksprequestsearch_self.php`,
         payload
       )
       .pipe(map((data: any) => data.datareturn));
   }
 
-  getRequestById(id: number): Observable<SelfRequest> {
-    return this.http.post<SelfRequest>(
-      `${environment.apiUrl}/kspself/requestselectidall`,
+  getRequestById(id: number): Observable<SelfGetRequest> {
+    return this.http.post<SelfGetRequest>(
+      `${environment.apiUrl}/kspself/ksprequestselectbyid`,
       {
         id: `${id}`,
       }
+    );
+  }
+
+  createPayment(payload: KspPayment): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspself/ksppaymentinsert`,
+      payload
     );
   }
 }

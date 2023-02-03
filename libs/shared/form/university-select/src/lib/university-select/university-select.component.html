@@ -1,11 +1,11 @@
 <form [formGroup]="form">
   <div class="bg-light px-4 py-3">
-    <div class="text-primary box-header">กรุณาเลือกสถาบันที่ท่านสังกัด</div>
-    <div class="row" *ngIf="searchType !== 'uni'">
+    <div class="text-primary box-header">{{ title }}</div>
+    <div class="row mb-2" *ngIf="searchType !== 'uni'">
       <div class="col">
         <label class="form-label">{{ label1 }}</label>
         <select
-          [ngClass]="{ 'select-disable': bureauName && bureauName.length > 0 }"
+          [ngClass]="{ 'select-disable': bureauName && bureauName.length }"
           class="form-select"
           formControlName="institution"
         >
@@ -15,7 +15,7 @@
           <ng-container *ngIf="!bureauName">
             <option value="null" selected disabled hidden>กรุณาเลือก</option>
             <option
-              *ngFor="let bureau of bureaus$ | async"
+              *ngFor="let bureau of bureauList"
               [value]="bureau?.bureauId"
             >
               {{ bureau?.bureauName }}
@@ -30,7 +30,7 @@
           (click)="search()"
           class="form-control form-search"
           type="text"
-          [placeholder]="schoolName"
+          [placeholder]="schoolName || 'ค้นหาหน่วยงาน/สถานศึกษา'"
         />
       </div>
     </div>
@@ -53,6 +53,17 @@
           class="form-control form-search"
           type="text"
           [placeholder]="bureauName"
+        />
+      </div>
+    </div>
+    <div class="row" *ngIf="showAddress">
+      <div class="col mb-1">
+        <label class="form-label">ที่อยู่</label>
+        <input
+          class="form-control"
+          type="text"
+          disabled
+          [placeholder]="address"
         />
       </div>
     </div>

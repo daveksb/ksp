@@ -26,18 +26,18 @@ export class AddressService {
   getAmphurs(pid: number): Observable<any> {
     return this.http
       .get(`${environment.apiUrl}/kspmasterdata/amphur?provinceId=${pid}`)
-      .pipe(
-        shareReplay(),
-        map((data: any) => data.datareturn)
-      );
+      .pipe(map((data: any) => data.datareturn));
   }
 
   getTumbols(aid: number): Observable<any> {
     return this.http
       .get(`${environment.apiUrl}/kspmasterdata/tambol?amphurCode=${aid}`)
-      .pipe(
-        shareReplay(),
-        map((data: any) => data.datareturn)
-      );
+      .pipe(map((data: any) => data?.datareturn));
+  }
+
+  getAddressByPostcode(postcode: string | null): Observable<any> {
+    return this.http
+      .post(`${environment.shortApiUrl}/postcodesearch.php`, { postcode: postcode, offset: 0, row: 10 })
+      .pipe(map((data: any) => data?.datareturn));
   }
 }

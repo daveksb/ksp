@@ -1,0 +1,78 @@
+.main__container {
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  background-image: url(/assets/images/BG-Information.png);
+  min-height: 100vh;
+}
+
+.content__container {
+  background: #ffffff;
+  box-shadow: 0px 0px 15px #e2e2e2;
+  border-radius: 20px;
+  padding: 24px;
+}
+
+.content__label {
+  font-size: 18px;
+  color: #000000;
+}
+
+.date__label {
+  color: #3f89fe;
+  padding-left: 8px;
+}
+
+.table {
+  font-size: 14px;
+  background-color: #edf8ff;
+  border: 1px solid #ecedf3;
+  color: #333333;
+  white-space: nowrap;
+}
+
+.header__container {
+  text-align: center;
+}
+
+.body__table {
+  background-color: #fff;
+  color: #a6a6a6;
+}
+
+.detail__table {
+  text-align: center;
+}
+
+.qrcode__title {
+  font-size: 22px;
+  color: #656565;
+  text-decoration: underline;
+}
+
+.qrcode__label {
+  font-size: 20px;
+  color: #656565;
+  margin-top: 16px;
+}
+
+@media only screen and (max-width: 768px) {
+  .container {
+    padding: 0;
+  }
+
+  .qrcode__title {
+    margin-top: 0;
+  }
+
+  .content__label {
+    font-size: 14px;
+  }
+}
+
+::ng-deep #dialogTrasparent {
+  box-shadow: none;
+  background: transparent;
+  overflow: hidden;
+  padding: 0;
+}

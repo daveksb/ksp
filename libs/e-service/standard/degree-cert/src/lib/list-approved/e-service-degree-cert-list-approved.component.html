@@ -1,0 +1,171 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
+<ksp-top-nav>
+  <span header>รายการแบบคำขอส่งรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา</span>
+</ksp-top-nav>
+
+<div class="bg-secondary bg-opacity-10 py-2 px-4 full-height full-width-2">
+  <div class="box-header">
+    รายการแบบคำขอส่งรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา
+  </div>
+  <div class="bg-white p-3">
+    <form [formGroup]="form">
+      <ksp-degree-cert-approved-search
+        formControlName="search"
+        (cleared)="onClear()"
+        (searched)="search()"
+        [uniUniversityOption]="uniUniversityOption"
+        [degreeLevelOption]="degreeLevelOptions"
+        [statusOption]="statusList"
+      ></ksp-degree-cert-approved-search>
+    </form>
+
+    <br />
+
+    <div class="table__scroll">
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="order">
+          <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+          <td mat-cell *matCellDef="let element">{{ element.order }}</td>
+        </ng-container>
+        <ng-container matColumnDef="requestno">
+          <th mat-header-cell *matHeaderCellDef>เลขที่แบบคำขอ</th>
+          <td mat-cell *matCellDef="let element">
+            <span
+              class="text-primary link"
+              *ngIf="element.status !== '3'"
+              (click)="goToDetailPage(element.unirequestadmissionid)"
+            >
+              {{ element.requestnounirequestadmission || '-' }}
+            </span>
+            <span *ngIf="element.status === '3'">{{
+              element.requestnounirequestadmission || '-'
+            }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="unicode">
+          <th mat-header-cell *matHeaderCellDef>รหัสสถาบัน</th>
+          <td mat-cell *matCellDef="let element">{{ element.unicode }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="degreeapprovecode">
+          <th mat-header-cell *matHeaderCellDef>รหัสปริญญา</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.degreeapprovecode }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="uniname">
+          <th mat-header-cell *matHeaderCellDef>สถาบัน / มหาวิทยาลัย</th>
+          <td mat-cell *matCellDef="let element">{{ element.uniname }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="degreelevel">
+          <th mat-header-cell *matHeaderCellDef>ระดับปริญญา</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.degreelevelname }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="degreename">
+          <th mat-header-cell *matHeaderCellDef>
+            ชื่อปริญญาและประกาศนียบัตรทางการศึกษา
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.fulldegreenameth }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="admissionstatus">
+          <th mat-header-cell *matHeaderCellDef>สถานะรายชื่อผู้เข้า</th>
+          <td mat-cell *matCellDef="let element">
+            <span
+              class="rounded-pill d-flex justify-content-center"
+              [ngClass]="{
+                edit__status:
+                  element.studentStatus === 'สร้าง' || 'ยื่นเรียบร้อย',
+                verify__status: element.studentStatus === 'รับข้อมูล'
+              }"
+            >
+              {{ element.admissionstatus || '-' }}</span
+            >
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="graduatestatus">
+          <th mat-header-cell *matHeaderCellDef>สถานะรายชื่อผู้สำเร็จ</th>
+          <td mat-cell *matCellDef="let element">
+            <span
+              class="rounded-pill d-flex justify-content-center"
+              [ngClass]="{
+                edit__status:
+                  element.graduateStatus === 'สร้าง' || 'ยื่นเรียบร้อย',
+                verify__status: element.graduateStatus === 'รับข้อมูล'
+              }"
+            >
+              {{ element.graduatestatus || '-' }}</span
+            >
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="updatedate">
+          <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.updatedate }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="requestdate">
+          <th mat-header-cell *matHeaderCellDef>วันที่ยื่นคำขอ</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.requestdate }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="history">
+          <th mat-header-cell *matHeaderCellDef>ประวัติคำขอ</th>
+          <td mat-cell *matCellDef="let element">
+            <i
+              role="button"
+              (click)="viewhistory(element)"
+              class="bi bi-eye text-success fs-5 ms-3"
+            ></i>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="print">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td class="text-end" mat-cell *matCellDef="let element">
+            <button class="btn btn-sm btn-primary" (click)="lastStep()">
+              <div class="d-flex justify-content-center">
+                <i role="button" class="bi bi-printer"></i>
+                <span class="ms-1">พิมพ์แบบคำขอ</span>
+              </div>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        <tr class="mat-row text-center" *matNoDataRow>
+          <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+            ไม่พบข้อมูล
+          </td>
+        </tr>
+      </table>
+    </div>
+    <mat-paginator
+      [pageSizeOptions]="[25]"
+      showFirstLastButtons
+      [length]="pageEvent.length"
+      [pageSize]="pageEvent.pageSize"
+      [pageIndex]="pageEvent.pageIndex"
+      (page)="onPaginatorEvent($event)"
+    >
+    </mat-paginator>
+  </div>
+</div>

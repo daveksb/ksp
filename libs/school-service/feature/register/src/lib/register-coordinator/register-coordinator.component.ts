@@ -7,163 +7,113 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-import { FormMode } from '@ksp/shared/interface';
-import { GeneralInfoService, RequestService } from '@ksp/shared/service';
-import { EMPTY, Observable, switchMap } from 'rxjs';
+import {
+  FileGroup,
+  FormMode,
+  Nationality,
+  Prefix,
+} from '@ksp/shared/interface';
+import { GeneralInfoService } from '@ksp/shared/service';
+import { Observable } from 'rxjs';
 import localForage from 'localforage';
-import { thaiDate } from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
+import { mapMultiFileInfo } from '@ksp/shared/utility';
 @Component({
   templateUrl: './register-coordinator.component.html',
   styleUrls: ['./register-coordinator.component.scss'],
 })
 export class CoordinatorInfoComponent implements OnInit {
-  form = this.fb.group({
-    coordinator: [],
-  });
-  savingData: any;
-  uploadFileList = [
-    {
-      name: 'หนังสือแต่งตั้งผู้ประสานงาน',
-      fileId: '',
-    },
-    {
-      name: 'สำเนาบัตรประชาชน',
-      fileId: '',
-    },
-  ];
-  requestDate = thaiDate(new Date());
-  requestNumber = '';
-
-  prefixList$!: Observable<any>;
-  nationalitys$!: Observable<any>;
+  prefixList$!: Observable<Prefix[]>;
+  nationList$!: Observable<Nationality[]>;
   mode: FormMode = 'edit';
   userInfoFormdisplayMode: number = UserInfoFormType.thai;
   school: any;
-  uniqueTimestamp: any;
+  address: any;
+  uniqueNo!: string;
+  uploadFiles: FileGroup[] = [
+    {
+      name: 'หนังสือแต่งตั้งผู้ประสานงาน',
+      files: [],
+    },
+    {
+      name: 'สำเนาบัตรประชาชน',
+      files: [],
+    },
+  ];
+  form = this.fb.group({
+    coordinator: [],
+  });
+
   constructor(
     private router: Router,
     public dialog: MatDialog,
     private fb: FormBuilder,
-    private generalInfoService: GeneralInfoService,
-    private requestService: RequestService
+    private generalInfoService: GeneralInfoService
   ) {}
 
   ngOnInit(): void {
-    //this.savingData = history.state.data;
-
+    this.uniqueNo = uuidv4();
     this.getListData();
-
-    localForage.getItem('registerSelectedSchool').then((res) => {
-      this.school = res;
-    });
-
-    localForage.getItem('registerUserInfoFormValue').then((res) => {
-      this.savingData = res;
-    });
-
-    this.uniqueTimestamp = uuidv4();
+    this.getStoredData();
   }
+
+  save() {
+    localForage.setItem(
+      'registerCoordinator',
+      this.form.controls.coordinator.value
+    );
+    localForage.setItem('registerFile', mapMultiFileInfo(this.uploadFiles));
+    this.router.navigate(['/register', 'password']);
+  }
+
+  getStoredData() {
+    localForage.getItem('registerSelectedSchool').then((res: any) => {
+      this.school = res;
+      this.address = `เลขที่ ${res.address} ซอย ${res?.street ?? '-'} หมู่ ${
+        res?.moo ?? '-'
+      } ถนน ${res?.road ?? '-'} ตำบล ${res.tumbon} อำเภอ ${
+        res.amphurname
+      } จังหวัด ${res.provincename} รหัสไปรษณีย์ ${res.zipcode}`;
+      //console.log('school = ', res);
+    });
+  }
+
   getListData() {
     this.prefixList$ = this.generalInfoService.getPrefix();
-    this.nationalitys$ = this.generalInfoService.getNationality();
+    this.nationList$ = this.generalInfoService.getNationality();
   }
 
-  cancel() {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
+  cancelConfirmDialog() {
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
-        title: `คุณต้องการยกเลิกรายการใบคำขอ
+        title: `คุณต้องการยกเลิกรายการแบบคำขอ
         ใช่หรือไม่?`,
         btnLabel: 'ยืนยัน',
       },
     });
 
-    dialogRef.componentInstance.confirmed.subscribe((res) => {
+    dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.onConfirmed();
+        this.cancelCompleteDialog();
       }
     });
   }
 
-  onConfirmed() {
-    const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
+  cancelCompleteDialog() {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header: 'ยกเลิกรายการสำเร็จ',
       },
     });
 
-    completeDialog.componentInstance.completed.subscribe((res) => {
+    dialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/', 'login']);
+        this.router.navigate(['/login']);
       }
     });
   }
 
   back() {
     this.router.navigate(['register', 'requester']);
-  }
-
-  save() {
-    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
-      data: {
-        title: `คุณต้องการยืนยันข้อมูลใช่หรือไม่?`,
-        subTitle: `คุณยืนยันข้อมูลและส่งเรื่องเพื่อขออนุมัติ
-        ใช่หรือไม่`,
-        schoolCode: `รหัสเข้าใช้งาน(รหัสโรงเรียน): ${this.school?.schoolId}`,
-        btnLabel: 'บันทึก',
-      },
-    });
-
-    confirmDialog.componentInstance.confirmed
-      .pipe(
-        switchMap((res) => {
-          if (res) {
-            const payload = {
-              ...this.savingData,
-              coordinatorinfo: JSON.stringify(this.form.value),
-            };
-            payload.ref1 = '2';
-            payload.ref2 = '01';
-            payload.ref3 = '1';
-            payload.systemtype = '2';
-            payload.requesttype = '1';
-            payload.currentprocess = `1`;
-            return this.requestService.createRequest(payload);
-          }
-          return EMPTY;
-        })
-      )
-      .subscribe((res) => {
-        if (res) {
-          const requestNo = res?.requestno;
-          this.showCompleteDialog(requestNo);
-        }
-      });
-  }
-
-  showCompleteDialog(requestNo: string) {
-    const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '375px',
-      data: {
-        header: `ยืนยันข้อมูลสำเร็จ`,
-        content: `วันที่ : ${this.requestDate}
-        เลขที่ใบคำขอ : ${requestNo}`,
-        subContent: `กรุณาตรวจสอบสถานะใบคำขอผ่านทางอีเมล
-        ผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
-      },
-    });
-
-    completeDialog.componentInstance.completed.subscribe((res) => {
-      if (res) {
-        localForage.setItem(
-          'registerCoordinatorInfoFormValue',
-          this.form.value
-        );
-        this.router.navigate(['/register', 'password']);
-      }
-    });
   }
 }

@@ -2,8 +2,9 @@
   border-radius: 16px;
   background-color: #eeffff;
   background-size: cover;
-  width: 500px;
-  height: 250px;
+  width: auto;
+  height: 225px;
+  margin: auto;
 }
 
 .title {
@@ -16,10 +17,6 @@
   font-size: 14px;
 }
 
-.xxx {
-  display: flex;
-}
-
 .dot {
   height: 8px;
   width: 8px;
@@ -27,4 +24,10 @@
   background-color: #bbb;
   border-radius: 50%;
   display: inline-block;
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: 500px;
+  }
 }

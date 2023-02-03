@@ -1,20 +1,16 @@
-/* .buttons__container {
-  display: flex;
-  justify-content: center;
-  margin: 24px 0;
+mat-button-toggle-group {
+  background-color: #fff;
+  border: 1px solid #01b27b;
+  color: #000;
 }
 
-.btn__license {
-  background-color: #fff;
-  border: 1px solid #06dea9;
-  border-radius: 15px;
-  padding: 6px 24px;
-  margin: 0 12px;
-} */
+.mat-button-toggle-checked {
+  background-color: #06dea9;
+  color: #fff;
+}
 
-mat-button-toggle-group {
-  margin: 0 12px;
-  background-color: #fff;
-  border: 1px solid #06dea9;
-  border-radius: 15px;
+.mat-button-toggle-group-appearance-standard
+  .mat-button-toggle
+  + .mat-button-toggle {
+  border-left: solid 1px #01b27b;
 }

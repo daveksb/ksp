@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SetNewPasswordComponent } from './set-new-password/set-new-password.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TopNavSecondComponent } from '@ksp/shared/menu';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export const routes: Routes = [
   {
@@ -23,6 +24,7 @@ export const routes: Routes = [
     TopNavSecondComponent,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
+    MatProgressSpinnerModule,
   ],
   declarations: [PersonIdComponent, SetNewPasswordComponent],
 })

@@ -1,25 +1,21 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import {
-  GeneralInfoService,
-  AddressService,
-  MyInfoService,
-} from '@ksp/shared/service';
+import { GeneralInfoService, AddressService } from '@ksp/shared/service';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { nameEnPattern, passportPattern } from '@ksp/shared/utility';
-import { parseJson } from '@ksp/shared/utility';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { nameEnPattern } from '@ksp/shared/utility';
+import {
+  Country,
+  FileGroup,
+  KspFormBaseComponent,
+  Prefix,
+  Province,
+} from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
+import moment from 'moment';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
-const ACADEMIC_FILES = [
-  {
-    name: `1. Achelor's degree`,
-    fileId: '',
-    fileName: '',
-  },
-];
-
+@UntilDestroy()
 @Component({
   selector: 'self-service-foreign-license-step-two',
   templateUrl: './foreign-license-step-two.component.html',
@@ -60,27 +56,45 @@ export class ForeignLicenseStepTwoComponent
       }
     }, 0);
   }
+  @Input()
+  set eduInfo(value: any) {
+    setTimeout(() => {
+      this.form.controls.academicForm.patchValue(value);
+    }, 0);
+  }
+  @Input()
+  set grantionTeachingInfo(value: any) {
+    setTimeout(() => {
+      this.form.controls.grantionLicenseForm.patchValue(value);
+    }, 0);
+  }
+  @Input()
+  set licensureInfo(value: any) {
+    setTimeout(() => {
+      this.form.controls.licensureInfoForm.patchValue(value);
+    }, 0);
+  }
+  @Input() academicFiles: FileGroup[] = [];
+  @Input() uniqueTimestamp!: string;
+  @Input() isRenewLicense = false;
+  @Input() myImage = '';
+  @Input() isEditMode = true;
 
-  prefixList$!: Observable<any>;
-  provinces1$!: Observable<any>;
+  prefixList$!: Observable<Prefix[]>;
+  provinces1$!: Observable<Province[]>;
   district1$!: Observable<any>;
   subDistrict1$!: Observable<any>;
   provinces2$!: Observable<any>;
   district2$!: Observable<any>;
   subDistrict2$!: Observable<any>;
   nationalitys$!: Observable<any>;
-  countries$!: Observable<any>;
-  countries2$!: Observable<any>;
-
-  academicFiles: any[] = [];
-  uniqueTimestamp!: string;
+  countries$!: Observable<Country[]>;
+  countries2$!: Observable<Country[]>;
+  age = '';
 
   override form = this.fb.group({
     id: [],
-    passportno: [
-      null,
-      [Validators.required, Validators.pattern(passportPattern)],
-    ],
+    passportno: [null, Validators.required],
     prefixen: [null, Validators.required],
     firstnameen: [
       null,
@@ -91,13 +105,15 @@ export class ForeignLicenseStepTwoComponent
       null,
       [Validators.required, Validators.pattern(nameEnPattern)],
     ],
-    sex: [null, Validators.required],
     birthdate: [null, Validators.required],
-    nationality: [null],
+    nationality: [null, Validators.required],
+    foreignpassporttype: [null, Validators.required],
+    imagefileid: [''],
     addressForm: [],
     workplaceForm: [],
     academicForm: [],
     grantionLicenseForm: [],
+    licensureInfoForm: [],
   });
 
   constructor(
@@ -118,11 +134,16 @@ export class ForeignLicenseStepTwoComponent
   ngOnInit(): void {
     this.getListData();
     // this.getMyInfo();
-    this.initializeFiles();
-  }
-
-  initializeFiles() {
-    this.academicFiles = structuredClone(ACADEMIC_FILES);
+    this.form.controls.birthdate.valueChanges
+      .pipe(untilDestroyed(this))
+      .subscribe((value) => {
+        if (value) {
+          const birthDate = moment(value);
+          const currentDate = moment(new Date());
+          const age = Math.abs(birthDate.diff(currentDate, 'years'));
+          this.age = `${age}`;
+        }
+      });
   }
 
   getListData() {
@@ -133,74 +154,6 @@ export class ForeignLicenseStepTwoComponent
     this.countries$ = this.addressService.getCountry();
     this.countries2$ = this.countries$;
   }
-
-  // getMyInfo() {
-  //   this.myInfoService.getMyInfo().subscribe((res) => {
-  //     console.log(res);
-  //     this.patchUserInfo(res);
-  //     this.patchAddress(parseJson(res.addressinfo), res.phone, res.email);
-  //     if (res.schooladdrinfo) {
-  //       this.patchWorkplace(parseJson(res.schooladdrinfo));
-  //     }
-  //   });
-  // }
-
-  // patchUserInfo(data: any) {
-  //   const {
-  //     birthdate,
-  //     firstnameen,
-  //     lastnameen,
-  //     prefixen,
-  //     id,
-  //     middlenameen,
-  //     passportno,
-  //     nationality,
-  //   } = data;
-  //   const patchData = {
-  //     birthdate: birthdate.split('T')[0],
-  //     firstnameen,
-  //     lastnameen,
-  //     prefixen,
-  //     id,
-  //     middlenameen,
-  //     passportno,
-  //     nationality,
-  //   } as any;
-  //   // this.patchUserInfoForm(patchData);
-  //   this.form.patchValue({
-  //     ...patchData,
-  //   });
-  // }
-
-  // patchAddress(addrs: any[], phone: any, email: any) {
-  //   if (addrs && addrs.length) {
-  //     const addr = addrs[0];
-  //     this.district1$ = this.addressService.getAmphurs(addr.province);
-  //     this.subDistrict1$ = this.addressService.getTumbols(addr.amphur);
-  //     this.form.controls.addressForm.patchValue({
-  //       ...addr,
-  //       phone,
-  //       email,
-  //     });
-  //   }
-  // }
-
-  // patchWorkplace(data: any) {
-  //   this.district2$ = this.addressService.getAmphurs(data.province);
-  //   this.subDistrict2$ = this.addressService.getTumbols(data.district);
-  //   this.form.controls.workplaceForm.patchValue({
-  //     addressName: data.addressName,
-  //     addressForm: {
-  //       houseNo: data.houseNumber,
-  //       alley: data.lane,
-  //       road: data.road,
-  //       postcode: data.zipCode,
-  //       province: data.province,
-  //       tumbol: data.subDistrict,
-  //       amphur: data.district,
-  //     },
-  //   } as any);
-  // }
 
   provinceChanged(addrType: number, evt: any) {
     const province = evt.target?.value;
@@ -222,5 +175,9 @@ export class ForeignLicenseStepTwoComponent
         this.subDistrict2$ = this.addressService.getTumbols(amphur);
       }
     }
+  }
+
+  uploadImageComplete(imageId: string) {
+    this.form.patchValue({ imagefileid: imageId });
   }
 }

@@ -12,7 +12,7 @@ export class SelfMyInfo {
   firstnameen: string | null = null;
   firstnameth: string | null = null;
   filedata?: string | null = null;
-  id: string | null = null;
+  id?: string | null = null;
   idcardbackno: string | null = null;
   idcardimage: string | null = null;
   idcardno: string | null = null;
@@ -40,6 +40,7 @@ export class SelfMyInfo {
   requestinfo: string | null = null;
   schooladdrinfo: string | null = null;
   selfdevelopmentinfo: string | null = null;
+  sex: string | null = null;
   teachercouncilidno: string | null = null;
   updatedate?: string | null = null;
   username: string | null = null;
@@ -49,6 +50,7 @@ export class SelfMyInfo {
   visaenddate: string | null = null;
   visatype: string | null = null;
   uniquetimestamp: string | null = null;
+  returncode?: string | null = null;
 }
 
 export type SelfMyInfoKey = keyof SelfMyInfo;

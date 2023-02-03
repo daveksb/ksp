@@ -1,11 +1,30 @@
 import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { providerFactory } from '@ksp/shared/utility';
+
+function checkAllValidator(): any {
+  return (form: FormArray) => {
+    const checkAll = form.controls.every((item) => !!item.value);
+
+    if (!checkAll) {
+      return { checkall: true };
+    }
+
+    return null;
+  };
+}
 
 @Component({
   selector: 'self-service-foreign-license-step-one',
   templateUrl: './foreign-license-step-one.component.html',
   styleUrls: ['./foreign-license-step-one.component.scss'],
+  providers: providerFactory(ForeignLicenseStepOneComponent),
 })
-export class ForeignLicenseStepOneComponent implements OnInit {
+export class ForeignLicenseStepOneComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
   rules = [
     `Teaching License Application Form (Form KS. 01)`,
     `Copy of educational certificate along with official transcript`,
@@ -45,7 +64,38 @@ export class ForeignLicenseStepOneComponent implements OnInit {
     `Payment receipt for registration fee: 500 Baht`,
   ];
 
-  constructor() {}
+  override form = this.fb.group({
+    checkDocuments: this.fb.array([], checkAllValidator()),
+  });
 
-  ngOnInit(): void {}
+  override set value(value: any) {
+    Object.keys(value).forEach((key) => {
+      const control = this.form.get(key) as FormArray;
+      if (value[key]?.length) {
+        value[key].forEach((value: any, index: any) => {
+          control.at(index)?.patchValue(value);
+        });
+      }
+    });
+
+    this.onChange(value);
+    this.onTouched();
+  }
+
+  constructor(private fb: FormBuilder) {
+    super();
+    this.subscriptions.push(
+      // any time the inner form changes update the parent of any change
+      this.form?.valueChanges.subscribe((value) => {
+        this.onChange(value);
+        this.onTouched();
+      })
+    );
+  }
+
+  ngOnInit(): void {
+    this.rules.forEach((rule) =>
+      this.form.controls.checkDocuments.push(this.fb.control(false))
+    );
+  }
 }

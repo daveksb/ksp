@@ -1,0 +1,61 @@
+<!-- <div class="table__scroll summary-table"> -->
+<div class="summary-table">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="order">
+      <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+      <td mat-cell *matCellDef="let element; let i = index">
+        {{ element.order }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="licenseType">
+      <th mat-header-cell *matHeaderCellDef>ประเภทหนังสืออนุญาต</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.label }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="count">
+      <th mat-header-cell *matHeaderCellDef>จำนวน (ราย)</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.count }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="viewDetail">
+      <th mat-header-cell *matHeaderCellDef>ยืนยันผล</th>
+      <td mat-cell *matCellDef="let element">
+        <button
+          (click)="viewDetail(element)"
+          type="button"
+          class="btn btn-sm btn-success"
+          [disabled]="element.count === 0"
+        >
+          บัญชีรายชื่อ
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="approve">
+      <th mat-header-cell *matHeaderCellDef>อนุมัติ</th>
+      <td mat-cell *matCellDef="let element">{{ element.approve }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="unApprove">
+      <th mat-header-cell *matHeaderCellDef>ไม่อนุมัติ</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.unApprove }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="urgent">
+      <th mat-header-cell *matHeaderCellDef>เร่งด่วน</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.urgent }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

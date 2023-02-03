@@ -43,12 +43,11 @@
             <th scope="row" class="fs-5 text-end">รวมทั้งหมด</th>
             <td>
               <div>
-                <div
-                  class="form-control text-center p-2 bg-secondary bg-opacity-25"
+                <input
+                  class="form-control text-center p-2"
                   disabled
-                >
-                  {{ totalCredit | number }}
-                </div>
+                  value="{{ totalCredit | number }}"
+                />
               </div>
             </td>
           </tr>
@@ -66,6 +65,7 @@
         <thead>
           <tr>
             <th scope="col" class="w-50">แผนการรับนักศึกษา (รายปี)</th>
+            <th scope="col" class="text-center">ชื่อแผน</th>
             <th scope="col" class="text-center">ปีการศึกษา (พ.ศ)</th>
             <th scope="col" class="text-center">จำนวนนักศึกษา</th>
           </tr>
@@ -78,6 +78,18 @@
                 <th scope="row" class="align-middle">
                   {{ item.value.label }}
                 </th>
+
+                <td>
+                  <div>
+                    <input
+                      class="form-control text-center"
+                      type="text"
+                      placeholder="กรอกชื่อแผน"
+                      formControlName="planname"
+                    />
+                  </div>
+                </td>
+
                 <td>
                   <div>
                     <input
@@ -106,12 +118,11 @@
             <th scope="row"></th>
             <td class="fs-5 text-end">รวมทั้งหมด</td>
             <td>
-              <div
-                class="form-control text-center bg-secondary bg-opacity-25 p-2"
+              <input
+                class="form-control text-center p-2"
                 disabled
-              >
-                {{ totalStudent | number }}
-              </div>
+                value="{{ totalStudent | number }}"
+              />
             </td>
           </tr>
         </tbody>

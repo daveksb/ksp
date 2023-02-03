@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -14,11 +14,11 @@ export class SeniorTeacherInfoComponent
   implements OnInit
 {
   override form = this.fb.group({
-    position: [],
-    professionalType: [],
-    resignationDetail: [],
-    earlyRetireDetail: [],
-    disciplineDetail: [],
+    position: [null, Validators.required],
+    professionalType: [null, Validators.required],
+    resignationDetail: [null, Validators.required],
+    earlyRetireDetail: [null, Validators.required],
+    disciplineDetail: [null, Validators.required],
   });
 
   constructor(private fb: FormBuilder) {

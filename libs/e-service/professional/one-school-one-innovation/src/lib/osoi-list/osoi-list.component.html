@@ -1,176 +1,143 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav
-  ><span header>ย่ืนใบคำขอรางวัล</span
+  ><span header>ยื่นแบบคำขอรางวัล</span
   ><span subHeader
     >ขอรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม (One School One Innovation: OSOI)</span
   ></ksp-top-nav
 >
 
-<div class="bg-secondary bg-opacity-10 px-4 py-2">
+<div class="bg-secondary full-height full-width-2 bg-opacity-10 px-4 py-2">
   <div class="box-header">
     รายการขอรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม (One School One Innovation: OSOI)
   </div>
-  <div class="bg-white p-3">
+  <div class="bg-white default-width p-3">
     <div class="box-header">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
     <hr />
-
-    <div class="row">
-      <div class="col">
-        <label class="form-label">เลขที่คำขอ</label>
-        <input type="text" class="form-control" />
-      </div>
-      <div class="col">
-        <label class="form-label">หมายเลขบัตรประชาชน</label>
-        <input type="text" class="form-control" />
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col">
-        <label class="form-label">ชื่อ-นามสกุล</label>
-        <input type="text" class="form-control" />
-      </div>
-      <div class="col">
-        <label class="form-label">ประเภท/กลุ่มสาระการเรียนรู้</label>
-        <input type="text" class="form-control" />
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col">
-        <label class="form-label">สถานะการดำเนินการ</label>
-        <select class="form-select">
-          <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
-      </div>
-      <div class="col">
-        <label class="form-label">ผลการพิจารณา</label>
-        <select class="form-select">
-          <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-3">
-        <label class="form-label">จาก : วันเดือนปีที่ยื่นใบคำขอ</label>
-        <input type="date" class="form-control" />
-      </div>
-      <div class="col-auto p-0 my-2">
-        <br />
-        <i class="bi bi-dash"></i>
-      </div>
-      <div class="col-3">
-        <label class="form-label">ถึง : วันเดือนปีที่ยื่นใบคำขอ</label>
-        <input type="date" class="form-control" />
-      </div>
-    </div>
-
-    <div class="d-flex justify-content-end">
-      <button
-        class="btn border-primary text-primary"
-        type="button"
-        (click)="clear()"
-      >
-        ล้างข้อมูล</button
-      ><button class="btn btn-primary ms-2" type="button" (click)="search()">
-        ค้นหา
-      </button>
-    </div>
+    <form [formGroup]="form">
+      <ksp-e-service-reward-search
+        [isSelfReward]="false"
+        (search)="search($event)"
+        (clear)="clear()"
+        formControlName="search"
+      ></ksp-e-service-reward-search>
+    </form>
   </div>
-  <br />
-  <div class="bg-white p-3">
-    <div class="box-header">
-      รายการขอรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม (One School One Innovation: OSOI)
-    </div>
-    <hr />
-    <div class="table-responsive">
+  <div class="bg-white p-3 mt-3">
+    <div class="box-header">ผลการค้นหา</div>
+    <div class="table__scroll">
       <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="order">
-          <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
-          <td mat-cell *matCellDef="let element">
-            {{ element.order }}
+          <th mat-header-cell *matHeaderCellDef class="text-center">ลำดับ</th>
+          <td
+            mat-cell
+            *matCellDef="let element; let i = index"
+            class="text-center"
+          >
+            {{
+              paginator.pageIndex === 0
+                ? i + 1
+                : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+            }}
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="licenseNumber">
-          <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
+        <ng-container matColumnDef="requestno">
+          <th mat-header-cell *matHeaderCellDef>เลขที่แบบคำขอ</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.licenseNumber }}
+            {{ element.requestno }}
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="schoolCode">
+        <ng-container matColumnDef="schoolid">
           <th mat-header-cell *matHeaderCellDef>รหัสโรงเรียน</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.schoolCode }}
+            {{ element.schoolid }}
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="schoolName">
+        <ng-container matColumnDef="schoolname">
           <th mat-header-cell *matHeaderCellDef>ชื่อหน่วยงาน/สถานศึกษา</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.schoolName }}
+            {{ element.schoolname }}
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="workName">
+        <ng-container matColumnDef="workname">
           <th mat-header-cell *matHeaderCellDef>ชื่อผลงาน</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.workName }}
+            {{ element.workname }}
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="consider">
+        <ng-container matColumnDef="process">
           <th mat-header-cell *matHeaderCellDef>ผลการพิจารณา</th>
-          <td mat-cell *matCellDef="let element">{{ element.consider }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.process }}</td>
         </ng-container>
 
-        <ng-container matColumnDef="lastEditDate">
-          <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
-          <td mat-cell *matCellDef="let element">{{ element.lastEditDate }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="submitDate">
-          <th mat-header-cell *matHeaderCellDef>คัดค้าน/เพิกถอน</th>
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>สถานะการดำเนินการ</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.submitDate }}
+            {{
+              checkStatus(
+                +element.process,
+                +element.status,
+                +element.requesttype
+              )?.ename
+            }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="processupdatedate">
+          <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.processupdatedate | thaiDate }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="requestdate">
+          <th mat-header-cell *matHeaderCellDef>วันที่ยื่นแบบคำขอ</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.requestdate | thaiDate }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="objection">
-          <th mat-header-cell *matHeaderCellDef>คัดค้าน/เพิกถอน</th>
-          <td mat-cell *matCellDef="let element">
-            {{ element.objection }}
-          </td>
+          <th mat-header-cell *matHeaderCellDef>การคัดค้าน/เพิกถอน</th>
+          <td mat-cell *matCellDef="let element">-</td>
         </ng-container>
 
         <ng-container matColumnDef="verify">
-          <th mat-header-cell *matHeaderCellDef>ตรวจสอบ</th>
-          <td mat-cell *matCellDef="let element">
-            <i role="button" class="bi bi-file-text fs-5 text-primary"></i>
+          <th mat-header-cell *matHeaderCellDef class="text-center">ตรวจสอบ</th>
+          <td mat-cell *matCellDef="let element" class="text-center">
+            <i
+              role="button"
+              class="bi bi-pencil-square fs-5 text-primary"
+              (click)="view(element.id)"
+            ></i>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="request">
-          <th mat-header-cell *matHeaderCellDef>ใบคำขอ</th>
-          <td mat-cell *matCellDef="let row">
+          <th mat-header-cell *matHeaderCellDef class="text-center">แบบคำขอ</th>
+          <td mat-cell *matCellDef="let element" class="text-center">
             <i role="button" class="bi bi-file-text fs-5 text-primary"></i>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="edit">
-          <th mat-header-cell *matHeaderCellDef>คัดค้าน/เพิกถอน</th>
-          <td mat-cell *matCellDef="let row">
+          <th mat-header-cell *matHeaderCellDef class="text-center">
+            คัดค้าน/เพิกถอน
+          </th>
+          <td mat-cell *matCellDef="let element" class="text-center">
             <i
+              *ngIf="isLicenseApproved(element)"
               role="button"
-              (click)="gotoNextPage()"
-              class="bi bi-pencil-square fs-5 text-primary"
+              (click)="cancelRequest()"
+              class="bi bi-file-x fs-5 text-danger"
             ></i>
           </td>
         </ng-container>
@@ -179,5 +146,11 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
     </div>
+    <mat-paginator
+      [pageSizeOptions]="[25]"
+      showFirstLastButtons
+      [hidden]="!dataSource.data.length"
+    >
+    </mat-paginator>
   </div>
 </div>

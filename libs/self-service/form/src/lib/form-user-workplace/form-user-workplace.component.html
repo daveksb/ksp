@@ -1,8 +1,32 @@
 <form [formGroup]="form">
+  <ng-container *ngIf="showNotRequire">
+    <div class="d-flex flex-md-row flex-column justify-content-between">
+      <div class="d-flex align-items-center">
+        <input type="checkbox" class="me-2" formControlName="notRequired" />
+        <label class="form-label">เป็นผู้ประสงค์ประกอบวิชาชีพทางการศึกษา</label>
+      </div>
+
+      <div
+        class="d-flex align-items-center justify-content-end"
+        *ngIf="form.controls.notRequired.value !== true && mode !== 'view'"
+      >
+        <label
+          (click)="openSearchDialog()"
+          role="button"
+          class="text-primary text-decoration-underline fs-6"
+          ><i class="bi bi-search me-1 fs-6"></i>ค้นหาสถานศึกษา</label
+        >
+      </div>
+    </div>
+  </ng-container>
   <div class="row">
-    <div class="col-md-6 mb-3">
-      <label class="form-label">สังกัด</label>
-      <select class="search__content form-select" formControlName="bureauid">
+    <div class="col-md-6 mb-2">
+      <label
+        class="form-label"
+        [class.required]="!form.controls.notRequired.value"
+        >สังกัด</label
+      >
+      <select class="form-select" formControlName="bureauid">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option *ngFor="let bureau of bureaus" [value]="bureau?.bureauId">
           {{ bureau?.bureauName }}
@@ -10,47 +34,65 @@
       </select>
     </div>
 
-    <div class="col-md-6 mb-3">
-      <label class="form-label">ชื่อหน่วยงาน/สถานศึกษา</label>
+    <div class="col-md-6 mb-2">
+      <label
+        class="form-label"
+        [class.required]="!form.controls.notRequired.value"
+        >ชื่อหน่วยงาน/สถานศึกษา</label
+      >
       <input class="form-control" type="text" formControlName="schoolname" />
-      <!-- (click)="openSearchDialog()" -->
+      <!-- <select class="form-select" formControlName="schoolname">
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+      </select> -->
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-6 mb-3">
-      <label class="form-label">ที่อยู่/เลขที่</label>
+    <div class="col-md-6 mb-2">
+      <label
+        class="form-label"
+        [class.required]="!form.controls.notRequired.value"
+        >ที่อยู่/เลขที่</label
+      >
       <input class="form-control" type="text" formControlName="houseno" />
     </div>
 
-    <div class="col-md-6 mb-3">
+    <div class="col-md-6 mb-2">
       <label class="form-label">หมู่ที่</label>
       <input class="form-control" type="text" formControlName="moo" />
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-6 mb-3">
+    <div class="col-md-6 mb-2">
       <label class="form-label">ซอย</label>
       <input class="form-control" type="text" formControlName="alley" />
     </div>
 
-    <div class="col-md-6 mb-3">
+    <div class="col-md-6 mb-2">
       <label class="form-label">ถนน</label>
       <input class="form-control" type="text" formControlName="road" />
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-6 mb-3">
-      <label class="form-label required">รหัสไปรษณีย์ </label>
+    <div class="col-md-6 mb-2">
+      <label
+        class="form-label"
+        [class.required]="!form.controls.notRequired.value"
+        >รหัสไปรษณีย์
+      </label>
       <input class="form-control" type="text" formControlName="postcode" />
     </div>
 
-    <div class="col-md-6 mb-3">
-      <label class="form-label">จังหวัด</label>
+    <div class="col-md-6 mb-2">
+      <label
+        class="form-label"
+        [class.required]="!form.controls.notRequired.value"
+        >จังหวัด</label
+      >
       <select
-        class="search__content form-select"
+        class="form-select"
         formControlName="province"
         (change)="provinceChanged.emit($event)"
       >
@@ -66,10 +108,14 @@
   </div>
 
   <div class="row">
-    <div class="col-md-6 mb-3">
-      <label class="form-label">ตำบล</label>
+    <div class="col-md-6 mb-2">
+      <label
+        class="form-label"
+        [class.required]="!form.controls.notRequired.value"
+        >ตำบล</label
+      >
       <select
-        class="search__content form-select"
+        class="form-select"
         formControlName="tumbol"
         (change)="updatePostcode($event)"
       >
@@ -80,10 +126,14 @@
       </select>
     </div>
 
-    <div class="col-md-6 mb-3">
-      <label class="form-label">อำเภอ</label>
+    <div class="col-md-6 mb-2">
+      <label
+        class="form-label"
+        [class.required]="!form.controls.notRequired.value"
+        >อำเภอ</label
+      >
       <select
-        class="search__content form-select"
+        class="form-select"
         formControlName="amphur"
         (change)="amphurChanged.emit($event)"
       >
@@ -94,4 +144,30 @@
       </select>
     </div>
   </div>
+
+  <ng-container *ngIf="showContactForm">
+    <div class="row">
+      <div class="col-md-6 mb-2">
+        <label class="form-label">โทรศัพท์</label>
+        <input class="form-control" type="text" formControlName="phone" />
+      </div>
+
+      <div class="col-md-6 mb-2">
+        <label class="form-label">โทรสาร</label>
+        <input class="form-control" type="text" formControlName="fax" />
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="showOnlineForm">
+    <div class="row">
+      <div class="col-md-6 mb-2">
+        <label class="form-label">อีเมล</label>
+        <input class="form-control" type="text" formControlName="email" />
+      </div>
+
+      <div class="col-md-6 mb-2">
+        <label class="form-label">เว็บไซต์</label>
+        <input class="form-control" type="text" formControlName="website" />
+      </div></div
+  ></ng-container>
 </form>

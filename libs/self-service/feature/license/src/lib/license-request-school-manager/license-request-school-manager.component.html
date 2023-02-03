@@ -1,39 +1,61 @@
-<ksp-top-nav><span header>ใบอนุญาตประกอบวิชาชีพ</span><span subHeader>ขอขึ้นใบอนุญาตประกอบวิชาชีพ</span></ksp-top-nav>
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
+<ksp-top-nav [isSelfService]="true"
+  ><span header>ยื่นแบบคำขอ</span
+  ><span subHeader
+    >ขอขึ้นหนังสืออนุญาตประกอบวิชาชีพ (ผู้บริหารสถานศึกษา)</span
+  ></ksp-top-nav
+>
 
 <div class="main__container px-4 py-2">
-  <self-service-license-info
-    [header]="'รายละเอียดใบคำขอ'"
-    [subheader1]="'วันที่ทำรายการ'"
-    [subheader2]="'เลขใบคำขอ'"
-    [subheader3]="'เลขที่ประจำตัวคุรุสภา'"
-    [subheader4]="'เลขประจำตัวประชาชน'"
-    [date]="'10 ตุลาคม 2565'"
-    [requestNo]="'11020-00xxx-xx-x'"
-    [KuruspaId]="'11020-00xxx-xx-x'"
-    [personId]="'3365500066412'"></self-service-license-info>
+  <self-service-request-status
+    [requestDate]="requestDate"
+    [idcardNo]="(myInfo$ | async)?.idcardno || ''"
+    [kurusapaNo]="(myInfo$ | async)?.kuruspano || ''"
+    [requestNo]="requestNo"
+  ></self-service-request-status>
 
   <form [formGroup]="form">
-    <div class="row mx-0 border shadow rounded-4 px-2 py-4 bg-white my-4">
-      <div class="col-lg-2">
-        <self-service-form-upload-image>
-        </self-service-form-upload-image>
+    <div class="row mx-0 border shadow-sm rounded-4 px-2 py-4 bg-white my-4">
+      <div class="col-lg-3 my-auto">
+        <self-service-form-upload-image
+          [imgSrc]="myImage"
+          [uniqueTimestamp]="uniqueTimestamp"
+          (uploadImageComplete)="uploadImageComplete($event)"
+        ></self-service-form-upload-image>
       </div>
-      <div class="col-md">
+      <div class="col-md mt-md-0 mt-2">
         <ksp-form-user-info
           formControlName="userInfo"
           [isDarkMode]="true"
           [prefixList]="prefixList$ | async"
-          [displayMode]="[userInfoType]"
           [nationList]="nationalitys$ | async"
-          [isSchoolService]="false">
+          [isSelfService]="true"
+        >
         </ksp-form-user-info>
       </div>
+    </div>
+
+    <div
+      class="m-2"
+      *ngIf="kspComment.checkdetail[selectedTabIndex]?.result === 'incomplete'"
+    >
+      <ksp-uni-form-badge
+        [mainTitle]="kspComment.checkdetail[selectedTabIndex].detail"
+      >
+      </ksp-uni-form-badge>
     </div>
 
     <mat-tab-group
       class="tab-group"
       animationDuration="0ms"
-      [selectedIndex]="0">
+      (selectedIndexChange)="selectedTabIndex = $event"
+      [selectedIndex]="selectedTabIndex"
+      selectedIndex="0"
+    >
       <mat-tab label="ที่อยู่" class="tab-content">
         <ksp-form-address
           formControlName="address1"
@@ -42,25 +64,28 @@
           [amphurs]="amphurs1$ | async"
           [tumbols]="tumbols1$ | async"
           (provinceChanged)="provinceChanged(1, $event)"
-          (amphurChanged)="amphurChanged(1, $event)">
+          (amphurChanged)="amphurChanged(1, $event)"
+        >
           <span>ที่อยู่ทะเบียนบ้าน</span>
         </ksp-form-address>
         <hr />
         <ksp-form-address
           formControlName="address2"
           [isDarkMode]="true"
-          [provinces]="provinces2$ | async"
+          [provinces]="provinces1$ | async"
           [amphurs]="amphurs2$ | async"
           [tumbols]="tumbols2$ | async"
           (provinceChanged)="provinceChanged(2, $event)"
-          (amphurChanged)="amphurChanged(2, $event)">
+          (amphurChanged)="amphurChanged(2, $event)"
+        >
           <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
           <span class="text-danger ms-1 fs-6">*กรุณากรอกข้อมูลตำบล, อำเภอ</span>
           <div class="d-flex align-items-center">
             <input
               type="checkbox"
               class="me-2"
-              (change)="useSameAddress($event)" />
+              (change)="useSameAddress($event)"
+            />
             <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
           </div>
         </ksp-form-address>
@@ -69,26 +94,16 @@
       <mat-tab label="สถานที่ทำงาน">
         <self-service-form-user-workplace
           formControlName="workplace"
-          [provinces]="provinces3$ | async"
+          [showNotRequire]="true"
+          [provinces]="provinces1$ | async"
           [amphurs]="amphurs3$ | async"
           [tumbols]="tumbols3$ | async"
           [bureaus]="bureau$ | async"
           (provinceChanged)="provinceChanged(3, $event)"
-          (amphurChanged)="amphurChanged(3, $event)">
+          (amphurChanged)="amphurChanged(3, $event)"
+          [showOnlineForm]="true"
+        >
         </self-service-form-user-workplace>
-        <div class="row mb-3">
-          <div class="col">
-            <label class="form-label">เว็บไซต์</label>
-            <input type="text" class="form-control" formControlName="website" />
-          </div>
-          <div class="col">
-            <label class="form-label">อีเมล</label>
-            <input
-              type="text"
-              class="form-control"
-              formControlName="workEmail" />
-          </div>
-        </div>
       </mat-tab>
 
       <mat-tab label="ข้อมูลทางการศึกษา">
@@ -96,22 +111,21 @@
           formControlName="education"
           [attachFiles]="eduFiles"
           [uniqueTimestamp]="uniqueTimestamp"
-          [educationTypes]="'manager'"></self-service-form-user-education>
-        <!-- <hr />
-      <ksp-form-attachment
-        [groups]="eduFiles"
-        [title]="'กรุณาแนบหลักฐานประกอบวุฒิทางการศึกษา'"
-      ></ksp-form-attachment> -->
+          [educationTypes]="'schManager'"
+        ></self-service-form-user-education>
       </mat-tab>
 
       <mat-tab label="ข้อมูลประสบการณ์วิชาชีพ">
         <self-service-school-manager-experience
-          formControlName="experience"></self-service-school-manager-experience>
-        <hr />
-        <ksp-form-attachment
-          [groups]="experienceFiles"
-          [uniqueTimestamp]="uniqueTimestamp"
-          [title]="'กรุณาแนบหลักฐานประกอบ'"></ksp-form-attachment>
+          formControlName="experience"
+        ></self-service-school-manager-experience>
+        <div class="mt-3">
+          <ksp-form-multi-attachment
+            [groups]="experienceFiles"
+            [uniqueTimestamp]="uniqueTimestamp"
+            [title]="'กรุณาแนบหลักฐานประกอบ'"
+          ></ksp-form-multi-attachment>
+        </div>
       </mat-tab>
     </mat-tab-group>
   </form>
@@ -122,12 +136,27 @@
   </div>
 
   <div class="d-flex justify-content-center my-3">
-    <button type="button" class="btn btn-secondary">ล้างข้อมูล</button>
+    <button
+      type="button"
+      class="btn border-secondary text-secondary bg-light"
+      (click)="resetForm()"
+    >
+      ล้างข้อมูล
+    </button>
+    <button
+      *ngIf="requestId"
+      (click)="cancel()"
+      type="button"
+      class="ms-3 btn border-primary text-primary"
+    >
+      ยกเลิกแบบคำขอ
+    </button>
     <button
       type="button"
       (click)="save()"
       class="ms-3 btn btn-primary"
-      [disabled]="disableNextButton">
+      [disabled]="form.invalid"
+    >
       ต่อไป
     </button>
   </div>

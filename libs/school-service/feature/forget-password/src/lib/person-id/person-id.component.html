@@ -1,3 +1,8 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav-2><br /></ksp-top-nav-2>
 
 <form [formGroup]="form">
@@ -12,21 +17,22 @@
       <div class="box-header">ลืมรหัสผ่าน</div>
       <hr />
       <div class="px-5 py-2">
-        <div class="text-primary box-header">
+        <div class="text-primary box-header mb-3">
           กรุณากรอกข้อมูลเพื่อยืนยันตัวตน
         </div>
 
         <div class="mb-3">
-          <div class="form-label">
-            รหัสโรงเรียน <span class="text-danger">*</span>
-          </div>
-          <input formControlName="schoolId" type="text" class="form-control" />
+          <div class="form-label required">รหัสโรงเรียน</div>
+          <input formControlName="schoolid" type="text" class="form-control" />
         </div>
         <div class="mb-1">
-          <div class="form-label">
-            หมายเลขบัตรประชาชน <span class="text-danger">*</span>
-          </div>
-          <input formControlName="personId" type="text" class="form-control" />
+          <div class="form-label required">หมายเลขบัตรประชาชน</div>
+          <input
+            formControlName="idcardno"
+            type="text"
+            class="form-control"
+            maxlength="13"
+          />
 
           <div class="form-label fs-6">
             หมายเลขบัตรประชาชนของผู้แต่งตั้ง / ผู้มีอำนาจ / ผู้บริหาร
@@ -38,7 +44,13 @@
         <button (click)="cancel()" class="btn border-primary text-primary">
           ยกเลิก
         </button>
-        <button (click)="accept()" class="ms-2 btn btn-primary">ตกลง</button>
+        <button
+          (click)="accept()"
+          class="ms-2 btn btn-primary"
+          [disabled]="form.invalid"
+        >
+          ตกลง
+        </button>
       </div>
     </div>
   </div>

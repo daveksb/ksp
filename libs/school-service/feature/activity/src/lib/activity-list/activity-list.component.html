@@ -1,106 +1,150 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav>
   <span header>
-    กิจกรรมพัฒนาตนเอง (หนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต)
+    กิจกรรมพัฒนาตนเอง (หนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีหนังสืออนุญาต)
   </span>
 </ksp-top-nav>
 
 <form [formGroup]="form">
-  <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
+  <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height full-width-2">
     <div class="box-header">
-      กิจกรรมพัฒนาตนเอง (หนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต)
+      กิจกรรมพัฒนาตนเอง (หนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีหนังสืออนุญาต)
     </div>
 
     <school-service-staff-search
       formControlName="activitySearch"
       (clear)="clear()"
-      (search)="search()"
+      (search)="search($event)"
+      [licenseTypes]="licenseTypes"
+      [positions]="positions$ | async"
     ></school-service-staff-search>
 
     <div class="bg-white mt-3 px-3 py-2">
       <div class="box-header">
-        รายชื่อผู้มีหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีใบอนุญาต
+        รายชื่อผู้มีหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีหนังสืออนุญาต
       </div>
       <hr />
 
-      <table mat-table [dataSource]="dataSource">
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
-          <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-        </ng-container>
+      <div class="table__scroll">
+        <table
+          class="mt-1"
+          mat-table
+          matSort
+          [dataSource]="dataSource"
+          [hidden]="!dataSource.data.length"
+        >
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef class="text-center">ลำดับ</th>
+            <td
+              mat-cell
+              *matCellDef="let element; let i = index"
+              class="text-center"
+            >
+              {{ i + 1 }}
+            </td>
+          </ng-container>
 
-        <!-- <ng-container matColumnDef="licenseID">
-          <th mat-header-cell *matHeaderCellDef>เลขที่หนังสืออนุญาต</th>
-          <td mat-cell *matCellDef="let element">{{ element.licenseID }}</td>
-        </ng-container> -->
+          <ng-container matColumnDef="licenseID">
+            <th mat-header-cell *matHeaderCellDef>เลขที่หนังสืออนุญาต</th>
+            <td mat-cell *matCellDef="let element">{{ element.licenseno }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="idcardno">
-          <th mat-header-cell *matHeaderCellDef>
-            หมายเลขบัตรประชาชน/เลขที่หนังสือเดินทาง
-          </th>
-          <td mat-cell *matCellDef="let element">{{ element.idcardno }}</td>
-        </ng-container>
+          <ng-container matColumnDef="idcardno">
+            <th mat-header-cell *matHeaderCellDef>
+              หมายเลขบัตรประชาชน/เลขคุรุสภาสำหรับชาวต่างชาติ
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.idcardno || element.kuruspano }}
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
-          <td mat-cell *matCellDef="let element">
-            {{ element.firstnameth }} {{ element.lastnameth }}
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.firstnameth }} {{ element.lastnameth }}
+            </td>
+          </ng-container>
 
-        <!-- <ng-container matColumnDef="releaseDate">
-          <th mat-header-cell *matHeaderCellDef>วันที่ออกหนังสือ</th>
-          <td mat-cell *matCellDef="let element">
-            {{ element.releaseDate }}
-          </td>
-        </ng-container> -->
+          <ng-container matColumnDef="releaseDate">
+            <th mat-header-cell *matHeaderCellDef>วันที่ออกหนังสือ</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.licensestartdate | thaiDate }}
+            </td>
+          </ng-container>
 
-        <!-- <ng-container matColumnDef="finishedDate">
-          <th mat-header-cell *matHeaderCellDef>วันที่สิ้นสุด</th>
-          <td mat-cell *matCellDef="let element">
-            {{ element.finishedDate }}
-          </td>
-        </ng-container> -->
+          <ng-container matColumnDef="finishedDate">
+            <th mat-header-cell *matHeaderCellDef>วันที่สิ้นสุด</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.licenseenddate | thaiDate }}
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="startdate">
-          <th mat-header-cell *matHeaderCellDef>วันที่เข้าปฏิบัติงาน</th>
-          <td mat-cell *matCellDef="let element">{{ element.startdate }}</td>
-        </ng-container>
+          <ng-container matColumnDef="startdate">
+            <th mat-header-cell *matHeaderCellDef>วันที่เข้าปฏิบัติงาน</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.startdate | thaiDate }}
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="enddate">
-          <th mat-header-cell *matHeaderCellDef>วันที่หมดสัญญา</th>
-          <td mat-cell *matCellDef="let element">{{ element.enddate }}</td>
-        </ng-container>
+          <ng-container matColumnDef="enddate">
+            <th mat-header-cell *matHeaderCellDef>วันที่หมดสัญญา</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.enddate | thaiDate }}
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="edit">
-          <th mat-header-cell *matHeaderCellDef>เพิ่ม/แก้ไข</th>
-          <td mat-cell *matCellDef="let element">
-            <i
-              role="button"
-              (click)="edit(activityPageMode.edit, element.id)"
-              class="bi bi-pencil-square text-primary fs-5"
-            ></i>
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef class="text-center">
+              เพิ่ม/แก้ไข
+            </th>
+            <td mat-cell *matCellDef="let element" class="text-center">
+              <i
+                role="button"
+                (click)="
+                  edit(activityPageMode.edit, element.id, element.requestid)
+                "
+                class="bi bi-pencil-square text-primary fs-5"
+              ></i>
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="view">
-          <th mat-header-cell *matHeaderCellDef>ดูข้อมูล</th>
-          <td mat-cell *matCellDef="let element">
-            <i
-              role="button"
-              (click)="view(activityPageMode.view, element.id)"
-              class="bi bi-eye fs-5 text-success"
-            ></i>
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="view">
+            <th mat-header-cell *matHeaderCellDef class="text-center">
+              ดูข้อมูล
+            </th>
+            <td mat-cell *matCellDef="let element" class="text-center">
+              <i
+                role="button"
+                (click)="view(element.id, element.requestid)"
+                class="bi bi-eye fs-5 text-success"
+              ></i>
+            </td>
+          </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      </table>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+        <table>
+          <tr *ngIf="searchNotFound">
+            <td
+              class="text-center fs-5"
+              [attr.colspan]="displayedColumns.length"
+            >
+              ไม่พบข้อมูล
+            </td>
+          </tr>
+        </table>
+      </div>
 
       <mat-paginator
-        [pageSizeOptions]="[5]"
-        showFirstLastButtons
-        aria-label="Select page of periodic elements"
+        [hidden]="!dataSource.data.length"
+        [length]="dataSource.data.length"
+        [pageSize]="25"
+        [showFirstLastButtons]="true"
       >
       </mat-paginator>
     </div>

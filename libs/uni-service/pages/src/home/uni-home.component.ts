@@ -1,16 +1,23 @@
+import { getCookie, stringToThaiDate, thaiDate } from '@ksp/shared/utility';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { SelfServiceFormModule } from '@ksp/self-service/form';
-import { ListData } from '@ksp/shared/interface';
+import { ListData, KspPaginationComponent } from '@ksp/shared/interface';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { DegreeHomeSearchComponent } from '@ksp/shared/search';
-import { AddressService, UniInfoService } from '@ksp/shared/service';
+import {
+  AddressService,
+  LoaderService,
+  UniInfoService,
+} from '@ksp/shared/service';
 import { UniFormBadgeComponent } from '@ksp/shared/ui';
 import _ from 'lodash';
 import moment from 'moment';
-import { map } from 'rxjs';
+import { lastValueFrom, map, Subject } from 'rxjs';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 const mapOption = () =>
   map((data: any) => {
     return (
@@ -32,20 +39,25 @@ const mapOption = () =>
     ReactiveFormsModule,
     DegreeHomeSearchComponent,
     UniFormBadgeComponent,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
   ],
 })
-export class UniHomeComponent {
-  badgeTitle1 = [
-    `เลขที่คำขอ : 010641000123
-  รายการขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา ถูกส่งคืน “ปรับแก้ไข /
-  เพิ่มเติม`,
-  ];
+export class UniHomeComponent extends KspPaginationComponent implements OnInit {
+  badgeTitle1: any;
+  badgeTitle2: any;
 
-  badgeTitle2 = [
-    `กรุณาส่งกลับภายในวันที่ DD/MM/YYYY มิฉะนั้นใบคำขอจะถูกยกเลิก`,
-  ];
+  // badgeTitle1 = [
+  //   `เลขที่คำขอ : 010641000123
+  // รายการขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา ถูกส่งคืน “ปรับแก้ไข /
+  // เพิ่มเติม`,
+  // ];
 
-  form = this.fb.group({
+  // badgeTitle2 = [
+  //   `กรุณาส่งกลับภายในวันที่ DD/MM/YYYY มิฉะนั้นแบบคำขอจะถูกยกเลิก`,
+  // ];
+
+  form: any = this.fb.group({
     homeSearch: [],
   });
   degreeLevelOptions: ListData[] = [];
@@ -56,11 +68,14 @@ export class UniHomeComponent {
   provinces: ListData[] = [];
   universityType: ListData[] = [];
   universities: ListData[] = [];
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   constructor(
     private fb: FormBuilder,
     private uniInfoService: UniInfoService,
-    private addressService: AddressService
+    private addressService: AddressService,
+    private loaderService: LoaderService
   ) {
+    super();
     this.getAll();
   }
 
@@ -78,34 +93,10 @@ export class UniHomeComponent {
   private _findOptions(dataSource: any, key: any) {
     return _.find(dataSource, { value: key })?.label || '-';
   }
-  mapTable = () =>
-    map((res: any) => {
-      return res?.datareturn?.map((row: any, index: number) => {
-        const degreeLevel = this._findOptions(
-          this.degreeLevelOptions,
-          row?.degreelevel
-        );
-        const major = this._findOptions(this.majorOptions, row?.coursemajor);
-        const branch = this._findOptions(
-          this.majorOptions,
-          row?.coursesubjects
-        );
-        const approveDate = row?.createdate
-          ? moment(row?.createdate).format('DD/MM/YYYY')
-          : '-';
-        return {
-          order: ++index,
-          approveNumber: row?.degreeapprovecode || '-',
-          degreeLevel,
-          uniName: row?.uniname || '-',
-          degreeName: row?.fulldegreenameth || '-',
-          major,
-          branch,
-          approveDate: approveDate,
-        };
-      });
-    });
-  search() {
+  ngOnInit(): void {
+    this.initFormData();
+  }
+  override search() {
     const value: any = this.form.value?.homeSearch;
     const payload = {
       uniid: value?.university || '',
@@ -118,23 +109,70 @@ export class UniHomeComponent {
       coursemajor: value?.major || '',
       coursesubjects: value?.subject || '',
       uniprovince: value?.province || '',
-      offset: '0',
-      row: '10',
+      ...this.tableRecord,
     };
-    this.uniInfoService
-      .uniDegreeSearch(payload)
-      .pipe(this.mapTable())
-      .subscribe((res) => {
-        this.dataSource.data = res;
-      });
+    this.uniInfoService.uniDegreeSearch(payload).subscribe(async (res) => {
+      const newData: any[] = [];
+      this.pageEvent.length = res?.countrow;
+      for (const row of res?.datareturn || []) {
+        const degreeLevel = this._findOptions(
+          this.degreeLevelOptions,
+          row?.degreelevel
+        );
+
+        const approveDate = row?.createdate
+          ? thaiDate(new Date(row?.createdate))
+          : '';
+        const { major, branch } = await this.uniInfoService.getMajorAndBranch(
+          row
+        );
+        newData.push({
+          approveNumber: row?.degreeapprovecode || '-',
+          degreeLevel,
+          uniName: row?.uniname || '-',
+          degreeName: row?.fulldegreenameth || '-',
+          major,
+          branch,
+          approveDate: approveDate,
+        });
+      }
+      this.dataSource.data = newData;
+    });
   }
 
   clear() {
     this.form.reset();
+    this.clearPageEvent();
     this.dataSource.data = [];
   }
-
+  initFormData() {
+    this.form.setValue({
+      homeSearch: {
+        universityType: getCookie('uniType'),
+        university: getCookie('uniId'),
+      },
+    });
+  }
   getAll() {
+    if (getCookie('uniType')) {
+      this.uniInfoService
+        .getUniversity(getCookie('uniType'))
+        .subscribe((res) => {
+          if (res) {
+            this.universities =
+              res.map((data: any) => ({
+                label:
+                  _.get(data, 'name') +
+                  (_.get(data, 'campusname')
+                    ? `, ${_.get(data, 'campusname')}`
+                    : ''),
+                value: _.get(data, 'id'),
+              })) || [];
+          } else {
+            this.universities = [];
+          }
+        });
+    }
     this.uniInfoService
       .getUniversityType()
       .pipe(mapOption())
@@ -149,12 +187,6 @@ export class UniHomeComponent {
         this.degreeLevelOptions = res;
       });
 
-    this.uniInfoService
-      .uniDegreeLevel()
-      .pipe(mapOption())
-      .subscribe((res) => {
-        this.degreeLevelOptions = res;
-      });
     this.uniInfoService
       .uniFieldOfStudy()
       .pipe(mapOption())

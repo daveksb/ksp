@@ -1,9 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConfirmDialogComponent } from '@ksp/shared/dialog';
+import {
+  CompleteDialogComponent,
+  ConfirmDialogComponent,
+} from '@ksp/shared/dialog';
 import { FormBuilder } from '@angular/forms';
-import { SelfRequest } from '@ksp/shared/interface';
+import {
+  FileGroup,
+  KspRequestCancelPayload,
+  SelfGetRequest,
+  SelfRequest,
+} from '@ksp/shared/interface';
 import {
   parseJson,
   replaceEmptyWithNull,
@@ -18,7 +26,13 @@ import { SelfRequestService, MyInfoService } from '@ksp/shared/service';
 import * as _ from 'lodash';
 import { getCookie } from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
+import {
+  ACADEMIC_FILES,
+  REQUEST_DOCUMENT_FILES,
+} from './license-request-foreign-files';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'self-service-license-request-foreign',
   templateUrl: './license-request-foreign.component.html',
@@ -26,14 +40,14 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export class LicenseRequestForeignComponent implements OnInit {
   headerGroup = ['Issue Date', 'Form ID'];
-  title = 'TEACHING LICENSE APPLICATION FORM';
 
   form = this.fb.group({
     personalDetail: [],
     personalDeclaration: [],
+    foreignCheckDocument: [],
+    foreignSelectUpload: [],
   });
 
-  attachFiles: any[] = [];
   uniqueTimestamp!: string;
   requestId!: number;
   requestData!: SelfRequest;
@@ -42,6 +56,15 @@ export class LicenseRequestForeignComponent implements OnInit {
   userInfo: any;
   addressInfo: any;
   workplaceInfo: any;
+  eduInfo: any;
+  academicFiles: FileGroup[] = [];
+  grantionTeachingInfo: any;
+  personalDeclaration: any;
+  documentFiles: FileGroup[] = [];
+  myImage = '';
+  requestType: any;
+  requestLabel = '';
+  requestDate: any;
 
   constructor(
     private router: Router,
@@ -54,6 +77,28 @@ export class LicenseRequestForeignComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkRequestId();
+    this.checkCareerType();
+    /*     this.personalDetail.valueChanges.subscribe((res) => {
+      console.log('valid = ', this.personalDetail.valid);
+    }); */
+  }
+
+  checkCareerType() {
+    this.route.queryParams.pipe(untilDestroyed(this)).subscribe((params) => {
+      if (Number(params['type'])) {
+        this.requestType = Number(params['type']);
+      }
+
+      if (this.requestType === 1) {
+        this.requestLabel = 'TEACHER';
+      } else if (this.requestType === 2) {
+        this.requestLabel = 'ADMINISTRATORS';
+      }
+    });
+  }
+
+  get personalDetail() {
+    return this.form.controls.personalDetail;
   }
 
   checkRequestId() {
@@ -61,41 +106,73 @@ export class LicenseRequestForeignComponent implements OnInit {
       this.requestId = Number(params.get('id'));
       if (this.requestId) {
         console.log(this.requestId);
-        // this.loadRequestFromId(this.requestId);
         this.requestService.getRequestById(this.requestId).subscribe((res) => {
           if (res) {
             console.log(res);
             this.requestData = res;
+            this.requestDate = res.requestdate;
             this.requestNo = res.requestno;
-            this.currentProcess = Number(res.currentprocess);
-            this.uniqueTimestamp = res.uniquetimestamp || '';
-            console.log(this.uniqueTimestamp);
-
+            this.currentProcess = Number(res.process);
+            this.uniqueTimestamp = res.uniqueno || '';
             this.patchData(res);
           }
         });
       } else {
         // this.initializeFiles();
         this.uniqueTimestamp = uuidv4();
-
+        this.academicFiles = structuredClone(ACADEMIC_FILES);
+        this.documentFiles = structuredClone(REQUEST_DOCUMENT_FILES);
         this.getMyInfo();
       }
     });
   }
 
-  patchData(data: SelfRequest) {
+  patchData(data: SelfGetRequest) {
+    const address = parseJson(data.addressinfo);
     this.patchUserInfo(data);
-    this.patchAddress(
-      parseJson(data.addressinfo),
-      data.contactphone,
-      data.email
-    );
+    this.patchAddress(address, address?.[0].phone, address?.[0].email);
+
     if (data.schooladdrinfo) {
-      this.patchWorkplace(parseJson(data.schooladdrinfo));
+      const workplace = parseJson(data.schooladdrinfo);
+      const { addressName, ...addressForm } = workplace;
+      this.workplaceInfo = { addressName, addressForm };
     }
-    // if (data.prohibitproperty) {
-    //   this.prohibitProperty = parseJson(data.prohibitproperty);
-    // }
+
+    if (data.eduinfo) {
+      const eduInfo = parseJson(data.eduinfo);
+      this.eduInfo = eduInfo;
+    }
+
+    if (data.fileinfo) {
+      const fileInfo = parseJson(data.fileinfo);
+      const { documentfiles, academicfiles } = fileInfo;
+      this.documentFiles = documentfiles;
+      this.academicFiles = academicfiles;
+    }
+
+    if (data.grantionteachinglicenseinfo) {
+      const grantionTeachingInfo = parseJson(data.grantionteachinglicenseinfo);
+      this.grantionTeachingInfo = grantionTeachingInfo;
+    }
+
+    if (data.checkprohibitproperty) {
+      const personalDeclaration = parseJson(data.checkprohibitproperty);
+      this.personalDeclaration = personalDeclaration;
+    }
+
+    if (data.foreigncheckdocument) {
+      const foreignCheckDocument = parseJson(data.foreigncheckdocument);
+      this.form.controls.foreignCheckDocument.patchValue(foreignCheckDocument);
+    }
+
+    if (data.foreignselectupload) {
+      const foreignSelectUpload = parseJson(data.foreignselectupload);
+      this.form.controls.foreignSelectUpload.patchValue(foreignSelectUpload);
+    }
+
+    if (data.filedata) {
+      this.myImage = atob(data.filedata);
+    }
   }
 
   getMyInfo() {
@@ -105,6 +182,10 @@ export class LicenseRequestForeignComponent implements OnInit {
       this.patchAddress(parseJson(res.addressinfo), res.phone, res.email);
       if (res.schooladdrinfo) {
         this.patchWorkplace(parseJson(res.schooladdrinfo));
+      }
+
+      if (res && res.filedata) {
+        this.myImage = atob(res.filedata);
       }
     });
   }
@@ -119,7 +200,8 @@ export class LicenseRequestForeignComponent implements OnInit {
       middlenameen,
       passportno,
       nationality,
-    } = data;
+      foreignpassporttype,
+    } = data || { foreignpassporttype: '' };
     const patchData = {
       birthdate: birthdate.split('T')[0],
       firstnameen,
@@ -129,6 +211,7 @@ export class LicenseRequestForeignComponent implements OnInit {
       middlenameen,
       passportno,
       nationality,
+      foreignpassporttype,
     } as any;
     this.userInfo = patchData;
   }
@@ -146,15 +229,15 @@ export class LicenseRequestForeignComponent implements OnInit {
 
   patchWorkplace(data: any) {
     this.workplaceInfo = {
-      addressName: data.addressName,
+      addressName: data.schoolname,
       addressForm: {
-        houseNo: data.houseNumber,
-        alley: data.lane,
+        houseNo: data.houseno,
+        alley: data.alley,
         road: data.road,
-        postcode: data.zipCode,
+        postcode: data.postcode,
         province: data.province,
-        tumbol: data.subDistrict,
-        amphur: data.district,
+        tumbol: data.tumbol,
+        amphur: data.amphur,
       },
     };
   }
@@ -164,10 +247,9 @@ export class LicenseRequestForeignComponent implements OnInit {
   }
 
   save() {
-    console.log(this.form.getRawValue());
-    console.log(this.attachFiles);
-    const completeDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
+    //console.log(this.form.getRawValue());
+    //console.log(this.documentFiles);
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `Do you want to save and proceed?`,
         btnLabel: 'Save & Proceed',
@@ -175,10 +257,13 @@ export class LicenseRequestForeignComponent implements OnInit {
       },
     });
 
-    completeDialog.componentInstance.saved.subscribe((res) => {
+    dialog.componentInstance.saved.subscribe((res) => {
       if (res) {
         const payload = this.createRequest(1);
-        this.requestService.createRequest(payload).subscribe((res) => {
+        const request = this.requestId
+          ? this.requestService.updateRequest.bind(this.requestService)
+          : this.requestService.createRequest.bind(this.requestService);
+        request(payload).subscribe((res) => {
           //console.log('request result = ', res);
           if (res.returncode === '00') {
             this.router.navigate(['/home']);
@@ -187,13 +272,17 @@ export class LicenseRequestForeignComponent implements OnInit {
       }
     });
 
-    completeDialog.componentInstance.confirmed.subscribe((res) => {
+    dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         const payload = this.createRequest(2);
-        this.requestService.createRequest(payload).subscribe((res) => {
+        const request = this.requestId
+          ? this.requestService.updateRequest.bind(this.requestService)
+          : this.requestService.createRequest.bind(this.requestService);
+        request(payload).subscribe((res) => {
           console.log('request result = ', res);
           if (res.returncode === '00') {
-            this.router.navigate(['/license', 'payment-channel']);
+            // this.router.navigate(['/license', 'payment-channel']);
+            this.router.navigate(['/home']);
           }
         });
       }
@@ -206,7 +295,7 @@ export class LicenseRequestForeignComponent implements OnInit {
       SelfServiceRequestSubType.ครู;
     const self = new SelfRequest(
       '1',
-      SelfServiceRequestType.ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ,
+      SelfServiceRequestType.ขอขึ้นทะเบียนหนังสืออนุญาตประกอบวิชาชีพ,
       `${type}`,
       currentProcess
     );
@@ -222,18 +311,20 @@ export class LicenseRequestForeignComponent implements OnInit {
 
     const { id, ...rawUserInfo } = userInfoForm;
     const userInfo = toLowercaseProp(rawUserInfo);
-    userInfo.requestfor = `${SelfServiceRequestForType.ชาวต่างชาติ}`;
-    userInfo.uniquetimestamp = this.uniqueTimestamp;
-    userInfo.staffid = getCookie('userId');
+    self.isforeign = `${SelfServiceRequestForType.ชาวต่างชาติ}`;
+    self.uniqueno = this.uniqueTimestamp;
+    self.userid = getCookie('userId');
 
     const selectData = _.pick(userInfo, allowKey);
 
     const { addressName, addressForm: resWorkplaceForm } = workplaceForm;
-    const documentfiles = this.attachFiles;
+    const documentfiles = this.documentFiles;
+    const academicfiles = this.academicFiles;
 
-    const payload = {
+    const payload: SelfRequest = {
       ...self,
       ...replaceEmptyWithNull(selectData),
+      ...(this.requestId && { id: `${this.requestId}` }),
       ...{
         addressinfo: JSON.stringify([addressForm]),
       },
@@ -248,15 +339,62 @@ export class LicenseRequestForeignComponent implements OnInit {
         grantionteachinglicenseinfo: JSON.stringify(grantionLicenseForm),
       },
       ...{
-        checkProhibitProperty: JSON.stringify(formData.personalDeclaration),
+        foreigncheckdocument: JSON.stringify(formData.foreignCheckDocument),
       },
-      ...{ fileinfo: JSON.stringify({ documentfiles }) },
+      ...{
+        foreignselectupload: JSON.stringify(formData.foreignSelectUpload),
+      },
+      ...{
+        checkprohibitproperty: JSON.stringify(formData.personalDeclaration),
+      },
+      ...{ fileinfo: JSON.stringify({ documentfiles, academicfiles }) },
     };
     console.log(payload);
     return payload;
   }
 
-  onFileUpdate(files: any[]) {
-    this.attachFiles = files;
+  onCancelRequest() {
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: `คุณต้องการยกเลิกรายการแบบคำขอ
+        ใช่หรือไม่? `,
+      },
+    });
+
+    dialog.componentInstance.confirmed.subscribe((res) => {
+      if (res) {
+        this.cancelRequest();
+      }
+    });
+  }
+
+  cancelRequest() {
+    const payload: KspRequestCancelPayload = {
+      requestid: `${this.requestId}`,
+      process: `${this.requestData.process}`,
+      userid: getCookie('userId'),
+    };
+
+    this.requestService.cancelRequest(payload).subscribe(() => {
+      this.cancelCompleted();
+    });
+  }
+
+  cancelCompleted() {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header: `ยกเลิกแบบคำขอสำเร็จ`,
+      },
+    });
+
+    dialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/home']);
+      }
+    });
+  }
+
+  onAttachFilesChange(event: any) {
+    this.documentFiles = event;
   }
 }

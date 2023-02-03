@@ -1,103 +1,102 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Ethics } from '@ksp/shared/interface';
 import { EthicsService } from '@ksp/shared/service';
-
+import {
+  jsonParse,
+  mapFileInfo,
+  replaceEmptyWithNull,
+} from '@ksp/shared/utility';
+import { UntilDestroy } from '@ngneat/until-destroy';
+import _ from 'lodash';
+import { AccusationRecordComponent } from '../accusation-record/accusation-record.component';
+@UntilDestroy()
 @Component({
   selector: 'e-service-accusation-main',
   templateUrl: './accusation-main.component.html',
   styleUrls: ['./accusation-main.component.scss'],
 })
-export class AccusationMainComponent {
-  form = this.fb.group({
-    accusation: [],
-  });
+export class AccusationMainComponent implements OnInit {
+  ethicsId!: number;
 
+  form = this.fb.group({
+    accusation: [] as any,
+  });
+  @ViewChild(AccusationRecordComponent)
+  accusation!: AccusationRecordComponent;
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     public dialog: MatDialog,
     private fb: FormBuilder,
     private service: EthicsService
   ) {}
 
-  saveEthics() {
-    const payload = {
-      /*       ethicsno:
-      accuserinfo:
-      licenseinfo:
-      addressinfo:
-      workplaceinfo:
-      idcardno:
-      passportno:
-      prefixth:  */
-      firstnameth: '5',
-      lastnameth: '6',
-      prefixen: '7',
-      firstnameen: '8',
-      lastnameen: '9',
-      birthdate: '2022-09-16T00:00:00',
-      sex: '10',
-      email: '11',
-      phone: '12',
-      accusationblackno: '13',
-      accusationtype: '14',
-      accusationincidentdate: '2022-09-16T00:00:00',
-      accusationincidentplace: '15',
-      accusationcondemnationtype: '16',
-      accusationcondemnation: '17',
-      accusationissuedate: '2022-09-16T00:00:00',
-      accusationdetail: '18',
-      accusationpunishmentdetail: '19',
-      accusationviolatedetail: '20',
-      accusationassignofficer: '21',
-      accusationassigndate: '2022-09-16T00:00:00',
-      accusationfile: "{'field1':'data1','field2':'data2','field3':'data3'}",
-      accusationconsideration:
-        "{'field1':'data1','field2':'data2','field3':'data3'}",
-      investigationorderno: '22',
-      investigationorderdate: '2022-09-16T00:00:00',
-      investigationsubcommittee:
-        "{'field1':'data1','field2':'data2','field3':'data3'}",
-      investigationdate: '2022-09-16T00:00:00',
-      investigationreportdate: '2022-09-16T00:00:00',
-      investigationreport: '23',
-      investigationfile: "{'field1':'data1','field2':'data2','field3':'data3'}",
-      investigationresult:
-        "{'field1':'data1','field2':'data2','field3':'data3'}",
-      inquiryorderno: '24',
-      inquiryorderdate: '2022-09-16T00:00:00',
-      inquirysubcommittee:
-        "{'field1':'data1','field2':'data2','field3':'data3'}",
-      inquiryexplaindate: '2022-09-16T00:00:00',
-      inquiryjbdate: '2022-09-16T00:00:00',
-      inquiryreport: '25',
-      inquiryfile: "{'field1':'data1','field2':'data2','field3':'data3'}",
-      inquiryresult: "{'field1':'data1','field2':'data2','field3':'data3'}",
-      resultredno: '26',
-      resultcomitteeno: '27',
-      resultcomitteedate: '2022-09-16T00:00:00',
-      resultcomitteefile:
-        "{'field1':'data1','field2':'data2','field3':'data3'}",
-      resulttoaccuserdate: '2022-09-16T00:00:00',
-      resulttoaccuserfile:
-        "{'field1':'data1','field2':'data2','field3':'data3'}",
-      resulttoschooldate: '2022-09-16T00:00:00',
-      resulttoschoolfile:
-        "{'field1':'data1','field2':'data2','field3':'data3'}",
-      resulttoaccuseddate: '2022-09-16T00:00:00',
-      resulttoaccusedfile:
-        "{'field1':'data1','field2':'data2','field3':'data3'}",
-      publishstatus: '28',
-      publishdate: '2022-09-16T00:00:00',
-    };
-    this.service.createEthics(payload).subscribe((res) => {
-      console.log('save = ', res);
+  ngOnInit(): void {
+    this.checkRequestId();
+    this.form.valueChanges.subscribe((res) => {
+      // console.log('form value = ', this.form.controls.accusation.value);
     });
   }
 
+  checkRequestId() {
+    this.route.paramMap.subscribe((params) => {
+      this.ethicsId = Number(params.get('id'));
+      if (this.ethicsId) {
+        this.service.getEthicsByID({ id: this.ethicsId }).subscribe((res) => {
+          this.accusation.accusationFiles.forEach(
+            (element: any, index: any) => {
+              if (res.accusationfile) {
+                const json: any = jsonParse(res?.accusationfile);
+                if (json) {
+                  element.fileid = json[index]?.fileid;
+                  element.filename = json[index]?.filename;
+                }
+              }
+            }
+          );
+          if (res?.investigationresult) {
+            const json = jsonParse(res?.investigationresult);
+            res.investigationresult = json;
+          }
+          this.form.controls.accusation.patchValue(res);
+        });
+      }
+    });
+  }
+
+  saveEthics() {
+    const ethics = new Ethics();
+    const allowKey = Object.keys(ethics);
+    const data = this.form.controls.accusation.value as any;
+
+    if (data?.accuserinfo) {
+      data.accuserinfo = JSON.stringify(data?.accuserinfo);
+    }
+    data.accusationfile = JSON.stringify(
+      mapFileInfo(this.accusation.accusationFiles)
+    );
+    const selectData = _.pick(data, allowKey);
+    if (this.ethicsId) {
+      selectData['id'] = this.ethicsId;
+      const payload = replaceEmptyWithNull(selectData);
+      this.service.updateEthicsAccusation(payload).subscribe((res) => {
+        console.log('save = ', res);
+      });
+    } else {
+      this.service.createEthics(selectData).subscribe((res) => {
+        const id = res.id;
+        if (id) {
+          this.router.navigate(['/accusation', 'detail', id]);
+        }
+      });
+    }
+  }
+
   next() {
-    this.router.navigate(['/accusation', 'decision']);
+    this.router.navigate(['/accusation', 'decision', this.ethicsId || '']);
   }
 
   cancel() {

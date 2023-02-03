@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  SchoolRequest,
-  SchoolServiceUserPageType,
-} from '@ksp/shared/interface';
+import { SchoolUserPageType } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
@@ -46,8 +43,8 @@ export class UserDetailComponent implements OnInit {
 
   headers = [
     [
-      'ใบคำขอรหัสเข้าใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service) ',
-      'ตรวจสอบและอนุมัติใบคำขอรหัสเข้าใช้งาน',
+      'แบบคำขอรหัสเข้าใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service) ',
+      'ตรวจสอบและอนุมัติแบบคำขอรหัสเข้าใช้งาน',
     ],
     [
       'ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
@@ -57,7 +54,7 @@ export class UserDetailComponent implements OnInit {
 
   requestId!: number | null;
   requestDate!: string | null;
-  requestData!: SchoolRequest;
+  requestData!: any;
   prefixList$!: Observable<any>;
 
   requestNo: string | null = '';
@@ -88,7 +85,7 @@ export class UserDetailComponent implements OnInit {
 
     this.form2.controls.verifyResult.valueChanges.subscribe((res: any) => {
       this.verifySelected = Number(res['result']);
-      console.log(' //this.form.valid;', this.verifySelected);
+      //console.log(' //this.form.valid;', this.verifySelected);
     });
 
     this.route.queryParams.subscribe((res) => {
@@ -136,16 +133,16 @@ export class UserDetailComponent implements OnInit {
       requeststatus: this.verifySelected,
     };
 
-    this.eRequestService.approveUserRequest(payload).subscribe((res) => {
+    /*     this.eRequestService.createSchUser(payload).subscribe((res) => {
       //console.log('Cancel request  = ', res);
       //create new user in sch_user
-    });
+    }); */
   }
 
   cancel() {
-    if (this.pageType === SchoolServiceUserPageType.ApproveNewUser) {
+    if (this.pageType === SchoolUserPageType.NewUser) {
       this.router.navigate(['/approve-new-user']);
-    } else if (this.pageType === SchoolServiceUserPageType.ManageCurrentUser) {
+    } else if (this.pageType === SchoolUserPageType.CurrentUser) {
       this.router.navigate(['/manage-current-user']);
     }
   }
@@ -172,17 +169,14 @@ export class UserDetailComponent implements OnInit {
       width: '350px',
       data: {
         header: `บันทึกข้อมูลสำเร็จ`,
-        buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        if (this.pageType === SchoolServiceUserPageType.ApproveNewUser) {
+        if (this.pageType === SchoolUserPageType.NewUser) {
           this.router.navigate(['/approve-new-user', 'list']);
-        } else if (
-          this.pageType === SchoolServiceUserPageType.ManageCurrentUser
-        ) {
+        } else if (this.pageType === SchoolUserPageType.CurrentUser) {
           this.router.navigate(['/manage-current-user', 'list']);
         }
       }

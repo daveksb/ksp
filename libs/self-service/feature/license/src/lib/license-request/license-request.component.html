@@ -1,35 +1,64 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav [isSelfService]="true"
-  ><span header>ใบอนุญาตประกอบวิชาชีพ</span
-  ><span subHeader>ขอขึ้นใบอนุญาตประกอบวิชาชีพ</span></ksp-top-nav
+  ><span header>ยื่นแบบคำขอ</span
+  ><span subHeader>ขอขึ้นหนังสืออนุญาตประกอบวิชาชีพ (ครู)</span></ksp-top-nav
 >
 
-<div class="main__container px-3 py-2">
-  <self-service-request-status></self-service-request-status>
+<div class="main__container px-4 py-2">
+  <self-service-request-status
+    [requestDate]="requestDate"
+    [idcardNo]="(myInfo$ | async)?.idcardno || ''"
+    [requestNo]="requestNo"
+  ></self-service-request-status>
 
   <form [formGroup]="form">
-    <div class="row mx-0 border shadow-sm rounded-4 px-2 py-4 bg-white my-4">
-      <div class="col-lg-3">
-        <self-service-form-upload-image></self-service-form-upload-image>
+    <div class="row mx-0 border shadow-sm rounded-4 px-2 py-4 bg-white my-3">
+      <div class="col-lg-3 my-auto">
+        <self-service-form-upload-image
+          [imgSrc]="myImage"
+          [uniqueTimestamp]="uniqueTimestamp"
+          (uploadImageComplete)="uploadImageComplete($event)"
+        ></self-service-form-upload-image>
       </div>
-      <div class="col-md">
+      <div class="col-md mt-md-0 mt-2">
         <ksp-form-user-info
+          [mode]="requestData.status === '0' ? 'view' : 'edit'"
           formControlName="userInfo"
+          [isSelfService]="true"
           [isDarkMode]="true"
           [prefixList]="prefixList$ | async"
-          [displayMode]="[userInfoType]"
           [nationList]="nationalitys$ | async"
-          [isSchoolService]="false"
         ></ksp-form-user-info>
       </div>
+    </div>
+
+    <div
+      class="m-2"
+      *ngIf="
+        kspComment.checkdetail &&
+        kspComment.checkdetail[selectedTabIndex]?.result === 'incomplete'
+      "
+    >
+      <ksp-uni-form-badge
+        [mainTitle]="kspComment.checkdetail[selectedTabIndex].detail"
+      >
+      </ksp-uni-form-badge>
     </div>
 
     <mat-tab-group
       class="tab-group"
       animationDuration="0ms"
-      [selectedIndex]="0"
+      (selectedIndexChange)="selectedTabIndex = $event"
+      [selectedIndex]="selectedTabIndex"
+      selectedIndex="0"
     >
       <mat-tab label="ที่อยู่" class="tab-content">
         <ksp-form-address
+          [mode]="requestData.status === '0' ? 'view' : 'edit'"
           formControlName="address1"
           [isDarkMode]="true"
           [provinces]="provinces1$ | async"
@@ -42,9 +71,10 @@
         </ksp-form-address>
         <hr />
         <ksp-form-address
+          [mode]="requestData.status === '0' ? 'view' : 'edit'"
           formControlName="address2"
           [isDarkMode]="true"
-          [provinces]="provinces2$ | async"
+          [provinces]="provinces1$ | async"
           [amphurs]="amphurs2$ | async"
           [tumbols]="tumbols2$ | async"
           (provinceChanged)="provinceChanged(2, $event)"
@@ -65,8 +95,11 @@
 
       <mat-tab label="สถานที่ทำงาน">
         <self-service-form-user-workplace
+          [mode]="requestData.status === '0' ? 'view' : 'edit'"
           formControlName="workplace"
-          [provinces]="provinces3$ | async"
+          [showNotRequire]="true"
+          [showOnlineForm]="true"
+          [provinces]="provinces1$ | async"
           [amphurs]="amphurs3$ | async"
           [tumbols]="tumbols3$ | async"
           [bureaus]="bureau$ | async"
@@ -78,53 +111,76 @@
 
       <mat-tab label="ข้อมูลทางการศึกษา">
         <self-service-form-user-education
+          [mode]="requestData.status === '0' ? 'view' : 'edit'"
           [countries]="countries$ | async"
           formControlName="education"
-        ></self-service-form-user-education>
-        <hr />
-        <ksp-form-attachment
-          [title]="'กรุณาแนบหลักฐานประกอบวุฒิทางการศึกษา'"
+          [attachFiles]="eduFiles"
           [uniqueTimestamp]="uniqueTimestamp"
-          [groups]="eduFiles"
-        ></ksp-form-attachment>
+        ></self-service-form-user-education>
+        <!-- <div class="mt-3">
+          <ksp-form-multi-attachment
+            [title]="'กรุณาแนบหลักฐานประกอบวุฒิทางการศึกษา'"
+            [uniqueTimestamp]="uniqueTimestamp"
+            [groups]="eduFiles"
+          ></ksp-form-multi-attachment>
+        </div> -->
       </mat-tab>
 
       <mat-tab label="ข้อมูลประสบการณ์วิชาชีพ">
         <self-service-form-user-experience
-          [countries]="countries2$ | async"
+          [mode]="requestData.status === '0' ? 'view' : 'edit'"
+          [countries]="countries$ | async"
           [licenses]="licenses$ | async"
           formControlName="experience"
         ></self-service-form-user-experience>
-        <hr />
-        <ksp-form-attachment
-          [title]="'กรุณาแนบหลักฐานประกอบการฝึกประสบการณ์วิชาชีพ'"
-          [uniqueTimestamp]="uniqueTimestamp"
-          [groups]="experienceFiles"
-        ></ksp-form-attachment>
+        <div class="mt-3">
+          <ksp-form-multi-attachment
+            [mode]="requestData.status === '0' ? 'view' : 'edit'"
+            [title]="'กรุณาแนบหลักฐานประกอบการฝึกประสบการณ์วิชาชีพ'"
+            [uniqueTimestamp]="uniqueTimestamp"
+            [groups]="experienceFiles"
+          ></ksp-form-multi-attachment>
+        </div>
       </mat-tab>
 
       <mat-tab label="ข้อมูลผลการประเมินสมรรถนะ">
-        <self-service-form-user-performance></self-service-form-user-performance>
-        <!-- <hr />
-      <ksp-form-attachment
-        title="กรุณาแนบหลักฐาน"
-        [groups]="service.performanceFiles"
-      ></ksp-form-attachment> -->
+        <self-service-form-user-performance
+          [mode]="requestData.status === '0' ? 'view' : 'edit'"
+          [performanceFiles]="performanceFiles"
+          [uniqueTimestamp]="uniqueTimestamp"
+        >
+        </self-service-form-user-performance>
       </mat-tab>
     </mat-tab-group>
 
-    <div class="fs-6 text-danger mt-2">
-      * กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
+    <div class="fs-6 text-danger mt-1">
+      *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
       โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
     </div>
 
     <div class="d-flex justify-content-center mt-3 mb-3">
-      <button type="button" class="btn btn-secondary">ล้างข้อมูล</button>
+      <button
+        type="button"
+        class="btn border-secondary text-secondary bg-light"
+        [disabled]="requestData.status === '0'"
+        (click)="resetForm()"
+      >
+        ล้างข้อมูล
+      </button>
+      <button
+        [disabled]="requestData.status === '0'"
+        *ngIf="requestId"
+        (click)="cancel()"
+        type="button"
+        class="ms-3 btn border-primary bg-white text-primary"
+      >
+        ยกเลิกแบบคำขอ
+      </button>
       <button
         (click)="save()"
         type="button"
         class="ms-3 btn btn-primary"
-        [disabled]="disableNextButton"
+        [disabled]="form.invalid || requestData.status === '0'"
       >
         ต่อไป
       </button>

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { FormMode } from '@ksp/shared/interface';
 
 @Component({
   selector: 'self-service-form-user-performance',
@@ -7,6 +8,10 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./form-user-performance.component.css'],
 })
 export class FormUserPerformanceComponent implements OnInit {
+  @Input() uniqueTimestamp = '';
+  @Input() performanceFiles: any[] = [];
+  @Input() mode: FormMode = 'edit';
+
   typesOfSubject: string[] = [
     'วิชาชีพครู',
     'วิชาภาษาไทยเพื่อการสื่อสาร',
@@ -15,14 +20,5 @@ export class FormUserPerformanceComponent implements OnInit {
   ];
   personSelected = false;
 
-  performanceFiles = performanceFiles;
-
   ngOnInit(): void {}
 }
-
-const performanceFiles = [
-  {
-    name: 'สำเนาผลการทดสอบ',
-    fileId: '',
-  },
-];

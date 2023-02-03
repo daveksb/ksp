@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent, ListData } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
+import { skip } from 'rxjs/operators';
 
 @Component({
   selector: 'self-service-renew-license-foreign-step-two',
@@ -18,10 +19,10 @@ export class RenewLicenseForeignStepTwoComponent
   selectedEducationType!: number;
 
   override form = this.fb.group({
-    educationType: [],
-
-    teacherInfo: this.fb.array([]),
-    nonTeacherInfo: this.fb.array([]),
+    educationType: [null, Validators.required],
+    educationLevelForm: [null, Validators.required],
+    // teacherInfo: this.fb.array([]),
+    // nonTeacherInfo: this.fb.array([]),
   });
 
   constructor(private fb: FormBuilder) {
@@ -38,10 +39,12 @@ export class RenewLicenseForeignStepTwoComponent
   ngOnInit(): void {
     this.educationTypes = educationTypes;
 
-    this.form.controls['educationType'].valueChanges.subscribe((res) => {
-      this.selectedEducationType = Number(res);
-      //this.form.controls.educationLevelForm.reset();
-    });
+    this.form.controls['educationType'].valueChanges
+      .pipe(skip(1))
+      .subscribe((res) => {
+        this.selectedEducationType = Number(res);
+        //this.form.controls.educationLevelForm.reset();
+      });
   }
 
   /*  setDefaulFormValue() {
@@ -58,9 +61,9 @@ export class RenewLicenseForeignStepTwoComponent
     form.push(data);
   }
 
-  get nonTeacherInfo() {
-    return this.form.controls['nonTeacherInfo'] as FormArray;
-  }
+  // get nonTeacherInfo() {
+  //   return this.form.controls['nonTeacherInfo'] as FormArray;
+  // }
 }
 
 const educationTypes = [

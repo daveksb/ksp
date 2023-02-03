@@ -1,19 +1,32 @@
-<div class="box-header">อาจารย์นิเทศก์</div>
-
-<div class="row mb-3">
-  <div class="col-2">
-    <label class="form-label">ระบุจำนวน</label>
-    <input type="text" class="form-control" />
-  </div>
-  <div class="col-3">
-    <br />
-    <button (click)="addNitet()" type="button" class="btn btn-primary w-auto">
-      กรอกข้อมูลอาจารย์นิเทศก์
-    </button>
-  </div>
-</div>
-
 <form [formGroup]="form">
+  <div class="box-header">อาจารย์นิเทศก์</div>
+
+  <div class="row align-items-end mb-3">
+    <div class="col-2">
+      <label class="form-label">ระบุจำนวน</label>
+      <input
+        class="form-control"
+        formControlName="nittetAmount"
+        type="number"
+        ngModel
+        [max]="maxAmount"
+        [min]="minAmount"
+        minMax
+      />
+    </div>
+    <div class="col-3">
+      <label class="form-label"><br /></label>
+      <button
+        (click)="addNitet()"
+        type="button"
+        class="btn btn-primary w-auto"
+        style="height: 36px"
+      >
+        กรอกข้อมูลอาจารย์นิเทศก์
+      </button>
+    </div>
+  </div>
+
   <ng-container formArrayName="nitets">
     <ng-container *ngFor="let nitet of nitets.controls; let i = index">
       <!-- <div [formGroupName]="i" [ngClass]="{ apply__opac: opaciseBox[i] }"> -->
@@ -47,71 +60,67 @@
                   formControlName="faculty"
                 />
               </div>
-              <div class="col-4 mb-3">
+              <div class="col-4 mb-3 border-end">
                 <label class="form-label">สถานะ (กรุณาเลือก) </label>
 
                 <div class="row">
-                  <div class="col-6">
-                    <div class="form-control">
-                      <div class="d-flex align-items-center">
-                        <input
-                          class="m-0 me-2"
-                          type="radio"
-                          value="1"
-                          name="status"
-                          formControlName="status"
-                        />
-                        <label class="fs-5"> ประจำ </label>
+                  <div class="col">
+                    <div class="d-flex align-items-center">
+                      <input
+                        class="form-check-input my-0 radio"
+                        type="radio"
+                        value="1"
+                        formControlName="status"
+                      />
+                      <div class="form-control">
+                        <label class="ms-4"> ประจำ </label>
                       </div>
                     </div>
                   </div>
-                  <div class="col-6">
-                    <div class="form-control">
-                      <div class="d-flex align-items-center">
-                        <input
-                          class="me-2"
-                          type="radio"
-                          value="2"
-                          name="status"
-                          formControlName="status"
-                        />
-                        <label class="fs-5"> พิเศษ </label>
+                  <div class="col">
+                    <div class="d-flex align-items-center">
+                      <input
+                        class="form-check-input my-0 radio"
+                        type="radio"
+                        value="2"
+                        formControlName="status"
+                      />
+                      <div class="form-control">
+                        <label class="ms-4"> พิเศษ </label>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-4 mb-3">
+              <div class="col-4 mb-3 border-start">
                 <label class="form-label"
                   >กลุ่มวิชาที่นิเทศก์ (กรุณาเลือก)
                 </label>
 
                 <div class="row">
-                  <div class="col-6">
-                    <div class="form-control">
-                      <div class="d-flex align-items-center">
-                        <input
-                          class="me-2"
-                          type="radio"
-                          value="1"
-                          name="subject"
-                          formControlName="subject"
-                        />
-                        <label class="fs-5"> วิชาชีพครู </label>
+                  <div class="col">
+                    <div class="d-flex align-items-center">
+                      <input
+                        class="form-check-input my-0 radio"
+                        type="radio"
+                        value="1"
+                        formControlName="subject"
+                      />
+                      <div class="form-control">
+                        <label class="ms-4"> วิชาชีพครู </label>
                       </div>
                     </div>
                   </div>
-                  <div class="col-6">
-                    <div class="form-control">
-                      <div class="d-flex align-items-center">
-                        <input
-                          class="me-2"
-                          type="radio"
-                          value="2"
-                          name="subject"
-                          formControlName="subject"
-                        />
-                        <label class="fs-5"> วิชาเอก </label>
+                  <div class="col">
+                    <div class="d-flex align-items-center">
+                      <input
+                        class="form-check-input my-0 radio"
+                        type="radio"
+                        value="2"
+                        formControlName="subject"
+                      />
+                      <div class="form-control">
+                        <label class="ms-4"> วิชาเอก </label>
                       </div>
                     </div>
                   </div>

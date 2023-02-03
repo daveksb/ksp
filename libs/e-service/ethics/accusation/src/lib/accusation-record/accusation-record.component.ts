@@ -14,9 +14,24 @@ import {
   RequestHeaderInfoComponent,
 } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
-import { providerFactory } from '@ksp/shared/utility';
+import {
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import {
+  ACCUSATION_FILES,
+  defaultEhicsMember,
+  EhicsMember,
+  KspFormBaseComponent,
+} from '@ksp/shared/interface';
+import { providerFactory, thaiDate } from '@ksp/shared/utility';
+import { v4 as uuidv4 } from 'uuid';
+import { Observable } from 'rxjs';
+import { GeneralInfoService } from '@ksp/shared/service';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'e-service-ethic-accusation-record',
@@ -36,6 +51,7 @@ import { providerFactory } from '@ksp/shared/utility';
     LicenseInfoComponent,
     ReactiveFormsModule,
     StepperNavComponent,
+    MatDatepickerModule,
   ],
   providers: providerFactory(AccusationRecordComponent),
 })
@@ -43,33 +59,33 @@ export class AccusationRecordComponent
   extends KspFormBaseComponent
   implements OnInit
 {
-  accusationFiles = [
-    { name: 'เอกสารกล่าวหา/กล่าวโทษ' },
-    { name: 'สำเนาบัตรประชาชน' },
-  ];
+  today = thaiDate(new Date());
+  requestNumber = '';
+  accusationFiles: any[] = structuredClone(ACCUSATION_FILES);
+  uniqueTimestamp: any;
+  prefixList$!: Observable<any>;
 
   override form = this.fb.group({
-    accusationblackno: [],
-    accusationtype: [],
-    accusationincidentdate: [],
-    accusationincidentplace: [],
-    accusationcondemnationtype: [],
-    accusationcondemnation: [],
+    accusationblackno: [null, Validators.required],
+    accusationtype: [null, Validators.required],
+    accusationincidentdate: [null, Validators.required],
+    accusationincidentplace: [null, Validators.required],
+    accusationcondemnationtype: [null, Validators.required],
+    accusationcondemnation: [null, Validators.required],
     accusationissuedate: [],
     accusationdetail: [],
     accusationpunishmentdetail: [],
     accusationviolatedetail: [],
     accusationassignofficer: [],
     accusationassigndate: [],
-
-    //accusation_file
-    //accusation_consideration
+    accuserinfo: this.fb.array([] as FormGroup[]),
+    accusationconsideration: [],
   });
-
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private generalInfoService: GeneralInfoService
   ) {
     super();
     this.subscriptions.push(
@@ -80,17 +96,45 @@ export class AccusationRecordComponent
       })
     );
   }
-
+  get members() {
+    return this.form.controls.accuserinfo as FormArray;
+  }
+  addRow(data: EhicsMember = defaultEhicsMember) {
+    const rewardForm = this.fb.group({
+      idcardno: [data.idcardno],
+      prefix: [data.prefix],
+      firstname: [data.firstname],
+      lastname: [data.lastname],
+      phone: [data.phone],
+    });
+    this.members.push(rewardForm);
+  }
+  deleteRow(index: number) {
+    this.members.removeAt(index);
+  }
   ngOnInit(): void {
     this.route.data.subscribe((res) => {
       //console.log('res2 = ', res);
     });
+    this.uniqueTimestamp = uuidv4();
+    this.getListData();
+  }
+
+  getListData() {
+    this.prefixList$ = this.generalInfoService.getPrefix();
   }
 
   openSearchDialog() {
-    this.dialog.open(AccusationSearchComponent, {
+    const dialogRef = this.dialog.open(AccusationSearchComponent, {
       height: '100vh',
-      width: '1250px',
+      width: '75vw',
+      position: {
+        top: '0px',
+        right: '0px',
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(result);
     });
   }
 

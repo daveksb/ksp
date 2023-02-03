@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -9,10 +9,16 @@ import { providerFactory } from '@ksp/shared/utility';
   styleUrls: ['./renew-license-property-three.component.scss'],
   providers: providerFactory(RenewLicensePropertyThreeComponent),
 })
-export class RenewLicensePropertyThreeComponent extends KspFormBaseComponent {
+export class RenewLicensePropertyThreeComponent
+  extends KspFormBaseComponent
+  implements OnDestroy
+{
+  @Input() formType: 'sch' | 'edu' | 'sup' = 'sch';
+  @Input() eduType: 'bachelor' | 'other' = 'bachelor';
+
   override form = this.fb.group({
-    degree: [],
-    managingDegree: [],
+    degree: [null, Validators.required],
+    managingDegree: [null, Validators.required],
   });
 
   constructor(private fb: FormBuilder) {
@@ -24,5 +30,10 @@ export class RenewLicensePropertyThreeComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+  }
+
+  override ngOnDestroy(): void {
+    this.onChange(null);
+    this.onTouched();
   }
 }

@@ -25,19 +25,28 @@ export class UniRegisterSelectUniComponent {
   }
 
   back() {
+    localForage.removeItem('registerSelectedUniversity');
+    localForage.removeItem('registerUserForm');
+    localForage.removeItem('registerCoordinatorForm');
     this.router.navigate(['/login']);
   }
 
   selectedUniversity(university: any) {
-    this.form.patchValue({
-      universityInfo: {
-        schoolid: university.id,
-        unitype: university.typeid,
-        institution: university.name,
-        affiliation: university.nametype
-      }
-    })
-    localForage.setItem('registerSelectedUniversity', this.form.getRawValue());
-    this.next();
+    const formuni = {
+      schoolid: university.id,
+      uniid: university.id,
+      unitype: university.typeid,
+      institution: university.name,
+      affiliation: university.nametype,
+      unicode: university.universitycode,
+      uniname: university.name + (university.campusname ? `, ${university.campusname}` : ''),
+      unitypename: university.nametype,
+      campusid: university.campusid,
+      campusname: university.campusname
+    }
+    console.log(formuni)
+    localForage.setItem('registerSelectedUniversity', formuni).then(()=>{
+      this.next();
+    });
   }
 }

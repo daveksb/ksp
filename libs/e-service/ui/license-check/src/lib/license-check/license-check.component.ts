@@ -16,6 +16,7 @@ export class LicenseCheckComponent extends KspFormBaseComponent {
   @Input() reasons: string[] = [];
   @Input() choices: any[] = [];
   @Input() headerTitle = 'ผลการตรวจสอบ';
+  @Input() checkedResult: string[] = [];
   @Output() selectedItem = 0;
 
   override form = this.fb.group({
@@ -27,7 +28,6 @@ export class LicenseCheckComponent extends KspFormBaseComponent {
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value) => {
         this.onChange(value);
         this.onTouched();

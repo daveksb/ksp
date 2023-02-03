@@ -16,28 +16,39 @@ export class TokenHandleInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const token = getCookie('userToken');
-
+    const token = getCookie('userToken') || null;
     if (
+      request.url.includes('ksppublic') ||
+      request.url.includes('checkphoneandidcardno') ||
+      request.url.includes('ksprequestinsertforisforeign') ||
+      request.url.includes('selfmyinfoinsert') ||
       request.url.includes('kspmasterdata') ||
       request.url.includes('ksplogin') ||
-      request.url.includes('ksppublic') ||
       request.url.includes('schschoolselect') ||
-      request.url.includes('kspfileinsert') ||
-      !token
+      (request.url.includes('kspfileinsert') &&
+        (request.body.requesttype == '1' || request.body.requesttype == '2')) ||
+      request.url.includes('schschoolsearch.php') ||
+      (request.url.includes('schrequestfileinsert') &&
+        (request.body.requesttype == '1' ||
+          request.body.requesttype == '2')) /*||
+      !token */
     ) {
       return next.handle(request);
     }
 
     if (request.method === 'GET') {
+      const tokenkey = request.url.includes('?')
+        ? `&tokenkey=${token}`
+        : `?tokenkey=${token}`;
       const newRequest = request.clone({
-        url: request.url + `&tokenkey=${token}`,
+        url: request.url + tokenkey,
       });
 
       return next.handle(newRequest);
     }
 
     if (request.method === 'POST') {
+      //console.log('token url = ', request.url);
       request = request.clone({
         body: { ...request.body, tokenkey: token },
       });

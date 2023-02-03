@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -9,11 +9,16 @@ import { providerFactory } from '@ksp/shared/utility';
   styleUrls: ['./standard-train-pass.component.scss'],
   providers: providerFactory(StandardTrainPassComponent),
 })
-export class StandardTrainPassComponent extends KspFormBaseComponent {
+export class StandardTrainPassComponent
+  extends KspFormBaseComponent
+  implements OnDestroy
+{
+  @Input() isForeignForm = false;
+
   override form = this.fb.group({
-    date: [],
-    name: [],
-    agency: [],
+    date: [null, Validators.required],
+    name: [null, Validators.required],
+    agency: [null, Validators.required],
   });
 
   constructor(private fb: FormBuilder) {
@@ -25,5 +30,10 @@ export class StandardTrainPassComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+  }
+
+  override ngOnDestroy(): void {
+    this.onChange(null);
+    this.onTouched();
   }
 }

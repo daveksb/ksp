@@ -3,12 +3,17 @@
     <div class="bg-light px-3 pt-1 pb-3">
       <div class="box-header text-primary">กรุณากรอกข้อมูลที่ต้องการค้นหา</div>
 
-      <div class="row" *ngIf="searchType == 'uni'">
-        <div class="col-6 mb-3">
+      <div class="row" *ngIf="searchType === 'uni'">
+        <div class="col-6 mb-2">
           <label class="form-label required">สิทธิสำหรับการเข้าใช้งาน</label>
           <select class="form-select" formControlName="permissionright">
             <option value="null" selected hidden disabled>กรุณาเลือก</option>
-            <option *ngFor="let permission of permissionList" [value]="permission.value">{{permission.label}}</option>
+            <option
+              *ngFor="let permission of permissionList"
+              [value]="permission.value"
+            >
+              {{ permission.label }}
+            </option>
           </select>
         </div>
       </div>
@@ -16,41 +21,24 @@
       <ksp-basic-institute-search
         formControlName="searchType"
         [searchType]="searchType"
-        [bureaus]="bureaus$|async"
-        [universityType]="uniType$|async"
+        [subSearchType]="subsearchType"
+        [bureaus]="bureaus$ | async"
+        [universityType]="uniType$ | async"
       ></ksp-basic-institute-search>
 
       <div class="row mb-2">
-        <div class="col">
-          <label class="form-label">เลขที่ใบคำขอ</label>
-          <input
-            class="form-control"
-            type="text"
-            formControlName="requestno"
-          />
-        </div>
-        <div class="col">
+        <div class="col-sm-6">
           <label class="form-label">ชื่อ-นามสกุล</label>
           <input class="form-control" type="text" formControlName="name" />
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-6">
-          <label class="form-label">เบอร์โทรศัพท์</label>
-          <input class="form-control" type="text" formControlName="phone" />
         </div>
       </div>
     </div>
 
     <div class="d-flex justify-content-end mt-3">
-      <button
-        (click)="handleClear()"
-        class="btn text-primary border-primary"
-      >
+      <button (click)="handleClear()" class="btn text-primary border-primary">
         ล้างข้อมูล
       </button>
-      <button (click)="search.emit(form.value)" class="ms-2 btn btn-primary">
+      <button (click)="search.emit(form.value)" [disabled]="form.invalid" class="ms-2 btn btn-primary">
         ค้นหา
       </button>
     </div>

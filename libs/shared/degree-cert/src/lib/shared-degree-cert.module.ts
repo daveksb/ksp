@@ -9,7 +9,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedFormDegreeCertStepTwoModule } from '@ksp/shared/form/degree-cert/step-two';
 import { SharedFormDegreeCertStepThreeModule } from '@ksp/shared/form/degree-cert/step-three';
 import { UniServiceFormModule } from '@ksp/uni-service/form';
@@ -22,6 +22,8 @@ import {
 import { TopNavComponent } from '@ksp/shared/menu';
 import { DegreeCertSearchComponent } from '@ksp/shared/search';
 import { RouterModule } from '@angular/router';
+import { SharedFormUniCourseFormModule } from '@ksp/shared/form/uni-course-form';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   imports: [
@@ -41,6 +43,9 @@ import { RouterModule } from '@angular/router';
     TopNavComponent,
     DegreeCertSearchComponent,
     UniWarnIncorrectComponent,
+    FormsModule,
+    SharedFormUniCourseFormModule,
+    MatDatepickerModule,
   ],
   declarations: [
     DegreeCertStepOneComponent,

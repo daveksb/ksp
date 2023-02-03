@@ -1,25 +1,24 @@
 <form [formGroup]="form">
   <div class="row mb-2">
-    <div class="col-7">
-      <label class="form-label">
-        {{ searchType === 'uni' ? 'กลุ่มสถาบัน' : 'สังกัด'
-        }}<span class="text-danger"> *</span></label
+    <div class="col-md-8">
+      <label class="form-label" [ngClass]="{ 'required' : subSearchType === 'uni_searchstatus' || 
+                                                          subSearchType === 'uni_searchretire' }">
+        {{ searchType === 'uni' ? 'กลุ่มสถาบัน' : 'สังกัด' }}</label
       >
       <select
         class="form-select"
-        formControlName="organization"
+        formControlName="bureauid"
         *ngIf="searchType === 'uni'"
       >
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
-        <option
-              *ngFor="let uni of universityType" [value]="uni?.id">
-              {{ uni?.name }}
-            </option>
+        <option *ngFor="let uni of universityType" [value]="uni?.id">
+          {{ uni?.name }}
+        </option>
       </select>
 
       <select
         class="form-select"
-        formControlName="organization"
+        formControlName="bureauid"
         *ngIf="searchType !== 'uni'"
       >
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
@@ -31,7 +30,7 @@
   </div>
 
   <div class="row mb-2">
-    <div class="col-4">
+    <div class="col-md-4">
       <label class="form-label">
         {{
           searchType === 'uni' ? 'รหัสมหาวิทยาลัย' : 'รหัสโรงเรียน/สถานศึกษา'
@@ -39,14 +38,14 @@
       </label>
       <input class="form-control" type="text" formControlName="schoolid" />
     </div>
-    <div class="col-8">
-      <label class="form-label">
+    <div class="col-md-8">
+      <label class="form-label" [ngClass]="{ 'required' : subSearchType === 'uni_searchstatus' || 
+                                                          subSearchType === 'uni_searchretire' }">
         {{
           searchType === 'uni' ? 'ชื่อมหาวิทยาลัย' : 'ชื่อโรงเรียน/สถานศึกษา'
         }}
-        <span class="text-danger">*</span></label
-      >
-      <input class="form-control" type="text" formControlName="instituteName" />
+      </label>
+      <input class="form-control" type="text" formControlName="schoolname" />
     </div>
   </div>
 </form>

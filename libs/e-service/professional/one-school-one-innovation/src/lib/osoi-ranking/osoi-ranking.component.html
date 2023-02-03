@@ -1,5 +1,5 @@
 <ksp-top-nav
-  ><span header>ยื่นใบคำขอ</span
+  ><span header>ยื่นแบบคำขอ</span
   ><span subHeader
     >ขอรับรางวัลหนึ่งโรงเรียนหนึ่งนวัตกรรม (One School One Innovation: OSOI)
   </span></ksp-top-nav
@@ -11,10 +11,7 @@
   </div>
   <div class="bg-white p-3">
     <div class="d-flex justify-content-between">
-      <ksp-request-header-info
-        [requestDate]="'10 ตุลาคม 2565'"
-        [requestNumber]="'112234467876543'"
-      ></ksp-request-header-info>
+      <ksp-request-header-info></ksp-request-header-info>
       <div class="form-label">
         วันที่ตรวจสอบ :
         <span class="text-orange">10 ตุลาคม 2565</span>
@@ -47,31 +44,34 @@
       </table>
     </div>
   </div>
-  <br />
-  <div class="bg-white py-3 px-4">
+  <div class="bg-white py-3 px-4 mt-3">
     <div class="box-header">ผลการพิจารณาคณะกรรมการ</div>
     <hr />
 
-    <div class="row mb-3">
-      <div class="d-flex col-3 align-items-center me-5">
-        <input type="checkbox" />
-        <label class="form-label mx-2">ภูมิภาค</label>
+    <div class="row gap-5 mb-3">
+      <div class="col-3 d-flex align-items-center">
+        <div class="d-flex align-items-center">
+          <input type="checkbox" />
+          <label class="form-label mx-2">ภูมิภาค</label>
+        </div>
         <select class="form-select">
-          <option selected>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option value="1">ทอง</option>
+          <option value="2">เงิน</option>
+          <option value="3">ทองแดง</option>
         </select>
       </div>
 
-      <div class="d-flex col-3 align-items-center">
-        <input type="checkbox" />
-        <label class="form-label mx-2">ประเทศ</label>
+      <div class="col-3 d-flex align-items-center">
+        <div class="d-flex align-items-center">
+          <input type="checkbox" />
+          <label class="form-label mx-2">ประเทศ</label>
+        </div>
         <select class="form-select">
-          <option selected>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option value="1">ทอง</option>
+          <option value="2">เงิน</option>
+          <option value="3">ทองแดง</option>
         </select>
       </div>
     </div>
@@ -88,7 +88,6 @@
     [isLastPage]="true"
     [showSaveButton]="true"
     [showCancelButton]="true"
-    (saveClicked)="next()"
     (cancelClicked)="cancel()"
   ></ksp-bottom-nav>
 </div>

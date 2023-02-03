@@ -1,49 +1,63 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav>
-  <span header>รายการขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา</span>
+  <span header>{{ header }}</span>
 </ksp-top-nav>
 
-<div class="bg-secondary bg-opacity-10 py-2 px-4 full-height">
-  <div class="fs-5">รายการขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา</div>
+<div class="bg-secondary bg-opacity-10 py-2 px-4 full-height full-width-2">
+  <div class="box-header">{{ header }}</div>
   <div class="bg-white p-3">
-    <ksp-degree-cert-search
-      (cleared)="onClear()"
-      (searched)="onSearch()"
-    ></ksp-degree-cert-search>
+    <form [formGroup]="form">
+      <ksp-degree-cert-search
+        formControlName="search"
+        [uniUniversityOption]="uniUniversityOption"
+        [degreeLevelOption]="degreeLevelOption"
+        [verifyStatusOption]="verifyStatusOption"
+        [approveStatusOption]="approveStatusOption"
+        (cleared)="onClear()"
+        (searched)="search()"
+      ></ksp-degree-cert-search>
+    </form>
 
     <br />
 
-    <div class="table-responsive">
+    <div class="table__scroll">
       <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="select">
-          <th mat-header-cell *matHeaderCellDef>
-            <mat-checkbox
+          <th [hidden]="showColumnSelect" mat-header-cell *matHeaderCellDef>
+            <!-- <mat-checkbox
               *ngIf="showActionButtons"
               (change)="$event ? masterToggle() : null"
               [checked]="selection.hasValue() && isAllSelected()"
               [indeterminate]="selection.hasValue() && !isAllSelected()"
             >
-            </mat-checkbox>
+            </mat-checkbox> -->
+            เลือก
           </th>
-          <td mat-cell *matCellDef="let row">
+          <td mat-cell [hidden]="showColumnSelect" *matCellDef="let row">
             <mat-checkbox
               *ngIf="showActionButtons"
               (click)="$event.stopPropagation()"
               (change)="$event ? selection.toggle(row) : null"
               [checked]="selection.isSelected(row)"
+              [disabled]="!isSelect(row)"
             >
             </mat-checkbox>
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="degreeId">
-          <th mat-header-cell *matHeaderCellDef>เลขที่ใบคำขอ</th>
+        <ng-container matColumnDef="requestno">
+          <th mat-header-cell *matHeaderCellDef>เลขที่แบบคำขอ</th>
           <td
-            (click)="goToDetailPage()"
             class="text-primary link"
             mat-cell
             *matCellDef="let element"
+            (click)="goToDetailPage(element)"
           >
-            {{ element.degreeId }}
+            {{ element.requestno }}
           </td>
         </ng-container>
 
@@ -65,21 +79,30 @@
         <ng-container matColumnDef="verifyStatus">
           <th mat-header-cell *matHeaderCellDef>สถานะตรวจสอบ</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.verifyStatus }}
+            <ksp-degree-cert-status
+              [dataSource]="element"
+              type="examine_status"
+            ></ksp-degree-cert-status>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="considerStatus">
           <th mat-header-cell *matHeaderCellDef>สถานะพิจารณา</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.considerStatus }}
+            <ksp-degree-cert-status
+              [dataSource]="element"
+              type="consider_status"
+            ></ksp-degree-cert-status>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="approveStatus">
           <th mat-header-cell *matHeaderCellDef>สถานะรับรอง</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.approveStatus }}
+            <ksp-degree-cert-status
+              [dataSource]="element"
+              type="certification_status"
+            ></ksp-degree-cert-status>
           </td>
         </ng-container>
 
@@ -100,24 +123,30 @@
         <ng-container matColumnDef="verify">
           <th mat-header-cell *matHeaderCellDef>ตรวจสอบ</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.verify }}
+            <ksp-degree-cert-status
+              [dataSource]="element"
+              type="examine"
+            ></ksp-degree-cert-status>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="consider">
           <th mat-header-cell *matHeaderCellDef>พิจารณา</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.consider }}
+            <ksp-degree-cert-status
+              [dataSource]="element"
+              type="consider"
+            ></ksp-degree-cert-status>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="print">
           <th mat-header-cell *matHeaderCellDef></th>
           <td class="text-end" mat-cell *matCellDef="let element">
-            <button class="btn btn-sm btn-primary" (click)="lastStep()">
+            <button class="btn btn-sm btn-primary" (click)="lastStep(element)">
               <div class="d-flex justify-content-center">
                 <i role="button" class="bi bi-printer"></i>
-                <span class="ms-1">พิมพ์ใบคำขอ</span>
+                <span class="ms-1">พิมพ์แบบคำขอ</span>
               </div>
             </button>
           </td>
@@ -126,7 +155,24 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
+      <table>
+        <tr *ngIf="!dataSource?.data?.length">
+          <td
+            class="text-center text-danger fs-5"
+            [attr.colspan]="displayedColumns.length"
+          >
+            ไม่พบข้อมูล
+          </td>
+        </tr>
+      </table>
     </div>
+    <mat-paginator
+      [length]="pageEvent.length"
+      [pageSize]="25"
+      (page)="onPaginatorEvent($event)"
+      [pageIndex]="pageEvent.pageIndex"
+    >
+    </mat-paginator>
   </div>
 </div>
 
@@ -140,6 +186,8 @@
         (click)="consider()"
         class="fs-6 btn btn-sm bg-orange"
         style="width: 300px"
+        *ngIf="pageType !== 3"
+        [disabled]="!isSelectConsider()"
       >
         พิจารณาประเมินหลักสูตร (หลายรายการ)
       </button>
@@ -149,8 +197,21 @@
         (click)="approve()"
         class="fs-6 ms-3 btn btn-sm btn-primary"
         style="width: 300px"
+        *ngIf="pageType !== 3"
+        [disabled]="!isSelectApprove()"
       >
         พิจารณารับรอง (หลายรายการ)
+      </button>
+    </div>
+    <div>
+      <button
+        (click)="followUp()"
+        class="fs-6 ms-3 btn btn-sm btn-primary"
+        style="width: 300px"
+        *ngIf="pageType === 3"
+        [disabled]="!isSelectResult()"
+      >
+        พิจารณาติดตามผลเชิงประจักษ์ (หลายรายการ)
       </button>
     </div>
   </div>

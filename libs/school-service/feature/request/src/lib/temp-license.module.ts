@@ -12,15 +12,21 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { BottomNavComponent } from '@ksp/shared/menu';
-import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
+import {
+  RequestHeaderInfoComponent,
+  UniFormBadgeComponent,
+} from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RequestSearchComponent } from '@ksp/shared/search';
 import { SchoolTempLicenseRoutingModule } from './temp-license-routing.module';
 import { SchoolRequestComponent } from './school-request/school-request.component';
-import { SchoolRequestListComponent } from './request-list/request-list.component';
-import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { SchoolRequestListComponent } from './school-request-list/school-request-list.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   imports: [
@@ -28,7 +34,6 @@ import { MatSortModule } from '@angular/material/sort';
     RouterModule,
     SchoolTempLicenseRoutingModule,
     MatTabsModule,
-    SharedFormOthersModule,
     MatMenuModule,
     TopNavComponent,
     MatTableModule,
@@ -42,6 +47,12 @@ import { MatSortModule } from '@angular/material/sort';
     FormEducationInfoManagerComponent,
     MatPaginatorModule,
     MatSortModule,
+    ThaiDatePipe,
+    RequestNoPipe,
+    UniFormBadgeComponent,
+    MatProgressSpinnerModule,
+    SharedFormOthersModule,
+    MatTooltipModule
   ],
   declarations: [SchoolRequestListComponent, SchoolRequestComponent],
 })

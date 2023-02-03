@@ -1,17 +1,17 @@
 <form [formGroup]="form">
   <div class="row">
     <div class="col-md mb-2">
-      <label class="form-label">Name of Educational Institution</label>
+      <label class="form-label required">Name of Educational Institution</label>
       <input class="form-control" type="text" formControlName="addressName" />
     </div>
   </div>
   <self-service-foreign-step-two-tab-one
+    [mode]="mode"
     formControlName="addressForm"
     [provinces]="provinces"
     [districts]="districts"
     [subDistricts]="subDistricts"
     (provinceChanged)="provinceChanged.emit($event)"
-    (districtChanged)="districtChanged.emit($event)"
-  >
+    (districtChanged)="districtChanged.emit($event)">
   </self-service-foreign-step-two-tab-one>
 </form>

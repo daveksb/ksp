@@ -1,46 +1,55 @@
 <form [formGroup]="form">
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">Address No. / home / room / condo</label>
+      <label class="form-label required">Address No. / home / room / condo</label>
       <input class="form-control" type="text" formControlName="houseNo" />
-    </div>
-    <div class="col-md mb-2">
-      <label class="form-label">Soi</label>
-      <input class="form-control" type="text" formControlName="alley" />
     </div>
     <div class="col-md mb-2">
       <label class="form-label">Road</label>
       <input class="form-control" type="text" formControlName="road" />
     </div>
+    <div class="col-md mb-2">
+      <label class="form-label">Soi</label>
+      <input class="form-control" type="text" formControlName="alley" />
+    </div>
   </div>
 
   <div class="row">
-    <div class="col-md mb-2">
-      <label class="form-label">sub-district</label>
-      <select class="form-select" (change)="updatePostcode($event)" formControlName="tumbol">
-        <option value="null" selected hidden disabled>กรุณาเลือก</option>
-        <option *ngFor="let t of subDistricts" [value]="t?.tambolCode">
-          {{ t?.tambolName }}
+    <div class="col-md-6 mb-2">
+      <label class="form-label required">Province</label>
+      <select
+        class="form-select"
+        (change)="provinceChanged.emit($event)"
+        formControlName="province">
+        <option value="null" selected hidden disabled>Please Choose</option>
+        <option
+          *ngFor="let province of provinces"
+          [value]="province?.province_id">
+          {{ province?.province_name_en }}
         </option>
       </select>
     </div>
     <div class="col-md mb-2">
-      <label class="form-label">district</label>
-      <select class="form-select" (change)="districtChanged.emit($event)" formControlName="amphur">
-        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+      <label class="form-label required">district</label>
+      <select
+        class="form-select"
+        (change)="districtChanged.emit($event)"
+        formControlName="amphur">
+        <option value="null" selected hidden disabled>Please Choose</option>
         <option *ngFor="let a of districts" [value]="a?.amphurCode">
           {{ a?.amphurName }}
         </option>
       </select>
     </div>
-    <div class="col-md-6 mb-2">
-      <label class="form-label">Province</label>
-      <select class="form-select" (change)="provinceChanged.emit($event)" formControlName="province">
-        <option value="null" selected hidden disabled>กรุณาเลือก</option>
-        <option
-          *ngFor="let province of provinces"
-          [value]="province?.province_id">
-          {{ province?.province_name }}
+    <div class="col-md mb-2">
+      <label class="form-label required">sub-district</label>
+      <select
+        class="form-select"
+        (change)="updatePostcode($event)"
+        formControlName="tumbol">
+        <option value="null" selected hidden disabled>Please Choose</option>
+        <option *ngFor="let t of subDistricts" [value]="t?.tambolCode">
+          {{ t?.tambolName }}
         </option>
       </select>
     </div>
@@ -48,15 +57,15 @@
 
   <div class="row">
     <div class="col-md mb-2">
-      <label class="form-label">zip code</label>
+      <label class="form-label required">zip code</label>
       <input class="form-control" type="text" formControlName="postcode" />
     </div>
     <div class="col-md mb-2">
-      <label class="form-label">Cell Phone</label>
+      <label class="form-label required">Cell Phone</label>
       <input class="form-control" type="text" formControlName="phone" />
     </div>
     <div class="col-md-6 mb-2">
-      <label class="form-label">E-mail</label>
+      <label class="form-label required">E-mail</label>
       <input class="form-control" type="text" formControlName="email" />
     </div>
   </div>

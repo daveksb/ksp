@@ -1,0 +1,21 @@
+<form [formGroup]="form">
+  <div class="box-header">Licensure Information</div>
+
+  <div class="row">
+    <div class="col-md mb-2">
+      <label class="form-label required">License No.</label>
+      <input class="form-control" type="text" formControlName="licenseNo" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md mb-2">
+      <label class="form-label required">Date of Admission</label>
+      <input class="form-control" type="date" formControlName="dateOfAdmission" />
+    </div>
+    <div class="col-md mb-2">
+      <label class="form-label required">Date of Graduation</label>
+      <input class="form-control" type="date" formControlName="dateOfGraduation" />
+    </div>
+  </div>
+</form>

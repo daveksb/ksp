@@ -1,23 +1,34 @@
-<ksp-top-nav [isSelfService]="true"
-  ><span header>ใบคำขอเทียบโอนความรู้ตามมาตรฐานวิชาชีพครู</span></ksp-top-nav
->
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
+<ksp-top-nav [isSelfService]="true">
+  <span header>ยื่นแบบคำขอ</span>
+  <span subHeader>ขอยื่นเทียบเคียงความรู้</span>
+</ksp-top-nav>
 
 <form [formGroup]="form">
   <div class="main__container px-4 py-2">
-    <self-service-request-status></self-service-request-status>
+    <self-service-request-status
+      [idcardNo]="(myInfo$ | async)?.idcardno || null"
+    ></self-service-request-status>
 
     <div class="row mx-0 border shadow-sm rounded-4 px-2 py-4 bg-white my-4">
-      <div class="col-lg-3">
-        <self-service-form-upload-image></self-service-form-upload-image>
+      <div class="col-lg-3 my-auto">
+        <self-service-form-upload-image
+          [imgSrc]="myImage"
+          [uniqueTimestamp]="uniqueTimestamp"
+          (uploadImageComplete)="uploadImageComplete($event)"
+        ></self-service-form-upload-image>
       </div>
-      <div class="col-md">
+      <div class="col-md mt-md-0 mt-2">
         <ksp-form-user-info
           formControlName="userInfo"
           [isDarkMode]="true"
           [prefixList]="prefixList$ | async"
-          [displayMode]="[userInfoType]"
           [nationList]="nationalitys$ | async"
-          [isSchoolService]="false"
+          [isSelfService]="true"
         ></ksp-form-user-info>
       </div>
     </div>
@@ -44,7 +55,7 @@
         <ksp-form-address
           formControlName="address2"
           [isDarkMode]="true"
-          [provinces]="provinces2$ | async"
+          [provinces]="provinces1$ | async"
           [amphurs]="amphurs2$ | async"
           [tumbols]="tumbols2$ | async"
           (provinceChanged)="provinceChanged(2, $event)"
@@ -53,20 +64,21 @@
           <span>ที่อยู่ที่ติดต่อได้สะดวก</span>
           <span class="text-danger ms-1 fs-6">*กรุณากรอกข้อมูลตำบล, อำเภอ</span>
           <div class="d-flex align-items-center">
-            <input type="checkbox" class="me-1" />
+            <input
+              type="checkbox"
+              class="me-1"
+              (change)="useSameAddress($event)"
+            />
             <label class="form-label">ที่อยู่ตามทะเบียนบ้าน</label>
           </div>
         </ksp-form-address>
-        <div class="fs-6 text-danger">
-          *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
-          โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
-        </div>
       </mat-tab>
 
       <mat-tab label="สถานที่ทำงาน">
         <self-service-form-user-workplace
+          [showNotRequire]="true"
           formControlName="workplace"
-          [provinces]="provinces3$ | async"
+          [provinces]="provinces1$ | async"
           [amphurs]="amphurs3$ | async"
           [tumbols]="tumbols3$ | async"
           [bureaus]="bureau$ | async"
@@ -78,6 +90,7 @@
 
       <mat-tab label="ข้อมูลทางการศึกษา">
         <self-service-compare-knowledge-education
+          [countries]="countries$ | async"
           formControlName="educationInfo"
         >
         </self-service-compare-knowledge-education>
@@ -91,25 +104,53 @@
       </mat-tab>
 
       <mat-tab label="เอกสารประกอบ">
-        <ksp-form-attachment
+        <ksp-form-multi-attachment
           [title]="'กรุณาแนบหลักฐานประกอบ'"
           [groups]="objectiveFiles"
           [uniqueTimestamp]="uniqueTimestamp"
-        ></ksp-form-attachment>
-        <div class="fs-6 text-danger">
-          *กรุณาส่งเอกสารแสดงผลคะแนนที่ใช้เทียบเคียงผลการทดสอบ(ฉบับจริง)
-          ตามรายวิชาที่ยื่นเทียบเคียงผลการทดสอบ ไปยัง สำนักงานเลขาธิการคุรุสภา
-          เลขที่ XXXXXXX
-        </div>
+          [titleNote]="
+            '*กรุณาส่งเอกสารแสดงผลคะแนนที่ใช้เทียบเคียงผลการทดสอบ(ฉบับจริง) ตามรายวิชาที่ยื่นเทียบเคียงผลการทดสอบไปยังสำนักงานเลขาธิการคุรุสภา'
+          "
+        ></ksp-form-multi-attachment>
+        <!-- <div class="fs-6 text-danger">
+          *กรุณาส่งเอกสารแสดงผลคะแนนที่ใช้เทียบเคียงผลการทดสอบ (ฉบับจริง)
+          ตามรายวิชาที่ยื่นเทียบเคียงผลการทดสอบไปยัง สำนักงานเลขาธิการคุรุสภา
+          เลขที่ 128/1 ถนนนครราชสีมา แขวงดุสิต เขตดุสิต กรุงเทพมหานคร 10300
+        </div> -->
       </mat-tab>
     </mat-tab-group>
+    <div class="fs-6 text-danger mt-1">
+      *กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
+      โปรดตรวจสอบอีกครั้งก่อนทำการบันทึกข้อมูลลงในระบบ
+    </div>
 
     <div class="d-flex justify-content-center my-3">
-      <button type="button" class="btn btn-secondary">ล้างข้อมูล</button>
-      <button type="button" class="btn btn-warning mx-3" (click)="submit(1)">
+      <!-- <button type="button" class="btn btn-secondary" (click)="resetForm()">
+        ล้างข้อมูล
+      </button> -->
+      <button
+        *ngIf="requestId"
+        type="button"
+        [disabled]="!requestId"
+        (click)="cancel()"
+        class="btn border-secondary text-secondary bg-light"
+      >
+        ยกเลิกแบบคำขอ
+      </button>
+      <button
+        type="button"
+        class="btn border-primary text-primary bg-white mx-3"
+        (click)="submit(1)"
+        [disabled]="!form.valid"
+      >
         บันทึกชั่วคราว
       </button>
-      <button type="button" (click)="submit(2)" class="btn btn-primary">
+      <button
+        type="button"
+        (click)="submit(2)"
+        class="btn btn-primary"
+        [disabled]="!form.valid"
+      >
         บันทึกและยื่น
       </button>
     </div>

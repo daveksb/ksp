@@ -1,27 +1,58 @@
-<ng-container *ngIf="uploadType === 'button'">
+<ng-container *ngIf="uploadType === 'button' && mode !== 'view'">
   <button
     (click)="fileUpload.click()"
+    [disabled]="mode === 'view'"
     type="button"
     class="btn btn-sm btn-primary w-auto"
   >
-    <img src="/assets/images/img-uni/Upload.svg" /> {{ buttonLabel }}
-  </button></ng-container
->
-<ng-container *ngIf="uploadType === 'link'">
-  <label role="button" class="text-primary me-3" (click)="fileUpload.click()">
-    + upload document
-  </label></ng-container
->
+    + {{ buttonLabel }}
+  </button>
+</ng-container>
+
+<ng-container *ngIf="uploadType === 'link' && mode !== 'view'">
+  <!-- <label role="button" class="text-primary" (click)="fileUpload.click()">
+    + อัพโหลดไฟล์
+  </label> -->
+  <button
+    type="button"
+    class="btn btn-sm btn-link text-primary w-auto px-0 text-decoration-none"
+    (click)="fileUpload.click()"
+  >
+    + อัพโหลดไฟล์
+  </button>
+</ng-container>
 
 <input
   hidden="true"
   type="file"
+  (click)="fileUpload.value = ''"
   (change)="onFileSelected($event)"
   #fileUpload
 />
 
+<ng-container *ngIf="mode === 'view'">
+  <!-- <label role="button" class="text-orange" (click)="view()">
+    ดูเอกสารแนบ
+  </label> -->
+  <button
+    type="button"
+    class="btn btn-sm btn-link text-orange w-auto px-0 text-decoration-none"
+    (click)="view()"
+    [disabled]="!file?.length"
+  >
+    ดูเอกสารแนบ
+  </button>
+</ng-container>
+
 <span
   *ngIf="showUploadedFileName"
-  class="fs-6 text-secondary text-decoration-underline"
-  >{{ fileName }}</span
+  class="fs-6 text-secondary text-decoration-underline ms-2"
+  >{{ filename }}</span
 >
+
+<i
+  *ngIf="showDeleteFile && filename && !isImage && mode !== 'view'"
+  (click)="deleteFile(file)"
+  class="bi bi-x-circle-fill text-danger fs-6 ms-2"
+  role="button"
+></i>

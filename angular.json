@@ -43,6 +43,11 @@
             "assets": [
               "apps/e-service/src/favicon.ico",
               {
+                "glob": "**/*",
+                "input": "node_modules/ngx-extended-pdf-viewer/assets/",
+                "output": "assets"
+              },
+              {
                 "input": "libs/shared/assets/src/assets",
                 "glob": "**/*",
                 "output": "./assets"
@@ -52,7 +57,14 @@
               "apps/e-service/src/app-styles.scss",
               "libs/shared/assets/src/assets/project-styles.scss"
             ],
-            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.js"]
+            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.js"],
+            "allowedCommonJsDependencies": [
+              "pako",
+              "moment",
+              "localforage",
+              "ngx-barcode",
+              "lodash"
+            ]
           },
           "configurations": {
             "production": {
@@ -60,7 +72,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "2mb",
-                  "maximumError": "2mb"
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -117,7 +129,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/e-service"],
+          "outputs": ["{workspaceRoot}/coverage/apps/e-service"],
           "options": {
             "jestConfig": "apps/e-service/jest.config.ts",
             "passWithNoTests": true
@@ -128,6 +140,14 @@
           "options": {
             "outputPath": "dist/apps/e-service",
             "siteId": "e816803c-b91a-46f9-baf7-679701a9d5c7",
+            "noBuild": true
+          }
+        },
+        "deploy-dev": {
+          "builder": "@netlify-builder/deploy:deploy",
+          "options": {
+            "outputPath": "dist/apps/e-service",
+            "siteId": "e569cc56-85e0-479c-be25-aae1a7c8d294",
             "noBuild": true
           }
         }
@@ -319,6 +339,78 @@
         }
       ]
     },
+    "e-service-e-license-approve-ksp-request": {
+      "projectType": "library",
+      "root": "libs/e-service/e-license/approve-ksp-request",
+      "sourceRoot": "libs/e-service/e-license/approve-ksp-request/src",
+      "prefix": "ksp",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/e-license/approve-ksp-request/**/*.ts",
+              "libs/e-service/e-license/approve-ksp-request/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-e-license-certificate-knowledge": {
+      "projectType": "library",
+      "root": "libs/e-service/e-license/certificate-knowledge",
+      "sourceRoot": "libs/e-service/e-license/certificate-knowledge/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/e-license/certificate-knowledge"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/e-license/certificate-knowledge/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/e-license/certificate-knowledge/**/*.ts",
+              "libs/e-service/e-license/certificate-knowledge/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-e-license-create-license-id": {
+      "projectType": "library",
+      "root": "libs/e-service/e-license/create-license-id",
+      "sourceRoot": "libs/e-service/e-license/create-license-id/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/e-service/e-license/create-license-id"],
+          "options": {
+            "jestConfig": "libs/e-service/e-license/create-license-id/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/e-license/create-license-id/**/*.ts",
+              "libs/e-service/e-license/create-license-id/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "e-service-e-license-document-delivery": {
       "projectType": "library",
       "root": "libs/e-service/e-license/document-delivery",
@@ -327,7 +419,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/e-license/document-delivery"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/e-license/document-delivery"
+          ],
           "options": {
             "jestConfig": "libs/e-service/e-license/document-delivery/jest.config.ts",
             "passWithNoTests": true
@@ -339,6 +433,34 @@
             "lintFilePatterns": [
               "libs/e-service/e-license/document-delivery/**/*.ts",
               "libs/e-service/e-license/document-delivery/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-e-license-edit-license": {
+      "projectType": "library",
+      "root": "libs/e-service/e-license/edit-license",
+      "sourceRoot": "libs/e-service/e-license/edit-license/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/e-license/edit-license"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/e-license/edit-license/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/e-license/edit-license/**/*.ts",
+              "libs/e-service/e-license/edit-license/**/*.html"
             ]
           }
         }
@@ -443,6 +565,34 @@
         }
       ]
     },
+    "e-service-e-license-knowledge-cert": {
+      "projectType": "library",
+      "root": "libs/e-service/e-license/knowledge-cert",
+      "sourceRoot": "libs/e-service/e-license/knowledge-cert/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/e-license/knowledge-cert"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/e-license/knowledge-cert/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/e-license/knowledge-cert/**/*.ts",
+              "libs/e-service/e-license/knowledge-cert/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "e-service-e-license-license-approve": {
       "projectType": "library",
       "root": "libs/e-service/e-license/license-approve",
@@ -451,7 +601,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/e-license/license-approve"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/e-license/license-approve"
+          ],
           "options": {
             "jestConfig": "libs/e-service/e-license/license-approve/jest.config.ts",
             "passWithNoTests": true
@@ -469,6 +621,90 @@
       },
       "tags": []
     },
+    "e-service-e-license-license-editing": {
+      "projectType": "library",
+      "root": "libs/e-service/e-license/license-editing",
+      "sourceRoot": "libs/e-service/e-license/license-editing/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/e-license/license-editing"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/e-license/license-editing/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/e-license/license-editing/**/*.ts",
+              "libs/e-service/e-license/license-editing/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-e-license-qualification-approve": {
+      "projectType": "library",
+      "root": "libs/e-service/e-license/qualification-approve",
+      "sourceRoot": "libs/e-service/e-license/qualification-approve/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/e-license/qualification-approve"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/e-license/qualification-approve/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/e-license/qualification-approve/**/*.ts",
+              "libs/e-service/e-license/qualification-approve/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-e-license-renew-foreign-license": {
+      "projectType": "library",
+      "root": "libs/e-service/e-license/renew-foreign-license",
+      "sourceRoot": "libs/e-service/e-license/renew-foreign-license/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/e-service/e-license/renew-foreign-license"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/e-license/renew-foreign-license/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/e-license/renew-foreign-license/**/*.ts",
+              "libs/e-service/e-license/renew-foreign-license/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "e-service-e-license-renew-license": {
       "projectType": "library",
       "root": "libs/e-service/e-license/renew-license",
@@ -477,7 +713,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/e-license/renew-license"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/e-license/renew-license"
+          ],
           "options": {
             "jestConfig": "libs/e-service/e-license/renew-license/jest.config.ts",
             "passWithNoTests": true
@@ -495,6 +733,34 @@
       },
       "tags": []
     },
+    "e-service-e-license-request-foreign-license": {
+      "projectType": "library",
+      "root": "libs/e-service/e-license/request-foreign-license",
+      "sourceRoot": "libs/e-service/e-license/request-foreign-license/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/e-service/e-license/request-foreign-license"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/e-license/request-foreign-license/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/e-license/request-foreign-license/**/*.ts",
+              "libs/e-service/e-license/request-foreign-license/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "e-service-e-license-request-license": {
       "projectType": "library",
       "root": "libs/e-service/e-license/request-license",
@@ -503,7 +769,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/e-license/request-license"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/e-license/request-license"
+          ],
           "options": {
             "jestConfig": "libs/e-service/e-license/request-license/jest.config.ts",
             "passWithNoTests": true
@@ -530,7 +798,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/e-license/school-user"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/e-license/school-user"
+          ],
           "options": {
             "jestConfig": "libs/e-service/e-license/school-user/jest.config.ts",
             "passWithNoTests": true
@@ -633,6 +903,62 @@
             "lintFilePatterns": [
               "libs/e-service/e-license/self-user/**/*.ts",
               "libs/e-service/e-license/self-user/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-e-license-substitute-license": {
+      "projectType": "library",
+      "root": "libs/e-service/e-license/substitute-license",
+      "sourceRoot": "libs/e-service/e-license/substitute-license/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/e-license/substitute-license"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/e-license/substitute-license/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/e-license/substitute-license/**/*.ts",
+              "libs/e-service/e-license/substitute-license/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-e-license-substitute-license-approve": {
+      "projectType": "library",
+      "root": "libs/e-service/e-license/substitute-license-approve",
+      "sourceRoot": "libs/e-service/e-license/substitute-license-approve/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/e-license/substitute-license-approve"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/e-license/substitute-license-approve/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/e-license/substitute-license-approve/**/*.ts",
+              "libs/e-service/e-license/substitute-license-approve/**/*.html"
             ]
           }
         }
@@ -824,7 +1150,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/ethics/accusation"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/ethics/accusation"
+          ],
           "options": {
             "jestConfig": "libs/e-service/ethics/accusation/jest.config.ts",
             "passWithNoTests": true
@@ -988,6 +1316,100 @@
         {
           "file": "libs/e-service/ethics/accusation/tsconfig.spec.json",
           "hash": "d1f5c8852d652eac23b0378b6c259ea88d5a88d1"
+        }
+      ]
+    },
+    "e-service-ethics-form": {
+      "root": "libs/e-service/ethics/form",
+      "projectType": "library",
+      "sourceRoot": "libs/e-service/ethics/form/src",
+      "prefix": "ksp",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/ethics/form/**/*.ts",
+              "libs/e-service/ethics/form/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": [],
+      "files": [
+        {
+          "file": "libs/e-service/ethics/form/.eslintrc.json",
+          "hash": "27c5e47e999848beed2882877542e9a23959ec86"
+        },
+        {
+          "file": "libs/e-service/ethics/form/project.json",
+          "hash": "ae412021f5addde6ace8327a5406d8debcd261cd"
+        },
+        {
+          "file": "libs/e-service/ethics/form/README.md",
+          "hash": "f9cadbbf4b978af369d7ebe0c7692efd45ac479b"
+        },
+        {
+          "file": "libs/e-service/ethics/form/src/index.ts",
+          "hash": "540727d3ce449097db1c168295879d1e1da8a5fa"
+        },
+        {
+          "file": "libs/e-service/ethics/form/src/lib/e-service-form.module.ts",
+          "hash": "4405ea1dd1b2928fa5d93cc97d33a1d868102297",
+          "deps": ["npm:@angular/core"]
+        },
+        {
+          "file": "libs/e-service/ethics/form/src/lib/form-investigation-detail/form-investigation-detail.component.html",
+          "hash": "ccaaf577a50e56c9486e8973bea611a2c88af577"
+        },
+        {
+          "file": "libs/e-service/ethics/form/src/lib/form-investigation-detail/form-investigation-detail.component.scss",
+          "hash": "f6a77d03751a3304f0a98c9b3cd1f6a023433420"
+        },
+        {
+          "file": "libs/e-service/ethics/form/src/lib/form-investigation-detail/form-investigation-detail.component.ts",
+          "hash": "b6d0b40edc761ae56a8c3e8b1c2e03c1ce405bab",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:@angular/material",
+            "npm:@angular/router",
+            "e-service-ui-accusation-info",
+            "shared-form-others",
+            "shared-menu",
+            "shared-dialog",
+            "shared-ui",
+            "shared-form-file-upload",
+            "shared-utility",
+            "npm:@angular/forms",
+            "shared-interface"
+          ]
+        },
+        {
+          "file": "libs/e-service/ethics/form/src/lib/form-meeting-record/form-meeting-record.component.html",
+          "hash": "0b4c009aa29609e5120206aa04d880e069b91952"
+        },
+        {
+          "file": "libs/e-service/ethics/form/src/lib/form-meeting-record/form-meeting-record.component.scss",
+          "hash": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+        },
+        {
+          "file": "libs/e-service/ethics/form/src/lib/form-meeting-record/form-meeting-record.component.ts",
+          "hash": "1b63182df9cdf434d0d63ea6fba1035325acbc41",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "shared-form-file-upload",
+            "npm:@angular/forms"
+          ]
+        },
+        {
+          "file": "libs/e-service/ethics/form/tsconfig.json",
+          "hash": "d91a40079b4230f99a815486387cf3d3ad9ca621"
+        },
+        {
+          "file": "libs/e-service/ethics/form/tsconfig.lib.json",
+          "hash": "095e7f31b37e81c0a51c926290157de0d8e90960"
         }
       ]
     },
@@ -1350,7 +1772,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/feature/container-page"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/feature/container-page"
+          ],
           "options": {
             "jestConfig": "libs/e-service/feature/container-page/jest.config.ts",
             "passWithNoTests": true
@@ -1500,7 +1924,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/feature/login"],
+          "outputs": ["{workspaceRoot}/coverage/libs/e-service/feature/login"],
           "options": {
             "jestConfig": "libs/e-service/feature/login/jest.config.ts",
             "passWithNoTests": true
@@ -1579,6 +2003,84 @@
         }
       ]
     },
+    "e-service-fee-import-save-fee": {
+      "projectType": "library",
+      "root": "libs/e-service/fee/import-save-fee",
+      "sourceRoot": "libs/e-service/fee/import-save-fee/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+          "options": {
+            "jestConfig": "libs/e-service/fee/import-save-fee/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/fee/import-save-fee/**/*.ts",
+              "libs/e-service/fee/import-save-fee/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-fee-payment-fee": {
+      "projectType": "library",
+      "root": "libs/e-service/fee/payment-fee",
+      "sourceRoot": "libs/e-service/fee/payment-fee/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+          "options": {
+            "jestConfig": "libs/e-service/fee/payment-fee/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/fee/payment-fee/**/*.ts",
+              "libs/e-service/fee/payment-fee/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-fee-refund": {
+      "projectType": "library",
+      "root": "libs/e-service/fee-refund",
+      "sourceRoot": "libs/e-service/fee-refund/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["{workspaceRoot}/coverage/libs/e-service/fee-refund"],
+          "options": {
+            "jestConfig": "libs/e-service/fee-refund/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/fee-refund/**/*.ts",
+              "libs/e-service/fee-refund/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "e-service-fee-refund-fee": {
       "projectType": "library",
       "root": "libs/e-service/fee/refund-fee",
@@ -1587,7 +2089,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/fee/refund-fee"],
+          "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
           "options": {
             "jestConfig": "libs/e-service/fee/refund-fee/jest.config.ts",
             "passWithNoTests": true
@@ -1605,99 +2107,61 @@
       },
       "tags": []
     },
-    "e-service-form": {
-      "root": "libs/e-service/form",
+    "e-service-professional-best-teacher-reward": {
       "projectType": "library",
-      "sourceRoot": "libs/e-service/form/src",
+      "root": "libs/e-service/professional/best-teacher-reward",
+      "sourceRoot": "libs/e-service/professional/best-teacher-reward/src",
       "prefix": "ksp",
       "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/professional/best-teacher-reward"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/professional/best-teacher-reward/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "libs/e-service/form/**/*.ts",
-              "libs/e-service/form/**/*.html"
+              "libs/e-service/professional/best-teacher-reward/**/*.ts",
+              "libs/e-service/professional/best-teacher-reward/**/*.html"
             ]
           }
         }
       },
-      "tags": [],
-      "files": [
-        {
-          "file": "libs/e-service/form/.eslintrc.json",
-          "hash": "27c5e47e999848beed2882877542e9a23959ec86"
+      "tags": []
+    },
+    "e-service-professional-enable-reward-request": {
+      "projectType": "library",
+      "root": "libs/e-service/professional/enable-reward-request",
+      "sourceRoot": "libs/e-service/professional/enable-reward-request/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/professional/enable-reward-request"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/professional/enable-reward-request/jest.config.ts",
+            "passWithNoTests": true
+          }
         },
-        {
-          "file": "libs/e-service/form/project.json",
-          "hash": "ae412021f5addde6ace8327a5406d8debcd261cd"
-        },
-        {
-          "file": "libs/e-service/form/README.md",
-          "hash": "f9cadbbf4b978af369d7ebe0c7692efd45ac479b"
-        },
-        {
-          "file": "libs/e-service/form/src/index.ts",
-          "hash": "540727d3ce449097db1c168295879d1e1da8a5fa"
-        },
-        {
-          "file": "libs/e-service/form/src/lib/e-service-form.module.ts",
-          "hash": "4405ea1dd1b2928fa5d93cc97d33a1d868102297",
-          "deps": ["npm:@angular/core"]
-        },
-        {
-          "file": "libs/e-service/form/src/lib/form-investigation-detail/form-investigation-detail.component.html",
-          "hash": "ccaaf577a50e56c9486e8973bea611a2c88af577"
-        },
-        {
-          "file": "libs/e-service/form/src/lib/form-investigation-detail/form-investigation-detail.component.scss",
-          "hash": "f6a77d03751a3304f0a98c9b3cd1f6a023433420"
-        },
-        {
-          "file": "libs/e-service/form/src/lib/form-investigation-detail/form-investigation-detail.component.ts",
-          "hash": "b6d0b40edc761ae56a8c3e8b1c2e03c1ce405bab",
-          "deps": [
-            "npm:@angular/common",
-            "npm:@angular/core",
-            "npm:@angular/material",
-            "npm:@angular/router",
-            "e-service-ui-accusation-info",
-            "shared-form-others",
-            "shared-menu",
-            "shared-dialog",
-            "shared-ui",
-            "shared-form-file-upload",
-            "shared-utility",
-            "npm:@angular/forms",
-            "shared-interface"
-          ]
-        },
-        {
-          "file": "libs/e-service/form/src/lib/form-meeting-record/form-meeting-record.component.html",
-          "hash": "0b4c009aa29609e5120206aa04d880e069b91952"
-        },
-        {
-          "file": "libs/e-service/form/src/lib/form-meeting-record/form-meeting-record.component.scss",
-          "hash": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
-        },
-        {
-          "file": "libs/e-service/form/src/lib/form-meeting-record/form-meeting-record.component.ts",
-          "hash": "1b63182df9cdf434d0d63ea6fba1035325acbc41",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common",
-            "shared-form-file-upload",
-            "npm:@angular/forms"
-          ]
-        },
-        {
-          "file": "libs/e-service/form/tsconfig.json",
-          "hash": "d91a40079b4230f99a815486387cf3d3ad9ca621"
-        },
-        {
-          "file": "libs/e-service/form/tsconfig.lib.json",
-          "hash": "095e7f31b37e81c0a51c926290157de0d8e90960"
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/professional/enable-reward-request/**/*.ts",
+              "libs/e-service/professional/enable-reward-request/**/*.html"
+            ]
+          }
         }
-      ]
+      },
+      "tags": []
     },
     "e-service-professional-one-school-one-innovation": {
       "projectType": "library",
@@ -1708,7 +2172,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "outputs": [
-            "coverage/libs/e-service/professional/one-school-one-innovation"
+            "{workspaceRoot}/coverage/libs/e-service/professional/one-school-one-innovation"
           ],
           "options": {
             "jestConfig": "libs/e-service/professional/one-school-one-innovation/jest.config.ts",
@@ -1727,6 +2191,34 @@
       },
       "tags": []
     },
+    "e-service-professional-praise-teacher-reward": {
+      "projectType": "library",
+      "root": "libs/e-service/professional/praise-teacher-reward",
+      "sourceRoot": "libs/e-service/professional/praise-teacher-reward/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/professional/praise-teacher-reward"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/professional/praise-teacher-reward/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/professional/praise-teacher-reward/**/*.ts",
+              "libs/e-service/professional/praise-teacher-reward/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "e-service-professional-professional": {
       "projectType": "library",
       "root": "libs/e-service/professional/professional",
@@ -1735,7 +2227,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/professional/professional"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/professional/professional"
+          ],
           "options": {
             "jestConfig": "libs/e-service/professional/professional/jest.config.ts",
             "passWithNoTests": true
@@ -1747,6 +2241,146 @@
             "lintFilePatterns": [
               "libs/e-service/professional/professional/**/*.ts",
               "libs/e-service/professional/professional/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-professional-research-reward": {
+      "projectType": "library",
+      "root": "libs/e-service/professional/research-reward",
+      "sourceRoot": "libs/e-service/professional/research-reward/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/professional/research-reward"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/professional/research-reward/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/professional/research-reward/**/*.ts",
+              "libs/e-service/professional/research-reward/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-professional-senior-teacher-reward": {
+      "projectType": "library",
+      "root": "libs/e-service/professional/senior-teacher-reward",
+      "sourceRoot": "libs/e-service/professional/senior-teacher-reward/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/professional/senior-teacher-reward"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/professional/senior-teacher-reward/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/professional/senior-teacher-reward/**/*.ts",
+              "libs/e-service/professional/senior-teacher-reward/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-professional-teacher-council-reward": {
+      "projectType": "library",
+      "root": "libs/e-service/professional/teacher-council-reward",
+      "sourceRoot": "libs/e-service/professional/teacher-council-reward/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/professional/teacher-council-reward"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/professional/teacher-council-reward/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/professional/teacher-council-reward/**/*.ts",
+              "libs/e-service/professional/teacher-council-reward/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-professional-thai-teacher-reward": {
+      "projectType": "library",
+      "root": "libs/e-service/professional/thai-teacher-reward",
+      "sourceRoot": "libs/e-service/professional/thai-teacher-reward/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/professional/thai-teacher-reward"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/professional/thai-teacher-reward/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/professional/thai-teacher-reward/**/*.ts",
+              "libs/e-service/professional/thai-teacher-reward/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-standard-compare-knowledge": {
+      "projectType": "library",
+      "root": "libs/e-service/standard/compare-knowledge",
+      "sourceRoot": "libs/e-service/standard/compare-knowledge/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/standard/compare-knowledge"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/standard/compare-knowledge/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/standard/compare-knowledge/**/*.ts",
+              "libs/e-service/standard/compare-knowledge/**/*.html"
             ]
           }
         }
@@ -1939,6 +2573,34 @@
         }
       ]
     },
+    "e-service-standard-knowledge-cert": {
+      "projectType": "library",
+      "root": "libs/e-service/standard/knowledge-cert",
+      "sourceRoot": "libs/e-service/standard/knowledge-cert/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/standard/knowledge-cert"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/standard/knowledge-cert/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/standard/knowledge-cert/**/*.ts",
+              "libs/e-service/standard/knowledge-cert/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "e-service-standard-performance-result": {
       "projectType": "library",
       "root": "libs/e-service/standard/performance-result",
@@ -1947,7 +2609,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/standard/performance-result"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/standard/performance-result"
+          ],
           "options": {
             "jestConfig": "libs/e-service/standard/performance-result/jest.config.ts",
             "passWithNoTests": true
@@ -1965,6 +2629,34 @@
       },
       "tags": []
     },
+    "e-service-standard-qualification-approve": {
+      "projectType": "library",
+      "root": "libs/e-service/standard/qualification-approve",
+      "sourceRoot": "libs/e-service/standard/qualification-approve/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/standard/qualification-approve"
+          ],
+          "options": {
+            "jestConfig": "libs/e-service/standard/qualification-approve/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/standard/qualification-approve/**/*.ts",
+              "libs/e-service/standard/qualification-approve/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "e-service-standard-test-result": {
       "projectType": "library",
       "root": "libs/e-service/standard/test-result",
@@ -1973,7 +2665,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/e-service/standard/test-result"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/e-service/standard/test-result"
+          ],
           "options": {
             "jestConfig": "libs/e-service/standard/test-result/jest.config.ts",
             "passWithNoTests": true
@@ -1985,6 +2679,32 @@
             "lintFilePatterns": [
               "libs/e-service/standard/test-result/**/*.ts",
               "libs/e-service/standard/test-result/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "e-service-standard-user-management": {
+      "projectType": "library",
+      "root": "libs/e-service/standard/user-management",
+      "sourceRoot": "libs/e-service/standard/user-management/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+          "options": {
+            "jestConfig": "libs/e-service/standard/user-management/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/standard/user-management/**/*.ts",
+              "libs/e-service/standard/user-management/**/*.html"
             ]
           }
         }
@@ -2165,6 +2885,32 @@
         }
       ]
     },
+    "e-service-ui-reward-reject-form": {
+      "projectType": "library",
+      "root": "libs/e-service/ui/reward-reject-form",
+      "sourceRoot": "libs/e-service/ui/reward-reject-form/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/e-service/ui/reward-reject-form"],
+          "options": {
+            "jestConfig": "libs/e-service/ui/reward-reject-form/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/e-service/ui/reward-reject-form/**/*.ts",
+              "libs/e-service/ui/reward-reject-form/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "e-service-ui-verify-result-box": {
       "root": "libs/e-service/ui/verify-result-box",
       "projectType": "library",
@@ -2262,6 +3008,11 @@
             "assets": [
               "apps/school-service/src/favicon.ico",
               {
+                "glob": "**/*",
+                "input": "node_modules/ngx-extended-pdf-viewer/assets/",
+                "output": "assets"
+              },
+              {
                 "input": "libs/shared/assets/src/assets",
                 "glob": "**/*",
                 "output": "./assets"
@@ -2271,7 +3022,15 @@
               "apps/school-service/src/app-styles.scss",
               "libs/shared/assets/src/assets/project-styles.scss"
             ],
-            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.js"]
+            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.js"],
+            "allowedCommonJsDependencies": [
+              "pako",
+              "moment",
+              "localforage",
+              "ngx-barcode",
+              "lodash",
+              "crypto-js"
+            ]
           },
           "configurations": {
             "production": {
@@ -2279,7 +3038,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kb",
-                  "maximumError": "2mb"
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -2336,7 +3095,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/school-service"],
+          "outputs": ["{workspaceRoot}/coverage/apps/school-service"],
           "options": {
             "jestConfig": "apps/school-service/jest.config.ts",
             "passWithNoTests": true
@@ -2347,6 +3106,14 @@
           "options": {
             "outputPath": "dist/apps/school-service",
             "siteId": "b3164b84-b992-4605-bc6e-3ec8dd992fe0",
+            "noBuild": true
+          }
+        },
+        "deploy-dev": {
+          "builder": "@netlify-builder/deploy:deploy",
+          "options": {
+            "outputPath": "dist/apps/school-service",
+            "siteId": "aeb4f082-082b-418b-b3bb-0400f7d6aaa4",
             "noBuild": true
           }
         }
@@ -2475,7 +3242,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/school-service/feature/activity"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/school-service/feature/activity"
+          ],
           "options": {
             "jestConfig": "libs/school-service/feature/activity/jest.config.ts",
             "passWithNoTests": true
@@ -2598,7 +3367,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/school-service/feature/container-page"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/school-service/feature/container-page"
+          ],
           "options": {
             "jestConfig": "libs/school-service/feature/container-page/jest.config.ts",
             "passWithNoTests": true
@@ -2765,7 +3536,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/school-service/feature/forget-password"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/school-service/feature/forget-password"
+          ],
           "options": {
             "jestConfig": "libs/school-service/feature/forget-password/jest.config.ts",
             "passWithNoTests": true
@@ -2880,7 +3653,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/school-service/feature/login"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/school-service/feature/login"
+          ],
           "options": {
             "jestConfig": "libs/school-service/feature/login/jest.config.ts",
             "passWithNoTests": true
@@ -2974,7 +3749,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "outputs": [
-            "coverage/libs/school-service/feature/qualification-approve"
+            "{workspaceRoot}/coverage/libs/school-service/feature/qualification-approve"
           ],
           "options": {
             "jestConfig": "libs/school-service/feature/qualification-approve/jest.config.ts",
@@ -3075,7 +3850,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/school-service/feature/register"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/school-service/feature/register"
+          ],
           "options": {
             "jestConfig": "libs/school-service/feature/register/jest.config.ts",
             "passWithNoTests": true
@@ -3203,6 +3980,32 @@
         }
       ]
     },
+    "school-service-feature-report": {
+      "projectType": "library",
+      "root": "libs/school-service/feature/report",
+      "sourceRoot": "libs/school-service/feature/report/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+          "options": {
+            "jestConfig": "libs/school-service/feature/report/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/school-service/feature/report/**/*.ts",
+              "libs/school-service/feature/report/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "school-service-feature-request": {
       "root": "libs/school-service/feature/request",
       "projectType": "library",
@@ -3211,7 +4014,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/school-service/feature/request"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/school-service/feature/request"
+          ],
           "options": {
             "jestConfig": "libs/school-service/feature/request/jest.config.ts",
             "passWithNoTests": true
@@ -3345,7 +4150,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/school-service/feature/request-reward"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/school-service/feature/request-reward"
+          ],
           "options": {
             "jestConfig": "libs/school-service/feature/request-reward/jest.config.ts",
             "passWithNoTests": true
@@ -3443,7 +4250,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/school-service/feature/retired"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/school-service/feature/retired"
+          ],
           "options": {
             "jestConfig": "libs/school-service/feature/retired/jest.config.ts",
             "passWithNoTests": true
@@ -3568,6 +4377,34 @@
           "hash": "d1f5c8852d652eac23b0378b6c259ea88d5a88d1"
         }
       ]
+    },
+    "school-service-feature-school-info": {
+      "projectType": "library",
+      "root": "libs/school-service/feature/school-info",
+      "sourceRoot": "libs/school-service/feature/school-info/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/school-service/feature/school-info"
+          ],
+          "options": {
+            "jestConfig": "libs/school-service/feature/school-info/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/school-service/feature/school-info/**/*.ts",
+              "libs/school-service/feature/school-info/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
     },
     "school-service-feature-staff-management": {
       "root": "libs/school-service/feature/staff-management",
@@ -3700,6 +4537,34 @@
           "hash": "6c82dd8c3d2424596cc6c96b464f24be7d0099f3"
         }
       ]
+    },
+    "school-service-feature-temp-license-register": {
+      "projectType": "library",
+      "root": "libs/school-service/feature/temp-license-register",
+      "sourceRoot": "libs/school-service/feature/temp-license-register/src",
+      "prefix": "ksp",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/school-service/feature/temp-license-register"
+          ],
+          "options": {
+            "jestConfig": "libs/school-service/feature/temp-license-register/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/school-service/feature/temp-license-register/**/*.ts",
+              "libs/school-service/feature/temp-license-register/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
     },
     "school-service-form-activity": {
       "root": "libs/school-service/form/activity",
@@ -3978,7 +4843,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/school-service/ui/staff-search"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/school-service/ui/staff-search"
+          ],
           "options": {
             "jestConfig": "libs/school-service/ui/staff-search/jest.config.ts",
             "passWithNoTests": true
@@ -4081,6 +4948,11 @@
             "assets": [
               "apps/self-service/src/favicon.ico",
               {
+                "glob": "**/*",
+                "input": "node_modules/ngx-extended-pdf-viewer/assets/",
+                "output": "assets"
+              },
+              {
                 "input": "libs/shared/assets/src/assets",
                 "glob": "**/*",
                 "output": "./assets"
@@ -4092,6 +4964,13 @@
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "pako",
+              "moment",
+              "localforage",
+              "ngx-barcode",
+              "lodash"
             ]
           },
           "configurations": {
@@ -4100,12 +4979,12 @@
                 {
                   "type": "initial",
                   "maximumWarning": "2mb",
-                  "maximumError": "2mb"
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "500kb",
-                  "maximumError": "2mb"
+                  "maximumError": "5mb"
                 }
               ],
               "fileReplacements": [
@@ -4157,7 +5036,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/self-service"],
+          "outputs": ["{workspaceRoot}/coverage/apps/self-service"],
           "options": {
             "jestConfig": "apps/self-service/jest.config.ts",
             "passWithNoTests": true
@@ -4168,6 +5047,14 @@
           "options": {
             "outputPath": "dist/apps/self-service",
             "siteId": "dad36791-c9ee-4b6a-8909-b0519e2f562e",
+            "noBuild": true
+          }
+        },
+        "deploy-dev": {
+          "builder": "@netlify-builder/deploy:deploy",
+          "options": {
+            "outputPath": "dist/apps/self-service",
+            "siteId": "8df413ac-5d19-4e60-9165-93ba45e13d27",
             "noBuild": true
           }
         }
@@ -4293,7 +5180,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/self-service/dialog"],
+          "outputs": ["{workspaceRoot}/coverage/libs/self-service/dialog"],
           "options": {
             "jestConfig": "libs/self-service/dialog/jest.config.ts",
             "passWithNoTests": true
@@ -4319,7 +5206,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/self-service/feature/compare-knowledge"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/self-service/feature/compare-knowledge"
+          ],
           "options": {
             "jestConfig": "libs/self-service/feature/compare-knowledge/jest.config.ts",
             "passWithNoTests": true
@@ -4345,7 +5234,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/self-service/feature/home"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/self-service/feature/home"
+          ],
           "options": {
             "jestConfig": "libs/self-service/feature/home/jest.config.ts",
             "passWithNoTests": true
@@ -4428,7 +5319,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/self-service/feature/license"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/self-service/feature/license"
+          ],
           "options": {
             "jestConfig": "libs/self-service/feature/license/jest.config.ts",
             "passWithNoTests": true
@@ -4558,7 +5451,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/self-service/feature/login"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/self-service/feature/login"
+          ],
           "options": {
             "jestConfig": "libs/self-service/feature/login/jest.config.ts",
             "passWithNoTests": true
@@ -4649,7 +5544,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/self-service/feature/master-page"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/self-service/feature/master-page"
+          ],
           "options": {
             "jestConfig": "libs/self-service/feature/master-page/jest.config.ts",
             "passWithNoTests": true
@@ -4823,7 +5720,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/self-service/feature/payment"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/self-service/feature/payment"
+          ],
           "options": {
             "jestConfig": "libs/self-service/feature/payment/jest.config.ts",
             "passWithNoTests": true
@@ -4930,7 +5829,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/self-service/feature/refund-fee"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/self-service/feature/refund-fee"
+          ],
           "options": {
             "jestConfig": "libs/self-service/feature/refund-fee/jest.config.ts",
             "passWithNoTests": true
@@ -4956,7 +5857,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/self-service/feature/register"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/self-service/feature/register"
+          ],
           "options": {
             "jestConfig": "libs/self-service/feature/register/jest.config.ts",
             "passWithNoTests": true
@@ -5113,7 +6016,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/self-service/feature/renew-license"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/self-service/feature/renew-license"
+          ],
           "options": {
             "jestConfig": "libs/self-service/feature/renew-license/jest.config.ts",
             "passWithNoTests": true
@@ -5139,7 +6044,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/self-service/feature/reward"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/self-service/feature/reward"
+          ],
           "options": {
             "jestConfig": "libs/self-service/feature/reward/jest.config.ts",
             "passWithNoTests": true
@@ -5166,7 +6073,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "outputs": [
-            "coverage/libs/self-service/feature/self-improve-activity"
+            "{workspaceRoot}/coverage/libs/self-service/feature/self-improve-activity"
           ],
           "options": {
             "jestConfig": "libs/self-service/feature/self-improve-activity/jest.config.ts",
@@ -5193,7 +6100,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/self-service/feature/substitute-license"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/self-service/feature/substitute-license"
+          ],
           "options": {
             "jestConfig": "libs/self-service/feature/substitute-license/jest.config.ts",
             "passWithNoTests": true
@@ -5219,7 +6128,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/self-service/feature/transfer-knowledge"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/self-service/feature/transfer-knowledge"
+          ],
           "options": {
             "jestConfig": "libs/self-service/feature/transfer-knowledge/jest.config.ts",
             "passWithNoTests": true
@@ -5246,7 +6157,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/self-service/form"],
+          "outputs": ["{workspaceRoot}/coverage/libs/self-service/form"],
           "options": {
             "jestConfig": "libs/self-service/form/jest.config.ts",
             "passWithNoTests": true
@@ -5437,7 +6348,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/self-service/ui"],
+          "outputs": ["{workspaceRoot}/coverage/libs/self-service/ui"],
           "options": {
             "jestConfig": "libs/self-service/ui/jest.config.ts",
             "passWithNoTests": true
@@ -5550,7 +6461,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/assets"],
+          "outputs": ["{workspaceRoot}/coverage/libs/shared/assets"],
           "options": {
             "jestConfig": "libs/shared/assets/jest.config.ts",
             "passWithNoTests": true
@@ -5971,7 +6882,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/degree-cert"],
+          "outputs": ["{workspaceRoot}/coverage/libs/shared/degree-cert"],
           "options": {
             "jestConfig": "libs/shared/degree-cert/jest.config.ts",
             "passWithNoTests": true
@@ -6161,7 +7072,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/dialog"],
+          "outputs": ["{workspaceRoot}/coverage/libs/shared/dialog"],
           "options": {
             "jestConfig": "libs/shared/dialog/jest.config.ts",
             "passWithNoTests": true
@@ -6911,7 +7822,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/form/license"],
+          "outputs": ["{workspaceRoot}/coverage/libs/shared/form/license"],
           "options": {
             "jestConfig": "libs/shared/form/license/jest.config.ts",
             "passWithNoTests": true
@@ -7004,7 +7915,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/form/others"],
+          "outputs": ["{workspaceRoot}/coverage/libs/shared/form/others"],
           "options": {
             "jestConfig": "libs/shared/form/others/jest.config.ts",
             "passWithNoTests": true
@@ -7366,7 +8277,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/form/school/request-reward"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/shared/form/school/request-reward"
+          ],
           "options": {
             "jestConfig": "libs/shared/form/school/request-reward/jest.config.ts",
             "passWithNoTests": true
@@ -7392,7 +8305,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/form/self-activity-form"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/shared/form/self-activity-form"
+          ],
           "options": {
             "jestConfig": "libs/shared/form/self-activity-form/jest.config.ts",
             "passWithNoTests": true
@@ -7419,7 +8334,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "outputs": [
-            "coverage/libs/shared/form/self-renew-license-property-form"
+            "{workspaceRoot}/coverage/libs/shared/form/self-renew-license-property-form"
           ],
           "options": {
             "jestConfig": "libs/shared/form/self-renew-license-property-form/jest.config.ts",
@@ -7446,7 +8361,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/form/self-reward-form"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/shared/form/self-reward-form"
+          ],
           "options": {
             "jestConfig": "libs/shared/form/self-reward-form/jest.config.ts",
             "passWithNoTests": true
@@ -7583,7 +8500,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/form/uni-course-form"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/shared/form/uni-course-form"
+          ],
           "options": {
             "jestConfig": "libs/shared/form/uni-course-form/jest.config.ts",
             "passWithNoTests": true
@@ -7729,7 +8648,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/form/university-select"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/shared/form/university-select"
+          ],
           "options": {
             "jestConfig": "libs/shared/form/university-select/jest.config.ts",
             "passWithNoTests": true
@@ -7926,7 +8847,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/menu"],
+          "outputs": ["{workspaceRoot}/coverage/libs/shared/menu"],
           "options": {
             "jestConfig": "libs/shared/menu/jest.config.ts",
             "passWithNoTests": true
@@ -8081,6 +9002,24 @@
           "hash": "7aa46d88c0a8c71bd0d7892fec0da11aca03e354"
         }
       ]
+    },
+    "shared-pipe": {
+      "projectType": "library",
+      "root": "libs/shared/pipe",
+      "sourceRoot": "libs/shared/pipe/src",
+      "prefix": "ksp",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/pipe/**/*.ts",
+              "libs/shared/pipe/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
     },
     "shared-search": {
       "root": "libs/shared/search",
@@ -8509,6 +9448,11 @@
             "assets": [
               "apps/uni-service/src/favicon.ico",
               {
+                "glob": "**/*",
+                "input": "node_modules/ngx-extended-pdf-viewer/assets/",
+                "output": "assets"
+              },
+              {
                 "input": "libs/shared/assets/src/assets",
                 "glob": "**/*",
                 "output": "./assets"
@@ -8525,13 +9469,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "2mb"
+                  "maximumWarning": "1mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumError": "2mb"
                 }
               ],
               "fileReplacements": [
@@ -8583,7 +9527,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/uni-service"],
+          "outputs": ["{workspaceRoot}/coverage/apps/uni-service"],
           "options": {
             "jestConfig": "apps/uni-service/jest.config.ts",
             "passWithNoTests": true
@@ -8594,6 +9538,14 @@
           "options": {
             "outputPath": "dist/apps/uni-service",
             "siteId": "d1dc849e-2e37-4508-8323-ce8980880a6c",
+            "noBuild": true
+          }
+        },
+        "deploy-dev": {
+          "builder": "@netlify-builder/deploy:deploy",
+          "options": {
+            "outputPath": "dist/apps/uni-service",
+            "siteId": "ba462199-aad5-4f7b-89d1-bbf4079cc71c",
             "noBuild": true
           }
         }
@@ -8722,7 +9674,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/uni-service/dialog"],
+          "outputs": ["{workspaceRoot}/coverage/libs/uni-service/dialog"],
           "options": {
             "jestConfig": "libs/uni-service/dialog/jest.config.ts",
             "passWithNoTests": true
@@ -8855,7 +9807,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/uni-service/feature/degree-cert"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/uni-service/feature/degree-cert"
+          ],
           "options": {
             "jestConfig": "libs/uni-service/feature/degree-cert/jest.config.ts",
             "passWithNoTests": true
@@ -8976,7 +9930,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/uni-service/feature/edit-degree-cert"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/uni-service/feature/edit-degree-cert"
+          ],
           "options": {
             "jestConfig": "libs/uni-service/feature/edit-degree-cert/jest.config.ts",
             "passWithNoTests": true
@@ -9002,7 +9958,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/uni-service/feature/edit-student-list"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/uni-service/feature/edit-student-list"
+          ],
           "options": {
             "jestConfig": "libs/uni-service/feature/edit-student-list/jest.config.ts",
             "passWithNoTests": true
@@ -9029,7 +9987,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/uni-service/feature/foreign-student-id"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/uni-service/feature/foreign-student-id"
+          ],
           "options": {
             "jestConfig": "libs/uni-service/feature/foreign-student-id/jest.config.ts",
             "passWithNoTests": true
@@ -9127,7 +10087,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/uni-service/feature/graduate"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/uni-service/feature/graduate"
+          ],
           "options": {
             "jestConfig": "libs/uni-service/feature/graduate/jest.config.ts",
             "passWithNoTests": true
@@ -9283,7 +10245,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/uni-service/feature/register"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/uni-service/feature/register"
+          ],
           "options": {
             "jestConfig": "libs/uni-service/feature/register/jest.config.ts",
             "passWithNoTests": true
@@ -9408,7 +10372,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/uni-service/feature/retired"],
+          "outputs": [
+            "{workspaceRoot}/coverage/libs/uni-service/feature/retired"
+          ],
           "options": {
             "jestConfig": "libs/uni-service/feature/retired/jest.config.ts",
             "passWithNoTests": true
@@ -9542,7 +10508,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/uni-service/form"],
+          "outputs": ["{workspaceRoot}/coverage/libs/uni-service/form"],
           "options": {
             "jestConfig": "libs/uni-service/form/jest.config.ts",
             "passWithNoTests": true
@@ -9749,8 +10715,5 @@
       ]
     }
   },
-  "version": 1,
-  "cli": {
-    "analytics": false
-  }
+  "version": 1
 }

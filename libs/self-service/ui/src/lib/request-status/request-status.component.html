@@ -2,61 +2,101 @@
 
 <div class="bg-white border shadow-sm bg-white rounded-4 px-2 py-3">
   <div class="row row-cols-2 row-cols-md-4 m-0">
-    <ng-container *ngIf="requestDate">
-      <div class="d-flex flex-column align-items-center col-xs-auto mb-1">
-        <div class="text-black form-label">วันที่ทำรายการ</div>
-
-        <div class="form-label border rounded-5 content__box box__primary">
-          {{ requestDate }}
-        </div>
-      </div></ng-container
-    >
-
     <div class="d-flex flex-column align-items-center col-xs-auto mb-1">
-      <div class="text-black form-label">เลขใบคำขอ</div>
+      <div class="text-black form-label">{{ headerLabel1 }}</div>
 
-      <div class="form-label border rounded-5 content__box box__second">
-        {{ requestNo }}
+      <div
+        class="form-label border border-white rounded-5 content__box box__primary"
+        *ngIf="!isForeign"
+      >
+        {{ (requestDate | thaiDate) || (today | thaiDate) }}
+      </div>
+      <div
+        class="form-label border border-white rounded-5 content__box box__primary"
+        *ngIf="isForeign"
+      >
+        {{ (requestDate | engDate) || (today | engDate) }}
       </div>
     </div>
 
-    <div class="d-flex flex-column align-items-center col-xs-auto mb-1">
-      <div class="text-black form-label">เลขที่ใบอนุญาต</div>
+    <div
+      class="d-flex flex-column align-items-center col-xs-auto mb-1"
+      *ngIf="requestNo"
+    >
+      <div class="text-black form-label">{{ headerLabel2 }}</div>
 
-      <div class="form-label border rounded-5 content__box box__third">
+      <div
+        class="form-label border border-white rounded-5 content__box box__second"
+      >
+        {{ requestNo | reqNoFormat }}
+      </div>
+    </div>
+
+    <div
+      class="d-flex flex-column align-items-center col-xs-auto mb-1"
+      *ngIf="licenseNo"
+    >
+      <div class="text-black form-label">เลขที่หนังสืออนุญาต</div>
+
+      <div
+        class="form-label border border-white rounded-5 content__box box__third"
+      >
         {{ licenseNo }}
       </div>
     </div>
 
-    <div class="d-flex flex-column align-items-center col-xs-auto mb-1">
-      <div class="text-black form-label">เลขที่ประจำตัวคุรุสภา</div>
+    <div
+      class="d-flex flex-column align-items-center col-xs-auto mb-1"
+      *ngIf="kurusapaNo"
+    >
+      <!-- <div class="text-black form-label">เลขที่ประจำตัวคุรุสภา</div> -->
+      <div class="text-black form-label">
+        Teachers Council of Thailand ID number
+      </div>
 
-      <div class="form-label border rounded-5 content__box box__fourth">
+      <div
+        class="form-label border border-white rounded-5 content__box box__fourth"
+      >
         {{ kurusapaNo }}
       </div>
     </div>
 
-    <div class="d-flex flex-column align-items-center col-xs-auto mb-1">
+    <div
+      class="d-flex flex-column align-items-center col-xs-auto mb-1"
+      *ngIf="idcardNo"
+    >
       <div class="text-black form-label">เลขประจำตัวประชาชน</div>
 
-      <div class="form-label border rounded-5 content__box box__primary">
+      <div
+        class="form-label border border-white rounded-5 content__box box__primary"
+      >
         {{ idcardNo }}
       </div>
     </div>
 
-    <div class="d-flex flex-column align-items-center col-xs-auto mb-1">
-      <div class="text-black form-label">วันที่ออกใบอนุญาต</div>
+    <div
+      class="d-flex flex-column align-items-center col-xs-auto mb-1"
+      *ngIf="licenseStartDate"
+    >
+      <div class="text-black form-label">วันที่ออกหนังสืออนุญาต</div>
 
-      <div class="form-label border rounded-5 content__box box__second">
-        {{ licenseStartDate }}
+      <div
+        class="form-label border border-white rounded-5 content__box box__second"
+      >
+        {{ licenseStartDate | thaiDate }}
       </div>
     </div>
 
-    <div class="d-flex flex-column align-items-center col-xs-auto mb-1">
-      <div class="text-black form-label">วันที่หมดอายุใบอนุญาต</div>
+    <div
+      class="d-flex flex-column align-items-center col-xs-auto mb-1"
+      *ngIf="licenseEndDate"
+    >
+      <div class="text-black form-label">วันที่หนังสืออนุญาตหมดอายุ</div>
 
-      <div class="form-label border rounded-5 content__box box__third">
-        {{ licenseEndDate }}
+      <div
+        class="form-label border border-white rounded-5 content__box box__third"
+      >
+        {{ licenseEndDate | thaiDate }}
       </div>
     </div>
   </div>

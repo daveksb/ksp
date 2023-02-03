@@ -1,86 +1,157 @@
-import { Component, ViewChild } from '@angular/core';
-import { MatSort, MatSortable, Sort } from '@angular/material/sort';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import {
   SelfServiceRequestSubType,
   SelfServiceRequestForType,
 } from '@ksp/shared/constant';
-import { SelfRequest } from '@ksp/shared/interface';
-import { SelfRequestService } from '@ksp/shared/service';
-import { getCookie, thaiDate } from '@ksp/shared/utility';
+import {
+  EmailPayload,
+  KspRequest,
+  KSPRequestSelfSearchFilter,
+  SelfRequest,
+} from '@ksp/shared/interface';
+import {
+  LoaderService,
+  MyInfoService,
+  SelfRequestService,
+} from '@ksp/shared/service';
+import {
+  formatRequestNo,
+  getCookie,
+  hasRejectedRequest,
+  replaceEmptyWithNull,
+  SelfCheckProcess,
+  SelfcheckStatus,
+  SelfHasRejectedRequest,
+  selfMapRequestType,
+  thaiDate,
+} from '@ksp/shared/utility';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'ksp-self-service-home-page',
   templateUrl: './self-service-home-page.component.html',
   styleUrls: ['./self-service-home-page.component.scss'],
 })
-export class SelfServiceHomePageComponent {
-  badgeTitle = [
-    `เลขที่ใบคำขอ : SF_010641000123 รายการขอขึ้นทะเบียนใบอนุญาต ถูกส่งคืน
-  “ปรับแก้ไข / เพิ่มเติม” กดเพื่อตรวจสอบ`,
-  ];
-
-  dataSource = new MatTableDataSource<SelfRequest>();
+export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
+  checkStatus = SelfcheckStatus;
+  checkProcess = SelfCheckProcess;
+  selfMapRequestType = selfMapRequestType;
+  dataSource = new MatTableDataSource<SelfRequest>();
+  searchNotFound = false;
+  displayedColumns: string[] = column;
+  initialSearch = true;
+  rejectedRequests: KspRequest[] = [];
+  userType = '1';
+  form = this.fb.group({
+    requestno: [],
+    requesttype: [],
+    requestdate: [],
+  });
 
   constructor(
     private router: Router,
-    private requestService: SelfRequestService
+    private requestService: SelfRequestService,
+    private fb: FormBuilder,
+    private loaderService: LoaderService,
+    private myInfoService: MyInfoService
   ) {}
 
-  displayedColumns: string[] = column;
+  ngOnInit(): void {
+    this.defaultSearch();
+    this.myInfoService.getMyInfo().subscribe((res) => {
+      if (res && res.usertype) {
+        this.userType = res.usertype;
+      }
+    });
+
+    const mail = new EmailPayload('test@gmail.com', 'test email 2');
+    /*     this.myInfoService.sendMail(mail).subscribe((res) => {
+      console.log('send email = ', res);
+    }); */
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
+  defaultSearch() {
+    const payload = new KSPRequestSelfSearchFilter();
+    payload.idcardno = getCookie('idCardNo');
+    this.requestService.searchMyRequests(payload).subscribe((res) => {
+      this.rejectedRequests = SelfHasRejectedRequest(res);
+      //console.log('has reject = ', this.rejectedRequests);
+    });
+  }
 
   search() {
-    const payload = {
-      staffid: getCookie('userId'),
-      requesttype: null,
-      requestno: null,
-      requestdate: null,
-      requeststatus: null,
-      currentprocess: null,
+    let payload: KSPRequestSelfSearchFilter = {
+      requesttype: this.form.controls.requesttype.value,
+      requestno: this.form.controls.requestno.value,
+      requestdate: this.form.controls.requestdate.value,
+      status: null,
+      process: null,
+      paymentstatus: null,
+      idcardno: getCookie('idCardNo'),
+      kuruspano: getCookie('kuruspaNo'),
       offset: '0',
-      row: '100',
+      row: '200',
     };
+
+    payload = replaceEmptyWithNull(payload);
+
     this.requestService.searchMyRequests(payload).subscribe((res) => {
+      if (this.initialSearch) {
+        this.rejectedRequests = hasRejectedRequest(res);
+      }
+
       if (res && res.length) {
+        //console.log('res xx = ', res);
+        this.searchNotFound = false;
+        //this.dataSource.data = res.filter((item) => item.isclose !== '1');
         this.dataSource.data = res;
         this.dataSource.sort = this.sort;
 
         const sortState: Sort = { active: 'id', direction: 'desc' };
         this.sort.active = sortState.active;
         this.sort.direction = sortState.direction;
-      this.sort.sortChange.emit(sortState);
+        this.sort.sortChange.emit(sortState);
+        this.initialSearch = false;
       } else {
         this.dataSource.data = [];
+        this.searchNotFound = true;
+        this.initialSearch = false;
       }
     });
   }
 
-  toThaiDate(input: string) {
-    return thaiDate(new Date(input));
-  }
-
   goToDetail(input: SelfRequest) {
-    console.log('self request = ', input);
+    //console.log('self request = ', input);
     const requestType = Number(input.requesttype);
-    const subType = Number(input.subtype);
-    const isForeign = Number(input.requestfor);
+    const subType = Number(input.careertype);
+    const isForeign = Number(input.isforeign);
     const id = Number(input.id);
-    console.log('subType ', subType);
+    //console.log('subType ', subType);
 
-    if (requestType > 40) {
-      this.reward();
+    if (requestType >= 40) {
+      this.reward(id);
     } else if (requestType === 30) {
-      this.refundFee();
+      this.refundFee(id);
     } else if (requestType === 6) {
-      this.compare();
+      this.compare(id);
     } else if (requestType === 5) {
-      this.transfer();
+      this.transfer(id);
     } else if (requestType === 4) {
-      this.substituteLicense();
+      this.substituteLicense(id);
     } else if (requestType === 3) {
-      this.licenseEdit();
+      this.licenseEdit(id);
     } else if (requestType === 2) {
       // renew
       this.checkRenewRedirect(subType, isForeign, id);
@@ -109,7 +180,7 @@ export class SelfServiceHomePageComponent {
         if (isForeign === SelfServiceRequestForType.ชาวไทย) {
           this.schoolManager(id);
         } else {
-          this.foreignTeacher(subtype);
+          this.foreignTeacher(subtype, id);
         }
         break;
       }
@@ -132,7 +203,7 @@ export class SelfServiceHomePageComponent {
         if (isForeign === SelfServiceRequestForType.ชาวไทย) {
           this.teacherRenew(id);
         } else {
-          this.foreignRenew(subtype);
+          this.foreignRenew(subtype, id);
         }
         break;
       }
@@ -140,7 +211,7 @@ export class SelfServiceHomePageComponent {
         if (isForeign === SelfServiceRequestForType.ชาวไทย) {
           this.schManagerRenew(id);
         } else {
-          this.foreignRenew(subtype);
+          this.foreignRenew(subtype, id);
         }
         break;
       }
@@ -154,18 +225,15 @@ export class SelfServiceHomePageComponent {
   }
 
   clear() {
+    this.form.reset();
     this.dataSource.data = [];
+    this.searchNotFound = false;
   }
-
-  // requestLicense(type: SelfServiceRequestSubType) {
-  //   this.router.navigate(['/license', 'request', type]);
-  // }
 
   // ครูไทย
   thaiTeacher(id?: number) {
     this.router.navigate(['/license', 'teacher', ...(id ? [`${id}`] : [])]);
   }
-
   //ครู + ผู้บริหหาร ต่างชาติ
   foreignTeacher(type: SelfServiceRequestSubType, id?: number) {
     if (id) {
@@ -181,7 +249,6 @@ export class SelfServiceHomePageComponent {
       });
     }
   }
-
   // ผู้บริหารสถานศึกษา
   schoolManager(id?: number) {
     this.router.navigate([
@@ -190,7 +257,6 @@ export class SelfServiceHomePageComponent {
       ...(id ? [`${id}`] : []),
     ]);
   }
-
   // ผู้บริหารการศึกษา
   eduManagerRequest(id?: number) {
     this.router.navigate([
@@ -199,7 +265,6 @@ export class SelfServiceHomePageComponent {
       ...(id ? [`${id}`] : []),
     ]);
   }
-
   //ศึกษานิเทศก์
   studySupervision(id?: number) {
     this.router.navigate([
@@ -208,11 +273,6 @@ export class SelfServiceHomePageComponent {
       ...(id ? [`${id}`] : []),
     ]);
   }
-
-  // renewLicense(type: SelfServiceRequestSubType) {
-  //   this.router.navigate(['/renew-license', 'request', type]);
-  // }
-
   // ครูไทย
   teacherRenew(id?: number) {
     this.router.navigate([
@@ -221,12 +281,14 @@ export class SelfServiceHomePageComponent {
       ...(id ? [`${id}`] : []),
     ]);
   }
-
   //ครู + ผู้บริหาร ต่างชาติ
-  foreignRenew(type: SelfServiceRequestSubType) {
-    this.router.navigate(['/renew-license', 'foreign'], {
-      queryParams: { type },
-    });
+  foreignRenew(type: SelfServiceRequestSubType, id?: number) {
+    this.router.navigate(
+      ['/renew-license', 'foreign', ...(id ? [`${id}`] : [])],
+      {
+        queryParams: { type },
+      }
+    );
   }
   // ผู้บริหารสถานศึกษา
   schManagerRenew(id?: number) {
@@ -236,7 +298,6 @@ export class SelfServiceHomePageComponent {
       ...(id ? [`${id}`] : []),
     ]);
   }
-
   // ผู้บริหารการศึกษา
   eduManagerRenew(id?: number) {
     this.router.navigate([
@@ -245,7 +306,6 @@ export class SelfServiceHomePageComponent {
       ...(id ? [`${id}`] : []),
     ]);
   }
-
   //ศึกษานิเทศก์
   supervisionRenew(id?: number) {
     this.router.navigate([
@@ -255,45 +315,70 @@ export class SelfServiceHomePageComponent {
     ]);
   }
 
-  //ขอเปลี่ยนแปลง/แก้ไขใบอนุญาตประกอบวิชาชีพ
-  licenseEdit() {
-    this.router.navigate(['/license', 'edit']);
+  //ขอเปลี่ยนแปลง/แก้ไขหนังสืออนุญาตประกอบวิชาชีพ
+  licenseEdit(id?: number) {
+    this.router.navigate(['/license', 'edit', ...(id ? [`${id}`] : [])]);
   }
 
   //ขอรับรางวัล
-  reward() {
-    this.router.navigate(['/reward', 'request']);
+  reward(id?: number) {
+    this.router.navigate(['/reward', 'request', ...(id ? [`${id}`] : [])]);
   }
 
   // ขอหนังสือรับรองความรู้
-  transfer() {
-    this.router.navigate(['/transfer-knowledge', 'request']);
+  transfer(id?: number) {
+    this.router.navigate([
+      '/transfer-knowledge',
+      'request',
+      ...(id ? [`${id}`] : []),
+    ]);
   }
 
   // เทียบเคียง
-  compare() {
-    this.router.navigate(['/compare-knowledge', 'request']);
+  compare(id?: number) {
+    this.router.navigate([
+      '/compare-knowledge',
+      'request',
+      ...(id ? [`${id}`] : []),
+    ]);
   }
 
   // คืนเงินค่าธรรมเนียม
-  refundFee() {
-    this.router.navigate(['/refund-fee', 'request']);
+  refundFee(id?: number) {
+    this.router.navigate(['/refund-fee', 'request', ...(id ? [`${id}`] : [])]);
   }
 
-  //ขอใบแทนใบอนุญาตประกอบวิชาชีพ
-  substituteLicense() {
-    this.router.navigate(['/substitute-license', 'request']);
+  //ขอใบแทนหนังสืออนุญาตประกอบวิชาชีพ
+  substituteLicense(id?: number) {
+    this.router.navigate([
+      '/substitute-license',
+      'request',
+      ...(id ? [`${id}`] : []),
+    ]);
+  }
+
+  genAlertMessage(req: KspRequest) {
+    const detail: any = JSON.parse(req.detail || '');
+    //console.log('return date = ', detail.returndate);
+    return `แจ้งเตือน เลขที่คำขอ: ${formatRequestNo(
+      req.requestno || ''
+    )} ถูกส่งคืน "ปรับแก้ไข/เพิ่มเติม"
+    กรุณาส่งกลับภายในวันที่ ${thaiDate(
+      new Date(detail.returndate)
+    )} มิฉะนั้นแบบคำขอจะถูกยกเลิก `;
   }
 }
 
 export const column = [
   'order',
   'requestno',
+  'requesttype',
   'requestdate',
   'name',
   'paymentStatus',
-  'listStatus',
   'process',
+  'listStatus',
+  'editDate',
   'edit',
   'print',
 ];

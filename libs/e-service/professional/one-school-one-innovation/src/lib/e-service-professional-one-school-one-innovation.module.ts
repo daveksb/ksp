@@ -11,9 +11,18 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { OsoiRankingComponent } from './osoi-ranking/osoi-ranking.component';
 import { OsoiObjectionComponent } from './osoi-objection/osoi-objection.component';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
-import { FormMeetingRecordComponent } from '@ksp/e-service/form';
+import { FormMeetingRecordComponent } from '@ksp/e-service/ethics/form';
 import { MatTableModule } from '@angular/material/table';
 import { FileUploadComponent } from '@ksp/shared/form/file-upload';
+import { EServiceRewardSearchComponent } from '@ksp/shared/search';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { ThaiDatePipe } from '@ksp/shared/pipe';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
+import { OsoiRankingListComponent } from './osoi-ranking-list/osoi-ranking-list.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ValidateKspRequestComponent } from '@ksp/e-service/e-license/approve-ksp-request';
 
 const routes: Routes = [
   {
@@ -30,15 +39,19 @@ const routes: Routes = [
         component: OsoiListComponent,
       },
       {
-        path: 'approve',
+        path: 'detail/:id',
         component: OsoiDetailComponent,
       },
       {
-        path: 'confirm',
+        path: 'confirm/:id',
         component: OsoiConfirmComponent,
       },
       {
-        path: 'ranking',
+        path: 'ranking-list',
+        component: OsoiRankingListComponent,
+      },
+      {
+        path: 'ranking-detail',
         component: OsoiRankingComponent,
       },
       {
@@ -61,6 +74,14 @@ const routes: Routes = [
     MatTableModule,
     FileUploadComponent,
     RouterModule.forChild(routes),
+    EServiceRewardSearchComponent,
+    MatDatepickerModule,
+    MatPaginatorModule,
+    ThaiDatePipe,
+    ReactiveFormsModule,
+    LicenseCheckComponent,
+    MatProgressSpinnerModule,
+    ValidateKspRequestComponent,
   ],
   declarations: [
     OsoiListComponent,
@@ -68,13 +89,15 @@ const routes: Routes = [
     OsoiConfirmComponent,
     OsoiRankingComponent,
     OsoiObjectionComponent,
+    OsoiRankingListComponent,
   ],
-  exports: [
+  /* exports: [OsoiRankingListComponent], */
+  /*   exports: [
     OsoiListComponent,
     OsoiDetailComponent,
     OsoiConfirmComponent,
     OsoiRankingComponent,
     OsoiObjectionComponent,
-  ],
+  ], */
 })
 export class EServiceProfessionalOneSchoolOneInnovationModule {}

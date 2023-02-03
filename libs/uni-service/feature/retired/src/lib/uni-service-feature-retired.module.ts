@@ -14,6 +14,8 @@ import {
   RetiredSearchComponent,
 } from '@ksp/shared/search';
 import { RetiredHomeComponent } from './retired-home/retired-home.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   imports: [
@@ -28,6 +30,8 @@ import { RetiredHomeComponent } from './retired-home/retired-home.component';
     ReactiveFormsModule,
     BasicInstituteSearchComponent,
     RetiredSearchComponent,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
   ],
   declarations: [
     RetiredHomeComponent,

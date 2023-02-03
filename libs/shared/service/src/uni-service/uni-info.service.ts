@@ -1,26 +1,113 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
-import { getCookie } from '@ksp/shared/utility';
-import { map, Observable, shareReplay } from 'rxjs';
-
+import { getCookie, parseJson } from '@ksp/shared/utility';
+import { lastValueFrom, map, Observable, shareReplay } from 'rxjs';
+import _ from 'lodash';
+import moment from 'moment';
+function toDate(sDate: any) {
+  return sDate ? moment(sDate).format('yyyy-MM-DD') : '';
+}
 @Injectable({
   providedIn: 'root',
 })
 export class UniInfoService {
-  tokenKey = getCookie('userToken');
   constructor(private http: HttpClient) {}
+  mappingUniverSitySelectByIdWithForm(res: any): any {
+    const formData: any = {};
+    formData.checkresult = parseJson(res.checkresult);
+    formData.requestNo = res?.requestno ?? '';
+    formData.step1 = {
+      institutionsCode: res?.unicode || '',
+      institutionsGroup: res?.unitype || '',
+      institutionsName: res?.uniname || '',
+      provience: res?.uniprovince || '',
+      courseDetailType: res?.coursedetailtype,
+      courseDetail: res?.coursedetailinfo
+        ? parseJson(res?.coursedetailinfo)
+        : null,
+      degreeTypeForm: {
+        degreeType: res?.degreelevel,
+        courseYear: res?.courseacademicyear,
+        courseName: res?.coursename,
+        courseType: res?.coursetype,
+        courseStatus: res?.coursestatus,
+        degreeNameThFull: res?.fulldegreenameth,
+        degreeNameThShort: res?.shortdegreenameth,
+        degreeNameEnFull: res?.fulldegreenameen,
+        degreeNameEnShort: res?.shortdegreenameen,
+        courseApproveTime: res?.courseapprovetime,
+        courseApproveDate: toDate(res?.courseapprovedate),
+        courseAcceptDate: toDate(res?.courseacceptdate),
+      },
+      //type json
+      locations: res?.teachinglocation
+        ? parseJson(res?.teachinglocation)
+        : null,
+      institutions: res?.responsibleunit
+        ? parseJson(res?.responsibleunit)
+        : null,
+      locations2: res?.evaluatelocation
+        ? parseJson(res?.evaluatelocation)
+        : null,
+      coordinator: res?.coordinatorinfo
+        ? parseJson(res?.coordinatorinfo)
+        : null,
+    };
+    formData.step2 = {
+      teacher: {
+        teachers: res.courseteacher ? parseJson(res.courseteacher) : [],
+      },
 
+      nitet: {
+        nitets: res.courseinstructor ? parseJson(res.courseinstructor) : [],
+      },
+      advisor: {
+        advisors: res.courseadvisor ? parseJson(res.courseadvisor) : [],
+      },
+    };
+    if (['1', '2', '3', '4'].includes(res?.degreelevel)) {
+      formData.step2.plan1 = {
+        plans: res.coursestructure ? parseJson(res.coursestructure) : [],
+        subjects: res.courseplan ? parseJson(res.courseplan) : [],
+      };
+    } else {
+      const subjectsdata = parseJson(res.courseplan);
+      formData.step2.plan2 = {
+        plans: res.coursestructure ? parseJson(res.coursestructure) : [],
+        subjects: res.courseplan ? subjectsdata.subjects : [],
+        subject1GroupName: subjectsdata?.subjectgroupname.subject1GroupName,
+        subject2GroupName: subjectsdata?.subjectgroupname.subject2GroupName,
+        subject3GroupName: subjectsdata?.subjectgroupname.subject3GroupName,
+      };
+    }
+    formData.step3 = {
+      training: {
+        rows: res.processtrainning ? parseJson(res.processtrainning) : [],
+      },
+      teaching: {
+        rows: res.processteaching ? parseJson(res.processteaching) : [],
+      },
+    };
+    if (res?.attachfiles)
+      formData.step4 = {
+        files: parseJson(res?.attachfiles),
+      };
+    if (res?.degreeapprovecode) {
+      formData.degreeApproveCode = res?.degreeapprovecode;
+    }
+    return formData;
+  }
   univerSitySelectById(id: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/kspuni/universityselectbyid`, {
       id,
-      tokenkey: this.tokenKey,
+      tokenkey: getCookie('userToken'),
     });
   }
   searchTypeidUniUniversity(id: any): Observable<any> {
     return this.http
       .get(
-        `${environment.apiUrl}/kspmasterdata/searchtypeiduniuniversity?searchTypeId=${id}`
+        `${environment.apiUrl}/kspmasterdata/searchtypeiduniuniversity?searchtypeid=${id}`
       )
       .pipe(map((res: any) => res?.datareturn));
   }
@@ -30,7 +117,7 @@ export class UniInfoService {
       `${environment.shortApiUrl}/unirequestdegreecertsearch.php`,
       {
         ...params,
-        tokenkey: this.tokenKey,
+        tokenkey: getCookie('userToken'),
       }
     );
   }
@@ -38,13 +125,13 @@ export class UniInfoService {
   uniRequestDegreeCertSelectById(id: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/kspuni/unirequestdegreecertselectbyid`,
-      { id, tokenkey: this.tokenKey }
+      { id, tokenkey: getCookie('userToken') }
     );
   }
   getUniversity(typeId: any): Observable<any> {
     return this.http
       .get(
-        `${environment.apiUrl}/kspmasterdata/searchtypeiduniuniversity?searchTypeId=${typeId}`
+        `${environment.apiUrl}/kspmasterdata/searchtypeiduniuniversity?searchtypeid=${typeId}`
       )
       .pipe(
         map((data: any) => data.datareturn),
@@ -127,8 +214,121 @@ export class UniInfoService {
       `${environment.shortApiUrl}/unidegreecertsearch.php`,
       {
         ...params,
-        tokenkey: this.tokenKey,
+        tokenkey: getCookie('userToken'),
       }
     );
+  }
+  async getMajorAndBranch(row: any) {
+    let major: any;
+    let branch: any;
+    if (row?.coursefieldofstudy)
+      major = await lastValueFrom(
+        this.uniMajor(row?.coursefieldofstudy).pipe(
+          map((res) => {
+            return _.find(res, { id: row?.coursemajor });
+          })
+        )
+      );
+    if (major?.id)
+      branch = await lastValueFrom(
+        this.uniSubject(major?.id).pipe(
+          map((res) => {
+            return _.find(res, { id: row?.coursesubjects });
+          })
+        )
+      );
+    return { major: major?.name || '-', branch: branch?.name || '-' };
+  }
+
+  uniDegreeCertSelectByid(id: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspuni/unidegreecertselectbyid`,
+      {
+        id,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
+
+  searchSelfStudent(params: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/selfmyinfosearch_uni.php`,
+      {
+        ...params,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
+
+  uniAdmissionSearch(params: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/unidegreeadmissionsearch.php`,
+      {
+        ...params,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
+
+  uniAdmissionSearch2(params: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/unidegreeadmissionsearch_2.php`,
+      {
+        ...params,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
+
+  uniRequestDegreeCertSelectUniDegreeCertId(
+    unidegreecertid: any
+  ): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspuni/unirequestdegreecertselectunidegreecertid`,
+      {
+        unidegreecertid,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
+
+  uniDegreeHistory(params: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspuni/unirequestadmissionselectadid`,
+      {
+        ...params,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
+
+  uniRequestEditHistory(params: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspuni/unirequestadmissionjoinksprequestprocessselect`,
+      {
+        ...params,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
+
+  kspRequestSearchUni(params: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/ksprequestsearch_uni.php`,
+      {
+        ...params,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
+  getUniuniversity(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/kspmasterdata/uniuniversity`);
+  }
+  getUniDegreelevel(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/kspmasterdata/unidegreelevel`);
+  }
+
+  getBoard(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/kspmasterdata/board`);
   }
 }

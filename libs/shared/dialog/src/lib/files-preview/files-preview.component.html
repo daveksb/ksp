@@ -1,13 +1,16 @@
 <div class="main__container">
-  <div class="header">หนังสือนำส่ง + แบบคำขอรับรองปริญญา</div>
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="box-header">{{ data.title }}</div>
+    <i role="button" class="bi bi-x-lg fs-5" matDialogClose></i>
+  </div>
   <hr />
-  <div class="file__img">
+  <div class="d-flex justify-content-center">
     <img src="assets/images/degree-cert-file.png" />
   </div>
   <hr />
   <e-service-license-check [choices]="fileVerify"></e-service-license-check>
 
-  <div class="button__container">
+  <div class="d-flex justify-content-center pb-2">
     <button class="btn btn-primary" (click)="confirm()">ยืนยัน</button>
   </div>
 </div>

@@ -22,7 +22,8 @@ export class UniRegisterRequesterComponent implements OnInit {
   uniType$!: Observable<any>;
   occupyList$!: Observable<any>;
   userInfoFormdisplayMode: number = UserInfoFormType.thai;
-  uniData: any;
+  uniData!: any;
+  submit = false;
   form = this.fb.group({
     requester: []
   });
@@ -38,7 +39,7 @@ export class UniRegisterRequesterComponent implements OnInit {
   ngOnInit(): void {
     localForage.getItem('registerSelectedUniversity').then((res: any) => {
       if (res) {
-        this.uniData = res.universityInfo;
+        this.uniData = res;
       }
     });
     localForage.getItem('registerUserForm').then((res:any) => {
@@ -54,18 +55,23 @@ export class UniRegisterRequesterComponent implements OnInit {
   }
 
   next() {
+    this.submit = true;
     const data = this.form.getRawValue();
     const { requester } = data as any;
-    const userInfo = {
-      ...requester,
-      schoolid: this.uniData.schoolid,
-      unitype: this.uniData.unitype,
-      institution: this.uniData.institution,
-      affiliation: this.uniData.affiliation
-    };
-    
-    localForage.setItem('registerUserForm', userInfo);
-    this.router.navigate(['/register', 'coordinator']);
+    if (this.form.valid && requester.prefixth == requester.prefixen) {
+      const userInfo = {
+        ...requester,
+        schoolid: this.uniData.schoolid,
+        unitype: this.uniData.unitype,
+        institution: this.uniData.institution,
+        affiliation: this.uniData.affiliation
+      };
+      this.submit = false;
+      
+      localForage.setItem('registerUserForm', userInfo).then(()=>{
+        this.router.navigate(['/register', 'coordinator']);
+      });
+    }
   }
 
   back() {

@@ -1,6 +1,5 @@
 <ksp-top-nav [isSelfService]="true">
   <span header>ข้อมูลของฉัน</span>
-  <span subHeader>ที่อยู่</span>
 </ksp-top-nav>
 
 <div class="main__container px-4 py-2 full-height">
@@ -36,9 +35,20 @@
     </div>
   </form>
   <div class="d-flex justify-content-center my-3">
-    <button class="btn btn-secondary me-2">ล้างข้อมูล</button>
-    <button (click)="onClickChangeMode()" class="btn btn-primary">
-      แก้ไขข้อมูล
+    <button
+      type="button"
+      class="btn text-secondary bg-light border-secondary me-2"
+      (click)="clear()"
+    >
+      ล้างข้อมูล
+    </button>
+    <button
+      type="button"
+      class="btn"
+      (click)="onClickChangeMode()"
+      [ngClass]="mode === 'edit' ? 'btn-success' : 'btn-primary'"
+    >
+      {{ label }}
     </button>
   </div>
 </div>

@@ -1,56 +1,100 @@
-import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   MatDialogModule,
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'ksp-qualification-approve-detail',
   standalone: true,
-  imports: [CommonModule, MatDialogModule, ReactiveFormsModule],
   templateUrl: './qualification-approve-detail.component.html',
   styleUrls: ['./qualification-approve-detail.component.scss'],
+  imports: [CommonModule, MatDialogModule, ReactiveFormsModule],
 })
-export class QualificationApproveDetailComponent implements OnInit {
-  constructor(
-    public dialogRef: MatDialogRef<QualificationApproveDetailComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private fb: FormBuilder
-  ) {}
+export class QualificationApproveDetailComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
   degreeLevelName = '';
-  degreeName = '';
-  institution = '';
-  major = '';
   degreelevelMapping = new Map([
     ['1', 'ปริญญาตรี'],
     ['2', 'ปริญญาโท'],
     ['3', 'ปริญญาเอก'],
     ['4', 'วุฒิการศึกษาปริญญาอื่นๆที่เทียบเท่าปริญญาตรี / ปริญญาทางการศึกษา'],
   ]);
-  form = this.fb.group({
+
+  override form = this.fb.group({
+    degree: [null, Validators.required],
+    degreename: [],
+    major: [],
+    institute: [],
     reason1: [],
     reason2: [],
   });
+
+  @Input() set otherReason(value: any) {
+    //console.log('value = ', value);
+    if (value) this.form.patchValue(value);
+  }
+
   @Output() confirmed = new EventEmitter<boolean>();
+
+  constructor(
+    public dialogRef: MatDialogRef<QualificationApproveDetailComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private fb: FormBuilder
+  ) {
+    super();
+    this.subscriptions.push(
+      this.form?.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
+        this.onChange(value);
+        this.onTouched();
+      })
+    );
+  }
 
   ngOnInit(): void {
     const education = this.data.education;
     const mode = this.data.mode;
-    if (mode == 'view')
+    //console.log('data = ', this.data);
+
+    const eduData: any = {
+      degree: true,
+      major: this.data?.education?.major,
+      institute: this.data?.education?.institution,
+      degreename: this.data?.education?.degreeName,
+    };
+    this.form.patchValue(eduData);
+
+    if (mode == 'view') {
       setTimeout(() => {
-        this.form.patchValue(this.data.otherreason);
         this.form.disable();
       }, 0);
-    this.institution = education?.institution ?? '';
-    this.degreeName = education?.degreeName ?? '';
-    this.major = education?.major ?? '';
+    } else {
+      this.form.controls.degreename.disable();
+      this.form.controls.major.disable();
+      this.form.controls.institute.disable();
+    }
+
     this.degreeLevelName =
-      this.degreelevelMapping.get(education?.degreeLevelName) ?? '';
+      this.degreelevelMapping.get(education?.degreeLevelName) ??
+      'วุฒิการศึกษาปริญญาตรี';
   }
+
   save() {
-    this.dialogRef.close({ otherreason: this.form.value });
+    this.dialogRef.close({ otherreason: this.form.getRawValue() });
   }
 }

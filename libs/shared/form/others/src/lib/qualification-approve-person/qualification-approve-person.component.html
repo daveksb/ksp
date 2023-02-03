@@ -1,11 +1,12 @@
-<div class="box-header text-primary">ผู้รับรองข้อมูล</div>
+<div class="box-header">ผู้รับรองข้อมูล</div>
 <hr />
 <form [formGroup]="form">
-  <div class="form-label text-black">ผู้ที่หน่วยงานขอรับรองคุณวุฒิ</div>
+  <div class="fs-5 text-black">ผู้ที่หน่วยงานขอรับรองคุณวุฒิ</div>
   <div class="row mb-2">
     <div class="col-3">
       <label class="form-label">คำนำหน้าชื่อ</label>
       <select formControlName="prefixth1" class="form-select">
+        <option value="null" disabled hidden selected>กรุณาเลือก</option>
         <option *ngFor="let prefix of prefixList$ | async" [value]="prefix.id">
           {{ prefix?.name_th }}
         </option>
@@ -27,11 +28,12 @@
       <input formControlName="position1" type="text" class="form-control" />
     </div>
   </div>
-  <div class="form-label text-black">หน่วยงานที่ขอรับรองคุณวุฒิ</div>
+  <div class="fs-5 text-black">หน่วยงานที่ขอรับรองคุณวุฒิ</div>
   <div class="row mb-2">
     <div class="col-3">
       <label class="form-label">คำนำหน้าชื่อ</label>
-      <select formControlName="prefixth1" class="form-select">
+      <select formControlName="prefixth2" class="form-select">
+        <option value="null" disabled hidden selected>กรุณาเลือก</option>
         <option *ngFor="let prefix of prefixList$ | async" [value]="prefix.id">
           {{ prefix?.name_th }}
         </option>
@@ -53,8 +55,8 @@
     </div>
   </div>
 </form>
-<br />
-<div class="d-flex justify-content-center">
+
+<div class="d-flex justify-content-center mt-3" *ngIf="mode !== 'view'">
   <button matDialogClose class="btn border-primary text-primary me-1">
     ยกเลิก
   </button>

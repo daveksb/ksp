@@ -1,7 +1,10 @@
 <form [formGroup]="form">
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">สถาบันการศึกษา</label>
+      <label class="form-label required"
+        ><span *ngIf="!isForeignForm">สถาบันการศึกษา</span>
+        <span *ngIf="isForeignForm">Institution</span>
+      </label>
       <input
         class="form-control"
         type="text"
@@ -10,7 +13,10 @@
     </div>
 
     <div class="col-md-6 mb-2">
-      <label class="form-label">วุฒิปริญญาที่จบ</label>
+      <label class="form-label required">
+        <span *ngIf="!isForeignForm">วุฒิปริญญาที่จบ</span>
+        <span *ngIf="isForeignForm">degree</span></label
+      >
       <input
         class="form-control"
         type="text"
@@ -21,18 +27,71 @@
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">สาขา/วิชาเอก</label>
+      <label class="form-label required"
+        ><span *ngIf="!isForeignForm">สาขา/วิชาเอก</span>
+        <span *ngIf="isForeignForm">Subject/Major</span></label
+      >
       <input class="form-control" type="text" formControlName="branch" />
     </div>
 
-    <div class="col-md-6 mb-2">
-      <label class="form-label">วัน/เดือน/ปี ที่เข้าศึกษา</label>
-      <input class="form-control" type="date" formControlName="admissionDate" />
+    <div class="col-md-3 mb-2">
+      <label class="form-label required"
+        ><span *ngIf="!isForeignForm">วัน/เดือน/ปี ที่เข้าศึกษา</span>
+        <span *ngIf="isForeignForm">Start of Graduated Date</span></label
+      >
+      <div class="d-flex align-items-center" *ngIf="!isForeignForm">
+        <input
+          matInput
+          [matDatepicker]="picker1"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="admissionDate"
+          placeholder="วว/ดด/ปปปป"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker1"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </div>
+      <div *ngIf="isForeignForm">
+        <input
+          type="date"
+          class="form-control"
+          formControlName="admissionDate"
+        />
+      </div>
     </div>
 
-    <div class="col-md-6 mb-2">
-      <label class="form-label">วัน/เดือน/ปี ที่สำเร็จการศึกษา</label>
-      <input class="form-control" type="date" formControlName="graduateDate" />
+    <div class="col-md-3 mb-2">
+      <label class="form-label required"
+        ><span *ngIf="!isForeignForm">วัน/เดือน/ปี ที่สำเร็จการศึกษา</span>
+        <span *ngIf="isForeignForm">End of Graduated Date</span></label
+      >
+      <div class="d-flex align-items-center" *ngIf="!isForeignForm">
+        <input
+          matInput
+          [matDatepicker]="picker2"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="graduateDate"
+          placeholder="วว/ดด/ปปปป"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker2"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </div>
+      <div *ngIf="isForeignForm">
+        <input
+          type="date"
+          class="form-control"
+          formControlName="graduateDate"
+        />
+      </div>
     </div>
   </div>
 

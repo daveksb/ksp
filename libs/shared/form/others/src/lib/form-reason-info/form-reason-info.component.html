@@ -2,27 +2,63 @@
   <div class="bg-light px-3 py-3">
     <div class="box-header">
       ชี้แจงเหตุผลความจำเป็นที่ต้องรับผู้ไม่มีใบประกอบวิชาชีพ
-      เข้าประกอบวิชาชีพครูในสถานศึกษา
+      เข้าประกอบวิชาชีพในสถานศึกษา ดังนี้
     </div>
     <div class="row">
-      <div class="col mb-3">
+      <div class="col mb-2">
         <label class="form-label">สถานศึกษาชี้แจงเหตุผลความจำเป็น</label>
         <label class="text-danger ms-2">* เลือกได้มากกว่า 1 รายการ</label>
-
-        <input
-          class="form-control"
-          type="text"
-          formControlName="schoolReasonInfo"
-        />
       </div>
     </div>
 
-    <ng-container *ngFor="let item of schoolReason">
-      <div class="d-flex align-items-center mb-2">
-        <input class="me-2" formControlName="{{ item.name }}" type="checkbox" />
-        <label class="form-label">{{ item.label }}</label>
-      </div>
-    </ng-container>
+    <ng-container *ngIf="careerType === 1 || careerType === 5">
+      <ng-container
+        formArrayName="schoolReasons"
+        *ngFor="let item of schoolReasons.controls; let i = index"
+      >
+        <div class="d-flex align-items-center mb-2">
+          <input class="me-2" [formControlName]="i" type="checkbox" />
+          <label class="form-label">{{ schoolReasonList[i].label }}</label>
+        </div>
+      </ng-container></ng-container
+    >
+
+    <ng-container *ngIf="careerType === 2">
+      <ng-container
+        formArrayName="schoolReasons"
+        *ngFor="let item of schoolReasons.controls; let i = index"
+      >
+        <div class="d-flex align-items-center mb-2">
+          <input class="me-2" [formControlName]="i" type="checkbox" />
+          <label class="form-label">{{ schoolReasonList2[i].label }}</label>
+        </div>
+      </ng-container></ng-container
+    >
+
+    <!--     <ng-container *ngIf="careerType === 1 || careerType === 5">
+      <ng-container *ngFor="let item of schoolReasons.controls">
+        <div class="d-flex align-items-center mb-2">
+          <input
+            class="me-2"
+            formControlName="{{ item.name }}"
+            type="checkbox"
+          />
+          <label class="form-label">{{ item.label }}</label>
+        </div>
+      </ng-container></ng-container
+    >
+    <ng-container *ngIf="careerType === 2">
+      <ng-container *ngFor="let item of schoolReasons.controls; let i = index">
+        <div class="d-flex align-items-center mb-2">
+          <input
+            class="me-2"
+            formControlName="{{ item.name }}"
+            type="checkbox"
+          />
+          <label class="form-label">{{ item.label }}</label>
+        </div>
+      </ng-container></ng-container
+    > -->
 
     <div class="mx-4">
       <textarea
@@ -32,27 +68,24 @@
         placeholder="โปรดระบุ"
       ></textarea>
     </div>
-    <br />
-    <div class="row">
-      <div class="col mb-3">
+
+    <div class="row mt-3">
+      <div class="col mb-2">
         <label class="form-label"
-          >ผู้ขอประกอบวิชาชีพครู
+          >ผู้ขอประกอบวิชาชีพ
           ชี้แจงเหตุผลที่ไม่สามารถพัฒนาตนเองได้ตามระยะเวลาที่คุรุสภากำหนด</label
         >
         <label class="text-danger ms-2">* เลือกได้มากกว่า 1 รายการ</label>
-
-        <input
-          class="form-control"
-          type="text"
-          formControlName="teacherReasonInfo"
-        />
       </div>
     </div>
 
-    <ng-container *ngFor="let item of teacherReason">
+    <ng-container
+      formArrayName="teacherReasons"
+      *ngFor="let item of teacherReasons.controls; let i = index"
+    >
       <div class="d-flex align-items-center mb-2">
-        <input class="me-2" formControlName="{{ item.name }}" type="checkbox" />
-        <label class="form-label">{{ item.label }}</label>
+        <input class="me-2" [formControlName]="i" type="checkbox" />
+        <label class="form-label">{{ teacherReasonList[i].label }}</label>
       </div>
     </ng-container>
 

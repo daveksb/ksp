@@ -30,7 +30,10 @@ import { ForeignStepTwoTabOneComponent } from './foreign-step-two-tab-one/foreig
 import { ForeignStepTwoTabTwoComponent } from './foreign-step-two-tab-two/foreign-step-two-tab-two.component';
 import { ForeignStepTwoTabThreeComponent } from './foreign-step-two-tab-three/foreign-step-two-tab-three.component';
 import { ForeignStepTwoTabFourComponent } from './foreign-step-two-tab-four/foreign-step-two-tab-four.component';
-import { FileUploadComponent } from '@ksp/shared/form/file-upload';
+import {
+  FileMultiUploadComponent,
+  FileUploadComponent,
+} from '@ksp/shared/form/file-upload';
 import { TransferKnowledgeInfoComponent } from './transfer-knowledge-info/transfer-knowledge-info.component';
 import { AddRowButtonComponent } from '@ksp/shared/ui';
 import { TransferKnowledgeEducationComponent } from './transfer-knowledge-education/transfer-knowledge-education.component';
@@ -46,6 +49,9 @@ import { RenewLicenseForeignTeacherComponent } from './renew-license-foreign-tea
 import { RenewLicenseForeignNonTeacherComponent } from './renew-license-foreign-non-teacher/renew-license-foreign-non-teacher.component';
 import { TestResultTableComponent } from '@ksp/self-service/ui';
 import { FormUserTrainingWorkplaceComponent } from './form-user-training-workplace/form-user-training-workplace.component';
+import { ForeignStepTwoTabFourRenewComponent } from './foreign-step-two-tab-four-renew/foreign-step-two-tab-four-renew.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { TransferKnowledgeCareerCertComponent } from './transfer-knowledge-career-cert/transfer-knowledge-career-cert.component';
 
 @NgModule({
   imports: [
@@ -55,7 +61,6 @@ import { FormUserTrainingWorkplaceComponent } from './form-user-training-workpla
     MatTableModule,
     MatFormFieldModule,
     MatOptionModule,
-    SharedFormOthersModule,
     MatListModule,
     SharedFormEducationLevelModule,
     DynamicComponentDirective,
@@ -72,6 +77,9 @@ import { FormUserTrainingWorkplaceComponent } from './form-user-training-workpla
     SchoolServiceFormActivityModule,
     SharedFormSelfRenewLicensePropertyFormModule,
     TestResultTableComponent,
+    MatDatepickerModule,
+    SharedFormOthersModule,
+    FileMultiUploadComponent,
   ],
   declarations: [
     FormUserEducationComponent,
@@ -98,6 +106,8 @@ import { FormUserTrainingWorkplaceComponent } from './form-user-training-workpla
     RenewLicenseForeignTeacherComponent,
     RenewLicenseForeignNonTeacherComponent,
     FormUserTrainingWorkplaceComponent,
+    ForeignStepTwoTabFourRenewComponent,
+    TransferKnowledgeCareerCertComponent,
   ],
   exports: [
     FormUserEducationComponent,
@@ -124,6 +134,8 @@ import { FormUserTrainingWorkplaceComponent } from './form-user-training-workpla
     RenewLicenseForeignTeacherComponent,
     RenewLicenseForeignNonTeacherComponent,
     FormUserTrainingWorkplaceComponent,
+    ForeignStepTwoTabFourRenewComponent,
+    TransferKnowledgeCareerCertComponent,
   ],
 })
 export class SelfServiceFormModule {}

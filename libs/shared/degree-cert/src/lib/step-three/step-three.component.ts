@@ -13,6 +13,8 @@ export class DegreeCertStepThreeComponent extends KspFormBaseComponent {
   override form = this.fb.group({
     training: [],
     teaching: [],
+    section1: [false],
+    section2: [false],
   });
 
   @Input() showEditCheckbox = false;
@@ -26,5 +28,11 @@ export class DegreeCertStepThreeComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+  }
+  get section1() {
+    return !!(!this.form.controls?.section1?.value && this.showEditCheckbox) || this.mode === 'view'
+  }
+  get section2() {
+    return !!(!this.form.controls?.section2?.value && this.showEditCheckbox) || this.mode === 'view'
   }
 }

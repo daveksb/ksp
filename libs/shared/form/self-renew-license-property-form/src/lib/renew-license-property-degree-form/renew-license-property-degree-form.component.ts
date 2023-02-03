@@ -1,13 +1,14 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'ksp-renew-license-property-degree-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, MatDatepickerModule],
   templateUrl: './renew-license-property-degree-form.component.html',
   styleUrls: ['./renew-license-property-degree-form.component.scss'],
   providers: providerFactory(RenewLicensePropertyDegreeFormComponent),
@@ -18,11 +19,11 @@ export class RenewLicensePropertyDegreeFormComponent extends KspFormBaseComponen
   @Input() degreeLabel = 'วุฒิการศึกษา';
 
   override form = this.fb.group({
-    degreeLabel: [],
+    degreeLabel: [null, Validators.required],
     managingExperienceYear: [],
-    institute: [],
-    major: [],
-    entryDate: [],
+    institute: [null, Validators.required],
+    major: [null, Validators.required],
+    entryDate: [null, Validators.required],
     graduationDate: [],
   });
 

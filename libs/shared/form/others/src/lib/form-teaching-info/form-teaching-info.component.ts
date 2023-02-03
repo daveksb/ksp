@@ -33,19 +33,19 @@ export class FormTeachingInfoComponent extends KspFormBaseComponent {
 
   private addCheckboxes() {
     this.levels.forEach(() =>
-      this.teachingLevelFormArray.push(this.fb.control([null]))
+      this.teachingLevels.push(this.fb.control([null]))
     );
 
     this.subjects.forEach(() =>
-      this.teachingSubjectsFormArray.push(this.fb.control([null]))
+      this.teachingSubjects.push(this.fb.control([null]))
     );
   }
 
-  get teachingSubjectsFormArray() {
+  get teachingSubjects() {
     return this.form.controls.teachingSubjects as FormArray;
   }
 
-  get teachingLevelFormArray() {
+  get teachingLevels() {
     return this.form.controls.teachingLevel as FormArray;
   }
 }

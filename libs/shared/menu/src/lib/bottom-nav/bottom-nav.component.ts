@@ -20,16 +20,19 @@ export class BottomNavComponent {
 
   @Input() isLastPage = false;
   @Input() isFirstPage = false;
-  @Input() disableNext = false;
-  @Input() disableNextMessage = 'กรุณาเลือกรายการก่อน';
-  @Input() saveButtonLabel = 'บันทึก';
-  @Input() disableSaveButton = false;
-  @Input() showCenterButtons = false;
-  @Input() showCancelButton = true;
-  @Input() disableCancelButton = false;
-  @Input() showTempSaveButton = false;
-  @Input() disableTempSaveButton = true;
-  @Input() showSaveButton = false;
   @Input() colorMode: ColorMode = 'blue';
   @Input() cancelButtonLabel = 'ยกเลิก';
+
+  @Input() disableNext = false;
+  @Input() disableNextMessage = 'กรุณาเลือกรายการก่อน';
+  @Input() disableCancelButton: boolean | string | null | undefined = false;
+  @Input() disableSaveButton = false;
+  @Input() disableTempSaveButton = true;
+
+  @Input() saveButtonLabel = 'บันทึก';
+  @Input() showCenterButtons = false;
+  @Input() showCancelButton = true;
+  @Input() showTempSaveButton = false;
+  @Input() showSaveButton = false;
+  @Input() showAllPageTempsave = false;
 }

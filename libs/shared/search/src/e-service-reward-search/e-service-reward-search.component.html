@@ -1,0 +1,150 @@
+<form [formGroup]="form">
+  <div class="row mb-2">
+    <div class="col">
+      <label class="form-label">เลขที่แบบคำขอ</label>
+      <input type="text" class="form-control" formControlName="requestno" />
+    </div>
+    <div class="col" *ngIf="isSelfReward">
+      <label class="form-label">หมายเลขบัตรประชาชน</label>
+      <input type="text" class="form-control" formControlName="idcardno" />
+    </div>
+    <div class="col" *ngIf="!isSelfReward">
+      <label class="form-label">รหัสโรงเรียน</label>
+      <input type="text" class="form-control" formControlName="schoolid" />
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col" *ngIf="isSelfReward">
+      <label class="form-label">ชื่อ-นามสกุล</label>
+      <input type="text" class="form-control" formControlName="name" />
+    </div>
+    <div class="col" *ngIf="!isSelfReward">
+      <label class="form-label">ชื่อหน่วยงาน/สถานศึกษา</label>
+      <input type="text" class="form-control" />
+    </div>
+    <div class="col">
+      <label class="form-label">ประเภท/กลุ่มสาระการเรียนรู้</label>
+      <input type="text" class="form-control" />
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col">
+      <label class="form-label">สถานะการดำเนินการ</label>
+      <select class="form-select" formControlName="status">
+        <option value="null" disabled hidden selected>กรุณาเลือก</option>
+        <option *ngFor="let s of statusList" [value]="s.id">
+          {{ s.sname }}
+        </option>
+      </select>
+    </div>
+    <div class="col">
+      <label class="form-label">ผลการพิจารณา</label>
+      <select class="form-select" formControlName="process">
+        <option value="null" selected hidden disabled>กรุณาเลือก</option>
+        <option value="1">ผ่าน</option>
+        <option value="2">ไม่ผ่าน</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-3" *ngIf="showDeclareDate">
+      <label class="form-label">จาก : วันเดือนปีที่ยื่นแบบคำขอ</label>
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker3"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="declaredatefrom"
+          placeholder="วว/ดด/ปปปป"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker3"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker3></mat-datepicker>
+      </div>
+    </div>
+
+    <div class="col-3" *ngIf="showDeclareDate">
+      <label class="form-label">ถึง : วันเดือนปีที่ยื่นแบบคำขอ</label>
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker4"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="declaredateto"
+          placeholder="วว/ดด/ปปปป"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker4"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker4></mat-datepicker>
+      </div>
+    </div>
+
+    <div class="col-3">
+      <label class="form-label">จาก : วันเดือนปีที่ยื่นแบบคำขอ</label>
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="requestdatefrom"
+          placeholder="วว/ดด/ปปปป"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </div>
+    </div>
+
+    <div class="col-3">
+      <label class="form-label">ถึง : วันเดือนปีที่ยื่นแบบคำขอ</label>
+      <div class="d-flex align-items-center">
+        <input
+          matInput
+          [matDatepicker]="picker2"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="requestdateto"
+          placeholder="วว/ดด/ปปปป"
+        />
+        <mat-datepicker-toggle
+          class="button-date"
+          matSuffix
+          [for]="picker2"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end mt-3">
+    <button
+      class="btn border-primary text-primary"
+      type="button"
+      (click)="clear.emit()"
+    >
+      ล้างข้อมูล
+    </button>
+    <button
+      class="btn btn-primary ms-2"
+      type="button"
+      (click)="search.emit(form.value)"
+    >
+      ค้นหา
+    </button>
+  </div>
+</form>

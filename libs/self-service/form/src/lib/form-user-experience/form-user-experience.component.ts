@@ -1,9 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  Validators,
+} from '@angular/forms';
+import { Country, KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { debounceTime } from 'rxjs';
+import { pairwise } from 'rxjs';
 
 @UntilDestroy()
 @Component({
@@ -16,12 +21,17 @@ export class FormUserExperienceComponent
   extends KspFormBaseComponent
   implements OnInit
 {
-  @Input() countries: any[] = [];
+  @Input() countries: Country[] | null = [];
   @Input() licenses: any[] = [];
+
+  teachingAddress = this.fb.group({
+    teachingAddress: [null, Validators.required],
+  });
+
   override form = this.fb.group({
-    TrainingAddressOne: [],
-    TrainingAddressTwo: [],
-    teachingAddress: [],
+    TrainingAddressOne: [null, Validators.required],
+    TrainingAddressTwo: [null, Validators.required],
+    teachingAddressForm: this.fb.array([this.teachingAddress]),
     hasForeignLicense: [],
     foreignLicenseForm: [],
   });
@@ -29,7 +39,6 @@ export class FormUserExperienceComponent
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
       this.form?.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
         this.onChange(value);
         this.onTouched();
@@ -39,10 +48,55 @@ export class FormUserExperienceComponent
 
   ngOnInit(): void {
     this.form.valueChanges
-      .pipe(debounceTime(300), untilDestroyed(this))
-      .subscribe((res) => {
-        //console.log('exp form = ', res);
+      .pipe(untilDestroyed(this), pairwise())
+      .subscribe(([prev, next]) => {
+        if (prev.hasForeignLicense !== next.hasForeignLicense) {
+          if (next.hasForeignLicense) {
+            //console.log('set validators');
+            this.form.controls.foreignLicenseForm.addValidators(
+              Validators.required
+            );
+          } else {
+            this.form.controls.foreignLicenseForm.clearValidators();
+          }
+          this.form.controls.foreignLicenseForm.updateValueAndValidity();
+        }
       });
+  }
+
+  override set value(value: any) {
+    /* this.form.patchValue({ TrainingAddressOne: value.TrainingAddressOne });
+    this.form.patchValue({ TrainingAddressTwo: value.TrainingAddressTwo }); */
+    /* this.form.patchValue({ hasForeignLicense: value.hasForeignLicense });
+    this.form.patchValue({ foreignLicenseForm: value.foreignLicenseForm }); */
+    this.form.patchValue(value);
+
+    if (value.teachingAddressForm?.length) {
+      this.form.controls.teachingAddressForm.removeAt(0);
+
+      value.teachingAddressForm.forEach((item: any, index: number) => {
+        this.addAddress();
+        this.address.at(index).patchValue(item);
+      });
+    }
+
+    if (this.mode === 'view') {
+      this.form.disable();
+    }
+
+    this.onChange(value);
+    this.onTouched();
+  }
+
+  addAddress() {
+    const teachingAddressForm = this.fb.group({
+      teachingAddress: [null, Validators.required],
+    });
+    this.address.push(teachingAddressForm);
+  }
+
+  deleteAddress(index: number) {
+    this.address.removeAt(index);
   }
 
   resetForeignLicenseForm(evt: any) {
@@ -50,7 +104,15 @@ export class FormUserExperienceComponent
     if (!checked) this.form.controls.foreignLicenseForm.reset();
   }
 
+  get address() {
+    return this.form.controls.teachingAddressForm;
+  }
+
   get hasForeignLicense() {
     return this.form.controls.hasForeignLicense.value;
   }
+
+  /* getAddress(index: number) {
+    return this.address.controls[index].controls.teachingAddress;
+  } */
 }

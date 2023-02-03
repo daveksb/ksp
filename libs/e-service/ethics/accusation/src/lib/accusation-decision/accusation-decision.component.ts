@@ -1,39 +1,64 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
-
+import { Ethics } from '@ksp/shared/interface';
+import { EthicsService } from '@ksp/shared/service';
+import { thaiDate } from '@ksp/shared/utility';
+import _ from 'lodash';
 @Component({
   selector: 'e-service-accusation-decision',
   templateUrl: './accusation-decision.component.html',
   styleUrls: ['./accusation-decision.component.scss'],
 })
-export class AccusationDecisionComponent {
+export class AccusationDecisionComponent implements OnInit {
   decisions = decisions;
-
+  today = thaiDate(new Date());
+  ethicsId!: number;
   form = this.fb.group({
-    decisions: [],
-    otherDetail: [],
+    accusationblackno: [''],
+    accusationtype: [''],
+    accusationincidentdate: [''],
+    accusationincidentplace: [''],
+    accusationcondemnationtype: [''],
+    accusationcondemnation: [''],
+    accusationissuedate: [''],
+    accusationdetail: [''],
+    accusationpunishmentdetail: [''],
+    accusationviolatedetail: [''],
+    accusationassignofficer: [''],
+    accusationassigndate: [''],
+    accuserinfo: [''],
+    accusationfile: [''],
+    accusationconsideration: this.fb.group({
+      decisions: [''],
+      otherDetail: [''],
+    }),
   });
-
+  requestNumber = '';
   constructor(
     private router: Router,
     public dialog: MatDialog,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private service: EthicsService
   ) {}
 
   @Input() hideAllButtons = false;
 
+  ngOnInit() {
+    this.checkRequestId();
+  }
   cancel() {
     this.router.navigate(['/', 'accusation']);
   }
 
   back() {
-    this.router.navigate(['/', 'accusation', 'detail']);
+    this.router.navigate(['/', 'accusation', 'detail', this.ethicsId || null]);
   }
 
   save() {
@@ -41,26 +66,49 @@ export class AccusationDecisionComponent {
       width: '350px',
       data: {
         title: `คุณยืนยันการบันทึกข้อมูลใช่หรือไม่? `,
-        btnLabel: 'ยืนยัน'
+        btnLabel: 'ยืนยัน',
       },
     });
 
     confirmDialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
-        this.onCompleted();
+        this.saveEthics();
       }
     });
   }
-
+  checkRequestId() {
+    this.route.paramMap.subscribe((params) => {
+      this.ethicsId = Number(params.get('id'));
+      if (this.ethicsId) {
+        this.service.getEthicsByID({ id: this.ethicsId }).subscribe((res) => {
+          const { accusationconsideration, ...payload } = res;
+          const json = JSON.parse(accusationconsideration as string);
+          this.form.patchValue({ ...payload, accusationconsideration: json });
+        });
+      }
+    });
+  }
+  saveEthics() {
+    const ethics = new Ethics();
+    const allowKey = Object.keys(ethics);
+    const data = this.form.value as any;
+    data.accusationconsideration = JSON.stringify(data.accusationconsideration);
+    const selectData = _.pick(data, allowKey);
+    if (this.ethicsId) {
+      selectData['id'] = this.ethicsId;
+      this.service.updateEthicsAccusation(selectData).subscribe((res) => {
+        this.onCompleted();
+      });
+    }
+  }
   onCompleted() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '375px',
       data: {
-        header: `บึนทึกข้อมูลสำเร็จ`,
-        content: `เลขที่รายการ : 640120000123
-        วันที่ : 10 ตุลาคม 2656`,
-        subContent: 'ผู้บันทึกข้อมูล : นางสาวปาเจรา ไก่คลุก',
-        buttonLabel: 'กลับสู่หน้าหลัก',
+        header: `บันทึกข้อมูลสำเร็จ`,
+        content: `เลขที่รายการ : ${this.ethicsId}
+        วันที่ : ${this.today}`,
+        subContent: 'ผู้บันทึกข้อมูล : นางสาวปาเจรา ไฟลุก',
       },
     });
 
@@ -82,7 +130,7 @@ export const decisions = [
     value: 2,
   },
   {
-    label: 'ยุติเรื่องกรณีไม่มีใบอนุญาต',
+    label: 'ยุติเรื่องกรณีไม่มีหนังสืออนุญาต',
     value: 3,
   },
   {

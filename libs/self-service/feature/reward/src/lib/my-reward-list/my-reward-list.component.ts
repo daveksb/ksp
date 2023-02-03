@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
@@ -7,17 +8,19 @@ import { Router } from '@angular/router';
   templateUrl: './my-reward-list.component.html',
   styleUrls: ['./my-reward-list.component.scss'],
 })
-export class MyRewardListComponent implements OnInit {
+export class MyRewardListComponent implements AfterViewInit {
   badgeTitle = [
-    `กรุณาลงทะเบียนรายงานตัวเพื่อยืนยันเข้าเฝ้ารับเข็มเชิดชูเกียรติภายในวันที่ 24/มิ.ย./2564  กดเพื่อตรวจสอบ`,
+    `กรุณาลงทะเบียนรายงานตัวเพื่อยืนยันเข้าเฝ้ารับเข็มเชิดชูเกียรติภายในวันที่ 24/มิ.ย./2564`,
   ];
-
-  constructor(private router: Router) {}
-
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<PersonLicense>();
 
-  ngOnInit(): void {}
+  constructor(private router: Router) {}
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
 
   search() {
     this.dataSource.data = data;
@@ -27,12 +30,12 @@ export class MyRewardListComponent implements OnInit {
     this.dataSource.data = [];
   }
 
-  viewDetail() {
-    this.router.navigate(['/', 'reward', 'detail']);
+  viewDetail(id: number) {
+    this.router.navigate(['/reward', 'detail', id]);
   }
 
   honorPage() {
-    this.router.navigate(['/', 'reward', 'honor-request']);
+    this.router.navigate(['/reward', 'honor-request']);
   }
 }
 
@@ -60,7 +63,7 @@ export const data: PersonLicense[] = [
     order: 1,
     rewardType: 'ระดับจังหวัด',
     professionType: 'ครู',
-    rewardName: 'ครูภาษาไทยดีเด่น',
+    rewardName: 'คุรุสภา',
     requestDate: '1 มิถุนายน 2665',
     announceDate: '1 มิถุนายน 2665',
   },
@@ -76,7 +79,7 @@ export const data: PersonLicense[] = [
     order: 3,
     rewardType: 'ระดับจังหวัด',
     professionType: 'ครู',
-    rewardName: 'ครูภาษาไทยดีเด่น',
+    rewardName: 'ครูผู้สอนดีเด่น',
     requestDate: '1 มิถุนายน 2665',
     announceDate: '1 มิถุนายน 2665',
   },
@@ -84,7 +87,23 @@ export const data: PersonLicense[] = [
     order: 4,
     rewardType: 'ระดับประเทศ',
     professionType: 'ครู',
-    rewardName: 'ครูภาษาไทยดีเด่น',
+    rewardName: 'คุรุสดุดี',
+    requestDate: '1 มิถุนายน 2665',
+    announceDate: '1 มิถุนายน 2665',
+  },
+  {
+    order: 5,
+    rewardType: 'ระดับประเทศ',
+    professionType: 'ครู',
+    rewardName: 'ครูอาวุโส',
+    requestDate: '1 มิถุนายน 2665',
+    announceDate: '1 มิถุนายน 2665',
+  },
+  {
+    order: 6,
+    rewardType: 'ระดับประเทศ',
+    professionType: 'ครู',
+    rewardName: 'ผลงานวิจัยของคุรุสภา',
     requestDate: '1 มิถุนายน 2665',
     announceDate: '1 มิถุนายน 2665',
   },

@@ -7,10 +7,16 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { FormMode } from '@ksp/shared/interface';
-import { EMPTY, switchMap } from 'rxjs';
+import { EMPTY, Subject, switchMap } from 'rxjs';
 import localForage from 'localforage';
-import { encrypt, thaiDate } from '@ksp/shared/utility';
-import { UniRequestService } from '@ksp/shared/service';
+import {
+  getCookie,
+  mapMultiFileInfo,
+  replaceEmptyWithNull,
+  thaiDate,
+} from '@ksp/shared/utility';
+import { LoaderService, UniRequestService } from '@ksp/shared/service';
+import * as CryptoJs from 'crypto-js';
 
 @Component({
   templateUrl: './uni-register-password.component.html',
@@ -18,8 +24,22 @@ import { UniRequestService } from '@ksp/shared/service';
 })
 export class UniRegisterPasswordComponent implements OnInit {
   form = this.fb.group({
-    password: [null, [Validators.minLength(8), Validators.required, Validators.pattern(/^[\w\s]+$/)]],
-    repassword: [null, [Validators.minLength(8), Validators.required, Validators.pattern(/^[\w\s]+$/)]]
+    password: [
+      null,
+      [
+        Validators.minLength(8),
+        Validators.required,
+        Validators.pattern(/^[\w\s]+$/),
+      ],
+    ],
+    repassword: [
+      null,
+      [
+        Validators.minLength(8),
+        Validators.required,
+        Validators.pattern(/^[\w\s]+$/),
+      ],
+    ],
   });
   savingData: any;
   requestDate = thaiDate(new Date());
@@ -29,25 +49,30 @@ export class UniRegisterPasswordComponent implements OnInit {
   uniData: any;
   coordinator: any;
   uploadFileList: Array<any> = [];
-  requesttype = 1;
-  systemtype = 3;
-  currentprocess = 1;
+  requesttype = '1';
+  systemtype = '3';
+  currentprocess = '1';
+  eyeIconClicked = false;
+  eyeIconClickedRe = false;
+  wrongpass = false;
+  submit = false;
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   constructor(
     private router: Router,
     public dialog: MatDialog,
     private fb: FormBuilder,
-    private requestService: UniRequestService
+    private requestService: UniRequestService,
+    private loaderService: LoaderService
   ) {}
   get disable() {
     const { password, repassword } = this.form.getRawValue();
     return password !== repassword || !password || !repassword;
   }
   ngOnInit(): void {
-
     localForage.getItem('registerSelectedUniversity').then((res: any) => {
       if (res) {
-        this.uniData = res.universityInfo;
+        this.uniData = res;
       }
     });
 
@@ -67,7 +92,7 @@ export class UniRegisterPasswordComponent implements OnInit {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
-        title: `คุณต้องการยกเลิกรายการใบคำขอ
+        title: `คุณต้องการยกเลิกรายการแบบคำขอ
         ใช่หรือไม่?`,
         btnLabel: 'ยืนยัน',
       },
@@ -102,7 +127,8 @@ export class UniRegisterPasswordComponent implements OnInit {
     this.router.navigate(['register', 'coordinator']);
   }
 
-  async save() {
+  save() {
+    this.submit = true;
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -113,37 +139,55 @@ export class UniRegisterPasswordComponent implements OnInit {
         btnLabel: 'บันทึก',
       },
     });
-    const password = await encrypt(this.form?.value?.password);
+
+    // waiting api for encoding password
+    // const password = CryptoJs.SHA256(
+    //   `${this.form?.value?.password}`
+    // ).toString();
+
+    // save raw password
+    const password = this.form?.value?.password;
+
     confirmDialog.componentInstance.confirmed
       .pipe(
         switchMap((res) => {
           if (res) {
+            console.log(this.uniData);
+            this.savingData = replaceEmptyWithNull(this.savingData);
             const educationoccupy = {
               permission: this.savingData.permission,
-              unitype: this.savingData.unitype,
-              other: this.savingData.other
-            }
-            const fileUpload = this.uploadFileList.map((file) => file.fileId || null);
+              other: this.savingData.other,
+              ...this.uniData,
+            };
+            const fileUpload = mapMultiFileInfo(this.uploadFileList);
             const payload = {
+              ...this.uniData,
               ...this.savingData,
               educationoccupy: JSON.stringify(educationoccupy),
-              coordinatorinfo: JSON.stringify({...this.coordinator, password}),
-              fileinfo: JSON.stringify({ fileUpload })
+              coordinatorinfo: JSON.stringify({
+                ...this.coordinator,
+                password,
+              }),
+              fileinfo: JSON.stringify({ fileUpload }),
             };
             payload.ref1 = '3';
             payload.ref2 = '01';
             payload.ref3 = '5';
             payload.systemtype = this.systemtype;
             payload.requesttype = this.requesttype;
-            payload.requeststatus = `1`;
+            payload.careertype = '5';
+            payload.status = '1';
+            payload.process = '1';
+            // payload.userpermission = this.savingData.permission;
             payload.currentprocess = this.currentprocess;
-            return this.requestService.createRequest(payload);
+            return this.requestService.createRequestKsp(payload);
           }
           return EMPTY;
         })
       )
       .subscribe((res) => {
         if (res) {
+          this.submit = false;
           const requestNo = res?.requestno;
           this.showCompleteDialog(requestNo);
         }
@@ -156,8 +200,8 @@ export class UniRegisterPasswordComponent implements OnInit {
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,
         content: `วันที่ : ${this.requestDate}
-        เลขที่ใบคำขอ : ${requestNo}`,
-        subContent: `กรุณาตรวจสอบสถานะใบคำขอผ่านทางอีเมล
+        เลขที่แบบคำขอ : ${requestNo}`,
+        subContent: `กรุณาตรวจสอบสถานะแบบคำขอผ่านทางอีเมล
         ผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },
     });

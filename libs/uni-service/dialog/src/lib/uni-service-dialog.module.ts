@@ -6,6 +6,7 @@ import { AddRowButtonComponent } from '@ksp/shared/ui';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
+import { HistoryRequestAdmissionDialogComponent } from './history-request-admission-dialog/history-request-admission-dialog.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatIconModule,
     MatTooltipModule,
     AddRowButtonComponent,
+    HistoryRequestAdmissionDialogComponent
   ],
   declarations: [TrainingAddressComponent],
   exports: [TrainingAddressComponent],

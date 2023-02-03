@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -40,6 +40,22 @@ export class CouncilEducationComponent
     });
   }
 
+  override set value(value: any) {
+    Object.keys(value).forEach((key) => {
+      const control = this.form.get(key) as FormArray;
+      value[key].forEach((item: any) =>
+        control.push(
+          this.fb.group({
+            ...item,
+          })
+        )
+      );
+    });
+
+    this.onChange(value);
+    this.onTouched();
+  }
+
   setDefaulFormValue() {
     this.addFormArray(this.licenseInfo1, 1);
     this.addFormArray(this.licenseInfo2, 2);
@@ -56,14 +72,14 @@ export class CouncilEducationComponent
     let data;
     if (formNumber === 5) {
       data = this.fb.group({
-        certificationType: [],
-        recognizedOrganization: [],
-        certificateNo: [],
-        issueDate: [],
+        certificationType: [null, Validators.required],
+        recognizedOrganization: [null, Validators.required],
+        certificateNo: [null, Validators.required],
+        issueDate: [null, Validators.required],
       });
     } else {
       data = this.fb.group({
-        licenseForm: [],
+        licenseForm: [null, Validators.required],
       });
     }
 

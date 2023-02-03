@@ -5,7 +5,7 @@
       ครู ที่มีการฝึกปฏิบัติวิชาชีพระหว่างเรียน
     </div>
 
-    <div class="bg-light p-3 my-4">
+    <div class="bg-light p-3 my-3">
       <div class="table-responsive">
         <table class="table">
           <thead>
@@ -31,7 +31,6 @@
                         class="form-control text-center"
                         type="number"
                         min="0"
-                        placeholder=""
                         formControlName="year"
                       />
                     </div>
@@ -43,7 +42,6 @@
                         class="form-control text-center"
                         type="number"
                         min="0"
-                        placeholder=""
                         formControlName="term"
                       />
                     </div>
@@ -55,7 +53,6 @@
                         class="form-control text-center"
                         type="number"
                         min="0"
-                        placeholder=""
                         formControlName="hour"
                       />
                     </div>
@@ -64,13 +61,11 @@
               </ng-container>
             </ng-container>
 
-            <tr>
+            <tr *ngIf="mode === 'edit'">
               <th scope="row"></th>
               <td></td>
               <td>
-                <ksp-add-row-button
-                  (addRowClick)="addRow()"
-                  *ngIf="mode === 'edit'"
+                <ksp-add-row-button (addRowClick)="addRow()"
                   >เพิ่มจำนวนครั้ง
                 </ksp-add-row-button>
               </td>
@@ -82,12 +77,11 @@
               <th scope="row"></th>
               <td class="text-end fs-5">รวมทั้งหมด</td>
               <td>
-                <div
-                  class="form-control bg-secondary bg-opacity-25 text-center"
+                <input
+                  class="form-control text-center"
                   disabled
-                >
-                  {{ totalHours }}
-                </div>
+                  value="{{ totalHours }}"
+                />
               </td>
             </tr>
           </tbody>

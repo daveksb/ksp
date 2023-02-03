@@ -1,0 +1,297 @@
+<!-- <div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div> -->
+
+<ksp-top-nav><span header>รายการรับเงินค่าธรรมเนียม</span></ksp-top-nav>
+
+<form [formGroup]="form">
+  <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height full-width-2">
+    <div class="box-header">
+      รายการรับเงินค่าธรรมเนียมการประกอบวิชาชีพทางการศึกษา
+    </div>
+
+    <div class="bg-white px-3 py-3">
+      <div class="bg-light default-width p-3">
+        <div class="box-header">ค้นหารายการ</div>
+
+        <div class="row mb-2">
+          <div class="col">
+            <label class="form-label">ประเภทค่าธรรมเนียม</label>
+            <select class="form-select" formControlName="licensetype">
+              <option value="null" selected hidden disabled>กรุณาเลือก</option>
+              <option value="1">
+                ค่าขึ้นทะเบียนรับหนังสืออนุญาตประกอบวิชาชีพ
+              </option>
+              <option value="2">ค่าต่ออายุหนังสืออนุญาตประกอบวิชาชีพ</option>
+              <option value="3">ค่าใบแทนหนังสืออนุญาต</option>
+              <option value="4">ค่าธรรมเนียมอื่นๆ</option>
+            </select>
+          </div>
+          <div class="col">
+            <label class="form-label">ช่องทางการชำระเงิน</label>
+            <select class="form-select" formControlName="paymentchannel">
+              <option value="null" selected hidden disabled>กรุณาเลือก</option>
+              <option value="1">KTB</option>
+              <option value="2">Promptpay</option>
+              <option value="3">K-Bank Credit Card</option>
+            </select>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col">
+            <label class="form-label">เลขที่แบบคำขอ</label>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="licenseno"
+            />
+          </div>
+          <div class="col">
+            <label class="form-label">หมายเลขบัตรประชาชน</label>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="idcardno"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-6">
+            <label class="form-label">จาก: วันเดือนปีที่ชำระเงิน</label>
+            <div class="d-flex align-items-center">
+              <input
+                matInput
+                [matDatepicker]="picker1"
+                autocomplete="off"
+                class="form-control form-date"
+                placeholder="วว/ดด/ปปปป"
+                formControlName="paymentdate"
+              />
+              <mat-datepicker-toggle
+                class="button-date"
+                matSuffix
+                [for]="picker1"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </div>
+          </div>
+          <div class="col-6">
+            <label class="form-label">ถึง: วันเดือนปีที่ชำระเงิน</label>
+            <div class="d-flex align-items-center">
+              <input
+                matInput
+                [matDatepicker]="picker2"
+                autocomplete="off"
+                class="form-control form-date"
+                placeholder="วว/ดด/ปปปป"
+                formControlName="paymentdate"
+              />
+              <mat-datepicker-toggle
+                class="button-date"
+                matSuffix
+                [for]="picker2"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end mt-3">
+          <button
+            type="button"
+            (click)="clear()"
+            class="btn border-primary text-primary bg-white"
+          >
+            ล้างข้อมูล
+          </button>
+          <button type="button" (click)="search()" class="ms-3 btn btn-primary">
+            ค้นหา
+          </button>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end mt-3">
+        <button
+          type="button"
+          class="btn border-success text-success w-auto me-2"
+        >
+          <img src="/assets/images/img-uni/microsoft excel.png" />
+          นำข้อมูลออก
+        </button>
+        <button type="button" class="btn border-danger text-danger w-auto">
+          <i class="bi bi-file-earmark-pdf-fill"></i>
+          นำข้อมูลออก
+        </button>
+      </div>
+
+      <div class="border border-dark p-3 mt-3">
+        <div class="box-header text-center">
+          รายงานการรับเงินค่าธรรมเนียมการประกอบวิชาชีพทางการศึกษา - แบบรวม
+        </div>
+        <div class="d-flex justify-content-between">
+          <div class="form-label text-black">ช่องทางการรับเงิน:</div>
+          <div>
+            <div class="form-label text-black">ผู้รับเงิน:</div>
+            <div class="form-label text-black">วันที่รับเงิน:</div>
+          </div>
+        </div>
+        <div class="table__scroll mt-3">
+          <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="order">
+              <th mat-header-cell *matHeaderCellDef>ที่</th>
+              <td mat-cell *matCellDef="let element">{{ element.order }}</td>
+              <td
+                mat-footer-cell
+                *matFooterCellDef
+                style="height: 82px"
+                colspan="2"
+              >
+                <div class="mb-1 footer__label">รวม รายการ รับ</div>
+                <div class="mt-1 footer__label">รวม รายการ ยกเลิก</div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>ชื่อ - นามสกุล</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.name }}
+              </td>
+              <td
+                mat-footer-cell
+                *matFooterCellDef
+                [ngStyle]="{ display: 'none' }"
+              ></td>
+            </ng-container>
+
+            <ng-container matColumnDef="idcardno">
+              <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
+              <td mat-cell *matCellDef="let element">{{ element.idcardno }}</td>
+              <td mat-footer-cell *matFooterCellDef>
+                <div class="mb-1">-</div>
+                <div class="mt-1">-</div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="refid">
+              <th mat-header-cell *matHeaderCellDef>เลขที่อ้างอิง</th>
+              <td mat-cell *matCellDef="let element">{{ element.refid }}</td>
+              <td mat-footer-cell *matFooterCellDef>
+                <div class="mb-1">-</div>
+                <div class="mt-1">-</div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="receiptno">
+              <th mat-header-cell *matHeaderCellDef>เลขที่ใบเสร็จรับเงิน</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.requestno }}
+              </td>
+              <td mat-footer-cell *matFooterCellDef>
+                <div class="mb-1">-</div>
+                <div class="mt-1">-</div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="amount">
+              <th mat-header-cell *matHeaderCellDef>จำนวนเงิน (บาท)</th>
+              <td mat-cell *matCellDef="let element">{{ element.amount }}</td>
+              <td mat-footer-cell *matFooterCellDef colspan="2">
+                <div class="mb-1">-</div>
+                <div class="mt-1">-</div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="feetype">
+              <th mat-header-cell *matHeaderCellDef>
+                ประเภทรายการ/สถานะรายการ
+              </th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.feetype }}
+              </td>
+              <td
+                mat-footer-cell
+                *matFooterCellDef
+                [ngStyle]="{ display: 'none' }"
+              ></td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+          </table>
+        </div>
+        <mat-paginator
+          [pageSizeOptions]="[25]"
+          showFirstLastButtons
+          [hidden]="!dataSource.data.length"
+        ></mat-paginator>
+      </div>
+
+      <div class="border border-dark p-3 mt-3">
+        <table class="table table-bordered border-dark">
+          <thead>
+            <tr>
+              <th scope="col" rowspan="2">ประเภทค่าธรรมเนียม</th>
+              <th rowspan="2">อัตราค่าธรรมเนียม</th>
+
+              <th colspan="4" class="text-center">
+                จำนวนประเภทผู้ประกอบวิชาชีพ (ราย)
+              </th>
+
+              <th rowspan="2">รวมจำนวน</th>
+              <th rowspan="2">รวมเงินจำนวน</th>
+            </tr>
+            <tr>
+              <th rowspan="1">ครู</th>
+              <th rowspan="1">ผู้บริหารสถานศึกษา</th>
+              <th rowspan="1">ผู้บริหารการศึกษา</th>
+              <th rowspan="1">บุคลากรทางการศึกษาอื่น</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">
+                1. ค่าขึ้นทะเบียนรับหนังสืออนุญาตประกอบวิชาชีพ
+              </th>
+              <th>500 / ราย</th>
+            </tr>
+            <tr>
+              <th scope="row">2. ค่าต่ออายุหนังสืออนุญาตประกอบวิชาชีพ</th>
+              <th>200 / ราย</th>
+            </tr>
+            <tr>
+              <th scope="row">3. ค่าใบแทนหนังสืออนุญาต</th>
+              <th>200 / ราย</th>
+            </tr>
+            <tr>
+              <th scope="row">4. ค่าบัตรสมาชิก</th>
+              <th>50 / ราย</th>
+            </tr>
+            <tr>
+              <th scope="row">5. ค่าเทียบโอนความรู้ตามมาตรฐาน</th>
+              <th>300 / มาตรฐาน</th>
+            </tr>
+            <tr>
+              <th scope="row">รวม</th>
+              <th></th>
+            </tr>
+            <tr>
+              <th scope="row">6. ค่าดำเนินการต่ออายุล่าช้า</th>
+              <th>200 / เดือน</th>
+            </tr>
+            <tr>
+              <th scope="row">7. ค่าดำเินการยื่น - ค่าจัดส่งหนังสืออนุญาต</th>
+              <th>50 / ราย</th>
+            </tr>
+            <tr>
+              <th scope="row">รวมทั้งสิ้น</th>
+              <th></th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</form>

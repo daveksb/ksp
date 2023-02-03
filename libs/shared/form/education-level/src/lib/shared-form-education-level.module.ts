@@ -8,9 +8,10 @@ import { ExperienceFormComponent } from './experience-form/experience-form.compo
 import { ReactiveFormsModule } from '@angular/forms';
 import { EducationLevelFormFiveComponent } from './education-level-form-five/education-level-form-five.component';
 import { EducationLevelFormSixComponent } from './education-level-form-six/education-level-form-six.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, MatDatepickerModule],
   declarations: [
     EducationLevelFormOneComponent,
     EducationLevelFormTwoComponent,

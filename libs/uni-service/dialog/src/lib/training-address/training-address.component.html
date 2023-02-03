@@ -1,87 +1,87 @@
 <form [formGroup]="form">
-  <div class="container">
-    <div class="box__container">
-      <div class="box__header">
-        <div class="title__box">สถานที่ปฏิบัติการสอน</div>
-        <div>
-          <i role="button" class="bi bi-x-lg" matDialogClose=""></i>
-        </div>
-      </div>
-      <hr />
-      <div class="box__detail">
-        <ng-container formArrayName="addresses">
-          <ng-container
-            *ngFor="let teacherForm of addresses.controls; let i = index"
-          >
-            <ng-container [formGroupName]="i">
-              <div class="form-label my-2">
-                สถานที่ปฏิบัติการสอนครั้งที่ {{ i + 1 }}
-              </div>
-              <div class="row">
-                <div class="col mb-3">
-                  <label class="form-label">รหัสหน่วยงาน/สถานศึกษา</label>
-                  <div class="d-flex align-items-center">
-                    <input
-                      class="form-control"
-                      type="text"
-                      formControlName="addressCode"
-                    />
-                    <i
-                      role="button"
-                      (click)="searchAddress()"
-                      class="bi bi-search text-primary fs-5 ms-1"
-                    ></i>
-                  </div>
-                </div>
-                <div class="col mb-3">
-                  <label class="form-label">ชื่อหน่วยงาน/สถานศึกษา </label>
-                  <input
-                    class="form-control"
-                    type="text"
-                    formControlName="addressName"
-                  />
-                </div>
-                <div class="col-auto">
-                  <br />
-                  <i
-                    role="button"
-                    *ngIf="i > 0"
-                    (click)="deleteAddress(i)"
-                    class="bi bi-trash text-danger fs-5"
-                  ></i>
-                </div>
-              </div>
-            </ng-container>
-          </ng-container>
-        </ng-container>
-
-        <div class="detail__footer">
-          <ksp-add-row-button
-            class="blue"
-            (addRowClick)="addAddress()"
-            *ngIf="addresses.length < 5"
-            >เพิ่มสถานที่ปฏิบัติการสอน</ksp-add-row-button
-          >
-        </div>
-
-        <div class="detail__action">
-          <button
-            matDialogClose
-            type="button"
-            class="btn border-primary text-primary"
-          >
-            ยกเลิก
-          </button>
-          <button
-            id="btn-save"
-            matDialogClose
-            type="button"
-            class="btn btn-primary"
-          >
-            บันทึก
-          </button>
-        </div>
-      </div>
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="box-header">สถานที่ปฏิบัติการสอน</div>
+    <div>
+      <i role="button" class="bi bi-x-lg text-primary" matDialogClose></i>
     </div>
+  </div>
+  <hr />
+  <ng-container formArrayName="addresses">
+    <ng-container *ngFor="let teacherForm of addresses.controls; let i = index">
+      <ng-container [formGroupName]="i">
+        <div class="form-label">สถานที่ปฏิบัติการสอนครั้งที่ {{ i + 1 }}</div>
+        <div class="row">
+          <div class="col-4 mb-3">
+            <label class="form-label">รหัสหน่วยงาน/สถานศึกษา</label>
+            <div class="d-flex align-items-center">
+              <input
+                class="form-control"
+                type="text"
+                formControlName="schoolid"
+              />
+              <i
+                role="button"
+                (click)="searchAddress(i)"
+                class="bi bi-search text-primary fs-5 ms-1"
+                *ngIf="!data.disableAll"
+              ></i>
+            </div>
+          </div>
+          <div class="col-8 mb-3">
+            <label class="form-label">ชื่อหน่วยงาน/สถานศึกษา </label>
+            <div class="d-flex align-items-center">
+              <input
+                class="form-control"
+                type="text"
+                formControlName="schoolname"
+              />
+              <i
+                role="button"
+                *ngIf="i > 0 && !data.disableAll"
+                (click)="deleteAddress(i)"
+                class="bi bi-trash text-danger fs-5 ms-1"
+              ></i>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+
+  <div 
+    class="d-flex justify-content-end"
+    *ngIf="!data.disableAll">
+    <ksp-add-row-button
+      class="blue"
+      (addRowClick)="addAddress()"
+      *ngIf="addresses.length < 5"
+      >เพิ่มสถานที่ปฏิบัติการสอน</ksp-add-row-button
+    >
+  </div>
+
+  <div class="d-flex justify-content-end mt-3">
+    <button
+      matDialogClose
+      type="button"
+      class="btn border-primary text-primary"
+      *ngIf="!data.disableAll"
+    >
+      ยกเลิก
+    </button>
+    <button 
+      (click)="save()" 
+      type="button" 
+      class="btn btn-primary ms-2"
+      *ngIf="!data.disableAll">
+      บันทึก
+    </button>
+    <button
+      matDialogClose
+      type="button"
+      class="btn border-primary text-primary"
+      *ngIf="data.disableAll"
+    >
+      ปิด
+    </button>
   </div>
 </form>

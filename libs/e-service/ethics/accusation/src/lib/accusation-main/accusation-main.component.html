@@ -1,5 +1,6 @@
 <ksp-top-nav>
-  <span subHeader>ระบบงานจรรยาบรรณ </span>
+  <span header>ระบบงานจรรยาบรรณ </span
+  ><span subHeader>บันทึกการกล่าวหา/กล่าวโทษ</span>
 </ksp-top-nav>
 
 <form [formGroup]="form">
@@ -24,6 +25,8 @@
     [isFirstPage]="true"
     [showSaveButton]="true"
     [colorMode]="'green'"
+    [disableNext]="form.invalid"
+    [disableSaveButton]="false"
     (nextClicked)="next()"
     (cancelClicked)="cancel()"
     (saveClicked)="saveEthics()"

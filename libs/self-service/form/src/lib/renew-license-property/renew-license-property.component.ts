@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent, ListData } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
+import { skip } from 'rxjs';
 
 @Component({
   selector: 'self-service-renew-license-property',
@@ -15,12 +16,14 @@ export class RenewLicensePropertyComponent
 {
   @Input() renewLicenseTypes: 'schManager' | 'eduManager' | 'supervision' =
     'schManager';
+  @Input() uniqueTimestamp = '';
+  @Input() workingInfo: any[] = [];
 
   selectedEducationType!: number;
 
   override form = this.fb.group({
-    educationType: [],
-    educationLevelForm: [],
+    educationType: [null, Validators.required],
+    educationLevelForm: [null, Validators.required],
   });
 
   educationTypes1: ListData[] = [];
@@ -43,10 +46,18 @@ export class RenewLicensePropertyComponent
     this.educationTypes2 = educationTypes2;
     this.educationTypes3 = educationTypes3;
 
-    this.form.controls['educationType'].valueChanges.subscribe((res) => {
-      this.selectedEducationType = Number(res);
-      //this.form.controls.educationLevelForm.reset();
-    });
+    this.form.controls['educationType'].valueChanges
+      .pipe(skip(1))
+      .subscribe((res) => {
+        this.selectedEducationType = Number(res);
+        //this.form.controls.educationLevelForm.reset();
+      });
+  }
+
+  override set value(value: any) {
+    this.form.patchValue(value);
+    this.onChange(value);
+    this.onTouched();
   }
 }
 

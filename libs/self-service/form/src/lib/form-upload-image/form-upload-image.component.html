@@ -1,12 +1,14 @@
 <div class="d-flex flex-column align-items-center">
-  <img
-    style="max-width: 150px; max-height: 200px"
-    [src]="imgSrc || '/assets/images/img-profile.png'"
-  />
+  <div class="d-flex">
+    <img
+      style="width: 96px; height: 144px"
+      [src]="imgSrc || '/assets/images/img-profile.png'"
+    />
+  </div>
 
   <div class="my-2" *ngIf="isEditMode === true">
     <ksp-file-upload
-      buttonLabel="อัพโหลดรูปภาพ"
+      buttonLabel="{{ btnLabel }}"
       [showUploadedFileName]="false"
       (uploadComplete)="uploadComplete($event)"
       [uniqueTimestamp]="uniqueTimestamp"
@@ -14,18 +16,33 @@
       [pageType]="requestPageType.fileAttachTab"
       [isImage]="true"
       [systemFileName]="'รูป'"
+      [maxSize]="maxSize"
     ></ksp-file-upload>
   </div>
 
-  <!-- <div class="d-flex flex-row" *ngIf="imgMode === 'edit'">
-    <div class="fs-6 text-secondary me-1">ภาพหน้าตรงขนาด 1x1.5 นิ้ว /</div>
-    <div class="fs-6 text-secondary me-1">ขนาดไม่เกิน 2 MB /</div>
-    <div class="fs-6 text-secondary me-1">รองรับไฟล์ .Jpg , Jpeg เท่านั้น</div>
-  </div> -->
-
   <div class="d-flex flex-column" *ngIf="isEditMode === true">
-    <div class="fs-6 text-secondary">* ภาพหน้าตรงขนาด 1x1.5 นิ้ว</div>
-    <div class="fs-6 text-secondary">* ขนาดไม่เกิน 2 MB</div>
-    <div class="fs-6 text-secondary">* รองรับไฟล์ .Jpg , Jpeg เท่านั้น</div>
+    <div class="form__detail text-danger">
+      *
+      <span class="text-secondary" *ngIf="!isForeignForm"
+        >ภาพหน้าตรงขนาด 1 x 1.5 นิ้ว</span
+      >
+      <span class="text-secondary" *ngIf="isForeignForm"
+        >SIZE 1 x 1.5 INCH.</span
+      >
+    </div>
+    <div class="form__detail text-danger">
+      *
+      <span class="text-secondary" *ngIf="!isForeignForm"
+        >ขนาดไม่เกิน 2 MB</span
+      >
+      <span class="text-secondary" *ngIf="isForeignForm">2 MB. MAXIMUM</span>
+    </div>
+    <div class="form__detail text-danger">
+      *
+      <span class="text-secondary" *ngIf="!isForeignForm"
+        >รองรับไฟล์ .Jpg , Jpeg เท่านั้น</span
+      >
+      <span class="text-secondary" *ngIf="isForeignForm">JPG. or PNG.</span>
+    </div>
   </div>
 </div>

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { Country, KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -13,15 +13,15 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
   providers: providerFactory(ForeignStepTwoTabThreeFormComponent),
 })
 export class ForeignStepTwoTabThreeFormComponent extends KspFormBaseComponent {
-  @Input() countries: any[] = [];
+  @Input() countries: Country[] | null = [];
 
   override form = this.fb.group({
     degreeName: [null, Validators.required],
     major: [null, Validators.required],
     institution: [null, Validators.required],
-    admissionDate: [],
-    graduateDate: [],
-    country: [],
+    admissionDate: [null, Validators.required],
+    graduateDate: [null, Validators.required],
+    country: [null, Validators.required],
   });
 
   constructor(private fb: FormBuilder) {

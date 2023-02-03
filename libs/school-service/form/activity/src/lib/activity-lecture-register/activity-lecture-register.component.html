@@ -1,32 +1,85 @@
 <form [formGroup]="form">
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">เรื่อง</label>
+      <label class="form-label required"
+        ><span *ngIf="!isForeignForm">เรื่อง</span>
+        <span *ngIf="isForeignForm">Topic/Theme</span></label
+      >
       <input class="form-control" type="text" formControlName="name" />
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">สถานที่</label>
+      <label class="form-label required"
+        ><span *ngIf="!isForeignForm">สถานที่</span>
+        <span *ngIf="isForeignForm">Place</span></label
+      >
       <input class="form-control" type="text" formControlName="address" />
     </div>
 
     <div class="col-md-6 mb-2">
-      <label class="form-label">หน่วยงานที่จัด</label>
+      <label class="form-label required"
+        ><span *ngIf="!isForeignForm">หน่วยงานที่จัด</span>
+        <span *ngIf="isForeignForm">Agency/Institution</span></label
+      >
       <input class="form-control" type="text" formControlName="agency" />
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-2">
-      <label class="form-label">วันที่</label>
-      <input class="form-control" type="date" formControlName="dateFrom" />
+      <label class="form-label required"
+        ><span *ngIf="!isForeignForm">วันที่</span>
+        <span *ngIf="isForeignForm">Attended Date To</span></label
+      >
+      <div class="d-flex align-items-center" *ngIf="!isForeignForm">
+        <input
+          matInput
+          [matDatepicker]="picker1"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="dateFrom"
+          placeholder="วว/ดด/ปปปป"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="picker1"
+          class="button-date"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </div>
+
+      <div *ngIf="isForeignForm">
+        <input type="date" class="form-control" formControlName="dateFrom" />
+      </div>
     </div>
 
-    <div class="col-md-6 mb-2">
-      <label class="form-label">ถึงวันที่</label>
-      <input class="form-control" type="date" formControlName="dateTo" />
+    <div class="col-md-6 mb-2" *ngIf="showDateTo">
+      <label class="form-label required"
+        ><span *ngIf="!isForeignForm">ถึงวันที่</span>
+        <span *ngIf="isForeignForm">Attended Date Form</span></label
+      >
+      <div class="d-flex align-items-center" *ngIf="!isForeignForm">
+        <input
+          matInput
+          [matDatepicker]="picker2"
+          autocomplete="off"
+          class="form-control form-date"
+          formControlName="dateTo"
+          placeholder="วว/ดด/ปปปป"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="picker2"
+          class="button-date"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </div>
+
+      <div *ngIf="isForeignForm">
+        <input type="date" class="form-control" formControlName="dateTo" />
+      </div>
     </div>
   </div>
 </form>

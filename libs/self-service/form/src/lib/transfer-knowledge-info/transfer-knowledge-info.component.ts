@@ -1,5 +1,10 @@
-import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -9,14 +14,20 @@ import { providerFactory } from '@ksp/shared/utility';
   styleUrls: ['./transfer-knowledge-info.component.scss'],
   providers: providerFactory(TransferKnowledgeInfoComponent),
 })
-export class TransferKnowledgeInfoComponent extends KspFormBaseComponent {
+export class TransferKnowledgeInfoComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
+  selectedStandardName: any;
+
   transferForm = this.fb.group({
+    standardInfo: [null, Validators.required],
     subjects: this.fb.array([
       this.fb.group({
-        subjectName: [''],
-        subjectCode: [''],
-        grade: [''],
-        detail: [''],
+        subjectName: ['', Validators.required],
+        subjectCode: ['', Validators.required],
+        grade: ['', Validators.required],
+        detail: ['', Validators.required],
       }),
     ]),
   });
@@ -37,18 +48,58 @@ export class TransferKnowledgeInfoComponent extends KspFormBaseComponent {
     );
   }
 
+  ngOnInit(): void {
+    /* this.form.controls.standards.valueChanges.subscribe((res) => {
+        console.log('std = ', res);
+      }); */
+  }
+
+  override set value(value: any) {
+    this.form.patchValue({ standardInfo: value.standardInfo });
+    console.log(this.form);
+    if (value.standards?.length) {
+      this.form.controls.standards.removeAt(0);
+      value.standards.forEach((item: any) => {
+        const control = this.form.controls.standards;
+        const subjects = item.subjects?.map((subject: any) => {
+          return this.fb.group({
+            subjectName: subject.subjectName,
+            subjectCode: subject.subjectCode,
+            grade: subject.grade,
+            detail: subject.detail,
+          });
+        });
+
+        control.push(
+          this.fb.group({
+            standardInfo: new FormControl(item.standardInfo),
+            subjects: new FormArray(subjects),
+          })
+        );
+      });
+    }
+
+    console.log(value);
+    if (this.mode === 'view') {
+      this.form.disable();
+    }
+
+    this.onChange(value);
+    this.onTouched();
+  }
+
   addStandard() {
     const transferForm = this.fb.group({
+      standardInfo: [null, Validators.required],
       subjects: this.fb.array([
         this.fb.group({
-          subjectName: [''],
-          subjectCode: [''],
-          grade: [''],
-          detail: [''],
+          subjectName: ['', Validators.required],
+          subjectCode: ['', Validators.required],
+          grade: ['', Validators.required],
+          detail: ['', Validators.required],
         }),
       ]),
     });
-
     this.standards.push(transferForm);
   }
 
@@ -58,10 +109,10 @@ export class TransferKnowledgeInfoComponent extends KspFormBaseComponent {
 
   addSubject(index: number) {
     const form = this.fb.group({
-      subjectName: [''],
-      subjectCode: [''],
-      grade: [''],
-      detail: [''],
+      subjectName: ['', Validators.required],
+      subjectCode: ['', Validators.required],
+      grade: ['', Validators.required],
+      detail: ['', Validators.required],
     });
 
     this.getSubjects(index).push(form);

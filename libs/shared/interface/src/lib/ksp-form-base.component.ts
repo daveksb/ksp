@@ -2,7 +2,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { ControlValueAccessor, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { FormMode } from './form';
+import { FormMode } from './form-mode';
 
 @Component({
   template: ``,
@@ -13,6 +13,7 @@ export abstract class KspFormBaseComponent
 {
   _mode: FormMode = 'edit';
 
+  @Input() readonly = false;
   @Input()
   set mode(value: FormMode) {
     this._mode = value;
@@ -52,6 +53,35 @@ export abstract class KspFormBaseComponent
     this.onChange(value);
     this.onTouched();
   }
+  /*   set value(value: any) {
+    for (const key in this.form.controls) {
+      if (this.form.controls[key] instanceof FormControl) {
+        // normal formControl
+        this.form.controls[key].patchValue(value[key]);
+      }  else if (this.form.controls[key] instanceof FormArray) {
+        // loop into fromArray to patch value
+        const formArray = this.form.controls[key] as FormArray;
+        for (let i = 0; i < formArray.controls.length; i++) {
+          const formGroup = formArray.controls[i] as FormGroup;
+          for (const subkey in formGroup.controls) {
+            if (value[key] && value[key][i] && value[key][i][subkey]) {
+              formGroup.controls[subkey].patchValue(value[key][i][subkey]);
+            }
+          }
+          if (this.mode == 'view') formGroup.disable();
+        }
+      }  else if (this.form.controls[key] instanceof FormGroup) {
+        const formGroup = this.form.controls[key] as FormGroup;
+        for (const subkey in formGroup.controls) {
+          if (value[key] && value[key] && value[key][subkey]) {
+            formGroup.controls[subkey].patchValue(value[key][subkey]);
+          }
+        }
+      }
+    }
+    // this.onChange(value);
+    // this.onTouched();
+  } */
 
   public onChange = (value?: any) => {};
   public onTouched = () => {};
@@ -80,6 +110,7 @@ export abstract class KspFormBaseComponent
   ngOnDestroy() {
     this.subscriptions.forEach((s) => s.unsubscribe());
   }
+
   ngOnChanges(event: any) {
     if (event?.mode) {
       this.mode = event.mode.currentValue;

@@ -14,10 +14,17 @@
         </label>
       </div>
       <div class="d-flex align-items-center ms-4">
-        <label class="form-label me-3">จำนวนปี</label>
+        <label
+          class="form-label me-3"
+          [class.required]="form.controls.hasTeachingExperience.value"
+          >จำนวนปี</label
+        >
         <input
-          type="text"
+          type="number"
           class="form-control w-auto"
+          [class.form-control-danger]="
+            teachingYear.invalid && (teachingYear.dirty || teachingYear.touched)
+          "
           formControlName="teachingExperienceYear"
         />
       </div>
@@ -36,10 +43,17 @@
         </label>
       </div>
       <div class="d-flex align-items-center ms-4">
-        <label class="form-label me-3">จำนวนปี</label>
+        <label
+          class="form-label me-3"
+          [class.required]="form.controls.hasManagingExperience.value"
+          >จำนวนปี</label
+        >
         <input
-          type="text"
+          type="number"
           class="form-control w-auto"
+          [class.form-control-danger]="
+            managingYear.invalid && (managingYear.dirty || managingYear.touched)
+          "
           formControlName="managingExperienceYear"
         />
       </div>
@@ -57,15 +71,23 @@
           />
         </div>
         <label class="form-label">
-          มีประสบการณ์ในตำแหน่งบุคลากรทางการศึกษาอื่นตามที่กำหนดในกฏกระทรวง
+          มีประสบการณ์ในตำแหน่งบุคลากรทางการศึกษาอื่นตามที่กำหนดในกฏกระทรวงมาแล้วไม่น้อยกว่า
+          3 ปี
         </label>
       </div>
-      <label class="form-label ms-4"> มาแล้วไม่น้อยกว่า 3 ปี</label>
       <div class="d-flex align-items-center ms-4">
-        <label class="form-label me-3">จำนวนปี</label>
+        <label
+          class="form-label me-3"
+          [class.required]="form.controls.hasEducationExperience.value"
+          >จำนวนปี</label
+        >
         <input
-          type="text"
+          type="number"
           class="form-control w-auto"
+          [class.form-control-danger]="
+            educationYear.invalid &&
+            (educationYear.dirty || educationYear.touched)
+          "
           formControlName="educationExperienceYear"
         />
       </div>
@@ -85,10 +107,18 @@
         </label>
       </div>
       <div class="d-flex align-items-center ms-4">
-        <label class="form-label me-3">จำนวนปี</label>
+        <label
+          class="form-label me-3"
+          [class.required]="form.controls.hasEducationManagingExperience.value"
+          >จำนวนปี</label
+        >
         <input
-          type="text"
+          type="number"
           class="form-control w-auto"
+          [class.form-control-danger]="
+            educationManagingYear.invalid &&
+            (educationManagingYear.dirty || educationManagingYear.touched)
+          "
           formControlName="educationManagingExperienceYear"
         />
       </div>
@@ -114,10 +144,18 @@
         </label>
       </div>
       <div class="d-flex align-items-center ms-4">
-        <label class="form-label me-3">จำนวนปี</label>
+        <label
+          class="form-label me-3"
+          [class.required]="form.controls.hasLongManagingExperience.value"
+          >จำนวนปี</label
+        >
         <input
-          type="text"
+          type="number"
           class="form-control w-auto"
+          [class.form-control-danger]="
+            longManagingYear.invalid &&
+            (longManagingYear.dirty || longManagingYear.touched)
+          "
           formControlName="longManagingExperienceYear"
         />
       </div>

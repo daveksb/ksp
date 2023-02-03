@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -14,14 +14,14 @@ export class ResearchResearcherComponent
   implements OnInit
 {
   override form = this.fb.group({
-    academicStanding: [],
-    experienceYear: [],
-    professionalType: [],
-    associationName: [],
-    phone1: [],
-    phone2: [],
-    email1: [],
-    email2: [],
+    academicStanding: [null, Validators.required],
+    experienceYear: [null, Validators.required],
+    professionalType: [null, Validators.required],
+    associationName: [null, Validators.required],
+    phone1: [null, Validators.required],
+    phone2: [null, Validators.required],
+    email1: [null, Validators.required],
+    email2: [null, Validators.required],
   });
 
   constructor(private fb: FormBuilder) {

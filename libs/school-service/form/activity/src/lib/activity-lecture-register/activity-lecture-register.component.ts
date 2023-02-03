@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, Input, OnDestroy } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
@@ -9,16 +9,21 @@ import { providerFactory } from '@ksp/shared/utility';
   styleUrls: ['./activity-lecture-register.component.scss'],
   providers: providerFactory(ActivityLectureRegisterComponent),
 })
-export class ActivityLectureRegisterComponent extends KspFormBaseComponent {
+export class ActivityLectureRegisterComponent
+  extends KspFormBaseComponent
+  implements OnDestroy
+{
   @Input() data: any;
+  @Input() isForeignForm = false;
+  @Input() showDateTo = true;
 
   //การเป็นวิทยากร ผู้บรรยาย ผู้อภิปราย หรือผู้อภิปรายร่วมในกิจกรรมที่เกี่ยวข้องกับวิชาชีพ หรือวิชาการเฉพาะด้าน
   override form = this.fb.group({
-    name: [],
-    address: [],
-    agency: [],
-    dateFrom: [],
-    dateTo: [],
+    name: [null, Validators.required],
+    address: [null, Validators.required],
+    agency: [null, Validators.required],
+    dateFrom: [null, Validators.required],
+    dateTo: [null, Validators.required],
   });
 
   constructor(private fb: FormBuilder) {
@@ -29,5 +34,10 @@ export class ActivityLectureRegisterComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+  }
+
+  override ngOnDestroy(): void {
+    this.onChange(null);
+    this.onTouched();
   }
 }

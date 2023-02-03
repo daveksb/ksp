@@ -15,9 +15,10 @@ import {
   EducationDetailService,
   MyInfoService,
   SelfRequestService,
+  LoaderService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { SelfRequest } from '@ksp/shared/interface';
+import { FileGroup, SelfRequest } from '@ksp/shared/interface';
 import {
   getCookie,
   parseJson,
@@ -25,22 +26,8 @@ import {
   toLowercaseProp,
 } from '@ksp/shared/utility';
 import * as _ from 'lodash';
-
-const EXPERIENCE_FILES = [
-  { name: '1. สำเนาวุฒิทางการศึกษา', fileId: '', fileName: '' },
-  { name: '2. หนังสือรับรองคุณวุฒิ	', fileId: '', fileName: '' },
-  { name: '3. วุฒิบัตรอบรม', fileId: '', fileName: '' },
-];
-
-const EDU_FILES = [
-  { name: '1. สำเนาวุฒิทางการศึกษา', fileId: '', fileName: '' },
-  {
-    name: '2. เอกสารผู้สำเร็จการศึกษา ( ระบบ KSP BUNDIT)		',
-    fileId: '',
-    fileName: '',
-  },
-  { name: '3. วุฒิบัตรอบรม', fileId: '', fileName: '' },
-];
+import { v4 as uuidv4 } from 'uuid';
+import { Subject } from 'rxjs';
 
 @UntilDestroy()
 @Component({
@@ -52,10 +39,11 @@ export class LicenseRequestEducationManagerComponent
   extends LicenseFormBaseComponent
   implements OnInit
 {
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   userInfoType = UserInfoFormType.thai;
-
-  experienceFiles: any[] = [];
-  eduFiles: any[] = [];
+  experienceFiles: FileGroup[] = [];
+  eduFiles: FileGroup[] = [];
+  selectedTabIndex = 0;
 
   override form = this.fb.group({
     userInfo: [],
@@ -68,8 +56,6 @@ export class LicenseRequestEducationManagerComponent
     workEmail: [],
   });
 
-  disableNextButton = false;
-
   constructor(
     dialog: MatDialog,
     router: Router,
@@ -79,7 +65,8 @@ export class LicenseRequestEducationManagerComponent
     educationDetailService: EducationDetailService,
     myInfoService: MyInfoService,
     requestService: SelfRequestService,
-    route: ActivatedRoute
+    route: ActivatedRoute,
+    private loaderService: LoaderService
   ) {
     super(
       generalInfoService,
@@ -96,14 +83,20 @@ export class LicenseRequestEducationManagerComponent
 
   ngOnInit(): void {
     this.getListData();
-    this.checkButtonsDisableStatus();
     this.checkRequestId();
+  }
+
+  override resetForm() {
+    super.resetForm();
+    this.eduFiles = structuredClone(EDU_FILES);
+    this.experienceFiles = structuredClone(EXPERIENCE_FILES);
   }
 
   override initializeFiles() {
     super.initializeFiles();
     this.eduFiles = structuredClone(EDU_FILES);
     this.experienceFiles = structuredClone(EXPERIENCE_FILES);
+    this.uniqueTimestamp = uuidv4();
   }
 
   override patchData(data: SelfRequest) {
@@ -161,7 +154,7 @@ export class LicenseRequestEducationManagerComponent
   createRequest(forbidden: any, currentProcess: number) {
     const self = new SelfRequest(
       '1',
-      SelfServiceRequestType.ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ,
+      SelfServiceRequestType.ขอขึ้นทะเบียนหนังสืออนุญาตประกอบวิชาชีพ,
       `${SelfServiceRequestSubType.ผู้บริหารการศึกษา}`,
       currentProcess
     );
@@ -172,9 +165,9 @@ export class LicenseRequestEducationManagerComponent
 
     const { id, ...rawUserInfo } = formData.userInfo;
     const userInfo = toLowercaseProp(rawUserInfo);
-    userInfo.requestfor = `${SelfServiceRequestForType.ชาวไทย}`;
-    userInfo.uniquetimestamp = this.uniqueTimestamp;
-    userInfo.staffid = getCookie('userId');
+    self.isforeign = `${SelfServiceRequestForType.ชาวไทย}`;
+    self.uniqueno = this.uniqueTimestamp;
+    self.userid = getCookie('userId');
 
     const selectData = _.pick(userInfo, allowKey);
 
@@ -190,6 +183,7 @@ export class LicenseRequestEducationManagerComponent
       ...self,
       ...replaceEmptyWithNull(selectData),
       ...(this.requestId && { id: `${this.requestId}` }),
+      ...(this.imageId && { imagefileid: `${this.imageId}` }),
       ...{
         addressinfo: JSON.stringify([formData.address1, formData.address2]),
       },
@@ -210,11 +204,34 @@ export class LicenseRequestEducationManagerComponent
     console.log(payload);
     return payload;
   }
-
-  checkButtonsDisableStatus() {
-    this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((res) => {
-      //this.disableNextButton = !this.form.valid;
-      this.disableNextButton = false;
-    });
-  }
 }
+
+const EXPERIENCE_FILES: FileGroup[] = [
+  {
+    name: '1. สำเนาวุฒิทางการศึกษา',
+    files: [],
+  },
+  {
+    name: '2. หนังสือรับรองคุณวุฒิ',
+    files: [],
+  },
+  {
+    name: '3. วุฒิบัตรอบรม',
+    files: [],
+  },
+];
+
+const EDU_FILES: FileGroup[] = [
+  {
+    name: '1. สำเนาวุฒิทางการศึกษา',
+    files: [],
+  },
+  {
+    name: '2. เอกสารผู้สำเร็จการศึกษา (ระบบ KSP BUNDIT)',
+    files: [],
+  },
+  {
+    name: '3. วุฒิบัตรอบรม',
+    files: [],
+  },
+];

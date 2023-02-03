@@ -1,100 +1,144 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav [isSelfService]="true"><span header>หน้าแรก</span></ksp-top-nav>
 
-<div class="full-height main__container py-2 px-4">
-  <ksp-uni-form-badge [mainTitle]="badgeTitle"></ksp-uni-form-badge>
-  <div class="row" style="overflow-x: auto">
-    <div class="col p-0">
-      <self-service-slideshow></self-service-slideshow>
-      <br />
-    </div>
-    <div class="col p-0">
-      <self-service-slideshow-second></self-service-slideshow-second>
-      <br />
-    </div>
-  </div>
-  <self-service-license-info
-    [header]="'สถานะใบคำขอ'"
-    [subheader1]="'ใบคำขอที่ต้องชำระเงิน'"
-    [subheader2]="'ใบคำขอทั้งหมด'"
-    [subheader3]="'รอการอนุมัติ'"
-    [subheader4]="'ปรับแก้ไข / เพิ่มเติม'"
-    [date]="'1'"
-    [requestNo]="'1'"
-    [KuruspaId]="'1'"
-    [personId]="'1'"
-  ></self-service-license-info>
-  <br />
+<div class="full-height full-width-2 main__container py-2 px-4">
+  <ng-container *ngFor="let req of rejectedRequests; let i = index">
+    <ksp-uni-form-badge [mainTitle]="genAlertMessage(req)">
+      <button
+        (click)="goToDetail(req)"
+        class="btn btn-link text-primary p-0 w-auto ms-1"
+        type="button"
+      >
+        กดเพื่อตรวจสอบ
+      </button>
+    </ksp-uni-form-badge>
+  </ng-container>
 
-  <div class="box-header">ค้นหาใบคำขอ</div>
-  <div class="box__container px-4 py-3">
+  <div
+    class="d-flex flex-column flex-lg-row gap-0 gap-md-4 mb-3 justify-content-center"
+    style="overflow-x: auto"
+  >
+    <div class="col-4 mb-3 mb-md-0">
+      <self-service-slideshow [showButton]="false"
+        ><img
+          src="/assets/images/img-profile.png"
+          style="width: 96px; height: 144px"
+      /></self-service-slideshow>
+    </div>
+    <!-- <div class="col mb-3 mb-md-0">
+      <self-service-slideshow-second></self-service-slideshow-second>
+    </div> -->
+  </div>
+
+  <div class="box-header">สถานะแบบคำขอ</div>
+  <div class="mb-3">
+    <self-service-license-info></self-service-license-info>
+  </div>
+
+  <div class="box-header">ค้นหาแบบคำขอ</div>
+  <div [formGroup]="form" class="box__container px-4 py-3">
     <div class="row">
       <div class="col-md mb-2">
-        <label class="form-label">เลขที่ใบคำขอ</label>
-        <input type="text" class="form-control" />
+        <label class="form-label">เลขที่แบบคำขอ</label>
+        <input type="text" class="form-control" formControlName="requestno" />
       </div>
       <div class="col-md mb-2">
-        <label class="form-label">ประเภทใบคำขอ</label>
-        <select class="form-select">
-          <option selected>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+        <label class="form-label">ประเภทแบบคำขอ</label>
+        <select class="form-select" formControlName="requesttype">
+          <option selected hidden disabled value="null">กรุณาเลือก</option>
+          <option value="1">ขอขึ้นทะเบียนหนังสืออนุญาตประกอบวิชาชีพ</option>
+          <option value="2">ขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ</option>
+          <option value="3">
+            ขอเปลี่ยนแปลง/แก้ไขหนังสืออนุญาตประกอบวิชาชีพ
+          </option>
+          <option value="4">ขอใบแทนหนังสืออนุญาตประกอบวิชาชีพ</option>
+          <option value="5">ขอหนังสือรับรองความรู้</option>
+          <option value="6">ขอยื่นเทียบเคียงความรู้</option>
+          <option value="30">ขอคืนเงินค่าธรรมเนียม</option>
+          <option value="40">ขอรับรางวัลคุรุสภา</option>
+          <option value="41">ขอรับรางวัลครูภาษาไทยดีเด่น</option>
+          <option value="42">
+            ขอรับรางวัลครูผู้สอนดีเด่นตามกลุ่มสาระการเรียนรู้
+          </option>
+          <option value="43">ขอรับรางวัลคุรุสดุดี</option>
+          <option value="44">ขอรับรางวัลครูอาวุโส</option>
+          <option value="45">ขอรับรางวัลผลงานวิจัยของคุรุสภา</option>
         </select>
       </div>
     </div>
     <div class="row">
       <div class="col-md-3 mb-2">
         <label class="form-label">วันที่ยื่นคำขอ</label>
-        <input type="text" class="form-control" />
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker"
+            autocomplete="off"
+            class="form-control form-date"
+            formControlName="requestdate"
+            placeholder="วว/ดด/ปปปป"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </div>
       </div>
       <div class="col-md-3 mb-2">
         <label class="form-label">สถานะการชำระเงิน</label>
         <select class="form-select">
-          <option selected>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option selected hidden disabled value="null">กรุณาเลือก</option>
+          <option value="0">รอชำระเงิน</option>
+          <option value="1">ชำระเงินแล้ว</option>
         </select>
       </div>
       <div class="col-md mb-2">
         <label class="form-label">สถานะรายการ</label>
         <select class="form-select">
-          <option selected>กรุณาเลือก</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option selected hidden disabled value="null">กรุณาเลือก</option>
+          <option value="1">ผ่าน</option>
+          <option value="2">ขอเอกสารเพิ่มเติม</option>
+          <option value="3">ไม่ผ่าน</option>
         </select>
       </div>
     </div>
-    <br />
-    <div class="d-flex justify-content-center">
-      <button class="btn btn-secondary me-2" (click)="clear()">
+
+    <div class="d-flex justify-content-center mt-2">
+      <button
+        class="btn border-secondary bg-light text-secondary me-2"
+        (click)="clear()"
+      >
         ล้างข้อมูล
       </button>
       <button class="btn btn-primary ms-2" (click)="search()">ค้นหา</button>
     </div>
   </div>
-  <br />
-  <div class="d-flex justify-content-between align-items-center mb-2">
+  <div class="d-flex justify-content-between align-items-center mt-3">
     <div class="box-header">
-      สรุปผลลัพธ์การค้นหา {{ dataSource.data.length }} รายการ
+      ผลลัพธ์การค้นหา {{ dataSource.data.length }} รายการ
     </div>
     <button
       mat-button
       [matMenuTriggerFor]="license"
       class="btn text-primary border-primary bg-white"
     >
-      + สร้างใบคำขอ
+      + สร้างแบบคำขอ
     </button>
     <mat-menu #license="matMenu">
       <button mat-menu-item [matMenuTriggerFor]="request">
-        ขอขึ้นทะเบียนใบอนุญาตประกอบวิชาชีพ
+        ขอขึ้นทะเบียนหนังสืออนุญาตประกอบวิชาชีพ
       </button>
       <button mat-menu-item [matMenuTriggerFor]="renew">
-        ขอต่ออายุใบอนุญาตประกอบวิชาชีพ
+        ขอต่ออายุหนังสืออนุญาตประกอบวิชาชีพ
       </button>
       <button mat-menu-item (click)="substituteLicense()">
-        ขอใบแทนใบอนุญาตประกอบวิชาชีพ
+        ขอใบแทนหนังสืออนุญาตประกอบวิชาชีพ
       </button>
       <button mat-menu-item (click)="transfer()">ขอหนังสือรับรองความรู้</button>
       <button mat-menu-item (click)="compare()">ขอยื่นเทียบเคียงความรู้</button>
@@ -127,82 +171,142 @@
     </mat-menu>
 
     <mat-menu #teacher="matMenu">
-      <button mat-menu-item (click)="thaiTeacher()">ครูชาวไทย</button>
-      <button mat-menu-item (click)="foreignTeacher(1)">ครูชาวต่างชาติ</button>
+      <button mat-menu-item (click)="thaiTeacher()" *ngIf="userType === '1'">
+        ครูชาวไทย
+      </button>
+      <button
+        mat-menu-item
+        (click)="foreignTeacher(1)"
+        *ngIf="userType === '2'"
+      >
+        ครูชาวต่างชาติ
+      </button>
     </mat-menu>
 
     <mat-menu #renewTeacher="matMenu">
-      <button mat-menu-item (click)="teacherRenew()">ครูชาวไทย</button>
-      <button mat-menu-item (click)="foreignRenew(1)">ครูชาวต่างชาติ</button>
+      <button mat-menu-item (click)="teacherRenew()" *ngIf="userType === '1'">
+        ครูชาวไทย
+      </button>
+      <button mat-menu-item (click)="foreignRenew(1)" *ngIf="userType === '2'">
+        ครูชาวต่างชาติ
+      </button>
     </mat-menu>
 
     <mat-menu #manager="matMenu">
-      <button mat-menu-item (click)="schoolManager()">
+      <button mat-menu-item (click)="schoolManager()" *ngIf="userType === '1'">
         ผู้บริหารสถานศึกษาชาวไทย
       </button>
-      <button mat-menu-item (click)="foreignTeacher(2)">
+      <button
+        mat-menu-item
+        (click)="foreignTeacher(2)"
+        *ngIf="userType === '2'"
+      >
         ผู้บริหารสถานศึกษาชาวต่างชาติ
       </button>
     </mat-menu>
 
     <mat-menu #renewManager="matMenu">
-      <button mat-menu-item (click)="schManagerRenew()">
+      <button
+        mat-menu-item
+        (click)="schManagerRenew()"
+        *ngIf="userType === '1'"
+      >
         ผู้บริหารสถานศึกษาชาวไทย
       </button>
-      <button mat-menu-item (click)="foreignRenew(2)">
+      <button mat-menu-item (click)="foreignRenew(2)" *ngIf="userType === '2'">
         ผู้บริหารสถานศึกษาชาวต่างชาติ
       </button>
     </mat-menu>
   </div>
 
-  <div class="table-responsive" style="white-space: nowrap">
-    <table matSort mat-table [dataSource]="dataSource">
+  <div class="table__scroll">
+    <table
+      matSort
+      mat-table
+      [dataSource]="dataSource"
+      [hidden]="!dataSource.data.length"
+      class="mt-2"
+    >
       <ng-container matColumnDef="order">
-        <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
-        <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
+        <th mat-header-cell *matHeaderCellDef class="text-center">ลำดับ</th>
+        <td
+          mat-cell
+          *matCellDef="let element; let i = index"
+          class="text-center"
+        >
+          {{
+            paginator.pageIndex === 0
+              ? i + 1
+              : 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+          }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="requestno">
         <th mat-header-cell *matHeaderCellDef>เลขที่คำขอ</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.requestno }}
+          {{ element.requestno | reqNoFormat }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="requesttype">
+        <th mat-header-cell *matHeaderCellDef>ประเภทแบบคำขอ</th>
+        <td mat-cell *matCellDef="let element">
+          {{ selfMapRequestType(element.requesttype) }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="requestdate">
         <th mat-header-cell *matHeaderCellDef>วันที่ยื่นคำขอ</th>
         <td mat-cell *matCellDef="let element">
-          {{ toThaiDate(element.requestdate) }}
+          {{ element.requestdate | thaiDate }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.firstnameth }} {{ element.lastnameth }}
+          <div *ngIf="element.isforeign === '1'; else thaiPeople">
+            {{ element.firstnameen }} {{ element.lastnameen }}
+          </div>
+          <ng-template #thaiPeople>
+            {{ element.firstnameth }} {{ element.lastnameth }}
+          </ng-template>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="paymentStatus">
         <th mat-header-cell *matHeaderCellDef>สถานะการชำระเงิน</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.paymentStatus }}
+          {{ element.status === '0' ? '' : 'รอการชำระเงิน' }}
+        </td>
+        <!-- element.paymentstatus -->
+      </ng-container>
+
+      <ng-container matColumnDef="process">
+        <th mat-header-cell *matHeaderCellDef>ขั้นตอน</th>
+        <td mat-cell *matCellDef="let element">
+          {{ checkProcess(+element.process)?.processName }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="listStatus">
         <th mat-header-cell *matHeaderCellDef>สถานะรายการ</th>
-        <td mat-cell *matCellDef="let element">{{ element.listStatus }}</td>
+        <td mat-cell *matCellDef="let element">
+          {{ checkStatus(+element.process, +element.status)?.sname }}
+        </td>
       </ng-container>
 
-      <ng-container matColumnDef="process">
-        <th mat-header-cell *matHeaderCellDef>ขั้นตอน</th>
-        <td mat-cell *matCellDef="let element">{{ element.process }}</td>
+      <ng-container matColumnDef="editDate">
+        <th mat-header-cell *matHeaderCellDef>วันที่แก้ไขล่าสุด</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.processupdatedate | thaiDate }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="edit">
-        <th mat-header-cell *matHeaderCellDef>แก้ไข</th>
-        <td mat-cell *matCellDef="let element">
+        <th mat-header-cell *matHeaderCellDef class="text-center">แก้ไข</th>
+        <td mat-cell *matCellDef="let element" class="text-center">
           <i
             (click)="goToDetail(element)"
             role="button"
@@ -212,8 +316,10 @@
       </ng-container>
 
       <ng-container matColumnDef="print">
-        <th mat-header-cell *matHeaderCellDef>พิมพ์ใบคำขอ</th>
-        <td mat-cell *matCellDef="let element">
+        <th mat-header-cell *matHeaderCellDef class="text-center">
+          พิมพ์แบบคำขอ
+        </th>
+        <td mat-cell *matCellDef="let element" class="text-center">
           <i role="button" class="bi bi-printer-fill text-primary fs-5"></i>
         </td>
       </ng-container>
@@ -221,5 +327,22 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
+    <table>
+      <tr *ngIf="searchNotFound">
+        <td
+          class="text-center text-danger fs-5"
+          [attr.colspan]="displayedColumns.length"
+        >
+          ไม่พบข้อมูล
+        </td>
+      </tr>
+    </table>
   </div>
+  <mat-paginator
+    [hidden]="!dataSource.data.length"
+    [length]="dataSource.data.length"
+    [pageSize]="25"
+    [showFirstLastButtons]="true"
+  >
+  </mat-paginator>
 </div>

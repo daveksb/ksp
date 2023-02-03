@@ -2,13 +2,19 @@
   border-radius: 16px;
   background-image: url('/assets/images/self-card-bg.png');
   background-size: cover;
-  width: 500px;
-  height: 250px;
+  background-position: center;
+  height: 270px;
+  width: 480px;
+  margin: auto;
 }
 
-.title {
-  color: #e06511;
-  font-size: 24px;
+.blue__text {
+  color: #125eaf;
+  font-size: 14px;
+}
+
+.text__normal {
+  font-size: 14px;
 }
 
 .dot {
@@ -19,3 +25,10 @@
   border-radius: 50%;
   display: inline-block;
 }
+
+/* @media (max-width: 768px) {
+  .card {
+    width: 480px;
+  }
+}
+ */

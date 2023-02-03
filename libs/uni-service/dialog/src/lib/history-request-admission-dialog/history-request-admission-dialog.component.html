@@ -1,0 +1,25 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div></div>
+  <div class="fs-5">ประวัติสถานะคำขอ</div>
+  <i class="bi bi-x-lg" role="button" matDialogClose></i>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">เลขที่คำขอ</th>
+      <th scope="col">สถานะ</th>
+      <th scope="col">วันที่</th>
+      <th scope="col">ชื่อเจ้าหน้าที่</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of dataSource.data;">
+      <th scope="row">{{item?.requestno || "-"}}</th>
+      <td>{{item?.statusname}}</td>
+      <td>{{toDateTh(item?.requestdate)}}</td>
+      <td>{{item?.updateby || '-'}}</td>
+    </tr>    
+    <tr *ngIf="!dataSource.data" colSpan="4" style="width: 100%" class="text-center">ไม่พบข้อมูล</tr>
+  </tbody>
+</table>

@@ -1,4 +1,4 @@
-<ksp-top-nav><span header> รับ-ส่งเอกสารงานใบอนุญาต </span></ksp-top-nav>
+<ksp-top-nav><span header> รับ-ส่งเอกสารงานหนังสืออนุญาต </span></ksp-top-nav>
 
 <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
   <div class="box-header">ค้นหารายการเลขพัสดุและตรวจสอบสถานะพัสดุ</div>
@@ -7,7 +7,7 @@
       <div class="col">
         <label class="form-label">หน่วยงานที่รับ</label>
         <select class="form-select">
-          <option selected>กรุณาเลือก</option>
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
@@ -26,11 +26,39 @@
       </div>
       <div class="col">
         <label class="form-label">รับวันที่ : จาก</label>
-        <input type="date" class="form-control" />
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker1"
+            autocomplete="off"
+            class="form-control form-date"
+            placeholder="วว/ดด/ปปปป"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker1"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </div>
       </div>
       <div class="col">
         <label class="form-label">รับวันที่ : ถึง</label>
-        <input type="date" class="form-control" />
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker2"
+            autocomplete="off"
+            class="form-control form-date"
+            placeholder="วว/ดด/ปปปป"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker2"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </div>
       </div>
     </div>
 
@@ -42,7 +70,7 @@
       <div class="col">
         <label class="form-label">เรียน</label>
         <select class="form-select">
-          <option selected>กรุณาเลือก</option>
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
@@ -54,7 +82,7 @@
       <div class="col">
         <label class="form-label">จากบุคคล (ชื่อ-นามสกุล)</label>
         <select class="form-select">
-          <option selected>กรุณาเลือก</option>
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
@@ -63,7 +91,7 @@
       <div class="col">
         <label class="form-label">จากหน่วยงาน</label>
         <select class="form-select">
-          <option selected>กรุณาเลือก</option>
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
@@ -75,7 +103,7 @@
       <div class="col">
         <label class="form-label">แสดงรายการ</label>
         <select class="form-select">
-          <option selected>กรุณาเลือก</option>
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
@@ -84,7 +112,7 @@
       <div class="col">
         <label class="form-label">สถานะการรับหนังสือ</label>
         <select class="form-select">
-          <option selected>กรุณาเลือก</option>
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
@@ -185,7 +213,7 @@
     <!-- <mat-paginator
       [pageSizeOptions]="[10]"
       showFirstLastButtons
-      aria-label="Select page of periodic elements"
+
     >
     </mat-paginator> -->
   </div>

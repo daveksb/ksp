@@ -1,82 +1,124 @@
+import { FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-
+import { EUniService, LoaderService } from '@ksp/shared/service';
+import { KspPaginationComponent, ListData } from '@ksp/shared/interface';
+import { map, Subject } from 'rxjs';
+const DEFAULT_DATE = new Date().getFullYear() + 543 + '';
 @Component({
   selector: 'ksp-test-data-list',
   templateUrl: './test-data-list.component.html',
   styleUrls: ['./test-data-list.component.scss'],
 })
-export class TestDataListComponent implements OnInit {
+export class TestDataListComponent
+  extends KspPaginationComponent
+  implements OnInit
+{
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   displayedColumns: string[] = column;
-  dataSource = new MatTableDataSource<testResult>();
-
-  constructor(private router: Router) {}
-
-  search() {
-    this.dataSource.data = data;
+  dataSource = new MatTableDataSource<TestResult>();
+  yearOption: ListData[] = [];
+  courseNameOption: ListData[] = [];
+  form = this.fb.group({
+    subjectid: [],
+    subjectname: [],
+    examstatus: [],
+    examresult: [],
+    idcardno: [],
+    fullname: [],
+    calendaryear: [DEFAULT_DATE],
+  });
+  constructor(
+    private router: Router,
+    private eUniservice: EUniService,
+    private fb: FormBuilder,
+    private loaderService: LoaderService
+  ) {
+    super();
+    this.getYear();
+  }
+  getYear() {
+    const year = new Date().getFullYear() + 543;
+    this.yearOption = new Array(11).fill(null).map((data, i) => {
+      const value = year - i + '';
+      return {
+        label: value,
+        value: value,
+      };
+    });
+  }
+  override search() {
+    this.eUniservice
+      .uniExamResultSearchEs({
+        ...this.form.value,
+        ...this.tableRecord,
+      })
+      .subscribe((res) => {
+        if (res?.returncode === '00') {
+          this.pageEvent.length = res.countrow;
+          this.dataSource.data = res?.datareturn || [];
+        } else {
+          this.dataSource.data = [];
+          this.clearPageEvent();
+        }
+      });
   }
 
   clear() {
     this.dataSource.data = [];
+    this.form.reset();
   }
 
   import() {
     this.router.navigate(['/', 'import-test', 'detail']);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.eUniservice
+      .getUniExamCourse()
+      .pipe(
+        map((res: any): any => {
+          return (
+            res?.datareturn?.map((op: any) => ({
+              value: op?.coursename,
+              label: op?.coursename,
+            })) || []
+          );
+        })
+      )
+      .subscribe((res: any) => {
+        this.courseNameOption = res;
+      });
+  }
 }
 
 export const column = [
-  'id',
-  'year',
-  'subjectCode',
-  'personId',
-  'name',
-  'score',
-  'testResult',
-  'testStatus',
-  'importDate',
-  'announceDate',
+  'examcount',
+  'calendaryear',
+  'subjectid',
+  'subjectname',
+  'idcardno',
+  'fullname',
+  'userscore',
+  'examresult',
+  'examscore',
+  'annoucedate',
+  'expiredate',
 ];
 
-export interface testResult {
-  id: number;
-  year: string;
-  subjectCode: string;
-  personId: string;
-  name: string;
-  score: string;
-  testResult: string;
-  testStatus: string;
-  importDate: string;
-  announceDate: string;
+export interface TestResult {
+  examcount: string;
+  calendaryear: string;
+  subjectid: string;
+  subjectname: string;
+  idcardno: string;
+  subjectcode: string;
+  fullname: string;
+  userscore: string;
+  examresult: string;
+  examscore: string;
+  annoucedate: string;
+  expiredate: string;
+  isValid?: boolean;
 }
-
-export const data: testResult[] = [
-  {
-    id: 1,
-    year: '2564',
-    subjectCode: '101',
-    personId: '3-1020-xXXXX-XX-1',
-    name: 'นางสาวมาลัย ซ่อนกลิ่น',
-    score: '80',
-    testResult: 'ผ่าน',
-    testStatus: 'มาสอบ',
-    importDate: '10 ต.ค. 2564',
-    announceDate: '10 ต.ค. 2564',
-  },
-  {
-    id: 2,
-    year: '2564',
-    subjectCode: '101',
-    personId: '3-1020-xXXXX-XX-1',
-    name: 'นางสาวมาลัย ซ่อนกลิ่น',
-    score: '80',
-    testResult: 'ผ่าน',
-    testStatus: 'มาสอบ',
-    importDate: '10 ต.ค. 2564',
-    announceDate: '10 ต.ค. 2564',
-  },
-];

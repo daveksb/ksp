@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import localForage from 'localforage';
 import { SchoolRetireReason } from '@ksp/shared/constant';
 import { thaiDate } from '@ksp/shared/utility';
+import { Subject } from 'rxjs';
+import { LoaderService } from '@ksp/shared/service';
 
 @Component({
   selector: 'uni-service-retired-reason',
@@ -20,7 +22,12 @@ export class RetiredReasonComponent implements OnInit {
   userInfo: any = {};  
   requestNo = '';
   today = thaiDate(new Date());
-  constructor(private router: Router, private fb: FormBuilder) {}
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
+  constructor(
+    private router: Router, 
+    private fb: FormBuilder,
+    private loaderService: LoaderService
+  ) {}
 
   ngOnInit(): void {
     localForage.getItem('retireReasonData').then((res:any) => {
@@ -34,18 +41,31 @@ export class RetiredReasonComponent implements OnInit {
     localForage.getItem('userSelectedData').then((res:any) => {
       if (res) {
         this.userInfo = res;
-        this.userInfo.nameth = this.userInfo.prefixth ? this.userInfo.prefixth + ' ' : '' 
-                               + this.userInfo.firstnameth ? this.userInfo.firstnameth + ' ' : '' 
-                               + this.userInfo.lastnameth ? this.userInfo.lastnameth : '';
-        this.userInfo.nameen = this.userInfo.prefixen ? this.userInfo.prefixen + ' ' : '' 
-                               + this.userInfo.firstnameen ? this.userInfo.firstnameen + ' ' : '' 
-                               + this.userInfo.lastnameen ? this.userInfo.lastnameen : '';
+        this.userInfo.nameth = `${this.userInfo.firstnameth ? this.userInfo.firstnameth + ' ' : ''}` +
+                               `${this.userInfo.lastnameth ? this.userInfo.lastnameth : ''}`;
+        this.userInfo.nameen = `${this.userInfo.firstnameen ? this.userInfo.firstnameen + ' ' : ''}` +
+                               `${this.userInfo.lastnameen ? this.userInfo.lastnameen : ''}`;
+        if (this.userInfo.phone) {
+          this.userInfo.contactPhone = this.userInfo.phone;
+        }
+        this.userInfo.permissionname = this.userInfo.permissionright == '1' 
+        ? 'เจ้าหน้าที่ประสานงาน (รับรองปริญญาและประกาศนียบัตรทางการศึกษา)' :
+        this.userInfo.permissionright == '2' ? 'เจ้าหน้าที่ประสานงาน (นำส่งรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา​)' : '';
       }
     });
   }
 
   next() {
-    localForage.setItem('retireReasonData', this.form.getRawValue());
-    this.router.navigate(['/retired', 'attachment']);
+    localForage.setItem('retireReasonData', this.form.getRawValue()).then(()=>{
+      this.router.navigate(['/retired', 'attachment']);
+    });
   }
+
+  prevPage() {
+    localForage.removeItem('retireReasonData');
+    localForage.removeItem('userSelectedData');
+    localForage.removeItem('retireCoordinatorInfo');
+    this.router.navigate(['/', 'retired', 'home']);
+  }
+
 }

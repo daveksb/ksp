@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -11,30 +11,32 @@ import { providerFactory } from '@ksp/shared/utility';
 })
 export class FormSchoolAddressComponent extends KspFormBaseComponent {
   override form = this.fb.group({
-    /*
-    letterNumber: [],
-    letterRelease: [], */
-    schoolId: [],
-    schoolName: [],
-    bureauName: [],
+    letternumber: [],
+    letterrelease: [],
+    schoolid: [],
+    schoolname: [],
+    bureauname: [],
     address: [],
     road: [],
-    provinceName: [],
-    amphurName: [],
+    provincename: [],
+    amphurname: [],
     tumbon: [],
-    zipCode: [],
+    zipcode: [],
     moo: [],
-    eMail: [],
+    email: [],
     fax: [],
     street: [],
     telphone: [],
     web: [],
   });
 
+  @Input() showLicenseInfo = true;
+  @Input() title = 'ที่อยู่ของสถานศึกษาที่ขออนุญาต';
+  @Input() schoolEngInfo = false;
+
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value) => {
         this.onChange(value);
         this.onTouched();

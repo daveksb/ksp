@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RegisterStepOneComponent } from './register-step-one/register-step-one.component';
-import { RegisterStepTwoComponent } from './register-step-two/register-step-two.component';
-import { RegisterStepThreeComponent } from './register-step-three/register-step-three.component';
+import { RegisterUserInfoComponent } from './register-user-info/register-user-info.component';
+import { RegisterIdCardComponent } from './register-id-card/register-id-card.component';
+import { RegisterPasswordComponent } from './register-password/register-password.component';
 import { SelfServiceFormModule } from '@ksp/self-service/form';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule, Routes } from '@angular/router';
@@ -15,6 +15,10 @@ import { RegisterForeignStepOneComponent } from './register-foreign-step-one/reg
 import { RegisterForeignStepThreeComponent } from './register-foreign-step-three/register-foreign-step-three.component';
 import { RegisterForeignStepTwoComponent } from './register-foreign-step-two/register-foreign-step-two.component';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { FileUploadComponent } from '@ksp/shared/form/file-upload';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { UniFormBadgeComponent } from '@ksp/shared/ui';
 
 export const routes: Routes = [
   {
@@ -25,15 +29,15 @@ export const routes: Routes = [
   { path: 'policy', component: PrivacyPolicyComponent },
   {
     path: 'th-step-1',
-    component: RegisterStepOneComponent,
+    component: RegisterIdCardComponent,
   },
   {
     path: 'th-step-2',
-    component: RegisterStepTwoComponent,
+    component: RegisterUserInfoComponent,
   },
   {
     path: 'th-step-3',
-    component: RegisterStepThreeComponent,
+    component: RegisterPasswordComponent,
   },
   {
     path: 'en-step-0',
@@ -62,11 +66,15 @@ export const routes: Routes = [
     ReactiveFormsModule,
     MatIconModule,
     SharedFormOthersModule,
+    MatTooltipModule,
+    FileUploadComponent,
+    MatDatepickerModule,
+    UniFormBadgeComponent,
   ],
   declarations: [
-    RegisterStepOneComponent,
-    RegisterStepTwoComponent,
-    RegisterStepThreeComponent,
+    RegisterUserInfoComponent,
+    RegisterIdCardComponent,
+    RegisterPasswordComponent,
     PrivacyPolicyComponent,
     RegisterCompletedComponent,
     RegisterForeignComponent,

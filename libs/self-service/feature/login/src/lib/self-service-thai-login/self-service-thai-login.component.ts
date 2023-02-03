@@ -1,23 +1,28 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { ForgotPasswordSearchPersonComponent } from '@ksp/shared/dialog';
+import {
+  CompleteDialogComponent,
+  ForgotPasswordSearchPersonComponent,
+  ForgotPasswordSetNewPasswordComponent,
+} from '@ksp/shared/dialog';
 import { SelfServiceLoginService } from './self-service-login.service';
 import { setCookie } from '@ksp/shared/utility';
 import { MyInfoService } from '@ksp/shared/service';
-import { switchMap } from 'rxjs';
-
+import { switchMap, tap } from 'rxjs';
+import localForage from 'localforage';
 @Component({
   templateUrl: './self-service-thai-login.component.html',
   styleUrls: ['./self-service-thai-login.component.css'],
 })
 export class SelfServiceThaiLoginComponent {
   eyeIconClicked = false;
+  loginFail = false;
 
   form = this.fb.group({
-    username: [],
-    password: [],
+    username: [null, Validators.required],
+    password: [null, Validators.required],
   });
 
   constructor(
@@ -33,26 +38,68 @@ export class SelfServiceThaiLoginComponent {
   }
 
   login() {
+    this.loginFail = false;
     this.loginService.validateLogin(this.form.value).subscribe((res) => {
-      //if (res.returnCode == 99) return;
       if (res && res.id && res.usertoken) {
-        this.loginService.myInfo = res;
+        localForage.setItem('my-info', res);
         setCookie('userToken', res.usertoken, 1);
         setCookie('userId', res.id, 1);
+        setCookie('idCardNo', `${res.idcardno}`, 1);
         this.router.navigate(['/home']);
+      } else if (res.returncode === '99') {
+        this.loginFail = true;
+        this.form.reset();
       } else {
         return;
       }
     });
+    this.loginFail = false;
   }
 
   forgot() {
-    this.dialog.closeAll();
-    const dialogRef = this.dialog.open(ForgotPasswordSearchPersonComponent, {
-      width: '350px',
+    let formData: any = null;
+    const dialog = this.dialog.open(ForgotPasswordSearchPersonComponent);
+    dialog.componentInstance.confirmed
+      .pipe(
+        tap((i) => (formData = i)),
+        switchMap((res) => {
+          dialog.componentInstance.data = {
+            notfound: false,
+          };
+          return this.myInfoService.forgetPassword(res);
+        })
+      )
+      .subscribe((res) => {
+        if (res.returncode === '1') {
+          this.showForgetDialog(formData);
+        } else {
+          dialog.componentInstance.data = {
+            notfound: true,
+          };
+        }
+      });
+  }
+
+  showForgetDialog(formData: any) {
+    const dialogRef = this.dialog.open(ForgotPasswordSetNewPasswordComponent, {
+      data: formData,
     });
-    dialogRef.componentInstance.confirmed
-      .pipe(switchMap((res) => this.myInfoService.resetPassword(res)))
-      .subscribe((res) => console.log(res));
+
+    dialogRef.componentInstance.confirmed.subscribe((password) => {
+      const payload = {
+        ...formData,
+        password,
+      };
+      this.myInfoService.resetPassword(payload).subscribe(() => {
+        this.dialog.open(CompleteDialogComponent, {
+          data: {
+            header: `ทำรายการสำเร็จ`,
+            subContent: `ระบบได้ทำการเปลี่ยนรหัสผ่านให้ท่านเรียบร้อยแล้ว
+            กรุณาเข้าสู่ระบบใหม่อีกครั้ง`,
+            btnLabel: 'เข้าสู่ระบบ',
+          },
+        });
+      });
+    });
   }
 }

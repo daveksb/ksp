@@ -15,19 +15,17 @@
       <div class="box-header text-primary">
         {{ data.subHeader || 'กรุณาเลือกสถาบันที่ท่านสังกัด' }}
       </div>
-
       <ksp-basic-institute-search
         formControlName="institution"
-        [bureaus]="bureaus$! | async"
+        [bureaus]="data.bureauList"
         [universityType]="universityType$! | async"
         [searchType]="data.searchType"
+        [subSearchType]="'uni_search'"
       ></ksp-basic-institute-search>
 
       <div class="row mb-2">
-        <div class="col">
-          <label class="form-label"
-            >จังหวัด <span class="text-danger">*</span>
-          </label>
+        <div class="col-md-6">
+          <label class="form-label required">จังหวัด </label>
           <select
             formControlName="provinceid"
             (change)="provinceChange($event)"
@@ -42,19 +40,8 @@
             </option>
           </select>
         </div>
-        <div class="col">
-          <label class="form-label"
-            >อำเภอ <span class="text-danger">*</span></label
-          >
-          <select formControlName="amphurid" class="form-select">
-            <option value="null" selected hidden disabled>กรุณาเลือก</option>
-            <option *ngFor="let a of amphurs$ | async" [value]="a?.amphurCode">
-              {{ a?.amphurName }}
-            </option>
-          </select>
-        </div>
       </div>
-      <div class="d-flex justify-content-end">
+      <div class="d-flex justify-content-end my-3">
         <button
           (click)="clear()"
           type="button"
@@ -62,35 +49,61 @@
         >
           ล้างข้อมูล
         </button>
-        <button (click)="search()" type="button" class="btn btn-primary ms-2">
-          ค้นหา
-        </button>
+        <span
+          [matTooltipDisabled]="!form.invalid"
+          matTooltip="กรุณาเลือกจังหวัดและอำเภอก่อน"
+        >
+          <button
+            (click)="search()"
+            type="button"
+            class="btn btn-primary ms-2"
+            [disabled]="form.invalid"
+          >
+            ค้นหา
+          </button></span
+        >
       </div>
       <hr />
+      <div class="d-flex flex-row align-items-center">
+        <div class="box-header text-primary me-2">ผลการค้นหา</div>
+        <ng-container *ngIf="searchStatus === 'searching'">
+          <div
+            class="spinner-border spinner-border-sm text-primary"
+            role="status"
+          >
+            <span class="sr-only"></span></div
+        ></ng-container>
+      </div>
 
-      <div class="box-header text-primary">ผลการค้นหา</div>
-      <div class="table-responsive">
+      <div *ngIf="searchNotFound" class="fs-5 text-center text-danger">
+        ไม่พบข้อมูล
+      </div>
+      <div class="table-responsive" *ngIf="schoolInfos && schoolInfos.length">
         <table class="table">
           <thead class="header__table">
             <tr>
               <th scope="col">เลือก</th>
-              <th scope="col">
+              <th scope="col" style="white-space: nowrap">
                 {{
-                  data.searchType === 'uni' ? 'รหัสมหาวิทยาลัย' : 'รหัสโรงเรียน'
+                  data.searchType === 'uni'
+                    ? 'รหัสมหาวิทยาลัย'
+                    : 'รหัสโรงเรียน/สถานศึกษา'
                 }}
               </th>
               <th scope="col">
                 {{
-                  data.searchType === 'uni' ? 'ชื่อมหาวิทยาลัย' : 'ชื่อโรงเรียน'
+                  data.searchType === 'uni'
+                    ? 'ชื่อมหาวิทยาลัย'
+                    : 'ชื่อโรงเรียน/สถานศึกษา'
                 }}
               </th>
-              <th scope="col">ที่อยู่</th>
+              <th scope="col" *ngIf="data.searchType !== 'uni'">ที่อยู่</th>
               <th scope="col">สังกัด</th>
             </tr>
           </thead>
-          <tbody class="body__table" *ngIf="data.searchType != 'uni'">
-            <tr *ngFor="let item of Data">
-              <th scope="row" class="body__detail">
+          <tbody *ngIf="data.searchType !== 'uni'">
+            <tr *ngFor="let item of schoolInfos">
+              <th scope="row" class="text-center">
                 <div>
                   <input
                     class="form-check-input"
@@ -100,15 +113,15 @@
                   />
                 </div>
               </th>
-              <td class="detail__table">{{ item.schoolId }}</td>
-              <td class="detail__table">{{ item.schoolName }}</td>
-              <td class="detail__table">{{ item.addressShow }}</td>
-              <td class="detail__table">{{ item.bureauName }}</td>
+              <td>{{ item.schoolid }}</td>
+              <td>{{ item.schoolname }}</td>
+              <td>{{ item.addressShow }}</td>
+              <td>{{ item.bureauname }}</td>
             </tr>
           </tbody>
-          <tbody class="body__table" *ngIf="data.searchType == 'uni'">
-            <tr *ngFor="let item of Data">
-              <th scope="row" class="body__detail">
+          <tbody *ngIf="data.searchType === 'uni'">
+            <tr *ngFor="let item of schoolInfos">
+              <th scope="row">
                 <div>
                   <input
                     class="form-check-input"
@@ -118,34 +131,52 @@
                   />
                 </div>
               </th>
-              <td class="detail__table">{{ item.universitycode }}</td>
-              <td class="detail__table">{{ item.name }}</td>
-              <td class="detail__table">{{ item.addressShow }}</td>
-              <td class="detail__table">{{ item.nametype }}</td>
+              <td>{{ item.universitycode }}</td>
+              <td>{{ item.name }} {{ item.campusname || '' }}</td>
+              <!-- <td>{{ item.addressShow }}</td> -->
+              <td>{{ item.nametype }}</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <nav
-        *ngIf="Data.length > 0"
-        style="padding-top: 20px"
-        aria-label="Page navigation example"
-      >
-        <ul class="pagination">
-          <li role="button" (click)="goPrevious()" class="page-item">
-            <a class="page-link">Previous</a>
+      <nav *ngIf="schoolInfos && schoolInfos.length" style="padding-top: 18px">
+        <ul class="pagination justify-content-start">
+          <li class="page-item">
+            <a class="page-link" (click)="goPrevious()" role="button"
+              ><i class="bi bi-chevron-left"></i
+            ></a>
           </li>
-          <li role="button" class="page-item">
-            <a class="page-link">{{ currentPage }}</a>
+          <li class="page-item disabled">
+            <a class="page-link">หน้าที่ {{ currentPage }} </a>
           </li>
-          <li role="button" (click)="goNext()" class="page-item">
-            <a class="page-link">Next</a>
+          <li class="page-item">
+            <a class="page-link" (click)="goNext()" role="button"
+              ><i class="bi bi-chevron-right"></i
+            ></a>
           </li>
         </ul>
+        <!-- <ul class="pagination">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true"
+              >Previous</a
+            >
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item active" aria-current="page">
+            <a class="page-link" href="#">2</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul> -->
       </nav>
 
-      <div class="d-flex justify-content-center mt-2">
+      <div
+        class="d-flex justify-content-center"
+        *ngIf="schoolInfos && schoolInfos.length"
+      >
         <button
           matDialogClose
           type="button"

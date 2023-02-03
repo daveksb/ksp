@@ -1,20 +1,32 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import {
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { Router } from '@angular/router';
 import { EServiceUiAccusationInfoModule } from '@ksp/e-service/ui/accusation-info';
 import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import {
+  defaultSubcommittee,
+  EhicsSubcommittee,
+  KspFormBaseComponent,
+} from '@ksp/shared/interface';
 import { BottomNavComponent } from '@ksp/shared/menu';
+import { GeneralInfoService } from '@ksp/shared/service';
 import {
   LicenseInfoComponent,
   LicenseTypeButtonGroupComponent,
   RequestHeaderInfoComponent,
 } from '@ksp/shared/ui';
-import { providerFactory } from '@ksp/shared/utility';
+import { providerFactory, thaiDate } from '@ksp/shared/utility';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'e-service-inquiry-detail',
@@ -33,26 +45,41 @@ import { providerFactory } from '@ksp/shared/utility';
     LicenseInfoComponent,
     FileUploadComponent,
     ReactiveFormsModule,
+    MatDatepickerModule,
   ],
   providers: providerFactory(InquiryDetailComponent),
 })
-export class InquiryDetailComponent extends KspFormBaseComponent {
+export class InquiryDetailComponent
+  extends KspFormBaseComponent
+  implements OnInit
+{
   override form = this.fb.group({
-    boardOrder: [],
-    boardDate: [],
-    reportDate: [],
-    inquiryReport: [],
-    considerLevelTimes: [],
-    considerLevelDate: [],
-    considerLevelReason: [],
-    consider: [],
-    considerDay: [],
-    considerDateFrom: [],
-    considerDateTo: [],
-    boardOtherReason: [],
+    inquiryorderno: [],
+    inquiryorderdate: [],
+    inquirysubcommittee: this.fb.array([] as FormGroup[]),
+    inquiryexplaindate: [],
+    inquiryjbdate: [],
+    inquiryreport: [],
+    inquiryfile: [],
+    inquiryresult: this.fb.group({
+      considertimes: [],
+      considerdate: [],
+      considerreason: [],
+      considerday: [],
+      considerdatefrom: [],
+      considerdateto: [],
+      consider: [],
+      otherreason: [],
+    }),
   });
-
-  constructor(private router: Router, private fb: FormBuilder) {
+  prefixList$!: Observable<any>;
+  today = thaiDate(new Date());
+  requestNumber = '';
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private generalInfoService: GeneralInfoService
+  ) {
     super();
     this.subscriptions.push(
       // any time the inner form changes update the parent of any change
@@ -62,6 +89,12 @@ export class InquiryDetailComponent extends KspFormBaseComponent {
       })
     );
   }
+  ngOnInit(): void {
+    this.getListData();
+  }
+  get members() {
+    return this.form.controls.inquirysubcommittee as FormArray;
+  }
 
   next() {
     this.router.navigate(['/', 'ethics', 'inquiry', 'result']);
@@ -69,5 +102,24 @@ export class InquiryDetailComponent extends KspFormBaseComponent {
 
   cancel() {
     this.router.navigate(['/', 'ethics', 'inquiry']);
+  }
+  addRow(data: EhicsSubcommittee = defaultSubcommittee) {
+    const rewardForm = this.fb.group({
+      idcardno: data.idcardno,
+      idnumber: data.idnumber,
+      positioncommittee: data.positioncommittee,
+      prefix: data.prefix,
+      firstname: data.firstname,
+      lastname: data.lastname,
+      position: data.position,
+      bureau: data.bureau,
+    });
+    this.members.push(rewardForm);
+  }
+  deleteRow(index: number) {
+    this.members.removeAt(index);
+  }
+  getListData() {
+    this.prefixList$ = this.generalInfoService.getPrefix();
   }
 }

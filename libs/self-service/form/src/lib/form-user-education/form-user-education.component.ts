@@ -1,7 +1,6 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { DynamicComponentDirective } from '@ksp/shared/directive';
-import { KspFormBaseComponent, ListData } from '@ksp/shared/interface';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Country, KspFormBaseComponent, ListData } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 import { skip } from 'rxjs';
 
@@ -15,17 +14,22 @@ export class FormUserEducationComponent
   extends KspFormBaseComponent
   implements OnInit
 {
-  @Input() educationTypes: 'teacher' | 'manager' | 'supervision' = 'teacher';
+  @Input() educationTypes:
+    | 'teacher'
+    | 'schManager'
+    | 'eduManager'
+    | 'supervision' = 'teacher';
 
-  @Input() countries: any[] = [];
+  @Input() countries: Country[] | null = [];
   @Input() attachFiles!: any[];
   @Input() uniqueTimestamp = '';
+  @Input() title = '';
 
   selectedEducationType!: number;
 
   override form = this.fb.group({
-    educationType: [],
-    educationLevelForm: [],
+    educationType: [null, Validators.required],
+    educationLevelForm: [null, Validators.required],
   });
 
   educationTypes1: ListData[] = [];

@@ -50,8 +50,6 @@ export * from './lib/compare-knowledge-education/compare-knowledge-education.com
 
 export * from './lib/compare-knowledge-info/compare-knowledge-info.component';
 
-export * from './lib/transfer-knowledge-standard-form/transfer-knowledge-standard-form.component';
-
 export * from './lib/renew-license-property/renew-license-property.component';
 
 export * from './lib/renew-license-property-supervision/renew-license-property-supervision.component';
@@ -65,3 +63,13 @@ export * from './lib/renew-license-foreign-teacher/renew-license-foreign-teacher
 export * from './lib/renew-license-foreign-non-teacher/renew-license-foreign-non-teacher.component';
 
 export * from './lib/license-form-base.component';
+
+export * from './lib/foreign-step-two-tab-four-renew/foreign-step-two-tab-four-renew.component';
+
+export * from './lib/e-reward-form-base.component';
+
+export * from './lib/e-reward-confirm-form-base.component';
+
+export * from './lib/e-self-confirm-form-base.component';
+
+export * from './lib/transfer-knowledge-career-cert/transfer-knowledge-career-cert.component';

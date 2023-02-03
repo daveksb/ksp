@@ -3,16 +3,12 @@
 <form [formGroup]="form">
   <div class="container-fluid bg-secondary bg-opacity-10 pb-3">
     <div class="container-xl px-0 pt-2">
-      <div class="box-header">รายละเอียดใบคำขอรหัสเข้าใช้งานระบบ</div>
+      <div class="box-header">รายละเอียดแบบคำขอรหัสเข้าใช้งานระบบ</div>
     </div>
 
-    <div class="bg-white container-xl py-2">
-      <ksp-request-header-info
-        [requestDate]="requestDate"
-        [requestNumber]="requestNumber"
-      ></ksp-request-header-info>
+    <div class="bg-white container-xl py-2 px-4">
+      <ksp-request-header-info></ksp-request-header-info>
       <hr />
-
       <div>
         <ksp-stepper-nav
           [LabelSecond]="'ข้อมูลผู้มีอำนาจแต่งตั้ง'"
@@ -21,10 +17,13 @@
 
       <ksp-university-select
         mode="view"
+        [title]="'กรุณาเลือกหน่วยงาน/สถานศึกษาที่ท่านสังกัด'"
         [label1]="'สังกัด'"
         [label2]="'โรงเรียน / สถานศึกษา'"
-        [schoolName]="school?.schoolName"
-        [bureauName]="school?.bureauName"
+        [schoolName]="school?.schoolname"
+        [bureauName]="school?.bureauname"
+        [address]="address"
+        [showAddress]="true"
       ></ksp-university-select>
 
       <div class="bg-light px-4 py-3 my-4">
@@ -32,14 +31,14 @@
           ข้อมูลผู้ขอรหัสสำหรับเข้าใช้งานระบบ
         </div>
 
-        <ksp-form-user-info
+        <ksp-form-coordinator-info
           formControlName="requester"
-          [isDarkMode]="false"
           [mode]="mode"
           [prefixList]="prefixList$ | async"
           [nationList]="nationalitys$ | async"
           [displayMode]="[userInfoFormdisplayMode]"
-        ></ksp-form-user-info>
+          [isSchoolService]="false"
+        ></ksp-form-coordinator-info>
       </div>
       <ksp-bottom-nav
         [disableNext]="form.invalid"

@@ -1,13 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { FormMode, SelfMyInfo } from '@ksp/shared/interface';
+import {
+  Amphur,
+  Bureau,
+  FormMode,
+  Province,
+  SelfMyInfo,
+  Tambol,
+} from '@ksp/shared/interface';
 import {
   AddressService,
   EducationDetailService,
   MyInfoService,
 } from '@ksp/shared/service';
 import { Observable } from 'rxjs';
-import { parseJson, replaceEmptyWithNull } from '@ksp/shared/utility';
+import { replaceEmptyWithNull } from '@ksp/shared/utility';
 
 @Component({
   selector: 'self-service-workplace-info',
@@ -15,25 +22,26 @@ import { parseJson, replaceEmptyWithNull } from '@ksp/shared/utility';
   styleUrls: ['./workplace-info.component.scss'],
 })
 export class WorkplaceInfoComponent implements OnInit {
+  label = 'แก้ไขข้อมูล';
+  mode: FormMode = 'view';
+  provinces1$!: Observable<Province[]>;
+  amphurs1$!: Observable<Amphur[]>;
+  tumbols1$!: Observable<Tambol[]>;
+  bureau$!: Observable<Bureau[]>;
+  baseForm = this.fb.group(new SelfMyInfo());
+  form = this.fb.group({
+    workplace: [],
+  });
+
   constructor(
     private addressService: AddressService,
     private fb: FormBuilder,
     private educationDetailService: EducationDetailService,
     private myInfoService: MyInfoService
   ) {}
-  provinces1$!: Observable<any>;
-  amphurs1$!: Observable<any>;
-  tumbols1$!: Observable<any>;
-  bureau$!: Observable<any>;
-  form = this.fb.group({
-    workplace: [],
-  });
-  mode!: FormMode;
-  baseForm = this.fb.group(new SelfMyInfo());
+
   ngOnInit(): void {
-    this.mode = 'view';
-    this.bureau$ = this.educationDetailService.getBureau();
-    this.provinces1$ = this.addressService.getProvinces();
+    this.getListData();
     this.myInfoService.getMyInfo().subscribe((res) => {
       res = this.myInfoService.formatMyInfo(res);
       this.baseForm.patchValue(res);
@@ -41,13 +49,16 @@ export class WorkplaceInfoComponent implements OnInit {
     });
   }
 
+  getListData() {
+    this.bureau$ = this.educationDetailService.getBureau();
+    this.provinces1$ = this.addressService.getProvinces();
+  }
+
   patchWorkPlace(res: SelfMyInfo) {
-    //console.log('res = ', res);
-    //const workplace = parseJson(res.schooladdrinfo);
+    console.log('res = ', res);
     const workplace = JSON.parse(`${res?.schooladdrinfo}`);
-    //console.log('workplace = ', workplace);
     this.amphurs1$ = this.addressService.getAmphurs(workplace.province);
-    this.tumbols1$ = this.addressService.getTumbols(workplace.district);
+    this.tumbols1$ = this.addressService.getTumbols(workplace.amphur);
     this.form.patchValue({ workplace });
   }
 
@@ -72,9 +83,11 @@ export class WorkplaceInfoComponent implements OnInit {
   onClickChangeMode() {
     if (this.mode == 'view') {
       this.mode = 'edit';
+      this.label = 'บันทึกข้อมูล';
     } else {
       this.savingData();
       this.mode = 'view';
+      this.label = 'แก้ไขข้อมูล';
     }
   }
 
@@ -85,8 +98,13 @@ export class WorkplaceInfoComponent implements OnInit {
       schooladdrinfo: JSON.stringify(formData.workplace),
     });
     const payload: SelfMyInfo = replaceEmptyWithNull(this.baseForm.value);
+    console.log('payload = ', payload);
     this.myInfoService.updateMyInfo(payload).subscribe((res) => {
-      //
+      //console.log('update res = ', res);
     });
+  }
+
+  clearData() {
+    this.form.reset();
   }
 }

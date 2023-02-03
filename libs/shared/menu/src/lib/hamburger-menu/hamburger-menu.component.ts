@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MenuConfig } from '@ksp/shared/interface';
+import { Router } from '@angular/router';
+import { KspParam, MenuConfig } from '@ksp/shared/interface';
+import { deleteCookie } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-hamburger-menu',
@@ -9,8 +11,23 @@ import { MenuConfig } from '@ksp/shared/interface';
 export class HamburgerMenuComponent {
   @Input() menuConfig: MenuConfig[] = [];
   @Input() showHeader = false;
+  @Input() name = '';
+  @Input() lastLogin = '';
 
-  /**
-   * Side menu use absolute path routing
-   */
+  constructor(private router: Router) {}
+
+  navigateUrl(url: string, queryParams: KspParam | undefined) {
+    if (queryParams) {
+      this.router.navigate([url], {
+        queryParams,
+      });
+    } else {
+      this.router.navigate([url]);
+    }
+  }
+
+  logout() {
+    deleteCookie('userToken');
+    this.router.navigate(['/']);
+  }
 }

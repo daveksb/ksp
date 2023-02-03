@@ -1,13 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { Bureau, KspFormBaseComponent, SchInfo } from '@ksp/shared/interface';
 import { UniversitySearchComponent } from '@ksp/shared/search';
-import { GeneralInfoService } from '@ksp/shared/service';
 import { providerFactory } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Observable } from 'rxjs';
 
 @UntilDestroy()
 @Component({
@@ -18,40 +16,32 @@ import { Observable } from 'rxjs';
   imports: [ReactiveFormsModule, CommonModule],
   providers: providerFactory(UniversitySelectComponent),
 })
-export class UniversitySelectComponent
-  extends KspFormBaseComponent
-  implements OnInit
-{
+export class UniversitySelectComponent extends KspFormBaseComponent {
+  @Input() title = 'กรุณาเลือกสถาบันที่ท่านสังกัด';
   @Input() label1 = 'สังกัด';
   @Input() label2 = 'โรงเรียน / สถานศึกษา';
-  @Input() schoolName = '';
-  @Input() bureauName = '';
+  @Input() schoolName: string | null = '';
+  @Input() bureauName: string | null = '';
+  @Input() address = '';
   @Input() searchType = '';
-  @Input() readonly = false;
-  bureaus$!: Observable<any>;
-  @Output() selectedUniversity = new EventEmitter<string>();
+  @Input() showAddress = false;
+  @Input() bureauList: Bureau[] | null = [];
+  @Output() selectedUniversity = new EventEmitter<SchInfo>();
 
   override form = this.fb.group({
     institution: [],
     affiliation: [],
+    address: [],
   });
 
-  constructor(
-    public dialog: MatDialog,
-    private fb: FormBuilder,
-    private generalInfoService: GeneralInfoService
-  ) {
+  constructor(public dialog: MatDialog, private fb: FormBuilder) {
     super();
     this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
       this.form?.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
         this.onChange(value);
         this.onTouched();
       })
     );
-  }
-  ngOnInit(): void {
-    this.bureaus$ = this.generalInfoService.getBureau();
   }
 
   search() {
@@ -64,10 +54,14 @@ export class UniversitySelectComponent
       },
       data: {
         searchType: this.searchType,
+        subHeader: 'กรุณาเลือกหน่วยงาน/สถานศึกษาที่ท่านสังกัด',
+        bureauList: this.bureauList,
       },
     });
-    dialog.afterClosed().subscribe((res) => {
+
+    dialog.afterClosed().subscribe((res: SchInfo) => {
       if (res) {
+        console.log(res);
         this.selectedUniversity.emit(res);
       }
     });

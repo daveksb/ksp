@@ -1,0 +1,12 @@
+.hide__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: underline;
+}
+
+@media only screen and (max-width: 768px) {
+  .hide__content {
+    display: none;
+  }
+}

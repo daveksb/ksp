@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { KspFormBaseComponent, VisaType } from '@ksp/shared/interface';
 import {
   createDefaultVisaInfo,
   providerFactory,
@@ -15,10 +15,9 @@ import {
 })
 export class FormVisaInfoComponent extends KspFormBaseComponent {
   @Input() isDarkMode = false;
-  @Input() visaTypeList: any;
+  @Input() visaTypeList: VisaType[] | null = [];
 
   validatorMessages = validatorMessages;
-
   /**
    * Dark Mode : all inputs will have gray background and form container will have white background
    * Use in Self-Service

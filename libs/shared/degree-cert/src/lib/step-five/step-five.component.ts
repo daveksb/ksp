@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
+import _ from 'lodash';
 
 @Component({
   selector: 'ksp-degree-cert-step-five',
@@ -10,12 +11,14 @@ import { providerFactory } from '@ksp/shared/utility';
   providers: providerFactory(DegreeCertStepFiveComponent),
 })
 export class DegreeCertStepFiveComponent extends KspFormBaseComponent {
+  @Input() disableFields: { forward: any[]; verify: any[] } = {
+    forward: [],
+    verify: [],
+  };
   override form = this.fb.group({
     verify: [],
-    returnDate: [],
-    forward: [],
+    returnDate: []
   });
-
   constructor(private fb: FormBuilder) {
     super();
     this.subscriptions.push(
@@ -25,5 +28,8 @@ export class DegreeCertStepFiveComponent extends KspFormBaseComponent {
         this.onTouched();
       })
     );
+  }
+  isDisable(key: 'verify', option: any):boolean {
+    return _.includes(_.get(this.disableFields, `${key}`), option);
   }
 }

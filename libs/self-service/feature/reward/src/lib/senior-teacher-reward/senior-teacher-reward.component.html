@@ -7,9 +7,10 @@
     [selectedIndex]="0">
     <mat-tab label="ข้อมูลส่วนตัว">
       <ksp-form-user-info
-        [displayMode]="[userInfoType]"
-        [isSchoolService]="false"
+        [isHasSixtiesDate]="true"
+        [isSelfService]="true"
         [prefixList]="prefixList"
+        [requiredIdCardNo]="false"
         formControlName="userInfo"></ksp-form-user-info>
     </mat-tab>
 
@@ -27,6 +28,7 @@
       <hr />
       <div class="box-header text-primary">สถานที่ทำงาน</div>
       <self-service-form-user-workplace
+        [showContactForm]="true"
         formControlName="workplace"
         [provinces]="provinces2$ | async"
         [amphurs]="amphurs2$ | async"
@@ -35,32 +37,6 @@
         (provinceChanged)="provinceChanged(2, $event)"
         (amphurChanged)="amphurChanged(2, $event)">
       </self-service-form-user-workplace>
-      <div class="row">
-        <div class="col-md-6 mb-2">
-          <label class="form-label">โทรศัพท์</label>
-          <input class="form-control" type="text" formControlName="phone" />
-        </div>
-
-        <div class="col-md-6 mb-2">
-          <label class="form-label">โทรสาร</label>
-          <input class="form-control" type="text" formControlName="fax" />
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6 mb-2">
-          <label class="form-label">อีเมล</label>
-          <input class="form-control" type="text" formControlName="email" />
-        </div>
-
-        <div class="col-md-6 mb-2">
-          <label class="form-label">เว็บไซต์</label>
-          <input class="form-control" type="text" formControlName="website" />
-        </div>
-      </div>
-    </mat-tab>
-
-    <mat-tab label="ข้อมูลครูอาวุโส">
-      <ksp-senior-teacher-info formControlName="rewardTeacherInfo"></ksp-senior-teacher-info>
     </mat-tab>
 
     <mat-tab label="ข้อมูลประกอบวิชาชีพ">
@@ -69,23 +45,22 @@
         [btnLabel]="'เพิ่มข้อมูลประกอบวิชาชีพ'"></ksp-senior-teacher-career>
     </mat-tab>
 
-    <mat-tab label="ข้อมูลผู้ขอรับเงินช่วยเหลือ">
-      <ksp-senior-teacher-subsidy formControlName="rewardMoneySupportInfo"></ksp-senior-teacher-subsidy>
+    <mat-tab label="ข้อมูลการถูกลงโทษทางวินัย">
+      <ksp-praise-teacher-punished
+        formControlName="rewardPunishmentInfo"></ksp-praise-teacher-punished>
     </mat-tab>
 
     <mat-tab label="เอกสารประกอบ">
-      <ksp-form-attachment
+      <ksp-form-multi-attachment
         [groups]="rewardFiles"
-        [uniqueTimestamp]="uniqueTimestamp"
-        [titleClass]="'text-primary'"></ksp-form-attachment>
+        [uniqueTimestamp]="uniqueTimestamp"></ksp-form-multi-attachment>
     </mat-tab>
+
+    <!-- <mat-tab label="ข้อมูลผู้ขอรับเงินช่วยเหลือ">
+      <ksp-senior-teacher-subsidy
+        [moneyAssistanceFiles]="moneyAssistanceFiles"
+        [uniqueTimestamp]="uniqueTimestamp"
+        formControlName="rewardMoneySupportInfo"></ksp-senior-teacher-subsidy>
+    </mat-tab> -->
   </mat-tab-group>
 </form>
-
-<!-- <div class="d-flex justify-content-center my-3">
-  <button type="button" class="btn border-primary text-primary bg-white">
-    บันทึกชั่วคราว
-  </button>
-  <button type="button" class="ms-3 btn btn-primary">บันทึกและยื่น</button>
-</div>
- -->

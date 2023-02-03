@@ -12,8 +12,9 @@ import {
 } from '@ksp/shared/ui';
 import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { providerFactory } from '@ksp/shared/utility';
+import { providerFactory, thaiDate } from '@ksp/shared/utility';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'e-service-inquiry-result',
@@ -31,19 +32,25 @@ import { KspFormBaseComponent } from '@ksp/shared/interface';
     LicenseInfoComponent,
     FileUploadComponent,
     ReactiveFormsModule,
+    MatDatepickerModule,
   ],
   providers: providerFactory(InquiryResultComponent),
 })
 export class InquiryResultComponent extends KspFormBaseComponent {
   override form = this.fb.group({
-    redNumber: [],
-    rulingTimes: [],
-    rulingDate: [],
-    accuserInform: [],
-    agencyInform: [],
-    accusedInform: [],
+    resultredno: [],
+    resultcomitteeno: [],
+    resultcomitteedate: [],
+    resultcomitteefile: [],
+    resulttoaccuserdate: [],
+    resulttoaccuserfile: [],
+    resulttoschooldate: [],
+    resulttoschoolfile: [],
+    resulttoaccuseddate: [],
+    resulttoaccusedfile: [],
   });
-
+  today = thaiDate(new Date());
+  requestNumber = '';
   constructor(private router: Router, private fb: FormBuilder) {
     super();
     this.subscriptions.push(

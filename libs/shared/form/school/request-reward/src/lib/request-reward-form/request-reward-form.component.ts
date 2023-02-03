@@ -13,8 +13,14 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
-import { providerFactory, thaiDate } from '@ksp/shared/utility';
+import { FileGroup, KspFormBaseComponent } from '@ksp/shared/interface';
+import {
+  idCardPattern,
+  nameThPattern,
+  phonePattern,
+  providerFactory,
+  validatorMessages,
+} from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-request-reward-form',
@@ -30,14 +36,12 @@ import { providerFactory, thaiDate } from '@ksp/shared/utility';
   styleUrls: ['./request-reward-form.component.scss'],
   providers: providerFactory(RequestRewardFormComponent),
 })
-export class RequestRewardFormComponent
-  extends KspFormBaseComponent
-  implements OnInit
-{
+export class RequestRewardFormComponent extends KspFormBaseComponent {
+  validatorMessages = validatorMessages;
   @Input() osoiTypes: any = [];
   @Input() personTypes: any = [];
   @Input() prefixList: any = [];
-  @Input() requestNo: string | null = null;
+  @Input() uniqueTimeStamp = '';
 
   @Input()
   set memberList(members: MemberForm[]) {
@@ -53,31 +57,40 @@ export class RequestRewardFormComponent
     rewardname: [null, Validators.required],
     rewardtype: [null, Validators.required],
     submitbefore: [null, Validators.required],
-    vdolink: [],
+
+    idcardno: [null, [Validators.required, Validators.pattern(idCardPattern)]],
+    prefixth: [null, Validators.required],
+    firstnameth: [
+      null,
+      [Validators.required, Validators.pattern(nameThPattern)],
+    ],
+    lastnameth: [
+      null,
+      [Validators.required, Validators.pattern(nameThPattern)],
+    ],
+    contactphone: [
+      null,
+      [Validators.required, Validators.pattern(phonePattern)],
+    ],
+    email: [null, [Validators.required, Validators.email]],
+    position: [null, Validators.required],
+
     osoimember: this.fb.array([]),
-    /*     personId: [''],
-    prefix: [null],
-    firstName: [''],
-    lastName: [''],
-    phone: [''],
-    email: [''],
-    academicStanding: [''], */
+    vdolink: [''],
   });
 
-  rewardFiles = [
-    { name: 'แบบ นร. 1', fileId: '' },
-    { name: 'แบบ นร.2', fileId: '' },
-    { name: 'เอกสารอื่นๆ', fileId: '' },
-    { name: 'บันทึกนำส่งจากสถานศึกษา', fileId: '' },
+  rewardFiles: FileGroup[] = [
+    { name: 'แบบ นร. 1', files: [] },
+    { name: 'แบบ นร.2', files: [] },
+    { name: 'เอกสารอื่นๆ', files: [] },
+    { name: 'บันทึกนำส่งจากสถานศึกษา', files: [] },
   ];
 
   rewards = rewards;
-  today = thaiDate(new Date());
 
   constructor(public dialog: MatDialog, private fb: FormBuilder) {
     super();
     this.subscriptions.push(
-      // any time the inner form changes update the parent of any change
       this.form?.valueChanges.subscribe((value) => {
         this.onChange(value);
         this.onTouched();
@@ -85,24 +98,52 @@ export class RequestRewardFormComponent
     );
   }
 
-  ngOnInit(): void {
-    this.addRow();
-  }
-
   get members() {
     return this.form.controls.osoimember as FormArray;
   }
 
+  /* get personId() {
+    return this.form.controls.idcardno;
+  }
+
+  get firstName() {
+    return this.form.controls.firstnameth;
+  }
+
+  get lastName() {
+    return this.form.controls.lastnameth;
+  }
+
+  get selfPhone() {
+    return this.form.controls.contactphone;
+  }
+
+  get email() {
+    return this.form.controls.email;
+  } */
+
   addRow(data: MemberForm = defaultMember) {
     const rewardForm = this.fb.group({
-      membertype: [data.membertype],
-      idcardno: [data.idcardno],
-      prefix: [data.prefix],
-      firstname: [data.firstname],
-      lastname: [data.lastname],
-      phone: [data.phone],
-      email: [data.email],
-      academicstanding: [data.academicstanding],
+      membertype: [data.membertype, Validators.required],
+      idcardno: [
+        data.idcardno,
+        [Validators.required, Validators.pattern(idCardPattern)],
+      ],
+      prefix: [data.prefix, Validators.required],
+      firstname: [
+        data.firstname,
+        [Validators.required, Validators.pattern(nameThPattern)],
+      ],
+      lastname: [
+        data.lastname,
+        [Validators.required, Validators.pattern(nameThPattern)],
+      ],
+      phone: [
+        data.phone,
+        [Validators.required, Validators.pattern(phonePattern)],
+      ],
+      email: [data.email, [Validators.required, Validators.email]],
+      academicstanding: [data.academicstanding, Validators.required],
     });
 
     //console.log('reward form = ', rewardForm);

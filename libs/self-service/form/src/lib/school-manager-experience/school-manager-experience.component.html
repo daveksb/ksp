@@ -14,10 +14,17 @@
         </label>
       </div>
       <div class="d-flex align-items-center ms-4">
-        <label class="form-label me-3">จำนวนปี</label>
+        <label
+          class="form-label me-3"
+          [class.required]="form.controls.hasTeachingExperience.value"
+          >จำนวนปี</label
+        >
         <input
-          type="text"
+          type="number"
           class="form-control w-auto"
+          [class.form-control-danger]="
+            teachingYear.invalid && (teachingYear.dirty || teachingYear.touched)
+          "
           formControlName="teachingExperienceYear"
         />
       </div>
@@ -38,10 +45,17 @@
         </label>
       </div>
       <div class="d-flex align-items-center ms-4">
-        <label class="form-label me-3">จำนวนปี</label>
+        <label
+          class="form-label me-3"
+          [class.required]="form.controls.hasManagingExperience.value"
+          >จำนวนปี</label
+        >
         <input
-          type="text"
+          type="number"
           class="form-control w-auto"
+          [class.form-control-danger]="
+            managingYear.invalid && (managingYear.dirty || managingYear.touched)
+          "
           formControlName="managingExperienceYear"
         />
       </div>

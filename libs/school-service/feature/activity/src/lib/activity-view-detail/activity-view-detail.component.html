@@ -1,0 +1,124 @@
+<ksp-top-nav>
+  <span header>
+    กิจกรรมพัฒนาตนเอง (หนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีหนังสืออนุญาต)
+  </span>
+  <span subHeader>เพิ่มกิจกรรมการพัฒนาตนเอง</span>
+</ksp-top-nav>
+
+<div class="bg-secondary bg-opacity-10 px-4 py-2 full-height-2">
+  <div class="box-header">รายละเอียดกิจกรรมพัฒนาตนเอง</div>
+
+  <div class="bg-white p-3">
+    <ksp-request-header-info></ksp-request-header-info>
+    <hr />
+
+    <!-- <div class="bg-light py-5 mb-3">
+      <ksp-license-info></ksp-license-info>
+    </div> -->
+
+    <div class="bg-light px-3 py-3 mb-3">
+      <div class="box-header">
+        ข้อมูลหนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีหนังสืออนุญาต
+      </div>
+
+      <table class="table" *ngIf="requestId">
+        <thead class="header__table">
+          <tr>
+            <th scope="col">เลขที่หนังสืออนุญาต</th>
+            <th scope="col">ชื่อ-นามสกุล</th>
+            <th scope="col">วันที่ออกหนังสือ</th>
+            <th scope="col">วันที่สิ้นสุด</th>
+            <th scope="col" class="text-center">ดูเอกสาร</th>
+          </tr>
+        </thead>
+        <tbody class="body__table">
+          <tr>
+            <td>{{ tempLicense?.licenseno }}</td>
+            <td>{{ tempLicense?.firstname }} {{ tempLicense?.lastname }}</td>
+            <td>{{ tempLicense?.startdate | thaiDate }}</td>
+            <td>{{ tempLicense?.enddate | thaiDate }}</td>
+            <td class="text-center">
+              <i
+                role="button"
+                class="box-header text-success bi bi-eye"
+                (click)="genPdf(pdfTempLicense)"
+              ></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <ng-container *ngIf="!requestId">
+        <div class="text-center fs-5 py-5">ไม่พบข้อมูล</div></ng-container
+      >
+    </div>
+
+    <div class="bg-light px-3 py-3">
+      <div class="box-header mb-1">ข้อมูลกิจกรรมพัฒนาตนเอง</div>
+
+      <table class="table" *ngIf="staffSelfDev && staffSelfDev.length">
+        <thead class="header__table">
+          <tr>
+            <th scope="col" class="text-center">ลำดับ</th>
+            <th scope="col">กิจกรรมการพัฒนาตนเอง</th>
+            <th scope="col">วันที่แก้ไขล่าสุด</th>
+            <th scope="col">วันที่บันทึก</th>
+            <th scope="col" class="text-center">แก้ไขข้อมูล</th>
+            <th scope="col" class="text-center">ดูเข้อมูล</th>
+          </tr>
+        </thead>
+        <tbody class="body__table">
+          <ng-container *ngIf="staffSelfDev && staffSelfDev.length">
+            <tr *ngFor="let activity of staffSelfDev; let i = index">
+              <td class="text-center">{{ i + 1 }}</td>
+              <td>
+                {{ schoolMapSelfDevelopType(+activity.selfdeveloptype) }}
+              </td>
+              <td>{{ activity.updatedate | thaiDate }}</td>
+              <td>{{ activity.createdate | thaiDate }}</td>
+              <td class="text-center">
+                <i
+                  role="button"
+                  class="fs-5 text-primary bi bi-pencil-square"
+                  (click)="
+                    edit(
+                      activityPageMode.edit,
+                      activity.staffid,
+                      requestId,
+                      i + 1
+                    )
+                  "
+                ></i>
+              </td>
+              <td class="text-center">
+                <i
+                  role="button"
+                  class="fs-5 text-success bi bi-eye"
+                  (click)="
+                    view(
+                      activityPageMode.view,
+                      activity.staffid,
+                      requestId,
+                      i + 1
+                    )
+                  "
+                ></i>
+              </td></tr
+          ></ng-container>
+        </tbody>
+      </table>
+      <ng-container *ngIf="!staffSelfDev.length">
+        <div class="text-center fs-5 py-5">ไม่พบข้อมูล</div></ng-container
+      >
+    </div>
+  </div>
+</div>
+
+<div class="sticky-bottom border px-2">
+  <ksp-bottom-nav
+    [isFirstPage]="true"
+    [isLastPage]="true"
+    [showCenterButtons]="true"
+    [showCancelButton]="true"
+    (cancelClicked)="cancel()"
+  ></ksp-bottom-nav>
+</div>

@@ -4,16 +4,79 @@
 
 <div class="main__container px-4 py-2 full-height">
   <div class="box-header">ข้อมูลรางวัลที่ได้รับ</div>
-  <div class="bg-light p-3">
-    <ksp-license-info
-      [isHasTitle]="true"
-      [subTitle1]="'วันที่ยื่นขอรางวัล'"
-      [subTitle2]="'วันที่ประกาศผลรางวัล'"
-    ></ksp-license-info>
-  </div>
 
-  <br />
-  <ksp-thai-teacher-reward [mode]="'view'"></ksp-thai-teacher-reward>
+  <ng-container *ngIf="requestId === 1">
+    <div class="bg-light p-3">
+      <ksp-license-info
+        [rewardTitleName]="''"
+        [isHasTitle]="true"
+        [subTitle1]="'วันที่ยื่นขอรางวัล'"
+        [subTitle2]="'วันที่ประกาศผลรางวัล'"
+      ></ksp-license-info>
+    </div>
+    <br />
+    <ksp-council-reward [mode]="'view'"></ksp-council-reward
+  ></ng-container>
+  <ng-container *ngIf="requestId === 2">
+    <div class="bg-light p-3">
+      <ksp-license-info
+        [rewardTitleName]="'ครูภาษาไทยดีเด่น'"
+        [isHasTitle]="true"
+        [subTitle1]="'วันที่ยื่นขอรางวัล'"
+        [subTitle2]="'วันที่ประกาศผลรางวัล'"
+      ></ksp-license-info>
+    </div>
+    <br />
+    <ksp-thai-teacher-reward [mode]="'view'"></ksp-thai-teacher-reward
+  ></ng-container>
+  <ng-container *ngIf="requestId === 3">
+    <div class="bg-light p-3">
+      <ksp-license-info
+        [rewardTitleName]="'ครูผู้สอนดีเด่น'"
+        [isHasTitle]="true"
+        [subTitle1]="'วันที่ยื่นขอรางวัล'"
+        [subTitle2]="'วันที่ประกาศผลรางวัล'"
+      ></ksp-license-info>
+    </div>
+    <br />
+    <ksp-best-teacher-reward [mode]="'view'"></ksp-best-teacher-reward
+  ></ng-container>
+  <ng-container *ngIf="requestId === 4">
+    <div class="bg-light p-3">
+      <ksp-license-info
+        [rewardTitleName]="'คุรุสดุดี'"
+        [isHasTitle]="true"
+        [subTitle1]="'วันที่ยื่นขอรางวัล'"
+        [subTitle2]="'วันที่ประกาศผลรางวัล'"
+      ></ksp-license-info>
+    </div>
+    <br />
+    <ksp-praise-teacher-reward [mode]="'view'"></ksp-praise-teacher-reward
+  ></ng-container>
+  <ng-container *ngIf="requestId === 5">
+    <div class="bg-light p-3">
+      <ksp-license-info
+        [rewardTitleName]="'ครูอาวุโส'"
+        [isHasTitle]="true"
+        [subTitle1]="'วันที่ยื่นขอรางวัล'"
+        [subTitle2]="'วันที่ประกาศผลรางวัล'"
+      ></ksp-license-info>
+    </div>
+    <br />
+    <ksp-senior-teacher-reward [mode]="'view'"></ksp-senior-teacher-reward
+  ></ng-container>
+  <ng-container *ngIf="requestId === 6">
+    <div class="bg-light p-3">
+      <ksp-license-info
+        [rewardTitleName]="'ผลงานวิจัยของคุรุสภา'"
+        [isHasTitle]="true"
+        [subTitle1]="'วันที่ยื่นขอรางวัล'"
+        [subTitle2]="'วันที่ประกาศผลรางวัล'"
+      ></ksp-license-info>
+    </div>
+    <br />
+    <ksp-research-reward [mode]="'view'"></ksp-research-reward
+  ></ng-container>
 
   <div class="d-flex justify-content-center my-3">
     <button type="button" class="btn btn-primary" (click)="back()">

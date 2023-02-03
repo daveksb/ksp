@@ -2,8 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
-  SchoolRequest,
-  SchoolServiceUserPageType,
+  FileGroup,
+  FormMode,
+  KspApprovePayload,
+  KspRequest,
+  Prefix,
+  SchoolUserPageType,
+  SchUser,
 } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
@@ -11,8 +16,10 @@ import {
 } from '@ksp/shared/dialog';
 import { ERequestService, GeneralInfoService } from '@ksp/shared/service';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { parseJson, thaiDate } from '@ksp/shared/utility';
+import { concatMap, forkJoin, Observable } from 'rxjs';
+import { getCookie, jsonParse, parseJson } from '@ksp/shared/utility';
+import localForage from 'localforage';
+import moment from 'moment';
 
 @Component({
   templateUrl: './user-detail.component.html',
@@ -20,59 +27,39 @@ import { parseJson, thaiDate } from '@ksp/shared/utility';
 })
 export class UserDetailComponent implements OnInit {
   approveTitles = ['ผลการตรวจสอบ', 'สถานะการใช้งาน'];
-
-  approveChoices = [
-    [
-      {
-        name: 'อนุมัติ',
-        value: 2,
-      },
-      {
-        name: 'ไม่อนุมัติ',
-        value: 3,
-      },
-    ],
-    [
-      {
-        name: 'ใช้งาน',
-        value: 1,
-      },
-      {
-        name: 'ไม่ใช้งาน',
-        value: 2,
-      },
-    ],
-  ];
-
-  headers = [
-    [
-      'ใบคำขอรหัสเข้าใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service) ',
-      'ตรวจสอบและอนุมัติใบคำขอรหัสเข้าใช้งาน',
-    ],
-    [
-      'ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
-      'ข้อมูลผู้เข้าใช้งานระบบ School Service',
-    ],
-  ];
-
+  approveChoices = approveChoices;
+  headers = headers;
   requestId!: number | null;
-  requestDate!: string | null;
-  requestData!: SchoolRequest;
-  prefixList$!: Observable<any>;
-
-  requestNo: string | null = '';
-
+  requestData = new KspRequest();
+  prefixList$!: Observable<Prefix[]>;
+  pageType: SchoolUserPageType = SchoolUserPageType.CurrentUser;
+  pageTypeEnum = SchoolUserPageType;
+  setPassword = '';
+  mode: FormMode = 'view';
+  checkedResult: any;
+  files: FileGroup[] = [
+    {
+      name: 'หนังสือแต่งตั้งผู้ประสานงาน',
+      files: [],
+    },
+    {
+      name: 'สำเนาบัตรประชาชน',
+      files: [],
+    },
+  ];
   form = this.fb.group({
     userInfo: [],
     coordinatorInfo: [],
   });
-
   form2 = this.fb.group({
-    verifyResult: [null, Validators.required],
+    bureau: [''],
+    schoolName: [''],
+    schoolAddress: [''],
   });
 
-  verifySelected = 1;
-  pageType = 0;
+  verifyForm = this.fb.group({
+    result: [null, Validators.required],
+  });
 
   constructor(
     private router: Router,
@@ -84,18 +71,21 @@ export class UserDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.checkRequestId();
-
-    this.form2.controls.verifyResult.valueChanges.subscribe((res: any) => {
-      this.verifySelected = Number(res['result']);
-      console.log(' //this.form.valid;', this.verifySelected);
-    });
-
     this.route.queryParams.subscribe((res) => {
       this.pageType = Number(res['type']);
     });
 
+    if (this.pageType === SchoolUserPageType.NewUser) {
+      this.checkRequestId();
+    }
+
     this.prefixList$ = this.generalInfoService.getPrefix();
+    this.form2.disable();
+
+    /* this.verifyForm.valueChanges.subscribe((res) => {
+      const form: any = this.verifyForm.controls.result.value;
+      const detail: string = form.detail;
+    }); */
   }
 
   checkRequestId() {
@@ -108,84 +98,214 @@ export class UserDetailComponent implements OnInit {
   }
 
   loadRequestFromId(id: number) {
-    this.eRequestService.getRequestById(id).subscribe((res) => {
+    this.eRequestService.getKspRequestById(id).subscribe((res) => {
       this.requestData = res;
-      this.requestNo = res.requestno;
-      this.requestDate = thaiDate(new Date(`${res.requestdate}`));
+      //console.log('res = ', res.status);
+      res.status === '1' ? (this.mode = 'edit') : (this.mode = 'view');
+      //set value for checked approve result
+      if (res.status === '2') {
+        this.checkedResult = approveChoices[0][0].value;
+      } else if (res.status === '3') {
+        this.checkedResult = approveChoices[0][1].value;
+      }
+      //console.log('file = ', parseJson(res.fileinfo));
+      const files = parseJson(res.fileinfo);
 
+      if (files && Array.isArray(files)) {
+        this.files.forEach((group, index) => {
+          //console.log('group = ', group);
+          return (group.files = files[index]);
+        });
+      }
+      //console.log('mode = ', this.mode);
       if (res.birthdate) {
         res.birthdate = res.birthdate.split('T')[0];
       }
 
-      const data: any = res;
-      this.form.controls.userInfo.patchValue(data);
-
+      this.form.controls.userInfo.patchValue(<any>res);
       const coordinator = parseJson(res.coordinatorinfo);
-      //console.log('coordinator = ', res);
-      this.form.controls.coordinatorInfo.patchValue(coordinator.coordinator);
+
+      this.setPassword = coordinator.password;
+      this.form.controls.coordinatorInfo.patchValue(coordinator);
+
+      this.form2.controls.bureau.patchValue(res.bureauname);
+      this.form2.controls.schoolName.patchValue(res.schoolname);
+      this.form2.controls.schoolAddress.patchValue(res.schooladdress);
     });
   }
 
-  approveRequest() {
-    const payload = {
-      id: `${this.requestId}`,
-      checksubresult: null,
-      checkfinalresult: null,
-      approveresult: null,
-      currentprocess: 1,
-      requeststatus: this.verifySelected,
+  retireUser() {
+    const payload: KspApprovePayload = {
+      requestid: `${this.requestId}`,
+      process: '1',
+      status: '2',
+      detail: null,
+      systemtype: '4', //e-service
+      userid: getCookie('userId'),
+      paymentstatus: null,
     };
 
-    this.eRequestService.approveUserRequest(payload).subscribe((res) => {
-      //console.log('Cancel request  = ', res);
-      //create new user in sch_user
+    this.eRequestService.KspUpdateRequestProcess(payload).subscribe((res) => {
+      //console.log('update result = ', res);
+      this.completeDialog();
+    });
+
+    const retirePayload = {
+      schmemberid: this.requestData.userid,
+      schuseractive: '0',
+    };
+
+    this.eRequestService.retiredUser(retirePayload).subscribe((res) => {
+      console.log('retired result = ', res);
+    });
+  }
+
+  approveUser() {
+    const deActivateAllUser = this.eRequestService.deActivateAllUser(
+      this.requestData.schoolid ?? ''
+    );
+
+    const updatePayload: KspApprovePayload = {
+      requestid: `${this.requestId}`,
+      process: '1',
+      status: '2',
+      detail: null,
+      systemtype: '4', //e-service
+      userid: getCookie('userId'),
+      paymentstatus: null,
+    };
+    const updateRequest =
+      this.eRequestService.KspUpdateRequestProcess(updatePayload);
+
+    const user = new SchUser();
+    const coordinatorinfo = jsonParse(this.requestData.coordinatorinfo || '{}');
+
+    user.idcardno = this.requestData.idcardno;
+    user.prefixth = this.requestData.prefixth;
+    user.schemail = this.requestData.email;
+    user.position = this.requestData.position;
+    user.firstnameth = this.requestData.firstnameth;
+    user.lastnameth = this.requestData.lastnameth;
+    user.schusername = this.requestData.schoolid;
+    user.schoolid = this.requestData.schoolid;
+    user.schmobile = this.requestData.contactphone;
+    user.schpassword = this.setPassword;
+    user.requestid = this.requestData.id;
+    user.schuseractive = '1';
+    user.schuserstartdate = moment().format('yyyy-MM-DD');
+    user.coordinatorinfo = JSON.stringify(coordinatorinfo);
+    //console.log('user = ', user);
+
+    const createUser = this.eRequestService.createSchUser(user);
+    const forkRequest = forkJoin([updateRequest, createUser]);
+    deActivateAllUser.pipe(concatMap(() => forkRequest)).subscribe(() => {
+      //console.log('res = ', res);
+      this.completeDialog();
+    });
+  }
+
+  unApproveUser() {
+    const payload: KspApprovePayload = {
+      requestid: `${this.requestId}`,
+      process: '1',
+      status: '3',
+      detail: null,
+      systemtype: '4', //e-service
+      userid: getCookie('userId'),
+      paymentstatus: null,
+    };
+
+    this.eRequestService.KspUpdateRequestProcess(payload).subscribe(() => {
+      //console.log('un approve result = ', res);
+      this.completeDialog();
+    });
+  }
+
+  viewUser(schoolId: any) {
+    localForage.setItem('schoolDetail', this.form2.value);
+    this.router.navigate(['school', 'all-user'], {
+      queryParams: { schoolId: schoolId },
     });
   }
 
   cancel() {
-    if (this.pageType === SchoolServiceUserPageType.ApproveNewUser) {
-      this.router.navigate(['/approve-new-user']);
-    } else if (this.pageType === SchoolServiceUserPageType.ManageCurrentUser) {
-      this.router.navigate(['/manage-current-user']);
+    if (this.pageType === SchoolUserPageType.NewUser) {
+      this.router.navigate(['/school', 'new-user']);
+    } else if (this.pageType === SchoolUserPageType.CurrentUser) {
+      this.router.navigate(['/school', 'current-user']);
     }
   }
 
   confirm() {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
       data: {
         title: `คุณต้องการบันทึกข้อมูล
         ใช่หรือไม่? `,
       },
     });
 
-    confirmDialog.componentInstance.confirmed.subscribe((res) => {
-      if (res) {
-        this.approveRequest();
-        this.onCompleted();
+    confirmDialog.componentInstance.confirmed.subscribe(() => {
+      const form: any = this.verifyForm.controls.result.value;
+      const resultOk = +form.result;
+      if (resultOk) {
+        if (this.requestData.requesttype === '1') {
+          this.approveUser();
+        } else if (this.requestData.requesttype === '2') {
+          this.retireUser();
+        }
+      } else {
+        this.unApproveUser();
       }
     });
   }
 
-  onCompleted() {
-    const completeDialog = this.dialog.open(CompleteDialogComponent, {
-      width: '350px',
+  completeDialog() {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
         header: `บันทึกข้อมูลสำเร็จ`,
-        buttonLabel: 'กลับสู่หน้าหลัก',
       },
     });
 
-    completeDialog.componentInstance.completed.subscribe((res) => {
+    dialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        if (this.pageType === SchoolServiceUserPageType.ApproveNewUser) {
-          this.router.navigate(['/approve-new-user', 'list']);
-        } else if (
-          this.pageType === SchoolServiceUserPageType.ManageCurrentUser
-        ) {
-          this.router.navigate(['/manage-current-user', 'list']);
+        if (this.pageType === SchoolUserPageType.NewUser) {
+          this.router.navigate(['/school', 'new-user']);
         }
       }
     });
   }
 }
+
+const approveChoices = [
+  [
+    {
+      name: 'อนุมัติ',
+      value: 1,
+    },
+    {
+      name: 'ไม่อนุมัติ',
+      value: 0,
+    },
+  ],
+  [
+    {
+      name: 'ใช้งาน',
+      value: 1,
+    },
+    {
+      name: 'ไม่ใช้งาน',
+      value: 2,
+    },
+  ],
+];
+
+const headers = [
+  [
+    'แบบคำขอผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service) ',
+    'ตรวจสอบและอนุมัติแบบคำขอรหัสเข้าใช้งาน',
+  ],
+  [
+    'ผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
+    'ข้อมูลผู้เข้าใช้งานระบบ School Service',
+  ],
+];
