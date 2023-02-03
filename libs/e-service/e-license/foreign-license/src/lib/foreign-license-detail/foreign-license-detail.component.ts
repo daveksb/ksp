@@ -162,14 +162,13 @@ export class ForeignLicenseDetailComponent implements OnInit {
             const countryCode = this.requestData.country ?? 0;
             const countryCode3digits = countryCode.toString().padStart(3, '0');
 
-            payload.country = this.requestData.country;
-            payload.countrycode = countryCode3digits;
+            payload.country = countryCode3digits;
             payload.requestno = this.requestData.requestno;
             payload.createdate = moment().format('yyyy-MM-DD');
             payload.expireddate = moment().add(2, 'years').format('yyyy-MM-DD');
             payload.visaclass = this.requestData.visaclass;
             payload.visatype = this.requestData.visatype;
-            payload.visaexpireddate = this.requestData.visaexpiredate;
+            payload.visaexpiredate = this.requestData.visaexpiredate;
             payload.idcardno = this.requestData.idcardno;
             payload.passportno = this.requestData.passportno;
             payload.passportstartdate = this.requestData.passportstartdate;
