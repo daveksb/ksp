@@ -142,10 +142,11 @@ export class UserDetailComponent implements OnInit {
       this.form.controls.userInfo.patchValue(<any>res);
       const coordinator = parseJson(res.coordinatorinfo);
       this.form.controls.coordinatorInfo.patchValue(coordinator);
+      const resultDetail = parseJson(res.approvestatus);
       this.verifyForm.controls.result.patchValue({
         result: this.requestData?.isuseractive === '1' ? '1' : '2',
-        reason: '',
-        detail: '',
+        reason: resultDetail.detail?.reason,
+        detail: resultDetail.detail?.detail,
       });
     })
   }
@@ -214,6 +215,7 @@ export class UserDetailComponent implements OnInit {
 
       this.form.controls.userInfo.patchValue(<any>res);
       const coordinator = parseJson(res.coordinatorinfo);
+      this.requestData.coordinatorinfo = coordinator;
       this.setPassword = coordinator.password;
       this.form.controls.coordinatorInfo.patchValue(coordinator);
     });
@@ -274,7 +276,7 @@ export class UserDetailComponent implements OnInit {
     newUser.prefixen = this.requestData.prefixen;
     newUser.firstnameen = this.requestData.firstnameen;
     newUser.lastnameen = this.requestData.lastnameen;
-    newUser.coordinatorinfo = this.requestData.coordinatorinfo;
+    newUser.coordinatorinfo = JSON.stringify(this.requestData.coordinatorinfo);
     newUser.unitype = this.requestData.unitype;
     newUser.requestno = this.requestData.requestno;
     newUser.permissionright = this.permissionRight;
@@ -336,6 +338,9 @@ export class UserDetailComponent implements OnInit {
   }
 
   confirm() {
+    const form: any = this.verifyForm.controls.result.value;
+      const result = +form.result;
+    console.log(result)
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการบันทึกข้อมูล
@@ -363,9 +368,10 @@ export class UserDetailComponent implements OnInit {
   }
 
   setActiveUser(form: any) {
+    const result = +form.result
     const payload = {
       id: this.requestData.id,
-      isuseractive: (+form.result) - 1,
+      isuseractive: result == 1 ? 1 : 0,
       approvestatus: JSON.stringify({ detail: form })
     }
     this.eUniService.updateActiveUser(payload).subscribe(() => {
