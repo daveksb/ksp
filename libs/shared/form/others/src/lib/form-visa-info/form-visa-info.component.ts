@@ -1,6 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { KspFormBaseComponent, VisaType } from '@ksp/shared/interface';
+import {
+  KspFormBaseComponent,
+  VisaClass,
+  VisaType,
+} from '@ksp/shared/interface';
 import {
   createDefaultVisaInfo,
   providerFactory,
@@ -16,15 +20,9 @@ import {
 export class FormVisaInfoComponent extends KspFormBaseComponent {
   @Input() isDarkMode = false;
   @Input() visaTypeList: VisaType[] | null = [];
+  @Input() visaClassList: VisaClass[] | null = [];
 
   validatorMessages = validatorMessages;
-  /**
-   * Dark Mode : all inputs will have gray background and form container will have white background
-   * Use in Self-Service
-   *
-   * Normal Mode : all inputs will have white background and form container will have gray background
-   * Use in E-service, School-Service
-   */
 
   override form = createDefaultVisaInfo(this.fb);
 

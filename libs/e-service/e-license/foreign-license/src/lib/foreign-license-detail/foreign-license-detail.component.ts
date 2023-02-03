@@ -10,6 +10,7 @@ import {
   Prefix,
   KspKuruspa,
   VisaType,
+  VisaClass,
 } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
@@ -47,6 +48,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
   prefixList$!: Observable<Prefix[]>;
   countries$!: Observable<Country[]>;
   visaTypeList$!: Observable<VisaType[]>;
+  visaClassList$!: Observable<VisaClass[]>;
   verifyChoice = verifyChoices;
   evidenceFile = evidenceFiles;
   requestData = new KspRequest();
@@ -119,6 +121,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.countries$ = this.addressService.getCountry();
     this.visaTypeList$ = this.generalInfoService.getVisaType();
+    this.visaClassList$ = this.generalInfoService.getVisaClass();
   }
 
   cancel() {
