@@ -82,6 +82,8 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
           this.targetProcess = 6;
           this.targetStatus = 1;
         }
+        console.log('target process = ', this.targetProcess);
+        console.log('target status = ', this.targetStatus);
       }
     } else if (input.result === '2') {
       //ขอแก้ไข / เพิ่มเติม

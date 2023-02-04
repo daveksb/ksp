@@ -244,7 +244,7 @@ export const SelfRequestProcess: SchRequestProcess[] = [
     ],
   },
 
-  //ขอรับรางวัล xxx
+  //ขอรับรางวัลคุรุสภา
   {
     requestType: 40,
     processId: 1,
@@ -287,7 +287,7 @@ export const SelfRequestProcess: SchRequestProcess[] = [
   {
     requestType: 40,
     processId: 5,
-    processName: 'เจ้าหน้าที่ส่วนกลาง ตรวจสอบ บันทึกผล',
+    processName: 'เจ้าหน้าที่ส่วนกลางตรวจสอบบันทึกผล',
     status: [
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
       { id: 2, sname: 'ขอแก้ไข/เพิ่มเติม', ename: 'ขอแก้ไข/เพิ่มเติม' },
@@ -298,7 +298,342 @@ export const SelfRequestProcess: SchRequestProcess[] = [
   {
     requestType: 40,
     processId: 6,
-    processName: 'เจ้าหน้าที่ส่วนกลาง ประกาศรายชื่อ',
+    processName: 'เจ้าหน้าที่ส่วนกลางประกาศรายชื่อ',
+    status: [
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
+      { id: 2, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+    ],
+  },
+
+  //ขอรับรางวัลครูภาษาไทยดีเด่น
+  {
+    requestType: 41,
+    processId: 1,
+    processName: 'สร้างแบบคำขอ',
+    status: [
+      { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
+    ],
+  },
+  {
+    requestType: 41,
+    processId: 2,
+    processName: 'สร้างและส่งแบบคำขอ',
+    status: [
+      { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
+    ],
+  },
+  {
+    requestType: 41,
+    processId: 3,
+    processName: 'เจ้าหน้าที่ส่วนจังหวัดตรวจสอบ',
+    status: [
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
+      { id: 2, sname: 'ขอแก้ไข/เพิ่มเติม', ename: 'ขอแก้ไข/เพิ่มเติม' },
+      { id: 3, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+      { id: 4, sname: 'ขาดคุณสมบัติ', ename: 'ขาดคุณสมบัติ' },
+      { id: 5, sname: 'คัดค้าน/เพิกถอน', ename: 'คัดค้าน/เพิกถอน' },
+    ],
+  },
+  {
+    requestType: 41,
+    processId: 4,
+    processName: 'เจ้าหน้าที่ส่วนจังหวัดจัดทำบัญชีรายชื่อ',
+    status: [
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
+      { id: 2, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+    ],
+  },
+  {
+    requestType: 41,
+    processId: 5,
+    processName: 'เจ้าหน้าที่ส่วนกลางตรวจสอบบันทึกผล',
+    status: [
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
+      { id: 2, sname: 'ขอแก้ไข/เพิ่มเติม', ename: 'ขอแก้ไข/เพิ่มเติม' },
+      { id: 3, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+      { id: 4, sname: 'ขาดคุณสมบัติ', ename: 'ขาดคุณสมบัติ' },
+    ],
+  },
+  {
+    requestType: 41,
+    processId: 6,
+    processName: 'เจ้าหน้าที่ส่วนกลางประกาศรายชื่อ',
+    status: [
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
+      { id: 2, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+    ],
+  },
+
+  //ขอรับรางวัลครูผู้สอนดีเด่น
+  {
+    requestType: 42,
+    processId: 1,
+    processName: 'สร้างแบบคำขอ',
+    status: [
+      { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
+    ],
+  },
+  {
+    requestType: 42,
+    processId: 2,
+    processName: 'สร้างและส่งแบบคำขอ',
+    status: [
+      { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
+    ],
+  },
+  {
+    requestType: 42,
+    processId: 3,
+    processName: 'เจ้าหน้าที่ส่วนจังหวัดตรวจสอบ',
+    status: [
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
+      { id: 2, sname: 'ขอแก้ไข/เพิ่มเติม', ename: 'ขอแก้ไข/เพิ่มเติม' },
+      { id: 3, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+      { id: 4, sname: 'ขาดคุณสมบัติ', ename: 'ขาดคุณสมบัติ' },
+      { id: 5, sname: 'คัดค้าน/เพิกถอน', ename: 'คัดค้าน/เพิกถอน' },
+    ],
+  },
+  {
+    requestType: 42,
+    processId: 4,
+    processName: 'เจ้าหน้าที่ส่วนจังหวัดจัดทำบัญชีรายชื่อ',
+    status: [
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
+      { id: 2, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+    ],
+  },
+  {
+    requestType: 42,
+    processId: 5,
+    processName: 'เจ้าหน้าที่ส่วนกลางตรวจสอบบันทึกผล',
+    status: [
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
+      { id: 2, sname: 'ขอแก้ไข/เพิ่มเติม', ename: 'ขอแก้ไข/เพิ่มเติม' },
+      { id: 3, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+      { id: 4, sname: 'ขาดคุณสมบัติ', ename: 'ขาดคุณสมบัติ' },
+    ],
+  },
+  {
+    requestType: 42,
+    processId: 6,
+    processName: 'เจ้าหน้าที่ส่วนกลางประกาศรายชื่อ',
+    status: [
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
+      { id: 2, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+    ],
+  },
+
+  //ขอรับรางวัลคุรุสดุดี
+  {
+    requestType: 43,
+    processId: 1,
+    processName: 'สร้างแบบคำขอ',
+    status: [
+      { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
+    ],
+  },
+  {
+    requestType: 43,
+    processId: 2,
+    processName: 'สร้างและส่งแบบคำขอ',
+    status: [
+      { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
+    ],
+  },
+  {
+    requestType: 43,
+    processId: 3,
+    processName: 'เจ้าหน้าที่ส่วนจังหวัดตรวจสอบ',
+    status: [
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
+      { id: 2, sname: 'ขอแก้ไข/เพิ่มเติม', ename: 'ขอแก้ไข/เพิ่มเติม' },
+      { id: 3, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+      { id: 4, sname: 'ขาดคุณสมบัติ', ename: 'ขาดคุณสมบัติ' },
+      { id: 5, sname: 'คัดค้าน/เพิกถอน', ename: 'คัดค้าน/เพิกถอน' },
+    ],
+  },
+  {
+    requestType: 43,
+    processId: 4,
+    processName: 'เจ้าหน้าที่ส่วนจังหวัดจัดทำบัญชีรายชื่อ',
+    status: [
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
+      { id: 2, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+    ],
+  },
+  {
+    requestType: 43,
+    processId: 5,
+    processName: 'เจ้าหน้าที่ส่วนกลางตรวจสอบบันทึกผล',
+    status: [
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
+      { id: 2, sname: 'ขอแก้ไข/เพิ่มเติม', ename: 'ขอแก้ไข/เพิ่มเติม' },
+      { id: 3, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+      { id: 4, sname: 'ขาดคุณสมบัติ', ename: 'ขาดคุณสมบัติ' },
+    ],
+  },
+  {
+    requestType: 43,
+    processId: 6,
+    processName: 'เจ้าหน้าที่ส่วนกลางประกาศรายชื่อ',
+    status: [
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
+      { id: 2, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+    ],
+  },
+
+  //ขอรับรางวัลครูอาวุโส
+  {
+    requestType: 44,
+    processId: 1,
+    processName: 'สร้างแบบคำขอ',
+    status: [
+      { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
+    ],
+  },
+  {
+    requestType: 44,
+    processId: 2,
+    processName: 'สร้างและส่งแบบคำขอ',
+    status: [
+      { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
+    ],
+  },
+  {
+    requestType: 44,
+    processId: 3,
+    processName: 'เจ้าหน้าที่ส่วนจังหวัดตรวจสอบ',
+    status: [
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
+      { id: 2, sname: 'ขอแก้ไข/เพิ่มเติม', ename: 'ขอแก้ไข/เพิ่มเติม' },
+      { id: 3, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+      { id: 4, sname: 'ขาดคุณสมบัติ', ename: 'ขาดคุณสมบัติ' },
+      { id: 5, sname: 'คัดค้าน/เพิกถอน', ename: 'คัดค้าน/เพิกถอน' },
+    ],
+  },
+  {
+    requestType: 44,
+    processId: 4,
+    processName: 'เจ้าหน้าที่ส่วนจังหวัดจัดทำบัญชีรายชื่อ (มอ5)',
+    status: [
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
+      { id: 2, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+    ],
+  },
+  {
+    requestType: 44,
+    processId: 5,
+    processName: 'เจ้าหน้าที่ส่วนกลางตรวจสอบบันทึกผล',
+    status: [
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
+      { id: 2, sname: 'ขอแก้ไข/เพิ่มเติม', ename: 'ขอแก้ไข/เพิ่มเติม' },
+      { id: 3, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+      { id: 4, sname: 'ขาดคุณสมบัติ', ename: 'ขาดคุณสมบัติ' },
+    ],
+  },
+  {
+    requestType: 44,
+    processId: 6,
+    processName: 'เจ้าหน้าที่ส่วนกลางจัดทำบัญชีผู้เข้ารายงานตัว',
+    status: [
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
+      { id: 2, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+    ],
+  },
+  {
+    requestType: 44,
+    processId: 7,
+    processName: 'ลงทะเบียนรายงานตัว',
+    status: [
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
+      { id: 2, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+    ],
+  },
+  {
+    requestType: 44,
+    processId: 8,
+    processName: 'พิมพ์ป้ายติดหน้าอก',
+    status: [
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
+      { id: 2, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+    ],
+  },
+  {
+    requestType: 44,
+    processId: 9,
+    processName: 'ลงทะเบียนวันเข้าเฝ้าฯ',
+    status: [
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
+      { id: 2, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+    ],
+  },
+
+  //ขอรับรางวัลผลงานวิจัยของคุรุสภา
+  {
+    requestType: 45,
+    processId: 1,
+    processName: 'สร้างแบบคำขอ',
+    status: [
+      { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
+    ],
+  },
+  {
+    requestType: 45,
+    processId: 2,
+    processName: 'สร้างและส่งแบบคำขอ',
+    status: [
+      { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'กำลังดำเนินการ' },
+    ],
+  },
+  {
+    requestType: 45,
+    processId: 3,
+    processName: 'เจ้าหน้าที่ส่วนกลางตรวจสอบ ลำดับที่ 1',
+    status: [
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
+      { id: 2, sname: 'ขอแก้ไข/เพิ่มเติม', ename: 'ขอแก้ไข/เพิ่มเติม' },
+      { id: 3, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+      { id: 4, sname: 'ขาดคุณสมบัติ', ename: 'ขาดคุณสมบัติ' },
+      { id: 5, sname: 'คัดค้าน/เพิกถอน', ename: 'คัดค้าน/เพิกถอน' },
+    ],
+  },
+  {
+    requestType: 45,
+    processId: 4,
+    processName: 'เจ้าหน้าที่ส่วนกลางตรวจสอบ ลำดับที่ 2',
+    status: [
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
+      { id: 2, sname: 'ขอแก้ไข/เพิ่มเติม', ename: 'ขอแก้ไข/เพิ่มเติม' },
+      { id: 3, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+      { id: 4, sname: 'ขาดคุณสมบัติ', ename: 'ขาดคุณสมบัติ' },
+      { id: 5, sname: 'คัดค้าน/เพิกถอน', ename: 'คัดค้าน/เพิกถอน' },
+    ],
+  },
+  {
+    requestType: 45,
+    processId: 5,
+    processName: 'เจ้าหน้าที่ส่วนกลางบันทึกผล',
+    status: [
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
+      { id: 2, sname: 'ขอแก้ไข/เพิ่มเติม', ename: 'ขอแก้ไข/เพิ่มเติม' },
+      { id: 3, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+      { id: 4, sname: 'ขาดคุณสมบัติ', ename: 'ขาดคุณสมบัติ' },
+    ],
+  },
+  {
+    requestType: 45,
+    processId: 6,
+    processName: 'เจ้าหน้าที่ส่วนกลางประกาศรายชื่อ',
     status: [
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
       { id: 2, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
