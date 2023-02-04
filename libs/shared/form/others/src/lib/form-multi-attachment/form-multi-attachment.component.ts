@@ -62,7 +62,7 @@ export class FormMultiAttachmentComponent {
           files: group.files,
           checkresult: group?.checkresult ?? [],
           systemType: this.systemType,
-          mode: this.viewFileMode
+          mode: this.viewFileMode,
         },
       });
       dialogRef
@@ -73,7 +73,7 @@ export class FormMultiAttachmentComponent {
 
   mapDisplay(result: any) {
     if (result) {
-      return result == 'complete' ? 'รับเอกสารแล้ว' : 'ขอเอกสารเพิ่มเติม'
+      return result == 'complete' ? 'รับเอกสารแล้ว' : 'ขอเอกสารเพิ่มเติม';
     }
     return '';
   }

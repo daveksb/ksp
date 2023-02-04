@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject, OnInit, Output } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PDFDocument } from 'pdf-lib';
 
@@ -86,7 +86,7 @@ export class PdfViewerComponent implements OnInit {
         }
       });
     } else if (this.data.systemType == 'ksp') {
-      this.fileService.downloadKspFile({ id }).subscribe((res: any) => {
+      this.fileService.eDownloadKspFile({ id }).subscribe((res: any) => {
         const extension = this.pdfList[index].type;
         const src = atob(res?.filedata ?? '');
         if (extension == 'pdf') {
@@ -98,7 +98,19 @@ export class PdfViewerComponent implements OnInit {
         }
       });
     } else {
-      this.fileService.downloadSchoolFile({ id }).subscribe((res: any) => {
+      this.fileService.downloadFile({ id }).subscribe((res: any) => {
+        //console.log('ttt = ', res);
+        const extension = this.pdfList[index].type;
+        const src = atob(res?.filedata ?? '') || atob(res?.file ?? '');
+        if (extension == 'pdf') {
+          this.downloading(src, index);
+        } else {
+          this.pdfList[index].src = src;
+          this.pdfList[index].view = src;
+          this.pdfList[index].loading = false;
+        }
+      });
+      /*       this.fileService.eDownloadSchoolFile({ id }).subscribe((res: any) => {
         const extension = this.pdfList[index].type;
         const src = atob(res?.filedata ?? '');
         if (extension == 'pdf') {
@@ -108,7 +120,7 @@ export class PdfViewerComponent implements OnInit {
           this.pdfList[index].view = src;
           this.pdfList[index].loading = false;
         }
-      });
+      }); */
     }
   }
   async downloading(src: string, index: number) {
@@ -127,7 +139,7 @@ export class PdfViewerComponent implements OnInit {
   mappingFile(files: KspFile[]) {
     files.map((file) => {
       const id = file.fileid;
-      return this.fileService.downloadSchoolFile({ id });
+      return this.fileService.eDownloadSchoolFile({ id });
     });
   }
   setDefault(count: number) {

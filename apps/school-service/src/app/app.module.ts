@@ -17,12 +17,12 @@ import {
   TokenFailInterceptor,
   TokenHandleInterceptor,
 } from '@ksp/shared/interceptor';
-import { File_UPLOAD_URLS, FileUploadUrls } from '@ksp/shared/form/file-upload';
+import { File_UPLOAD_URLS, FileUrls } from '@ksp/shared/form/file-upload';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 
-const fileUrls: FileUploadUrls = {
+const fileUrls: FileUrls = {
   uploadFile: '/kspstaff/schrequestfileinsert',
   uploadImage: '',
   delete: '/kspstaff/schrequestfiledelete',
@@ -69,7 +69,6 @@ const fileUrls: FileUploadUrls = {
       useValue: fileUrls,
     },
     { provide: MAT_DATE_LOCALE, useValue: 'th-TH' },
-    //{ provide: DateAdapter, useClass: PickDateAdapter },
     {
       provide: MAT_DIALOG_DEFAULT_OPTIONS,
       useValue: {

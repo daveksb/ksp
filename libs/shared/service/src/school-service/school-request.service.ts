@@ -2,13 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
 import {
-  KspListResponse,
   KspRequest,
   KspRequestProcess,
   SchRequestSearchFilter,
   SchTempLicense,
 } from '@ksp/shared/interface';
-import { map, Observable, shareReplay } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -81,11 +80,5 @@ export class SchoolRequestService {
       `${environment.apiUrl}/kspstaff/ksprequestupdateisclose`,
       payload
     );
-  }
-
-  loadFile(payload: any) {
-    return this.http
-      .post(`${environment.apiUrl}/kspstaff/schrequestfileselectbyid`, payload)
-      .pipe(shareReplay());
   }
 }
