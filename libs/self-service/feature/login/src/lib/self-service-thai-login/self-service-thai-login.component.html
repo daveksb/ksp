@@ -1,12 +1,12 @@
 <section class="bg-image">
   <div class="container min-vh-100 d-flex flex-column justify-content-center">
     <div class="d-flex justify-content-start">
-      <mat-button-toggle-group name="lang" aria-label="Font Style">
+      <mat-button-toggle-group #group="matButtonToggleGroup">
         <mat-button-toggle value="th" checked="true" class="w-50"
           ><img src="/assets/images/thai-flag.png" style="width: 25px" />
           Th</mat-button-toggle
         >
-        <mat-button-toggle value="th" class="w-50"
+        <mat-button-toggle value="en" class="w-50"
           ><img src="/assets/images/eng-flag.png" style="width: 20px" />
           En</mat-button-toggle
         >
@@ -33,7 +33,12 @@
           <div class="d-flex flex-column align-items-center">
             <div class="text-center">
               <img src="/assets/images/K-logo.png" />
-              <h1 class="mb-1">เข้าใช้งานเว็บไซต์</h1>
+              <h1 class="mb-1" *ngIf="group.value === 'th'">
+                เข้าใช้งานเว็บไซต์
+              </h1>
+              <h1 class="mb-1" *ngIf="group.value === 'en'">
+                Access the Website
+              </h1>
               <h3 class="mb-3 text-secondary">Selfservice</h3>
             </div>
           </div>
@@ -46,11 +51,20 @@
 
           <div class="row">
             <div class="col mb-3">
-              <label class="fs-4 text-black">รหัสบัตรประชาชน</label>
+              <label class="fs-4 text-black" *ngIf="group.value === 'th'"
+                >รหัสบัตรประชาชน</label
+              >
+              <label class="fs-4 text-black" *ngIf="group.value === 'en'"
+                >Teachers Council of Thailand ID number</label
+              >
               <input
                 type="text"
                 class="form-control form-control-lg"
-                placeholder="กรุณากรอกรหัสบัตรประชาชน 13 หลัก"
+                [placeholder]="
+                  group.value === 'th'
+                    ? 'กรุณากรอกรหัสบัตรประชาชน 13 หลัก'
+                    : 'username'
+                "
                 formControlName="username"
                 maxlength="13"
               />
@@ -59,11 +73,16 @@
 
           <div class="row">
             <div class="col mb-3">
-              <label class="fs-4 text-black">รหัสผ่าน</label>
+              <label class="fs-4 text-black" *ngIf="group.value === 'th'"
+                >รหัสผ่าน</label
+              >
+              <label class="fs-4 text-black" *ngIf="group.value === 'en'"
+                >Password</label
+              >
               <input
                 [type]="eyeIconClicked ? 'text' : 'password'"
                 class="form-control form-control-lg"
-                placeholder="รหัสผ่าน"
+                [placeholder]="group.value === 'th' ? 'รหัสผ่าน' : 'password'"
                 formControlName="password"
               />
               <i
@@ -83,7 +102,8 @@
               class="text-secondary text-decoration-underline fs-5"
               (click)="forgot()"
             >
-              ลืมรหัสผ่าน?
+              <span *ngIf="group.value === 'th'">ลืมรหัสผ่าน?</span>
+              <span *ngIf="group.value === 'en'">Forgot Password?</span>
             </div>
           </div>
 
@@ -94,7 +114,8 @@
               type="submit"
               class="btn btn-primary fs-4 w-100"
             >
-              เข้าสู่ระบบ
+              <span *ngIf="group.value === 'th'">เข้าสู่ระบบ</span>
+              <span *ngIf="group.value === 'en'">Login</span>
             </button>
           </div>
 
@@ -104,7 +125,8 @@
               (click)="register()"
               class="label__primary text-decoration-underline fs-5"
             >
-              สมัครสมาชิก
+              <span *ngIf="group.value === 'th'">สมัครสมาชิก</span>
+              <span *ngIf="group.value === 'en'">Register</span>
             </div>
           </div>
         </form>
