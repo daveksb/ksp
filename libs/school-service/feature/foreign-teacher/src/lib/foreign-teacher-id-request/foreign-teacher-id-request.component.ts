@@ -98,12 +98,14 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   loadRequestData(id: number) {
     this.requestService.schGetRequestById(id).subscribe((res) => {
       if (res) {
+        //console.log('res xx = ', res);
         this.mode = 'view';
         this.showCancelButton = Boolean(res.status);
-        this.requestData.requestdate = res.requestdate ?? '';
-        this.requestData.requestno = res.requestno ?? '';
-        this.requestData.isclose =
-          this.requestData.isclose === '1' ? true : false;
+        this.requestData = res;
+        this.requestData.isclose = Number(this.requestData.isclose)
+          ? true
+          : false;
+
         const fileinfo = parseJson(res?.fileinfo || '');
         if (fileinfo) {
           this.foreignFiles.forEach(
@@ -174,11 +176,6 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   }
 
   confirmDialog() {
-    /*  if (
-      !this.form.get('foreignTeacher')?.valid ||
-      !this.form.get('visainfo')?.valid
-    )
-      return; */
     const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการยืนยันข้อมูล
@@ -200,7 +197,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
             userInfo.ref2 = '04';
             userInfo.ref3 = '5';
             userInfo.isforeign = '1';
-            userInfo.systemtype = '2';
+            userInfo.systemtype = '2'; // school service
             userInfo.requesttype = '4';
             userInfo.careertype = '5';
             userInfo.schoolid = this.schoolId;

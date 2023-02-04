@@ -141,11 +141,12 @@ export class ForeignLicenseDetailComponent implements OnInit {
         switchMap((res) => {
           if (res) {
             const data: any = this.form.controls.verifydetail.value;
+            //console.log('data = ', data);
             const payload: KspApprovePayload = {
               requestid: this.requestData.requestid,
               process: '2',
               status: data?.result,
-              detail: null, //`${data?.detail}`,
+              detail: JSON.stringify(data),
               systemtype: '4', // e-service
               userid: getCookie('userId'),
               paymentstatus: null,
@@ -164,8 +165,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
 
             payload.country = countryCode3digits;
             payload.requestno = this.requestData.requestno;
-            payload.createdate = moment().format('yyyy-MM-DD');
-            payload.expireddate = moment().add(2, 'years').format('yyyy-MM-DD');
+            payload.expiredate = moment().add(2, 'years').format('yyyy-MM-DD');
             payload.visaclass = this.requestData.visaclass;
             payload.visatype = this.requestData.visatype;
             payload.visaexpiredate = this.requestData.visaexpiredate;
