@@ -99,7 +99,6 @@ export class PdfViewerComponent implements OnInit {
       });
     } else {
       this.fileService.downloadFile({ id }).subscribe((res: any) => {
-        //console.log('ttt = ', res);
         const extension = this.pdfList[index].type;
         const src = atob(res?.filedata ?? '') || atob(res?.file ?? '');
         if (extension == 'pdf') {
@@ -110,17 +109,6 @@ export class PdfViewerComponent implements OnInit {
           this.pdfList[index].loading = false;
         }
       });
-      /*       this.fileService.eDownloadSchoolFile({ id }).subscribe((res: any) => {
-        const extension = this.pdfList[index].type;
-        const src = atob(res?.filedata ?? '');
-        if (extension == 'pdf') {
-          this.downloading(src, index);
-        } else {
-          this.pdfList[index].src = src;
-          this.pdfList[index].view = src;
-          this.pdfList[index].loading = false;
-        }
-      }); */
     }
   }
   async downloading(src: string, index: number) {
