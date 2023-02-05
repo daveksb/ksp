@@ -4,11 +4,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatDialogConfig, MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import {
+  MatDialogConfig,
+  MatDialogModule,
+  MAT_DIALOG_DEFAULT_OPTIONS,
+} from '@angular/material/dialog';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ReactiveFormsModule } from '@angular/forms';
-import { File_UPLOAD_URLS, FileUploadUrls } from '@ksp/shared/form/file-upload';
+import { File_UPLOAD_URLS, FileUrls } from '@ksp/shared/form/file-upload';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import {
@@ -17,7 +21,7 @@ import {
   TokenHandleInterceptor,
 } from '@ksp/shared/interceptor';
 
-const fileUrls: FileUploadUrls = {
+const fileUrls: FileUrls = {
   uploadFile: '/kspuni/unirequestfilesinsert',
   uploadImage: '',
   download: '/kspuni/unirequestfileselectfile',
