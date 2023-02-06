@@ -56,7 +56,7 @@ export class FormUserEducationComponent
     this.educationTypes3 = educationTypes3;
 
     this.form.controls['educationType'].valueChanges
-      .pipe(skip(1))
+      .pipe(skip(this.educationTypes === 'teacher' ? 3 : 1))
       .subscribe((res) => {
         this.selectedEducationType = Number(res);
         //this.form.controls.educationLevelForm.reset();
