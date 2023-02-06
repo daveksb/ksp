@@ -14,6 +14,7 @@ import {
 } from '@ksp/shared/dialog';
 import {
   EsSearchPayload,
+  KspApprovePayload,
   KspRequest,
   SchRequestSearchFilter,
   SelfApproveList,
@@ -24,7 +25,7 @@ import {
   getCookie,
   replaceEmptyWithNull,
 } from '@ksp/shared/utility';
-import { Subject } from 'rxjs';
+import { forkJoin, Subject } from 'rxjs';
 
 interface CheckKSPRequest extends KspRequest {
   check: boolean;
@@ -88,7 +89,7 @@ export class ETeacherCouncilCreateAccountComponent
       name: null,
       idcardno: null,
       passportno: null,
-      process: null,
+      process: '4',
       status: null,
       schoolid: null,
       schoolname: null,
@@ -136,27 +137,41 @@ export class ETeacherCouncilCreateAccountComponent
 
     dialog.componentInstance.confirmed.subscribe((res) => {
       //console.log('max career type = ', this.maxCareerType);
+      const checkIds = this.dataSource.data
+        .filter((item) => item.check)
+        .map((item) => item.id);
       if (res) {
         const payload: Partial<SelfApproveList> = {
           listno: this.listNo.toString(),
           process: '5',
-          // careertype: this.maxCareerType.licenseType,
+          careertype: '5',
           requesttype: '40', // ใบคำขออนุญาต
           isforeign: '0',
           status: '1',
           // forwardtolicensecreate: this.form.controls.createNumber.value
           //   ? '1'
           //   : '0',
-          requestlist: JSON.stringify(
-            this.dataSource.data
-              .filter((item) => item.check)
-              .map((item) => item.id)
-          ),
+          requestlist: JSON.stringify(checkIds),
           userid: `${getCookie('userId')}`,
         };
         this.requestService.createAprroveList(payload).subscribe((res) => {
           if (res?.returnmessage === 'success') {
-            this.completeDialog();
+            const streams = checkIds.map((id) => {
+              const payload: KspApprovePayload = {
+                requestid: id,
+                process: '5',
+                status: '1',
+                userid: `${getCookie('userId')}`,
+                detail: null,
+                systemtype: '4', // approve by e-service staff
+                paymentstatus: null,
+              };
+              return this.requestService.KspUpdateRequestProcess(payload);
+            });
+            forkJoin(streams).subscribe((res) => {
+              console.log(res);
+              this.completeDialog();
+            });
           }
         });
       }

@@ -59,7 +59,7 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
     console.log('input ', input);
     if (input.result === '1') {
       //ครบถ้วน และถูกต้อง
-      if (input.shouldForward === false) {
+      if (!!input.shouldForward === false) {
         //ไม่ส่งตรวจสอบลำดับต่อไป
         if (req.process === '2') {
           this.targetProcess = Number(req.process) + 1;
@@ -82,12 +82,14 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
           this.targetProcess = 6;
           this.targetStatus = 1;
         }
-        console.log('target process = ', this.targetProcess);
-        console.log('target status = ', this.targetStatus);
       }
     } else if (input.result === '2') {
       //ขอแก้ไข / เพิ่มเติม
-      this.targetProcess = Number(req.process) + 1;
+      if (req.process === '2') {
+        this.targetProcess = Number(req.process) + 1;
+      } else {
+        this.targetProcess = Number(req.process);
+      }
       this.targetStatus = 2;
     } else if (input.result === '3') {
       //ขาดคุณสมบัติ
@@ -113,7 +115,7 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
       userid: this.userId,
       paymentstatus: null,
     };
-    // console.log('payload = ', payload);
+    console.log('payload = ', payload);
     this.eRequestService.KspUpdateRequestProcess(payload).subscribe(() => {
       this.eRequestService
         .setUrgentRequest(this.saveData.requestData.id, form.isurgent)
