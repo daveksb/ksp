@@ -59,7 +59,7 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
     console.log('input ', input);
     if (input.result === '1') {
       //ครบถ้วน และถูกต้อง
-      if (input.shouldForward === false) {
+      if (!!input.shouldForward === false) {
         //ไม่ส่งตรวจสอบลำดับต่อไป
         if (req.process === '2') {
           this.targetProcess = Number(req.process) + 1;
@@ -82,8 +82,6 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
           this.targetProcess = 6;
           this.targetStatus = 1;
         }
-        console.log('target process = ', this.targetProcess);
-        console.log('target status = ', this.targetStatus);
       }
     } else if (input.result === '2') {
       //ขอแก้ไข / เพิ่มเติม

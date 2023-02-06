@@ -89,7 +89,7 @@ export class ETeacherCouncilCreateAccountComponent
       name: null,
       idcardno: null,
       passportno: null,
-      process: null,
+      process: '4',
       status: null,
       schoolid: null,
       schoolname: null,
