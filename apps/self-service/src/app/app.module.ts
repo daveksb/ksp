@@ -17,11 +17,11 @@ import {
   LoadingInterceptor,
   TokenHandleInterceptor,
 } from '@ksp/shared/interceptor';
-import { FileUploadUrls, File_UPLOAD_URLS } from '@ksp/shared/form/file-upload';
+import { FileUrls, File_UPLOAD_URLS } from '@ksp/shared/form/file-upload';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
-const fileUrls: FileUploadUrls = {
+const fileUrls: FileUrls = {
   uploadFile: '/kspself/requestfileinsert',
   uploadImage: '/kspself/kspfileinsert',
   delete: '/kspself/requestfiledelete',

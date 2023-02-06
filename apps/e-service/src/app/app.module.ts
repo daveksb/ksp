@@ -14,7 +14,7 @@ import {
   TokenHandleInterceptor,
 } from '@ksp/shared/interceptor';
 import { MatMenuModule } from '@angular/material/menu';
-import { FileUploadUrls, File_UPLOAD_URLS } from '@ksp/shared/form/file-upload';
+import { FileUrls, File_UPLOAD_URLS } from '@ksp/shared/form/file-upload';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import {
@@ -23,7 +23,7 @@ import {
   MAT_DIALOG_DEFAULT_OPTIONS,
 } from '@angular/material/dialog';
 
-const fileUrls: FileUploadUrls = {
+const fileUrls: FileUrls = {
   uploadFile: '/e-service/kspfileinsert',
   uploadImage: '',
   download: '/e-service/kspfileselectidfile',

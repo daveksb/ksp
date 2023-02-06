@@ -144,6 +144,7 @@ export class RequestRewardFormComponent extends KspFormBaseComponent {
       ],
       email: [data.email, [Validators.required, Validators.email]],
       academicstanding: [data.academicstanding, Validators.required],
+      isCoordinator: [],
     });
 
     //console.log('reward form = ', rewardForm);

@@ -2,7 +2,7 @@ export class KspKuruspa {
   //countrycode: string | null = null;
   requestno: string | null = null;
   createdate: string | null = null;
-  expireddate: string | null = null;
+  expiredate: string | null = null;
   kuruspano: string | null = null;
   idcardno: string | null = null;
   passportno: string | null = null;

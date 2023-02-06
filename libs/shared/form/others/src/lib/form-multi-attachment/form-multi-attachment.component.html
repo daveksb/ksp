@@ -63,8 +63,13 @@
             </td>
             <td *ngIf="systemType === 'e-service-uni'">
               <div class="mt-4">
-                <ng-container *ngFor="let result of group.checkresult; index as j">
-                  <div class="d-flex align-items-center flex-row mb-4" *ngIf="!result?.result"></div>
+                <ng-container
+                  *ngFor="let result of group.checkresult; index as j"
+                >
+                  <div
+                    class="d-flex align-items-center flex-row mb-4"
+                    *ngIf="!result?.result"
+                  ></div>
                   <div class="d-flex align-items-center flex-row">
                     {{ mapDisplay(result?.result) }}
                   </div>
