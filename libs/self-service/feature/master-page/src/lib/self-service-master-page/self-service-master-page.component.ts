@@ -14,15 +14,15 @@ import localForage from 'localforage';
   imports: [CommonModule, RouterModule, SharedMenuModule, TopNavComponent],
 })
 export class SelfServiceMasterPageComponent implements OnInit {
-  menuConfig: MenuConfig[];
+  menuConfig!: MenuConfig[];
   myName = '';
   lastLogin = '';
 
   constructor(private myInfoService: MyInfoService) {
-    this.menuConfig = getMenu('1');
     localForage.getItem('my-info').then((res: any) => {
       this.myName = res.firstnameth + ' ' + res.lastnameth;
       this.lastLogin = thaiDate(new Date(res.lastlogintime as string));
+      this.menuConfig = getMenu(res.usertype);
     });
   }
 
@@ -56,6 +56,14 @@ const getMenu = (userType: string | null) => {
               subMenu: [
                 {
                   label: 'ครู',
+                  path: '/license/teacher',
+                },
+                {
+                  label: 'ผู้บริหารสถานศึกษา',
+                  path: '/license/school-manager',
+                },
+                /* {
+                  label: 'ครู',
                   path: '',
                   subMenuName: 'teacherType',
                   subMenu:
@@ -73,8 +81,8 @@ const getMenu = (userType: string | null) => {
                             params: { type: 1 },
                           },
                         ],
-                },
-                {
+                }, */
+                /* {
                   label: 'ผู้บริหารสถานศึกษา',
                   path: '',
                   subMenuName: 'manageType',
@@ -93,7 +101,7 @@ const getMenu = (userType: string | null) => {
                             params: { type: 2 },
                           },
                         ],
-                },
+                }, */
                 {
                   label: 'ผู้บริหารการศึกษา',
                   path: '/license/education-manager',
@@ -110,6 +118,14 @@ const getMenu = (userType: string | null) => {
               subMenuName: 'renewLicense',
               subMenu: [
                 {
+                  label: 'ครู',
+                  path: '/renew-license/request',
+                },
+                {
+                  label: 'ผู้บริหารสถานศึกษา',
+                  path: '/renew-license/school-manager',
+                },
+                /* {
                   label: 'ครู',
                   path: '',
                   subMenuName: 'teacherType',
@@ -148,7 +164,7 @@ const getMenu = (userType: string | null) => {
                             params: { type: 2 },
                           },
                         ],
-                },
+                }, */
                 {
                   label: 'ผู้บริหารการศึกษา',
                   path: '/renew-license/education-manager',
@@ -257,27 +273,29 @@ const getMenu = (userType: string | null) => {
               subMenu: [
                 {
                   label: 'Teacher',
-                  path: '',
-                  subMenuName: 'teacherType',
+                  path: '/license/agreement',
+                  params: { type: 1 },
+                  /* subMenuName: 'teacherType',
                   subMenu: [
                     {
                       label: 'Foreign',
                       path: '/license/agreement',
                       params: { type: 1 },
                     },
-                  ],
+                  ], */
                 },
                 {
                   label: 'Educational Institution',
-                  path: '',
-                  subMenuName: 'manageType',
+                  path: '/license/agreement',
+                  params: { type: 2 },
+                  /* subMenuName: 'manageType',
                   subMenu: [
                     {
                       label: 'Foreign',
                       path: '/license/agreement',
                       params: { type: 2 },
                     },
-                  ],
+                  ], */
                 },
               ],
             },
@@ -288,27 +306,29 @@ const getMenu = (userType: string | null) => {
               subMenu: [
                 {
                   label: 'Teacher',
-                  path: '',
-                  subMenuName: 'teacherType',
+                  path: '/renew-license/foreign',
+                  params: { type: 1 },
+                  /* subMenuName: 'teacherType',
                   subMenu: [
                     {
                       label: 'Foreign',
                       path: '/renew-license/foreign',
                       params: { type: 1 },
                     },
-                  ],
+                  ], */
                 },
                 {
                   label: 'Educational Institution',
-                  path: '',
-                  subMenuName: 'manageType',
+                  path: '/renew-license/foreign',
+                  params: { type: 2 },
+                  /* subMenuName: 'manageType',
                   subMenu: [
                     {
                       label: 'Foreign',
                       path: '/renew-license/foreign',
                       params: { type: 2 },
                     },
-                  ],
+                  ], */
                 },
               ],
             },
