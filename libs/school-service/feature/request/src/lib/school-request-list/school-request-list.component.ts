@@ -10,6 +10,7 @@ import {
   SchoolLangMapping,
   SchoolRequestSubType,
   SchoolRequestType,
+  SchoolRewardType,
 } from '@ksp/shared/constant';
 import { PdfRenderComponent } from '@ksp/shared/dialog';
 import {
@@ -58,10 +59,20 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
   tempLicenseRequestTimes: any;
   reqTypeStatus = false;
   viewMoreClicked = false;
+
+  JSON = JSON;
+  SchoolRewardType = SchoolRewardType;
+
+  getPdfColumnLabel = '';
+  getIdColumnLabel = '';
+  getTypeColumnLabel = '';
+  getNameColumnLabel = '';
+
   defaultForm = {
     requesttype: '3',
     careertype: '1',
   };
+
   form = this.fb.group({
     licenseSearch: [this.defaultForm],
   });
@@ -89,11 +100,29 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  getColumnLabel() {
+  /* getPdfColumnLabel() {
     if (this.form.controls.licenseSearch.value?.requesttype !== '3') {
       return 'หนังสือแจ้งผล';
     } else return 'หนังสืออนุญาตฯ';
   }
+
+  getNameColumnLabel() {
+    if (this.form.controls.licenseSearch.value?.requesttype === '40') {
+      return 'ชื่อผลงาน';
+    } else return 'ชื่อ-นามสกุล';
+  }
+
+  getTypeColumnLabel() {
+    if (this.form.controls.licenseSearch.value?.requesttype === '40') {
+      return 'ประเภทผลงาน';
+    } else return 'ประเภทวิชาชีพ';
+  }
+
+  getIdColumnLabel() {
+    if (this.form.controls.licenseSearch.value?.requesttype === '40') {
+      return 'หมายเลขบัตรประชาชนผู้บริหารสถานศึกษา';
+    } else return 'หมายเลขบัตรประชาชน/เลขคุรุสภาสำหรับชาวต่างชาติ';
+  } */
 
   genAlertMessage(req: KspRequest) {
     const detail: any = JSON.parse(req.detail || '');
@@ -129,13 +158,6 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
         this.rejectedRequests = hasRejectedRequest(res);
       }
 
-      // กรณีเลือกใบคำขอ 4 displayColumn จะไม่แสดง column สุดท้าย
-      if (payload.requesttype === '4' || payload.requesttype === '40') {
-        this.displayedColumns = displayedColumnsKSP;
-      } else {
-        this.displayedColumns = displayedColumns;
-      }
-
       if (res && res.length && !this.initialSearch) {
         //console.log('res = ', res);
         this.searchNotFound = false;
@@ -150,6 +172,43 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
         this.dataSource.data = [];
         this.searchNotFound = true;
         this.initialSearch = false;
+      }
+
+      // กรณีเลือกใบคำขอ 4 displayColumn จะไม่แสดง column สุดท้าย
+      if (payload.requesttype === '4') {
+        this.displayedColumns = displayedColumnsKSP;
+      } else {
+        this.displayedColumns = displayedColumns;
+      }
+
+      // เลือกใบคำขอแต่ละประเภท แสดงชื่อตารางไม่เหมือนกัน
+      if (payload.requesttype === '3') {
+        this.getPdfColumnLabel = 'หนังสืออนุญาตฯ';
+      } else if (payload.requesttype === '40') {
+        this.getPdfColumnLabel = 'ประกาศนียบัตร';
+      } else {
+        this.getPdfColumnLabel = 'หนังสือแจ้งผล';
+      }
+
+      if (payload.requesttype === '40') {
+        this.getNameColumnLabel = 'ชื่อผลงาน';
+      } else {
+        this.getNameColumnLabel = 'ชื่อ-นามสกุล';
+      }
+
+      if (payload.requesttype === '40') {
+        this.getTypeColumnLabel = 'ประเภทผลงาน';
+      } else {
+        this.getTypeColumnLabel = 'ประเภทวิชาชีพ';
+      }
+
+      if (payload.requesttype === '40') {
+        this.getIdColumnLabel = 'หมายเลขบัตรประชาชนผู้บริหารสถานศึกษา';
+      } else if (payload.requesttype === '4') {
+        this.getIdColumnLabel = 'เลขคุรุสภาสำหรับชาวต่างชาติ';
+      } else {
+        this.getIdColumnLabel =
+          'หมายเลขบัตรประชาชน/เลขคุรุสภาสำหรับชาวต่างชาติ';
       }
     });
   }
@@ -979,5 +1038,4 @@ export const displayedColumnsKSP = [
   'status',
   'updatedate',
   'requestdate',
-  'requestpdf',
 ];

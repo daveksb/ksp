@@ -15,6 +15,7 @@ import {
 } from '@ksp/shared/interface';
 import {
   AddressService,
+  EducationDetailService,
   ERequestService,
   GeneralInfoService,
 } from '@ksp/shared/service';
@@ -42,6 +43,7 @@ export class EQualificationApproveDetailComponent implements OnInit {
   tumbols2$!: Observable<Tambol[]>;
   countries$!: Observable<Country[]>;
   nationalitys$!: Observable<Nationality[]>;
+  bureau$!: Observable<any>;
   showEdu2 = false;
   showEdu3 = false;
   showEdu4 = false;
@@ -60,6 +62,10 @@ export class EQualificationApproveDetailComponent implements OnInit {
     edu2: [],
     edu3: [],
     edu4: [],
+    exp1: [],
+    exp2: [],
+    exp3: [],
+    exp4: [],
     checkResult: this.fb.array([]),
   });
 
@@ -69,7 +75,8 @@ export class EQualificationApproveDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private eRequestService: ERequestService,
     private generalInfoService: GeneralInfoService,
-    private addressService: AddressService
+    private addressService: AddressService,
+    private educationDetailService: EducationDetailService
   ) {}
 
   ngOnInit(): void {
@@ -79,7 +86,7 @@ export class EQualificationApproveDetailComponent implements OnInit {
   }
 
   addCheckResultArray() {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 6; i++) {
       this.checkResultFormArray.push(this.fb.control(null));
     }
     this.checkResultFormArray.setValidators(
@@ -204,6 +211,7 @@ export class EQualificationApproveDetailComponent implements OnInit {
     this.provinces1$ = this.addressService.getProvinces();
     this.countries$ = this.addressService.getCountry();
     this.nationalitys$ = this.generalInfoService.getNationality();
+    this.bureau$ = this.educationDetailService.getBureau();
   }
 
   getAmphurChanged(addrType: number, province: any) {
@@ -227,7 +235,7 @@ export class EQualificationApproveDetailComponent implements OnInit {
   }
 
   nextTab() {
-    if (this.selectedTabIndex < 4) {
+    if (this.selectedTabIndex < 5) {
       this.selectedTabIndex++;
     } else {
       this.next();

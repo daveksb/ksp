@@ -11,12 +11,16 @@ import { FormForeignIdComponent } from './form-foreign-id/form-foreign-id.compon
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
+import {
+  AddRowButtonComponent,
+  RequestHeaderInfoComponent,
+} from '@ksp/shared/ui';
 import { FormHiringInfoComponent } from './form-hiring-info/form-hiring-info.component';
 import { FormVisaInfoComponent } from './form-visa-info/form-visa-info.component';
 import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 import { FormMultiAttachmentComponent } from './form-multi-attachment/form-multi-attachment.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { QualificationExperienceInfoComponent } from './qualification-experience-info/qualification-experience-info.component';
 
 @NgModule({
   imports: [
@@ -27,6 +31,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatCheckboxModule,
     RequestHeaderInfoComponent,
     FileUploadComponent,
+    AddRowButtonComponent,
   ],
   declarations: [
     FormAddressComponent,
@@ -40,6 +45,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     FormForeignIdComponent,
     FormHiringInfoComponent,
     FormVisaInfoComponent,
+    QualificationExperienceInfoComponent,
   ],
   exports: [
     FormAddressComponent,
@@ -53,6 +59,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     FormForeignIdComponent,
     FormHiringInfoComponent,
     FormVisaInfoComponent,
+    QualificationExperienceInfoComponent,
   ],
 })
 export class SharedFormOthersModule {}
