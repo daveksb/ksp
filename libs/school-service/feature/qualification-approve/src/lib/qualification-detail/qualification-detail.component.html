@@ -229,6 +229,7 @@
               <ksp-qualification-experience-info
                 formControlName="exp1"
                 [bureaus]="bureau$ | async"
+                [mode]="mode"
               ></ksp-qualification-experience-info
             ></ng-container>
             <div class="d-flex align-items-center">
@@ -243,6 +244,7 @@
               <ksp-qualification-experience-info
                 formControlName="exp2"
                 [bureaus]="bureau$ | async"
+                [mode]="mode"
               ></ksp-qualification-experience-info
             ></ng-container>
             <div class="d-flex align-items-center">
@@ -257,6 +259,7 @@
               <ksp-qualification-experience-info
                 formControlName="exp3"
                 [bureaus]="bureau$ | async"
+                [mode]="mode"
               ></ksp-qualification-experience-info
             ></ng-container>
             <div class="d-flex align-items-center">
@@ -271,6 +274,7 @@
               <ksp-qualification-experience-info
                 formControlName="exp4"
                 [bureaus]="bureau$ | async"
+                [mode]="mode"
               ></ksp-qualification-experience-info
             ></ng-container>
           </mat-tab>
@@ -287,7 +291,9 @@
       requestId > 0 && requestData.process !== '3' && requestData.status !== '0'
     "
     [showSaveButton]="mode === 'edit'"
-    [disableSaveButton]="form.controls.userInfo.invalid"
+    [disableSaveButton]="
+      form.controls.userInfo.invalid || requestData.status === '0'
+    "
     (saveClicked)="onSave()"
     (prevClicked)="onClickPrev()"
     (nextClicked)="onClickNext()"
