@@ -134,7 +134,7 @@ export class ETeacherCouncilCreateDeclareComponent
           listno: this.listNo.toString(),
           process: '6',
           careertype: '5',
-          requesttype: '40', // ใบคำขออนุญาต
+          requesttype: SelfServiceRequestType.ขอรับรางวัลคุรุสภา, // ใบคำขออนุญาต
           isforeign: '0',
           status: '2',
           requestlist: JSON.stringify(checkIds),

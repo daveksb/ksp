@@ -54,8 +54,8 @@ export class ETeacherCouncilAccountListComponent implements AfterViewInit {
   searchData(params: any) {
     const payload: SelfApproveListSearch = {
       groupno: params.groupno,
-      process: params.process,
-      status: params.status,
+      process: params.process || '5',
+      status: params.status || '1',
       careertype: params.careertype,
       createdate: params.createdate,
       offset: '0',

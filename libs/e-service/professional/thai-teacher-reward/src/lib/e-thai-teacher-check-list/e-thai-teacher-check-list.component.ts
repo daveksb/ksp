@@ -49,13 +49,13 @@ export class EThaiTeacherCheckListComponent implements OnInit, AfterViewInit {
   search(params: Partial<SchRequestSearchFilter>) {
     let payload: EsSearchPayload = {
       systemtype: '1',
-      requesttype: SelfServiceRequestType.ขอรับรางวัลคุรุสภา,
+      requesttype: SelfServiceRequestType.ขอรับรางวัลครูภาษาไทยดีเด่น,
       requestno: params.requestno,
       careertype: null,
       name: params.name,
       idcardno: params.idcardno,
       passportno: null,
-      process: null,
+      process: '5',
       status: params.status,
       schoolid: null,
       schoolname: null,

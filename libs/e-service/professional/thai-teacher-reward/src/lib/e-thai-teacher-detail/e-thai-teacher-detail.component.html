@@ -9,7 +9,7 @@
       <div class="box-header">รายละเอียดแบบคำขอรางวัลครูภาษาไทยดีเด่น</div>
       <mat-tab-group
         class="tab-group"
-        [selectedIndex]="0"
+        [selectedIndex]="selectedTabIndex"
         (selectedTabChange)="tabChanged($event)"
         animationDuration="0ms">
         <mat-tab label="ข้อมูลส่วนตัว">
@@ -106,6 +106,6 @@
     [colorMode]="'blue'"
     [showCenterButtons]="true"
     [showCancelButton]="true"
-    (nextClicked)="next()"
+    (nextClicked)="nextTab(formTabCount)"
     (cancelClicked)="cancel()"></ksp-bottom-nav>
 </div>
