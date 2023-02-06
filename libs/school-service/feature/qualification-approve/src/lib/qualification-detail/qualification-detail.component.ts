@@ -26,6 +26,7 @@ import {
 } from '@ksp/shared/interface';
 import {
   AddressService,
+  EducationDetailService,
   GeneralInfoService,
   LoaderService,
   SchoolInfoService,
@@ -63,6 +64,10 @@ export class QualificationDetailComponent implements OnInit {
     edu2: [],
     edu3: [],
     edu4: [],
+    exp1: [],
+    exp2: [],
+    exp3: [],
+    exp4: [],
   });
 
   uniqueNo!: string;
@@ -76,6 +81,8 @@ export class QualificationDetailComponent implements OnInit {
   tumbols2$!: Observable<Tambol[]>;
   countries$!: Observable<Country[]>;
   nationalitys$!: Observable<Nationality[]>;
+  bureau$!: Observable<any>;
+  institution$!: Observable<any>;
   positions: PositionType[] = [];
   schoolId = getCookie('schoolId');
   userId = getCookie('userId');
@@ -97,6 +104,8 @@ export class QualificationDetailComponent implements OnInit {
   showEdu3 = false;
   showEdu4 = false;
   formData: any = null;
+  experienceSelected: number[] = [];
+  selectedTabIndex = 0;
 
   constructor(
     public dialog: MatDialog,
@@ -108,7 +117,8 @@ export class QualificationDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private schoolInfoService: SchoolInfoService,
     private staffService: StaffService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private educationDetailService: EducationDetailService
   ) {}
 
   ngOnInit(): void {
@@ -276,6 +286,11 @@ export class QualificationDetailComponent implements OnInit {
     }
   }
 
+  experienceSelect(exp: number, evt: any) {
+    const checked = evt.target.checked;
+    this.experienceSelected[exp] = checked;
+  }
+
   getListData() {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.provinces1$ = this.addressService.getProvinces();
@@ -299,6 +314,7 @@ export class QualificationDetailComponent implements OnInit {
           res.amphurname
         } จังหวัด ${res.provincename} รหัสไปรษณีย์ ${res.zipcode}`;
       });
+    this.bureau$ = this.educationDetailService.getBureau();
   }
 
   cancel() {
@@ -452,7 +468,17 @@ export class QualificationDetailComponent implements OnInit {
   }
 
   onClickPrev() {
-    this.router.navigate(['/temp-license']);
+    if (this.selectedTabIndex == 0) {
+      this.router.navigate(['/temp-license', 'list']);
+    } else {
+      this.selectedTabIndex--;
+    }
+  }
+
+  onClickNext() {
+    if (this.selectedTabIndex < 4) {
+      this.selectedTabIndex++;
+    }
   }
 
   searchIdCardNotFound() {
@@ -479,7 +505,7 @@ export class QualificationDetailComponent implements OnInit {
   duplicateRequestDialog() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       data: {
-        header: `หมายเลขบัตรประชาชนนี้ได้ถูกใช้ยื่นแบบคำขอ
+        header: `หมายเลขบัตรประชาชนนี้ได้ถูกใช้ยื่นแบบคำขอแล้ว
         และกำลังอยู่ในระหว่างดำเนินการ !`,
       },
     });
