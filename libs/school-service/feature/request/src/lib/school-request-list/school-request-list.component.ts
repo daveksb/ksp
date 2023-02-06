@@ -204,6 +204,8 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
 
       if (payload.requesttype === '40') {
         this.getIdColumnLabel = 'หมายเลขบัตรประชาชนผู้บริหารสถานศึกษา';
+      } else if (payload.requesttype === '4') {
+        this.getIdColumnLabel = 'เลขคุรุสภาสำหรับชาวต่างชาติ';
       } else {
         this.getIdColumnLabel =
           'หมายเลขบัตรประชาชน/เลขคุรุสภาสำหรับชาวต่างชาติ';
