@@ -19,10 +19,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
   styleUrls: ['./form-education-info-manager.component.scss'],
   providers: providerFactory(FormEducationInfoManagerComponent),
 })
-export class FormEducationInfoManagerComponent
-  extends KspFormBaseComponent
-  implements OnInit
-{
+export class FormEducationInfoManagerComponent extends KspFormBaseComponent {
   @Input() requestType: any;
   @Input() countries: Country[] | null = [];
 
@@ -45,6 +42,4 @@ export class FormEducationInfoManagerComponent
       })
     );
   }
-
-  ngOnInit(): void {}
 }

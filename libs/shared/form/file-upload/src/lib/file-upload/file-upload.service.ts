@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, InjectionToken } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
 
-export interface FileUploadUrls {
+export interface FileUrls {
   uploadFile: string;
   uploadImage: string;
   update?: string;
@@ -10,14 +10,14 @@ export interface FileUploadUrls {
   delete: string;
 }
 
-export const File_UPLOAD_URLS = new InjectionToken<FileUploadUrls>('');
+export const File_UPLOAD_URLS = new InjectionToken<FileUrls>('');
 @Injectable({
   providedIn: 'root',
 })
 export class FileService {
   constructor(
     private http: HttpClient,
-    @Inject(File_UPLOAD_URLS) private apiURL: FileUploadUrls
+    @Inject(File_UPLOAD_URLS) private apiURL: FileUrls
   ) {}
 
   uploadFile(payload: any) {
@@ -56,14 +56,14 @@ export class FileService {
     );
   }
 
-  downloadSchoolFile(payload: any) {
+  eDownloadSchoolFile(payload: any) {
     return this.http.post(
       `${environment.apiUrl}/e-service/schrequestfileselectbyid`,
       payload
     );
   }
 
-  downloadEUniFile(payload: any) {
+  eDownloadEUniFile(payload: any) {
     return this.http.post(
       `${environment.apiUrl}/e-service/unirequestfileselectbyid`,
       payload
@@ -77,7 +77,7 @@ export class FileService {
     );
   }
 
-  downloadKspFile(payload: any) {
+  eDownloadKspFile(payload: any) {
     return this.http.post(
       `${environment.apiUrl}/e-service/kspfileselectidfile`,
       payload

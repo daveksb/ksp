@@ -9,6 +9,7 @@ import {
   SelfServiceRequestForType,
 } from '@ksp/shared/constant';
 import {
+  EmailPayload,
   KspRequest,
   KSPRequestSelfSearchFilter,
   SelfRequest,
@@ -70,6 +71,11 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
         this.userType = res.usertype;
       }
     });
+
+    const mail = new EmailPayload('test@gmail.com', 'test email 2');
+    /*     this.myInfoService.sendMail(mail).subscribe((res) => {
+      console.log('send email = ', res);
+    }); */
   }
 
   ngAfterViewInit() {
@@ -80,7 +86,6 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
     const payload = new KSPRequestSelfSearchFilter();
     payload.idcardno = getCookie('idCardNo');
     this.requestService.searchMyRequests(payload).subscribe((res) => {
-      //console.log('res  = ', res);
       this.rejectedRequests = SelfHasRejectedRequest(res);
       //console.log('has reject = ', this.rejectedRequests);
     });

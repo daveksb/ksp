@@ -11,7 +11,7 @@ import {
 import { ERequestService, LoaderService } from '@ksp/shared/service';
 import {
   replaceEmptyWithNull,
-  SelfCheckProcess,
+  eSelfCheckProcess,
   eSelfCheckStatus,
   processFilter,
 } from '@ksp/shared/utility';
@@ -26,7 +26,7 @@ export class ETeacherCouncilListComponent implements OnInit, AfterViewInit {
   isLoading: Subject<boolean> = this.loaderService.isLoading;
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfRequest>();
-  checkProcess = SelfCheckProcess;
+  checkProcess = eSelfCheckProcess;
   checkStatus = eSelfCheckStatus;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -68,12 +68,6 @@ export class ETeacherCouncilListComponent implements OnInit, AfterViewInit {
     this.requestService.KspSearchRequest(payload).subscribe((res) => {
       console.log(res);
       this.dataSource.data = processFilter(res);
-      // this.dataSource.sort = this.sort;
-
-      // const sortState: Sort = { active: 'id', direction: 'desc' };
-      // this.sort.active = sortState.active;
-      // this.sort.direction = sortState.direction;
-      // this.sort.sortChange.emit(sortState);
     });
   }
 

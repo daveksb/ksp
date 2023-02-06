@@ -13,7 +13,13 @@ import { TopNavComponent, BottomNavComponent } from '@ksp/shared/menu';
 import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
 import { SelfServiceFormModule } from '@ksp/self-service/form';
 import { SharedFormSelfRewardFormModule } from '@ksp/shared/form/self-reward-form';
-import { EServiceRewardSearchComponent } from '@ksp/shared/search';
+import {
+  EServiceRewardAccountSearchComponent,
+  EServiceRewardCreateDeclareSearchComponent,
+  EServiceRewardDeclareSearchComponent,
+  EServiceRewardRequestSearchComponent,
+  EServiceRewardSearchComponent,
+} from '@ksp/shared/search';
 import { RequestNoPipe, ThaiDatePipe } from '@ksp/shared/pipe';
 import { LicenseCheckComponent } from '@ksp/e-service/ui/license-check';
 import {
@@ -26,6 +32,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { EBestTeacherRejectComponent } from './e-best-teacher-reject/e-best-teacher-reject.component';
 import { EServiceUiRewardRejectFormModule } from '@ksp/e-service/ui/reward-reject-form';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { EBestTeacherAccountListComponent } from './e-best-teacher-account-list/e-best-teacher-account-list.component';
+import { EBestTeacherCreateAccountComponent } from './e-best-teacher-create-account/e-best-teacher-create-account.component';
+import { EBestTeacherCheckListComponent } from './e-best-teacher-check-list/e-best-teacher-check-list.component';
+import { EBestTeacherCheckComponent } from './e-best-teacher-check/e-best-teacher-check.component';
+import { EBestTeacherDeclareComponent } from './e-best-teacher-declare/e-best-teacher-declare.component';
+import { EBestTeacherCreateDeclareComponent } from './e-best-teacher-create-declare/e-best-teacher-create-declare.component';
 
 const routes: Routes = [
   {
@@ -53,6 +65,34 @@ const routes: Routes = [
         path: 'reject/:id',
         component: EBestTeacherRejectComponent,
       },
+      {
+        path: 'account-list',
+        component: EBestTeacherAccountListComponent,
+      },
+      {
+        path: 'create-account',
+        component: EBestTeacherCreateAccountComponent,
+      },
+      {
+        path: 'check-list',
+        component: EBestTeacherCheckListComponent,
+      },
+      {
+        path: 'check/:id',
+        component: EBestTeacherDetailComponent,
+      },
+      {
+        path: 'check-confirm/:id',
+        component: EBestTeacherCheckComponent,
+      },
+      {
+        path: 'declare',
+        component: EBestTeacherDeclareComponent,
+      },
+      {
+        path: 'create-declare',
+        component: EBestTeacherCreateDeclareComponent,
+      },
     ],
   },
 ];
@@ -79,13 +119,23 @@ const routes: Routes = [
     RequestNoPipe,
     EServiceUiRewardRejectFormModule,
     RewardValidateRequestComponent,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    EServiceRewardAccountSearchComponent,
+    EServiceRewardRequestSearchComponent,
+    EServiceRewardDeclareSearchComponent,
+    EServiceRewardCreateDeclareSearchComponent,
   ],
   declarations: [
     EBestTeacherListComponent,
     EBestTeacherDetailComponent,
     EBestTeacherConfirmComponent,
     EBestTeacherRejectComponent,
+    EBestTeacherAccountListComponent,
+    EBestTeacherCreateAccountComponent,
+    EBestTeacherCheckListComponent,
+    EBestTeacherCheckComponent,
+    EBestTeacherDeclareComponent,
+    EBestTeacherCreateDeclareComponent,
   ],
   exports: [EBestTeacherListComponent, EBestTeacherDetailComponent],
 })

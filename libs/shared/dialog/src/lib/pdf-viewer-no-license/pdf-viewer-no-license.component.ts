@@ -85,7 +85,7 @@ export class PdfViewerNoLicenseComponent implements OnInit {
         }
       });
     } else {
-      this.fileService.downloadEUniFile({ id }).subscribe((res: any) => {
+      this.fileService.eDownloadEUniFile({ id }).subscribe((res: any) => {
         const extension = this.pdfList[index].type;
         const src = atob(res?.filedata ?? '');
         if (extension == 'pdf') {
@@ -114,7 +114,7 @@ export class PdfViewerNoLicenseComponent implements OnInit {
   mappingFile(files: KspFile[]) {
     files.map((file) => {
       const id = file.fileid;
-      return this.fileService.downloadSchoolFile({ id });
+      return this.fileService.eDownloadSchoolFile({ id });
     });
   }
   setDefault(count: number) {

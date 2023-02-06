@@ -4,8 +4,8 @@
       <label class="form-label">Visa Class</label>
       <select class="form-select" formControlName="visaclass">
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
-        <option *ngFor="let c of visaTypeList" [value]="+c.id">
-          {{ c.nameEn }}
+        <option *ngFor="let c of visaClassList" [value]="+c.id">
+          {{ c.name }}
         </option>
       </select>
     </div>

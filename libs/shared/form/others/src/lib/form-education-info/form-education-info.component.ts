@@ -23,6 +23,8 @@ export class FormEducationInfoComponent
   @Input() isOptional = false;
   @Input() isDarkMode = true;
   @Input() userEducationType: any;
+  @Input() UniversityList: any[] = [];
+
   FormTypeEnum = UserInfoFormType;
 
   override form = this.fb.group({

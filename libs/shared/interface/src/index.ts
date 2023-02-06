@@ -6,6 +6,7 @@ export * from './lib/e-self-search-request';
 export * from './lib/ethics';
 export * from './lib/user-info-form';
 export * from './lib/e-sch-user-search';
+export * from './lib/email';
 
 export * from './lib/self-license';
 export * from './lib/self-request';
@@ -41,6 +42,7 @@ export * from './lib/ksp-comment';
 
 export * from './lib/uni-service-import-type';
 export * from './lib/university-select';
+export * from './lib/university';
 
 export * from './lib/e-uni-approve';
 export * from './lib/uni-user';

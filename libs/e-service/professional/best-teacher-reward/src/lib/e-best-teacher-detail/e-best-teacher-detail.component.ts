@@ -39,6 +39,7 @@ export class EBestTeacherDetailComponent
   provinces4$!: Observable<any>;
   amphurs4$!: Observable<any>;
   tumbols4$!: Observable<any>;
+  formTabCount = FORM_TAB_COUNT;
 
   form = this.fb.group({
     userInfo: [],
@@ -79,6 +80,7 @@ export class EBestTeacherDetailComponent
     this.getListData();
     this.checkRequestId();
     this.addCheckResultArray();
+    this.getMode();
   }
 
   addCheckResultArray() {
@@ -186,10 +188,18 @@ export class EBestTeacherDetailComponent
 
   next() {
     this.persistData(this.form.controls.checkResult.value);
-    this.router.navigate(['/best-teacher', 'confirm', this.requestId]);
+    if (this.mode === 'check') {
+      this.router.navigate(['/best-teacher', 'check-confirm', this.requestId]);
+    } else {
+      this.router.navigate(['/best-teacher', 'confirm', this.requestId]);
+    }
   }
 
   cancel() {
-    this.router.navigate(['/thai-teacher']);
+    if (this.mode === 'check') {
+      this.router.navigate(['/best-teacher', 'check-list']);
+    } else {
+      this.router.navigate(['/best-teacher']);
+    }
   }
 }

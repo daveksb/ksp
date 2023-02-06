@@ -8,6 +8,7 @@ import {
   KspRequest,
   KspRequestProcess,
   Prefix,
+  VisaClass,
   VisaType,
 } from '@ksp/shared/interface';
 import {
@@ -51,6 +52,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   prefixList$!: Observable<Prefix[]>;
   countries$!: Observable<Country[]>;
   visaTypeList$!: Observable<VisaType[]>;
+  visaClassList$!: Observable<VisaClass[]>;
   requestId!: number;
   requestData: KspRequest = new KspRequest();
   foreignFiles: FileGroup[] = [{ name: '1.สำเนาหนังสือเดินทาง', files: [] }];
@@ -96,12 +98,14 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   loadRequestData(id: number) {
     this.requestService.schGetRequestById(id).subscribe((res) => {
       if (res) {
+        //console.log('res xx = ', res);
         this.mode = 'view';
         this.showCancelButton = Boolean(res.status);
-        this.requestData.requestdate = res.requestdate ?? '';
-        this.requestData.requestno = res.requestno ?? '';
-        this.requestData.isclose =
-          this.requestData.isclose === '1' ? true : false;
+        this.requestData = res;
+        this.requestData.isclose = Number(this.requestData.isclose)
+          ? true
+          : false;
+
         const fileinfo = parseJson(res?.fileinfo || '');
         if (fileinfo) {
           this.foreignFiles.forEach(
@@ -172,11 +176,6 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   }
 
   confirmDialog() {
-    /*  if (
-      !this.form.get('foreignTeacher')?.valid ||
-      !this.form.get('visainfo')?.valid
-    )
-      return; */
     const dialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: `คุณต้องการยืนยันข้อมูล
@@ -198,7 +197,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
             userInfo.ref2 = '04';
             userInfo.ref3 = '5';
             userInfo.isforeign = '1';
-            userInfo.systemtype = '2';
+            userInfo.systemtype = '2'; // school service
             userInfo.requesttype = '4';
             userInfo.careertype = '5';
             userInfo.schoolid = this.schoolId;
@@ -216,7 +215,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
               mapMultiFileInfo(this.foreignFiles)
             );
             const payload = formatDatePayload(userInfo);
-            console.log('payload = ', payload);
+            //console.log('payload = ', payload);
             return this.requestService.schCreateRequest(payload);
           }
           return EMPTY;
@@ -230,7 +229,7 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   onCompleted(requestNo: string) {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       data: {
-        header: `บึนทึกข้อมูลสำเร็จ`,
+        header: `บันทึกข้อมูลสำเร็จ`,
         content: `เลขที่รายการ : ${formatRequestNo(requestNo)}
         วันที่ : ${thaiDate(new Date())}`,
       },
@@ -244,6 +243,11 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
   }
 
   getList() {
+    this.countries$ = this.addressService.getCountry();
+    this.prefixList$ = this.generalInfoService.getPrefix();
+    this.visaTypeList$ = this.generalInfoService.getVisaType();
+    this.visaClassList$ = this.generalInfoService.getVisaClass();
+
     const payload = {
       schoolid: this.schoolId,
     };
@@ -260,8 +264,5 @@ export class ForeignTeacherIdRequestComponent implements OnInit {
           res.amphurname
         } จังหวัด ${res.provincename} รหัสไปรษณีย์ ${res.zipcode}`;
       });
-    this.countries$ = this.addressService.getCountry();
-    this.prefixList$ = this.generalInfoService.getPrefix();
-    this.visaTypeList$ = this.generalInfoService.getVisaType();
   }
 }

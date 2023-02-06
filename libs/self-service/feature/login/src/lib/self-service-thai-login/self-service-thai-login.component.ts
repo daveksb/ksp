@@ -19,6 +19,7 @@ import localForage from 'localforage';
 export class SelfServiceThaiLoginComponent {
   eyeIconClicked = false;
   loginFail = false;
+  lang_thai = true
 
   form = this.fb.group({
     username: [null, Validators.required],

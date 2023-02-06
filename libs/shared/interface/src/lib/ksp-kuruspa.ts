@@ -1,8 +1,8 @@
 export class KspKuruspa {
-  countrycode: string | null = null;
+  //countrycode: string | null = null;
   requestno: string | null = null;
   createdate: string | null = null;
-  expireddate: string | null = null;
+  expiredate: string | null = null;
   kuruspano: string | null = null;
   idcardno: string | null = null;
   passportno: string | null = null;
@@ -12,7 +12,7 @@ export class KspKuruspa {
   visaclass: string | null = null;
   visatype: string | null = null;
   visastartdate: string | null = null;
-  visaexpireddate: string | null = null;
+  visaexpiredate: string | null = null;
 
   prefixth: string | null = null;
   firstnameth: string | null = null;

@@ -10,6 +10,7 @@ import {
   Prefix,
   KspKuruspa,
   VisaType,
+  VisaClass,
 } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
@@ -47,6 +48,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
   prefixList$!: Observable<Prefix[]>;
   countries$!: Observable<Country[]>;
   visaTypeList$!: Observable<VisaType[]>;
+  visaClassList$!: Observable<VisaClass[]>;
   verifyChoice = verifyChoices;
   evidenceFile = evidenceFiles;
   requestData = new KspRequest();
@@ -119,6 +121,7 @@ export class ForeignLicenseDetailComponent implements OnInit {
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.countries$ = this.addressService.getCountry();
     this.visaTypeList$ = this.generalInfoService.getVisaType();
+    this.visaClassList$ = this.generalInfoService.getVisaClass();
   }
 
   cancel() {
@@ -138,11 +141,12 @@ export class ForeignLicenseDetailComponent implements OnInit {
         switchMap((res) => {
           if (res) {
             const data: any = this.form.controls.verifydetail.value;
+            //console.log('data = ', data);
             const payload: KspApprovePayload = {
               requestid: this.requestData.requestid,
               process: '2',
               status: data?.result,
-              detail: null, //`${data?.detail}`,
+              detail: JSON.stringify(data),
               systemtype: '4', // e-service
               userid: getCookie('userId'),
               paymentstatus: null,
@@ -159,14 +163,12 @@ export class ForeignLicenseDetailComponent implements OnInit {
             const countryCode = this.requestData.country ?? 0;
             const countryCode3digits = countryCode.toString().padStart(3, '0');
 
-            payload.country = this.requestData.country;
-            payload.countrycode = countryCode3digits;
+            payload.country = countryCode3digits;
             payload.requestno = this.requestData.requestno;
-            payload.createdate = moment().format('yyyy-MM-DD');
-            payload.expireddate = moment().add(2, 'years').format('yyyy-MM-DD');
+            payload.expiredate = moment().add(2, 'years').format('yyyy-MM-DD');
             payload.visaclass = this.requestData.visaclass;
             payload.visatype = this.requestData.visatype;
-            payload.visaexpireddate = this.requestData.visaexpiredate;
+            payload.visaexpiredate = this.requestData.visaexpiredate;
             payload.idcardno = this.requestData.idcardno;
             payload.passportno = this.requestData.passportno;
             payload.passportstartdate = this.requestData.passportstartdate;
