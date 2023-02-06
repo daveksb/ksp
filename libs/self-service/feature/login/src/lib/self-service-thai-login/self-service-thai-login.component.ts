@@ -19,7 +19,7 @@ import localForage from 'localforage';
 export class SelfServiceThaiLoginComponent {
   eyeIconClicked = false;
   loginFail = false;
-  lang_thai = true
+  lang_thai = true;
 
   form = this.fb.group({
     username: [null, Validators.required],
@@ -59,29 +59,35 @@ export class SelfServiceThaiLoginComponent {
 
   forgot() {
     let formData: any = null;
-    const dialog = this.dialog.open(ForgotPasswordSearchPersonComponent);
+    const dialog = this.dialog.open(ForgotPasswordSearchPersonComponent, {
+      data: {
+        lang_thai: this.lang_thai,
+      },
+    });
     dialog.componentInstance.confirmed
       .pipe(
         tap((i) => (formData = i)),
         switchMap((res) => {
           dialog.componentInstance.data = {
             notfound: false,
+            lang_thai: this.lang_thai,
           };
           return this.myInfoService.forgetPassword(res);
         })
       )
       .subscribe((res) => {
         if (res.returncode === '1') {
-          this.showForgetDialog(formData);
+          this.showForgetDialog(formData, this.lang_thai);
         } else {
           dialog.componentInstance.data = {
             notfound: true,
+            lang_thai: this.lang_thai,
           };
         }
       });
   }
 
-  showForgetDialog(formData: any) {
+  showForgetDialog(formData: any, lang: any) {
     const dialogRef = this.dialog.open(ForgotPasswordSetNewPasswordComponent, {
       data: formData,
     });
@@ -94,10 +100,13 @@ export class SelfServiceThaiLoginComponent {
       this.myInfoService.resetPassword(payload).subscribe(() => {
         this.dialog.open(CompleteDialogComponent, {
           data: {
-            header: `ทำรายการสำเร็จ`,
-            subContent: `ระบบได้ทำการเปลี่ยนรหัสผ่านให้ท่านเรียบร้อยแล้ว
-            กรุณาเข้าสู่ระบบใหม่อีกครั้ง`,
-            btnLabel: 'เข้าสู่ระบบ',
+            header: lang ? `ทำรายการสำเร็จ` : `Completed !`,
+            subContent: lang
+              ? `ระบบได้ทำการเปลี่ยนรหัสผ่านให้ท่านเรียบร้อยแล้ว
+            กรุณาเข้าสู่ระบบใหม่อีกครั้ง`
+              : `The system has changed your password.
+            Please login again.`,
+            btnLabel: lang ? `เข้าสู่ระบบ` : `Login`,
           },
         });
       });
