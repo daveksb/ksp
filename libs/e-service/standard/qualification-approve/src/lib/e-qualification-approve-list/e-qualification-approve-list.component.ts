@@ -196,7 +196,7 @@ export class EQualificationApproveListComponent implements AfterViewInit {
           year,
           schoolname,
           bureauname,
-          /*  address,
+          /* address,
           moo,
           street,
           road,

@@ -2,11 +2,15 @@
   <div class="container min-vh-100 d-flex flex-column justify-content-between">
     <div class="d-flex justify-content-start" style="padding-top: 12px">
       <mat-button-toggle-group #group="matButtonToggleGroup">
-        <mat-button-toggle value="th" checked="true" class="w-50"
+        <mat-button-toggle
+          value="th"
+          checked="true"
+          class="w-50"
+          (click)="lang_thai = true"
           ><img src="/assets/images/thai-flag.png" style="width: 25px" />
           Th</mat-button-toggle
         >
-        <mat-button-toggle value="en" class="w-50"
+        <mat-button-toggle value="en" class="w-50" (click)="lang_thai = false"
           ><img src="/assets/images/eng-flag.png" style="width: 20px" />
           En</mat-button-toggle
         >
@@ -33,7 +37,11 @@
 
           <ng-container *ngIf="loginFail">
             <ksp-uni-form-badge
-              [subTitle]="'คุณกรอกรหัสเข้าใช้งาน หรือรหัสผ่านไม่ถูกต้อง'"
+              [subTitle]="
+                lang_thai
+                  ? 'คุณกรอกรหัสเข้าใช้งาน หรือรหัสผ่านไม่ถูกต้อง'
+                  : 'You enter incorrect username or password. !'
+              "
             ></ksp-uni-form-badge>
           </ng-container>
 
@@ -70,7 +78,9 @@
               <input
                 [type]="eyeIconClicked ? 'text' : 'password'"
                 class="form-control form-control-lg"
-                [placeholder]="group.value === 'th' ? 'กรุณากรอกรหัสผ่าน' : 'password'"
+                [placeholder]="
+                  group.value === 'th' ? 'กรุณากรอกรหัสผ่าน' : 'password'
+                "
                 formControlName="password"
               />
               <i
