@@ -3,7 +3,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { SelfServiceRequestSubType } from '@ksp/shared/constant';
+import {
+  SelfServiceRequestSubType,
+  SelfServiceRequestType,
+} from '@ksp/shared/constant';
 import { SelfApproveListSearch } from '@ksp/shared/interface';
 import { ERequestService, LoaderService } from '@ksp/shared/service';
 import { Subject } from 'rxjs';
@@ -57,7 +60,7 @@ export class ETeacherCouncilAccountListComponent implements AfterViewInit {
       createdate: params.createdate,
       offset: '0',
       row: '500',
-      requesttype: '40',
+      requesttype: SelfServiceRequestType.ขอรับรางวัลคุรุสภา,
     };
     this.requestService.searchSelfApproveList(payload).subscribe((res) => {
       this.dataSource.data = res.map((i) => {

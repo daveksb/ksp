@@ -24,7 +24,7 @@ export class EServiceRewardAccountSearchComponent extends KspFormBaseComponent {
 
   processList: SchRequestProcess[] = [];
   statusList?: SchRequestStatus[] = [];
-  licenseTypes = selfOccupyList.filter((i) => i.id < 5);
+  licenseTypes = selfOccupyList;
 
   override form = this.fb.group({
     groupno: [null],

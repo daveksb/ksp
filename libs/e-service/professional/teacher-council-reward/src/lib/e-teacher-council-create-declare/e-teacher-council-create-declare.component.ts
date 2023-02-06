@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -7,8 +8,15 @@ import {
   SelfServiceRequestType,
 } from '@ksp/shared/constant';
 import {
+  CompleteDialogComponent,
+  ConfirmDialogComponent,
+} from '@ksp/shared/dialog';
+import {
   EsSearchPayload,
+  KspApprovePayload,
+  KspRequest,
   SchRequestSearchFilter,
+  SelfApproveList,
   SelfRequest,
 } from '@ksp/shared/interface';
 import { ERequestService, LoaderService } from '@ksp/shared/service';
@@ -16,8 +24,13 @@ import {
   replaceEmptyWithNull,
   SelfCheckProcess,
   eSelfCheckStatus,
+  getCookie,
 } from '@ksp/shared/utility';
-import { Subject } from 'rxjs';
+import { forkJoin, Subject } from 'rxjs';
+
+interface CheckKSPRequest extends KspRequest {
+  check: boolean;
+}
 
 @Component({
   selector: 'ksp-e-teacher-council-create-declare',
@@ -28,21 +41,28 @@ export class ETeacherCouncilCreateDeclareComponent
   implements OnInit, AfterViewInit
 {
   displayedColumns: string[] = column;
-  dataSource = new MatTableDataSource<SelfRequest>();
+  dataSource = new MatTableDataSource<any>();
   checkProcess = SelfCheckProcess;
   checkStatus = eSelfCheckStatus;
   SelfServiceRequestSubType = SelfServiceRequestSubType;
   isLoading: Subject<boolean> = this.loaderService.isLoading;
+  listNo!: number;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private router: Router,
     private requestService: ERequestService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    public dialog: MatDialog
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.requestService.getLastApproveList().subscribe((res) => {
+      this.listNo = +res.listno + 1;
+      console.log(this.listNo);
+    });
+  }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -58,7 +78,7 @@ export class ETeacherCouncilCreateDeclareComponent
       name: null,
       idcardno: null,
       passportno: null,
-      process: null,
+      process: '6',
       status: null,
       schoolid: null,
       schoolname: null,
@@ -85,6 +105,62 @@ export class ETeacherCouncilCreateDeclareComponent
 
   clear() {
     this.dataSource.data = [];
+  }
+
+  onCheck(element: CheckKSPRequest) {
+    element.check = !element.check;
+  }
+
+  prev() {
+    this.router.navigate(['/teacher-council', 'declare']);
+  }
+
+  confirmDialog() {
+    const checkIds = this.dataSource.data
+      .filter((item) => item.check)
+      .map((item) => item.id);
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: `คุณต้องการยืนยันข้อมูล
+        ใช่หรือไม่? `,
+      },
+    });
+
+    dialog.componentInstance.confirmed.subscribe((res) => {
+      //console.log('max career type = ', this.maxCareerType);
+
+      if (res) {
+        const payload: Partial<SelfApproveList> = {
+          listno: this.listNo.toString(),
+          process: '6',
+          careertype: '5',
+          requesttype: '40', // ใบคำขออนุญาต
+          isforeign: '0',
+          status: '2',
+          requestlist: JSON.stringify(checkIds),
+          userid: `${getCookie('userId')}`,
+        };
+        this.requestService.createAprroveList(payload).subscribe((res) => {
+          if (res?.returnmessage === 'success') {
+            this.completeDialog();
+          }
+        });
+      }
+    });
+  }
+
+  completeDialog() {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header: `บันทึกข้อมูลสำเร็จ`,
+      },
+    });
+
+    dialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/teacher-council', 'declare']);
+      }
+    });
   }
 }
 
