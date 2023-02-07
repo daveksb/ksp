@@ -88,6 +88,7 @@ export class UniLoginComponent {
   forgetPassword() {
     const dialogRef = this.dialog.open(ForgotPasswordSearchPersonComponent, {
       width: '350px',
+      data: { lang_thai: true }
     });
     dialogRef.componentInstance.confirmed.subscribe(async (res: any) => {
       this.submitForgotPassword(res);
