@@ -57,11 +57,10 @@ export class EQualificationApproveListComponent implements AfterViewInit {
   renderLicense(request: KspRequest) {
     const pdfType = 99;
     const pdfSubType = 6;
-    const requestno = 'ศธ ' + request.requestno;
+    const requestno = 'ศธ. ' + request.requestno;
     const name = request.firstnameth + ' ' + request.lastnameth;
     const position = request.position;
     const bureauname = request.bureauname;
-    console.log('bureauname = ', bureauname);
     const schoolname = request.schoolname;
 
     const approveStatus = request.status || '';

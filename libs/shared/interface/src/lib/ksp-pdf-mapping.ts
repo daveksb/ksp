@@ -3650,8 +3650,8 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'bureauname',
             options: {
-              x: 500,
-              y: 500,
+              x: 101,
+              y: 455,
               size: defaultSize,
               color: black,
             },
