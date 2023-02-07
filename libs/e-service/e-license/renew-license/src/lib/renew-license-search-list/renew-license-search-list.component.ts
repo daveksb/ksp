@@ -94,7 +94,7 @@ export class RenewLicenseSearchListComponent implements OnInit, AfterViewInit {
     this.canSave = false;
     const payload: SelfApproveListSearch = {
       groupno: params.groupno,
-      process: params.process,
+      process: params.process || this.mode === 'guarantee' ? '6' : '5',
       status: params.status,
       careertype: params.careertype,
       createdate: params.createdate,
