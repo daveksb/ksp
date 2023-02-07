@@ -20,4 +20,11 @@ export class UniLoginService {
       form
     );
   }
+
+  checkUser(form: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/ksppublic/uniusercheckuser`,
+      form
+    );
+  }
 }
