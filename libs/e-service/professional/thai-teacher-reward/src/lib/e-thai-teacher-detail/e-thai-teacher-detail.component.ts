@@ -43,6 +43,7 @@ export class EThaiTeacherDetailComponent
   bureau$!: Observable<any>;
   uniqueTimestamp!: string;
   rewardFiles: any[] = [];
+  formTabCount = FORM_TAB_COUNT;
 
   form = this.fb.group({
     userInfo: [],

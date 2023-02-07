@@ -9,6 +9,7 @@ import {
 import {
   EsSearchPayload,
   SchRequestSearchFilter,
+  SelfApproveListSearch,
   SelfRequest,
 } from '@ksp/shared/interface';
 import { ERequestService, LoaderService } from '@ksp/shared/service';
@@ -26,7 +27,7 @@ import { Subject } from 'rxjs';
 })
 export class EThaiTeacherDeclareComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = column;
-  dataSource = new MatTableDataSource<SelfRequest>();
+  dataSource = new MatTableDataSource<any>();
   checkProcess = SelfCheckProcess;
   checkStatus = eSelfCheckStatus;
   SelfServiceRequestSubType = SelfServiceRequestSubType;
@@ -46,37 +47,21 @@ export class EThaiTeacherDeclareComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  search(params: Partial<SchRequestSearchFilter>) {
-    let payload: EsSearchPayload = {
-      systemtype: '1',
-      requesttype: SelfServiceRequestType.ขอรับรางวัลคุรุสภา,
-      requestno: params.requestno,
-      careertype: null,
-      name: params.name,
-      idcardno: params.idcardno,
-      passportno: null,
-      process: null,
-      status: params.status,
-      schoolid: null,
-      schoolname: null,
-      bureauid: null,
-      requestdatefrom: params.requestdatefrom,
-      requestdateto: params.requestdateto,
+  search(params: any) {
+    const payload: SelfApproveListSearch = {
+      groupno: params.groupno,
+      process: '6',
+      status: '2',
+      careertype: params.careertype,
+      createdate: params.createdate,
       offset: '0',
-      row: '1000',
+      row: '500',
+      requesttype: SelfServiceRequestType.ขอรับรางวัลครูภาษาไทยดีเด่น,
     };
-
-    payload = replaceEmptyWithNull(payload);
-
-    this.requestService.KspSearchRequest(payload).subscribe((res) => {
-      console.log(res);
-      this.dataSource.data = res;
-      // this.dataSource.sort = this.sort;
-
-      // const sortState: Sort = { active: 'id', direction: 'desc' };
-      // this.sort.active = sortState.active;
-      // this.sort.direction = sortState.direction;
-      // this.sort.sortChange.emit(sortState);
+    this.requestService.searchSelfApproveList(payload).subscribe((res) => {
+      this.dataSource.data = res.map((i) => {
+        return { ...i, count: JSON.parse(i.requestlist || '').length };
+      });
     });
   }
 

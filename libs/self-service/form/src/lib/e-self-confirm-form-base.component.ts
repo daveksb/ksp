@@ -89,16 +89,16 @@ export abstract class ESelfConfirmFormBaseComponent implements OnInit {
         this.targetStatus = 3;
       } else {
         // no should forward
-        // if (req.process === '2') {
-        //   this.targetProcess = 4;
-        //   this.targetStatus = 1;
-        // } else if (req.process === '3') {
-        //   this.targetProcess = 4;
-        //   this.targetStatus = 1;
-        // } else if (req.process === '4') {
-        //   this.targetProcess = 4;
-        //   this.targetStatus = 3;
-        // }
+        if (req.process === '2') {
+          this.targetProcess = 4;
+          this.targetStatus = 1;
+        } else if (req.process === '3') {
+          this.targetProcess = 4;
+          this.targetStatus = 1;
+        } else if (req.process === '4') {
+          this.targetProcess = 4;
+          this.targetStatus = 3;
+        }
       }
     } else if (input.result === '2') {
       //ขอแก้ไข / เพิ่มเติม

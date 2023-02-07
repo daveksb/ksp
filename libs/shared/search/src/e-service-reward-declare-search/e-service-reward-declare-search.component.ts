@@ -8,7 +8,11 @@ import {
 } from '@ksp/shared/interface';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { SelfRequestProcess, SelfRequestType } from '@ksp/shared/constant';
+import {
+  selfOccupyList,
+  SelfRequestProcess,
+  SelfRequestType,
+} from '@ksp/shared/constant';
 
 @UntilDestroy()
 @Component({
@@ -26,26 +30,16 @@ export class EServiceRewardDeclareSearchComponent
   @Output() search = new EventEmitter<any>();
 
   override form = this.fb.group({
-    // requesttype: ['', Validators.required],
-    requestno: [''],
-    idcardno: [''],
-    name: [''],
-    status: [''],
-    requestdatefrom: [''],
-    requestdateto: [''],
-    declaredatefrom: [''],
-    declaredateto: [''],
-
-    careertype: [],
-    passportno: [''],
-    process: [''],
-    schoolid: [''],
-    offset: [''],
-    row: [''],
+    groupno: [null],
+    careertype: [null],
+    result: [null],
+    createFrom: [null],
+    createTo: [null],
   });
 
   processList: SchRequestProcess[] = [];
   statusList?: SchRequestStatus[] = [];
+  licenseTypes = selfOccupyList;
 
   constructor(private fb: FormBuilder) {
     super();

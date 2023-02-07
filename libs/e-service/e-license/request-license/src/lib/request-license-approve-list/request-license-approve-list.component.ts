@@ -18,6 +18,7 @@ import {
 import {
   eSelfCheckProcess,
   eSelfCheckStatus,
+  formatDatePayload,
   processFilter,
   replaceEmptyWithNull,
 } from '@ksp/shared/utility';
@@ -69,7 +70,7 @@ export class RequestLicenseApproveListComponent implements AfterViewInit {
       name: null,
       idcardno: params.idcardno,
       passportno: null,
-      process: params.process || '2',
+      process: params.process || '5',
       status: params.status,
       schoolid: null,
       schoolname: null,
@@ -82,6 +83,7 @@ export class RequestLicenseApproveListComponent implements AfterViewInit {
     };
 
     payload = replaceEmptyWithNull(payload);
+    payload = formatDatePayload(payload);
 
     this.requestService.KspSearchRequest(payload).subscribe((res) => {
       if (res) {

@@ -90,9 +90,9 @@ export class LicenseRequestForeignComponent implements OnInit {
       }
 
       if (this.requestType === 1) {
-        this.requestLabel = 'TEACHER';
+        this.requestLabel = 'Teacher';
       } else if (this.requestType === 2) {
-        this.requestLabel = 'ADMINISTRATORS';
+        this.requestLabel = 'Educational Institution';
       }
     });
   }

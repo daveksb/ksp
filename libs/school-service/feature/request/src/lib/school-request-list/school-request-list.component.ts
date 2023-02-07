@@ -10,6 +10,7 @@ import {
   SchoolLangMapping,
   SchoolRequestSubType,
   SchoolRequestType,
+  SchoolRewardType,
 } from '@ksp/shared/constant';
 import { PdfRenderComponent } from '@ksp/shared/dialog';
 import {
@@ -58,10 +59,20 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
   tempLicenseRequestTimes: any;
   reqTypeStatus = false;
   viewMoreClicked = false;
+
+  JSON = JSON;
+  SchoolRewardType = SchoolRewardType;
+
+  getPdfColumnLabel = '';
+  getIdColumnLabel = '';
+  getTypeColumnLabel = '';
+  getNameColumnLabel = '';
+
   defaultForm = {
     requesttype: '3',
     careertype: '1',
   };
+
   form = this.fb.group({
     licenseSearch: [this.defaultForm],
   });
@@ -89,11 +100,29 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  getColumnLabel() {
+  /* getPdfColumnLabel() {
     if (this.form.controls.licenseSearch.value?.requesttype !== '3') {
       return 'หนังสือแจ้งผล';
     } else return 'หนังสืออนุญาตฯ';
   }
+
+  getNameColumnLabel() {
+    if (this.form.controls.licenseSearch.value?.requesttype === '40') {
+      return 'ชื่อผลงาน';
+    } else return 'ชื่อ-นามสกุล';
+  }
+
+  getTypeColumnLabel() {
+    if (this.form.controls.licenseSearch.value?.requesttype === '40') {
+      return 'ประเภทผลงาน';
+    } else return 'ประเภทวิชาชีพ';
+  }
+
+  getIdColumnLabel() {
+    if (this.form.controls.licenseSearch.value?.requesttype === '40') {
+      return 'หมายเลขบัตรประชาชนผู้บริหารสถานศึกษา';
+    } else return 'หมายเลขบัตรประชาชน/เลขคุรุสภาสำหรับชาวต่างชาติ';
+  } */
 
   genAlertMessage(req: KspRequest) {
     const detail: any = JSON.parse(req.detail || '');
@@ -129,13 +158,6 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
         this.rejectedRequests = hasRejectedRequest(res);
       }
 
-      // กรณีเลือกใบคำขอ 4 displayColumn จะไม่แสดง column สุดท้าย
-      if (payload.requesttype === '4' || payload.requesttype === '40') {
-        this.displayedColumns = displayedColumnsKSP;
-      } else {
-        this.displayedColumns = displayedColumns;
-      }
-
       if (res && res.length && !this.initialSearch) {
         //console.log('res = ', res);
         this.searchNotFound = false;
@@ -150,6 +172,43 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
         this.dataSource.data = [];
         this.searchNotFound = true;
         this.initialSearch = false;
+      }
+
+      // กรณีเลือกใบคำขอ 4 displayColumn จะไม่แสดง column สุดท้าย
+      if (payload.requesttype === '4') {
+        this.displayedColumns = displayedColumnsKSP;
+      } else {
+        this.displayedColumns = displayedColumns;
+      }
+
+      // เลือกใบคำขอแต่ละประเภท แสดงชื่อตารางไม่เหมือนกัน
+      if (payload.requesttype === '3') {
+        this.getPdfColumnLabel = 'หนังสืออนุญาตฯ';
+      } else if (payload.requesttype === '40') {
+        this.getPdfColumnLabel = 'ประกาศนียบัตร';
+      } else {
+        this.getPdfColumnLabel = 'หนังสือแจ้งผล';
+      }
+
+      if (payload.requesttype === '40') {
+        this.getNameColumnLabel = 'ชื่อผลงาน';
+      } else {
+        this.getNameColumnLabel = 'ชื่อ-นามสกุล';
+      }
+
+      if (payload.requesttype === '40') {
+        this.getTypeColumnLabel = 'ประเภทผลงาน';
+      } else {
+        this.getTypeColumnLabel = 'ประเภทวิชาชีพ';
+      }
+
+      if (payload.requesttype === '40') {
+        this.getIdColumnLabel = 'หมายเลขบัตรประชาชนผู้บริหารสถานศึกษา';
+      } else if (payload.requesttype === '4') {
+        this.getIdColumnLabel = 'เลขคุรุสภาสำหรับชาวต่างชาติ';
+      } else {
+        this.getIdColumnLabel =
+          'หมายเลขบัตรประชาชน/เลขคุรุสภาสำหรับชาวต่างชาติ';
       }
     });
   }
@@ -396,6 +455,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
   }
 
   requestPdf(element: KspRequest) {
+    console.log(' requestPdf= ', element.requesttype);
     const pdfType = element.requesttype;
     const pdfSubType = element.careertype;
     const date = new Date(element.requestdate || '');
@@ -503,22 +563,6 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     const admission1 = edu1?.admissionDate ?? '';
     const country1 = edu1?.country ?? '';
 
-    const teachinginfo = JSON.parse(element.teachinginfo || '');
-
-    let subject: any;
-    let subjectName = '';
-    let otherSubject = '';
-
-    for (const index in teachinginfo.teachingSubjects) {
-      subject = teachingSubjects(teachinginfo.teachingSubjects[index]);
-      subjectName += subject + ' ';
-    }
-
-    if (teachinginfo.teachingSubjectOther !== null) {
-      otherSubject = teachinginfo.teachingSubjectOther;
-      subjectName = subjectName + otherSubject;
-    }
-
     let lv1 = false;
     let lv2 = false;
     let lv3 = false;
@@ -529,30 +573,48 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     let level: any;
     let levelName = '';
 
-    for (const index in teachinginfo.teachingLevel) {
-      level = teachingLevels(teachinginfo.teachingLevel[index]);
-      levelName += level + ' ';
+    let subject: any;
+    let subjectName = '';
+    let otherSubject = '';
 
-      if (teachinginfo.teachingLevel[index] === 'level1') {
-        lv1 = true;
+    if (element.teachinginfo) {
+      const teachinginfo = JSON.parse(element.teachinginfo || '');
+
+      for (const index in teachinginfo.teachingSubjects) {
+        subject = teachingSubjects(teachinginfo.teachingSubjects[index]);
+        subjectName += subject + ' ';
       }
-      if (teachinginfo.teachingLevel[index] === 'level2') {
-        lv2 = true;
+
+      if (teachinginfo.teachingSubjectOther !== null) {
+        otherSubject = teachinginfo.teachingSubjectOther;
+        subjectName = subjectName + otherSubject;
       }
-      if (teachinginfo.teachingLevel[index] === 'level3') {
-        lv3 = true;
-      }
-      if (teachinginfo.teachingLevel[index] === 'level4') {
-        lv4 = true;
-      }
-      if (teachinginfo.teachingLevel[index] === 'level5') {
-        lv5 = true;
-      }
-      if (teachinginfo.teachingLevel[index] === 'level6') {
-        lv6 = true;
-      }
-      if (teachinginfo.teachingLevel[index] === 'level7') {
-        lv7 = true;
+
+      for (const index in teachinginfo.teachingLevel) {
+        level = teachingLevels(teachinginfo.teachingLevel[index]);
+        levelName += level + ' ';
+
+        if (teachinginfo.teachingLevel[index] === 'level1') {
+          lv1 = true;
+        }
+        if (teachinginfo.teachingLevel[index] === 'level2') {
+          lv2 = true;
+        }
+        if (teachinginfo.teachingLevel[index] === 'level3') {
+          lv3 = true;
+        }
+        if (teachinginfo.teachingLevel[index] === 'level4') {
+          lv4 = true;
+        }
+        if (teachinginfo.teachingLevel[index] === 'level5') {
+          lv5 = true;
+        }
+        if (teachinginfo.teachingLevel[index] === 'level6') {
+          lv6 = true;
+        }
+        if (teachinginfo.teachingLevel[index] === 'level7') {
+          lv7 = true;
+        }
       }
     }
 
@@ -561,11 +623,13 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     let hiringStartDate = '';
     let hiringEndDate = '';
 
-    const hiring = JSON.parse(element.hiringinfo || '');
+    if (element.hiringinfo) {
+      const hiring = JSON.parse(element.hiringinfo || '');
 
-    if (hiring) {
-      hiringStartDate = hiring.startDate;
-      hiringEndDate = hiring.endDate;
+      if (hiring) {
+        hiringStartDate = hiring.startDate;
+        hiringEndDate = hiring.endDate;
+      }
     }
 
     const payload = {
@@ -580,179 +644,205 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     let reasonDetail2 = '';
     let reasonDetail3 = '';
 
-    const reason = JSON.parse(element.reasoninfo || '');
-
-    if (reason) {
-      const schReason = reason.schoolReasons;
-      if (schReason[0] === true) {
-        if (element.careertype === '2') {
-          label1 =
-            'ผู้ขอประกอบวิชาชีพผู้บริหารสถานศึกษา เป็นผู้มีความรู้ ความสามารถในการบริหารสถานศึกษา ';
-        } else {
-          label1 = 'ผู้ขอประกอบวิชาชีพครูเป็นผู้มีความรู้ ความสามารถในการสอน ';
+    if (element.hiringinfo) {
+      const reason = JSON.parse(element.reasoninfo || '');
+      console.log('reason = ', reason);
+      if (reason && reason !== null) {
+        const schReason = reason.schoolReasons;
+        if (schReason[0] === true) {
+          if (element.careertype === '2') {
+            label1 =
+              'ผู้ขอประกอบวิชาชีพผู้บริหารสถานศึกษา เป็นผู้มีความรู้ ความสามารถในการบริหารสถานศึกษา ';
+          } else {
+            label1 =
+              'ผู้ขอประกอบวิชาชีพครูเป็นผู้มีความรู้ ความสามารถในการสอน ';
+          }
         }
-      }
-      if (schReason[1] === true) {
-        if (element.careertype === '2') {
-          label2 =
-            'ผู้ขอประกอบวิชาชีพผู้บริหารสถานศึกษา เป็นผู้มีประสบการณ์ในการบริหารสถานศึกษา ';
-        } else {
-          label2 = 'ผู้ขอประกอบวิชาชีพครูเป็นผู้มีประสบการณ์ ในการสอน ';
+        if (schReason[1] === true) {
+          if (element.careertype === '2') {
+            label2 =
+              'ผู้ขอประกอบวิชาชีพผู้บริหารสถานศึกษา เป็นผู้มีประสบการณ์ในการบริหารสถานศึกษา ';
+          } else {
+            label2 = 'ผู้ขอประกอบวิชาชีพครูเป็นผู้มีประสบการณ์ ในการสอน ';
+          }
         }
-      }
-      if (schReason[2] === true) {
-        if (element.careertype === '2') {
-          label3 = 'ขาดแคลนผู้บริหารสถานศึกษาที่มีหนังสืออนุญาตประกอบวิชาชีพ ';
-        } else {
-          label3 = 'ขาดแคลนครูผู้สอนที่มีหนังสืออนุญาตประกอบวิชาชีพ ';
+        if (schReason[2] === true) {
+          if (element.careertype === '2') {
+            label3 =
+              'ขาดแคลนผู้บริหารสถานศึกษาที่มีหนังสืออนุญาตประกอบวิชาชีพ ';
+          } else {
+            label3 = 'ขาดแคลนครูผู้สอนที่มีหนังสืออนุญาตประกอบวิชาชีพ ';
+          }
         }
-      }
-      if (schReason[3] === true) {
-        label4 = 'และ' + reason.schoolOtherDetail;
-      }
-      reasonDetail = label1;
-      if (element.careertype !== '5') {
-        reasonDetail2 = label2;
-        reasonDetail3 = label3 + label4;
-      } else {
-        reasonDetail2 = label2 + label3 + label4;
+        if (schReason[3] === true) {
+          label4 = 'และ' + reason.schoolOtherDetail;
+        }
+        reasonDetail = label1;
+        if (element.careertype !== '5') {
+          reasonDetail2 = label2;
+          reasonDetail3 = label3 + label4;
+        } else {
+          reasonDetail2 = label2 + label3 + label4;
+        }
       }
     }
 
-    const fileinfo = JSON.parse(element.fileinfo || '');
-
-    const tab3 = fileinfo['tab3'];
-    const tab4 = fileinfo['tab4'];
-    const tab5 = fileinfo['tab5'];
-    const tab6 = fileinfo['tab6'];
-
-    //teacher
-    const file1_th = tab6[0];
     let file1_thai = false;
-    if (file1_th.length > 0) {
-      file1_thai = true;
-    }
-
-    const file2_thai = true;
-
-    const file3_th = tab6[6];
-
-    const file4_th = tab3[2];
+    let file2_thai = false;
     let file4_thai = false;
-    if (file4_th.length > 0) {
-      file4_thai = true;
-    }
-
-    const file5_th = tab3[0];
     let file5_thai = false;
-    if (file5_th.length > 0) {
-      file5_thai = true;
-    }
-
-    const file6_th = tab3[1];
     let file6_thai = false;
-    if (file6_th.length > 0) {
-      file6_thai = true;
-    }
-
-    const file7_1_th = tab3[3];
     let file7_1_thai = false;
-    if (file7_1_th.length > 0) {
-      file7_1_thai = true;
-    }
-
-    const file7_2_th = tab3[4];
     let file7_2_thai = false;
-    if (file7_2_th.length > 0) {
-      file7_2_thai = true;
-    }
-
-    const file8_th = tab4[1];
     let file8_thai = false;
-    if (file8_th.length > 0) {
-      file8_thai = true;
-    }
-
-    const file9_th = tab4[2];
     let file9_thai = false;
-    if (file9_th.length > 0) {
-      file9_thai = true;
-    }
-
-    const file10_th = tab4[0];
     let file10_thai = false;
-    if (file10_th.length > 0) {
-      file10_thai = true;
-    }
-
-    const file11_th = tab6[1];
     let file11_thai = false;
-    if (file11_th.length > 0) {
-      file11_thai = true;
-    }
-
-    const file12_th = tab6[5];
     let file12_thai = false;
-    if (file12_th.length > 0) {
-      file12_thai = true;
-    }
-
-    const file13_th = tab6[6];
-
-    //manager
-    const file7_mgr = tab6[6];
-
-    const file8_mgr = tab4[1];
     let file8_manager = false;
-    if (file8_mgr.length > 0) {
-      file8_manager = true;
-    }
-
-    const file10_mgr = tab6[6];
-    const file11_mgr = tab6[6];
-    const file12_mgr = tab6[6];
-
-    const file13_mgr = tab6[5];
     let file13_manager = false;
-    if (file13_mgr.length > 0) {
-      file13_manager = true;
-    }
-
-    const file14_mgr = tab6[6];
-
-    //foreign
-    const file2_frgn = tab3[0];
     let file2_foreign = false;
-    if (file2_frgn.length > 0) {
-      file2_foreign = true;
-    }
-
-    const file3_frgn = tab3[1];
     let file3_foreign = false;
-    if (file3_frgn.length > 0) {
-      file3_foreign = true;
-    }
-
-    const file4_frgn = tab6[6];
-
-    const file5_frgn = tab3[4];
     let file5_foreign = false;
-    if (file5_frgn.length > 0) {
-      file5_foreign = true;
-    }
-
-    const file6_frgn = tab6[6];
-
-    const file7_frgn = tab4[1];
     let file7_foreign = false;
-    if (file7_frgn.length > 0) {
-      file7_foreign = true;
-    }
-
-    const file8_frgn = tab6[5];
     let file8_foreign = false;
-    if (file8_frgn.length > 0) {
-      file8_foreign = true;
+
+    if (element.fileinfo && element.requesttype === '3') {
+      const fileinfo = JSON.parse(element.fileinfo || '');
+
+      const tab3 = fileinfo['tab3'];
+      const tab4 = fileinfo['tab4'];
+      const tab5 = fileinfo['tab5'];
+      const tab6 = fileinfo['tab6'];
+
+      //teacher
+      const file1_th = tab6[0];
+
+      file2_thai = true;
+
+      if (file1_th.length > 0) {
+        file1_thai = true;
+      }
+
+      const file3_th = tab6[6];
+
+      const file4_th = tab3[2];
+
+      if (file4_th.length > 0) {
+        file4_thai = true;
+      }
+
+      const file5_th = tab3[0];
+
+      if (file5_th.length > 0) {
+        file5_thai = true;
+      }
+
+      const file6_th = tab3[1];
+
+      if (file6_th.length > 0) {
+        file6_thai = true;
+      }
+
+      const file7_1_th = tab3[3];
+
+      if (file7_1_th.length > 0) {
+        file7_1_thai = true;
+      }
+
+      const file7_2_th = tab3[4];
+
+      if (file7_2_th.length > 0) {
+        file7_2_thai = true;
+      }
+
+      const file8_th = tab4[1];
+
+      if (file8_th.length > 0) {
+        file8_thai = true;
+      }
+
+      const file9_th = tab4[2];
+
+      if (file9_th.length > 0) {
+        file9_thai = true;
+      }
+
+      const file10_th = tab4[0];
+
+      if (file10_th.length > 0) {
+        file10_thai = true;
+      }
+
+      const file11_th = tab6[1];
+
+      if (file11_th.length > 0) {
+        file11_thai = true;
+      }
+
+      const file12_th = tab6[5];
+
+      if (file12_th.length > 0) {
+        file12_thai = true;
+      }
+
+      const file13_th = tab6[6];
+
+      //manager
+      const file7_mgr = tab6[6];
+
+      const file8_mgr = tab4[1];
+
+      if (file8_mgr.length > 0) {
+        file8_manager = true;
+      }
+
+      const file10_mgr = tab6[6];
+      const file11_mgr = tab6[6];
+      const file12_mgr = tab6[6];
+
+      const file13_mgr = tab6[5];
+
+      if (file13_mgr.length > 0) {
+        file13_manager = true;
+      }
+
+      const file14_mgr = tab6[6];
+
+      //foreign
+      const file2_frgn = tab3[0];
+
+      if (file2_frgn.length > 0) {
+        file2_foreign = true;
+      }
+
+      const file3_frgn = tab3[1];
+
+      if (file3_frgn.length > 0) {
+        file3_foreign = true;
+      }
+
+      const file4_frgn = tab6[6];
+
+      const file5_frgn = tab3[4];
+
+      if (file5_frgn.length > 0) {
+        file5_foreign = true;
+      }
+
+      const file6_frgn = tab6[6];
+
+      const file7_frgn = tab4[1];
+
+      if (file7_frgn.length > 0) {
+        file7_foreign = true;
+      }
+
+      const file8_frgn = tab6[5];
+
+      if (file8_frgn.length > 0) {
+        file8_foreign = true;
+      }
     }
 
     let forbid1_1 = false;
@@ -827,117 +917,173 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       const telphone = res.telphone;
       const schoolemail = res.email;
       //console.log(id12);
-      this.dialog.open(PdfRenderComponent, {
-        width: '1200px',
-        height: '100vh',
-        data: {
-          pdfType,
-          pdfSubType,
-          input: {
-            day,
-            month,
-            year,
-            schoolname,
-            bureauname,
-            address,
-            moo,
-            street,
-            road,
-            tumbon,
-            amphurname,
-            provincename,
-            zipcode,
-            fax,
-            name,
-            phone,
-            telphone,
-            email,
-            schoolemail,
-            nationality,
-            birthdate,
-            passportno,
-            position,
-            hiringStartDate,
-            hiringEndDate,
-            country1,
-            admission1,
-            id1,
-            id2,
-            id3,
-            id4,
-            id5,
-            id6,
-            id7,
-            id8,
-            id9,
-            id10,
-            id11,
-            id12,
-            id13,
-            approve1,
-            approve2,
-            approve3,
-            degreename1,
-            institution1,
-            major1,
-            degree1,
-            graduateDate1,
-            grade1,
-            degreename2,
-            institution2,
-            major2,
-            degree2,
-            graduateDate2,
-            grade2,
-            degreename3,
-            institution3,
-            major3,
-            degree3,
-            graduateDate3,
-            grade3,
-            nameen,
-            subjectName,
-            lv1,
-            lv2,
-            lv3,
-            lv4,
-            lv5,
-            lv6,
-            lv7,
-            levelName,
-            reasonDetail,
-            reasonDetail2,
-            reasonDetail3,
-            file1_thai,
-            file2_thai,
-            file4_thai,
-            file5_thai,
-            file6_thai,
-            file7_1_thai,
-            file7_2_thai,
-            file8_thai,
-            file9_thai,
-            file10_thai,
-            file11_thai,
-            file12_thai,
-            file8_manager,
-            file13_manager,
-            file2_foreign,
-            file3_foreign,
-            file5_foreign,
-            file7_foreign,
-            file8_foreign,
-            forbid1_1,
-            forbid2_1,
-            forbid3_1,
-            forbid1_2,
-            forbid2_2,
-            forbid3_2,
-            forbid3,
-            prisonDetail,
+
+      if (element.requesttype === '3') {
+        this.dialog.open(PdfRenderComponent, {
+          width: '1200px',
+          height: '100vh',
+          data: {
+            pdfType,
+            pdfSubType,
+            input: {
+              day,
+              month,
+              year,
+              schoolname,
+              bureauname,
+              address,
+              moo,
+              street,
+              road,
+              tumbon,
+              amphurname,
+              provincename,
+              zipcode,
+              fax,
+              name,
+              phone,
+              telphone,
+              email,
+              schoolemail,
+              nationality,
+              birthdate,
+              passportno,
+              position,
+              hiringStartDate,
+              hiringEndDate,
+              country1,
+              admission1,
+              id1,
+              id2,
+              id3,
+              id4,
+              id5,
+              id6,
+              id7,
+              id8,
+              id9,
+              id10,
+              id11,
+              id12,
+              id13,
+              approve1,
+              approve2,
+              approve3,
+              degreename1,
+              institution1,
+              major1,
+              degree1,
+              graduateDate1,
+              grade1,
+              degreename2,
+              institution2,
+              major2,
+              degree2,
+              graduateDate2,
+              grade2,
+              degreename3,
+              institution3,
+              major3,
+              degree3,
+              graduateDate3,
+              grade3,
+              nameen,
+              subjectName,
+              lv1,
+              lv2,
+              lv3,
+              lv4,
+              lv5,
+              lv6,
+              lv7,
+              levelName,
+              reasonDetail,
+              reasonDetail2,
+              reasonDetail3,
+              file1_thai,
+              file2_thai,
+              file4_thai,
+              file5_thai,
+              file6_thai,
+              file7_1_thai,
+              file7_2_thai,
+              file8_thai,
+              file9_thai,
+              file10_thai,
+              file11_thai,
+              file12_thai,
+              file8_manager,
+              file13_manager,
+              file2_foreign,
+              file3_foreign,
+              file5_foreign,
+              file7_foreign,
+              file8_foreign,
+              forbid1_1,
+              forbid2_1,
+              forbid3_1,
+              forbid1_2,
+              forbid2_2,
+              forbid3_2,
+              forbid3,
+              prisonDetail,
+            },
           },
-        },
-      });
+        });
+      } else {
+        this.dialog.open(PdfRenderComponent, {
+          width: '1200px',
+          height: '100vh',
+          data: {
+            pdfType,
+            pdfSubType,
+            input: {
+              day,
+              month,
+              year,
+              schoolname,
+              bureauname,
+              address,
+              moo,
+              street,
+              road,
+              tumbon,
+              amphurname,
+              provincename,
+              zipcode,
+              fax,
+              name,
+              phone,
+              telphone,
+              position,
+              id1,
+              id2,
+              id3,
+              id4,
+              id5,
+              id6,
+              id7,
+              id8,
+              id9,
+              id10,
+              id11,
+              id12,
+              id13,
+              degreename1,
+              institution1,
+              major1,
+              degree1,
+              graduateDate1,
+              degreename2,
+              institution2,
+              major2,
+              degree2,
+              graduateDate2,
+              nameen,
+            },
+          },
+        });
+      }
     });
   }
 }
@@ -979,5 +1125,4 @@ export const displayedColumnsKSP = [
   'status',
   'updatedate',
   'requestdate',
-  'requestpdf',
 ];

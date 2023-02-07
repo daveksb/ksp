@@ -257,7 +257,7 @@ export class RenewLicenseRequestComponent
 
 const WORKING_INFO_FILES: FileGroup[] = [
   {
-    name: '1.สำเนาผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน (3 กิจกรรม)',
+    name: '1.สำเนาผลการปฏิบัติงานตามมาตรฐานการปฏิบัติงาน (มากกว่า 3 กิจกรรม)',
     files: [],
   },
 ];

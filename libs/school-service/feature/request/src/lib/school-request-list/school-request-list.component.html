@@ -158,7 +158,7 @@
 
           <ng-container matColumnDef="idcardno">
             <th mat-header-cell *matHeaderCellDef>
-              หมายเลขบัตรประชาชน/เลขคุรุสภาสำหรับชาวต่างชาติ
+              {{ getIdColumnLabel }}
             </th>
             <td mat-cell *matCellDef="let element">
               {{ element.idcardno || element.kuruspano }}
@@ -166,9 +166,16 @@
           </ng-container>
 
           <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+            <th mat-header-cell *matHeaderCellDef>
+              {{ getNameColumnLabel }}
+            </th>
             <td mat-cell *matCellDef="let element">
-              {{ element.firstnameth }} {{ element.lastnameth }}
+              <ng-container *ngIf="element.requesttype !== '40'">
+                {{ element.firstnameth }} {{ element.lastnameth }}</ng-container
+              >
+              <ng-container *ngIf="element.requesttype === '40'">
+                {{ JSON.parse(element.osoiinfo).rewardname }}</ng-container
+              >
             </td>
           </ng-container>
 
@@ -180,9 +187,18 @@
           </ng-container>
 
           <ng-container matColumnDef="careertype">
-            <th mat-header-cell *matHeaderCellDef>ประเภทวิชาชีพ</th>
+            <th mat-header-cell *matHeaderCellDef>
+              {{ getTypeColumnLabel }}
+            </th>
             <td mat-cell *matCellDef="let element">
-              {{ SchoolRequestSubType[+element.careertype] }}
+              <ng-container *ngIf="element.requesttype !== '40'">
+                {{ SchoolRequestSubType[+element.careertype] }}
+              </ng-container>
+              <ng-container *ngIf="element.requesttype === '40'">
+                {{
+                  SchoolRewardType[+JSON.parse(element.osoiinfo).rewardtype]
+                }}</ng-container
+              >
             </td>
           </ng-container>
 
@@ -246,13 +262,12 @@
                 role="button"
                 class="bi bi-file-earmark-text text-primary fs-5"
               ></i>
-              <div *ngIf="!reqTypeStatus" class="form-label">-</div>
             </td>
           </ng-container>
 
           <ng-container matColumnDef="licensepdf">
             <th mat-header-cell *matHeaderCellDef class="text-center">
-              {{ getColumnLabel() }}
+              {{ getPdfColumnLabel }}
             </th>
             <td mat-cell *matCellDef="let element" class="text-center">
               <i
@@ -261,7 +276,6 @@
                 role="button"
                 class="bi bi-file-earmark-text text-primary fs-5"
               ></i>
-              <div *ngIf="!reqTypeStatus" class="form-label">-</div>
             </td>
           </ng-container>
 

@@ -42,7 +42,7 @@ export class PaymentChannelComponent implements OnInit {
   cancel() {
     const dialog = this.dialog.open(CompleteDialogComponent, {
       data: {
-        header: `ทำรายการชำระเงินไม่สำเร็จ`,
+        header: `รอชำระเงิน`,
         isDanger: true,
         showImg: true,
         content: `วันที่ : ${thaiDate(new Date())}

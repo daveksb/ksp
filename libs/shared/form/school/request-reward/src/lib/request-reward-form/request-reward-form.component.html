@@ -72,7 +72,11 @@
             />
           </td>
           <td>
-            <select class="form-select" formControlName="prefixth">
+            <select
+              class="form-select"
+              formControlName="prefixth"
+              style="min-width: 125px"
+            >
               <option value="null" selected hidden disabled>เลือก</option>
               <option *ngFor="let prefix of prefixList" [value]="prefix.id">
                 {{ prefix?.name_th }}
@@ -130,6 +134,7 @@
           <th scope="col">เบอร์โทรศัพท์มือถือ</th>
           <th scope="col">อีเมล</th>
           <th scope="col">วิทยฐานะ</th>
+          <th scope="col">ผู้ประสานงาน</th>
         </tr>
       </thead>
       <tbody>
@@ -138,7 +143,11 @@
             <tr [formGroupName]="i">
               <th class="text-center">{{ i + 1 }}</th>
               <td>
-                <select class="form-select" formControlName="membertype">
+                <select
+                  class="form-select"
+                  style="min-width: 150px"
+                  formControlName="membertype"
+                >
                   <option value="null" selected hidden disabled>
                     กรุณาเลือก
                   </option>
@@ -153,10 +162,15 @@
                   class="form-control"
                   formControlName="idcardno"
                   maxlength="13"
+                  style="min-width: 150px"
                 />
               </td>
               <td>
-                <select class="form-select" formControlName="prefix">
+                <select
+                  class="form-select"
+                  formControlName="prefix"
+                  style="min-width: 125px"
+                >
                   <option value="null" selected hidden disabled>เลือก</option>
                   <option *ngFor="let prefix of prefixList" [value]="prefix.id">
                     {{ prefix?.name_th }}
@@ -168,6 +182,7 @@
                   type="text"
                   class="form-control"
                   formControlName="firstname"
+                  style="min-width: 150px"
                 />
               </td>
               <td>
@@ -175,6 +190,7 @@
                   type="text"
                   class="form-control"
                   formControlName="lastname"
+                  style="min-width: 150px"
                 />
               </td>
               <td>
@@ -183,6 +199,7 @@
                   class="form-control"
                   formControlName="phone"
                   maxlength="10"
+                  style="min-width: 150px"
                 />
               </td>
               <td>
@@ -190,6 +207,7 @@
                   type="text"
                   class="form-control"
                   formControlName="email"
+                  style="min-width: 150px"
                 />
               </td>
               <td>
@@ -197,7 +215,11 @@
                   type="text"
                   class="form-control"
                   formControlName="academicstanding"
+                  style="min-width: 150px"
                 />
+              </td>
+              <td class="text-center align-items-center">
+                <input type="checkbox" formControlName="isCoordinator" />
               </td>
             </tr>
           </ng-container>
