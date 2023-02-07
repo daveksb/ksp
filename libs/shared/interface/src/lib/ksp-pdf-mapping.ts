@@ -2340,7 +2340,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           },
 
           {
-            key: 'reasonDetail',
+            key: 'approveReasonDetail',
             options: {
               x: 305,
               y: 138,
@@ -2866,7 +2866,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           },
 
           {
-            key: 'reasonDetail',
+            key: 'approveReasonDetail',
             options: {
               x: 320,
               y: 101,
@@ -3412,7 +3412,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           },
 
           {
-            key: 'reasonDetail',
+            key: 'approveReasonDetail',
             options: {
               x: 305,
               y: 124,
@@ -3544,7 +3544,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
     pdfSubType: 6,
     //pdfSrc: 'assets/pdf/school-qualification-approve-temp-license.pdf',
     pdfSrc:
-      'https://ksp-eservice.ksp.or.th/pdf/school-qualification-approve-temp-license.pdf',
+      'https://ksp-eservice.ksp.or.th/pdf/school-qualification-approve.pdf',
     input: [
       {
         text: [
