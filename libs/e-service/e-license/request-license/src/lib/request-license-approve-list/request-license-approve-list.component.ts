@@ -18,6 +18,7 @@ import {
 import {
   eSelfCheckProcess,
   eSelfCheckStatus,
+  formatDatePayload,
   processFilter,
   replaceEmptyWithNull,
 } from '@ksp/shared/utility';
@@ -82,6 +83,7 @@ export class RequestLicenseApproveListComponent implements AfterViewInit {
     };
 
     payload = replaceEmptyWithNull(payload);
+    payload = formatDatePayload(payload);
 
     this.requestService.KspSearchRequest(payload).subscribe((res) => {
       if (res) {
