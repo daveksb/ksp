@@ -199,6 +199,7 @@ export class LicenseRequestComponent
     if (formData?.address2?.addressType) formData.address2.addresstype = 2;
 
     const { id, ...rawUserInfo } = formData.userInfo;
+    console.log('rawUserInfo ', rawUserInfo);
     //console.log('requestId ', this.requestId);
     const userInfo = toLowercaseProp(rawUserInfo);
     self.isforeign = `${SelfServiceRequestForType.ชาวไทย}`;

@@ -24,6 +24,7 @@ export class FormUserEducationComponent
   @Input() attachFiles!: any[];
   @Input() uniqueTimestamp = '';
   @Input() title = '';
+  @Input() systemType = '';
 
   selectedEducationType!: number;
 

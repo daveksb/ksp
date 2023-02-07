@@ -18,6 +18,7 @@ export class RenewLicensePropertyComponent
     'schManager';
   @Input() uniqueTimestamp = '';
   @Input() workingInfo: any[] = [];
+  @Input() systemType = '';
 
   selectedEducationType!: number;
 

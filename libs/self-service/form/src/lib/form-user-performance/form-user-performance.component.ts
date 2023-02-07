@@ -11,6 +11,7 @@ export class FormUserPerformanceComponent implements OnInit {
   @Input() uniqueTimestamp = '';
   @Input() performanceFiles: any[] = [];
   @Input() mode: FormMode = 'edit';
+  @Input() systemType = '';
 
   typesOfSubject: string[] = [
     'วิชาชีพครู',
