@@ -59,7 +59,6 @@ export class EBestTeacherCreateDeclareComponent
   ngOnInit(): void {
     this.requestService.getLastApproveList().subscribe((res) => {
       this.listNo = +res.listno + 1;
-      console.log(this.listNo);
     });
   }
 
