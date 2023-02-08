@@ -57,12 +57,20 @@ export class EQualificationApproveListComponent implements AfterViewInit {
   renderLicense(request: KspRequest) {
     const pdfType = 99;
     const pdfSubType = 6;
-    const requestno = request.requestno;
+    const requestno = 'ศธ. ' + request.requestno;
     const name = request.firstnameth + ' ' + request.lastnameth;
     const position = request.position;
     const bureauname = request.bureauname;
     const schoolname = request.schoolname;
-    const approveresult = request.status;
+
+    const approveStatus = request.status || '';
+    let approveresult = '';
+    if (approveStatus === '2') {
+      approveresult = 'รับรอง';
+    } else {
+      approveresult = 'ไม่รับรอง';
+    }
+
     const careertype = SchoolRequestSubType[Number(request.careertype)];
     const eduinfo = JSON.parse(request.eduinfo || '');
     //console.log('yyy = ', eduinfo);
@@ -304,5 +312,5 @@ export const column = [
   'updatedate',
   'requestdate',
   'reqDoc',
-  //'license',
+  'license',
 ];

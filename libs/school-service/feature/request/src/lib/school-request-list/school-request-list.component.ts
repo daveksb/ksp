@@ -100,30 +100,6 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  /* getPdfColumnLabel() {
-    if (this.form.controls.licenseSearch.value?.requesttype !== '3') {
-      return 'หนังสือแจ้งผล';
-    } else return 'หนังสืออนุญาตฯ';
-  }
-
-  getNameColumnLabel() {
-    if (this.form.controls.licenseSearch.value?.requesttype === '40') {
-      return 'ชื่อผลงาน';
-    } else return 'ชื่อ-นามสกุล';
-  }
-
-  getTypeColumnLabel() {
-    if (this.form.controls.licenseSearch.value?.requesttype === '40') {
-      return 'ประเภทผลงาน';
-    } else return 'ประเภทวิชาชีพ';
-  }
-
-  getIdColumnLabel() {
-    if (this.form.controls.licenseSearch.value?.requesttype === '40') {
-      return 'หมายเลขบัตรประชาชนผู้บริหารสถานศึกษา';
-    } else return 'หมายเลขบัตรประชาชน/เลขคุรุสภาสำหรับชาวต่างชาติ';
-  } */
-
   genAlertMessage(req: KspRequest) {
     const detail: any = JSON.parse(req.detail || '');
     return `แจ้งเตือน เลขที่คำขอ : ${req.requestno} ใบคำ${schoolMapRequestType(
@@ -241,7 +217,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
   }
 
   genPdf(element: SchTempLicense) {
-    console.log('element = ', element);
+    //console.log('element = ', element);
     const position = element?.position;
     const startDate = new Date(element.licensestartdate || '');
     const endDate = new Date(element.licenseenddate || '');
@@ -455,7 +431,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
   }
 
   requestPdf(element: KspRequest) {
-    console.log(' requestPdf= ', element.requesttype);
+    //console.log('requestPdf= ', element.requesttype);
     const pdfType = element.requesttype;
     const pdfSubType = element.careertype;
     const date = new Date(element.requestdate || '');
@@ -508,7 +484,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
 
     const edu1 = eduinfo.find((item: any) => {
       if (item?.degreeLevel) {
-        return item.degreeLevel === '1';
+        return item.degreeLevel === '1' || item.degreeLevel === 1;
       }
       return false;
     });
@@ -526,7 +502,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
 
     const edu2 = eduinfo.find((item: any) => {
       if (item?.degreeLevel) {
-        return item.degreeLevel === '2';
+        return item.degreeLevel === '2' || item.degreeLevel === 2;
       }
       return false;
     });
@@ -544,7 +520,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
 
     const edu3 = eduinfo.find((item: any) => {
       if (item?.degreeLevel) {
-        return item.degreeLevel === '3';
+        return item.degreeLevel === '3' || item.degreeLevel === 3;
       }
       return false;
     });
@@ -559,6 +535,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     if (degreename3) {
       degree3 = true;
     }
+    console.log('eduinfo = ', eduinfo);
 
     const admission1 = edu1?.admissionDate ?? '';
     const country1 = edu1?.country ?? '';
@@ -646,7 +623,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
 
     if (element.hiringinfo) {
       const reason = JSON.parse(element.reasoninfo || '');
-      console.log('reason = ', reason);
+      //console.log('reason = ', reason);
       if (reason && reason !== null) {
         const schReason = reason.schoolReasons;
         if (schReason[0] === true) {
@@ -709,7 +686,6 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
 
     if (element.fileinfo && element.requesttype === '3') {
       const fileinfo = JSON.parse(element.fileinfo || '');
-
       const tab3 = fileinfo['tab3'];
       const tab4 = fileinfo['tab4'];
       const tab5 = fileinfo['tab5'];
@@ -717,71 +693,60 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
 
       //teacher
       const file1_th = tab6[0];
-
-      file2_thai = true;
-
       if (file1_th.length > 0) {
         file1_thai = true;
       }
 
+      file2_thai = true;
+
       const file3_th = tab6[6];
 
       const file4_th = tab3[2];
-
       if (file4_th.length > 0) {
         file4_thai = true;
       }
 
       const file5_th = tab3[0];
-
       if (file5_th.length > 0) {
         file5_thai = true;
       }
 
       const file6_th = tab3[1];
-
       if (file6_th.length > 0) {
         file6_thai = true;
       }
 
       const file7_1_th = tab3[3];
-
       if (file7_1_th.length > 0) {
         file7_1_thai = true;
       }
 
       const file7_2_th = tab3[4];
-
       if (file7_2_th.length > 0) {
         file7_2_thai = true;
       }
 
       const file8_th = tab4[1];
-
       if (file8_th.length > 0) {
         file8_thai = true;
       }
 
       const file9_th = tab4[2];
-
       if (file9_th.length > 0) {
         file9_thai = true;
       }
 
       const file10_th = tab4[0];
-
       if (file10_th.length > 0) {
         file10_thai = true;
       }
 
       const file11_th = tab6[1];
-
       if (file11_th.length > 0) {
         file11_thai = true;
       }
 
       const file12_th = tab6[5];
-
       if (file12_th.length > 0) {
         file12_thai = true;
       }
@@ -792,7 +757,6 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       const file7_mgr = tab6[6];
 
       const file8_mgr = tab4[1];
-
       if (file8_mgr.length > 0) {
         file8_manager = true;
       }
@@ -802,7 +766,6 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       const file12_mgr = tab6[6];
 
       const file13_mgr = tab6[5];
-
       if (file13_mgr.length > 0) {
         file13_manager = true;
       }
@@ -811,13 +774,11 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
 
       //foreign
       const file2_frgn = tab3[0];
-
       if (file2_frgn.length > 0) {
         file2_foreign = true;
       }
 
       const file3_frgn = tab3[1];
-
       if (file3_frgn.length > 0) {
         file3_foreign = true;
       }
@@ -825,7 +786,6 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       const file4_frgn = tab6[6];
 
       const file5_frgn = tab3[4];
-
       if (file5_frgn.length > 0) {
         file5_foreign = true;
       }
@@ -833,16 +793,77 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       const file6_frgn = tab6[6];
 
       const file7_frgn = tab4[1];
-
       if (file7_frgn.length > 0) {
         file7_foreign = true;
       }
 
       const file8_frgn = tab6[5];
-
       if (file8_frgn.length > 0) {
         file8_foreign = true;
       }
+    }
+
+    let evidence1 = false;
+    let evidence2 = false;
+    let evidence3 = false;
+    /* let evidence4 = false; */
+    let evidence5 = false;
+    let evidence6 = false;
+    let evidence7 = false;
+    let evidence8 = false;
+
+    if (element.fileinfo && element.requesttype === '6') {
+      const fileinfo = JSON.parse(element.fileinfo || '');
+
+      const tab3 = fileinfo['file'];
+
+      if (tab3[0].length > 0) {
+        evidence1 = true;
+      }
+
+      if (tab3[1].length > 0) {
+        evidence2 = true;
+      }
+
+      if (tab3[2].length > 0) {
+        evidence3 = true;
+      }
+
+      /* if (tab3[7].length > 0) {
+        evidence4 = true;
+      } */
+
+      if (tab3[3].length > 0) {
+        evidence6 = true;
+      }
+
+      if (tab3[4].length > 0) {
+        evidence5 = true;
+      }
+
+      if (tab3[5].length > 0) {
+        evidence7 = true;
+      }
+
+      if (tab3[6].length > 0) {
+        evidence8 = true;
+      }
+    }
+
+    let approveReasonDetail = '';
+    let approveDegreeLevel = '';
+    let approveDegreeName = '';
+    let approveMajor = '';
+    let approveInstitution = '';
+
+    if (element.otherreason) {
+      const qualification_reason = JSON.parse(element.otherreason || '');
+      approveReasonDetail = qualification_reason['reason1'];
+      approveDegreeLevel = 'ตรี';
+      approveDegreeName = qualification_reason['degreename'];
+      approveMajor = qualification_reason['major'];
+      approveInstitution = qualification_reason['institute'];
+      //console.log('qualification_reason = ', qualification_reason);
     }
 
     let forbid1_1 = false;
@@ -1079,7 +1100,24 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
               major2,
               degree2,
               graduateDate2,
+              degreename3,
+              institution3,
+              major3,
+              degree3,
+              graduateDate3,
               nameen,
+              evidence1,
+              evidence2,
+              evidence3,
+              evidence5,
+              evidence6,
+              evidence7,
+              evidence8,
+              approveReasonDetail,
+              approveDegreeLevel,
+              approveDegreeName,
+              approveMajor,
+              approveInstitution,
             },
           },
         });

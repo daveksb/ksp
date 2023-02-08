@@ -221,6 +221,13 @@
               <input
                 type="checkbox"
                 class="me-2"
+                [attr.disabled]="
+                  experienceSelected[2] ||
+                  experienceSelected[3] ||
+                  experienceSelected[4]
+                    ? true
+                    : null
+                "
                 (change)="experienceSelect(1, $event)"
               />
               <label class="box-header">ด้านการสอน</label>
@@ -237,6 +244,13 @@
                 type="checkbox"
                 class="me-2"
                 (change)="experienceSelect(2, $event)"
+                [attr.disabled]="
+                  experienceSelected[1] ||
+                  experienceSelected[3] ||
+                  experienceSelected[4]
+                    ? true
+                    : null
+                "
               />
               <label class="box-header">ด้านการบริหารสถานศึกษา</label>
             </div>
@@ -252,6 +266,13 @@
                 type="checkbox"
                 class="me-2"
                 (change)="experienceSelect(3, $event)"
+                [attr.disabled]="
+                  experienceSelected[1] ||
+                  experienceSelected[2] ||
+                  experienceSelected[4]
+                    ? true
+                    : null
+                "
               />
               <label class="box-header">ด้านการบริหารการศึกษา</label>
             </div>
@@ -267,6 +288,13 @@
                 type="checkbox"
                 class="me-2"
                 (change)="experienceSelect(4, $event)"
+                [attr.disabled]="
+                  experienceSelected[1] ||
+                  experienceSelected[2] ||
+                  experienceSelected[3]
+                    ? true
+                    : null
+                "
               />
               <label class="box-header">ด้านการนิเทศก์การศึกษา</label>
             </div>
@@ -285,6 +313,7 @@
 </form>
 <div class="sticky-bottom border px-2">
   <ksp-bottom-nav
+    [cancelButtonLabel]="'ยกเลิกใบคำขอ'"
     [showCenterButtons]="true"
     [isLastPage]="selectedTabIndex === 3"
     [showCancelButton]="
