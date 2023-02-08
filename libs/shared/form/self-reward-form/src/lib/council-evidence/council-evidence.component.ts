@@ -15,6 +15,7 @@ export class CouncilEvidenceComponent
 {
   @Input() rewardFiles!: any[];
   @Input() uniqueTimestamp!: string;
+  @Input() systemType = '';
 
   override form = this.fb.group({
     evidenceInfo: this.fb.array([]),

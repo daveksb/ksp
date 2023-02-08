@@ -1,7 +1,4 @@
-<ksp-top-nav
-  ><span header>ยื่นแบบคำขอ</span
-  ><span subHeader>ขอหนังสืออนุญาตประกอบวิชาชีพ (ชาวไทย)</span></ksp-top-nav
->
+<ksp-top-nav><span header>ยื่นแบบคำขอ</span><span subHeader>ขอหนังสืออนุญาตประกอบวิชาชีพ (ชาวไทย)</span></ksp-top-nav>
 
 <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height">
   <div class="box-header">
@@ -11,15 +8,13 @@
     <div class="bg-white px-4 py-2">
       <ksp-request-header-info
         [requestDate]="requestData.createdate"
-        [requestNumber]="requestData.requestno"
-      ></ksp-request-header-info>
+        [requestNumber]="requestData.requestno"></ksp-request-header-info>
       <hr />
       <div class="row align-items-center bg-light py-2 mx-0 mb-3">
         <div class="col-3">
           <self-service-form-upload-image
             [imgSrc]="myImage"
-            [isEditMode]="false"
-          ></self-service-form-upload-image>
+            [isEditMode]="false"></self-service-form-upload-image>
         </div>
         <div class="col-9">
           <ksp-form-user-info
@@ -28,8 +23,7 @@
             [mode]="'view'"
             [isDarkMode]="false"
             [prefixList]="prefixList$ | async"
-            [nationList]="nationalitys$ | async"
-          ></ksp-form-user-info>
+            [nationList]="nationalitys$ | async"></ksp-form-user-info>
         </div>
       </div>
 
@@ -38,8 +32,7 @@
         animationDuration="0ms"
         (selectedIndexChange)="selectedTabIndex = $event"
         [selectedIndex]="selectedTabIndex"
-        selectedIndex="0"
-      >
+        selectedIndex="0">
         <mat-tab label="ที่อยู่" class="tab-content">
           <ksp-form-address
             formControlName="address1"
@@ -47,8 +40,7 @@
             [isDarkMode]="true"
             [provinces]="provinces$ | async"
             [amphurs]="amphurs1$ | async"
-            [tumbols]="tumbols1$ | async"
-          >
+            [tumbols]="tumbols1$ | async">
             <span>ที่อยู่ทะเบียนบ้าน</span>
           </ksp-form-address>
           <hr />
@@ -58,8 +50,7 @@
             [isDarkMode]="true"
             [provinces]="provinces$ | async"
             [amphurs]="amphurs2$ | async"
-            [tumbols]="tumbols2$ | async"
-          >
+            [tumbols]="tumbols2$ | async">
             <span class="me-1">ที่อยู่ที่ติดต่อได้สะดวก</span>
           </ksp-form-address>
         </mat-tab>
@@ -73,8 +64,7 @@
             [provinces]="provinces$ | async"
             [amphurs]="amphurs3$ | async"
             [tumbols]="tumbols3$ | async"
-            [bureaus]="bureau$ | async"
-          >
+            [bureaus]="bureau$ | async">
           </self-service-form-user-workplace>
         </mat-tab>
 
@@ -86,7 +76,7 @@
             [educationTypes]="educationTypes"
             [title]="'หลักฐานประกอบวุฒิทางการศึกษา'"
             [attachFiles]="eduFiles"
-          ></self-service-form-user-education>
+            [systemType]="'sch'"></self-service-form-user-education>
         </mat-tab>
 
         <mat-tab label="ข้อมูลประสบการณ์วิชาชีพ">
@@ -95,31 +85,27 @@
             [mode]="'view'"
             [countries]="countries2$ | async"
             [licenses]="licenses$ | async"
-            formControlName="experience"
-          ></self-service-form-user-experience>
+            formControlName="experience"></self-service-form-user-experience>
           <self-service-school-manager-experience
             *ngIf="educationTypes === 'schManager'"
             [mode]="'view'"
-            formControlName="experience"
-          ></self-service-school-manager-experience>
+            formControlName="experience"></self-service-school-manager-experience>
           <self-service-education-manager-experience
             *ngIf="educationTypes === 'eduManager'"
             [mode]="'view'"
-            formControlName="experience"
-          >
+            formControlName="experience">
           </self-service-education-manager-experience>
           <self-service-study-supervision-experience
             *ngIf="educationTypes === 'supervision'"
             [mode]="'view'"
-            formControlName="experience"
-          >
+            formControlName="experience">
           </self-service-study-supervision-experience>
           <div class="mt-3">
             <ksp-form-multi-attachment
               [mode]="'view'"
               [title]="'หลักฐานประกอบการฝึกประสบการณ์วิชาชีพ'"
               [groups]="experienceFiles"
-            ></ksp-form-multi-attachment>
+              [systemType]="'sch'"></ksp-form-multi-attachment>
           </div>
         </mat-tab>
 
@@ -128,7 +114,7 @@
             <self-service-form-user-performance
               [mode]="'view'"
               [performanceFiles]="performanceFiles"
-            >
+              [systemType]="'sch'">
             </self-service-form-user-performance>
           </mat-tab>
         </ng-container>
@@ -140,8 +126,7 @@
                 'ลักษณะต้องห้ามตามที่กำหนดไว้ในมาตรา 44 แห่งพระราชบัญญัติสภาครูและบุคลากรทางการศึกษา พ.ศ.2546'
               "
               [input]="prohibitProperty"
-              [mode]="'view'"
-            ></ksp-forbidden-property>
+              [mode]="'view'"></ksp-forbidden-property>
           </div>
         </mat-tab>
       </mat-tab-group>
@@ -155,20 +140,16 @@
           (requestData.process === '4' && requestData.status === '4') ||
           (requestData.process === '4' && requestData.status === '5')
         )
-      "
-    >
+      ">
       <ng-container
         formArrayName="checkResult"
-        *ngFor="let c of checkResultFormArray.controls; let i = index"
-      >
+        *ngFor="let c of checkResultFormArray.controls; let i = index">
         <div
           class="bg-white px-3 py-2 mt-3"
-          [ngClass]="{ hide: (selectedTabIndex || 0) !== i }"
-        >
+          [ngClass]="{ hide: (selectedTabIndex || 0) !== i }">
           <e-service-license-check
             [choices]="verifyChoice"
-            [formControlName]="i"
-          ></e-service-license-check>
+            [formControlName]="i"></e-service-license-check>
         </div>
       </ng-container>
     </ng-container>
@@ -185,7 +166,6 @@
     [disableNextMessage]="'กรุณาตรวจสอบให้ครบถ้วน'"
     [disableNext]="
       !checkResultFormArray.valid && selectedTabIndex === tabsCount
-    "
-  >
+    ">
   </ksp-bottom-nav>
 </div>

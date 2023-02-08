@@ -55,7 +55,7 @@ export class EPraiseTeacherCheckListComponent implements OnInit, AfterViewInit {
       name: params.name,
       idcardno: params.idcardno,
       passportno: null,
-      process: null,
+      process: '5',
       status: params.status,
       schoolid: null,
       schoolname: null,

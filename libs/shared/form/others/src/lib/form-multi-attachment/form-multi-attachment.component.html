@@ -23,16 +23,14 @@
                   <div
                     class="text-secondary"
                     role="button"
-                    (click)="downloadFile(file)"
-                  >
+                    (click)="downloadFile(file)">
                     {{ file?.filename }}
                   </div>
                   <i
                     (click)="deleteFile(file)"
                     *ngIf="file?.fileid && mode === 'edit'"
                     class="bi bi-x-circle-fill text-danger fs-6 ms-2"
-                    role="button"
-                  ></i>
+                    role="button"></i>
 
                   <!-- <div *ngIf="i === 0 && mode === 'edit'" class="text-danger">
                     ขอเอกสารเพิ่มเติม: เนื่องจากขาดข้อมูลหน้าที่ 11-20
@@ -44,9 +42,7 @@
             <td *ngIf="mode === 'view' && group?.files?.length">
               <div class="mt-4">
                 <div class="d-flex flex-row justify-content-center">
-                  <label class="view__label" (click)="view(group)"
-                    >ดูเอกสารแนบ</label
-                  >
+                  <label class="view__label" (click)="view(group)">ดูเอกสารแนบ</label>
                 </div>
               </div>
             </td>
@@ -57,19 +53,16 @@
                 [systemFileName]="group.name"
                 [requestType]="requestType"
                 [uniqueTimestamp]="uniqueTimestamp"
-                (uploadComplete)="updateComplete($event, group)"
-              >
+                (uploadComplete)="updateComplete($event, group)">
               </ksp-file-upload>
             </td>
             <td *ngIf="systemType === 'e-service-uni'">
               <div class="mt-4">
                 <ng-container
-                  *ngFor="let result of group.checkresult; index as j"
-                >
+                  *ngFor="let result of group.checkresult; index as j">
                   <div
                     class="d-flex align-items-center flex-row mb-4"
-                    *ngIf="!result?.result"
-                  ></div>
+                    *ngIf="!result?.result"></div>
                   <div class="d-flex align-items-center flex-row">
                     {{ mapDisplay(result?.result) }}
                   </div>

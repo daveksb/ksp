@@ -23,6 +23,8 @@ export class StandardWorkingComponent
   @Input() defaultEducationType = '0';
   @Input() workingInfo: any[] = [];
   @Input() workingInfo2: any[] = [];
+  @Input() systemType = '';
+
   selectedEducationType!: number;
   educationTypes: ListData[] = educationTypes;
   override form = this.fb.group({

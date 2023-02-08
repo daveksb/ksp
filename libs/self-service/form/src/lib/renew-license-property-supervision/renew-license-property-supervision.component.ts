@@ -19,6 +19,7 @@ export class RenewLicensePropertySupervisionComponent
   selectedstandardKnowledgeType!: number;
   @Input() uniqueTimestamp = '';
   @Input() workingInfo: any[] = [];
+  @Input() systemType = '';
 
   override form = this.fb.group({
     standardKnowledgeType: [null, Validators.required],

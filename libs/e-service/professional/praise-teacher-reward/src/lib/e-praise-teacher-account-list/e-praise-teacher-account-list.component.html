@@ -69,13 +69,13 @@
         <ng-container matColumnDef="accountGroup">
           <th mat-header-cell *matHeaderCellDef>กลุ่มบัญชีรายชื่อ</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.accountGroup }}
+            {{ element.listno }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="careerType">
           <th mat-header-cell *matHeaderCellDef>ประเภทวิชาชีพ</th>
-          <td mat-cell *matCellDef="let element">{{ element.careerType }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.careertype }}</td>
         </ng-container>
 
         <ng-container matColumnDef="result">
@@ -85,7 +85,7 @@
 
         <ng-container matColumnDef="createDate">
           <th mat-header-cell *matHeaderCellDef>วันที่จัดบัญชีรายชื่อ</th>
-          <td mat-cell *matCellDef="let element">{{ element.createDate }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.createdate | thaiDate }}</td>
         </ng-container>
 
         <ng-container matColumnDef="view">

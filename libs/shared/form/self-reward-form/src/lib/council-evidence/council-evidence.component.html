@@ -2,19 +2,16 @@
   <div class="box-header text-primary">รางวัลระดับชาติที่เคยได้รับ</div>
   <ng-container formArrayName="evidenceInfo">
     <ng-container
-      *ngFor="let DegreeForm of evidenceInfo.controls; let i = index"
-    >
+      *ngFor="let DegreeForm of evidenceInfo.controls; let i = index">
       <ng-container [formGroupName]="i">
         <div
           class="border rounded px-3 py-2"
-          [ngClass]="i > 0 ? 'mt-3' : 'mt-0'"
-        >
+          [ngClass]="i > 0 ? 'mt-3' : 'mt-0'">
           <div class="d-flex justify-content-end" *ngIf="i > 0">
             <i
               class="bi bi-x-circle-fill text-danger"
               (click)="deleteFormArray(evidenceInfo, i)"
-              role="button"
-            ></i>
+              role="button"></i>
           </div>
           <div class="row">
             <div class="col-md-6 mb-2">
@@ -22,29 +19,24 @@
               <input
                 class="form-control"
                 type="text"
-                formControlName="rewardYear"
-              />
+                formControlName="rewardYear" />
             </div>
             <div class="col-md-6 mb-2">
               <label class="form-label required">ชื่อรางวัลระดับชาติ</label>
               <input
                 class="form-control"
                 type="text"
-                formControlName="rewardName"
-              />
+                formControlName="rewardName" />
             </div>
           </div>
 
           <div class="row">
             <div class="col-md-6 mb-2">
-              <label class="form-label required"
-                >รายละเอียดของรางวัลระดับชาติ</label
-              >
+              <label class="form-label required">รายละเอียดของรางวัลระดับชาติ</label>
               <input
                 class="form-control"
                 type="text"
-                formControlName="rewardDetail"
-              />
+                formControlName="rewardDetail" />
             </div>
           </div>
           <div class="mt-2 mb-2">
@@ -52,7 +44,7 @@
               [groups]="rewardFiles"
               [mode]="mode"
               [uniqueTimestamp]="uniqueTimestamp"
-            ></ksp-form-multi-attachment>
+              [systemType]="systemType"></ksp-form-multi-attachment>
           </div>
         </div>
       </ng-container>
@@ -61,8 +53,6 @@
   <div class="d-flex justify-content-end mt-3" *ngIf="mode === 'edit'">
     <ksp-add-row-button
       class="text-primary"
-      (addRowClick)="addFormArray(evidenceInfo)"
-      >เพิ่มข้อมูลรางวัล</ksp-add-row-button
-    >
+      (addRowClick)="addFormArray(evidenceInfo)">เพิ่มข้อมูลรางวัล</ksp-add-row-button>
   </div>
 </form>

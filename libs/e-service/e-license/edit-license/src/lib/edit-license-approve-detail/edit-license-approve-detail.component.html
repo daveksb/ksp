@@ -1,5 +1,4 @@
-<ksp-top-nav
-  ><span header>ยื่นแบบคำขอ</span>
+<ksp-top-nav><span header>ยื่นแบบคำขอ</span>
   <span subHeader>ขอเปลี่ยนแปลง/แก้ไขหนังสืออนุญาต</span>
 </ksp-top-nav>
 
@@ -13,14 +12,13 @@
         [showDistributeData]="true"
         [mode]="'view'"
         [prefixList]="prefixList$ | async"
-        formControlName="userInfo"
-      ></ksp-edit-license>
+        formControlName="userInfo"></ksp-edit-license>
 
       <div class="mt-3">
         <ksp-form-multi-attachment
           [groups]="uploadFileList"
           [mode]="'view'"
-        ></ksp-form-multi-attachment>
+          [systemType]="'sch'"></ksp-form-multi-attachment>
       </div>
     </div>
     <ng-container
@@ -31,17 +29,14 @@
           (requestData.process === '4' && requestData.status === '4') ||
           (requestData.process === '4' && requestData.status === '5')
         )
-      "
-    >
+      ">
       <ng-container
         formArrayName="checkResult"
-        *ngFor="let c of checkResultFormArray.controls; let i = index"
-      >
+        *ngFor="let c of checkResultFormArray.controls; let i = index">
         <div class="bg-white px-3 py-2 mt-3">
           <e-service-license-check
             [choices]="verifyChoice"
-            [formControlName]="i"
-          ></e-service-license-check>
+            [formControlName]="i"></e-service-license-check>
         </div>
       </ng-container>
     </ng-container>
@@ -54,6 +49,5 @@
     [isFirstPage]="true"
     [disableNext]="false"
     (nextClicked)="next()"
-    (cancelClicked)="cancel()"
-  ></ksp-bottom-nav>
+    (cancelClicked)="cancel()"></ksp-bottom-nav>
 </div>
