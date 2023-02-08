@@ -1,7 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UserInfoFormType } from '@ksp/shared/constant';
-import { Country, KspFormBaseComponent } from '@ksp/shared/interface';
+import {
+  Country,
+  KspFormBaseComponent,
+  University,
+} from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
 
 @Component({
@@ -23,7 +27,7 @@ export class FormEducationInfoComponent
   @Input() isOptional = false;
   @Input() isDarkMode = true;
   @Input() userEducationType: any;
-  @Input() UniversityList: any[] = [];
+  @Input() universityList: University[] | null = [];
 
   FormTypeEnum = UserInfoFormType;
 

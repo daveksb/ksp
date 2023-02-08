@@ -36,6 +36,7 @@ import {
   SchTempLicense,
   StaffType,
   Tambol,
+  University,
   VisaClass,
   VisaType,
 } from '@ksp/shared/interface';
@@ -45,6 +46,7 @@ import {
   GeneralInfoService,
   LoaderService,
   SchoolInfoService,
+  SchoolLicenseService,
   SchoolRequestService,
   StaffService,
 } from '@ksp/shared/service';
@@ -106,6 +108,7 @@ export class SchoolRequestComponent implements OnInit {
   tempLicenseHistory$ = new Observable<SchTempLicense[]>;
   selectedTabIndex = 0;
   kspComment = new KspComment()
+  universityList$!: Observable<University[]>
 
   form = this.fb.group({
     userInfo: [],
@@ -134,7 +137,8 @@ export class SchoolRequestComponent implements OnInit {
     private staffService: StaffService,
     private requestService: SchoolRequestService,
     private loaderService: LoaderService,
-    private location: Location
+    private location: Location,
+    private licenseService: SchoolLicenseService,
   ) {}
 
   eduSelect(degreeLevel: number, evt: any) {
@@ -675,6 +679,7 @@ export class SchoolRequestComponent implements OnInit {
     this.staffTypes$ = this.staffService.getStaffTypes();
     this.positionTypes$ = this.staffService.getPositionTypes();
     this.academicTypes$ = this.staffService.getAcademicStandingTypes();
+    this.universityList$ = this.licenseService.getUniversityList();
     this.getSchoolInfo();
   }
 

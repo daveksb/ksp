@@ -23,6 +23,7 @@ import {
   Prefix,
   Province,
   Tambol,
+  University,
 } from '@ksp/shared/interface';
 import {
   AddressService,
@@ -30,6 +31,7 @@ import {
   GeneralInfoService,
   LoaderService,
   SchoolInfoService,
+  SchoolLicenseService,
   SchoolRequestService,
   StaffService,
 } from '@ksp/shared/service';
@@ -106,6 +108,7 @@ export class QualificationDetailComponent implements OnInit {
   formData: any = null;
   experienceSelected: number[] = [];
   selectedTabIndex = 0;
+  universityList$!: Observable<University[]>;
 
   constructor(
     public dialog: MatDialog,
@@ -118,7 +121,8 @@ export class QualificationDetailComponent implements OnInit {
     private schoolInfoService: SchoolInfoService,
     private staffService: StaffService,
     private loaderService: LoaderService,
-    private educationDetailService: EducationDetailService
+    private educationDetailService: EducationDetailService,
+    private licenseService: SchoolLicenseService
   ) {}
 
   ngOnInit(): void {
@@ -300,6 +304,7 @@ export class QualificationDetailComponent implements OnInit {
     this.staffService.getPositionTypes().subscribe((res) => {
       this.positions = res;
     });
+    this.universityList$ = this.licenseService.getUniversityList();
     this.schoolInfoService
       .getSchoolInfo({
         schoolid: this.schoolId,
@@ -611,9 +616,13 @@ const files: FileGroup[] = [
     files: [],
   },
   {
-    name: 'สำเนาวุฒิการศึกษาและใบรายงานผลการเรียน',
+    name: 'สำเนาบัตรประจำตัวประชาชน / บัตรประจำตัวข้าราชการ',
     files: [],
   },
+  /* {
+    name: 'สำเนาทะเบียนบ้าน',
+    files: [],
+  }, */
   {
     name: 'สำเนาหนังสือแจ้งการเทียบคุณวุฒิ (กรณีจบการศึกษาจากต่างประเทศ)',
     files: [],

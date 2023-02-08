@@ -302,7 +302,11 @@ export abstract class LicenseFormBaseComponent {
         request(payload).subscribe((res) => {
           //console.log('request confirm = ', res);
           if (res.returncode === '00') {
-            this.router.navigate(['/license', 'payment-channel', res.id]);
+            this.router.navigate([
+              '/license',
+              'payment-channel',
+              payload.id ? payload.id : res.id,
+            ]);
           } else if (res.returncode === '409') {
             this.sameIdCardDialog();
           }
@@ -386,7 +390,7 @@ export abstract class LicenseFormBaseComponent {
     this.imageId = imageId;
   }
 
-  abstract createRequest(forbidden: any, currentProcess: number): void;
+  abstract createRequest(forbidden: any, currentProcess: number): any;
   abstract patchUserInfoForm(data: any): void;
   abstract patchAddress1Form(data: any): void;
   abstract patchAddress2Form(data: any): void;

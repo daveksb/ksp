@@ -120,6 +120,7 @@
               [showSelectDegree]="false"
               [countries]="countries$ | async"
               [readonly]="true"
+              [universityList]="universityList$ | async"
             >
               <div class="box-header">วุฒิการศึกษาปริญญาตรี</div>
             </ksp-form-education-info>
@@ -132,6 +133,7 @@
                 [showGradeInput]="false"
                 [showPropertyInput]="true"
                 [countries]="countries$ | async"
+                [universityList]="universityList$ | async"
               >
                 <div class="box-header">วุฒิการศึกษาปริญญาโท</div>
               </ksp-form-education-info>
@@ -151,21 +153,6 @@
                 <label class="box-header">วุฒิการศึกษาปริญญาตรี</label>
               </div> -->
               <label class="box-header">วุฒิการศึกษาปริญญาตรี</label>
-              <!-- <ng-container *ngIf="eduSelected[1]">
-                <ksp-form-education-info
-                  [isDarkMode]="false"
-                  [showCheckbox]="false"
-                  [showSelectDegree]="false"
-                  formControlName="edu1"
-                  [showGradeInput]="careerType === 2 ? true : false"
-                  [showPropertyInput]="false"
-                  [countries]="countries$ | async"
-                  [isOptional]="!eduSelected[1]"
-                  [userEducationType]="userInfoFormType"
-                  [mode]="'view'"
-                >
-                </ksp-form-education-info></ng-container
-            > -->
               <ksp-form-education-info
                 [isDarkMode]="false"
                 [showCheckbox]="false"
@@ -176,6 +163,7 @@
                 [countries]="countries$ | async"
                 [userEducationType]="userInfoFormType"
                 [readonly]="true"
+                [universityList]="universityList$ | async"
               >
               </ksp-form-education-info>
             </ng-container>
@@ -201,6 +189,7 @@
                   [showPropertyInput]="false"
                   [countries]="countries$ | async"
                   [isOptional]="!eduSelected[4]"
+                  [universityList]="universityList$ | async"
                 >
                 </ksp-form-education-info></ng-container
             ></ng-container>
@@ -225,6 +214,7 @@
                   [countries]="countries$ | async"
                   [isOptional]="!eduSelected[2]"
                   [userEducationType]="userInfoFormType"
+                  [universityList]="universityList$ | async"
                 >
                 </ksp-form-education-info></ng-container
             ></ng-container>
@@ -249,6 +239,7 @@
                   [countries]="countries$ | async"
                   [isOptional]="!eduSelected[3]"
                   [userEducationType]="userInfoFormType"
+                  [universityList]="universityList$ | async"
                 >
                 </ksp-form-education-info></ng-container
             ></ng-container>
@@ -273,6 +264,7 @@
                   [countries]="countries$ | async"
                   [isOptional]="!eduSelected[5]"
                   [userEducationType]="userInfoFormType"
+                  [universityList]="universityList$ | async"
                 >
                 </ksp-form-education-info> </ng-container
             ></ng-container>

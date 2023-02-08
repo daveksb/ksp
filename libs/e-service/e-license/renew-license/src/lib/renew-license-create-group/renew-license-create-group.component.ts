@@ -137,7 +137,7 @@ export class RenewLicenseCreateGroupComponent implements OnInit, AfterViewInit {
   }
 
   prev() {
-    this.router.navigate(['/request-license', 'search-list']);
+    this.router.navigate(['/renew-license', 'search-list']);
   }
 
   confirmDialog() {
@@ -186,7 +186,7 @@ export class RenewLicenseCreateGroupComponent implements OnInit, AfterViewInit {
 
     dialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.router.navigate(['/request-license', 'search-list']);
+        this.router.navigate(['/renew-license', 'search-list']);
       }
     });
   }

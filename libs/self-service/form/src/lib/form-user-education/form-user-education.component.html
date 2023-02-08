@@ -3,14 +3,10 @@
     <div class="col-md-6 mb-2">
       <label
         class="form-label required"
-        *ngIf="educationTypes !== 'supervision'"
-        >ลักษณะวุฒิการศึกษา</label
-      >
+        *ngIf="educationTypes !== 'supervision'">ลักษณะวุฒิการศึกษา</label>
       <label
         class="form-label required"
-        *ngIf="educationTypes === 'supervision'"
-        >คุณสมบัติตามมาตรฐานวิชาชีพศึกษานิเทศก์</label
-      >
+        *ngIf="educationTypes === 'supervision'">คุณสมบัติตามมาตรฐานวิชาชีพศึกษานิเทศก์</label>
 
       <ng-container *ngIf="educationTypes === 'teacher'">
         <select formControlName="educationType" class="form-select">
@@ -24,8 +20,7 @@
       <ng-container
         *ngIf="
           educationTypes === 'schManager' || educationTypes === 'eduManager'
-        "
-      >
+        ">
         <select formControlName="educationType" class="form-select">
           <option value="null" disabled hidden selected>กรุณาเลือก</option>
           <option *ngFor="let edu of educationTypes2" [value]="edu.value">
@@ -48,34 +43,28 @@
       <ksp-education-level-form-one
         *ngIf="selectedEducationType === 0"
         [mode]="mode"
-        formControlName="educationLevelForm"
-      ></ksp-education-level-form-one>
+        formControlName="educationLevelForm"></ksp-education-level-form-one>
       <ksp-education-level-form-two
         *ngIf="selectedEducationType === 1"
         [mode]="mode"
-        formControlName="educationLevelForm"
-      ></ksp-education-level-form-two>
+        formControlName="educationLevelForm"></ksp-education-level-form-two>
       <ksp-education-level-form-one
         *ngIf="selectedEducationType === 2"
         [mode]="mode"
-        formControlName="educationLevelForm"
-      ></ksp-education-level-form-one>
+        formControlName="educationLevelForm"></ksp-education-level-form-one>
       <ksp-education-level-form-one
         *ngIf="selectedEducationType === 3"
         [mode]="mode"
-        formControlName="educationLevelForm"
-      ></ksp-education-level-form-one>
+        formControlName="educationLevelForm"></ksp-education-level-form-one>
       <ksp-education-level-form-three
         *ngIf="selectedEducationType === 4"
         [mode]="mode"
         formControlName="educationLevelForm"
-        [countries]="countries"
-      ></ksp-education-level-form-three>
+        [countries]="countries"></ksp-education-level-form-three>
       <ksp-education-level-form-four
         *ngIf="selectedEducationType === 5"
         [mode]="mode"
-        formControlName="educationLevelForm"
-      ></ksp-education-level-form-four>
+        formControlName="educationLevelForm"></ksp-education-level-form-four>
       <ng-container *ngIf="selectedEducationType >= 0">
         <div class="mt-3">
           <ksp-form-multi-attachment
@@ -83,7 +72,7 @@
             [uniqueTimestamp]="uniqueTimestamp"
             [groups]="attachFiles"
             [mode]="mode"
-          ></ksp-form-multi-attachment>
+            [systemType]="systemType"></ksp-form-multi-attachment>
         </div>
       </ng-container>
     </ng-container>
@@ -92,21 +81,18 @@
       <ksp-education-level-form-one
         *ngIf="selectedEducationType <= 1"
         [mode]="mode"
-        formControlName="educationLevelForm"
-      >
+        formControlName="educationLevelForm">
       </ksp-education-level-form-one>
       <ksp-education-level-form-five
         *ngIf="selectedEducationType === 2"
         [mode]="mode"
-        formControlName="educationLevelForm"
-      >
+        formControlName="educationLevelForm">
       </ksp-education-level-form-five>
       <ksp-education-level-form-six
         [isHasCountry]="true"
         *ngIf="selectedEducationType === 3"
         [mode]="mode"
-        formControlName="educationLevelForm"
-      >
+        formControlName="educationLevelForm">
       </ksp-education-level-form-six>
       <ng-container *ngIf="selectedEducationType >= 0">
         <div class="mt-3">
@@ -115,7 +101,7 @@
             [groups]="attachFiles"
             [uniqueTimestamp]="uniqueTimestamp"
             [title]="'กรุณาแนบหลักฐานประกอบวุฒิทางการศึกษา'"
-          ></ksp-form-multi-attachment>
+            [systemType]="systemType"></ksp-form-multi-attachment>
         </div>
       </ng-container>
     </ng-container>
@@ -124,20 +110,17 @@
       <ksp-education-level-form-one
         *ngIf="selectedEducationType <= 1"
         [mode]="mode"
-        formControlName="educationLevelForm"
-      >
+        formControlName="educationLevelForm">
       </ksp-education-level-form-one>
       <ksp-education-level-form-five
         *ngIf="selectedEducationType === 2"
         [mode]="mode"
-        formControlName="educationLevelForm"
-      >
+        formControlName="educationLevelForm">
       </ksp-education-level-form-five>
       <ksp-education-level-form-six
         *ngIf="selectedEducationType === 3"
         [mode]="mode"
-        formControlName="educationLevelForm"
-      >
+        formControlName="educationLevelForm">
       </ksp-education-level-form-six>
       <ng-container *ngIf="selectedEducationType >= 0">
         <div class="mt-3">
@@ -146,7 +129,7 @@
             [groups]="attachFiles"
             [uniqueTimestamp]="uniqueTimestamp"
             [title]="title || 'กรุณาแนบหลักฐานประกอบวุฒิทางการศึกษา'"
-          ></ksp-form-multi-attachment>
+            [systemType]="systemType"></ksp-form-multi-attachment>
         </div>
       </ng-container>
     </ng-container>
@@ -156,13 +139,11 @@
         [isSupervision]="true"
         *ngIf="selectedEducationType === 0"
         [mode]="mode"
-        formControlName="educationLevelForm"
-      ></ksp-education-level-form-one>
+        formControlName="educationLevelForm"></ksp-education-level-form-one>
       <ksp-education-level-form-six
         *ngIf="selectedEducationType === 1"
         [mode]="mode"
-        formControlName="educationLevelForm"
-      ></ksp-education-level-form-six>
+        formControlName="educationLevelForm"></ksp-education-level-form-six>
       <ng-container *ngIf="selectedEducationType >= 0">
         <div class="mt-3">
           <ksp-form-multi-attachment
@@ -170,7 +151,7 @@
             [groups]="attachFiles"
             [uniqueTimestamp]="uniqueTimestamp"
             [title]="title || 'กรุณาแนบหลักฐานประกอบวุฒิทางการศึกษา'"
-          ></ksp-form-multi-attachment>
+            [systemType]="systemType"></ksp-form-multi-attachment>
         </div>
       </ng-container>
     </ng-container>

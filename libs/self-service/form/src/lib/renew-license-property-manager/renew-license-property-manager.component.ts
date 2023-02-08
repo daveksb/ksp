@@ -24,6 +24,7 @@ export class RenewLicensePropertyManagerComponent
   @Input() uniqueTimestamp = '';
   @Input() workingInfo: any[] = [];
   @Input() managerType: 'sch' | 'edu' = 'sch';
+  @Input() systemType = '';
 
   override form = this.fb.group({
     standardKnowledgeType1: [null, Validators.required],

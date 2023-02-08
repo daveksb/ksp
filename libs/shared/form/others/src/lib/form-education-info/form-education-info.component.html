@@ -62,12 +62,22 @@
         <label class="form-label" [class.required]="!isOptional"
           >สถาบันการศึกษา
         </label>
-        <input
+        <select
+          class="form-select"
+          formControlName="institution"
+          [attr.disabled]="readonly ? true : null"
+        >
+          <option value="null" selected hidden disabled>กรุณาเลือก</option>
+          <option *ngFor="let u of universityList" [value]="u.id">
+            {{ u.name }} {{ u.campusname }}
+          </option>
+        </select>
+        <!-- <input
           class="form-control"
           type="text"
           formControlName="institution"
           [attr.disabled]="readonly ? true : null"
-        />
+        /> -->
       </div>
       <div class="col mb-2">
         <label class="form-label">ประเทศ</label>

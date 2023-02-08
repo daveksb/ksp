@@ -73,6 +73,7 @@ export class PdfViewerComponent implements OnInit {
   getFile(index: number) {
     const file = this.data.files[index];
     const id = file.fileid;
+    console.log(this.data);
     if (this.data.systemType == 'uni') {
       this.fileService.downloadUniFile({ id }).subscribe((res: any) => {
         const extension = this.pdfList[index].type;
@@ -87,6 +88,18 @@ export class PdfViewerComponent implements OnInit {
       });
     } else if (this.data.systemType == 'ksp') {
       this.fileService.eDownloadKspFile({ id }).subscribe((res: any) => {
+        const extension = this.pdfList[index].type;
+        const src = atob(res?.filedata ?? '');
+        if (extension == 'pdf') {
+          this.downloading(src, index);
+        } else {
+          this.pdfList[index].src = src;
+          this.pdfList[index].view = src;
+          this.pdfList[index].loading = false;
+        }
+      });
+    } else if (this.data.systemType == 'sch') {
+      this.fileService.eDownloadSchoolFile({ id }).subscribe((res: any) => {
         const extension = this.pdfList[index].type;
         const src = atob(res?.filedata ?? '');
         if (extension == 'pdf') {

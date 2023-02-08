@@ -97,13 +97,13 @@ export class RequestLicenseApproveSearchListComponent
     this.canSave = false;
     const payload: SelfApproveListSearch = {
       groupno: params.groupno,
-      process: params.process || '6', // แสดงเฉพาะใบที่ผ่านคณะอนุกรรมการ
+      process: params.process || this.mode === 'guarantee' ? '6' : '5', // แสดงเฉพาะใบที่ผ่านคณะอนุกรรมการ
       status: params.status,
       careertype: params.careertype,
       createdate: params.createdate,
       offset: '0',
       row: '500',
-      requesttype: '01',
+      requesttype: '1',
     };
     this.requestService.searchSelfApproveList(payload).subscribe((res) => {
       this.dataSource.data = res.map((i) => {
