@@ -76,7 +76,7 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
           this.targetProcess = 4;
           this.targetStatus = 1;
         } else if (req.process === '4') {
-          this.targetProcess = 6;
+          this.targetProcess = 5;
           this.targetStatus = 1;
         } else if (req.process === '5') {
           this.targetProcess = 6;
@@ -99,6 +99,22 @@ export abstract class ERewardConfirmFormBaseComponent implements OnInit {
         this.targetProcess = Number(req.process);
       }
       this.targetStatus = 4;
+    } else {
+      if (input.shouldForward === true) {
+        if (req.process === '2') {
+          this.targetProcess = 4;
+        } else {
+          this.targetProcess = Number(req.process) + 1;
+        }
+        this.targetStatus = 1;
+      } else {
+        if (req.process === '2') {
+          this.targetProcess = Number(req.process) + 1;
+        } else {
+          this.targetProcess = Number(req.process);
+        }
+        this.targetStatus = 3;
+      }
     }
   }
 

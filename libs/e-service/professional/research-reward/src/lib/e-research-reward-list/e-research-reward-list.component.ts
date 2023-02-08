@@ -58,7 +58,7 @@ export class EResearchRewardListComponent implements OnInit, AfterViewInit {
       name: params.name,
       idcardno: params.idcardno,
       passportno: null,
-      process: null,
+      process: this.checkMode ? '5' : null,
       status: params.status,
       schoolid: null,
       schoolname: null,
