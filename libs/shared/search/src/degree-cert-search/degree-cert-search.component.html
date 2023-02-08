@@ -50,7 +50,7 @@
       </div>
       <div class="col">
         <label class="form-label">สถาบัน / มหาวิทยาลัย </label>
-        <select class="form-select" formControlName="institutionName">
+        <select class="form-select" formControlName="institutionName" [attr.disabled]="true">
           <option value="null" disabled selected hidden>กรุณาเลือก</option>
           <option *ngFor="let item of uniUniversityOption" [value]="item.value">
             {{ item.label }}
