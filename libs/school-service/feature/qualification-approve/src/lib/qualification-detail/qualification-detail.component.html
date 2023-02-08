@@ -97,6 +97,7 @@
               [showGraduateYearInput]="true"
               [showCheckbox]="false"
               [countries]="countries$ | async"
+              [universityList]="universityList$ | async"
               ><label class="box-header"
                 >วุฒิการศึกษาปริญญาตรี</label
               ></ksp-form-education-info
@@ -122,6 +123,7 @@
                 [showCheckbox]="false"
                 [countries]="countries$ | async"
                 [isOptional]="true"
+                [universityList]="universityList$ | async"
               >
                 <div class="d-flex align-items-center">
                   <input
@@ -155,6 +157,7 @@
                 [showCheckbox]="false"
                 [countries]="countries$ | async"
                 [isOptional]="true"
+                [universityList]="universityList$ | async"
                 ><div class="d-flex align-items-center">
                   <input
                     *ngIf="mode !== 'view'"
@@ -190,6 +193,7 @@
                 [showCheckbox]="false"
                 [countries]="countries$ | async"
                 [isOptional]="true"
+                [universityList]="universityList$ | async"
                 ><div class="d-flex align-items-center">
                   <input
                     *ngIf="mode !== 'view'"
