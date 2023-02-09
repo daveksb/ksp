@@ -28,6 +28,7 @@ export class DegreeHomeSearchComponent
   @Input() provinces: ListData[] = [];
   @Input() universityType: ListData[] = [];
   @Input() universities: ListData[] = [];
+  calendaryearList: ListData[] = [];
 
   override form = this.fb.group({
     university: [],
@@ -53,7 +54,15 @@ export class DegreeHomeSearchComponent
     );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const currYear = new Date().getFullYear();
+    for (let index = 0; index < 10; index++) {
+      this.calendaryearList.push({
+        value: ((currYear - index) + 543).toString(),
+        label: ((currYear - index) + 543).toString()
+      })
+    }
+  }
 
   onSelectChange(e: any, key: any) {
     this.selectChange.emit({ value: e?.target?.value, key });

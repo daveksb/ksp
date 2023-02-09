@@ -51,7 +51,8 @@
       </div>
       <div class="col">
         <label class="form-label">สาขาวิชา</label>
-        <select
+        <input class="form-control" type="text" formControlName="fieldOfStudy" />
+        <!-- <select
           class="form-select"
           formControlName="fieldOfStudy"
           (change)="onSelectChange($event, 'fieldOfStudy')"
@@ -63,14 +64,15 @@
           >
             {{ item.label }}
           </option>
-        </select>
+        </select> -->
       </div>
     </div>
 
     <div class="row mb-2">
       <div class="col">
         <label class="form-label">วิชาเอก</label>
-        <select
+        <input class="form-control" type="text" formControlName="major" />
+        <!-- <select
           class="form-select"
           formControlName="major"
           (change)="onSelectChange($event, 'major')"
@@ -79,17 +81,18 @@
           <option *ngFor="let item of majorOptions" [value]="item?.value">
             {{ item.label }}
           </option>
-        </select>
+        </select> -->
       </div>
 
       <div class="col">
         <label class="form-label">แขนงวิชา</label>
-        <select class="form-select" formControlName="subject">
+        <input class="form-control" type="text" formControlName="subject" />
+        <!-- <select class="form-select" formControlName="subject">
           <option value="null" selected disabled hidden>กรุณาเลือก</option>
           <option *ngFor="let item of subjectOptions" [value]="item?.value">
             {{ item.label }}
           </option>
-        </select>
+        </select> -->
       </div>
     </div>
 
@@ -98,12 +101,7 @@
         <label class="form-label">ปีการศึกษา</label>
         <select class="form-select" formControlName="year">
           <option value="null" selected disabled hidden>กรุณาเลือก</option>
-          <option
-            *ngFor="let item of academicYearOptions"
-            [value]="item?.value"
-          >
-            {{ item.label }}
-          </option>
+          <option *ngFor="let year of calendaryearList" [value]="year.value">{{ year.label }}</option>
         </select>
       </div>
 
