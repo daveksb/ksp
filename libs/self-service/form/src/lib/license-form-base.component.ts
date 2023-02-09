@@ -59,6 +59,7 @@ export abstract class LicenseFormBaseComponent {
   requestNo: string | null = '';
   requestDate: string | null = '';
   currentProcess!: number;
+  currentStatus!: number;
   prohibitProperty: any;
   myImage = '';
   imageId = '';
@@ -92,6 +93,7 @@ export abstract class LicenseFormBaseComponent {
             this.requestNo = res.requestno;
             this.requestDate = res.requestdate;
             this.currentProcess = Number(res.process);
+            this.currentStatus = Number(res.status);
             this.uniqueTimestamp = res.uniqueno || '';
             this.patchData(res);
           }
@@ -105,6 +107,7 @@ export abstract class LicenseFormBaseComponent {
   }
 
   patchData(data: SelfGetRequest) {
+    console.log('patchData', data);
     this.patchUserInfo(data);
     this.patchAddress(parseJson(data.addressinfo));
     if (data.schooladdrinfo) {
@@ -283,7 +286,6 @@ export abstract class LicenseFormBaseComponent {
           ? this.requestService.updateRequest.bind(this.requestService)
           : this.requestService.createRequest.bind(this.requestService);
         request(payload).subscribe((res) => {
-          console.log('request = ', res);
           if (res.returncode === '00') {
             this.saveCompleted(res);
           } else if (res.returncode === '409') {
@@ -302,11 +304,15 @@ export abstract class LicenseFormBaseComponent {
         request(payload).subscribe((res) => {
           //console.log('request confirm = ', res);
           if (res.returncode === '00') {
-            this.router.navigate([
-              '/license',
-              'payment-channel',
-              payload.id ? payload.id : res.id,
-            ]);
+            if (this.currentProcess > 2) {
+              this.saveCompleted(res);
+            } else {
+              this.router.navigate([
+                '/license',
+                'payment-channel',
+                payload.id ? payload.id : res.id,
+              ]);
+            }
           } else if (res.returncode === '409') {
             this.sameIdCardDialog();
           }

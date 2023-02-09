@@ -68,7 +68,7 @@ export class RenewLicenseListComponent implements AfterViewInit {
       idcardno: params.idcardno?.replace(/-/g, '').replace(/\s/g, ''),
       isurgent: params.isurgent ? '1' : null,
       passportno: null,
-      process: params.process || '2',
+      process: params.process,
       status: params.status,
       schoolid: null,
       schoolname: null,

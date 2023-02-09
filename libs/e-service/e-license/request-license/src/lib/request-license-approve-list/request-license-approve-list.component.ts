@@ -70,7 +70,7 @@ export class RequestLicenseApproveListComponent implements AfterViewInit {
       name: null,
       idcardno: params.idcardno?.replace(/-/g, '').replace(/\s/g, ''),
       passportno: null,
-      process: params.process || '2',
+      process: params.process,
       status: params.status,
       schoolid: null,
       schoolname: null,
