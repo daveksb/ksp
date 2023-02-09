@@ -98,7 +98,6 @@ export class TempLicenseApproveListComponent implements AfterViewInit {
   }
 
   search(params: Partial<SchRequestSearchFilter>) {
-    console.log('params = ', params);
     const payload: EsSearchPayload = {
       systemtype: '2',
       requesttype: '3',
