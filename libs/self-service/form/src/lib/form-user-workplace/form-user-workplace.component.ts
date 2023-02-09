@@ -97,7 +97,6 @@ export class FormUserWorkplaceComponent
     super();
     this.subscriptions.push(
       this.form?.valueChanges.subscribe((value) => {
-        //console.log(value);
         this.onChange(value);
         this.onTouched();
       })
