@@ -98,9 +98,10 @@ export class TempLicenseApproveListComponent implements AfterViewInit {
   }
 
   search(params: Partial<SchRequestSearchFilter>) {
-    //console.log('params = ', params);
+    console.log('params = ', params);
     const payload: EsSearchPayload = {
-      systemtype: '2',
+      //systemtype: '2',
+      systemtype: null,
       requesttype: '3',
       requestno: params.requestno,
       careertype: params.careertype,
@@ -121,7 +122,7 @@ export class TempLicenseApproveListComponent implements AfterViewInit {
 
     this.eRequestService.KspSearchRequest(payload).subscribe((res) => {
       if (res && res.length) {
-        this.dataSource.data = res;
+        //this.dataSource.data = res;
         this.dataSource.data = processFilter(res);
 
         this.dataSource.sort = this.sort;
