@@ -19,7 +19,7 @@ import {
   GeneralInfoService,
   StaffService,
 } from '@ksp/shared/service';
-import { parseJson } from '@ksp/shared/utility';
+import { getCookie, parseJson } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 import localForage from 'localforage';
@@ -81,6 +81,9 @@ export class ETempLicenseDetailComponent implements OnInit {
   btnNextPrev = {
     index: 0,
   };
+
+  showCheckerForm = false;
+  userPermission = getCookie('permissionRight');
 
   form = this.fb.group({
     userInfo: [],
@@ -202,7 +205,29 @@ export class ETempLicenseDetailComponent implements OnInit {
       this.patchFileInfo(parseJson(res.fileinfo));
       this.patchProhibitProperty(parseJson(res.prohibitproperty));
       //console.log('res = ', res.prohibitproperty);
+      this.setShowCheckerForm(res);
     });
+  }
+
+  setShowCheckerForm(res: KspRequest) {
+    if (
+      this.userPermission === '2' && // เจ้าหน้าที่ส่วนภูมิภาค
+      ((res.process === '2' && res.status === '1') || //สร้างและส่งแบบคำขอ กำลังดำเนินการ
+        (res.process === '4' && res.status === '2')) //ตรวจสอบเอกสาร ลำดับที่ 2 ขอปรับแก้ไข/เพิ่มเติม
+    ) {
+      this.showCheckerForm = true;
+      return;
+    }
+
+    if (
+      this.userPermission === '1' && // เจ้าหน้าที่ส่วนกลาง
+      ((res.process === '2' && res.status === '1') || //สร้างและส่งแบบคำขอ กำลังดำเนินการ
+        //(res.process === '3' && res.status === '2') || //ตรวจสอบเอกสาร ลำดับที่ 1 ปรับแก้ไข/เพิ่มเติม
+        (res.process === '3' && res.status === '2')) //ตรวจสอบเอกสาร ลำดับที่ 1 ผ่านการตรวจสอบ
+      //(res.process === '4' && res.status === '2') || //ตรวจสอบเอกสาร ลำดับที่ 2 ปรับแก้ไข/เพิ่มเติม
+    ) {
+      this.showCheckerForm = true;
+    }
   }
 
   patchFileInfo(res: any) {
