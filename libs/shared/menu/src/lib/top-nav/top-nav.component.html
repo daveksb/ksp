@@ -1,9 +1,6 @@
-<nav
-  class="navbar navbar-expand-lg navbar-light"
-  [ngClass]="{
+<nav class="navbar navbar-expand-lg navbar-light" [ngClass]="{
     navbar__image: isSelfService === true
-  }"
->
+  }">
   <div class="container-fluid">
     <div class="label">
       <span #s1>
@@ -23,14 +20,10 @@
     <div class="user__info" *ngIf="!isSelfService">
       <div class="d-flex flex-column align-items-end">
         <div class="user__name">{{ firstName }} {{ lastName }}</div>
-        <div class="login__time">เข้าใช้งานเมื่อวันที่ {{ today }}</div>
+        <!-- <div class="login__time">เข้าใช้งานเมื่อวันที่ {{ today }}</div> -->
+        <div class="login__time">เจ้าหน้าที่ส่วน{{ permission === '1' ? 'กลาง' : 'ภูมิภาค' }}</div>
       </div>
-      <div
-        class="ms-2"
-        (click)="logout()"
-        role="button"
-        matTooltip="ออกจากระบบ"
-      >
+      <div class="ms-2" (click)="logout()" role="button" matTooltip="ออกจากระบบ">
         <img src="/assets/images/profile.png" />
       </div>
     </div>

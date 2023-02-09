@@ -165,7 +165,6 @@ export const kspPdfMapping: IKspPdfMapping[] = [
   {
     pdfType: 3,
     pdfSubType: 1,
-    //pdfSrc: 'assets/pdf/school-thai-temp-license.pdf',
     pdfSrc: 'https://ksp-eservice.ksp.or.th/pdf/school-thai-temp-license.pdf',
     input: [
       {
@@ -857,7 +856,6 @@ export const kspPdfMapping: IKspPdfMapping[] = [
   {
     pdfType: 3,
     pdfSubType: 2,
-    //pdfSrc: 'assets/pdf/school-manager-temp-license.pdf',
     pdfSrc:
       'https://ksp-eservice.ksp.or.th/pdf/school-manager-temp-license.pdf',
     input: [
@@ -1539,7 +1537,6 @@ export const kspPdfMapping: IKspPdfMapping[] = [
   {
     pdfType: 3,
     pdfSubType: 5,
-    //pdfSrc: 'assets/pdf/school-foreign-temp-license.pdf',
     pdfSrc:
       'https://ksp-eservice.ksp.or.th/pdf/school-foreign-temp-license.pdf',
     input: [
@@ -1953,7 +1950,6 @@ export const kspPdfMapping: IKspPdfMapping[] = [
   {
     pdfType: 6,
     pdfSubType: 1,
-    //pdfSrc: 'assets/pdf/school-qualification-approve-teacher.pdf',
     pdfSrc:
       'https://ksp-eservice.ksp.or.th/pdf/school-qualification-approve-teacher.pdf',
     input: [
@@ -2460,7 +2456,6 @@ export const kspPdfMapping: IKspPdfMapping[] = [
   {
     pdfType: 6,
     pdfSubType: 2,
-    //pdfSrc: 'assets/pdf/school-qualification-approve-manager.pdf',
     pdfSrc:
       'https://ksp-eservice.ksp.or.th/pdf/school-qualification-approve-manager.pdf',
     input: [
