@@ -76,8 +76,8 @@ export class TempLicenseApproveListComponent implements AfterViewInit {
     this.route.paramMap.subscribe((params) => {
       this.defaultForm = {
         requesttype: '3',
-        process: '5',
-        //status: null,
+        process: '4',
+        status: '3',
         careertype: params.get('careertype'),
       };
       this.form = this.fb.group({
@@ -100,8 +100,7 @@ export class TempLicenseApproveListComponent implements AfterViewInit {
   search(params: Partial<SchRequestSearchFilter>) {
     console.log('params = ', params);
     const payload: EsSearchPayload = {
-      //systemtype: '2',
-      systemtype: null,
+      systemtype: '2',
       requesttype: '3',
       requestno: params.requestno,
       careertype: params.careertype,
@@ -122,7 +121,6 @@ export class TempLicenseApproveListComponent implements AfterViewInit {
 
     this.eRequestService.KspSearchRequest(payload).subscribe((res) => {
       if (res && res.length) {
-        //this.dataSource.data = res;
         this.dataSource.data = processFilter(res);
 
         this.dataSource.sort = this.sort;
