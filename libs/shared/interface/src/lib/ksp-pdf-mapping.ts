@@ -817,6 +817,34 @@ export const kspPdfMapping: IKspPdfMapping[] = [
               color: black,
             },
           },
+
+          {
+            key: 'name_full',
+            options: {
+              x: 250,
+              y: 549,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'managername',
+            options: {
+              x: 300,
+              y: 400,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'managerposition',
+            options: {
+              x: 275,
+              y: 375,
+              size: defaultSize,
+              color: black,
+            },
+          },
         ],
         svg: [
           {
@@ -1543,16 +1571,13 @@ export const kspPdfMapping: IKspPdfMapping[] = [
     pdfSrc:
       'https://ksp-eservice.ksp.or.th/pdf/school-temp-license-foreign.pdf',
     input: [
-      { text: [], svg: [] },
-      { text: [], svg: [] },
-      { text: [], svg: [] },
       {
         text: [
           {
             key: 'day',
             options: {
               x: 330,
-              y: 613,
+              y: 612,
               size: defaultSize,
               color: black,
             },
@@ -1561,7 +1586,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'month',
             options: {
               x: 405,
-              y: 613,
+              y: 612,
               size: defaultSize,
               color: black,
             },
@@ -1570,7 +1595,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'year',
             options: {
               x: 500,
-              y: 613,
+              y: 612,
               size: defaultSize,
               color: black,
             },
@@ -1579,7 +1604,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'schoolname',
             options: {
               x: 185,
-              y: 563,
+              y: 562,
               size: defaultSize - 3,
               color: black,
             },
@@ -1587,8 +1612,8 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'bureauname',
             options: {
-              x: 410,
-              y: 563,
+              x: 405,
+              y: 562,
               size: defaultSize - 3,
               color: black,
             },
@@ -1597,7 +1622,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'address',
             options: {
               x: 135,
-              y: 541,
+              y: 540,
               size: defaultSize,
               color: black,
             },
@@ -1606,7 +1631,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'moo',
             options: {
               x: 210,
-              y: 541,
+              y: 540,
               size: defaultSize,
               color: black,
             },
@@ -1615,7 +1640,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'street',
             options: {
               x: 300,
-              y: 541,
+              y: 540,
               size: defaultSize,
               color: black,
             },
@@ -1624,7 +1649,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'road',
             options: {
               x: 440,
-              y: 541,
+              y: 540,
               size: defaultSize,
               color: black,
             },
@@ -1633,7 +1658,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'tumbon',
             options: {
               x: 160,
-              y: 520,
+              y: 518,
               size: defaultSize,
               color: black,
             },
@@ -1642,7 +1667,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'amphurname',
             options: {
               x: 400,
-              y: 520,
+              y: 518,
               size: defaultSize,
               color: black,
             },
@@ -1650,7 +1675,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'provincename',
             options: {
-              x: 135,
+              x: 130,
               y: 495,
               size: defaultSize,
               color: black,
@@ -1686,7 +1711,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'schoolemail',
             options: {
-              x: 175,
+              x: 170,
               y: 472,
               size: defaultSize,
               color: black,
@@ -1695,7 +1720,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'email',
             options: {
-              x: 415,
+              x: 410,
               y: 472,
               size: defaultSize,
               color: black,
@@ -1704,7 +1729,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'nameen',
             options: {
-              x: 280,
+              x: 270,
               y: 450,
               size: defaultSize,
               color: black,
@@ -1888,7 +1913,26 @@ export const kspPdfMapping: IKspPdfMapping[] = [
         ],
       },
       {
-        text: [],
+        text: [
+          {
+            key: 'managername',
+            options: {
+              x: 350,
+              y: 150,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'managerposition',
+            options: {
+              x: 325,
+              y: 128,
+              size: defaultSize,
+              color: black,
+            },
+          },
+        ],
         svg: [
           {
             key: 'file5_foreign',
@@ -1919,6 +1963,44 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             options: {
               x: 145,
               y: 432,
+              size: defaultSize,
+              color: black,
+            },
+          },
+
+          {
+            key: 'nameen',
+            options: {
+              x: 280,
+              y: 363,
+              size: defaultSize,
+              color: black,
+            },
+          },
+
+          {
+            key: 'day',
+            options: {
+              x: 250,
+              y: 319,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'month',
+            options: {
+              x: 300,
+              y: 319,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'year',
+            options: {
+              x: 385,
+              y: 319,
               size: defaultSize,
               color: black,
             },

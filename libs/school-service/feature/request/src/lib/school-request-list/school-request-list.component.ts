@@ -479,7 +479,9 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     const eduinfo = JSON.parse(element.eduinfo || '');
     const email = element.email;
     const nationality = element.nationality;
-    const birthdate = element.birthdate;
+    const birthdate = thaiDate(new Date(element.birthdate || ''));
+    //const birthdate_th = thaiDate(birthdate);
+    //const th_birthdate = birthdate.split('T');
     const passportno = element.passportno;
 
     const edu1 = eduinfo.find((item: any) => {
@@ -535,7 +537,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     if (degreename3) {
       degree3 = true;
     }
-    console.log('eduinfo = ', eduinfo);
+    //console.log('eduinfo = ', eduinfo);
 
     const admission1 = edu1?.admissionDate ?? '';
     const country1 = edu1?.country ?? '';
@@ -596,6 +598,8 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     }
 
     const nameen = element.firstnameen + ' ' + element.lastnameen;
+    const name_full =
+      element.prefixth + ' ' + element.firstnameth + ' ' + element.lastnameth;
 
     let hiringStartDate = '';
     let hiringEndDate = '';
@@ -604,8 +608,8 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       const hiring = JSON.parse(element.hiringinfo || '');
 
       if (hiring) {
-        hiringStartDate = hiring.startDate;
-        hiringEndDate = hiring.endDate;
+        hiringStartDate = thaiDate(new Date(hiring.startDate));
+        hiringEndDate = thaiDate(new Date(hiring.endDate));
       }
     }
 
@@ -937,7 +941,10 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       const zipcode = res.zipcode;
       const telphone = res.telphone;
       const schoolemail = res.email;
-      //console.log(id12);
+      const managername =
+        res.thprefixname + ' ' + res.thname + ' ' + res.thfamilyname;
+      //console.log(res);
+      const managerposition = res.thposition;
 
       if (element.requesttype === '3') {
         this.dialog.open(PdfRenderComponent, {
@@ -1009,6 +1016,9 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
               graduateDate3,
               grade3,
               nameen,
+              name_full,
+              managername,
+              managerposition,
               subjectName,
               lv1,
               lv2,
