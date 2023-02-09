@@ -36,6 +36,7 @@ export class EServiceLoginComponent {
       setCookie('firstNameTh', res.firstnameth, 1);
       setCookie('lastNameTh', res.lastnameth, 1);
       setCookie('userId', res.id, 1);
+      setCookie('permissionRight', res.permissionright, 1); //1 = ส่วนกลาง, 2 = ส่วนภูมิภาค
 
       this.router.navigate(['/landing']);
     });
