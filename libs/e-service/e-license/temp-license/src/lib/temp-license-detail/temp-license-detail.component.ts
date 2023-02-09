@@ -19,7 +19,7 @@ import {
   GeneralInfoService,
   StaffService,
 } from '@ksp/shared/service';
-import { getCookie, parseJson } from '@ksp/shared/utility';
+import { checkProcess, getCookie, parseJson } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 import localForage from 'localforage';
@@ -52,6 +52,7 @@ export class KspApprovePersistData {
   styleUrls: ['./temp-license-detail.component.scss'],
 })
 export class ETempLicenseDetailComponent implements OnInit {
+  checkProcess = checkProcess;
   verifyChoice: any[] = [];
   selectedTabIndex = 0;
   eduFiles: FileGroup[] = RequestEduFiles;
@@ -223,7 +224,7 @@ export class ETempLicenseDetailComponent implements OnInit {
       this.userPermission === '1' && // เจ้าหน้าที่ส่วนกลาง
       ((res.process === '2' && res.status === '1') || //สร้างและส่งแบบคำขอ กำลังดำเนินการ
         //(res.process === '3' && res.status === '2') || //ตรวจสอบเอกสาร ลำดับที่ 1 ปรับแก้ไข/เพิ่มเติม
-        (res.process === '3' && res.status === '2')) //ตรวจสอบเอกสาร ลำดับที่ 1 ผ่านการตรวจสอบ
+        (res.process === '3' && res.status === '3')) //ตรวจสอบเอกสาร ลำดับที่ 1 ผ่านการตรวจสอบ
       //(res.process === '4' && res.status === '2') || //ตรวจสอบเอกสาร ลำดับที่ 2 ปรับแก้ไข/เพิ่มเติม
     ) {
       this.showCheckerForm = true;
