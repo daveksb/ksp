@@ -224,7 +224,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     const date = new Date(element.licensestartdate || '');
     const thai = thaiDate(date);
     const [day, month, year] = thai.split(' ');
-    const fulldateth = `${changeToThaiNumber(day)} เดือน ${month} พ.ศ. ${year}`;
+    const fulldateth = `${changeToThaiNumber(day)} เดือน ${month} พ.ศ. ${changeToThaiNumber(year)}`;
     const fulldateen = `${day} Day of ${changeToEnglishMonth(month)} B.E. ${
       parseInt(year) - 543
     }`;
@@ -943,8 +943,8 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       const schoolemail = res.email;
       const managername =
         res.thprefixname + ' ' + res.thname + ' ' + res.thfamilyname;
-      //console.log(res);
       const managerposition = res.thposition;
+      //console.log(res);
 
       if (element.requesttype === '3') {
         this.dialog.open(PdfRenderComponent, {

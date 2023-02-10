@@ -143,7 +143,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             options: {
               x: 290,
               y: 175,
-              size: defaultSize,
+              size: defaultSize - 1,
               color: black,
             },
           },
@@ -152,7 +152,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             options: {
               x: 290,
               y: 155,
-              size: defaultSize,
+              size: defaultSize - 1,
               color: black,
             },
           },
@@ -3078,9 +3078,535 @@ export const kspPdfMapping: IKspPdfMapping[] = [
     pdfSubType: 3,
     //pdfSrc: 'assets/pdf/school-qualification-approve-manager.pdf',
     pdfSrc:
-      'https://ksp-eservice.ksp.or.th/pdf/school-qualification-approve-manager.pdf',
+      'https://ksp-eservice.ksp.or.th/pdf/school-qualification-approve-education-manager.pdf',
+    input: [
+      {
+        text: [
+          {
+            key: 'schoolname',
+            options: {
+              x: 387,
+              y: 612,
+              size: defaultSize - 1,
+              color: black,
+            },
+          },
+          {
+            key: 'day',
+            options: {
+              x: 370,
+              y: 594,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'month',
+            options: {
+              x: 415,
+              y: 594,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'year',
+            options: {
+              x: 488,
+              y: 594,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'schoolname',
+            options: {
+              x: 210,
+              y: 548,
+              size: defaultSize - 3,
+              color: black,
+            },
+          },
+          {
+            key: 'bureauname',
+            options: {
+              x: 385,
+              y: 548,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'address',
+            options: {
+              x: 130,
+              y: 529,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'moo',
+            options: {
+              x: 190,
+              y: 529,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'street',
+            options: {
+              x: 275,
+              y: 529,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'road',
+            options: {
+              x: 405,
+              y: 529,
+              size: defaultSize,
+              color: black,
+            },
+          },
 
-    input: [],
+          {
+            key: 'tumbon',
+            options: {
+              x: 140,
+              y: 512,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'amphurname',
+            options: {
+              x: 275,
+              y: 512,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'provincename',
+            options: {
+              x: 415,
+              y: 512,
+              size: defaultSize,
+              color: black,
+            },
+          },
+
+          {
+            key: 'zipcode',
+            options: {
+              x: 140,
+              y: 495,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'telphone',
+            options: {
+              x: 375,
+              y: 495,
+              size: defaultSize,
+              color: black,
+            },
+          },
+
+          {
+            key: 'fax',
+            options: {
+              x: 140,
+              y: 477,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'phone',
+            options: {
+              x: 420,
+              y: 477,
+              size: defaultSize,
+              color: black,
+            },
+          },
+
+          {
+            key: 'name',
+            options: {
+              x: 200,
+              y: 443,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'position',
+            options: {
+              x: 425,
+              y: 443,
+              size: defaultSize,
+              color: black,
+            },
+          },
+
+          {
+            key: 'bureauname',
+            options: {
+              x: 125,
+              y: 424,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'experienceYear',
+            options: {
+              x: 450,
+              y: 424,
+              size: defaultSize,
+              color: black,
+            },
+          },
+
+          {
+            key: 'otherPosition',
+            options: {
+              x: 175,
+              y: 409,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'otherExperienceYear',
+            options: {
+              x: 310,
+              y: 409,
+              size: defaultSize,
+              color: black,
+            },
+          },
+
+          {
+            key: 'degreeName1',
+            options: {
+              x: 205,
+              y: 357,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'major1',
+            options: {
+              x: 385,
+              y: 357,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'institution1',
+            options: {
+              x: 175,
+              y: 339,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'graduateDate1',
+            options: {
+              x: 450,
+              y: 339,
+              size: defaultSize,
+              color: black,
+            },
+          },
+
+          {
+            key: 'degreeName2',
+            options: {
+              x: 205,
+              y: 305,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'major2',
+            options: {
+              x: 385,
+              y: 305,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'institution2',
+            options: {
+              x: 175,
+              y: 288,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'graduateDate2',
+            options: {
+              x: 450,
+              y: 288,
+              size: defaultSize,
+              color: black,
+            },
+          },
+
+          {
+            key: 'degreeName3',
+            options: {
+              x: 205,
+              y: 253,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'major3',
+            options: {
+              x: 385,
+              y: 253,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'institution3',
+            options: {
+              x: 175,
+              y: 236,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'graduateDate3',
+            options: {
+              x: 450,
+              y: 236,
+              size: defaultSize,
+              color: black,
+            },
+          },
+
+          {
+            key: 'degreeName4',
+            options: {
+              x: 205,
+              y: 201,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'major4',
+            options: {
+              x: 385,
+              y: 201,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'institution4',
+            options: {
+              x: 175,
+              y: 184,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'graduateDate4',
+            options: {
+              x: 450,
+              y: 184,
+              size: defaultSize,
+              color: black,
+            },
+          },
+
+          {
+            key: 'approveDegreeLevel',
+            options: {
+              x: 240,
+              y: 154,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'approveDegreeName',
+            options: {
+              x: 410,
+              y: 154,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'approveMajor',
+            options: {
+              x: 149,
+              y: 137,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'approveGraduateDate',
+            options: {
+              x: 380,
+              y: 137,
+              size: defaultSize,
+              color: black,
+            },
+          },
+
+          {
+            key: 'approveReasonDetail',
+            options: {
+              x: 320,
+              y: 101,
+              size: defaultSize,
+              color: black,
+            },
+          },
+        ],
+        svg: [
+          {
+            key: 'degree1',
+            options: { x: 81, y: 388 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'degree2',
+            options: { x: 81, y: 336 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'degree3',
+            options: { x: 81, y: 284 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'degree4',
+            options: { x: 82, y: 232 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+        ],
+      },
+      {
+        text: [
+          {
+            key: 'name',
+            options: {
+              x: 275,
+              y: 706,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'name',
+            options: {
+              x: 275,
+              y: 293,
+              size: defaultSize,
+              color: black,
+            },
+          },
+        ],
+        svg: [
+          {
+            key: 'evidence1',
+            options: { x: 94, y: 702 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'evidence2',
+            options: { x: 93, y: 684 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'evidence3',
+            options: { x: 93, y: 666 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'evidence4',
+            options: { x: 93, y: 648 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'evidence5',
+            options: { x: 93, y: 630 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'evidence6',
+            options: { x: 93, y: 613 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'evidence7',
+            options: { x: 94, y: 580 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'evidence8',
+            options: { x: 94, y: 563 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'evidence9',
+            options: { x: 94, y: 545 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+
+          {
+            key: 'evidence9_1',
+            options: { x: 129, y: 526 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+
+          {
+            key: 'evidence9_2',
+            options: { x: 129, y: 475 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+
+          {
+            key: 'evidence9_3',
+            options: { x: 129, y: 371 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+          {
+            key: 'evidence9_4',
+            options: { x: 129, y: 336 },
+            svgPath: 'M18 7L9.42857 17L6 13',
+          },
+        ],
+      },
+    ],
   },
   //แบบคำขอของ หนังสือรับรองคุณวุฒิ ศึกษานิเทศก์
   {
