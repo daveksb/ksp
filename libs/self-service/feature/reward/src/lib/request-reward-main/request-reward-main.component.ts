@@ -65,6 +65,7 @@ export class RequestRewardMainComponent implements OnInit {
   requestData!: SelfRequest;
   requestNo: string | null = '';
   currentProcess!: number;
+  currentStatus!: number;
 
   form = this.fb.group({
     rewardType: [0],
@@ -113,6 +114,7 @@ export class RequestRewardMainComponent implements OnInit {
             this.requestData = res;
             this.requestNo = res.requestno;
             this.currentProcess = Number(res.process);
+            this.currentStatus = Number(res.status);
             this.uniqueTimestamp = res.uniqueno || '';
             console.log(this.uniqueTimestamp);
 
@@ -486,6 +488,12 @@ export class RequestRewardMainComponent implements OnInit {
     console.log('payload = ', payload);
     if (this.requestId) {
       payload.id = this.requestId;
+    }
+    if (this.currentProcess) {
+      payload.process = `${this.currentProcess}`;
+    }
+    if (this.currentStatus) {
+      payload.status = `${this.currentStatus}`;
     }
     return payload;
   }
