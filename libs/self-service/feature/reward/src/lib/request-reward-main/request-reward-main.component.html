@@ -35,14 +35,14 @@
 
       <div class="col-md-6 mb-2" *ngIf="rewardType.value === '41'">
         <div class="box-header">ประเภทระดับการศึกษา</div>
-        <select class="form-select">
+        <select class="form-select" formControlName="careerType">
           <option value="0" selected hidden disabled>กรุณาเลือก</option>
         </select>
       </div>
 
       <div class="col-md-6 mb-2" *ngIf="rewardType.value === '42'">
         <div class="box-header">ประเภท/กลุ่มสาระการเรียนรู้</div>
-        <select class="form-select">
+        <select class="form-select" formControlName="careerType">
           <option value="0" selected hidden disabled>กรุณาเลือก</option>
           <option value="1">
             ครูผู้สอนกลุ่มสาระการเรียนรู้การงานอาชีพและเทคโนโลยีดีเด่น
@@ -98,7 +98,7 @@
 
       <div class="col-md-6 mb-2" *ngIf="rewardType.value === '45'">
         <div class="box-header">ประเภทที่ส่งผลงานวิจัย</div>
-        <select class="form-select" formControlName="researchSubmissionType">
+        <select class="form-select" formControlName="careerType">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
           <option value="1">ครู</option>
           <option value="2">ผู้บริหารสถานศึกษา</option>

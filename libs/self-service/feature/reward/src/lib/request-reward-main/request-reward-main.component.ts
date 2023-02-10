@@ -72,7 +72,6 @@ export class RequestRewardMainComponent implements OnInit {
     rewardDetail: [],
     careerType: ['0'],
     province: [null],
-    researchSubmissionType: [null],
   });
 
   prefixList$!: Observable<any>;
@@ -216,6 +215,8 @@ export class RequestRewardMainComponent implements OnInit {
     this.workplaceInfo = parseJson(schooladdrinfo);
     console.log(this.workplaceInfo);
 
+    this.form.controls.careerType.patchValue(careertype);
+
     switch (rewardType) {
       case 40: {
         const eduInfo = parseJson(eduinfo);
@@ -230,7 +231,6 @@ export class RequestRewardMainComponent implements OnInit {
           rewardSuccessInfo,
           rewardDetailInfo,
         });
-        this.form.controls.careerType.patchValue(careertype);
         break;
       }
       case 41: {
@@ -266,12 +266,14 @@ export class RequestRewardMainComponent implements OnInit {
         const hiringInfo = parseJson(hiringinfo);
         const rewardDetailInfo = parseJson(rewarddetailinfo);
         const rewardPunishmentInfo = parseJson(rewardpunishmentinfo);
+        const rewardTeacherInfo = parseJson(rewardteacherinfo);
         this.form.controls.rewardDetail.patchValue(<any>{
           eduInfo,
           hiringInfo,
           rewardDetailInfo,
           rewardPunishmentInfo,
         });
+        this.form.patchValue({ province: rewardTeacherInfo?.province || null });
         break;
       }
       case 44: {
@@ -416,9 +418,7 @@ export class RequestRewardMainComponent implements OnInit {
     const self = new SelfRequest(
       '1',
       `${this.form.value.rewardType}`,
-      `${this.form.value.rewardType}` === '40'
-        ? this.form.value.careerType || '0'
-        : `${SelfServiceRequestSubType.อื่นๆ}`,
+      this.form.value.careerType || '0',
       currentProcess
     );
     const allowKey = Object.keys(self);
@@ -432,7 +432,12 @@ export class RequestRewardMainComponent implements OnInit {
     const selectData = _.pick(userInfo, allowKey);
     const rewardfiles = this.rewardFiles;
     const moneyassistancefiles = this.moneyAssistanceFiles;
-    console.log(rewardfiles);
+
+    if (this.form.value?.rewardType === 43) {
+      form.rewardTeacherInfo = {
+        province: this.form.value.province,
+      };
+    }
 
     const filledData = {
       ...self,
