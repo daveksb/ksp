@@ -33,7 +33,7 @@ export class EServiceLicenseSearchComponent extends KspFormBaseComponent {
     careertype: [null],
     idcardno: [null],
     province: [null],
-    process: [null],
+    process: ['2'],
     status: [null],
     requestdatefrom: [null],
     requestdateto: [null],

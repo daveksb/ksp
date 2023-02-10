@@ -6,7 +6,7 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { ERequestService } from '@ksp/shared/service';
-import { getCookie, parseJson } from '@ksp/shared/utility';
+import { getCookie, getLicenseType, parseJson } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-request-license-approve-print',
@@ -16,33 +16,7 @@ import { getCookie, parseJson } from '@ksp/shared/utility';
 export class RequestLicenseApprovePrintComponent implements OnInit {
   groupNo!: number;
   accounts!: string;
-  licenseData = [
-    {
-      order: 1,
-      licenseType: 'ครู',
-      count: 0,
-    },
-    {
-      order: 2,
-      licenseType: 'ครูชาวต่างชาติ',
-      count: 0,
-    },
-    {
-      order: 3,
-      licenseType: 'ผู้บริหารสถานศึกษา',
-      count: 0,
-    },
-    {
-      order: 4,
-      licenseType: 'ผู้บริหารการศึกษา',
-      count: 0,
-    },
-    {
-      order: 5,
-      licenseType: 'ศึกษานิเทศก์',
-      count: 0,
-    },
-  ];
+  licenseData = [];
 
   constructor(
     private router: Router,
@@ -62,6 +36,18 @@ export class RequestLicenseApprovePrintComponent implements OnInit {
 
       if (accounts) {
         this.accounts = accounts.split(',').join(' | ');
+        console.log(accounts);
+        const payload = {
+          listno: accounts,
+          offset: '0',
+          row: '500',
+        };
+        this.requestService
+          .getRequestListByGroupNo(payload)
+          .subscribe((res) => {
+            //console.log('requests = ', res.datareturn);
+            this.licenseData = getLicenseType(res.datareturn);
+          });
       }
     });
   }
