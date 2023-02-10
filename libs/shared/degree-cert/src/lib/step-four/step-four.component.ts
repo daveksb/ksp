@@ -36,7 +36,7 @@ export class DegreeCertStepFourComponent
 {
   @Input() formType = 'a';
   @Input() systemType = '';
-  step4Incorrect = null;
+  @Input() step4Incorrect = [];
   // step4Incorrect = [
   //   'ไม่ครบถ้วน และไม่ถูกต้อง',
   //   'หมายเหตุ สำเนาหนังสืออนุญาตไม่ถูกต้อง',

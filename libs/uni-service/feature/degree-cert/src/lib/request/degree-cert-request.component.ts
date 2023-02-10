@@ -9,6 +9,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ApproveStepStatusOption } from '@ksp/shared/constant';
 
 import {
   CompleteDialogComponent,
@@ -21,12 +22,14 @@ import {
   parseJson,
   formatDate,
 } from '@ksp/shared/utility';
+import _ from 'lodash';
 import moment from 'moment';
 import { lastValueFrom } from 'rxjs';
 @Component({
   templateUrl: './degree-cert-request.component.html',
   styleUrls: ['./degree-cert-request.component.scss'],
 })
+
 export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
   @ViewChild('stepper') private stepper?: MatStepper;
   id?: string;
@@ -37,6 +40,7 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
 
   step1Form: any = this.fb.group({
     step1: [],
+    detail: []
   });
   step2Form: any = this.fb.group({
     step2: [
@@ -44,12 +48,15 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
         plans: [],
       },
     ],
+    detail: []
   });
   step3Form: any = this.fb.group({
     step3: [],
+    detail: []
   });
   step4Form: any = this.fb.group({
     step4: [{ files: [] }],
+    detail: []
   });
   uniData: any;
   mode: any = 'edit';
@@ -72,6 +79,13 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
 
   ngOnInit(): void {
     this.initForm();
+  }
+
+  mapCheckResult(data: any) {
+    const result: any = _.find(ApproveStepStatusOption, {
+      value: Number(data)
+    });
+    return result?.name;
   }
 
   async initForm() {
@@ -104,23 +118,40 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
       }
       this.status = uniRequestDegree.requeststatus;
       this.process = uniRequestDegree.requestprocess;
+      const checkresult = uniRequestDegree.checkresult ? parseJson(uniRequestDegree.checkresult) : {};
       const { requestNo, step1, step2, step3, step4 } =
         this.uniInfoService.mappingUniverSitySelectByIdWithForm(
           uniRequestDegree
         );
       this.requestNo = requestNo;
       this.step1Form.setValue({
-        step1,
+        step1: step1,
+        detail: checkresult?.verifyStep1?.result ? [
+          this.mapCheckResult(checkresult?.verifyStep1?.result),
+          'หมายเหตุ ' + (checkresult?.verifyStep1?.detail ? checkresult?.verifyStep1?.detail : ''),
+        ] : []
       });
       this.step2Form.setValue({
-        step2,
+        step2: step2,
+        detail: checkresult?.verifyStep2?.result ? [
+          this.mapCheckResult(checkresult?.verifyStep2?.result),
+          'หมายเหตุ ' + (checkresult?.verifyStep2?.detail ? checkresult?.verifyStep2?.detail : ''),
+        ] : []
       });
       this.step3Form.setValue({
-        step3,
+        step3: step3,
+        detail: checkresult?.verifyStep3?.result ? [
+          this.mapCheckResult(checkresult?.verifyStep3?.result),
+          'หมายเหตุ ' + (checkresult?.verifyStep3?.detail ? checkresult?.verifyStep3?.detail : ''),
+        ] : []
       });
       setTimeout(() => {
         this.step4Form.setValue({
-          step4,
+          step4: step4,
+          detail: checkresult?.verifyStep4?.result ? [
+            this.mapCheckResult(checkresult?.verifyStep4?.result),
+            'หมายเหตุ ' + (checkresult?.verifyStep4?.detail ? checkresult?.verifyStep4?.detail : ''),
+          ] : []
         });
       }, 500);
     } else {
@@ -135,6 +166,7 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
                 : '') || '',
           provience: this.uniData?.provinceid || '',
         },
+        detail: []
       });
     }
   }

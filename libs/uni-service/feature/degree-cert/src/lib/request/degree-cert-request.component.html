@@ -24,6 +24,7 @@
             (degreeType)="step1DegreeType = $event"
             formControlName="step1"
             [disabledInstitute]="true"
+            [step1Incorrect]="step1Form.value.detail"
           >
           </ksp-degree-cert-step-one>
         </form>
@@ -36,6 +37,7 @@
             [mode]="mode"
             [formType]="step1DegreeType"
             formControlName="step2"
+            [step2Incorrect]="step2Form.value.detail"
           >
           </ksp-degree-cert-step-two>
         </form>
@@ -47,6 +49,7 @@
           <ksp-degree-cert-step-3
             [mode]="mode"
             formControlName="step3"
+            [step3Incorrect]="step3Form.value.detail"
           ></ksp-degree-cert-step-3>
         </form>
       </mat-step>
@@ -59,6 +62,7 @@
             formControlName="step4"
             [formType]="step1DegreeType"
             [systemType]="'uni'"
+            [step4Incorrect]="step4Form.value.detail"
           ></ksp-degree-cert-step-four>
         </form>
       </mat-step>

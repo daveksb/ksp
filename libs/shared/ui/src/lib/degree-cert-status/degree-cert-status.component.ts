@@ -47,6 +47,9 @@ export class DegreeCertStatusComponent implements OnInit {
     if (!status) {
       classStatus = 'edit-status';
     }
+    if (status?.id == 2) {
+      classStatus = 'return-status';
+    }
     return {
       message: status?.sname,
       classStatus,
@@ -63,6 +66,9 @@ export class DegreeCertStatusComponent implements OnInit {
     });
     if (!status) {
       classStatus = 'edit-status';
+    }
+    if (status?.id == 2) {
+      classStatus = 'return-status';
     }
     return {
       message: status?.sname,

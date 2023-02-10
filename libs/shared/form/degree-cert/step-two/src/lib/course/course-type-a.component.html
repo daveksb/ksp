@@ -1,8 +1,8 @@
 <form [formGroup]="form">
   <div *ngIf="mode === 'edit'" class="form-header text-black">
     ปริญญา/หลักสูตร<br />
-    1) ปริญญาตรีทางการศึกษา (วิชาชีพครู) <br />
-    2) ปริญญาตรีทางการศึกษา (วิชาชีพบริหาร) <br />
+    1) ปริญญาตรีทางการศึกษา (หลักสูตร 4 ปี) <br />
+    2) ปริญญาตรีทางการศึกษา (หลักสูตร 5 ปี) <br />
     3) ประกาศนียบัตรบัณฑิตทางการศึกษา (วิชาชีพครู) <br />
     4) ประกาศนียบัตรบัณฑิตทางการศึกษา (วิชาชีพบริหาร)
   </div>
@@ -65,7 +65,6 @@
         <thead>
           <tr>
             <th scope="col" class="w-50">แผนการรับนักศึกษา (รายปี)</th>
-            <th scope="col" class="text-center">ชื่อแผน</th>
             <th scope="col" class="text-center">ปีการศึกษา (พ.ศ)</th>
             <th scope="col" class="text-center">จำนวนนักศึกษา</th>
           </tr>
@@ -78,17 +77,6 @@
                 <th scope="row" class="align-middle">
                   {{ item.value.label }}
                 </th>
-
-                <td>
-                  <div>
-                    <input
-                      class="form-control text-center"
-                      type="text"
-                      placeholder="กรอกชื่อแผน"
-                      formControlName="planname"
-                    />
-                  </div>
-                </td>
 
                 <td>
                   <div>

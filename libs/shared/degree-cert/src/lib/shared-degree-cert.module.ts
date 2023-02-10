@@ -17,6 +17,7 @@ import { SharedFormDegreeCertStepOneModule } from '@ksp/shared/form/degree-cert/
 import { DynamicComponentDirective } from '@ksp/shared/directive';
 import {
   AddRowButtonComponent,
+  UniFormBadgeComponent,
   UniWarnIncorrectComponent,
 } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
@@ -46,6 +47,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     FormsModule,
     SharedFormUniCourseFormModule,
     MatDatepickerModule,
+    UniFormBadgeComponent
   ],
   declarations: [
     DegreeCertStepOneComponent,
