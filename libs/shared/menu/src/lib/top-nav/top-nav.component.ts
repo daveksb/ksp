@@ -18,7 +18,10 @@ export class TopNavComponent {
   today = thaiDate(new Date());
   firstName = getCookie('firstNameTh');
   lastName = getCookie('lastNameTh');
+  permission = getCookie('permissionRight');
+
   constructor(private router: Router) {}
+
   logout() {
     deleteCookie('userToken');
     this.router.navigate(['/']);

@@ -15,7 +15,7 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { ApproveResult } from '@ksp/e-service/e-license/approve-ksp-request';
-import { getCookie } from '@ksp/shared/utility';
+import { getCookie, parseJson } from '@ksp/shared/utility';
 
 @UntilDestroy()
 @Component({
@@ -102,7 +102,11 @@ export abstract class ESelfConfirmFormBaseComponent implements OnInit {
       }
     } else if (input.result === '2') {
       //ขอแก้ไข / เพิ่มเติม
-      this.targetProcess = Number(req.process) + 1;
+      if (req.process === '2') {
+        this.targetProcess = Number(req.process) + 1;
+      } else {
+        this.targetProcess = Number(req.process);
+      }
       this.targetStatus = 2;
     } else if (input.result === '3') {
       if (req.process === '2') {
@@ -110,12 +114,15 @@ export abstract class ESelfConfirmFormBaseComponent implements OnInit {
       } else {
         this.targetProcess = Number(req.process);
       }
+
       if (input.shouldForward === '3') {
         //ไม่ผ่านการตรวจสอบ เนื่องจากไม่ครบถ้วน / ไม่ถูกต้อง
         this.targetStatus = 4;
       } else if (input.shouldForward === '5') {
         //ยกเลิก
         this.targetStatus = 5;
+      } else {
+        this.targetStatus = 4;
       }
     }
   }
@@ -129,6 +136,7 @@ export abstract class ESelfConfirmFormBaseComponent implements OnInit {
     const detail: KspComment = {
       returndate: form.returndate,
       checkdetail: this.saveData.checkDetail,
+      checkresult: form.result,
     };
 
     const payload: KspApprovePayload = {
@@ -156,7 +164,11 @@ export abstract class ESelfConfirmFormBaseComponent implements OnInit {
     });
   }
 
-  mapCheckResult(result: string) {
+  mapCheckResult(data: any) {
+    if (!data) return '';
+    const parseData = JSON.parse(data);
+    const result = parseData.checkresult || '';
+
     if (result === '1') return 'ครบถ้วน และถูกต้อง';
     if (result === '2') return 'ขอแก้ไข / เพิ่มเติม';
     if (result === '3') return 'ขาดคุณสมบัติ';

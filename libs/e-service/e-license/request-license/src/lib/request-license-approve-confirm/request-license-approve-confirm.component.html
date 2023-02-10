@@ -1,9 +1,5 @@
-<ksp-top-nav
-  ><span header>ยื่นแบบคำขอ</span
-  ><span subHeader
-    >รายละเอียดแบบคำขอหนังสืออนุญาตประกอบวิชาชีพ (ชาวไทย)
-  </span></ksp-top-nav
->
+<ksp-top-nav><span header>ยื่นแบบคำขอ</span><span subHeader>รายละเอียดแบบคำขอหนังสืออนุญาตประกอบวิชาชีพ (ชาวไทย)
+  </span></ksp-top-nav>
 
 <div class="bg-secondary bg-opacity-10 py-2 px-4 full-height-2">
   <div class="box-header">รายละเอียดแบบคำขอหนังสืออนุญาตประกอบวิชาชีพ</div>
@@ -11,8 +7,7 @@
     <div class="d-flex justify-content-between">
       <ksp-request-header-info
         [requestDate]="saveData.requestData.requestdate"
-        [requestNumber]="saveData.requestData.requestno"
-      ></ksp-request-header-info>
+        [requestNumber]="saveData.requestData.requestno"></ksp-request-header-info>
     </div>
     <hr />
     <div class="box-header text-primary">
@@ -35,7 +30,7 @@
             <td scope="col">{{ row.firstnameth }} {{ row.lastnameth }}</td>
             <td scope="col">{{ row.createdate | thaiDate }}</td>
             <td scope="col">
-              {{ mapCheckResult(row.detail.checkresult) }}
+              {{ mapCheckResult(row.detail) }}
             </td>
           </tr>
         </ng-container>
@@ -49,14 +44,12 @@
           saveData.requestData.process === '3' ||
           (saveData.requestData.process === '4' &&
             saveData.requestData.status !== '3')
-        "
-      >
+        ">
         <ksp-validate-ksp-request
           [requestType]="saveData.requestData.requesttype"
           [process]="saveData.requestData.process"
           [showUrgent]="saveData.requestData.process === '4'"
-          formControlName="approvement"
-        ></ksp-validate-ksp-request>
+          formControlName="approvement"></ksp-validate-ksp-request>
       </ng-container>
     </div>
 
@@ -95,6 +88,5 @@
     [showCenterButtons]="true"
     [isLastPage]="true"
     [showSaveButton]="true"
-    [showCancelButton]="true"
-  ></ksp-bottom-nav>
+    [showCancelButton]="true"></ksp-bottom-nav>
 </div>

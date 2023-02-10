@@ -41,13 +41,6 @@ export class TempLicenseCheckConfirmComponent implements OnInit {
   form = this.fb.group({
     approvement: [],
   });
-  /*   form = this.fb.group({
-    approvement: this.fb.group({
-      result: [''],
-      reason: [''],
-      returndate: [''],
-    }),
-  }); */
 
   constructor(
     private fb: FormBuilder,

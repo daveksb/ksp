@@ -16,10 +16,4 @@ export class EServiceLoginService {
       form
     );
   }
-
-  /* validateTokenKey(token: string): Observable<any> {
-    return this.http
-      .post(`${environment.apiUrl}/ksplogin/userloginschuser`, token)
-      .pipe(map((data: any) => data.datareturn));
-  } */
 }
