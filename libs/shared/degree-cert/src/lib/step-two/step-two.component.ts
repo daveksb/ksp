@@ -15,6 +15,7 @@ export class DegreeCertStepTwoComponent extends KspFormBaseComponent {
   @Output() tabIndexChanged = new EventEmitter<number>();
   @Input() formType = 'a';
   @Input() showEditCheckbox = false;
+  @Input() step2Incorrect = [];
 
   override form = this.fb.group({
     plan1: [{ plans: [], subjects: [] }],
@@ -32,7 +33,6 @@ export class DegreeCertStepTwoComponent extends KspFormBaseComponent {
     section4: [false],
     section5: [false],
   });
-  step2Incorrect = null;
   // step2Incorrect = ['ไม่ครบถ้วน และไม่ถูกต้อง', 'หมายเหตุ XXXXXXXXX'];
 
   constructor(private fb: FormBuilder) {

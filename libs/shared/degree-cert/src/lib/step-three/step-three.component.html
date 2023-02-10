@@ -1,3 +1,7 @@
+<ng-container *ngIf="mode === 'edit' && (step3Incorrect && step3Incorrect.length)">
+  <ksp-uni-warn-incorrect [details]="step3Incorrect"></ksp-uni-warn-incorrect>
+</ng-container>
+
 <form [formGroup]="form">
   <mat-tab-group class="tab-group" animationDuration="0ms" dynamicHeight="true">
     <mat-tab label="การฝึกปฏิบัติวิชาชีพระหว่างเรียน" class="tab-content">

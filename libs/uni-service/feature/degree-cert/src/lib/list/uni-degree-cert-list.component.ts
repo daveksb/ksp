@@ -15,7 +15,7 @@ import {
   DegreeCertStatusComponent,
   UniFormBadgeComponent,
 } from '@ksp/shared/ui';
-import { getCookie, stringToThaiDate, thaiDate } from '@ksp/shared/utility';
+import { formatRequestNo, getCookie, parseJson, stringToThaiDate, thaiDate } from '@ksp/shared/utility';
 import _ from 'lodash';
 import moment from 'moment';
 import { lastValueFrom, map, Subject } from 'rxjs';
@@ -43,7 +43,8 @@ export class UniDegreeCertListComponent
   implements OnInit
 {
   displayedColumns: string[] = displayedColumns;
-
+  badgeTitle1: any;
+  badgeTitle2: any;
   dataSource = new MatTableDataSource<DegreeCertInfo>();
   form = this.fb.group({
     search: [{}],
@@ -55,6 +56,7 @@ export class UniDegreeCertListComponent
     ({ processId, processName }) => ({ value: processId, label: processName })
   );
   approveStatusOption: ListData[] = [];
+  rejectedRequests: any = [];
 
   constructor(
     private fb: FormBuilder,
@@ -131,11 +133,36 @@ export class UniDegreeCertListComponent
               process: item?.process,
               requestType: item?.requesttype,
               status: item?.status,
+              detail: item?.detail ? JSON.parse(item?.detail) : {},
+              requestno: item?.requestno
             };
           }
         );
+        this.rejectedRequests = this.dataSource.data.filter((data: any) => {
+          return data.process == '2' && data.status == '2';
+        })
       });
   }
+
+  genAlertMessage(req: any) {
+    return `แจ้งเตือน เลขที่คำขอ: ${req.requestno} รายการขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา ถูกส่งคืน "ปรับแก้ไข/เพิ่มเติม"`;
+  }
+
+  genSubTitle(req: any) {
+    const detail: any = req.detail;
+    return ` กรุณาส่งกลับภายในวันที่ ${detail.returnDate ? thaiDate(
+      new Date(detail.returnDate)
+    ) : ''} มิฉะนั้นแบบคำขอจะถูกยกเลิก `;
+  }
+
+  goToDetail(req: any) {
+    this.router.navigate(['/degree-cert', 'request'], {
+      queryParams: {
+        id: req?.key,
+      },
+    });
+  }
+
   onEdit(rowData: any) {
     this.router.navigate(['/degree-cert', 'request'], {
       queryParams: {

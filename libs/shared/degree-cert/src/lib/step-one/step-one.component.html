@@ -1,9 +1,9 @@
-<ng-container *ngIf="mode === 'edit' && step1Incorrect">
+<ng-container *ngIf="mode === 'edit' && (step1Incorrect && step1Incorrect.length)">
   <ksp-uni-warn-incorrect [details]="step1Incorrect"></ksp-uni-warn-incorrect>
 </ng-container>
 
 <form [formGroup]="form">
-  <div class="bg-white" style="width: auto">
+  <div class="bg-white mt-4" style="width: auto">
     <fieldset [disabled]="disabledInstitute">
       <div class="px-3 py-2 mb-3" style="background-color: #f4faff">
         <div class="box-header">ข้อมูลสถาบัน</div>
@@ -151,7 +151,7 @@
                   role="button"
                   *ngIf="i > 0"
                   (click)="deleteFormArray(locations, i)"
-                  class="bi bi-trash fs-6 text-danger"
+                  class="bi bi-trash fs-6 text-danger delete-icon"
                 ></i>
               </div>
             </div>
@@ -194,7 +194,7 @@
                   role="button"
                   *ngIf="i > 0"
                   (click)="deleteFormArray(institutions, i)"
-                  class="bi bi-trash fs-6 text-danger"
+                  class="bi bi-trash fs-6 text-danger delete-icon"
                 ></i>
               </div>
             </div>
@@ -238,7 +238,7 @@
                   role="button"
                   *ngIf="i > 0"
                   (click)="deleteFormArray(locations2, i)"
-                  class="bi bi-trash fs-6 text-danger"
+                  class="bi bi-trash fs-6 text-danger delete-icon"
                 ></i>
               </div>
             </div>

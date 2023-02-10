@@ -9,7 +9,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SharedFormDegreeCertStepThreeModule } from '@ksp/shared/form/degree-cert/step-three';
 import { SharedFormDegreeCertStepOneModule } from '@ksp/shared/form/degree-cert/step-one';
-import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
+import { RequestHeaderInfoComponent, UniFormBadgeComponent } from '@ksp/shared/ui';
 import { MatIconModule } from '@angular/material/icon';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -53,6 +53,7 @@ const routes: Routes = [
     MatIconModule,
     TopNavComponent,
     ReactiveFormsModule,
+    UniFormBadgeComponent
   ],
   declarations: [DegreeCertRequestComponent],
 })

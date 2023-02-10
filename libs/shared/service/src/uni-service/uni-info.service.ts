@@ -76,9 +76,9 @@ export class UniInfoService {
       formData.step2.plan2 = {
         plans: res.coursestructure ? parseJson(res.coursestructure) : [],
         subjects: res.courseplan ? subjectsdata.subjects : [],
-        subject1GroupName: subjectsdata?.subjectgroupname.subject1GroupName,
-        subject2GroupName: subjectsdata?.subjectgroupname.subject2GroupName,
-        subject3GroupName: subjectsdata?.subjectgroupname.subject3GroupName,
+        subject1GroupName: subjectsdata.subjectgroupname ? subjectsdata?.subjectgroupname.subject1GroupName : '',
+        subject2GroupName: subjectsdata.subjectgroupname ? subjectsdata?.subjectgroupname.subject2GroupName : '',
+        subject3GroupName: subjectsdata.subjectgroupname ? subjectsdata?.subjectgroupname.subject3GroupName : '',
       };
     }
     formData.step3 = {

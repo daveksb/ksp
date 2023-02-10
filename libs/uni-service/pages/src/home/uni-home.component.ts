@@ -131,8 +131,8 @@ export class UniHomeComponent extends KspPaginationComponent implements OnInit {
           degreeLevel,
           uniName: row?.uniname || '-',
           degreeName: row?.fulldegreenameth || '-',
-          major,
-          branch,
+          coursemajor: row?.coursemajor,
+          coursesubjects: row?.coursesubjects,
           approveDate: approveDate,
         });
       }
