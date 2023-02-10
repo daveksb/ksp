@@ -12,8 +12,18 @@
   <div class="box-header">รายการขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา</div>
   <!-- no api
 <ksp-uni-form-badge></ksp-uni-form-badge> -->
-
-  <div class="bg-white p-3">
+  <ng-container *ngFor="let req of rejectedRequests; let i = index">
+    <ksp-uni-form-badge [mainTitle]="genAlertMessage(req)" [subTitle]="genSubTitle(req)">
+      <button
+        (click)="goToDetail(req)"
+        class="btn btn-link text-primary p-0 w-auto ms-1"
+        type="button"
+      >
+        กดเพื่อตรวจสอบ
+      </button>
+    </ksp-uni-form-badge>
+  </ng-container>
+  <div class="bg-white p-3 mt-4">
     <form [formGroup]="form">
       <ksp-degree-cert-search
         (cleared)="clear()"

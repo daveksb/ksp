@@ -35,6 +35,7 @@ export class DegreeCertStepOneComponent
 
   @Input() showCoordinatorForm = true;
   @Output() degreeType = new EventEmitter<string>();
+  @Input() step1Incorrect = [];
   @ViewChild(DynamicComponentDirective, { static: true })
   myHost!: DynamicComponentDirective;
 
@@ -60,7 +61,6 @@ export class DegreeCertStepOneComponent
     section5: [false],
     section6: [false],
   });
-  step1Incorrect = null;
   // step1Incorrect = [
   //   'ไม่ครบถ้วน และไม่ถูกต้อง',
   //   'หมายเหตุ ข้อมูลมคอ. 2 ไม่ถูกต้อง',

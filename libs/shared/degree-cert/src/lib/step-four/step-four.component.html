@@ -1,4 +1,4 @@
-<ng-container *ngIf="mode === 'edit' && step4Incorrect">
+<ng-container *ngIf="mode === 'edit' && (step4Incorrect && step4Incorrect.length)">
   <ksp-uni-warn-incorrect [details]="step4Incorrect"></ksp-uni-warn-incorrect
 ></ng-container>
 

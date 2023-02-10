@@ -51,7 +51,7 @@
       </div>
       <div class="col">
         <label class="form-label">สาขาวิชา</label>
-        <input class="form-control" type="text" formControlName="fieldOfStudy" />
+        <!-- <input class="form-control" type="text" formControlName="fieldOfStudy" /> -->
         <select
           class="form-select"
           formControlName="fieldOfStudy"
@@ -71,7 +71,7 @@
     <div class="row mb-2">
       <div class="col">
         <label class="form-label">วิชาเอก</label>
-        <input class="form-control" type="text" formControlName="major" />
+        <!-- <input class="form-control" type="text" formControlName="major" /> -->
         <select
           class="form-select"
           formControlName="major"
@@ -86,7 +86,7 @@
 
       <div class="col">
         <label class="form-label">แขนงวิชา</label>
-        <input class="form-control" type="text" formControlName="subject" />
+        <!-- <input class="form-control" type="text" formControlName="subject" /> -->
         <select class="form-select" formControlName="subject">
           <option value="null" selected disabled hidden>กรุณาเลือก</option>
           <option *ngFor="let item of subjectOptions" [value]="item?.value">
