@@ -11,6 +11,7 @@ import {
   SchoolRequestSubType,
   SchoolRequestType,
   SchoolRewardType,
+  SelfPrefixTh,
 } from '@ksp/shared/constant';
 import { PdfRenderComponent } from '@ksp/shared/dialog';
 import {
@@ -224,7 +225,9 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     const date = new Date(element.licensestartdate || '');
     const thai = thaiDate(date);
     const [day, month, year] = thai.split(' ');
-    const fulldateth = `${changeToThaiNumber(day)} เดือน ${month} พ.ศ. ${changeToThaiNumber(year)}`;
+    const fulldateth = `${changeToThaiNumber(
+      day
+    )} เดือน ${month} พ.ศ. ${changeToThaiNumber(year)}`;
     const fulldateen = `${day} Day of ${changeToEnglishMonth(month)} B.E. ${
       parseInt(year) - 543
     }`;
@@ -455,9 +458,11 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       id13,
     ] = element?.idcardno?.split('') ?? [];
 
-    let approve1 = false;
+    /* let approve1 = false;
     let approve2 = false;
-    let approve3 = false;
+    let approve3 = false; */
+
+    let approvetimes = '';
 
     this.requestService
       .getTempLicenseHistory(element.idcardno)
@@ -465,14 +470,15 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
         this.tempLicenseHistory = res;
         this.tempLicenseRequestTimes =
           (this.tempLicenseHistory?.length || 0) + 1;
+        approvetimes = String(this.tempLicenseRequestTimes);
 
-        if (Number(this.tempLicenseRequestTimes) === 1) {
+        /* if (Number(this.tempLicenseRequestTimes) === 1) {
           approve1 = true;
         } else if (Number(this.tempLicenseRequestTimes) === 2) {
           approve2 = true;
         } else if (Number(this.tempLicenseRequestTimes) === 3) {
           approve3 = true;
-        }
+        } */
       });
 
     const position = element.position;
@@ -598,8 +604,30 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     }
 
     const nameen = element.firstnameen + ' ' + element.lastnameen;
+    let prefixth = '';
+    //console.log(' element.prefixth= ', element.prefixth);
+    if (element.prefixth === '1') {
+      prefixth = 'นาย';
+    } else if (element.prefixth === '2') {
+      prefixth = 'นาง';
+    } else if (element.prefixth === '3') {
+      prefixth = 'นางสาว';
+    } else if (element.prefixth === '4') {
+      prefixth = 'นางหรือนางสาว';
+    } else if (element.prefixth === '5') {
+      prefixth = 'ท่านผู้หญิง';
+    } else if (element.prefixth === '6') {
+      prefixth = 'หม่อมหลวง';
+    } else if (element.prefixth === '7') {
+      prefixth = 'หม่อมราชวงศ์';
+    } else if (element.prefixth === '8') {
+      prefixth = 'หม่อมเจ้า';
+    } else {
+      prefixth = 'ไม่ระบุ';
+    }
+
     const name_full =
-      element.prefixth + ' ' + element.firstnameth + ' ' + element.lastnameth;
+      prefixth + ' ' + element.firstnameth + ' ' + element.lastnameth;
 
     let hiringStartDate = '';
     let hiringEndDate = '';
@@ -994,9 +1022,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
               id11,
               id12,
               id13,
-              approve1,
-              approve2,
-              approve3,
+              approvetimes,
               degreename1,
               institution1,
               major1,
