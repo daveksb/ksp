@@ -231,8 +231,54 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     const fulldateen = `${day} Day of ${changeToEnglishMonth(month)} B.E. ${
       parseInt(year) - 543
     }`;
-    const name = element.firstnameth + ' ' + element.lastnameth;
-    const nameen = element.firstnameen + ' ' + element.lastnameen;
+
+    let prefixen = '';
+    let prefixth = '';
+
+    if (element.prefixen === '1') {
+      prefixen = 'MR.';
+    } else if (element.prefixen === '2') {
+      prefixen = 'MRS.';
+    } else if (element.prefixen === '3') {
+      prefixen = 'MISS.';
+    } else if (element.prefixen === '4') {
+      prefixen = 'MS.';
+    } else if (element.prefixen === '5') {
+      prefixen = 'LADY';
+    } else if (element.prefixen === '6') {
+      prefixen = 'M.L.';
+    } else if (element.prefixen === '7') {
+      prefixen = 'M.R.';
+    } else if (element.prefixen === '8') {
+      prefixen = 'M.C.';
+    } else {
+      prefixen = 'Not Indentified';
+    }
+    const nameen =
+      prefixen + ' ' + element.firstnameen + ' ' + element.lastnameen;
+
+    if (element.prefixth === '1') {
+      prefixth = 'นาย';
+    } else if (element.prefixth === '2') {
+      prefixth = 'นาง';
+    } else if (element.prefixth === '3') {
+      prefixth = 'นางสาว';
+    } else if (element.prefixth === '4') {
+      prefixth = 'นางหรือนางสาว';
+    } else if (element.prefixth === '5') {
+      prefixth = 'ท่านผู้หญิง';
+    } else if (element.prefixth === '6') {
+      prefixth = 'หม่อมหลวง';
+    } else if (element.prefixth === '7') {
+      prefixth = 'หม่อมราชวงศ์';
+    } else if (element.prefixth === '8') {
+      prefixth = 'หม่อมเจ้า';
+    } else {
+      prefixth = 'ไม่ระบุ';
+    }
+    const name =
+      prefixth + ' ' + element.firstnameth + ' ' + element.lastnameth;
+
     const start = thaiDate(startDate);
     const end = thaiDate(endDate);
     const startth = changeToThaiNumber(start);

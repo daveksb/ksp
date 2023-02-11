@@ -51,7 +51,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'careertype',
             options: {
-              x: 120,
+              x: 140,
               y: 604,
               size: defaultSize,
               color: black,
@@ -60,7 +60,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'careertypeen',
             options: {
-              x: 120,
+              x: 140,
               y: 585,
               size: defaultSize,
               color: black,
@@ -78,7 +78,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'careertypeen',
             options: {
-              x: 425,
+              x: 440,
               y: 420,
               size: defaultSize,
               color: black,
@@ -120,6 +120,26 @@ export const kspPdfMapping: IKspPdfMapping[] = [
               color: black,
             },
           },
+
+          {
+            key: 'schoolname',
+            options: {
+              x: 115,
+              y: 530,
+              size: defaultSize,
+              color: black,
+            },
+          },
+          {
+            key: 'schoolname',
+            options: {
+              x: 115,
+              y: 511,
+              size: defaultSize,
+              color: black,
+            },
+          },
+
           {
             key: 'schoolapprovename',
             options: {
