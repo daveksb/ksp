@@ -603,7 +603,33 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       }
     }
 
+    let prefixen = '';
+
+    if (element.prefixen === '1') {
+      prefixen = 'MR.';
+    } else if (element.prefixen === '2') {
+      prefixen = 'MRS.';
+    } else if (element.prefixen === '3') {
+      prefixen = 'MISS.';
+    } else if (element.prefixen === '4') {
+      prefixen = 'MS.';
+    } else if (element.prefixen === '5') {
+      prefixen = 'LADY';
+    } else if (element.prefixen === '6') {
+      prefixen = 'M.L.';
+    } else if (element.prefixen === '7') {
+      prefixen = 'M.R.';
+    } else if (element.prefixen === '8') {
+      prefixen = 'M.C.';
+    } else {
+      prefixen = 'Not Indentified';
+    }
+
     const nameen = element.firstnameen + ' ' + element.lastnameen;
+
+    const nameen_full =
+      prefixen + ' ' + element.firstnameen + ' ' + element.lastnameen;
+
     let prefixth = '';
     //console.log(' element.prefixth= ', element.prefixth);
     if (element.prefixth === '1') {
@@ -651,7 +677,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     let label4 = '';
     let reasonDetail = '';
     let reasonDetail2 = '';
-    let reasonDetail3 = '';
+    /* let reasonDetail3 = ''; */
 
     if (element.hiringinfo) {
       const reason = JSON.parse(element.reasoninfo || '');
@@ -684,15 +710,17 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
           }
         }
         if (schReason[3] === true) {
-          label4 = 'และ' + reason.schoolOtherDetail;
+          label4 = 'อื่นๆ' + '(' + reason.schoolOtherDetail + ')';
         }
-        reasonDetail = label1;
-        if (element.careertype !== '5') {
+
+        reasonDetail = label1 + label3;
+        reasonDetail2 = label2 + label4;
+        /* if (element.careertype !== '5') {
           reasonDetail2 = label2;
           reasonDetail3 = label3 + label4;
         } else {
           reasonDetail2 = label2 + label3 + label4;
-        }
+        } */
       }
     }
 
@@ -1042,6 +1070,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
               graduateDate3,
               grade3,
               nameen,
+              nameen_full,
               name_full,
               managername,
               managerposition,
@@ -1056,7 +1085,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
               levelName,
               reasonDetail,
               reasonDetail2,
-              reasonDetail3,
+              /* reasonDetail3, */
               file1_thai,
               file2_thai,
               file4_thai,
