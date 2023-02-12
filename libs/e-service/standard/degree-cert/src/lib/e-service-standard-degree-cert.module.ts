@@ -35,6 +35,7 @@ import {
 import { RouterModule } from '@angular/router';
 import {
   FormApproveMeetingRecordComponent,
+  FormFollowUpRecordComponent,
   FormMeetingRecordComponent,
 } from '@ksp/e-service/ethics/form';
 import { EServiceDegreeCertApprovedListComponent } from './list-approved/e-service-degree-cert-list-approved.component';
@@ -72,6 +73,7 @@ import { FollowUpComponent } from './follow-up/follow-up.component';
     FinalResultInfoComponent,
     ReactiveFormsModule,
     FormMeetingRecordComponent,
+    FormFollowUpRecordComponent,
     DegreeCertSearchComponent,
     DegreeCertApprovedSearchComponent,
     MatDatepickerModule,

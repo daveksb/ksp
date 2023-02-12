@@ -1,7 +1,7 @@
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FileUploadComponent } from '@ksp/shared/form/file-upload';
+import { FileMultiUploadComponent, FileUploadComponent } from '@ksp/shared/form/file-upload';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { providerFactory } from '@ksp/shared/utility';
@@ -13,7 +13,7 @@ import { PdfViewerComponent } from '@ksp/shared/dialog';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-  selector: 'e-service-form-meeting-record',
+  selector: 'e-service-form-followup-record',
   standalone: true,
   imports: [
     CommonModule,
@@ -21,19 +21,19 @@ import { MatDialog } from '@angular/material/dialog';
     ReactiveFormsModule,
     MatDatepickerModule,
     SharedFormOthersModule,
+    FileMultiUploadComponent
   ],
-  template: ` <p>form-meeting-record works!</p> `,
-  templateUrl: './form-meeting-record.component.html',
-  styleUrls: ['./form-meeting-record.component.scss'],
-  providers: providerFactory(FormMeetingRecordComponent),
+  template: ` <p>form-followup-record works!</p> `,
+  templateUrl: './form-followup-record.component.html',
+  styleUrls: ['./form-followup-record.component.scss'],
+  providers: providerFactory(FormFollowUpRecordComponent),
 })
-export class FormMeetingRecordComponent extends KspFormBaseComponent {
+export class FormFollowUpRecordComponent extends KspFormBaseComponent {
   override form = this.fb.group({
-    reasonTimes: ['', Validators.required],
-    date: ['', Validators.required],
-    boardType: [],
-    boardName: ['', Validators.required],
-    chairmanName: ['', Validators.required],
+    schoolname: ['', Validators.required],
+    followdate: ['', Validators.required],
+    resultdate: ['', Validators.required],
+    followresult: ['', Validators.required],
     file: [[], Validators.required],
   });
   uniqueNo = '';
@@ -64,8 +64,9 @@ export class FormMeetingRecordComponent extends KspFormBaseComponent {
         this.boardOption = res;
       });
   }
+
   onUploadComplete(evt: any) {
-    this.form.controls.file.setValue(evt);
+    this.form.controls.file.setValue(evt.files);
   }
 
   view() {

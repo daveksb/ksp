@@ -50,7 +50,7 @@
       </div>
       <div class="col">
         <label class="form-label">สถาบัน / มหาวิทยาลัย </label>
-        <select class="form-select" formControlName="institutionName" [attr.disabled]="true">
+        <select class="form-select" formControlName="institutionName" [attr.disabled]="systemType === 'uni' ? true : null">
           <option value="null" disabled selected hidden>กรุณาเลือก</option>
           <option *ngFor="let item of uniUniversityOption" [value]="item.value">
             {{ item.label }}
@@ -60,7 +60,7 @@
     </div>
 
     <div class="row mb-2">
-      <div class="col">
+      <div class="col-6">
         <label class="form-label">ระดับปริญญาที่เสนอขอรับรอง </label>
         <select class="form-select" formControlName="submitDegreeLevel">
           <option value="null" disabled selected hidden>กรุณาเลือก</option>
@@ -69,7 +69,7 @@
           </option>
         </select>
       </div>
-      <div class="col">
+      <div class="col-6" *ngIf="subType === 'all'">
         <label class="form-label">สถานะหลักสูตร </label>
         <select class="form-select" formControlName="courseStatus">
           <option value="null" disabled selected hidden>กรุณาเลือก</option>
@@ -77,10 +77,18 @@
           <option value="2">ปรับปรุง</option>
         </select>
       </div>
+      <div class="col-6" *ngIf="subType === 'followup'">
+        <label class="form-label">รหัสรับรอง</label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="degreeapprovecode"
+        />
+      </div>
     </div>
 
-    <div class="row mb-3">
-      <div class="col">
+    <div class="row mb-3" *ngIf="subType === 'all'">
+      <div class="col-6">
         <label class="form-label">สถานะตรวจสอบ </label>
         <select
           class="form-select"
@@ -93,7 +101,7 @@
           </option>
         </select>
       </div>
-      <div class="col">
+      <div class="col-6">
         <label class="form-label">สถานะรับรอง </label>
         <select class="form-select" formControlName="approveStatus">
           <option value="null" disabled selected hidden>กรุณาเลือก</option>

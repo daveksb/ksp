@@ -7,7 +7,7 @@ import { KspPaginationComponent, ListData } from '@ksp/shared/interface';
 import { UniInfoService } from '@ksp/shared/service';
 import { map, Subject } from 'rxjs';
 import { FormBuilder } from '@angular/forms';
-import { thaiDate } from '@ksp/shared/utility';
+import { formatRequestNo, thaiDate } from '@ksp/shared/utility';
 import { EUniApproveProcess } from '@ksp/shared/constant';
 import _ from 'lodash';
 import moment from 'moment';
@@ -38,6 +38,8 @@ export class EServiceDegreeCertListComponent
   });
   isLoading: Subject<boolean> = this.loaderService.isLoading;
   header = 'รายการขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา';
+  processType: any;
+  subTypeSearch = '';
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -97,16 +99,38 @@ export class EServiceDegreeCertListComponent
         /**
          * show action buttons if process = consider || approve
          */
-        this.showActionButtons = [3, 4, 5, 6].includes(Number(res.get('type')));
+        this.processType = Number(res.get('type'));
+        this.showActionButtons = [3, 6].includes(Number(res.get('type')));
         this.showColumnSelect =
-          Number(res.get('type')) == 1 || !res.get('type');
+          Number(res.get('type')) == 1 || Number(res.get('type')) == 4 || !res.get('type');
+        this.subTypeSearch = this.processType == '6' ? 'followup' : 'all'
       }
       this.pageType = Number(res.get('processId'));
-      if (this.pageType == 0) this.header = 'รายการขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา';
-      if (this.pageType == 1) this.header = 'ประเมินหลักสูตรและโครงสร้างหลักสูตร';
-      if (this.pageType == 2) this.header = 'พิจารณาและออกใบรับรองปริญญาและประกาศนียบัตร';
-      if (this.pageType == 3) this.header = 'การติดตามเชิงประจักษ์';
-
+      if (this.pageType == 0) {
+        this.header = 'รายการขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา';
+        this.form.controls.search.patchValue({
+          verifyStatus: '1'
+        });
+      };
+      if (this.pageType == 1) {
+        this.header = 'ประเมินหลักสูตรและโครงสร้างหลักสูตร';
+        this.form.controls.search.patchValue({
+          verifyStatus: '3'
+        });
+      };
+      if (this.pageType == 2) {
+        this.header = 'พิจารณาและออกใบรับรองปริญญาและประกาศนียบัตร';
+        this.form.controls.search.patchValue({
+          verifyStatus: '4'
+        });
+      };
+      if (this.pageType == 3) {
+        this.header = 'การติดตามเชิงประจักษ์';
+        this.form.controls.search.patchValue({
+          verifyStatus: '6'
+        });
+      };
+      this.search();
       console.log('page type = ', this.pageType);
     });
   }
@@ -130,23 +154,28 @@ export class EServiceDegreeCertListComponent
   getRequest() {
     const {
       institutionNumber,
+      institutionName,
       licenseNumber,
       degreeName,
       date,
       submitDegreeLevel,
       courseStatus,
-      verifyStatus,
-      approveStatus,
+      approveStatus
     } = this.form.controls.search.value as any;
+    let verifystatus = '';
+    if (this.pageType == 0) verifystatus = '1';
+    if (this.pageType == 1) verifystatus = '3';
+    if (this.pageType == 2) verifystatus = '4';
+    if (this.pageType == 3) verifystatus = '6';
     return {
-      uniid: institutionNumber || '',
+      uniid: institutionName || '',
       fulldegreenameth: degreeName || '',
       requestno: licenseNumber || '',
       requestdate: date ? moment(date).format('YYYY-MM-DD') : '',
       coursestatus: courseStatus || '',
       degreelevel: submitDegreeLevel || '',
-      requeststatus: approveStatus || '',
-      requestprocess: verifyStatus || '',
+      status: approveStatus || '',
+      process: verifystatus || '',
       ...this.tableRecord,
     };
   }
@@ -158,12 +187,13 @@ export class EServiceDegreeCertListComponent
         this.pageEvent.length = res.countrow;
         this.dataSource.data = res?.datareturn?.map(
           (item: any, index: number) => {
+            const approvedetail = item?.detail ? JSON.parse(item?.detail) : {};
             return {
               key: item?.id,
               order:
                 this.pageEvent.pageIndex * this.pageEvent.pageSize + ++index,
               // degreeId: item?.requestno,
-              requestno: item?.requestno,
+              requestno: formatRequestNo(item?.requestno),
               date: item?.requestdate
                 ? thaiDate(new Date(item?.requestdate))
                 : '',
@@ -181,6 +211,7 @@ export class EServiceDegreeCertListComponent
               process: item?.process,
               requestType: item?.requesttype,
               status: item?.status,
+              degreeapprovecode: approvedetail?.degreeApproveCode ? approvedetail?.degreeApproveCode : ''
             };
           }
         );

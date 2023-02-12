@@ -178,7 +178,6 @@
                   <thead>
                     <tr>
                       <th scope="col" class="w-50">แผนการรับนักศึกษา (รายปี)</th>
-                      <th scope="col" class="text-center">ชื่อแผน</th>
                       <th scope="col" class="text-center">ปีการศึกษา (พ.ศ)</th>
                       <th scope="col" class="text-center">จำนวนนักศึกษา</th>
                     </tr>
@@ -191,16 +190,6 @@
                           <th scope="row" class="align-middle">
                             {{ item.value.label }}
                           </th>
-                          <td>
-                            <div>
-                              <input
-                                class="form-control text-center"
-                                type="text"
-                                placeholder="กรอกชื่อแผน"
-                                formControlName="planname"
-                              />
-                            </div>
-                          </td>
                           <td>
                             <div>
                               <input
@@ -246,7 +235,6 @@
                   <thead>
                     <tr>
                       <th scope="col" class="text-center">พิจารณา</th>
-                      <th scope="col" class="text-center">ชื่อแผน</th>
                       <th scope="col" class="text-center">ปีการศึกษา (พ.ศ)</th>
                       <th scope="col" class="text-center">จำนวนนักศึกษา</th>
                     </tr>
@@ -261,16 +249,6 @@
                               <input
                                 type="checkbox"
                                 formControlName="consider"
-                              />
-                            </div>
-                          </td>
-                          <td>
-                            <div>
-                              <input
-                                class="form-control text-center"
-                                type="text"
-                                placeholder="กรอกชื่อแผน"
-                                formControlName="planname"
                               />
                             </div>
                           </td>

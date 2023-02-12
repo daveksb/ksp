@@ -1,0 +1,84 @@
+<form [formGroup]="form">
+  <div class="bg-light p-3">
+    <div class="row mb-2">
+      <div class="col-12">
+        <label class="form-label">ชื่อคณะที่ติดตาม</label>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="กรุณากรอก"
+          formControlName="schoolname"
+        />
+      </div>
+      <div class="col-6 mt-2">
+        <label class="form-label">วันที่ติดตาม</label>
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker"
+            autocomplete="off"
+            class="form-control form-date"
+            formControlName="followdate"
+            placeholder="วว/ดด/ปปปป"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </div>
+      </div>
+      <div class="col-6 mt-2">
+        <label class="form-label">วันที่สรุปผล</label>
+        <div class="d-flex align-items-center">
+          <input
+            matInput
+            [matDatepicker]="picker2"
+            autocomplete="off"
+            class="form-control form-date"
+            formControlName="resultdate"
+            placeholder="วว/ดด/ปปปป"
+          />
+          <mat-datepicker-toggle
+            class="button-date"
+            matSuffix
+            [for]="picker2"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </div>
+      </div>
+      <div class="col-12 mt-2">
+        <label class="form-label">ผลการติดตาม</label>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="กรุณากรอก"
+          formControlName="followresult"
+        />
+      </div>
+    </div>
+
+    <div class="d-flex mt-4">
+      <div class="form-label">เอกสารรายงานผลการติดตาม</div>
+      <div class="ms-2 text-danger">
+        *กรุณาอัพโหลดไฟล์ .pdf และขนาดไม่เกิน 2 MB สามารถอัพโหลดไฟล์ได้มากกว่า 1
+        ไฟล์ต่อรายการ
+      </div>
+    </div>
+    <div class="row" *ngIf="mode === 'edit'">
+      <ksp-file-multi-upload
+        [buttonLabel]="'อัพโหลดไฟล์'"
+        [uniqueTimestamp]="uniqueNo"
+        [showDeleteFile]="true"
+        (uploadComplete)="onUploadComplete($event)"
+      ></ksp-file-multi-upload>
+    </div>
+    <div class="row" *ngIf="mode === 'view'">
+      <div class="col-8">
+        <label class="view__label" (click)="view()">ดูเอกสารแนบ</label>
+      </div>
+    </div>
+    <!-- <ksp-file-upload></ksp-file-upload> -->
+  </div>
+</form>
