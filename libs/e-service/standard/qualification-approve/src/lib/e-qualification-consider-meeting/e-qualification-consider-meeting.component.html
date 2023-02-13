@@ -19,11 +19,13 @@
         </thead>
 
         <tbody>
-          <tr>
-            <td class="detail__table">x</td>
-            <td class="detail__table">x</td>
-            <td class="detail__table">x</td>
-            <td class="detail__table">x</td>
+          <tr *ngFor="let r of kspRequests; let i = index">
+            <td class="detail__table">{{ r.requestno || '' | reqNoFormat }}</td>
+            <td class="detail__table">{{ r.requestdate | thaiDate }}</td>
+            <td class="detail__table">
+              {{ r.firstnameth }} {{ r.lastnameth }}
+            </td>
+            <td class="detail__table">{{ r.schoolname }}</td>
           </tr>
         </tbody>
       </table>
