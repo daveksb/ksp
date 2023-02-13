@@ -36,6 +36,7 @@
           <button
             type="button"
             class="btn bg-orange bg-opacity-25 text-orange"
+            [disabled]="selection.isEmpty()"
             (click)="createGroup()"
           >
             บันทึกมติที่ประชุม

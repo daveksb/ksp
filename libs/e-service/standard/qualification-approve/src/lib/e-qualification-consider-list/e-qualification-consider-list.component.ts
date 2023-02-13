@@ -301,10 +301,15 @@ export class EQualificationConsiderListComponent implements AfterViewInit {
 
   createGroup() {
     //console.log('this.selection.selected = ', this.selection.selected);
-    localForage.setItem(
-      'qualification-meeting-result',
-      this.selection.selected
+    setTimeout(
+      () =>
+        localForage.setItem(
+          'qualification-meeting-result',
+          this.selection.selected
+        ),
+      1
     );
+
     this.router.navigate(['/qualification-approve', 'consider-meeting']);
   }
 }
