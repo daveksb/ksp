@@ -22,6 +22,7 @@ import {
   ERequestService,
   LoaderService,
 } from '@ksp/shared/service';
+import { CheckHistoryComponent } from '@ksp/shared/ui';
 import {
   checkProcess,
   schoolMapRequestType,
@@ -145,9 +146,11 @@ export class ETempLicenseListComponent implements AfterViewInit {
     this.eRequestService.getApproveHistory(req.id || '').subscribe((res) => {
       if (res && res.length) {
         console.log('res = ', res);
-        /* this.approveHistory = this.approveHistory.map((h: any) => {
-          return { ...h, ...{ detail: JSON.parse(h.detail) } };
-        }); */
+
+        this.dialog.open(CheckHistoryComponent, {
+          width: '1200px',
+          data: res,
+        });
       }
     });
   }
