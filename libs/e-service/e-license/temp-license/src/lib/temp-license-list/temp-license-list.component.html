@@ -154,7 +154,11 @@
           <ng-container matColumnDef="history">
             <th mat-header-cell *matHeaderCellDef>ประวัติการตรวจสอบ</th>
             <td mat-cell *matCellDef="let element">
-              <i role="button" class="bi bi-eye-fill text-primary fs-5"></i>
+              <i
+                (click)="openHistory(element)"
+                role="button"
+                class="bi bi-eye-fill text-primary fs-5"
+              ></i>
             </td>
           </ng-container>
 
