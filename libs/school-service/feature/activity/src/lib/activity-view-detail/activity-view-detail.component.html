@@ -1,12 +1,17 @@
+<div *ngIf="isLoading | async" class="overlay">
+  <mat-progress-spinner class="spinner" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <ksp-top-nav>
   <span header>
     กิจกรรมพัฒนาตนเอง (หนังสืออนุญาตให้ประกอบวิชาชีพ โดยไม่มีหนังสืออนุญาต)
   </span>
-  <span subHeader>เพิ่มกิจกรรมการพัฒนาตนเอง</span>
+  <span subHeader>ข้อมูลกิจกรรมการพัฒนาตนเอง</span>
 </ksp-top-nav>
 
 <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height-2">
-  <div class="box-header">รายละเอียดกิจกรรมพัฒนาตนเอง</div>
+  <div class="box-header">รายละเอียดข้อมูลกิจกรรมพัฒนาตนเอง</div>
 
   <div class="bg-white p-3">
     <ksp-request-header-info></ksp-request-header-info>
