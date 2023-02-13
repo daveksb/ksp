@@ -15,7 +15,7 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import { ApproveResult } from '@ksp/e-service/e-license/approve-ksp-request';
-import { getCookie, parseJson } from '@ksp/shared/utility';
+import { getCookie } from '@ksp/shared/utility';
 
 @UntilDestroy()
 @Component({

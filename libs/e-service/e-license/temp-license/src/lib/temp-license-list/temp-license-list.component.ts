@@ -22,6 +22,7 @@ import {
   ERequestService,
   LoaderService,
 } from '@ksp/shared/service';
+import { CheckHistoryComponent } from '@ksp/shared/ui';
 import {
   checkProcess,
   schoolMapRequestType,
@@ -137,6 +138,19 @@ export class ETempLicenseListComponent implements AfterViewInit {
       } else {
         this.clearData();
         this.searchNotFound = true;
+      }
+    });
+  }
+
+  openHistory(req: KspRequest) {
+    this.eRequestService.getApproveHistory(req.id || '').subscribe((res) => {
+      if (res && res.length) {
+        console.log('res = ', res);
+
+        this.dialog.open(CheckHistoryComponent, {
+          width: '1200px',
+          data: res,
+        });
       }
     });
   }
@@ -658,5 +672,6 @@ export const column = [
   'updatedate',
   'requestdate',
   'reqDoc',
-  //'license',
+  'license',
+  'history',
 ];
