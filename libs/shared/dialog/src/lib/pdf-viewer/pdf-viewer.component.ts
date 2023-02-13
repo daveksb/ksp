@@ -35,6 +35,10 @@ export class PdfViewerComponent implements OnInit {
       name: 'ขอเอกสารเพิ่มเติม',
       value: 'incomplete',
     },
+    {
+      name: 'ส่งกลับเพื่อแก้ไข',
+      value: 'return',
+    },
   ];
   form = this.fb.group({
     checkResult: this.fb.array([]),

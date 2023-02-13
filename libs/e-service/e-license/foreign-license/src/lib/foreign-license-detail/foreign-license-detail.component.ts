@@ -93,7 +93,10 @@ export class ForeignLicenseDetailComponent implements OnInit {
       } else if (res.status === '3') {
         this.checkedResult = verifyChoices[1].value;
       }
-      //console.log('checkResult = ', this.checkedResult);
+      //console.log('checkResult 2 = ', this.checkedResult);
+      //console.log('detail = ', parseJson(res.detail));
+      const temp: any = { detail: parseJson(res?.detail)?.detail };
+      this.form.controls.verifydetail.patchValue(temp);
     });
   }
 
