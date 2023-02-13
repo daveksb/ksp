@@ -142,6 +142,7 @@ export class ETempLicenseListComponent implements AfterViewInit {
   }
 
   renderPdf(request: KspRequest) {
+    //console.log('request = ', request);
     const date = new Date(request.requestdate || '');
     const pdfType = request.requesttype;
     const pdfSubType = request.careertype;
