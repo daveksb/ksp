@@ -23,7 +23,7 @@ import {
   replaceEmptyWithNull,
   toLowercaseProp,
 } from '@ksp/shared/utility';
-import { FileGroup, SelfRequest } from '@ksp/shared/interface';
+import { FileGroup, mapCheckFile, SelfRequest } from '@ksp/shared/interface';
 import { LicenseFormBaseComponent } from '@ksp/self-service/form';
 import * as _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
@@ -124,9 +124,22 @@ export class LicenseRequestSchoolManagerComponent
 
     if (data.fileinfo) {
       const fileInfo = parseJson(data.fileinfo);
+      const detail = parseJson(data.detail);
       const { edufiles, experiencefiles } = fileInfo;
-      this.eduFiles = edufiles;
-      this.experienceFiles = experiencefiles;
+
+      if (detail?.checkfiles) {
+        const {
+          edufiles: checkEdufiles,
+          experiencefiles: checkExperienceFiles,
+        } = detail.checkfiles;
+        const mapCheckEduFile = mapCheckFile(checkEdufiles);
+        const mapCheckExperienceFile = mapCheckFile(checkExperienceFiles);
+        this.eduFiles = edufiles.map(mapCheckEduFile);
+        this.experienceFiles = experiencefiles.map(mapCheckExperienceFile);
+      } else {
+        this.eduFiles = edufiles;
+        this.experienceFiles = experiencefiles;
+      }
     }
   }
 
