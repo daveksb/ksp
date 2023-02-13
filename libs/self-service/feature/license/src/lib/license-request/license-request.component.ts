@@ -13,7 +13,12 @@ import {
   SelfRequestService,
   LoaderService,
 } from '@ksp/shared/service';
-import { Country, FileGroup, SelfRequest } from '@ksp/shared/interface';
+import {
+  Country,
+  FileGroup,
+  mapCheckFile,
+  SelfRequest,
+} from '@ksp/shared/interface';
 import {
   getCookie,
   parseJson,
@@ -154,11 +159,26 @@ export class LicenseRequestComponent
 
     if (data.fileinfo) {
       const fileInfo = parseJson(data.fileinfo);
-      //console.log(fileInfo);
+      const detail = parseJson(data.detail);
       const { edufiles, experiencefiles, performancefiles } = fileInfo;
-      this.eduFiles = edufiles;
-      this.experienceFiles = experiencefiles;
-      this.performanceFiles = performancefiles;
+
+      if (detail?.checkfiles) {
+        const {
+          edufiles: checkEdufiles,
+          experiencefiles: checkExperienceFiles,
+          performancefiles: checkPerformanceFiles,
+        } = detail.checkfiles;
+        const mapCheckEduFile = mapCheckFile(checkEdufiles);
+        const mapCheckExperienceFile = mapCheckFile(checkExperienceFiles);
+        const mapCheckPerformanceFile = mapCheckFile(checkPerformanceFiles);
+        this.eduFiles = edufiles.map(mapCheckEduFile);
+        this.experienceFiles = experiencefiles.map(mapCheckExperienceFile);
+        this.performanceFiles = performancefiles.map(mapCheckPerformanceFile);
+      } else {
+        this.eduFiles = edufiles;
+        this.experienceFiles = experiencefiles;
+        this.performanceFiles = performancefiles;
+      }
     }
   }
 

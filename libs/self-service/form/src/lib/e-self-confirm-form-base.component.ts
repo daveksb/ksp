@@ -137,6 +137,7 @@ export abstract class ESelfConfirmFormBaseComponent implements OnInit {
       returndate: form.returndate,
       checkdetail: this.saveData.checkDetail,
       checkresult: form.result,
+      checkfiles: this.saveData.checkFiles,
     };
 
     const payload: KspApprovePayload = {
