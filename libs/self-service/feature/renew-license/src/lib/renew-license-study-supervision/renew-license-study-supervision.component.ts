@@ -18,7 +18,12 @@ import {
   LoaderService,
 } from '@ksp/shared/service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { FileGroup, KspRequest, SelfRequest } from '@ksp/shared/interface';
+import {
+  FileGroup,
+  KspRequest,
+  mapCheckFile,
+  SelfRequest,
+} from '@ksp/shared/interface';
 import {
   getCookie,
   parseJson,
@@ -170,10 +175,26 @@ export class RenewLicenseStudySupervisionComponent
 
     if (data.fileinfo) {
       const fileInfo = parseJson(data.fileinfo);
+      const detail = parseJson(data.detail);
       const { performancefiles, licensefiles, performancefiles2 } = fileInfo;
-      this.workingInfoFiles = performancefiles;
-      this.workingInfoFiles2 = performancefiles2;
-      this.licenseFiles = licensefiles;
+
+      if (detail?.checkfiles) {
+        const {
+          performancefiles: checkPerformanceFiles,
+          performancefiles2: checkPerformanceFiles2,
+          licensefiles: checkLicenseFiles,
+        } = detail.checkfiles;
+        const mapPerformanceFiles = mapCheckFile(checkPerformanceFiles);
+        const mapPerformanceFiles2 = mapCheckFile(checkPerformanceFiles2);
+        const mapLicenseFiles = mapCheckFile(checkLicenseFiles);
+        this.workingInfoFiles = performancefiles.map(mapPerformanceFiles);
+        this.workingInfoFiles2 = performancefiles2.map(mapPerformanceFiles2);
+        this.licenseFiles = licensefiles.map(mapLicenseFiles);
+      } else {
+        this.workingInfoFiles = performancefiles;
+        this.workingInfoFiles2 = performancefiles2;
+        this.licenseFiles = licensefiles;
+      }
     }
   }
 

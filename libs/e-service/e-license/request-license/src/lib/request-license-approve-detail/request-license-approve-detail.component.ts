@@ -203,7 +203,12 @@ export class RequestLicenseApproveDetailComponent
   next() {
     ESelfFormBaseComponent.persistData(
       this.form.controls.checkResult.value,
-      this.requestData
+      this.requestData,
+      {
+        edufiles: this.eduFiles,
+        experiencefiles: this.experienceFiles,
+        performancefiles: this.performanceFiles,
+      }
     );
     this.router.navigate([
       '/request-license',

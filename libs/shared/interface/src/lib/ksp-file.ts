@@ -26,3 +26,11 @@ export interface ImageUpload {
   originalname: string;
   uniquetimestamp: string;
 }
+
+export const mapCheckFile = (fileGroup: FileGroup[]) => (item: FileGroup) => {
+  const checkItem = fileGroup.find((x: FileGroup) => x.name === item.name);
+  return {
+    ...item,
+    checkresult: checkItem ? checkItem.checkresult : null,
+  };
+};

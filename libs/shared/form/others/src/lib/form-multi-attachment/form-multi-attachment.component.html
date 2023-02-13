@@ -18,6 +18,7 @@
           <tr style="height: 60px; border-top: 1px solid #eceef2">
             <th class="ps-3 py-2 text-black">
               {{ group.name }}
+              <ng-container *ngIf="group.checkresult"> - {{ group.checkresult | fileComment }}</ng-container>
               <ng-container *ngFor="let file of group.files; index as j">
                 <div class="d-flex align-items-center flex-row">
                   <div

@@ -21,6 +21,7 @@ import { FileUploadComponent } from '@ksp/shared/form/file-upload';
 import { FormMultiAttachmentComponent } from './form-multi-attachment/form-multi-attachment.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { QualificationExperienceInfoComponent } from './qualification-experience-info/qualification-experience-info.component';
+import { FileCommentPipe } from '@ksp/shared/pipe';
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import { QualificationExperienceInfoComponent } from './qualification-experience
     RequestHeaderInfoComponent,
     FileUploadComponent,
     AddRowButtonComponent,
+    FileCommentPipe,
   ],
   declarations: [
     FormAddressComponent,

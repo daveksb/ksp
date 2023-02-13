@@ -232,7 +232,12 @@ export class RenewLicenseDetailComponent
   next() {
     ESelfFormBaseComponent.persistData(
       this.form.controls.checkResult.value,
-      this.requestData
+      this.requestData,
+      {
+        licensefiles: this.licenseFiles,
+        performancefiles: this.workingInfoFiles,
+        performancefiles2: this.workingInfoFiles2,
+      }
     );
     this.router.navigate(['/renew-license', 'approve-confirm', this.requestId]);
   }
