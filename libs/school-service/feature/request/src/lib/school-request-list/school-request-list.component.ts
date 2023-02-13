@@ -1046,7 +1046,6 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       const managername =
         res.thprefixname + ' ' + res.thname + ' ' + res.thfamilyname;
       const managerposition = res.thposition;
-      //console.log(res);
 
       if (element.requesttype === '3') {
         this.dialog.open(PdfRenderComponent, {

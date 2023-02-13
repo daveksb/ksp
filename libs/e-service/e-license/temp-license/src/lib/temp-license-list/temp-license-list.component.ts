@@ -11,7 +11,10 @@ import {
   SchoolRequestSubType,
   SchoolRequestType,
 } from '@ksp/shared/constant';
-import { PdfRenderComponent } from '@ksp/shared/dialog';
+import {
+  CompleteDialogComponent,
+  PdfRenderComponent,
+} from '@ksp/shared/dialog';
 import {
   EsSearchPayload,
   KspRequest,
@@ -157,6 +160,17 @@ export class ETempLicenseListComponent implements AfterViewInit {
         this.dialog.open(CheckHistoryComponent, {
           width: '50vw',
           data: res,
+        });
+      } else {
+        const dialog = this.dialog.open(CompleteDialogComponent, {
+          data: {
+            header: `ไม่พบข้อมูล`,
+            btnLabel: 'ตกลง',
+          },
+        });
+
+        dialog.componentInstance.completed.subscribe(() => {
+          this.dialog.closeAll();
         });
       }
     });
