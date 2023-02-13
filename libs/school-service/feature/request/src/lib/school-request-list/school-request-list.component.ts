@@ -11,6 +11,7 @@ import {
   SchoolRequestSubType,
   SchoolRequestType,
   SchoolRewardType,
+  SelfPrefixTh,
 } from '@ksp/shared/constant';
 import { PdfRenderComponent } from '@ksp/shared/dialog';
 import {
@@ -224,12 +225,60 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     const date = new Date(element.licensestartdate || '');
     const thai = thaiDate(date);
     const [day, month, year] = thai.split(' ');
-    const fulldateth = `${changeToThaiNumber(day)} เดือน ${month} พ.ศ. ${year}`;
+    const fulldateth = `${changeToThaiNumber(
+      day
+    )} เดือน ${month} พ.ศ. ${changeToThaiNumber(year)}`;
     const fulldateen = `${day} Day of ${changeToEnglishMonth(month)} B.E. ${
       parseInt(year) - 543
     }`;
-    const name = element.firstnameth + ' ' + element.lastnameth;
-    const nameen = element.firstnameen + ' ' + element.lastnameen;
+
+    let prefixen = '';
+    let prefixth = '';
+
+    if (element.prefixen === '1') {
+      prefixen = 'MR.';
+    } else if (element.prefixen === '2') {
+      prefixen = 'MRS.';
+    } else if (element.prefixen === '3') {
+      prefixen = 'MISS.';
+    } else if (element.prefixen === '4') {
+      prefixen = 'MS.';
+    } else if (element.prefixen === '5') {
+      prefixen = 'LADY';
+    } else if (element.prefixen === '6') {
+      prefixen = 'M.L.';
+    } else if (element.prefixen === '7') {
+      prefixen = 'M.R.';
+    } else if (element.prefixen === '8') {
+      prefixen = 'M.C.';
+    } else {
+      prefixen = 'Not Indentified';
+    }
+    const nameen =
+      prefixen + ' ' + element.firstnameen + ' ' + element.lastnameen;
+
+    if (element.prefixth === '1') {
+      prefixth = 'นาย';
+    } else if (element.prefixth === '2') {
+      prefixth = 'นาง';
+    } else if (element.prefixth === '3') {
+      prefixth = 'นางสาว';
+    } else if (element.prefixth === '4') {
+      prefixth = 'นางหรือนางสาว';
+    } else if (element.prefixth === '5') {
+      prefixth = 'ท่านผู้หญิง';
+    } else if (element.prefixth === '6') {
+      prefixth = 'หม่อมหลวง';
+    } else if (element.prefixth === '7') {
+      prefixth = 'หม่อมราชวงศ์';
+    } else if (element.prefixth === '8') {
+      prefixth = 'หม่อมเจ้า';
+    } else {
+      prefixth = 'ไม่ระบุ';
+    }
+    const name =
+      prefixth + ' ' + element.firstnameth + ' ' + element.lastnameth;
+
     const start = thaiDate(startDate);
     const end = thaiDate(endDate);
     const startth = changeToThaiNumber(start);
@@ -248,7 +297,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       const schoolname = res.schoolname;
       const bureauname = res.bureauname;
       const schoolapprovename = 'ผู้อํานวยการสถานศึกษา';
-      const schoolapprovenameen = 'director of the educational institution';
+      const schoolapprovenameen = 'Director of the Educational Institution';
       this.dialog.open(PdfRenderComponent, {
         width: '1200px',
         height: '100vh',
@@ -455,9 +504,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       id13,
     ] = element?.idcardno?.split('') ?? [];
 
-    let approve1 = false;
-    let approve2 = false;
-    let approve3 = false;
+    let approvetimes = '';
 
     this.requestService
       .getTempLicenseHistory(element.idcardno)
@@ -465,21 +512,14 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
         this.tempLicenseHistory = res;
         this.tempLicenseRequestTimes =
           (this.tempLicenseHistory?.length || 0) + 1;
-
-        if (Number(this.tempLicenseRequestTimes) === 1) {
-          approve1 = true;
-        } else if (Number(this.tempLicenseRequestTimes) === 2) {
-          approve2 = true;
-        } else if (Number(this.tempLicenseRequestTimes) === 3) {
-          approve3 = true;
-        }
+        approvetimes = String(this.tempLicenseRequestTimes);
       });
 
     const position = element.position;
     const eduinfo = JSON.parse(element.eduinfo || '');
     const email = element.email;
     const nationality = element.nationality;
-    const birthdate = element.birthdate;
+    const birthdate = thaiDate(new Date(element.birthdate || ''));
     const passportno = element.passportno;
 
     const edu1 = eduinfo.find((item: any) => {
@@ -492,7 +532,10 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     const degreename1 = edu1?.degreeName ?? '';
     const institution1 = edu1?.institution ?? '';
     const major1 = edu1?.major ?? '';
-    const graduateDate1 = edu1?.graduateDate ?? '';
+    let graduateDate1 = '';
+    if (edu1?.graduateDate) {
+      graduateDate1 = thaiDate(new Date(edu1?.graduateDate ?? ''));
+    }
     const grade1 = edu1?.grade ?? '';
 
     let degree1 = false;
@@ -510,7 +553,10 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     const degreename2 = edu2?.degreeName ?? '';
     const institution2 = edu2?.institution ?? '';
     const major2 = edu2?.major ?? '';
-    const graduateDate2 = edu2?.graduateDate ?? '';
+    let graduateDate2 = '';
+    if (edu2?.graduateDate) {
+      graduateDate2 = thaiDate(new Date(edu2?.graduateDate ?? ''));
+    }
     const grade2 = edu2?.grade ?? '';
 
     let degree2 = false;
@@ -528,14 +574,17 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     const degreename3 = edu3?.degreeName ?? '';
     const institution3 = edu3?.institution ?? '';
     const major3 = edu3?.major ?? '';
-    const graduateDate3 = edu3?.graduateDate ?? '';
+    let graduateDate3 = '';
+    if (edu3?.graduateDate) {
+      graduateDate3 = thaiDate(new Date(edu3?.graduateDate ?? ''));
+    }
     const grade3 = edu3?.grade ?? '';
 
     let degree3 = false;
     if (degreename3) {
       degree3 = true;
     }
-    console.log('eduinfo = ', eduinfo);
+    //console.log('eduinfo = ', eduinfo);
 
     const admission1 = edu1?.admissionDate ?? '';
     const country1 = edu1?.country ?? '';
@@ -595,7 +644,57 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       }
     }
 
+    let prefixen = '';
+
+    if (element.prefixen === '1') {
+      prefixen = 'MR.';
+    } else if (element.prefixen === '2') {
+      prefixen = 'MRS.';
+    } else if (element.prefixen === '3') {
+      prefixen = 'MISS.';
+    } else if (element.prefixen === '4') {
+      prefixen = 'MS.';
+    } else if (element.prefixen === '5') {
+      prefixen = 'LADY';
+    } else if (element.prefixen === '6') {
+      prefixen = 'M.L.';
+    } else if (element.prefixen === '7') {
+      prefixen = 'M.R.';
+    } else if (element.prefixen === '8') {
+      prefixen = 'M.C.';
+    } else {
+      prefixen = 'Not Indentified';
+    }
+
     const nameen = element.firstnameen + ' ' + element.lastnameen;
+
+    const nameen_full =
+      prefixen + ' ' + element.firstnameen + ' ' + element.lastnameen;
+
+    let prefixth = '';
+    //console.log(' element.prefixth= ', element.prefixth);
+    if (element.prefixth === '1') {
+      prefixth = 'นาย';
+    } else if (element.prefixth === '2') {
+      prefixth = 'นาง';
+    } else if (element.prefixth === '3') {
+      prefixth = 'นางสาว';
+    } else if (element.prefixth === '4') {
+      prefixth = 'นางหรือนางสาว';
+    } else if (element.prefixth === '5') {
+      prefixth = 'ท่านผู้หญิง';
+    } else if (element.prefixth === '6') {
+      prefixth = 'หม่อมหลวง';
+    } else if (element.prefixth === '7') {
+      prefixth = 'หม่อมราชวงศ์';
+    } else if (element.prefixth === '8') {
+      prefixth = 'หม่อมเจ้า';
+    } else {
+      prefixth = 'ไม่ระบุ';
+    }
+
+    const name_full =
+      prefixth + ' ' + element.firstnameth + ' ' + element.lastnameth;
 
     let hiringStartDate = '';
     let hiringEndDate = '';
@@ -604,8 +703,8 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       const hiring = JSON.parse(element.hiringinfo || '');
 
       if (hiring) {
-        hiringStartDate = hiring.startDate;
-        hiringEndDate = hiring.endDate;
+        hiringStartDate = thaiDate(new Date(hiring.startDate));
+        hiringEndDate = thaiDate(new Date(hiring.endDate));
       }
     }
 
@@ -619,7 +718,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     let label4 = '';
     let reasonDetail = '';
     let reasonDetail2 = '';
-    let reasonDetail3 = '';
+    /* let reasonDetail3 = ''; */
 
     if (element.hiringinfo) {
       const reason = JSON.parse(element.reasoninfo || '');
@@ -652,20 +751,22 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
           }
         }
         if (schReason[3] === true) {
-          label4 = 'และ' + reason.schoolOtherDetail;
+          label4 = 'อื่นๆ' + '(' + reason.schoolOtherDetail + ')';
         }
-        reasonDetail = label1;
-        if (element.careertype !== '5') {
+
+        reasonDetail = label1 + label3;
+        reasonDetail2 = label2 + label4;
+        /* if (element.careertype !== '5') {
           reasonDetail2 = label2;
           reasonDetail3 = label3 + label4;
         } else {
           reasonDetail2 = label2 + label3 + label4;
-        }
+        } */
       }
     }
 
-    let file1_thai = false;
-    let file2_thai = false;
+    let file1_foreign = false;
+    /* let file2_thai = false;
     let file4_thai = false;
     let file5_thai = false;
     let file6_thai = false;
@@ -677,7 +778,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     let file11_thai = false;
     let file12_thai = false;
     let file8_manager = false;
-    let file13_manager = false;
+    let file13_manager = false; */
     let file2_foreign = false;
     let file3_foreign = false;
     let file5_foreign = false;
@@ -691,7 +792,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       const tab5 = fileinfo['tab5'];
       const tab6 = fileinfo['tab6'];
 
-      //teacher
+      /* //teacher
       const file1_th = tab6[0];
       if (file1_th.length > 0) {
         file1_thai = true;
@@ -770,9 +871,14 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
         file13_manager = true;
       }
 
-      const file14_mgr = tab6[6];
+      const file14_mgr = tab6[6]; */
 
       //foreign
+      const file1_th = tab6[0];
+      if (file1_th.length > 0) {
+        file1_foreign = true;
+      }
+
       const file2_frgn = tab3[0];
       if (file2_frgn.length > 0) {
         file2_foreign = true;
@@ -937,7 +1043,9 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       const zipcode = res.zipcode;
       const telphone = res.telphone;
       const schoolemail = res.email;
-      //console.log(id12);
+      const managername =
+        res.thprefixname + ' ' + res.thname + ' ' + res.thfamilyname;
+      const managerposition = res.thposition;
 
       if (element.requesttype === '3') {
         this.dialog.open(PdfRenderComponent, {
@@ -987,9 +1095,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
               id11,
               id12,
               id13,
-              approve1,
-              approve2,
-              approve3,
+              approvetimes,
               degreename1,
               institution1,
               major1,
@@ -1009,6 +1115,10 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
               graduateDate3,
               grade3,
               nameen,
+              nameen_full,
+              name_full,
+              managername,
+              managerposition,
               subjectName,
               lv1,
               lv2,
@@ -1020,9 +1130,8 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
               levelName,
               reasonDetail,
               reasonDetail2,
-              reasonDetail3,
-              file1_thai,
-              file2_thai,
+              file1_foreign,
+              /* file2_thai,
               file4_thai,
               file5_thai,
               file6_thai,
@@ -1034,7 +1143,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
               file11_thai,
               file12_thai,
               file8_manager,
-              file13_manager,
+              file13_manager, */
               file2_foreign,
               file3_foreign,
               file5_foreign,

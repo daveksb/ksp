@@ -21,7 +21,7 @@ export class EServiceDegreeCertListComponent
   implements OnInit
 {
   showActionButtons = false;
-  data: DegreeCertInfo[] = [data];
+  data: DegreeCertInfo[] = [];
   dataSource = new MatTableDataSource<DegreeCertInfo>();
   selection = new SelectionModel<DegreeCertInfo>(true, []);
   displayedColumns: string[] = displayedColumns;
@@ -109,21 +109,21 @@ export class EServiceDegreeCertListComponent
       if (this.pageType == 0) {
         this.header = 'รายการขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา';
         this.form.controls.search.patchValue({
-          verifyStatus: '1'
+          verifyStatus: '1',
         });
-      };
+      }
       if (this.pageType == 1) {
         this.header = 'ประเมินหลักสูตรและโครงสร้างหลักสูตร';
         this.form.controls.search.patchValue({
-          verifyStatus: '3'
+          verifyStatus: '3',
         });
-      };
+      }
       if (this.pageType == 2) {
         this.header = 'พิจารณารับรองปริญญาและประกาศนียบัตร';
         this.form.controls.search.patchValue({
-          verifyStatus: '4'
+          verifyStatus: '4',
         });
-      };
+      }
       if (this.pageType == 3) {
         this.header = 'ออกรหัสรับรองปริญญาและประกาศนียบัตร';
         this.form.controls.search.patchValue({
@@ -133,9 +133,9 @@ export class EServiceDegreeCertListComponent
       if (this.pageType == 4) {
         this.header = 'การติดตามเชิงประจักษ์';
         this.form.controls.search.patchValue({
-          verifyStatus: '6'
+          verifyStatus: '6',
         });
-      };
+      }
       this.search();
       console.log('page type = ', this.pageType);
     });
@@ -219,7 +219,9 @@ export class EServiceDegreeCertListComponent
               process: item?.process,
               requestType: item?.requesttype,
               status: item?.status,
-              degreeapprovecode: approvedetail?.degreeApproveCode ? approvedetail?.degreeApproveCode : ''
+              degreeapprovecode: approvedetail?.degreeApproveCode
+                ? approvedetail?.degreeApproveCode
+                : '',
             };
           }
         );
@@ -326,17 +328,3 @@ export interface DegreeCertInfo {
   verify: string;
   consider: string;
 }
-
-export const data: DegreeCertInfo = {
-  // degreeId: 'UNI_VC_64120009',
-  date: '10 ธ.ค. 2564',
-  uni: 'มหาวิทยาลัยภูเก็ต',
-  major: 'คุรุศาสตร์',
-  verifyStatus: 'รับข้อมูล',
-  considerStatus: 'พิจารณา',
-  approveStatus: 'พิจารณา',
-  approveDate: '30 ส.ค. 2564',
-  editDate: '30 ส.ค. 2564',
-  verify: 'ตรวจสอบแล้ว',
-  consider: 'ตรวจสอบแล้ว',
-};

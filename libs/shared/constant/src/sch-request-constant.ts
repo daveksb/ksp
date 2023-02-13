@@ -205,7 +205,7 @@ export const SchoolRequestProcess: SchRequestProcess[] = [
   {
     requestType: 6,
     processId: 2,
-    processName: 'ตรวจสอบเอกสาร',
+    processName: 'ตรวจสอบเอกสาร ลำดับที่ 1',
     status: [
       { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
@@ -215,6 +215,19 @@ export const SchoolRequestProcess: SchRequestProcess[] = [
       { id: 5, sname: 'ส่งคืนและยกเลิก', ename: 'ส่งคืนและยกเลิก' },
     ],
   },
+  /* {
+    requestType: 6,
+    processId: 3,
+    processName: 'ตรวจสอบเอกสาร ลำดับที่ 2',
+    status: [
+      { id: 0, sname: 'ยกเลิก', ename: 'ยกเลิก' },
+      { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
+      { id: 2, sname: 'ปรับแก้ไข/เพิ่มเติม', ename: 'ปรับแก้ไข/เพิ่มเติม' },
+      { id: 3, sname: 'ผ่านการตรวจสอบ', ename: 'ผ่านการตรวจสอบ' },
+      { id: 4, sname: 'ไม่ผ่านการตรวจสอบ', ename: 'ไม่ผ่านการตรวจสอบ' },
+      { id: 5, sname: 'ส่งคืนและยกเลิก', ename: 'ส่งคืนและยกเลิก' },
+    ],
+  }, */
   {
     requestType: 6,
     processId: 3,

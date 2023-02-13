@@ -167,15 +167,15 @@ export const eLicenseMenu: MenuConfig[] = [
   {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'แบบคำขอเลขคุรุสภาสำหรับชาวต่างชาติ',
-    path: '',
-    isExpanded: false,
+    path: '/foreign-license/list',
+    /* isExpanded: false,
     subMenuName: 'foreign-id',
     subMenu: [
       {
         path: '/foreign-license/list',
         label: 'รายการใบคำเลขคุรุสภาสำหรับชาวต่างชาติ',
       },
-    ],
+    ], */
   },
   /* {
     icon: 'assets/images/icon-sidenav/paper.svg',
@@ -239,6 +239,24 @@ export const eLicenseMenu: MenuConfig[] = [
     path: '/xxx',
   },
   {
+    icon: 'assets/images/icon-sidenav/people.svg',
+    label: 'แบบคำขอผู้ใช้งาน',
+    path: '',
+    isExpanded: false,
+    subMenuName: 'user-request',
+    subMenu: [
+      {
+        path: '/self-user/new-user-list',
+        label:
+          'แบบคำขอผู้ใช้งานระบบบริการตนเอง (self Service) สำหรับชาวต่างชาติ',
+      },
+      {
+        path: '/school/new-user',
+        label: 'แบบคำขอผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
+      },
+    ],
+  },
+  /* {
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'แบบคำขอผู้ใช้งานระบบบริการตนเอง (Self Service) สำหรับชาวต่างชาติ',
     path: '/self-user/new-user-list',
@@ -247,7 +265,7 @@ export const eLicenseMenu: MenuConfig[] = [
     icon: 'assets/images/icon-sidenav/paper.svg',
     label: 'แบบคำขอผู้ใช้งานระบบบริการหน่วยงานทางการศึกษา (School Service)',
     path: '/school/new-user',
-  },
+  }, */
   {
     icon: 'assets/images/icon-sidenav/people.svg',
     label: 'บริหารจัดการผู้ใช้งาน',

@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { SelectionModel } from '@angular/cdk/collections';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -19,6 +20,7 @@ import {
 import { ERequestService, LoaderService } from '@ksp/shared/service';
 import { checkProcess, checkStatus, thaiDate } from '@ksp/shared/utility';
 import { Subject } from 'rxjs';
+import localForage from 'localforage';
 
 @Component({
   selector: 'ksp-e-qualification-consider-list',
@@ -35,7 +37,7 @@ export class EQualificationConsiderListComponent implements AfterViewInit {
   displayedColumns: string[] = column2;
   dataSource = new MatTableDataSource<any>();
   searchNotFound = false;
-
+  selection = new SelectionModel<any>(true, []);
   form = this.fb.group({
     search: [{ requesttype: '6', process: '3', status: '1' }],
   });
@@ -298,11 +300,17 @@ export class EQualificationConsiderListComponent implements AfterViewInit {
   }
 
   createGroup() {
+    //console.log('this.selection.selected = ', this.selection.selected);
+    localForage.setItem(
+      'qualification-meeting-result',
+      this.selection.selected
+    );
     this.router.navigate(['/qualification-approve', 'consider-meeting']);
   }
 }
 
 export const column2 = [
+  'select',
   'id',
   'edit',
   'requestno',
@@ -315,4 +323,5 @@ export const column2 = [
   'requestdate',
   'reqDoc',
   //'license',
+  'resultdoc',
 ];

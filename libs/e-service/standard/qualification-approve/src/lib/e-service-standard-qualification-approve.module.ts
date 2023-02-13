@@ -39,6 +39,7 @@ import { EQualificationConsiderMeetingComponent } from './e-qualification-consid
 import { PdfRenderComponent } from '@ksp/shared/dialog';
 import { FormMeetingRecordComponent } from '@ksp/shared/form/license';
 import { EQulificationRosterCreateComponent } from './e-qulification-roster-create/e-qulification-roster-create.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 export const routes: Route[] = [
   {
@@ -104,6 +105,9 @@ export const routes: Route[] = [
     ConsiderKspRequestComponent,
     PdfRenderComponent,
     FormMeetingRecordComponent,
+    MatCheckboxModule,
+    ThaiDatePipe,
+    RequestNoPipe,
   ],
   declarations: [
     EQualificationApproveListComponent,
