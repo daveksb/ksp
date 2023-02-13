@@ -1131,7 +1131,6 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
               levelName,
               reasonDetail,
               reasonDetail2,
-              /* reasonDetail3, */
               file1_thai,
               file2_thai,
               file4_thai,

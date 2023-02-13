@@ -51,7 +51,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'careertype',
             options: {
-              x: 140,
+              x: 150,
               y: 604,
               size: defaultSize,
               color: black,
@@ -60,7 +60,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'careertypeen',
             options: {
-              x: 140,
+              x: 150,
               y: 585,
               size: defaultSize,
               color: black,
@@ -88,7 +88,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'startth',
             options: {
               x: 120,
-              y: 570,
+              y: 568,
               size: defaultSize,
               color: black,
             },
@@ -97,7 +97,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'endth',
             options: {
               x: 270,
-              y: 570,
+              y: 568,
               size: defaultSize,
               color: black,
             },
@@ -106,7 +106,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'starten',
             options: {
               x: 120,
-              y: 550,
+              y: 548,
               size: defaultSize,
               color: black,
             },
@@ -115,7 +115,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'enden',
             options: {
               x: 270,
-              y: 550,
+              y: 548,
               size: defaultSize,
               color: black,
             },
@@ -163,7 +163,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             options: {
               x: 290,
               y: 175,
-              size: defaultSize - 1,
+              size: defaultSize - 2,
               color: black,
             },
           },
@@ -171,8 +171,8 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'fulldateen',
             options: {
               x: 290,
-              y: 155,
-              size: defaultSize - 1,
+              y: 157,
+              size: defaultSize - 2,
               color: black,
             },
           },

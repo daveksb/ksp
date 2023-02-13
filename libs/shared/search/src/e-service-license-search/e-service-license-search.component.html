@@ -30,7 +30,7 @@
         </select>
       </div> -->
 
-      <div class="col">
+      <div class="col-6">
         <label class="form-label">ประเภทวิชาชีพ</label>
         <select class="form-select" formControlName="careertype">
           <option value="null" selected hidden disabled>กรุณาเลือก</option>
@@ -40,7 +40,7 @@
         </select>
       </div>
 
-      <div class="col-5">
+      <div class="col">
         <label class="form-label">ขั้นตอนการดำเนินการ</label>
         <select class="form-select" formControlName="process">
           <option value="null" disabled hidden>กรุณาเลือก</option>
@@ -50,13 +50,11 @@
         </select>
       </div>
 
-      <div class="col-1">
+      <div class="col-auto ps-0">
         <label class="form-label">เร่งด่วน</label>
-        <input
-          class="form-control form-check-input radio mt-2"
-          type="checkbox"
-          formControlName="isurgent"
-        />
+        <div class="d-flex justify-content-center">
+          <input class="my-2" type="checkbox" formControlName="isurgent" />
+        </div>
       </div>
     </div>
 
