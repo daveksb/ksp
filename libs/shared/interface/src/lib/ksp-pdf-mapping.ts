@@ -51,7 +51,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'careertype',
             options: {
-              x: 140,
+              x: 150,
               y: 604,
               size: defaultSize,
               color: black,
@@ -60,7 +60,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'careertypeen',
             options: {
-              x: 140,
+              x: 150,
               y: 585,
               size: defaultSize,
               color: black,
@@ -88,7 +88,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'startth',
             options: {
               x: 120,
-              y: 570,
+              y: 568,
               size: defaultSize,
               color: black,
             },
@@ -97,7 +97,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'endth',
             options: {
               x: 270,
-              y: 570,
+              y: 568,
               size: defaultSize,
               color: black,
             },
@@ -106,7 +106,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'starten',
             options: {
               x: 120,
-              y: 550,
+              y: 548,
               size: defaultSize,
               color: black,
             },
@@ -115,7 +115,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'enden',
             options: {
               x: 270,
-              y: 550,
+              y: 548,
               size: defaultSize,
               color: black,
             },
@@ -163,7 +163,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             options: {
               x: 290,
               y: 175,
-              size: defaultSize - 1,
+              size: defaultSize - 2,
               color: black,
             },
           },
@@ -171,8 +171,8 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'fulldateen',
             options: {
               x: 290,
-              y: 155,
-              size: defaultSize - 1,
+              y: 157,
+              size: defaultSize - 2,
               color: black,
             },
           },
@@ -232,16 +232,16 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             options: {
               x: 175,
               y: 517,
-              size: defaultSize,
+              size: defaultSize - 1,
               color: black,
             },
           },
           {
             key: 'bureauname',
             options: {
-              x: 420,
+              x: 415,
               y: 517,
-              size: defaultSize,
+              size: defaultSize - 1,
               color: black,
             },
           },
@@ -508,7 +508,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             },
           },
           {
-            key: 'graduate1',
+            key: 'graduateDate1',
             options: {
               x: 420,
               y: 213,
@@ -554,7 +554,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             },
           },
           {
-            key: 'graduate2',
+            key: 'graduateDate2',
             options: {
               x: 420,
               y: 110,
@@ -566,7 +566,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             key: 'grade2',
             options: {
               x: 175,
-              y: 115,
+              y: 85,
               size: defaultSize,
               color: black,
             },
@@ -632,7 +632,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             },
           },
           {
-            key: 'graduate3',
+            key: 'graduateDate3',
             options: {
               x: 420,
               y: 699,
@@ -1238,7 +1238,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             },
           },
           {
-            key: 'graduate1',
+            key: 'graduateDate1',
             options: {
               x: 400,
               y: 197,
@@ -1284,7 +1284,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             },
           },
           {
-            key: 'graduate2',
+            key: 'graduateDate2',
             options: {
               x: 415,
               y: 94,
@@ -1356,7 +1356,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             },
           },
           {
-            key: 'graduate3',
+            key: 'graduateDate3',
             options: {
               x: 420,
               y: 693,
@@ -1672,7 +1672,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'bureauname',
             options: {
-              x: 405,
+              x: 400,
               y: 562,
               size: defaultSize - 3,
               color: black,
@@ -1863,7 +1863,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           },
 
           {
-            key: 'admission1',
+            key: 'admissionDate1',
             options: {
               x: 177,
               y: 361,
@@ -1872,7 +1872,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             },
           },
           {
-            key: 'graduate1',
+            key: 'graduateDate1',
             options: {
               x: 425,
               y: 361,
@@ -1923,9 +1923,9 @@ export const kspPdfMapping: IKspPdfMapping[] = [
           {
             key: 'reasonDetail',
             options: {
-              x: 250,
+              x: 240,
               y: 273,
-              size: defaultSize,
+              size: defaultSize - 1,
               color: black,
             },
           },
@@ -1934,7 +1934,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
             options: {
               x: 75,
               y: 250,
-              size: defaultSize,
+              size: defaultSize - 1,
               color: black,
             },
           },
@@ -1951,7 +1951,7 @@ export const kspPdfMapping: IKspPdfMapping[] = [
         ],
         svg: [
           {
-            key: 'file1_th',
+            key: 'file1_foreign',
             options: { x: 87, y: 157 },
             svgPath: 'M18 7L9.42857 17L6 13',
           },

@@ -1,12 +1,12 @@
 import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'ksp-check-history',
   standalone: true,
-  imports: [CommonModule, ThaiDatePipe],
+  imports: [CommonModule, ThaiDatePipe, MatDialogModule],
   templateUrl: './check-history.component.html',
   styleUrls: ['./check-history.component.scss'],
 })

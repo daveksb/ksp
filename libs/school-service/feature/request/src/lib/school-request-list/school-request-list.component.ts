@@ -297,7 +297,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       const schoolname = res.schoolname;
       const bureauname = res.bureauname;
       const schoolapprovename = 'ผู้อํานวยการสถานศึกษา';
-      const schoolapprovenameen = 'director of the educational institution';
+      const schoolapprovenameen = 'Director of the Educational Institution';
       this.dialog.open(PdfRenderComponent, {
         width: '1200px',
         height: '100vh',
@@ -504,10 +504,6 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       id13,
     ] = element?.idcardno?.split('') ?? [];
 
-    /* let approve1 = false;
-    let approve2 = false;
-    let approve3 = false; */
-
     let approvetimes = '';
 
     this.requestService
@@ -517,14 +513,6 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
         this.tempLicenseRequestTimes =
           (this.tempLicenseHistory?.length || 0) + 1;
         approvetimes = String(this.tempLicenseRequestTimes);
-
-        /* if (Number(this.tempLicenseRequestTimes) === 1) {
-          approve1 = true;
-        } else if (Number(this.tempLicenseRequestTimes) === 2) {
-          approve2 = true;
-        } else if (Number(this.tempLicenseRequestTimes) === 3) {
-          approve3 = true;
-        } */
       });
 
     const position = element.position;
@@ -532,8 +520,6 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     const email = element.email;
     const nationality = element.nationality;
     const birthdate = thaiDate(new Date(element.birthdate || ''));
-    //const birthdate_th = thaiDate(birthdate);
-    //const th_birthdate = birthdate.split('T');
     const passportno = element.passportno;
 
     const edu1 = eduinfo.find((item: any) => {
@@ -546,7 +532,10 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     const degreename1 = edu1?.degreeName ?? '';
     const institution1 = edu1?.institution ?? '';
     const major1 = edu1?.major ?? '';
-    const graduateDate1 = edu1?.graduateDate ?? '';
+    let graduateDate1 = '';
+    if (edu1?.graduateDate) {
+      graduateDate1 = thaiDate(new Date(edu1?.graduateDate ?? ''));
+    }
     const grade1 = edu1?.grade ?? '';
 
     let degree1 = false;
@@ -564,7 +553,10 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     const degreename2 = edu2?.degreeName ?? '';
     const institution2 = edu2?.institution ?? '';
     const major2 = edu2?.major ?? '';
-    const graduateDate2 = edu2?.graduateDate ?? '';
+    let graduateDate2 = '';
+    if (edu2?.graduateDate) {
+      graduateDate2 = thaiDate(new Date(edu2?.graduateDate ?? ''));
+    }
     const grade2 = edu2?.grade ?? '';
 
     let degree2 = false;
@@ -582,7 +574,10 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     const degreename3 = edu3?.degreeName ?? '';
     const institution3 = edu3?.institution ?? '';
     const major3 = edu3?.major ?? '';
-    const graduateDate3 = edu3?.graduateDate ?? '';
+    let graduateDate3 = '';
+    if (edu3?.graduateDate) {
+      graduateDate3 = thaiDate(new Date(edu3?.graduateDate ?? ''));
+    }
     const grade3 = edu3?.grade ?? '';
 
     let degree3 = false;
@@ -770,8 +765,8 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       }
     }
 
-    let file1_thai = false;
-    let file2_thai = false;
+    let file1_foreign = false;
+    /* let file2_thai = false;
     let file4_thai = false;
     let file5_thai = false;
     let file6_thai = false;
@@ -783,7 +778,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     let file11_thai = false;
     let file12_thai = false;
     let file8_manager = false;
-    let file13_manager = false;
+    let file13_manager = false; */
     let file2_foreign = false;
     let file3_foreign = false;
     let file5_foreign = false;
@@ -797,7 +792,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       const tab5 = fileinfo['tab5'];
       const tab6 = fileinfo['tab6'];
 
-      //teacher
+      /* //teacher
       const file1_th = tab6[0];
       if (file1_th.length > 0) {
         file1_thai = true;
@@ -876,9 +871,14 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
         file13_manager = true;
       }
 
-      const file14_mgr = tab6[6];
+      const file14_mgr = tab6[6]; */
 
       //foreign
+      const file1_th = tab6[0];
+      if (file1_th.length > 0) {
+        file1_foreign = true;
+      }
+
       const file2_frgn = tab3[0];
       if (file2_frgn.length > 0) {
         file2_foreign = true;
@@ -1046,7 +1046,6 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       const managername =
         res.thprefixname + ' ' + res.thname + ' ' + res.thfamilyname;
       const managerposition = res.thposition;
-      //console.log(res);
 
       if (element.requesttype === '3') {
         this.dialog.open(PdfRenderComponent, {
@@ -1131,9 +1130,8 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
               levelName,
               reasonDetail,
               reasonDetail2,
-              /* reasonDetail3, */
-              file1_thai,
-              file2_thai,
+              file1_foreign,
+              /* file2_thai,
               file4_thai,
               file5_thai,
               file6_thai,
@@ -1145,7 +1143,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
               file11_thai,
               file12_thai,
               file8_manager,
-              file13_manager,
+              file13_manager, */
               file2_foreign,
               file3_foreign,
               file5_foreign,

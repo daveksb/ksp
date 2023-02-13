@@ -28,6 +28,8 @@ import {
   checkStatus,
   processFilter,
   thaiDate,
+  teachingLevels,
+  teachingSubjects,
 } from '@ksp/shared/utility';
 import { Subject, Observable } from 'rxjs';
 
@@ -161,7 +163,7 @@ export class TempLicenseApproveListComponent implements AfterViewInit {
     ] = request?.idcardno?.split('') ?? [];
     const email = request.email;
     const nationality = request.nationality;
-    const birthdate = request.birthdate;
+    const birthdate = thaiDate(new Date(request.birthdate || ''));
     const passportno = request.passportno;
     const eduinfo = JSON.parse(request.eduinfo || '');
 
@@ -175,7 +177,7 @@ export class TempLicenseApproveListComponent implements AfterViewInit {
     const degreename1 = edu1?.degreeName ?? '';
     const institution1 = edu1?.institution ?? '';
     const major1 = edu1?.major ?? '';
-    const graduate1 = edu1?.graduateDate ?? '';
+    const graduateDate1 = edu1?.graduateDate ?? '';
     const grade1 = edu1?.grade ?? '';
     const admission1 = edu1?.admissionDate ?? '';
     const country1 = edu1?.country ?? '';
@@ -195,7 +197,7 @@ export class TempLicenseApproveListComponent implements AfterViewInit {
     const degreename2 = edu2?.degreeName ?? '';
     const institution2 = edu2?.institution ?? '';
     const major2 = edu2?.major ?? '';
-    const graduate2 = edu2?.graduateDate ?? '';
+    const graduateDate2 = edu2?.graduateDate ?? '';
     const grade2 = edu2?.grade ?? '';
 
     let degree2 = false;
@@ -203,7 +205,73 @@ export class TempLicenseApproveListComponent implements AfterViewInit {
       degree2 = true;
     }
 
-    const teachinginfo = JSON.parse(request.teachinginfo || '');
+    const edu3 = eduinfo.find((item: any) => {
+      if (item?.degreeLevel) {
+        return item.degreeLevel === '3';
+      }
+      return false;
+    });
+
+    const degreename3 = edu3?.degreeName ?? '';
+    const institution3 = edu3?.institution ?? '';
+    const major3 = edu3?.major ?? '';
+    const graduateDate3 = edu3?.graduateDate ?? '';
+    const grade3 = edu3?.grade ?? '';
+
+    let degree3 = false;
+    if (degreename3) {
+      degree3 = true;
+    }
+
+    let prefixen = '';
+
+    if (request.prefixen === '1') {
+      prefixen = 'MR.';
+    } else if (request.prefixen === '2') {
+      prefixen = 'MRS.';
+    } else if (request.prefixen === '3') {
+      prefixen = 'MISS.';
+    } else if (request.prefixen === '4') {
+      prefixen = 'MS.';
+    } else if (request.prefixen === '5') {
+      prefixen = 'LADY';
+    } else if (request.prefixen === '6') {
+      prefixen = 'M.L.';
+    } else if (request.prefixen === '7') {
+      prefixen = 'M.R.';
+    } else if (request.prefixen === '8') {
+      prefixen = 'M.C.';
+    } else {
+      prefixen = 'Not Indentified';
+    }
+
+    const nameen_full =
+      prefixen + ' ' + request.firstnameen + ' ' + request.lastnameen;
+
+    let prefixth = '';
+    //console.log(' request.prefixth= ', request.prefixth);
+    if (request.prefixth === '1') {
+      prefixth = 'นาย';
+    } else if (request.prefixth === '2') {
+      prefixth = 'นาง';
+    } else if (request.prefixth === '3') {
+      prefixth = 'นางสาว';
+    } else if (request.prefixth === '4') {
+      prefixth = 'นางหรือนางสาว';
+    } else if (request.prefixth === '5') {
+      prefixth = 'ท่านผู้หญิง';
+    } else if (request.prefixth === '6') {
+      prefixth = 'หม่อมหลวง';
+    } else if (request.prefixth === '7') {
+      prefixth = 'หม่อมราชวงศ์';
+    } else if (request.prefixth === '8') {
+      prefixth = 'หม่อมเจ้า';
+    } else {
+      prefixth = 'ไม่ระบุ';
+    }
+
+    const name_full =
+      prefixth + ' ' + request.firstnameth + ' ' + request.lastnameth;
 
     let lv1 = false;
     let lv2 = false;
@@ -212,28 +280,50 @@ export class TempLicenseApproveListComponent implements AfterViewInit {
     let lv5 = false;
     let lv6 = false;
     let lv7 = false;
+    let level: any;
+    let levelName = '';
 
-    for (const index in teachinginfo.teachingLevel) {
-      if (teachinginfo.teachingLevel[index] === 'level1') {
-        lv1 = true;
+    let subject: any;
+    let subjectName = '';
+    let otherSubject = '';
+
+    if (request.teachinginfo) {
+      const teachinginfo = JSON.parse(request.teachinginfo || '');
+
+      for (const index in teachinginfo.teachingSubjects) {
+        subject = teachingSubjects(teachinginfo.teachingSubjects[index]);
+        subjectName += subject + ' ';
       }
-      if (teachinginfo.teachingLevel[index] === 'level2') {
-        lv2 = true;
+
+      if (teachinginfo.teachingSubjectOther !== null) {
+        otherSubject = teachinginfo.teachingSubjectOther;
+        subjectName = subjectName + otherSubject;
       }
-      if (teachinginfo.teachingLevel[index] === 'level3') {
-        lv3 = true;
-      }
-      if (teachinginfo.teachingLevel[index] === 'level4') {
-        lv4 = true;
-      }
-      if (teachinginfo.teachingLevel[index] === 'level5') {
-        lv5 = true;
-      }
-      if (teachinginfo.teachingLevel[index] === 'level6') {
-        lv6 = true;
-      }
-      if (teachinginfo.teachingLevel[index] === 'level7') {
-        lv7 = true;
+
+      for (const index in teachinginfo.teachingLevel) {
+        level = teachingLevels(teachinginfo.teachingLevel[index]);
+        levelName += level + ' ';
+        if (teachinginfo.teachingLevel[index] === 'level1') {
+          lv1 = true;
+        }
+        if (teachinginfo.teachingLevel[index] === 'level2') {
+          lv2 = true;
+        }
+        if (teachinginfo.teachingLevel[index] === 'level3') {
+          lv3 = true;
+        }
+        if (teachinginfo.teachingLevel[index] === 'level4') {
+          lv4 = true;
+        }
+        if (teachinginfo.teachingLevel[index] === 'level5') {
+          lv5 = true;
+        }
+        if (teachinginfo.teachingLevel[index] === 'level6') {
+          lv6 = true;
+        }
+        if (teachinginfo.teachingLevel[index] === 'level7') {
+          lv7 = true;
+        }
       }
     }
 
@@ -248,66 +338,77 @@ export class TempLicenseApproveListComponent implements AfterViewInit {
     const zipcode = school.zipcode;
     const telphone = school.telphone;
     const schoolemail = school.email;
+    const managername =
+      school.thprefixname + ' ' + school.thname + ' ' + school.thfamilyname;
+    const managerposition = school.thposition;
+
+    let hiringStartDate = '';
+    let hiringEndDate = '';
 
     const hiring = JSON.parse(request.hiringinfo || '');
-    const hiringStartDate = hiring.startDate;
-    const hiringEndDate = hiring.endDate;
+    if (hiring) {
+      hiringStartDate = thaiDate(new Date(hiring.startDate));
+      hiringEndDate = thaiDate(new Date(hiring.endDate));
+    }
     const position = hiring.position;
-
-    const prohibit = JSON.parse(request.prohibitproperty || '');
-
-    const immoral = prohibit.immoral;
-    const incompetent = prohibit.incompetent;
-    const prison = prohibit.prison;
 
     let forbid1_1 = false;
     let forbid1_2 = false;
-    if (request.careertype !== '5') {
-      if (immoral === '2') {
-        forbid1_1 = true;
-      } else {
-        forbid1_2 = true;
-      }
-    } else {
-      if (immoral === '2') {
-        forbid1_2 = true;
-      } else {
-        forbid1_1 = true;
-      }
-    }
-
     let forbid2_1 = false;
     let forbid2_2 = false;
-    if (request.careertype !== '5') {
-      if (incompetent === '2') {
-        forbid2_1 = true;
-      } else {
-        forbid2_2 = true;
-      }
-    } else {
-      if (immoral === '2') {
-        forbid2_2 = true;
-      } else {
-        forbid2_1 = true;
-      }
-    }
-
     let forbid3_1 = false;
     let forbid3_2 = false;
     let forbid3 = '';
     let prisonDetail = '';
-    if (request.careertype !== '5') {
-      if (prison === '2') {
-        forbid3_1 = true;
+
+    if (request.prohibitproperty) {
+      const prohibit = JSON.parse(request.prohibitproperty || '');
+
+      const immoral = prohibit.immoral;
+      const incompetent = prohibit.incompetent;
+      const prison = prohibit.prison;
+
+      if (request.careertype !== '5') {
+        if (immoral === '2') {
+          forbid1_1 = true;
+        } else {
+          forbid1_2 = true;
+        }
       } else {
-        forbid3_2 = true;
-        prisonDetail = prohibit.prisonReason;
+        if (immoral === '2') {
+          forbid1_2 = true;
+        } else {
+          forbid1_1 = true;
+        }
       }
-    } else {
-      if (immoral === '2') {
-        forbid3 = 'No';
+
+      if (request.careertype !== '5') {
+        if (incompetent === '2') {
+          forbid2_1 = true;
+        } else {
+          forbid2_2 = true;
+        }
       } else {
-        forbid3 = 'Yes' + ' ' + prohibit.prisonReason;
+        if (immoral === '2') {
+          forbid2_2 = true;
+        } else {
+          forbid2_1 = true;
+        }
+      }
+
+      if (request.careertype !== '5') {
+        if (prison === '2') {
+          forbid3_1 = true;
+        } else {
+          forbid3_2 = true;
+          prisonDetail = prohibit.prisonReason;
+        }
+      } else {
+        if (immoral === '2') {
+          forbid3 = 'No';
+        } else {
+          forbid3 = 'Yes' + ' ' + prohibit.prisonReason;
+        }
       }
     }
 
@@ -318,47 +419,104 @@ export class TempLicenseApproveListComponent implements AfterViewInit {
 
     let reasonDetail = '';
     let reasonDetail2 = '';
-    let reasonDetail3 = '';
+    /* let reasonDetail3 = ''; */
 
-    const reason = JSON.parse(request.reasoninfo || '');
-    const schReason = reason.schoolReasons;
+    if (request.reasoninfo) {
+      const reason = JSON.parse(request.reasoninfo || '');
+      if (reason && reason !== null) {
+        const schReason = reason.schoolReasons;
 
-    if (schReason[0] === true) {
-      if (request.careertype === '2') {
-        label1 =
-          'ผู้ขอประกอบวิชาชีพผู้บริหารสถานศึกษา เป็นผู้มีความรู้ ความสามารถในการบริหารสถานศึกษา ';
-      } else {
-        label1 = 'ผู้ขอประกอบวิชาชีพครูเป็นผู้มีความรู้ ความสามารถในการสอน ';
+        if (schReason[0] === true) {
+          if (request.careertype === '2') {
+            label1 =
+              'ผู้ขอประกอบวิชาชีพผู้บริหารสถานศึกษา เป็นผู้มีความรู้ ความสามารถในการบริหารสถานศึกษา ';
+          } else {
+            label1 =
+              'ผู้ขอประกอบวิชาชีพครูเป็นผู้มีความรู้ ความสามารถในการสอน ';
+          }
+        }
+        if (schReason[1] === true) {
+          if (request.careertype === '2') {
+            label2 =
+              'ผู้ขอประกอบวิชาชีพผู้บริหารสถานศึกษา เป็นผู้มีประสบการณ์ในการบริหารสถานศึกษา ';
+          } else {
+            label2 = 'ผู้ขอประกอบวิชาชีพครูเป็นผู้มีประสบการณ์ ในการสอน ';
+          }
+        }
+        if (schReason[2] === true) {
+          if (request.careertype === '2') {
+            label3 =
+              'ขาดแคลนผู้บริหารสถานศึกษาที่มีหนังสืออนุญาตประกอบวิชาชีพ ';
+          } else {
+            label3 = 'ขาดแคลนครูผู้สอนที่มีหนังสืออนุญาตประกอบวิชาชีพ ';
+          }
+        }
+        if (schReason[3] === true) {
+          label4 = 'และ' + reason.schoolOtherDetail;
+        }
+
+        reasonDetail = label1 + label3;
+        reasonDetail2 = label2 + label4;
+
+        /* reasonDetail = label1;
+        if (request.careertype !== '5') {
+          reasonDetail2 = label2;
+          reasonDetail3 = label3 + label4;
+        } else {
+          reasonDetail2 = label2 + label3 + label4;
+        } */
       }
     }
-    if (schReason[1] === true) {
-      if (request.careertype === '2') {
-        label2 =
-          'ผู้ขอประกอบวิชาชีพผู้บริหารสถานศึกษา เป็นผู้มีประสบการณ์ในการบริหารสถานศึกษา ';
-      } else {
-        label2 = 'ผู้ขอประกอบวิชาชีพครูเป็นผู้มีประสบการณ์ ในการสอน ';
+
+    let file1_foreign = false;
+    let file2_foreign = false;
+    let file3_foreign = false;
+    let file5_foreign = false;
+    let file7_foreign = false;
+    let file8_foreign = false;
+
+    if (request.fileinfo && request.requesttype === '3') {
+      const fileinfo = JSON.parse(request.fileinfo || '');
+      const tab3 = fileinfo['tab3'];
+      const tab4 = fileinfo['tab4'];
+      const tab5 = fileinfo['tab5'];
+      const tab6 = fileinfo['tab6'];
+
+      //foreign
+      const file1_th = tab6[0];
+      if (file1_th.length > 0) {
+        file1_foreign = true;
+      }
+
+      const file2_frgn = tab3[0];
+      if (file2_frgn.length > 0) {
+        file2_foreign = true;
+      }
+
+      const file3_frgn = tab3[1];
+      if (file3_frgn.length > 0) {
+        file3_foreign = true;
+      }
+
+      const file4_frgn = tab6[6];
+
+      const file5_frgn = tab3[4];
+      if (file5_frgn.length > 0) {
+        file5_foreign = true;
+      }
+
+      const file6_frgn = tab6[6];
+
+      const file7_frgn = tab4[1];
+      if (file7_frgn.length > 0) {
+        file7_foreign = true;
+      }
+
+      const file8_frgn = tab6[5];
+      if (file8_frgn.length > 0) {
+        file8_foreign = true;
       }
     }
-    if (schReason[2] === true) {
-      if (request.careertype === '2') {
-        label3 = 'ขาดแคลนผู้บริหารสถานศึกษาที่มีหนังสืออนุญาตประกอบวิชาชีพ ';
-      } else {
-        label3 = 'ขาดแคลนครูผู้สอนที่มีหนังสืออนุญาตประกอบวิชาชีพ ';
-      }
-    }
-    if (schReason[3] === true) {
-      label4 = 'และ' + reason.schoolOtherDetail;
-    }
-
-    reasonDetail = label1;
-    if (request.careertype !== '5') {
-      reasonDetail2 = label2;
-      reasonDetail3 = label3 + label4;
-    } else {
-      reasonDetail2 = label2 + label3 + label4;
-    }
-
-    //console.log('res = ', schReason[0]);
 
     this.dialog.open(PdfRenderComponent, {
       width: '1200px',
@@ -389,6 +547,11 @@ export class TempLicenseApproveListComponent implements AfterViewInit {
           nationality,
           birthdate,
           passportno,
+          position,
+          hiringStartDate,
+          hiringEndDate,
+          country1,
+          admission1,
           id1,
           id2,
           id3,
@@ -402,21 +565,31 @@ export class TempLicenseApproveListComponent implements AfterViewInit {
           id11,
           id12,
           id13,
-          country1,
-          admission1,
+          /* approvetimes, */
           degreename1,
           institution1,
           major1,
-          graduate1,
-          grade1,
           degree1,
+          graduateDate1,
+          grade1,
           degreename2,
           institution2,
           major2,
-          graduate2,
-          grade2,
           degree2,
+          graduateDate2,
+          grade2,
+          degreename3,
+          institution3,
+          major3,
+          degree3,
+          graduateDate3,
+          grade3,
           nameen,
+          nameen_full,
+          name_full,
+          managername,
+          managerposition,
+          subjectName,
           lv1,
           lv2,
           lv3,
@@ -424,18 +597,21 @@ export class TempLicenseApproveListComponent implements AfterViewInit {
           lv5,
           lv6,
           lv7,
-          hiringStartDate,
-          hiringEndDate,
-          position,
+          levelName,
+          reasonDetail,
+          reasonDetail2,
+          file1_foreign,
+          file2_foreign,
+          file3_foreign,
+          file5_foreign,
+          file7_foreign,
+          file8_foreign,
           forbid1_1,
           forbid2_1,
           forbid3_1,
           forbid1_2,
           forbid2_2,
           forbid3_2,
-          reasonDetail,
-          reasonDetail2,
-          reasonDetail3,
           forbid3,
           prisonDetail,
         },
