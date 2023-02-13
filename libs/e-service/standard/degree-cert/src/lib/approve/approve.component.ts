@@ -57,6 +57,7 @@ const detailToState = (res: any) => {
   return {
     ...considerCourses,
     verifyResult: verifyResult,
+    response: res.datareturn
   };
 };
 const mapProcess = (data: any) => {
@@ -105,6 +106,7 @@ export class ApproveComponent implements OnInit {
   newConsiderCourses: any = [];
   newConsiderCert: any = [];
   result: any = { '1': 'ผ่านการพิจารณา', '2': 'ไม่ผ่านการพิจารณา' };
+  historyList: Array<any> = [];
   constructor(
     public dialog: MatDialog,
     private router: Router,
@@ -132,7 +134,7 @@ export class ApproveComponent implements OnInit {
         .pipe(
           map((res) => {
             this.daftRequest = res;
-            this.allowEdit = res?.requestprocess === '4';
+            this.allowEdit = res?.requestprocess === '4' && res?.requeststatus === '1';
             return this.uniInfoService.mappingUniverSitySelectByIdWithForm(res);
           })
         )
@@ -154,6 +156,16 @@ export class ApproveComponent implements OnInit {
       .kspUniRequestProcessSelectByRequestId(this.route.snapshot.params['key'])
       .pipe(map(detailToState))
       .subscribe((res) => {
+        this.historyList = res.response.filter((data:any)=>{
+          return (data.process == '5' || (data.process == '4' && data.status == '3')) && data.userid
+        }).map((data: any)=>{
+          data.detail = parseJson(data.detail);
+          data.createdate = thaiDate(new Date(data.createdate));
+          const findResult = this.choices.find(choice=>{return choice.value == data.status });
+          data.resultname = findResult ? findResult?.name : '';
+          data.comment = data.detail.verify.detail || '';
+          return data;
+        });
         this.verifyResult = res?.verifyResult;
         this.considerCert = [
           ...(res?.considerCert || []),
@@ -163,7 +175,18 @@ export class ApproveComponent implements OnInit {
           ...(res?.considerCourses || []),
           ...this.newConsiderCourses
         ];
-        const lastPlan = res?.verifyResult.find((data: any)=>{return data.process == 5}) as any;
+        let lastPlan = {} as any;
+        if (this.daftRequest.requestprocess == 5) {
+          lastPlan = res?.verifyResult.find((data: any)=>{
+            return data.process == 5;
+          }) as any;
+        } else {
+          if (this.daftRequest.process != 4 && this.daftRequest.status != 1) {
+            lastPlan = res?.verifyResult.find((data: any)=>{
+              return data.process == 4 && data.status == 3;
+            }) as any;
+          }
+        }
         this.form.controls.verify.patchValue(lastPlan?.detail?.verify);
         this.form.controls.approveData.patchValue(lastPlan?.detail?.approveData);
       });
@@ -194,11 +217,20 @@ export class ApproveComponent implements OnInit {
           considerCourses: this.newConsiderCourses,
           considerCert: this.newConsiderCert,
         });
+        let reqProcess = '';
+        let reqStatus = '';
+        if (_.get(this.form, 'value.verify.result', '') == '3') {
+          reqStatus = '3'
+          reqProcess = '4'
+        } else {
+          reqStatus = _.get(this.form, 'value.verify.result', '');
+          reqProcess = '5';
+        }
         const payload: any = {
           systemtype: '3',
-          process: '5',
+          process: reqProcess,
           requestid: this.daftRequest?.requestid,
-          status: _.get(this.form, 'value.verify.result', ''),
+          status: reqStatus,
           detail,
           userid: getCookie('userId'),
         }
@@ -216,14 +248,24 @@ export class ApproveComponent implements OnInit {
   onSubmitKSP(degreeApproveCode: any, uniDegreeCertId: any) {
     if (!degreeApproveCode || !uniDegreeCertId)
       return this.onConfirmed('บันทึกข้อมูลไม่สำเร็จ');
+    let reqProcess = '';
+    let reqStatus = '';
+    if (_.get(this.form, 'value.verify.result', '') == '3') {
+      reqStatus = '3'
+      reqProcess = '4'
+    } else {
+      reqStatus = _.get(this.form, 'value.verify.result', '');
+      reqProcess = '5';
+    }
     const detail: any = _.pick(this.form.value, ['verify', 'approveData']);
     const payload: any = {
       systemtype: '3',
       requestid: this.daftRequest?.requestid,
       userid: getCookie('userId'),
-      process: '5',
+      process: reqProcess,
+      status: reqStatus
     };
-    payload.status = _.get(this.form, 'value.verify.result', '');
+    // payload.status = _.get(this.form, 'value.verify.result', '');
     payload.detail = jsonStringify({
       ...detail,
       considerCourses: this.newConsiderCourses,
@@ -261,7 +303,7 @@ export class ApproveComponent implements OnInit {
       height: '100vh',
       data: {
         title: e?.file?.filename,
-        files: [e?.file],
+        files: e?.file.files,
         checkresult: [],
         systemType: 'ksp',
       },
