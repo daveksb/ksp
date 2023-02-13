@@ -69,12 +69,12 @@
       </div>
     </div>
     <div *ngIf="mode === 'edit'">
-      <ksp-file-upload
+      <ksp-file-multi-upload
         [buttonLabel]="'อัพโหลดไฟล์'"
         [uniqueTimestamp]="uniqueNo"
         [showDeleteFile]="true"
         (uploadComplete)="onUploadComplete($event)"
-      ></ksp-file-upload>
+      ></ksp-file-multi-upload>
     </div>
     <div class="row" *ngIf="mode === 'view'">
       <div class="col-8">

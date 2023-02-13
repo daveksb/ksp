@@ -37,6 +37,8 @@ export class DegreeCertStatusComponent implements OnInit {
   getConsider() {
     // if (['1', '2', '3'].includes(this.dataSource?.process)) return '';
     let classStatus = 'verify-status';
+    const dprocess = _.toNumber(this.dataSource?.process);
+    const dstatus = _.toNumber(this.dataSource?.status)
     let status: any = _.find(EUniApproveProcess, {
       requestType: _.toNumber(this.dataSource?.requestType),
       processId: _.toNumber(this.dataSource?.process),
@@ -47,7 +49,10 @@ export class DegreeCertStatusComponent implements OnInit {
     if (!status) {
       classStatus = 'edit-status';
     }
-    if (status?.id == 2) {
+    if ((dprocess == 1 && dstatus == 2) ||
+        (dprocess == 3 && dstatus == 2) ||
+        (dprocess == 4 && dstatus == 3) ||
+        (dprocess == 5 && dstatus == 3)) {
       classStatus = 'return-status';
     }
     return {
@@ -57,6 +62,8 @@ export class DegreeCertStatusComponent implements OnInit {
   }
   getExamine() {
     let classStatus = 'verify-status';
+    const dprocess = _.toNumber(this.dataSource?.process);
+    const dstatus = _.toNumber(this.dataSource?.status)
     let status: any = _.find(EUniApproveProcess, {
       requestType: _.toNumber(this.dataSource?.requestType),
       processId: _.toNumber(this.dataSource?.process),
@@ -67,7 +74,10 @@ export class DegreeCertStatusComponent implements OnInit {
     if (!status) {
       classStatus = 'edit-status';
     }
-    if (status?.id == 2) {
+    if ((dprocess == 1 && dstatus == 2) ||
+        (dprocess == 3 && dstatus == 2) ||
+        (dprocess == 4 && dstatus == 3) ||
+        (dprocess == 5 && dstatus == 3)) {
       classStatus = 'return-status';
     }
     return {

@@ -65,8 +65,10 @@ export class NitetComponent extends KspFormBaseComponent implements OnInit {
           studentResponsible: [],
           studentOtherCourse: [],
           lessExperience: [],
-        });
-        this.form.controls.nitets.push(form);
+        })
+        if (this.form.value.nittetAmount != this.form.controls.nitets.length) {
+          this.form.controls.nitets.push(form);
+        }
       });
     }
   }

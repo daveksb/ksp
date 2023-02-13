@@ -261,7 +261,7 @@ export class CheckComponent implements OnInit, AfterContentChecked {
       process = _.toNumber(this.daftRequest?.requestprocess) + 2;
       status = 1;
     } else if (verify == 2) {
-      process = _.toNumber(this.daftRequest?.requestprocess) + 2;
+      process = _.toNumber(this.daftRequest?.requestprocess);
       status = 2;
     }
 
