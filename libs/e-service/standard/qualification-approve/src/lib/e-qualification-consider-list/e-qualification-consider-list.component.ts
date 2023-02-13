@@ -316,5 +316,4 @@ export const column2 = [
   'reqDoc',
   //'license',
   'resultdoc',
-  'history',
 ];

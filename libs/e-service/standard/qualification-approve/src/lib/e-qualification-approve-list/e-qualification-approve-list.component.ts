@@ -17,6 +17,7 @@ import {
   SchRequestSearchFilter,
 } from '@ksp/shared/interface';
 import { ERequestService, LoaderService } from '@ksp/shared/service';
+import { CheckHistoryComponent } from '@ksp/shared/ui';
 import { checkProcess, checkStatus, thaiDate } from '@ksp/shared/utility';
 import { Subject } from 'rxjs';
 
@@ -52,6 +53,18 @@ export class EQualificationApproveListComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+  }
+
+  openHistory(reqId: string) {
+    this.eRequestService.getApproveHistory(reqId).subscribe((res) => {
+      if (res && res.length) {
+        //console.log('res = ', res);
+        this.dialog.open(CheckHistoryComponent, {
+          width: '1200px',
+          data: res,
+        });
+      }
+    });
   }
 
   renderLicense(request: KspRequest) {
@@ -313,4 +326,5 @@ export const column = [
   'requestdate',
   'reqDoc',
   'license',
+  'history',
 ];
