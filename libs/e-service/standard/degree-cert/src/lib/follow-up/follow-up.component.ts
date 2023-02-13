@@ -146,7 +146,7 @@ export class FollowUpComponent implements OnInit {
     const payload: any = {
       systemtype: '3',
       process: '7',
-      status: this.form.value.considerationResult?.result,
+      status: '1',
       detail: jsonStringify(detail),
       userid: getCookie('userId')
     };

@@ -5,9 +5,10 @@ import { CourseFormTwoComponent } from './course-form-two/course-form-two.compon
 import { CourseFormThreeComponent } from './course-form-three/course-form-three.component';
 import { CourseFormFourComponent } from './course-form-four/course-form-four.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { InputNumberDirective } from '@ksp/shared/directive';
 
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, InputNumberDirective],
   declarations: [
     CourseFormOneComponent,
     CourseFormTwoComponent,

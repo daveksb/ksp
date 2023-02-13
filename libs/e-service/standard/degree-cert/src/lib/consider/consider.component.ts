@@ -252,11 +252,20 @@ export class ConsiderComponent implements OnInit {
       considerCert: this.newConsiderCert,
       oldPlan: this.stepData.step2
     });
+    let reqProcess = '';
+    let reqStatus = '';
+    if (_.get(this.form, 'value.verify.result', '') == '3') {
+      reqStatus = '3'
+      reqProcess = '3'
+    } else {
+      reqStatus = _.get(this.form, 'value.verify.result', '');
+      reqProcess = '4';
+    }
     const payload: any = {
       systemtype: '3',
-      process: '4',
+      process: reqProcess,
       requestid: this.daftRequest?.requestid,
-      status: _.get(this.form, 'value.verify.result', ''),
+      status: reqStatus,
       detail,
       userid: getCookie('userId'),
     };
@@ -282,11 +291,18 @@ export class ConsiderComponent implements OnInit {
   }
 
   updatePlan() {
-    const process = '4';
-    const status = _.get(this.form, 'value.verify.result', '')
+    let reqProcess = '';
+    let reqStatus = '';
+    if (_.get(this.form, 'value.verify.result', '') == '3') {
+      reqStatus = '1'
+      reqProcess = '3'
+    } else {
+      reqStatus = _.get(this.form, 'value.verify.result', '');
+      reqProcess = '4';
+    }
     const payload = this._getRequest('4', status);
-    payload.process = process;
-    payload.status = status;
+    payload.process = reqProcess;
+    payload.status = reqStatus;
     payload.requestprocess = process;
     payload.requeststatus = status;
     this.eUniService

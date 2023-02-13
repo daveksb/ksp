@@ -90,11 +90,15 @@ export class UniDegreeCertListComponent
       verifyStatus,
       approveStatus,
     } = this.form.controls.search.value as any;
+    let requestno = '';
+    if (licenseNumber) {
+      requestno = licenseNumber.replaceAll('-', ''); 
+    }
     return {
       unicode: institutionNumber || '',
       uniid: institutionName || '',
       fulldegreenameth: degreeName || '',
-      requestno: licenseNumber || '',
+      requestno: requestno,
       requestdate: date ? moment(date).format('YYYY-MM-DD') : '',
       coursestatus: courseStatus || '',
       degreelevel: submitDegreeLevel || '',
@@ -115,7 +119,7 @@ export class UniDegreeCertListComponent
               key: item?.id,
               order:
                 this.pageEvent.pageIndex * this.pageEvent.pageSize + ++index,
-              degreeId: item?.requestno,
+              degreeId: formatRequestNo(item?.requestno),
               date: item?.requestdate
                 ? thaiDate(new Date(item?.requestdate))
                 : '',

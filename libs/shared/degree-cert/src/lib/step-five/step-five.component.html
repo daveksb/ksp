@@ -17,7 +17,7 @@
     </div>
 
     <div class="d-flex align-items-center mb-3">
-      <fieldset [disabled]="isDisable('verify', 2)">
+      <fieldset>
         <div class="form-control" style="width: 22rem">
           <div class="d-flex align-items-center">
             <input type="radio" value="2" formControlName="verify" />
@@ -25,29 +25,32 @@
           </div>
         </div>
       </fieldset>
-      <div class="row mx-2 align-items-center">
-        <div class="col">
-          <div class="form-label">วันที่ต้องการแบบคำขอส่งกลับ</div>
-        </div>
-        <div class="col">
-          <div class="d-flex align-items-center">
-            <input
-              matInput
-              [matDatepicker]="picker"
-              autocomplete="off"
-              class="form-control form-date"
-              formControlName="returnDate"
-              placeholder="วว/ดด/ปปปป"
-            />
-            <mat-datepicker-toggle
-              class="button-date"
-              matSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+      <fieldset [disabled]="form.controls.verify.value === '1'">
+        <div class="row mx-2 align-items-center">
+          <div class="col">
+            <div class="form-label">วันที่ต้องการแบบคำขอส่งกลับ</div>
+          </div>
+          <div class="col">
+            <div class="d-flex align-items-center">
+              <input
+                matInput
+                [matDatepicker]="picker"
+                autocomplete="off"
+                class="form-control form-date"
+                formControlName="returnDate"
+                placeholder="วว/ดด/ปปปป"
+              />
+              <mat-datepicker-toggle
+                class="button-date"
+                matSuffix
+                [for]="picker"
+                [disabled]="form.controls.verify.value === '1'"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </div>
           </div>
         </div>
-      </div>
+      </fieldset>
     </div>
   </div>
 </form>

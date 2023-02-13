@@ -31,6 +31,7 @@ export class DegreeCertSearchComponent extends KspFormBaseComponent {
     courseStatus: [],
     verifyStatus: [],
     approveStatus: [],
+    degreeapprovecode: []
   });
 
   @Output() searched = new EventEmitter<boolean>();
@@ -40,6 +41,8 @@ export class DegreeCertSearchComponent extends KspFormBaseComponent {
   @Input() degreeLevelOption: ListData[] = [];
   @Input() verifyStatusOption: ListData[] = [];
   @Input() approveStatusOption: ListData[] = [];
+  @Input() systemType = '';
+  @Input() subType = 'all';
 
   constructor(private fb: FormBuilder) {
     super();

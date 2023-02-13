@@ -21,6 +21,7 @@ import {
   thaiDate,
   parseJson,
   formatDate,
+  formatRequestNo,
 } from '@ksp/shared/utility';
 import _ from 'lodash';
 import moment from 'moment';
@@ -317,7 +318,7 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
       data: {
         header: 'ยืนยันข้อมูลสำเร็จ',
         content: `วันที่ : ${this.date}
-        เลขที่แบบคำขอ : ${requestno || this.requestNo || '-'}`,
+        เลขที่แบบคำขอ : ${formatRequestNo(requestno || '') || formatRequestNo(this.requestNo) || '-'}`,
         subContent: `กรุณาตรวจสอบสถานะแบบคำขอหรือรหัสเข้าใช้งาน
         ผ่านทางอีเมลผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },

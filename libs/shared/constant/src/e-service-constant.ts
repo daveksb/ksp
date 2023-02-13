@@ -31,16 +31,15 @@ export const EUniApproveProcess: UniApproveProcess[] = [
     ],
   },
   // ขั้นตอนที่ 1 ตรวจสอบข้อมูลและเอกสาร ลำดับที่ 1
-  {
-    requestType: 3,
-    processId: 2,
-    processName: 'ตรวจสอบเอกสาร ลำดับที่ 1',
-    status: [
-      { id: 1, sname: 'ครบถ้วน และถูกต้อง', ename: 'ครบถ้วน และถูกต้อง' },
-      { id: 2, sname: 'ขอแก้ไข / เพิ่มเติม', ename: 'ขอแก้ไข / เพิ่มเติม' },
-      { id: 4, sname: 'ขอแก้ไข / เพิ่มเติม', ename: 'ขอแก้ไข / เพิ่มเติม' },
-    ],
-  },
+  // {
+  //   requestType: 3,
+  //   processId: 2,
+  //   processName: 'ตรวจสอบเอกสาร ลำดับที่ 1',
+  //   status: [
+  //     { id: 1, sname: 'ครบถ้วน และถูกต้อง', ename: 'ครบถ้วน และถูกต้อง' },
+  //     { id: 2, sname: 'ขอแก้ไข / เพิ่มเติม', ename: 'ขอแก้ไข / เพิ่มเติม' },
+  //   ],
+  // },
   // ขั้นตอนที่ 2 ตรวจสอบข้อมูลและเอกสาร ลำดับที่ 2
   {
     requestType: 3,
@@ -49,7 +48,7 @@ export const EUniApproveProcess: UniApproveProcess[] = [
     status: [
       { id: 1, sname: 'ครบถ้วน และถูกต้อง', ename: 'ครบถ้วน และถูกต้อง' },
       { id: 2, sname: 'ขอแก้ไข / เพิ่มเติม', ename: 'ขอแก้ไข / เพิ่มเติม' },
-      { id: 4, sname: 'ขอแก้ไข / เพิ่มเติม', ename: 'ขอแก้ไข / เพิ่มเติม' },
+      { id: 3, sname: 'ครบถ้วน และถูกต้อง', ename: 'ขอแก้ไข / เพิ่มเติม'}
     ],
   },
 
@@ -100,6 +99,7 @@ export const EUniApproveProcess: UniApproveProcess[] = [
         ename: 'ให้สถาบันแก้ไข / เพิ่มเติม',
       },
       { sname: 'ส่งคืนหลักสูตร', id: 4, ename: 'ส่งคืนหลักสูตร' },
+      { sname: 'เห็นควรพิจารณาให้การรับรอง', id: 5, ename: 'ให้สถาบันแก้ไข / เพิ่มเติม'}
     ],
   },
   {
