@@ -338,10 +338,14 @@ export const standardMenu: MenuConfig[] = [
       },
       {
         path: `/degree-cert/list/4/2`,
-        label: 'พิจารณาและออกใบรับรองปริญญาและประกาศนียบัตร',
+        label: 'พิจารณารับรองปริญญาและประกาศนียบัตร',
       },
       {
-        path: `/degree-cert/list/6/3`,
+        path: '/degree-cert/list/5/3',
+        label: 'ออกรหัสรับรองปริญญาและประกาศนียบัตร'
+      },
+      {
+        path: `/degree-cert/list/6/4`,
         label: 'ติดตามผลเชิงประจักษ์',
       },
     ],

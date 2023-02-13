@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConfirmDialogComponent } from '@ksp/shared/dialog';
+import { CompleteDialogComponent, ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { Location } from '@angular/common';
 import _ from 'lodash';
 import { FormBuilder } from '@angular/forms';
@@ -168,10 +168,24 @@ export class FollowUpComponent implements OnInit {
             .kspUpdateRequestUniRequestDegree(payload)
             .subscribe(() => {
               if (index === _.size(this.dataSource) - 1)
-                this.location.back();
+                this.onConfirmed();
             });
           }
         });
+      }
+    });
+  }
+
+  onConfirmed(header = 'บันทึกข้อมูลสำเร็จ') {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header,
+      },
+    });
+
+    dialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.router.navigate(['/degree-cert', 'list', 6, 4]);
       }
     });
   }

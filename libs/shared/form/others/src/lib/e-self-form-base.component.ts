@@ -65,10 +65,11 @@ export abstract class ESelfFormBaseComponent {
   ) {}
 
   // save data to indexed db
-  static persistData(checkDetail: any, requestData: any) {
+  static persistData(checkDetail: any, requestData: any, checkFiles?: any) {
     const saveData: KspApprovePersistData = {
       checkDetail,
       requestData,
+      checkFiles,
     };
     localForage.setItem('checkRequestData', saveData);
   }

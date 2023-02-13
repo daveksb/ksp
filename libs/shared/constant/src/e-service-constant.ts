@@ -28,6 +28,7 @@ export const EUniApproveProcess: UniApproveProcess[] = [
     processName: 'สร้างและส่งแบบคำขอ',
     status: [
       { id: 1, sname: 'สร้างและส่งแบบคำขอ', ename: 'สร้างและส่งแบบคำขอ' },
+      { id: 2, sname: 'ขอแก้ไข / เพิ่มเติม', ename: 'ขอแก้ไข / เพิ่มเติม' },
     ],
   },
   // ขั้นตอนที่ 1 ตรวจสอบข้อมูลและเอกสาร ลำดับที่ 1
@@ -47,8 +48,7 @@ export const EUniApproveProcess: UniApproveProcess[] = [
     processName: 'ตรวจสอบเอกสาร ลำดับที่ 1',
     status: [
       { id: 1, sname: 'ครบถ้วน และถูกต้อง', ename: 'ครบถ้วน และถูกต้อง' },
-      { id: 2, sname: 'ขอแก้ไข / เพิ่มเติม', ename: 'ขอแก้ไข / เพิ่มเติม' },
-      { id: 3, sname: 'ครบถ้วน และถูกต้อง', ename: 'ขอแก้ไข / เพิ่มเติม'}
+      { id: 2, sname: 'ให้สถาบันแก้ไข / เพิ่มเติม', ename: 'ให้สถาบันแก้ไข / เพิ่มเติม' },
     ],
   },
 

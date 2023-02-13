@@ -57,6 +57,7 @@ const detailToState = (res: any) => {
   return {
     ...considerCourses,
     verifyResult: verifyResult,
+    response: res.datareturn
   };
 };
 const checkCondition = (data: any) => {
@@ -131,6 +132,7 @@ export class ConsiderComponent implements OnInit {
     { name: 'ให้สถาบันแก้ไข / เพิ่มเติม', value: 3 },
     { name: 'ส่งคืนหลักสูตร', value: 4 },
   ];
+  historyList: Array<any> = [];
   result: any = { '1': 'ผ่านการพิจารณา', '2': 'ไม่ผ่านการพิจารณา' };
 
   constructor(
@@ -155,7 +157,23 @@ export class ConsiderComponent implements OnInit {
       .kspUniRequestProcessSelectByRequestId(this.route.snapshot.params['key'])
       .pipe(map(detailToState))
       .subscribe((res: any) => {
-        this.verifyResult = res?.verifyResult.filter((data: any) => { return data.process == '2' || data.process == '3'});
+        this.historyList = res.response.filter((data:any)=>{
+          return (data.process == '4' || (data.process == '3' && data.status == '2')) && data.userid
+        }).map((data: any)=>{
+          data.detail = parseJson(data.detail);
+          data.createdate = thaiDate(new Date(data.createdate));
+          let findstatus: any;
+          if (data.process == '3' && data.status == '2') {
+            findstatus = 3;
+          } else {
+            findstatus = data.status;
+          }
+          const findResult = this.choices.find(choice=>{return choice.value == findstatus });
+          data.resultname = findResult ? findResult?.name : '';
+          data.comment = data.detail.verify.detail || '';
+          return data;
+        });
+        this.verifyResult = res?.verifyResult.filter((data: any) => { return data.process == '3'});
         this.considerCourses = [
           ...(res?.considerCourses || []),
           ...this.newConsiderCourses,
@@ -165,7 +183,16 @@ export class ConsiderComponent implements OnInit {
           ...this.newConsiderCert,
         ];
 
-        const lastPlan = res?.verifyResult.find((data: any)=>{return data.process == '4'}) as any;
+        let lastPlan = {} as any;
+        if (this.daftRequest.requestprocess == '4') {
+          lastPlan = res?.verifyResult.find((data: any)=>{
+            return data.process == '4';
+          }) as any;
+        } else {
+          lastPlan = res?.verifyResult.find((data: any)=>{
+            return data.process == '3' && data.status == '2';
+          }) as any;
+        }
         if (this.daftRequest.requestprocess >= '4') {
           this.form.controls.plan.setValue({
             plans: lastPlan?.detail?.plan.plans || [],
@@ -255,7 +282,7 @@ export class ConsiderComponent implements OnInit {
     let reqProcess = '';
     let reqStatus = '';
     if (_.get(this.form, 'value.verify.result', '') == '3') {
-      reqStatus = '3'
+      reqStatus = '2'
       reqProcess = '3'
     } else {
       reqStatus = _.get(this.form, 'value.verify.result', '');
@@ -294,17 +321,17 @@ export class ConsiderComponent implements OnInit {
     let reqProcess = '';
     let reqStatus = '';
     if (_.get(this.form, 'value.verify.result', '') == '3') {
-      reqStatus = '1'
+      reqStatus = '2'
       reqProcess = '3'
     } else {
       reqStatus = _.get(this.form, 'value.verify.result', '');
       reqProcess = '4';
     }
-    const payload = this._getRequest('4', status);
+    const payload = this._getRequest(reqProcess, reqStatus);
     payload.process = reqProcess;
     payload.status = reqStatus;
-    payload.requestprocess = process;
-    payload.requeststatus = status;
+    payload.requestprocess = reqProcess;
+    payload.requeststatus = reqStatus;
     this.eUniService
       .uniRequestDegreeCertUpdate(payload)
       .subscribe(() => {
@@ -341,7 +368,7 @@ export class ConsiderComponent implements OnInit {
       height: '100vh',
       data: {
         title: e?.file?.filename,
-        files: [e?.file],
+        files: e?.file.files,
         checkresult: [],
         systemType: 'ksp',
       },

@@ -60,7 +60,7 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
     detail: []
   });
   uniData: any;
-  mode: any = 'edit';
+  mode: any = 'view';
   status = '';
   process = '';
 
@@ -100,26 +100,33 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
       uniRequestDegree = await lastValueFrom(
         this.uniInfoService.uniRequestDegreeCertSelectById(this.id)
       );
-      if (
-        uniRequestDegree.requestprocess == '1' ||
-        (uniRequestDegree.requestprocess == '2' &&
-          uniRequestDegree.requeststatus == '1') ||
-        (uniRequestDegree.requestprocess == '3' &&
-          uniRequestDegree.requeststatus == '1') ||
-        (uniRequestDegree.requestprocess == '4' &&
-          uniRequestDegree.requeststatus == '1') ||
-        (uniRequestDegree.requestprocess == '4' &&
-          uniRequestDegree.requeststatus == '2') ||
-        (uniRequestDegree.requestprocess == '5' &&
-          uniRequestDegree.requeststatus == '1') ||
-        (uniRequestDegree.requestprocess == '5' &&
-          uniRequestDegree.requeststatus == '2')
-      ) {
-        this.mode = 'view';
+      if ((uniRequestDegree.requeststatus == '2' && uniRequestDegree.requestprocess == '1') ||
+          (uniRequestDegree.requeststatus == '2' && uniRequestDegree.requestprocess == '3') ||
+          (uniRequestDegree.requeststatus == '3' && uniRequestDegree.requestprocess == '4') ||
+          (uniRequestDegree.requeststatus == '3' && uniRequestDegree.requestprocess == '5')) {
+            this.mode = 'edit';
       }
+      // if (
+      //   uniRequestDegree.requestprocess == '1' ||
+      //   (uniRequestDegree.requestprocess == '2' &&
+      //     uniRequestDegree.requeststatus == '1') ||
+      //   (uniRequestDegree.requestprocess == '3' &&
+      //     uniRequestDegree.requeststatus == '1') ||
+      //   (uniRequestDegree.requestprocess == '4' &&
+      //     uniRequestDegree.requeststatus == '1') ||
+      //   (uniRequestDegree.requestprocess == '4' &&
+      //     uniRequestDegree.requeststatus == '2') ||
+      //   (uniRequestDegree.requestprocess == '5' &&
+      //     uniRequestDegree.requeststatus == '1') ||
+      //   (uniRequestDegree.requestprocess == '5' &&
+      //     uniRequestDegree.requeststatus == '2')
+      // ) {
+      //   this.mode = 'view';
+      // }
       this.status = uniRequestDegree.requeststatus;
       this.process = uniRequestDegree.requestprocess;
       const checkresult = uniRequestDegree.checkresult ? parseJson(uniRequestDegree.checkresult) : {};
+      console.log(checkresult)
       const { requestNo, step1, step2, step3, step4 } =
         this.uniInfoService.mappingUniverSitySelectByIdWithForm(
           uniRequestDegree
@@ -156,6 +163,7 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
         });
       }, 500);
     } else {
+      this.mode = 'edit';
       this.step1Form.setValue({
         step1: {
           institutionsCode: this.uniData?.universitycode || '',
@@ -189,12 +197,14 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
     dialogRef.componentInstance.confirmed.subscribe(async (e) => {
       if (e) {
         const res = await (async () => {
-          if (this.id)
+          if (this.id) {
+            const currentprocess = this.process;
             return await lastValueFrom(
               this.uniRequestService.uniRequestUpdate(
-                this._getRequest(process, '1')
+                this._getRequest(currentprocess, '1')
               )
             );
+          }
           return await lastValueFrom(
             this.uniRequestService.uniRequestInsert(
               this._getRequest(process, '1')
@@ -318,7 +328,7 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
       data: {
         header: 'ยืนยันข้อมูลสำเร็จ',
         content: `วันที่ : ${this.date}
-        เลขที่แบบคำขอ : ${formatRequestNo(requestno || '') || formatRequestNo(this.requestNo) || '-'}`,
+        เลขที่แบบคำขอ : ${requestno ? formatRequestNo(requestno || '') : formatRequestNo(this.requestNo) || '-'}`,
         subContent: `กรุณาตรวจสอบสถานะแบบคำขอหรือรหัสเข้าใช้งาน
         ผ่านทางอีเมลผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },

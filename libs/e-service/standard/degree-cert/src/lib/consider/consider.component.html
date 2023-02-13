@@ -69,7 +69,6 @@
               </thead>
               <tbody>
                 <tr *ngFor="let item of considerCert; let i = index">
-                  <td>{{ i + 1 }}</td>
                   <td class="detail__table">
                     {{ item?.verifyForm?.reasonTimes || '' }}
                   </td>
@@ -149,6 +148,36 @@
           [choices]="choices"
           formControlName="verify"
         ></e-service-license-check>
+      </div>
+      <br />
+      <div class="bg-white p-4">
+        <div class="box-header text-primary">
+          ประวัติการตรวจสอบ
+        </div>
+
+        <div class="table-responsive mt-4">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">ลำดับ</th>
+                <th scope="col">วันที่ตรวจสอบ</th>
+                <th scope="col">ชื่อ-นามสกุลเจ้าหน้าที่</th>
+                <th scope="col">ผลการตรวจสอบ</th>
+                <th scope="col">หมายเหต/สาเหตุ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of historyList;let i = index">
+                <td>{{ i+1 || '' }}</td>
+                <td>{{ item?.createdate || '' }}</td>
+                <td>{{ item?.fullnameth || '' }}</td>
+                <td>{{ item?.resultname || '' }}</td>
+                <td>{{ item?.comment || '' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <br />
       </div>
     </div>
   </form>

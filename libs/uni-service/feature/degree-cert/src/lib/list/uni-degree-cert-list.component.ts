@@ -143,7 +143,10 @@ export class UniDegreeCertListComponent
           }
         );
         this.rejectedRequests = this.dataSource.data.filter((data: any) => {
-          return data.process == '2' && data.status == '2';
+          return (data.process == '1' && data.status == '2') || 
+                  (data.process == '3' && data.status == '2') ||
+                  (data.process == '4' && data.status == '3') ||
+                  (data.process == '5' && data.status == '3');
         })
       });
   }

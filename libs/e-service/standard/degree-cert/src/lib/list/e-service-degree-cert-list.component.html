@@ -148,7 +148,7 @@
 
         <ng-container matColumnDef="print">
           <th mat-header-cell *matHeaderCellDef></th>
-          <td class="text-end" mat-cell *matCellDef="let element" [hidden]="processType !== 4">
+          <td class="text-end" mat-cell *matCellDef="let element" [hidden]="processType !== 5">
             <button class="btn btn-sm btn-primary" (click)="lastStep(element)">
               <div class="d-flex justify-content-center">
                 <i role="button" class="bi bi-printer"></i>
@@ -192,7 +192,7 @@
         (click)="consider()"
         class="fs-6 btn btn-sm bg-orange"
         style="width: 300px"
-        *ngIf="pageType !== 3"
+        *ngIf="pageType !== 4"
         [disabled]="!isSelectConsider()"
       >
         พิจารณาประเมินหลักสูตร (หลายรายการ)
@@ -203,7 +203,7 @@
         (click)="approve()"
         class="fs-6 ms-3 btn btn-sm btn-primary"
         style="width: 300px"
-        *ngIf="pageType !== 3"
+        *ngIf="pageType !== 4"
         [disabled]="!isSelectApprove()"
       >
         พิจารณารับรอง (หลายรายการ)
@@ -214,7 +214,7 @@
         (click)="followUp()"
         class="fs-6 ms-3 btn btn-sm btn-primary"
         style="width: 300px"
-        *ngIf="pageType === 3"
+        *ngIf="pageType === 4"
         [disabled]="!isSelectResult()"
       >
         พิจารณาติดตามผลเชิงประจักษ์ (หลายรายการ)

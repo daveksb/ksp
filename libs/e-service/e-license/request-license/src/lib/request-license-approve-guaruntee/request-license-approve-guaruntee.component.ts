@@ -140,8 +140,8 @@ export class RequestLicenseApproveGuarunteeComponent
       if (res) {
         const data = this.selection.selected.map((item: any) => ({
           requestid: item.id,
-          process: '5',
-          status: '3',
+          process: '6', // พิจารณาและรับรองคณะอนุกรรมการ
+          status: '2', // ผ่านการพิจารณา
           // detail: '',
           // systemtype: '4',
           // userid: '123',
