@@ -24,6 +24,10 @@ export class EQualificationConsiderMeetingComponent implements OnInit {
   cancel() {
     this.router.navigate(['/qualification-approve', 'consider-list']);
   }
+
+  save() {
+    //
+  }
 }
 
 const verifyChoices = [

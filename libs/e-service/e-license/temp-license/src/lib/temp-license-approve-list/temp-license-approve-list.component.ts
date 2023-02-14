@@ -133,7 +133,7 @@ export class TempLicenseApproveListComponent implements AfterViewInit {
         this.sort.direction = sortState.direction;
         this.sort.sortChange.emit(sortState);
       } else {
-        this.clearData();
+        this.dataSource.data = [];
       }
     });
   }
@@ -619,7 +619,7 @@ export class TempLicenseApproveListComponent implements AfterViewInit {
     });
   }
 
-  clearData() {
+  resetSearch() {
     this.dataSource.data = [];
     this.form.reset();
     this.form.controls.search.patchValue(this.defaultForm);
