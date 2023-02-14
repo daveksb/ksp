@@ -12,7 +12,7 @@ export function mapSchUserStatus(status: string): string {
 
 const urgentFilter = (item: KspRequest) => item.isurgent === '1';
 const approveFilter = (item: KspRequest) =>
-  item.process === '5' && item.status === '3';
+  item.process === '6' && item.status === '2';
 
 export function getLicenseType(requestList: KspRequest[]): any {
   const teacher = requestList.filter(
@@ -110,4 +110,21 @@ export function getLicenseType(requestList: KspRequest[]): any {
 
     return item;
   });
+}
+
+export function getSummaryData(list: any[]) {
+  return [
+    {
+      result: 'อนุมัติออกหนังสืออนุญาต',
+      count: list.reduce((acc, item) => acc + item.approve, 0),
+    },
+    {
+      result: 'ไม่อนุมัติออกหนังสืออนุญาต',
+      count: list.reduce((acc, item) => acc + item.unApprove, 0),
+    },
+    {
+      result: 'กรณีเร่งด่วนออกหนังสืออนุญาตแล้ว',
+      count: list.reduce((acc, item) => acc + item.urgent, 0),
+    },
+  ];
 }

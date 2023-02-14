@@ -3,8 +3,7 @@
   </mat-progress-spinner>
 </div>
 
-<ksp-top-nav
-  ><span header>แบบคำขออนุญาตประกอบวิชาชีพ</span>
+<ksp-top-nav><span header>แบบคำขออนุญาตประกอบวิชาชีพ</span>
   <span subHeader>รับรองหนังสืออนุญาตประกอบวิชาชีพ </span>
 </ksp-top-nav>
 
@@ -30,8 +29,7 @@
     <ksp-request-license-approve-license-table
       [isKmv]="true"
       [data]="requestTypeList"
-      (listOpen)="onListOpen($event)"
-    ></ksp-request-license-approve-license-table>
+      (listOpen)="onListOpen($event)"></ksp-request-license-approve-license-table>
   </div>
 
   <div class="bg-white px-3 py-3 mb-3">
@@ -39,7 +37,8 @@
       สรุปจำนวนพิจารณาออกหนังสืออนุญาตประกอบวิชาชีพทางการศึกษา
     </div>
     <hr />
-    <e-service-request-license-approve-summary-table></e-service-request-license-approve-summary-table>
+    <e-service-request-license-approve-summary-table
+      [data]="summaryData"></e-service-request-license-approve-summary-table>
   </div>
 
   <div class="bg-white px-3 py-3">
@@ -48,8 +47,7 @@
         formControlName="matiDetail"
         [disabled]="disableForm"
         (cancel)="cancel()"
-        (save)="save($event)"
-      >
+        (save)="save($event)">
       </ksp-e-service-license-save-result>
     </form>
   </div>
