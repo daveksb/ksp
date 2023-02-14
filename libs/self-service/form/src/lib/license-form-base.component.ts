@@ -204,7 +204,8 @@ export abstract class LicenseFormBaseComponent {
   sameIdCardDialog() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       data: {
-        header: `หมายเลขบัตรประชาชนนี้ได้ถูกใช้ยื่นแบบคำขอไปแล้ว`,
+        header: `หมายเลขบัตรประชาชนนี้ได้ถูกใช้ยื่นแบบคำขอ
+        และกำลังอยู่ในระหว่างดำเนินการ !`,
       },
     });
 
