@@ -1,4 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 
 @Component({
@@ -8,21 +14,10 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
   styleUrls: ['./request-license-approve-summary-table.component.scss'],
   imports: [MatTableModule],
 })
-export class RequestLicenseApproveSummaryTableComponent implements OnInit {
-  @Input() data = [
-    {
-      result: 'อนุมัติออกหนังสืออนุญาต',
-      count: 0,
-    },
-    {
-      result: 'ไม่อนุมัติออกหนังสืออนุญาต',
-      count: 0,
-    },
-    {
-      result: 'กรณีเร่งด่วนออกหนังสืออนุญาตแล้ว',
-      count: 0,
-    },
-  ];
+export class RequestLicenseApproveSummaryTableComponent
+  implements OnInit, OnChanges
+{
+  @Input() data: any = [];
   displayedColumns: string[] = ['result', 'count'];
   dataSource = new MatTableDataSource<any>();
 
@@ -30,5 +25,11 @@ export class RequestLicenseApproveSummaryTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataSource.data = this.data;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['data']) {
+      this.dataSource.data = this.data;
+    }
   }
 }
