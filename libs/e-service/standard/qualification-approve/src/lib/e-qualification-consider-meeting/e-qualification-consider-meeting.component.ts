@@ -16,13 +16,17 @@ export class EQualificationConsiderMeetingComponent implements OnInit {
 
   ngOnInit(): void {
     localForage.getItem('qualification-meeting-result').then((res: any) => {
-      console.log('xxx = ', res);
+      //console.log('xxx = ', res);
       this.kspRequests = res;
     });
   }
 
   cancel() {
     this.router.navigate(['/qualification-approve', 'consider-list']);
+  }
+
+  save() {
+    //
   }
 }
 

@@ -10,67 +10,79 @@ export function mapSchUserStatus(status: string): string {
   } else return 'ไม่ใช้งาน';
 }
 
-export function getLicenseType(requestList: KspRequest[]): any {
-  const teacherCount = requestList.filter(
-    (item: any) => +item.careertype === SelfServiceRequestSubType.ครู
-  ).length;
+const urgentFilter = (item: KspRequest) => item.isurgent === '1';
+const approveFilter = (item: KspRequest) =>
+  item.process === '6' && item.status === '2';
 
-  const schoolManagerCount = requestList.filter(
+export function getLicenseType(requestList: KspRequest[]): any {
+  const teacher = requestList.filter(
+    (item: any) => +item.careertype === SelfServiceRequestSubType.ครู
+  );
+  const teacherCount = teacher.length;
+
+  const schoolManager = requestList.filter(
     (item: any) =>
       +item.careertype === SelfServiceRequestSubType.ผู้บริหารสถานศึกษา
-  ).length;
+  );
+  const schoolManagerCount = schoolManager.length;
 
-  const educationManagerCount = requestList.filter(
+  const educationManager = requestList.filter(
     (item: any) =>
       +item.careertype === SelfServiceRequestSubType.ผู้บริหารการศึกษา
-  ).length;
+  );
+  const educationManagerCount = educationManager.length;
 
-  const educationConsultantCount = requestList.filter(
+  const educationConsultant = requestList.filter(
     (item: any) => +item.careertype === SelfServiceRequestSubType.ศึกษานิเทศก์
-  ).length;
+  );
+  const educationConsultantCount = educationConsultant.length;
 
   return DEFAULT_REQUEST_TYPE_LIST.map((item) => {
     if (item.order === 1) {
+      const approveCount = teacher.filter(approveFilter).length;
       return {
         ...item,
         label: 'ครู',
         count: teacherCount,
-        approve: 0,
-        unApprove: 0,
-        urgent: 0,
+        approve: approveCount,
+        unApprove: teacherCount - approveCount,
+        urgent: teacher.filter(urgentFilter).length,
       };
     }
 
     if (item.licenseType === 'ผู้บริหารสถานศึกษา') {
+      const approveCount = schoolManager.filter(approveFilter).length;
       return {
         ...item,
         label: 'ผู้บริหารสถานศึกษา',
         count: schoolManagerCount,
-        approve: 0,
-        unApprove: 0,
-        urgent: 0,
+        approve: approveCount,
+        unApprove: schoolManagerCount - approveCount,
+        urgent: schoolManager.filter(urgentFilter).length,
       };
     }
 
     if (item.licenseType === 'ผู้บริหารการศึกษา') {
+      const approveCount = educationManager.filter(approveFilter).length;
       return {
         ...item,
         label: 'ผู้บริหารการศึกษา',
         count: educationManagerCount,
-        approve: 0,
-        unApprove: 0,
-        urgent: 0,
+        approve: approveCount,
+        unApprove: educationManagerCount - approveCount,
+        urgent: educationManager.filter(urgentFilter).length,
       };
     }
 
     if (item.licenseType === 'ศึกษานิเทศก์') {
+      const approveCount = educationConsultant.filter(approveFilter).length;
       return {
         ...item,
         label: 'ศึกษานิเทศก์',
         count: educationConsultantCount,
-        approve: 0,
-        unApprove: 0,
-        urgent: 0,
+        approve: approveCount,
+        unApprove: educationConsultantCount - approveCount,
+        urgent: educationConsultant.filter(urgentFilter).length,
       };
     }
 
@@ -98,4 +110,21 @@ export function getLicenseType(requestList: KspRequest[]): any {
 
     return item;
   });
+}
+
+export function getSummaryData(list: any[]) {
+  return [
+    {
+      result: 'อนุมัติออกหนังสืออนุญาต',
+      count: list.reduce((acc, item) => acc + item.approve, 0),
+    },
+    {
+      result: 'ไม่อนุมัติออกหนังสืออนุญาต',
+      count: list.reduce((acc, item) => acc + item.unApprove, 0),
+    },
+    {
+      result: 'กรณีเร่งด่วนออกหนังสืออนุญาตแล้ว',
+      count: list.reduce((acc, item) => acc + item.urgent, 0),
+    },
+  ];
 }

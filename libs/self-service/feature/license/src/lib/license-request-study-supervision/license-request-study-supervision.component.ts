@@ -24,7 +24,12 @@ import {
   replaceEmptyWithNull,
   toLowercaseProp,
 } from '@ksp/shared/utility';
-import { FileGroup, SelfMyInfo, SelfRequest } from '@ksp/shared/interface';
+import {
+  FileGroup,
+  mapCheckFile,
+  SelfMyInfo,
+  SelfRequest,
+} from '@ksp/shared/interface';
 import * as _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 import { Subject } from 'rxjs';
@@ -161,9 +166,22 @@ export class LicenseRequestStudySupervisionComponent
 
     if (data.fileinfo) {
       const fileInfo = parseJson(data.fileinfo);
+      const detail = parseJson(data.detail);
       const { edufiles, experiencefiles } = fileInfo;
-      this.eduFiles = edufiles;
-      this.experienceFiles = experiencefiles;
+
+      if (detail?.checkfiles) {
+        const {
+          edufiles: checkEdufiles,
+          experiencefiles: checkExperienceFiles,
+        } = detail.checkfiles;
+        const mapCheckEduFile = mapCheckFile(checkEdufiles);
+        const mapCheckExperienceFile = mapCheckFile(checkExperienceFiles);
+        this.eduFiles = edufiles.map(mapCheckEduFile);
+        this.experienceFiles = experiencefiles.map(mapCheckExperienceFile);
+      } else {
+        this.eduFiles = edufiles;
+        this.experienceFiles = experiencefiles;
+      }
     }
   }
 

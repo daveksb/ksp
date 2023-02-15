@@ -304,8 +304,8 @@ export class EQualificationConsiderListComponent implements AfterViewInit {
     localForage.setItem(
       'qualification-meeting-result',
       this.selection.selected
-    );
-    this.router.navigate(['/qualification-approve', 'consider-meeting']);
+    ),
+      this.router.navigate(['/qualification-approve', 'consider-meeting']);
   }
 }
 

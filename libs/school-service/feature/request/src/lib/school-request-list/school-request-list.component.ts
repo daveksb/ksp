@@ -163,6 +163,8 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
         this.getPdfColumnLabel = 'หนังสืออนุญาตฯ';
       } else if (payload.requesttype === '40') {
         this.getPdfColumnLabel = 'ประกาศนียบัตร';
+      } else if (payload.requesttype === '6') {
+        this.getPdfColumnLabel = 'หนังสือรับรองคุณวุฒิ';
       } else {
         this.getPdfColumnLabel = 'หนังสือแจ้งผล';
       }

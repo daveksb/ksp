@@ -11,6 +11,7 @@ import { ERequestService, LoaderService } from '@ksp/shared/service';
 import {
   formatDatePayload,
   getLicenseType,
+  getSummaryData,
   parseJson,
 } from '@ksp/shared/utility';
 import { Subject } from 'rxjs';
@@ -31,6 +32,20 @@ export class RequestLicenseApproveKmvComponent implements OnInit {
   form = this.fb.group({
     matiDetail: [''],
   });
+  summaryData: any[] = [
+    {
+      result: 'อนุมัติออกหนังสืออนุญาต',
+      count: 0,
+    },
+    {
+      result: 'ไม่อนุมัติออกหนังสืออนุญาต',
+      count: 0,
+    },
+    {
+      result: 'กรณีเร่งด่วนออกหนังสืออนุญาตแล้ว',
+      count: 0,
+    },
+  ];
 
   constructor(
     private dialog: MatDialog,
@@ -82,6 +97,7 @@ export class RequestLicenseApproveKmvComponent implements OnInit {
               this.requestList = res.datareturn;
               this.requestTypeList = getLicenseType(this.requestList);
               //console.log('type list = ', this.requestTypeList);
+              this.summaryData = getSummaryData(this.requestTypeList);
             }
           });
       }
