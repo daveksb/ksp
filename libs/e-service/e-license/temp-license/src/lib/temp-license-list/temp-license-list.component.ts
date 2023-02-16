@@ -158,7 +158,7 @@ export class ETempLicenseListComponent implements AfterViewInit {
       .getApproveHistory(request.id || '')
       .subscribe((res) => {
         if (res && res.length) {
-          console.log('res xx = ', res);
+          //console.log('res xx = ', res);
           this.dialog.open(CheckHistoryComponent, {
             width: '50vw',
             data: { request: res, selectedTab: 0 },
