@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -18,6 +18,7 @@ export class LicenseCheckComponent extends KspFormBaseComponent {
   @Input() headerTitle = 'ผลการตรวจสอบ';
   @Input() checkedResult: string[] = [];
   @Output() selectedItem = 0;
+  @Output() showHistory = new EventEmitter<any>();
 
   override form = this.fb.group({
     result: [],

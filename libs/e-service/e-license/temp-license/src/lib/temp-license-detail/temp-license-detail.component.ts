@@ -40,6 +40,9 @@ import {
 import { TempLicenseDetailService } from './temp-license-detail.service';
 import { ESelfFormBaseComponent } from '@ksp/shared/form/others';
 import { Location } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { CheckHistoryComponent } from '@ksp/shared/ui';
+import { CompleteDialogComponent } from '@ksp/shared/dialog';
 
 export class KspApprovePersistData {
   checkDetail: any = null;
@@ -112,7 +115,8 @@ export class ETempLicenseDetailComponent implements OnInit {
     private addressService: AddressService,
     private generalInfoService: GeneralInfoService,
     private staffService: StaffService,
-    private location: Location
+    private location: Location,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -121,6 +125,33 @@ export class ETempLicenseDetailComponent implements OnInit {
     this.checkRequestId();
     this.addCheckResultArray();
     this.checkSubType();
+  }
+
+  showHistory(req: KspRequest) {
+    this.eRequestService.getApproveHistory(req.id || '').subscribe((res) => {
+      if (res && res.length) {
+        //console.log('res = ', res);
+        this.dialog.open(CheckHistoryComponent, {
+          width: '50vw',
+          data: {
+            selectedTab: this.selectedTabIndex,
+            request: res,
+            showReason: true,
+          },
+        });
+      } else {
+        const dialog = this.dialog.open(CompleteDialogComponent, {
+          data: {
+            header: `ไม่พบข้อมูล`,
+            btnLabel: 'ตกลง',
+          },
+        });
+
+        dialog.componentInstance.completed.subscribe(() => {
+          this.dialog.closeAll();
+        });
+      }
+    });
   }
 
   addCheckResultArray() {
