@@ -17,14 +17,23 @@ export class CheckHistoryComponent {
   ) {}
 
   mapCheckResult(data: string) {
+    //console.log('data = ', this.data);
     if (!data) return '';
     const parseData = JSON.parse(data);
+    //console.log('parse data = ', parseData);
     const result = parseData.checkresult || '';
-    //console.log('data xx = ', result);
-
     if (result === '1') return 'ครบถ้วน และถูกต้อง';
     if (result === '2') return 'ขอแก้ไข / เพิ่มเติม';
     if (result === '3') return 'ขาดคุณสมบัติ';
     else return '';
+  }
+
+  mapReason(data: string) {
+    const parseData = JSON.parse(data);
+    /*     console.log(
+      'reason = ',
+      parseData?.checkdetail[this.data.selectedTab].detail
+    ); */
+    return parseData?.checkdetail[this.data.selectedTab]?.detail || '';
   }
 }

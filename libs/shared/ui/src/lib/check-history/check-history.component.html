@@ -17,17 +17,21 @@
           <th scope="col">ชื่อ-นามสกุล เจ้าหน้าที่</th>
           <th scope="col">วันที่ตรวจสอบ</th>
           <th scope="col">ผลการตรวจสอบ</th>
+          <th *ngIf="data?.showReason" scope="col">หมายเหตุ/เหตุผล</th>
         </tr>
       </thead>
 
       <tbody>
-        <ng-container *ngFor="let row of data; let i = index">
+        <ng-container *ngFor="let row of data?.request; let i = index">
           <tr>
             <td scope="col">{{ i + 1 }}</td>
             <td scope="col">{{ row.firstnameth }} {{ row.lastnameth }}</td>
             <td scope="col">{{ row.createdate | thaiDate }}</td>
             <td scope="col">
               {{ mapCheckResult(row?.detail) }}
+            </td>
+            <td *ngIf="data?.showReason" scope="col">
+              {{ mapReason(row?.detail) }}
             </td>
           </tr>
         </ng-container>

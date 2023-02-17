@@ -132,7 +132,6 @@ export class ETempLicenseListComponent implements AfterViewInit {
 
     this.eRequestService.KspSearchRequest(payload).subscribe((res) => {
       if (res && res.length) {
-        //this.dataSource.data = res;
         this.dataSource.data = processFilter(res);
 
         this.dataSource.sort = this.sort;
@@ -152,28 +151,30 @@ export class ETempLicenseListComponent implements AfterViewInit {
     });
   }
 
-  openHistory(req: KspRequest) {
-    this.eRequestService.getApproveHistory(req.id || '').subscribe((res) => {
-      if (res && res.length) {
-        console.log('res = ', res);
+  openHistory(request: KspRequest) {
+    //console.log('reqq = ', req);
+    this.eRequestService
+      .getApproveHistory(request.id || '')
+      .subscribe((res) => {
+        if (res && res.length) {
+          //console.log('res xx = ', res);
+          this.dialog.open(CheckHistoryComponent, {
+            width: '50vw',
+            data: { request: res, selectedTab: 0 },
+          });
+        } else {
+          const dialog = this.dialog.open(CompleteDialogComponent, {
+            data: {
+              header: `ไม่พบข้อมูล`,
+              btnLabel: 'ตกลง',
+            },
+          });
 
-        this.dialog.open(CheckHistoryComponent, {
-          width: '50vw',
-          data: res,
-        });
-      } else {
-        const dialog = this.dialog.open(CompleteDialogComponent, {
-          data: {
-            header: `ไม่พบข้อมูล`,
-            btnLabel: 'ตกลง',
-          },
-        });
-
-        dialog.componentInstance.completed.subscribe(() => {
-          this.dialog.closeAll();
-        });
-      }
-    });
+          dialog.componentInstance.completed.subscribe(() => {
+            this.dialog.closeAll();
+          });
+        }
+      });
   }
 
   isLicenseApproved(req: KspRequest) {
@@ -197,7 +198,7 @@ export class ETempLicenseListComponent implements AfterViewInit {
   }
 
   genPdf(element: any) {
-    console.log('element = ', element);
+    //console.log('element = ', element);
     const requestno = element.licenseno ?? '';
     const position = element?.position;
     const startDate = new Date();
