@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent, ListData } from '@ksp/shared/interface';
 import { GeneralInfoService } from '@ksp/shared/service';
-import { providerFactory } from '@ksp/shared/utility';
+import { nameThPattern, phonePattern, providerFactory, validatorMessages } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 @UntilDestroy()
@@ -15,14 +15,15 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 export class DegreeCertCoordinatorComponent extends KspFormBaseComponent {
   override form = this.fb.group({
     prefixTh: [],
-    nameTh: [],
-    lastNameTh: [],
+    nameTh: ['', Validators.pattern(nameThPattern)],
+    lastNameTh: ['', Validators.pattern(nameThPattern)],
     post: [],
-    contactPhone: [],
-    workplacePhone: [],
+    contactPhone: ['', Validators.pattern(phonePattern)],
+    workplacePhone: ['', Validators.pattern(phonePattern)],
     fax: [],
-    email: [],
+    email: ['', Validators.email],
   });
+  validatorMessages = validatorMessages;
   prefixOptions: ListData[] = [];
   constructor(
     private fb: FormBuilder,
@@ -42,5 +43,25 @@ export class DegreeCertCoordinatorComponent extends KspFormBaseComponent {
         label: name_th,
       }));
     });
+  }
+
+  get email() {
+    return this.form.controls.email;
+  }
+
+  get nameTh() {
+    return this.form.controls.nameTh;
+  }
+
+  get lastnameTh() {
+    return this.form.controls.lastNameTh;
+  }
+
+  get contactphone () {
+    return this.form.controls.contactPhone;
+  }
+
+  get workphone () {
+    return this.form.controls.workplacePhone;
   }
 }

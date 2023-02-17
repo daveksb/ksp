@@ -10,6 +10,7 @@ import { CourseTypeAComponent } from './course/course-type-a.component';
 import { CourseTypeBComponent } from './course/course-type-b.component';
 import {
   HideInViewModeDirective,
+  InputNumberDirective,
   MinMaxDirective,
 } from '@ksp/shared/directive';
 import { AddRowButtonComponent } from '@ksp/shared/ui';
@@ -25,7 +26,8 @@ import { CourseConsiderComponent } from './course-consider/course-consider.compo
     SharedFormTeacherInfoModule,
     AddRowButtonComponent,
     HideInViewModeDirective,
-    MinMaxDirective
+    MinMaxDirective,
+    InputNumberDirective
   ],
   declarations: [
     TeacherComponent,
