@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent, ListData } from '@ksp/shared/interface';
-import { providerFactory } from '@ksp/shared/utility';
+import { nameEnPattern, nameThPattern, providerFactory, validatorMessages } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 @UntilDestroy()
@@ -22,16 +22,17 @@ export class DegreeInfoComponent
     degreeType: [],
     courseYear: [],
     courseName: [],
-    degreeNameThFull: [],
-    degreeNameEnFull: [],
-    degreeNameThShort: [],
-    degreeNameEnShort: [],
+    degreeNameThFull: ['', Validators.pattern(nameThPattern)],
+    degreeNameEnFull: ['', Validators.pattern(nameEnPattern)],
+    degreeNameThShort: ['', Validators.pattern(nameThPattern)],
+    degreeNameEnShort: ['', Validators.pattern(nameEnPattern)],
     courseType: [],
     courseStatus: [],
     courseApproveTime: [],
     courseApproveDate: [],
     courseAcceptDate: [],
   });
+  validatorMessages = validatorMessages;
 
   @Input()
   set degreeTypes(value: ListData[]) {
@@ -53,6 +54,22 @@ export class DegreeInfoComponent
         this.onTouched();
       })
     );
+  }
+
+  get degreenamethfull () {
+    return this.form.controls.degreeNameThFull;
+  }
+
+  get degreenamethshort () {
+    return this.form.controls.degreeNameThShort;
+  }
+
+  get degreenameenfull () {
+    return this.form.controls.degreeNameEnFull;
+  }
+
+  get degreenameenshort () {
+    return this.form.controls.degreeNameEnShort;
   }
 
   ngOnInit(): void {

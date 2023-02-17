@@ -39,7 +39,7 @@ export class CourseTypeAComponent
   }
 
   sum(source: any[], data: string): number {
-    return source.reduce((p, c) => p + Number(c[data]), 0);
+    return source.reduce((p, c) => p + Number(c[data]) || 0, 0);
   }
 
   calculateSum() {

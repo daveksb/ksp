@@ -80,8 +80,16 @@
           type="text"
           placeholder="กรุณากรอก"
           formControlName="degreeNameThFull"
-          inputThai
         />
+        <ng-container
+          *ngIf="
+            degreenamethfull.invalid && (degreenamethfull.dirty || degreenamethfull.touched)
+          "
+        >
+          <span class="text-danger" *ngIf="degreenamethfull.errors?.['pattern']">
+            {{ validatorMessages.th }}
+          </span>
+        </ng-container>
       </div>
       <div class="col-md-4">
         <label class="form-label">ชื่อปริญญาและสาขาวิชา (ภาษาไทย แบบย่อ)</label>
@@ -89,9 +97,17 @@
           class="form-control"
           type="text"
           placeholder="กรุณากรอก"
-          formControlName="degreeNameEnFull"
-          inputThai
+          formControlName="degreeNameThShort"
         />
+        <ng-container
+          *ngIf="
+            degreenamethshort.invalid && (degreenamethshort.dirty || degreenamethshort.touched)
+          "
+        >
+          <span class="text-danger" *ngIf="degreenamethshort.errors?.['pattern']">
+            {{ validatorMessages.th }}
+          </span>
+        </ng-container>
       </div>
     </div>
     <div class="row mb-3">
@@ -103,9 +119,17 @@
           class="form-control"
           type="text"
           placeholder="กรุณากรอก"
-          formControlName="degreeNameThShort"
-          inputEng
+          formControlName="degreeNameEnFull"
         />
+        <ng-container
+          *ngIf="
+            degreenameenfull.invalid && (degreenameenfull.dirty || degreenameenfull.touched)
+          "
+        >
+          <span class="text-danger" *ngIf="degreenameenfull.errors?.['pattern']">
+            {{ validatorMessages.en }}
+          </span>
+        </ng-container>
       </div>
       <div class="col-md-4">
         <label class="form-label"
@@ -116,8 +140,16 @@
           type="text"
           placeholder="กรุณากรอก"
           formControlName="degreeNameEnShort"
-          inputEng
         />
+        <ng-container
+          *ngIf="
+            degreenameenshort.invalid && (degreenameenshort.dirty || degreenameenshort.touched)
+          "
+        >
+          <span class="text-danger" *ngIf="degreenameenshort.errors?.['pattern']">
+            {{ validatorMessages.en }}
+          </span>
+        </ng-container>
       </div>
     </div>
 

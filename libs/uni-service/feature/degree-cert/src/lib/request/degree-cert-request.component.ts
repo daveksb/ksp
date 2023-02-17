@@ -100,7 +100,8 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
       uniRequestDegree = await lastValueFrom(
         this.uniInfoService.uniRequestDegreeCertSelectById(this.id)
       );
-      if ((uniRequestDegree.requeststatus == '2' && uniRequestDegree.requestprocess == '1') ||
+      if ((uniRequestDegree.requeststatus == '1' && uniRequestDegree.requestprocess == '99') ||
+          (uniRequestDegree.requeststatus == '2' && uniRequestDegree.requestprocess == '1') ||
           (uniRequestDegree.requeststatus == '2' && uniRequestDegree.requestprocess == '3') ||
           (uniRequestDegree.requeststatus == '3' && uniRequestDegree.requestprocess == '4') ||
           (uniRequestDegree.requeststatus == '3' && uniRequestDegree.requestprocess == '5')) {

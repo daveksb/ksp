@@ -25,6 +25,15 @@
           formControlName="nameTh"
           inputThai
         />
+        <ng-container
+            *ngIf="
+              nameTh.invalid && (nameTh.dirty || nameTh.touched)
+            "
+          >
+            <span class="text-danger" *ngIf="nameTh.errors?.['pattern']">
+              {{ validatorMessages.th }}
+            </span>
+          </ng-container>
       </div>
       <div class="col-5">
         <label class="form-label">นามสกุลภาษาไทย </label>
@@ -35,6 +44,15 @@
           formControlName="lastNameTh"
           inputThai
         />
+        <ng-container
+            *ngIf="
+              lastnameTh.invalid && (lastnameTh.dirty || lastnameTh.touched)
+            "
+          >
+            <span class="text-danger" *ngIf="lastnameTh.errors?.['pattern']">
+              {{ validatorMessages.th }}
+            </span>
+          </ng-container>
       </div>
     </div>
 
@@ -58,6 +76,15 @@
           inputNumber
           maxlength="10"
         />
+        <ng-container
+          *ngIf="
+            contactphone.invalid && (contactphone.dirty || contactphone.touched)
+          "
+        >
+          <span class="text-danger" *ngIf="contactphone.errors?.['pattern']">
+            {{ validatorMessages.phone }}
+          </span>
+        </ng-container>
       </div>
     </div>
 
@@ -72,6 +99,15 @@
           inputNumber
           maxlength="10"
         />
+        <ng-container
+          *ngIf="
+            workphone.invalid && (workphone.dirty || workphone.touched)
+          "
+        >
+          <span class="text-danger" *ngIf="workphone.errors?.['pattern']">
+            {{ validatorMessages.phone }}
+          </span>
+        </ng-container>
       </div>
       <div class="col">
         <label class="form-label">เบอร์โทรสาร</label>
@@ -95,6 +131,11 @@
           placeholder="กรุณากรอก"
           formControlName="email"
         />
+        <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
+          <span class="text-danger" *ngIf="email.errors?.['email']">{{
+            validatorMessages.email
+          }}</span>
+        </ng-container>
       </div>
     </div>
   </div>

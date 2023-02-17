@@ -38,6 +38,7 @@ export class NitetComponent extends KspFormBaseComponent implements OnInit {
       this.form?.valueChanges.subscribe((value) => {
         this.onChange(value);
         this.onTouched();
+        // this.addNitet();
       })
     );
   }
@@ -48,14 +49,18 @@ export class NitetComponent extends KspFormBaseComponent implements OnInit {
         this.nitetForm.controls.lessExperience.reset();
       }
     });
+    this.form.controls.nittetAmount.valueChanges.subscribe((res: any) => {
+      if (res && res > 0) {
+        this.form.updateValueAndValidity();
+        this.addNitet();
+      }
+    });
   }
 
   addNitet() {
-    console.log();
-
-    if (this.form.value.nittetAmount) {
-      new Array(this.form.value.nittetAmount).fill(null).forEach(() => {
-        console.log("sdf")
+    const nitetamt = this.form.controls.nittetAmount.value || 0;
+    if (nitetamt) {
+      new Array(nitetamt).fill(null).forEach(() => {
         const form = this.fb.group({
           generalInfo: [],
           experienceYear: [],
@@ -66,7 +71,7 @@ export class NitetComponent extends KspFormBaseComponent implements OnInit {
           studentOtherCourse: [],
           lessExperience: [],
         })
-        if (this.form.value.nittetAmount != this.form.controls.nitets.length) {
+        if (this.form.controls.nitets.length  < nitetamt) {
           this.form.controls.nitets.push(form);
         }
       });

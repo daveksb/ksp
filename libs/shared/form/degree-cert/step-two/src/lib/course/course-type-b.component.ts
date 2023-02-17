@@ -100,7 +100,7 @@ export class CourseTypeBComponent
   }
 
   creditSum(source: any[], data: string): number {
-    return source.reduce((p, c) => p + Number(c[data]), 0);
+    return source.reduce((p, c) => p + Number(c[data] || 0), 0);
   }
 
   get plans() {
