@@ -2,7 +2,7 @@ import { map } from 'rxjs';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FileUploadComponent } from '@ksp/shared/form/file-upload';
+import { FileMultiUploadComponent, FileUploadComponent } from '@ksp/shared/form/file-upload';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { providerFactory } from '@ksp/shared/utility';
@@ -21,6 +21,7 @@ import { MatDialog } from '@angular/material/dialog';
     ReactiveFormsModule,
     MatDatepickerModule,
     SharedFormOthersModule,
+    FileMultiUploadComponent
   ],
   template: ` <p>form-meeting-record works!</p> `,
   templateUrl: './form-approve-meeting-record.component.html',

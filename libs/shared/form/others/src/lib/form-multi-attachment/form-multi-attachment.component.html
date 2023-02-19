@@ -10,7 +10,7 @@
           <!-- <th class="text-center">จำนวนหน้า</th> -->
           <th *ngIf="mode === 'view'" class="text-center">ตรวจสอบ</th>
           <th *ngIf="mode === 'edit'" class="text-center">อัพโหลด</th>
-          <th *ngIf="systemType === 'e-service-uni'">ผลการตรวจสอบ</th>
+          <th *ngIf="(systemType === 'e-service-uni' || systemType === 'uni') && submode === 'return'">ผลการตรวจสอบ</th>
         </tr>
       </thead>
       <tbody class="text-secondary">
@@ -57,7 +57,7 @@
                 (uploadComplete)="updateComplete($event, group)">
               </ksp-file-upload>
             </td>
-            <td *ngIf="systemType === 'e-service-uni'">
+            <td *ngIf="(systemType === 'e-service-uni' || systemType === 'uni') && submode === 'return'">
               <div class="mt-4">
                 <ng-container
                   *ngFor="let result of group.checkresult; index as j">

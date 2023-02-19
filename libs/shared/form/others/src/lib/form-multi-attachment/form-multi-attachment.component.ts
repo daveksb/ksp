@@ -23,6 +23,7 @@ export class FormMultiAttachmentComponent {
   @Input() uniqueTimestamp = '';
   @Input() requestType: number | null = null;
   @Input() systemType: string | null = null;
+  @Input() submode: string | null = 'create';
   @Output() downloadClick = new EventEmitter<any>();
   @Output() uploadComplete = new EventEmitter<any>();
   @Output() confirmChoice = new EventEmitter<any>();

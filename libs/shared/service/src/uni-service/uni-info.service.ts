@@ -89,6 +89,7 @@ export class UniInfoService {
         rows: res.processteaching ? parseJson(res.processteaching) : [],
       },
     };
+    console.log(parseJson(res?.attachfiles))
     if (res?.attachfiles)
       formData.step4 = {
         files: parseJson(res?.attachfiles),
@@ -330,5 +331,15 @@ export class UniInfoService {
 
   getBoard(): Observable<any> {
     return this.http.get(`${environment.apiUrl}/kspmasterdata/board`);
+  }
+
+  getRequestProcessHistory(params: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/kspuni/ksprequestprocessselectbyrequestid_requestdegree`,
+      {
+        ...params,
+        tokenkey: getCookie('userToken'),
+      }
+    );
   }
 }

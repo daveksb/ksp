@@ -37,11 +37,13 @@ export class DegreeCertStepFourComponent
   @Input() formType = 'a';
   @Input() systemType = '';
   @Input() step4Incorrect = [];
+  @Input() submode = 'create';
   // step4Incorrect = [
   //   'ไม่ครบถ้วน และไม่ถูกต้อง',
   //   'หมายเหตุ สำเนาหนังสืออนุญาตไม่ถูกต้อง',
   // ];
   uniqueTimestamp = '';
+  firstChange = true;
   override form = this.fb.group({
     files: [],
   });
@@ -110,10 +112,13 @@ export class DegreeCertStepFourComponent
   }
 
   override ngOnChanges(event: any) {
+    if ((event?.formType && event?.formType.currentValue != '') && this.firstChange) {
+      this.firstChange = false;
+    }
     if (event?.mode) {
       this.mode = event.mode.currentValue;
     }
-    if (event?.formType != this.form) {
+    if (event?.formType && !this.firstChange) {
       this.value = {
         files: this.uploadFilesCollection[this.formType || 'a'],
       };
