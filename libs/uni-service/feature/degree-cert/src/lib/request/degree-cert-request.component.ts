@@ -61,6 +61,7 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
   });
   uniData: any;
   mode: any = 'view';
+  submode = 'create';
   status = '';
   process = '';
 
@@ -91,7 +92,7 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
 
   async initForm() {
     this.id = this.activatedRoute.snapshot.queryParams['id'];
-    let uniRequestDegree;
+    let uniRequestDegree: any;
     this.uniData = await lastValueFrom(
       this.uniInfoService.univerSitySelectById(getCookie('uniId'))
     );
@@ -100,12 +101,22 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
       uniRequestDegree = await lastValueFrom(
         this.uniInfoService.uniRequestDegreeCertSelectById(this.id)
       );
+      let modeFile = 'edit';
+      const editComment = await lastValueFrom(
+        this.uniInfoService.getRequestProcessHistory({ requestid: this.id})
+      );
+      const editdetail = editComment.datareturn.find((data: any) => { 
+        return data.status == uniRequestDegree.requeststatus && data.process == uniRequestDegree.requestprocess});
       if ((uniRequestDegree.requeststatus == '1' && uniRequestDegree.requestprocess == '99') ||
           (uniRequestDegree.requeststatus == '2' && uniRequestDegree.requestprocess == '1') ||
           (uniRequestDegree.requeststatus == '2' && uniRequestDegree.requestprocess == '3') ||
           (uniRequestDegree.requeststatus == '3' && uniRequestDegree.requestprocess == '4') ||
           (uniRequestDegree.requeststatus == '3' && uniRequestDegree.requestprocess == '5')) {
             this.mode = 'edit';
+            modeFile = 'reject';
+      }
+      if (uniRequestDegree.requestprocess != '99') {
+        this.submode = 'return';
       }
       // if (
       //   uniRequestDegree.requestprocess == '1' ||
@@ -128,36 +139,58 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
       this.process = uniRequestDegree.requestprocess;
       const checkresult = uniRequestDegree.checkresult ? parseJson(uniRequestDegree.checkresult) : {};
       console.log(checkresult)
-      const { requestNo, step1, step2, step3, step4 } =
+      const { requestNo, step1, step2, step3, step4 } = await
         this.uniInfoService.mappingUniverSitySelectByIdWithForm(
           uniRequestDegree
         );
       this.requestNo = requestNo;
-      this.step1Form.setValue({
-        step1: step1,
-        detail: checkresult?.verifyStep1?.result ? [
-          this.mapCheckResult(checkresult?.verifyStep1?.result),
-          'หมายเหตุ ' + (checkresult?.verifyStep1?.detail ? checkresult?.verifyStep1?.detail : ''),
-        ] : []
-      });
-      this.step2Form.setValue({
-        step2: step2,
-        detail: checkresult?.verifyStep2?.result ? [
-          this.mapCheckResult(checkresult?.verifyStep2?.result),
-          'หมายเหตุ ' + (checkresult?.verifyStep2?.detail ? checkresult?.verifyStep2?.detail : ''),
-        ] : []
-      });
+      if (uniRequestDegree.requeststatus == '3' && uniRequestDegree.requestprocess == '4') {
+        const parsedetail = parseJson(editdetail.detail);
+        this.step1Form.setValue({
+          step1: step1,
+          detail: parsedetail.verify?.result && parsedetail.verify?.result != '1' ? [
+            this.mapCheckResult(parsedetail.verify?.result),
+            'หมายเหตุ ' + (parsedetail.verify?.detail ? parsedetail.verify?.detail : ''),
+          ] : []
+        });
+      } else {
+        this.step1Form.setValue({
+          step1: step1,
+          detail: checkresult?.verifyStep1?.result && checkresult?.verifyStep1?.result != '1' ? [
+            this.mapCheckResult(checkresult?.verifyStep1?.result),
+            'หมายเหตุ ' + (checkresult?.verifyStep1?.detail ? checkresult?.verifyStep1?.detail : ''),
+          ] : []
+        });
+      }
+      if (uniRequestDegree.requeststatus == '2' && uniRequestDegree.requestprocess == '3') {
+        const parsedetail = parseJson(editdetail.detail);
+        this.step2Form.setValue({
+          step2: step2,
+          detail: parsedetail.verify?.result && parsedetail.verify?.result != '1' ? [
+            this.mapCheckResult(parsedetail.verify?.result),
+            'หมายเหตุ ' + (parsedetail.verify?.detail ? parsedetail.verify?.detail : ''),
+          ] : []
+        });
+      } else {
+        this.step2Form.setValue({
+          step2: step2,
+          detail: checkresult?.verifyStep2?.result && checkresult?.verifyStep2?.result != '1' ? [
+            this.mapCheckResult(checkresult?.verifyStep2?.result),
+            'หมายเหตุ ' + (checkresult?.verifyStep2?.detail ? checkresult?.verifyStep2?.detail : ''),
+          ] : []
+        });
+      }
       this.step3Form.setValue({
         step3: step3,
-        detail: checkresult?.verifyStep3?.result ? [
+        detail: checkresult?.verifyStep3?.result && checkresult?.verifyStep3?.result != '1' ? [
           this.mapCheckResult(checkresult?.verifyStep3?.result),
           'หมายเหตุ ' + (checkresult?.verifyStep3?.detail ? checkresult?.verifyStep3?.detail : ''),
         ] : []
       });
       setTimeout(() => {
         this.step4Form.setValue({
-          step4: step4,
-          detail: checkresult?.verifyStep4?.result ? [
+          step4: modeFile == 'edit' ? step4 : checkresult.filedetail ? checkresult.filedetail : step4,
+          detail: checkresult?.verifyStep4?.result && checkresult?.verifyStep4?.result != '1' ? [
             this.mapCheckResult(checkresult?.verifyStep4?.result),
             'หมายเหตุ ' + (checkresult?.verifyStep4?.detail ? checkresult?.verifyStep4?.detail : ''),
           ] : []

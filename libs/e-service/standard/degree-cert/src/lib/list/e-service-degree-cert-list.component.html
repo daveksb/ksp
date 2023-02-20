@@ -50,10 +50,22 @@
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="requestno">
+        <ng-container matColumnDef="requestno" 
+          *ngIf="processType !== 5">
           <th mat-header-cell *matHeaderCellDef>เลขที่แบบคำขอ</th>
           <td
             class="text-primary link"
+            mat-cell
+            *matCellDef="let element"
+            (click)="goToDetailPage(element)"
+          >
+            {{ element.requestno }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="requestno" 
+          *ngIf="processType === 5">
+          <th mat-header-cell *matHeaderCellDef>เลขที่แบบคำขอ</th>
+          <td
             mat-cell
             *matCellDef="let element"
             (click)="goToDetailPage(element)"

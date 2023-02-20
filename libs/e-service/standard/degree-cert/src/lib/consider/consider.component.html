@@ -58,7 +58,6 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th></th>
                   <th scope="col">มติครั้งที่</th>
                   <th scope="col">วันที่ส่งคำขอ</th>
                   <th scope="col">ประธาน</th>
@@ -85,7 +84,7 @@
                     {{ result[item?.considerationResult?.result || ''] }}
                   </td>
                   <td class="detail__table">
-                    <label class="view__label" (click)="view(item?.verifyForm)"
+                    <label class="view__label" (click)="view(item?.verifyForm)" *ngIf="item?.verifyForm.file.files"
                       >ดูเอกสารแนบ</label
                     >
                   </td>
@@ -127,7 +126,7 @@
                     {{ result[item?.considerationResult?.result || ''] }}
                   </td>
                   <td class="detail__table">
-                    <label class="view__label" (click)="view(item?.verifyForm)"
+                    <label class="view__label" (click)="view(item?.verifyForm)" *ngIf="item?.verifyForm.file.files"
                       >ดูเอกสารแนบ</label
                     >
                   </td>
@@ -150,7 +149,7 @@
         ></e-service-license-check>
       </div>
       <br />
-      <div class="bg-white p-4">
+      <div class="bg-white p-4" *ngIf="historyList && historyList.length">
         <div class="box-header text-primary">
           ประวัติการตรวจสอบ
         </div>

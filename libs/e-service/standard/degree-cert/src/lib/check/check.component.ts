@@ -1,4 +1,4 @@
-import { jsonStringify, parseJson, getCookie } from '@ksp/shared/utility';
+import { jsonStringify, parseJson, getCookie, formatDate } from '@ksp/shared/utility';
 import {
   AfterContentChecked,
   ChangeDetectorRef,
@@ -93,6 +93,7 @@ export class CheckComponent implements OnInit, AfterContentChecked {
   choices = ApproveStepStatusOption;
   daftRequest: any;
   disabledVerifyStep = false;
+  submode = 'return';
 
   constructor(
     public dialog: MatDialog,
@@ -164,99 +165,109 @@ export class CheckComponent implements OnInit, AfterContentChecked {
     this.getDegreeCert();
   }
 
-  private _getRequest(): any {
-    const payload: any = _.pick(this.daftRequest, [
-      'requestid',
-      'requestno',
-      'degreeapprovecode',
-      'uniid',
-      'unitype',
-      'uniname',
-      'unicode',
-      'uniprovince',
-      'degreelevel',
-      'courseacademicyear',
-      'coursename',
-      'coursetype',
-      'coursestatus',
-      'coursemajor',
-      'coursefieldofstudy',
-      'coursesubjects',
-      'fulldegreenameth',
-      'fulldegreenameen',
-      'shortdegreenameth',
-      'shortdegreenameen',
-      'courseapprovetime',
-      'courseapprovedate',
-      'courseacceptdate',
-      'coursedetailtype',
-      'coursedetailinfo',
-      'teachinglocation',
-      'responsibleunit',
-      'evaluatelocation',
-      'coordinatorinfo',
-      'coursestructure',
-      'courseplan',
-      'courseteacher',
-      'courseinstructor',
-      'courseadvisor',
-      'processtrainning',
-      'processteaching',
-      'attachfiles',
-      'requestdate',
-      'tokenkey',
-    ]);
-    if (payload?.coursedetailinfo)
-      payload.coursedetailinfo = jsonStringify(
-        parseJson(payload.coursedetailinfo)
-      );
-    if (payload?.teachinglocation)
-      payload.teachinglocation = jsonStringify(
-        parseJson(payload.teachinglocation)
-      );
-    if (payload?.responsibleunit)
-      payload.responsibleunit = jsonStringify(
-        parseJson(payload.responsibleunit)
-      );
-    if (payload?.evaluatelocation)
-      payload.evaluatelocation = jsonStringify(
-        parseJson(payload.evaluatelocation)
-      );
-    if (payload?.coordinatorinfo)
-      payload.coordinatorinfo = jsonStringify(
-        parseJson(payload.coordinatorinfo)
-      );
-    if (payload?.courseteacher)
-      payload.courseteacher = jsonStringify(parseJson(payload.courseteacher));
-    if (payload?.courseinstructor)
-      payload.courseinstructor = jsonStringify(
-        parseJson(payload.courseinstructor)
-      );
-    if (payload?.courseadvisor)
-      payload.courseadvisor = jsonStringify(parseJson(payload.courseadvisor));
-    if (payload?.processtrainning)
-      payload.processtrainning = jsonStringify(
-        parseJson(payload.processtrainning)
-      );
-    if (payload?.processteaching)
-      payload.processteaching = jsonStringify(
-        parseJson(payload.processteaching)
-      );
-    if (payload?.coursestructure)
-      payload.coursestructure = jsonStringify(
-        parseJson(payload.coursestructure)
-      );
-    if (payload?.courseplan)
-      payload.courseplan = jsonStringify(parseJson(payload.courseplan));
-    return payload;
+  private _getRequest(process: string, status: string): any {
+    const step1: any = this.form.value.step1;
+    const step2: any = this.form.value.step2;
+    const step3: any = this.form.value.step3;
+    const step4: any = this.form.value.step4;
+
+    const dateapprove = new Date(step1?.degreeTypeForm?.courseApproveDate);
+    dateapprove.setHours(dateapprove.getHours() + 7)
+    const dateaccept = new Date(step1?.degreeTypeForm?.courseAcceptDate);
+    dateaccept.setHours(dateaccept.getHours() + 7)
+    const reqBody: any = {
+      uniid: this.daftRequest.uniid,
+      ref1: '3',
+      ref2: '03',
+      ref3: '5',
+      requestprocess: process,
+      requeststatus: status,
+      process: process,
+      status: status,
+      systemtype: this.daftRequest.systemtype,
+      requesttype: this.daftRequest.requesttype,
+      subtype: '5',
+
+      attachfiles: step4 ? JSON.stringify(step4?.files) : null,
+      uniname: step1?.institutionsName,
+      unitype: step1?.institutionsGroup || null,
+      uniprovince: step1?.provience || null,
+      unicode: step1?.institutionsCode || null,
+      degreelevel: step1?.degreeTypeForm?.degreeType || null,
+      courseacademicyear: step1?.degreeTypeForm?.courseYear || null,
+      coursename: step1?.degreeTypeForm?.courseName || null,
+      coursetype: step1?.degreeTypeForm?.courseType || null,
+      coursestatus: step1?.degreeTypeForm?.courseStatus || null,
+      fulldegreenameth: step1?.degreeTypeForm?.degreeNameThFull || null,
+      shortdegreenameth: step1?.degreeTypeForm?.degreeNameThShort || null,
+      fulldegreenameen: step1?.degreeTypeForm?.degreeNameEnFull || null,
+      shortdegreenameen: step1?.degreeTypeForm?.degreeNameEnShort || null,
+      courseapprovetime: step1?.degreeTypeForm?.courseApproveTime || null,
+      courseapprovedate: step1?.degreeTypeForm?.courseApproveDate
+        ? formatDate(
+            dateapprove.toISOString()
+          )
+        : null,
+      courseacceptdate: step1?.degreeTypeForm?.courseAcceptDate
+        ? formatDate(
+            dateaccept.toISOString()
+          )
+        : null,
+      coursedetailtype: step1?.courseDetailType || null,
+      coursedetailinfo: step1?.courseDetail
+        ? JSON.stringify(step1?.courseDetail)
+        : null,
+      teachinglocation: step1?.locations
+        ? JSON.stringify(step1?.locations)
+        : null,
+      responsibleunit: step1?.institutions
+        ? JSON.stringify(step1?.institutions)
+        : null,
+      evaluatelocation: step1?.locations2
+        ? JSON.stringify(step1?.locations2)
+        : null,
+      coordinatorinfo: step1?.coordinator
+        ? JSON.stringify(step1?.coordinator)
+        : null,
+      courseteacher: step2?.teacher?.teachers
+        ? JSON.stringify(step2?.teacher?.teachers)
+        : null,
+      courseinstructor: step2?.nitet?.nitets
+        ? JSON.stringify(step2?.nitet?.nitets)
+        : null,
+      courseadvisor: step2?.advisor?.advisors
+        ? JSON.stringify(step2?.advisor?.advisors)
+        : null,
+      processtrainning: step3?.training?.rows
+        ? JSON.stringify(step3?.training?.rows)
+        : null,
+      processteaching: step3?.teaching?.rows
+        ? JSON.stringify(step3?.teaching?.rows)
+        : null,
+      tokenkey: getCookie('userToken') || null,
+      coursestructure: step2?.coursestructure,
+      courseplan: step2?.courseplan
+    };
+
+    reqBody['id'] = this.daftRequest.id;
+    return reqBody;
   }
+
   cancel() {
     this.router.navigate(['/', 'degree-cert', 'list', 0]);
   }
   onSubmitKSP() {
     const verify = _.get(this.form, 'value.step5.verify', '');
-    let process;
-    let status;
+    const detail: any = _.pick(this.form.value, [
+      'verifyStep1',
+      'verifyStep2',
+      'verifyStep3',
+      'verifyStep4',
+    ]);
+
+    console.log(detail)
+    let process: any;
+    let status: any;
     if (verify == 1) {
       process = _.toNumber(this.daftRequest?.requestprocess) + 2;
       status = 1;
@@ -266,12 +277,7 @@ export class CheckComponent implements OnInit, AfterContentChecked {
     }
 
     try {
-      const detail: any = _.pick(this.form.value, [
-        'verifyStep1',
-        'verifyStep2',
-        'verifyStep3',
-        'verifyStep4',
-      ]);
+      
       const payload: any = {
         systemtype: '3',
         requestid: this.daftRequest?.requestid,
@@ -282,17 +288,51 @@ export class CheckComponent implements OnInit, AfterContentChecked {
       payload.process = process;
       payload.requeststatus = status;
       payload.requestprocess = process;
-      payload.detail = jsonStringify(detail);
+      payload.detail = jsonStringify({...detail, filedetail: _.get(this.form, 'value.step4', '')});
       this.eRequestService
         .kspUpdateRequestUniRequestDegree(payload)
         .subscribe(() => {
+          // this.updateDegreeRequest(process, status);
           this.onConfirmed();
         });
     } catch (error) {
       console.log(error);
     }
   }
+
+  updateDegreeRequest(reqProcess: any, reqStatus: any) {
+    const payload = this._getRequest(reqProcess, reqStatus);
+    payload.process = reqProcess;
+    payload.status = reqStatus;
+    payload.requestprocess = reqProcess;
+    payload.requeststatus = reqStatus;
+    this.eUniService
+      .uniRequestDegreeCertUpdate(payload)
+      .subscribe(() => {
+        this.onConfirmed();
+      });
+  }
+
   save() {
+    const detail: any = _.pick(this.form.value, [
+      'verifyStep1',
+      'verifyStep2',
+      'verifyStep3',
+      'verifyStep4',
+    ]);
+
+    console.log(detail)
+    if (!detail.verifyStep1 || !detail.verifyStep2 || !detail.verifyStep3 || !detail.verifyStep4) {
+      this.dialog.open(CompleteDialogComponent, {
+        width: '350px',
+        data: {
+          header: `กรุณาเลือกผลการตรวจสอบให้ครบถ้วน `,
+          btnLabel: 'ตกลง',
+          isDanger: true
+        },
+      });
+      return;
+    }
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
