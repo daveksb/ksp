@@ -27,9 +27,6 @@
         </tr>
       </thead>
       <tbody>
-        <!-- <tr *ngIf="!approveHistory.length">
-          <td scope="col" colspan="4" class="text-center">ไม่พบข้อมูล</td>
-        </tr> -->
         <ng-container *ngFor="let row of approveHistory; let i = index">
           <tr>
             <td scope="col">{{ i + 1 }}</td>
