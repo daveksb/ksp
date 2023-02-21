@@ -158,7 +158,7 @@ export const SchoolRequestProcess: SchRequestProcess[] = [
   {
     requestType: 3,
     processId: 5,
-    processName: 'พิจาณาและรับรอง',
+    processName: 'พิจารณาและรับรอง',
     status: [
       { id: 1, sname: 'กำลังดำเนินการ', ename: 'รอการตรวจสอบ' },
       { id: 2, sname: 'ผ่านการรับรอง/พิจารณา', ename: 'ผ่านการรับรอง/พิจารณา' },

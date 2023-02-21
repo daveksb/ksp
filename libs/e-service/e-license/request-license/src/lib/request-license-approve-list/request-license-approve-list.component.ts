@@ -12,7 +12,6 @@ import {
 import {
   EsSearchPayload,
   KspRequest,
-  KSPRequestSelfSearchFilter,
   Province,
   SelfRequest,
 } from '@ksp/shared/interface';
@@ -28,7 +27,6 @@ import {
   formatRequestNo,
   getCookie,
   hasLevel2RejectedRequest,
-  hasRejectedRequest,
   processFilter,
   replaceEmptyWithNull,
   thaiDate,
@@ -52,7 +50,6 @@ export class RequestLicenseApproveListComponent
   checkStatus = eSelfCheckStatus;
   provinces$!: Observable<Province[]>;
   searchNotFound = false;
-  initialSearch = true;
   rejectedRequests: KspRequest[] = [];
   form = this.fb.group({
     search: [{ requesttype: '3' }],
@@ -101,8 +98,6 @@ export class RequestLicenseApproveListComponent
 
     this.requestService.KspSearchRequest(payload).subscribe((res) => {
       this.rejectedRequests = hasLevel2RejectedRequest(res);
-      //console.log('reject = ', this.rejectedRequests);
-      this.initialSearch = false;
     });
   }
 
@@ -162,11 +157,9 @@ export class RequestLicenseApproveListComponent
         this.sort.sortChange.emit(sortState);
 
         this.searchNotFound = false;
-        this.initialSearch = false;
       } else {
         this.clear();
         this.searchNotFound = true;
-        this.initialSearch = false;
       }
     });
   }

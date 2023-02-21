@@ -14,14 +14,14 @@ import { FileGroup, KspRequest } from '@ksp/shared/interface';
 import _ from 'lodash';
 import moment from 'moment';
 
-export function hasRejectedRequest(requests: KspRequest[]): KspRequest[] {
+export function schoolHasRejectedRequest(requests: KspRequest[]): KspRequest[] {
   return requests.filter((req) => {
     const condition1 =
       req.requesttype === '3' && req.process === '3' && req.status === '2';
-
-    const condition2 =
-      req.requesttype === '3' && req.process === '4' && req.status === '2';
-    return condition1 || condition2;
+    return condition1;
+    /*  const condition2 =
+      req.requesttype === '3' && req.process === '4' && req.status === '2'; */
+    //return condition1 || condition2;
   });
 }
 
