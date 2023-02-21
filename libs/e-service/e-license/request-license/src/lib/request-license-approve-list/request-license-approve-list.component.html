@@ -8,6 +8,15 @@
   <span subHeader>ขอหนังสืออนุญาตประกอบวิชาชีพ (ชาวไทย)</span>
 </ksp-top-nav>
 
+<ng-container *ngFor="let req of rejectedRequests; let i = index">
+  <ksp-uni-form-badge [mainTitle]="genAlertMessage(req)">
+    <!-- (click)="goToDetail(req)" -->
+    <button class="btn btn-link text-primary p-0 w-auto ms-1" type="button">
+      กดเพื่อตรวจสอบ
+    </button>
+  </ksp-uni-form-badge>
+</ng-container>
+
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 px-4 py-2 full-height full-width-2">
     <div class="box-header">รายการแบบคำขอหนังสืออนุญาตประกอบวิชาชีพ</div>

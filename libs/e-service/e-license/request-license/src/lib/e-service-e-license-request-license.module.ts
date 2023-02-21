@@ -27,7 +27,10 @@ import {
   EServiceRequestSearchComponent,
   RequestSearchComponent,
 } from '@ksp/shared/search';
-import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
+import {
+  RequestHeaderInfoComponent,
+  UniFormBadgeComponent,
+} from '@ksp/shared/ui';
 import { RequestLicenseApproveDetailComponent } from './request-license-approve-detail/request-license-approve-detail.component';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -142,6 +145,7 @@ export const routes: Route[] = [
     MatProgressSpinnerModule,
     ForbiddenPropertyFormComponent,
     RequestLicenseApproveLicenseTableComponent,
+    UniFormBadgeComponent,
   ],
   declarations: [
     RequestLicenseApproveListComponent,

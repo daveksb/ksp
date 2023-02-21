@@ -25,6 +25,14 @@ export function hasRejectedRequest(requests: KspRequest[]): KspRequest[] {
   });
 }
 
+export function hasLevel2RejectedRequest(requests: KspRequest[]): KspRequest[] {
+  return requests.filter((req) => {
+    const condition1 =
+      req.requesttype === '3' && req.process === '4' && req.status === '2';
+    return condition1;
+  });
+}
+
 export function formatRequestNo(input: string) {
   if (!input.includes('-')) {
     const s1 = input.slice(0, 1);
