@@ -1,4 +1,4 @@
-import { jsonStringify, parseJson, getCookie, formatDate } from '@ksp/shared/utility';
+import { jsonStringify, parseJson, getCookie, formatDate, thaiDate } from '@ksp/shared/utility';
 import {
   AfterContentChecked,
   ChangeDetectorRef,
@@ -26,7 +26,7 @@ import { ApproveStepStatusOption } from '@ksp/shared/constant';
 import { MatStepper } from '@angular/material/stepper';
 const detailToState = (res: any) => {
   const newRes = _.filter(res?.datareturn, ({ process }) =>
-    ['2', '3'].includes(process)
+    ['1', '2', '3'].includes(process)
   ).map((data: any) => {
     return {
       ...data,
@@ -79,6 +79,10 @@ export class CheckComponent implements OnInit, AfterContentChecked {
     verifyStep2: [],
     verifyStep3: [],
     verifyStep4: [],
+    historyStep1: [],
+    historyStep2: [],
+    historyStep3: [],
+    historyStep4: [],
   });
   verifyResult: {
     isBasicValid: boolean;
@@ -94,6 +98,7 @@ export class CheckComponent implements OnInit, AfterContentChecked {
   daftRequest: any;
   disabledVerifyStep = false;
   submode = 'return';
+  historyResult: Array<any> = [];
 
   constructor(
     public dialog: MatDialog,
@@ -114,7 +119,50 @@ export class CheckComponent implements OnInit, AfterContentChecked {
       .kspUniRequestProcessSelectByRequestId(this.route.snapshot.params['key'])
       .pipe(map(detailToState))
       .subscribe((res) => {
-        this.verifyResult = res.newres;
+        this.verifyResult = res.res;
+        this.historyResult = res.res.filter((data: any) => {
+          return data.process == '1' && data.status == '2'
+        });
+        const step1history = [] as any;
+        const step2history = [] as any;
+        const step3history = [] as any;
+        const step4history = [] as any;
+        this.historyResult.forEach((data: any) => {
+          const findResult1 = this.choices.find(choice=>{return choice.value == data.detail.verifyStep1.result });
+          const findResult2 = this.choices.find(choice=>{return choice.value == data.detail.verifyStep2.result });
+          const findResult3 = this.choices.find(choice=>{return choice.value == data.detail.verifyStep3.result });
+          const findResult4 = this.choices.find(choice=>{return choice.value == data.detail.verifyStep4.result });
+          step1history.push({
+            resultname: findResult1 ? findResult1?.name : '',
+            comment: data.detail.verifyStep1.detail || '',
+            createdate: thaiDate(new Date(data.createdate)),
+            fullnameth: data.fullnameth
+          });
+          step2history.push({
+            resultname: findResult2 ? findResult2?.name : '',
+            comment: data.detail.verifyStep2.detail || '',
+            createdate: thaiDate(new Date(data.createdate)),
+            fullnameth: data.fullnameth
+          });
+          step3history.push({
+            resultname: findResult3 ? findResult3?.name : '',
+            comment: data.detail.verifyStep3.detail || '',
+            createdate: thaiDate(new Date(data.createdate)),
+            fullnameth: data.fullnameth
+          });
+          step4history.push({
+            resultname: findResult4 ? findResult4?.name : '',
+            comment: data.detail.verifyStep4.detail || '',
+            createdate: thaiDate(new Date(data.createdate)),
+            fullnameth: data.fullnameth
+          });
+        });
+        this.form.patchValue({
+          historyStep1: step1history,
+          historyStep2: step2history,
+          historyStep3: step3history,
+          historyStep4: step4history,
+        })
         const lastPlan = _.last(
           res?.res.filter((data) => {
             return data.process == 3;

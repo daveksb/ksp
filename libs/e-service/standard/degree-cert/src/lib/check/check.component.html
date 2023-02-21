@@ -27,10 +27,12 @@
 
             <div class="bg-light px-3 py-2 mt-3 border">
               <e-service-license-check
+                [showHistoryButton]="false"
                 [mode]="disabledVerifyStep ? 'view' : 'edit'"
                 formControlName="verifyStep1"
                 [choices]="choices"
               ></e-service-license-check>
+              <ksp-result-history [historyList]="form.value.historyStep1"></ksp-result-history>
             </div>
           </mat-step>
 
@@ -46,10 +48,12 @@
 
             <div class="bg-light px-3 py-2 mt-3 border">
               <e-service-license-check
+                [showHistoryButton]="false"
                 [mode]="disabledVerifyStep ? 'view' : 'edit'"
                 formControlName="verifyStep2"
                 [choices]="choices"
               ></e-service-license-check>
+              <ksp-result-history [historyList]="form.value.historyStep2"></ksp-result-history>
             </div>
           </mat-step>
 
@@ -63,9 +67,11 @@
 
             <div class="bg-light px-3 py-2 mt-3 border">
               <e-service-license-check
+                [showHistoryButton]="false"
                 formControlName="verifyStep3"
                 [choices]="choices"
               ></e-service-license-check>
+              <ksp-result-history [historyList]="form.value.historyStep3"></ksp-result-history>
             </div>
           </mat-step>
 
@@ -80,10 +86,12 @@
 
             <div class="bg-light px-3 py-2 mt-3 border">
               <e-service-license-check
+                [showHistoryButton]="false"
                 [mode]="disabledVerifyStep ? 'view' : 'edit'"
                 formControlName="verifyStep4"
                 [choices]="choices"
               ></e-service-license-check>
+              <ksp-result-history [historyList]="form.value.historyStep4"></ksp-result-history>
             </div>
           </mat-step>
 
