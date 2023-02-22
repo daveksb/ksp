@@ -149,7 +149,10 @@
       <br />
 
       <div class="bg-white p-3 default-width">
-        <e-service-license-check formControlName="verify" [choices]="choices">
+        <e-service-license-check 
+          formControlName="verify" 
+          [choices]="choices"
+          [showHistoryButton]="false">
         </e-service-license-check>
         <!-- <ksp-form-meeting-record></ksp-form-meeting-record> -->
         <ng-container *ngIf="isApprove">

@@ -231,7 +231,8 @@ export class ConsiderComponent implements OnInit {
             if (this.daftRequest.requestprocess == '3') {
               if (this.daftRequest.degreelevel == '1' || 
                 this.daftRequest.degreelevel == '2' ||
-                this.daftRequest.degreelevel == '3') {
+                this.daftRequest.degreelevel == '3' ||
+                this.daftRequest.degreelevel == '4') {
                   this.form.controls.plan.patchValue({
                     plansResult: [],
                     plans: res?.step2?.plan1.plans || [],
