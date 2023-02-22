@@ -16,12 +16,14 @@ import moment from 'moment';
 
 export function schoolHasRejectedRequest(requests: KspRequest[]): KspRequest[] {
   return requests.filter((req) => {
+    //ขอหนังสืออนุญาตประกอบวิชาชีพ โดยไม่มีหนังสืออนุญาตประกอบวิชาชีพ
     const condition1 =
       req.requesttype === '3' && req.process === '3' && req.status === '2';
-    return condition1;
-    /*  const condition2 =
-      req.requesttype === '3' && req.process === '4' && req.status === '2'; */
-    //return condition1 || condition2;
+
+    //ขอหนังสือรับรองคุณวุฒิการศึกษา
+    const condition2 =
+      req.requesttype === '6' && req.process === '2' && req.status === '2';
+    return condition1 || condition2;
   });
 }
 

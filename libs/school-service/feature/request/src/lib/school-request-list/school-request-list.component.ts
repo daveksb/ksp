@@ -88,7 +88,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
     const filters: Partial<SchRequestSearchFilter> = {
-      requesttype: '3',
+      requesttype: null,
     };
     this.search(filters);
   }
@@ -113,7 +113,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     //console.log('filters = ', filters);
     const payload: SchRequestSearchFilter = {
       schoolid: `${this.schoolId}`,
-      requesttype: `${f.requesttype}`,
+      requesttype: f.requesttype,
       requestno: f.requestno,
       careertype: f.careertype,
       name: f.name,
