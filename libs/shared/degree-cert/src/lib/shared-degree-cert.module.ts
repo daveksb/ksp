@@ -25,6 +25,7 @@ import { DegreeCertSearchComponent } from '@ksp/shared/search';
 import { RouterModule } from '@angular/router';
 import { SharedFormUniCourseFormModule } from '@ksp/shared/form/uni-course-form';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ResultHistoryComponent } from './result-history/result-history.component';
 
 @NgModule({
   imports: [
@@ -47,7 +48,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     FormsModule,
     SharedFormUniCourseFormModule,
     MatDatepickerModule,
-    UniFormBadgeComponent
+    UniFormBadgeComponent,
   ],
   declarations: [
     DegreeCertStepOneComponent,
@@ -55,6 +56,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     DegreeCertStepThreeComponent,
     DegreeCertStepFourComponent,
     DegreeCertStepFiveComponent,
+    ResultHistoryComponent
   ],
   exports: [
     DegreeCertStepOneComponent,
@@ -62,6 +64,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     DegreeCertStepThreeComponent,
     DegreeCertStepFourComponent,
     DegreeCertStepFiveComponent,
+    ResultHistoryComponent
   ],
 })
 export class SharedDegreeCertModule {}
