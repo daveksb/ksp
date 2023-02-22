@@ -74,7 +74,7 @@ export class EQualificationConfirmComponent implements OnInit {
   getLicenseNo() {
     this.eRequestService.getLicenseNoTh().subscribe((res) => {
       const be = moment().add(543, 'year').year();
-      console.log('call get license no = ', res.runningno);
+      //console.log('call get license no = ', res.runningno);
       this.approveInfo = {
         approveNo: `${res.runningno}/${be}`,
         approveDate: new Date(),
@@ -221,16 +221,16 @@ export class EQualificationConfirmComponent implements OnInit {
   }
 
   considerRequest() {
-    //console.log('consider request  = ');
+    console.log('consider request form  = ', this.form.value.approvement);
     const req = this.saveData.requestData;
     let considerProcess = '';
     if (req.requesttype === '3') {
       considerProcess = '5';
     } else if (req.requesttype === '6') {
-      considerProcess = '3';
+      considerProcess = '2';
     }
 
-    console.log('this.saveData.checkDetail = ', this.saveData.checkDetail);
+    //console.log('this.saveData.checkDetail = ', this.saveData.checkDetail);
 
     const detail = {
       ...this.saveData.checkDetail,
@@ -241,10 +241,22 @@ export class EQualificationConfirmComponent implements OnInit {
     };
 
     const form: any = this.form.value.approvement;
+    const formValue = form.result;
+    let status = '';
+    if (formValue === '1') {
+      status = '3';
+    } else if (formValue === '2') {
+      status = '2';
+    } else if (formValue === '3') {
+      status = '4';
+    } else {
+      status = '1';
+    }
+
     const payload: KspApprovePayload = {
       requestid: req.id,
       process: considerProcess,
-      status: `${form.result}`,
+      status: status,
       detail:
         form.result === '2'
           ? JSON.stringify(detail)
@@ -283,7 +295,7 @@ export class EQualificationConfirmComponent implements OnInit {
       requestid: this.saveData.requestData.id,
       requestno: this.saveData.requestData.requestno,
     };
-    //console.log('payload = ', payload);
+    console.log('payload = ', payload);
     this.eRequestService.KspUpdateRequestProcess(payload).subscribe(() => {
       //console.log('form = ', form);
       if (form.result === '2') {
@@ -354,7 +366,7 @@ export class EQualificationConfirmComponent implements OnInit {
     dialog.componentInstance.confirmed.subscribe((res) => {
       if (res) {
         if (this.saveData.requestData.requesttype === '3') {
-          //console.log('แบบคำขอชั่วคราว = ');
+          console.log('แบบคำขอชั่วคราว = ');
           if (this.saveData.requestData.process === '5') {
             this.considerRequest();
           } else {
@@ -362,8 +374,8 @@ export class EQualificationConfirmComponent implements OnInit {
           }
         }
         if (this.saveData.requestData.requesttype === '6') {
-          //console.log('แบบคำขอรับรองคุณวุฒิ = ');
-          if (this.saveData.requestData.process === '3') {
+          if (this.saveData.requestData.process === '1') {
+            console.log('แบบคำขอรับรองคุณวุฒิ = ');
             this.considerRequest();
           } else {
             this.checkRequest();

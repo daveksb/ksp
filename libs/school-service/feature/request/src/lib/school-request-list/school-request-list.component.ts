@@ -11,7 +11,6 @@ import {
   SchoolRequestSubType,
   SchoolRequestType,
   SchoolRewardType,
-  SelfPrefixTh,
 } from '@ksp/shared/constant';
 import { PdfRenderComponent } from '@ksp/shared/dialog';
 import {
@@ -30,11 +29,12 @@ import {
   checkStatus,
   getCookie,
   thaiDate,
-  hasRejectedRequest,
+  schoolHasRejectedRequest,
   changeToThaiNumber,
   changeToEnglishMonth,
   teachingSubjects,
   teachingLevels,
+  formatRequestNo,
 } from '@ksp/shared/utility';
 import { Subject } from 'rxjs';
 
@@ -60,20 +60,16 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
   tempLicenseRequestTimes: any;
   reqTypeStatus = false;
   viewMoreClicked = false;
-
   JSON = JSON;
   SchoolRewardType = SchoolRewardType;
-
   getPdfColumnLabel = '';
   getIdColumnLabel = '';
   getTypeColumnLabel = '';
   getNameColumnLabel = '';
-
   defaultForm = {
     requesttype: '3',
     careertype: '1',
   };
-
   form = this.fb.group({
     licenseSearch: [this.defaultForm],
   });
@@ -92,7 +88,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
     const filters: Partial<SchRequestSearchFilter> = {
-      requesttype: '3',
+      requesttype: null,
     };
     this.search(filters);
   }
@@ -103,7 +99,9 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
 
   genAlertMessage(req: KspRequest) {
     const detail: any = JSON.parse(req.detail || '');
-    return `แจ้งเตือน เลขที่คำขอ : ${req.requestno} ใบคำ${schoolMapRequestType(
+    return `แจ้งเตือน เลขที่คำขอ : ${formatRequestNo(
+      req.requestno || ''
+    )} แบบคำ${schoolMapRequestType(
       +Number(req.requesttype)
     )} ถูกส่งคืน "ปรับแก้ไข/เพิ่มเติม"
     กรุณาส่งกลับภายในวันที่ ${thaiDate(
@@ -115,7 +113,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     //console.log('filters = ', filters);
     const payload: SchRequestSearchFilter = {
       schoolid: `${this.schoolId}`,
-      requesttype: `${f.requesttype}`,
+      requesttype: f.requesttype,
       requestno: f.requestno,
       careertype: f.careertype,
       name: f.name,
@@ -132,7 +130,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
     this.requestService.schSearchRequest(payload).subscribe((res) => {
       // search without showing result do automatically after load
       if (this.initialSearch) {
-        this.rejectedRequests = hasRejectedRequest(res);
+        this.rejectedRequests = schoolHasRejectedRequest(res);
       }
 
       if (res && res.length && !this.initialSearch) {

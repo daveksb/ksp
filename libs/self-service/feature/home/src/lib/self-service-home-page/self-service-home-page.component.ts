@@ -22,7 +22,6 @@ import {
 import {
   formatRequestNo,
   getCookie,
-  hasRejectedRequest,
   replaceEmptyWithNull,
   SelfCheckProcess,
   SelfcheckStatus,
@@ -108,10 +107,6 @@ export class SelfServiceHomePageComponent implements AfterViewInit, OnInit {
     payload = replaceEmptyWithNull(payload);
 
     this.requestService.searchMyRequests(payload).subscribe((res) => {
-      if (this.initialSearch) {
-        this.rejectedRequests = hasRejectedRequest(res);
-      }
-
       if (res && res.length) {
         //console.log('res xx = ', res);
         this.searchNotFound = false;
