@@ -19,6 +19,7 @@ export class LicenseCheckComponent extends KspFormBaseComponent {
   @Input() checkedResult: string[] = [];
   @Output() selectedItem = 0;
   @Output() showHistory = new EventEmitter<any>();
+  @Input() showHistoryButton = true;
 
   override form = this.fb.group({
     result: [],
