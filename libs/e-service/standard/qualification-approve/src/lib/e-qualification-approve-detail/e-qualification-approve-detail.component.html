@@ -224,22 +224,23 @@
     </div>
 
     <ng-container
-      *ngIf="!(requestData.process === '3' && requestData.status !== '1')"
+      formArrayName="checkResult"
+      *ngFor="let c of checkResultFormArray.controls; let i = index"
     >
-      <ng-container
-        formArrayName="checkResult"
-        *ngFor="let c of checkResultFormArray.controls; let i = index"
+      <div
+        class="bg-white px-3 py-2 mt-3"
+        [ngClass]="{ hide: (selectedTabIndex || 0) !== i }"
       >
-        <div
-          class="bg-white px-3 py-2 mt-3"
-          [ngClass]="{ hide: (selectedTabIndex || 0) !== i }"
-        >
-          <e-service-license-check
-            [choices]="choice"
-            [formControlName]="i"
-          ></e-service-license-check>
-        </div>
-      </ng-container>
+        <e-service-license-check
+          [mode]="
+            requestData.process === '1' && requestData.status === '1'
+              ? 'edit'
+              : 'view'
+          "
+          [choices]="choice"
+          [formControlName]="i"
+        ></e-service-license-check>
+      </div>
     </ng-container>
   </div>
 </form>

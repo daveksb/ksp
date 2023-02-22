@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -9,7 +9,12 @@ import {
   SelfServiceRequestSubType,
   SelfServiceRequestType,
 } from '@ksp/shared/constant';
-import { EsSearchPayload, Province, SelfRequest } from '@ksp/shared/interface';
+import {
+  EsSearchPayload,
+  KspRequest,
+  Province,
+  SelfRequest,
+} from '@ksp/shared/interface';
 import {
   AddressService,
   ERequestService,
@@ -19,8 +24,12 @@ import {
   eSelfCheckProcess,
   eSelfCheckStatus,
   formatDatePayload,
+  formatRequestNo,
+  getCookie,
+  hasLevel2RejectedRequest,
   processFilter,
   replaceEmptyWithNull,
+  thaiDate,
 } from '@ksp/shared/utility';
 import { Observable, Subject } from 'rxjs';
 
@@ -29,7 +38,9 @@ import { Observable, Subject } from 'rxjs';
   templateUrl: './request-license-approve-list.component.html',
   styleUrls: ['./request-license-approve-list.component.scss'],
 })
-export class RequestLicenseApproveListComponent implements AfterViewInit {
+export class RequestLicenseApproveListComponent
+  implements AfterViewInit, OnInit
+{
   isLoading: Subject<boolean> = this.loaderService.isLoading;
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<SelfRequest>();
@@ -39,6 +50,7 @@ export class RequestLicenseApproveListComponent implements AfterViewInit {
   checkStatus = eSelfCheckStatus;
   provinces$!: Observable<Province[]>;
   searchNotFound = false;
+  rejectedRequests: KspRequest[] = [];
   form = this.fb.group({
     search: [{ requesttype: '3' }],
   });
@@ -54,9 +66,55 @@ export class RequestLicenseApproveListComponent implements AfterViewInit {
     private addressService: AddressService
   ) {}
 
+  ngOnInit(): void {
+    // เฉพาะกรณี จนท. ส่วนภูมิภาค
+    if (getCookie('permissionRight') === '2') {
+      this.defaultSearch();
+    }
+  }
+
+  defaultSearch() {
+    console.log('run default search for school temp request');
+    const payload: EsSearchPayload = {
+      systemtype: '2',
+      provinceid: null,
+      requesttype: '3',
+      requestno: null,
+      careertype: null,
+      name: null,
+      idcardno: null,
+      passportno: null,
+      process: '4', //ตรวจสอบเอกสาร ลำดับที่ 2
+      status: null,
+      schoolid: null,
+      schoolname: null,
+      bureauid: null,
+      requestdatefrom: null,
+      requestdateto: null,
+      isurgent: null,
+      offset: '0',
+      row: '1000',
+    };
+
+    this.requestService.KspSearchRequest(payload).subscribe((res) => {
+      this.rejectedRequests = hasLevel2RejectedRequest(res);
+    });
+  }
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.provinces$ = this.addressService.getProvinces();
+  }
+
+  genAlertMessage(req: KspRequest) {
+    const detail: any = JSON.parse(req.detail || '');
+    //console.log('return date = ', detail.returndate);
+    return `แจ้งเตือน เลขที่คำขอ: ${formatRequestNo(
+      req.requestno || ''
+    )} ถูกส่งคืน "ปรับแก้ไข/เพิ่มเติม"
+    กรุณาส่งกลับภายในวันที่ ${thaiDate(
+      new Date(detail.returndate)
+    )} มิฉะนั้นแบบคำขอจะถูกยกเลิก `;
   }
 
   search(params: any) {

@@ -111,7 +111,6 @@ export class ETempLicenseListComponent implements AfterViewInit {
     //console.log('params = ', params);
     const payload: EsSearchPayload = {
       systemtype: '2',
-      //systemtype: null,
       requesttype: '3',
       requestno: params.requestno,
       careertype: params.careertype,
