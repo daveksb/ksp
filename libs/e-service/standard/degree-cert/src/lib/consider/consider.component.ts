@@ -214,7 +214,7 @@ export class ConsiderComponent implements OnInit {
         .pipe(
           map((res) => {
             this.daftRequest = res;
-            if (res.degreelevel == '1' || res.degreelevel == '2' || res.degreelevel == '3') {
+            if (res.degreelevel == '1' || res.degreelevel == '2' || res.degreelevel == '3'|| res.degreelevel == '4') {
               this.degreeType = 'a';
             } else {
               this.degreeType = 'b';
