@@ -411,7 +411,7 @@ export class CheckComponent implements OnInit, AfterContentChecked {
 
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
-        this.location.back();
+        this.router.navigate(['/', 'degree-cert', 'list', 1,0]);
       }
     });
   }

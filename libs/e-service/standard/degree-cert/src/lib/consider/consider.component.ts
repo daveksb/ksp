@@ -214,7 +214,7 @@ export class ConsiderComponent implements OnInit {
         .pipe(
           map((res) => {
             this.daftRequest = res;
-            if (res.degreelevel == '1' || res.degreelevel == '2' || res.degreelevel == '3') {
+            if (res.degreelevel == '1' || res.degreelevel == '2' || res.degreelevel == '3'|| res.degreelevel == '4') {
               this.degreeType = 'a';
             } else {
               this.degreeType = 'b';
@@ -231,7 +231,8 @@ export class ConsiderComponent implements OnInit {
             if (this.daftRequest.requestprocess == '3') {
               if (this.daftRequest.degreelevel == '1' || 
                 this.daftRequest.degreelevel == '2' ||
-                this.daftRequest.degreelevel == '3') {
+                this.daftRequest.degreelevel == '3' ||
+                this.daftRequest.degreelevel == '4') {
                   this.form.controls.plan.patchValue({
                     plansResult: [],
                     plans: res?.step2?.plan1.plans || [],
