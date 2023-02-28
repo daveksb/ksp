@@ -116,7 +116,6 @@ export class FollowUpComponent implements OnInit {
     .kspUniRequestProcessSelectByRequestId(this.requestId)
     .pipe(map(detailToState))
     .subscribe((res) => {
-      console.log(res)
       const findHistory = res?.newRes.find((data: any) => { return data.status == '1' });
       if (findHistory) {
         this.mode = 'view';
@@ -132,7 +131,7 @@ export class FollowUpComponent implements OnInit {
     if (this.processType > 2) {
       this.location.back();
     } else {
-      this.router.navigate(['./degree-cert', 'list', '6', '3']);
+      this.router.navigate(['./degree-cert', 'list', '6', '4']);
     }
   }
 

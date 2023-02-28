@@ -256,7 +256,6 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
     const step2: any = this.step2Form.value.step2;
     const step3: any = this.step3Form.value.step3;
     const step4: any = this.step4Form.value.step4;
-
     const dateapprove = new Date(step1?.degreeTypeForm?.courseApproveDate);
     dateapprove.setHours(dateapprove.getHours() + 7);
     const dateaccept = new Date(step1?.degreeTypeForm?.courseAcceptDate);
@@ -314,8 +313,8 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
       courseteacher: step2?.teacher?.teachers
         ? JSON.stringify(step2?.teacher?.teachers)
         : null,
-      courseinstructor: step2?.nitet?.nitets
-        ? JSON.stringify(step2?.nitet?.nitets)
+      courseinstructor: step2?.nitet
+        ? JSON.stringify(step2?.nitet)
         : null,
       courseadvisor: step2?.advisor?.advisors
         ? JSON.stringify(step2?.advisor?.advisors)

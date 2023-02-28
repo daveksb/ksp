@@ -25,8 +25,8 @@ import { Location } from '@angular/common';
 import { ApproveStepStatusOption } from '@ksp/shared/constant';
 import { MatStepper } from '@angular/material/stepper';
 const detailToState = (res: any) => {
-  const newRes = _.filter(res?.datareturn, ({ process }) =>
-    ['1', '2', '3'].includes(process)
+  const newRes = _.filter(res?.datareturn, ({ process, status }) =>
+    (process == '1' && status == '2') || (process == '3' && status == '1')
   ).map((data: any) => {
     return {
       ...data,
@@ -119,9 +119,10 @@ export class CheckComponent implements OnInit, AfterContentChecked {
       .kspUniRequestProcessSelectByRequestId(this.route.snapshot.params['key'])
       .pipe(map(detailToState))
       .subscribe((res) => {
-        this.verifyResult = res.res;
+        console.log(res.res)
+        this.verifyResult = res.newres;
         this.historyResult = res.res.filter((data: any) => {
-          return data.process == '1' && data.status == '2'
+          return (data.process == '1' && data.status == '2') || (data.process == '3' && data.status == '1');
         });
         const step1history = [] as any;
         const step2history = [] as any;
@@ -187,6 +188,7 @@ export class CheckComponent implements OnInit, AfterContentChecked {
           })
         )
         .subscribe((res) => {
+          console.log(res)
           if (res?.returncode !== 98) {
             this.requestNumber = res?.requestNo;
             this.form.patchValue({
@@ -368,9 +370,9 @@ export class CheckComponent implements OnInit, AfterContentChecked {
       'verifyStep3',
       'verifyStep4',
     ]);
-
+    const verify = _.get(this.form, 'value.step5.verify', '');
     console.log(detail)
-    if (!detail.verifyStep1 || !detail.verifyStep2 || !detail.verifyStep3 || !detail.verifyStep4) {
+    if (!detail.verifyStep1 || !detail.verifyStep2 || !detail.verifyStep3 || !detail.verifyStep4 || !verify) {
       this.dialog.open(CompleteDialogComponent, {
         width: '350px',
         data: {

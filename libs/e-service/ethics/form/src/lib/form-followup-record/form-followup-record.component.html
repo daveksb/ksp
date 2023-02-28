@@ -75,9 +75,18 @@
       ></ksp-file-multi-upload>
     </div>
     <div class="row" *ngIf="mode === 'view'">
-      <div class="col-8">
+      <ksp-file-multi-upload
+        [buttonLabel]="'อัพโหลดไฟล์'"
+        [uniqueTimestamp]="uniqueNo"
+        [showDeleteFile]="true"
+        (uploadComplete)="onUploadComplete($event)"
+        [groupFiles]="form.value.file || []"
+        [mode]="'view'"
+        [systemType]="'ksp'"
+      ></ksp-file-multi-upload>
+      <!-- <div class="col-8">
         <label class="view__label" (click)="view()">ดูเอกสารแนบ</label>
-      </div>
+      </div> -->
     </div>
     <!-- <ksp-file-upload></ksp-file-upload> -->
   </div>

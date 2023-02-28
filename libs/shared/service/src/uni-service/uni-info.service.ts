@@ -54,14 +54,15 @@ export class UniInfoService {
         ? parseJson(res?.coordinatorinfo)
         : null,
     };
+    console.log(parseJson(res.courseinstructor))
+    console.log(parseJson(res.courseteacher))
+    console.log(parseJson(res.courseadvisor))
     formData.step2 = {
       teacher: {
         teachers: res.courseteacher ? parseJson(res.courseteacher) : [],
       },
 
-      nitet: {
-        nitets: res.courseinstructor ? parseJson(res.courseinstructor) : [],
-      },
+      nitet: res.courseinstructor ? parseJson(res.courseinstructor) : {},
       advisor: {
         advisors: res.courseadvisor ? parseJson(res.courseadvisor) : [],
       },

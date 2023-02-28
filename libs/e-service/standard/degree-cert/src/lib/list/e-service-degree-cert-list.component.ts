@@ -225,9 +225,10 @@ export class EServiceDegreeCertListComponent
               process: item?.process,
               requestType: item?.requesttype,
               status: item?.status,
-              degreeapprovecode: approvedetail?.degreeApproveCode
-                ? approvedetail?.degreeApproveCode
-                : '',
+              degreeapprovecode: item?.degreeapprovecode
+              // degreeapprovecode: approvedetail?.degreeApproveCode
+              //   ? approvedetail?.degreeApproveCode
+              //   : '',
             };
           }
         );

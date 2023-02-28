@@ -154,7 +154,18 @@ export class FileMultiUploadComponent {
   }
 
   view() {
-    if (this.systemType != 'uni') {
+    if (this.systemType == 'uni' || this.systemType == 'ksp') {
+      this.dialog.open(PdfViewerNoLicenseComponent, {
+        width: '1200px',
+        height: '100vh',
+        data: {
+          title: this.groupName,
+          files: this.groupFiles,
+          checkresult: [],
+          systemType: this.systemType,
+        },
+      });
+    } else {
       const dialogRef = this.dialog.open(PdfViewerComponent, {
         width: '1200px',
         height: '100vh',
@@ -166,17 +177,6 @@ export class FileMultiUploadComponent {
         },
       });
       dialogRef.afterClosed().subscribe();
-    } else {
-      this.dialog.open(PdfViewerNoLicenseComponent, {
-        width: '1200px',
-        height: '100vh',
-        data: {
-          title: this.groupName,
-          files: this.groupFiles,
-          checkresult: [],
-          systemType: this.systemType,
-        },
-      });
     }
   }
 }
