@@ -40,6 +40,7 @@ export class EServiceDegreeCertListComponent
   header = 'รายการขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา';
   processType: any;
   subTypeSearch = '';
+  processTypeSearch: any;
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -111,30 +112,35 @@ export class EServiceDegreeCertListComponent
         this.form.controls.search.patchValue({
           verifyStatus: '1',
         });
+        this.processTypeSearch = "'1','1'";
       }
       if (this.pageType == 1) {
         this.header = 'ประเมินหลักสูตรและโครงสร้างหลักสูตร';
         this.form.controls.search.patchValue({
           verifyStatus: '3',
         });
+        this.processTypeSearch = "'3','3'";
       }
       if (this.pageType == 2) {
         this.header = 'พิจารณารับรองปริญญาและประกาศนียบัตร';
         this.form.controls.search.patchValue({
           verifyStatus: '4',
         });
+        this.processTypeSearch = "'4','4'";
       }
       if (this.pageType == 3) {
         this.header = 'ออกรหัสรับรองปริญญาและประกาศนียบัตร';
         this.form.controls.search.patchValue({
           verifyStatus: '5'
         });
+        this.processTypeSearch = "'5','5'";
       };
       if (this.pageType == 4) {
         this.header = 'การติดตามเชิงประจักษ์';
         this.form.controls.search.patchValue({
           verifyStatus: '6',
         });
+        this.processTypeSearch = "'6','7'";
       }
       this.search();
       console.log('page type = ', this.pageType);
@@ -183,7 +189,7 @@ export class EServiceDegreeCertListComponent
       coursestatus: courseStatus || '',
       degreelevel: submitDegreeLevel || '',
       status: approveStatus || '',
-      process: verifyStatus || '',
+      process: this.processTypeSearch || '',
       ...this.tableRecord,
     };
   }

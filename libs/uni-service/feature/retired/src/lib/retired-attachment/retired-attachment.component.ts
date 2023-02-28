@@ -8,6 +8,7 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import {
+  formatRequestNo,
   mapMultiFileInfo,
   replaceEmptyWithNull,
   thaiDate,
@@ -155,6 +156,7 @@ export class RetiredAttachmentComponent implements OnInit {
             const payload = {
               ...this.userInfo,
               contactphone: this.userInfo.phone,
+              workphone: this.userInfo?.workphone || null,
               educationoccupy: JSON.stringify(educationoccupy),
               coordinatorinfo: JSON.stringify(this.form.value.coordinator),
               fileinfo: JSON.stringify({ fileUpload }),
@@ -190,7 +192,7 @@ export class RetiredAttachmentComponent implements OnInit {
       data: {
         header: 'ยืนยันข้อมูลสำเร็จ',
         content: `วันที่ : ${this.today}
-        เลขที่แบบคำขอ : ${requestno} `,
+        เลขที่แบบคำขอ : ${formatRequestNo(requestno)} `,
         subContent: `กรุณาตรวจสอบสถานะแบบคำขอหรือรหัสเข้าใช้งาน
         ผ่านทางอีเมลผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },
