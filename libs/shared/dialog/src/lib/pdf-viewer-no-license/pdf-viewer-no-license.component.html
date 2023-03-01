@@ -79,6 +79,7 @@
       <div *ngIf="index !== null && data.systemType !== 'uni'" class="bg-white mt-3">
         <hr />
         <e-service-license-check
+          [showHistoryButton]="false"
           [choices]="verifyChoice"
           [formControlName]="index"
           [mode]="data.mode"

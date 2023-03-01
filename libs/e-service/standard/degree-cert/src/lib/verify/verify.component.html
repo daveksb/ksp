@@ -43,6 +43,7 @@
 
     <div class="mt-3 bg-white py-1 px-3">
       <e-service-license-check
+        [showHistoryButton]="false"
         [headerTitle]="'ผลการพิจารณา'"
         [choices]="choices[processType]"
         formControlName="considerationResult"

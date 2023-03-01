@@ -33,6 +33,8 @@ export class ForgotPasswordSetNewPasswordComponent {
       validators: [Validation.match('newPassword', 'confirmPassword')],
     }
   );
+  eyeIconClicked = false;
+  eyeIconClickedRe = false;
 
   @Output() confirmed = new EventEmitter<any>();
   validatorMessages = validatorMessages;

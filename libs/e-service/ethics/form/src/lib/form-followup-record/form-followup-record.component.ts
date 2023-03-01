@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { SharedFormOthersModule } from '@ksp/shared/form/others';
 import { UniInfoService } from '@ksp/shared/service';
 import { map } from 'rxjs';
-import { PdfViewerComponent } from '@ksp/shared/dialog';
+import { PdfViewerComponent, PdfViewerNoLicenseComponent } from '@ksp/shared/dialog';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -71,12 +71,13 @@ export class FormFollowUpRecordComponent extends KspFormBaseComponent {
 
   view() {
     const e = this.form.getRawValue() as any;
-    const dialogRef = this.dialog.open(PdfViewerComponent, {
+    console.log(e)
+    const dialogRef = this.dialog.open(PdfViewerNoLicenseComponent, {
       width: '1200px',
       height: '100vh',
       data: {
         title: e?.file?.filename,
-        files: [e?.file],
+        files: e?.file,
         checkresult: [],
         systemType: 'ksp',
         mode: 'view'

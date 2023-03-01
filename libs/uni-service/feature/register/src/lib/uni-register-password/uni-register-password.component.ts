@@ -10,6 +10,7 @@ import { FormMode } from '@ksp/shared/interface';
 import { EMPTY, Subject, switchMap } from 'rxjs';
 import localForage from 'localforage';
 import {
+  formatRequestNo,
   getCookie,
   mapMultiFileInfo,
   replaceEmptyWithNull,
@@ -200,7 +201,7 @@ export class UniRegisterPasswordComponent implements OnInit {
       data: {
         header: `ยืนยันข้อมูลสำเร็จ`,
         content: `วันที่ : ${this.requestDate}
-        เลขที่แบบคำขอ : ${requestNo}`,
+        เลขที่แบบคำขอ : ${formatRequestNo(requestNo)}`,
         subContent: `กรุณาตรวจสอบสถานะแบบคำขอผ่านทางอีเมล
         ผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
       },

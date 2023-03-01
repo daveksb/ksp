@@ -71,13 +71,14 @@ export class PdfViewerComponent implements OnInit {
 
     this.data.files = this.data.files.filter((file) => file.fileid);
     this.pdfList = this.setDefault(this.data.files.length);
+    console.log('open')
     this.getAllFileData();
   }
 
   getFile(index: number) {
     const file = this.data.files[index];
     const id = file.fileid;
-    console.log(this.data);
+    console.log('get file',this.data);
     if (this.data.systemType == 'uni') {
       this.fileService.downloadUniFile({ id }).subscribe((res: any) => {
         const extension = this.pdfList[index].type;
@@ -168,6 +169,7 @@ export class PdfViewerComponent implements OnInit {
     return extension;
   }
   getAllFileData() {
+    console.log(this.data)
     for (const index in this.data.files) {
       this.getFile(parseInt(index));
     }

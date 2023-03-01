@@ -41,7 +41,7 @@
           </th>
           <td mat-cell [hidden]="showColumnSelect" *matCellDef="let row">
             <mat-checkbox
-              *ngIf="showActionButtons || processType === 6"
+              *ngIf="(showActionButtons || processType === 6) && row.process !== '7'"
               (click)="$event.stopPropagation()"
               (change)="$event ? selection.toggle(row) : null"
               [checked]="selection.isSelected(row)"

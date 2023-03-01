@@ -152,7 +152,7 @@ export class UniDegreeCertListComponent
   }
 
   genAlertMessage(req: any) {
-    return `แจ้งเตือน เลขที่คำขอ: ${req.requestno} รายการขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา ถูกส่งคืน "ปรับแก้ไข/เพิ่มเติม"`;
+    return `แจ้งเตือน เลขที่คำขอ: ${formatRequestNo(req.requestno)} รายการขอรับรองปริญญาและประกาศนียบัตรทางการศึกษา ถูกส่งคืน "ปรับแก้ไข/เพิ่มเติม"`;
   }
 
   genSubTitle(req: any) {

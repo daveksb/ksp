@@ -164,6 +164,7 @@
   <br />
   <div [formGroup]="verifyForm" class="bg-white p-3">
     <e-service-license-check
+      [showHistoryButton]="false"
       [mode]="mode"
       formControlName="result"
       [headerTitle]="approveTitles[pageType]"

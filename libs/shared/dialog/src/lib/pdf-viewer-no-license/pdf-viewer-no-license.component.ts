@@ -71,6 +71,7 @@ export class PdfViewerNoLicenseComponent implements OnInit {
   }
 
   getFile(index: number) {
+    console.log(this.data)
     const file = this.data.files[index];
     const id = file.fileid;
     if (this.data.systemType == 'uni') {
@@ -81,6 +82,18 @@ export class PdfViewerNoLicenseComponent implements OnInit {
           this.downloading(src, index);
         } else {
           this.pdfList[index].src = src;
+          this.pdfList[index].loading = false;
+        }
+      });
+    } else if (this.data.systemType == 'ksp') {
+      this.fileService.eDownloadKspFile({ id }).subscribe((res: any) => {
+        const extension = this.pdfList[index].type;
+        const src = atob(res?.filedata ?? '');
+        if (extension == 'pdf') {
+          this.downloading(src, index);
+        } else {
+          this.pdfList[index].src = src;
+          this.pdfList[index].view = src;
           this.pdfList[index].loading = false;
         }
       });
