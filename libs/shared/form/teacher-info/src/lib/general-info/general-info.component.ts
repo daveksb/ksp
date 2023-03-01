@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent, ListData } from '@ksp/shared/interface';
 import { GeneralInfoService } from '@ksp/shared/service';
-import { providerFactory } from '@ksp/shared/utility';
+import { idCardPattern, providerFactory, validatorMessages } from '@ksp/shared/utility';
 import _ from 'lodash';
 
 @Component({
@@ -16,7 +16,7 @@ export class TeacherGeneralInfoComponent extends KspFormBaseComponent {
     prefix: [''],
     firstName: [''],
     lastName: [''],
-    personId: [''],
+    personId: ['', Validators.pattern(idCardPattern)],
     academicPost: [''],
     degrees: this.fb.array([
       this.fb.group({
@@ -27,6 +27,8 @@ export class TeacherGeneralInfoComponent extends KspFormBaseComponent {
     ]),
   });
   prefixOptions: ListData[] = [];
+  validIdcard = true;
+  validatorMessages = validatorMessages;
 
   override writeValue(value: any) {
     if (value) {
@@ -82,4 +84,28 @@ export class TeacherGeneralInfoComponent extends KspFormBaseComponent {
   deleteDegree(degreeIndex: number) {
     this.degrees.removeAt(degreeIndex);
   }
+
+  checkID(event: any) {
+    const id = event?.target.value;
+    if (id.length != 13) {
+      this.validIdcard = false;
+      return;
+    }
+    let sum = 0;
+    for (let i = 0; i < 12; i++) {
+      sum += parseInt(id.charAt(i)) * (13 - i);
+    }
+    const mod = sum % 11;
+    const check = (11 - mod) % 10;
+    if (check == parseInt(id.charAt(12))) {
+      this.validIdcard = true;
+    } else {
+      this.validIdcard = false;
+    }
+  }
+
+  get idCardNo() {
+    return this.form.controls.personId;
+  }
+
 }

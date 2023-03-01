@@ -39,6 +39,16 @@
           placeholder="หมายเลขบัตรประชาชนจำนวน 13 หลัก"
           formControlName="personId"
         />
+        <ng-container
+          *ngIf="(idCardNo.invalid) || !validIdcard"
+        >
+          <span class="text-danger" *ngIf="idCardNo.invalid && !idCardNo.value">
+            {{ validatorMessages.required.replace('field', 'หมายเลขบัตรประชาชน') }} !
+          </span>
+          <span class="text-danger" *ngIf="idCardNo.value && (idCardNo.errors?.['pattern'] || !validIdcard)">
+            {{ validatorMessages.idCardNo }}
+          </span>
+        </ng-container>
       </div>
 
       <div class="col mb-3">

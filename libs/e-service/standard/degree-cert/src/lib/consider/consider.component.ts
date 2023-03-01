@@ -28,7 +28,7 @@ import { EUniApproveProcess } from '@ksp/shared/constant';
 
 const detailToState = (res: any) => {
   const newRes = _.orderBy(res?.datareturn
-    .filter(({ process, detail }: any) => ['2', '3', '4', '5'].includes(process) && detail)
+    .filter(({ process, detail }: any) => ['1', '3', '4', '5'].includes(process) && detail)
     .map((data: any) => {
       return { ...data, detail: parseJson(data?.detail)};
     }), ['id'], ['asc']);
@@ -173,7 +173,9 @@ export class ConsiderComponent implements OnInit {
           data.comment = data.detail.verify.detail || '';
           return data;
         });
-        this.verifyResult = res?.verifyResult.filter((data: any) => { return data.process == '3'});
+        this.verifyResult = res?.verifyResult.filter((data: any) => { 
+          return (data.process == '1' && data.status == '2') || data.process == '3'
+        });
         this.considerCourses = [
           ...(res?.considerCourses || []),
           ...this.newConsiderCourses,

@@ -46,11 +46,20 @@ export class DegreeCertStepTwoComponent extends KspFormBaseComponent {
     );
   }
   get minAmount() {
-    const studentMax = _.maxBy(
-      this.form.controls.plan1.value?.plans as any,
-      (data: any) => _.parseInt(data?.student) || 0
-    );
-    return ~~(~~studentMax?.student / 10);
+    let studentMax: any;
+    if (this.formType == 'a') {
+      studentMax = _.maxBy(
+        this.form.controls.plan1.value?.plans as any,
+        (data: any) => _.parseInt(data?.student) || 0
+      );
+      return ~~(~~studentMax?.student / 10);
+    } else {
+      studentMax = _.maxBy(
+        this.form.controls.plan2.value?.plans as any,
+        (data: any) => (_.parseInt(data?.student1) + _.parseInt(data?.student2) + _.parseInt(data?.student3)) || 0
+      );
+      return ~~(~~(_.parseInt(studentMax?.student1) + _.parseInt(studentMax?.student2) + _.parseInt(studentMax?.student3)) / 10);
+    }
   }
   tabChanged($event: MatTabChangeEvent) {
     //console.log('tab index = ', $event.index);
