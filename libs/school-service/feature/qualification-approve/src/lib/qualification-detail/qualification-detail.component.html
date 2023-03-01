@@ -54,7 +54,7 @@
               formControlName="addr1"
               [isDarkMode]="false"
               [mode]="'view'"
-              [provinces]="provinces1$ | async"
+              [provinces]="provinces$ | async"
               [amphurs]="amphurs1$ | async"
               [tumbols]="tumbols1$ | async"
               (provinceChanged)="provinceChanged(1, $event)"
@@ -65,7 +65,7 @@
               <ksp-form-address
                 formControlName="addr2"
                 [mode]="'view'"
-                [provinces]="provinces2$ | async"
+                [provinces]="provinces$ | async"
                 [amphurs]="amphurs2$ | async"
                 [tumbols]="tumbols2$ | async"
                 (provinceChanged)="provinceChanged(2, $event)"

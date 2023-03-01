@@ -75,8 +75,7 @@ export class QualificationDetailComponent implements OnInit {
   uniqueNo!: string;
   userInfoFormdisplayMode: number = UserInfoFormType.thai;
   prefixList$!: Observable<Prefix[]>;
-  provinces1$!: Observable<Province[]>;
-  provinces2$!: Observable<Province[]>;
+  provinces$!: Observable<Province[]>;
   amphurs1$!: Observable<Amphur[]>;
   tumbols1$!: Observable<Tambol[]>;
   amphurs2$!: Observable<Amphur[]>;
@@ -126,12 +125,11 @@ export class QualificationDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    //7396307202241
-    this.form.valueChanges.subscribe((res) => {
-      //console.log('formData', this.form.getRawValue());
-      //console.log('edu1 = ', this.form.controls.edu1.valid);
-      //console.log('user info  = ', this.form.controls.userInfo.getRawValue());
-    });
+    /* this.form.valueChanges.subscribe((res) => {
+      console.log('formData', this.form.getRawValue());
+      console.log('edu1 = ', this.form.controls.edu1.valid);
+      console.log('user info  = ', this.form.controls.userInfo.getRawValue());
+    }); */
     this.uniqueNo = uuidv4();
     this.getListData();
     this.checkRequestId();
@@ -297,8 +295,7 @@ export class QualificationDetailComponent implements OnInit {
 
   getListData() {
     this.prefixList$ = this.generalInfoService.getPrefix();
-    this.provinces1$ = this.addressService.getProvinces();
-    this.provinces2$ = this.provinces1$;
+    this.provinces$ = this.addressService.getProvinces();
     this.countries$ = this.addressService.getCountry();
     this.nationalitys$ = this.generalInfoService.getNationality();
     this.staffService.getPositionTypes().subscribe((res) => {
@@ -472,6 +469,76 @@ export class QualificationDetailComponent implements OnInit {
       });
   }
 
+  updateRequest(process: number) {
+    const baseForm = this.fb.group(new KspRequest());
+    const formData: any = this.form.getRawValue();
+    const { id, ...userInfo } = formData.userInfo;
+
+    userInfo.id = `${this.requestId}`;
+    userInfo.schoolid = this.schoolId;
+    userInfo.process = `${process}`;
+    userInfo.status = `1`;
+    userInfo.ref1 = '2';
+    userInfo.ref2 = '06';
+    userInfo.ref3 = '1';
+    userInfo.systemtype = '2';
+    userInfo.requesttype = '6';
+    userInfo.careertype = `${this.careerType}`;
+
+    /*    const teaching: any = this.form.controls.teachinginfo.value;
+    let teachingInfo = {}; */
+
+    /*     if (this.form.controls.teachinginfo.value) {
+      const teachingLevel = formatCheckboxData(teaching.teachingLevel, levels);
+      const teachingSubjects = formatCheckboxData(
+        teaching.teachingSubjects,
+        subjects
+      );
+      teachingInfo = {
+        teachingLevel,
+        teachingSubjects,
+        teachingSubjectOther: teaching.teachingSubjectOther || null,
+      };
+    }
+
+    const tab3 = mapMultiFileInfo(this.eduFiles);
+    const tab4 = mapMultiFileInfo(this.teachingFiles);
+    const tab5 = mapMultiFileInfo(this.reasonFiles);
+    const tab6 = mapMultiFileInfo(this.attachFiles); */
+
+    const payload = {
+      ...replaceEmptyWithNull(userInfo),
+      ...{ addressinfo: JSON.stringify([formData.addr1, formData.addr2]) },
+      ...{ eduinfo: JSON.stringify([formData.edu1, formData.edu2]) },
+      //...{ teachinginfo: JSON.stringify(teachingInfo) },
+      ...{ hiringinfo: JSON.stringify(formData.hiringinfo) },
+      //...{ visainfo: JSON.stringify(visaInfo) },
+      ...{ schooladdrinfo: JSON.stringify(formData.schoolAddr) },
+      ...{ reasoninfo: JSON.stringify(formData.reasoninfo) },
+      //...{ fileinfo: JSON.stringify({ tab3, tab4, tab5, tab6 }) },
+      //...{ prohibitproperty: JSON.stringify(this.forbidden || null) },
+    };
+
+    baseForm.patchValue(payload);
+
+    const { ref1, ref2, ref3, uniqueno, requestdate, requestno, ...temp } =
+      baseForm.value;
+
+    const res = replaceEmptyWithNull(temp);
+
+    //console.log('update payload = ', res);
+    this.requestService.schUpdateRequest(res).subscribe(() => {
+      /*  if (process === 2) {
+        this.completeDialog(`ระบบทำการบันทึกเรียบร้อยแล้ว
+        สามารถตรวจสอบสถานะภายใน
+        3 - 15 วันทำการ`);
+      } else if (process === 1) {
+        // บันทึกชั่วคราว
+        this.completeDialog(`ระบบทำการบันทึกชั่วคราวเรียบร้อยแล้ว`);
+      } */
+    });
+  }
+
   onClickPrev() {
     if (this.selectedTabIndex == 0) {
       this.router.navigate(['/temp-license', 'list']);
@@ -599,7 +666,6 @@ export class QualificationDetailComponent implements OnInit {
     const checked = evt.target.checked;
     this.amphurs2$ = this.amphurs1$;
     this.tumbols2$ = this.tumbols1$;
-    this.provinces2$ = this.provinces1$;
     if (checked) {
       this.form.controls.addr2.patchValue(this.form.controls.addr1.value);
     }
@@ -619,10 +685,6 @@ const files: FileGroup[] = [
     name: 'สำเนาบัตรประจำตัวประชาชน / บัตรประจำตัวข้าราชการ',
     files: [],
   },
-  /* {
-    name: 'สำเนาทะเบียนบ้าน',
-    files: [],
-  }, */
   {
     name: 'สำเนาหนังสือแจ้งการเทียบคุณวุฒิ (กรณีจบการศึกษาจากต่างประเทศ)',
     files: [],
