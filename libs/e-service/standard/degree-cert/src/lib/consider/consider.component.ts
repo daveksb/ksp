@@ -6,6 +6,7 @@ import {
   CompleteDialogComponent,
   ConfirmDialogComponent,
   PdfViewerComponent,
+  PdfViewerNoLicenseComponent,
 } from '@ksp/shared/dialog';
 import {
   ERequestService,
@@ -366,7 +367,7 @@ export class ConsiderComponent implements OnInit {
   }
 
   view(e: any) {
-    const dialogRef = this.dialog.open(PdfViewerComponent, {
+    const dialogRef = this.dialog.open(PdfViewerNoLicenseComponent, {
       width: '1200px',
       height: '100vh',
       data: {
@@ -374,6 +375,8 @@ export class ConsiderComponent implements OnInit {
         files: e?.file.files,
         checkresult: [],
         systemType: 'ksp',
+        showLicense: false,
+        mode: 'view'
       },
     });
     dialogRef.afterClosed().subscribe((result) => {

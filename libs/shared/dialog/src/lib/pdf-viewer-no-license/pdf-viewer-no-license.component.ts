@@ -49,6 +49,7 @@ export class PdfViewerNoLicenseComponent implements OnInit {
       checkresult: KspCheckResult[];
       systemType: string;
       mode: FormMode;
+      showLicense: boolean;
     },
     private fb: FormBuilder,
     private fileService: FileService,

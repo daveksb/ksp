@@ -7,6 +7,7 @@ import {
   ConfirmDialogComponent,
   FilesPreviewComponent,
   PdfViewerComponent,
+  PdfViewerNoLicenseComponent,
 } from '@ksp/shared/dialog';
 import { Location } from '@angular/common';
 import {
@@ -298,7 +299,7 @@ export class ApproveComponent implements OnInit {
   }
 
   view(e: any) {
-    const dialogRef = this.dialog.open(PdfViewerComponent, {
+    const dialogRef = this.dialog.open(PdfViewerNoLicenseComponent, {
       width: '1200px',
       height: '100vh',
       data: {
@@ -306,6 +307,8 @@ export class ApproveComponent implements OnInit {
         files: e?.file.files,
         checkresult: [],
         systemType: 'ksp',
+        showLicense: false,
+        mode: 'view'
       },
     });
     dialogRef.afterClosed().subscribe((result) => {

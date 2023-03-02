@@ -27,6 +27,7 @@ export class FormMultiAttachmentComponent {
   @Output() downloadClick = new EventEmitter<any>();
   @Output() uploadComplete = new EventEmitter<any>();
   @Output() confirmChoice = new EventEmitter<any>();
+  @Input() showLicense = true;
 
   constructor(public dialog: MatDialog, private fileService: FileService) {}
 
@@ -64,6 +65,7 @@ export class FormMultiAttachmentComponent {
           checkresult: group?.checkresult ?? [],
           systemType: this.systemType,
           mode: this.viewFileMode,
+          showLicense: this.showLicense
         },
       });
       dialogRef
