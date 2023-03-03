@@ -118,23 +118,6 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
       if (uniRequestDegree.requestprocess != '99') {
         this.submode = 'return';
       }
-      // if (
-      //   uniRequestDegree.requestprocess == '1' ||
-      //   (uniRequestDegree.requestprocess == '2' &&
-      //     uniRequestDegree.requeststatus == '1') ||
-      //   (uniRequestDegree.requestprocess == '3' &&
-      //     uniRequestDegree.requeststatus == '1') ||
-      //   (uniRequestDegree.requestprocess == '4' &&
-      //     uniRequestDegree.requeststatus == '1') ||
-      //   (uniRequestDegree.requestprocess == '4' &&
-      //     uniRequestDegree.requeststatus == '2') ||
-      //   (uniRequestDegree.requestprocess == '5' &&
-      //     uniRequestDegree.requeststatus == '1') ||
-      //   (uniRequestDegree.requestprocess == '5' &&
-      //     uniRequestDegree.requeststatus == '2')
-      // ) {
-      //   this.mode = 'view';
-      // }
       this.status = uniRequestDegree.requeststatus;
       this.process = uniRequestDegree.requestprocess;
       const checkresult = uniRequestDegree.checkresult ? parseJson(uniRequestDegree.checkresult) : {};
@@ -232,7 +215,12 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
       if (e) {
         const res = await (async () => {
           if (this.id) {
-            const currentprocess = this.process;
+            let currentprocess = '';
+            if (this.process != '1' && this.process != '99') {
+              currentprocess = this.process;
+            } else {
+              currentprocess = process;
+            }
             return await lastValueFrom(
               this.uniRequestService.uniRequestUpdate(
                 this._getRequest(currentprocess, '1')

@@ -54,19 +54,22 @@ export class UniInfoService {
         ? parseJson(res?.coordinatorinfo)
         : null,
     };
-    console.log(parseJson(res.courseinstructor))
-    console.log(parseJson(res.courseteacher))
-    console.log(parseJson(res.courseadvisor))
+    const parseCourseInstructor = res.courseinstructor ? parseJson(res.courseinstructor) : {};
+    console.log(parseCourseInstructor)
+    const parseCourseAdvisor = res.courseadvisor ? parseJson(res.courseadvisor) : [];
+    const parseCourseTeacher = res.courseteacher ? parseJson(res.courseteacher) : [];
     formData.step2 = {
       teacher: {
-        teachers: res.courseteacher ? parseJson(res.courseteacher) : [],
+        teachers: parseCourseTeacher,
       },
-
-      nitet: res.courseinstructor ? parseJson(res.courseinstructor) : {},
+      nitet: {
+        nitets: parseCourseInstructor.nitets
+      },
       advisor: {
-        advisors: res.courseadvisor ? parseJson(res.courseadvisor) : [],
+        advisors: parseCourseAdvisor,
       },
     };
+    console.log(formData.step2)
     if (['1', '2', '3', '4'].includes(res?.degreelevel)) {
       formData.step2.plan1 = {
         plans: res.coursestructure ? parseJson(res.coursestructure) : [],

@@ -97,6 +97,7 @@ export class EServiceDegreeCertListComponent
     });
     this.route.paramMap.subscribe((res) => {
       if (res) {
+        this.form.controls.search.reset(); 
         /**
          * show action buttons if process = consider || approve
          */
@@ -197,11 +198,14 @@ export class EServiceDegreeCertListComponent
     this.eUiService
       .uniRequestDegreeCertSearchEsUni(this.getRequest())
       .subscribe((res) => {
-        if (!res?.datareturn) return;
+        if (!res?.datareturn) {
+          this.dataSource.data = []; 
+          this.pageEvent.length = 0;
+          return;
+        }
         this.pageEvent.length = res.countrow;
         this.dataSource.data = res?.datareturn?.map(
           (item: any, index: number) => {
-            const approvedetail = item?.detail ? JSON.parse(item?.detail) : {};
             return {
               key: item?.id,
               order:
@@ -226,9 +230,6 @@ export class EServiceDegreeCertListComponent
               requestType: item?.requesttype,
               status: item?.status,
               degreeapprovecode: item?.degreeapprovecode
-              // degreeapprovecode: approvedetail?.degreeApproveCode
-              //   ? approvedetail?.degreeApproveCode
-              //   : '',
             };
           }
         );

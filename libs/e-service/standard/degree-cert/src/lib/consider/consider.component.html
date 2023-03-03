@@ -106,7 +106,6 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th></th>
                   <th scope="col">วันที่ประเมิน</th>
                   <th scope="col">ชื่อคณะกรรมการ</th>
                   <th scope="col">รายละเอียด</th>
@@ -115,7 +114,6 @@
               </thead>
               <tbody>
                 <tr *ngFor="let item of considerCourses; let i = index">
-                  <td>{{ i + 1 }}</td>
                   <td class="detail__table">
                     {{ toDate(item?.verifyForm?.date) || '' }}
                   </td>
