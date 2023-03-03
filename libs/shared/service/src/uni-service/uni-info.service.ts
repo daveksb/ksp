@@ -55,16 +55,13 @@ export class UniInfoService {
         : null,
     };
     const parseCourseInstructor = res.courseinstructor ? parseJson(res.courseinstructor) : {};
-    console.log(parseCourseInstructor)
     const parseCourseAdvisor = res.courseadvisor ? parseJson(res.courseadvisor) : [];
     const parseCourseTeacher = res.courseteacher ? parseJson(res.courseteacher) : [];
     formData.step2 = {
       teacher: {
         teachers: parseCourseTeacher,
       },
-      nitet: {
-        nitets: parseCourseInstructor.nitets
-      },
+      nitet: parseCourseInstructor,
       advisor: {
         advisors: parseCourseAdvisor,
       },

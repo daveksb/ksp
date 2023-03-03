@@ -148,7 +148,7 @@ export class RetiredAttachmentComponent implements OnInit {
               institution: this.userInfo.name,
               affiliation: this.userInfo.unitypename,
               unicode: this.userInfo.unicode,
-              uniname: this.userInfo.name,
+              uniname: this.userInfo.uniname,
               unitypename: this.userInfo.unitypename,
               permission: this.userInfo.permissionright,
               userid: this.userInfo.id,

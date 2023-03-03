@@ -28,7 +28,6 @@ export class RetiredHomeComponent extends KspPaginationComponent {
   }
 
   handleSearch(form: any) {
-    console.log(form)
     if (form) {
       let nameData = {};
       if (form.name) {
@@ -52,6 +51,7 @@ export class RetiredHomeComponent extends KspPaginationComponent {
         uniname: form.searchType?.schoolname,
         ...this.tableRecord
       }
+      delete this.payload.name;
       delete this.payload.searchType;
       this.searchUser(this.payload);
     }
@@ -62,9 +62,7 @@ export class RetiredHomeComponent extends KspPaginationComponent {
   // }
 
   searchUser(form: any) {
-    console.log(form)
     this.uniRequestService.searchUniRequest(form).subscribe(res=>{
-      console.log(res)
       this.pageEvent.length = res.countrow;
       if (res.returncode == "00" && res.datareturn) {
         this.data = res.datareturn.map((data: any) => {

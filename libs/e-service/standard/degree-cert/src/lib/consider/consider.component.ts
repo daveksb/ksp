@@ -175,7 +175,7 @@ export class ConsiderComponent implements OnInit {
           return data;
         });
         this.verifyResult = res?.verifyResult.filter((data: any) => { 
-          return (data.process == '1' && data.status == '2') || data.process == '3'
+          return (data.process == '3' && data.status == '2') || data.process == '4'
         });
         this.considerCourses = [
           ...(res?.considerCourses || []),
@@ -286,8 +286,8 @@ export class ConsiderComponent implements OnInit {
     let reqProcess = '';
     let reqStatus = '';
     if (_.get(this.form, 'value.verify.result', '') == '3') {
-      reqStatus = '2'
-      reqProcess = '3'
+      reqStatus = '2';
+      reqProcess = '3';
     } else {
       reqStatus = _.get(this.form, 'value.verify.result', '');
       reqProcess = '4';

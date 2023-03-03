@@ -51,8 +51,8 @@ export class NitetComponent extends KspFormBaseComponent implements OnInit {
     });
     this.form.controls.nittetAmount.valueChanges.subscribe((res: any) => {
       if (res && res > 0) {
-        this.form.updateValueAndValidity();
-        this.addNitet();
+        // this.form.updateValueAndValidity();
+        // this.addNitet();
       }
     });
   }

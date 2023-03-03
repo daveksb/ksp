@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConfirmDialogComponent } from '@ksp/shared/dialog';
+import { CompleteDialogComponent, ConfirmDialogComponent } from '@ksp/shared/dialog';
 import { Location } from '@angular/common';
 import _ from 'lodash';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -10,7 +10,7 @@ import { jsonStringify, parseJson } from '@ksp/shared/utility';
 import { map } from 'rxjs';
 const detailToState = (res: any) => {
   const newRes =
-    _.filter(res?.datareturn, ({ process }) => process === '3').map(
+    _.filter(res?.datareturn, ({ process, status, userid }) => process === '3' && status === '1' && userid ).map(
       (data: any) => {
         return parseJson(data?.detail);
       }
@@ -101,7 +101,6 @@ export class VerifyComponent implements OnInit {
       this.processType = Number(res.get('type'));
       this.requestId = res.get('requestId');
       this.process = res.get('process');
-      //console.log('process type = ', this.processType);
     });
   }
 
@@ -169,25 +168,53 @@ export class VerifyComponent implements OnInit {
         this.dataSource.forEach((data: any, index) => {
           payload.requestid = data?.key;
           if (data?.status === '1' && data?.process === '3') {
+            if (this.processType === 1) {
+              payload.process = '4';
+            } else if (this.processType == 2) {
+              payload.process = '5';
+            } else {
+              payload.process = this.process;
+            }
             this.eRequestService
-              .kspUniRequestProcessSelectByRequestId(payload.requestid)
-              .pipe(map(detailToState))
-              .subscribe((res) => {
-                if (
-                  (this.processType === 2 && res?.isNotEmptyConsiderCert) ||
-                  (this.processType === 1 && res?.isNotEmptyConsiderCourses)
-                ) {
-                  payload.process = '4';
-                }
-                this.eRequestService
-                  .kspUpdateRequestUniRequestDegree(payload)
-                  .subscribe(() => {
-                    if (index === _.size(this.dataSource) - 1)
-                      this.location.back();
-                  });
-              });
+            .kspUpdateRequestUniRequestDegree(payload)
+            .subscribe(() => {
+              if (index === _.size(this.dataSource) - 1)
+                this.onConfirmed(index, 'บันทึกข้อมูลสำเร็จ');
+            });
+            // this.eRequestService
+            //   .kspUniRequestProcessSelectByRequestId(payload.requestid)
+            //   .pipe(map(detailToState))
+            //   .subscribe((res) => {
+            //     console.log(res)
+            //     if (
+            //       (this.processType === 2 && res?.isNotEmptyConsiderCert) ||
+            //       (this.processType === 1 && res?.isNotEmptyConsiderCourses)
+            //     ) {
+            //       payload.process = '4';
+            //     }
+            //     this.eRequestService
+            //       .kspUpdateRequestUniRequestDegree(payload)
+            //       .subscribe(() => {
+            //         if (index === _.size(this.dataSource) - 1)
+            //           this.location.back();
+            //       });
+            //   });
           }
         });
+      }
+    });
+  }
+
+  onConfirmed(index: any, header: any) {
+    const dialog = this.dialog.open(CompleteDialogComponent, {
+      data: {
+        header,
+      },
+    });
+
+    dialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.location.back();
       }
     });
   }
