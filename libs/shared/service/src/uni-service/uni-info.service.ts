@@ -61,12 +61,14 @@ export class UniInfoService {
       teacher: {
         teachers: parseCourseTeacher,
       },
-      nitet: parseCourseInstructor,
+      nitet: {
+        nitets: parseCourseInstructor.nitets,
+        nittetAmount: parseCourseInstructor.nittetAmount
+      },
       advisor: {
         advisors: parseCourseAdvisor,
       },
     };
-    console.log(formData.step2)
     if (['1', '2', '3', '4'].includes(res?.degreelevel)) {
       formData.step2.plan1 = {
         plans: res.coursestructure ? parseJson(res.coursestructure) : [],

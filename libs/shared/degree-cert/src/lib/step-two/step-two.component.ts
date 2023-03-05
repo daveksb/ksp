@@ -62,11 +62,6 @@ export class DegreeCertStepTwoComponent extends KspFormBaseComponent {
     }
   }
   tabChanged($event: MatTabChangeEvent) {
-    if ($event.index === 2) {
-      const nitetData = this.form.controls.nitet.value as any;
-      nitetData.nittetAmount = this.minAmount as any;
-      this.form.controls.nitet.patchValue(nitetData);
-    }
     this.tabIndexChanged.emit($event.index);
   }
 

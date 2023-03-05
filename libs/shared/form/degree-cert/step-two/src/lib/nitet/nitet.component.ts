@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
 import { providerFactory } from '@ksp/shared/utility';
@@ -10,7 +10,7 @@ import _ from 'lodash';
   styleUrls: ['./nitet.component.scss'],
   providers: providerFactory(NitetComponent),
 })
-export class NitetComponent extends KspFormBaseComponent implements OnInit {
+export class NitetComponent extends KspFormBaseComponent implements OnInit, OnChanges {
  @Input() maxAmount = 99;
  @Input() minAmount = 0;
   experienceYearFocused = false;
@@ -42,6 +42,26 @@ export class NitetComponent extends KspFormBaseComponent implements OnInit {
       })
     );
   }
+  
+  override ngOnChanges(event: any): void {
+      if (event.minAmount) {
+        this.form.patchValue({nittetAmount: event.minAmount.currentValue})
+        this.addNitet(event.minAmount.currentValue);
+      }
+  }
+
+  override writeValue(value: any): void {
+      if (value) {
+        const nitetamt = value.nittetAmount || 0;
+        if (this.form.controls.nitets.length  < nitetamt) {
+          this.addNitet(value.nittetAmount);
+        }
+        this.form.patchValue({
+          nitets: value.nitets,
+          nittetAmount: value.nittetAmount
+        });
+      }
+  }
 
   ngOnInit(): void {
     this.nitetForm.controls.experienceYear.valueChanges.subscribe((res) => {
@@ -49,18 +69,11 @@ export class NitetComponent extends KspFormBaseComponent implements OnInit {
         this.nitetForm.controls.lessExperience.reset();
       }
     });
-    this.form.controls.nittetAmount.valueChanges.subscribe((res: any) => {
-      if (res && res > 0) {
-        // this.form.updateValueAndValidity();
-        // this.addNitet();
-      }
-    });
   }
 
-  addNitet() {
-    const nitetamt = this.form.controls.nittetAmount.value || 0;
-    if (nitetamt) {
-      new Array(nitetamt).fill(null).forEach(() => {
+  addNitet(amount: number) {
+    if (amount) {
+      new Array(amount).fill(null).forEach(() => {
         const form = this.fb.group({
           generalInfo: [],
           experienceYear: [],
@@ -70,8 +83,8 @@ export class NitetComponent extends KspFormBaseComponent implements OnInit {
           studentResponsible: [],
           studentOtherCourse: [],
           lessExperience: [],
-        })
-        if (this.form.controls.nitets.length  < nitetamt) {
+        });
+        if (this.form.controls.nitets.length  < amount) {
           this.form.controls.nitets.push(form);
         }
       });
