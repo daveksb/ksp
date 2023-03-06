@@ -17,7 +17,7 @@
     <div class="col-3">
       <label class="form-label"><br /></label>
       <button
-        (click)="addNitet()"
+        (click)="addNitet(form.value.nittetAmount || 0)"
         type="button"
         class="btn btn-primary w-auto"
         style="height: 36px"

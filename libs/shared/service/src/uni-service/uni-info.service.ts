@@ -55,7 +55,6 @@ export class UniInfoService {
         : null,
     };
     const parseCourseInstructor = res.courseinstructor ? parseJson(res.courseinstructor) : {};
-    console.log(parseCourseInstructor)
     const parseCourseAdvisor = res.courseadvisor ? parseJson(res.courseadvisor) : [];
     const parseCourseTeacher = res.courseteacher ? parseJson(res.courseteacher) : [];
     formData.step2 = {
@@ -63,13 +62,13 @@ export class UniInfoService {
         teachers: parseCourseTeacher,
       },
       nitet: {
-        nitets: parseCourseInstructor.nitets
+        nitets: parseCourseInstructor.nitets,
+        nittetAmount: parseCourseInstructor.nittetAmount
       },
       advisor: {
         advisors: parseCourseAdvisor,
       },
     };
-    console.log(formData.step2)
     if (['1', '2', '3', '4'].includes(res?.degreelevel)) {
       formData.step2.plan1 = {
         plans: res.coursestructure ? parseJson(res.coursestructure) : [],

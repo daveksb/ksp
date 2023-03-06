@@ -248,6 +248,7 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
     dateapprove.setHours(dateapprove.getHours() + 7);
     const dateaccept = new Date(step1?.degreeTypeForm?.courseAcceptDate);
     dateaccept.setHours(dateaccept.getHours() + 7);
+    console.log(step2?.nitet)
     const reqBody: any = {
       uniid: getCookie('uniId'),
       ref1: '3',

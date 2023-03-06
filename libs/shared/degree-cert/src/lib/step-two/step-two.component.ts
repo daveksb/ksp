@@ -62,11 +62,6 @@ export class DegreeCertStepTwoComponent extends KspFormBaseComponent {
     }
   }
   tabChanged($event: MatTabChangeEvent) {
-    //console.log('tab index = ', $event.index);
-    if ($event.index === 2)
-      this.form.controls.nitet.setValue({
-        nittetAmount: this.minAmount as any,
-      });
     this.tabIndexChanged.emit($event.index);
   }
 
