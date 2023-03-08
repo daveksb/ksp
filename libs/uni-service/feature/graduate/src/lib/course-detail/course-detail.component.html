@@ -42,7 +42,7 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col" class="text-center" colspan="6">
+            <th scope="col" class="text-center" colspan="5">
               แผนการรับนิสิต / นักศึกษา (ผ่านการรับรอง)
             </th>
           </tr>
@@ -52,9 +52,6 @@
             </th>
             <th scope="col" class="text-center" style="min-width: 120px">
               ปีการศึกษา (พ.ศ)
-            </th>
-            <th scope="col" class="text-center" style="min-width: 100px">
-              ชื่อแผน
             </th>
             <th scope="col" class="text-center" style="min-width: 120px">
               จำนวนนักศึกษา
@@ -74,10 +71,7 @@
             </th>
 
             <td class="text-center form-label vertical-middle">
-              <div>{{ row.year }}</div>
-            </td>
-            <td class="text-center form-label vertical-middle">
-              <div>{{ row.name || '-' }}</div>
+              <div>{{ row.year || '-' }}</div>
             </td>
             <td class="text-center form-label vertical-middle">
               <div>{{ row.student }}</div>
@@ -97,7 +91,8 @@
               </div>
             </td>
             <td class="text-center form-label vertical-middle">
-              <div>
+              <div
+                *ngIf="checkGraduate(row)">
                 {{ row.graduatecount || 0 }} / {{ row.student }}
                 <span
                   role="button"
@@ -113,7 +108,6 @@
 
           <tr>
             <th scope="row"></th>
-            <td class="text-center form-label vertical-middle"></td>
             <td class="text-center form-label vertical-middle">
               <div>รวมทั้งหมด</div>
             </td>

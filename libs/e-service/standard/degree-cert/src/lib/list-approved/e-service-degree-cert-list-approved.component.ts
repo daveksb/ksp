@@ -10,7 +10,8 @@ import { HistoryRequestAdmissionDialogComponent } from '@ksp/uni-service/dialog'
 import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder } from '@angular/forms';
 import { UniAdmissionStatus } from '@ksp/shared/constant';
-import { thaiDate } from '@ksp/shared/utility';
+import { formatRequestNo, thaiDate } from '@ksp/shared/utility';
+import moment from 'moment';
 
 const mapOption = () =>
   map((data: any) => {
@@ -123,8 +124,8 @@ export class EServiceDegreeCertApprovedListComponent extends KspPaginationCompon
       graduatestatus
     } = this.form.controls.search.value as any;
     return {
-      requestno: requestno || null,
-      requestdate: requestdate || null,
+      requestno: requestno ? requestno.replaceAll('-', '') : null,
+      requestdate: requestdate ? moment(requestdate).format('YYYY-MM-DD') : '',
       fulldegreenameth: fulldegreename || null,
       unicode: unicode || null,
       uniid: uniid || null,
@@ -151,6 +152,7 @@ export class EServiceDegreeCertApprovedListComponent extends KspPaginationCompon
         this.pageEvent.length = res.countnum;
         this.dataSource.data = res.datareturn.map((item: any, index: any) => {
           item.order = index+1;
+          item.requestnounirequestadmission = formatRequestNo(item?.requestnounirequestadmission);
           if (item.requesttype == '05') {
             item.admissionstatus = this.mapStatusProcess(item.status, item.process);
             item.graduatestatus = '';

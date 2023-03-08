@@ -60,7 +60,7 @@ export class CourseDetailComponent implements OnInit {
         this.courseData.teachinglocation = parseJson(response?.teachinglocation);
         if (this.courseData.coursestructure) {
           this.courseData.totalStudent = this.courseData.coursestructure.reduce((curr: any,prev: any)=>{
-            return curr + parseInt(prev.student)
+            return curr + (prev.student ? parseInt(prev.student) : 0);
           }, 0);
           this.courseData.coursestructure.map((data: any, index: any) => {
             data.admissioncount = 0;
@@ -186,7 +186,7 @@ export class CourseDetailComponent implements OnInit {
     const yearnow = (new Date().getFullYear() + 543);
     return (Number(row.year)+2) <= yearnow 
           && row.graduatecount < row.student
-          && row.student == row.admissioncount;
+          && row.admissioncount > 0;
   }
 
   viewCourseDetail() {

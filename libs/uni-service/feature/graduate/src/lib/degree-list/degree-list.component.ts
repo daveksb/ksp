@@ -205,6 +205,12 @@ export class DegreeListComponent extends KspPaginationComponent implements OnIni
 
   clear() {
     this.form.reset();
+    this.form.setValue({
+      search: {
+        institution: getCookie('uniId'),
+        affiliation: getCookie('uniType'),
+      },
+    });
     this.getDegreeCertList();
   }
 }
