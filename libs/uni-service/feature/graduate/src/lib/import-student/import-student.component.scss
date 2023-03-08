@@ -1,3 +1,7 @@
 tr {
   border: 1px solid #dadde1;
 }
+
+input[readonly] {
+  background-color: #e9ecef;
+}
