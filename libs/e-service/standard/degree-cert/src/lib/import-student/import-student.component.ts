@@ -186,7 +186,7 @@ export class ImportStudentComponent implements OnInit {
     }
     return this.fb.group({
       id: [data.id],
-      checked: [false],
+      checked: [data.checked ?? false],
       index: [data.index],
       no: [data.index + 1],
       admissiondate: [moment(data.admissiondate).format('YYYY-MM-DD')],
@@ -375,7 +375,6 @@ export class ImportStudentComponent implements OnInit {
 
   next() {
     const checkeddata = this.getCheckedValue();
-    console.log(checkeddata);
     const datainfo = {
       studentlist: checkeddata,
       requestno: this.requestNo,
@@ -384,6 +383,7 @@ export class ImportStudentComponent implements OnInit {
       total: this.user.value.length,
       requestdate: this.requestDate,
       payload: { ...this.payload },
+      allstudent: this.user.getRawValue()
     };
 
     localForage.setItem('studentform', datainfo).then(() => {

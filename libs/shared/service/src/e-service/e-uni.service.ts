@@ -92,6 +92,16 @@ export class EUniService {
     );
   }
 
+  updateRequestAdmission(form: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service/unirequestadmissioninsertupdate`,
+      {
+        ...form,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
+
   getProcessHistory(form: any): Observable<any> {
     return this.http.post(
       `${environment.apiUrl}/e-service/ksprequestprocessselectbyrequestid_requestadmission`,

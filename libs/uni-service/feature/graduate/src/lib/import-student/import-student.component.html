@@ -342,6 +342,7 @@
                   type="checkbox"
                   formControlName="checked"
                   class="form-check-input"
+                  [readonly]="control.value.locked"
                 />
               </td>
 
@@ -352,6 +353,7 @@
                   pInputText
                   type="text"
                   formControlName="approveno"
+                  [readonly]="control.value.locked"
                 />
               </td>
               <td class="p-2 text-nowrap" *ngIf="pageType === 'graduateList'">
@@ -362,6 +364,7 @@
                     autocomplete="off"
                     class="form-control form-date"
                     formControlName="approvedate"
+                    [readonly]="control.value.locked"
                   />
                   <mat-datepicker-toggle
                     class="button-date"
@@ -386,6 +389,7 @@
                     autocomplete="off"
                     class="form-control form-date"
                     formControlName="graduationdate"
+                    [readonly]="control.value.locked"
                   />
                   <mat-datepicker-toggle
                     class="button-date"
@@ -405,7 +409,7 @@
 
               <td class="p-2 text-nowrap" *ngIf="pageType === 'graduateList'">
                 <div
-                  (click)="searchAddress(control.value.index)"
+                  (click)="searchAddress(control.value.index, control.value.locked)"
                   class="text-orange text-decoration-underline whitespace-nowrap"
                   role="button"
                 >
@@ -421,14 +425,16 @@
                     autocomplete="off"
                     class="form-control form-date"
                     formControlName="admissiondate"
-                    [readonly]="pageType === 'graduateList'"
+                    [readonly]="pageType === 'graduateList' || control.value.locked"
                   />
                   <mat-datepicker-toggle
                     class="button-date"
                     matSuffix
                     [for]="picker"
                   ></mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-datepicker 
+                    #picker 
+                    [disabled]="pageType === 'graduateList' || control.value.locked"></mat-datepicker>
                 </div>
                 <!-- <input
                   class="form-control"
@@ -458,7 +464,7 @@
                     )
                   "
                   (keyup.enter)="idcard.blur()"
-                  [readonly]="pageType === 'graduateList'"
+                  [readonly]="pageType === 'graduateList' || control.value.locked"
                 />
               </td>
               <td class="p-2 text-nowrap">
@@ -479,7 +485,7 @@
                     )
                   "
                   (keyup.enter)="passport.blur()"
-                  [readonly]="pageType === 'graduateList'"
+                  [readonly]="pageType === 'graduateList' || control.value.locked"
                 />
               </td>
 
@@ -488,6 +494,7 @@
                   class="form-select"
                   style="width: 150px"
                   formControlName="nationality"
+                  [attr.disabled]="control.value.locked ? '' : null"
                 >
                   <option value="null" selected hidden disabled>
                     กรุณาเลือก
@@ -504,7 +511,7 @@
               <td class="p-2 text-nowrap">
                 <select
                   class="form-select"
-                  [attr.disabled]="pageType === 'graduateList' ? '' : null"
+                  [attr.disabled]="pageType === 'graduateList' || control.value.locked ? '' : null"
                   formControlName="prefixth"
                 >
                   <option value="null" selected hidden disabled>
@@ -526,7 +533,7 @@
                   pInputText
                   type="text"
                   formControlName="firstnameth"
-                  [readonly]="pageType === 'graduateList'"
+                  [readonly]="pageType === 'graduateList' || control.value.locked"
                 />
               </td>
               <td class="p-2 text-nowrap">
@@ -536,13 +543,13 @@
                   pInputText
                   type="text"
                   formControlName="lastnameth"
-                  [readonly]="pageType === 'graduateList'"
+                  [readonly]="pageType === 'graduateList' || control.value.locked"
                 />
               </td>
               <td class="p-2 text-nowrap">
                 <select
                   class="form-select"
-                  [attr.disabled]="pageType === 'graduateList' ? '' : null"
+                  [attr.disabled]="pageType === 'graduateList' || control.value.locked ? '' : null"
                   formControlName="prefixen"
                 >
                   <option value="null" selected hidden disabled>
@@ -564,7 +571,7 @@
                   pInputText
                   type="text"
                   formControlName="firstnameen"
-                  [readonly]="pageType === 'graduateList'"
+                  [readonly]="pageType === 'graduateList' || control.value.locked"
                 />
               </td>
 
@@ -575,7 +582,7 @@
                   pInputText
                   type="text"
                   formControlName="middlenameen"
-                  [readonly]="pageType === 'graduateList'"
+                  [readonly]="pageType === 'graduateList' || control.value.locked"
                 />
               </td>
 
@@ -586,7 +593,7 @@
                   pInputText
                   type="text"
                   formControlName="lastnameen"
-                  [readonly]="pageType === 'graduateList'"
+                  [readonly]="pageType === 'graduateList' || control.value.locked"
                 />
               </td>
 
@@ -598,7 +605,7 @@
                   type="text"
                   maxlength="10"
                   formControlName="phone"
-                  [readonly]="pageType === 'graduateList'"
+                  [readonly]="pageType === 'graduateList' || control.value.locked"
                 />
               </td>
               <td class="p-2 text-nowrap">
@@ -609,14 +616,16 @@
                     autocomplete="off"
                     class="form-control form-date"
                     formControlName="birthdate"
-                    [readonly]="pageType === 'graduateList'"
+                    [readonly]="pageType === 'graduateList' || control.value.locked"
                   />
                   <mat-datepicker-toggle
                     class="button-date"
                     matSuffix
                     [for]="pickerbirthdate"
                   ></mat-datepicker-toggle>
-                  <mat-datepicker #pickerbirthdate></mat-datepicker>
+                  <mat-datepicker 
+                    #pickerbirthdate
+                    [disabled]="pageType === 'graduateList' || control.value.locked"></mat-datepicker>
                 </div>
                 <!-- <input
                   class="form-control"
@@ -653,7 +662,7 @@
                 <div
                   class="text-orange text-decoration-underline whitespace-nowrap"
                   role="button"
-                  (click)="insertSubject(control.value.subjects, ri)"
+                  (click)="insertSubject(control.value.subjects, ri, control.value.locked)"
                 >
                   รายวิชา
                 </div>
@@ -669,7 +678,7 @@
                   <ksp-form-address-table
                     id="address-info"
                     formControlName="addressInfo"
-                    [disabledAll]="false"
+                    [disabledAll]="control.value.locked"
                   ></ksp-form-address-table>
                 </form>
               </td>

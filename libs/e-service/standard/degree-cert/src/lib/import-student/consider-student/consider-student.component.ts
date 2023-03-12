@@ -66,6 +66,7 @@ export class ConsiderStudentComponent implements OnInit {
           studentlist: res.studentlist,
           total: res.total,
           payloaddetail: res.payload,
+          allstudent: res.allstudent
         };
         this.requestdate = res.requestdate;
         this.requestno = res.requestno;
@@ -134,7 +135,9 @@ export class ConsiderStudentComponent implements OnInit {
       .getProcessHistory({ requestid: this.payload.requestid })
       .subscribe((res: any) => {
         if (res.datareturn) {
-          this.historylist = res.datareturn.map((data: any) => {
+          this.historylist = res.datareturn.filter((data: any) => {
+            return data.process == '3';
+          }).map((data: any) => {
             data.createdate = thaiDate(new Date(data?.createdate));
             data.updatedate = data?.updatedate
               ? thaiDate(new Date(data?.updatedate))
@@ -231,13 +234,50 @@ export class ConsiderStudentComponent implements OnInit {
                     this.onConfirmed();
                   });
               } else {
-                this.onConfirmed();
+                this.payloadUpdate();
+                // this.onConfirmed();
               }
             }
           });
       }
     });
   }
+
+  payloadUpdate() {
+    const realpayload = {...this.payload.payloaddetail};
+    console.log(realpayload)
+    this.payload.allstudent.forEach((data : any)=>{
+      if (data.checked) {
+        data.passdata = true;
+      }
+    })
+    if (this.payload.pagetype == 'admissionList') {
+      const convertadmission = this.payload.allstudent.map((data: any) => {
+        delete data.index;
+        data.address = JSON.stringify(data.address.addressInfo);
+        data.subjects = JSON.stringify(data.subjects);
+        return data;
+      });
+      realpayload.admissionlist = JSON.stringify(convertadmission);
+    } else {
+      const convertgraduate = this.payload.allstudent.map((data: any) => {
+        data.address = JSON.stringify(data.address.addressInfo);
+        data.subjects = JSON.stringify(data.subjects);
+        data.teachingpracticeschool = JSON.stringify(
+          data.teachingpracticeschool
+        );
+        return data;
+      });
+      realpayload.graduatelist = JSON.stringify(convertgraduate);
+    }
+    console.log(realpayload, this.payload)
+    this.requestService
+      .updateRequestAdmission(replaceEmptyWithNull(realpayload))
+      .subscribe((res: any) => {
+        this.onConfirmed();
+      });
+  }
+
   onConfirmed() {
     const completeDialog = this.dialog.open(CompleteDialogComponent, {
       width: '350px',

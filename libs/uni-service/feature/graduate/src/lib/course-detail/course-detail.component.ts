@@ -184,8 +184,7 @@ export class CourseDetailComponent implements OnInit {
 
   checkGraduate(row: any) {
     const yearnow = (new Date().getFullYear() + 543);
-    return (Number(row.year)+2) <= yearnow 
-          && row.graduatecount < row.student
+    return row.graduatecount < row.student
           && row.admissioncount > 0;
   }
 
