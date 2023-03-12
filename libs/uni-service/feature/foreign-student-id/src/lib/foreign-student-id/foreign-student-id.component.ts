@@ -123,6 +123,12 @@ export class ForeignStudentIdComponent implements OnInit {
         res?.name + (res?.campusname ? `, ${res?.campusname}` : '') || '-';
       this.universityCode = res?.universitycode || '-';
       this.uniAddress = '-';
+      this.uniAddress = `${res.address ? 'เลขที่ ' + res.address : ''}${
+        res?.street ? ' ซอย ' + res?.street : ''}${
+          res?.moo ? ' หมู่ ' + res?.moo : ''
+      }${res?.road ? ' ถนน ' + res?.road : ''}${res.tumbon ? ' ตำบล ' + res.tumbon  : ''}${
+        res.amphurname ? ' อำเภอ ' + res.amphurname : ''
+      }${res.provincename ? ' จังหวัด ' + res.provincename : ''}${res.zipcode ? ' รหัสไปรษณีย์ ' + res.zipcode : ''}`;
     });
     this.uniInfoService.getUniversityType().subscribe((res: any) => {
       const findUnitype = res.find((data: any) => {
