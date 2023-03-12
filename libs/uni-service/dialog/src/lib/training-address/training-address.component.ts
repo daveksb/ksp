@@ -32,14 +32,12 @@ export class TrainingAddressComponent {
     private generalInfoService: GeneralInfoService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    console.log(this.data);
     if (this.data.teachingpracticeschool.length) {
       this.setData(this.data.teachingpracticeschool);
     } else {
       this.addresses.push(this.teachingAddressForm);
     }
     if (this.data.disableAll) {
-      console.log('true')
       this.addresses.controls
       .forEach(control => {
         control.disable();

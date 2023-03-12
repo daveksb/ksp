@@ -233,6 +233,7 @@ export class ImportStudentComponent implements OnInit {
                           'YYYY-MM-DD'
                         ),
                         checked: true,
+                        locked: data.passdata ?? false,
                         teachingpracticeschool: JSON.parse(
                           data.teachingpracticeschool
                         ),
@@ -575,7 +576,7 @@ export class ImportStudentComponent implements OnInit {
       },
       data: {
         teachingpracticeschool:
-          this.user.at(index).value.teachingpracticeschool,
+          JSON.parse(this.user.at(index).value.teachingpracticeschool),
         disableAll: disable ?? false,
       },
     });

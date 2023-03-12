@@ -102,7 +102,6 @@ export class ImportStudentComponent implements OnInit {
       .subscribe((response: any) => {
         if (response) {
           let parseuser: any;
-          console.log(response);
           if (response.requesttype == '05') {
             parseuser = parseJson(response.admissionlist);
             this.pageType = 'admissionList';
@@ -177,7 +176,6 @@ export class ImportStudentComponent implements OnInit {
   }
 
   edituser(data: any) {
-    console.log(data);
     let userAddress: any;
     if (this.pageType == 'admissionList') {
       userAddress = JSON.parse(data.address);
@@ -336,7 +334,6 @@ export class ImportStudentComponent implements OnInit {
   }
 
   viewAdress(address: any) {
-    console.log(this.user.value);
     this.dialog.open(FormAddressTableComponent, {
       width: '75vw',
       height: '100vw',

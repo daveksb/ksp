@@ -234,7 +234,7 @@ export class ConsiderStudentComponent implements OnInit {
                     this.onConfirmed();
                   });
               } else {
-                this.payloadUpdate();
+                this.payloadUpdate(process, status);
                 // this.onConfirmed();
               }
             }
@@ -243,16 +243,17 @@ export class ConsiderStudentComponent implements OnInit {
     });
   }
 
-  payloadUpdate() {
+  payloadUpdate(process: any, status: any) {
     const realpayload = {...this.payload.payloaddetail};
-    console.log(realpayload)
-    this.payload.allstudent.forEach((data : any)=>{
-      if (data.checked) {
-        data.passdata = true;
-      }
-    })
+    realpayload.process = process;
+    realpayload.status = status;
+    realpayload.requestprocess = process;
+    realpayload.requeststatus = status;
     if (this.payload.pagetype == 'admissionList') {
       const convertadmission = this.payload.allstudent.map((data: any) => {
+        if (data.checked) {
+          data.passdata = true;
+        }
         delete data.index;
         data.address = JSON.stringify(data.address.addressInfo);
         data.subjects = JSON.stringify(data.subjects);
@@ -261,6 +262,9 @@ export class ConsiderStudentComponent implements OnInit {
       realpayload.admissionlist = JSON.stringify(convertadmission);
     } else {
       const convertgraduate = this.payload.allstudent.map((data: any) => {
+        if (data.checked) {
+          data.passdata = true;
+        }
         data.address = JSON.stringify(data.address.addressInfo);
         data.subjects = JSON.stringify(data.subjects);
         data.teachingpracticeschool = JSON.stringify(
@@ -270,7 +274,6 @@ export class ConsiderStudentComponent implements OnInit {
       });
       realpayload.graduatelist = JSON.stringify(convertgraduate);
     }
-    console.log(realpayload, this.payload)
     this.requestService
       .updateRequestAdmission(replaceEmptyWithNull(realpayload))
       .subscribe((res: any) => {
