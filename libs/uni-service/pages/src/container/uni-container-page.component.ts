@@ -42,11 +42,6 @@ export class UniContainerPageComponent implements OnInit {
           permission: '1',
         },
         {
-          path: '/foreign-student-id',
-          label: 'ขอสร้างเลขประจำตัวคุรุสภาสำหรับนักศึกษาชาวต่างชาติ',
-          permission: '1',
-        },
-        {
           path: '/student-list',
           label: 'ขอยื่นรายชื่อผู้เข้าศึกษา และผู้สำเร็จการศึกษา',
           permission: '2',
@@ -59,6 +54,11 @@ export class UniContainerPageComponent implements OnInit {
         {
           path: '/edit-student-list',
           label: 'ขอเปลี่ยนแปลงรายละเอียดรายชื่อผู้เข้าและผู้สำเร็จการศึกษา',
+          permission: '2',
+        },
+        {
+          path: '/foreign-student-id',
+          label: 'ขอสร้างเลขประจำตัวคุรุสภาสำหรับนักศึกษาชาวต่างชาติ',
           permission: '2',
         },
       ],

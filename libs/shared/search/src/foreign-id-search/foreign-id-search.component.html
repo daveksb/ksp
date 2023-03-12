@@ -4,7 +4,7 @@
   <div class="row mb-2">
     <div class="col">
       <label class="form-label">สถาบัน / มหาวิทยาลัย</label>
-      <select class="form-select" formControlName="uniid">
+      <select class="form-select" formControlName="uniid" [attr.disabled]="systemType === 'uni' ? true : null">
         <option value="null" selected disabled hidden>กรุณาเลือก</option>
         <option
           *ngFor="let university of uniUniversityOption"
