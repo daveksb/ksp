@@ -103,6 +103,11 @@ export class ForeignStudentListComponent
   }
   clear() {
     this.form.reset();
+    this.form.setValue({
+      search: {
+        uniid: getCookie('uniId'),
+      },
+    });
     this.dataSource = [];
     this.clearPageEvent();
   }

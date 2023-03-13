@@ -29,11 +29,13 @@ import { SchoolRequestSubType } from '@ksp/shared/constant';
 import {
   AddressService,
   ERequestService,
+  EUniService,
   GeneralInfoService,
 } from '@ksp/shared/service';
 import { EMPTY, Observable, of, switchMap } from 'rxjs';
 import _ from 'lodash';
 import moment from 'moment';
+import { untilDestroyed } from '@ngneat/until-destroy';
 
 @Component({
   selector: 'ksp-foreign-license-detail',
@@ -67,7 +69,8 @@ export class ForeignLicenseDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private eRequestService: ERequestService,
     private generalInfoService: GeneralInfoService,
-    private addressService: AddressService
+    private addressService: AddressService,
+    private uniService: EUniService
   ) {}
 
   ngOnInit(): void {
@@ -97,7 +100,31 @@ export class ForeignLicenseDetailComponent implements OnInit {
       //console.log('detail = ', parseJson(res.detail));
       const temp: any = { detail: parseJson(res?.detail)?.detail };
       this.form.controls.verifydetail.patchValue(temp);
+      if (res.systemtype == '3') {
+        this.getUniDetail();
+      }
     });
+  }
+
+  getUniDetail() {
+    console.log('here')
+    const payload = {
+      id: this.requestData.uniid,
+    };
+
+    this.uniService
+      .getUniversityById(payload)
+      .subscribe((res) => {
+        this.requestData.schoolname = res.campusname ? `${res.name}, ${res.campusname}` : res.name;
+        this.requestData.bureauname = res.unitypename ?? '';
+        this.requestData.schoolid = res.universitycode;
+        this.requestData.schooladdress = `${res.address ? 'เลขที่ ' + res.address : ''}${
+          res?.street ? ' ซอย ' + res?.street : ''}${
+            res?.moo ? ' หมู่ ' + res?.moo : ''
+        }${res?.road ? ' ถนน ' + res?.road : ''}${res.tumbon ? ' ตำบล ' + res.tumbon  : ''}${
+          res.amphurname ? ' อำเภอ ' + res.amphurname : ''
+        }${res.provincename ? ' จังหวัด ' + res.provincename : ''}${res.zipcode ? ' รหัสไปรษณีย์ ' + res.zipcode : ''}`;
+      });
   }
 
   pathUserInfo(data: any) {
@@ -111,9 +138,13 @@ export class ForeignLicenseDetailComponent implements OnInit {
     }
     const fileinfo = parseJson(data.fileinfo);
     if (fileinfo) {
-      this.evidenceFile.forEach(
-        (group, index) => (group.files = fileinfo[index])
-      );
+      if (this.requestData.systemtype != '3') {
+        this.evidenceFile.forEach(
+          (group, index) => (group.files = fileinfo[index])
+        );
+      } else {
+        this.evidenceFile = fileinfo;
+      }
     }
     data.country = Number(data.country);
     this.form.controls.foreignTeacherInfo.patchValue(data);

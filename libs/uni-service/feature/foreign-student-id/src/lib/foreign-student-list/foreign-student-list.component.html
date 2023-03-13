@@ -16,10 +16,11 @@
   <div class="bg-white p-3">
     <form [formGroup]="form">
       <ksp-foreign-id-search
-        (cleared)="clear()"
+        (clear)="clear()"
         (search)="search()"
         formControlName="search"
         [uniUniversityOption]="uniUniversityOption"
+        [systemType]="'uni'"
       ></ksp-foreign-id-search>
     </form>
     <br />

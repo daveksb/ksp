@@ -233,6 +233,7 @@ export class ImportStudentComponent implements OnInit {
                           'YYYY-MM-DD'
                         ),
                         checked: true,
+                        locked: data.passdata ?? false,
                         teachingpracticeschool: JSON.parse(
                           data.teachingpracticeschool
                         ),
@@ -296,6 +297,7 @@ export class ImportStudentComponent implements OnInit {
     return this.fb.group({
       id: [null],
       checked: [false],
+      locked: [false],
       index: [index],
       no: [index + 1],
       admissiondate: [moment().format('YYYY-MM-DD'), Validators.required],
@@ -351,7 +353,8 @@ export class ImportStudentComponent implements OnInit {
     }
     return this.fb.group({
       id: [data.id],
-      checked: [false],
+      checked: [data.checked ? data.checked : false],
+      locked: [data.passdata ? data.passdata : false],
       index: [data.index],
       no: [data.index + 1],
       admissiondate: [moment(data.admissiondate).format('YYYY-MM-DD')],
@@ -546,11 +549,12 @@ export class ImportStudentComponent implements OnInit {
     }
   }
 
-  insertSubject(subjectInfo: any, index: any) {
+  insertSubject(subjectInfo: any, index: any, disable: boolean) {
     const dialogRef = this.dialog.open(StudentListSubjectComponent, {
       width: '600px',
       data: {
         ...subjectInfo,
+        disableAll: disable ?? false
       },
     });
     dialogRef.afterClosed().subscribe((res) => {
@@ -562,7 +566,7 @@ export class ImportStudentComponent implements OnInit {
     });
   }
 
-  searchAddress(index: any) {
+  searchAddress(index: any, disable: boolean) {
     const dialogRef = this.dialog.open(TrainingAddressComponent, {
       height: '100vh',
       width: '75vw',
@@ -572,8 +576,8 @@ export class ImportStudentComponent implements OnInit {
       },
       data: {
         teachingpracticeschool:
-          this.user.at(index).value.teachingpracticeschool,
-        disableAll: false,
+          JSON.parse(this.user.at(index).value.teachingpracticeschool),
+        disableAll: disable ?? false,
       },
     });
     dialogRef.afterClosed().subscribe((response: any) => {

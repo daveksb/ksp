@@ -46,6 +46,7 @@ export class ForeignIdSearchComponent extends KspFormBaseComponent {
   @Output() search = new EventEmitter<any>();
   @Input() disableRequestType = false;
   @Input() requestTypeList = SchoolRequestType;
+  @Input() systemType = 'all';
 
   eduOccupyList = careerTypeList;
   processList: SchRequestProcess[] = [];

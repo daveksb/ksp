@@ -49,6 +49,9 @@
                   }}
                 </td>
               </tr>
+              <tr *ngIf="!historylist.length">
+                <td colspan="5" class="text-center">ไม่พบข้อมูล</td>
+              </tr>
             </tbody>
           </table>
         </div>
