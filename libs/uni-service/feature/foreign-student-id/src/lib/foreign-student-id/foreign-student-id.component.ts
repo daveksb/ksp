@@ -43,6 +43,7 @@ export class ForeignStudentIdComponent implements OnInit {
   prefixList$!: Observable<any>;
   countries$!: Observable<any>;
   visaTypeList$!: Observable<any>;
+  visaClassList$!: Observable<any>;
   universityCode = '-';
   universitytypename = '';
   uniAddress = '-';
@@ -143,6 +144,7 @@ export class ForeignStudentIdComponent implements OnInit {
     this.countries$ = this.addressService.getCountry();
     this.prefixList$ = this.generalInfoService.getPrefix();
     this.visaTypeList$ = this.generalInfoService.getVisaType();
+    this.visaClassList$ = this.generalInfoService.getVisaClass();
   }
 
   cancel() {
