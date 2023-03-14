@@ -417,22 +417,22 @@ export class ImportStudentComponent implements OnInit {
         data.birthdate,
         this.pageType == 'admissionList' ? Validators.required : undefined,
       ],
-      address: this.fb.group({
+      address: userAddress ? this.fb.group({
         addressInfo: [
           {
-            location: [userAddress?.location || null],
-            housenumber: [userAddress?.housenumber || null],
-            villagenumber: [userAddress?.villagenumber || null],
-            lane: [userAddress?.lane || null],
-            road: [userAddress?.road || null],
-            zipcode: [userAddress?.zipcode || null],
-            provinceid: [userAddress?.provinceid || null],
-            districtid: [userAddress?.districtid || null],
-            subdistrictid: [userAddress?.subdistrictid || null],
-            remark: [userAddress?.remark || null],
+            location: userAddress?.location || null,
+            housenumber: userAddress?.housenumber || null,
+            villagenumber: userAddress?.villagenumber || null,
+            lane: userAddress?.lane || null,
+            road: userAddress?.road || null,
+            zipcode: userAddress?.zipcode || null,
+            provinceid: userAddress?.provinceid || null,
+            districtid: userAddress?.districtid || null,
+            subdistrictid: userAddress?.subdistrictid || null,
+            remark: userAddress?.remark || null,
           },
         ],
-      }),
+      }) : this.fb.group({ addressInfo: [] }),
       approveno: [
         data.approveno,
         this.pageType == 'graduateList' ? Validators.required : undefined,
@@ -576,7 +576,7 @@ export class ImportStudentComponent implements OnInit {
       },
       data: {
         teachingpracticeschool:
-          JSON.parse(this.user.at(index).value.teachingpracticeschool),
+          this.user.at(index).value.teachingpracticeschool,
         disableAll: disable ?? false,
       },
     });
@@ -736,7 +736,7 @@ export class ImportStudentComponent implements OnInit {
           this.user
             .at(index)
             .get('address')
-            ?.patchValue({
+            ?.patchValue(response.datareturn[0].addressinfo ? {
               addressInfo: {
                 location: [
                   response.datareturn[0].addressinfo
@@ -789,7 +789,7 @@ export class ImportStudentComponent implements OnInit {
                     : null,
                 ],
               },
-            });
+            } : this.fb.group({ addressInfo: [] }));
           this.user.at(index).updateValueAndValidity();
         }
       });
@@ -807,7 +807,7 @@ export class ImportStudentComponent implements OnInit {
 
   checkdisableSave() {
     if (this.pageType == 'admissionList') {
-      return this.formStudent.invalid;
+      return this.formStudent.invalid || this.user.value.length == 0;
     } else {
       let invalidform = false;
       let empytychecked = true;
