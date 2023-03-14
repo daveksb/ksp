@@ -9,6 +9,7 @@ import {
 import {
   StudentListSubjectComponent,
   TrainingAddressComponent,
+  ViewHistoryAdmissionComponent
 } from '@ksp/uni-service/dialog';
 import { SelectItem } from 'primeng/api';
 import { User } from './user';
@@ -74,6 +75,8 @@ export class ImportStudentComponent implements OnInit {
     user: this.fb.array([]),
   });
   filterColumn = ['idcardno'];
+  showHistoryButton = false;
+  datasourceHistory = [];
 
   constructor(
     public dialog: MatDialog,
@@ -146,6 +149,11 @@ export class ImportStudentComponent implements OnInit {
       })
       .subscribe((response: any) => {
         if (response.datareturn) {
+          const request = response.datareturn.filter(({process}: any) => process != '1');
+          if (request && request.length > 0) {
+            this.datasourceHistory = request;
+            this.showHistoryButton = true;
+          }
           const findResponse = response.datareturn.find((data: any) => {
             return (
               data.unidegreecertid == this.courseData?.courseDetail.id &&
@@ -202,11 +210,14 @@ export class ImportStudentComponent implements OnInit {
             })
             .subscribe((res: any) => {
               if (res.datareturn && res.datareturn.length) {
+                const request = res.datareturn.filter(({process}: any) => process != '1');
+                if (request && request.length > 0) {
+                  this.datasourceHistory = request;
+                  this.showHistoryButton = true;
+                }
                 const findRequestGraduate = res.datareturn.find((data: any) => {
                   return (
-                    data.graduatelist != null &&
-                    (data.process == '1' ||
-                      (data.process == '3' && data.status == '2'))
+                    data.graduatelist != null && data.requesttype == '06'
                   );
                 });
                 if (findRequestGraduate) {
@@ -225,6 +236,19 @@ export class ImportStudentComponent implements OnInit {
                     if (findindex != -1) {
                       const userAddress = JSON.parse(data.address);
                       this.user.at(findindex).patchValue({
+                        locked: () => {
+                          if (data.process == '1' || (data.process == '3' && data.status == '3')) {
+                            return true;
+                          } else if (data.process == '3' && data.status == '2') {
+                            if (data.passdata) {
+                              return true;
+                            } else {
+                              return false;
+                            }
+                          } else {
+                            return false;
+                          }
+                        },
                         approveno: data.approveno,
                         approvedate: moment(data.approvedate).format(
                           'YYYY-MM-DD'
@@ -233,7 +257,6 @@ export class ImportStudentComponent implements OnInit {
                           'YYYY-MM-DD'
                         ),
                         checked: true,
-                        locked: data.passdata ?? false,
                         teachingpracticeschool: JSON.parse(
                           data.teachingpracticeschool
                         ),
@@ -830,5 +853,22 @@ export class ImportStudentComponent implements OnInit {
         doc.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
       }   
     }, 0);
+  }
+
+  viewRequestHistory() {
+    this.dialog.open(ViewHistoryAdmissionComponent, {
+      width: '80vw',
+      height: '100vw',
+      position: {
+        top: '0px',
+      },
+      data: {
+        pageType: this.pageType,
+        datasource: this.datasourceHistory,
+        nationality: this.nationality,
+        ThPrefixes: this.ThPrefixes,
+        EngPrefixes: this.EngPrefixes
+      },
+    });
   }
 }

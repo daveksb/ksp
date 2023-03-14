@@ -11,3 +11,5 @@ export * from './lib/print-request-dialog/print-request-dialog.component';
 export * from './lib/history-request-dialog/history-request-dialog.component';
 
 export * from './lib/history-request-admission-dialog/history-request-admission-dialog.component';
+
+export * from './lib/view-history-dialog/view-history-dialog.component';

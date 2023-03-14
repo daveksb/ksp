@@ -17,10 +17,20 @@
   <div class="box-header">รายละเอียดแบบคำขอ</div>
 
   <div class="bg-white p-3">
-    <ksp-request-header-info
-      [requestDate]="requestDate"
-      [requestNumber]="requestNo"
-    ></ksp-request-header-info>
+    <div class="d-flex flex-row justify-content-between">
+      <ksp-request-header-info
+        [requestDate]="requestDate"
+        [requestNumber]="requestNo"
+      ></ksp-request-header-info>
+      <button
+        (click)="viewRequestHistory()"
+        type="button"
+        class="btn btn-primary w-25"
+        *ngIf="showHistoryButton"
+      >
+        {{ pageType === 'admissionList' ? 'ประวัติการยื่นผู้เข้าศึกษา' : 'ประวัติการยื่นผู้สำเร็จการศึกษา' }}
+      </button>
+    </div>
     <hr />
 
     <!-- <div class="d-flex justify-content-between mb-1">
