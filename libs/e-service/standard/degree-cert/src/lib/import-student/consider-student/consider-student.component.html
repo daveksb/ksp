@@ -34,9 +34,9 @@
             <tbody>
               <tr *ngFor="let history of historylist; index as i">
                 <td class="detail__table">{{ i + 1 }}</td>
-                <td class="detail__table">{{ history.createdate }}</td>
-                <td class="detail__table">{{ history.updatedate }}</td>
-                <td class="detail__table">{{ history.createby }}</td>
+                <td class="detail__table">{{ history.createdate || '-' }}</td>
+                <td class="detail__table">{{ history.updatedate || '-' }}</td>
+                <td class="detail__table">{{ history.fullnameth || '-' }}</td>
                 <td class="detail__table">
                   {{
                     history.status === '1'
