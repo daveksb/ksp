@@ -136,7 +136,7 @@ export class ConsiderStudentComponent implements OnInit {
       .subscribe((res: any) => {
         if (res.datareturn) {
           this.historylist = res.datareturn.filter((data: any) => {
-            return data.process == '3';
+            return data.process == '3' && data.userid;
           }).map((data: any) => {
             data.createdate = thaiDate(new Date(data?.createdate));
             data.updatedate = data?.updatedate
@@ -249,6 +249,7 @@ export class ConsiderStudentComponent implements OnInit {
     realpayload.status = status;
     realpayload.requestprocess = process;
     realpayload.requeststatus = status;
+    realpayload.checkresult = this.payload.detail;
     if (this.payload.pagetype == 'admissionList') {
       const convertadmission = this.payload.allstudent.map((data: any) => {
         if (data.checked) {

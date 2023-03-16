@@ -112,7 +112,7 @@ export class ImportStudentComponent implements OnInit {
           uniuserid: userId,
           systemtype: '3',
           subtype: '5',
-          unirequestdegreecertid: this.courseData.courseDetail.id,
+          unirequestdegreecertid: this.courseData.courseDetail.requestid,
           unidegreecertid: this.courseData.courseDetail.id,
           degreeapprovecode: this.courseData.courseDetail.degreeapprovecode,
           planyear: this.courseData.courseSelected.indexyear,
@@ -210,14 +210,17 @@ export class ImportStudentComponent implements OnInit {
             })
             .subscribe((res: any) => {
               if (res.datareturn && res.datareturn.length) {
-                const request = res.datareturn.filter(({process}: any) => process != '1');
+                const request = res.datareturn.filter(({process, status}: any) => {
+                  return process != '1';
+                });
                 if (request && request.length > 0) {
                   this.datasourceHistory = request;
                   this.showHistoryButton = true;
                 }
                 const findRequestGraduate = res.datareturn.find((data: any) => {
                   return (
-                    data.graduatelist != null && data.requesttype == '06'
+                    data.graduatelist != null && 
+                    data.requesttype == '06' && (data.process == '3' && data.status != '3')
                   );
                 });
                 if (findRequestGraduate) {
@@ -236,19 +239,9 @@ export class ImportStudentComponent implements OnInit {
                     if (findindex != -1) {
                       const userAddress = JSON.parse(data.address);
                       this.user.at(findindex).patchValue({
-                        locked: () => {
-                          if (data.process == '1' || (data.process == '3' && data.status == '3')) {
-                            return true;
-                          } else if (data.process == '3' && data.status == '2') {
-                            if (data.passdata) {
-                              return true;
-                            } else {
-                              return false;
-                            }
-                          } else {
-                            return false;
-                          }
-                        },
+                        locked: findRequestGraduate.process == '2' || (findRequestGraduate.process == '3' && findRequestGraduate.status == '3') ?
+                          true : findRequestGraduate.process == '3' && findRequestGraduate.status == '2' ? 
+                          (data.passdata ? true : false) : false,
                         approveno: data.approveno,
                         approvedate: moment(data.approvedate).format(
                           'YYYY-MM-DD'

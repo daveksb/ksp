@@ -112,6 +112,7 @@ export class ImportStudentComponent implements OnInit {
           parseuser.forEach((user: any, index: any) => {
             user.index = index;
             user.subjects = JSON.parse(user.subjects);
+            user.teachingpracticeschool = JSON.parse(user.teachingpracticeschool);
             this.user.push(this.edituser(user));
           });
           this.requestNo = response.requestno;
@@ -318,9 +319,7 @@ export class ImportStudentComponent implements OnInit {
         right: '0px',
       },
       data: {
-        teachingpracticeschool: JSON.parse(
-          this.user.at(index).value.teachingpracticeschool
-        ),
+        teachingpracticeschool: this.user.at(index).value.teachingpracticeschool,
         disableAll: true,
       },
     });

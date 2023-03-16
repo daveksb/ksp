@@ -24,6 +24,7 @@ import { MatTableModule } from '@angular/material/table';
 import {
   AddRowButtonComponent,
   RequestHeaderInfoComponent,
+  UniFormBadgeComponent,
 } from '@ksp/shared/ui';
 import { TopNavComponent } from '@ksp/shared/menu';
 import { FileUploadComponent } from '@ksp/shared/form/file-upload';
@@ -60,6 +61,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     FormAddressTableComponent,
     MatPaginatorModule,
     MatProgressSpinnerModule,
+    UniFormBadgeComponent
   ],
   declarations: [
     DegreeListComponent,
