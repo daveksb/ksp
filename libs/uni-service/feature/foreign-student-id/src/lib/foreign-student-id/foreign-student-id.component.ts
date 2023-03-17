@@ -151,8 +151,13 @@ export class ForeignStudentIdComponent implements OnInit {
     this.router.navigate(['/', 'home']);
   }
   getDefaultReq(value: any): any {
-    const visainfo = this.form.value.visainfo || {};
-    const payload = { ...value, ...visainfo };
+    const visaform: any = this.form.value.visainfo;
+    const payload = { ...value,
+      visaclass: visaform?.visaclass,
+      visatype: visaform?.visatype,
+      visaexpiredate: visaform.visaexpiredate
+      ? formatDate(new Date(visaform.visaexpiredate).toISOString()) : null
+    };
     payload.birthdate = value?.birthdate
       ? formatDate(new Date(value?.birthdate).toISOString())
       : null;

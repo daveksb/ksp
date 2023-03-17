@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoaderService, UniInfoService, UniRequestService } from '@ksp/shared/service';
-import { getCookie, replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
+import { formatRequestNo, getCookie, replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
 import { UniserviceImportType, KspPaginationComponent, ListData } from '@ksp/shared/interface';
 
 import {
@@ -15,6 +15,7 @@ import { DegreeCertInfo } from '@ksp/uni-service/feature/edit-degree-cert';
 import { MatPaginator } from '@angular/material/paginator';
 import { Subject } from 'rxjs';
 import { lastValueFrom } from 'rxjs';
+import localForage from 'localforage';
 
 @Component({
   templateUrl: './degree-list.component.html',
@@ -34,6 +35,7 @@ export class DegreeListComponent extends KspPaginationComponent implements OnIni
   uniUniversityOption: ListData[] = [];
   uniUniversityTypeOption: ListData[] = [];
   isLoading: Subject<boolean> = this.loaderService.isLoading;
+  rejectedRequests: any = [];
 
   constructor(
     private fb: FormBuilder,
@@ -58,6 +60,7 @@ export class DegreeListComponent extends KspPaginationComponent implements OnIni
       },
     });
     this.getOptions();
+    this.getRejectRequest();
     // this.getDegreeCertList();
   }
 
@@ -213,6 +216,52 @@ export class DegreeListComponent extends KspPaginationComponent implements OnIni
     });
     this.getDegreeCertList();
   }
+
+  getRejectRequest() {
+    this.uniInfoService.getRejectedRequest().subscribe((res: any) => {
+      if (res && res.datareturn) {
+        this.rejectedRequests = res.datareturn;
+      }
+    })
+  }
+
+  genAlertMessage(req: any) {
+    return `แจ้งเตือน เลขที่คำขอ: ${formatRequestNo(req.requestno)} ` + 
+    ` ${req.requesttype == '05' ? 'ขอยื่นรายชื่อผู้เข้าศึกษา' : 'ขอยื่นรายชื่อผู้สำเร็จการศึกษา'} ถูกส่งคืน "ปรับแก้ไข/เพิ่มเติม"`;
+  }
+
+  genSubTitle(req: any) {
+    if (req.detail) {
+      const detail: any = JSON.parse(req.detail);
+      return ` กรุณาส่งกลับภายในวันที่ ${detail.returndate ? thaiDate(
+        new Date(detail.returndate)
+      ) : ''} มิฉะนั้นแบบคำขอจะถูกยกเลิก `;
+    } else {
+      return '';
+    }
+  }
+
+  goToDetail(row: any) {
+    const rowDetail = {
+      indexyear: row.planyear,
+      calendaryear: row.plancalendaryear,
+      label: row.planname,
+      student: row.plantotalno
+    }
+    const course = {
+      courseSelected: rowDetail,
+      courseDetail: {
+        id: row.unidegreecertid,
+        requestid: row.unirequestdegreecertid,
+        degreeapprovecode: row.degreeapprovecode
+      }
+    };
+    const type = row.requesttype == '05' ? 'admissionList' : 'graduateList';
+    localForage.setItem('courseData', course).then(()=>{
+      this.router.navigate(['/', 'student-list', 'import-student', type]);
+    });
+  }
+
 }
 const columns = [
   'order',

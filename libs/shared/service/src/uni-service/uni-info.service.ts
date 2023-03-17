@@ -345,4 +345,13 @@ export class UniInfoService {
       }
     );
   }
+
+  getRejectedRequest(): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/unirequestadmissionsearch_requestedit.php`,
+      {
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
 }
