@@ -325,6 +325,7 @@ export class ImportStudentComponent implements OnInit {
       studentno: [''],
       studentstatus: [null],
       originaldegree: [null],
+      email: [null],
       prefixth: [null, Validators.required],
       firstnameth: [
         '',
@@ -400,6 +401,10 @@ export class ImportStudentComponent implements OnInit {
       ],
       originaldegree: [
         data.originaldegree,
+        this.pageType == 'admissionList' ? Validators.required : undefined,
+      ],
+      email: [
+        data.email,
         this.pageType == 'admissionList' ? Validators.required : undefined,
       ],
       prefixth: [

@@ -337,6 +337,9 @@
               <th class="p-2 text-nowrap align-text-top">
                 วัน/เดือน/ปีเกิด(พ.ศ.)
               </th>
+              <th class="p-2 text-nowrap align-text-top">
+                อีเมล
+              </th>
               <th class="p-2 text-nowrap align-text-top">ที่อยู่</th>
               <th
                 class="p-2 text-nowrap align-text-top"
@@ -694,7 +697,17 @@
                   [readonly]="pageType === 'graduateList'"
                 /> -->
               </td>
-
+              <td class="p-2 text-nowrap">
+                <input
+                  class="form-control"
+                  style="width: 150px"
+                  pInputText
+                  type="text"
+                  maxlength="10"
+                  formControlName="email"
+                  [readonly]="pageType === 'graduateList' || control.value.locked"
+                />
+              </td>
               <td class="p-2 text-nowrap">
                 <div
                   *ngIf="pageType === 'admissionList'"

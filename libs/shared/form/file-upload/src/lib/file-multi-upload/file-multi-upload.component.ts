@@ -46,14 +46,14 @@ export class FileMultiUploadComponent {
   async onFileSelected(event: any) {
     const file: File = event.target.files[0];
     if (this.inValidFileType(file.type)) {
-      alert('Invalid File Type !');
+      alert('กรุณาอัปโหลดไฟล์ .pdf .jpg .jpeg .png เท่านั้น' + (this.maxSize ? ` และขนาดไม่เกิน ${this.maxSize/1000000} MB` : ''));
       return;
     }
     const base64 = (await getBase64(file)) as string;
     //console.log(this.pageType);
 
     if (this.maxSize && file.size > this.maxSize) {
-      alert('File Size Exceeded the Maximum Size');
+      alert('กรุณาอัปโหลดไฟล์ที่ขนาดไม่เกิน ' + this.maxSize/1000000 + ' MB');
       return;
     }
 

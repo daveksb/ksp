@@ -194,68 +194,19 @@ export class ImportStudentComponent implements OnInit {
       studentno: [data.studentno],
       studentstatus: [data.studentstatus],
       originaldegree: [data.originaldegree],
-      idcardno: [
-        data.idcardno,
-        this.pageType == 'admissionList'
-          ? [Validators.required, Validators.pattern(idCardPattern)]
-          : undefined,
-      ],
-      passportno: [
-        data.passportno,
-        this.pageType == 'admissionList' ? Validators.required : undefined,
-      ],
-      nationality: [
-        data.nationality,
-        this.pageType == 'admissionList' ? Validators.required : undefined,
-      ],
-      prefixth: [
-        data.prefixth,
-        this.pageType == 'admissionList' ? Validators.required : undefined,
-      ],
-      firstnameth: [
-        data.firstnameth,
-        this.pageType == 'admissionList'
-          ? [Validators.required, Validators.pattern(nameThPattern)]
-          : undefined,
-      ],
-      lastnameth: [
-        data.lastnameth,
-        this.pageType == 'admissionList'
-          ? [Validators.required, Validators.pattern(nameThPattern)]
-          : undefined,
-      ],
-      prefixen: [
-        data.prefixen,
-        this.pageType == 'admissionList' ? Validators.required : undefined,
-      ],
-      firstnameen: [
-        data.firstnameen,
-        this.pageType == 'admissionList'
-          ? [Validators.required, Validators.pattern(nameEnPattern)]
-          : undefined,
-      ],
-      middlenameen: [
-        data.middlenameen,
-        this.pageType == 'admissionList'
-          ? [Validators.required, Validators.pattern(nameEnPattern)]
-          : undefined,
-      ],
-      lastnameen: [
-        data.lastnameen,
-        this.pageType == 'admissionList'
-          ? [Validators.required, Validators.pattern(nameEnPattern)]
-          : undefined,
-      ],
-      phone: [
-        data.phone,
-        this.pageType == 'admissionList'
-          ? [Validators.required, Validators.pattern(phonePattern)]
-          : undefined,
-      ],
-      birthdate: [
-        data.birthdate,
-        this.pageType == 'admissionList' ? Validators.required : undefined,
-      ],
+      email: [data.email],
+      idcardno: [data.idcardno],
+      passportno: [data.passportno],
+      nationality: [data.nationality],
+      prefixth: [data.prefixth],
+      firstnameth: [data.firstnameth],
+      lastnameth: [data.lastnameth],
+      prefixen: [data.prefixen],
+      firstnameen: [data.firstnameen],
+      middlenameen: [data.middlenameen],
+      lastnameen: [data.lastnameen],
+      phone: [data.phone],
+      birthdate: [data.birthdate],
       address: this.fb.group({
         addressInfo: {
           location: userAddress?.location || null,
@@ -270,29 +221,18 @@ export class ImportStudentComponent implements OnInit {
           remark: userAddress?.remark || null,
         },
       }),
-      approveno: [
-        data.approveno,
-        this.pageType == 'graduateList' ? Validators.required : undefined,
-      ],
-      graduationdate: [
-        data.graduationdate,
-        this.pageType == 'graduateList' ? Validators.required : undefined,
-      ],
-      approvedate: [
-        data.approvedate,
-        this.pageType == 'graduateList' ? Validators.required : undefined,
-      ],
+      approveno: [data.approveno],
+      graduationdate: [data.graduationdate],
+      approvedate: [data.approvedate],
       subjects: data.subjects
         ? [
             {
               subject1: data.subjects.subject1,
               subject2: data.subjects.subject2,
             },
-            Validators.required,
           ]
         : [
-            { subject1: '', subject2: '' },
-            this.pageType == 'admissionList' ? Validators.required : undefined,
+            { subject1: '', subject2: '' }
           ],
       teachingpracticeschool: [data.teachingpracticeschool],
     });

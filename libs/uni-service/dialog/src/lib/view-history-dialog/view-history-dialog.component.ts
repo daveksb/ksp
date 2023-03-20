@@ -140,6 +140,7 @@ export class ViewHistoryAdmissionComponent {
       studentno: [data.studentno],
       studentstatus: [data.studentstatus],
       originaldegree: [data.originaldegree],
+      email: [data.email],
       idcardno: [data.idcardno],
       passportno: [data.passportno],
       nationality: [data.nationality],
