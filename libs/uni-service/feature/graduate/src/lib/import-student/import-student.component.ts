@@ -40,6 +40,7 @@ import {
   thaiDate,
 } from '@ksp/shared/utility';
 import moment from 'moment';
+import { studentStatusList } from 'libs/shared/constant/src/uni-service-constant';
 
 @Component({
   selector: 'uni-service-import-student',
@@ -77,6 +78,7 @@ export class ImportStudentComponent implements OnInit {
   filterColumn = ['idcardno'];
   showHistoryButton = false;
   datasourceHistory = [];
+  studentStatusList = studentStatusList;
 
   constructor(
     public dialog: MatDialog,
@@ -320,6 +322,9 @@ export class ImportStudentComponent implements OnInit {
       idcardno: ['', [Validators.required, Validators.pattern(idCardPattern)]],
       passportno: [''],
       nationality: [null, Validators.required],
+      studentno: [''],
+      studentstatus: [null],
+      originaldegree: [null],
       prefixth: [null, Validators.required],
       firstnameth: [
         '',
@@ -383,6 +388,18 @@ export class ImportStudentComponent implements OnInit {
       passportno: [data.passportno],
       nationality: [
         data.nationality,
+        this.pageType == 'admissionList' ? Validators.required : undefined,
+      ],
+      studentno: [
+        data.studentno,
+        this.pageType == 'admissionList' ? Validators.required : undefined,
+      ],
+      studentstatus: [
+        data.studentstatus,
+        this.pageType == 'admissionList' ? Validators.required : undefined,
+      ],
+      originaldegree: [
+        data.originaldegree,
         this.pageType == 'admissionList' ? Validators.required : undefined,
       ],
       prefixth: [

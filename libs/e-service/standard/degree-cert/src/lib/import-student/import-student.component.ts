@@ -29,6 +29,7 @@ import {
   phonePattern,
 } from '@ksp/shared/utility';
 import moment from 'moment';
+import { studentStatusList } from '@ksp/shared/constant';
 
 @Component({
   selector: 'e-service-import-student',
@@ -67,6 +68,7 @@ export class ImportStudentComponent implements OnInit {
   isLoading: Subject<boolean> = this.loaderService.isLoading;
   requestid = '';
   requeststatus = '1';
+  studentStatusList = studentStatusList
 
   constructor(
     public dialog: MatDialog,
@@ -189,6 +191,9 @@ export class ImportStudentComponent implements OnInit {
       index: [data.index],
       no: [data.index + 1],
       admissiondate: [moment(data.admissiondate).format('YYYY-MM-DD')],
+      studentno: [data.studentno],
+      studentstatus: [data.studentstatus],
+      originaldegree: [data.originaldegree],
       idcardno: [
         data.idcardno,
         this.pageType == 'admissionList'

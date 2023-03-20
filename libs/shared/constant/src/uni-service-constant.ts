@@ -12,3 +12,14 @@ export const requestStatus = [
     value: 3,
   },
 ];
+
+export const studentStatusList = [
+  {
+    label: 'คงสภาพนักศึกษา',
+    value: 1
+  },
+  {
+    label: 'พ้นสภาพนักศึกษา',
+    value: 2
+  }
+]
