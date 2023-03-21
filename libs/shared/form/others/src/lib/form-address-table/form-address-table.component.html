@@ -23,7 +23,16 @@
       <label class="form-label"
         >บ้านเลขที่ <span class="text-danger"> *</span>
       </label>
-      <input class="form-control" type="text" formControlName="housenumber" />
+      <input class="form-control" type="text" formControlName="housenumber"
+        [ngClass]="{'invalid': submitted && form.controls.housenumber.invalid}" 
+      />
+      <ng-container
+        *ngIf="submitted && form.controls.housenumber.invalid"
+      >
+        <span class="text-danger">
+          {{ validatorMessages.required.replace('field', 'บ้านเลขที่') }} !
+        </span>
+      </ng-container>
     </div>
     <div class="col-sm-4 col-md-2 mb-1">
       <label class="form-label">หมู่ที่</label>
@@ -50,7 +59,15 @@
         formControlName="zipcode" 
         (blur)="onSearchPostcode()"
         #postcode
-        (keyup.enter)="postcode.blur()" />
+        (keyup.enter)="postcode.blur()"
+        [ngClass]="{'invalid': submitted && form.controls.zipcode.invalid}"  />
+      <ng-container
+        *ngIf="submitted && form.controls.zipcode.invalid"
+      >
+        <span class="text-danger">
+          {{ validatorMessages.required.replace('field', 'รหัสไปรษณีย์') }} !
+        </span>
+      </ng-container>
     </div>
     <div class="col-sm-4 col-md-4 mb-1">
       <label class="form-label"
@@ -60,6 +77,7 @@
         class="form-select"
         formControlName="provinceid"
         (change)="getDistrict(form.value.provinceid)"
+        [ngClass]="{'invalid': submitted && form.controls.provinceid.invalid}" 
       >
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option
@@ -69,6 +87,13 @@
           {{ province.province_name }}
         </option>
       </select>
+      <ng-container
+        *ngIf="submitted && form.controls.provinceid.invalid"
+      >
+        <span class="text-danger">
+          {{ validatorMessages.requiredSelect.replace('field', 'จังหวัด') }} !
+        </span>
+      </ng-container>
     </div>
     <div class="col-sm-6 col-md-3 mb-1">
       <label class="form-label"
@@ -78,6 +103,7 @@
         class="form-select"
         formControlName="districtid"
         (change)="getSubdistrict(form.value.districtid)"
+        [ngClass]="{'invalid': submitted && form.controls.districtid.invalid}" 
       >
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option
@@ -87,6 +113,13 @@
           {{ district.amphurName }}
         </option>
       </select>
+      <ng-container
+        *ngIf="submitted && form.controls.districtid.invalid"
+      >
+        <span class="text-danger">
+          {{ validatorMessages.requiredSelect.replace('field', 'อำเภอ/เขต') }} !
+        </span>
+      </ng-container>
     </div>
     <div class="col-sm-6 col-md-3 mb-1">
       <label class="form-label"
@@ -96,6 +129,7 @@
         class="form-select"
         formControlName="subdistrictid"
         (change)="selectSubdistrict($event)"
+        [ngClass]="{'invalid': submitted && form.controls.subdistrictid.invalid}" 
       >
         <option value="null" selected hidden disabled>กรุณาเลือก</option>
         <option
@@ -105,6 +139,13 @@
           {{ subDistrict.tambolName }}
         </option>
       </select>
+      <ng-container
+        *ngIf="submitted && form.controls.subdistrictid.invalid"
+      >
+        <span class="text-danger">
+          {{ validatorMessages.requiredSelect.replace('field', 'แขวง/ตำบล') }} !
+        </span>
+      </ng-container>
     </div>
   </div>
 
