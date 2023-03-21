@@ -2,3 +2,17 @@
   text-decoration: underline;
   cursor: pointer;
 }
+
+.text-hidden {
+  overflow: hidden;
+  max-width: 200px;
+  text-overflow: ellipsis;
+}
+
+.col1:hover {
+  max-width: none;
+}
+
+.col2:hover {
+  max-width: none;
+}

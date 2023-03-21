@@ -82,7 +82,7 @@
                 class="p-2 text-nowrap align-text-top"
                 *ngIf="pageType === 'admissionList'"
               >
-                วันที่รับเข้า
+              วันที่เข้าศึกษา
               </th>
               <th class="p-2 text-nowrap" *ngIf="pageType === 'graduateList'">
                 <div>
@@ -170,7 +170,18 @@
               >
                 สัญชาติ
               </th>
-
+              <th
+                class="p-2 text-nowrap align-text-top"
+                *ngIf="pageType === 'admissionList'"
+              >
+                เลขประจำตัวนักศึกษา
+              </th>
+              <th
+                class="p-2 text-nowrap align-text-top"
+                *ngIf="pageType === 'admissionList'"
+              >
+                สถานะนักศึกษา
+              </th>
               <th class="p-2 text-nowrap align-text-top" style="width: 5rem">
                 คำนำหน้าชื่อ (ภาษาไทย)
               </th>
@@ -289,12 +300,22 @@
               <th class="p-2 text-nowrap align-text-top">
                 วัน/เดือน/ปีเกิด(พ.ศ.)
               </th>
+              <th class="p-2 text-nowrap align-text-top">
+                อีเมล
+              </th>
               <th class="p-2 text-nowrap align-text-top">ที่อยู่</th>
               <th
                 class="p-2 text-nowrap align-text-top"
                 *ngIf="pageType === 'admissionList'"
               >
                 รายวิชา
+              </th>
+              
+              <th
+                class="p-2 text-nowrap align-text-top"
+                *ngIf="pageType === 'admissionList'"
+              >
+                วุฒิการศึกษาเดิม
               </th>
               <th class="p-2 text-nowrap"></th>
             </tr>
@@ -454,6 +475,36 @@
                 </select>
               </td>
 
+              <td class="p-2 text-nowrap" *ngIf="pageType === 'admissionList'">
+                <input
+                  class="form-control"
+                  style="width: 175px"
+                  pInputText
+                  type="text"
+                  formControlName="studentno"
+                  readonly
+                />
+              </td>
+
+              <td class="p-2 text-nowrap" *ngIf="pageType === 'admissionList'">
+                <select
+                  class="form-select"
+                  style="width: 150px"
+                  formControlName="studentstatus"
+                  [attr.disabled]="true"
+                >
+                  <option value="null" selected hidden disabled>
+                    กรุณาเลือก
+                  </option>
+                  <option
+                    *ngFor="let item of studentStatusList"
+                    [value]="item.value"
+                  >
+                    {{ item.label }}
+                  </option>
+                </select>
+              </td>
+
               <td class="p-2 text-nowrap">
                 <select
                   class="form-select"
@@ -583,6 +634,17 @@
               </td>
 
               <td class="p-2 text-nowrap">
+                <input
+                  class="form-control"
+                  style="width: 150px"
+                  pInputText
+                  type="text"
+                  maxlength="10"
+                  formControlName="email"
+                  readonly
+                />
+              </td>
+              <td class="p-2 text-nowrap">
                 <div
                   *ngIf="pageType === 'admissionList'"
                   role="button"
@@ -611,6 +673,17 @@
                 >
                   รายวิชา
                 </div>
+              </td>
+
+              <td class="p-2 text-nowrap" *ngIf="pageType === 'admissionList'">
+                <input
+                  class="form-control"
+                  style="width: 175px"
+                  pInputText
+                  type="text"
+                  formControlName="originaldegree"
+                  [readonly]="control.value.locked"
+                />
               </td>
             </tr>
           </ng-template>

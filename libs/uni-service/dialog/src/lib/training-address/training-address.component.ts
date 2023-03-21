@@ -18,7 +18,10 @@ export class TrainingAddressComponent {
     schoolid: [],
     schoolname: [],
     bureauid: [],
-    bureauname: []
+    bureauname: [],
+    classlevel: [],
+    term: [],
+    year: []
   });
 
   form = this.fb.group({
@@ -51,7 +54,10 @@ export class TrainingAddressComponent {
         schoolid: address.schoolid,
         schoolname: address.schoolname,
         bureauid: address.bureauid,
-        bureauname: address.bureauname
+        bureauname: address.bureauname,
+        classlevel: address.classlevel,
+        term: address.term,
+        year: address.year
       });
       this.addresses.push(teachingAddressForm);
     });
@@ -87,7 +93,10 @@ export class TrainingAddressComponent {
       schoolid: [],
       schoolname: [],
       bureauid: [],
-      bureauname: []
+      bureauname: [],
+      classlevel: [],
+      term: [],
+      year: []
     });
     this.addresses.push(teachingAddressForm);
   }

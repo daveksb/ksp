@@ -58,12 +58,13 @@
     <div class="row mb-3">
       <div class="col-2">
         <label class="form-label required">คำนำหน้าชื่อภาษาไทย</label>
-        <select class="form-select" 
+        <select class="form-select"
+                data-live-search="true"
                 formControlName="prefixth" 
                 (change)="changePrefixTH($event)"
                 [ngClass]="{'invalid': isSubmit && prefixth.invalid}">
-          <option value="null" selected hidden disabled>กรุณาเลือก</option>
-          <option *ngFor="let prefix of prefixName" [value]="prefix.id">
+          <option value="null" data-tokens="null" selected hidden disabled>กรุณาเลือก</option>
+          <option *ngFor="let prefix of prefixName" [value]="prefix.id" data-tokens="prefix.id">
             {{ prefix.name_th }}
           </option>
         </select>
@@ -211,7 +212,7 @@
     <div class="row mb-3">
       <div class="col-sm-6">
         <label class="form-label">เบอร์โทรศัพท์ (ที่ทำงาน)</label>
-        <input class="form-control" type="text" formControlName="workphone" />
+        <input class="form-control" type="text" formControlName="workphone" maxlength="10" />
         <ng-container
           *ngIf="workPhone.invalid && (workPhone.dirty || workPhone.touched)"
         >
@@ -226,6 +227,7 @@
           class="form-control"
           type="text"
           formControlName="contactphone"
+          maxlength="10"
           [ngClass]="{'invalid': isSubmit && contactPhone.invalid}"
         />
         <ng-container

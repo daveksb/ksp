@@ -7,6 +7,7 @@ import {
 } from '@angular/material/dialog';
 import { UniversitySearchComponent } from '@ksp/shared/search';
 import { GeneralInfoService } from '@ksp/shared/service';
+import { studentStatusList } from 'libs/shared/constant/src/uni-service-constant';
 import { FormAddressTableComponent } from 'libs/shared/form/others/src/lib/form-address-table/form-address-table.component';
 import { StudentListSubjectComponent } from '../student-list-subject/student-list-subject.component';
 import { TrainingAddressComponent } from '../training-address/training-address.component';
@@ -20,6 +21,7 @@ export class ViewHistoryAdmissionComponent {
   formStudent = this.fb.group({
     user: this.fb.array([]),
   });
+  studentStatusList = studentStatusList;
 
   constructor(
     public dialog: MatDialog,
@@ -135,6 +137,10 @@ export class ViewHistoryAdmissionComponent {
       index: [data.index],
       no: [data.index + 1],
       admissiondate: [data.admissiondate],
+      studentno: [data.studentno],
+      studentstatus: [data.studentstatus],
+      originaldegree: [data.originaldegree],
+      email: [data.email],
       idcardno: [data.idcardno],
       passportno: [data.passportno],
       nationality: [data.nationality],
