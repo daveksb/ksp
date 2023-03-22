@@ -28,6 +28,7 @@ export class ConsiderStudentComponent implements OnInit {
     result: [''],
     returndate: [''],
     nextprocess: [''],
+    reason: ['']
   });
   payload: any;
   requestdate = null;
@@ -196,6 +197,7 @@ export class ConsiderStudentComponent implements OnInit {
 
         this.payload.detail = JSON.stringify({
           returndate: this.form.value.returndate || null,
+          reason: this.form.value.reason || null
         });
         const realpayload = {
           requestid: this.payload.requestid,

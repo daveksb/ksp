@@ -5,3 +5,11 @@ tr {
 input[readonly] {
   background-color: #e9ecef;
 }
+
+.invalid {
+  border-color: red;
+}
+
+.table-student td {
+  vertical-align: text-top;
+}

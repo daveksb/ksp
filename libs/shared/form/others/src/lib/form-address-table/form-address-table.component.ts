@@ -4,7 +4,7 @@ import { AddressService } from '@ksp/shared/service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { KspFormBaseComponent } from '@ksp/shared/interface';
-import { providerFactory } from '@ksp/shared/utility';
+import { providerFactory, validatorMessages } from '@ksp/shared/utility';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @UntilDestroy()
@@ -37,9 +37,11 @@ export class FormAddressTableComponent
   provinceList: Array<any> = [];
   districtList: Array<any> = [];
   subDistrictList: Array<any> = [];
+  validatorMessages = validatorMessages;
 
   @Input() addressData: any = {};
   @Input() disabledAll = false;
+  @Input() submitted = false;
 
   constructor(
     private fb: FormBuilder,

@@ -38,6 +38,7 @@ import {
   parseJson,
   phonePattern,
   thaiDate,
+  validatorMessages,
 } from '@ksp/shared/utility';
 import moment from 'moment';
 import { studentStatusList } from 'libs/shared/constant/src/uni-service-constant';
@@ -79,6 +80,8 @@ export class ImportStudentComponent implements OnInit {
   showHistoryButton = false;
   datasourceHistory = [];
   studentStatusList = studentStatusList;
+  submitted = false;
+  validatorMessages = validatorMessages;
 
   constructor(
     public dialog: MatDialog,
@@ -322,10 +325,10 @@ export class ImportStudentComponent implements OnInit {
       idcardno: ['', [Validators.required, Validators.pattern(idCardPattern)]],
       passportno: [''],
       nationality: [null, Validators.required],
-      studentno: [''],
-      studentstatus: [null],
+      studentno: ['', Validators.required],
+      studentstatus: [null, Validators.required],
       originaldegree: [null],
-      email: [null],
+      email: [null, Validators.required],
       prefixth: [null, Validators.required],
       firstnameth: [
         '',
@@ -644,6 +647,12 @@ export class ImportStudentComponent implements OnInit {
   }
 
   save(typeSave: string) {
+    this.submitted = true;
+    console.log(this.formStudent)
+    const invalidateData = this.checkdisableSave();
+    if (invalidateData) {
+      return;
+    }
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
