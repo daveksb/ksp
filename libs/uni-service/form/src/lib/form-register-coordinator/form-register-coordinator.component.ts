@@ -50,7 +50,7 @@ export class FormRegisterCoordinatorInfoComponent extends KspFormBaseComponent {
 
   changePrefixTH(event: any) {
     this.form.patchValue({
-      prefixen: event.target.value
+      prefixen: event
     });
   }
 

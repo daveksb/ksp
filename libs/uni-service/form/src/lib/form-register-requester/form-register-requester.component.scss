@@ -1,3 +1,10 @@
 .invalid {
     border-color: red;
 }
+
+::ng-deep .p-dropdown {
+    font-size: 1.25rem !important;
+    width: 100%;
+    height: 35.23px;
+    line-height: 0.875rem;
+}

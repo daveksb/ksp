@@ -66,7 +66,7 @@ export class FormRegisterRequesterInfoComponent
 
   changePrefixTH(event: any) {
     this.form.patchValue({
-      prefixen: event.target.value
+      prefixen: event
     });
   }
 
