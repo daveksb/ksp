@@ -10579,7 +10579,8 @@
             "npm:@angular/core",
             "npm:@angular/forms",
             "shared-interface",
-            "shared-utility"
+            "shared-utility",
+            "npm:primeng"
           ]
         },
         {
@@ -10588,7 +10589,8 @@
           "deps": [
             "npm:@angular/core",
             "npm:@angular/common",
-            "npm:@angular/forms"
+            "npm:@angular/forms",
+            "npm:primeng"
           ]
         },
         {

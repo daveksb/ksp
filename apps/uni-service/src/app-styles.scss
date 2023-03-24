@@ -17,3 +17,6 @@ $enable-cssgrid: true;
 $theme-colors: map-merge($theme-colors, $customTheme);
 @import './node_modules/bootstrap/scss/bootstrap';
 @import './node_modules/bootstrap-icons/font/bootstrap-icons';
+@import "primeicons/primeicons.css";
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.min.css";
