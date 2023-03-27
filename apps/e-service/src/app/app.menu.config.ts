@@ -361,10 +361,10 @@ export const standardMenu: MenuConfig[] = [
         path: '/degree-cert/list-approved',
         label: 'รายการแบบคำขอส่งรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา',
       },
-      // {
-      //   path: '/cc',
-      //   label: 'พิจารณารับข้อมูลผู้เข้าและผู้สำเร็จการศึกษา',
-      // },
+      {
+        path: '/degree-cert/edit-student-list',
+        label: 'รายการขอเปลี่ยนแปลงรายละเอียดของผู้เข้าและผู้สำเร็จการศึกษา',
+      },
     ],
   },
   /* {

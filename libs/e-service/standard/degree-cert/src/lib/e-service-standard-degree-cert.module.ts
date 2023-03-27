@@ -31,6 +31,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {
   DegreeCertApprovedSearchComponent,
   DegreeCertSearchComponent,
+  DegreeSearchComponent,
 } from '@ksp/shared/search';
 import { RouterModule } from '@angular/router';
 import {
@@ -43,12 +44,16 @@ import { ImportStudentComponent } from './import-student/import-student.componen
 import { CourseDetailComponent } from './course-detail/course-detail.component';
 import { TableModule } from 'primeng/table';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { FormAddressTableComponent } from '@ksp/shared/form/others';
+import { FormAddressTableComponent, SharedFormOthersModule } from '@ksp/shared/form/others';
 import { ConsiderStudentComponent } from './import-student/consider-student/consider-student.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ThaiDatePipe } from '@ksp/shared/pipe';
 import { FollowUpComponent } from './follow-up/follow-up.component';
+import { EserviceEditStudentListComponent } from './edit-student-list/edit-student-list.component';
+import { EserviceEditStudentDetailComponent } from './edit-student-detail/edit-student-detail.component';
+import { EditLicenseComponent } from '@ksp/shared/form/license';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -60,7 +65,6 @@ import { FollowUpComponent } from './follow-up/follow-up.component';
     EServiceStandardDegreeCertRoutingModule,
     SharedDegreeCertModule,
     BottomNavComponent,
-    SharedDegreeCertModule,
     SharedFormDegreeCertStepOneModule,
     MatStepperModule,
     MatTabsModule,
@@ -83,10 +87,15 @@ import { FollowUpComponent } from './follow-up/follow-up.component';
     DegreeCertStatusComponent,
     MatProgressSpinnerModule,
     ThaiDatePipe,
+    DegreeSearchComponent,
+    EditLicenseComponent,
+    SharedFormOthersModule
   ],
   declarations: [
     EServiceDegreeCertListComponent,
     EServiceDegreeCertApprovedListComponent,
+    EserviceEditStudentListComponent,
+    EserviceEditStudentDetailComponent,
     VerifyComponent,
     ConsiderComponent,
     ApproveComponent,
