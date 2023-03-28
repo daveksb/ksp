@@ -5,6 +5,8 @@ import { ApproveComponent } from './approve/approve.component';
 import { CheckComponent } from './check/check.component';
 import { ConsiderComponent } from './consider/consider.component';
 import { CourseDetailComponent } from './course-detail/course-detail.component';
+import { EserviceEditStudentDetailComponent } from './edit-student-detail/edit-student-detail.component';
+import { EserviceEditStudentListComponent } from './edit-student-list/edit-student-list.component';
 import { FinalResultComponent } from './final-result/final-result.component';
 import { FollowUpComponent } from './follow-up/follow-up.component';
 import { ConsiderStudentComponent } from './import-student/consider-student/consider-student.component';
@@ -82,6 +84,14 @@ export const routes: Routes = [
       {
         path: 'follow-up/:key',
         component: FollowUpComponent
+      },
+      {
+        path: 'edit-student-list',
+        component: EserviceEditStudentListComponent
+      },
+      {
+        path: 'edit-student-detail/:id',
+        component: EserviceEditStudentDetailComponent
       }
     ],
   },

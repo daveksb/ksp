@@ -66,6 +66,7 @@ export class EditLicenseComponent
   });
 
   @Input() showEditPassport = false;
+  @Input() disableEdit = false;
   @Input() showDistributeData = false;
   @Input() prefixList: Prefix[] | null = [];
   @Input()

@@ -1,7 +1,3 @@
-<div *ngIf="isLoading | async" class="overlay">
-  <mat-progress-spinner class="spinner" mode="indeterminate">
-  </mat-progress-spinner>
-</div>
 <ksp-top-nav
   ><span header>ยื่นแบบคำขอ</span>
   <span subHeader
@@ -18,64 +14,8 @@
       [requestNumber]="requestNo"
     ></ksp-request-header-info>
     <hr />
-    <form [formGroup]="formSearch">
-      <div class="box__contaner p-3">
-        <div class="box-header text-primary">ค้นหาข้อมูล</div>
-        <div class="row mb-3 mx-5">
-          <div class="col-12">
-            <label class="form-label">
-              หมายเลขบัตรประชาชน / เลขประจำตัวคุรุสภา / หมายเลขหนังสือเดินทาง
-            </label>
-            <div class="col-6">
-              <input
-                type="text"
-                class="form-control"
-                formControlName="idcardno"
-              />
-            </div>
-          </div>
-        </div>
 
-        <div class="row mb-3 mx-5">
-          <div class="col">
-            <label class="form-label">ชื่อ</label>
-            <input
-              type="text"
-              class="form-control"
-              formControlName="firstname"
-            />
-          </div>
-          <div class="col">
-            <label class="form-label">นามสกุล</label>
-            <input
-              type="text"
-              class="form-control"
-              formControlName="lastname"
-            />
-          </div>
-        </div>
-
-        <div class="d-flex justify-content-end me-5">
-          <button
-            class="btn border-primary text-primary bg-white"
-            type="button"
-            (click)="clearData()"
-          >
-            ล้างข้อมูล
-          </button>
-          <button
-            class="btn btn-primary ms-2"
-            type="button"
-            (click)="searchData()"
-          >
-            ค้นหา
-          </button>
-        </div>
-      </div>
-    </form>
-    <br />
-
-    <form [formGroup]="studentDetail" *ngIf="data">
+    <form [formGroup]="studentDetail">
       <div class="bg-light p-3">
         <div class="box-header">ข้อมูลนักศึกษาที่ต้องการเปลี่ยนแปลง</div>
         <div class="row mb-2 mx-5">
@@ -84,7 +24,7 @@
             <select class="form-select" formControlName="prefixth">
               <option value="null" selected hidden disabled>กรุณาเลือก</option>
               <option
-                *ngFor="let option of prefixList$ | async"
+                *ngFor="let option of prefixList"
                 [value]="option.id"
               >
                 {{ option.name_th }}
@@ -115,7 +55,7 @@
             <select class="form-select" formControlName="prefixen">
               <option value="null" selected hidden disabled>กรุณาเลือก</option>
               <option
-                *ngFor="let option of prefixList$ | async"
+                *ngFor="let option of prefixList"
                 value="option.id"
               >
                 {{ option.name_en }}
@@ -146,7 +86,7 @@
             <select class="form-select" formControlName="nationality">
               <option value="null" selected hidden disabled>กรุณาเลือก</option>
               <option
-                *ngFor="let option of nationalityList$ | async"
+                *ngFor="let option of nationalityList"
                 value="option.id"
               >
                 {{ option.name_en }}
@@ -186,7 +126,7 @@
 
       <br />
     </form>
-    <form [formGroup]="formData" *ngIf="data">
+    <form [formGroup]="formData">
       <ng-container>
         <div class="bg-light p-3">
           <div class="mx-5">
@@ -194,7 +134,9 @@
               formControlName="editStudent"
               [oldValue]="oldValue"
               [showEditPassport]="true"
-              [prefixList]="prefixList$ | async"
+              [prefixList]="prefixList"
+              [disableEdit]="true"
+              [mode]="'view'"
             ></ksp-edit-license>
           </div>
         </div>
@@ -204,27 +146,30 @@
           [pageType]="pageType.fileAttachTab"
           [requestType]="1"
           [groups]="uploadFileList"
+          [mode]="'view'"
+          [showLicense]="false"
+          [systemType]="'e-service-uni'"
         >
         </ksp-form-multi-attachment>
-        <label class="text-red"
-          >กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
-          โปรดตรวจสอบอีกครั้งก่อนบันทึกลงระบบ</label
-        >
       </ng-container>
+      <div class="bg-white p-4">
+        <e-service-license-check
+          [showHistoryButton]="false"
+          [choices]="choices"
+          formControlName="verify"
+        ></e-service-license-check>
+      </div>
     </form>
-    <div class="bg-light p-4 text-center" *ngIf="!data && isNotFound">
-      <span>ไม่พบข้อมูล</span>
-    </div>
   </div>
 </div>
-<div class="sticky-bottom border" *ngIf="data">
+<div class="sticky-bottom border">
   <ksp-bottom-nav
     (cancelClicked)="cancel()"
     [isLastPage]="true"
     [isFirstPage]="true"
     [showCenterButtons]="true"
     [showSaveButton]="true"
-    [disableSaveButton]="formData.invalid"
+    [disableSaveButton]="formData.controls.verify.invalid"
     (saveClicked)="save()"
   ></ksp-bottom-nav>
 </div>

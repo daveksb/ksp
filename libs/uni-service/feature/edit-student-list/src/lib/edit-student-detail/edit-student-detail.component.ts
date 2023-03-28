@@ -10,11 +10,12 @@ import {
 } from '@ksp/shared/dialog';
 import {
   GeneralInfoService,
+  LoaderService,
   UniInfoService,
   UniRequestService,
 } from '@ksp/shared/service';
 import { getCookie, mapMultiFileInfo, thaiDate } from '@ksp/shared/utility';
-import { EMPTY, Observable, switchMap } from 'rxjs';
+import { EMPTY, Observable, Subject, switchMap } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
@@ -38,6 +39,7 @@ export class EditStudentDetailComponent implements OnInit {
   isNotFound = false;
 
   studentDetail = this.fb.group({
+    id: [],
     prefixth: [],
     firstnameth: [],
     lastnameth: [],
@@ -70,6 +72,7 @@ export class EditStudentDetailComponent implements OnInit {
   data = false;
   pageType = RequestPageType;
   requesttype = 8;
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   constructor(
     private router: Router,
@@ -77,7 +80,8 @@ export class EditStudentDetailComponent implements OnInit {
     private fb: FormBuilder,
     private uniInfoService: UniInfoService,
     private generalInfoService: GeneralInfoService,
-    private requestService: UniRequestService
+    private requestService: UniRequestService,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {
@@ -163,16 +167,16 @@ export class EditStudentDetailComponent implements OnInit {
               admissionlist: '',
               fileinfo: JSON.stringify({ file }),
             };
-            const admissionlist = [];
-            let formsave = {};
             const editStudent = this.formData.value.editStudent as any;
             const studentform = this.studentDetail.value as object;
-            formsave = {
+            const formsave = {
+              editform: editStudent,
+              studentdetail: studentform,
+              files: JSON.stringify(this.uploadFileList),
               ...editStudent,
-              ...studentform,
+              ...studentform
             };
-            admissionlist.push(formsave);
-            payload.admissionlist = JSON.stringify(admissionlist);
+            payload.admissionlist = JSON.stringify(formsave);
             return this.requestService.createRequestAdmission(payload);
           }
           return EMPTY;

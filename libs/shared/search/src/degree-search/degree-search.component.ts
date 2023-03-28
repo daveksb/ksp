@@ -39,6 +39,7 @@ export class DegreeSearchComponent extends KspFormBaseComponent {
 
   @Input() uniUniversityOption: Array<any> = [];
   @Input() uniUniversityTypeOption: Array<any> = [];
+  @Input() disableSelectUni = true;
   @Output() clear = new EventEmitter<boolean>();
   @Output() search = new EventEmitter<boolean>();
   @Output() getUniversity = new EventEmitter<any>();

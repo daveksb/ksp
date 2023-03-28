@@ -299,4 +299,34 @@ export class EUniService {
       }
     );
   }
+
+  getEditRequestAdmision(data: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/unirequestadmissionjoinunidegreecertsearch_es.php`,
+      {
+        ...data,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
+
+  getRequestEditAdmissionById(data: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service2/unirequestadmissionselectbyid`,
+      {
+        ...data,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
+
+  updateAdmission(data: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service2/unidegreeadmissionupdate`,
+      {
+        ...data,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
 }
