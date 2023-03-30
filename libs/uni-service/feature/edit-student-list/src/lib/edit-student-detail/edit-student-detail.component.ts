@@ -178,6 +178,7 @@ export class EditStudentDetailComponent implements OnInit {
               ...studentform
             };
             payload.admissionlist = JSON.stringify(formsave);
+            payload.idcardno = null;
             return this.requestService.createRequestAdmission(payload);
           }
           return EMPTY;
