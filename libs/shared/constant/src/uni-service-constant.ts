@@ -1,15 +1,15 @@
 export const requestStatus = [
   {
-    label: 'สร้าง',
+    label: 'ยื่นข้อมูล',
     value: 1,
   },
   {
-    label: 'ยื่นข้อมูล',
-    value: 2,
+    label: 'ไม่ผ่านการตรวจสอบ',
+    value: 3,
   },
   {
     label: 'รับข้อมูล',
-    value: 3,
+    value: 2,
   },
 ];
 

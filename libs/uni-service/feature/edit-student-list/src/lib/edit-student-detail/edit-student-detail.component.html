@@ -116,7 +116,7 @@
               <option value="null" selected hidden disabled>กรุณาเลือก</option>
               <option
                 *ngFor="let option of prefixList$ | async"
-                value="option.id"
+                [value]="option.id"
               >
                 {{ option.name_en }}
               </option>
@@ -147,9 +147,9 @@
               <option value="null" selected hidden disabled>กรุณาเลือก</option>
               <option
                 *ngFor="let option of nationalityList$ | async"
-                value="option.id"
+                [value]="option.nationId"
               >
-                {{ option.name_en }}
+                {{ option.nationName }}
               </option>
             </select>
           </div>
