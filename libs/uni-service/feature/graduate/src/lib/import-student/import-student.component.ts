@@ -695,6 +695,7 @@ export class ImportStudentComponent implements OnInit {
               this.payload.admissionlist = null;
               this.payload.currentgraduateno = this.getCheckedValue().length;
             }
+            this.payload.idcardno = null;
             return this.requestService.createRequestAdmission(this.payload);
           }
           return EMPTY;

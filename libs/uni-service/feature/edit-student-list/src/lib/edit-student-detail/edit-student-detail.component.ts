@@ -166,6 +166,7 @@ export class EditStudentDetailComponent implements OnInit {
               ref3: '5',
               admissionlist: '',
               fileinfo: JSON.stringify({ file }),
+              idcardno: this.studentDetail.value.idcardno
             };
             const editStudent = this.formData.value.editStudent as any;
             const studentform = this.studentDetail.value as object;
@@ -177,14 +178,17 @@ export class EditStudentDetailComponent implements OnInit {
               ...studentform
             };
             payload.admissionlist = JSON.stringify(formsave);
+            payload.idcardno = null;
             return this.requestService.createRequestAdmission(payload);
           }
           return EMPTY;
         })
       )
       .subscribe((res) => {
-        if (res) {
+        if (res.returncode != '409') {
           this.onCompleted(res?.requestno);
+        } else {
+          this.onConflict();
         }
       });
   }
@@ -198,6 +202,22 @@ export class EditStudentDetailComponent implements OnInit {
         เลขที่แบบคำขอ : ${requestno}`,
         subContent: `กรุณาตรวจสอบสถานะแบบคำขอหรือรหัสเข้าใช้งาน
         ผ่านทางอีเมลผู้ที่ลงทะเบียนภายใน 3 วันทำการ`,
+      },
+    });
+
+    completeDialog.componentInstance.completed.subscribe((res) => {
+      if (res) {
+        this.cancel();
+      }
+    });
+  }
+
+  onConflict() {
+    const completeDialog = this.dialog.open(CompleteDialogComponent, {
+      width: '350px',
+      data: {
+        header: `ยืนยันข้อมูลไม่สำเร็จ`,
+        subContent: `รายชื่อผู้เข้าศึกษาหรือผู้สำเร็จการศึกษานี้ มีรายการขอแก้ไขที่ยังไม่ได้ดำเนินการ`,
       },
     });
 

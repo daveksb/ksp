@@ -252,6 +252,7 @@ export class ConsiderStudentComponent implements OnInit {
     realpayload.requestprocess = process;
     realpayload.requeststatus = status;
     realpayload.checkresult = this.payload.detail;
+    realpayload.idcardno = null;
     if (this.payload.pagetype == 'admissionList') {
       const convertadmission = this.payload.allstudent.map((data: any) => {
         if (data.checked) {

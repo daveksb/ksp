@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { requestStatus } from '@ksp/shared/constant';
 import { LoaderService, UniInfoService, UniRequestService } from '@ksp/shared/service';
-import { formatRequestNo, providerFactory, replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
+import { formatRequestNo, getCookie, providerFactory, replaceEmptyWithNull, thaiDate } from '@ksp/shared/utility';
 import { HistoryRequestDialogComponent, PrintRequestDialogComponent } from '@ksp/uni-service/dialog';
 import { KspPaginationComponent, ListData } from '@ksp/shared/interface';
 import _ from 'lodash';
@@ -119,7 +119,23 @@ export class EditStudentListComponent extends KspPaginationComponent implements 
       form.requestdateto = new Date(form.requestdateto)
       form.requestdateto.setHours(form.requestdateto.getHours() + 7)
     }
+    let nameData = {};
+    if (form.name) {
+      const newName = form.name.split(' ');
+      if (newName.length > 1) {
+        nameData = {
+          firstnameth: newName[0],
+          lastnameth: newName[1]
+        }
+      } else {
+        nameData = {
+          firstnameth: newName[0]
+        }
+      }
+    }
     return {
+      uniid: getCookie('uniId'),
+      unitype: getCookie('uniType'),
       requestno: form.requestno ? form.requestno.replaceAll('-','') : '',
       degreelevel: form.degreelevel,
       fulldegreename: form.fulldegreename,
@@ -127,7 +143,7 @@ export class EditStudentListComponent extends KspPaginationComponent implements 
       plancalendaryear: form.plancalendaryear,
       courseacademicyear: form.plancalendaryear,
       cardno: form.cardno,
-      name: form.name,
+      ...nameData,
       requestdatefrom: form.requestdatefrom,
       requestdateto: form.requestdateto,
       process: form.process,
@@ -154,7 +170,7 @@ export class EditStudentListComponent extends KspPaginationComponent implements 
             return data.degreelevel == level.value;
           }))
           data.degreelevelname = finddegreelevel?.label || '';
-          data.requeststatusname = data.status == '1' ? 'ยื่นเรียบร้อย' :
+          data.requeststatusname = data.status == '1' ? 'ยื่นข้อมูล' :
                                data.status == '2' ? 'รับข้อมูล' :
                                data.status == '3' ? 'ไม่ผ่านการตรวจสอบ' : '';
           return data;
