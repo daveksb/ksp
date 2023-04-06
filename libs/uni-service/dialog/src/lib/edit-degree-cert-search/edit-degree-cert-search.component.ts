@@ -9,6 +9,7 @@ import { map } from 'rxjs';
 import _ from 'lodash';
 import moment from 'moment';
 import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
+import { getCookie } from '@ksp/shared/utility';
 const mapOption = () =>
   map((data: any) => {
     return (
@@ -72,6 +73,7 @@ export class EditDegreeCertSearchComponent
   override search() {
     const value: any = this.form.value;
     const payload = {
+      uniid: getCookie('uniId') || '',
       fulldegreenameth: value?.degreeName || '',
       degreelevel: value?.degreeLevel || '',
       courseacademicyear: value?.year || '',
@@ -117,7 +119,7 @@ export class EditDegreeCertSearchComponent
   }
 
   confirm() {
-    this.router.navigate(['/edit-degree-cert', 'detail'], {
+    this.router.navigate(['/edit-degree-cert', 'detail', 'create'], {
       queryParams: {
         id: this.selectedUniversity,
       },

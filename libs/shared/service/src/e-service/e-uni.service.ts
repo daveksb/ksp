@@ -329,4 +329,24 @@ export class EUniService {
       }
     );
   }
+
+  updateDegreecert(data: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/e-service2/unidegreecertupdate`,
+      {
+        ...data,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
+
+  editUniDegreeSearch(data: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/unirequestdegreecertsearchedit_es.php`,
+      {
+        ...data,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
 }

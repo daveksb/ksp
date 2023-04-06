@@ -348,6 +348,10 @@ export const standardMenu: MenuConfig[] = [
         path: `/degree-cert/list/6/4`,
         label: 'ติดตามผลเชิงประจักษ์',
       },
+      {
+        path: '/degree-cert/list-edit-request',
+        label: 'รายการขอเปลี่ยนแปลงรายละเอียดรับรองปริญญาและประกาศนียบัตรทางการศึกษา',
+      }
     ],
   },
   {

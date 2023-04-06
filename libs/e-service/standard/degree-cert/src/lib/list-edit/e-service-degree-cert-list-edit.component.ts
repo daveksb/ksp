@@ -5,8 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { requestEditStatus } from '@ksp/shared/constant';
 import { ListData, KspPaginationComponent } from '@ksp/shared/interface';
-import { UniInfoService, AddressService, LoaderService } from '@ksp/shared/service';
-import { getCookie } from '@ksp/shared/utility';
+import { UniInfoService, AddressService, LoaderService, EUniService } from '@ksp/shared/service';
+import { formatRequestNo, getCookie } from '@ksp/shared/utility';
 import {
   EditDegreeCertSearchComponent,
   HistoryRequestDialogComponent,
@@ -24,11 +24,11 @@ const mapOption = () =>
     );
   });
 @Component({
-  selector: 'ksp-edit-degree-list',
-  templateUrl: './edit-degree-list.component.html',
-  styleUrls: ['./edit-degree-list.component.scss'],
+  selector: 'e-service-degree-cert-list-edit',
+  templateUrl: './e-service-degree-cert-list-edit.component.html',
+  styleUrls: ['./e-service-degree-cert-list-edit.component.scss'],
 })
-export class EditDegreeListComponent
+export class EServiceDegreeCertListEditComponent
   extends KspPaginationComponent
 {
   form = this.fb.group({
@@ -52,11 +52,13 @@ export class EditDegreeListComponent
     private uniInfoService: UniInfoService,
     private addressService: AddressService,
     private router: Router,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private eUniService: EUniService
   ) {
     super();
     this.getAll();
   }
+
   clear() {
     this.form.reset();
     this.clearPageEvent();
@@ -173,7 +175,7 @@ export class EditDegreeListComponent
   }
 
   override search() {
-    this.uniInfoService.editUniDegreeSearch(this.getRequest()).subscribe(async (res) => {
+    this.eUniService.editUniDegreeSearch(this.getRequest()).subscribe(async (res) => {
       const newData: any = [];
       this.pageEvent.length = res.countrow;
       for (const row of res?.datareturn || []) {
@@ -182,7 +184,7 @@ export class EditDegreeListComponent
           row?.degreelevel
         );
         const approveDate = row?.courseapprovedate
-          ? moment(row?.courseapprovedate).format('DD/MM/YYYY')
+          ? new Date(row?.courseapprovedate)
           : '-';
         const submitDate = row?.requestdate
           ? new Date(row?.requestdate)
@@ -193,7 +195,7 @@ export class EditDegreeListComponent
         const findStatus = this.statusList.find((data: any) => { return data.value == row.status });
         newData.push({
           key: row?.id,
-          requestId: row?.requestno || '-',
+          requestId: formatRequestNo(row?.requestno) || '-',
           submitDate,
           approveCode: row?.degreeapprovecode || '-',
           degreeCode,
@@ -202,9 +204,9 @@ export class EditDegreeListComponent
           university: row?.uniname || '-',
           degreeName: row?.fulldegreenameth || '-',
           approveDate: approveDate,
+          statusname: findStatus?.elabel,
           status: row?.status,
-          process: row?.process,
-          statusname: findStatus?.ulabel
+          process: row?.process
         });
       }
       this.dataSource.data = newData;
@@ -213,12 +215,9 @@ export class EditDegreeListComponent
   private _findOptions(dataSource: any, key: any) {
     return _.find(dataSource, { value: key })?.label || '-';
   }
-  onEdit(rowData: any) {
-    this.router.navigate(['/edit-degree-cert', 'detail', 'edit'], {
-      queryParams: {
-        id: rowData?.key,
-      },
-    });
+
+  goToDetailPage(requestid: any) {
+    this.router.navigate(['/degree-cert', 'edit-degree-detail', requestid]);
   }
 }
 
@@ -232,11 +231,7 @@ const displayedColumns: string[] = [
   'degreeName',
   'major',
   'branch',
-  'verifyStatus',
-  'approveDate',
-  'edit',
-  'print',
-  'history',
+  'verifyStatus'
 ];
 
 export interface DegreeCertInfo {

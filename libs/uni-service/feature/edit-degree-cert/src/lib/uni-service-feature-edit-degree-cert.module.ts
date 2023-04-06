@@ -30,7 +30,7 @@ const routes: Routes = [
         component: EditDegreeListComponent,
       },
       {
-        path: 'detail',
+        path: 'detail/:mode',
         component: EditDegreeDetailComponent,
       },
     ],
