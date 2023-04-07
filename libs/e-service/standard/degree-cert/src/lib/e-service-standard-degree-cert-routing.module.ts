@@ -5,6 +5,7 @@ import { ApproveComponent } from './approve/approve.component';
 import { CheckComponent } from './check/check.component';
 import { ConsiderComponent } from './consider/consider.component';
 import { CourseDetailComponent } from './course-detail/course-detail.component';
+import { EserviceEditDegreeDetailComponent } from './edit-degree-detail/e-service-edit-degree-detail.component';
 import { EserviceEditStudentDetailComponent } from './edit-student-detail/edit-student-detail.component';
 import { EserviceEditStudentListComponent } from './edit-student-list/edit-student-list.component';
 import { FinalResultComponent } from './final-result/final-result.component';
@@ -12,6 +13,7 @@ import { FollowUpComponent } from './follow-up/follow-up.component';
 import { ConsiderStudentComponent } from './import-student/consider-student/consider-student.component';
 import { ImportStudentComponent } from './import-student/import-student.component';
 import { EServiceDegreeCertApprovedListComponent } from './list-approved/e-service-degree-cert-list-approved.component';
+import { EServiceDegreeCertListEditComponent } from './list-edit/e-service-degree-cert-list-edit.component';
 import { EServiceDegreeCertListComponent } from './list/e-service-degree-cert-list.component';
 import { VerifyComponent } from './verify/verify.component';
 
@@ -28,6 +30,10 @@ export const routes: Routes = [
       {
         path: 'list',
         component: EServiceDegreeCertListComponent,
+      },
+      {
+        path: 'list-edit-request',
+        component: EServiceDegreeCertListEditComponent
       },
       {
         path: 'list/:type',
@@ -92,6 +98,10 @@ export const routes: Routes = [
       {
         path: 'edit-student-detail/:id',
         component: EserviceEditStudentDetailComponent
+      },
+      {
+        path: 'edit-degree-detail/:id',
+        component: EserviceEditDegreeDetailComponent
       }
     ],
   },

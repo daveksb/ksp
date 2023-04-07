@@ -222,6 +222,17 @@ export class UniInfoService {
       }
     );
   }
+
+  editUniDegreeSearch(params: any): Observable<any> {
+    return this.http.post(
+      `${environment.shortApiUrl}/unirequestdegreecertsearchedit.php`,
+      {
+        ...params,
+        tokenkey: getCookie('userToken'),
+      }
+    );
+  }
+
   async getMajorAndBranch(row: any) {
     let major: any;
     let branch: any;

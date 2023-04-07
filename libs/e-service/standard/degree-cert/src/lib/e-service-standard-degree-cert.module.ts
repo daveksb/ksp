@@ -53,6 +53,8 @@ import { FollowUpComponent } from './follow-up/follow-up.component';
 import { EserviceEditStudentListComponent } from './edit-student-list/edit-student-list.component';
 import { EserviceEditStudentDetailComponent } from './edit-student-detail/edit-student-detail.component';
 import { EditLicenseComponent } from '@ksp/shared/form/license';
+import { EServiceDegreeCertListEditComponent } from './list-edit/e-service-degree-cert-list-edit.component';
+import { EserviceEditDegreeDetailComponent } from './edit-degree-detail/e-service-edit-degree-detail.component';
 
 @NgModule({
   imports: [
@@ -89,7 +91,8 @@ import { EditLicenseComponent } from '@ksp/shared/form/license';
     ThaiDatePipe,
     DegreeSearchComponent,
     EditLicenseComponent,
-    SharedFormOthersModule
+    SharedFormOthersModule,
+    
   ],
   declarations: [
     EServiceDegreeCertListComponent,
@@ -104,7 +107,9 @@ import { EditLicenseComponent } from '@ksp/shared/form/license';
     ImportStudentComponent,
     CourseDetailComponent,
     ConsiderStudentComponent,
-    FollowUpComponent
+    FollowUpComponent,
+    EServiceDegreeCertListEditComponent,
+    EserviceEditDegreeDetailComponent
   ],
 })
 export class EServiceStandardDegreeCertModule {}

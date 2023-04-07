@@ -5,11 +5,11 @@
 
 <ksp-top-nav
   ><span header>ยื่นแบบคำขอ </span>
-  <span subHeader>ขอรับรองปริญญาและประกาศนียบัตร</span></ksp-top-nav
+  <span subHeader>ขอเปลี่ยนแปลงรายละเอียดปริญญาและประกาศนียบัตรทางการศึกษา</span></ksp-top-nav
 >
 
-<div class="bg-secondary bg-opacity-10 px-4 py-2 full-height-2">
-  <div class="box-header">รายละเอียดแบบคำขอรับรองปริญญาและประกาศนียบัตร</div>
+<div class="bg-secondary bg-opacity-10 px-4 py-2 full-height-2 full-width-2">
+  <div class="box-header">ขอเปลี่ยนแปลงรายละเอียดปริญญาและประกาศนียบัตรทางการศึกษา</div>
   <div class="bg-white px-3 pt-2 pb-1">
     <ksp-request-header-info
       [requestNumber]="requestNo"
@@ -31,6 +31,7 @@
             (degreeType)="step1DegreeType = $event"
             formControlName="step1"
             [disabledInstitute]="true"
+            [mode]="'view'"
           >
           </ksp-degree-cert-step-one>
         </form>
@@ -43,6 +44,7 @@
             [formType]="step1DegreeType"
             formControlName="step2"
             [showEditCheckbox]="true"
+            [mode]="'view'"
           >
           </ksp-degree-cert-step-two>
         </form>
@@ -54,6 +56,7 @@
           <ksp-degree-cert-step-3
             [showEditCheckbox]="true"
             formControlName="step3"
+            [mode]="'view'"
           ></ksp-degree-cert-step-3>
         </form>
       </mat-step>
@@ -63,14 +66,21 @@
         <form [formGroup]="step4Form">
           <ksp-degree-cert-step-four
             formControlName="step4"
+            [mode]="'view'"
           ></ksp-degree-cert-step-four>
         </form>
       </mat-step>
-
-      <mat-step [completed]="false">
-        <ng-template matStepLabel>ตรวจสอบและยื่นคำขอ</ng-template>
-      </mat-step>
     </mat-stepper>
+  </div>
+  <br />
+  <div class="bg-white p-4">
+    <form [formGroup]="verifyForm">
+      <e-service-license-check
+        [showHistoryButton]="false"
+        [choices]="choices"
+        formControlName="verify"
+      ></e-service-license-check>
+    </form>
   </div>
 </div>
 
@@ -85,8 +95,5 @@
     (nextClicked)="goForward()"
     (prevClicked)="goBack()"
     (cancelClicked)="back()"
-    [showTempSaveButton]="true"
-    (tempSaveClicked)="save('tempsave')"
-    [disableTempSaveButton]="false"
   ></ksp-bottom-nav>
 </div>

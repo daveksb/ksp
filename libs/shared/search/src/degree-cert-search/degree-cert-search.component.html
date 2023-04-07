@@ -88,7 +88,7 @@
     </div>
 
     <div class="row mb-3" *ngIf="subType === 'all'">
-      <div class="col-6">
+      <div class="col-6" *ngIf="systemType === 'uni'">
         <label class="form-label">สถานะตรวจสอบ </label>
         <select
           class="form-select"
@@ -97,11 +97,24 @@
         >
           <option value="null" disabled selected hidden>กรุณาเลือก</option>
           <option *ngFor="let item of verifyStatusOption" [value]="item.value">
-            {{ item.label }}
+            {{ item.ulabel }}
           </option>
         </select>
       </div>
-      <div class="col-6">
+      <div class="col-6" *ngIf="systemType === 'e-uni'">
+        <label class="form-label">สถานะตรวจสอบ </label>
+        <select
+          class="form-select"
+          formControlName="verifyStatus"
+          (change)="handleChangeStatus($event)"
+        >
+          <option value="null" disabled selected hidden>กรุณาเลือก</option>
+          <option *ngFor="let item of verifyStatusOption" [value]="item.value">
+            {{ item.elabel }}
+          </option>
+        </select>
+      </div>
+      <div class="col-6" *ngIf="showApproveStatus">
         <label class="form-label">สถานะรับรอง </label>
         <select class="form-select" formControlName="approveStatus">
           <option value="null" disabled selected hidden>กรุณาเลือก</option>
