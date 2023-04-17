@@ -29,6 +29,7 @@ export class CourseDetailComponent implements OnInit {
     step1: [],
   });
   planRows = [1, 2, 3, 4];
+  mode = 'create';
   requestNo = '';
   headerDetail = [
     '',
@@ -40,6 +41,7 @@ export class CourseDetailComponent implements OnInit {
   async ngOnInit() {
     this.route.paramMap.subscribe((res) => {
       this.id = Number(res.get('id'));
+      this.mode = res.get('mode') ?? 'create';
       this.processType = 0;
     });
     this.uniRequestService.getUniDegreeCertById(this.id).subscribe(response=>{
@@ -168,12 +170,20 @@ export class CourseDetailComponent implements OnInit {
       courseDetail: this.courseData
     };
     localForage.setItem('courseData', course).then(()=>{
-      this.router.navigate(['/', 'student-list', 'import-student', type]);
+      if (this.mode == 'create') {
+        this.router.navigate(['/', 'student-list', 'import-student', type]);
+      } else {
+        this.router.navigate(['/', 'student-list', 'data-student', type, this.mode]);
+      }
     });
   }
 
   cancel() {
-    this.router.navigate(['/', 'student-list']);
+    if (this.mode == 'create') {
+      this.router.navigate(['/', 'student-list']);
+    } else {
+      this.router.navigate(['/degree-cert-list']);
+    }
   }
 
   checkAdmission(row: any) {

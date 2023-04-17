@@ -1,0 +1,689 @@
+<ksp-top-nav>
+  <span header>{{
+    pageType === 'admissionList' ? headerStudent.h1 : headerGraduate.h1
+  }}</span>
+  <span subHeader>{{
+    pageType === 'admissionList' ? headerStudent.h2 : headerGraduate.h2
+  }}</span>
+  <span detail>
+    >
+    {{
+      pageType === 'admissionList' ? headerStudent.h3 : headerGraduate.h3
+    }}</span
+  >
+</ksp-top-nav>
+
+<div class="bg-secondary bg-opacity-10 px-4 py-2 full-height full-width-2">
+  <div class="box-header">รายละเอียดแบบคำขอ</div>
+
+  <div class="bg-white p-3 table-student">
+    <div class="d-flex flex-row justify-content-between">
+      <ksp-request-header-info
+        [requestDate]="requestDate"
+        [requestNumber]="requestNo"
+      ></ksp-request-header-info>
+    </div>
+    <hr />
+
+    <form [formGroup]="formStudent">
+      <div formArrayName="user">
+        <p-table
+          [value]="user.controls"
+          responsiveLayout="scroll"
+          dataKey="controls.index.value"
+          editMode="row"
+          #dt
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th
+                class="p-2 text-nowrap align-text-top"
+                *ngIf="pageType === 'admissionList'"
+              >
+                ลำดับ
+              </th>
+              <th
+                class="p-2 text-nowrap align-text-top"
+                *ngIf="pageType === 'graduateList'"
+              >
+                ครั้งที่สภาอนุมัติ
+              </th>
+              <th
+                class="p-2 text-nowrap align-text-top"
+                *ngIf="pageType === 'graduateList'"
+              >
+                วันที่สภาอนุมัติ
+              </th>
+              <th
+                class="p-2 text-nowrap align-text-top"
+                *ngIf="pageType === 'graduateList'"
+              >
+                วันที่จบการศึกษา
+              </th>
+              <th
+                class="p-2 text-nowrap align-text-top"
+                *ngIf="pageType === 'graduateList'"
+              >
+                สถานที่ปฏิบัติการสอน
+              </th>
+              <th
+                class="p-2 text-nowrap align-text-top"
+                *ngIf="pageType === 'admissionList'"
+              >
+                วันที่เข้าศึกษา
+              </th>
+              <th class="p-2 text-nowrap" *ngIf="pageType === 'graduateList'">
+                <div>
+                  <label>วันที่เข้ารับการศึกษา</label>
+                  <!-- <input
+                    pInputText
+                    type="date"
+                    class="form-control form-search"
+                    (input)="
+                      dt.filter(
+                        $any($event.target).value,
+                        'admissiondate',
+                        'contains'
+                      )
+                    "
+                  /> -->
+                  <div class="d-flex align-items-center">
+                    <input
+                      [matDatepicker]="picker_searchadmissiondate"
+                      style="width: 150px"
+                      autocomplete="off"
+                      class="form-control form-date"
+                      (change)="
+                        dt.filter(
+                          $any($event.target).value,
+                          'controls.admissiondate.value',
+                          'contains'
+                        )
+                      "
+                    />
+                    <mat-datepicker-toggle
+                      class="button-date"
+                      matSuffix
+                      [for]="picker_searchadmissiondate"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker
+                      #picker_searchadmissiondate
+                    ></mat-datepicker>
+                  </div>
+                </div>
+              </th>
+
+              <th class="p-2 text-nowrap" *ngIf="pageType === 'admissionList'">
+                เลขบัตรประจำตัวประชาชน / เลขประจำตัวคุรุสภา
+              </th>
+
+              <th class="p-2 text-nowrap" *ngIf="pageType === 'graduateList'">
+                <div>
+                  เลขบัตรประจำตัวประชาชน
+                  <input
+                    pInputText
+                    type="text"
+                    class="form-control form-search"
+                    (input)="
+                      dt.filter(
+                        $any($event.target).value,
+                        'controls.idcardno.value',
+                        'contains'
+                      )
+                    "
+                  />
+                </div>
+              </th>
+
+              <th class="p-2 text-nowrap align-text-top">
+                หมายเลขหนังสือเดินทาง
+                <input
+                  pInputText
+                  type="text"
+                  class="form-control form-search"
+                  *ngIf="pageType === 'graduateList'"
+                  (input)="
+                    dt.filter(
+                      $any($event.target).value,
+                      'controls.passportno.value',
+                      'contains'
+                    )
+                  "
+                />
+              </th>
+              <th
+                class="p-2 text-nowrap align-text-top"
+                *ngIf="pageType === 'admissionList'"
+              >
+                สัญชาติ
+              </th>
+              <th
+                class="p-2 text-nowrap align-text-top"
+                *ngIf="pageType === 'admissionList'"
+              >
+                เลขประจำตัวนักศึกษา
+              </th>
+              <th
+                class="p-2 text-nowrap align-text-top"
+                *ngIf="pageType === 'admissionList'"
+              >
+                สถานะนักศึกษา
+              </th>
+
+              <th class="p-2 text-nowrap align-text-top" style="width: 5rem">
+                คำนำหน้าชื่อ (ภาษาไทย)
+              </th>
+
+              <th class="p-2 text-nowrap align-text-top" style="width: 5rem">
+                ชื่อ (ภาษาไทย)
+                <div>
+                  <input
+                    pInputText
+                    type="text"
+                    class="form-control form-search"
+                    *ngIf="pageType === 'graduateList'"
+                    (input)="
+                      dt.filter(
+                        $any($event.target).value,
+                        'controls.firstnameth.value',
+                        'contains'
+                      )
+                    "
+                  />
+                </div>
+              </th>
+
+              <th class="p-2 text-nowrap align-text-top" style="width: 5rem">
+                นามสกุล (ภาษาไทย)
+                <div>
+                  <input
+                    pInputText
+                    type="text"
+                    class="form-control form-search"
+                    *ngIf="pageType === 'graduateList'"
+                    (input)="
+                      dt.filter(
+                        $any($event.target).value,
+                        'controls.lastnameth.value',
+                        'contains'
+                      )
+                    "
+                  />
+                </div>
+              </th>
+
+              <th class="p-2 text-nowrap align-text-top" style="width: 5rem">
+                คำนำหน้าชื่อ (ภาษาอังกฤษ)
+              </th>
+
+              <th class="p-2 text-nowrap align-text-top" style="width: 5rem">
+                ชื่อ (ภาษาอังกฤษ)
+                <div>
+                  <input
+                    pInputText
+                    type="text"
+                    class="form-control form-search"
+                    *ngIf="pageType === 'graduateList'"
+                    (input)="
+                      dt.filter(
+                        $any($event.target).value,
+                        'controls.firstnameen.value',
+                        'contains'
+                      )
+                    "
+                  />
+                </div>
+              </th>
+
+              <th class="p-2 text-nowrap align-text-top" style="width: 5rem">
+                ชื่อกลาง (ภาษาอังกฤษ)
+                <div>
+                  <input
+                    pInputText
+                    type="text"
+                    class="form-control form-search"
+                    *ngIf="pageType === 'graduateList'"
+                    (input)="
+                      dt.filter(
+                        $any($event.target).value,
+                        'controls.middlenameen.value',
+                        'contains'
+                      )
+                    "
+                  />
+                </div>
+              </th>
+
+              <th class="p-2 text-nowrap align-text-top" style="width: 5rem">
+                นามสกุล (ภาษาอังกฤษ)
+                <div>
+                  <input
+                    pInputText
+                    type="text"
+                    class="form-control form-search"
+                    *ngIf="pageType === 'graduateList'"
+                    (input)="
+                      dt.filter(
+                        $any($event.target).value,
+                        'controls.lastnameen.value',
+                        'contains'
+                      )
+                    "
+                  />
+                </div>
+              </th>
+
+              <th class="p-2 text-nowrap align-text-top">
+                เบอร์โทรศัพท์มือถือ
+                <input
+                  pInputText
+                  type="text"
+                  class="form-control form-search"
+                  *ngIf="pageType === 'graduateList'"
+                  (input)="
+                    dt.filter($any($event.target).value, 'phone', 'contains')
+                  "
+                />
+              </th>
+              <th class="p-2 text-nowrap align-text-top">
+                วัน/เดือน/ปีเกิด(พ.ศ.)
+              </th>
+              <th class="p-2 text-nowrap align-text-top">
+                อีเมล
+              </th>
+              <th class="p-2 text-nowrap align-text-top">ที่อยู่</th>
+              <th
+                class="p-2 text-nowrap align-text-top"
+                *ngIf="pageType === 'admissionList'"
+              >
+                รายวิชา
+              </th>
+              <th
+                class="p-2 text-nowrap align-text-top"
+                *ngIf="pageType === 'admissionList'"
+              >
+                วุฒิการศึกษาเดิม
+              </th>
+              <th class="p-2 text-nowrap"></th>
+            </tr>
+          </ng-template>
+          <ng-template
+            pTemplate="body"
+            let-control
+            let-editing="editing"
+            let-ri="rowIndex"
+            let-expanded="expanded"
+          >
+            <tr [formGroupName]="ri">
+              <td class="p-2 text-nowrap" *ngIf="pageType === 'admissionList'">
+                {{ control.value.no }}
+              </td>
+
+              <td class="p-2 text-nowrap" *ngIf="pageType === 'graduateList'">
+                <input
+                  class="form-control text-center"
+                  style="width: 75px"
+                  pInputText
+                  type="text"
+                  formControlName="approveno"
+                  readonly
+                />
+              </td>
+              <td class="p-2 text-nowrap" *ngIf="pageType === 'graduateList'">
+                <div class="d-flex align-items-center">
+                  <input
+                    [matDatepicker]="pickerapprovedate"
+                    style="width: 150px"
+                    autocomplete="off"
+                    class="form-control form-date"
+                    formControlName="approvedate"
+                    readonly
+                  />
+                  <mat-datepicker-toggle
+                    class="button-date"
+                    matSuffix
+                    [for]="pickerapprovedate"
+                    disabled
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #pickerapprovedate></mat-datepicker>
+                </div>
+                <!-- <input
+                  class="form-control"
+                  style="width: 150px"
+                  pInputText
+                  type="date"
+                  formControlName="approvedate"
+                /> -->
+              </td>
+              <td class="p-2 text-nowrap" *ngIf="pageType === 'graduateList'">
+                <div class="d-flex align-items-center">
+                  <input
+                    [matDatepicker]="pickergraduatedate"
+                    style="width: 150px"
+                    autocomplete="off"
+                    class="form-control form-date"
+                    formControlName="graduationdate"
+                    readonly
+                  />
+                  <mat-datepicker-toggle
+                    class="button-date"
+                    matSuffix
+                    [for]="pickergraduatedate"
+                    disabled
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #pickergraduatedate></mat-datepicker>
+                </div>
+              </td>
+
+              <td class="p-2 text-nowrap" *ngIf="pageType === 'graduateList'">
+                <div
+                  (click)="searchAddress(control.value.index, control.value.locked)"
+                  class="text-orange text-decoration-underline whitespace-nowrap"
+                  role="button"
+                >
+                  สถานที่ปฏิบัติการสอน
+                </div>
+              </td>
+
+              <td class="p-2 text-nowrap">
+                <div class="d-flex align-items-center">
+                  <input
+                    [matDatepicker]="picker"
+                    style="width: 150px"
+                    autocomplete="off"
+                    class="form-control form-date"
+                    formControlName="admissiondate"
+                    readonly
+                  />
+                  <mat-datepicker-toggle
+                    class="button-date"
+                    matSuffix
+                    [for]="picker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker 
+                    #picker 
+                    disabled></mat-datepicker>
+                </div>
+              </td>
+              <td class="p-2 text-nowrap">
+                <input
+                  class="form-control"
+                  style="width: 220px"
+                  pInputText
+                  #idcard
+                  maxlength="13"
+                  type="text"
+                  formControlName="idcardno"
+                  readonly
+                />
+              </td>
+              <td class="p-2 text-nowrap">
+                <input
+                  class="form-control"
+                  style="width: 175px"
+                  pInputText
+                  #passport
+                  type="text"
+                  formControlName="passportno"
+                  readonly
+                />
+              </td>
+
+              <td class="p-2 text-nowrap" *ngIf="pageType === 'admissionList'">
+                <select
+                  class="form-select"
+                  style="width: 150px"
+                  formControlName="nationality"
+                  [attr.disabled]="true"
+                >
+                  <option value="null" selected hidden disabled>
+                    กรุณาเลือก
+                  </option>
+                  <option
+                    *ngFor="let nation of nationality"
+                    [value]="nation.nationId"
+                  >
+                    {{ nation.nationName }}
+                  </option>
+                </select>
+              </td>
+
+              <td class="p-2 text-nowrap" *ngIf="pageType === 'admissionList'">
+                <input
+                  class="form-control"
+                  style="width: 175px"
+                  pInputText
+                  type="text"
+                  formControlName="studentno"
+                  readonly
+                />
+              </td>
+
+              <td class="p-2 text-nowrap" *ngIf="pageType === 'admissionList'">
+                <select
+                  class="form-select"
+                  style="width: 150px"
+                  formControlName="studentstatus"
+                  [attr.disabled]="true"
+                >
+                  <option value="null" selected hidden disabled>
+                    กรุณาเลือก
+                  </option>
+                  <option
+                    *ngFor="let item of studentStatusList"
+                    [value]="item.value"
+                  >
+                    {{ item.label }}
+                  </option>
+                </select>
+              </td>
+
+              <td class="p-2 text-nowrap">
+                <select
+                  class="form-select"
+                  [attr.disabled]="true"
+                  formControlName="prefixth"
+                >
+                  <option value="null" selected hidden disabled>
+                    กรุณาเลือก
+                  </option>
+                  <option
+                    *ngFor="let ThPrefix of ThPrefixes"
+                    [value]="ThPrefix.id"
+                  >
+                    {{ ThPrefix.name_th }}
+                  </option>
+                </select>
+              </td>
+
+              <td class="p-2 text-nowrap">
+                <input
+                  class="form-control"
+                  style="width: 150px"
+                  pInputText
+                  type="text"
+                  formControlName="firstnameth"
+                  readonly
+                />
+              </td>
+              <td class="p-2 text-nowrap">
+                <input
+                  class="form-control"
+                  style="width: 150px"
+                  pInputText
+                  type="text"
+                  formControlName="lastnameth"
+                  readonly
+                />
+              </td>
+              <td class="p-2 text-nowrap">
+                <select
+                  class="form-select"
+                  [attr.disabled]="true"
+                  formControlName="prefixen"
+                >
+                  <option value="null" selected hidden disabled>
+                    กรุณาเลือก
+                  </option>
+                  <option
+                    *ngFor="let EngPrefix of EngPrefixes"
+                    [value]="EngPrefix.id"
+                  >
+                    {{ EngPrefix.name_en }}
+                  </option>
+                </select>
+              </td>
+
+              <td class="p-2 text-nowrap">
+                <input
+                  class="form-control"
+                  style="width: 150px"
+                  pInputText
+                  type="text"
+                  formControlName="firstnameen"
+                  readonly
+                />
+              </td>
+
+              <td class="p-2 text-nowrap">
+                <input
+                  class="form-control"
+                  style="width: 150px"
+                  pInputText
+                  type="text"
+                  formControlName="middlenameen"
+                  readonly
+                />
+              </td>
+
+              <td class="p-2 text-nowrap">
+                <input
+                  class="form-control"
+                  style="width: 150px"
+                  pInputText
+                  type="text"
+                  formControlName="lastnameen"
+                  readonly
+                />
+              </td>
+
+              <td class="p-2 text-nowrap">
+                <input
+                  class="form-control"
+                  style="width: 150px"
+                  pInputText
+                  type="text"
+                  maxlength="10"
+                  formControlName="phone"
+                  readonly
+                />
+              </td>
+              <td class="p-2 text-nowrap">
+                <div class="d-flex align-items-center">
+                  <input
+                    [matDatepicker]="pickerbirthdate"
+                    style="width: 150px"
+                    autocomplete="off"
+                    class="form-control form-date"
+                    formControlName="birthdate"
+                    readonly
+                  />
+                  <mat-datepicker-toggle
+                    class="button-date"
+                    matSuffix
+                    [for]="pickerbirthdate"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker 
+                    #pickerbirthdate
+                    disabled></mat-datepicker>
+                </div>
+              </td>
+              <td class="p-2 text-nowrap">
+                <input
+                  class="form-control"
+                  style="width: 200px"
+                  pInputText
+                  type="text"
+                  formControlName="email"
+                  readonly
+                />
+              </td>
+              <td class="p-2 text-nowrap">
+                <div
+                  *ngIf="pageType === 'admissionList'"
+                  role="button"
+                  class="text-orange text-decoration-underline whitespace-nowrap"
+                  [pRowToggler]="control"
+                  (click)="autoScroll()"
+                >
+                  รายละเอียดที่อยู่
+                  <i class="bi bi-chevron-down"></i>
+                </div>
+
+                <div
+                  class="text-orange text-decoration-underline whitespace-nowrap"
+                  role="button"
+                  *ngIf="pageType === 'graduateList'"
+                  (click)="viewAdress(control.value.address)"
+                >
+                  รายละเอียดที่อยู่
+                </div>
+              </td>
+
+              <td class="p-2 text-nowrap" *ngIf="pageType === 'admissionList'">
+                <div
+                  class="text-orange text-decoration-underline whitespace-nowrap"
+                  role="button"
+                  (click)="insertSubject(control.value.subjects, ri, control.value.locked)"
+                >
+                  รายวิชา
+                </div>
+              </td>
+
+              <td class="p-2 text-nowrap" *ngIf="pageType === 'admissionList'">
+                <input
+                  class="form-control"
+                  style="width: 175px"
+                  pInputText
+                  type="text"
+                  formControlName="originaldegree"
+                  readonly
+                />
+              </td>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="rowexpansion" let-control let-ii="rowIndex">
+            <tr [formGroupName]="ii">
+              <td></td>
+              <td colspan="5">
+                <form [formGroup]="control.controls.address">
+                  <ksp-form-address-table
+                    id="address-info"
+                    formControlName="addressInfo"
+                    [disabledAll]="control.value.locked"
+                    [submitted]="submitted"
+                  ></ksp-form-address-table>
+                </form>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="sticky-bottom border">
+  <ksp-bottom-nav
+    [isLastPage]="true"
+    [isFirstPage]="true"
+    [showCenterButtons]="true"
+    [showSaveButton]="false"
+    [showTempSaveButton]="false"
+    [disableTempSaveButton]="false"
+    (cancelClicked)="cancel()"
+    (prevClicked)="prev()"
+    [saveButtonLabel]="'บันทึกและยื่นแบบคำขอ'"
+  ></ksp-bottom-nav>
+</div>

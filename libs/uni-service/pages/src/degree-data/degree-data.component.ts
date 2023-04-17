@@ -15,9 +15,9 @@ import {
 } from '@ksp/shared/service';
 import { UniFormBadgeComponent } from '@ksp/shared/ui';
 import _ from 'lodash';
-import moment from 'moment';
-import { lastValueFrom, map, Subject } from 'rxjs';
+import { map, Subject } from 'rxjs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Router } from '@angular/router';
 const mapOption = () =>
   map((data: any) => {
     return (
@@ -28,8 +28,8 @@ const mapOption = () =>
     );
   });
 @Component({
-  templateUrl: './uni-home.component.html',
-  styleUrls: ['./uni-home.component.scss'],
+  templateUrl: './degree-data.component.html',
+  styleUrls: ['./degree-data.component.scss'],
   standalone: true,
   imports: [
     CommonModule,
@@ -43,7 +43,7 @@ const mapOption = () =>
     MatProgressSpinnerModule,
   ],
 })
-export class UniHomeComponent extends KspPaginationComponent implements OnInit {
+export class UniDegreeDataComponent extends KspPaginationComponent implements OnInit {
   badgeTitle1: any;
   badgeTitle2: any;
 
@@ -73,7 +73,8 @@ export class UniHomeComponent extends KspPaginationComponent implements OnInit {
     private fb: FormBuilder,
     private uniInfoService: UniInfoService,
     private addressService: AddressService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private router: Router,
   ) {
     super();
     this.getAll();
@@ -89,7 +90,7 @@ export class UniHomeComponent extends KspPaginationComponent implements OnInit {
     'branch',
     'approveDate',
   ];
-  dataSource = new MatTableDataSource<DegreeInfo>();
+  dataSource = new MatTableDataSource<DegreeInfoDetail>();
   private _findOptions(dataSource: any, key: any) {
     return _.find(dataSource, { value: key })?.label || '-';
   }
@@ -127,6 +128,7 @@ export class UniHomeComponent extends KspPaginationComponent implements OnInit {
           row
         );
         newData.push({
+          id: row?.id,
           approveNumber: row?.degreeapprovecode || '-',
           degreeLevel,
           uniName: row?.uniname || '-',
@@ -246,9 +248,19 @@ export class UniHomeComponent extends KspPaginationComponent implements OnInit {
         });
     }
   }
+
+  goToDetailPage(id: any) {
+    this.router.navigate([
+      '/',
+      'student-list',
+      'course-detail',
+      'view',
+      id,
+    ]);
+  }
 }
 
-export interface DegreeInfo {
+export interface DegreeInfoDetail {
   order: number;
   approveNumber: string;
   degreeLevel: string;
@@ -258,36 +270,3 @@ export interface DegreeInfo {
   branch: string;
   approveDate: string;
 }
-
-export const data: DegreeInfo[] = [
-  {
-    order: 1,
-    approveNumber: '00069784',
-    degreeLevel: 'ปริญญาตรีทางการศึกษา (หลักสูตร 4 ปี)',
-    uniName: 'มหาวิทยาลัยราชภัฏพระนครศรีอยุธยา',
-    degreeName: 'การศึกษาบัณฑิต สาขาวิชาเคมี หลักสูตรปรับปรุง พ.ศ.2562',
-    major: 'วิทยาศาสตร์พื้นฐาน',
-    branch: 'วิทยาศาสตร์บัณฑิต',
-    approveDate: '10/10/2565',
-  },
-  {
-    order: 2,
-    approveNumber: '00069784',
-    degreeLevel: 'ปริญญาตรีทางการศึกษา (หลักสูตร 4 ปี)',
-    uniName: 'มหาวิทยาลัยราชภัฏพระนครศรีอยุธยา',
-    degreeName: 'การศึกษาบัณฑิต สาขาวิชาเคมี หลักสูตรปรับปรุง พ.ศ.2562',
-    major: 'วิทยาศาสตร์พื้นฐาน',
-    branch: 'วิทยาศาสตร์บัณฑิต',
-    approveDate: '10/10/2565',
-  },
-  {
-    order: 3,
-    approveNumber: '00069784',
-    degreeLevel: 'ปริญญาตรีทางการศึกษา (หลักสูตร 4 ปี)',
-    uniName: 'มหาวิทยาลัยราชภัฏพระนครศรีอยุธยา',
-    degreeName: 'การศึกษาบัณฑิต สาขาวิชาเคมี หลักสูตรปรับปรุง พ.ศ.2562',
-    major: 'วิทยาศาสตร์พื้นฐาน',
-    branch: 'วิทยาศาสตร์บัณฑิต',
-    approveDate: '10/10/2565',
-  },
-];

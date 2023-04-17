@@ -171,6 +171,7 @@ export class DegreeListComponent extends KspPaginationComponent implements OnIni
       '/',
       'student-list',
       'course-detail',
+      'create',
       id,
     ]);
   }

@@ -4,6 +4,7 @@ import { UniContainerPageComponent } from '@ksp/uni-service/pages';
 import { CourseDetailComponent } from './course-detail/course-detail.component';
 import { DegreeListComponent } from './degree-list/degree-list.component';
 import { ImportStudentComponent } from './import-student/import-student.component';
+import { DataStudentComponent } from './data-student/data-student.component';
 
 const routes: Routes = [
   {
@@ -20,13 +21,17 @@ const routes: Routes = [
         component: DegreeListComponent,
       },
       {
-        path: 'course-detail/:id',
+        path: 'course-detail/:mode/:id',
         component: CourseDetailComponent,
       },
       {
         path: 'import-student/:type',
         component: ImportStudentComponent,
       },
+      {
+        path: 'data-student/:type/:mode',
+        component: DataStudentComponent,
+      }
     ],
   },
 ];
