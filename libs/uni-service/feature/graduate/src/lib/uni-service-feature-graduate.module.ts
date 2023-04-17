@@ -32,6 +32,7 @@ import { DegreeSearchComponent } from '@ksp/shared/search';
 import { DropdownModule } from 'primeng/dropdown';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DataStudentComponent } from './data-student/data-student.component';
 
 @NgModule({
   imports: [
@@ -67,6 +68,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     DegreeListComponent,
     CourseDetailComponent,
     ImportStudentComponent,
+    DataStudentComponent
   ],
 })
 export class UniServiceFeatureGraduateModule {}

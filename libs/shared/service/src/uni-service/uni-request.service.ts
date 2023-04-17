@@ -89,6 +89,13 @@ export class UniRequestService {
     });
   }
 
+  getGraduatedListById(form: any): Observable<any> {
+    return this.http.post(`${environment.shortApiUrl}/unidegreeadmissionsearchgraduation.php`, {
+      ...form,
+      tokenkey: getCookie('userToken'),
+    });
+  }
+
   getGraduateListById(form: any): Observable<any> {
     return this.http.post(`${environment.shortApiUrl}/unidegreeadmissionsearchall.php`, {
       ...form,

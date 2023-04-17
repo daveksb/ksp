@@ -5,6 +5,7 @@ import { UniserviceImportType } from '@ksp/shared/interface';
 import { ForeignStudentIdComponent } from '@ksp/uni-service/feature/foreign-student-id';
 import {
   UniContainerPageComponent,
+  UniDegreeDataComponent,
   UniHomeComponent,
   UniLoginComponent,
 } from '@ksp/uni-service/pages';
@@ -19,6 +20,16 @@ const routes: Routes = [
       {
         path: '',
         component: UniHomeComponent,
+      },
+    ],
+  },
+  {
+    path: 'degree-cert-list',
+    component: UniContainerPageComponent,
+    children: [
+      {
+        path: '',
+        component: UniDegreeDataComponent,
       },
     ],
   },

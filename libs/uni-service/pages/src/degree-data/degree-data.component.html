@@ -3,7 +3,7 @@
   </mat-progress-spinner>
 </div>
 
-<ksp-top-nav><span header>หน้าแรก </span></ksp-top-nav>
+<ksp-top-nav><span header>ทะเบียนข้อมูล </span></ksp-top-nav>
 
 <form [formGroup]="form">
   <div class="bg-secondary bg-opacity-10 px-4 py-3 full-height">
@@ -31,7 +31,7 @@
       </ksp-degree-home-search>
     </div>
     <br />
-    <div class="box-header">ข้อมูลรับรองปริญญาและประกาศนียบัตรทางการศึกษา</div>
+    <div class="box-header">ทะเบียนข้อมูลข้อมูลรับรองปริญญาและประกาศนียบัตรทางการศึกษา</div>
 
     <div class="bg-white p-3">
       <div class="table__scroll">
@@ -49,8 +49,13 @@
 
           <ng-container matColumnDef="approveNumber">
             <th mat-header-cell *matHeaderCellDef>รหัสการรับรอง</th>
-            <td mat-cell *matCellDef="let element">
-              {{ element.approveNumber || '-' }}
+            <td
+                class="text-primary link"
+                mat-cell
+                *matCellDef="let element"
+                (click)="goToDetailPage(element.id)"
+              >
+                {{ element.approveNumber }}
             </td>
           </ng-container>
 
