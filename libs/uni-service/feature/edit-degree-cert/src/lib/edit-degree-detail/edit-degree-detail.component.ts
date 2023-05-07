@@ -145,10 +145,10 @@ export class EditDegreeDetailComponent {
     const { formchange } = res.checkresult != null ? parseJson(res.checkresult) : {} as any;
     this.step1Form.setValue({
       step1: {
-        institutionsCode: this.pageMode == 'edit' ? res?.unicode : uniData?.universitycode || '',
-        institutionsGroup: this.pageMode == 'edit' ? res?.unitype : getCookie('uniType') || '',
-        institutionsName: this.pageMode == 'edit' ? res?.uniname : uniData?.name || '',
-        provience: this.pageMode == 'edit' ? res?.uniprovince : uniData?.provinceid || '',
+        institutionsCode: res?.unicode,
+        institutionsGroup: res?.unitype,
+        institutionsName: res?.uniname,
+        provience: res?.uniprovince,
         courseDetailType: res?.coursedetailtype,
         courseDetail: res?.coursedetailinfo
           ? parseJson(res?.coursedetailinfo)
@@ -349,7 +349,6 @@ export class EditDegreeDetailComponent {
       step2: this.step2Form.value.step2,
       step3: this.step3Form.value.step3,
     });
-    console.log(this.step3Form.value.step3)
     const daftData = this._getRequestAllowEdit(this.deftBeforeEdit);
     let reqBody: any = {
       id: this.requestId || null,
@@ -371,6 +370,7 @@ export class EditDegreeDetailComponent {
       unicode: step1?.institutionsCode || null,
       tokenkey: getCookie('userToken') || null,
       requestdate: moment().format("YYYY-MM-DD[T]HH:mm:ss"),
+      createdate: this.draftRequest.createdate,
       unidegreecertid: this.pageMode == 'create' 
         ? this.draftRequest.id : this.draftRequest.unidegreecertid,
       degreeapprovecode: this.draftRequest.degreeapprovecode
@@ -401,21 +401,18 @@ export class EditDegreeDetailComponent {
         ? newData?.step1Section6
         : daftData?.step1Section6),
       //form2 section
-      ...(form2Section?.section1
+      ...(form2Section?.section1 || form2Section?.section2
         ? newData?.step2Section1
         : daftData?.step2Section1),
-      ...(form2Section?.section2
+      ...(form2Section?.section3
         ? newData?.step2Section2
         : daftData?.step2Section2),
-      ...(form2Section?.section3
+      ...(form2Section?.section4
         ? newData?.step2Section3
         : daftData?.step2Section3),
-      ...(form2Section?.section4
+      ...(form2Section?.section5
         ? newData?.step2Section4
         : daftData?.step2Section4),
-      ...(form2Section?.section5
-        ? newData?.step2Section5
-        : daftData?.step2Section5),
       //form2 section
       ...(form3Section?.section1
         ? newData?.step3Section1
@@ -425,7 +422,6 @@ export class EditDegreeDetailComponent {
         : daftData?.step3Section2),
       checkresult: JSON.stringify({ formchange : formChange })
     };
-    console.log(reqBody)
     return reqBody;
   }
 
@@ -446,14 +442,14 @@ export class EditDegreeDetailComponent {
     if (form1Section?.section5) changedata.step1.section5 = true;
     if (form1Section?.section6) changedata.step1.section6 = true;
 
-    if (form2Section?.section1) changedata.step1.section1 = true;
-    if (form2Section?.section2) changedata.step1.section2 = true;
-    if (form2Section?.section3) changedata.step1.section3 = true;
-    if (form2Section?.section4) changedata.step1.section4 = true;
-    if (form2Section?.section5) changedata.step1.section5 = true;
+    if (form2Section?.section1) changedata.step2.section1 = true;
+    if (form2Section?.section2) changedata.step2.section2 = true;
+    if (form2Section?.section3) changedata.step2.section3 = true;
+    if (form2Section?.section4) changedata.step2.section4 = true;
+    if (form2Section?.section5) changedata.step2.section5 = true;
 
-    if (form3Section?.section1) changedata.step1.section1 = true;
-    if (form2Section?.section2) changedata.step1.section2 = true;
+    if (form3Section?.section1) changedata.step3.section1 = true;
+    if (form2Section?.section2) changedata.step3.section2 = true;
     
 
     return changedata;

@@ -30,7 +30,6 @@ export class ViewHistoryAdmissionComponent {
     private generalInfoService: GeneralInfoService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    console.log(this.data);
     this.initFormAdmission(this.data);
   }
 
@@ -45,14 +44,12 @@ export class ViewHistoryAdmissionComponent {
     } else {
       datasource = data.datasource.filter((data: any) => data.requesttype == '06');
     }
-    console.log(datasource)
     if (datasource.length) {
       datasource.forEach((request: any) => {
         if (request.admissionlist || request.graduatelist) {
           const parseuser = data.pageType == 'admissionList' ? 
                             JSON.parse(request.admissionlist) :
                             JSON.parse(request.graduatelist);
-          console.log(parseuser)
           parseuser.forEach((user: any, index: any) => {
             user.index = index;
             user.subjects = JSON.parse(user.subjects);

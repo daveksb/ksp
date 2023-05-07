@@ -65,7 +65,6 @@ export class RetiredAttachmentComponent implements OnInit {
     });
     localForage.getItem('userSelectedData').then((res: any) => {
       if (res) {
-        console.log(res);
         this.userInfo = res;
       }
     });

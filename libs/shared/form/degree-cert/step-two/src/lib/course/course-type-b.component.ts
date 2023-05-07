@@ -25,6 +25,7 @@ export class CourseTypeBComponent
   defaultPlan = {
     plans: this.fb.array([this.newPlan(1)]),
   };
+  calendaryearList: Array<any> = [];
 
   override form = this.fb.group({
     subject1GroupName: [''],
@@ -48,12 +49,19 @@ export class CourseTypeBComponent
   ngOnInit(): void {
     this.addData();
     this.calculateSum();
+    const currYear = new Date().getFullYear()+5;
+    for (let index = 0; index < 15; index++) {
+      this.calendaryearList.push({
+        value: ((currYear - index) + 543).toString(),
+        label: ((currYear - index) + 543).toString()
+      })
+    }
   }
 
   newPlan(year: number) {
     return this.fb.group({
       label: 'แผนฯ ปีที่ ' + year,
-      year: [''],
+      year: [null],
       student1: [''],
       student2: [''],
       student3: [''],
