@@ -648,7 +648,6 @@ export class ImportStudentComponent implements OnInit {
 
   save(typeSave: string) {
     this.submitted = true;
-    console.log(this.formStudent)
     const invalidateData = this.checkdisableSave();
     if (invalidateData) {
       return;

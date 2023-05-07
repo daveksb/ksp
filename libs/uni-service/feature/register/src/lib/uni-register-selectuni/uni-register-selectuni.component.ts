@@ -44,7 +44,6 @@ export class UniRegisterSelectUniComponent {
       campusid: university.campusid,
       campusname: university.campusname
     }
-    console.log(formuni)
     localForage.setItem('registerSelectedUniversity', formuni).then(()=>{
       this.next();
     });

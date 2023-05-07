@@ -416,3 +416,8 @@ export function dateDiff(date1: Date, date2: Date) {
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   return diffDays;
 }
+
+export function toUpperCaseName(character: any) {
+  const upperChar = character ? character[0].toUpperCase() + character.slice(1) : '';
+  return upperChar;
+}

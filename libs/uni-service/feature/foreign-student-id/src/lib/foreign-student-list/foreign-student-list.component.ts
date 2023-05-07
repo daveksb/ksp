@@ -113,7 +113,6 @@ export class ForeignStudentListComponent
   }
 
   viewRequest(element: any) {
-    console.log(element.requestid)
     this.router.navigate([
       '/',
       'foreign-student-id',

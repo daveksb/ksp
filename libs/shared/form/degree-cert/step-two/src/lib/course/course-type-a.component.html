@@ -81,13 +81,12 @@
 
                 <td>
                   <div>
-                    <input
-                      class="form-control text-center"
-                      type="text"
-                      placeholder="กรอกปีการศึกษา"
-                      formControlName="year"
-                      inputNumber
-                    />
+                    <select class="form-select" formControlName="year">
+                      <option value="null" selected disabled hidden>
+                        กรุณาเลือกปีการศึกษา
+                      </option>
+                      <option *ngFor="let year of calendaryearList" [value]="year.value">{{ year.label }}</option>
+                    </select>
                   </div>
                 </td>
 

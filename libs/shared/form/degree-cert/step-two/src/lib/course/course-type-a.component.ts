@@ -17,6 +17,7 @@ export class CourseTypeAComponent
   totalCredit = 0;
   totalStudent = 0;
   contactForm?: FormGroup;
+  calendaryearList: Array<any> = [];
 
   override form = this.fb.group({
     plans: this.fb.array([this.newPlan(1)]),
@@ -36,6 +37,13 @@ export class CourseTypeAComponent
   ngOnInit(): void {
     this.addData();
     this.calculateSum();
+    const currYear = new Date().getFullYear()+5;
+    for (let index = 0; index < 15; index++) {
+      this.calendaryearList.push({
+        value: ((currYear - index) + 543).toString(),
+        label: ((currYear - index) + 543).toString()
+      })
+    }
   }
 
   sum(source: any[], data: string): number {
@@ -90,7 +98,7 @@ export class CourseTypeAComponent
     return this.fb.group({
       label: 'แผนฯ ปีที่ ' + year,
       student: [''],
-      year: [''],
+      year: [null],
       planname: ['']
     });
   }

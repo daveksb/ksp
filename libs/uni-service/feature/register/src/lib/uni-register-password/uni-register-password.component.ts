@@ -153,7 +153,6 @@ export class UniRegisterPasswordComponent implements OnInit {
       .pipe(
         switchMap((res) => {
           if (res) {
-            console.log(this.uniData);
             this.savingData = replaceEmptyWithNull(this.savingData);
             const educationoccupy = {
               permission: this.savingData.permission,

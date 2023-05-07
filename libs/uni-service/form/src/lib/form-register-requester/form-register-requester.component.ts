@@ -5,6 +5,7 @@ import { KspFormBaseComponent } from '@ksp/shared/interface';
 import {
   createUniUserInfoForm,
   providerFactory,
+  toUpperCaseName,
   validatorMessages,
 } from '@ksp/shared/utility';
 
@@ -78,6 +79,10 @@ export class FormRegisterRequesterInfoComponent
     } else {
       this.validprefix = true;
     }
+  }
+
+  uppercaseChange(event: any) {
+    this.form.patchValue({ firstnameen: toUpperCaseName(event.target.value) });
   }
 
   get idCardNo() {

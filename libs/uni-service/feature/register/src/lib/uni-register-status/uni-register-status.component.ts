@@ -34,7 +34,6 @@ export class UniRegisterStatusComponent extends KspPaginationComponent {
   }
 
   handleSearch(form: any) {
-    console.log(form)
     if (form) {
       let nameData = {};
       if (form.name) {

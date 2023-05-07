@@ -121,7 +121,6 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
       this.status = uniRequestDegree.requeststatus;
       this.process = uniRequestDegree.requestprocess;
       const checkresult = uniRequestDegree.checkresult ? parseJson(uniRequestDegree.checkresult) : {};
-      console.log(checkresult)
       const { requestNo, step1, step2, step3, step4 } = await
         this.uniInfoService.mappingUniverSitySelectByIdWithForm(
           uniRequestDegree
@@ -248,7 +247,6 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
     dateapprove.setHours(dateapprove.getHours() + 7);
     const dateaccept = new Date(step1?.degreeTypeForm?.courseAcceptDate);
     dateaccept.setHours(dateaccept.getHours() + 7);
-    console.log(step2?.nitet)
     const reqBody: any = {
       uniid: getCookie('uniId'),
       ref1: '3',
