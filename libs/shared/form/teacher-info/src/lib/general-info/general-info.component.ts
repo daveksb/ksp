@@ -29,6 +29,7 @@ export class TeacherGeneralInfoComponent extends KspFormBaseComponent {
   prefixOptions: ListData[] = [];
   validIdcard = true;
   validatorMessages = validatorMessages;
+  calendaryearList: Array<any> = [];
 
   override writeValue(value: any) {
     if (value) {
@@ -66,6 +67,13 @@ export class TeacherGeneralInfoComponent extends KspFormBaseComponent {
         label: name_th,
       }));
     });
+    const currYear = new Date().getFullYear()+5;
+    for (let index = 0; index < 15; index++) {
+      this.calendaryearList.push({
+        value: ((currYear - index) + 543).toString(),
+        label: ((currYear - index) + 543).toString()
+      })
+    }
   }
 
   get degrees() {

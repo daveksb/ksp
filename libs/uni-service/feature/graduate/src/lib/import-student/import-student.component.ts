@@ -7,6 +7,7 @@ import {
   ConfirmDialogComponent,
 } from '@ksp/shared/dialog';
 import {
+  OriginalDegreeDialogComponent,
   StudentListSubjectComponent,
   TrainingAddressComponent,
   ViewHistoryAdmissionComponent
@@ -117,13 +118,13 @@ export class ImportStudentComponent implements OnInit {
           uniuserid: userId,
           systemtype: '3',
           subtype: '5',
-          unirequestdegreecertid: this.courseData.courseDetail.requestid,
-          unidegreecertid: this.courseData.courseDetail.id,
-          degreeapprovecode: this.courseData.courseDetail.degreeapprovecode,
-          planyear: this.courseData.courseSelected.indexyear,
-          plancalendaryear: this.courseData.courseSelected.calendaryear,
-          planname: this.courseData.courseSelected.label,
-          plantotalno: this.courseData.courseSelected.student,
+          unirequestdegreecertid: this.courseData.courseDetail.requestid || null,
+          unidegreecertid: this.courseData.courseDetail.id || null,
+          degreeapprovecode: this.courseData.courseDetail.degreeapprovecode || null,
+          planyear: this.courseData.courseSelected.indexyear || null,
+          plancalendaryear: this.courseData.courseSelected.calendaryear || null,
+          planname: this.courseData.courseSelected.label || null,
+          plantotalno: this.courseData.courseSelected.student || null,
           currentadmissionno: 0,
           currentgraduateno: 0,
           ref1: '3',
@@ -174,6 +175,7 @@ export class ImportStudentComponent implements OnInit {
             parseuser.forEach((user: any, index: any) => {
               user.index = index;
               user.subjects = JSON.parse(user.subjects);
+              user.originaldegree = JSON.parse(user.originaldegree);
               this.user.push(this.edituser(user));
             });
             this.requestNo = findResponse.requestno;
@@ -607,6 +609,23 @@ export class ImportStudentComponent implements OnInit {
     });
   }
 
+  viewOriginalDegree(originalDegreeInfo: any, index: any, disable: boolean) {
+    const dialogRef = this.dialog.open(OriginalDegreeDialogComponent, {
+      width: '600px',
+      data: {
+        ...originalDegreeInfo,
+        disableAll: disable ?? false
+      },
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        this.user.at(index).patchValue({
+          originaldegree: res,
+        });
+      }
+    });
+  }
+
   searchAddress(index: any, disable: boolean) {
     const dialogRef = this.dialog.open(TrainingAddressComponent, {
       height: '100vh',
@@ -677,6 +696,7 @@ export class ImportStudentComponent implements OnInit {
                 delete data.index;
                 data.address = JSON.stringify(data.address.addressInfo);
                 data.subjects = JSON.stringify(data.subjects);
+                data.originaldegree = JSON.stringify(data.originaldegree);
               });
               this.payload.admissionlist = JSON.stringify(datasave);
               this.payload.graduatelist = null;

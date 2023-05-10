@@ -11,6 +11,7 @@ import { studentStatusList } from 'libs/shared/constant/src/uni-service-constant
 import { FormAddressTableComponent } from 'libs/shared/form/others/src/lib/form-address-table/form-address-table.component';
 import { StudentListSubjectComponent } from '../student-list-subject/student-list-subject.component';
 import { TrainingAddressComponent } from '../training-address/training-address.component';
+import { OriginalDegreeDialogComponent } from '../original-degree-dialog/original-degree-dialog.component';
 
 @Component({
   selector: 'uni-service-view-history-dialog',
@@ -53,6 +54,7 @@ export class ViewHistoryAdmissionComponent {
           parseuser.forEach((user: any, index: any) => {
             user.index = index;
             user.subjects = JSON.parse(user.subjects);
+            user.originaldegree = JSON.parse(user.originaldegree);
             this.user.push(this.edituser(user));
           });
         }
@@ -120,6 +122,23 @@ export class ViewHistoryAdmissionComponent {
       if (res) {
         this.user.at(index).patchValue({
           subjects: res,
+        });
+      }
+    });
+  }
+
+  viewOriginalDegree(originalDegreeInfo: any, index: any, disable: boolean) {
+    const dialogRef = this.dialog.open(OriginalDegreeDialogComponent, {
+      width: '600px',
+      data: {
+        ...originalDegreeInfo,
+        disableAll: disable ?? false
+      },
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        this.user.at(index).patchValue({
+          originaldegree: res,
         });
       }
     });

@@ -847,14 +847,21 @@
               </td>
 
               <td class="p-2 text-nowrap" *ngIf="pageType === 'admissionList'">
-                <input
+                <div
+                  class="text-orange text-decoration-underline whitespace-nowrap"
+                  role="button"
+                  (click)="viewOriginalDegree(control.value.originaldegree, ri, control.value.locked)"
+                >
+                  วุฒิการศึกษาเดิม
+                </div>
+                <!-- <input
                   class="form-control"
                   style="width: 175px"
                   pInputText
                   type="text"
                   formControlName="originaldegree"
                   [readonly]="control.value.locked"
-                />
+                /> -->
               </td>
             </tr>
           </ng-template>

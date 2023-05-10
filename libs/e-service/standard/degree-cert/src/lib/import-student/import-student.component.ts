@@ -6,6 +6,7 @@ import {
   CompleteDialogComponent,
 } from '@ksp/shared/dialog';
 import {
+  OriginalDegreeDialogComponent,
   StudentListSubjectComponent,
   TrainingAddressComponent,
 } from '@ksp/uni-service/dialog';
@@ -115,6 +116,7 @@ export class ImportStudentComponent implements OnInit {
             user.index = index;
             user.subjects = JSON.parse(user.subjects);
             user.teachingpracticeschool = JSON.parse(user.teachingpracticeschool);
+            user.originaldegree = JSON.parse(user.originaldegree);
             this.user.push(this.edituser(user));
           });
           this.requestNo = response.requestno;
@@ -250,6 +252,23 @@ export class ImportStudentComponent implements OnInit {
       if (res) {
         this.user.at(index).patchValue({
           subjects: res,
+        });
+      }
+    });
+  }
+
+  viewOriginalDegree(originalDegreeInfo: any, index: any) {
+    const dialogRef = this.dialog.open(OriginalDegreeDialogComponent, {
+      width: '600px',
+      data: {
+        ...originalDegreeInfo,
+        disableAll: true
+      },
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        this.user.at(index).patchValue({
+          originaldegree: res,
         });
       }
     });
