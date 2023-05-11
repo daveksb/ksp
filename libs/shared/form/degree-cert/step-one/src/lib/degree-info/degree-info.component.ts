@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { KspFormBaseComponent, ListData } from '@ksp/shared/interface';
-import { nameEnPattern, nameThPattern, providerFactory, validatorMessages } from '@ksp/shared/utility';
+import { nameEnPattern, nameThPattern, patternEnAndSpecial, patternThAndSpecial, providerFactory, validatorMessages } from '@ksp/shared/utility';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 @UntilDestroy()
@@ -22,10 +22,10 @@ export class DegreeInfoComponent
     degreeType: [],
     courseYear: [],
     courseName: [],
-    degreeNameThFull: ['', Validators.pattern(nameThPattern)],
-    degreeNameEnFull: ['', Validators.pattern(nameEnPattern)],
-    degreeNameThShort: ['', Validators.pattern(nameThPattern)],
-    degreeNameEnShort: ['', Validators.pattern(nameEnPattern)],
+    degreeNameThFull: ['', Validators.pattern(patternThAndSpecial)],
+    degreeNameEnFull: ['', Validators.pattern(patternEnAndSpecial)],
+    degreeNameThShort: ['', Validators.pattern(patternThAndSpecial)],
+    degreeNameEnShort: ['', Validators.pattern(patternEnAndSpecial)],
     courseType: [],
     courseStatus: [],
     courseApproveTime: [],

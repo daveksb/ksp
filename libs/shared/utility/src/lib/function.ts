@@ -418,6 +418,6 @@ export function dateDiff(date1: Date, date2: Date) {
 }
 
 export function toUpperCaseName(character: any) {
-  const upperChar = character ? character[0].toUpperCase() + character.slice(1) : '';
+  const upperChar = character ? character.toUpperCase() : '';
   return upperChar;
 }

@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-between align-items-center">
+  <div class="box-header">วุฒิการศึกษาเดิม</div>
+  <i class="bi bi-x-lg text-primary" role="button" matDialogClose></i>
+</div>
+<div class="row mb-3 mt-3">
+  <div class="col">
+    <label>วุฒิการศึกษา</label>
+    <input
+      type="text"
+      class="form-control"
+      [(ngModel)]="degreeData.originaldegree"
+      [readonly]="disabledField"
+    />
+  </div>
+</div>
+<div class="d-flex justify-content-end mt-3">
+  <button
+    matDialogClose
+    type="button"
+    class="btn border-primary text-primary"
+    *ngIf="!data.disableAll"
+  >
+    ยกเลิก
+  </button>
+  <button 
+    (click)="save()" 
+    type="button" 
+    class="btn btn-primary ms-2"
+    *ngIf="!data.disableAll">
+    บันทึก
+  </button>
+  <button
+    matDialogClose
+    type="button"
+    class="btn border-primary text-primary"
+    *ngIf="data.disableAll"
+  >
+    ปิด
+  </button>
+</div>
