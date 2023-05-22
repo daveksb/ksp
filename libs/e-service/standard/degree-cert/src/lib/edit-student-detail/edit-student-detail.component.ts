@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RequestPageType } from '@ksp/shared/constant';
+import { RequestPageType, studentStatusList } from '@ksp/shared/constant';
 import { FileGroup } from '@ksp/shared/interface';
 import {
   CompleteDialogComponent,
@@ -14,9 +14,12 @@ import {
   UniInfoService,
   UniRequestService,
 } from '@ksp/shared/service';
-import { getCookie, mapMultiFileInfo, parseJson, thaiDate } from '@ksp/shared/utility';
+import { getCookie, idCardPattern, mapMultiFileInfo, nameEnPattern, nameThPattern, parseJson, phonePattern, thaiDate, validatorMessages } from '@ksp/shared/utility';
 import { EMPTY, Observable, switchMap } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
+import moment from 'moment';
+import { OriginalDegreeDialogComponent, StudentListSubjectComponent, TrainingAddressComponent } from '@ksp/uni-service/dialog';
+import { FormAddressTableComponent } from '@ksp/shared/form/others';
 
 @Component({
   selector: 'e-service-edit-student-detail',
@@ -33,7 +36,6 @@ export class EserviceEditStudentDetailComponent implements OnInit {
   });
   oldValue: any;
   formData = this.fb.group({
-    editStudent: [],
     verify: [
       {
         detail: null,
@@ -85,6 +87,14 @@ export class EserviceEditStudentDetailComponent implements OnInit {
   requesttype = 8;
   requestid = '';
   systemtype: any;
+  formStudent = this.fb.group({
+    user: this.fb.array([]),
+  });
+  submitted = false;
+  validatorMessages = validatorMessages;
+  studentStatusList = studentStatusList;
+  prefixList$!: Observable<any>;
+  nationalityList$!: Observable<any>;
 
   constructor(
     private router: Router,
@@ -104,6 +114,8 @@ export class EserviceEditStudentDetailComponent implements OnInit {
     this.route.paramMap.subscribe((res) => {
       this.requestid = res.get('id') || '';
     });
+    this.prefixList$ = this.generalInfoService.getPrefix();
+    this.nationalityList$ = this.generalInfoService.getNationality();
     this.getRequestById();
   }
 
@@ -112,14 +124,20 @@ export class EserviceEditStudentDetailComponent implements OnInit {
       .getRequestEditAdmissionById({id: this.requestid})
       .subscribe((response: any) => {
         if (response) {
-          this.requestDate = thaiDate(new Date(response.requestdata));
+          console.log(response);
+          this.requestDate = thaiDate(new Date(response.requestdate));
           this.requestNo = response.requestno;
           this.requestid = response.id;
           this.systemtype = response.systemtype;
           const requestdata = parseJson(response.admissionlist);
-          this.studentDetail.patchValue(requestdata.studentdetail);
+          console.log(requestdata)
           this.uploadFileList = JSON.parse(requestdata.files);
-          this.formData.controls.editStudent.patchValue(requestdata.editform)
+          const dataEdit = requestdata.admissionlist[0];
+          console.log(dataEdit);
+          dataEdit.originaldegree = JSON.parse(dataEdit.originaldegree);
+          // dataEdit. = JSON.parse(dataEdit.originaldegree);
+          dataEdit.subjects = JSON.parse(dataEdit.subjects);
+          this.user.push(this.edituser(dataEdit));
         } else {
           this.data = false;
           this.isNotFound = true;
@@ -155,6 +173,7 @@ export class EserviceEditStudentDetailComponent implements OnInit {
         switchMap((res) => {
           if (res) {
             const verifyform = this.formData.controls.verify.value as any;
+            console.log(verifyform)
             const payloadKspUpdate = {
               requestid: this.requestid,
               process: '2',
@@ -166,6 +185,7 @@ export class EserviceEditStudentDetailComponent implements OnInit {
             this.requestService
             .requestProcessInsert(payloadKspUpdate)
             .subscribe((response: any) => {
+              console.log(verifyform)
               if (verifyform.result == "2") {
                 this.updateAdmission();
               } else {
@@ -186,18 +206,11 @@ export class EserviceEditStudentDetailComponent implements OnInit {
   }
 
   updateAdmission() {
-    const studentdata = this.studentDetail.value;
-    const editdetail = this.formData.controls.editStudent.value as any;
-    const payloadUpdateData = {
-      id: studentdata.id,
-      prefixth: editdetail.prefixTh ? editdetail.prefixTh : editdetail.oldPrefixTh,
-      prefixen: editdetail.prefixEn ? editdetail.prefixEn : editdetail.oldPrefixEn,
-      firstnameth: editdetail.firstnameTh ? editdetail.firstnameTh : editdetail.oldFirstnameTh,
-      firstnameen: editdetail.firstnameEn ? editdetail.firstnameEn : editdetail.oldFirstnameEn,
-      lastnameth: editdetail.lastnameTh ? editdetail.lastnameTh : editdetail.oldLastnameTh,
-      lastnameen: editdetail.lastnameEn ? editdetail.lastnameEn : editdetail.oldLastnameEn,
-      passportno: editdetail.passportNo ? editdetail.passportNo : editdetail.oldPassportNo
-    }
+    const payloadUpdateData = this.user.value[0] as any;
+    payloadUpdateData.address = JSON.stringify(payloadUpdateData.address);
+    payloadUpdateData.originaldegree = JSON.stringify(payloadUpdateData.originaldegree);
+    payloadUpdateData.teachingpracticeschool = JSON.stringify(payloadUpdateData.teachingpracticeschool);
+    payloadUpdateData.subjects = JSON.stringify(payloadUpdateData.subjects);
     this.requestService.updateAdmission(payloadUpdateData).subscribe((res: any) => {
       this.onCompleted(this.requestNo);
     });
@@ -214,6 +227,194 @@ export class EserviceEditStudentDetailComponent implements OnInit {
     completeDialog.componentInstance.completed.subscribe((res) => {
       if (res) {
         this.cancel();
+      }
+    });
+  }
+
+  edituser(data: any) {
+    const userAddress = JSON.parse(data.address);
+    return this.fb.group({
+      id: [data.id],
+      checked: [data.checked ? data.checked : false],
+      locked: [true],
+      index: [0],
+      no: [1],
+      admissiondate: [moment(data.admissiondate).format('YYYY-MM-DD')],
+      idcardno: [
+        data.idcardno, [Validators.required, Validators.pattern(idCardPattern)]
+      ],
+      passportno: [data.passportno],
+      nationality: [
+        data.nationality, Validators.required
+      ],
+      studentno: [
+        data.studentno, Validators.required
+      ],
+      studentstatus: [
+        data.studentstatus, Validators.required
+      ],
+      originaldegree: [
+        data.originaldegree,
+        Validators.required
+      ],
+      email: [
+        data.email,
+        Validators.required
+      ],
+      prefixth: [
+        data.prefixth,
+        Validators.required
+      ],
+      firstnameth: [
+        data.firstnameth, [Validators.required, Validators.pattern(nameThPattern)]
+      ],
+      lastnameth: [
+        data.lastnameth, [Validators.required, Validators.pattern(nameThPattern)]
+      ],
+      prefixen: [
+        data.prefixen, Validators.required
+      ],
+      firstnameen: [
+        data.firstnameen, [Validators.required, Validators.pattern(nameEnPattern)]
+      ],
+      middlenameen: [
+        data.middlenameen, [Validators.pattern(nameEnPattern)]
+      ],
+      lastnameen: [
+        data.lastnameen, [Validators.required, Validators.pattern(nameEnPattern)]
+      ],
+      phone: [
+        data.phone, [Validators.required, Validators.pattern(phonePattern)]
+      ],
+      birthdate: [
+        data.birthdate, Validators.required
+      ],
+      address: userAddress ? this.fb.group({
+        addressInfo: [
+          {
+            location: userAddress?.location || null,
+            housenumber: userAddress?.housenumber || null,
+            villagenumber: userAddress?.villagenumber || null,
+            lane: userAddress?.lane || null,
+            road: userAddress?.road || null,
+            zipcode: userAddress?.zipcode || null,
+            provinceid: userAddress?.provinceid || null,
+            districtid: userAddress?.districtid || null,
+            subdistrictid: userAddress?.subdistrictid || null,
+            remark: userAddress?.remark || null,
+          },
+        ],
+      }) : this.fb.group({ addressInfo: [] }),
+      approveno: [
+        data.approveno,
+        Validators.required
+      ],
+      graduationdate: [
+        data.graduationdate,
+        Validators.required
+      ],
+      approvedate: [
+        data.approvedate,
+        Validators.required
+      ],
+      subjects: data.subjects
+        ? [
+            {
+              subject1: data.subjects.subject1,
+              subject2: data.subjects.subject2,
+            },
+            Validators.required,
+          ]
+        : [
+            { subject1: '', subject2: '' },
+            Validators.required
+          ],
+      teachingpracticeschool: [data.teachingpracticeschool],
+    });
+  }
+
+  get user(): FormArray {
+    return this.formStudent.get('user') as FormArray;
+  }
+
+  searchAddress(index: any, disable: boolean) {
+    const dialogRef = this.dialog.open(TrainingAddressComponent, {
+      height: '100vh',
+      width: '75vw',
+      position: {
+        top: '0px',
+        right: '0px',
+      },
+      data: {
+        teachingpracticeschool:
+          this.user.at(index).value.teachingpracticeschool ?? null ,
+        disableAll: disable ?? false,
+      },
+    });
+    dialogRef.afterClosed().subscribe((response: any) => {
+      if (response) {
+        this.user.at(index).patchValue({
+          teachingpracticeschool: response,
+        });
+      }
+    });
+  }
+
+  autoScroll() {
+    setTimeout(() => {
+      const doc = document.getElementById('address-info');
+      if (doc != null) {
+        doc.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+      }   
+    }, 0);
+  }
+
+  viewAdress(address: any) {
+    this.dialog.open(FormAddressTableComponent, {
+      width: '75vw',
+      height: '100vw',
+      position: {
+        top: '0px',
+        right: '0px',
+      },
+      data: {
+        mode: 'view',
+        address: address.addressInfo || {},
+        isDialog: true,
+      },
+    });
+  }
+  
+  insertSubject(subjectInfo: any, index: any, disable: boolean) {
+    const dialogRef = this.dialog.open(StudentListSubjectComponent, {
+      width: '600px',
+      data: {
+        ...subjectInfo,
+        disableAll: disable ?? false
+      },
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        this.user.at(index).patchValue({
+          subjects: res,
+        });
+      }
+    });
+  }
+
+  viewOriginalDegree(originalDegreeInfo: any, index: any, disable: boolean) {
+    const dialogRef = this.dialog.open(OriginalDegreeDialogComponent, {
+      width: '600px',
+      data: {
+        ...originalDegreeInfo,
+        disableAll: disable ?? false
+      },
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        this.user.at(index).patchValue({
+          originaldegree: res,
+        });
       }
     });
   }

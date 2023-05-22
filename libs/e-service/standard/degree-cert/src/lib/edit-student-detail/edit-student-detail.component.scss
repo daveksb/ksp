@@ -2,3 +2,19 @@
   text-decoration: underline;
   cursor: pointer;
 }
+
+.box__contaner {
+  background-color: #f4faff;
+}
+
+input[readonly] {
+  background-color: #e9ecef;
+}
+
+.invalid {
+  border-color: red;
+}
+
+.table-student td {
+  vertical-align: text-top;
+}
