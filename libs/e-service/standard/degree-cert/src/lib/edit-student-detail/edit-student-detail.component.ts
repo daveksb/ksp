@@ -137,6 +137,7 @@ export class EserviceEditStudentDetailComponent implements OnInit {
           dataEdit.originaldegree = JSON.parse(dataEdit.originaldegree);
           // dataEdit. = JSON.parse(dataEdit.originaldegree);
           dataEdit.subjects = JSON.parse(dataEdit.subjects);
+          dataEdit.teachingpracticeschool = JSON.parse(dataEdit.teachingpracticeschool);
           this.user.push(this.edituser(dataEdit));
         } else {
           this.data = false;
@@ -207,7 +208,7 @@ export class EserviceEditStudentDetailComponent implements OnInit {
 
   updateAdmission() {
     const payloadUpdateData = this.user.value[0] as any;
-    payloadUpdateData.address = JSON.stringify(payloadUpdateData.address);
+    payloadUpdateData.addressinfo = JSON.stringify(payloadUpdateData.address);
     payloadUpdateData.originaldegree = JSON.stringify(payloadUpdateData.originaldegree);
     payloadUpdateData.teachingpracticeschool = JSON.stringify(payloadUpdateData.teachingpracticeschool);
     payloadUpdateData.subjects = JSON.stringify(payloadUpdateData.subjects);
@@ -310,11 +311,11 @@ export class EserviceEditStudentDetailComponent implements OnInit {
         Validators.required
       ],
       graduationdate: [
-        data.graduationdate,
+        moment(data.graduationdate).format('YYYY-MM-DD'),
         Validators.required
       ],
       approvedate: [
-        data.approvedate,
+        moment(data.approvedate).format('YYYY-MM-DD'),
         Validators.required
       ],
       subjects: data.subjects
