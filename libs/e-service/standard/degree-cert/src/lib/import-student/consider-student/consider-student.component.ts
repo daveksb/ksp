@@ -74,6 +74,7 @@ export class ConsiderStudentComponent implements OnInit {
         this.payload.studentlist.forEach((student: any) => {
           student.addressinfo = JSON.stringify(student.address);
           student.subjects = JSON.stringify(student.subjects);
+          student.originaldegree = JSON.stringify(student.originaldegree);
           student.unidegreecertid = this.payload.payloaddetail.unidegreecertid;
           student.unirequestadmissionid = this.payload.payloaddetail.id;
           student.planyear = this.payload.payloaddetail.planyear.toString();
@@ -105,7 +106,6 @@ export class ConsiderStudentComponent implements OnInit {
             student.birthdate = null;
           }
           if (!student.approveno) student.approveno = null;
-          delete student.middlenameen;
           delete student.address;
           delete student.checked;
           delete student.index;
@@ -158,6 +158,7 @@ export class ConsiderStudentComponent implements OnInit {
   }
 
   save() {
+    console.log(this.payload.studentlist);
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {

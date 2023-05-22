@@ -35,7 +35,7 @@ export class TrainingAddressComponent {
     private generalInfoService: GeneralInfoService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    if (this.data.teachingpracticeschool.length) {
+    if (this.data.teachingpracticeschool && this.data.teachingpracticeschool.length) {
       this.setData(this.data.teachingpracticeschool);
     } else {
       this.addresses.push(this.teachingAddressForm);

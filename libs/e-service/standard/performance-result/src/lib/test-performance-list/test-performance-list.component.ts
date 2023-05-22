@@ -119,12 +119,7 @@ export class TestPerformanceListComponent extends KspPaginationComponent impleme
           const findType = this.universityTypeList.find(type => { return data.unitype == type.value });
           data.unitypename = findType ? findType.label : '';
           data.createdate = data.createdate ? stringToThaiDate(data.createdate) : '';
-          data.studentlist = data.studentlist ? JSON.parse(data.studentlist).map((data: any)=>{
-            // data.admissiondate = data.admissiondate ? stringToThaiDate(data.admissiondate) : '';
-            // console.log(data.importdate)
-            // data.importdate = data.importdate ? thaiDate() : '';
-            return data;
-          }) : [];
+          data.studentlist = data.studentlist ? JSON.parse(data.studentlist) : [];
           return data;
         });
       } else {
