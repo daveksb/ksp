@@ -27,3 +27,5 @@ export * from './lib/activity-lecture-register/activity-lecture-register.compone
 export * from './lib/standard-test-pass/standard-test-pass.component';
 
 export * from './lib/standard-train-pass/standard-train-pass.component';
+
+export * from './lib/exp-inp/exp-inp.component';

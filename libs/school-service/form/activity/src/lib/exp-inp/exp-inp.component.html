@@ -1,0 +1,140 @@
+<form [formGroup]="form">
+    <div class="row justify-content-end">
+        <div class="col-md-6">
+          <div class="row align-items-baseline">
+            <div class="col-md-4 text-md-end">
+              <label class="form-label">รวมประสบการณ์</label>
+            </div>
+            <div class="col-md-4 d-flex mb-2 align-items-center">
+              <input class="form-control" type="text" [value]="sumYear" disabled />
+              <label class="mx-2 form-label">ปี</label>
+            </div>
+            <div class="col-md-4 d-flex mb-2 align-items-center">
+              <input class="form-control" type="text" [value]="sumMonth" disabled />
+              <label class="ms-2 form-label">เดือน</label>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <ng-container formArrayName="workInfo">
+      <ng-container *ngFor="let DegreeForm of workInfo.controls; let i = index">
+        <ng-container [formGroupName]="i">
+          <div class="border rounded px-3 py-2" [ngClass]="i > 0 ? 'mt-3' : 'mt-0'">
+
+            <div class="d-flex justify-content-end" *ngIf="i > 0">
+              <i class="bi bi-x-circle-fill text-danger" (click)="deleteFormArray(workInfo, i)" role="button"></i>
+            </div>
+
+            <!-- Row 1  -->
+            <div class="row">
+              <div class="col-md-6 mb-2">
+                <label class="form-label required">สังกัด</label>
+                <select class="form-select" formControlName="affiliation">
+                  <option value="null" selected hidden disabled>
+                    กรุณาเลือก
+                  </option>
+                  <option
+                    *ngFor="let bureau of bureaus"
+                    [value]="bureau?.bureauId"
+                  >
+                    {{ bureau?.bureauName }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-6 mb-2">
+                <label class="form-label required">ชื่อหน่วยงาน/สถานศึกษา</label>
+                <input type="text" class="form-control" formControlName="schoolname" (click)="searchSchool($event.target)" [attr.grpind]="i" />
+              </div>
+            </div>
+
+            <!-- Row 2  -->
+            <div class="row">
+              <div class="col-md-6 mb-2">
+                <label class="form-label required">ตำแหน่ง</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  formControlName="position"
+                />
+              </div>
+              <div class="col-md-3 mb-2">
+                <label class="form-label required">ระหว่างวันที่</label>
+                <div class="d-flex align-items-center">
+                  <input
+                    matInput
+                    [matDatepicker]="picker"
+                    autocomplete="off"
+                    class="form-control form-date"
+                    formControlName="startDate"
+                    placeholder="วว/ดด/ปปปป"
+                  />
+                  <mat-datepicker-toggle
+                    class="button-date"
+                    matSuffix
+                    [for]="picker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </div>
+              </div>
+              <div class="col-md-3 mb-2">
+                <label class="form-label required">ถึงวันที่</label>
+                <div class="d-flex align-items-center">
+                  <input
+                    matInput
+                    [matDatepicker]="picker2"
+                    autocomplete="off"
+                    class="form-control form-date"
+                    formControlName="endDate"
+                    placeholder="วว/ดด/ปปปป"
+                  />
+                  <mat-datepicker-toggle
+                    class="button-date"
+                    matSuffix
+                    [for]="picker2"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+                </div>
+              </div>
+            </div>
+            <!-- Row 3  -->
+            <div class="row">
+              <div class="col-md-3 mb-2">
+                <label class="form-label">รวมเวลา</label>
+                <div class="d-flex align-items-center">
+                  <input
+                    class="form-control"
+                    type="text"
+                    [value]="sum[i][0]"
+                    disabled
+                  />
+                  <label class="mx-2 form-label">ปี</label>
+                </div>
+              </div>
+  
+              <div class="col-md-3 mb-2">
+                <label class="form-label"></label>
+                <div class="d-flex align-items-center">
+                  <input
+                    class="form-control"
+                    type="text"
+                    [value]="sum[i][1]"
+                    disabled
+                  />
+                  <label class="mx-2 form-label">เดือน</label>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+    <div class="d-flex justify-content-end mt-3" *ngIf="mode === 'edit'">
+      <ksp-add-row-button class="text-primary" (addRowClick)="addFormArray(workInfo)">
+        เพิ่ม
+      </ksp-add-row-button>
+    </div>
+
+</form>
