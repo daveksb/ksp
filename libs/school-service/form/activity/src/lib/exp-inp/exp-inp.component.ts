@@ -1,20 +1,23 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit} from '@angular/core';
+import { Component, EventEmitter, OnInit, Input, Output} from '@angular/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { Validators, FormArray, FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 // ------------------------------------------------------------------------------------------------------
-import { dateDiff } from '@ksp/shared/utility';
+import { dateDiff, providerFactory } from '@ksp/shared/utility';
 import { AddRowButtonComponent } from '@ksp/shared/ui';
-import { KspFormBaseComponent } from '@ksp/shared/interface';
+import { KspFormBaseComponent, Bureau, SchInfo } from '@ksp/shared/interface';
+import { UniversitySearchComponent } from '@ksp/shared/search';
 // ------------------------------------------------------------------------------------------------------
 @Component({
     selector: 'ksp-exp-inp',
     imports: [ CommonModule, 
-               FormsModule, ReactiveFormsModule, 
+               FormsModule, ReactiveFormsModule,
                MatDatepickerModule,
-               AddRowButtonComponent 
+               AddRowButtonComponent
              ],
     standalone : true,
+    providers: providerFactory(ExperienceInputComponent),
     templateUrl: './exp-inp.component.html',
     styleUrls: ['./exp-inp.component.css']
 })
@@ -23,8 +26,11 @@ import { KspFormBaseComponent } from '@ksp/shared/interface';
 export class ExperienceInputComponent extends KspFormBaseComponent implements OnInit
 {
     // Decoration -----------------------------------------
-    @Input() bureaus: any[] = [];
+    @Input() searchType = '';
     @Input() institutions: any[] = [];
+    @Input() bureaus: any[] = [];
+    @Input() bureauList: Bureau[] | null = [];
+    @Output() selectedUniversity = new EventEmitter<SchInfo>();
 
     // Override -------------------------------------------
     override form = this.fb.group({
@@ -57,11 +63,13 @@ export class ExperienceInputComponent extends KspFormBaseComponent implements On
     }
 
     // Property -------------------------------------------
-    sum: number[][] = [];
+    school: any;
+       sum: number[][] = [];
+
     dateDiff = dateDiff;
 
     // Constructor ----------------------------------------
-    constructor(private fb: FormBuilder) {
+    constructor(public dialog: MatDialog, private fb: FormBuilder) {
         super();
         this.subscriptions.push(this.onUpdateForm());
     }
@@ -123,5 +131,32 @@ export class ExperienceInputComponent extends KspFormBaseComponent implements On
               return [0, 0];
             }
           });
+    }
+
+    searchSchool(target:any) {
+        const dialog = this.dialog.open(UniversitySearchComponent, {
+          width: '1200px',
+          height: '100vh',
+          position: {
+            top: '0px',
+            right: '0px',
+          },
+          data: {
+            searchType: this.searchType,
+            subHeader: 'กรุณาเลือกหน่วยงาน/สถานศึกษาที่ท่านสังกัด'
+          },
+        });
+    
+        dialog.afterClosed().subscribe((res: SchInfo) => {
+          if (res) {
+            console.log(res);
+            console.log(target);
+            console.log(this.workInfo.get('schoolname'));
+            
+            target.value = res.schoolname;
+            this.workInfo.get('schoolname')?.setValue('Hello');
+            this.selectedUniversity.emit(res);
+          }
+        });
     }
 }
