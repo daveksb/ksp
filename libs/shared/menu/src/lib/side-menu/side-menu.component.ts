@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { KspParam, MenuConfig } from '@ksp/shared/interface';
-import { deleteCookie } from '@ksp/shared/utility';
+import { deleteCookie, getCookie } from '@ksp/shared/utility';
 
 @Component({
   selector: 'ksp-side-menu',
@@ -13,8 +13,14 @@ export class SideMenuComponent {
   @Input() showHeader = false;
   @Input() name = '';
   @Input() lastLogin = '';
+  isIframe = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    const iframeToken = getCookie('iframeToken');
+    if (iframeToken == 'TRUE') {
+      this.isIframe = true;
+    }
+  }
 
   navigateUrl(url: string, queryParams: KspParam | undefined) {
     if (queryParams) {
@@ -28,6 +34,7 @@ export class SideMenuComponent {
 
   logout() {
     deleteCookie('userToken');
+    deleteCookie('iframeToken');
     this.router.navigate(['/']);
   }
 }

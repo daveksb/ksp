@@ -85,6 +85,10 @@ export class FormRegisterRequesterInfoComponent
     this.form.patchValue({ firstnameen: toUpperCaseName(event.target.value) });
   }
 
+  uppercaseChangeLast(event:any) {
+    this.form.patchValue({ lastnameen: toUpperCaseName(event.target.value) });
+  }
+
   get idCardNo() {
     return this.form.controls.idcardno;
   }

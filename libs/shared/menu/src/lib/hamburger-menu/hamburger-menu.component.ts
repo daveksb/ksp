@@ -28,6 +28,7 @@ export class HamburgerMenuComponent {
 
   logout() {
     deleteCookie('userToken');
+    deleteCookie('iframeToken');
     this.router.navigate(['/']);
   }
 }

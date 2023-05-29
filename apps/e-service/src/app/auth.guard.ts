@@ -31,6 +31,7 @@ export class AuthGuard implements CanActivate {
   ): Observable<boolean> {
     if (next.queryParams['token']) {
       setCookie('userToken', next.queryParams['token'] || '', 1);
+      setCookie('iframeToken', 'TRUE', 1);
       return of(true);
     } else {
       return this.checkAuth();

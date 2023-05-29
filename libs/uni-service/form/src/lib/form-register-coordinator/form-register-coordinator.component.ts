@@ -69,6 +69,9 @@ export class FormRegisterCoordinatorInfoComponent extends KspFormBaseComponent {
     this.form.patchValue({ firstnameen: toUpperCaseName(event.target.value) });
   }
 
+  uppercaseChangeLast(event:any) {
+    this.form.patchValue({ lastnameen: toUpperCaseName(event.target.value) });
+  }
 
   get firstNameTh() {
     return this.form.controls.firstnameth;
