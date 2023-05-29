@@ -130,4 +130,11 @@ export class UniRequestService {
       tokenkey: getCookie('userToken'),
     });
   }
+
+  kspSendEmailUni(form: any): Observable<any> {
+    return this.http.post(`https://ksp-uniservice.ksp.or.th/mail/kspsendmail_uni.php`, {
+      ...form,
+      tokenkey: getCookie('userToken'),
+    });
+  }
 }

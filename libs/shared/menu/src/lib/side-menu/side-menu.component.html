@@ -1,12 +1,12 @@
-<div class="sidebar-header" *ngIf="!showHeader">
+<div class="sidebar-header" *ngIf="!showHeader && !isIframe">
   <div class="d-flex justify-content-start">
     <img src="/assets/images/logo-sidenav.png" />
   </div>
 </div>
-<div class="sidebar-header-2" *ngIf="showHeader">
+<div class="sidebar-header-2" *ngIf="showHeader && !isIframe">
   <img src="/assets/images/nav-img-780.png" class="h-100 w-auto" />
 </div>
-<nav id="sidebar">
+<nav id="sidebar" *ngIf="!isIframe">
   <div *ngIf="showHeader" class="sidebar-header-profile">
     <div
       class="profile__img"
