@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, OnInit, Input, Output} from '@angular/core';
+import { Component,  OnInit, Input } from '@angular/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { Validators, FormArray, FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -30,7 +30,6 @@ export class ExperienceInputComponent extends KspFormBaseComponent implements On
     @Input() institutions: any[] = [];
     @Input() bureaus: any[] = [];
     @Input() bureauList: Bureau[] | null = [];
-    @Output() selectedUniversity = new EventEmitter<SchInfo>();
 
     // Override -------------------------------------------
     override form = this.fb.group({
@@ -149,13 +148,11 @@ export class ExperienceInputComponent extends KspFormBaseComponent implements On
     
         dialog.afterClosed().subscribe((res: SchInfo) => {
           if (res) {
-            console.log(res);
-            console.log(target);
-            console.log(this.workInfo.get('schoolname'));
-            
+            const grpind =  parseInt( target.getAttribute('grpind') )
+
+            // Assign to element
             target.value = res.schoolname;
-            this.workInfo.get('schoolname')?.setValue('Hello');
-            this.selectedUniversity.emit(res);
+            this.workInfo.controls[grpind].get('affiliation')?.setValue(res.bureauid);
           }
         });
     }

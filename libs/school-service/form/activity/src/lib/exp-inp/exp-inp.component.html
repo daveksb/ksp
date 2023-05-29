@@ -44,7 +44,7 @@
               </div>
               <div class="col-md-6 mb-2">
                 <label class="form-label required">ชื่อหน่วยงาน/สถานศึกษา</label>
-                <input type="text" class="form-control" formControlName="schoolname" (click)="searchSchool($event.target)"/>
+                <input type="text" class="form-control" formControlName="schoolname" (click)="searchSchool($event.target)" [attr.grpind]="i" />
               </div>
             </div>
 
