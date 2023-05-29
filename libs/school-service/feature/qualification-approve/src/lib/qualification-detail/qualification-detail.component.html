@@ -237,12 +237,12 @@
               <label class="box-header">ด้านการสอน</label>
             </div>
             <ng-container *ngIf="experienceSelected[1]">
-              <ksp-qualification-experience-info
-                formControlName="exp1"
-                [bureaus]="bureau$ | async"
-                [mode]="mode"
-              ></ksp-qualification-experience-info
-            ></ng-container>
+                <ksp-exp-inp
+                  formControlName="exp1"
+                  [bureaus]="bureau$ | async"
+                  [mode]="mode">
+                </ksp-exp-inp>
+            </ng-container>
             <div class="d-flex align-items-center">
               <input
                 type="checkbox"

@@ -10,6 +10,7 @@ import { SchoolContainerPageComponent } from '@ksp/school-service/feature/contai
 import { Route, RouterModule } from '@angular/router';
 import { RequestNoPipe } from '@ksp/shared/pipe';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ExperienceInputComponent } from '@ksp/school-service/form/activity';
 
 export const routes: Route[] = [
   {
@@ -39,7 +40,8 @@ export const routes: Route[] = [
     MatTabsModule,
     BottomNavComponent,
     RequestNoPipe,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    ExperienceInputComponent
   ],
   declarations: [QualificationDetailComponent],
   exports: [QualificationDetailComponent],
