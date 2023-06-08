@@ -17,7 +17,7 @@ export class SchoolRequestService {
 
   getTempLicense(requestid: string | null): Observable<SchTempLicense> {
     return this.http.post<SchTempLicense>(
-      `${environment.apiUrl}/kspstaff/schtemplicenseselectrequestid`,
+      `${environment.apiUrl}/ksprequestprocess_systemtype.php`,
       {
         requestid,
       }

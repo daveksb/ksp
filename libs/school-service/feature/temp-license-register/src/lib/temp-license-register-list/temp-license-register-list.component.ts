@@ -71,7 +71,7 @@ export class TempLicenseRegisterListComponent implements AfterViewInit {
 
   getTempLicense(request: KspRequest) {
     this.requestService.getTempLicense(request.id).subscribe((res) => {
-      //console.log('temp license = ', res);
+      console.log('temp license = ', res);
       this.genPdf(res);
     });
   }
@@ -222,6 +222,7 @@ export class TempLicenseRegisterListComponent implements AfterViewInit {
         const data = res.map((i) => {
 
           const license = JSON.parse(i.detail || '{}');
+          console.log( i )
           return {
             ...i,
             ...{
