@@ -215,17 +215,17 @@ export class TempLicenseRegisterListComponent implements AfterViewInit {
       row: '500',
     };
 
-    this.requestService.schSearchRequest(payload).subscribe((res) => {
+    const resp = this.requestService.schSearchRequest(payload)
+    resp?.subscribe((res) => {
       // search without showing result do automatically after load
-
       if (res && res.length) {
-        //console.log('res = ', res);
         const data = res.map((i) => {
+
           const license = JSON.parse(i.detail || '{}');
           return {
             ...i,
             ...{
-              licenseDate: license?.licenseDate,
+              licenseDate: license?.checkdetail?.approveDate,   // Get approveDate from checkdetail
             },
           };
         });
