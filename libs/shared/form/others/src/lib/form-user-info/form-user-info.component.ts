@@ -48,6 +48,7 @@ export class FormUserInfoComponent
   @Input() requiredIdCardNo = true;
   @Input() isHasSixtiesDate = false;
   @Input() showSearchBtn = false;
+  @Input() lbl_lettertype: string | null = 'ประเภทการยื่น';
 
   public _displayMode = UserInfoFormType.thai;
   @Input()
