@@ -226,10 +226,10 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
             if (emailForm.step1.coordinator && emailForm.step1.coordinator.email) {
               this.uniRequestService.kspSendEmailUni(
                 {
-                  fromName: 'ksplicense',
+                  fromname: 'ksplicense',
                   subject: 'ขอรับรองปริญญาและประกาศนียบัตร',
                   body: `ขอรับรองปริญญาและประกาศนียบัตร เลขที่คำขอ: ${res?.requestno}`,
-                  emailAddress: emailForm.step1.coordinator.email
+                  emailaddress: emailForm.step1.coordinator.email
                 }
               ).subscribe((resEmail: any) => {
                 if (res?.returncode == 99) return;
@@ -248,10 +248,10 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
             if (emailForm.step1.coordinator && emailForm.step1.coordinator.email) {
               this.uniRequestService.kspSendEmailUni(
                 {
-                  fromName: 'ksplicense',
+                  fromname: 'ksplicense',
                   subject: 'ขอรับรองปริญญาและประกาศนียบัตร',
                   body: `ขอรับรองปริญญาและประกาศนียบัตร เลขที่คำขอ: ${res?.requestno}`,
-                  emailAddress: emailForm.step1.coordinator.email
+                  emailaddress: emailForm.step1.coordinator.email
                 }
               ).subscribe((resEmail: any) => {
                 if (res?.returncode == 99) return;

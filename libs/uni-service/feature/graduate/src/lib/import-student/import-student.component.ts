@@ -773,12 +773,9 @@ export class ImportStudentComponent implements OnInit {
   }
 
   searchByIdcard(params: any, index: any) {
-    if (params.idcardno || params.passportno) {
+    if (params) {
       const payload = {
-        idcardno: params.idcardno,
-        passportno: params.passportno,
-        offset: 0,
-        row: 10,
+        identity_no: params
       };
       this.uniInfoService.searchSelfStudent(payload).subscribe((response) => {
         if (response.datareturn) {
@@ -786,73 +783,73 @@ export class ImportStudentComponent implements OnInit {
             data.addressinfo = JSON.parse(data.addressinfo);
           });
           this.user.at(index).patchValue({
-            admissiondate: moment().format('YYYY-MM-DD') || null,
-            idcardno: response.datareturn[0].idcardno || null,
-            passportno: response.datareturn[0].passportno || null,
-            nationality: response.datareturn[0].nationality || null,
-            prefixth: response.datareturn[0].prefixth || null,
-            firstnameth: response.datareturn[0].firstnameth || null,
-            lastnameth: response.datareturn[0].lastnameth || null,
-            prefixen: response.datareturn[0].prefixen || null,
-            firstnameen: response.datareturn[0].firstnameen || null,
-            middlenameen: response.datareturn[0].middlenameen || null,
-            lastnameen: response.datareturn[0].lastnameen || null,
-            phone: response.datareturn[0].phone || null,
-            birthdate: response.datareturn[0].birthdate || null,
+            firstnameth: response.first_name_th || null,
+            lastnameth: response.last_name_th || null,
+            firstnameen: response.first_name_en || null,
+            lastnameen: response.last_name_en || null,
+            email: response.email || null,
+            phone: response.phone_number || null,
+            admissiondate: moment().format('YYYY-MM-DD'),
+            passportno: response.passportno || null,
+            nationality: response.nationality || null,
+            prefixth: response.prefixth || null,
+            prefixen: response.prefixen || null,
+            middlenameen: response.middlenameen || null,
+            birthdate: response.birthdate || null,
           });
           this.user
             .at(index)
             .get('address')
-            ?.patchValue(response.datareturn[0].addressinfo ? {
+            ?.patchValue(response.addressinfo ? {
               addressInfo: {
                 location: [
-                  response.datareturn[0].addressinfo
-                    ? response.datareturn[0].addressinfo[0].location
+                  response.addressinfo
+                    ? response.addressinfo.location
                     : null,
                 ],
                 housenumber: [
-                  response.datareturn[0].addressinfo
-                    ? response.datareturn[0].addressinfo[0].houseNo
+                  response.addressinfo
+                    ? response.addressinfo.houseNo
                     : null,
                 ],
                 villagenumber: [
-                  response.datareturn[0].addressinfo
-                    ? response.datareturn[0].addressinfo[0].moo
+                  response.addressinfo
+                    ? response.addressinfo.moo
                     : null,
                 ],
                 lane: [
-                  response.datareturn[0].addressinfo
-                    ? response.datareturn[0].addressinfo[0].alley
+                  response.addressinfo
+                    ? response.addressinfo.alley
                     : null,
                 ],
                 road: [
-                  response.datareturn[0].addressinfo
-                    ? response.datareturn[0].addressinfo[0].houseNo
+                  response.addressinfo
+                    ? response.addressinfo.houseNo
                     : null,
                 ],
                 zipcode: [
-                  response.datareturn[0].addressinfo
-                    ? response.datareturn[0].addressinfo[0].postcode
+                  response.addressinfo
+                    ? response.addressinfo.postcode
                     : null,
                 ],
                 provinceid: [
-                  response.datareturn[0].addressinfo
-                    ? response.datareturn[0].addressinfo[0].province
+                  response.addressinfo
+                    ? response.addressinfo.province
                     : null,
                 ],
                 districtid: [
-                  response.datareturn[0].addressinfo
-                    ? response.datareturn[0].addressinfo[0].amphur
+                  response.addressinfo
+                    ? response.addressinfo.amphur
                     : null,
                 ],
                 subdistrictid: [
-                  response.datareturn[0].addressinfo
-                    ? response.datareturn[0].addressinfo[0].tumbol
+                  response.addressinfo
+                    ? response.addressinfo.tumbol
                     : null,
                 ],
                 remark: [
-                  response.datareturn[0].addressinfo
-                    ? response.datareturn[0].addressinfo[0].remark
+                  response.addressinfo
+                    ? response.addressinfo.remark
                     : null,
                 ],
               },
