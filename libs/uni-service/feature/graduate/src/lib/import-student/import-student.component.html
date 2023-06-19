@@ -490,10 +490,7 @@
                   formControlName="idcardno"
                   (blur)="
                     searchByIdcard(
-                      {
-                        idcardno: idcard.value,
-                        passportno: control.value.passportno
-                      },
+                      idcard.value,
                       control.value.index
                     )
                   "
@@ -517,16 +514,6 @@
                   #passport
                   type="text"
                   formControlName="passportno"
-                  (blur)="
-                    searchByIdcard(
-                      {
-                        idcardno: control.value.idcardno,
-                        passportno: passport.value
-                      },
-                      control.value.index
-                    )
-                  "
-                  (keyup.enter)="passport.blur()"
                   [readonly]="pageType === 'graduateList' || control.value.locked"
                 />
               </td>
