@@ -166,7 +166,7 @@ export class SchoolRequestListComponent implements AfterViewInit, OnInit {
       } else {
         this.getPdfColumnLabel = 'หนังสือแจ้งผล';
       }
-
+      
       if (payload.requesttype === '40') {
         this.getNameColumnLabel = 'ชื่อผลงาน';
       } else {
@@ -1258,7 +1258,7 @@ export const displayedColumns = [
   'updatedate',
   'requestdate',
   'requestpdf',
-  'licensepdf',
+  // 'licensepdf',
 ];
 
 export const displayedColumnsKSP = [
