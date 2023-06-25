@@ -15,7 +15,7 @@ export interface EthicsCustomRoute extends Route {
   data?: EthicsCustomRouteData;
 }
 export class Ethics {
-  //id?: string | null = null;
+  id?: string | null = null;
   ethicsno: string | null = null;
   accuserinfo: string | null = null;
   licenseinfo: string | null = null;

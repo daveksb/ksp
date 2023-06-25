@@ -40,7 +40,7 @@ export class EthicsService {
   }
   searchSelfMyInfo(payload: any): Observable<any> {
     return this.http
-      .post('https://kspapi.oceanicnetwork.net/kspx/ethic/selfmyinfosearch.php', payload)
+      .post(`${environment.shortApiUrl}/kspx/ethic/selfmyinfosearch.php`, payload)
       .pipe(
         shareReplay(),
         map((data: any) => data.datareturn)
@@ -48,7 +48,7 @@ export class EthicsService {
   }
   searchSelfLicense(payload: any): Observable<any> {
     return this.http
-        .post( `https://kspapi.oceanicnetwork.net/kspx/ethic/selfmyinfosearch.php`, payload)
+        .post( `${environment.shortApiUrl}/kspx/ethic/selfmyinfosearch.php`, payload)
         .pipe(
         shareReplay(),
         map((data: any) => data.datareturn)
@@ -56,7 +56,7 @@ export class EthicsService {
   }
   searchEthicssearch(payload: any): Observable<any> {
     return this.http
-      .post('https://kspapi.oceanicnetwork.net/es_ethicssearch.php', payload)
+      .post(`${environment.shortApiUrl}/kspx/ethic/es_ethicssearch_id.php`, payload)
       .pipe(
         shareReplay(),
         map((data: any) => data.datareturn)
@@ -87,12 +87,20 @@ export class EthicsService {
       );
   }
   getEthicsByID(payload: any): Observable<Ethics> {
+    // console.log( "This EthicsById Payload : " , payload );
     return this.http
       .post<Ethics>(
-        `${environment.apiUrl}/e-service/es-ethicsselectbyid`,
+        `${environment.shortApiUrl}/kspx/ethic/es_ethicssearch_id.php`,
         payload
       )
-      .pipe(map((data) => this.formatMyInfo(data)));
+      .pipe(map((data: any) => { 
+        const ethicsArray = data.datareturn as Ethics[]
+        return this.formatMyInfo( ethicsArray.find((rowdata)=>{
+            const rawdata = rowdata
+            return rawdata.id == payload.id 
+        }) as Ethics )
+      }));
+      // .pipe(map((data) => this.formatMyInfo(data)));
   }
   formatMyInfo(info: Ethics): Ethics {
     const dateColumn = [
@@ -128,10 +136,12 @@ export class EthicsService {
       }
       if (jsonColumn.includes(key)) {
         if (info[ethicsKey]) {
-          info[ethicsKey] = atob(info[ethicsKey] as string);
+          info[ethicsKey] = null;
+          // info[ethicsKey] = atob(info[ethicsKey] as string);
         }
       }
     }
+    console.log('Info Here :',info);
     return info;
   }
 }

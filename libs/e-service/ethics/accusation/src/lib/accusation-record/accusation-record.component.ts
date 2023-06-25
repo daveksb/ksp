@@ -30,7 +30,7 @@ import {
 import { providerFactory, thaiDate } from '@ksp/shared/utility';
 import { v4 as uuidv4 } from 'uuid';
 import { Observable } from 'rxjs';
-import { GeneralInfoService , EthicsService } from '@ksp/shared/service';
+import { GeneralInfoService } from '@ksp/shared/service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
@@ -82,11 +82,11 @@ export class AccusationRecordComponent
     accusationassigndate: [],
     accuserinfo: this.fb.array([] as FormGroup[]),
     accusationconsideration: [],
+    id : []
   });
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
-    private service: EthicsService,
     private fb: FormBuilder,
     private generalInfoService: GeneralInfoService
   ) {
