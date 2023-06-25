@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
-import { Ethics, EthicsKey } from '@ksp/shared/interface';
+import { Ethics, EthicsKey , KspAccusationRequest } from '@ksp/shared/interface';
 import { map, Observable, shareReplay } from 'rxjs';
 
 @Injectable({
@@ -40,7 +40,7 @@ export class EthicsService {
   }
   searchSelfMyInfo(payload: any): Observable<any> {
     return this.http
-      .post('https://kspapi.oceanicnetwork.net/selfmyinfosearch.php', payload)
+      .post('https://kspapi.oceanicnetwork.net/kspx/ethic/selfmyinfosearch.php', payload)
       .pipe(
         shareReplay(),
         map((data: any) => data.datareturn)
@@ -48,11 +48,8 @@ export class EthicsService {
   }
   searchSelfLicense(payload: any): Observable<any> {
     return this.http
-      .post(
-        `${environment.apiUrl}/e-service/selflicensesearchidcardno`,
-        payload
-      )
-      .pipe(
+        .post( `https://kspapi.oceanicnetwork.net/kspx/ethic/selfmyinfosearch.php`, payload)
+        .pipe(
         shareReplay(),
         map((data: any) => data.datareturn)
       );

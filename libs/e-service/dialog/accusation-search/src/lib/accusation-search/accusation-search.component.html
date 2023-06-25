@@ -127,29 +127,29 @@
 
   <ng-container matColumnDef="personId">
     <th mat-header-cell *matHeaderCellDef>หมายเลขบัตรประชาชน</th>
-    <td mat-cell *matCellDef="let element">{{ element.idcardno }}</td>
+    <td mat-cell *matCellDef="let element">{{ element.identitynumber }}</td>
   </ng-container>
 
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
     <td mat-cell *matCellDef="let element">
-      {{ element.firstnameth }} {{ element.lastnameth }}
+      {{ element.nameth }} {{ element.lastnameth }}
     </td>
   </ng-container>
 
   <ng-container matColumnDef="organization">
     <th mat-header-cell *matHeaderCellDef>สังกัด</th>
-    <td mat-cell *matCellDef="let element">{{ element.organization }}</td>
+    <td mat-cell *matCellDef="let element">{{ element.workaddressbureauid }}</td>
   </ng-container>
 
   <ng-container matColumnDef="school">
     <th mat-header-cell *matHeaderCellDef>หน่วยงาน/ สถานศึกษา</th>
-    <td mat-cell *matCellDef="let element">{{ element.school }}</td>
+    <td mat-cell *matCellDef="let element">{{ element.workaddressinstitute }}</td>
   </ng-container>
 
   <ng-container matColumnDef="province">
     <th mat-header-cell *matHeaderCellDef>จังหวัด</th>
-    <td mat-cell *matCellDef="let element">{{ element.province }}</td>
+    <td mat-cell *matCellDef="let element">{{ element.workaddressprovinceid }}</td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -194,7 +194,10 @@
     >
       <mat-tab label="ข้อมูลผู้ได้รับหนังสืออนุญาต" class="tab-content">
         <ng-container *ngIf="dataSource.data.length && personSelected">
-          <e-service-person-info></e-service-person-info>
+          <e-service-person-info
+            [identityNo] = "identityNo"
+            [changeUpdate] = personSelected
+          ></e-service-person-info>
         </ng-container>
       </mat-tab>
 

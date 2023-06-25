@@ -107,9 +107,13 @@
 
   <div class="mb-3">
     <mat-tab-group class="tab-group" animationDuration="0ms">
-      <mat-tab label="ข้อมูลผู้ได้รับหนังสืออนุญาต" class="tab-content"
-        ><e-service-person-info></e-service-person-info>
-      </mat-tab>
+        <mat-tab label="ข้อมูลผู้ได้รับหนังสืออนุญาต" class="tab-content">
+              <e-service-person-info 
+                  [identityNo] = "selectId"
+                  [changeUpdate] = "updateStatus"
+              ></e-service-person-info>
+        </mat-tab>
+      
 
       <mat-tab label="ข้อมูลหนังสืออนุญาต">
         <div class="box-header">
