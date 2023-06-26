@@ -9,7 +9,7 @@
   ></ksp-top-nav
 >
 
-<div class="bg-secondary bg-opacity-10 py-2 px-4 full-height">
+<div class="bg-secondary bg-opacity-10 py-2 px-4 full-height full-width-2">
   <div class="box-header">
     รายละเอียดคำขอเปลี่ยนแปลงรายละเอียดรายชื่อผู้เข้าศึกษาและผู้สำเร็จการศึกษา
   </div>
@@ -75,7 +75,7 @@
     </form>
     <br />
 
-    <form [formGroup]="studentDetail" *ngIf="data">
+    <!-- <form [formGroup]="studentDetail" *ngIf="data">
       <div class="bg-light p-3">
         <div class="box-header">ข้อมูลนักศึกษาที่ต้องการเปลี่ยนแปลง</div>
         <div class="row mb-2 mx-5">
@@ -185,33 +185,621 @@
       </div>
 
       <br />
-    </form>
-    <form [formGroup]="formData" *ngIf="data">
-      <ng-container>
-        <div class="bg-light p-3">
-          <div class="mx-5">
-            <ksp-edit-license
-              formControlName="editStudent"
-              [oldValue]="oldValue"
-              [showEditPassport]="true"
-              [prefixList]="prefixList$ | async"
-            ></ksp-edit-license>
-          </div>
+    </form> -->
+    <ng-container *ngIf="data">
+      <div class="bg-light p-3">
+        <div class="box-header">ข้อมูลนักศึกษาที่ต้องการเปลี่ยนแปลง</div>
+        <div class="mt-2">
+          <form [formGroup]="formStudent">
+            <div formArrayName="user">
+              <p-table
+                [value]="user.controls"
+                responsiveLayout="scroll"
+                dataKey="controls.index.value"
+                editMode="row"
+                #dt
+              >
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th
+                      class="p-2 text-nowrap align-text-top"
+                    >
+                      แก้ไข
+                    </th>
+                    <th
+                      class="p-2 text-nowrap align-text-top"
+                    >
+                      ครั้งที่สภาอนุมัติ
+                    </th>
+                    <th
+                      class="p-2 text-nowrap align-text-top"
+                    >
+                      วันที่สภาอนุมัติ
+                    </th>
+                    <th
+                      class="p-2 text-nowrap align-text-top"
+                    >
+                      วันที่จบการศึกษา
+                    </th>
+                    <th
+                      class="p-2 text-nowrap align-text-top"
+                    >
+                      สถานที่ปฏิบัติการสอน
+                    </th>
+                    <th
+                      class="p-2 text-nowrap align-text-top"
+                    >
+                      วันที่เข้าศึกษา
+                    </th>
+      
+                    <th class="p-2 text-nowrap">
+                      เลขบัตรประจำตัวประชาชน / เลขประจำตัวคุรุสภา
+                    </th>
+      
+                    <th class="p-2 text-nowrap align-text-top">
+                      หมายเลขหนังสือเดินทาง
+                    </th>
+                    <th
+                      class="p-2 text-nowrap align-text-top"
+                    >
+                      สัญชาติ
+                    </th>
+                    <th
+                      class="p-2 text-nowrap align-text-top"
+                    >
+                      เลขประจำตัวนักศึกษา
+                    </th>
+                    <th
+                      class="p-2 text-nowrap align-text-top"
+                    >
+                      สถานะนักศึกษา
+                    </th>
+      
+                    <th class="p-2 text-nowrap align-text-top" style="width: 5rem">
+                      คำนำหน้าชื่อ (ภาษาไทย)
+                    </th>
+      
+                    <th class="p-2 text-nowrap align-text-top" style="width: 5rem">
+                      ชื่อ (ภาษาไทย)
+                    </th>
+      
+                    <th class="p-2 text-nowrap align-text-top" style="width: 5rem">
+                      นามสกุล (ภาษาไทย)
+                    </th>
+      
+                    <th class="p-2 text-nowrap align-text-top" style="width: 5rem">
+                      คำนำหน้าชื่อ (ภาษาอังกฤษ)
+                    </th>
+      
+                    <th class="p-2 text-nowrap align-text-top" style="width: 5rem">
+                      ชื่อ (ภาษาอังกฤษ)
+                    </th>
+      
+                    <th class="p-2 text-nowrap align-text-top" style="width: 5rem">
+                      ชื่อกลาง (ภาษาอังกฤษ)
+                    </th>
+      
+                    <th class="p-2 text-nowrap align-text-top" style="width: 5rem">
+                      นามสกุล (ภาษาอังกฤษ)
+                    </th>
+      
+                    <th class="p-2 text-nowrap align-text-top">
+                      เบอร์โทรศัพท์มือถือ
+                    </th>
+                    <th class="p-2 text-nowrap align-text-top">
+                      วัน/เดือน/ปีเกิด(พ.ศ.)
+                    </th>
+                    <th class="p-2 text-nowrap align-text-top">
+                      อีเมล
+                    </th>
+                    <th class="p-2 text-nowrap align-text-top">ที่อยู่</th>
+                    <th
+                      class="p-2 text-nowrap align-text-top"
+                    >
+                      รายวิชา
+                    </th>
+                    <th
+                      class="p-2 text-nowrap align-text-top"
+                    >
+                      วุฒิการศึกษาเดิม
+                    </th>
+                    <th class="p-2 text-nowrap"></th>
+                  </tr>
+                </ng-template>
+                <ng-template
+                  pTemplate="body"
+                  let-control
+                  let-editing="editing"
+                  let-ri="rowIndex"
+                  let-expanded="expanded"
+                >
+                  <tr [formGroupName]="ri">
+      
+                    <td class="text-center">
+                      <input
+                        type="checkbox"
+                        formControlName="checked"
+                        class="form-check-input"
+                      />
+                    </td>
+      
+                    <td class="p-2 text-nowrap">
+                      <input
+                        class="form-control text-center"
+                        style="width: 75px"
+                        pInputText
+                        type="text"
+                        formControlName="approveno"
+                        [readonly]="!control.value.checked"
+                        [ngClass]="{'invalid': submitted && control.get('approveno').invalid}"
+                      />
+                    </td>
+                    <td class="p-2 text-nowrap">
+                      <div class="d-flex align-items-center">
+                        <input
+                          [matDatepicker]="pickerapprovedate"
+                          style="width: 150px"
+                          autocomplete="off"
+                          class="form-control form-date"
+                          formControlName="approvedate"
+                          [readonly]="!control.value.checked"
+                          [ngClass]="{'invalid': submitted && control.get('approveadate').invalid}"
+                        />
+                        <mat-datepicker-toggle
+                          class="button-date"
+                          matSuffix
+                          [for]="pickerapprovedate"
+                        ></mat-datepicker-toggle>
+                        <mat-datepicker #pickerapprovedate></mat-datepicker>
+                      </div>
+                      <!-- <input
+                        class="form-control"
+                        style="width: 150px"
+                        pInputText
+                        type="date"
+                        formControlName="approvedate"
+                      /> -->
+                    </td>
+                    <td class="p-2 text-nowrap">
+                      <div class="d-flex align-items-center">
+                        <input
+                          [matDatepicker]="pickergraduatedate"
+                          style="width: 150px"
+                          autocomplete="off"
+                          class="form-control form-date"
+                          formControlName="graduationdate"
+                          [readonly]="!control.value.checked"
+                          [ngClass]="{'invalid': submitted && control.get('graduationdate').invalid}"
+                        />
+                        <mat-datepicker-toggle
+                          class="button-date"
+                          matSuffix
+                          [for]="pickergraduatedate"
+                        ></mat-datepicker-toggle>
+                        <mat-datepicker #pickergraduatedate></mat-datepicker>
+                      </div>
+                      <!-- <input
+                        class="form-control"
+                        style="width: 150px"
+                        pInputText
+                        type="date"
+                        formControlName="graduationdate"
+                      /> -->
+                    </td>
+      
+                    <td class="p-2 text-nowrap">
+                      <div
+                        (click)="searchAddress(control.value.index, !control.value.checked)"
+                        class="text-orange text-decoration-underline whitespace-nowrap"
+                        role="button"
+                      >
+                        สถานที่ปฏิบัติการสอน
+                      </div>
+                    </td>
+      
+                    <td class="p-2 text-nowrap">
+                      <div class="d-flex align-items-center">
+                        <input
+                          [matDatepicker]="picker"
+                          style="width: 150px"
+                          autocomplete="off"
+                          class="form-control form-date"
+                          formControlName="admissiondate"
+                          [readonly]="!control.value.checked"
+                          [ngClass]="{'invalid': submitted && control.get('admissiondate').invalid}"
+                        />
+                        <mat-datepicker-toggle
+                          class="button-date"
+                          matSuffix
+                          [for]="picker"
+                        ></mat-datepicker-toggle>
+                        <mat-datepicker 
+                          #picker 
+                          [disabled]="!control.value.checked"></mat-datepicker>
+                      </div>
+                      <!-- <input
+                        class="form-control"
+                        style="width: 150px"
+                        pInputText
+                        type="date"
+                        formControlName="admissiondate"
+                        [readonly]="pageType === 'graduateList'"
+                      /> -->
+                    </td>
+                    <td class="p-2 text-nowrap">
+                      <input
+                        class="form-control"
+                        style="width: 220px"
+                        pInputText
+                        #idcard
+                        maxlength="13"
+                        type="text"
+                        formControlName="idcardno"
+                        [readonly]="!control.value.checked"
+                        [ngClass]="{'invalid': submitted && control.get('idcardno').invalid}"
+                      />
+                      <ng-container
+                        *ngIf="submitted && control.get('idcardno').invalid"
+                      >
+                        <span class="text-danger">
+                          {{ validatorMessages.required.replace('field', 'เลขบัตรประจำตัวประชาชน/เลขประจำตัวคุรุสภา') }} !
+                        </span>
+                      </ng-container>
+                    </td>
+                    <td class="p-2 text-nowrap">
+                      <input
+                        class="form-control"
+                        style="width: 175px"
+                        pInputText
+                        #passport
+                        type="text"
+                        formControlName="passportno"
+                        [readonly]="!control.value.checked"
+                      />
+                    </td>
+      
+                    <td class="p-2 text-nowrap">
+                      <select
+                        class="form-select"
+                        style="width: 150px"
+                        formControlName="nationality"
+                        [attr.disabled]="!control.value.checked ? '' : null"
+                        [ngClass]="{'invalid': submitted && control.get('nationality').invalid}"
+                      >
+                        <option value="null" selected hidden disabled>
+                          กรุณาเลือก
+                        </option>
+                        <option
+                          *ngFor="let nation of nationalityList$ | async"
+                          [value]="nation.nationId"
+                        >
+                          {{ nation.nationName }}
+                        </option>
+                      </select>
+                      <ng-container
+                        *ngIf="submitted && control.get('nationality').invalid"
+                      >
+                        <span class="text-danger">
+                          {{ validatorMessages.requiredSelect.replace('field', 'สัญชาติ') }} !
+                        </span>
+                      </ng-container>
+                    </td>
+      
+                    <td class="p-2 text-nowrap">
+                      <input
+                        class="form-control"
+                        style="width: 175px"
+                        pInputText
+                        type="text"
+                        formControlName="studentno"
+                        [readonly]="!control.value.checked"
+                        [ngClass]="{'invalid': submitted && control.get('studentno').invalid}"
+                      />
+                      <ng-container
+                        *ngIf="submitted && control.get('studentno').invalid"
+                      >
+                        <span class="text-danger">
+                          {{ validatorMessages.required.replace('field', 'เลขประจำตัวนักศึกษา') }} !
+                        </span>
+                      </ng-container>
+                    </td>
+      
+                    <td class="p-2 text-nowrap">
+                      <select
+                        class="form-select"
+                        style="width: 150px"
+                        formControlName="studentstatus"
+                        [attr.disabled]="!control.value.checked ? '' : null"
+                        [ngClass]="{'invalid': submitted && control.get('studentstatus').invalid}"
+                      >
+                        <option value="null" selected hidden disabled>
+                          กรุณาเลือก
+                        </option>
+                        <option
+                          *ngFor="let item of studentStatusList"
+                          [value]="item.value"
+                        >
+                          {{ item.label }}
+                        </option>
+                      </select>
+                      <ng-container
+                        *ngIf="submitted && control.get('studentstatus').invalid"
+                      >
+                        <span class="text-danger">
+                          {{ validatorMessages.requiredSelect.replace('field', 'สถานะนักศึกษา') }} !
+                        </span>
+                      </ng-container>
+                    </td>
+      
+                    <td class="p-2 text-nowrap">
+                      <select
+                        class="form-select"
+                        [attr.disabled]="!control.value.checked ? '' : null"
+                        formControlName="prefixth"
+                        [ngClass]="{'invalid': submitted && control.get('prefixth').invalid}"
+                      >
+                        <option value="null" selected hidden disabled>
+                          กรุณาเลือก
+                        </option>
+                        <option
+                          *ngFor="let ThPrefix of prefixList$ | async"
+                          [value]="ThPrefix.id"
+                        >
+                          {{ ThPrefix.name_th }}
+                        </option>
+                      </select>
+                      <ng-container
+                        *ngIf="submitted && control.get('prefixth').invalid"
+                      >
+                        <span class="text-danger">
+                          {{ validatorMessages.requiredSelect.replace('field', 'คำนำหน้าชื่อ (ภาษาไทย)') }} !
+                        </span>
+                      </ng-container>
+                    </td>
+      
+                    <td class="p-2 text-nowrap">
+                      <input
+                        class="form-control"
+                        style="width: 150px"
+                        pInputText
+                        type="text"
+                        formControlName="firstnameth"
+                        [readonly]="!control.value.checked"
+                        [ngClass]="{'invalid': submitted && control.get('firstnameth').invalid}"
+                      />
+                      <ng-container
+                        *ngIf="submitted && control.get('firstnameth').invalid"
+                      >
+                        <span class="text-danger">
+                          {{ validatorMessages.required.replace('field', 'ชื่อ (ภาษาไทย)') }} !
+                        </span>
+                      </ng-container>
+                    </td>
+                    <td class="p-2 text-nowrap">
+                      <input
+                        class="form-control"
+                        style="width: 150px"
+                        pInputText
+                        type="text"
+                        formControlName="lastnameth"
+                        [readonly]="!control.value.checked"
+                        [ngClass]="{'invalid': submitted && control.get('lastnameth').invalid}"
+                      />
+                      <ng-container
+                        *ngIf="submitted && control.get('lastnameth').invalid"
+                      >
+                        <span class="text-danger">
+                          {{ validatorMessages.required.replace('field', 'นามสกุล (ภาษาไทย)') }} !
+                        </span>
+                      </ng-container>
+                    </td>
+                    <td class="p-2 text-nowrap">
+                      <select
+                        class="form-select"
+                        [attr.disabled]="!control.value.checked ? '' : null"
+                        formControlName="prefixen"
+                        [ngClass]="{'invalid': submitted && control.get('prefixen').invalid}"
+                      >
+                        <option value="null" selected hidden disabled>
+                          กรุณาเลือก
+                        </option>
+                        <option
+                          *ngFor="let EngPrefix of prefixList$ | async"
+                          [value]="EngPrefix.id"
+                        >
+                          {{ EngPrefix.name_en }}
+                        </option>
+                      </select>
+                      <ng-container
+                        *ngIf="submitted && control.get('prefixen').invalid"
+                      >
+                        <span class="text-danger">
+                          {{ validatorMessages.requiredSelect.replace('field', 'คำนำหน้าชื่อ (ภาษาอังกฤษ)') }} !
+                        </span>
+                      </ng-container>
+                    </td>
+      
+                    <td class="p-2 text-nowrap">
+                      <input
+                        class="form-control"
+                        style="width: 150px"
+                        pInputText
+                        type="text"
+                        formControlName="firstnameen"
+                        [readonly]="!control.value.checked"
+                        [ngClass]="{'invalid': submitted && control.get('firstnameen').invalid}"
+                      />
+                      <ng-container
+                        *ngIf="submitted && control.get('firstnameen').invalid"
+                      >
+                        <span class="text-danger">
+                          {{ validatorMessages.required.replace('field', 'ชื่อ (ภาษาอังกฤษ)') }} !
+                        </span>
+                      </ng-container>
+                    </td>
+      
+                    <td class="p-2 text-nowrap">
+                      <input
+                        class="form-control"
+                        style="width: 150px"
+                        pInputText
+                        type="text"
+                        formControlName="middlenameen"
+                        [readonly]="!control.value.checked"
+                      />
+                    </td>
+      
+                    <td class="p-2 text-nowrap">
+                      <input
+                        class="form-control"
+                        style="width: 150px"
+                        pInputText
+                        type="text"
+                        formControlName="lastnameen"
+                        [readonly]="!control.value.checked"
+                        [ngClass]="{'invalid': submitted && control.get('lastnameen').invalid}"
+                      />
+                      <ng-container
+                        *ngIf="submitted && control.get('lastnameen').invalid"
+                      >
+                        <span class="text-danger">
+                          {{ validatorMessages.required.replace('field', 'นามสกุล (ภาษาอังกฤษ)') }} !
+                        </span>
+                      </ng-container>
+                    </td>
+      
+                    <td class="p-2 text-nowrap">
+                      <input
+                        class="form-control"
+                        style="width: 150px"
+                        pInputText
+                        type="text"
+                        maxlength="10"
+                        formControlName="phone"
+                        [readonly]="!control.value.checked"
+                        [ngClass]="{'invalid': submitted && control.get('phone').invalid}"
+                      />
+                      <ng-container
+                        *ngIf="submitted && control.get('phone').invalid"
+                      >
+                        <span class="text-danger">
+                          {{ validatorMessages.required.replace('field', 'เบอร์โทรศัพท์มือถือ') }} !
+                        </span>
+                      </ng-container>
+                    </td>
+                    <td class="p-2 text-nowrap">
+                      <div class="d-flex align-items-center">
+                        <input
+                          [matDatepicker]="pickerbirthdate"
+                          style="width: 150px"
+                          autocomplete="off"
+                          class="form-control form-date"
+                          formControlName="birthdate"
+                          [readonly]="!control.value.checked"
+                          [ngClass]="{'invalid': submitted && control.get('birthdate').invalid}"
+                        />
+                        <mat-datepicker-toggle
+                          class="button-date"
+                          matSuffix
+                          [for]="pickerbirthdate"
+                        ></mat-datepicker-toggle>
+                        <mat-datepicker 
+                          #pickerbirthdate
+                          [disabled]="!control.value.checked"></mat-datepicker>
+                      </div>
+                      <ng-container
+                        *ngIf="submitted && control.get('birthdate').invalid"
+                      >
+                        <span class="text-danger">
+                          {{ validatorMessages.requiredSelect.replace('field', 'วัน/เดือน/ปีเกิด(พ.ศ.)') }} !
+                        </span>
+                      </ng-container>
+                    </td>
+                    <td class="p-2 text-nowrap">
+                      <input
+                        class="form-control"
+                        style="width: 200px"
+                        pInputText
+                        type="text"
+                        formControlName="email"
+                        [readonly]="!control.value.checked"
+                        [ngClass]="{'invalid': submitted && control.get('email').invalid}"
+                      />
+                      <ng-container
+                        *ngIf="submitted && control.get('email').invalid"
+                      >
+                        <span class="text-danger">
+                          {{ validatorMessages.required.replace('field', 'อีเมล') }} !
+                        </span>
+                      </ng-container>
+                    </td>
+                    <td class="p-2 text-nowrap">
+                      <div
+                        role="button"
+                        class="text-orange text-decoration-underline whitespace-nowrap"
+                        [pRowToggler]="control"
+                        (click)="autoScroll()"
+                      >
+                        รายละเอียดที่อยู่
+                        <i class="bi bi-chevron-down"></i>
+                      </div>
+                    </td>
+      
+                    <td class="p-2 text-nowrap">
+                      <div
+                        class="text-orange text-decoration-underline whitespace-nowrap"
+                        role="button"
+                        (click)="insertSubject(control.value.subjects, ri, !control.value.checked)"
+                      >
+                        รายวิชา
+                      </div>
+                    </td>
+      
+                    <td class="p-2 text-nowrap">
+                      <div
+                        class="text-orange text-decoration-underline whitespace-nowrap"
+                        role="button"
+                        (click)="viewOriginalDegree(control.value.originaldegree, ri, !control.value.checked)"
+                      >
+                        วุฒิการศึกษาเดิม
+                      </div>
+                    </td>
+                  </tr>
+                </ng-template>
+      
+                <ng-template pTemplate="rowexpansion" let-control let-ii="rowIndex">
+                  <tr [formGroupName]="ii">
+                    <td></td>
+                    <td colspan="5">
+                      <form [formGroup]="control.controls.address">
+                        <ksp-form-address-table
+                          id="address-info"
+                          formControlName="addressInfo"
+                          [disabledAll]="!control.value.checked"
+                          [submitted]="submitted"
+                        ></ksp-form-address-table>
+                      </form>
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </form>
         </div>
-        <br />
-        <ksp-form-multi-attachment
-          [uniqueTimestamp]="uniqueTimestamp"
-          [pageType]="pageType.fileAttachTab"
-          [requestType]="1"
-          [groups]="uploadFileList"
-        >
-        </ksp-form-multi-attachment>
-        <label class="text-red"
-          >กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
-          โปรดตรวจสอบอีกครั้งก่อนบันทึกลงระบบ</label
-        >
-      </ng-container>
-    </form>
+      </div>
+      <br />
+      <ksp-form-multi-attachment
+        [uniqueTimestamp]="uniqueTimestamp"
+        [pageType]="pageType.fileAttachTab"
+        [requestType]="1"
+        [groups]="uploadFileList"
+      >
+      </ksp-form-multi-attachment>
+      <label class="text-red"
+        >กรุณากรอกข้อมูลให้ถูกต้องเพื่อประโยชน์ของตัวท่านเอง
+        โปรดตรวจสอบอีกครั้งก่อนบันทึกลงระบบ</label
+      >
+    </ng-container>
     <div class="bg-light p-4 text-center" *ngIf="!data && isNotFound">
       <span>ไม่พบข้อมูล</span>
     </div>
@@ -224,7 +812,7 @@
     [isFirstPage]="true"
     [showCenterButtons]="true"
     [showSaveButton]="true"
-    [disableSaveButton]="formData.invalid"
+    [disableSaveButton]="formStudent.invalid"
     (saveClicked)="save()"
   ></ksp-bottom-nav>
 </div>

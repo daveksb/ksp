@@ -37,6 +37,7 @@
             [displayMode]="userInfoFormdisplayMode"
             [showSearchBtn]="!requestId"
             [readonly]="true"
+            [lbl_lettertype]="'ประเภทของบุคคลที่หน่วยงานผู้ใช้ขอรับรอง'"
           ></ksp-form-user-info>
         </div>
       </div>
@@ -237,12 +238,12 @@
               <label class="box-header">ด้านการสอน</label>
             </div>
             <ng-container *ngIf="experienceSelected[1]">
-              <ksp-qualification-experience-info
-                formControlName="exp1"
-                [bureaus]="bureau$ | async"
-                [mode]="mode"
-              ></ksp-qualification-experience-info
-            ></ng-container>
+                <ksp-exp-inp
+                  formControlName="exp1"
+                  [bureaus]="bureau$ | async"
+                  [mode]="mode">
+                </ksp-exp-inp>
+            </ng-container>
             <div class="d-flex align-items-center">
               <input
                 type="checkbox"
@@ -259,11 +260,11 @@
               <label class="box-header">ด้านการบริหารสถานศึกษา</label>
             </div>
             <ng-container *ngIf="experienceSelected[2]">
-              <ksp-qualification-experience-info
+              <ksp-exp-inp
                 formControlName="exp2"
                 [bureaus]="bureau$ | async"
                 [mode]="mode"
-              ></ksp-qualification-experience-info
+              ></ksp-exp-inp
             ></ng-container>
             <div class="d-flex align-items-center">
               <input
@@ -281,11 +282,11 @@
               <label class="box-header">ด้านการบริหารการศึกษา</label>
             </div>
             <ng-container *ngIf="experienceSelected[3]">
-              <ksp-qualification-experience-info
+              <ksp-exp-inp
                 formControlName="exp3"
                 [bureaus]="bureau$ | async"
                 [mode]="mode"
-              ></ksp-qualification-experience-info
+              ></ksp-exp-inp
             ></ng-container>
             <div class="d-flex align-items-center">
               <input
@@ -303,11 +304,11 @@
               <label class="box-header">ด้านการนิเทศก์การศึกษา</label>
             </div>
             <ng-container *ngIf="experienceSelected[4]">
-              <ksp-qualification-experience-info
+              <ksp-exp-inp
                 formControlName="exp4"
                 [bureaus]="bureau$ | async"
                 [mode]="mode"
-              ></ksp-qualification-experience-info
+              ></ksp-exp-inp
             ></ng-container>
           </mat-tab>
         </mat-tab-group>

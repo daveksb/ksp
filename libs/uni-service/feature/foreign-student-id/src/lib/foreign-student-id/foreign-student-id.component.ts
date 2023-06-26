@@ -86,13 +86,10 @@ export class ForeignStudentIdComponent implements OnInit {
     if (this.requestid) {
       this.allowSave = false;
       this.mode = 'view';
-      // this.uniRequestService;
-      console.log('get by id');
       this.uniRequestService
         .getUniRequestById(this.requestid)
         .subscribe((res: any) => {
           if (res) {
-            console.log(res);
             this.draftrequest = res;
             this.uniid = res.uniid;
             this.unitype = res.unitype;
@@ -101,7 +98,6 @@ export class ForeignStudentIdComponent implements OnInit {
               visainfo: res,
             });
             const file = res.fileinfo ? parseJson(res.fileinfo) : [];
-            console.log(file);
             this.foreignInfo = file;
             this.getUniversityDetail();
           }
@@ -109,16 +105,13 @@ export class ForeignStudentIdComponent implements OnInit {
     } else {
       this.allowSave = true;
       this.mode = 'edit';
-      console.log('here');
       this.uniid = getCookie('uniId') || '';
       this.unitype = getCookie('uniType') || '';
       this.getUniversityDetail();
     }
-    console.log(this.allowSave);
   }
 
   getUniversityDetail() {
-    console.log(this.uniid);
     this.uniInfoService.univerSitySelectById(this.uniid).subscribe((res) => {
       this.uniName =
         res?.name + (res?.campusname ? `, ${res?.campusname}` : '') || '-';
@@ -135,7 +128,6 @@ export class ForeignStudentIdComponent implements OnInit {
       const findUnitype = res.find((data: any) => {
         return data.id == this.unitype;
       });
-      console.log(findUnitype);
       if (findUnitype) this.universitytypename = findUnitype.name;
     });
   }
@@ -171,7 +163,6 @@ export class ForeignStudentIdComponent implements OnInit {
     return payload;
   }
   save() {
-    console.log(this.form);
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {

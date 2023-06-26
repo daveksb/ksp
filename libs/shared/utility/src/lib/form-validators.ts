@@ -8,6 +8,8 @@ export const idCardPattern = '^[0-9]{13}';
 export const passportPattern = '[a-zA-Z0-9]*';
 export const idCardBackPattern = '^([A-Z]{2})+([0-9]{10})+$';
 export const bankAccountPattern = '^[0-9]+$';
+export const patternThAndSpecial = '^[ก-๏0-9_?=.* ]+$';
+export const patternEnAndSpecial = '^[a-zA-Z0-9_?=.* ]+$';
 
 export const validatorMessages = {
   phone: 'กรุณากรอกข้อมูลในรูปแบบเบอร์โทรศัพท์',

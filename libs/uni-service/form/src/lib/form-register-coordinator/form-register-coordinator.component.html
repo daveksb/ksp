@@ -97,7 +97,10 @@
       </div>
       <div class="col-5">
         <label class="form-label">ชื่อภาษาอังกฤษ</label>
-        <input class="form-control" type="text" formControlName="firstnameen" />
+        <input class="form-control" 
+          type="text" 
+          formControlName="firstnameen"
+          (input)="uppercaseChange($event)" />
         <ng-container
           *ngIf="
             firstNameEn.invalid && (firstNameEn.dirty || firstNameEn.touched)
@@ -110,7 +113,10 @@
       </div>
       <div class="col-5">
         <label class="form-label">นามสกุลภาษาอังกฤษ</label>
-        <input class="form-control" type="text" formControlName="lastnameen" />
+        <input class="form-control" 
+          type="text" 
+          formControlName="lastnameen"
+          (input)="uppercaseChangeLast($event)" />
         <ng-container
           *ngIf="lastNameEn.invalid && (lastNameEn.dirty || lastNameEn.touched)"
         >

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UniserviceImportType } from '@ksp/shared/interface';
 import {
+  OriginalDegreeDialogComponent,
   StudentListSubjectComponent,
   TrainingAddressComponent,
   ViewHistoryAdmissionComponent
@@ -103,13 +104,13 @@ export class DataStudentComponent implements OnInit {
           uniuserid: userId,
           systemtype: '3',
           subtype: '5',
-          unirequestdegreecertid: this.courseData.courseDetail.requestid,
-          unidegreecertid: this.courseData.courseDetail.id,
-          degreeapprovecode: this.courseData.courseDetail.degreeapprovecode,
-          planyear: this.courseData.courseSelected.indexyear,
-          plancalendaryear: this.courseData.courseSelected.calendaryear,
-          planname: this.courseData.courseSelected.label,
-          plantotalno: this.courseData.courseSelected.student,
+          unirequestdegreecertid: this.courseData.courseDetail.requestid || null,
+          unidegreecertid: this.courseData.courseDetail.id || null,
+          degreeapprovecode: this.courseData.courseDetail.degreeapprovecode || null,
+          planyear: this.courseData.courseSelected.indexyear || null,
+          plancalendaryear: this.courseData.courseSelected.calendaryear || null,
+          planname: this.courseData.courseSelected.label || null,
+          plantotalno: this.courseData.courseSelected.student || null,
           currentadmissionno: 0,
           currentgraduateno: 0,
           ref1: '3',
@@ -143,6 +144,7 @@ export class DataStudentComponent implements OnInit {
           response.datareturn.forEach((user: any, index: any) => {
             user.index = index;
             user.subjects = JSON.parse(user.subjects);
+            user.originaldegree = JSON.parse(user.originaldegree);
             this.user.push(this.edituser(user));
           });
           this.requestNo = response.datareturn.requestno;
@@ -171,6 +173,7 @@ export class DataStudentComponent implements OnInit {
             );
             user.birthdate = moment(user.birthdate).format('YYYY-MM-DD');
             user.subjects = JSON.parse(user.subjects);
+            user.originaldegree = JSON.parse(user.originaldegree);
             this.user.push(this.edituser(user));
           });
           this.userBackup = [...this.user.value];
@@ -343,6 +346,23 @@ export class DataStudentComponent implements OnInit {
       if (res) {
         this.user.at(index).patchValue({
           subjects: res,
+        });
+      }
+    });
+  }
+
+  viewOriginalDegree(originalDegreeInfo: any, index: any, disable: boolean) {
+    const dialogRef = this.dialog.open(OriginalDegreeDialogComponent, {
+      width: '600px',
+      data: {
+        ...originalDegreeInfo,
+        disableAll: disable ?? false
+      },
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        this.user.at(index).patchValue({
+          originaldegree: res,
         });
       }
     });

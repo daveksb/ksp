@@ -121,7 +121,6 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
       this.status = uniRequestDegree.requeststatus;
       this.process = uniRequestDegree.requestprocess;
       const checkresult = uniRequestDegree.checkresult ? parseJson(uniRequestDegree.checkresult) : {};
-      console.log(checkresult)
       const { requestNo, step1, step2, step3, step4 } = await
         this.uniInfoService.mappingUniverSitySelectByIdWithForm(
           uniRequestDegree
@@ -213,29 +212,57 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
 
     dialogRef.componentInstance.confirmed.subscribe(async (e) => {
       if (e) {
-        const res = await (async () => {
-          if (this.id) {
-            let currentprocess = '';
-            if (this.process != '1' && this.process != '99') {
-              currentprocess = this.process;
-            } else {
-              currentprocess = process;
-            }
-            return await lastValueFrom(
-              this.uniRequestService.uniRequestUpdate(
-                this._getRequest(currentprocess, '1')
-              )
-            );
+        if (this.id) {
+          let currentprocess = '';
+          if (this.process != '1' && this.process != '99') {
+            currentprocess = this.process;
+          } else {
+            currentprocess = process;
           }
-          return await lastValueFrom(
-            this.uniRequestService.uniRequestInsert(
-              this._getRequest(process, '1')
-            )
-          );
-        })();
-
-        if (res?.returncode == 99) return;
-        this.showConfirmDialog(res?.requestno);
+          const emailForm = this.step1Form.value;
+          this.uniRequestService.uniRequestUpdate(
+            this._getRequest(currentprocess, '1')
+          ).subscribe((res: any) => {
+            if (emailForm.step1.coordinator && emailForm.step1.coordinator.email) {
+              this.uniRequestService.kspSendEmailUni(
+                {
+                  fromname: 'ksplicense',
+                  subject: 'ขอรับรองปริญญาและประกาศนียบัตร',
+                  body: `ขอรับรองปริญญาและประกาศนียบัตร เลขที่คำขอ: ${res?.requestno}`,
+                  emailaddress: emailForm.step1.coordinator.email
+                }
+              ).subscribe((resEmail: any) => {
+                if (res?.returncode == 99) return;
+                this.showConfirmDialog(res?.requestno);
+              })
+            } else {
+              if (res?.returncode == 99) return;
+              this.showConfirmDialog(res?.requestno);
+            }
+          });
+        } else {
+          const emailForm = this.step1Form.value;
+          this.uniRequestService.uniRequestInsert(
+            this._getRequest(process, '1')
+          ).subscribe((res: any) => {
+            if (emailForm.step1.coordinator && emailForm.step1.coordinator.email) {
+              this.uniRequestService.kspSendEmailUni(
+                {
+                  fromname: 'ksplicense',
+                  subject: 'ขอรับรองปริญญาและประกาศนียบัตร',
+                  body: `ขอรับรองปริญญาและประกาศนียบัตร เลขที่คำขอ: ${res?.requestno}`,
+                  emailaddress: emailForm.step1.coordinator.email
+                }
+              ).subscribe((resEmail: any) => {
+                if (res?.returncode == 99) return;
+                this.showConfirmDialog(res?.requestno);
+              })
+            } else {
+              if (res?.returncode == 99) return;
+              this.showConfirmDialog(res?.requestno);
+            }
+          });
+        }  
       }
     });
   }
@@ -248,7 +275,6 @@ export class DegreeCertRequestComponent implements OnInit, AfterContentChecked {
     dateapprove.setHours(dateapprove.getHours() + 7);
     const dateaccept = new Date(step1?.degreeTypeForm?.courseAcceptDate);
     dateaccept.setHours(dateaccept.getHours() + 7);
-    console.log(step2?.nitet)
     const reqBody: any = {
       uniid: getCookie('uniId'),
       ref1: '3',

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
 import { AbstractControl, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -55,7 +55,7 @@ import { v4 as uuidv4 } from 'uuid';
   templateUrl: './qualification-detail.component.html',
   styleUrls: ['./qualification-detail.component.scss'],
 })
-export class QualificationDetailComponent implements OnInit {
+export class QualificationDetailComponent implements OnInit, AfterViewInit, AfterViewChecked {
   isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   form = this.fb.group({
@@ -122,7 +122,8 @@ export class QualificationDetailComponent implements OnInit {
     private staffService: StaffService,
     private loaderService: LoaderService,
     private educationDetailService: EducationDetailService,
-    private licenseService: SchoolLicenseService
+    private licenseService: SchoolLicenseService,
+    private changedetector: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -137,6 +138,16 @@ export class QualificationDetailComponent implements OnInit {
     this.checkRequestId();
     this.checkRequestSubType();
   }
+
+  ngAfterViewInit(): void {
+    this.changedetector.detectChanges();
+  }
+
+  ngAfterViewChecked(): void {
+    this.changedetector.detectChanges();
+  }
+
+  // ---------------------------------------------------------------------------
 
   checkRequestId() {
     this.route.paramMap.subscribe((params) => {

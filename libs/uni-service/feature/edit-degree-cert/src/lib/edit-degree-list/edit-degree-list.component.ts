@@ -6,14 +6,14 @@ import { Router } from '@angular/router';
 import { requestEditStatus } from '@ksp/shared/constant';
 import { ListData, KspPaginationComponent } from '@ksp/shared/interface';
 import { UniInfoService, AddressService, LoaderService } from '@ksp/shared/service';
-import { getCookie } from '@ksp/shared/utility';
+import { getCookie, thaiDate } from '@ksp/shared/utility';
 import {
   EditDegreeCertSearchComponent,
   HistoryRequestDialogComponent,
 } from '@ksp/uni-service/dialog';
 import _ from 'lodash';
 import moment from 'moment';
-import { map, switchMap, lastValueFrom, Subject } from 'rxjs';
+import { map, Subject } from 'rxjs';
 const mapOption = () =>
   map((data: any) => {
     return (
@@ -59,6 +59,12 @@ export class EditDegreeListComponent
   }
   clear() {
     this.form.reset();
+    this.form.setValue({
+      search: {
+        universityType: getCookie('uniType'),
+        institutionName: getCookie('uniId'),
+      },
+    });
     this.clearPageEvent();
     this.dataSource.data = [];
   }
@@ -86,6 +92,12 @@ export class EditDegreeListComponent
   }
 
   getAll() {
+    this.form.setValue({
+      search: {
+        universityType: getCookie('uniType'),
+        institutionName: getCookie('uniId'),
+      },
+    });
     this.uniInfoService
       .getUniversityType()
       .pipe(mapOption())
@@ -181,15 +193,17 @@ export class EditDegreeListComponent
           this.degreeLevelOptions,
           row?.degreelevel
         );
-        const approveDate = row?.courseapprovedate
-          ? moment(row?.courseapprovedate).format('DD/MM/YYYY')
-          : '-';
         const submitDate = row?.requestdate
           ? new Date(row?.requestdate)
           : '-';
         const { major, branch } = await this.uniInfoService.getMajorAndBranch(
           row
         );
+        const detailapprove = row.detail ? JSON.parse(row.detail) : null;
+        // const approveDate = row?.courseapprovedate
+        //   ? moment(row?.courseapprovedate).format('DD/MM/YYYY')
+        //   : '-';
+        const approveDate = detailapprove?.approvedate ? detailapprove?.approvedate : null;
         const findStatus = this.statusList.find((data: any) => { return data.value == row.status });
         newData.push({
           key: row?.id,
@@ -201,10 +215,11 @@ export class EditDegreeListComponent
           branch,
           university: row?.uniname || '-',
           degreeName: row?.fulldegreenameth || '-',
-          approveDate: approveDate,
+          approveDate: approveDate ? thaiDate(approveDate) : '',
           status: row?.status,
           process: row?.process,
-          statusname: findStatus?.ulabel
+          statusname: findStatus?.ulabel,
+          createdate: row?.createdate
         });
       }
       this.dataSource.data = newData;

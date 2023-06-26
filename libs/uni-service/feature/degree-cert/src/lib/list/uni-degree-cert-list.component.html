@@ -79,7 +79,7 @@
         </ng-container>
 
         <ng-container matColumnDef="verifyStatus">
-          <th mat-header-cell *matHeaderCellDef>สถานะตรวจสอบ</th>
+          <th mat-header-cell *matHeaderCellDef>สถานะ</th>
           <td mat-cell *matCellDef="let element">
             <ksp-degree-cert-status
               [dataSource]="element"
@@ -88,7 +88,7 @@
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="considerStatus">
+        <!-- <ng-container matColumnDef="considerStatus">
           <th mat-header-cell *matHeaderCellDef>สถานะพิจารณา</th>
           <td mat-cell *matCellDef="let element">
             <ksp-degree-cert-status
@@ -106,7 +106,7 @@
               type="certification_status"
             ></ksp-degree-cert-status>
           </td>
-        </ng-container>
+        </ng-container> -->
 
         <ng-container matColumnDef="approveDate">
           <th mat-header-cell *matHeaderCellDef>วันที่รับรอง</th>

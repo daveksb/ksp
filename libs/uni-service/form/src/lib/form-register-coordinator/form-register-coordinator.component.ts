@@ -5,6 +5,7 @@ import { KspFormBaseComponent } from '@ksp/shared/interface';
 import {
   createUniCoordinatorForm,
   providerFactory,
+  toUpperCaseName,
   validatorMessages,
 } from '@ksp/shared/utility';
 
@@ -62,6 +63,14 @@ export class FormRegisterCoordinatorInfoComponent extends KspFormBaseComponent {
     } else {
       this.validprefix = true;
     }
+  }
+
+  uppercaseChange(event: any) {
+    this.form.patchValue({ firstnameen: toUpperCaseName(event.target.value) });
+  }
+
+  uppercaseChangeLast(event:any) {
+    this.form.patchValue({ lastnameen: toUpperCaseName(event.target.value) });
   }
 
   get firstNameTh() {

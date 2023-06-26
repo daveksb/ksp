@@ -153,6 +153,7 @@
           type="text"
           placeholder="กรุณากรอกชื่อภาษาอังกฤษ"
           formControlName="firstnameen"
+          (input)="uppercaseChange($event)"
         />
         <ng-container
           *ngIf="
@@ -171,6 +172,7 @@
           type="text"
           placeholder="กรุณากรอกนามสกุลภาษาอังกฤษ"
           formControlName="lastnameen"
+          (input)="uppercaseChangeLast($event)"
         />
         <ng-container
           *ngIf="lastNameEn.invalid && (lastNameEn.dirty || lastNameEn.touched)"

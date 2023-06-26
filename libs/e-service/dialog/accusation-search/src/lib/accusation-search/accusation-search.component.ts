@@ -8,6 +8,7 @@ import {
   EthicsService,
   GeneralInfoService,
 } from '@ksp/shared/service';
+
 import { replaceEmptyWithNull } from '@ksp/shared/utility';
 import { Observable } from 'rxjs';
 
@@ -34,6 +35,8 @@ export class AccusationSearchComponent implements OnInit, AfterViewInit {
   personSelected = false;
   displayedColumns: string[] = column;
   dataSource = new MatTableDataSource<any>();
+  dataSource2: any;
+  identityNo: any;
   currentPage = 1;
   prefixList$!: Observable<any>;
   bureaus$!: Observable<any>;
@@ -80,14 +83,15 @@ export class AccusationSearchComponent implements OnInit, AfterViewInit {
     this.searchPage(this.currentPage);
   }
   onClickRadio(form: any) {
-    this.selectedIdCard = form.idcardno;
+    this.selectedIdCard = form.identitynumber;
   }
   onClickGetInfo(form: any) {
     this.service
-      .searchSelfLicense({ idcardno: form.idcardno })
+      .searchSelfLicense({ identitynumber: form.identitynumber , ilicenseno: form.licenseno })
       .subscribe((res) => {
+        console.log(form)
+        this.identityNo = form.identitynumber
         this.personSelected = true;
-        console.log(res);
       });
   }
 }

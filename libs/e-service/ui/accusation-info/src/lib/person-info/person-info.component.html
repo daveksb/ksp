@@ -1,6 +1,6 @@
 <div class="row justify-content-center">
   <div class="col-auto">
-    <img style="width: 10rem; height: 10rem" src="assets/images/profile.png" />
+    <img style="width: 10rem; height: 10rem" src="{{mapData.profileImage}}" />
   </div>
 
   <div class="col-2 form-label fs-6 me-2">
@@ -14,12 +14,12 @@
   </div>
 
   <div class="col-2 ms-2">
-    <div>1-1020-00545-78-9</div>
-    <div>นาย ธนานุรักษ์ ใจสอาด</div>
-    <div>MR. Thananurak Jaisa-ard</div>
-    <div>ชาย</div>
-    <div>26 มิถุนายน 2526</div>
-    <div>098-876-1234</div>
-    <div>thananurak@gmail.com</div>
+    <div>{{mapData.identityNo }}</div>
+    <div>{{mapData.namefirstTH}} {{mapData.namelastTH}}</div>
+    <div>{{mapData.namefirstEN}} {{mapData.namelastEN}}</div>
+    <div>{{mapData.genderId}}</div>
+    <div>{{mapData.birthDate}}</div>
+    <div>{{mapData.phoneNumber}}</div>
+    <div>{{mapData.email}}</div>
   </div>
 </div>

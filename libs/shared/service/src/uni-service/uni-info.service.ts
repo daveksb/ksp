@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@ksp/shared/environment';
 import { getCookie, parseJson } from '@ksp/shared/utility';
@@ -265,14 +265,27 @@ export class UniInfoService {
     );
   }
 
+  // searchSelfStudent(params: any): Observable<any> {
+  //   return this.http.post(
+  //     `${environment.shortApiUrl}/selfmyinfosearch_uni.php`,
+  //     {
+  //       ...params,
+  //       tokenkey: getCookie('userToken'),
+  //     }
+  //   );
+  // }
+
   searchSelfStudent(params: any): Observable<any> {
-    return this.http.post(
-      `${environment.shortApiUrl}/selfmyinfosearch_uni.php`,
-      {
-        ...params,
-        tokenkey: getCookie('userToken'),
-      }
-    );
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Basic ' + btoa('ksppublicapi:KspPublicApi@2023')
+      })
+    };
+    return this.http.get(
+      `${environment.zdklabs}/public/user?=identity_no=${params?.identity_no}`,
+      httpOptions
+    )
   }
 
   uniAdmissionSearch(params: any): Observable<any> {

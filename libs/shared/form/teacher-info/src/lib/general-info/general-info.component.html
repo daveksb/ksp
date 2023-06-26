@@ -89,12 +89,18 @@
             </div>
             <div class="col-2 mb-3">
               <label class="form-label">ปีที่สำเร็จการศึกษา (พ.ศ.) </label>
-              <input
+              <select class="form-select" formControlName="year">
+                <option value="null" selected disabled hidden>
+                  กรุณาเลือกปีที่สำเร็จการศึกษา
+                </option>
+                <option *ngFor="let year of calendaryearList" [value]="year.value">{{ year.label }}</option>
+              </select>
+              <!-- <input
                 class="form-control"
                 type="text"
                 placeholder="กรอกเฉพาะตัวเลข"
                 formControlName="year"
-              />
+              /> -->
             </div>
             <div class="col-auto d-flex ps-0">
               <ng-container *hideInViewMode>

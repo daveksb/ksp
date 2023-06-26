@@ -63,6 +63,8 @@ export class AccusationRecordComponent
   requestNumber = '';
   accusationFiles: any[] = structuredClone(ACCUSATION_FILES);
   uniqueTimestamp: any;
+  updateStatus = false;
+  selectId: any
   prefixList$!: Observable<any>;
 
   override form = this.fb.group({
@@ -80,6 +82,7 @@ export class AccusationRecordComponent
     accusationassigndate: [],
     accuserinfo: this.fb.array([] as FormGroup[]),
     accusationconsideration: [],
+    id : []
   });
   constructor(
     public dialog: MatDialog,
@@ -114,7 +117,7 @@ export class AccusationRecordComponent
   }
   ngOnInit(): void {
     this.route.data.subscribe((res) => {
-      //console.log('res2 = ', res);
+      console.log('res2 = ', res);
     });
     this.uniqueTimestamp = uuidv4();
     this.getListData();
@@ -135,6 +138,8 @@ export class AccusationRecordComponent
     });
     dialogRef.afterClosed().subscribe((result) => {
       console.log(result);
+      this.selectId = result
+      this.updateStatus = true
     });
   }
 

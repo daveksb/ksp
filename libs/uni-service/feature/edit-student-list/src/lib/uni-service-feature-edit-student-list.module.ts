@@ -7,15 +7,23 @@ import { UniContainerPageComponent } from '@ksp/uni-service/pages';
 import { MatTableModule } from '@angular/material/table';
 import { BottomNavComponent, TopNavComponent } from '@ksp/shared/menu';
 import { EditLicenseComponent } from '@ksp/shared/form/license';
-import { SharedFormOthersModule } from '@ksp/shared/form/others';
-import { RequestHeaderInfoComponent } from '@ksp/shared/ui';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormAddressTableComponent, SharedFormOthersModule } from '@ksp/shared/form/others';
+import { RequestHeaderInfoComponent, UniFormBadgeComponent } from '@ksp/shared/ui';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { TableModule } from 'primeng/table';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import { SharedDegreeCertModule } from '@ksp/shared/degree-cert';
+import { DegreeSearchComponent } from '@ksp/shared/search';
+import { DropdownModule } from 'primeng/dropdown';
 
 const routes: Routes = [
   {
@@ -56,6 +64,17 @@ const routes: Routes = [
     MatTooltipModule,
     RouterModule.forChild(routes),
     MatProgressSpinnerModule,
+    TableModule,
+    FormAddressTableComponent,
+    FormsModule,
+    UniFormBadgeComponent,
+    MatDialogModule,
+    MatCheckboxModule,
+    MatSelectModule,
+    MatOptionModule,
+    SharedDegreeCertModule,
+    DegreeSearchComponent,
+    DropdownModule
   ],
   declarations: [EditStudentListComponent, EditStudentDetailComponent],
   exports: [EditStudentListComponent, EditStudentDetailComponent],

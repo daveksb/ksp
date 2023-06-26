@@ -126,6 +126,7 @@ export class EserviceEditDegreeDetailComponent {
           payload.status = detail?.verify?.result;
           payload.detail = jsonStringify({
             ...detail,
+            approvedate: moment().format("YYYY-MM-DD[T]HH:mm:ss"),
           });
           this.eRequestService
           .kspUpdateRequestUniRequestDegree(payload)

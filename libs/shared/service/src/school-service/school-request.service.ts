@@ -15,11 +15,11 @@ import { map, Observable } from 'rxjs';
 export class SchoolRequestService {
   constructor(private http: HttpClient) {}
 
-  getTempLicense(requestid: string | null): Observable<SchTempLicense> {
+  getTempLicense(id: string | null): Observable<SchTempLicense> {
     return this.http.post<SchTempLicense>(
-      `${environment.apiUrl}/kspstaff/schtemplicenseselectrequestid`,
+      `${environment.apiUrl}/kspstaff/ksprequestselectbyid`,
       {
-        requestid,
+        id,
       }
     );
   }

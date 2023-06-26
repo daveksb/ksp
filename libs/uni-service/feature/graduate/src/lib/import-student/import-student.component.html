@@ -490,10 +490,7 @@
                   formControlName="idcardno"
                   (blur)="
                     searchByIdcard(
-                      {
-                        idcardno: idcard.value,
-                        passportno: control.value.passportno
-                      },
+                      idcard.value,
                       control.value.index
                     )
                   "
@@ -517,16 +514,6 @@
                   #passport
                   type="text"
                   formControlName="passportno"
-                  (blur)="
-                    searchByIdcard(
-                      {
-                        idcardno: control.value.idcardno,
-                        passportno: passport.value
-                      },
-                      control.value.index
-                    )
-                  "
-                  (keyup.enter)="passport.blur()"
                   [readonly]="pageType === 'graduateList' || control.value.locked"
                 />
               </td>
@@ -847,14 +834,21 @@
               </td>
 
               <td class="p-2 text-nowrap" *ngIf="pageType === 'admissionList'">
-                <input
+                <div
+                  class="text-orange text-decoration-underline whitespace-nowrap"
+                  role="button"
+                  (click)="viewOriginalDegree(control.value.originaldegree, ri, control.value.locked)"
+                >
+                  วุฒิการศึกษาเดิม
+                </div>
+                <!-- <input
                   class="form-control"
                   style="width: 175px"
                   pInputText
                   type="text"
                   formControlName="originaldegree"
                   [readonly]="control.value.locked"
-                />
+                /> -->
               </td>
             </tr>
           </ng-template>
